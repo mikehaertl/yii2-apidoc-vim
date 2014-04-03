@@ -1,0 +1,267 @@
+
+*yii\test\ActiveFixture*   >> yii\test\BaseActiveFixture
+========================
+
+ Either [[modelClass]] or [[tableName]] must be set. You should also provide
+ fixture data in the file specified by [[dataFile]] or overriding
+ [[getData()]] if you want to use code to generate the fixture data.
+
+ When the fixture is being loaded, it will first call [[resetTable()]] to
+ remove any existing data in the table. It will then populate the table with
+ the data returned by [[getData()]].
+
+ After the fixture is loaded, you can access the loaded data via the [[data]]
+ property. If you set [[modelClass]], you will also be able to retrieve an
+ instance of [[modelClass]] with the populated data via [[getModel()]].
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$depends>				*yii\test\ActiveFixture::$depends*
+ See |yii\test\Fixture::$depends|
+
+<$db>					*yii\test\ActiveFixture::$db*
+ See |yii\test\DbFixture::$db|
+
+<$modelClass>				*yii\test\ActiveFixture::$modelClass*
+ See |yii\test\BaseActiveFixture::$modelClass|
+
+<$data> 				*yii\test\ActiveFixture::$data*
+ See |yii\test\BaseActiveFixture::$data|
+
+<$dataFile>				*yii\test\ActiveFixture::$dataFile*
+ (string|boolean) The file path or path alias of the data file that contains
+ the fixture data to be returned by [[getData()]]. If this is not set, it will
+ default to 'FixturePath/data/TableName.php', where 'FixturePath' stands for
+ the directory containing this fixture class, and 'TableName' stands for the
+ name of the table associated with this fixture. You can set this property to
+ be false to prevent loading any data.
+
+<$tableName>				*yii\test\ActiveFixture::$tableName*
+ (string) The name of the database table that this fixture is about. If this
+ property is not set, the table name will be determined via [[modelClass]].
+
+<$behaviors>				*yii\test\ActiveFixture::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$iterator>				*yii\test\ActiveFixture::$iterator*
+ (\ArrayIterator) An iterator for traversing the cookies in the collection.
+
+<$tableSchema>				*yii\test\ActiveFixture::$tableSchema*
+ (\yii\db\TableSchema) The schema information of the database table associated
+ with this fixture.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\test\ActiveFixture::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\test\ActiveFixture::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\test\ActiveFixture::init*					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\test\ActiveFixture::__get* 				 public
+ See |yii\base\Component::__get|
+
+
+*yii\test\ActiveFixture::__set* 				 public
+ See |yii\base\Component::__set|
+
+
+*yii\test\ActiveFixture::__isset*				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\test\ActiveFixture::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\test\ActiveFixture::__call*				 public
+ See |yii\base\Component::__call|
+
+
+*yii\test\ActiveFixture::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\test\ActiveFixture::canGetProperty*			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\test\ActiveFixture::canSetProperty*			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\test\ActiveFixture::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\test\ActiveFixture::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\test\ActiveFixture::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\test\ActiveFixture::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\test\ActiveFixture::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\test\ActiveFixture::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\test\ActiveFixture::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\test\ActiveFixture::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\test\ActiveFixture::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\test\ActiveFixture::attachBehavior*			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\test\ActiveFixture::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\test\ActiveFixture::detachBehavior*			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\test\ActiveFixture::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\test\ActiveFixture::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\test\ActiveFixture::load*					 public
+>
+ load()
+<
+(void)
+
+ It will then populate the table with the data returned by [[getData()]].
+
+ If you override this method, you should consider calling the parent
+ implementation so that the data returned by [[getData()]] can be populated
+ into the table.
+
+
+*yii\test\ActiveFixture::beforeLoad*				 public
+ See |yii\test\Fixture::beforeLoad|
+
+
+*yii\test\ActiveFixture::afterLoad*				 public
+ See |yii\test\Fixture::afterLoad|
+
+
+*yii\test\ActiveFixture::unload*				 public
+>
+ unload()
+<
+(void)
+
+ The default implementation will clean up the table by calling
+ [[resetTable()]].
+
+
+*yii\test\ActiveFixture::beforeUnload*				 public
+ See |yii\test\Fixture::beforeUnload|
+
+
+*yii\test\ActiveFixture::afterUnload*				 public
+ See |yii\test\Fixture::afterUnload|
+
+
+*yii\test\ActiveFixture::getIterator*				 public
+ See |yii\base\ArrayAccessTrait::getIterator|
+
+
+*yii\test\ActiveFixture::count* 				 public
+ See |yii\base\ArrayAccessTrait::count|
+
+
+*yii\test\ActiveFixture::offsetExists*				 public
+ See |yii\base\ArrayAccessTrait::offsetExists|
+
+
+*yii\test\ActiveFixture::offsetGet*				 public
+ See |yii\base\ArrayAccessTrait::offsetGet|
+
+
+*yii\test\ActiveFixture::offsetSet*				 public
+ See |yii\base\ArrayAccessTrait::offsetSet|
+
+
+*yii\test\ActiveFixture::offsetUnset*				 public
+ See |yii\base\ArrayAccessTrait::offsetUnset|
+
+
+*yii\test\ActiveFixture::getModel*				 public
+ See |yii\test\BaseActiveFixture::getModel|
+
+
+*yii\test\ActiveFixture::getData*				 protected
+>
+ getData()
+<
+(array) The data rows to be inserted into the database table.
+
+ The default implementation will try to return the fixture data by including
+ the external file specified by [[dataFile]]. The file should return an array
+ of data rows (column name => column value), each corresponding to a row in
+ the table.
+
+ If the data file does not exist, an empty array will be returned.
+
+
+*yii\test\ActiveFixture::resetTable*				 protected
+>
+ resetTable()
+<
+(void)
+
+ This method is called before populating fixture data into the table
+ associated with this fixture.
+
+
+*yii\test\ActiveFixture::getTableSchema*			 public
+>
+ getTableSchema()
+<
+(\yii\db\TableSchema) The schema information of the database table associated
+with this fixture.
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

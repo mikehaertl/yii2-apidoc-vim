@@ -1,0 +1,165 @@
+
+*yii\base\Event*   >> yii\base\Object
+================
+
+ It encapsulates the parameters associated with an event. The [[sender]]
+ property describes who raises the event. And the [[handled]] property
+ indicates if the event is handled. If an event handler sets [[handled]] to be
+ true, the rest of the uninvoked handlers will no longer be called to handle
+ the event.
+
+ Additionally, when attaching an event handler, extra data may be passed and
+ be available via the [[data]] property when the event handler is invoked.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$name> 				*yii\base\Event::$name*
+ (string) The event name. This property is set by [[Component::trigger()]] and
+ [[trigger()]]. Event handlers may use this property to check what event it is
+ handling.
+
+<$sender>				*yii\base\Event::$sender*
+ (object) The sender of this event. If not set, this property will be set as
+ the object whose "trigger()" method is called. This property may also be a
+ 'null' when this event is a class-level event which is triggered in a static
+ context.
+
+<$handled>				*yii\base\Event::$handled*
+ (boolean) Whether the event is handled. Defaults to false. When a handler
+ sets this to be true, the event processing will stop and ignore the rest of
+ the uninvoked event handlers.
+
+<$data> 				*yii\base\Event::$data*
+ (mixed) The data that is passed to [[Component::on()]] when attaching an
+ event handler. Note that this varies according to which event handler is
+ currently executing.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\Event::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\base\Event::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\base\Event::init*						 public
+ See |yii\base\Object::init|
+
+
+*yii\base\Event::__get* 					 public
+ See |yii\base\Object::__get|
+
+
+*yii\base\Event::__set* 					 public
+ See |yii\base\Object::__set|
+
+
+*yii\base\Event::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\base\Event::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\base\Event::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\base\Event::hasProperty*					 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\base\Event::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\base\Event::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\base\Event::hasMethod*					 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\base\Event::on*						 public
+>
+ on($class, $name, $handler, $data='null')
+<
+(void)
+
+ When a class-level event is triggered, event handlers attached to that class
+ and all parent classes will be invoked.
+
+ For example, the following code attaches an event handler to 'ActiveRecord''s
+ 'afterInsert' event:
+
+   Event::on(ActiveRecord::className(), ActiveRecord::EVENT_AFTER_INSERT,
+ function ($event) {
+       Yii::trace(get_class($event->sender) . ' is inserted.');
+   });
+
+ The handler will be invoked for EVERY successful ActiveRecord insertion.
+
+ For more details about how to declare an event handler, please refer to
+ [[Component::on()]].
+    [$class] (string) The fully qualified class name to which the event
+    handler needs to attach.
+    [$name] (string) The event name.
+    [$handler] (callable) The event handler.
+    [$data] (mixed) The data to be passed to the event handler when the event
+    is triggered. When the event handler is invoked, this data can be accessed
+    via [[Event::data]].
+
+
+*yii\base\Event::off*						 public
+>
+ off($class, $name, $handler='null')
+<
+(boolean) Whether a handler is found and detached.
+
+ This method is the opposite of [[on()]].
+    [$class] (string) The fully qualified class name from which the event
+    handler needs to be detached.
+    [$name] (string) The event name.
+    [$handler] (callable) The event handler to be removed. If it is null, all
+    handlers attached to the named event will be removed.
+
+
+*yii\base\Event::hasHandlers*					 public
+>
+ hasHandlers($class, $name)
+<
+(boolean) Whether there is any handler attached to the event.
+
+ Note that this method will also check all parent classes to see if there is
+ any handler attached to the named event.
+    [$class] (string|object) The object or the fully qualified class name
+    specifying the class-level event.
+    [$name] (string) The event name.
+
+
+*yii\base\Event::trigger*					 public
+>
+ trigger($class, $name, $event='null')
+<
+(void)
+
+ This method will cause invocation of event handlers that are attached to the
+ named event for the specified class and all its parent classes.
+    [$class] (string|object) The object or the fully qualified class name
+    specifying the class-level event.
+    [$name] (string) The event name.
+    [$event] (\yii\base\Event) The event parameter. If not set, a default
+    [[Event]] object will be created.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,147 @@
+
+*yii\base\ActionFilter*   >> yii\base\Behavior
+=======================
+
+ Check implementation of [[\yii\web\AccessControl]], [[\yii\web\PageCache]]
+ and [[\yii\web\HttpCache]] as examples on how to use it.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$owner>				*yii\base\ActionFilter::$owner*
+ See |yii\base\Behavior::$owner|
+
+<$only> 				*yii\base\ActionFilter::$only*
+ (array) List of action IDs that this filter should apply to. If this property
+ is not set, then the filter applies to all actions, unless they are listed in
+ [[except]]. If an action ID appears in both [[only]] and [[except]], this
+ filter will NOT apply to it.
+
+<$except>				*yii\base\ActionFilter::$except*
+ (array) List of action IDs that this filter should not apply to.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\ActionFilter::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\base\ActionFilter::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\base\ActionFilter::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\base\ActionFilter::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\base\ActionFilter::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\base\ActionFilter::__isset*				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\base\ActionFilter::__unset*				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\base\ActionFilter::__call* 				 public
+ See |yii\base\Object::__call|
+
+
+*yii\base\ActionFilter::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\base\ActionFilter::canGetProperty* 			 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\base\ActionFilter::canSetProperty* 			 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\base\ActionFilter::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\base\ActionFilter::events* 				 public
+>
+ events()
+<
+(array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+
+
+
+*yii\base\ActionFilter::attach* 				 public
+ See |yii\base\Behavior::attach|
+
+
+*yii\base\ActionFilter::detach* 				 public
+ See |yii\base\Behavior::detach|
+
+
+*yii\base\ActionFilter::beforeFilter*				 public
+>
+ beforeFilter($event)
+<
+(boolean) 
+
+
+    [$event] (\yii\base\ActionEvent) 
+
+
+*yii\base\ActionFilter::afterFilter*				 public
+>
+ afterFilter($event)
+<
+(boolean) 
+
+
+    [$event] (\yii\base\ActionEvent) 
+
+
+*yii\base\ActionFilter::beforeAction*				 public
+>
+ beforeAction($action)
+<
+(boolean) Whether the action should continue to be executed.
+
+
+    [$action] (\yii\base\Action) The action to be executed.
+
+
+*yii\base\ActionFilter::afterAction*				 public
+>
+ afterAction($action, $result)
+<
+(mixed) The processed action result.
+
+ You may override this method to do some postprocessing for the action.
+    [$action] (\yii\base\Action) The action just executed.
+    [$result] (mixed) The action execution result
+
+
+*yii\base\ActionFilter::isActive*				 protected
+>
+ isActive($action)
+<
+(boolean) Whether the filer is active for the given action.
+
+
+    [$action] (\yii\base\Action) The action being filtered
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

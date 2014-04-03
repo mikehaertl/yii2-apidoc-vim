@@ -1,0 +1,315 @@
+
+*yii\captcha\CaptchaAction*   >> yii\base\Action
+===========================
+
+ CaptchaAction is used together with [[Captcha]] and
+ [[\yii\captcha\CaptchaValidator]] to provide the
+ [CAPTCHA](http://en.wikipedia.org/wiki/Captcha) feature.
+
+ By configuring the properties of CaptchaAction, you may customize the
+ appearance of the generated CAPTCHA images, such as the font color, the
+ background color, etc.
+
+ Note that CaptchaAction requires either GD2 extension or ImageMagick PHP
+ extension.
+
+ Using CAPTCHA involves the following steps:
+
+ 1. Override [[\yii\web\Controller::actions()]] and register an action of
+ class CaptchaAction with ID 'captcha' 2. In the form model, declare an
+ attribute to store user-entered verification code, and declare the attribute 
+   to be validated by the 'captcha' validator. 3. In the controller view,
+ insert a [[Captcha]] widget in the form.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\captcha\CaptchaAction::$id*
+ See |yii\base\Action::$id|
+
+<$controller>				*yii\captcha\CaptchaAction::$controller*
+ See |yii\base\Action::$controller|
+
+<$testLimit>				*yii\captcha\CaptchaAction::$testLimit*
+ (integer) How many times should the same CAPTCHA be displayed. Defaults to 3.
+ A value less than or equal to 0 means the test is unlimited (available since
+ version 1.1.2).
+
+<$width>				*yii\captcha\CaptchaAction::$width*
+ (integer) The width of the generated CAPTCHA image. Defaults to 120.
+
+<$height>				*yii\captcha\CaptchaAction::$height*
+ (integer) The height of the generated CAPTCHA image. Defaults to 50.
+
+<$padding>				*yii\captcha\CaptchaAction::$padding*
+ (integer) Padding around the text. Defaults to 2.
+
+<$backColor>				*yii\captcha\CaptchaAction::$backColor*
+ (integer) The background color. For example, 0x55FF00. Defaults to 0xFFFFFF,
+ meaning white color.
+
+<$foreColor>				*yii\captcha\CaptchaAction::$foreColor*
+ (integer) The font color. For example, 0x55FF00. Defaults to 0x2040A0 (blue
+ color).
+
+<$transparent>				*yii\captcha\CaptchaAction::$transparent*
+ (boolean) Whether to use transparent background. Defaults to false.
+
+<$minLength>				*yii\captcha\CaptchaAction::$minLength*
+ (integer) The minimum length for randomly generated word. Defaults to 6.
+
+<$maxLength>				*yii\captcha\CaptchaAction::$maxLength*
+ (integer) The maximum length for randomly generated word. Defaults to 7.
+
+<$offset>				*yii\captcha\CaptchaAction::$offset*
+ (integer) The offset between characters. Defaults to -2. You can adjust this
+ property in order to decrease or increase the readability of the captcha.
+
+<$fontFile>				*yii\captcha\CaptchaAction::$fontFile*
+ (string) The TrueType font file. This can be either a file path or path
+ alias.
+
+<$fixedVerifyCode>			*yii\captcha\CaptchaAction::$fixedVerifyCode*
+ (string) The fixed verification code. When this property is set,
+ [[getVerifyCode()]] will always return the value of this property. This is
+ mainly used in automated tests where we want to be able to reproduce the same
+ verification code each time we run the tests. If not set, it means the
+ verification code will be randomly generated.
+
+<$behaviors>				*yii\captcha\CaptchaAction::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$uniqueId>				*yii\captcha\CaptchaAction::$uniqueId*
+ (string) The unique ID of this action among the whole application.
+
+<$verifyCode>				*yii\captcha\CaptchaAction::$verifyCode*
+ (string) The verification code.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\captcha\CaptchaAction::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\captcha\CaptchaAction::__construct*			 public
+ See |yii\base\Action::__construct|
+
+
+*yii\captcha\CaptchaAction::init*				 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\captcha\CaptchaAction::__get*				 public
+ See |yii\base\Component::__get|
+
+
+*yii\captcha\CaptchaAction::__set*				 public
+ See |yii\base\Component::__set|
+
+
+*yii\captcha\CaptchaAction::__isset*				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\captcha\CaptchaAction::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\captcha\CaptchaAction::__call*				 public
+ See |yii\base\Component::__call|
+
+
+*yii\captcha\CaptchaAction::hasProperty*			 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\captcha\CaptchaAction::canGetProperty*			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\captcha\CaptchaAction::canSetProperty*			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\captcha\CaptchaAction::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\captcha\CaptchaAction::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\captcha\CaptchaAction::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\captcha\CaptchaAction::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\captcha\CaptchaAction::on* 				 public
+ See |yii\base\Component::on|
+
+
+*yii\captcha\CaptchaAction::off*				 public
+ See |yii\base\Component::off|
+
+
+*yii\captcha\CaptchaAction::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\captcha\CaptchaAction::getBehavior*			 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\captcha\CaptchaAction::getBehaviors*			 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\captcha\CaptchaAction::attachBehavior*			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\captcha\CaptchaAction::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\captcha\CaptchaAction::detachBehavior*			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\captcha\CaptchaAction::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\captcha\CaptchaAction::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\captcha\CaptchaAction::getUniqueId*			 public
+ See |yii\base\Action::getUniqueId|
+
+
+*yii\captcha\CaptchaAction::runWithParams*			 public
+ See |yii\base\Action::runWithParams|
+
+
+*yii\captcha\CaptchaAction::beforeRun*				 protected
+ See |yii\base\Action::beforeRun|
+
+
+*yii\captcha\CaptchaAction::afterRun*				 protected
+ See |yii\base\Action::afterRun|
+
+
+*yii\captcha\CaptchaAction::run*				 public
+>
+ run()
+<
+(void)
+
+
+
+
+*yii\captcha\CaptchaAction::generateValidationHash*		 public
+>
+ generateValidationHash($code)
+<
+(string) A hash code generated from the CAPTCHA code
+
+
+    [$code] (string) The CAPTCHA code
+
+
+*yii\captcha\CaptchaAction::getVerifyCode*			 public
+>
+ getVerifyCode($regenerate='false')
+<
+(string) The verification code.
+
+
+    [$regenerate] (boolean) Whether the verification code should be
+    regenerated.
+
+
+*yii\captcha\CaptchaAction::validate*				 public
+>
+ validate($input, $caseSensitive)
+<
+(boolean) Whether the input is valid
+
+
+    [$input] (string) User input
+    [$caseSensitive] (boolean) Whether the comparison should be case-sensitive
+
+
+*yii\captcha\CaptchaAction::generateVerifyCode* 		 protected
+>
+ generateVerifyCode()
+<
+(string) The generated verification code
+
+
+
+
+*yii\captcha\CaptchaAction::getSessionKey*			 protected
+>
+ getSessionKey()
+<
+(string) The session variable name
+
+
+
+
+*yii\captcha\CaptchaAction::renderImage*			 protected
+>
+ renderImage($code)
+<
+(string) Image contents
+
+
+    [$code] (string) The verification code
+
+
+*yii\captcha\CaptchaAction::renderImageByGD*			 protected
+>
+ renderImageByGD($code)
+<
+(string) Image contents
+
+
+    [$code] (string) The verification code
+
+
+*yii\captcha\CaptchaAction::renderImageByImagick*		 protected
+>
+ renderImageByImagick($code)
+<
+(\Imagick) Image instance. Can be used as string. In this case it will contain
+image contents.
+
+
+    [$code] (string) The verification code
+
+
+*yii\captcha\CaptchaAction::setHttpHeaders*			 protected
+>
+ setHttpHeaders()
+<
+(void)
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

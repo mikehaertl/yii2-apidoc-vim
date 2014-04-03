@@ -1,0 +1,188 @@
+
+*yii\helpers\BaseInflector*  
+===========================
+
+ Do not use BaseInflector. Use [[Inflector]] instead.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$plurals>				*yii\helpers\BaseInflector::$plurals*
+ (array) The rules for converting a word into its plural form. The keys are
+ the regular expressions and the values are the corresponding replacements.
+
+<$singulars>				*yii\helpers\BaseInflector::$singulars*
+ (array) The rules for converting a word into its singular form. The keys are
+ the regular expressions and the values are the corresponding replacements.
+
+<$specials>				*yii\helpers\BaseInflector::$specials*
+ (array) The special rules for converting a word between its plural form and
+ singular form. The keys are the special words in singular form, and the
+ values are the corresponding plural form.
+
+<$transliteration>			*yii\helpers\BaseInflector::$transliteration*
+ (array) Map of special chars and its translation. This is used by [[slug()]].
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\helpers\BaseInflector::pluralize*				 public
+>
+ pluralize($word)
+<
+(string) The pluralized word
+
+ Note that this is for English only! For example, 'apple' will become
+ 'apples', and 'child' will become 'children'.
+    [$word] (string) The word to be pluralized
+
+
+*yii\helpers\BaseInflector::singularize*			 public
+>
+ singularize($word)
+<
+(string) Singular noun.
+
+
+    [$word] (string) The english word to singularize
+
+
+*yii\helpers\BaseInflector::titleize*				 public
+>
+ titleize($words, $ucAll='false')
+<
+(string) 
+
+
+    [$words] (string) 
+    [$ucAll] (boolean) Whether to set all words to uppercase
+
+
+*yii\helpers\BaseInflector::camelize*				 public
+>
+ camelize($word)
+<
+(string) 
+
+
+    [$word] (string) The word to CamelCase
+
+
+*yii\helpers\BaseInflector::camel2words*			 public
+>
+ camel2words($name, $ucwords='true')
+<
+(string) The resulting words
+
+ For example, 'PostTag' will be converted to 'Post Tag'.
+    [$name] (string) The string to be converted
+    [$ucwords] (boolean) Whether to capitalize the first letter in each word
+
+
+*yii\helpers\BaseInflector::camel2id*				 public
+>
+ camel2id($name, $separator=''-'')
+<
+(string) The resulting ID
+
+ Words in the ID may be concatenated using the specified character (defaults
+ to '-'). For example, 'PostTag' will be converted to 'post-tag'.
+    [$name] (string) The string to be converted
+    [$separator] (string) The character used to concatenate the words in the
+    ID
+
+
+*yii\helpers\BaseInflector::id2camel*				 public
+>
+ id2camel($id, $separator=''-'')
+<
+(string) The resulting CamelCase name
+
+ Words in the ID separated by '$separator' (defaults to '-') will be
+ concatenated into a CamelCase name. For example, 'post-tag' is converted to
+ 'PostTag'.
+    [$id] (string) The ID to be converted
+    [$separator] (string) The character used to separate the words in the ID
+
+
+*yii\helpers\BaseInflector::underscore* 			 public
+>
+ underscore($words)
+<
+(string) 
+
+
+    [$words] (string) The word(s) to underscore
+
+
+*yii\helpers\BaseInflector::humanize*				 public
+>
+ humanize($word, $ucAll='false')
+<
+(string) 
+
+
+    [$word] (string) The string to humanize
+    [$ucAll] (boolean) Whether to set all words to uppercase or not
+
+
+*yii\helpers\BaseInflector::variablize* 			 public
+>
+ variablize($word)
+<
+(string) 
+
+ Converts a word like "send_email" to "sendEmail". It will remove non
+ alphanumeric character from the word, so "who's online" will be converted to
+ "whoSOnline"
+    [$word] (string) To lowerCamelCase
+
+
+*yii\helpers\BaseInflector::tableize*				 public
+>
+ tableize($className)
+<
+(string) 
+
+
+    [$className] (string) The class name for getting related table_name
+
+
+*yii\helpers\BaseInflector::slug*				 public
+>
+ slug($string, $replacement=''-'', $lowercase='true')
+<
+(string) The converted string.
+
+
+    [$string] (string) An arbitrary string to convert
+    [$replacement] (string) The replacement to use for spaces
+    [$lowercase] (boolean) Whether to return the string in lowercase or not.
+    Defaults to 'true'.
+
+
+*yii\helpers\BaseInflector::classify*				 public
+>
+ classify($tableName)
+<
+(string) 
+
+
+    [$tableName] (string) 
+
+
+*yii\helpers\BaseInflector::ordinalize* 			 public
+>
+ ordinalize($number)
+<
+(string) 
+
+ ..
+    [$number] (integer) The number to get its ordinal value
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

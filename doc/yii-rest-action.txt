@@ -1,0 +1,196 @@
+
+*yii\rest\Action*   >> yii\base\Action
+=================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\rest\Action::$id*
+ See |yii\base\Action::$id|
+
+<$controller>				*yii\rest\Action::$controller*
+ See |yii\base\Action::$controller|
+
+<$modelClass>				*yii\rest\Action::$modelClass*
+ (string) Class name of the model which will be handled by this action. The
+ model class must implement [[ActiveRecordInterface]]. This property must be
+ set.
+
+<$findModel>				*yii\rest\Action::$findModel*
+ (callable) A PHP callable that will be called to return the model
+ corresponding to the specified primary key value. If not set, [[findModel()]]
+ will be used instead. The signature of the callable should be:
+
+   function ($id, $action) {
+       // $id is the primary key value. If composite primary key, the key
+ values
+       // will be separated by comma.
+       // $action is the action object currently running
+   }
+
+ The callable should return the model found, or throw an exception if not
+ found.
+
+<$checkAccess>				*yii\rest\Action::$checkAccess*
+ (callable) A PHP callable that will be called when running an action to
+ determine if the current user has the permission to execute the action. If
+ not set, the access check will not be performed. The signature of the
+ callable should be as follows,
+
+   function ($action, $model = null) {
+       // $model is the requested model instance.
+       // If null, it means no specific model (e.g. IndexAction)
+   }
+
+
+
+<$behaviors>				*yii\rest\Action::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$uniqueId>				*yii\rest\Action::$uniqueId*
+ (string) The unique ID of this action among the whole application.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\rest\Action::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\rest\Action::__construct*					 public
+ See |yii\base\Action::__construct|
+
+
+*yii\rest\Action::init* 					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\rest\Action::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\rest\Action::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\rest\Action::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\rest\Action::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\rest\Action::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\rest\Action::hasProperty*					 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\rest\Action::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\rest\Action::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\rest\Action::hasMethod*					 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\rest\Action::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\rest\Action::behaviors*					 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\rest\Action::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\rest\Action::on*						 public
+ See |yii\base\Component::on|
+
+
+*yii\rest\Action::off*						 public
+ See |yii\base\Component::off|
+
+
+*yii\rest\Action::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\rest\Action::getBehavior*					 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\rest\Action::getBehaviors* 				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\rest\Action::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\rest\Action::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\rest\Action::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\rest\Action::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\rest\Action::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\rest\Action::getUniqueId*					 public
+ See |yii\base\Action::getUniqueId|
+
+
+*yii\rest\Action::runWithParams*				 public
+ See |yii\base\Action::runWithParams|
+
+
+*yii\rest\Action::beforeRun*					 protected
+ See |yii\base\Action::beforeRun|
+
+
+*yii\rest\Action::afterRun*					 protected
+ See |yii\base\Action::afterRun|
+
+
+*yii\rest\Action::findModel*					 public
+>
+ findModel($id)
+<
+(\yii\db\ActiveRecordInterface) The model found
+
+ If the data model is not found, a 404 HTTP exception will be raised.
+    [$id] (string) The ID of the model to be loaded. If the model has a
+    composite primary key, the ID must be a string of the primary key values
+    separated by commas. The order of the primary key values should follow
+    that returned by the 'primaryKey()' method of the model.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

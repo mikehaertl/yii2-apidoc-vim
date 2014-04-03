@@ -1,0 +1,477 @@
+
+*yii\db\Migration*   >> yii\base\Component
+==================
+
+ Migration is designed to be used together with the "yii migrate" command.
+
+ Each child class of Migration represents an individual database migration
+ which is identified by the child class name.
+
+ Within each migration, the [[up()]] method should be overwritten to contain
+ the logic for "upgrading" the database; while the [[down()]] method for the
+ "downgrading" logic. The "yii migrate" command manages all available
+ migrations in an application.
+
+ If the database supports transactions, you may also overwrite [[safeUp()]]
+ and [[safeDown()]] so that if anything wrong happens during the upgrading or
+ downgrading, the whole migration can be reverted in a whole.
+
+ Migration provides a set of convenient methods for manipulating database data
+ and schema. For example, the [[insert()]] method can be used to easily insert
+ a row of data into a database table; the [[createTable()]] method can be used
+ to create a database table. Compared with the same methods in [[Command]],
+ these methods will display extra information showing the method parameters
+ and execution time, which may be useful when applying migrations.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$db>					*yii\db\Migration::$db*
+ (\yii\db\Connection|string) The DB connection object or the application
+ component ID of the DB connection that this migration should work with.
+
+<$behaviors>				*yii\db\Migration::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\db\Migration::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\db\Migration::__construct* 				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\db\Migration::init*					 public
+>
+ init()
+<
+(void)
+
+ This method will set [[db]] to be the 'db' application component, if it is
+ null.
+
+
+*yii\db\Migration::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\db\Migration::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\db\Migration::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\db\Migration::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\db\Migration::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\db\Migration::hasProperty* 				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\db\Migration::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\db\Migration::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\db\Migration::hasMethod*					 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\db\Migration::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\db\Migration::behaviors*					 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\db\Migration::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\db\Migration::on*						 public
+ See |yii\base\Component::on|
+
+
+*yii\db\Migration::off* 					 public
+ See |yii\base\Component::off|
+
+
+*yii\db\Migration::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\db\Migration::getBehavior* 				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\db\Migration::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\db\Migration::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\db\Migration::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\db\Migration::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\db\Migration::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\db\Migration::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\db\Migration::up*						 public
+>
+ up()
+<
+(boolean) Return a false value to indicate the migration fails and should not
+proceed further. All other return values mean the migration succeeds.
+
+ Child classes may overwrite this method to provide actual migration logic.
+
+
+*yii\db\Migration::down*					 public
+>
+ down()
+<
+(boolean) Return a false value to indicate the migration fails and should not
+proceed further. All other return values mean the migration succeeds.
+
+ The default implementation throws an exception indicating the migration
+ cannot be removed. Child classes may override this method if the
+ corresponding migrations can be removed.
+
+
+*yii\db\Migration::safeUp*					 public
+>
+ safeUp()
+<
+(boolean) Return a false value to indicate the migration fails and should not
+proceed further. All other return values mean the migration succeeds.
+
+ This method differs from [[up()]] in that the DB logic implemented here will
+ be enclosed within a DB transaction. Child classes may implement this method
+ instead of [[up()]] if the DB logic needs to be within a transaction.
+
+
+*yii\db\Migration::safeDown*					 public
+>
+ safeDown()
+<
+(boolean) Return a false value to indicate the migration fails and should not
+proceed further. All other return values mean the migration succeeds.
+
+ This method differs from [[down()]] in that the DB logic implemented here
+ will be enclosed within a DB transaction. Child classes may implement this
+ method instead of [[up()]] if the DB logic needs to be within a transaction.
+
+
+*yii\db\Migration::execute*					 public
+>
+ execute($sql, $params='[]')
+<
+(void)
+
+ This method executes the specified SQL statement using [[db]].
+    [$sql] (string) The SQL statement to be executed
+    [$params] (array) Input parameters (name => value) for the SQL execution.
+    See [[Command::execute()]] for more details.
+
+
+*yii\db\Migration::insert*					 public
+>
+ insert($table, $columns)
+<
+(void)
+
+ The method will properly escape the column names, and bind the values to be
+ inserted.
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column data (name => value) to be inserted into the
+    table.
+
+
+*yii\db\Migration::batchInsert* 				 public
+>
+ batchInsert($table, $columns, $rows)
+<
+(void)
+
+ The method will properly escape the column names, and bind the values to be
+ inserted.
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column names.
+    [$rows] (array) The rows to be batch inserted into the table
+
+
+*yii\db\Migration::update*					 public
+>
+ update($table, $columns, $condition='\'\'', $params='[]')
+<
+(void)
+
+ The method will properly escape the column names and bind the values to be
+ updated.
+    [$table] (string) The table to be updated.
+    [$columns] (array) The column data (name => value) to be updated.
+    [$condition] (array|string) The conditions that will be put in the WHERE
+    part. Please refer to [[Query::where()]] on how to specify conditions.
+    [$params] (array) The parameters to be bound to the query.
+
+
+*yii\db\Migration::delete*					 public
+>
+ delete($table, $condition='\'\'', $params='[]')
+<
+(void)
+
+
+    [$table] (string) The table where the data will be deleted from.
+    [$condition] (array|string) The conditions that will be put in the WHERE
+    part. Please refer to [[Query::where()]] on how to specify conditions.
+    [$params] (array) The parameters to be bound to the query.
+
+
+*yii\db\Migration::createTable* 				 public
+>
+ createTable($table, $columns, $options='null')
+<
+(void)
+
+ The columns in the new  table should be specified as name-definition pairs
+ (e.g. 'name' => 'string'), where name stands for a column name which will be
+ properly quoted by the method, and definition stands for the column type
+ which can contain an abstract DB type.
+
+ The [[QueryBuilder::getColumnType()]] method will be invoked to convert any
+ abstract type into a physical one.
+
+ If a column is specified with definition only (e.g. 'PRIMARY KEY (name,
+ type)'), it will be directly put into the generated SQL.
+    [$table] (string) The name of the table to be created. The name will be
+    properly quoted by the method.
+    [$columns] (array) The columns (name => definition) in the new table.
+    [$options] (string) Additional SQL fragment that will be appended to the
+    generated SQL.
+
+
+*yii\db\Migration::renameTable* 				 public
+>
+ renameTable($table, $newName)
+<
+(void)
+
+
+    [$table] (string) The table to be renamed. The name will be properly
+    quoted by the method.
+    [$newName] (string) The new table name. The name will be properly quoted
+    by the method.
+
+
+*yii\db\Migration::dropTable*					 public
+>
+ dropTable($table)
+<
+(void)
+
+
+    [$table] (string) The table to be dropped. The name will be properly
+    quoted by the method.
+
+
+*yii\db\Migration::truncateTable*				 public
+>
+ truncateTable($table)
+<
+(void)
+
+
+    [$table] (string) The table to be truncated. The name will be properly
+    quoted by the method.
+
+
+*yii\db\Migration::addColumn*					 public
+>
+ addColumn($table, $column, $type)
+<
+(void)
+
+
+    [$table] (string) The table that the new column will be added to. The
+    table name will be properly quoted by the method.
+    [$column] (string) The name of the new column. The name will be properly
+    quoted by the method.
+    [$type] (string) The column type. The [[QueryBuilder::getColumnType()]]
+    method will be invoked to convert abstract column type (if any) into the
+    physical one. Anything that is not recognized as abstract type will be
+    kept in the generated SQL. For example, 'string' will be turned into
+    'varchar(255)', while 'string not null' will become 'varchar(255) not
+    null'.
+
+
+*yii\db\Migration::dropColumn*					 public
+>
+ dropColumn($table, $column)
+<
+(void)
+
+
+    [$table] (string) The table whose column is to be dropped. The name will
+    be properly quoted by the method.
+    [$column] (string) The name of the column to be dropped. The name will be
+    properly quoted by the method.
+
+
+*yii\db\Migration::renameColumn*				 public
+>
+ renameColumn($table, $name, $newName)
+<
+(void)
+
+
+    [$table] (string) The table whose column is to be renamed. The name will
+    be properly quoted by the method.
+    [$name] (string) The old name of the column. The name will be properly
+    quoted by the method.
+    [$newName] (string) The new name of the column. The name will be properly
+    quoted by the method.
+
+
+*yii\db\Migration::alterColumn* 				 public
+>
+ alterColumn($table, $column, $type)
+<
+(void)
+
+
+    [$table] (string) The table whose column is to be changed. The table name
+    will be properly quoted by the method.
+    [$column] (string) The name of the column to be changed. The name will be
+    properly quoted by the method.
+    [$type] (string) The new column type. The
+    [[QueryBuilder::getColumnType()]] method will be invoked to convert
+    abstract column type (if any) into the physical one. Anything that is not
+    recognized as abstract type will be kept in the generated SQL. For
+    example, 'string' will be turned into 'varchar(255)', while 'string not
+    null' will become 'varchar(255) not null'.
+
+
+*yii\db\Migration::addPrimaryKey*				 public
+>
+ addPrimaryKey($name, $table, $columns)
+<
+(void)
+
+ The method will properly quote the table and column names.
+    [$name] (string) The name of the primary key constraint.
+    [$table] (string) The table that the primary key constraint will be added
+    to.
+    [$columns] (string|array) Comma separated string or array of columns that
+    the primary key will consist of.
+
+
+*yii\db\Migration::dropPrimaryKey*				 public
+>
+ dropPrimaryKey($name, $table)
+<
+(void)
+
+
+    [$name] (string) The name of the primary key constraint to be removed.
+    [$table] (string) The table that the primary key constraint will be
+    removed from.
+
+
+*yii\db\Migration::addForeignKey*				 public
+>
+ addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
+<
+(void)
+
+ The method will properly quote the table and column names.
+    [$name] (string) The name of the foreign key constraint.
+    [$table] (string) The table that the foreign key constraint will be added
+    to.
+    [$columns] (string) The name of the column to that the constraint will be
+    added on. If there are multiple columns, separate them with commas or use
+    an array.
+    [$refTable] (string) The table that the foreign key references to.
+    [$refColumns] (string) The name of the column that the foreign key
+    references to. If there are multiple columns, separate them with commas or
+    use an array.
+    [$delete] (string) The ON DELETE option. Most DBMS support these options:
+    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+    [$update] (string) The ON UPDATE option. Most DBMS support these options:
+    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+
+
+*yii\db\Migration::dropForeignKey*				 public
+>
+ dropForeignKey($name, $table)
+<
+(void)
+
+
+    [$name] (string) The name of the foreign key constraint to be dropped. The
+    name will be properly quoted by the method.
+    [$table] (string) The table whose foreign is to be dropped. The name will
+    be properly quoted by the method.
+
+
+*yii\db\Migration::createIndex* 				 public
+>
+ createIndex($name, $table, $columns, $unique='false')
+<
+(void)
+
+
+    [$name] (string) The name of the index. The name will be properly quoted
+    by the method.
+    [$table] (string) The table that the new index will be created for. The
+    table name will be properly quoted by the method.
+    [$columns] (string|array) The column(s) that should be included in the
+    index. If there are multiple columns, please separate them by commas or
+    use an array. The column names will be properly quoted by the method.
+    [$unique] (boolean) Whether to add UNIQUE constraint on the created index.
+
+
+*yii\db\Migration::dropIndex*					 public
+>
+ dropIndex($name, $table)
+<
+(void)
+
+
+    [$name] (string) The name of the index to be dropped. The name will be
+    properly quoted by the method.
+    [$table] (string) The table whose index is to be dropped. The name will be
+    properly quoted by the method.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

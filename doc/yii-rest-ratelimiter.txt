@@ -1,0 +1,154 @@
+
+*yii\rest\RateLimiter*   >> yii\base\Component
+======================
+
+ You may call [[check()]] to enforce rate limiting.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$enableRateLimitHeaders>		*yii\rest\RateLimiter::$enableRateLimitHeaders*
+ (boolean) Whether to include rate limit headers in the response
+
+<$errorMessage> 			*yii\rest\RateLimiter::$errorMessage*
+ (string) The message to be displayed when rate limit exceeds
+
+<$behaviors>				*yii\rest\RateLimiter::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\rest\RateLimiter::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\rest\RateLimiter::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\rest\RateLimiter::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\rest\RateLimiter::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\rest\RateLimiter::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\rest\RateLimiter::__isset* 				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\rest\RateLimiter::__unset* 				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\rest\RateLimiter::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\rest\RateLimiter::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\rest\RateLimiter::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\rest\RateLimiter::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\rest\RateLimiter::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\rest\RateLimiter::__clone* 				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\rest\RateLimiter::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\rest\RateLimiter::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\rest\RateLimiter::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\rest\RateLimiter::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\rest\RateLimiter::trigger* 				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\rest\RateLimiter::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\rest\RateLimiter::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\rest\RateLimiter::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\rest\RateLimiter::attachBehaviors* 			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\rest\RateLimiter::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\rest\RateLimiter::detachBehaviors* 			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\rest\RateLimiter::ensureBehaviors* 			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\rest\RateLimiter::check*					 public
+>
+ check($user, $request, $response, $action)
+<
+(void)
+
+
+    [$user] (\yii\rest\RateLimitInterface) The current user
+    [$request] (\yii\web\Request) 
+    [$response] (\yii\web\Response) 
+    [$action] (\yii\base\Action) The action to be executed
+
+
+*yii\rest\RateLimiter::addRateLimitHeaders*			 protected
+>
+ addRateLimitHeaders($response, $limit, $remaining, $reset)
+<
+(void)
+
+
+    [$response] (\yii\web\Response) 
+    [$limit] (integer) The maximum number of allowed requests during a period
+    [$remaining] (integer) The remaining number of allowed requests within the
+    current period
+    [$reset] (integer) The number of seconds to wait before having maximum
+    number of allowed requests again
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

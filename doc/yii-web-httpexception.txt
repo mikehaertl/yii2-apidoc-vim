@@ -1,0 +1,55 @@
+
+*yii\web\HttpException*   >> yii\base\UserException
+=======================
+
+ HttpException can be differentiated via its [[statusCode]] property value
+ which keeps a standard HTTP status code (e.g. 404, 500). Error handlers may
+ use this status code to decide how to format the error page.
+
+ Throwing an HttpException like in the following example will result in the
+ 404 page to be displayed.
+
+   if ($item === null) { // item does not exist
+       throw new \yii\web\HttpException(404, 'The requested Item could not be
+ found.');
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$statusCode>				*yii\web\HttpException::$statusCode*
+ (integer) HTTP status code, such as 403, 404, 500, etc.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\HttpException::getName*				 public
+>
+ getName()
+<
+(string) The user-friendly name of this exception
+
+
+
+
+*yii\web\HttpException::__construct*				 public
+>
+ __construct($status, $message='null', $code=0, $previous='null')
+<
+(void)
+
+
+    [$status] (integer) HTTP status code, such as 404, 500, etc.
+    [$message] (string) Error message
+    [$code] (integer) Error code
+    [$previous] (\Exception) The previous exception used for the exception
+    chaining.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

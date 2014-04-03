@@ -1,0 +1,190 @@
+
+*yii\web\AssetBundle*   >> yii\base\Object
+=====================
+
+ Each asset bundle has a unique name that globally identifies it among all
+ asset bundles used in an application. The name is the [fully qualified class
+ name](http://php.net/manual/en/language.namespaces.rules.php) of the class
+ representing it.
+
+ An asset bundle can depend on other asset bundles. When registering an asset
+ bundle with a view, all its dependent asset bundles will be automatically
+ registered.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$sourcePath>				*yii\web\AssetBundle::$sourcePath*
+ (string) The root directory of the source asset files. A source asset file is
+ a file that is part of your source code repository of your Web application.
+
+ You must set this property if the directory containing the source asset files
+ is not Web accessible (this is usually the case for extensions).
+
+ By setting this property, the asset manager will publish the source asset
+ files to a Web-accessible directory [[basePath]].
+
+ You can use either a directory or an alias of the directory.
+
+<$basePath>				*yii\web\AssetBundle::$basePath*
+ (string) The Web-accessible directory that contains the asset files in this
+ bundle.
+
+ If [[sourcePath]] is set, this property will be *overwritten* by
+ [[AssetManager]] when it publishes the asset files from [[sourcePath]].
+
+ If the bundle contains any assets that are specified in terms of relative
+ file path, then this property must be set either manually or automatically
+ (by [[AssetManager]] via asset publishing).
+
+ You can use either a directory or an alias of the directory.
+
+<$baseUrl>				*yii\web\AssetBundle::$baseUrl*
+ (string) The base URL that will be prefixed to the asset files for them to be
+ accessed via Web server.
+
+ If [[sourcePath]] is set, this property will be *overwritten* by
+ [[AssetManager]] when it publishes the asset files from [[sourcePath]].
+
+ If the bundle contains any assets that are specified in terms of relative
+ file path, then this property must be set either manually or automatically
+ (by asset manager via asset publishing).
+
+ You can use either a URL or an alias of the URL.
+
+<$depends>				*yii\web\AssetBundle::$depends*
+ (array) List of bundle class names that this bundle depends on.
+
+ For example:
+
+   public $depends = [
+      'yii\web\YiiAsset',
+      'yii\bootstrap\BootstrapAsset',
+   ];
+
+
+
+<$js>					*yii\web\AssetBundle::$js*
+ (array) List of JavaScript files that this bundle contains. Each JavaScript
+ file can be either a file path (without leading slash) relative to
+ [[basePath]] or a URL representing an external JavaScript file.
+
+ Note that only forward slash "/" can be used as directory separator.
+
+<$css>					*yii\web\AssetBundle::$css*
+ (array) List of CSS files that this bundle contains. Each CSS file can be
+ either a file path (without leading slash) relative to [[basePath]] or a URL
+ representing an external CSS file.
+
+ Note that only forward slash "/" can be used as directory separator.
+
+<$jsOptions>				*yii\web\AssetBundle::$jsOptions*
+ (array) The options that will be passed to
+ [[\yii\web\View::registerJsFile()]] when registering the JS files in this
+ bundle.
+
+<$cssOptions>				*yii\web\AssetBundle::$cssOptions*
+ (array) The options that will be passed to
+ [[\yii\web\View::registerCssFile()]] when registering the CSS files in this
+ bundle.
+
+<$publishOptions>			*yii\web\AssetBundle::$publishOptions*
+ (array) The options to be passed to [[AssetManager::publish()]] when the
+ asset bundle is being published.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\AssetBundle::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\web\AssetBundle::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\web\AssetBundle::init*					 public
+>
+ init()
+<
+(void)
+
+ If you override this method, make sure you call the parent implementation in
+ the last.
+
+
+*yii\web\AssetBundle::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\web\AssetBundle::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\web\AssetBundle::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\web\AssetBundle::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\web\AssetBundle::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\web\AssetBundle::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\web\AssetBundle::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\web\AssetBundle::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\web\AssetBundle::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\web\AssetBundle::register* 				 public
+>
+ register($view)
+<
+(static) The registered asset bundle instance
+
+
+    [$view] (\yii\web\View) 
+
+
+*yii\web\AssetBundle::registerAssetFiles*			 public
+>
+ registerAssetFiles($view)
+<
+(void)
+
+
+    [$view] (\yii\web\View) The view that the asset files are to be registered
+    with.
+
+
+*yii\web\AssetBundle::publish*					 public
+>
+ publish($am)
+<
+(void)
+
+ It will also try to convert non-CSS or JS files (e.g. LESS, Sass) into the
+ corresponding CSS or JS files using [[AssetManager::converter|asset
+ converter]].
+    [$am] (\yii\web\AssetManager) The asset manager to perform the asset
+    publishing
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

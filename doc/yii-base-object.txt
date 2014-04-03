@@ -1,0 +1,227 @@
+
+*yii\base\Object*  
+=================
+
+ A property is defined by a getter method (e.g. 'getLabel'), and/or a setter
+ method (e.g. 'setLabel'). For example, the following getter and setter
+ methods define a property named 'label':
+
+   private $_label;
+
+   public function getLabel()
+   {
+       return $this->_label;
+   }
+
+   public function setLabel($value)
+   {
+       $this->_label = $value;
+   }
+
+ Property names are *case-insensitive*.
+
+ A property can be accessed like a member variable of an object. Reading or
+ writing a property will cause the invocation of the corresponding getter or
+ setter method. For example,
+
+   // equivalent to $label = $object->getLabel();
+   $label = $object->label;
+   // equivalent to $object->setLabel('abc');
+   $object->label = 'abc';
+
+ If a property has only a getter method and has no setter method, it is
+ considered as *read-only*. In this case, trying to modify the property value
+ will cause an exception.
+
+ One can call [[hasProperty()]], [[canGetProperty()]] and/or
+ [[canSetProperty()]] to check the existence of a property.
+
+ Besides the property feature, Object also introduces an important object
+ initialization life cycle. In particular, creating an new instance of Object
+ or its derived class will involve the following life cycles sequentially:
+
+ 1. the class constructor is invoked; 2. object properties are initialized
+ according to the given configuration; 3. the 'init()' method is invoked.
+
+ In the above, both Step 2 and 3 occur at the end of the class constructor. It
+ is recommended that you perform object initialization in the 'init()' method
+ because at that stage, the object configuration is already applied.
+
+ In order to ensure the above life cycles, if a child class of Object needs to
+ override the constructor, it should be done like the following:
+
+   public function __construct($param1, $param2, ..., $config = [])
+   {
+       ...
+       parent::__construct($config);
+   }
+
+ That is, a '$config' parameter (defaults to '[]') should be declared as the
+ last parameter of the constructor, and the parent implementation should be
+ called at the end of the constructor.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\Object::className*					 public
+>
+ className()
+<
+(string) The fully qualified name of this class.
+
+
+
+
+*yii\base\Object::__construct*					 public
+>
+ __construct($config='[]')
+<
+(void)
+
+ The default implementation does two things:
+
+ - Initializes the object with the given configuration '$config'. - Call
+ [[init()]].
+
+ If this method is overridden in a child class, it is recommended that
+
+ - the last parameter of the constructor is a configuration array, like
+ '$config' here. - call the parent implementation at the end of the
+ constructor.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii\base\Object::init* 					 public
+>
+ init()
+<
+(void)
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+*yii\base\Object::__get*					 public
+>
+ __get($name)
+<
+(mixed) The property value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$value = $object->property;'.
+    [$name] (string) The property name
+
+
+*yii\base\Object::__set*					 public
+>
+ __set($name, $value)
+<
+(void)
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$object->property = $value;'.
+    [$name] (string) The property name or the event name
+    [$value] (mixed) The property value
+
+
+*yii\base\Object::__isset*					 public
+>
+ __isset($name)
+<
+(boolean) Whether the named property is set (not null).
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'isset($object->property)'.
+
+ Note that if the property is not defined, false will be returned.
+    [$name] (string) The property name or the event name
+
+
+*yii\base\Object::__unset*					 public
+>
+ __unset($name)
+<
+(void)
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'unset($object->property)'.
+
+ Note that if the property is not defined, this method will do nothing. If the
+ property is read-only, it will throw an exception.
+    [$name] (string) The property name
+
+
+*yii\base\Object::__call*					 public
+>
+ __call($name, $params)
+<
+(mixed) The method return value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when an unknown method is being invoked.
+    [$name] (string) The method name
+    [$params] (array) Method parameters
+
+
+*yii\base\Object::hasProperty*					 public
+>
+ hasProperty($name, $checkVars='true')
+<
+(boolean) Whether the property is defined
+
+ A property is defined if:
+
+ - the class has a getter or setter method associated with the specified name 
+  (in this case, property name is case-insensitive); - the class has a member
+ variable with the specified name (when '$checkVars' is true);
+    [$name] (string) The property name
+    [$checkVars] (boolean) Whether to treat member variables as properties
+
+
+*yii\base\Object::canGetProperty*				 public
+>
+ canGetProperty($name, $checkVars='true')
+<
+(boolean) Whether the property can be read
+
+ A property is readable if:
+
+ - the class has a getter method associated with the specified name   (in this
+ case, property name is case-insensitive); - the class has a member variable
+ with the specified name (when '$checkVars' is true);
+    [$name] (string) The property name
+    [$checkVars] (boolean) Whether to treat member variables as properties
+
+
+*yii\base\Object::canSetProperty*				 public
+>
+ canSetProperty($name, $checkVars='true')
+<
+(boolean) Whether the property can be written
+
+ A property is writable if:
+
+ - the class has a setter method associated with the specified name   (in this
+ case, property name is case-insensitive); - the class has a member variable
+ with the specified name (when '$checkVars' is true);
+    [$name] (string) The property name
+    [$checkVars] (boolean) Whether to treat member variables as properties
+
+
+*yii\base\Object::hasMethod*					 public
+>
+ hasMethod($name)
+<
+(boolean) Whether the property is defined
+
+ The default implementation is a call to php function 'method_exists()'. You
+ may override this method when you implemented the php magic method
+ '__call()'.
+    [$name] (string) The property name
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

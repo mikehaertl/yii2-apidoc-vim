@@ -1,0 +1,290 @@
+
+*yii\data\SqlDataProvider*   >> yii\data\BaseDataProvider
+==========================
+
+ SqlDataProvider provides data in terms of arrays, each representing a row of
+ query result.
+
+ Like other data providers, SqlDataProvider also supports sorting and
+ pagination. It does so by modifying the given [[sql]] statement with "ORDER
+ BY" and "LIMIT" clauses. You may configure the [[sort]] and [[pagination]]
+ properties to customize sorting and pagination behaviors.
+
+ SqlDataProvider may be used in the following way:
+
+   $count = Yii::$app->db->createCommand('
+       SELECT COUNT(*) FROM user WHERE status=:status
+   ', [':status' => 1])->queryScalar();
+
+   $dataProvider = new SqlDataProvider([
+       'sql' => 'SELECT * FROM user WHERE status=:status',
+       'params' => [':status' => 1],
+       'totalCount' => $count,
+       'sort' => [
+           'attributes' => [
+               'age',
+               'name' => [
+                   'asc' => ['first_name' => SORT_ASC, 'last_name' =>
+ SORT_ASC],
+                   'desc' => ['first_name' => SORT_DESC, 'last_name' =>
+ SORT_DESC],
+                   'default' => SORT_DESC,
+                   'label' => 'Name',
+               ],
+           ],
+       ],
+       'pagination' => [
+           'pageSize' => 20,
+       ],
+   ]);
+
+   // get the user records in the current page
+   $models = $dataProvider->getModels();
+
+ Note: if you want to use the pagination feature, you must configure the
+ [[totalCount]] property to be the total number of rows (without pagination).
+ And if you want to use the sorting feature, you must configure the [[sort]]
+ property so that the provider knows which columns can be sorted.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\data\SqlDataProvider::$id*
+ See |yii\data\BaseDataProvider::$id|
+
+<$db>					*yii\data\SqlDataProvider::$db*
+ (\yii\db\Connection|string) The DB connection object or the application
+ component ID of the DB connection.
+
+<$sql>					*yii\data\SqlDataProvider::$sql*
+ (string) The SQL statement to be used for fetching data rows.
+
+<$params>				*yii\data\SqlDataProvider::$params*
+ (array) Parameters (name=>value) to be bound to the SQL statement.
+
+<$key>					*yii\data\SqlDataProvider::$key*
+ (string|callable) The column that is used as the key of the data models. This
+ can be either a column name, or a callable that returns the key value of a
+ given data model.
+
+ If this is not set, the keys of the [[models]] array will be used.
+
+<$behaviors>				*yii\data\SqlDataProvider::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$models>				*yii\data\SqlDataProvider::$models*
+ (array) The list of data models in the current page.
+
+<$keys> 				*yii\data\SqlDataProvider::$keys*
+ (array) The list of key values corresponding to [[models]]. Each data model
+ in [[models]] is uniquely identified by the corresponding key value in this
+ array.
+
+<$count>				*yii\data\SqlDataProvider::$count*
+ (integer) The number of data models in the current page.
+
+<$totalCount>				*yii\data\SqlDataProvider::$totalCount*
+ (integer) Total number of possible data models.
+
+<$pagination>				*yii\data\SqlDataProvider::$pagination*
+ (\yii\data\Pagination|boolean) The pagination object. If this is false, it
+ means the pagination is disabled.
+
+<$sort> 				*yii\data\SqlDataProvider::$sort*
+ (\yii\data\Sort|boolean) The sorting object. If this is false, it means the
+ sorting is disabled.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\data\SqlDataProvider::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\data\SqlDataProvider::__construct* 			 public
+ See |yii\base\Object::__construct|
+
+
+*yii\data\SqlDataProvider::init*				 public
+>
+ init()
+<
+(void)
+
+ This method will initialize the [[db]] property to make sure it refers to a
+ valid DB connection.
+
+
+*yii\data\SqlDataProvider::__get*				 public
+ See |yii\base\Component::__get|
+
+
+*yii\data\SqlDataProvider::__set*				 public
+ See |yii\base\Component::__set|
+
+
+*yii\data\SqlDataProvider::__isset*				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\data\SqlDataProvider::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\data\SqlDataProvider::__call*				 public
+ See |yii\base\Component::__call|
+
+
+*yii\data\SqlDataProvider::hasProperty* 			 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\data\SqlDataProvider::canGetProperty*			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\data\SqlDataProvider::canSetProperty*			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\data\SqlDataProvider::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\data\SqlDataProvider::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\data\SqlDataProvider::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\data\SqlDataProvider::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\data\SqlDataProvider::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\data\SqlDataProvider::off* 				 public
+ See |yii\base\Component::off|
+
+
+*yii\data\SqlDataProvider::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\data\SqlDataProvider::getBehavior* 			 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\data\SqlDataProvider::getBehaviors*			 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\data\SqlDataProvider::attachBehavior*			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\data\SqlDataProvider::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\data\SqlDataProvider::detachBehavior*			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\data\SqlDataProvider::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\data\SqlDataProvider::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\data\SqlDataProvider::prepareModels*			 protected
+>
+ prepareModels()
+<
+(array) The available data models
+
+
+
+
+*yii\data\SqlDataProvider::prepareKeys* 			 protected
+>
+ prepareKeys($models)
+<
+(array) The keys
+
+
+    [$models] () 
+
+
+*yii\data\SqlDataProvider::prepareTotalCount*			 protected
+>
+ prepareTotalCount()
+<
+(integer) Total number of data models in this data provider.
+
+
+
+
+*yii\data\SqlDataProvider::prepare*				 public
+ See |yii\data\BaseDataProvider::prepare|
+
+
+*yii\data\SqlDataProvider::getModels*				 public
+ See |yii\data\BaseDataProvider::getModels|
+
+
+*yii\data\SqlDataProvider::setModels*				 public
+ See |yii\data\BaseDataProvider::setModels|
+
+
+*yii\data\SqlDataProvider::getKeys*				 public
+ See |yii\data\BaseDataProvider::getKeys|
+
+
+*yii\data\SqlDataProvider::setKeys*				 public
+ See |yii\data\BaseDataProvider::setKeys|
+
+
+*yii\data\SqlDataProvider::getCount*				 public
+ See |yii\data\BaseDataProvider::getCount|
+
+
+*yii\data\SqlDataProvider::getTotalCount*			 public
+ See |yii\data\BaseDataProvider::getTotalCount|
+
+
+*yii\data\SqlDataProvider::setTotalCount*			 public
+ See |yii\data\BaseDataProvider::setTotalCount|
+
+
+*yii\data\SqlDataProvider::getPagination*			 public
+ See |yii\data\BaseDataProvider::getPagination|
+
+
+*yii\data\SqlDataProvider::setPagination*			 public
+ See |yii\data\BaseDataProvider::setPagination|
+
+
+*yii\data\SqlDataProvider::getSort*				 public
+ See |yii\data\BaseDataProvider::getSort|
+
+
+*yii\data\SqlDataProvider::setSort*				 public
+ See |yii\data\BaseDataProvider::setSort|
+
+
+*yii\data\SqlDataProvider::refresh*				 public
+ See |yii\data\BaseDataProvider::refresh|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

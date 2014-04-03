@@ -1,0 +1,159 @@
+
+*yii\behaviors\AttributeBehavior*   >> yii\base\Behavior
+=================================
+
+ To use AttributeBehavior, configure the [[attributes]] property which should
+ specify the list of attributes that need to be updated and the corresponding
+ events that should trigger the update. For example, Then configure the
+ [[value]] property with a PHP callable whose return value will be used to
+ assign to the current attribute(s). For example,
+
+   use yii\behaviors\AttributeBehavior;
+
+   public function behaviors()
+   {
+       return [
+           'attributeStamp' => [
+               'class' => AttributeBehavior::className(),
+               'attributes' => [
+                   ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
+                   ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+               ],
+               'value' => function ($event) {
+                   return 'some value';
+               },
+           ],
+       ];
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$owner>				*yii\behaviors\AttributeBehavior::$owner*
+ See |yii\base\Behavior::$owner|
+
+<$attributes>				*yii\behaviors\AttributeBehavior::$attributes*
+ (array) List of attributes that are to be automatically filled with the value
+ specified via [[value]]. The array keys are the ActiveRecord events upon
+ which the attributes are to be updated, and the array values are the
+ corresponding attribute(s) to be updated. You can use a string to represent a
+ single attribute, or an array to represent a list of attributes. For example,
+
+   [
+       ActiveRecord::EVENT_BEFORE_INSERT => ['attribute1', 'attribute2'],
+       ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+   ]
+
+
+
+<$value>				*yii\behaviors\AttributeBehavior::$value*
+ (mixed) The value that will be assigned to the current attributes. This can
+ be an anonymous function or an arbitrary value. If the former, the return
+ value of the function will be assigned to the attributes. The signature of
+ the function should be as follows,
+
+   function ($event)
+   {
+       // return value will be assigned to the attribute
+   }
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\behaviors\AttributeBehavior::className*			 public
+ See |yii\base\Object::className|
+
+
+*yii\behaviors\AttributeBehavior::__construct*			 public
+ See |yii\base\Object::__construct|
+
+
+*yii\behaviors\AttributeBehavior::init* 			 public
+ See |yii\base\Object::init|
+
+
+*yii\behaviors\AttributeBehavior::__get*			 public
+ See |yii\base\Object::__get|
+
+
+*yii\behaviors\AttributeBehavior::__set*			 public
+ See |yii\base\Object::__set|
+
+
+*yii\behaviors\AttributeBehavior::__isset*			 public
+ See |yii\base\Object::__isset|
+
+
+*yii\behaviors\AttributeBehavior::__unset*			 public
+ See |yii\base\Object::__unset|
+
+
+*yii\behaviors\AttributeBehavior::__call*			 public
+ See |yii\base\Object::__call|
+
+
+*yii\behaviors\AttributeBehavior::hasProperty*			 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\behaviors\AttributeBehavior::canGetProperty*		 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\behaviors\AttributeBehavior::canSetProperty*		 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\behaviors\AttributeBehavior::hasMethod*			 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\behaviors\AttributeBehavior::events*			 public
+>
+ events()
+<
+(array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+
+
+
+*yii\behaviors\AttributeBehavior::attach*			 public
+ See |yii\base\Behavior::attach|
+
+
+*yii\behaviors\AttributeBehavior::detach*			 public
+ See |yii\base\Behavior::detach|
+
+
+*yii\behaviors\AttributeBehavior::evaluateAttributes*		 public
+>
+ evaluateAttributes($event)
+<
+(void)
+
+
+    [$event] (\yii\base\Event) 
+
+
+*yii\behaviors\AttributeBehavior::getValue*			 protected
+>
+ getValue($event)
+<
+(mixed) The attribute value
+
+ This method is called by [[evaluateAttributes()]]. Its return value will be
+ assigned to the attributes corresponding to the triggering event.
+    [$event] (\yii\base\Event) The event that triggers the current attribute
+    updating.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

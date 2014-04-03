@@ -1,0 +1,185 @@
+
+*yii\web\AccessControl*   >> yii\base\ActionFilter
+=======================
+
+ AccessControl is an action filter. It will check its [[rules]] to find the
+ first rule that matches the current context variables (such as user IP
+ address, user role). The matching rule will dictate whether to allow or deny
+ the access to the requested controller action. If no rule matches, the access
+ will be denied.
+
+ To use AccessControl, declare it in the 'behaviors()' method of your
+ controller class. For example, the following declarations will allow
+ authenticated users to access the "create" and "update" actions and deny all
+ other users from accessing these two actions.
+
+   public function behaviors()
+   {
+       return [
+           'access' => [
+               'class' => \yii\web\AccessControl::className(),
+               'only' => ['create', 'update'],
+               'rules' => [
+                   // deny all POST requests
+                   [
+                       'allow' => false,
+                       'verbs' => ['POST']
+                   ],
+                   // allow authenticated users
+                   [
+                       'allow' => true,
+                       'roles' => ['@'],
+                   ],
+                   // everything else is denied
+               ],
+           ],
+       ];
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$owner>				*yii\web\AccessControl::$owner*
+ See |yii\base\Behavior::$owner|
+
+<$only> 				*yii\web\AccessControl::$only*
+ See |yii\base\ActionFilter::$only|
+
+<$except>				*yii\web\AccessControl::$except*
+ See |yii\base\ActionFilter::$except|
+
+<$denyCallback> 			*yii\web\AccessControl::$denyCallback*
+ (callable) A callback that will be called if the access should be denied to
+ the current user. If not set, [[denyAccess()]] will be called.
+
+ The signature of the callback should be as follows:
+
+   function ($rule, $action)
+
+ where '$rule' is this rule, and '$action' is the current [[Action|action]]
+ object. '$rule' will be 'null' if access is denied because none of the rules
+ matched.
+
+<$ruleConfig>				*yii\web\AccessControl::$ruleConfig*
+ (array) The default configuration of access rules. Individual rule
+ configurations specified via [[rules]] will take precedence when the same
+ property of the rule is configured.
+
+<$rules>				*yii\web\AccessControl::$rules*
+ (array) A list of access rule objects or configuration arrays for creating
+ the rule objects. If a rule is specified via a configuration array, it will
+ be merged with [[ruleConfig]] first before it is used for creating the rule
+ object.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\AccessControl::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\web\AccessControl::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\web\AccessControl::init*					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\web\AccessControl::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\web\AccessControl::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\web\AccessControl::__isset*				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\web\AccessControl::__unset*				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\web\AccessControl::__call* 				 public
+ See |yii\base\Object::__call|
+
+
+*yii\web\AccessControl::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\web\AccessControl::canGetProperty* 			 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\web\AccessControl::canSetProperty* 			 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\web\AccessControl::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\web\AccessControl::events* 				 public
+ See |yii\base\ActionFilter::events|
+
+
+*yii\web\AccessControl::attach* 				 public
+ See |yii\base\Behavior::attach|
+
+
+*yii\web\AccessControl::detach* 				 public
+ See |yii\base\Behavior::detach|
+
+
+*yii\web\AccessControl::beforeFilter*				 public
+ See |yii\base\ActionFilter::beforeFilter|
+
+
+*yii\web\AccessControl::afterFilter*				 public
+ See |yii\base\ActionFilter::afterFilter|
+
+
+*yii\web\AccessControl::beforeAction*				 public
+>
+ beforeAction($action)
+<
+(boolean) Whether the action should continue to be executed.
+
+
+    [$action] (\yii\base\Action) The action to be executed.
+
+
+*yii\web\AccessControl::afterAction*				 public
+ See |yii\base\ActionFilter::afterAction|
+
+
+*yii\web\AccessControl::isActive*				 protected
+ See |yii\base\ActionFilter::isActive|
+
+
+*yii\web\AccessControl::denyAccess*				 protected
+>
+ denyAccess($user)
+<
+(void)
+
+ The default implementation will redirect the user to the login page if he is
+ a guest; if the user is already logged, a 403 HTTP exception will be thrown.
+    [$user] (\yii\web\User) The current user
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

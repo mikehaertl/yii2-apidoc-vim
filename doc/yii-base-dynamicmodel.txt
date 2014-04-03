@@ -1,0 +1,448 @@
+
+*yii\base\DynamicModel*   >> yii\base\Model
+=======================
+
+ The typical usage of DynamicModel is as follows,
+
+   public function actionSearch($name, $email)
+   {
+       $model = DynamicModel::validateData(compact('name', 'email'), [
+           [['name', 'email'], 'string', 'max' => 128]],
+           ['email', 'email'],
+       ]);
+       if ($model->hasErrors()) {
+           // validation fails
+       } else {
+           // validation succeeds
+       }
+   }
+
+ The above example shows how to validate '$name' and '$email' with the help of
+ DynamicModel. The [[validateData()]] method creates an instance of
+ DynamicModel, defines the attributes using the given data ('name' and 'email'
+ in this example), and then calls [[Model::validate()]].
+
+ You can check the validation result by [[hasErrors()]], like you do with a
+ normal model. You may also access the dynamic attributes defined through the
+ model instance, e.g., '$model->name' and '$model->email'.
+
+ Alternatively, you may use the following more "classic" syntax to perform
+ ad-hoc data validation:
+
+   $model = new DynamicModel(compact('name', 'email'));
+   $model->addRule(['name', 'email'], 'string', ['max' => 128])
+       ->addRule('email', 'email')
+       ->validate();
+
+ DynamicModel implements the above ad-hoc data validation feature by
+ supporting the so-called "dynamic attributes". It basically allows an
+ attribute to be defined dynamically through its constructor or
+ [[defineAttribute()]].
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$behaviors>				*yii\base\DynamicModel::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$validators>				*yii\base\DynamicModel::$validators*
+ (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
+ model.
+
+<$activeValidators>			*yii\base\DynamicModel::$activeValidators*
+ (\yii\validators\Validator[]) The validators applicable to the current
+ [[scenario]].
+
+<$errors>				*yii\base\DynamicModel::$errors*
+ (array) Errors for all attributes or the specified attribute. Empty array is
+ returned if no error. Note that when returning errors for all attributes, the
+ result is a two-dimensional array, like the following:
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+
+
+<$firstErrors>				*yii\base\DynamicModel::$firstErrors*
+ (array) The first errors. The array keys are the attribute names, and the
+ array values are the corresponding error messages. An empty array will be
+ returned if there is no error.
+
+<$attributes>				*yii\base\DynamicModel::$attributes*
+ (array) Attribute values (name => value).
+
+<$scenario>				*yii\base\DynamicModel::$scenario*
+ (string) The scenario that this model is in. Defaults to
+ [[SCENARIO_DEFAULT]].
+
+<$iterator>				*yii\base\DynamicModel::$iterator*
+ (\ArrayIterator) An iterator for traversing the items in the list.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\DynamicModel::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\base\DynamicModel::__construct*				 public
+>
+ __construct($attributes='[]', $config='[]')
+<
+(void)
+
+
+    [$attributes] (array) The dynamic attributes (name-value pairs, or names)
+    being defined
+    [$config] (array) The configuration array to be applied to this object.
+
+
+*yii\base\DynamicModel::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\base\DynamicModel::__get*					 public
+>
+ __get($name)
+<
+(mixed) The property value or the value of a behavior's property
+
+
+    [$name] () 
+
+
+*yii\base\DynamicModel::__set*					 public
+>
+ __set($name, $value)
+<
+(void)
+
+
+    [$name] () 
+    [$value] () 
+
+
+*yii\base\DynamicModel::__isset*				 public
+>
+ __isset($name)
+<
+(boolean) Whether the named property is null
+
+
+    [$name] () 
+
+
+*yii\base\DynamicModel::__unset*				 public
+>
+ __unset($name)
+<
+(void)
+
+
+    [$name] () 
+
+
+*yii\base\DynamicModel::__call* 				 public
+ See |yii\base\Component::__call|
+
+
+*yii\base\DynamicModel::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\base\DynamicModel::canGetProperty* 			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\base\DynamicModel::canSetProperty* 			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\base\DynamicModel::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\base\DynamicModel::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\base\DynamicModel::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\base\DynamicModel::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\base\DynamicModel::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\base\DynamicModel::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\base\DynamicModel::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\base\DynamicModel::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\base\DynamicModel::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\base\DynamicModel::attachBehavior* 			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\base\DynamicModel::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\base\DynamicModel::detachBehavior* 			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\base\DynamicModel::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\base\DynamicModel::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\base\DynamicModel::fields* 				 public
+ See |yii\base\ArrayableTrait::fields|
+
+
+*yii\base\DynamicModel::extraFields*				 public
+ See |yii\base\ArrayableTrait::extraFields|
+
+
+*yii\base\DynamicModel::toArray*				 public
+ See |yii\base\ArrayableTrait::toArray|
+
+
+*yii\base\DynamicModel::resolveFields*				 protected
+ See |yii\base\ArrayableTrait::resolveFields|
+
+
+*yii\base\DynamicModel::rules*					 public
+ See |yii\base\Model::rules|
+
+
+*yii\base\DynamicModel::scenarios*				 public
+ See |yii\base\Model::scenarios|
+
+
+*yii\base\DynamicModel::formName*				 public
+ See |yii\base\Model::formName|
+
+
+*yii\base\DynamicModel::attributes*				 public
+>
+ attributes()
+<
+(array) List of attribute names.
+
+
+
+
+*yii\base\DynamicModel::attributeLabels*			 public
+ See |yii\base\Model::attributeLabels|
+
+
+*yii\base\DynamicModel::validate*				 public
+ See |yii\base\Model::validate|
+
+
+*yii\base\DynamicModel::beforeValidate* 			 public
+ See |yii\base\Model::beforeValidate|
+
+
+*yii\base\DynamicModel::afterValidate*				 public
+ See |yii\base\Model::afterValidate|
+
+
+*yii\base\DynamicModel::getValidators*				 public
+ See |yii\base\Model::getValidators|
+
+
+*yii\base\DynamicModel::getActiveValidators*			 public
+ See |yii\base\Model::getActiveValidators|
+
+
+*yii\base\DynamicModel::createValidators*			 public
+ See |yii\base\Model::createValidators|
+
+
+*yii\base\DynamicModel::isAttributeRequired*			 public
+ See |yii\base\Model::isAttributeRequired|
+
+
+*yii\base\DynamicModel::isAttributeSafe*			 public
+ See |yii\base\Model::isAttributeSafe|
+
+
+*yii\base\DynamicModel::isAttributeActive*			 public
+ See |yii\base\Model::isAttributeActive|
+
+
+*yii\base\DynamicModel::getAttributeLabel*			 public
+ See |yii\base\Model::getAttributeLabel|
+
+
+*yii\base\DynamicModel::hasErrors*				 public
+ See |yii\base\Model::hasErrors|
+
+
+*yii\base\DynamicModel::getErrors*				 public
+ See |yii\base\Model::getErrors|
+
+
+*yii\base\DynamicModel::getFirstErrors* 			 public
+ See |yii\base\Model::getFirstErrors|
+
+
+*yii\base\DynamicModel::getFirstError*				 public
+ See |yii\base\Model::getFirstError|
+
+
+*yii\base\DynamicModel::addError*				 public
+ See |yii\base\Model::addError|
+
+
+*yii\base\DynamicModel::clearErrors*				 public
+ See |yii\base\Model::clearErrors|
+
+
+*yii\base\DynamicModel::generateAttributeLabel* 		 public
+ See |yii\base\Model::generateAttributeLabel|
+
+
+*yii\base\DynamicModel::getAttributes*				 public
+ See |yii\base\Model::getAttributes|
+
+
+*yii\base\DynamicModel::setAttributes*				 public
+ See |yii\base\Model::setAttributes|
+
+
+*yii\base\DynamicModel::onUnsafeAttribute*			 public
+ See |yii\base\Model::onUnsafeAttribute|
+
+
+*yii\base\DynamicModel::getScenario*				 public
+ See |yii\base\Model::getScenario|
+
+
+*yii\base\DynamicModel::setScenario*				 public
+ See |yii\base\Model::setScenario|
+
+
+*yii\base\DynamicModel::safeAttributes* 			 public
+ See |yii\base\Model::safeAttributes|
+
+
+*yii\base\DynamicModel::activeAttributes*			 public
+ See |yii\base\Model::activeAttributes|
+
+
+*yii\base\DynamicModel::load*					 public
+ See |yii\base\Model::load|
+
+
+*yii\base\DynamicModel::loadMultiple*				 public
+ See |yii\base\Model::loadMultiple|
+
+
+*yii\base\DynamicModel::validateMultiple*			 public
+ See |yii\base\Model::validateMultiple|
+
+
+*yii\base\DynamicModel::getIterator*				 public
+ See |yii\base\Model::getIterator|
+
+
+*yii\base\DynamicModel::offsetExists*				 public
+ See |yii\base\Model::offsetExists|
+
+
+*yii\base\DynamicModel::offsetGet*				 public
+ See |yii\base\Model::offsetGet|
+
+
+*yii\base\DynamicModel::offsetSet*				 public
+ See |yii\base\Model::offsetSet|
+
+
+*yii\base\DynamicModel::offsetUnset*				 public
+ See |yii\base\Model::offsetUnset|
+
+
+*yii\base\DynamicModel::defineAttribute*			 public
+>
+ defineAttribute($name, $value='null')
+<
+(void)
+
+
+    [$name] (string) The attribute name
+    [$value] (mixed) The attribute value
+
+
+*yii\base\DynamicModel::undefineAttribute*			 public
+>
+ undefineAttribute($name)
+<
+(void)
+
+
+    [$name] (string) The attribute name
+
+
+*yii\base\DynamicModel::addRule*				 public
+>
+ addRule($attributes, $validator, $options='[]')
+<
+(static) The model itself
+
+ You can also directly manipulate [[validators]] to add or remove validation
+ rules. This method provides a shortcut.
+    [$attributes] (string|array) The attribute(s) to be validated by the rule
+    [$validator] (mixed) The validator for the rule.This can be a built-in
+    validator name, a method name of the model class, an anonymous function,
+    or a validator class name.
+    [$options] (array) The options (name-value pairs) to be applied to the
+    validator
+
+
+*yii\base\DynamicModel::validateData*				 public
+>
+ validateData($data, $rules='[]')
+<
+(static) The model instance that contains the data being validated
+
+ This method will create a DynamicModel instance, populate it with the data to
+ be validated, create the specified validation rules, and then validate the
+ data using these rules.
+    [$data] (array) The data (name-value pairs) to be validated
+    [$rules] (array) The validation rules. Please refer to [[Model::rules()]]
+    on the format of this parameter.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

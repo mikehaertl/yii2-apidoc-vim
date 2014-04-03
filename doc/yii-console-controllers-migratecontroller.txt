@@ -1,0 +1,532 @@
+
+*yii\console\controllers\MigrateController*   >> yii\console\Controller
+===========================================
+
+ A migration means a set of persistent changes to the application environment
+ that is shared among different developers. For example, in an application
+ backed by a database, a migration may refer to a set of changes to the
+ database, such as creating a new table, adding a new table column.
+
+ This command provides support for tracking the migration history, upgrading
+ or downloading with migrations, and creating new migration skeletons.
+
+ The migration history is stored in a database table named as
+ [[migrationTable]]. The table will be automatically created the first time
+ this command is executed, if it does not exist. You may also manually create
+ it as follows:
+
+   CREATE TABLE migration (
+       version varchar(180) PRIMARY KEY,
+       apply_time integer
+   )
+
+ Below are some common usages of this command:
+
+   # creates a new migration named 'create_user_table'
+   yii migrate/create create_user_table
+
+   # applies ALL new migrations
+   yii migrate
+
+   # reverts the last applied migration
+   yii migrate/down
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\console\controllers\MigrateController::$id*
+ See |yii\base\Controller::$id|
+
+<$module>				*yii\console\controllers\MigrateController::$module*
+ See |yii\base\Controller::$module|
+
+<$defaultAction>			*yii\console\controllers\MigrateController::$defaultAction*
+ (string) The default command action.
+
+<$layout>				*yii\console\controllers\MigrateController::$layout*
+ See |yii\base\Controller::$layout|
+
+<$action>				*yii\console\controllers\MigrateController::$action*
+ See |yii\base\Controller::$action|
+
+<$interactive>				*yii\console\controllers\MigrateController::$interactive*
+ (boolean) Whether to execute the migration in an interactive mode.
+
+<$color>				*yii\console\controllers\MigrateController::$color*
+ See |yii\console\Controller::$color|
+
+<$migrationPath>			*yii\console\controllers\MigrateController::$migrationPath*
+ (string) The directory storing the migration classes. This can be either a
+ path alias or a directory.
+
+<$migrationTable>			*yii\console\controllers\MigrateController::$migrationTable*
+ (string) The name of the table for keeping applied migration information.
+
+<$templateFile> 			*yii\console\controllers\MigrateController::$templateFile*
+ (string) The template file for generating new migrations. This can be either
+ a path alias (e.g. "@app/migrations/template.php") or a file path.
+
+<$db>					*yii\console\controllers\MigrateController::$db*
+ (\yii\db\Connection|string) The DB connection object or the application
+ component ID of the DB connection.
+
+<$behaviors>				*yii\console\controllers\MigrateController::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$uniqueId>				*yii\console\controllers\MigrateController::$uniqueId*
+ (string) The controller ID that is prefixed with the module ID (if any).
+
+<$route>				*yii\console\controllers\MigrateController::$route*
+ (string) The route (module ID, controller ID and action ID) of the current
+ request.
+
+<$view> 				*yii\console\controllers\MigrateController::$view*
+ (\yii\base\View) The view object that can be used to render views or view
+ files.
+
+<$viewPath>				*yii\console\controllers\MigrateController::$viewPath*
+ (string) The directory containing the view files for this controller.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\console\controllers\MigrateController::className*		 public
+ See |yii\base\Object::className|
+
+
+*yii\console\controllers\MigrateController::__construct*	 public
+ See |yii\base\Controller::__construct|
+
+
+*yii\console\controllers\MigrateController::init*		 public
+ See |yii\base\Object::init|
+
+
+*yii\console\controllers\MigrateController::__get*		 public
+ See |yii\base\Component::__get|
+
+
+*yii\console\controllers\MigrateController::__set*		 public
+ See |yii\base\Component::__set|
+
+
+*yii\console\controllers\MigrateController::__isset*		 public
+ See |yii\base\Component::__isset|
+
+
+*yii\console\controllers\MigrateController::__unset*		 public
+ See |yii\base\Component::__unset|
+
+
+*yii\console\controllers\MigrateController::__call*		 public
+ See |yii\base\Component::__call|
+
+
+*yii\console\controllers\MigrateController::hasProperty*	 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\console\controllers\MigrateController::canGetProperty*	 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\console\controllers\MigrateController::canSetProperty*	 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\console\controllers\MigrateController::hasMethod*		 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\console\controllers\MigrateController::__clone*		 public
+ See |yii\base\Component::__clone|
+
+
+*yii\console\controllers\MigrateController::behaviors*		 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\console\controllers\MigrateController::hasEventHandlers*	 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\console\controllers\MigrateController::on* 		 public
+ See |yii\base\Component::on|
+
+
+*yii\console\controllers\MigrateController::off*		 public
+ See |yii\base\Component::off|
+
+
+*yii\console\controllers\MigrateController::trigger*		 public
+ See |yii\base\Component::trigger|
+
+
+*yii\console\controllers\MigrateController::getBehavior*	 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\console\controllers\MigrateController::getBehaviors*	 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\console\controllers\MigrateController::attachBehavior*	 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\console\controllers\MigrateController::attachBehaviors*	 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\console\controllers\MigrateController::detachBehavior*	 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\console\controllers\MigrateController::detachBehaviors*	 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\console\controllers\MigrateController::ensureBehaviors*	 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\console\controllers\MigrateController::actions*		 public
+ See |yii\base\Controller::actions|
+
+
+*yii\console\controllers\MigrateController::runAction*		 public
+ See |yii\console\Controller::runAction|
+
+
+*yii\console\controllers\MigrateController::run*		 public
+ See |yii\base\Controller::run|
+
+
+*yii\console\controllers\MigrateController::bindActionParams*	 public
+ See |yii\console\Controller::bindActionParams|
+
+
+*yii\console\controllers\MigrateController::createAction*	 public
+ See |yii\base\Controller::createAction|
+
+
+*yii\console\controllers\MigrateController::beforeAction*	 public
+>
+ beforeAction($action)
+<
+(boolean) Whether the action should continue to be executed.
+
+
+    [$action] (\yii\base\Action) The action to be executed.
+
+
+*yii\console\controllers\MigrateController::afterAction*	 public
+ See |yii\base\Controller::afterAction|
+
+
+*yii\console\controllers\MigrateController::getUniqueId*	 public
+ See |yii\base\Controller::getUniqueId|
+
+
+*yii\console\controllers\MigrateController::getRoute*		 public
+ See |yii\base\Controller::getRoute|
+
+
+*yii\console\controllers\MigrateController::render*		 public
+ See |yii\base\Controller::render|
+
+
+*yii\console\controllers\MigrateController::renderPartial*	 public
+ See |yii\base\Controller::renderPartial|
+
+
+*yii\console\controllers\MigrateController::renderFile* 	 public
+ See |yii\base\Controller::renderFile|
+
+
+*yii\console\controllers\MigrateController::getView*		 public
+ See |yii\base\Controller::getView|
+
+
+*yii\console\controllers\MigrateController::setView*		 public
+ See |yii\base\Controller::setView|
+
+
+*yii\console\controllers\MigrateController::getViewPath*	 public
+ See |yii\base\Controller::getViewPath|
+
+
+*yii\console\controllers\MigrateController::findLayoutFile*	 protected
+ See |yii\base\Controller::findLayoutFile|
+
+
+*yii\console\controllers\MigrateController::isColorEnabled*	 public
+ See |yii\console\Controller::isColorEnabled|
+
+
+*yii\console\controllers\MigrateController::ansiFormat* 	 public
+ See |yii\console\Controller::ansiFormat|
+
+
+*yii\console\controllers\MigrateController::stdout*		 public
+ See |yii\console\Controller::stdout|
+
+
+*yii\console\controllers\MigrateController::stderr*		 public
+ See |yii\console\Controller::stderr|
+
+
+*yii\console\controllers\MigrateController::prompt*		 public
+ See |yii\console\Controller::prompt|
+
+
+*yii\console\controllers\MigrateController::confirm*		 public
+ See |yii\console\Controller::confirm|
+
+
+*yii\console\controllers\MigrateController::select*		 public
+ See |yii\console\Controller::select|
+
+
+*yii\console\controllers\MigrateController::options*		 public
+>
+ options($actionId)
+<
+(array) The names of the options valid for the action
+
+
+    [$actionId] () 
+
+
+*yii\console\controllers\MigrateController::actionUp*		 public
+>
+ actionUp($limit=0)
+<
+(void)
+
+ For example,
+
+   yii migrate     # apply all new migrations
+   yii migrate 3   # apply the first 3 new migrations
+
+
+    [$limit] (integer) The number of new migrations to be applied. If 0, it
+    means applying all available new migrations.
+
+
+*yii\console\controllers\MigrateController::actionDown* 	 public
+>
+ actionDown($limit=1)
+<
+(void)
+
+ For example,
+
+   yii migrate/down     # revert the last migration
+   yii migrate/down 3   # revert the last 3 migrations
+
+
+    [$limit] (integer) The number of migrations to be reverted. Defaults to 1,
+    meaning the last applied migration will be reverted.
+
+
+*yii\console\controllers\MigrateController::actionRedo* 	 public
+>
+ actionRedo($limit=1)
+<
+(void)
+
+ This command will first revert the specified migrations, and then apply them
+ again. For example,
+
+   yii migrate/redo     # redo the last applied migration
+   yii migrate/redo 3   # redo the last 3 applied migrations
+
+
+    [$limit] (integer) The number of migrations to be redone. Defaults to 1,
+    meaning the last applied migration will be redone.
+
+
+*yii\console\controllers\MigrateController::actionTo*		 public
+>
+ actionTo($version)
+<
+(void)
+
+ Can also downgrade versions to the certain apply time in the past by
+ providing a UNIX timestamp or a string parseable by the strtotime() function.
+ This means that all the versions applied after the specified certain time
+ would be reverted.
+
+ This command will first revert the specified migrations, and then apply them
+ again. For example,
+
+   yii migrate/to 101129_185401                      # using timestamp
+   yii migrate/to m101129_185401_create_user_table   # using full name
+   yii migrate/to 1392853618                         # using UNIX timestamp
+   yii migrate/to "2014-02-15 13:00:50"              # using strtotime()
+ parseable string
+
+
+    [$version] (string) Either the version name or the certain time value in
+    the past that the application should be migrated to. This can be either
+    the timestamp, the full name of the migration, the UNIX timestamp, or the
+    parseable datetime string.
+
+
+*yii\console\controllers\MigrateController::actionMark* 	 public
+>
+ actionMark($version)
+<
+(void)
+
+ No actual migration will be performed.
+
+   yii migrate/mark 101129_185401                      # using timestamp
+   yii migrate/mark m101129_185401_create_user_table   # using full name
+
+
+    [$version] (string) The version at which the migration history should be
+    marked. This can be either the timestamp or the full name of the
+    migration.
+
+
+*yii\console\controllers\MigrateController::actionHistory*	 public
+>
+ actionHistory($limit=10)
+<
+(void)
+
+ This command will show the list of migrations that have been applied so far.
+ For example,
+
+   yii migrate/history     # showing the last 10 migrations
+   yii migrate/history 5   # showing the last 5 migrations
+   yii migrate/history 0   # showing the whole history
+
+
+    [$limit] (integer) The maximum number of migrations to be displayed. If it
+    is 0, the whole migration history will be displayed.
+
+
+*yii\console\controllers\MigrateController::actionNew*		 public
+>
+ actionNew($limit=10)
+<
+(void)
+
+ This command will show the new migrations that have not been applied. For
+ example,
+
+   yii migrate/new     # showing the first 10 new migrations
+   yii migrate/new 5   # showing the first 5 new migrations
+   yii migrate/new 0   # showing all new migrations
+
+
+    [$limit] (integer) The maximum number of new migrations to be displayed.
+    If it is 0, all available new migrations will be displayed.
+
+
+*yii\console\controllers\MigrateController::actionCreate*	 public
+>
+ actionCreate($name)
+<
+(void)
+
+ This command creates a new migration using the available migration template.
+ After using this command, developers should modify the created migration
+ skeleton by filling up the actual migration logic.
+
+   yii migrate/create create_user_table
+
+
+    [$name] (string) The name of the new migration. This should only contain
+    letters, digits and/or underscores.
+
+
+*yii\console\controllers\MigrateController::migrateUp*		 protected
+>
+ migrateUp($class)
+<
+(boolean) Whether the migration is successful
+
+
+    [$class] (string) The migration class name
+
+
+*yii\console\controllers\MigrateController::migrateDown*	 protected
+>
+ migrateDown($class)
+<
+(boolean) Whether the migration is successful
+
+
+    [$class] (string) The migration class name
+
+
+*yii\console\controllers\MigrateController::createMigration*	 protected
+>
+ createMigration($class)
+<
+(\yii\db\Migration) The migration instance
+
+
+    [$class] (string) The migration class name
+
+
+*yii\console\controllers\MigrateController::migrateToTime*	 protected
+>
+ migrateToTime($time)
+<
+(void)
+
+
+    [$time] (integer) UNIX timestamp value.
+
+
+*yii\console\controllers\MigrateController::migrateToVersion*	 protected
+>
+ migrateToVersion($version)
+<
+(void)
+
+
+    [$version] (string) Name in the full format.
+
+
+*yii\console\controllers\MigrateController::getMigrationHistory* protected
+>
+ getMigrationHistory($limit)
+<
+(array) The migration history
+
+
+    [$limit] (integer) The maximum number of records in the history to be
+    returned
+
+
+*yii\console\controllers\MigrateController::createMigrationHistoryTable*protected
+>
+ createMigrationHistoryTable()
+<
+(void)
+
+
+
+
+*yii\console\controllers\MigrateController::getNewMigrations*	 protected
+>
+ getNewMigrations()
+<
+(array) List of new migrations
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

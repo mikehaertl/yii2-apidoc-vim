@@ -1,0 +1,218 @@
+
+*yii\test\BaseActiveFixture*   >> yii\test\DbFixture
+============================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$depends>				*yii\test\BaseActiveFixture::$depends*
+ See |yii\test\Fixture::$depends|
+
+<$db>					*yii\test\BaseActiveFixture::$db*
+ See |yii\test\DbFixture::$db|
+
+<$modelClass>				*yii\test\BaseActiveFixture::$modelClass*
+ (string) The AR model class associated with this fixture.
+
+<$data> 				*yii\test\BaseActiveFixture::$data*
+ (array) The data rows. Each array element represents one row of data (column
+ name => column value).
+
+<$dataFile>				*yii\test\BaseActiveFixture::$dataFile*
+ (string|boolean) The file path or path alias of the data file that contains
+ the fixture data to be returned by [[getData()]]. You can set this property
+ to be false to prevent loading any data.
+
+<$behaviors>				*yii\test\BaseActiveFixture::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$iterator>				*yii\test\BaseActiveFixture::$iterator*
+ (\ArrayIterator) An iterator for traversing the cookies in the collection.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\test\BaseActiveFixture::className* 			 public
+ See |yii\base\Object::className|
+
+
+*yii\test\BaseActiveFixture::__construct*			 public
+ See |yii\base\Object::__construct|
+
+
+*yii\test\BaseActiveFixture::init*				 public
+ See |yii\test\DbFixture::init|
+
+
+*yii\test\BaseActiveFixture::__get*				 public
+ See |yii\base\Component::__get|
+
+
+*yii\test\BaseActiveFixture::__set*				 public
+ See |yii\base\Component::__set|
+
+
+*yii\test\BaseActiveFixture::__isset*				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\test\BaseActiveFixture::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\test\BaseActiveFixture::__call*				 public
+ See |yii\base\Component::__call|
+
+
+*yii\test\BaseActiveFixture::hasProperty*			 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\test\BaseActiveFixture::canGetProperty*			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\test\BaseActiveFixture::canSetProperty*			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\test\BaseActiveFixture::hasMethod* 			 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\test\BaseActiveFixture::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\test\BaseActiveFixture::behaviors* 			 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\test\BaseActiveFixture::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\test\BaseActiveFixture::on*				 public
+ See |yii\base\Component::on|
+
+
+*yii\test\BaseActiveFixture::off*				 public
+ See |yii\base\Component::off|
+
+
+*yii\test\BaseActiveFixture::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\test\BaseActiveFixture::getBehavior*			 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\test\BaseActiveFixture::getBehaviors*			 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\test\BaseActiveFixture::attachBehavior*			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\test\BaseActiveFixture::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\test\BaseActiveFixture::detachBehavior*			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\test\BaseActiveFixture::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\test\BaseActiveFixture::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\test\BaseActiveFixture::load*				 public
+>
+ load()
+<
+(void)
+
+ The default implementation simply stores the data returned by [[getData()]]
+ in [[data]]. You should usually override this method by putting the data into
+ the underlying database.
+
+
+*yii\test\BaseActiveFixture::beforeLoad*			 public
+ See |yii\test\Fixture::beforeLoad|
+
+
+*yii\test\BaseActiveFixture::afterLoad* 			 public
+ See |yii\test\Fixture::afterLoad|
+
+
+*yii\test\BaseActiveFixture::unload*				 public
+ See |yii\test\Fixture::unload|
+
+
+*yii\test\BaseActiveFixture::beforeUnload*			 public
+ See |yii\test\Fixture::beforeUnload|
+
+
+*yii\test\BaseActiveFixture::afterUnload*			 public
+ See |yii\test\Fixture::afterUnload|
+
+
+*yii\test\BaseActiveFixture::getIterator*			 public
+ See |yii\base\ArrayAccessTrait::getIterator|
+
+
+*yii\test\BaseActiveFixture::count*				 public
+ See |yii\base\ArrayAccessTrait::count|
+
+
+*yii\test\BaseActiveFixture::offsetExists*			 public
+ See |yii\base\ArrayAccessTrait::offsetExists|
+
+
+*yii\test\BaseActiveFixture::offsetGet* 			 public
+ See |yii\base\ArrayAccessTrait::offsetGet|
+
+
+*yii\test\BaseActiveFixture::offsetSet* 			 public
+ See |yii\base\ArrayAccessTrait::offsetSet|
+
+
+*yii\test\BaseActiveFixture::offsetUnset*			 public
+ See |yii\base\ArrayAccessTrait::offsetUnset|
+
+
+*yii\test\BaseActiveFixture::getModel*				 public
+>
+ getModel($name)
+<
+(null|\yii\db\ActiveRecord) The AR model, or null if the model cannot be found
+in the database
+
+ A model name is the key of the corresponding data row in [[data]].
+    [$name] (string) The model name.
+
+
+*yii\test\BaseActiveFixture::getData*				 protected
+>
+ getData()
+<
+(array) The data to be put into the database
+
+ The default implementation will try to return the fixture data by including
+ the external file specified by [[dataFile]]. The file should return the data
+ array that will be stored in [[data]] after inserting into the database.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

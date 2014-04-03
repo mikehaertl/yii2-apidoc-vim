@@ -1,0 +1,297 @@
+
+*yii\data\Sort*   >> yii\base\Object
+===============
+
+ When data needs to be sorted according to one or several attributes, we can
+ use Sort to represent the sorting information and generate appropriate
+ hyperlinks that can lead to sort actions.
+
+ A typical usage example is as follows,
+
+   function actionIndex()
+   {
+       $sort = new Sort([
+           'attributes' => [
+               'age',
+               'name' => [
+                   'asc' => ['first_name' => SORT_ASC, 'last_name' =>
+ SORT_ASC],
+                   'desc' => ['first_name' => SORT_DESC, 'last_name' =>
+ SORT_DESC],
+                   'default' => SORT_DESC,
+                   'label' => 'Name',
+               ],
+           ],
+       ]);
+
+       $models = Article::find()
+           ->where(['status' => 1])
+           ->orderBy($sort->orders)
+           ->all();
+
+       return $this->render('index', [
+            'models' => $models,
+            'sort' => $sort,
+       ]);
+   }
+
+ View:
+
+   // display links leading to sort actions
+   echo $sort->link('name') . ' | ' . $sort->link('age');
+
+   foreach ($models as $model) {
+       // display $model here
+   }
+
+ In the above, we declare two [[attributes]] that support sorting: name and
+ age. We pass the sort information to the Article query so that the query
+ results are sorted by the orders specified by the Sort object. In the view,
+ we show two hyperlinks that can lead to pages with the data sorted by the
+ corresponding attributes.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$enableMultiSort>			*yii\data\Sort::$enableMultiSort*
+ (boolean) Whether the sorting can be applied to multiple attributes
+ simultaneously. Defaults to false, which means each time the data can only be
+ sorted by one attribute.
+
+<$attributes>				*yii\data\Sort::$attributes*
+ (array) List of attributes that are allowed to be sorted. Its syntax can be
+ described using the following example:
+
+   [
+       'age',
+       'name' => [
+           'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
+           'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
+           'default' => SORT_DESC,
+           'label' => 'Name',
+       ],
+   ]
+
+ In the above, two attributes are declared: "age" and "name". The "age"
+ attribute is a simple attribute which is equivalent to the following:
+
+   'age' => [
+       'asc' => ['age' => SORT_ASC],
+       'desc' => ['age' => SORT_DESC],
+       'default' => SORT_ASC,
+       'label' => Inflector::camel2words('age'),
+   ]
+
+ The "name" attribute is a composite attribute:
+
+ - The "name" key represents the attribute name which will appear in the URLs
+ leading   to sort actions. - The "asc" and "desc" elements specify how to
+ sort by the attribute in ascending   and descending orders, respectively.
+ Their values represent the actual columns and   the directions by which the
+ data should be sorted by. - The "default" element specifies by which
+ direction the attribute should be sorted   if it is not currently sorted (the
+ default value is ascending order). - The "label" element specifies what label
+ should be used when calling [[link()]] to create   a sort link. If not set,
+ [[Inflector::camel2words()]] will be called to get a label.   Note that it
+ will not be HTML-encoded.
+
+ Note that if the Sort object is already created, you can only use the full
+ format to configure every attribute. Each attribute must include these
+ elements: 'asc' and 'desc'.
+
+<$sortParam>				*yii\data\Sort::$sortParam*
+ (string) The name of the parameter that specifies which attributes to be
+ sorted in which direction. Defaults to 'sort'.
+
+<$defaultOrder> 			*yii\data\Sort::$defaultOrder*
+ (array) The order that should be used when the current request does not
+ specify any order. The array keys are attribute names and the array values
+ are the corresponding sort directions. For example,
+
+   [
+       'name' => SORT_ASC,
+       'created_at' => SORT_DESC,
+   ]
+
+
+
+<$route>				*yii\data\Sort::$route*
+ (string) The route of the controller action for displaying the sorted
+ contents. If not set, it means using the currently requested route.
+
+<$separator>				*yii\data\Sort::$separator*
+ (string) The character used to separate different attributes that need to be
+ sorted by.
+
+<$params>				*yii\data\Sort::$params*
+ (array) Parameters (name => value) that should be used to obtain the current
+ sort directions and to create new sort URLs. If not set, $_GET will be used
+ instead.
+
+ In order to add hash to all links use 'array_merge($_GET, ['#' =>
+ 'my-hash'])'.
+
+ The array element indexed by [[sortParam]] is considered to be the current
+ sort directions. If the element does not exist, the [[defaultOrder|default
+ order]] will be used.
+
+<$urlManager>				*yii\data\Sort::$urlManager*
+ (\yii\web\UrlManager) The URL manager used for creating sort URLs. If not
+ set, the "urlManager" application component will be used.
+
+<$orders>				*yii\data\Sort::$orders*
+ (array) The columns (keys) and their corresponding sort directions (values).
+ This can be passed to [[\yii\db\Query::orderBy()]] to construct a DB query.
+
+<$attributeOrders>			*yii\data\Sort::$attributeOrders*
+ (array) Sort directions indexed by attribute names. Sort direction can be
+ either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\data\Sort::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\data\Sort::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\data\Sort::init*						 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\data\Sort::__get*						 public
+ See |yii\base\Object::__get|
+
+
+*yii\data\Sort::__set*						 public
+ See |yii\base\Object::__set|
+
+
+*yii\data\Sort::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\data\Sort::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\data\Sort::__call* 					 public
+ See |yii\base\Object::__call|
+
+
+*yii\data\Sort::hasProperty*					 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\data\Sort::canGetProperty* 				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\data\Sort::canSetProperty* 				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\data\Sort::hasMethod*					 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\data\Sort::getOrders*					 public
+>
+ getOrders($recalculate='false')
+<
+(array) The columns (keys) and their corresponding sort directions (values).
+This can be passed to [[\yii\db\Query::orderBy()]] to construct a DB query.
+
+
+    [$recalculate] (boolean) Whether to recalculate the sort directions
+
+
+*yii\data\Sort::getAttributeOrders*				 public
+>
+ getAttributeOrders($recalculate='false')
+<
+(array) Sort directions indexed by attribute names. Sort direction can be
+either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
+
+
+    [$recalculate] (boolean) Whether to recalculate the sort directions
+
+
+*yii\data\Sort::getAttributeOrder*				 public
+>
+ getAttributeOrder($attribute)
+<
+(boolean|null) Sort direction of the attribute. Can be either 'SORT_ASC' for
+ascending order or 'SORT_DESC' for descending order. Null is returned if the
+attribute is invalid or does not need to be sorted.
+
+
+    [$attribute] (string) The attribute name
+
+
+*yii\data\Sort::link*						 public
+>
+ link($attribute, $options='[]')
+<
+(string) The generated hyperlink
+
+ Based on the sort direction, the CSS class of the generated hyperlink will be
+ appended with "asc" or "desc".
+    [$attribute] (string) The attribute name by which the data should be
+    sorted by.
+    [$options] (array) Additional HTML attributes for the hyperlink tag. There
+    is one special attribute 'label' which will be used as the label of the
+    hyperlink. If this is not set, the label defined in [[attributes]] will be
+    used. If no label is defined, [[\yii\helpers\Inflector::camel2words()]]
+    will be called to get a label. Note that it will not be HTML-encoded.
+
+
+*yii\data\Sort::createUrl*					 public
+>
+ createUrl($attribute, $absolute='false')
+<
+(string) The URL for sorting. False if the attribute is invalid.
+
+ This method will consider the current sorting status given by
+ [[attributeOrders]]. For example, if the current page already sorts the data
+ by the specified attribute in ascending order, then the URL created will lead
+ to a page that sorts the data by the specified attribute in descending order.
+    [$attribute] (string) The attribute name
+    [$absolute] (boolean) Whether to create an absolute URL. Defaults to
+    'false'.
+
+
+*yii\data\Sort::createSortParam*				 public
+>
+ createSortParam($attribute)
+<
+(string) The value of the sort variable
+
+ The newly created sort variable can be used to create a URL that will lead to
+ sorting by the specified attribute.
+    [$attribute] (string) The attribute name
+
+
+*yii\data\Sort::hasAttribute*					 public
+>
+ hasAttribute($name)
+<
+(boolean) Whether the sort definition supports sorting by the named attribute.
+
+
+    [$name] (string) The attribute name
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,275 @@
+
+*yii\widgets\Pjax*   >> yii\base\Widget
+==================
+
+ Pjax only deals with the content enclosed between its [[begin()]] and
+ [[end()]] calls, called the *body content* of the widget. By default, any
+ link click or form submission (for those forms with 'data-pjax' attribute)
+ within the body content will trigger an AJAX request. In responding to the
+ AJAX request, Pjax will send the updated body content (based on the AJAX
+ request) to the client which will replace the old content with the new one.
+ The browser's URL will then be updated using pushState. The whole process
+ requires no reloading of the layout or resources (js, css).
+
+ You may configure [[linkSelector]] to specify which links should trigger
+ pjax, and configure [[formSelector]] to specify which form submission may
+ trigger pjax.
+
+ You may disable pjax for a specific link inside the container by adding
+ 'data-pjax="0"' attribute to this link.
+
+ The following example shows how to use Pjax with the [[\yii\grid\GridView]]
+ widget so that the grid pagination, sorting and filtering can be done via
+ pjax:
+
+   use yii\widgets\Pjax;
+
+   Pjax::begin();
+   echo GridView::widget([...]);
+   Pjax::end();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$counter>				*yii\widgets\Pjax::$counter*
+ See |yii\base\Widget::$counter|
+
+<$autoIdPrefix> 			*yii\widgets\Pjax::$autoIdPrefix*
+ See |yii\base\Widget::$autoIdPrefix|
+
+<$stack>				*yii\widgets\Pjax::$stack*
+ See |yii\base\Widget::$stack|
+
+<$options>				*yii\widgets\Pjax::$options*
+ (array) The HTML attributes for the widget container tag.
+
+<$linkSelector> 			*yii\widgets\Pjax::$linkSelector*
+ (string) The jQuery selector of the links that should trigger pjax requests.
+ If not set, all links within the enclosed content of Pjax will trigger pjax
+ requests. Note that if the response to the pjax request is a full page, a
+ normal request will be sent again.
+
+<$formSelector> 			*yii\widgets\Pjax::$formSelector*
+ (string) The jQuery selector of the forms whose submissions should trigger
+ pjax requests. If not set, all forms with 'data-pjax' attribute within the
+ enclosed content of Pjax will trigger pjax requests. Note that if the
+ response to the pjax request is a full page, a normal request will be sent
+ again.
+
+<$enablePushState>			*yii\widgets\Pjax::$enablePushState*
+ (boolean) Whether to enable push state.
+
+<$enableReplaceState>			*yii\widgets\Pjax::$enableReplaceState*
+ (boolean) Whether to enable replace state.
+
+<$timeout>				*yii\widgets\Pjax::$timeout*
+ (integer) Pjax timeout setting (in milliseconds). This timeout is used when
+ making AJAX requests. Use a bigger number if your server is slow. If the
+ server does not respond within the timeout, a full page load will be
+ triggered.
+
+<$scrollTo>				*yii\widgets\Pjax::$scrollTo*
+ (boolean|integer) How to scroll the page when pjax response is received. If
+ false, no page scroll will be made. Use a number if you want to scroll to a
+ particular place.
+
+<$clientOptions>			*yii\widgets\Pjax::$clientOptions*
+ (array) Additional options to be passed to the pjax JS plugin. Please refer
+ to the [pjax project page](https://github.com/yiisoft/jquery-pjax) for
+ available options.
+
+<$behaviors>				*yii\widgets\Pjax::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$id>					*yii\widgets\Pjax::$id*
+ (string) ID of the widget.
+
+<$view> 				*yii\widgets\Pjax::$view*
+ (\yii\web\View) The view object that can be used to render views or view
+ files.
+
+<$viewPath>				*yii\widgets\Pjax::$viewPath*
+ (string) The directory containing the view files for this widget.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\widgets\Pjax::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\widgets\Pjax::__construct* 				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\widgets\Pjax::init*					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\widgets\Pjax::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\widgets\Pjax::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\widgets\Pjax::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\widgets\Pjax::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\widgets\Pjax::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\widgets\Pjax::hasProperty* 				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\widgets\Pjax::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\widgets\Pjax::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\widgets\Pjax::hasMethod*					 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\widgets\Pjax::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\widgets\Pjax::behaviors*					 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\widgets\Pjax::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\widgets\Pjax::on*						 public
+ See |yii\base\Component::on|
+
+
+*yii\widgets\Pjax::off* 					 public
+ See |yii\base\Component::off|
+
+
+*yii\widgets\Pjax::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\widgets\Pjax::getBehavior* 				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\widgets\Pjax::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\widgets\Pjax::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\widgets\Pjax::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\widgets\Pjax::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\widgets\Pjax::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\widgets\Pjax::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\widgets\Pjax::begin*					 public
+ See |yii\base\Widget::begin|
+
+
+*yii\widgets\Pjax::end* 					 public
+ See |yii\base\Widget::end|
+
+
+*yii\widgets\Pjax::widget*					 public
+ See |yii\base\Widget::widget|
+
+
+*yii\widgets\Pjax::getId*					 public
+ See |yii\base\Widget::getId|
+
+
+*yii\widgets\Pjax::setId*					 public
+ See |yii\base\Widget::setId|
+
+
+*yii\widgets\Pjax::getView*					 public
+ See |yii\base\Widget::getView|
+
+
+*yii\widgets\Pjax::setView*					 public
+ See |yii\base\Widget::setView|
+
+
+*yii\widgets\Pjax::run* 					 public
+>
+ run()
+<
+(string) The result of widget execution to be outputted.
+
+
+
+
+*yii\widgets\Pjax::render*					 public
+ See |yii\base\Widget::render|
+
+
+*yii\widgets\Pjax::renderFile*					 public
+ See |yii\base\Widget::renderFile|
+
+
+*yii\widgets\Pjax::getViewPath* 				 public
+ See |yii\base\Widget::getViewPath|
+
+
+*yii\widgets\Pjax::requiresPjax*				 protected
+>
+ requiresPjax()
+<
+(boolean) Whether the current request requires pjax response from this widget
+
+
+
+
+*yii\widgets\Pjax::registerClientScript*			 public
+>
+ registerClientScript()
+<
+(void)
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

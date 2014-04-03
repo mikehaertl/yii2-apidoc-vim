@@ -1,0 +1,365 @@
+
+*yii\console\Controller*   >> yii\base\Controller
+========================
+
+ A controller consists of one or several actions known as sub-commands. Users
+ call a console command by specifying the corresponding route which identifies
+ a controller action. The 'yii' program is used when calling a console
+ command, like the following:
+
+   yii <route> [--param1=value1 --param2 ...]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\console\Controller::$id*
+ See |yii\base\Controller::$id|
+
+<$module>				*yii\console\Controller::$module*
+ See |yii\base\Controller::$module|
+
+<$defaultAction>			*yii\console\Controller::$defaultAction*
+ See |yii\base\Controller::$defaultAction|
+
+<$layout>				*yii\console\Controller::$layout*
+ See |yii\base\Controller::$layout|
+
+<$action>				*yii\console\Controller::$action*
+ See |yii\base\Controller::$action|
+
+<$interactive>				*yii\console\Controller::$interactive*
+ (boolean) Whether to run the command interactively.
+
+<$color>				*yii\console\Controller::$color*
+ (boolean) Whether to enable ANSI color in the output. If not set, ANSI color
+ will only be enabled for terminals that support it.
+
+<$behaviors>				*yii\console\Controller::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$uniqueId>				*yii\console\Controller::$uniqueId*
+ (string) The controller ID that is prefixed with the module ID (if any).
+
+<$route>				*yii\console\Controller::$route*
+ (string) The route (module ID, controller ID and action ID) of the current
+ request.
+
+<$view> 				*yii\console\Controller::$view*
+ (\yii\base\View) The view object that can be used to render views or view
+ files.
+
+<$viewPath>				*yii\console\Controller::$viewPath*
+ (string) The directory containing the view files for this controller.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\console\Controller::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\console\Controller::__construct*				 public
+ See |yii\base\Controller::__construct|
+
+
+*yii\console\Controller::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\console\Controller::__get* 				 public
+ See |yii\base\Component::__get|
+
+
+*yii\console\Controller::__set* 				 public
+ See |yii\base\Component::__set|
+
+
+*yii\console\Controller::__isset*				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\console\Controller::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\console\Controller::__call*				 public
+ See |yii\base\Component::__call|
+
+
+*yii\console\Controller::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\console\Controller::canGetProperty*			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\console\Controller::canSetProperty*			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\console\Controller::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\console\Controller::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\console\Controller::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\console\Controller::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\console\Controller::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\console\Controller::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\console\Controller::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\console\Controller::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\console\Controller::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\console\Controller::attachBehavior*			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\console\Controller::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\console\Controller::detachBehavior*			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\console\Controller::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\console\Controller::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\console\Controller::actions*				 public
+ See |yii\base\Controller::actions|
+
+
+*yii\console\Controller::runAction*				 public
+>
+ runAction($id, $params='[]')
+<
+(integer) The status of the action execution. 0 means normal, other values
+mean abnormal.
+
+ If the action ID is empty, the method will use [[defaultAction]].
+    [$id] (string) The ID of the action to be executed.
+    [$params] (array) The parameters (name-value pairs) to be passed to the
+    action.
+
+
+*yii\console\Controller::run*					 public
+ See |yii\base\Controller::run|
+
+
+*yii\console\Controller::bindActionParams*			 public
+>
+ bindActionParams($action, $params)
+<
+(array) The valid parameters that the action can run with.
+
+ This method is invoked by [[Action]] when it begins to run with the given
+ parameters. This method will first bind the parameters with the
+ [[options()|options]] available to the action. It then validates the given
+ arguments.
+    [$action] (\yii\base\Action) The action to be bound with parameters
+    [$params] (array) The parameters to be bound to the action
+
+
+*yii\console\Controller::createAction*				 public
+ See |yii\base\Controller::createAction|
+
+
+*yii\console\Controller::beforeAction*				 public
+ See |yii\base\Controller::beforeAction|
+
+
+*yii\console\Controller::afterAction*				 public
+ See |yii\base\Controller::afterAction|
+
+
+*yii\console\Controller::getUniqueId*				 public
+ See |yii\base\Controller::getUniqueId|
+
+
+*yii\console\Controller::getRoute*				 public
+ See |yii\base\Controller::getRoute|
+
+
+*yii\console\Controller::render*				 public
+ See |yii\base\Controller::render|
+
+
+*yii\console\Controller::renderPartial* 			 public
+ See |yii\base\Controller::renderPartial|
+
+
+*yii\console\Controller::renderFile*				 public
+ See |yii\base\Controller::renderFile|
+
+
+*yii\console\Controller::getView*				 public
+ See |yii\base\Controller::getView|
+
+
+*yii\console\Controller::setView*				 public
+ See |yii\base\Controller::setView|
+
+
+*yii\console\Controller::getViewPath*				 public
+ See |yii\base\Controller::getViewPath|
+
+
+*yii\console\Controller::findLayoutFile*			 protected
+ See |yii\base\Controller::findLayoutFile|
+
+
+*yii\console\Controller::isColorEnabled*			 public
+>
+ isColorEnabled($stream='STDOUT')
+<
+(boolean) Whether to enable ANSI style in output.
+
+ ANSI color is enabled only if [[color]] is set true or is not set and the
+ terminal supports ANSI color.
+    [$stream] (resource) The stream to check.
+
+
+*yii\console\Controller::ansiFormat*				 public
+>
+ ansiFormat($string)
+<
+(string) 
+
+ You may pass additional parameters using the constants defined in
+ [[\yii\helpers\Console]].
+
+ Example:
+
+   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE);
+
+
+    [$string] (string) The string to be formatted
+
+
+*yii\console\Controller::stdout*				 public
+>
+ stdout($string)
+<
+(int|boolean) Number of bytes printed or false on error
+
+ You may optionally format the string with ANSI codes by passing additional
+ parameters using the constants defined in [[\yii\helpers\Console]].
+
+ Example:
+
+   $this->stdout('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE);
+
+
+    [$string] (string) The string to print
+
+
+*yii\console\Controller::stderr*				 public
+>
+ stderr($string)
+<
+(int|boolean) Number of bytes printed or false on error
+
+ You may optionally format the string with ANSI codes by passing additional
+ parameters using the constants defined in [[\yii\helpers\Console]].
+
+ Example:
+
+   $this->stderr('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE);
+
+
+    [$string] (string) The string to print
+
+
+*yii\console\Controller::prompt*				 public
+>
+ prompt($text, $options='[]')
+<
+(string) The user input
+
+
+    [$text] (string) Prompt string
+    [$options] (array) The options to validate the input:
+
+     - required: whether it is required or not  - default: default value if no
+    input is inserted by the user  - pattern: regular expression pattern to
+    validate user input  - validator: a callable function to validate input.
+    The function must accept two parameters:      - $input: the user input to
+    validate      - $error: the error value passed by reference if validation
+    failed.
+
+
+*yii\console\Controller::confirm*				 public
+>
+ confirm($message, $default='false')
+<
+(boolean) Whether user confirmed. Will return true if [[interactive]] is
+false.
+
+
+    [$message] (string) To echo out before waiting for user input
+    [$default] (boolean) This value is returned if no selection is made.
+
+
+*yii\console\Controller::select*				 public
+>
+ select($prompt, $options='[]')
+<
+(string) An option character the user chose
+
+
+    [$prompt] (string) The prompt message
+    [$options] (array) Key-value array of options to choose from
+
+
+*yii\console\Controller::options*				 public
+>
+ options($actionId)
+<
+(array) The names of the options valid for the action
+
+ Child classes may override this method to specify possible options.
+
+ Note that the values setting via options are not available until
+ [[beforeAction()]] is being called.
+    [$actionId] (string) The action id of the current request
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,683 @@
+
+*yii\base\Application*   >> yii\base\Module
+======================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$params>				*yii\base\Application::$params*
+ See |yii\base\Module::$params|
+
+<$preload>				*yii\base\Application::$preload*
+ See |yii\base\Module::$preload|
+
+<$id>					*yii\base\Application::$id*
+ See |yii\base\Module::$id|
+
+<$module>				*yii\base\Application::$module*
+ See |yii\base\Module::$module|
+
+<$layout>				*yii\base\Application::$layout*
+ (string|boolean) The layout that should be applied for views in this
+ application. Defaults to 'main'. If this is false, layout will be disabled.
+
+<$controllerMap>			*yii\base\Application::$controllerMap*
+ See |yii\base\Module::$controllerMap|
+
+<$controllerNamespace>			*yii\base\Application::$controllerNamespace*
+ (string) The namespace that controller classes are in. If not set, it will
+ use the "app\controllers" namespace.
+
+<$defaultRoute> 			*yii\base\Application::$defaultRoute*
+ See |yii\base\Module::$defaultRoute|
+
+<$name> 				*yii\base\Application::$name*
+ (string) The application name.
+
+<$version>				*yii\base\Application::$version*
+ (string) The version of this application.
+
+<$charset>				*yii\base\Application::$charset*
+ (string) The charset currently used for the application.
+
+<$language>				*yii\base\Application::$language*
+ (string) The language that is meant to be used for end users.
+
+<$sourceLanguage>			*yii\base\Application::$sourceLanguage*
+ (string) The language that the application is written in. This mainly refers
+ to the language that the messages and view files are written in.
+
+<$controller>				*yii\base\Application::$controller*
+ (\yii\base\Controller) The currently active controller instance
+
+<$requestedRoute>			*yii\base\Application::$requestedRoute*
+ (string) The requested route
+
+<$requestedAction>			*yii\base\Application::$requestedAction*
+ (\yii\base\Action) The requested Action. If null, it means the request cannot
+ be resolved into an action.
+
+<$requestedParams>			*yii\base\Application::$requestedParams*
+ (array) The parameters supplied to the requested action.
+
+<$extensions>				*yii\base\Application::$extensions*
+ (array) List of installed Yii extensions. Each array element represents a
+ single extension with the following structure:
+
+   [
+       'name' => 'extension name',
+       'version' => 'version number',
+       'bootstrap' => 'BootstrapClassName',
+       'alias' => [
+           '@alias1' => 'to/path1',
+           '@alias2' => 'to/path2',
+       ],
+   ]
+
+
+
+<$bootstrap>				*yii\base\Application::$bootstrap*
+ (array) List of bootstrap classes or their configurations. A bootstrap class
+ must implement [[BootstrapInterface]]. The
+ [[BootstrapInterface::bootstrap()]] method of each bootstrap class will be
+ invoked at the beginning of [[init()]].
+
+<$state>				*yii\base\Application::$state*
+ (integer) The current application state during a request handling life cycle.
+ This property is managed by the application. Do not modify this property.
+
+<$behaviors>				*yii\base\Application::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$components>				*yii\base\Application::$components*
+ (array) The list of the component definitions or the loaded component
+ instances (ID => definition or instance).
+
+<$uniqueId>				*yii\base\Application::$uniqueId*
+ (string) The unique ID of the module.
+
+<$basePath>				*yii\base\Application::$basePath*
+ (string) The root directory of the module.
+
+<$controllerPath>			*yii\base\Application::$controllerPath*
+ (string) The directory that contains the controller classes.
+
+<$viewPath>				*yii\base\Application::$viewPath*
+ (string) The root directory of view files. Defaults to "[[basePath]]/view".
+
+<$layoutPath>				*yii\base\Application::$layoutPath*
+ (string) The root directory of layout files. Defaults to
+ "[[viewPath]]/layouts".
+
+<$aliases>				*yii\base\Application::$aliases*
+ (array) List of path aliases to be defined. The array keys are alias names
+ (must start with '@') and the array values are the corresponding paths or
+ aliases. For example,
+
+   [
+   '@models' => '@app/models', // an existing alias
+   '@backend' => __DIR__ . '/../backend',  // a directory
+   ]
+
+
+
+<$modules>				*yii\base\Application::$modules*
+ (array) The modules (indexed by their IDs)
+
+<$runtimePath>				*yii\base\Application::$runtimePath*
+ (string) The directory that stores runtime files. Defaults to the "runtime"
+ subdirectory under [[basePath]].
+
+<$vendorPath>				*yii\base\Application::$vendorPath*
+ (string) The directory that stores vendor files. Defaults to "vendor"
+ directory under [[basePath]].
+
+<$timeZone>				*yii\base\Application::$timeZone*
+ (string) The time zone used by this application.
+
+<$db>					*yii\base\Application::$db*
+ (\yii\db\Connection) The database connection
+
+<$log>					*yii\base\Application::$log*
+ (\yii\log\Dispatcher) The log dispatcher component
+
+<$errorHandler> 			*yii\base\Application::$errorHandler*
+ (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
+ application component.
+
+<$cache>				*yii\base\Application::$cache*
+ (\yii\caching\Cache) The cache application component. Null if the component
+ is not enabled.
+
+<$formatter>				*yii\base\Application::$formatter*
+ (\yii\base\Formatter) The formatter application component.
+
+<$request>				*yii\base\Application::$request*
+ (\yii\web\Request|\yii\console\Request) The request component
+
+<$response>				*yii\base\Application::$response*
+ (\yii\web\Response|\yii\console\Response) The response component
+
+<$view> 				*yii\base\Application::$view*
+ (\yii\base\View|\yii\web\View) The view object that is used to render various
+ view files.
+
+<$urlManager>				*yii\base\Application::$urlManager*
+ (\yii\web\UrlManager) The URL manager for this application.
+
+<$i18n> 				*yii\base\Application::$i18n*
+ (\yii\i18n\I18N) The internationalization component
+
+<$mail> 				*yii\base\Application::$mail*
+ (\yii\mail\MailerInterface) The mailer interface
+
+<$authManager>				*yii\base\Application::$authManager*
+ (\yii\rbac\Manager) The auth manager for this application. Null is returned
+ if auth manager is not configured.
+
+<$assetManager> 			*yii\base\Application::$assetManager*
+ (\yii\web\AssetManager) The asset manager component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\Application::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\base\Application::__construct*				 public
+>
+ __construct($config='[]')
+<
+(void)
+
+
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties. Note that the configuration must contain both [[id]]
+    and [[basePath]].
+
+
+*yii\base\Application::init*					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\base\Application::__get*					 public
+ See |yii\di\ServiceLocator::__get|
+
+
+*yii\base\Application::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\base\Application::__isset* 				 public
+ See |yii\di\ServiceLocator::__isset|
+
+
+*yii\base\Application::__unset* 				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\base\Application::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\base\Application::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\base\Application::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\base\Application::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\base\Application::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\base\Application::__clone* 				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\base\Application::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\base\Application::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\base\Application::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\base\Application::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\base\Application::trigger* 				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\base\Application::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\base\Application::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\base\Application::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\base\Application::attachBehaviors* 			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\base\Application::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\base\Application::detachBehaviors* 			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\base\Application::ensureBehaviors* 			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\base\Application::has*					 public
+ See |yii\di\ServiceLocator::has|
+
+
+*yii\base\Application::get*					 public
+ See |yii\di\ServiceLocator::get|
+
+
+*yii\base\Application::set*					 public
+ See |yii\di\ServiceLocator::set|
+
+
+*yii\base\Application::clear*					 public
+ See |yii\di\ServiceLocator::clear|
+
+
+*yii\base\Application::getComponents*				 public
+ See |yii\di\ServiceLocator::getComponents|
+
+
+*yii\base\Application::setComponents*				 public
+ See |yii\di\ServiceLocator::setComponents|
+
+
+*yii\base\Application::getUniqueId*				 public
+>
+ getUniqueId()
+<
+(string) The unique ID of the module.
+
+ Since this is an application instance, it will always return an empty string.
+
+
+*yii\base\Application::getBasePath*				 public
+ See |yii\base\Module::getBasePath|
+
+
+*yii\base\Application::setBasePath*				 public
+>
+ setBasePath($path)
+<
+(void)
+
+ This method can only be invoked at the beginning of the constructor.
+    [$path] (string) The root directory of the application.
+
+
+*yii\base\Application::getControllerPath*			 public
+ See |yii\base\Module::getControllerPath|
+
+
+*yii\base\Application::getViewPath*				 public
+ See |yii\base\Module::getViewPath|
+
+
+*yii\base\Application::setViewPath*				 public
+ See |yii\base\Module::setViewPath|
+
+
+*yii\base\Application::getLayoutPath*				 public
+ See |yii\base\Module::getLayoutPath|
+
+
+*yii\base\Application::setLayoutPath*				 public
+ See |yii\base\Module::setLayoutPath|
+
+
+*yii\base\Application::setAliases*				 public
+ See |yii\base\Module::setAliases|
+
+
+*yii\base\Application::hasModule*				 public
+ See |yii\base\Module::hasModule|
+
+
+*yii\base\Application::getModule*				 public
+ See |yii\base\Module::getModule|
+
+
+*yii\base\Application::setModule*				 public
+ See |yii\base\Module::setModule|
+
+
+*yii\base\Application::getModules*				 public
+ See |yii\base\Module::getModules|
+
+
+*yii\base\Application::setModules*				 public
+ See |yii\base\Module::setModules|
+
+
+*yii\base\Application::preloadComponents*			 public
+>
+ preloadComponents()
+<
+(void)
+
+
+
+
+*yii\base\Application::runAction*				 public
+ See |yii\base\Module::runAction|
+
+
+*yii\base\Application::createController*			 public
+ See |yii\base\Module::createController|
+
+
+*yii\base\Application::createControllerByID*			 public
+ See |yii\base\Module::createControllerByID|
+
+
+*yii\base\Application::beforeAction*				 public
+ See |yii\base\Module::beforeAction|
+
+
+*yii\base\Application::afterAction*				 public
+ See |yii\base\Module::afterAction|
+
+
+*yii\base\Application::preInit* 				 public
+>
+ preInit($config)
+<
+(void)
+
+ This method is called at the beginning of the application constructor. It
+ initializes several important application properties. If you override this
+ method, please make sure you call the parent implementation.
+    [$config] (array) The application configuration
+
+
+*yii\base\Application::initExtensions*				 protected
+>
+ initExtensions($extensions)
+<
+(void)
+
+
+    [$extensions] (array) The extensions to be initialized. Please refer to
+    [[extensions]] for the structure of the extension array.
+
+
+*yii\base\Application::registerErrorHandler*			 protected
+>
+ registerErrorHandler($config)
+<
+(void)
+
+
+    [$config] () 
+
+
+*yii\base\Application::run*					 public
+>
+ run()
+<
+(integer) The exit status (0 means normal, non-zero values mean abnormal)
+
+ This is the main entrance of an application.
+
+
+*yii\base\Application::handleRequest*				 public
+>
+ handleRequest($request)
+<
+(\yii\base\Response) The resulting response
+
+ This method should return an instance of [[Response]] or its child class
+ which represents the handling result of the request.
+    [$request] (\yii\base\Request) The request to be handled
+
+
+*yii\base\Application::getRuntimePath*				 public
+>
+ getRuntimePath()
+<
+(string) The directory that stores runtime files. Defaults to the "runtime"
+subdirectory under [[basePath]].
+
+
+
+
+*yii\base\Application::setRuntimePath*				 public
+>
+ setRuntimePath($path)
+<
+(void)
+
+
+    [$path] (string) The directory that stores runtime files.
+
+
+*yii\base\Application::getVendorPath*				 public
+>
+ getVendorPath()
+<
+(string) The directory that stores vendor files. Defaults to "vendor"
+directory under [[basePath]].
+
+
+
+
+*yii\base\Application::setVendorPath*				 public
+>
+ setVendorPath($path)
+<
+(void)
+
+
+    [$path] (string) The directory that stores vendor files.
+
+
+*yii\base\Application::getTimeZone*				 public
+>
+ getTimeZone()
+<
+(string) The time zone used by this application.
+
+ This is a simple wrapper of PHP function date_default_timezone_get(). If time
+ zone is not configured in php.ini or application config, it will be set to
+ UTC by default.
+
+
+*yii\base\Application::setTimeZone*				 public
+>
+ setTimeZone($value)
+<
+(void)
+
+ This is a simple wrapper of PHP function date_default_timezone_set(). Refer
+ to the [php manual](http://www.php.net/manual/en/timezones.php) for available
+ timezones.
+    [$value] (string) The time zone used by this application.
+
+
+*yii\base\Application::getDb*					 public
+>
+ getDb()
+<
+(\yii\db\Connection) The database connection
+
+
+
+
+*yii\base\Application::getLog*					 public
+>
+ getLog()
+<
+(\yii\log\Dispatcher) The log dispatcher component
+
+
+
+
+*yii\base\Application::getErrorHandler* 			 public
+>
+ getErrorHandler()
+<
+(\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
+application component.
+
+
+
+
+*yii\base\Application::getCache*				 public
+>
+ getCache()
+<
+(\yii\caching\Cache) The cache application component. Null if the component is
+not enabled.
+
+
+
+
+*yii\base\Application::getFormatter*				 public
+>
+ getFormatter()
+<
+(\yii\base\Formatter) The formatter application component.
+
+
+
+
+*yii\base\Application::getRequest*				 public
+>
+ getRequest()
+<
+(\yii\web\Request|\yii\console\Request) The request component
+
+
+
+
+*yii\base\Application::getResponse*				 public
+>
+ getResponse()
+<
+(\yii\web\Response|\yii\console\Response) The response component
+
+
+
+
+*yii\base\Application::getView* 				 public
+>
+ getView()
+<
+(\yii\base\View|\yii\web\View) The view object that is used to render various
+view files.
+
+
+
+
+*yii\base\Application::getUrlManager*				 public
+>
+ getUrlManager()
+<
+(\yii\web\UrlManager) The URL manager for this application.
+
+
+
+
+*yii\base\Application::getI18n* 				 public
+>
+ getI18n()
+<
+(\yii\i18n\I18N) The internationalization component
+
+
+
+
+*yii\base\Application::getMail* 				 public
+>
+ getMail()
+<
+(\yii\mail\MailerInterface) The mailer interface
+
+
+
+
+*yii\base\Application::getAuthManager*				 public
+>
+ getAuthManager()
+<
+(\yii\rbac\Manager) The auth manager for this application. Null is returned if
+auth manager is not configured.
+
+
+
+
+*yii\base\Application::getAssetManager* 			 public
+>
+ getAssetManager()
+<
+(\yii\web\AssetManager) The asset manager component
+
+
+
+
+*yii\base\Application::coreComponents*				 public
+>
+ coreComponents()
+<
+(void)
+
+
+
+
+*yii\base\Application::end*					 public
+>
+ end($status=0, $response='null')
+<
+(void)
+
+ This method replaces the 'exit()' function by ensuring the application life
+ cycle is completed before terminating the application.
+    [$status] (integer) The exit status (value 0 means normal exit while other
+    values mean abnormal exit).
+    [$response] (\yii\base\Response) The response to be sent. If not set, the
+    default application [[response]] component will be used.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

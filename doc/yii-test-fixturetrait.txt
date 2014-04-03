@@ -1,0 +1,112 @@
+
+*yii\test\FixtureTrait*  
+=======================
+
+ By using FixtureTrait, a test class will be able to specify which fixtures to
+ load by overriding the [[fixtures()]] method. It can then load and unload the
+ fixtures using [[loadFixtures()]] and [[unloadFixtures()]]. Once a fixture is
+ loaded, it can be accessed like an object property, thanks to the PHP
+ '__get()' magic method. Also, if the fixture is an instance of
+ [[ActiveFixture]], you will be able to access AR models through the syntax
+ '$this->fixtureName('model name')'.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\test\FixtureTrait::fixtures*				 public
+>
+ fixtures()
+<
+(array) The fixtures needed by the current test case
+
+ The return value of this method must be an array of fixture configurations.
+ For example,
+
+   [
+       // anonymous fixture
+       PostFixture::className(),
+       // "users" fixture
+       'users' => UserFixture::className(),
+       // "cache" fixture with configuration
+       'cache' => [
+            'class' => CacheFixture::className(),
+            'host' => 'xxx',
+       ],
+   ]
+
+ Note that the actual fixtures used for a test case will include both
+ [[globalFixtures()]] and [[fixtures()]].
+
+
+*yii\test\FixtureTrait::globalFixtures* 			 public
+>
+ globalFixtures()
+<
+(array) The fixtures shared and required by different test cases.
+
+ The return value should be similar to that of [[fixtures()]]. You should
+ usually override this method in a base class.
+
+
+*yii\test\FixtureTrait::loadFixtures*				 public
+>
+ loadFixtures($fixtures='null')
+<
+(void)
+
+ This method will call [[Fixture::load()]] for every fixture object.
+    [$fixtures] (\yii\test\Fixture[]) The fixtures to be loaded. If this
+    parameter is not specified, the return value of [[getFixtures()]] will be
+    used.
+
+
+*yii\test\FixtureTrait::unloadFixtures* 			 public
+>
+ unloadFixtures($fixtures='null')
+<
+(void)
+
+ This method will call [[Fixture::unload()]] for every fixture object.
+    [$fixtures] (\yii\test\Fixture[]) The fixtures to be loaded. If this
+    parameter is not specified, the return value of [[getFixtures()]] will be
+    used.
+
+
+*yii\test\FixtureTrait::getFixtures*				 public
+>
+ getFixtures()
+<
+(\yii\test\Fixture[]) The loaded fixtures for the current test case
+
+
+
+
+*yii\test\FixtureTrait::getFixture*				 public
+>
+ getFixture($name)
+<
+(\yii\test\Fixture) The fixture object, or null if the named fixture does not
+exist.
+
+
+    [$name] (string) The fixture name. This can be either the fixture alias
+    name, or the class name if the alias is not used.
+
+
+*yii\test\FixtureTrait::createFixtures* 			 protected
+>
+ createFixtures($fixtures)
+<
+(\yii\test\Fixture[]) The created fixture instances
+
+ All dependent fixtures will also be created.
+    [$fixtures] (array) The fixtures to be created. You may provide fixture
+    names or fixture configurations. If this parameter is not provided, the
+    fixtures specified in [[globalFixtures()]] and [[fixtures()]] will be
+    created.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

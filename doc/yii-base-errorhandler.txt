@@ -1,0 +1,228 @@
+
+*yii\base\ErrorHandler*   >> yii\base\Component
+=======================
+
+ ErrorHandler is configured as an application component in
+ [[\yii\base\Application]] by default. You can access that instance via
+ 'Yii::$app->errorHandler'.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$discardExistingOutput>		*yii\base\ErrorHandler::$discardExistingOutput*
+ (boolean) Whether to discard any existing page output before error display.
+ Defaults to true.
+
+<$memoryReserveSize>			*yii\base\ErrorHandler::$memoryReserveSize*
+ (integer) The size of the reserved memory. A portion of memory is
+ pre-allocated so that when an out-of-memory issue occurs, the error handler
+ is able to handle the error with the help of this reserved memory. If you set
+ this value to be 0, no memory will be reserved. Defaults to 256KB.
+
+<$exception>				*yii\base\ErrorHandler::$exception*
+ (\Exception) The exception that is being handled currently.
+
+<$behaviors>				*yii\base\ErrorHandler::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\ErrorHandler::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\base\ErrorHandler::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\base\ErrorHandler::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\base\ErrorHandler::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\base\ErrorHandler::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\base\ErrorHandler::__isset*				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\base\ErrorHandler::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\base\ErrorHandler::__call* 				 public
+ See |yii\base\Component::__call|
+
+
+*yii\base\ErrorHandler::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\base\ErrorHandler::canGetProperty* 			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\base\ErrorHandler::canSetProperty* 			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\base\ErrorHandler::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\base\ErrorHandler::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\base\ErrorHandler::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\base\ErrorHandler::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\base\ErrorHandler::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\base\ErrorHandler::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\base\ErrorHandler::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\base\ErrorHandler::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\base\ErrorHandler::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\base\ErrorHandler::attachBehavior* 			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\base\ErrorHandler::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\base\ErrorHandler::detachBehavior* 			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\base\ErrorHandler::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\base\ErrorHandler::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\base\ErrorHandler::register*				 public
+>
+ register()
+<
+(void)
+
+
+
+
+*yii\base\ErrorHandler::handleException*			 public
+>
+ handleException($exception)
+<
+(void)
+
+ This method is implemented as a PHP exception handler.
+    [$exception] (\Exception) The exception that is not caught
+
+
+*yii\base\ErrorHandler::handleError*				 public
+>
+ handleError($code, $message, $file, $line)
+<
+(void)
+
+ This method is used as a PHP error handler. It will simply raise an
+ [[ErrorException]].
+    [$code] (integer) The level of the error raised.
+    [$message] (string) The error message.
+    [$file] (string) The filename that the error was raised in.
+    [$line] (integer) The line number the error was raised at.
+
+
+*yii\base\ErrorHandler::handleFatalError*			 public
+>
+ handleFatalError()
+<
+(void)
+
+
+
+
+*yii\base\ErrorHandler::renderException*			 protected
+>
+ renderException($exception)
+<
+(void)
+
+
+    [$exception] (\Exception) The exception to be rendered.
+
+
+*yii\base\ErrorHandler::logException*				 protected
+>
+ logException($exception)
+<
+(void)
+
+
+    [$exception] (\Exception) The exception to be logged
+
+
+*yii\base\ErrorHandler::clearOutput*				 public
+>
+ clearOutput()
+<
+(void)
+
+
+
+
+*yii\base\ErrorHandler::convertExceptionToError*		 public
+>
+ convertExceptionToError($exception)
+<
+(void)
+
+ This method can be used to convert exceptions inside of methods like
+ '__toString()' to PHP errors because exceptions cannot be thrown inside of
+ them.
+    [$exception] (\Exception) The exception to convert to a PHP error.
+
+
+*yii\base\ErrorHandler::convertExceptionToString*		 public
+>
+ convertExceptionToString($exception)
+<
+(string) The string representation of the exception.
+
+
+    [$exception] (\Exception) The exception being converted
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

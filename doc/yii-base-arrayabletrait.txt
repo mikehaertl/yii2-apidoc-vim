@@ -1,0 +1,114 @@
+
+*yii\base\ArrayableTrait*  
+=========================
+
+ ArrayableTrait implements [[toArray()]] by respecting the field definitions
+ as declared in [[fields()]] and [[extraFields()]].
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\ArrayableTrait::fields*				 public
+>
+ fields()
+<
+(array) The list of field names or field definitions.
+
+ A field is a named element in the returned array by [[toArray()]].
+
+ This method should return an array of field names or field definitions. If
+ the former, the field name will be treated as an object property name whose
+ value will be used as the field value. If the latter, the array key should be
+ the field name while the array value should be the corresponding field
+ definition which can be either an object property name or a PHP callable
+ returning the corresponding field value. The signature of the callable should
+ be:
+
+   function ($field, $model) {
+       // return field value
+   }
+
+ For example, the following code declares four fields:
+
+ - 'email': the field name is the same as the property name 'email'; -
+ 'firstName' and 'lastName': the field names are 'firstName' and 'lastName',
+ and their   values are obtained from the 'first_name' and 'last_name'
+ properties; - 'fullName': the field name is 'fullName'. Its value is obtained
+ by concatenating 'first_name'   and 'last_name'.
+
+   return [
+       'email',
+       'firstName' => 'first_name',
+       'lastName' => 'last_name',
+       'fullName' => function () {
+           return $this->first_name . ' ' . $this->last_name;
+       },
+   ];
+
+ In this method, you may also want to return different lists of fields based
+ on some context information. For example, depending on the privilege of the
+ current application user, you may return different sets of visible fields or
+ filter out some fields.
+
+ The default implementation of this method returns the public object member
+ variables.
+
+
+*yii\base\ArrayableTrait::extraFields*				 public
+>
+ extraFields()
+<
+(array) The list of expandable field names or field definitions. Please refer
+to [[fields()]] on the format of the return value.
+
+ This method is similar to [[fields()]] except that the list of fields
+ returned by this method are not returned by default by [[toArray()]]. Only
+ when field names to be expanded are explicitly specified when calling
+ [[toArray()]], will their values be exported.
+
+ The default implementation returns an empty array.
+
+ You may override this method to return a list of expandable fields based on
+ some context information (e.g. the current application user).
+
+
+*yii\base\ArrayableTrait::toArray*				 public
+>
+ toArray($fields='[]', $expand='[]', $recursive='true')
+<
+(array) The array representation of the object
+
+ This method will first identify which fields to be included in the resulting
+ array by calling [[resolveFields()]]. It will then turn the model into an
+ array with these fields. If '$recursive' is true, any embedded objects will
+ also be converted into arrays.
+
+ If the model implements the [[Linkable]] interface, the resulting array will
+ also have a '_link' element which refers to a list of links as specified by
+ the interface.
+    [$fields] (array) The fields being requested. If empty, all fields as
+    specified by [[fields()]] will be returned.
+    [$expand] (array) The additional fields being requested for exporting.
+    Only fields declared in [[extraFields()]] will be considered.
+    [$recursive] (boolean) Whether to recursively return array representation
+    of embedded objects.
+
+
+*yii\base\ArrayableTrait::resolveFields*			 protected
+>
+ resolveFields($fields, $expand)
+<
+(array) The list of fields to be exported. The array keys are the field names,
+and the array values are the corresponding object property names or PHP
+callables returning the field values.
+
+ This method will check the requested fields against those declared in
+ [[fields()]] and [[extraFields()]] to determine which fields can be returned.
+    [$fields] (array) The fields being requested for exporting
+    [$expand] (array) The additional fields being requested for exporting
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

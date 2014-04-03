@@ -1,0 +1,561 @@
+
+*yii\web\Application*   >> yii\base\Application
+=====================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$params>				*yii\web\Application::$params*
+ See |yii\base\Module::$params|
+
+<$preload>				*yii\web\Application::$preload*
+ See |yii\base\Module::$preload|
+
+<$id>					*yii\web\Application::$id*
+ See |yii\base\Module::$id|
+
+<$module>				*yii\web\Application::$module*
+ See |yii\base\Module::$module|
+
+<$layout>				*yii\web\Application::$layout*
+ See |yii\base\Application::$layout|
+
+<$controllerMap>			*yii\web\Application::$controllerMap*
+ See |yii\base\Module::$controllerMap|
+
+<$controllerNamespace>			*yii\web\Application::$controllerNamespace*
+ See |yii\base\Application::$controllerNamespace|
+
+<$defaultRoute> 			*yii\web\Application::$defaultRoute*
+ (string) The default route of this application. Defaults to 'site'.
+
+<$name> 				*yii\web\Application::$name*
+ See |yii\base\Application::$name|
+
+<$version>				*yii\web\Application::$version*
+ See |yii\base\Application::$version|
+
+<$charset>				*yii\web\Application::$charset*
+ See |yii\base\Application::$charset|
+
+<$language>				*yii\web\Application::$language*
+ See |yii\base\Application::$language|
+
+<$sourceLanguage>			*yii\web\Application::$sourceLanguage*
+ See |yii\base\Application::$sourceLanguage|
+
+<$controller>				*yii\web\Application::$controller*
+ (\yii\web\Controller) The currently active controller instance
+
+<$requestedRoute>			*yii\web\Application::$requestedRoute*
+ See |yii\base\Application::$requestedRoute|
+
+<$requestedAction>			*yii\web\Application::$requestedAction*
+ See |yii\base\Application::$requestedAction|
+
+<$requestedParams>			*yii\web\Application::$requestedParams*
+ See |yii\base\Application::$requestedParams|
+
+<$extensions>				*yii\web\Application::$extensions*
+ See |yii\base\Application::$extensions|
+
+<$bootstrap>				*yii\web\Application::$bootstrap*
+ See |yii\base\Application::$bootstrap|
+
+<$state>				*yii\web\Application::$state*
+ See |yii\base\Application::$state|
+
+<$catchAll>				*yii\web\Application::$catchAll*
+ (array) The configuration specifying a controller action which should handle
+ all user requests. This is mainly used when the application is in maintenance
+ mode and needs to handle all incoming requests via a single action. The
+ configuration is an array whose first element specifies the route of the
+ action. The rest of the array elements (key-value pairs) specify the
+ parameters to be bound to the action. For example,
+
+   [
+       'offline/notice',
+       'param1' => 'value1',
+       'param2' => 'value2',
+   ]
+
+ Defaults to null, meaning catch-all is not used.
+
+<$behaviors>				*yii\web\Application::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$components>				*yii\web\Application::$components*
+ (array) The list of the component definitions or the loaded component
+ instances (ID => definition or instance).
+
+<$uniqueId>				*yii\web\Application::$uniqueId*
+ (string) The unique ID of the module.
+
+<$basePath>				*yii\web\Application::$basePath*
+ (string) The root directory of the module.
+
+<$controllerPath>			*yii\web\Application::$controllerPath*
+ (string) The directory that contains the controller classes.
+
+<$viewPath>				*yii\web\Application::$viewPath*
+ (string) The root directory of view files. Defaults to "[[basePath]]/view".
+
+<$layoutPath>				*yii\web\Application::$layoutPath*
+ (string) The root directory of layout files. Defaults to
+ "[[viewPath]]/layouts".
+
+<$aliases>				*yii\web\Application::$aliases*
+ (array) List of path aliases to be defined. The array keys are alias names
+ (must start with '@') and the array values are the corresponding paths or
+ aliases. For example,
+
+   [
+   '@models' => '@app/models', // an existing alias
+   '@backend' => __DIR__ . '/../backend',  // a directory
+   ]
+
+
+
+<$modules>				*yii\web\Application::$modules*
+ (array) The modules (indexed by their IDs)
+
+<$runtimePath>				*yii\web\Application::$runtimePath*
+ (string) The directory that stores runtime files. Defaults to the "runtime"
+ subdirectory under [[basePath]].
+
+<$vendorPath>				*yii\web\Application::$vendorPath*
+ (string) The directory that stores vendor files. Defaults to "vendor"
+ directory under [[basePath]].
+
+<$timeZone>				*yii\web\Application::$timeZone*
+ (string) The time zone used by this application.
+
+<$db>					*yii\web\Application::$db*
+ (\yii\db\Connection) The database connection
+
+<$log>					*yii\web\Application::$log*
+ (\yii\log\Dispatcher) The log dispatcher component
+
+<$errorHandler> 			*yii\web\Application::$errorHandler*
+ (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
+ application component.
+
+<$cache>				*yii\web\Application::$cache*
+ (\yii\caching\Cache) The cache application component. Null if the component
+ is not enabled.
+
+<$formatter>				*yii\web\Application::$formatter*
+ (\yii\base\Formatter) The formatter application component.
+
+<$request>				*yii\web\Application::$request*
+ (\yii\web\Request|\yii\console\Request) The request component
+
+<$response>				*yii\web\Application::$response*
+ (\yii\web\Response|\yii\console\Response) The response component
+
+<$view> 				*yii\web\Application::$view*
+ (\yii\base\View|\yii\web\View) The view object that is used to render various
+ view files.
+
+<$urlManager>				*yii\web\Application::$urlManager*
+ (\yii\web\UrlManager) The URL manager for this application.
+
+<$i18n> 				*yii\web\Application::$i18n*
+ (\yii\i18n\I18N) The internationalization component
+
+<$mail> 				*yii\web\Application::$mail*
+ (\yii\mail\MailerInterface) The mailer interface
+
+<$authManager>				*yii\web\Application::$authManager*
+ (\yii\rbac\Manager) The auth manager for this application. Null is returned
+ if auth manager is not configured.
+
+<$assetManager> 			*yii\web\Application::$assetManager*
+ (\yii\web\AssetManager) The asset manager component
+
+<$homeUrl>				*yii\web\Application::$homeUrl*
+ (string) The homepage URL
+
+<$session>				*yii\web\Application::$session*
+ (\yii\web\Session) The session component
+
+<$user> 				*yii\web\Application::$user*
+ (\yii\web\User) The user component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\Application::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\web\Application::__construct*				 public
+ See |yii\base\Application::__construct|
+
+
+*yii\web\Application::init*					 public
+ See |yii\base\Application::init|
+
+
+*yii\web\Application::__get*					 public
+ See |yii\di\ServiceLocator::__get|
+
+
+*yii\web\Application::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\web\Application::__isset*					 public
+ See |yii\di\ServiceLocator::__isset|
+
+
+*yii\web\Application::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\web\Application::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\web\Application::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\web\Application::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\web\Application::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\web\Application::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\web\Application::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\web\Application::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\web\Application::hasEventHandlers* 			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\web\Application::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\web\Application::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\web\Application::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\web\Application::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\web\Application::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\web\Application::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\web\Application::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\web\Application::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\web\Application::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\web\Application::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\web\Application::has*					 public
+ See |yii\di\ServiceLocator::has|
+
+
+*yii\web\Application::get*					 public
+ See |yii\di\ServiceLocator::get|
+
+
+*yii\web\Application::set*					 public
+ See |yii\di\ServiceLocator::set|
+
+
+*yii\web\Application::clear*					 public
+ See |yii\di\ServiceLocator::clear|
+
+
+*yii\web\Application::getComponents*				 public
+ See |yii\di\ServiceLocator::getComponents|
+
+
+*yii\web\Application::setComponents*				 public
+ See |yii\di\ServiceLocator::setComponents|
+
+
+*yii\web\Application::getUniqueId*				 public
+ See |yii\base\Application::getUniqueId|
+
+
+*yii\web\Application::getBasePath*				 public
+ See |yii\base\Module::getBasePath|
+
+
+*yii\web\Application::setBasePath*				 public
+ See |yii\base\Application::setBasePath|
+
+
+*yii\web\Application::getControllerPath*			 public
+ See |yii\base\Module::getControllerPath|
+
+
+*yii\web\Application::getViewPath*				 public
+ See |yii\base\Module::getViewPath|
+
+
+*yii\web\Application::setViewPath*				 public
+ See |yii\base\Module::setViewPath|
+
+
+*yii\web\Application::getLayoutPath*				 public
+ See |yii\base\Module::getLayoutPath|
+
+
+*yii\web\Application::setLayoutPath*				 public
+ See |yii\base\Module::setLayoutPath|
+
+
+*yii\web\Application::setAliases*				 public
+ See |yii\base\Module::setAliases|
+
+
+*yii\web\Application::hasModule*				 public
+ See |yii\base\Module::hasModule|
+
+
+*yii\web\Application::getModule*				 public
+ See |yii\base\Module::getModule|
+
+
+*yii\web\Application::setModule*				 public
+ See |yii\base\Module::setModule|
+
+
+*yii\web\Application::getModules*				 public
+ See |yii\base\Module::getModules|
+
+
+*yii\web\Application::setModules*				 public
+ See |yii\base\Module::setModules|
+
+
+*yii\web\Application::preloadComponents*			 public
+>
+ preloadComponents()
+<
+(void)
+
+
+
+
+*yii\web\Application::runAction*				 public
+ See |yii\base\Module::runAction|
+
+
+*yii\web\Application::createController* 			 public
+ See |yii\base\Module::createController|
+
+
+*yii\web\Application::createControllerByID*			 public
+ See |yii\base\Module::createControllerByID|
+
+
+*yii\web\Application::beforeAction*				 public
+ See |yii\base\Module::beforeAction|
+
+
+*yii\web\Application::afterAction*				 public
+ See |yii\base\Module::afterAction|
+
+
+*yii\web\Application::preInit*					 public
+ See |yii\base\Application::preInit|
+
+
+*yii\web\Application::initExtensions*				 protected
+ See |yii\base\Application::initExtensions|
+
+
+*yii\web\Application::registerErrorHandler*			 protected
+>
+ registerErrorHandler($config)
+<
+(void)
+
+
+    [$config] () 
+
+
+*yii\web\Application::run*					 public
+ See |yii\base\Application::run|
+
+
+*yii\web\Application::handleRequest*				 public
+>
+ handleRequest($request)
+<
+(\yii\web\Response) The resulting response
+
+
+    [$request] (\yii\web\Request) The request to be handled
+
+
+*yii\web\Application::getRuntimePath*				 public
+ See |yii\base\Application::getRuntimePath|
+
+
+*yii\web\Application::setRuntimePath*				 public
+ See |yii\base\Application::setRuntimePath|
+
+
+*yii\web\Application::getVendorPath*				 public
+ See |yii\base\Application::getVendorPath|
+
+
+*yii\web\Application::setVendorPath*				 public
+ See |yii\base\Application::setVendorPath|
+
+
+*yii\web\Application::getTimeZone*				 public
+ See |yii\base\Application::getTimeZone|
+
+
+*yii\web\Application::setTimeZone*				 public
+ See |yii\base\Application::setTimeZone|
+
+
+*yii\web\Application::getDb*					 public
+ See |yii\base\Application::getDb|
+
+
+*yii\web\Application::getLog*					 public
+ See |yii\base\Application::getLog|
+
+
+*yii\web\Application::getErrorHandler*				 public
+ See |yii\base\Application::getErrorHandler|
+
+
+*yii\web\Application::getCache* 				 public
+ See |yii\base\Application::getCache|
+
+
+*yii\web\Application::getFormatter*				 public
+ See |yii\base\Application::getFormatter|
+
+
+*yii\web\Application::getRequest*				 public
+ See |yii\base\Application::getRequest|
+
+
+*yii\web\Application::getResponse*				 public
+ See |yii\base\Application::getResponse|
+
+
+*yii\web\Application::getView*					 public
+ See |yii\base\Application::getView|
+
+
+*yii\web\Application::getUrlManager*				 public
+ See |yii\base\Application::getUrlManager|
+
+
+*yii\web\Application::getI18n*					 public
+ See |yii\base\Application::getI18n|
+
+
+*yii\web\Application::getMail*					 public
+ See |yii\base\Application::getMail|
+
+
+*yii\web\Application::getAuthManager*				 public
+ See |yii\base\Application::getAuthManager|
+
+
+*yii\web\Application::getAssetManager*				 public
+ See |yii\base\Application::getAssetManager|
+
+
+*yii\web\Application::coreComponents*				 public
+>
+ coreComponents()
+<
+(void)
+
+
+
+
+*yii\web\Application::end*					 public
+ See |yii\base\Application::end|
+
+
+*yii\web\Application::getHomeUrl*				 public
+>
+ getHomeUrl()
+<
+(string) The homepage URL
+
+
+
+
+*yii\web\Application::setHomeUrl*				 public
+>
+ setHomeUrl($value)
+<
+(void)
+
+
+    [$value] (string) The homepage URL
+
+
+*yii\web\Application::getSession*				 public
+>
+ getSession()
+<
+(\yii\web\Session) The session component
+
+
+
+
+*yii\web\Application::getUser*					 public
+>
+ getUser()
+<
+(\yii\web\User) The user component
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

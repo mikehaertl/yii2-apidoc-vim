@@ -1,0 +1,118 @@
+
+*yii\di\Instance*  
+=================
+
+ You may use [[get()]] to obtain the actual object referenced by [[id]].
+
+ Instance is mainly used in two places:
+
+ - When configuring a dependency injection container, you use Instance to
+ reference a class name, interface name   or alias name. The reference can
+ later be resolved into the actual object by the container. - In classes which
+ use service locator to obtain dependent objects.
+
+ The following example shows how to configure a DI container with Instance:
+
+   $container = new \yii\di\Container;
+   $container->set('cache', 'yii\caching\DbCache', Instance::of('db'));
+   $container->set('db', [
+       'class' => 'yii\db\Connection',
+       'dsn' => 'sqlite:path/to/file.db',
+   ]);
+
+ And the following example shows how a class retrieves a component from a
+ service locator:
+
+   class DbCache extends Cache
+   {
+       public $db = 'db';
+
+       public function init()
+       {
+           parent::init();
+           $this->db = Instance::ensure($this->db, 'yii\db\Connection');
+       }
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\di\Instance::$id*
+ (string) The component ID, class name, interface name or alias name
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\di\Instance::__construct*					 protected
+>
+ __construct($id)
+<
+(void)
+
+
+    [$id] (string) The component ID
+
+
+*yii\di\Instance::of*						 public
+>
+ of($id)
+<
+(\yii\di\Instance) The new Instance object.
+
+
+    [$id] (string) The component ID
+
+
+*yii\di\Instance::ensure*					 public
+>
+ ensure($reference, $type='null', $container='null')
+<
+(object) The object referenced by the Instance, or '$reference' itself if it
+is an object.
+
+ The reference may be specified as a string or an Instance object. If the
+ former, it will be treated as a component ID, a class/interface name or an
+ alias, depending on the container type.
+
+ If you do not specify a container, the method will first try 'Yii::$app'
+ followed by 'Yii::$container'.
+
+ For example,
+
+   use yii\db\Connection;
+
+   // returns Yii::$app->db
+   $db = Instance::ensure('db', Connection::className());
+   // or
+   $instance = Instance::of('db');
+   $db = Instance::ensure($instance, Connection::className());
+
+
+    [$reference] (object|string|static) An object or a reference to the
+    desired object. You may specify a reference in terms of a component ID or
+    an Instance object.
+    [$type] (string) The class/interface name to be checked. If null, type
+    check will not be performed.
+    [$container] (\yii\di\ServiceLocator|\yii\di\Container) The container.
+    This will be passed to [[get()]].
+
+
+*yii\di\Instance::get*						 public
+>
+ get($container='null')
+<
+(object) The actual object referenced by this Instance object.
+
+
+    [$container] (\yii\di\ServiceLocator|\yii\di\Container) The container used
+    to locate the referenced object. If null, the method will first try
+    'Yii::$app' then 'Yii::$container'.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

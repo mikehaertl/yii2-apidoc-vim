@@ -1,0 +1,143 @@
+
+*yii\web\UrlRule*   >> yii\base\Object
+=================
+
+ To define your own URL parsing and creation logic you can extend from this
+ class and add it to [[UrlManager::rules]] like this:
+
+   'rules' => [
+       ['class' => 'MyUrlRule', 'pattern' => '...', 'route' => 'site/index',
+ ...],
+       // ...
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$name> 				*yii\web\UrlRule::$name*
+ (string) The name of this rule. If not set, it will use [[pattern]] as the
+ name.
+
+<$pattern>				*yii\web\UrlRule::$pattern*
+ (string) The pattern used to parse and create the path info part of a URL.
+
+<$host> 				*yii\web\UrlRule::$host*
+ (string) The pattern used to parse and create the host info part of a URL
+ (e.g. 'http://example.com').
+
+<$route>				*yii\web\UrlRule::$route*
+ (string) The route to the controller action
+
+<$defaults>				*yii\web\UrlRule::$defaults*
+ (array) The default GET parameters (name => value) that this rule provides.
+ When this rule is used to parse the incoming request, the values declared in
+ this property will be injected into $_GET.
+
+<$suffix>				*yii\web\UrlRule::$suffix*
+ (string) The URL suffix used for this rule. For example, ".html" can be used
+ so that the URL looks like pointing to a static HTML page. If not, the value
+ of [[UrlManager::suffix]] will be used.
+
+<$verb> 				*yii\web\UrlRule::$verb*
+ (string|array) The HTTP verb (e.g. GET, POST, DELETE) that this rule should
+ match. Use array to represent multiple verbs that this rule may match. If
+ this property is not set, the rule can match any verb. Note that this
+ property is only used when parsing a request. It is ignored for URL creation.
+
+<$mode> 				*yii\web\UrlRule::$mode*
+ (integer) A value indicating if this rule should be used for both request
+ parsing and URL creation, parsing only, or creation only. If not set or 0, it
+ means the rule is both request parsing and URL creation. If it is
+ [[PARSING_ONLY]], the rule is for request parsing only. If it is
+ [[CREATION_ONLY]], the rule is for URL creation only.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\UrlRule::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\web\UrlRule::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\web\UrlRule::init* 					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\web\UrlRule::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\web\UrlRule::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\web\UrlRule::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\web\UrlRule::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\web\UrlRule::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\web\UrlRule::hasProperty*					 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\web\UrlRule::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\web\UrlRule::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\web\UrlRule::hasMethod*					 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\web\UrlRule::parseRequest* 				 public
+>
+ parseRequest($manager, $request)
+<
+(array|boolean) The parsing result. The route and the parameters are returned
+as an array. If false, it means this rule cannot be used to parse this path
+info.
+
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$request] (\yii\web\Request) The request component
+
+
+*yii\web\UrlRule::createUrl*					 public
+>
+ createUrl($manager, $route, $params)
+<
+(string|boolean) The created URL, or false if this rule cannot be used for
+creating this URL.
+
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$route] (string) The route. It should not have slashes at the beginning
+    or the end.
+    [$params] (array) The parameters
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

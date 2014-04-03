@@ -1,0 +1,193 @@
+
+*yii\web\ErrorAction*   >> yii\base\Action
+=====================
+
+ To use ErrorAction, you need to do the following steps:
+
+ First, declare an action of ErrorAction type in the 'actions()' method of
+ your 'SiteController' class (or whatever controller you prefer), like the
+ following:
+
+   public function actions()
+   {
+       return [
+           'error' => ['class' => 'yii\web\ErrorAction'],
+       ];
+   }
+
+ Then, create a view file for this action. If the route of your error action
+ is 'site/error', then the view file should be 'views/site/error.php'. In this
+ view file, the following variables are available:
+
+ - '$name': the error name - '$message': the error message - '$exception': the
+ exception being handled
+
+ Finally, configure the "errorHandler" application component as follows,
+
+   'errorHandler' => [
+       'errorAction' => 'site/error',
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\web\ErrorAction::$id*
+ See |yii\base\Action::$id|
+
+<$controller>				*yii\web\ErrorAction::$controller*
+ See |yii\base\Action::$controller|
+
+<$view> 				*yii\web\ErrorAction::$view*
+ (string) The view file to be rendered. If not set, it will take the value of
+ [[id]]. That means, if you name the action as "error" in "SiteController",
+ then the view name would be "error", and the corresponding view file would be
+ "views/site/error.php".
+
+<$defaultName>				*yii\web\ErrorAction::$defaultName*
+ (string) The name of the error when the exception name cannot be determined.
+ Defaults to "Error".
+
+<$defaultMessage>			*yii\web\ErrorAction::$defaultMessage*
+ (string) The message to be displayed when the exception message contains
+ sensitive information. Defaults to "An internal server error occurred.".
+
+<$behaviors>				*yii\web\ErrorAction::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$uniqueId>				*yii\web\ErrorAction::$uniqueId*
+ (string) The unique ID of this action among the whole application.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\ErrorAction::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\web\ErrorAction::__construct*				 public
+ See |yii\base\Action::__construct|
+
+
+*yii\web\ErrorAction::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\web\ErrorAction::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\web\ErrorAction::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\web\ErrorAction::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\web\ErrorAction::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\web\ErrorAction::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\web\ErrorAction::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\web\ErrorAction::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\web\ErrorAction::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\web\ErrorAction::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\web\ErrorAction::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\web\ErrorAction::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\web\ErrorAction::hasEventHandlers* 			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\web\ErrorAction::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\web\ErrorAction::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\web\ErrorAction::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\web\ErrorAction::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\web\ErrorAction::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\web\ErrorAction::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\web\ErrorAction::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\web\ErrorAction::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\web\ErrorAction::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\web\ErrorAction::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\web\ErrorAction::getUniqueId*				 public
+ See |yii\base\Action::getUniqueId|
+
+
+*yii\web\ErrorAction::runWithParams*				 public
+ See |yii\base\Action::runWithParams|
+
+
+*yii\web\ErrorAction::beforeRun*				 protected
+ See |yii\base\Action::beforeRun|
+
+
+*yii\web\ErrorAction::afterRun* 				 protected
+ See |yii\base\Action::afterRun|
+
+
+*yii\web\ErrorAction::run*					 public
+>
+ run()
+<
+(void)
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

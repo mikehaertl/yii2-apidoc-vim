@@ -1,0 +1,207 @@
+
+*yii\grid\ActionColumn*   >> yii\grid\Column
+=======================
+
+ To add an ActionColumn to the gridview, add it to the
+ [[GridView::columns|columns]] configuration as follows:
+
+   'columns' => [
+       // ...
+       [
+           'class' => 'yii\grid\ActionColumn',
+           // you may configure additional properties here
+       ],
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$grid> 				*yii\grid\ActionColumn::$grid*
+ See |yii\grid\Column::$grid|
+
+<$header>				*yii\grid\ActionColumn::$header*
+ See |yii\grid\Column::$header|
+
+<$footer>				*yii\grid\ActionColumn::$footer*
+ See |yii\grid\Column::$footer|
+
+<$content>				*yii\grid\ActionColumn::$content*
+ See |yii\grid\Column::$content|
+
+<$visible>				*yii\grid\ActionColumn::$visible*
+ See |yii\grid\Column::$visible|
+
+<$options>				*yii\grid\ActionColumn::$options*
+ See |yii\grid\Column::$options|
+
+<$headerOptions>			*yii\grid\ActionColumn::$headerOptions*
+ See |yii\grid\Column::$headerOptions|
+
+<$contentOptions>			*yii\grid\ActionColumn::$contentOptions*
+ See |yii\grid\Column::$contentOptions|
+
+<$footerOptions>			*yii\grid\ActionColumn::$footerOptions*
+ See |yii\grid\Column::$footerOptions|
+
+<$filterOptions>			*yii\grid\ActionColumn::$filterOptions*
+ See |yii\grid\Column::$filterOptions|
+
+<$controller>				*yii\grid\ActionColumn::$controller*
+ (string) The ID of the controller that should handle the actions specified
+ here. If not set, it will use the currently active controller. This property
+ is mainly used by [[urlCreator]] to create URLs for different actions. The
+ value of this property will be prefixed to each action name to form the route
+ of the action.
+
+<$template>				*yii\grid\ActionColumn::$template*
+ (string) The template used for composing each cell in the action column.
+ Tokens enclosed within curly brackets are treated as controller action IDs
+ (also called *button names* in the context of action column). They will be
+ replaced by the corresponding button rendering callbacks specified in
+ [[buttons]]. For example, the token '{view}' will be replaced by the result
+ of the callback 'buttons['view']'. If a callback cannot be found, the token
+ will be replaced with an empty string.
+
+<$buttons>				*yii\grid\ActionColumn::$buttons*
+ (array) Button rendering callbacks. The array keys are the button names
+ (without curly brackets), and the values are the corresponding button
+ rendering callbacks. The callbacks should use the following signature:
+
+   function ($url, $model) {
+       // return the button HTML code
+   }
+
+ where '$url' is the URL that the column creates for the button, and '$model'
+ is the model object being rendered for the current row.
+
+<$urlCreator>				*yii\grid\ActionColumn::$urlCreator*
+ (callable) A callback that creates a button URL using the specified model
+ information. The signature of the callback should be the same as that of
+ [[createUrl()]]. If this property is not set, button URLs will be created
+ using [[createUrl()]].
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\grid\ActionColumn::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\grid\ActionColumn::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\grid\ActionColumn::init*					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\grid\ActionColumn::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\grid\ActionColumn::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\grid\ActionColumn::__isset*				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\grid\ActionColumn::__unset*				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\grid\ActionColumn::__call* 				 public
+ See |yii\base\Object::__call|
+
+
+*yii\grid\ActionColumn::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\grid\ActionColumn::canGetProperty* 			 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\grid\ActionColumn::canSetProperty* 			 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\grid\ActionColumn::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\grid\ActionColumn::renderHeaderCell*			 public
+ See |yii\grid\Column::renderHeaderCell|
+
+
+*yii\grid\ActionColumn::renderFooterCell*			 public
+ See |yii\grid\Column::renderFooterCell|
+
+
+*yii\grid\ActionColumn::renderDataCell* 			 public
+ See |yii\grid\Column::renderDataCell|
+
+
+*yii\grid\ActionColumn::renderFilterCell*			 public
+ See |yii\grid\Column::renderFilterCell|
+
+
+*yii\grid\ActionColumn::renderHeaderCellContent*		 protected
+ See |yii\grid\Column::renderHeaderCellContent|
+
+
+*yii\grid\ActionColumn::renderFooterCellContent*		 protected
+ See |yii\grid\Column::renderFooterCellContent|
+
+
+*yii\grid\ActionColumn::renderDataCellContent*			 protected
+>
+ renderDataCellContent($model, $key, $index)
+<
+(string) The rendering result
+
+
+    [$model] () 
+    [$key] () 
+    [$index] () 
+
+
+*yii\grid\ActionColumn::renderFilterCellContent*		 protected
+ See |yii\grid\Column::renderFilterCellContent|
+
+
+*yii\grid\ActionColumn::initDefaultButtons*			 protected
+>
+ initDefaultButtons()
+<
+(void)
+
+
+
+
+*yii\grid\ActionColumn::createUrl*				 public
+>
+ createUrl($action, $model, $key, $index)
+<
+(string) The created URL
+
+ This method is called for each button and each row.
+    [$action] (string) The button name (or action ID)
+    [$model] (\yii\db\ActiveRecord) The data model
+    [$key] (mixed) The key associated with the data model
+    [$index] (integer) The current row index
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

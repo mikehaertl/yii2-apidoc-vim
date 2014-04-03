@@ -1,0 +1,140 @@
+
+*yii\web\VerbFilter*   >> yii\base\Behavior
+====================
+
+ It allows to define allowed HTTP request methods for each action and will
+ throw an HTTP 405 error when the method is not allowed.
+
+ To use VerbFilter, declare it in the 'behaviors()' method of your controller
+ class. For example, the following declarations will define a typical set of
+ allowed request methods for REST CRUD actions.
+
+   public function behaviors()
+   {
+       return [
+           'verbs' => [
+               'class' => \yii\web\VerbFilter::className(),
+               'actions' => [
+                   'index'  => ['get'],
+                   'view'   => ['get'],
+                   'create' => ['get', 'post'],
+                   'update' => ['get', 'put', 'post'],
+                   'delete' => ['post', 'delete'],
+               ],
+           ],
+       ];
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$owner>				*yii\web\VerbFilter::$owner*
+ See |yii\base\Behavior::$owner|
+
+<$actions>				*yii\web\VerbFilter::$actions*
+ (array) This property defines the allowed request methods for each action.
+ For each action that should only support limited set of request methods you
+ add an entry with the action id as array key and an array of allowed methods
+ (e.g. GET, HEAD, PUT) as the value. If an action is not listed all request
+ methods are considered allowed.
+
+ You can use '*' to stand for all actions. When an action is explicitly
+ specified, it takes precedence over the specification given by '*'.
+
+ For example,
+
+   [
+     'create' => ['get', 'post'],
+     'update' => ['get', 'put', 'post'],
+     'delete' => ['post', 'delete'],
+     '*' => ['get'],
+   ]
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\VerbFilter::className* 				 public
+ See |yii\base\Object::className|
+
+
+*yii\web\VerbFilter::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\web\VerbFilter::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\web\VerbFilter::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\web\VerbFilter::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\web\VerbFilter::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\web\VerbFilter::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\web\VerbFilter::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\web\VerbFilter::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\web\VerbFilter::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\web\VerbFilter::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\web\VerbFilter::hasMethod* 				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\web\VerbFilter::events*					 public
+>
+ events()
+<
+(array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+
+
+
+*yii\web\VerbFilter::attach*					 public
+ See |yii\base\Behavior::attach|
+
+
+*yii\web\VerbFilter::detach*					 public
+ See |yii\base\Behavior::detach|
+
+
+*yii\web\VerbFilter::beforeAction*				 public
+>
+ beforeAction($event)
+<
+(boolean) 
+
+
+    [$event] (\yii\base\ActionEvent) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

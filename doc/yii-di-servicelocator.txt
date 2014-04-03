@@ -1,0 +1,292 @@
+
+*yii\di\ServiceLocator*   >> yii\base\Component
+=======================
+
+ To use ServiceLocator, you first need to register component IDs with the
+ corresponding component definitions with the locator by calling [[set()]] or
+ [[setComponents()]]. You can then call [[get()]] to retrieve a component with
+ the specified ID. The locator will automatically instantiate and configure
+ the component according to the definition.
+
+ For example,
+
+   $locator = new \yii\di\ServiceLocator;
+   $locator->setComponents([
+       'db' => [
+           'class' => 'yii\db\Connection',
+           'dsn' => 'sqlite:path/to/file.db',
+       ],
+       'cache' => [
+           'class' => 'yii\caching\DbCache',
+           'db' => 'db',
+       ],
+   ]);
+
+   $db = $locator->get('db');  // or $locator->db
+   $cache = $locator->get('cache');  // or $locator->cache
+
+ Because [[\yii\base\Module]] extends from ServiceLocator, modules and the
+ application are all service locators.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$behaviors>				*yii\di\ServiceLocator::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$components>				*yii\di\ServiceLocator::$components*
+ (array) The list of the component definitions or the loaded component
+ instances (ID => definition or instance).
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\di\ServiceLocator::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\di\ServiceLocator::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\di\ServiceLocator::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\di\ServiceLocator::__get*					 public
+>
+ __get($name)
+<
+(mixed) The named property value
+
+ This method is overridden to support accessing components like reading
+ properties.
+    [$name] (string) Component or property name
+
+
+*yii\di\ServiceLocator::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\di\ServiceLocator::__isset*				 public
+>
+ __isset($name)
+<
+(boolean) Whether the property value is null
+
+ This method overrides the parent implementation by checking if the named
+ component is loaded.
+    [$name] (string) The property name or the event name
+
+
+*yii\di\ServiceLocator::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\di\ServiceLocator::__call* 				 public
+ See |yii\base\Component::__call|
+
+
+*yii\di\ServiceLocator::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\di\ServiceLocator::canGetProperty* 			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\di\ServiceLocator::canSetProperty* 			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\di\ServiceLocator::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\di\ServiceLocator::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\di\ServiceLocator::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\di\ServiceLocator::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\di\ServiceLocator::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\di\ServiceLocator::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\di\ServiceLocator::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\di\ServiceLocator::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\di\ServiceLocator::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\di\ServiceLocator::attachBehavior* 			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\di\ServiceLocator::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\di\ServiceLocator::detachBehavior* 			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\di\ServiceLocator::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\di\ServiceLocator::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\di\ServiceLocator::has*					 public
+>
+ has($id, $checkInstance='false')
+<
+(boolean) Whether the locator has the specified component definition or has
+instantiated the component.
+
+ This method may return different results depending on the value of
+ '$checkInstance'.
+
+ - If '$checkInstance' is false (default), the method will return a value
+ indicating whether the locator has the specified   component definition. - If
+ '$checkInstance' is true, the method will return a value indicating whether
+ the locator has   instantiated the specified component.
+    [$id] (string) Component ID (e.g. 'db').
+    [$checkInstance] (boolean) Whether the method should check if the
+    component is shared and instantiated.
+
+
+*yii\di\ServiceLocator::get*					 public
+>
+ get($id, $throwException='true')
+<
+(object|null) The component of the specified ID. If '$throwException' is false
+and '$id' is not registered before, null will be returned.
+
+
+    [$id] (string) Component ID (e.g. 'db').
+    [$throwException] (boolean) Whether to throw an exception if '$id' is not
+    registered with the locator before.
+
+
+*yii\di\ServiceLocator::set*					 public
+>
+ set($id, $definition)
+<
+(void)
+
+ For example,
+
+   // a class name
+   $locator->set('cache', 'yii\caching\FileCache');
+
+   // a configuration array
+   $locator->set('db', [
+       'class' => 'yii\db\Connection',
+       'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
+       'username' => 'root',
+       'password' => '',
+       'charset' => 'utf8',
+   ]);
+
+   // an anonymous function
+   $locator->set('cache', function ($params) {
+       return new \yii\caching\FileCache;
+   });
+
+   // an instance
+   $locator->set('cache', new \yii\caching\FileCache);
+
+ If a component definition with the same ID already exists, it will be
+ overwritten.
+    [$id] (string) Component ID (e.g. 'db').
+    [$definition] (mixed) The component definition to be registered with this
+    locator. It can be one of the followings:
+
+    - a class name - a configuration array: the array contains name-value
+    pairs that will be used to   initialize the property values of the newly
+    created object when [[get()]] is called.   The 'class' element is required
+    and stands for the the class of the object to be created. - a PHP
+    callable: either an anonymous function or an array representing a class
+    method (e.g. '['Foo', 'bar']').   The callable will be called by [[get()]]
+    to return an object associated with the specified component ID. - an
+    object: When [[get()]] is called, this object will be returned.
+
+
+*yii\di\ServiceLocator::clear*					 public
+>
+ clear($id)
+<
+(void)
+
+
+    [$id] (string) The component ID
+
+
+*yii\di\ServiceLocator::getComponents*				 public
+>
+ getComponents($returnDefinitions='true')
+<
+(array) The list of the component definitions or the loaded component
+instances (ID => definition or instance).
+
+
+    [$returnDefinitions] (boolean) Whether to return component definitions
+    instead of the loaded component instances.
+
+
+*yii\di\ServiceLocator::setComponents*				 public
+>
+ setComponents($components)
+<
+(void)
+
+ This is the bulk version of [[set()]]. The parameter should be an array whose
+ keys are component IDs and values the corresponding component definitions.
+
+ For more details on how to specify component IDs and definitions, please
+ refer to [[set()]].
+
+ If a component definition with the same ID already exists, it will be
+ overwritten.
+
+ The following is an example for registering two component definitions:
+
+   [
+       'db' => [
+           'class' => 'yii\db\Connection',
+           'dsn' => 'sqlite:path/to/file.db',
+       ],
+       'cache' => [
+           'class' => 'yii\caching\DbCache',
+           'db' => 'db',
+       ],
+   ]
+
+
+    [$components] (array) Component definitions or instances
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

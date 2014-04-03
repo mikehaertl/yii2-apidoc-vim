@@ -1,0 +1,273 @@
+
+*yii\base\Widget*   >> yii\base\Component
+=================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$counter>				*yii\base\Widget::$counter*
+ (integer) A counter used to generate [[id]] for widgets.
+
+<$autoIdPrefix> 			*yii\base\Widget::$autoIdPrefix*
+ (string) The prefix to the automatically generated widget IDs.
+
+<$stack>				*yii\base\Widget::$stack*
+ (\yii\base\Widget[]) The widgets that are currently being rendered (not
+ ended). This property is maintained by [[begin()]] and [[end()]] methods.
+
+<$behaviors>				*yii\base\Widget::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$id>					*yii\base\Widget::$id*
+ (string) ID of the widget.
+
+<$view> 				*yii\base\Widget::$view*
+ (\yii\web\View) The view object that can be used to render views or view
+ files.
+
+<$viewPath>				*yii\base\Widget::$viewPath*
+ (string) The directory containing the view files for this widget.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\Widget::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\base\Widget::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\base\Widget::init* 					 public
+ See |yii\base\Object::init|
+
+
+*yii\base\Widget::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\base\Widget::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\base\Widget::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\base\Widget::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\base\Widget::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\base\Widget::hasProperty*					 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\base\Widget::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\base\Widget::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\base\Widget::hasMethod*					 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\base\Widget::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\base\Widget::behaviors*					 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\base\Widget::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\base\Widget::on*						 public
+ See |yii\base\Component::on|
+
+
+*yii\base\Widget::off*						 public
+ See |yii\base\Component::off|
+
+
+*yii\base\Widget::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\base\Widget::getBehavior*					 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\base\Widget::getBehaviors* 				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\base\Widget::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\base\Widget::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\base\Widget::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\base\Widget::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\base\Widget::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\base\Widget::begin*					 public
+>
+ begin($config='[]')
+<
+(static) The newly created widget instance
+
+ This method creates an instance of the calling class. It will apply the
+ configuration to the created instance. A matching [[end()]] call should be
+ called later.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii\base\Widget::end*						 public
+>
+ end()
+<
+(static) The widget instance that is ended.
+
+ Note that the rendering result of the widget is directly echoed out.
+
+
+*yii\base\Widget::widget*					 public
+>
+ widget($config='[]')
+<
+(string) The rendering result of the widget.
+
+ The widget rendering result is returned by this method.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii\base\Widget::getId*					 public
+>
+ getId($autoGenerate='true')
+<
+(string) ID of the widget.
+
+
+    [$autoGenerate] (boolean) Whether to generate an ID if it is not set
+    previously
+
+
+*yii\base\Widget::setId*					 public
+>
+ setId($value)
+<
+(void)
+
+
+    [$value] (string) Id of the widget.
+
+
+*yii\base\Widget::getView*					 public
+>
+ getView()
+<
+(\yii\web\View) The view object that can be used to render views or view
+files.
+
+ The [[render()]] and [[renderFile()]] methods will use this view object to
+ implement the actual view rendering. If not set, it will default to the
+ "view" application component.
+
+
+*yii\base\Widget::setView*					 public
+>
+ setView($view)
+<
+(void)
+
+
+    [$view] (\yii\base\View) The view object that can be used to render views
+    or view files.
+
+
+*yii\base\Widget::run*						 public
+>
+ run()
+<
+(string) The result of widget execution to be outputted.
+
+
+
+
+*yii\base\Widget::render*					 public
+>
+ render($view, $params='[]')
+<
+(string) The rendering result.
+
+ The view to be rendered can be specified in one of the following formats:
+
+ - path alias (e.g. "@app/views/site/index"); - absolute path within
+ application (e.g. "//site/index"): the view name starts with double slashes. 
+  The actual view file will be looked for under the
+ [[Application::viewPath|view path]] of the application. - absolute path
+ within module (e.g. "/site/index"): the view name starts with a single slash.
+   The actual view file will be looked for under the [[Module::viewPath|view
+ path]] of the currently   active module. - relative path (e.g. "index"): the
+ actual view file will be looked for under [[viewPath]].
+
+ If the view name does not contain a file extension, it will use the default
+ one '.php'.
+    [$view] (string) The view name.
+    [$params] (array) The parameters (name-value pairs) that should be made
+    available in the view.
+
+
+*yii\base\Widget::renderFile*					 public
+>
+ renderFile($file, $params='[]')
+<
+(string) The rendering result.
+
+
+    [$file] (string) The view file to be rendered. This can be either a file
+    path or a path alias.
+    [$params] (array) The parameters (name-value pairs) that should be made
+    available in the view.
+
+
+*yii\base\Widget::getViewPath*					 public
+>
+ getViewPath()
+<
+(string) The directory containing the view files for this widget.
+
+ The default implementation returns the 'views' subdirectory under the
+ directory containing the widget class file.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

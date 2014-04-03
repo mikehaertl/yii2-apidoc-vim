@@ -1,0 +1,832 @@
+
+*yii\db\Query*   >> yii\base\Component
+==============
+
+ Query provides a set of methods to facilitate the specification of different
+ clauses in a SELECT statement. These methods can be chained together.
+
+ By calling [[createCommand()]], we can get a [[Command]] instance which can
+ be further used to perform/execute the DB query against a database.
+
+ For example,
+
+   $query = new Query;
+   // compose the query
+   $query->select('id, name')
+       ->from('user')
+       ->limit(10);
+   // build and execute the query
+   $rows = $query->all();
+   // alternatively, you can create DB command and execute it
+   $command = $query->createCommand();
+   // $command->sql returns the actual SQL
+   $rows = $command->queryAll();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$where>				*yii\db\Query::$where*
+ See |yii\db\QueryTrait::$where|
+
+<$limit>				*yii\db\Query::$limit*
+ See |yii\db\QueryTrait::$limit|
+
+<$offset>				*yii\db\Query::$offset*
+ See |yii\db\QueryTrait::$offset|
+
+<$orderBy>				*yii\db\Query::$orderBy*
+ See |yii\db\QueryTrait::$orderBy|
+
+<$indexBy>				*yii\db\Query::$indexBy*
+ See |yii\db\QueryTrait::$indexBy|
+
+<$select>				*yii\db\Query::$select*
+ (array) The columns being selected. For example, '['id', 'name']'. This is
+ used to construct the SELECT clause in a SQL statement. If not set, it means
+ selecting all columns.
+
+<$selectOption> 			*yii\db\Query::$selectOption*
+ (string) Additional option that should be appended to the 'SELECT' keyword.
+ For example, in MySQL, the option 'SQL_CALC_FOUND_ROWS' can be used.
+
+<$distinct>				*yii\db\Query::$distinct*
+ (boolean) Whether to select distinct rows of data only. If this is set true,
+ the SELECT clause would be changed to SELECT DISTINCT.
+
+<$from> 				*yii\db\Query::$from*
+ (array) The table(s) to be selected from. For example, '['user', 'post']'.
+ This is used to construct the FROM clause in a SQL statement.
+
+<$groupBy>				*yii\db\Query::$groupBy*
+ (array) How to group the query results. For example, '['company',
+ 'department']'. This is used to construct the GROUP BY clause in a SQL
+ statement.
+
+<$join> 				*yii\db\Query::$join*
+ (array) How to join with other tables. Each array element represents the
+ specification of one join which has the following structure:
+
+   [$joinType, $tableName, $joinCondition]
+
+ For example,
+
+   [
+       ['INNER JOIN', 'user', 'user.id = author_id'],
+       ['LEFT JOIN', 'team', 'team.id = team_id'],
+   ]
+
+
+
+<$having>				*yii\db\Query::$having*
+ (string|array) The condition to be applied in the GROUP BY clause. It can be
+ either a string or an array. Please refer to [[where()]] on how to specify
+ the condition.
+
+<$union>				*yii\db\Query::$union*
+ (array) This is used to construct the UNION clause(s) in a SQL statement.
+ Each array element is an array of the following structure:
+
+ - 'query': either a string or a [[Query]] object representing a query -
+ 'all': boolean, whether it should be 'UNION ALL' or 'UNION'
+
+<$params>				*yii\db\Query::$params*
+ (array) List of query parameter values indexed by parameter placeholders. For
+ example, '[':name' => 'Dan', ':age' => 31]'.
+
+<$behaviors>				*yii\db\Query::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\db\Query::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\db\Query::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\db\Query::init*						 public
+ See |yii\base\Object::init|
+
+
+*yii\db\Query::__get*						 public
+ See |yii\base\Component::__get|
+
+
+*yii\db\Query::__set*						 public
+ See |yii\base\Component::__set|
+
+
+*yii\db\Query::__isset* 					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\db\Query::__unset* 					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\db\Query::__call*						 public
+ See |yii\base\Component::__call|
+
+
+*yii\db\Query::hasProperty*					 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\db\Query::canGetProperty*					 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\db\Query::canSetProperty*					 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\db\Query::hasMethod*					 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\db\Query::__clone* 					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\db\Query::behaviors*					 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\db\Query::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\db\Query::on*						 public
+ See |yii\base\Component::on|
+
+
+*yii\db\Query::off*						 public
+ See |yii\base\Component::off|
+
+
+*yii\db\Query::trigger* 					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\db\Query::getBehavior*					 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\db\Query::getBehaviors*					 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\db\Query::attachBehavior*					 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\db\Query::attachBehaviors* 				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\db\Query::detachBehavior*					 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\db\Query::detachBehaviors* 				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\db\Query::ensureBehaviors* 				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\db\Query::indexBy* 					 public
+ See |yii\db\QueryTrait::indexBy|
+
+
+*yii\db\Query::where*						 public
+>
+ where($condition, $params='[]')
+<
+(static) The query object itself
+
+ The method requires a $condition parameter, and optionally a $params
+ parameter specifying the values to be bound to the query.
+
+ The $condition parameter should be either a string (e.g. 'id=1') or an array.
+ If the latter, it must be in one of the following two formats:
+
+ - hash format: '['column1' => value1, 'column2' => value2, ...]' - operator
+ format: '[operator, operand1, operand2, ...]'
+
+ A condition in hash format represents the following SQL expression in
+ general: 'column1=value1 AND column2=value2 AND ...'. In case when a value is
+ an array, an 'IN' expression will be generated. And if a value is null, 'IS
+ NULL' will be used in the generated expression. Below are some examples:
+
+ - '['type' => 1, 'status' => 2]' generates '(type = 1) AND (status = 2)'. -
+ '['id' => [1, 2, 3], 'status' => 2]' generates '(id IN (1, 2, 3)) AND (status
+ = 2)'. - '['status' => null] generates 'status IS NULL'.
+
+ A condition in operator format generates the SQL expression according to the
+ specified operator, which can be one of the followings:
+
+ - 'and': the operands should be concatenated together using 'AND'. For
+ example, '['and', 'id=1', 'id=2']' will generate 'id=1 AND id=2'. If an
+ operand is an array, it will be converted into a string using the rules
+ described here. For example, '['and', 'type=1', ['or', 'id=1', 'id=2']]' will
+ generate 'type=1 AND (id=1 OR id=2)'. The method will NOT do any quoting or
+ escaping.
+
+ - 'or': similar to the 'and' operator except that the operands are
+ concatenated using 'OR'.
+
+ - 'between': operand 1 should be the column name, and operand 2 and 3 should
+ be the starting and ending values of the range that the column is in. For
+ example, '['between', 'id', 1, 10]' will generate 'id BETWEEN 1 AND 10'.
+
+ - 'not between': similar to 'between' except the 'BETWEEN' is replaced with
+ 'NOT BETWEEN' in the generated condition.
+
+ - 'in': operand 1 should be a column or DB expression, and operand 2 be an
+ array representing the range of the values that the column or DB expression
+ should be in. For example, '['in', 'id', [1, 2, 3]]' will generate 'id IN (1,
+ 2, 3)'. The method will properly quote the column name and escape values in
+ the range.
+
+ - 'not in': similar to the 'in' operator except that 'IN' is replaced with
+ 'NOT IN' in the generated condition.
+
+ - 'like': operand 1 should be a column or DB expression, and operand 2 be a
+ string or an array representing the values that the column or DB expression
+ should be like. For example, '['like', 'name', 'tester']' will generate 'name
+ LIKE '%tester%''. When the value range is given as an array, multiple 'LIKE'
+ predicates will be generated and concatenated using 'AND'. For example,
+ '['like', 'name', ['test', 'sample']]' will generate 'name LIKE '%test%' AND
+ name LIKE '%sample%''. The method will properly quote the column name and
+ escape special characters in the values. Sometimes, you may want to add the
+ percentage characters to the matching value by yourself, you may supply a
+ third operand 'false' to do so. For example, '['like', 'name', '%tester',
+ false]' will generate 'name LIKE '%tester''.
+
+ - 'or like': similar to the 'like' operator except that 'OR' is used to
+ concatenate the 'LIKE' predicates when operand 2 is an array.
+
+ - 'not like': similar to the 'like' operator except that 'LIKE' is replaced
+ with 'NOT LIKE' in the generated condition.
+
+ - 'or not like': similar to the 'not like' operator except that 'OR' is used
+ to concatenate the 'NOT LIKE' predicates.
+
+ - 'exists': requires one operand which must be an instance of [[Query]]
+ representing the sub-query. It will build a 'EXISTS (sub-query)' expression.
+
+ - 'not exists': similar to the 'exists' operator and builds a 'NOT EXISTS
+ (sub-query)' expression.
+    [$condition] (string|array) The conditions that should be put in the WHERE
+    part.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::andWhere*					 public
+>
+ andWhere($condition, $params='[]')
+<
+(static) The query object itself
+
+ The new condition and the existing one will be joined using the 'AND'
+ operator.
+    [$condition] (string|array) The new WHERE condition. Please refer to
+    [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::orWhere* 					 public
+>
+ orWhere($condition, $params='[]')
+<
+(static) The query object itself
+
+ The new condition and the existing one will be joined using the 'OR'
+ operator.
+    [$condition] (string|array) The new WHERE condition. Please refer to
+    [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::filterWhere*					 public
+ See |yii\db\QueryTrait::filterWhere|
+
+
+*yii\db\Query::andFilterWhere*					 public
+ See |yii\db\QueryTrait::andFilterWhere|
+
+
+*yii\db\Query::orFilterWhere*					 public
+ See |yii\db\QueryTrait::orFilterWhere|
+
+
+*yii\db\Query::filterCondition* 				 protected
+ See |yii\db\QueryTrait::filterCondition|
+
+
+*yii\db\Query::isEmpty* 					 protected
+ See |yii\db\QueryTrait::isEmpty|
+
+
+*yii\db\Query::orderBy* 					 public
+ See |yii\db\QueryTrait::orderBy|
+
+
+*yii\db\Query::addOrderBy*					 public
+ See |yii\db\QueryTrait::addOrderBy|
+
+
+*yii\db\Query::normalizeOrderBy*				 protected
+ See |yii\db\QueryTrait::normalizeOrderBy|
+
+
+*yii\db\Query::limit*						 public
+ See |yii\db\QueryTrait::limit|
+
+
+*yii\db\Query::offset*						 public
+ See |yii\db\QueryTrait::offset|
+
+
+*yii\db\Query::createCommand*					 public
+>
+ createCommand($db='null')
+<
+(\yii\db\Command) The created DB command instance.
+
+
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::prepareBuild*					 public
+>
+ prepareBuild($builder)
+<
+(void)
+
+ This method is called by [[QueryBuilder]] when it starts to build SQL from a
+ query object. You may override this method to do some final preparation work
+ when converting a query into a SQL statement.
+    [$builder] (\yii\db\QueryBuilder) 
+
+
+*yii\db\Query::batch*						 public
+>
+ batch($batchSize=100, $db='null')
+<
+(\yii\db\BatchQueryResult) The batch query result. It implements the
+'Iterator' interface and can be traversed to retrieve the data in batches.
+
+ A batch query supports fetching data in batches, which can keep the memory
+ usage under a limit. This method will return a [[BatchQueryResult]] object
+ which implements the 'Iterator' interface and can be traversed to retrieve
+ the data in batches.
+
+ For example,
+
+   $query = (new Query)->from('user');
+   foreach ($query->batch() as $rows) {
+       // $rows is an array of 10 or fewer rows from user table
+   }
+
+
+    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$db] (\yii\db\Connection) The database connection. If not set, the "db"
+    application component will be used.
+
+
+*yii\db\Query::each*						 public
+>
+ each($batchSize=100, $db='null')
+<
+(\yii\db\BatchQueryResult) The batch query result. It implements the
+'Iterator' interface and can be traversed to retrieve the data in batches.
+
+ This method is similar to [[batch()]] except that in each iteration of the
+ result, only one row of data is returned. For example,
+
+   $query = (new Query)->from('user');
+   foreach ($query->each() as $row) {
+   }
+
+
+    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$db] (\yii\db\Connection) The database connection. If not set, the "db"
+    application component will be used.
+
+
+*yii\db\Query::all*						 public
+>
+ all($db='null')
+<
+(array) The query results. If the query results in nothing, an empty array
+will be returned.
+
+
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::prepareResult*					 public
+>
+ prepareResult($rows)
+<
+(array) The converted query result
+
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
+    [$rows] (array) The raw query result from database
+
+
+*yii\db\Query::one*						 public
+>
+ one($db='null')
+<
+(array|boolean) The first row (in terms of an array) of the query result.
+False is returned if the query results in nothing.
+
+
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::scalar*						 public
+>
+ scalar($db='null')
+<
+(string|boolean) The value of the first column in the first row of the query
+result. False is returned if the query result is empty.
+
+ The value returned will be the first column in the first row of the query
+ results.
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::column*						 public
+>
+ column($db='null')
+<
+(array) The first column of the query result. An empty array is returned if
+the query results in nothing.
+
+
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::count*						 public
+>
+ count($q=''*'', $db='null')
+<
+(integer) Number of records
+
+
+    [$q] (string) The COUNT expression. Defaults to '*'. Make sure you
+    properly quote column names in the expression.
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given (or null), the 'db'
+    application component will be used.
+
+
+*yii\db\Query::sum*						 public
+>
+ sum($q, $db='null')
+<
+(integer) The sum of the specified column values
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::average* 					 public
+>
+ average($q, $db='null')
+<
+(integer) The average of the specified column values.
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::min*						 public
+>
+ min($q, $db='null')
+<
+(integer) The minimum of the specified column values.
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::max*						 public
+>
+ max($q, $db='null')
+<
+(integer) The maximum of the specified column values.
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::exists*						 public
+>
+ exists($db='null')
+<
+(boolean) Whether the query result contains any row of data.
+
+
+    [$db] (\yii\db\Connection) The database connection used to generate the
+    SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii\db\Query::select*						 public
+>
+ select($columns, $option='null')
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) The columns to be selected. Columns can be
+    specified in either a string (e.g. "id, name") or an array (e.g. ['id',
+    'name']). Columns can be prefixed with table names (e.g. "user.id") and/or
+    contain column aliases (e.g. "user.id AS user_id"). The method will
+    automatically quote the column names unless a column contains some
+    parenthesis (which means the column contains a DB expression).
+
+    Note that if you are selecting an expression like 'CONCAT(first_name, ' ',
+    last_name)', you should use an array to specify the columns. Otherwise,
+    the expression may be incorrectly split into several parts.
+
+    When the columns are specified as an array, you may also use array keys as
+    the column aliases (if a column does not need alias, do not use a string
+    key).
+    [$option] (string) Additional option that should be appended to the
+    'SELECT' keyword. For example, in MySQL, the option 'SQL_CALC_FOUND_ROWS'
+    can be used.
+
+
+*yii\db\Query::distinct*					 public
+>
+ distinct($value='true')
+<
+(static) The query object itself
+
+
+    [$value] (boolean) Whether to SELECT DISTINCT or not.
+
+
+*yii\db\Query::from*						 public
+>
+ from($tables)
+<
+(static) The query object itself
+
+
+    [$tables] (string|array) The table(s) to be selected from. This can be
+    either a string (e.g. ''user'') or an array (e.g. '['user', 'profile']')
+    specifying one or several table names. Table names can contain schema
+    prefixes (e.g. ''public.user'') and/or table aliases (e.g. ''user u'').
+    The method will automatically quote the table names unless it contains
+    some parenthesis (which means the table is given as a sub-query or DB
+    expression).
+
+    When the tables are specified as an array, you may also use the array keys
+    as the table aliases (if a table does not need alias, do not use a string
+    key).
+
+    Use a Query object to represent a sub-query. In this case, the
+    corresponding array key will be used as the alias for the sub-query.
+
+
+*yii\db\Query::join*						 public
+>
+ join($type, $table, $on='\'\'', $params='[]')
+<
+(\yii\db\Query) The query object itself
+
+ The first parameter specifies what type of join it is.
+    [$type] (string) The type of join, such as INNER JOIN, LEFT JOIN.
+    [$table] (string|array) The table to be joined.
+
+    Use string to represent the name of the table to be joined. Table name can
+    contain schema prefix (e.g. 'public.user') and/or table alias (e.g. 'user
+    u'). The method will automatically quote the table name unless it contains
+    some parenthesis (which means the table is given as a sub-query or DB
+    expression).
+
+    Use array to represent joining with a sub-query. The array must contain
+    only one element. The value must be a Query object representing the
+    sub-query while the corresponding key represents the alias for the
+    sub-query.
+    [$on] (string|array) The join condition that should appear in the ON part.
+    Please refer to [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::innerJoin*					 public
+>
+ innerJoin($table, $on='\'\'', $params='[]')
+<
+(\yii\db\Query) The query object itself
+
+
+    [$table] (string|array) The table to be joined.
+
+    Use string to represent the name of the table to be joined. Table name can
+    contain schema prefix (e.g. 'public.user') and/or table alias (e.g. 'user
+    u'). The method will automatically quote the table name unless it contains
+    some parenthesis (which means the table is given as a sub-query or DB
+    expression).
+
+    Use array to represent joining with a sub-query. The array must contain
+    only one element. The value must be a Query object representing the
+    sub-query while the corresponding key represents the alias for the
+    sub-query.
+    [$on] (string|array) The join condition that should appear in the ON part.
+    Please refer to [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::leftJoin*					 public
+>
+ leftJoin($table, $on='\'\'', $params='[]')
+<
+(\yii\db\Query) The query object itself
+
+
+    [$table] (string|array) The table to be joined.
+
+    Use string to represent the name of the table to be joined. Table name can
+    contain schema prefix (e.g. 'public.user') and/or table alias (e.g. 'user
+    u'). The method will automatically quote the table name unless it contains
+    some parenthesis (which means the table is given as a sub-query or DB
+    expression).
+
+    Use array to represent joining with a sub-query. The array must contain
+    only one element. The value must be a Query object representing the
+    sub-query while the corresponding key represents the alias for the
+    sub-query.
+    [$on] (string|array) The join condition that should appear in the ON part.
+    Please refer to [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query
+
+
+*yii\db\Query::rightJoin*					 public
+>
+ rightJoin($table, $on='\'\'', $params='[]')
+<
+(\yii\db\Query) The query object itself
+
+
+    [$table] (string|array) The table to be joined.
+
+    Use string to represent the name of the table to be joined. Table name can
+    contain schema prefix (e.g. 'public.user') and/or table alias (e.g. 'user
+    u'). The method will automatically quote the table name unless it contains
+    some parenthesis (which means the table is given as a sub-query or DB
+    expression).
+
+    Use array to represent joining with a sub-query. The array must contain
+    only one element. The value must be a Query object representing the
+    sub-query while the corresponding key represents the alias for the
+    sub-query.
+    [$on] (string|array) The join condition that should appear in the ON part.
+    Please refer to [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query
+
+
+*yii\db\Query::groupBy* 					 public
+>
+ groupBy($columns)
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) The columns to be grouped by. Columns can be
+    specified in either a string (e.g. "id, name") or an array (e.g. ['id',
+    'name']). The method will automatically quote the column names unless a
+    column contains some parenthesis (which means the column contains a DB
+    expression).
+
+
+*yii\db\Query::addGroupBy*					 public
+>
+ addGroupBy($columns)
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) Additional columns to be grouped by. Columns can
+    be specified in either a string (e.g. "id, name") or an array (e.g. ['id',
+    'name']). The method will automatically quote the column names unless a
+    column contains some parenthesis (which means the column contains a DB
+    expression).
+
+
+*yii\db\Query::having*						 public
+>
+ having($condition, $params='[]')
+<
+(static) The query object itself
+
+
+    [$condition] (string|array) The conditions to be put after HAVING. Please
+    refer to [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::andHaving*					 public
+>
+ andHaving($condition, $params='[]')
+<
+(static) The query object itself
+
+ The new condition and the existing one will be joined using the 'AND'
+ operator.
+    [$condition] (string|array) The new HAVING condition. Please refer to
+    [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::orHaving*					 public
+>
+ orHaving($condition, $params='[]')
+<
+(static) The query object itself
+
+ The new condition and the existing one will be joined using the 'OR'
+ operator.
+    [$condition] (string|array) The new HAVING condition. Please refer to
+    [[where()]] on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii\db\Query::union*						 public
+>
+ union($sql, $all='false')
+<
+(static) The query object itself
+
+
+    [$sql] (string|\yii\db\Query) The SQL statement to be appended using UNION
+    [$all] (boolean) TRUE if using UNION ALL and FALSE if using UNION
+
+
+*yii\db\Query::params*						 public
+>
+ params($params)
+<
+(static) The query object itself
+
+
+    [$params] (array) List of query parameter values indexed by parameter
+    placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
+
+
+*yii\db\Query::addParams*					 public
+>
+ addParams($params)
+<
+(static) The query object itself
+
+
+    [$params] (array) List of query parameter values indexed by parameter
+    placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

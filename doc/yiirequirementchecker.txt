@@ -1,0 +1,235 @@
+
+*YiiRequirementChecker*  
+=======================
+
+ This class allows rendering of the check report for the web and console
+ application interface.
+
+ Example:
+
+   php
+   require_once('path/to/YiiRequirementChecker.php');
+   $requirementsChecker = new YiiRequirementChecker();
+   $requirements = array(
+       array(
+           'name' => 'PHP Some Extension',
+           'mandatory' => true,
+           'condition' => extension_loaded('some_extension'),
+           'by' => 'Some application feature',
+           'memo' => 'PHP extension "some_extension" required',
+       ),
+   );
+   $requirementsChecker->checkYii()->check($requirements)->render();
+
+ If you wish to render the report with your own representation, use
+ [[getResult()]] instead of [[render()]]
+
+ Requirement condition could be in format "eval:PHP expression". In this case
+ specified PHP expression will be evaluated in the context of this class
+ instance. For example:
+
+   $requirements = array(
+       array(
+           'name' => 'Upload max file size',
+           'condition' => 'eval:$this->checkUploadMaxFileSize("5M")',
+       ),
+   );
+
+ Note: this class definition does not match ordinary Yii style, because it
+ should match PHP 4.3 and should not use features from newer PHP versions!
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*YiiRequirementChecker::check*					 public
+>
+ check($requirements)
+<
+(static) Self instance.
+
+ This method can be invoked several times checking different requirement sets.
+ Use [[getResult()]] or [[render()]] to get the results.
+    [$requirements] (array|string) Requirements to be checked. If an array, it
+    is treated as the set of requirements; If a string, it is treated as the
+    path of the file, which contains the requirements;
+
+
+*YiiRequirementChecker::checkYii*				 public
+>
+ checkYii()
+<
+(\YiiRequirementChecker) Self instance.
+
+
+
+
+*YiiRequirementChecker::getResult*				 public
+>
+ getResult()
+<
+(array|null) Check results in format:
+
+  array(
+      'summary' => array(
+          'total' => total number of checks,
+          'errors' => number of errors,
+          'warnings' => number of warnings,
+      ),
+      'requirements' => array(
+          array(
+              ...
+              'error' => is there an error,
+              'warning' => is there a warning,
+          ),
+          ...
+      ),
+  )
+
+
+
+
+
+
+*YiiRequirementChecker::render* 				 public
+>
+ render()
+<
+(void)
+
+ The output will vary depending is a script running from web or from console.
+
+
+*YiiRequirementChecker::checkPhpExtensionVersion*		 public
+>
+ checkPhpExtensionVersion($extensionName, $version, $compare=''>='')
+<
+(boolean) If PHP extension version matches.
+
+
+    [$extensionName] (string) PHP extension name.
+    [$version] (string) Required PHP extension version.
+    [$compare] (string) Comparison operator, by default '>='
+
+
+*YiiRequirementChecker::checkPhpIniOn*				 public
+>
+ checkPhpIniOn($name)
+<
+(boolean) Option is on.
+
+
+    [$name] (string) Configuration option name.
+
+
+*YiiRequirementChecker::checkPhpIniOff* 			 public
+>
+ checkPhpIniOff($name)
+<
+(boolean) Option is off.
+
+
+    [$name] (string) Configuration option name.
+
+
+*YiiRequirementChecker::compareByteSize*			 public
+>
+ compareByteSize($a, $b, $compare=''>='')
+<
+(boolean) Comparison result.
+
+
+    [$a] (string) First value.
+    [$b] (string) Second value.
+    [$compare] (string) Comparison operator, by default '>='.
+
+
+*YiiRequirementChecker::getByteSize*				 public
+>
+ getByteSize($verboseSize)
+<
+(integer) Actual size in bytes.
+
+ For example: '5K' => 5*1024
+    [$verboseSize] (string) Verbose size representation.
+
+
+*YiiRequirementChecker::checkUploadMaxFileSize* 		 public
+>
+ checkUploadMaxFileSize($min='null', $max='null')
+<
+(boolean) Success.
+
+
+    [$min] (string|null) Verbose file size minimum required value, pass null
+    to skip minimum check.
+    [$max] (string|null) Verbose file size maximum required value, pass null
+    to skip maximum check.
+
+
+*YiiRequirementChecker::renderViewFile* 			 public
+>
+ renderViewFile($_viewFile_, $_data_='null', $_return_='false')
+<
+(string) The rendering result. Null if the rendering result is not required.
+
+ This method includes the view file as a PHP script and captures the display
+ result if required.
+    [$_viewFile_] (string) View file
+    [$_data_] (array) Data to be extracted and made available to the view file
+    [$_return_] (boolean) Whether the rendering result should be returned as a
+    string
+
+
+*YiiRequirementChecker::normalizeRequirement*			 public
+>
+ normalizeRequirement($requirement, $requirementKey=0)
+<
+(array) Normalized requirement.
+
+
+    [$requirement] (array) Raw requirement.
+    [$requirementKey] (integer) Requirement key in the list.
+
+
+*YiiRequirementChecker::usageError*				 public
+>
+ usageError($message)
+<
+(void)
+
+ This method will then terminate the execution of the current application.
+    [$message] (string) The error message
+
+
+*YiiRequirementChecker::evaluateExpression*			 public
+>
+ evaluateExpression($expression)
+<
+(mixed) The expression result.
+
+
+    [$expression] (string) A PHP expression to be evaluated.
+
+
+*YiiRequirementChecker::getServerInfo*				 public
+>
+ getServerInfo()
+<
+(string) Server information.
+
+
+
+
+*YiiRequirementChecker::getNowDate*				 public
+>
+ getNowDate()
+<
+(string) Now date.
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

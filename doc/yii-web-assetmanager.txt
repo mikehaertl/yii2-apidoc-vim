@@ -1,0 +1,317 @@
+
+*yii\web\AssetManager*   >> yii\base\Component
+======================
+
+ AssetManager is configured as an application component in
+ [[\yii\web\Application]] by default. You can access that instance via
+ 'Yii::$app->assetManager'.
+
+ You can modify its configuration by adding an array to your application
+ config under 'components' as it is shown in the following example:
+
+   'assetManager' => [
+       'bundles' => [
+           // you can override AssetBundle configs here
+       ],
+       //'linkAssets' => true,
+       // ...
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$bundles>				*yii\web\AssetManager::$bundles*
+ (array) List of available asset bundles. The keys are the class names
+ (without leading backslash) of the asset bundles, and the values are either
+ the configuration arrays for creating the [[AssetBundle]] objects or the
+ corresponding asset bundle instances. For example, the following code
+ disables the bootstrap css file used by Bootstrap widgets (because you want
+ to use your own styles):
+
+   [
+       'yii\bootstrap\BootstrapAsset' => [
+           'css' => [],
+       ],
+   ]
+
+
+
+<$basePath>				*yii\web\AssetManager::$basePath*
+ ()
+
+<$baseUrl>				*yii\web\AssetManager::$baseUrl*
+ ()
+
+<$linkAssets>				*yii\web\AssetManager::$linkAssets*
+ (boolean) Whether to use symbolic link to publish asset files. Defaults to
+ false, meaning asset files are copied to [[basePath]]. Using symbolic links
+ has the benefit that the published assets will always be consistent with the
+ source assets and there is no copy operation required. This is especially
+ useful during development.
+
+ However, there are special requirements for hosting environments in order to
+ use symbolic links. In particular, symbolic links are supported only on
+ Linux/Unix, and Windows Vista/2008 or greater.
+
+ Moreover, some Web servers need to be properly configured so that the linked
+ assets are accessible to Web users. For example, for Apache Web server, the
+ following configuration directive should be added for the Web folder:
+
+   Options FollowSymLinks
+
+
+
+<$fileMode>				*yii\web\AssetManager::$fileMode*
+ (integer) The permission to be set for newly published asset files. This
+ value will be used by PHP chmod() function. No umask will be applied. If not
+ set, the permission will be determined by the current environment.
+
+<$dirMode>				*yii\web\AssetManager::$dirMode*
+ (integer) The permission to be set for newly generated asset directories.
+ This value will be used by PHP chmod() function. No umask will be applied.
+ Defaults to 0775, meaning the directory is read-writable by owner and group,
+ but read-only for other users.
+
+<$behaviors>				*yii\web\AssetManager::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$converter>				*yii\web\AssetManager::$converter*
+ (\yii\web\AssetConverterInterface) The asset converter.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\AssetManager::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\web\AssetManager::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\web\AssetManager::init*					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\web\AssetManager::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\web\AssetManager::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\web\AssetManager::__isset* 				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\web\AssetManager::__unset* 				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\web\AssetManager::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\web\AssetManager::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\web\AssetManager::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\web\AssetManager::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\web\AssetManager::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\web\AssetManager::__clone* 				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\web\AssetManager::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\web\AssetManager::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\web\AssetManager::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\web\AssetManager::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\web\AssetManager::trigger* 				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\web\AssetManager::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\web\AssetManager::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\web\AssetManager::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\web\AssetManager::attachBehaviors* 			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\web\AssetManager::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\web\AssetManager::detachBehaviors* 			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\web\AssetManager::ensureBehaviors* 			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\web\AssetManager::getBundle*				 public
+>
+ getBundle($name, $publish='true')
+<
+(\yii\web\AssetBundle) The asset bundle instance
+
+ This method will first look for the bundle in [[bundles]]. If not found, it
+ will treat '$name' as the class of the asset bundle and create a new instance
+ of it.
+    [$name] (string) The class name of the asset bundle
+    [$publish] (boolean) Whether to publish the asset files in the asset
+    bundle before it is returned. If you set this false, you must manually
+    call 'AssetBundle::publish()' to publish the asset files.
+
+
+*yii\web\AssetManager::getConverter*				 public
+>
+ getConverter()
+<
+(\yii\web\AssetConverterInterface) The asset converter.
+
+
+
+
+*yii\web\AssetManager::setConverter*				 public
+>
+ setConverter($value)
+<
+(void)
+
+
+    [$value] (array|\yii\web\AssetConverterInterface) The asset converter.
+    This can be either an object implementing the [[AssetConverterInterface]],
+    or a configuration array that can be used to create the asset converter
+    object.
+
+
+*yii\web\AssetManager::publish* 				 public
+>
+ publish($path, $options='[]')
+<
+(array) The path (directory or file path) and the URL that the asset is
+published as.
+
+ This method will copy the specified file or directory to [[basePath]] so that
+ it can be accessed via the Web server.
+
+ If the asset is a file, its file modification time will be checked to avoid
+ unnecessary file copying.
+
+ If the asset is a directory, all files and subdirectories under it will be
+ published recursively. Note, in case $forceCopy is false the method only
+ checks the existence of the target directory to avoid repetitive copying
+ (which is very expensive).
+
+ By default, when publishing a directory, subdirectories and files whose name
+ starts with a dot "." will NOT be published. If you want to change this
+ behavior, you may specify the "beforeCopy" option as explained in the
+ '$options' parameter.
+
+ Note: On rare scenario, a race condition can develop that will lead to a
+ one-time-manifestation of a non-critical problem in the creation of the
+ directory that holds the published assets. This problem can be avoided
+ altogether by 'requesting' in advance all the resources that are supposed to
+ trigger a 'publish()' call, and doing that in the application deployment
+ phase, before system goes live. See more in the following discussion:
+ http://code.google.com/p/yii/issues/detail?id=2579
+    [$path] (string) The asset (file or directory) to be published
+    [$options] (array) The options to	be applied when publishing a directory.
+    The following options are supported:
+
+    - beforeCopy: callback, a PHP callback that is called before copying each
+    sub-directory or file.   This option is used only when publishing a
+    directory. If the callback returns false, the copy   operation for the
+    sub-directory or file will be cancelled.   The signature of the callback
+    should be: 'function ($from, $to)', where '$from' is the sub-directory or 
+     file to be copied from, while '$to' is the copy target. - afterCopy:
+    callback, a PHP callback that is called after a sub-directory or file is
+    successfully copied.   This option is used only when publishing a
+    directory. The signature of the callback is similar to that   of
+    'beforeCopy'. - forceCopy: boolean, whether the directory being published
+    should be copied even if   it is found in the target directory. This
+    option is used only when publishing a directory.   You may want to set
+    this to be true during the development stage to make sure the published  
+    directory is always up-to-date. Do not set this to true on production
+    servers as it will   significantly degrade the performance.
+
+
+*yii\web\AssetManager::getPublishedPath*			 public
+>
+ getPublishedPath($path)
+<
+(string) The published file path. False if the file or directory does not
+exist
+
+ This method does not perform any publishing. It merely tells you if the file
+ or directory is published, where it will go.
+    [$path] (string) Directory or file path being published
+
+
+*yii\web\AssetManager::getPublishedUrl* 			 public
+>
+ getPublishedUrl($path)
+<
+(string) The published URL for the file or directory. False if the file or
+directory does not exist.
+
+ This method does not perform any publishing. It merely tells you if the file
+ path is published, what the URL will be to access it.
+    [$path] (string) Directory or file path being published
+
+
+*yii\web\AssetManager::hash*					 protected
+>
+ hash($path)
+<
+(string) Hashed string.
+
+
+    [$path] (string) String to be hashed.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

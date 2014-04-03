@@ -1,0 +1,388 @@
+
+*yii\db\sqlite\QueryBuilder*   >> yii\db\QueryBuilder
+============================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$db>					*yii\db\sqlite\QueryBuilder::$db*
+ See |yii\db\QueryBuilder::$db|
+
+<$separator>				*yii\db\sqlite\QueryBuilder::$separator*
+ See |yii\db\QueryBuilder::$separator|
+
+<$typeMap>				*yii\db\sqlite\QueryBuilder::$typeMap*
+ (array) Mapping from abstract column types (keys) to physical column types
+ (values).
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\db\sqlite\QueryBuilder::className* 			 public
+ See |yii\base\Object::className|
+
+
+*yii\db\sqlite\QueryBuilder::__construct*			 public
+ See |yii\db\QueryBuilder::__construct|
+
+
+*yii\db\sqlite\QueryBuilder::init*				 public
+ See |yii\base\Object::init|
+
+
+*yii\db\sqlite\QueryBuilder::__get*				 public
+ See |yii\base\Object::__get|
+
+
+*yii\db\sqlite\QueryBuilder::__set*				 public
+ See |yii\base\Object::__set|
+
+
+*yii\db\sqlite\QueryBuilder::__isset*				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\db\sqlite\QueryBuilder::__unset*				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\db\sqlite\QueryBuilder::__call*				 public
+ See |yii\base\Object::__call|
+
+
+*yii\db\sqlite\QueryBuilder::hasProperty*			 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\db\sqlite\QueryBuilder::canGetProperty*			 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\db\sqlite\QueryBuilder::canSetProperty*			 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\db\sqlite\QueryBuilder::hasMethod* 			 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\db\sqlite\QueryBuilder::build*				 public
+ See |yii\db\QueryBuilder::build|
+
+
+*yii\db\sqlite\QueryBuilder::insert*				 public
+ See |yii\db\QueryBuilder::insert|
+
+
+*yii\db\sqlite\QueryBuilder::batchInsert*			 public
+>
+ batchInsert($table, $columns, $rows)
+<
+(string) The batch INSERT SQL statement
+
+ For example,
+
+   $connection->createCommand()->batchInsert('user', ['name', 'age'], [
+       ['Tom', 30],
+       ['Jane', 20],
+       ['Linda', 25],
+   ])->execute();
+
+ Note that the values in each row must match the corresponding column names.
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column names
+    [$rows] (array) The rows to be batch inserted into the table
+
+
+*yii\db\sqlite\QueryBuilder::update*				 public
+ See |yii\db\QueryBuilder::update|
+
+
+*yii\db\sqlite\QueryBuilder::delete*				 public
+ See |yii\db\QueryBuilder::delete|
+
+
+*yii\db\sqlite\QueryBuilder::createTable*			 public
+ See |yii\db\QueryBuilder::createTable|
+
+
+*yii\db\sqlite\QueryBuilder::renameTable*			 public
+ See |yii\db\QueryBuilder::renameTable|
+
+
+*yii\db\sqlite\QueryBuilder::dropTable* 			 public
+ See |yii\db\QueryBuilder::dropTable|
+
+
+*yii\db\sqlite\QueryBuilder::addPrimaryKey*			 public
+>
+ addPrimaryKey($name, $table, $columns)
+<
+(string) The SQL statement for adding a primary key constraint to an existing
+table.
+
+
+    [$name] (string) The name of the primary key constraint.
+    [$table] (string) The table that the primary key constraint will be added
+    to.
+    [$columns] (string|array) Comma separated string or array of columns that
+    the primary key will consist of.
+
+
+*yii\db\sqlite\QueryBuilder::dropPrimaryKey*			 public
+>
+ dropPrimaryKey($name, $table)
+<
+(string) The SQL statement for removing a primary key constraint from an
+existing table.
+
+
+    [$name] (string) The name of the primary key constraint to be removed.
+    [$table] (string) The table that the primary key constraint will be
+    removed from.
+
+
+*yii\db\sqlite\QueryBuilder::truncateTable*			 public
+>
+ truncateTable($table)
+<
+(string) The SQL statement for truncating a DB table.
+
+
+    [$table] (string) The table to be truncated. The name will be properly
+    quoted by the method.
+
+
+*yii\db\sqlite\QueryBuilder::addColumn* 			 public
+ See |yii\db\QueryBuilder::addColumn|
+
+
+*yii\db\sqlite\QueryBuilder::dropColumn*			 public
+>
+ dropColumn($table, $column)
+<
+(string) The SQL statement for dropping a DB column.
+
+
+    [$table] (string) The table whose column is to be dropped. The name will
+    be properly quoted by the method.
+    [$column] (string) The name of the column to be dropped. The name will be
+    properly quoted by the method.
+
+
+*yii\db\sqlite\QueryBuilder::renameColumn*			 public
+>
+ renameColumn($table, $oldName, $newName)
+<
+(string) The SQL statement for renaming a DB column.
+
+
+    [$table] (string) The table whose column is to be renamed. The name will
+    be properly quoted by the method.
+    [$oldName] (string) The old name of the column. The name will be properly
+    quoted by the method.
+    [$newName] (string) The new name of the column. The name will be properly
+    quoted by the method.
+
+
+*yii\db\sqlite\QueryBuilder::alterColumn*			 public
+>
+ alterColumn($table, $column, $type)
+<
+(string) The SQL statement for changing the definition of a column.
+
+
+    [$table] (string) The table whose column is to be changed. The table name
+    will be properly quoted by the method.
+    [$column] (string) The name of the column to be changed. The name will be
+    properly quoted by the method.
+    [$type] (string) The new column type. The [[getColumnType()]] method will
+    be invoked to convert abstract column type (if any) into the physical one.
+    Anything that is not recognized as abstract type will be kept in the
+    generated SQL. For example, 'string' will be turned into 'varchar(255)',
+    while 'string not null' will become 'varchar(255) not null'.
+
+
+*yii\db\sqlite\QueryBuilder::addForeignKey*			 public
+>
+ addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
+<
+(string) The SQL statement for adding a foreign key constraint to an existing
+table.
+
+ The method will properly quote the table and column names.
+    [$name] (string) The name of the foreign key constraint.
+    [$table] (string) The table that the foreign key constraint will be added
+    to.
+    [$columns] (string|array) The name of the column to that the constraint
+    will be added on. If there are multiple columns, separate them with commas
+    or use an array to represent them.
+    [$refTable] (string) The table that the foreign key references to.
+    [$refColumns] (string|array) The name of the column that the foreign key
+    references to. If there are multiple columns, separate them with commas or
+    use an array to represent them.
+    [$delete] (string) The ON DELETE option. Most DBMS support these options:
+    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+    [$update] (string) The ON UPDATE option. Most DBMS support these options:
+    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+
+
+*yii\db\sqlite\QueryBuilder::dropForeignKey*			 public
+>
+ dropForeignKey($name, $table)
+<
+(string) The SQL statement for dropping a foreign key constraint.
+
+
+    [$name] (string) The name of the foreign key constraint to be dropped. The
+    name will be properly quoted by the method.
+    [$table] (string) The table whose foreign is to be dropped. The name will
+    be properly quoted by the method.
+
+
+*yii\db\sqlite\QueryBuilder::createIndex*			 public
+ See |yii\db\QueryBuilder::createIndex|
+
+
+*yii\db\sqlite\QueryBuilder::dropIndex* 			 public
+>
+ dropIndex($name, $table)
+<
+(string) The SQL statement for dropping an index.
+
+
+    [$name] (string) The name of the index to be dropped. The name will be
+    properly quoted by the method.
+    [$table] (string) The table whose index is to be dropped. The name will be
+    properly quoted by the method.
+
+
+*yii\db\sqlite\QueryBuilder::resetSequence*			 public
+>
+ resetSequence($tableName, $value='null')
+<
+(string) The SQL statement for resetting sequence
+
+ The sequence will be reset such that the primary key of the next new row
+ inserted will have the specified value or 1.
+    [$tableName] (string) The name of the table whose primary key sequence
+    will be reset
+    [$value] (mixed) The value for the primary key of the next new row
+    inserted. If this is not set, the next new row's primary key will have a
+    value 1.
+
+
+*yii\db\sqlite\QueryBuilder::checkIntegrity*			 public
+>
+ checkIntegrity($check='true', $schema='''', $table='''')
+<
+(string) The SQL statement for checking integrity
+
+
+    [$check] (boolean) Whether to turn on or off the integrity check.
+    [$schema] (string) The schema of the tables. Meaningless for SQLite.
+    [$table] (string) The table name. Meaningless for SQLite.
+
+
+*yii\db\sqlite\QueryBuilder::getColumnType*			 public
+ See |yii\db\QueryBuilder::getColumnType|
+
+
+*yii\db\sqlite\QueryBuilder::buildSelect*			 public
+ See |yii\db\QueryBuilder::buildSelect|
+
+
+*yii\db\sqlite\QueryBuilder::buildFrom* 			 public
+ See |yii\db\QueryBuilder::buildFrom|
+
+
+*yii\db\sqlite\QueryBuilder::buildJoin* 			 public
+ See |yii\db\QueryBuilder::buildJoin|
+
+
+*yii\db\sqlite\QueryBuilder::buildWhere*			 public
+ See |yii\db\QueryBuilder::buildWhere|
+
+
+*yii\db\sqlite\QueryBuilder::buildGroupBy*			 public
+ See |yii\db\QueryBuilder::buildGroupBy|
+
+
+*yii\db\sqlite\QueryBuilder::buildHaving*			 public
+ See |yii\db\QueryBuilder::buildHaving|
+
+
+*yii\db\sqlite\QueryBuilder::buildOrderBy*			 public
+ See |yii\db\QueryBuilder::buildOrderBy|
+
+
+*yii\db\sqlite\QueryBuilder::buildLimit*			 public
+>
+ buildLimit($limit, $offset)
+<
+(string) The LIMIT and OFFSET clauses built from [[Query::$limit]].
+
+
+    [$limit] () 
+    [$offset] () 
+
+
+*yii\db\sqlite\QueryBuilder::hasLimit*				 protected
+ See |yii\db\QueryBuilder::hasLimit|
+
+
+*yii\db\sqlite\QueryBuilder::hasOffset* 			 protected
+ See |yii\db\QueryBuilder::hasOffset|
+
+
+*yii\db\sqlite\QueryBuilder::buildUnion*			 public
+ See |yii\db\QueryBuilder::buildUnion|
+
+
+*yii\db\sqlite\QueryBuilder::buildColumns*			 public
+ See |yii\db\QueryBuilder::buildColumns|
+
+
+*yii\db\sqlite\QueryBuilder::buildCondition*			 public
+ See |yii\db\QueryBuilder::buildCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildHashCondition*		 public
+ See |yii\db\QueryBuilder::buildHashCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildAndCondition* 		 public
+ See |yii\db\QueryBuilder::buildAndCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildNotCondition* 		 public
+ See |yii\db\QueryBuilder::buildNotCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildBetweenCondition*		 public
+ See |yii\db\QueryBuilder::buildBetweenCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildInCondition*			 public
+ See |yii\db\QueryBuilder::buildInCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildCompositeInCondition* 	 protected
+ See |yii\db\QueryBuilder::buildCompositeInCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildLikeCondition*		 public
+ See |yii\db\QueryBuilder::buildLikeCondition|
+
+
+*yii\db\sqlite\QueryBuilder::buildExistsCondition*		 public
+ See |yii\db\QueryBuilder::buildExistsCondition|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

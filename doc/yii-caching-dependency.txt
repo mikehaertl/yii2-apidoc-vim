@@ -1,0 +1,120 @@
+
+*yii\caching\Dependency*   >> yii\base\Object
+========================
+
+ Child classes should override its [[generateDependencyData()]] for generating
+ the actual dependency data.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$data> 				*yii\caching\Dependency::$data*
+ (mixed) The dependency data that is saved in cache and later is compared with
+ the latest dependency data.
+
+<$reusable>				*yii\caching\Dependency::$reusable*
+ (boolean) Whether this dependency is reusable or not. True value means that
+ dependent data for this cache dependency will be generated only once per
+ request. This allows you to use the same cache dependency for multiple
+ separate cache calls while generating the same page without an overhead of
+ re-evaluating dependency data each time. Defaults to false.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\caching\Dependency::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\caching\Dependency::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\caching\Dependency::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\caching\Dependency::__get* 				 public
+ See |yii\base\Object::__get|
+
+
+*yii\caching\Dependency::__set* 				 public
+ See |yii\base\Object::__set|
+
+
+*yii\caching\Dependency::__isset*				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\caching\Dependency::__unset*				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\caching\Dependency::__call*				 public
+ See |yii\base\Object::__call|
+
+
+*yii\caching\Dependency::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\caching\Dependency::canGetProperty*			 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\caching\Dependency::canSetProperty*			 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\caching\Dependency::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\caching\Dependency::evaluateDependency*			 public
+>
+ evaluateDependency($cache)
+<
+(void)
+
+ This method is invoked by cache before writing data into it.
+    [$cache] (\yii\caching\Cache) The cache component that is currently
+    evaluating this dependency
+
+
+*yii\caching\Dependency::getHasChanged* 			 public
+>
+ getHasChanged($cache)
+<
+(boolean) Whether the dependency has changed.
+
+
+    [$cache] (\yii\caching\Cache) The cache component that is currently
+    evaluating this dependency
+
+
+*yii\caching\Dependency::resetReusableData*			 public
+>
+ resetReusableData()
+<
+(void)
+
+
+
+
+*yii\caching\Dependency::generateDependencyData*		 protected
+>
+ generateDependencyData($cache)
+<
+(mixed) The data needed to determine if dependency has been changed.
+
+ Derived classes should override this method to generate the actual dependency
+ data.
+    [$cache] (\yii\caching\Cache) The cache component that is currently
+    evaluating this dependency
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

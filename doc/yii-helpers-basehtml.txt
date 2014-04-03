@@ -1,0 +1,1368 @@
+
+*yii\helpers\BaseHtml*  
+======================
+
+ Do not use BaseHtml. Use [[Html]] instead.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$voidElements> 			*yii\helpers\BaseHtml::$voidElements*
+ (array) List of void elements (element name => 1)
+
+<$attributeOrder>			*yii\helpers\BaseHtml::$attributeOrder*
+ (array) The preferred order of attributes in a tag. This mainly affects the
+ order of the attributes that are rendered by [[renderTagAttributes()]].
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\helpers\BaseHtml::encode*					 public
+>
+ encode($content, $doubleEncode='true')
+<
+(string) The encoded content
+
+ The [[\yii\base\Application::charset|application charset]] will be used for
+ encoding.
+    [$content] (string) The content to be encoded
+    [$doubleEncode] (boolean) Whether to encode HTML entities in '$content'.
+    If false, HTML entities in '$content' will not be further encoded.
+
+
+*yii\helpers\BaseHtml::decode*					 public
+>
+ decode($content)
+<
+(string) The decoded content
+
+ This is the opposite of [[encode()]].
+    [$content] (string) The content to be decoded
+
+
+*yii\helpers\BaseHtml::tag*					 public
+>
+ tag($name, $content='''', $options='[]')
+<
+(string) The generated HTML tag
+
+
+    [$name] (string) The tag name
+    [$content] (string) The content to be enclosed between the start and end
+    tags. It will not be HTML-encoded. If this is coming from end users, you
+    should consider [[encode()]] it to prevent XSS attacks.
+    [$options] (array) The HTML tag attributes (HTML options) in terms of
+    name-value pairs. These will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using [[encode()]]. If a
+    value is null, the corresponding attribute will not be rendered.
+
+    For example when using '['class' => 'my-class', 'target' => '_blank',
+    'value' => null]' it will result in the html attributes rendered like
+    this: 'class="my-class" target="_blank"'.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::beginTag*				 public
+>
+ beginTag($name, $options='[]')
+<
+(string) The generated start tag
+
+
+    [$name] (string) The tag name
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::endTag*					 public
+>
+ endTag($name)
+<
+(string) The generated end tag
+
+
+    [$name] (string) The tag name
+
+
+*yii\helpers\BaseHtml::style*					 public
+>
+ style($content, $options='[]')
+<
+(string) The generated style tag
+
+
+    [$content] (string) The style content
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. If the options does not contain "type", a
+    "type" attribute with value "text/css" will be used. See
+    [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::script*					 public
+>
+ script($content, $options='[]')
+<
+(string) The generated script tag
+
+
+    [$content] (string) The script content
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. If the options does not contain "type", a
+    "type" attribute with value "text/javascript" will be rendered. See
+    [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::cssFile* 				 public
+>
+ cssFile($url, $options='[]')
+<
+(string) The generated link tag
+
+
+    [$url] (array|string) The URL of the external CSS file. This parameter
+    will be processed by [[\yii\helpers\Url::to()]].
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::jsFile*					 public
+>
+ jsFile($url, $options='[]')
+<
+(string) The generated script tag
+
+
+    [$url] (string) The URL of the external JavaScript file. This parameter
+    will be processed by [[\yii\helpers\Url::to()]].
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::beginForm*				 public
+>
+ beginForm($action='\'\'', $method=''post'', $options='[]')
+<
+(string) The generated form start tag.
+
+
+    [$action] (array|string) The form action URL. This parameter will be
+    processed by [[\yii\helpers\Url::to()]].
+    [$method] (string) The form submission method, such as "post", "get",
+    "put", "delete" (case-insensitive). Since most browsers only support
+    "post" and "get", if other methods are given, they will be simulated using
+    "post", and a hidden input will be added which contains the actual method
+    type. See [[\yii\web\Request::methodParam]] for more details.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::endForm* 				 public
+>
+ endForm()
+<
+(string) The generated tag
+
+
+
+
+*yii\helpers\BaseHtml::a*					 public
+>
+ a($text, $url='null', $options='[]')
+<
+(string) The generated hyperlink
+
+
+    [$text] (string) Link body. It will NOT be HTML-encoded. Therefore you can
+    pass in HTML code such as an image tag. If this is coming from end users,
+    you should consider [[encode()]] it to prevent XSS attacks.
+    [$url] (array|string|null) The URL for the hyperlink tag. This parameter
+    will be processed by [[yii\helpers\Url::to()]] and will be used for the
+    "href" attribute of the tag. If this parameter is null, the "href"
+    attribute will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::mailto*					 public
+>
+ mailto($text, $email='null', $options='[]')
+<
+(string) The generated mailto link
+
+
+    [$text] (string) Link body. It will NOT be HTML-encoded. Therefore you can
+    pass in HTML code such as an image tag. If this is coming from end users,
+    you should consider [[encode()]] it to prevent XSS attacks.
+    [$email] (string) Email address. If this is null, the first parameter
+    (link body) will be treated as the email address and used.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::img*					 public
+>
+ img($src, $options='[]')
+<
+(string) The generated image tag
+
+
+    [$src] (array|string) The image URL. This parameter will be processed by
+    [[yii\helpers\Url::to()]].
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::label*					 public
+>
+ label($content, $for='null', $options='[]')
+<
+(string) The generated label tag
+
+
+    [$content] (string) Label text. It will NOT be HTML-encoded. Therefore you
+    can pass in HTML code such as an image tag. If this is is coming from end
+    users, you should [[encode()]] it to prevent XSS attacks.
+    [$for] (string) The ID of the HTML element that this label is associated
+    with. If this is null, the "for" attribute will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::button*					 public
+>
+ button($content=''Button'', $options='[]')
+<
+(string) The generated button tag
+
+
+    [$content] (string) The content enclosed within the button tag. It will
+    NOT be HTML-encoded. Therefore you can pass in HTML code such as an image
+    tag. If this is is coming from end users, you should consider [[encode()]]
+    it to prevent XSS attacks.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::submitButton*				 public
+>
+ submitButton($content=''Submit'', $options='[]')
+<
+(string) The generated submit button tag
+
+
+    [$content] (string) The content enclosed within the button tag. It will
+    NOT be HTML-encoded. Therefore you can pass in HTML code such as an image
+    tag. If this is is coming from end users, you should consider [[encode()]]
+    it to prevent XSS attacks.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::resetButton*				 public
+>
+ resetButton($content=''Reset'', $options='[]')
+<
+(string) The generated reset button tag
+
+
+    [$content] (string) The content enclosed within the button tag. It will
+    NOT be HTML-encoded. Therefore you can pass in HTML code such as an image
+    tag. If this is is coming from end users, you should consider [[encode()]]
+    it to prevent XSS attacks.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::input*					 public
+>
+ input($type, $name='null', $value='null', $options='[]')
+<
+(string) The generated input tag
+
+
+    [$type] (string) The type attribute.
+    [$name] (string) The name attribute. If it is null, the name attribute
+    will not be generated.
+    [$value] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::buttonInput*				 public
+>
+ buttonInput($label=''Button'', $options='[]')
+<
+(string) The generated button tag
+
+
+    [$label] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::submitInput*				 public
+>
+ submitInput($label=''Submit'', $options='[]')
+<
+(string) The generated button tag
+
+
+    [$label] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::resetInput*				 public
+>
+ resetInput($label=''Reset'', $options='[]')
+<
+(string) The generated button tag
+
+
+    [$label] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The attributes of the button tag. The values will be
+    HTML-encoded using [[encode()]]. Attributes whose value is null will be
+    ignored and not put in the tag returned. See [[renderTagAttributes()]] for
+    details on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::textInput*				 public
+>
+ textInput($name, $value='null', $options='[]')
+<
+(string) The generated button tag
+
+
+    [$name] (string) The name attribute.
+    [$value] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::hiddenInput*				 public
+>
+ hiddenInput($name, $value='null', $options='[]')
+<
+(string) The generated button tag
+
+
+    [$name] (string) The name attribute.
+    [$value] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::passwordInput*				 public
+>
+ passwordInput($name, $value='null', $options='[]')
+<
+(string) The generated button tag
+
+
+    [$name] (string) The name attribute.
+    [$value] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::fileInput*				 public
+>
+ fileInput($name, $value='null', $options='[]')
+<
+(string) The generated button tag
+
+ To use a file input field, you should set the enclosing form's "enctype"
+ attribute to be "multipart/form-data". After the form is submitted, the
+ uploaded file information can be obtained via $_FILES[$name] (see PHP
+ documentation).
+    [$name] (string) The name attribute.
+    [$value] (string) The value attribute. If it is null, the value attribute
+    will not be generated.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::textarea*				 public
+>
+ textarea($name, $value='''', $options='[]')
+<
+(string) The generated text area tag
+
+
+    [$name] (string) The input name
+    [$value] (string) The input value. Note that it will be encoded using
+    [[encode()]].
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. See [[renderTagAttributes()]] for details
+    on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::radio*					 public
+>
+ radio($name, $checked='false', $options='[]')
+<
+(string) The generated radio button tag
+
+
+    [$name] (string) The name attribute.
+    [$checked] (boolean) Whether the radio button should be checked.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - uncheck: string, the value associated with the uncheck state of the
+    radio button. When this attribute   is present, a hidden input will be
+    generated so that if the radio button is not checked and is submitted,  
+    the value of this attribute will still be submitted to the server via the
+    hidden input. - label: string, a label displayed next to the radio button.
+     It will NOT be HTML-encoded. Therefore you can pass   in HTML code such
+    as an image tag. If this is is coming from end users, you should
+    [[encode()]] it to prevent XSS attacks.   When this option is specified,
+    the radio button will be enclosed by a label tag. - labelOptions: array,
+    the HTML attributes for the label tag. This is only used when the "label"
+    option is specified. - container: array|boolean, the HTML attributes for
+    the container tag. This is only used when the "label" option is specified.
+      If it is false, no container will be rendered. If it is an array or not,
+    a "div" container will be rendered   around the the radio button.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting radio button tag. The values will be HTML-encoded using
+    [[encode()]]. If a value is null, the corresponding attribute will not be
+    rendered. See [[renderTagAttributes()]] for details on how attributes are
+    being rendered.
+
+
+*yii\helpers\BaseHtml::checkbox*				 public
+>
+ checkbox($name, $checked='false', $options='[]')
+<
+(string) The generated checkbox tag
+
+
+    [$name] (string) The name attribute.
+    [$checked] (boolean) Whether the checkbox should be checked.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - uncheck: string, the value associated with the uncheck state of the
+    checkbox. When this attribute   is present, a hidden input will be
+    generated so that if the checkbox is not checked and is submitted,   the
+    value of this attribute will still be submitted to the server via the
+    hidden input. - label: string, a label displayed next to the checkbox.  It
+    will NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
+    image tag. If this is is coming from end users, you should [[encode()]] it
+    to prevent XSS attacks.   When this option is specified, the checkbox will
+    be enclosed by a label tag. - labelOptions: array, the HTML attributes for
+    the label tag. This is only used when the "label" option is specified. -
+    container: array|boolean, the HTML attributes for the container tag. This
+    is only used when the "label" option is specified.   If it is false, no
+    container will be rendered. If it is an array or not, a "div" container
+    will be rendered   around the the radio button.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting checkbox tag. The values will be HTML-encoded using
+    [[encode()]]. If a value is null, the corresponding attribute will not be
+    rendered. See [[renderTagAttributes()]] for details on how attributes are
+    being rendered.
+
+
+*yii\helpers\BaseHtml::dropDownList*				 public
+>
+ dropDownList($name, $selection='null', $items='[]', $options='[]')
+<
+(string) The generated drop-down list tag
+
+
+    [$name] (string) The input name
+    [$selection] (string) The selected value
+    [$items] (array) The option data items. The array keys are option values,
+    and the array values are the corresponding option labels. The array can
+    also be nested (i.e. some array values are arrays too). For each
+    sub-array, an option group will be generated whose label is the key
+    associated with the sub-array. If you have a list of data models, you may
+    convert them into the format described above using
+    [[\yii\helpers\ArrayHelper::map()]].
+
+    Note, the values and labels will be automatically HTML-encoded by this
+    method, and the blank spaces in the labels will also be HTML-encoded.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - prompt: string, a prompt text to be displayed as the first option; -
+    options: array, the attributes for the select option tags. The array keys
+    must be valid option values,   and the array values are the extra
+    attributes for the corresponding option tags. For example,
+
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
+
+    - groups: array, the attributes for the optgroup tags. The structure of
+    this is similar to that of 'options',   except that the array keys
+    represent the optgroup labels specified in $items.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using [[encode()]]. If a
+    value is null, the corresponding attribute will not be rendered. See
+    [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::listBox* 				 public
+>
+ listBox($name, $selection='null', $items='[]', $options='[]')
+<
+(string) The generated list box tag
+
+
+    [$name] (string) The input name
+    [$selection] (string|array) The selected value(s)
+    [$items] (array) The option data items. The array keys are option values,
+    and the array values are the corresponding option labels. The array can
+    also be nested (i.e. some array values are arrays too). For each
+    sub-array, an option group will be generated whose label is the key
+    associated with the sub-array. If you have a list of data models, you may
+    convert them into the format described above using
+    [[\yii\helpers\ArrayHelper::map()]].
+
+    Note, the values and labels will be automatically HTML-encoded by this
+    method, and the blank spaces in the labels will also be HTML-encoded.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - prompt: string, a prompt text to be displayed as the first option; -
+    options: array, the attributes for the select option tags. The array keys
+    must be valid option values,   and the array values are the extra
+    attributes for the corresponding option tags. For example,
+
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
+
+    - groups: array, the attributes for the optgroup tags. The structure of
+    this is similar to that of 'options',   except that the array keys
+    represent the optgroup labels specified in $items. - unselect: string, the
+    value that will be submitted when no option is selected.   When this
+    attribute is set, a hidden field will be generated so that if no option is
+    selected in multiple   mode, we can still obtain the posted unselect
+    value.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using [[encode()]]. If a
+    value is null, the corresponding attribute will not be rendered. See
+    [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::checkboxList*				 public
+>
+ checkboxList($name, $selection='null', $items='[]', $options='[]')
+<
+(string) The generated checkbox list
+
+ A checkbox list allows multiple selection, like [[listBox()]]. As a result,
+ the corresponding submitted value is an array.
+    [$name] (string) The name attribute of each checkbox.
+    [$selection] (string|array) The selected value(s).
+    [$items] (array) The data item used to generate the checkboxes. The array
+    values are the labels, while the array keys are the corresponding checkbox
+    values.
+    [$options] (array) Options (name => config) for the checkbox list
+    container tag. The following options are specially handled:
+
+    - tag: string, the tag name of the container element. - unselect: string,
+    the value that should be submitted when none of the checkboxes is
+    selected.   By setting this option, a hidden input will be generated. -
+    encode: boolean, whether to HTML-encode the checkbox labels. Defaults to
+    true.   This option is ignored if 'item' option is set. - separator:
+    string, the HTML code that separates items. - itemOptions: array, the
+    options for generating the radio button tag using [[checkbox()]]. - item:
+    callable, a callback that can be used to customize the generation of the
+    HTML code   corresponding to a single item in $items. The signature of
+    this callback must be:
+
+        function ($index, $label, $name, $checked, $value)
+
+    where $index is the zero-based index of the checkbox in the whole list;
+    $label   is the label for the checkbox; and $name, $value and $checked
+    represent the name,   value and the checked status of the checkbox input,
+    respectively.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::radioList*				 public
+>
+ radioList($name, $selection='null', $items='[]', $options='[]')
+<
+(string) The generated radio button list
+
+ A radio button list is like a checkbox list, except that it only allows
+ single selection.
+    [$name] (string) The name attribute of each radio button.
+    [$selection] (string|array) The selected value(s).
+    [$items] (array) The data item used to generate the radio buttons. The
+    array values are the labels, while the array keys are the corresponding
+    radio button values.
+    [$options] (array) Options (name => config) for the radio button list. The
+    following options are supported:
+
+    - unselect: string, the value that should be submitted when none of the
+    radio buttons is selected.   By setting this option, a hidden input will
+    be generated. - encode: boolean, whether to HTML-encode the checkbox
+    labels. Defaults to true.   This option is ignored if 'item' option is
+    set. - separator: string, the HTML code that separates items. -
+    itemOptions: array, the options for generating the radio button tag using
+    [[radio()]]. - item: callable, a callback that can be used to customize
+    the generation of the HTML code   corresponding to a single item in
+    $items. The signature of this callback must be:
+
+        function ($index, $label, $name, $checked, $value)
+
+    where $index is the zero-based index of the radio button in the whole
+    list; $label   is the label for the radio button; and $name, $value and
+    $checked represent the name,   value and the checked status of the radio
+    button input, respectively.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::ul*					 public
+>
+ ul($items, $options='[]')
+<
+(string) The generated unordered list. An empty string is returned if '$items'
+is empty.
+
+
+    [$items] (array|\Traversable) The items for generating the list. Each item
+    generates a single list item. Note that items will be automatically HTML
+    encoded if '$options['encode']' is not set or true.
+    [$options] (array) Options (name => config) for the radio button list. The
+    following options are supported:
+
+    - encode: boolean, whether to HTML-encode the items. Defaults to true.  
+    This option is ignored if the 'item' option is specified. - itemOptions:
+    array, the HTML attributes for the 'li' tags. This option is ignored if
+    the 'item' option is specified. - item: callable, a callback that is used
+    to generate each individual list item.   The signature of this callback
+    must be:
+
+        function ($item, $index)
+
+    where $index is the array key corresponding to '$item' in '$items'. The
+    callback should return   the whole list item tag.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::ol*					 public
+>
+ ol($items, $options='[]')
+<
+(string) The generated ordered list. An empty string is returned if '$items'
+is empty.
+
+
+    [$items] (array|\Traversable) The items for generating the list. Each item
+    generates a single list item. Note that items will be automatically HTML
+    encoded if '$options['encode']' is not set or true.
+    [$options] (array) Options (name => config) for the radio button list. The
+    following options are supported:
+
+    - encode: boolean, whether to HTML-encode the items. Defaults to true.  
+    This option is ignored if the 'item' option is specified. - itemOptions:
+    array, the HTML attributes for the 'li' tags. This option is ignored if
+    the 'item' option is specified. - item: callable, a callback that is used
+    to generate each individual list item.   The signature of this callback
+    must be:
+
+        function ($item, $index)
+
+    where $index is the array key corresponding to '$item' in '$items'. The
+    callback should return   the whole list item tag.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::activeLabel*				 public
+>
+ activeLabel($model, $attribute, $options='[]')
+<
+(string) The generated label tag
+
+ The label text is the label associated with the attribute, obtained via
+ [[Model::getAttributeLabel()]].
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. If a value is null, the corresponding
+    attribute will not be rendered. The following options are specially
+    handled:
+
+    - label: this specifies the label to be displayed. Note that this will NOT
+    be [[encode()|encoded]].   If this is not set,
+    [[Model::getAttributeLabel()]] will be called to get the label for display
+      (after encoding).
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::error*					 public
+>
+ error($model, $attribute, $options='[]')
+<
+(string) The generated label tag
+
+ Note that even if there is no validation error, this method will still return
+ an empty error tag.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    values will be HTML-encoded using [[encode()]]. If a value is null, the
+    corresponding attribute will not be rendered.
+
+    The following options are specially handled:
+
+    - tag: this specifies the tag name. If not set, "div" will be used.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::activeInput*				 public
+>
+ activeInput($type, $model, $attribute, $options='[]')
+<
+(string) The generated input tag
+
+ This method will generate the "name" and "value" tag attributes automatically
+ for the model attribute unless they are explicitly specified in '$options'.
+    [$type] (string) The input type (e.g. 'text', 'password')
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. See [[renderTagAttributes()]] for
+    details on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::activeTextInput* 			 public
+>
+ activeTextInput($model, $attribute, $options='[]')
+<
+(string) The generated input tag
+
+ This method will generate the "name" and "value" tag attributes automatically
+ for the model attribute unless they are explicitly specified in '$options'.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. See [[renderTagAttributes()]] for
+    details on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::activeHiddenInput*			 public
+>
+ activeHiddenInput($model, $attribute, $options='[]')
+<
+(string) The generated input tag
+
+ This method will generate the "name" and "value" tag attributes automatically
+ for the model attribute unless they are explicitly specified in '$options'.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. See [[renderTagAttributes()]] for
+    details on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::activePasswordInput*			 public
+>
+ activePasswordInput($model, $attribute, $options='[]')
+<
+(string) The generated input tag
+
+ This method will generate the "name" and "value" tag attributes automatically
+ for the model attribute unless they are explicitly specified in '$options'.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. See [[renderTagAttributes()]] for
+    details on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::activeFileInput* 			 public
+>
+ activeFileInput($model, $attribute, $options='[]')
+<
+(string) The generated input tag
+
+ This method will generate the "name" and "value" tag attributes automatically
+ for the model attribute unless they are explicitly specified in '$options'.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. See [[renderTagAttributes()]] for
+    details on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::activeTextarea*				 public
+>
+ activeTextarea($model, $attribute, $options='[]')
+<
+(string) The generated textarea tag
+
+ The model attribute value will be used as the content in the textarea.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using [[encode()]]. See [[renderTagAttributes()]] for
+    details on how attributes are being rendered.
+
+
+*yii\helpers\BaseHtml::activeRadio*				 public
+>
+ activeRadio($model, $attribute, $options='[]')
+<
+(string) The generated radio button tag
+
+ This method will generate the "checked" tag attribute according to the model
+ attribute value.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - uncheck: string, the value associated with the uncheck state of the
+    radio button. If not set,   it will take the default value '0'. This
+    method will render a hidden input so that if the radio button   is not
+    checked and is submitted, the value of this attribute will still be
+    submitted to the server   via the hidden input. - label: string, a label
+    displayed next to the radio button.  It will NOT be HTML-encoded.
+    Therefore you can pass   in HTML code such as an image tag. If this is is
+    coming from end users, you should [[encode()]] it to prevent XSS attacks. 
+     When this option is specified, the radio button will be enclosed by a
+    label tag. - labelOptions: array, the HTML attributes for the label tag.
+    This is only used when the "label" option is specified.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using [[encode()]]. If a
+    value is null, the corresponding attribute will not be rendered.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::activeCheckbox*				 public
+>
+ activeCheckbox($model, $attribute, $options='[]')
+<
+(string) The generated checkbox tag
+
+ This method will generate the "checked" tag attribute according to the model
+ attribute value.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - uncheck: string, the value associated with the uncheck state of the
+    radio button. If not set,   it will take the default value '0'. This
+    method will render a hidden input so that if the radio button   is not
+    checked and is submitted, the value of this attribute will still be
+    submitted to the server   via the hidden input. - label: string, a label
+    displayed next to the checkbox.  It will NOT be HTML-encoded. Therefore
+    you can pass   in HTML code such as an image tag. If this is is coming
+    from end users, you should [[encode()]] it to prevent XSS attacks.   When
+    this option is specified, the checkbox will be enclosed by a label tag. -
+    labelOptions: array, the HTML attributes for the label tag. This is only
+    used when the "label" option is specified.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using [[encode()]]. If a
+    value is null, the corresponding attribute will not be rendered. See
+    [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::activeDropDownList*			 public
+>
+ activeDropDownList($model, $attribute, $items, $options='[]')
+<
+(string) The generated drop-down list tag
+
+ The selection of the drop-down list is taken from the value of the model
+ attribute.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$items] (array) The option data items. The array keys are option values,
+    and the array values are the corresponding option labels. The array can
+    also be nested (i.e. some array values are arrays too). For each
+    sub-array, an option group will be generated whose label is the key
+    associated with the sub-array. If you have a list of data models, you may
+    convert them into the format described above using
+    [[\yii\helpers\ArrayHelper::map()]].
+
+    Note, the values and labels will be automatically HTML-encoded by this
+    method, and the blank spaces in the labels will also be HTML-encoded.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - prompt: string, a prompt text to be displayed as the first option; -
+    options: array, the attributes for the select option tags. The array keys
+    must be valid option values,   and the array values are the extra
+    attributes for the corresponding option tags. For example,
+
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
+
+    - groups: array, the attributes for the optgroup tags. The structure of
+    this is similar to that of 'options',   except that the array keys
+    represent the optgroup labels specified in $items.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using [[encode()]]. If a
+    value is null, the corresponding attribute will not be rendered. See
+    [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::activeListBox*				 public
+>
+ activeListBox($model, $attribute, $items, $options='[]')
+<
+(string) The generated list box tag
+
+ The selection of the list box is taken from the value of the model attribute.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$items] (array) The option data items. The array keys are option values,
+    and the array values are the corresponding option labels. The array can
+    also be nested (i.e. some array values are arrays too). For each
+    sub-array, an option group will be generated whose label is the key
+    associated with the sub-array. If you have a list of data models, you may
+    convert them into the format described above using
+    [[\yii\helpers\ArrayHelper::map()]].
+
+    Note, the values and labels will be automatically HTML-encoded by this
+    method, and the blank spaces in the labels will also be HTML-encoded.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+    - prompt: string, a prompt text to be displayed as the first option; -
+    options: array, the attributes for the select option tags. The array keys
+    must be valid option values,   and the array values are the extra
+    attributes for the corresponding option tags. For example,
+
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
+
+    - groups: array, the attributes for the optgroup tags. The structure of
+    this is similar to that of 'options',   except that the array keys
+    represent the optgroup labels specified in $items. - unselect: string, the
+    value that will be submitted when no option is selected.   When this
+    attribute is set, a hidden field will be generated so that if no option is
+    selected in multiple   mode, we can still obtain the posted unselect
+    value.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using [[encode()]]. If a
+    value is null, the corresponding attribute will not be rendered. See
+    [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::activeCheckboxList*			 public
+>
+ activeCheckboxList($model, $attribute, $items, $options='[]')
+<
+(string) The generated checkbox list
+
+ A checkbox list allows multiple selection, like [[listBox()]]. As a result,
+ the corresponding submitted value is an array. The selection of the checkbox
+ list is taken from the value of the model attribute.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$items] (array) The data item used to generate the checkboxes. The array
+    values are the labels, while the array keys are the corresponding checkbox
+    values. Note that the labels will NOT be HTML-encoded, while the values
+    will.
+    [$options] (array) Options (name => config) for the checkbox list. The
+    following options are specially handled:
+
+    - unselect: string, the value that should be submitted when none of the
+    checkboxes is selected.   You may set this option to be null to prevent
+    default value submission.   If this option is not set, an empty string
+    will be submitted. - separator: string, the HTML code that separates
+    items. - item: callable, a callback that can be used to customize the
+    generation of the HTML code   corresponding to a single item in $items.
+    The signature of this callback must be:
+
+        function ($index, $label, $name, $checked, $value)
+
+    where $index is the zero-based index of the checkbox in the whole list;
+    $label   is the label for the checkbox; and $name, $value and $checked
+    represent the name,   value and the checked status of the checkbox input.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::activeRadioList* 			 public
+>
+ activeRadioList($model, $attribute, $items, $options='[]')
+<
+(string) The generated radio button list
+
+ A radio button list is like a checkbox list, except that it only allows
+ single selection. The selection of the radio buttons is taken from the value
+ of the model attribute.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for the format about attribute expression.
+    [$items] (array) The data item used to generate the radio buttons. The
+    array keys are the labels, while the array values are the corresponding
+    radio button values. Note that the labels will NOT be HTML-encoded, while
+    the values will.
+    [$options] (array) Options (name => config) for the radio button list. The
+    following options are specially handled:
+
+    - unselect: string, the value that should be submitted when none of the
+    radio buttons is selected.   You may set this option to be null to prevent
+    default value submission.   If this option is not set, an empty string
+    will be submitted. - separator: string, the HTML code that separates
+    items. - item: callable, a callback that can be used to customize the
+    generation of the HTML code   corresponding to a single item in $items.
+    The signature of this callback must be:
+
+        function ($index, $label, $name, $checked, $value)
+
+    where $index is the zero-based index of the radio button in the whole
+    list; $label   is the label for the radio button; and $name, $value and
+    $checked represent the name,   value and the checked status of the radio
+    button input.
+
+    See [[renderTagAttributes()]] for details on how attributes are being
+    rendered.
+
+
+*yii\helpers\BaseHtml::renderSelectOptions*			 public
+>
+ renderSelectOptions($selection, $items, $tagOptions='[]')
+<
+(string) The generated list options
+
+
+    [$selection] (string|array) The selected value(s). This can be either a
+    string for single selection or an array for multiple selections.
+    [$items] (array) The option data items. The array keys are option values,
+    and the array values are the corresponding option labels. The array can
+    also be nested (i.e. some array values are arrays too). For each
+    sub-array, an option group will be generated whose label is the key
+    associated with the sub-array. If you have a list of data models, you may
+    convert them into the format described above using
+    [[\yii\helpers\ArrayHelper::map()]].
+
+    Note, the values and labels will be automatically HTML-encoded by this
+    method, and the blank spaces in the labels will also be HTML-encoded.
+    [$tagOptions] (array) The $options parameter that is passed to the
+    [[dropDownList()]] or [[listBox()]] call. This method will take out these
+    elements, if any: "prompt", "options" and "groups". See more details in
+    [[dropDownList()]] for the explanation of these elements.
+
+
+*yii\helpers\BaseHtml::renderTagAttributes*			 public
+>
+ renderTagAttributes($attributes)
+<
+(string) The rendering result. If the attributes are not empty, they will be
+rendered into a string with a leading white space (so that it can be directly
+appended to the tag name in a tag. If there is no attribute, an empty string
+will be returned.
+
+ Attributes whose values are of boolean type will be treated as [boolean
+ attributes](http://www.w3.org/TR/html5/infrastructure.html#boolean-attributes).
+
+ Attributes whose values are null will not be rendered.
+
+ The values of attributes will be HTML-encoded using [[encode()]].
+
+ The "data" attribute is specially handled when it is receiving an array
+ value. In this case, the array will be "expanded" and a list data attributes
+ will be rendered. For example, if ''data' => ['id' => 1, 'name' => 'yii']',
+ then this will be rendered: 'data-id="1" data-name="yii"'.
+    [$attributes] (array) Attributes to be rendered. The attribute values will
+    be HTML-encoded using [[encode()]].
+
+
+*yii\helpers\BaseHtml::addCssClass*				 public
+>
+ addCssClass($options, $class)
+<
+(void)
+
+ If the CSS class is already in the options, it will not be added again.
+    [$options] (array) The options to be modified.
+    [$class] (string) The CSS class to be added
+
+
+*yii\helpers\BaseHtml::removeCssClass*				 public
+>
+ removeCssClass($options, $class)
+<
+(void)
+
+
+    [$options] (array) The options to be modified.
+    [$class] (string) The CSS class to be removed
+
+
+*yii\helpers\BaseHtml::addCssStyle*				 public
+>
+ addCssStyle($options, $style, $overwrite='true')
+<
+(void)
+
+ If the options already contain a 'style' element, the new style will be
+ merged with the existing one. If a CSS property exists in both the new and
+ the old styles, the old one may be overwritten if '$overwrite' is true.
+
+ For example,
+
+   Html::addCssStyle($options, 'width: 100px; height: 200px');
+
+
+    [$options] (array) The HTML options to be modified.
+    [$style] (string|array) The new style string (e.g. ''width: 100px; height:
+    200px'') or array (e.g. '['width' => '100px', 'height' => '200px']').
+    [$overwrite] (boolean) Whether to overwrite existing CSS properties if the
+    new style contain them too.
+
+
+*yii\helpers\BaseHtml::removeCssStyle*				 public
+>
+ removeCssStyle($options, $properties)
+<
+(void)
+
+ For example,
+
+   Html::removeCssStyle($options, ['width', 'height']);
+
+
+    [$options] (array) The HTML options to be modified.
+    [$properties] (string|array) The CSS properties to be removed. You may use
+    a string if you are removing a single property.
+
+
+*yii\helpers\BaseHtml::cssStyleFromArray*			 public
+>
+ cssStyleFromArray($style)
+<
+(string) The CSS style string. If the CSS style is empty, a null will be
+returned.
+
+ For example,
+
+   print_r(Html::cssStyleFromArray(['width' => '100px', 'height' =>
+ '200px']));
+   // will display: 'width: 100px; height: 200px;'
+
+
+    [$style] (array) The CSS style array. The array keys are the CSS property
+    names, and the array values are the corresponding CSS property values.
+
+
+*yii\helpers\BaseHtml::cssStyleToArray* 			 public
+>
+ cssStyleToArray($style)
+<
+(array) The array representation of the CSS style
+
+ The array keys are the CSS property names, and the array values are the
+ corresponding CSS property values.
+
+ For example,
+
+   print_r(Html::cssStyleToArray('width: 100px; height: 200px;'));
+   // will display: ['width' => '100px', 'height' => '200px']
+
+
+    [$style] (string) The CSS style string
+
+
+*yii\helpers\BaseHtml::getAttributeName*			 public
+>
+ getAttributeName($attribute)
+<
+(string) The attribute name without prefix and suffix.
+
+ An attribute expression is an attribute name prefixed and/or suffixed with
+ array indexes. It is mainly used in tabular data input and/or input of array
+ type. Below are some examples:
+
+ - '[0]content' is used in tabular data input to represent the "content"
+ attribute   for the first model in tabular input; - 'dates[0]' represents the
+ first array element of the "dates" attribute; - '[0]dates[0]' represents the
+ first array element of the "dates" attribute   for the first model in tabular
+ input.
+
+ If '$attribute' has neither prefix nor suffix, it will be returned back
+ without change.
+    [$attribute] (string) The attribute name or expression
+
+
+*yii\helpers\BaseHtml::getAttributeValue*			 public
+>
+ getAttributeValue($model, $attribute)
+<
+(string|array) The corresponding attribute value
+
+ For an attribute expression like '[0]dates[0]', this method will return the
+ value of '$model->dates[0]'. See [[getAttributeName()]] for more details
+ about attribute expression.
+
+ If an attribute value is an instance of [[ActiveRecordInterface]] or an array
+ of such instances, the primary value(s) of the AR instance(s) will be
+ returned instead.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression
+
+
+*yii\helpers\BaseHtml::getInputName*				 public
+>
+ getInputName($model, $attribute)
+<
+(string) The generated input name
+
+ This method generates a name that can be used as the input name to collect
+ user input for the specified attribute. The name is generated according to
+ the [[Model::formName|form name]] of the model and the given attribute name.
+ For example, if the form name of the 'Post' model is 'Post', then the input
+ name generated for the 'content' attribute would be 'Post[content]'.
+
+ See [[getAttributeName()]] for explanation of attribute expression.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression
+
+
+*yii\helpers\BaseHtml::getInputId*				 public
+>
+ getInputId($model, $attribute)
+<
+(string) The generated input ID
+
+ This method converts the result [[getInputName()]] into a valid input ID. For
+ example, if [[getInputName()]] returns 'Post[content]', this method will
+ return 'post-content'.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    [[getAttributeName()]] for explanation of attribute expression.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

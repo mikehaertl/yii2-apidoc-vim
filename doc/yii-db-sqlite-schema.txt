@@ -1,0 +1,260 @@
+
+*yii\db\sqlite\Schema*   >> yii\db\Schema
+======================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$db>					*yii\db\sqlite\Schema::$db*
+ See |yii\db\Schema::$db|
+
+<$defaultSchema>			*yii\db\sqlite\Schema::$defaultSchema*
+ See |yii\db\Schema::$defaultSchema|
+
+<$typeMap>				*yii\db\sqlite\Schema::$typeMap*
+ (array) Mapping from physical column types (keys) to abstract column types
+ (values)
+
+<$tableSchemas> 			*yii\db\sqlite\Schema::$tableSchemas*
+ (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
+ array element is an instance of [[TableSchema]] or its child class.
+
+<$tableNames>				*yii\db\sqlite\Schema::$tableNames*
+ (string[]) All table names in the database.
+
+<$queryBuilder> 			*yii\db\sqlite\Schema::$queryBuilder*
+ (\yii\db\QueryBuilder) The query builder for this connection.
+
+<$lastInsertID> 			*yii\db\sqlite\Schema::$lastInsertID*
+ (string) The row ID of the last row inserted, or the last value retrieved
+ from the sequence object
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\db\sqlite\Schema::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\db\sqlite\Schema::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\db\sqlite\Schema::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\db\sqlite\Schema::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\db\sqlite\Schema::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\db\sqlite\Schema::__isset* 				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\db\sqlite\Schema::__unset* 				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\db\sqlite\Schema::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\db\sqlite\Schema::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\db\sqlite\Schema::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\db\sqlite\Schema::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\db\sqlite\Schema::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\db\sqlite\Schema::loadTableSchema* 			 protected
+>
+ loadTableSchema($name)
+<
+(\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
+not exist.
+
+
+    [$name] (string) Table name
+
+
+*yii\db\sqlite\Schema::getTableSchema*				 public
+ See |yii\db\Schema::getTableSchema|
+
+
+*yii\db\sqlite\Schema::getCacheKey*				 protected
+ See |yii\db\Schema::getCacheKey|
+
+
+*yii\db\sqlite\Schema::getCacheGroup*				 protected
+ See |yii\db\Schema::getCacheGroup|
+
+
+*yii\db\sqlite\Schema::getTableSchemas* 			 public
+ See |yii\db\Schema::getTableSchemas|
+
+
+*yii\db\sqlite\Schema::getTableNames*				 public
+ See |yii\db\Schema::getTableNames|
+
+
+*yii\db\sqlite\Schema::getQueryBuilder* 			 public
+ See |yii\db\Schema::getQueryBuilder|
+
+
+*yii\db\sqlite\Schema::getPdoType*				 public
+ See |yii\db\Schema::getPdoType|
+
+
+*yii\db\sqlite\Schema::refresh* 				 public
+ See |yii\db\Schema::refresh|
+
+
+*yii\db\sqlite\Schema::createQueryBuilder*			 public
+>
+ createQueryBuilder()
+<
+(\yii\db\sqlite\QueryBuilder) Query builder instance
+
+ This method may be overridden by child classes to create a DBMS-specific
+ query builder.
+
+
+*yii\db\sqlite\Schema::findTableNames*				 protected
+>
+ findTableNames($schema='''')
+<
+(array) All table names in the database. The names have NO schema name prefix.
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
+
+
+*yii\db\sqlite\Schema::findUniqueIndexes*			 public
+>
+ findUniqueIndexes($table)
+<
+(array) All unique indexes for the given table.
+
+ Each array element is of the following structure:
+
+   [
+    'IndexName1' => ['col1' [, ...]],
+    'IndexName2' => ['col2' [, ...]],
+   ]
+
+
+    [$table] (\yii\db\TableSchema) The table metadata
+
+
+*yii\db\sqlite\Schema::getLastInsertID* 			 public
+ See |yii\db\Schema::getLastInsertID|
+
+
+*yii\db\sqlite\Schema::supportsSavepoint*			 public
+ See |yii\db\Schema::supportsSavepoint|
+
+
+*yii\db\sqlite\Schema::createSavepoint* 			 public
+ See |yii\db\Schema::createSavepoint|
+
+
+*yii\db\sqlite\Schema::releaseSavepoint*			 public
+ See |yii\db\Schema::releaseSavepoint|
+
+
+*yii\db\sqlite\Schema::rollBackSavepoint*			 public
+ See |yii\db\Schema::rollBackSavepoint|
+
+
+*yii\db\sqlite\Schema::quoteValue*				 public
+ See |yii\db\Schema::quoteValue|
+
+
+*yii\db\sqlite\Schema::quoteTableName*				 public
+ See |yii\db\Schema::quoteTableName|
+
+
+*yii\db\sqlite\Schema::quoteColumnName* 			 public
+ See |yii\db\Schema::quoteColumnName|
+
+
+*yii\db\sqlite\Schema::quoteSimpleTableName*			 public
+>
+ quoteSimpleTableName($name)
+<
+(string) The properly quoted table name
+
+ A simple table name has no schema prefix.
+    [$name] (string) Table name
+
+
+*yii\db\sqlite\Schema::quoteSimpleColumnName*			 public
+>
+ quoteSimpleColumnName($name)
+<
+(string) The properly quoted column name
+
+ A simple column name has no prefix.
+    [$name] (string) Column name
+
+
+*yii\db\sqlite\Schema::getRawTableName* 			 public
+ See |yii\db\Schema::getRawTableName|
+
+
+*yii\db\sqlite\Schema::getColumnPhpType*			 protected
+ See |yii\db\Schema::getColumnPhpType|
+
+
+*yii\db\sqlite\Schema::findColumns*				 protected
+>
+ findColumns($table)
+<
+(boolean) Whether the table exists in the database
+
+
+    [$table] (\yii\db\TableSchema) The table metadata
+
+
+*yii\db\sqlite\Schema::findConstraints* 			 protected
+>
+ findConstraints($table)
+<
+(void)
+
+
+    [$table] (\yii\db\TableSchema) The table metadata
+
+
+*yii\db\sqlite\Schema::loadColumnSchema*			 protected
+>
+ loadColumnSchema($info)
+<
+(\yii\db\ColumnSchema) The column schema object
+
+
+    [$info] (array) Column information
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

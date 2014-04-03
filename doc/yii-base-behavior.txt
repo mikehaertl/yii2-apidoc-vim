@@ -1,0 +1,126 @@
+
+*yii\base\Behavior*   >> yii\base\Object
+===================
+
+ A behavior can be used to enhance the functionality of an existing component
+ without modifying its code. In particular, it can "inject" its own methods
+ and properties into the component and make them directly accessible via the
+ component. It can also respond to the events triggered in the component and
+ thus intercept the normal code execution.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$owner>				*yii\base\Behavior::$owner*
+ (\yii\base\Component) The owner of this behavior
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\Behavior::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\base\Behavior::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\base\Behavior::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\base\Behavior::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\base\Behavior::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\base\Behavior::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\base\Behavior::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\base\Behavior::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\base\Behavior::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\base\Behavior::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\base\Behavior::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\base\Behavior::hasMethod*					 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\base\Behavior::events*					 public
+>
+ events()
+<
+(array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+ Child classes may override this method to declare what PHP callbacks should
+ be attached to the events of the [[owner]] component.
+
+ The callbacks will be attached to the [[owner]]'s events when the behavior is
+ attached to the owner; and they will be detached from the events when the
+ behavior is detached from the component.
+
+ The callbacks can be any of the followings:
+
+ - method in this behavior: ''handleClick'', equivalent to '[$this,
+ 'handleClick']' - object method: '[$object, 'handleClick']' - static method:
+ '['Page', 'handleClick']' - anonymous function: 'function ($event) { ... }'
+
+ The following is an example:
+
+   [
+    Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+    Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+   ]
+
+
+
+
+*yii\base\Behavior::attach*					 public
+>
+ attach($owner)
+<
+(void)
+
+ The default implementation will set the [[owner]] property and attach event
+ handlers as declared in [[events]]. Make sure you call the parent
+ implementation if you override this method.
+    [$owner] (\yii\base\Component) The component that this behavior is to be
+    attached to.
+
+
+*yii\base\Behavior::detach*					 public
+>
+ detach()
+<
+(void)
+
+ The default implementation will unset the [[owner]] property and detach event
+ handlers declared in [[events]]. Make sure you call the parent implementation
+ if you override this method.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,247 @@
+
+*yii\db\cubrid\Schema*   >> yii\db\Schema
+======================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$db>					*yii\db\cubrid\Schema::$db*
+ See |yii\db\Schema::$db|
+
+<$defaultSchema>			*yii\db\cubrid\Schema::$defaultSchema*
+ See |yii\db\Schema::$defaultSchema|
+
+<$typeMap>				*yii\db\cubrid\Schema::$typeMap*
+ (array) Mapping from physical column types (keys) to abstract column types
+ (values) Please refer to [CUBRID
+ manual](http://www.cubrid.org/manual/91/en/sql/datatype.html) for details on
+ data types.
+
+<$tableSchemas> 			*yii\db\cubrid\Schema::$tableSchemas*
+ (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
+ array element is an instance of [[TableSchema]] or its child class.
+
+<$tableNames>				*yii\db\cubrid\Schema::$tableNames*
+ (string[]) All table names in the database.
+
+<$queryBuilder> 			*yii\db\cubrid\Schema::$queryBuilder*
+ (\yii\db\QueryBuilder) The query builder for this connection.
+
+<$lastInsertID> 			*yii\db\cubrid\Schema::$lastInsertID*
+ (string) The row ID of the last row inserted, or the last value retrieved
+ from the sequence object
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\db\cubrid\Schema::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\db\cubrid\Schema::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\db\cubrid\Schema::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\db\cubrid\Schema::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\db\cubrid\Schema::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\db\cubrid\Schema::__isset* 				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\db\cubrid\Schema::__unset* 				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\db\cubrid\Schema::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\db\cubrid\Schema::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\db\cubrid\Schema::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\db\cubrid\Schema::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\db\cubrid\Schema::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\db\cubrid\Schema::loadTableSchema* 			 protected
+>
+ loadTableSchema($name)
+<
+(\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
+not exist.
+
+
+    [$name] (string) Table name
+
+
+*yii\db\cubrid\Schema::getTableSchema*				 public
+ See |yii\db\Schema::getTableSchema|
+
+
+*yii\db\cubrid\Schema::getCacheKey*				 protected
+ See |yii\db\Schema::getCacheKey|
+
+
+*yii\db\cubrid\Schema::getCacheGroup*				 protected
+ See |yii\db\Schema::getCacheGroup|
+
+
+*yii\db\cubrid\Schema::getTableSchemas* 			 public
+ See |yii\db\Schema::getTableSchemas|
+
+
+*yii\db\cubrid\Schema::getTableNames*				 public
+ See |yii\db\Schema::getTableNames|
+
+
+*yii\db\cubrid\Schema::getQueryBuilder* 			 public
+ See |yii\db\Schema::getQueryBuilder|
+
+
+*yii\db\cubrid\Schema::getPdoType*				 public
+>
+ getPdoType($data)
+<
+(integer) The PDO type
+
+
+    [$data] (mixed) The data whose PDO type is to be determined
+
+
+*yii\db\cubrid\Schema::refresh* 				 public
+ See |yii\db\Schema::refresh|
+
+
+*yii\db\cubrid\Schema::createQueryBuilder*			 public
+>
+ createQueryBuilder()
+<
+(\yii\db\cubrid\QueryBuilder) Query builder instance
+
+
+
+
+*yii\db\cubrid\Schema::findTableNames*				 protected
+>
+ findTableNames($schema='''')
+<
+(array) All table names in the database. The names have NO schema name prefix.
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
+
+
+*yii\db\cubrid\Schema::findUniqueIndexes*			 public
+ See |yii\db\Schema::findUniqueIndexes|
+
+
+*yii\db\cubrid\Schema::getLastInsertID* 			 public
+ See |yii\db\Schema::getLastInsertID|
+
+
+*yii\db\cubrid\Schema::supportsSavepoint*			 public
+ See |yii\db\Schema::supportsSavepoint|
+
+
+*yii\db\cubrid\Schema::createSavepoint* 			 public
+ See |yii\db\Schema::createSavepoint|
+
+
+*yii\db\cubrid\Schema::releaseSavepoint*			 public
+>
+ releaseSavepoint($name)
+<
+(void)
+
+
+    [$name] () 
+
+
+*yii\db\cubrid\Schema::rollBackSavepoint*			 public
+ See |yii\db\Schema::rollBackSavepoint|
+
+
+*yii\db\cubrid\Schema::quoteValue*				 public
+>
+ quoteValue($str)
+<
+(string) The properly quoted string
+
+ Note that if the parameter is not a string, it will be returned without
+ change.
+    [$str] (string) String to be quoted
+
+
+*yii\db\cubrid\Schema::quoteTableName*				 public
+ See |yii\db\Schema::quoteTableName|
+
+
+*yii\db\cubrid\Schema::quoteColumnName* 			 public
+ See |yii\db\Schema::quoteColumnName|
+
+
+*yii\db\cubrid\Schema::quoteSimpleTableName*			 public
+>
+ quoteSimpleTableName($name)
+<
+(string) The properly quoted table name
+
+ A simple table name has no schema prefix.
+    [$name] (string) Table name
+
+
+*yii\db\cubrid\Schema::quoteSimpleColumnName*			 public
+>
+ quoteSimpleColumnName($name)
+<
+(string) The properly quoted column name
+
+ A simple column name has no prefix.
+    [$name] (string) Column name
+
+
+*yii\db\cubrid\Schema::getRawTableName* 			 public
+ See |yii\db\Schema::getRawTableName|
+
+
+*yii\db\cubrid\Schema::getColumnPhpType*			 protected
+ See |yii\db\Schema::getColumnPhpType|
+
+
+*yii\db\cubrid\Schema::loadColumnSchema*			 protected
+>
+ loadColumnSchema($info)
+<
+(\yii\db\ColumnSchema) The column schema object
+
+
+    [$info] (array) Column information
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,136 @@
+
+*yii\db\ActiveRelationTrait*  
+============================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$multiple>				*yii\db\ActiveRelationTrait::$multiple*
+ (boolean) Whether this query represents a relation to more than one record.
+ This property is only used in relational context. If true, this relation will
+ populate all query results into AR instances using [[all()]]. If false, only
+ the first row of the results will be retrieved using [[one()]].
+
+<$primaryModel> 			*yii\db\ActiveRelationTrait::$primaryModel*
+ (\yii\db\ActiveRecord) The primary model of a relational query. This is used
+ only in lazy loading with dynamic query options.
+
+<$link> 				*yii\db\ActiveRelationTrait::$link*
+ (array) The columns of the primary and foreign tables that establish a
+ relation. The array keys must be columns of the table for this relation, and
+ the array values must be the corresponding columns from the primary table. Do
+ not prefix or quote the column names as this will be done automatically by
+ Yii. This property is only used in relational context.
+
+<$via>					*yii\db\ActiveRelationTrait::$via*
+ (array) The query associated with the pivot table. Please call [[via()]] to
+ set this property instead of directly setting it. This property is only used
+ in relational context.
+
+<$inverseOf>				*yii\db\ActiveRelationTrait::$inverseOf*
+ (string) The name of the relation that is the inverse of this relation. For
+ example, an order has a customer, which means the inverse of the "customer"
+ relation is the "orders", and the inverse of the "orders" relation is the
+ "customer". If this property is set, the primary record(s) will be referenced
+ through the specified relation. For example, '$customer->orders[0]->customer'
+ and '$customer' will be the same object, and accessing the customer of an
+ order will not trigger new DB query. This property is only used in relational
+ context.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\db\ActiveRelationTrait::__clone*				 public
+>
+ __clone()
+<
+(void)
+
+
+
+
+*yii\db\ActiveRelationTrait::via*				 public
+>
+ via($relationName, $callable='null')
+<
+(static) The relation object itself.
+
+ Use this method to specify a pivot record/table when declaring a relation in
+ the [[ActiveRecord]] class:
+
+   public function getOrders()
+   {
+       return $this->hasOne(Order::className(), ['id' => 'order_id']);
+   }
+
+   public function getOrderItems()
+   {
+       return $this->hasMany(Item::className(), ['id' => 'item_id'])
+                   ->via('orders', ['order_id' => 'id']);
+   }
+
+
+    [$relationName] (string) The relation name. This refers to a relation
+    declared in [[primaryModel]].
+    [$callable] (callable) A PHP callback for customizing the relation
+    associated with the pivot table. Its signature should be
+    'function($query)', where '$query' is the query to be customized.
+
+
+*yii\db\ActiveRelationTrait::inverseOf* 			 public
+>
+ inverseOf($relationName)
+<
+(static) The relation object itself.
+
+ For example, an order has a customer, which means the inverse of the
+ "customer" relation is the "orders", and the inverse of the "orders" relation
+ is the "customer". If this property is set, the primary record(s) will be
+ referenced through the specified relation. For example,
+ '$customer->orders[0]->customer' and '$customer' will be the same object, and
+ accessing the customer of an order will not trigger a new DB query.
+
+ Use this method when declaring a relation in the [[ActiveRecord]] class:
+
+   public function getOrders()
+   {
+       return $this->hasMany(Order::className(), ['customer_id' =>
+ 'id'])->inverseOf('customer');
+   }
+
+
+    [$relationName] (string) The name of the relation that is the inverse of
+    this relation.
+
+
+*yii\db\ActiveRelationTrait::findFor*				 public
+>
+ findFor($name, $model)
+<
+(mixed) The related record(s)
+
+ This method is invoked when a relation of an ActiveRecord is being accessed
+ in a lazy fashion.
+    [$name] (string) The relation name
+    [$model] (\yii\db\ActiveRecordInterface|\yii\db\BaseActiveRecord) The
+    primary model
+
+
+*yii\db\ActiveRelationTrait::populateRelation*			 public
+>
+ populateRelation($name, $primaryModels)
+<
+(array) The related models
+
+
+    [$name] (string) The relation name
+    [$primaryModels] (array) Primary models
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

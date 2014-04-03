@@ -1,0 +1,216 @@
+
+*yii\rbac\Item*   >> yii\base\Object
+===============
+
+ An authorization item can be an operation, a task or a role. They form an
+ authorization hierarchy. Items on higher levels of the hierarchy inherit the
+ permissions represented by items on lower levels. A user may be assigned one
+ or several authorization items (called [[Assignment]] assignments). He can
+ perform an operation only when it is among his assigned items.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$manager>				*yii\rbac\Item::$manager*
+ (\yii\rbac\Manager) The auth manager of this item
+
+<$description>				*yii\rbac\Item::$description*
+ (string) The item description
+
+<$bizRule>				*yii\rbac\Item::$bizRule*
+ (string) The business rule associated with this item
+
+<$data> 				*yii\rbac\Item::$data*
+ (mixed) The additional data associated with this item
+
+<$type> 				*yii\rbac\Item::$type*
+ (integer) The authorization item type. This could be 0 (operation), 1 (task)
+ or 2 (role).
+
+<$name> 				*yii\rbac\Item::$name*
+ (string) The item name
+
+<$children>				*yii\rbac\Item::$children*
+ (\yii\rbac\Item[]) All child items of this item.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\rbac\Item::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\rbac\Item::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\rbac\Item::init*						 public
+ See |yii\base\Object::init|
+
+
+*yii\rbac\Item::__get*						 public
+ See |yii\base\Object::__get|
+
+
+*yii\rbac\Item::__set*						 public
+ See |yii\base\Object::__set|
+
+
+*yii\rbac\Item::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\rbac\Item::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\rbac\Item::__call* 					 public
+ See |yii\base\Object::__call|
+
+
+*yii\rbac\Item::hasProperty*					 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\rbac\Item::canGetProperty* 				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\rbac\Item::canSetProperty* 				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\rbac\Item::hasMethod*					 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\rbac\Item::checkAccess*					 public
+>
+ checkAccess($itemName, $params='[]')
+<
+(boolean) Whether the specified item is within the hierarchy starting from
+this item.
+
+ This method is expected to be internally used by the actual implementations
+ of the [[Manager::checkAccess()]].
+    [$itemName] (string) The name of the item to be checked
+    [$params] (array) The parameters to be passed to business rule evaluation
+
+
+*yii\rbac\Item::getName*					 public
+>
+ getName()
+<
+(string) The item name
+
+
+
+
+*yii\rbac\Item::setName*					 public
+>
+ setName($value)
+<
+(void)
+
+
+    [$value] (string) The item name
+
+
+*yii\rbac\Item::addChild*					 public
+>
+ addChild($name)
+<
+(boolean) Whether the item is added successfully
+
+
+    [$name] (string) The name of the child item
+
+
+*yii\rbac\Item::removeChild*					 public
+>
+ removeChild($name)
+<
+(boolean) Whether the removal is successful
+
+ Note, the child item is not deleted. Only the parent-child relationship is
+ removed.
+    [$name] (string) The child item name
+
+
+*yii\rbac\Item::hasChild*					 public
+>
+ hasChild($name)
+<
+(boolean) Whether the child exists
+
+
+    [$name] (string) The child item name
+
+
+*yii\rbac\Item::getChildren*					 public
+>
+ getChildren()
+<
+(\yii\rbac\Item[]) All child items of this item.
+
+
+
+
+*yii\rbac\Item::assign* 					 public
+>
+ assign($userId, $bizRule='null', $data='null')
+<
+(\yii\rbac\Assignment) The authorization assignment information.
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$bizRule] (string) The business rule to be executed when
+    [[checkAccess()]] is called for this particular authorization item.
+    [$data] (mixed) Additional data associated with this assignment
+
+
+*yii\rbac\Item::revoke* 					 public
+>
+ revoke($userId)
+<
+(boolean) Whether removal is successful
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+
+
+*yii\rbac\Item::isAssigned*					 public
+>
+ isAssigned($userId)
+<
+(boolean) Whether the item has been assigned to the user.
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+
+
+*yii\rbac\Item::getAssignment*					 public
+>
+ getAssignment($userId)
+<
+(\yii\rbac\Assignment) The item assignment information. Null is returned if
+this item is not assigned to the user.
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+
+
+*yii\rbac\Item::save*						 public
+>
+ save()
+<
+(void)
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

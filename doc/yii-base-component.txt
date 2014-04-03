@@ -1,0 +1,436 @@
+
+*yii\base\Component*   >> yii\base\Object
+====================
+
+ Component provides the *event* and *behavior* features, in addition to the
+ *property* feature which is implemented in its parent class [[Object]].
+
+ Event is a way to "inject" custom code into existing code at certain places.
+ For example, a comment object can trigger an "add" event when the user adds a
+ comment. We can write custom code and attach it to this event so that when
+ the event is triggered (i.e. comment will be added), our custom code will be
+ executed.
+
+ An event is identified by a name that should be unique within the class it is
+ defined at. Event names are *case-sensitive*.
+
+ One or multiple PHP callbacks, called *event handlers*, can be attached to an
+ event. You can call [[trigger()]] to raise an event. When an event is raised,
+ the event handlers will be invoked automatically in the order they were
+ attached.
+
+ To attach an event handler to an event, call [[on()]]:
+
+   $post->on('update', function ($event) {
+       // send email notification
+   });
+
+ In the above, an anonymous function is attached to the "update" event of the
+ post. You may attach the following types of event handlers:
+
+ - anonymous function: 'function ($event) { ... }' - object method: '[$object,
+ 'handleAdd']' - static class method: '['Page', 'handleAdd']' - global
+ function: ''handleAdd''
+
+ The signature of an event handler should be like the following:
+
+   function foo($event)
+
+ where '$event' is an [[Event]] object which includes parameters associated
+ with the event.
+
+ You can also attach a handler to an event when configuring a component with a
+ configuration array. The syntax is like the following:
+
+   [
+       'on add' => function ($event) { ... }
+   ]
+
+ where 'on add' stands for attaching an event to the 'add' event.
+
+ Sometimes, you may want to associate extra data with an event handler when
+ you attach it to an event and then access it when the handler is invoked. You
+ may do so by
+
+   $post->on('update', function ($event) {
+       // the data can be accessed via $event->data
+   }, $data);
+
+ A behavior is an instance of [[Behavior]] or its child class. A component can
+ be attached with one or multiple behaviors. When a behavior is attached to a
+ component, its public properties and methods can be accessed via the
+ component directly, as if the component owns those properties and methods.
+
+ To attach a behavior to a component, declare it in [[behaviors()]], or
+ explicitly call [[attachBehavior]]. Behaviors declared in [[behaviors()]] are
+ automatically attached to the corresponding component.
+
+ One can also attach a behavior to a component when configuring it with a
+ configuration array. The syntax is like the following:
+
+   [
+       'as tree' => [
+           'class' => 'Tree',
+       ],
+   ]
+
+ where 'as tree' stands for attaching a behavior named 'tree', and the array
+ will be passed to [[\Yii::createObject()]] to create the behavior object.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$behaviors>				*yii\base\Component::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\Component::className* 				 public
+ See |yii\base\Object::className|
+
+
+*yii\base\Component::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\base\Component::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\base\Component::__get*					 public
+>
+ __get($name)
+<
+(mixed) The property value or the value of a behavior's property
+
+ This method will check in the following order and act accordingly:
+
+  - a property defined by a getter: return the getter result  - a property of
+ a behavior: return the behavior property value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$value = $component->property;'.
+    [$name] (string) The property name
+
+
+*yii\base\Component::__set*					 public
+>
+ __set($name, $value)
+<
+(void)
+
+ This method will check in the following order and act accordingly:
+
+  - a property defined by a setter: set the property value  - an event in the
+ format of "on xyz": attach the handler to the event "xyz"  - a behavior in
+ the format of "as xyz": attach the behavior named as "xyz"  - a property of a
+ behavior: set the behavior property value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$component->property = $value;'.
+    [$name] (string) The property name or the event name
+    [$value] (mixed) The property value
+
+
+*yii\base\Component::__isset*					 public
+>
+ __isset($name)
+<
+(boolean) Whether the named property is null
+
+ This method will check in the following order and act accordingly:
+
+  - a property defined by a setter: return whether the property value is null 
+ - a property of a behavior: return whether the property value is null
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'isset($component->property)'.
+    [$name] (string) The property name or the event name
+
+
+*yii\base\Component::__unset*					 public
+>
+ __unset($name)
+<
+(void)
+
+ This method will check in the following order and act accordingly:
+
+  - a property defined by a setter: set the property value to be null  - a
+ property of a behavior: set the property value to be null
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'unset($component->property)'.
+    [$name] (string) The property name
+
+
+*yii\base\Component::__call*					 public
+>
+ __call($name, $params)
+<
+(mixed) The method return value
+
+ This method will check if any attached behavior has the named method and will
+ execute it if available.
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when an unknown method is being invoked.
+    [$name] (string) The method name
+    [$params] (array) Method parameters
+
+
+*yii\base\Component::hasProperty*				 public
+>
+ hasProperty($name, $checkVars='true', $checkBehaviors='true')
+<
+(boolean) Whether the property is defined
+
+ A property is defined if:
+
+ - the class has a getter or setter method associated with the specified name 
+  (in this case, property name is case-insensitive); - the class has a member
+ variable with the specified name (when '$checkVars' is true); - an attached
+ behavior has a property of the given name (when '$checkBehaviors' is true).
+    [$name] (string) The property name
+    [$checkVars] (boolean) Whether to treat member variables as properties
+    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    properties of this component
+
+
+*yii\base\Component::canGetProperty*				 public
+>
+ canGetProperty($name, $checkVars='true', $checkBehaviors='true')
+<
+(boolean) Whether the property can be read
+
+ A property can be read if:
+
+ - the class has a getter method associated with the specified name   (in this
+ case, property name is case-insensitive); - the class has a member variable
+ with the specified name (when '$checkVars' is true); - an attached behavior
+ has a readable property of the given name (when '$checkBehaviors' is true).
+    [$name] (string) The property name
+    [$checkVars] (boolean) Whether to treat member variables as properties
+    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    properties of this component
+
+
+*yii\base\Component::canSetProperty*				 public
+>
+ canSetProperty($name, $checkVars='true', $checkBehaviors='true')
+<
+(boolean) Whether the property can be written
+
+ A property can be written if:
+
+ - the class has a setter method associated with the specified name   (in this
+ case, property name is case-insensitive); - the class has a member variable
+ with the specified name (when '$checkVars' is true); - an attached behavior
+ has a writable property of the given name (when '$checkBehaviors' is true).
+    [$name] (string) The property name
+    [$checkVars] (boolean) Whether to treat member variables as properties
+    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    properties of this component
+
+
+*yii\base\Component::hasMethod* 				 public
+>
+ hasMethod($name, $checkBehaviors='true')
+<
+(boolean) Whether the property is defined
+
+ A method is defined if:
+
+ - the class has a method with the specified name - an attached behavior has a
+ method with the given name (when '$checkBehaviors' is true).
+    [$name] (string) The property name
+    [$checkBehaviors] (boolean) Whether to treat behaviors' methods as methods
+    of this component
+
+
+*yii\base\Component::__clone*					 public
+>
+ __clone()
+<
+(void)
+
+ It removes all behaviors because they are attached to the old object.
+
+
+*yii\base\Component::behaviors* 				 public
+>
+ behaviors()
+<
+(array) The behavior configurations.
+
+ Child classes may override this method to specify the behaviors they want to
+ behave as.
+
+ The return value of this method should be an array of behavior objects or
+ configurations indexed by behavior names. A behavior configuration can be
+ either a string specifying the behavior class or an array of the following
+ structure:
+
+   'behaviorName' => [
+       'class' => 'BehaviorClass',
+       'property1' => 'value1',
+       'property2' => 'value2',
+   ]
+
+ Note that a behavior class must extend from [[Behavior]]. Behavior names can
+ be strings or integers. If the former, they uniquely identify the behaviors.
+ If the latter, the corresponding behaviors are anonymous and their properties
+ and methods will NOT be made available via the component (however, the
+ behaviors can still respond to the component's events).
+
+ Behaviors declared in this method will be attached to the component
+ automatically (on demand).
+
+
+*yii\base\Component::hasEventHandlers*				 public
+>
+ hasEventHandlers($name)
+<
+(boolean) Whether there is any handler attached to the event.
+
+
+    [$name] (string) The event name
+
+
+*yii\base\Component::on*					 public
+>
+ on($name, $handler, $data='null')
+<
+(void)
+
+ The event handler must be a valid PHP callback. The followings are some
+ examples:
+
+   function ($event) { ... }         // anonymous function
+   [$object, 'handleClick']          // $object->handleClick()
+   ['Page', 'handleClick']           // Page::handleClick()
+   'handleClick'                     // global function handleClick()
+
+ The event handler must be defined with the following signature,
+
+   function ($event)
+
+ where '$event' is an [[Event]] object which includes parameters associated
+ with the event.
+    [$name] (string) The event name
+    [$handler] (callable) The event handler
+    [$data] (mixed) The data to be passed to the event handler when the event
+    is triggered. When the event handler is invoked, this data can be accessed
+    via [[Event::data]].
+
+
+*yii\base\Component::off*					 public
+>
+ off($name, $handler='null')
+<
+(boolean) If a handler is found and detached
+
+ This method is the opposite of [[on()]].
+    [$name] (string) Event name
+    [$handler] (callable) The event handler to be removed. If it is null, all
+    handlers attached to the named event will be removed.
+
+
+*yii\base\Component::trigger*					 public
+>
+ trigger($name, $event='null')
+<
+(void)
+
+ This method represents the happening of an event. It invokes all attached
+ handlers for the event including class-level handlers.
+    [$name] (string) The event name
+    [$event] (\yii\base\Event) The event parameter. If not set, a default
+    [[Event]] object will be created.
+
+
+*yii\base\Component::getBehavior*				 public
+>
+ getBehavior($name)
+<
+(\yii\base\Behavior) The behavior object, or null if the behavior does not
+exist
+
+
+    [$name] (string) The behavior name
+
+
+*yii\base\Component::getBehaviors*				 public
+>
+ getBehaviors()
+<
+(\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+
+*yii\base\Component::attachBehavior*				 public
+>
+ attachBehavior($name, $behavior)
+<
+(\yii\base\Behavior) The behavior object
+
+ This method will create the behavior object based on the given configuration.
+ After that, the behavior object will be attached to this component by calling
+ the [[Behavior::attach()]] method.
+    [$name] (string) The name of the behavior.
+    [$behavior] (string|array|\yii\base\Behavior) The behavior configuration.
+    This can be one of the following:
+
+     - a [[Behavior]] object  - a string specifying the behavior class  - an
+    object configuration array that will be passed to [[Yii::createObject()]]
+    to create the behavior object.
+
+
+*yii\base\Component::attachBehaviors*				 public
+>
+ attachBehaviors($behaviors)
+<
+(void)
+
+ Each behavior is indexed by its name and should be a [[Behavior]] object, a
+ string specifying the behavior class, or an configuration array for creating
+ the behavior.
+    [$behaviors] (array) List of behaviors to be attached to the component
+
+
+*yii\base\Component::detachBehavior*				 public
+>
+ detachBehavior($name)
+<
+(\yii\base\Behavior) The detached behavior. Null if the behavior does not
+exist.
+
+ The behavior's [[Behavior::detach()]] method will be invoked.
+    [$name] (string) The behavior's name.
+
+
+*yii\base\Component::detachBehaviors*				 public
+>
+ detachBehaviors()
+<
+(void)
+
+
+
+
+*yii\base\Component::ensureBehaviors*				 public
+>
+ ensureBehaviors()
+<
+(void)
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,370 @@
+
+*yii\mail\BaseMailer*   >> yii\base\Component
+=====================
+
+ Concrete child classes should may focus on implementing the [[sendMessage()]]
+ method.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$htmlLayout>				*yii\mail\BaseMailer::$htmlLayout*
+ (string|boolean) HTML layout view name. This is the layout used to render
+ HTML mail body. The property can take the following values:
+
+ - a relative view name: a view file relative to [[viewPath]], e.g.,
+ 'layouts/html'. - a path alias: an absolute view file path specified as a
+ path alias, e.g., '@app/mail/html'. - a boolean false: the layout is
+ disabled.
+
+<$textLayout>				*yii\mail\BaseMailer::$textLayout*
+ (string|boolean) Text layout view name. This is the layout used to render
+ TEXT mail body. Please refer to [[htmlLayout]] for possible values that this
+ property can take.
+
+<$messageConfig>			*yii\mail\BaseMailer::$messageConfig*
+ (array) The configuration that should be applied to any newly created email
+ message instance by [[createMessage()]] or [[compose()]]. Any valid property
+ defined by [[MessageInterface]] can be configured, such as 'from', 'to',
+ 'subject', 'textBody', 'htmlBody', etc.
+
+ For example:
+
+   [
+       'charset' => 'UTF-8',
+       'from' => 'noreply@mydomain.com',
+       'bcc' => 'developer@mydomain.com',
+   ]
+
+
+
+<$messageClass> 			*yii\mail\BaseMailer::$messageClass*
+ (string) The default class name of the new message instances created by
+ [[createMessage()]]
+
+<$useFileTransport>			*yii\mail\BaseMailer::$useFileTransport*
+ (boolean) Whether to save email messages as files under [[fileTransportPath]]
+ instead of sending them to the actual recipients. This is usually used during
+ development for debugging purpose.
+
+<$fileTransportPath>			*yii\mail\BaseMailer::$fileTransportPath*
+ (string) The directory where the email messages are saved when
+ [[useFileTransport]] is true.
+
+<$fileTransportCallback>		*yii\mail\BaseMailer::$fileTransportCallback*
+ (callable) A PHP callback that will be called by [[send()]] when
+ [[useFileTransport]] is true. The callback should return a file name which
+ will be used to save the email message. If not set, the file name will be
+ generated based on the current timestamp.
+
+ The signature of the callback is:
+
+   function ($mailer, $message)
+
+
+
+<$behaviors>				*yii\mail\BaseMailer::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$view> 				*yii\mail\BaseMailer::$view*
+ (array|\yii\web\View) View instance or its array configuration that will be
+ used to render message bodies.
+
+<$viewPath>				*yii\mail\BaseMailer::$viewPath*
+ (string) The directory that contains the view files for composing mail
+ messages Defaults to '@app/mail'.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\mail\BaseMailer::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\mail\BaseMailer::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\mail\BaseMailer::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\mail\BaseMailer::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\mail\BaseMailer::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\mail\BaseMailer::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\mail\BaseMailer::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\mail\BaseMailer::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\mail\BaseMailer::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\mail\BaseMailer::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\mail\BaseMailer::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\mail\BaseMailer::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\mail\BaseMailer::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\mail\BaseMailer::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\mail\BaseMailer::hasEventHandlers* 			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\mail\BaseMailer::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\mail\BaseMailer::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\mail\BaseMailer::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\mail\BaseMailer::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\mail\BaseMailer::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\mail\BaseMailer::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\mail\BaseMailer::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\mail\BaseMailer::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\mail\BaseMailer::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\mail\BaseMailer::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\mail\BaseMailer::setView*					 public
+>
+ setView($view)
+<
+(void)
+
+
+    [$view] (array|\yii\web\View) View instance or its array configuration
+    that will be used to render message bodies.
+
+
+*yii\mail\BaseMailer::getView*					 public
+>
+ getView()
+<
+(\yii\web\View) View instance.
+
+
+
+
+*yii\mail\BaseMailer::createView*				 protected
+>
+ createView($config)
+<
+(\yii\web\View) View instance.
+
+
+    [$config] (array) View configuration.
+
+
+*yii\mail\BaseMailer::compose*					 public
+>
+ compose($view='null', $params='[]')
+<
+(\yii\mail\MessageInterface) Message instance.
+
+
+    [$view] (string|array) The view to be used for rendering the message body.
+    This can be:
+
+    - a string, which represents the view name or path alias for rendering the
+    HTML body of the email.   In this case, the text body will be generated by
+    applying 'strip_tags()' to the HTML body. - an array with 'html' and/or
+    'text' elements. The 'html' element refers to the view name or path alias 
+     for rendering the HTML body, while 'text' element is for rendering the
+    text body. For example,   '['html' => 'contact-html', 'text' =>
+    'contact-text']'. - null, meaning the message instance will be returned
+    without body content.
+
+    The view to be rendered can be specified in one of the following formats:
+
+    - path alias (e.g. "@app/mail/contact"); - a relative view name (e.g.
+    "contact") located under [[viewPath]].
+    [$params] (array) The parameters (name-value pairs) that will be extracted
+    and made available in the view file.
+
+
+*yii\mail\BaseMailer::createMessage*				 protected
+>
+ createMessage()
+<
+(\yii\mail\MessageInterface) Message instance.
+
+ The newly created instance will be initialized with the configuration
+ specified by [[messageConfig]]. If the configuration does not specify a
+ 'class', the [[messageClass]] will be used as the class of the new message
+ instance.
+
+
+*yii\mail\BaseMailer::send*					 public
+>
+ send($message)
+<
+(boolean) Whether the message has been sent successfully
+
+ This method will log a message about the email being sent. If
+ [[useFileTransport]] is true, it will save the email as a file under
+ [[fileTransportPath]]. Otherwise, it will call [[sendMessage()]] to send the
+ email to its recipient(s). Child classes should implement [[sendMessage()]]
+ with the actual email sending logic.
+    [$message] (\yii\mail\MessageInterface) Email message instance to be sent
+
+
+*yii\mail\BaseMailer::sendMultiple*				 public
+>
+ sendMultiple($messages)
+<
+(integer) Number of messages that are successfully sent.
+
+ The default implementation simply calls [[send()]] multiple times. Child
+ classes may override this method to implement more efficient way of sending
+ multiple messages.
+    [$messages] (array) List of email messages, which should be sent.
+
+
+*yii\mail\BaseMailer::render*					 public
+>
+ render($view, $params='[]', $layout='false')
+<
+(string) The rendering result.
+
+ The view will be rendered using the [[view]] component.
+    [$view] (string) The view name or the path alias of the view file.
+    [$params] (array) The parameters (name-value pairs) that will be extracted
+    and made available in the view file.
+    [$layout] (string|boolean) Layout view name or path alias. If false, no
+    layout will be applied.
+
+
+*yii\mail\BaseMailer::sendMessage*				 protected
+>
+ sendMessage($message)
+<
+(boolean) Whether the message is sent successfully
+
+ This method should be implemented by child classes with the actual email
+ sending logic.
+    [$message] (\yii\mail\MessageInterface) The message to be sent
+
+
+*yii\mail\BaseMailer::saveMessage*				 protected
+>
+ saveMessage($message)
+<
+(boolean) Whether the message is saved successfully
+
+
+    [$message] (\yii\mail\MessageInterface) 
+
+
+*yii\mail\BaseMailer::generateMessageFileName*			 public
+>
+ generateMessageFileName()
+<
+(string) The file name for saving the message when [[useFileTransport]] is
+true.
+
+
+
+
+*yii\mail\BaseMailer::getViewPath*				 public
+>
+ getViewPath()
+<
+(string) The directory that contains the view files for composing mail
+messages Defaults to '@app/mail'.
+
+
+
+
+*yii\mail\BaseMailer::setViewPath*				 public
+>
+ setViewPath($path)
+<
+(void)
+
+
+    [$path] (string) The directory that contains the view files for composing
+    mail messages This can be specified as an absolute path or a path alias.
+
+
+*yii\mail\BaseMailer::beforeSend*				 public
+>
+ beforeSend($message)
+<
+(boolean) Whether to continue sending an email.
+
+ You may override this method to do last-minute preparation for the message.
+ If you override this method, please make sure you call the parent
+ implementation first.
+    [$message] (\yii\mail\MessageInterface) 
+
+
+*yii\mail\BaseMailer::afterSend*				 public
+>
+ afterSend($message, $isSuccessful)
+<
+(void)
+
+ You may override this method to do some postprocessing or logging based on
+ mail send status. If you override this method, please make sure you call the
+ parent implementation first.
+    [$message] (\yii\mail\MessageInterface) 
+    [$isSuccessful] (boolean) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

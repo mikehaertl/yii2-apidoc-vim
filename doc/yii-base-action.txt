@@ -1,0 +1,188 @@
+
+*yii\base\Action*   >> yii\base\Component
+=================
+
+ Action provides a way to divide a complex controller into smaller actions in
+ separate class files.
+
+ Derived classes must implement a method named 'run()'. This method will be
+ invoked by the controller when the action is requested. The 'run()' method
+ can have parameters which will be filled up with user input values
+ automatically according to their names. For example, if the 'run()' method is
+ declared as follows:
+
+   public function run($id, $type = 'book') { ... }
+
+ And the parameters provided for the action are: '['id' => 1]'. Then the
+ 'run()' method will be invoked as 'run(1)' automatically.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\base\Action::$id*
+ (string) ID of the action
+
+<$controller>				*yii\base\Action::$controller*
+ (\yii\base\Controller) The controller that owns this action
+
+<$behaviors>				*yii\base\Action::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$uniqueId>				*yii\base\Action::$uniqueId*
+ (string) The unique ID of this action among the whole application.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\base\Action::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\base\Action::__construct*					 public
+>
+ __construct($id, $controller, $config='[]')
+<
+(void)
+
+
+    [$id] (string) The ID of this action
+    [$controller] (\yii\base\Controller) The controller that owns this action
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii\base\Action::init* 					 public
+ See |yii\base\Object::init|
+
+
+*yii\base\Action::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\base\Action::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\base\Action::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\base\Action::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\base\Action::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\base\Action::hasProperty*					 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\base\Action::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\base\Action::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\base\Action::hasMethod*					 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\base\Action::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\base\Action::behaviors*					 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\base\Action::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\base\Action::on*						 public
+ See |yii\base\Component::on|
+
+
+*yii\base\Action::off*						 public
+ See |yii\base\Component::off|
+
+
+*yii\base\Action::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\base\Action::getBehavior*					 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\base\Action::getBehaviors* 				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\base\Action::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\base\Action::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\base\Action::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\base\Action::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\base\Action::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\base\Action::getUniqueId*					 public
+>
+ getUniqueId()
+<
+(string) The unique ID of this action among the whole application.
+
+
+
+
+*yii\base\Action::runWithParams*				 public
+>
+ runWithParams($params)
+<
+(mixed) The result of the action
+
+ This method is mainly invoked by the controller.
+    [$params] (array) The parameters to be bound to the action's run() method.
+
+
+*yii\base\Action::beforeRun*					 protected
+>
+ beforeRun()
+<
+(boolean) Whether to run the action.
+
+ You may override this method to do preparation work for the action run. If
+ the method returns false, it will cancel the action.
+
+
+*yii\base\Action::afterRun*					 protected
+>
+ afterRun()
+<
+(void)
+
+ You may override this method to do post-processing work for the action run.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

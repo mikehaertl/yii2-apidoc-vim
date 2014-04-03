@@ -1,0 +1,65 @@
+
+*yii\helpers\BaseStringHelper*  
+==============================
+
+ Do not use BaseStringHelper. Use [[StringHelper]] instead.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\helpers\BaseStringHelper::byteLength*			 public
+>
+ byteLength($string)
+<
+(integer) The number of bytes in the given string.
+
+ This method ensures the string is treated as a byte array by using
+ 'mb_strlen()'.
+    [$string] (string) The string being measured for length
+
+
+*yii\helpers\BaseStringHelper::byteSubstr*			 public
+>
+ byteSubstr($string, $start, $length)
+<
+(string) The extracted part of string, or FALSE on failure or an empty string.
+
+ This method ensures the string is treated as a byte array by using
+ 'mb_substr()'.
+    [$string] (string) The input string. Must be one character or longer.
+    [$start] (integer) The starting position
+    [$length] (integer) The desired portion length
+
+
+*yii\helpers\BaseStringHelper::basename*			 public
+>
+ basename($path, $suffix='''')
+<
+(string) The trailing name component of the given path.
+
+ This method is similar to the php function 'basename()' except that it will
+ treat both \ and / as directory separators, independent of the operating
+ system. This method was mainly created to work on php namespaces. When
+ working with real file paths, php's 'basename()' should work fine for you.
+ Note: this method is not aware of the actual filesystem, or path components
+ such as "..".
+    [$path] (string) A path string.
+    [$suffix] (string) If the name component ends in suffix this will also be
+    cut off.
+
+
+*yii\helpers\BaseStringHelper::dirname* 			 public
+>
+ dirname($path)
+<
+(string) The parent directory's path.
+
+ This method is similar to 'dirname()' except that it will treat both \ and /
+ as directory separators, independent of the operating system.
+    [$path] (string) A path string.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

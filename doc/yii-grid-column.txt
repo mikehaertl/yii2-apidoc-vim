@@ -1,0 +1,182 @@
+
+*yii\grid\Column*   >> yii\base\Object
+=================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$grid> 				*yii\grid\Column::$grid*
+ (\yii\grid\GridView) The grid view object that owns this column.
+
+<$header>				*yii\grid\Column::$header*
+ (string) The header cell content. Note that it will not be HTML-encoded.
+
+<$footer>				*yii\grid\Column::$footer*
+ (string) The footer cell content. Note that it will not be HTML-encoded.
+
+<$content>				*yii\grid\Column::$content*
+ (callable)
+
+<$visible>				*yii\grid\Column::$visible*
+ (boolean) Whether this column is visible. Defaults to true.
+
+<$options>				*yii\grid\Column::$options*
+ (array) The HTML attributes for the column group tag.
+
+<$headerOptions>			*yii\grid\Column::$headerOptions*
+ (array) The HTML attributes for the header cell tag.
+
+<$contentOptions>			*yii\grid\Column::$contentOptions*
+ (array|\Closure) The HTML attributes for the data cell tag. This can either
+ be an array of attributes or an anonymous function that ([[Closure]]) that
+ returns such an array. The signature of the function should be the following:
+ 'function ($model, $key, $index, $gridView)'. A function may be used to
+ assign different attributes to different rows based on the data in that row.
+
+<$footerOptions>			*yii\grid\Column::$footerOptions*
+ (array) The HTML attributes for the footer cell tag.
+
+<$filterOptions>			*yii\grid\Column::$filterOptions*
+ (array) The HTML attributes for the filter cell tag.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\grid\Column::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\grid\Column::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\grid\Column::init* 					 public
+ See |yii\base\Object::init|
+
+
+*yii\grid\Column::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\grid\Column::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\grid\Column::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\grid\Column::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\grid\Column::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\grid\Column::hasProperty*					 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\grid\Column::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\grid\Column::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\grid\Column::hasMethod*					 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\grid\Column::renderHeaderCell*				 public
+>
+ renderHeaderCell()
+<
+(void)
+
+
+
+
+*yii\grid\Column::renderFooterCell*				 public
+>
+ renderFooterCell()
+<
+(void)
+
+
+
+
+*yii\grid\Column::renderDataCell*				 public
+>
+ renderDataCell($model, $key, $index)
+<
+(string) The rendering result
+
+
+    [$model] (mixed) The data model being rendered
+    [$key] (mixed) The key associated with the data model
+    [$index] (integer) The zero-based index of the data item among the item
+    array returned by [[GridView::dataProvider]].
+
+
+*yii\grid\Column::renderFilterCell*				 public
+>
+ renderFilterCell()
+<
+(void)
+
+
+
+
+*yii\grid\Column::renderHeaderCellContent*			 protected
+>
+ renderHeaderCellContent()
+<
+(string) The rendering result
+
+ The default implementation simply renders [[header]]. This method may be
+ overridden to customize the rendering of the header cell.
+
+
+*yii\grid\Column::renderFooterCellContent*			 protected
+>
+ renderFooterCellContent()
+<
+(string) The rendering result
+
+ The default implementation simply renders [[footer]]. This method may be
+ overridden to customize the rendering of the footer cell.
+
+
+*yii\grid\Column::renderDataCellContent*			 protected
+>
+ renderDataCellContent($model, $key, $index)
+<
+(string) The rendering result
+
+
+    [$model] (mixed) The data model
+    [$key] (mixed) The key associated with the data model
+    [$index] (integer) The zero-based index of the data model among the models
+    array returned by [[GridView::dataProvider]].
+
+
+*yii\grid\Column::renderFilterCellContent*			 protected
+>
+ renderFilterCellContent()
+<
+(string) The rendering result
+
+ The default implementation simply renders a space. This method may be
+ overridden to customize the rendering of the filter cell (if any).
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

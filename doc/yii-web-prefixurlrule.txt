@@ -1,0 +1,148 @@
+
+*yii\web\PrefixUrlRule*   >> yii\web\CompositeUrlRule
+=======================
+
+ PrefixUrlRule is best used by a module which often uses module ID as the
+ prefix for the URL rules. For example, the following code creates a rule for
+ the 'admin' module:
+
+   new PrefixUrlRule([
+       'prefix' => 'admin',
+       'rules' => [
+           'login' => 'user/login',
+           'logout' => 'user/logout',
+           'dashboard' => 'default/dashboard',
+       ],
+   ]);
+
+   // the above rule is equivalent to the following three rules:
+
+   [
+       'admin/login' => 'admin/user/login',
+       'admin/logout' => 'admin/user/logout',
+       'admin/dashboard' => 'admin/default/dashboard',
+   ]
+
+ The above example assumes the prefix for patterns and routes are the same.
+ They can be made different by configuring [[prefix]] and [[routePrefix]]
+ separately.
+
+ Using a PrefixUrlRule is more efficient than directly declaring the
+ individual rules its contains. This is because PrefixUrlRule can quickly
+ determine if it should process a URL parsing or creation request by simply
+ checking if the prefix matches.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$rules>				*yii\web\PrefixUrlRule::$rules*
+ (array) The rules contained within this composite rule. Please refer to
+ [[UrlManager::rules]] for the format of this property.
+
+<$prefix>				*yii\web\PrefixUrlRule::$prefix*
+ (string) The prefix for the pattern part of every rule declared in [[rules]].
+ The prefix and the pattern will be separated with a slash.
+
+<$routePrefix>				*yii\web\PrefixUrlRule::$routePrefix*
+ (string) The prefix for the route part of every rule declared in [[rules]].
+ The prefix and the route will be separated with a slash. If this property is
+ not set, it will take the value of [[prefix]].
+
+<$ruleConfig>				*yii\web\PrefixUrlRule::$ruleConfig*
+ (array) The default configuration of URL rules. Individual rule
+ configurations specified via [[rules]] will take precedence when the same
+ property of the rule is configured.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\web\PrefixUrlRule::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\web\PrefixUrlRule::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\web\PrefixUrlRule::init*					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\web\PrefixUrlRule::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\web\PrefixUrlRule::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\web\PrefixUrlRule::__isset*				 public
+ See |yii\base\Object::__isset|
+
+
+*yii\web\PrefixUrlRule::__unset*				 public
+ See |yii\base\Object::__unset|
+
+
+*yii\web\PrefixUrlRule::__call* 				 public
+ See |yii\base\Object::__call|
+
+
+*yii\web\PrefixUrlRule::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\web\PrefixUrlRule::canGetProperty* 			 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\web\PrefixUrlRule::canSetProperty* 			 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\web\PrefixUrlRule::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\web\PrefixUrlRule::createRules*				 protected
+>
+ createRules()
+<
+(\yii\web\UrlRuleInterface[]) The URL rules
+
+
+
+
+*yii\web\PrefixUrlRule::parseRequest*				 public
+>
+ parseRequest($manager, $request)
+<
+(void)
+
+
+    [$manager] () 
+    [$request] () 
+
+
+*yii\web\PrefixUrlRule::createUrl*				 public
+>
+ createUrl($manager, $route, $params)
+<
+(void)
+
+
+    [$manager] () 
+    [$route] () 
+    [$params] () 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

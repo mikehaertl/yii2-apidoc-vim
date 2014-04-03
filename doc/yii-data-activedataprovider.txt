@@ -1,0 +1,287 @@
+
+*yii\data\ActiveDataProvider*   >> yii\data\BaseDataProvider
+=============================
+
+ ActiveDataProvider provides data by performing DB queries using [[query]].
+
+ The following is an example of using ActiveDataProvider to provide
+ ActiveRecord instances:
+
+   $provider = new ActiveDataProvider([
+       'query' => Post::find(),
+       'pagination' => [
+           'pageSize' => 20,
+       ],
+   ]);
+
+   // get the posts in the current page
+   $posts = $provider->getModels();
+
+ And the following example shows how to use ActiveDataProvider without
+ ActiveRecord:
+
+   $query = new Query;
+   $provider = new ActiveDataProvider([
+       'query' => $query->from('post'),
+       'pagination' => [
+           'pageSize' => 20,
+       ],
+   ]);
+
+   // get the posts in the current page
+   $posts = $provider->getModels();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$id>					*yii\data\ActiveDataProvider::$id*
+ See |yii\data\BaseDataProvider::$id|
+
+<$query>				*yii\data\ActiveDataProvider::$query*
+ (\yii\db\QueryInterface) The query that is used to fetch data models and
+ [[totalCount]] if it is not explicitly set.
+
+<$key>					*yii\data\ActiveDataProvider::$key*
+ (string|callable) The column that is used as the key of the data models. This
+ can be either a column name, or a callable that returns the key value of a
+ given data model.
+
+ If this is not set, the following rules will be used to determine the keys of
+ the data models:
+
+ - If [[query]] is an [[\yii\db\ActiveQuery]] instance, the primary keys of
+ [[\yii\db\ActiveQuery::modelClass]] will be used. - Otherwise, the keys of
+ the [[models]] array will be used.
+
+<$db>					*yii\data\ActiveDataProvider::$db*
+ (\yii\db\Connection|string) The DB connection object or the application
+ component ID of the DB connection. If not set, the default DB connection will
+ be used.
+
+<$behaviors>				*yii\data\ActiveDataProvider::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$models>				*yii\data\ActiveDataProvider::$models*
+ (array) The list of data models in the current page.
+
+<$keys> 				*yii\data\ActiveDataProvider::$keys*
+ (array) The list of key values corresponding to [[models]]. Each data model
+ in [[models]] is uniquely identified by the corresponding key value in this
+ array.
+
+<$count>				*yii\data\ActiveDataProvider::$count*
+ (integer) The number of data models in the current page.
+
+<$totalCount>				*yii\data\ActiveDataProvider::$totalCount*
+ (integer) Total number of possible data models.
+
+<$pagination>				*yii\data\ActiveDataProvider::$pagination*
+ (\yii\data\Pagination|boolean) The pagination object. If this is false, it
+ means the pagination is disabled.
+
+<$sort> 				*yii\data\ActiveDataProvider::$sort*
+ (\yii\data\Sort|boolean) The sorting object. If this is false, it means the
+ sorting is disabled.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\data\ActiveDataProvider::className*			 public
+ See |yii\base\Object::className|
+
+
+*yii\data\ActiveDataProvider::__construct*			 public
+ See |yii\base\Object::__construct|
+
+
+*yii\data\ActiveDataProvider::init*				 public
+>
+ init()
+<
+(void)
+
+ This method will initialize the [[db]] property to make sure it refers to a
+ valid DB connection.
+
+
+*yii\data\ActiveDataProvider::__get*				 public
+ See |yii\base\Component::__get|
+
+
+*yii\data\ActiveDataProvider::__set*				 public
+ See |yii\base\Component::__set|
+
+
+*yii\data\ActiveDataProvider::__isset*				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\data\ActiveDataProvider::__unset*				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\data\ActiveDataProvider::__call*				 public
+ See |yii\base\Component::__call|
+
+
+*yii\data\ActiveDataProvider::hasProperty*			 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\data\ActiveDataProvider::canGetProperty*			 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\data\ActiveDataProvider::canSetProperty*			 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\data\ActiveDataProvider::hasMethod*			 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\data\ActiveDataProvider::__clone*				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\data\ActiveDataProvider::behaviors*			 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\data\ActiveDataProvider::hasEventHandlers* 		 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\data\ActiveDataProvider::on*				 public
+ See |yii\base\Component::on|
+
+
+*yii\data\ActiveDataProvider::off*				 public
+ See |yii\base\Component::off|
+
+
+*yii\data\ActiveDataProvider::trigger*				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\data\ActiveDataProvider::getBehavior*			 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\data\ActiveDataProvider::getBehaviors*			 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\data\ActiveDataProvider::attachBehavior*			 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\data\ActiveDataProvider::attachBehaviors*			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\data\ActiveDataProvider::detachBehavior*			 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\data\ActiveDataProvider::detachBehaviors*			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\data\ActiveDataProvider::ensureBehaviors*			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\data\ActiveDataProvider::prepareModels*			 protected
+>
+ prepareModels()
+<
+(array) The available data models
+
+
+
+
+*yii\data\ActiveDataProvider::prepareKeys*			 protected
+>
+ prepareKeys($models)
+<
+(array) The keys
+
+
+    [$models] () 
+
+
+*yii\data\ActiveDataProvider::prepareTotalCount*		 protected
+>
+ prepareTotalCount()
+<
+(integer) Total number of data models in this data provider.
+
+
+
+
+*yii\data\ActiveDataProvider::prepare*				 public
+ See |yii\data\BaseDataProvider::prepare|
+
+
+*yii\data\ActiveDataProvider::getModels*			 public
+ See |yii\data\BaseDataProvider::getModels|
+
+
+*yii\data\ActiveDataProvider::setModels*			 public
+ See |yii\data\BaseDataProvider::setModels|
+
+
+*yii\data\ActiveDataProvider::getKeys*				 public
+ See |yii\data\BaseDataProvider::getKeys|
+
+
+*yii\data\ActiveDataProvider::setKeys*				 public
+ See |yii\data\BaseDataProvider::setKeys|
+
+
+*yii\data\ActiveDataProvider::getCount* 			 public
+ See |yii\data\BaseDataProvider::getCount|
+
+
+*yii\data\ActiveDataProvider::getTotalCount*			 public
+ See |yii\data\BaseDataProvider::getTotalCount|
+
+
+*yii\data\ActiveDataProvider::setTotalCount*			 public
+ See |yii\data\BaseDataProvider::setTotalCount|
+
+
+*yii\data\ActiveDataProvider::getPagination*			 public
+ See |yii\data\BaseDataProvider::getPagination|
+
+
+*yii\data\ActiveDataProvider::setPagination*			 public
+ See |yii\data\BaseDataProvider::setPagination|
+
+
+*yii\data\ActiveDataProvider::getSort*				 public
+ See |yii\data\BaseDataProvider::getSort|
+
+
+*yii\data\ActiveDataProvider::setSort*				 public
+>
+ setSort($value)
+<
+(void)
+
+
+    [$value] () 
+
+
+*yii\data\ActiveDataProvider::refresh*				 public
+ See |yii\data\BaseDataProvider::refresh|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

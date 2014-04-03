@@ -1,0 +1,177 @@
+
+*yii\mutex\Mutex*   >> yii\base\Component
+=================
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$autoRelease>				*yii\mutex\Mutex::$autoRelease*
+ (boolean) Whether all locks acquired in this process (i.e. local locks) must
+ be released automagically before finishing script execution. Defaults to
+ true. Setting this property to true means that all locks acquire in this
+ process must be released in any case (regardless any kind of errors or
+ exceptions).
+
+<$behaviors>				*yii\mutex\Mutex::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\mutex\Mutex::className*					 public
+ See |yii\base\Object::className|
+
+
+*yii\mutex\Mutex::__construct*					 public
+ See |yii\base\Object::__construct|
+
+
+*yii\mutex\Mutex::init* 					 public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii\mutex\Mutex::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\mutex\Mutex::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\mutex\Mutex::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\mutex\Mutex::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\mutex\Mutex::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\mutex\Mutex::hasProperty*					 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\mutex\Mutex::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\mutex\Mutex::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\mutex\Mutex::hasMethod*					 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\mutex\Mutex::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\mutex\Mutex::behaviors*					 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\mutex\Mutex::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\mutex\Mutex::on*						 public
+ See |yii\base\Component::on|
+
+
+*yii\mutex\Mutex::off*						 public
+ See |yii\base\Component::off|
+
+
+*yii\mutex\Mutex::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\mutex\Mutex::getBehavior*					 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\mutex\Mutex::getBehaviors* 				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\mutex\Mutex::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\mutex\Mutex::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\mutex\Mutex::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\mutex\Mutex::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\mutex\Mutex::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\mutex\Mutex::acquire*					 public
+>
+ acquire($name, $timeout=0)
+<
+(boolean) Lock acquiring result.
+
+
+    [$name] (string) Of the lock to be acquired. Must be unique.
+    [$timeout] (integer) To wait for lock to be released. Defaults to zero
+    meaning that method will return false immediately in case lock was already
+    acquired.
+
+
+*yii\mutex\Mutex::release*					 public
+>
+ release($name)
+<
+(boolean) Lock release result: false in case named lock was not found..
+
+
+    [$name] (string) Of the lock to be released. This lock must be already
+    created.
+
+
+*yii\mutex\Mutex::acquireLock*					 protected
+>
+ acquireLock($name, $timeout=0)
+<
+(boolean) Acquiring result.
+
+
+    [$name] (string) Of the lock to be acquired.
+    [$timeout] (integer) To wait for lock to become released.
+
+
+*yii\mutex\Mutex::releaseLock*					 protected
+>
+ releaseLock($name)
+<
+(boolean) Release result.
+
+
+    [$name] (string) Of the lock to be released.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

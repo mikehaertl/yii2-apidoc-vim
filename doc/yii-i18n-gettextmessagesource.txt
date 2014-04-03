@@ -1,0 +1,189 @@
+
+*yii\i18n\GettextMessageSource*   >> yii\i18n\MessageSource
+===============================
+
+ Each GettextMessageSource instance represents the message tranlations for a
+ single domain. And each message category represents a message context in
+ Gettext. Translated messages are stored as either a MO or PO file, depending
+ on the [[useMoFile]] property value.
+
+ All translations are saved under the [[basePath]] directory.
+
+ Translations in one language are kept as MO or PO files under an individual
+ subdirectory whose name is the language ID. The file name is specified via
+ [[catalog]] property, which defaults to 'messages'.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$forceTranslation>			*yii\i18n\GettextMessageSource::$forceTranslation*
+ See |yii\i18n\MessageSource::$forceTranslation|
+
+<$sourceLanguage>			*yii\i18n\GettextMessageSource::$sourceLanguage*
+ See |yii\i18n\MessageSource::$sourceLanguage|
+
+<$basePath>				*yii\i18n\GettextMessageSource::$basePath*
+ (string)
+
+<$catalog>				*yii\i18n\GettextMessageSource::$catalog*
+ (string)
+
+<$useMoFile>				*yii\i18n\GettextMessageSource::$useMoFile*
+ (boolean)
+
+<$useBigEndian> 			*yii\i18n\GettextMessageSource::$useBigEndian*
+ (boolean)
+
+<$behaviors>				*yii\i18n\GettextMessageSource::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\i18n\GettextMessageSource::className*			 public
+ See |yii\base\Object::className|
+
+
+*yii\i18n\GettextMessageSource::__construct*			 public
+ See |yii\base\Object::__construct|
+
+
+*yii\i18n\GettextMessageSource::init*				 public
+ See |yii\i18n\MessageSource::init|
+
+
+*yii\i18n\GettextMessageSource::__get*				 public
+ See |yii\base\Component::__get|
+
+
+*yii\i18n\GettextMessageSource::__set*				 public
+ See |yii\base\Component::__set|
+
+
+*yii\i18n\GettextMessageSource::__isset*			 public
+ See |yii\base\Component::__isset|
+
+
+*yii\i18n\GettextMessageSource::__unset*			 public
+ See |yii\base\Component::__unset|
+
+
+*yii\i18n\GettextMessageSource::__call* 			 public
+ See |yii\base\Component::__call|
+
+
+*yii\i18n\GettextMessageSource::hasProperty*			 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\i18n\GettextMessageSource::canGetProperty* 		 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\i18n\GettextMessageSource::canSetProperty* 		 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\i18n\GettextMessageSource::hasMethod*			 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\i18n\GettextMessageSource::__clone*			 public
+ See |yii\base\Component::__clone|
+
+
+*yii\i18n\GettextMessageSource::behaviors*			 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\i18n\GettextMessageSource::hasEventHandlers*		 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\i18n\GettextMessageSource::on*				 public
+ See |yii\base\Component::on|
+
+
+*yii\i18n\GettextMessageSource::off*				 public
+ See |yii\base\Component::off|
+
+
+*yii\i18n\GettextMessageSource::trigger*			 public
+ See |yii\base\Component::trigger|
+
+
+*yii\i18n\GettextMessageSource::getBehavior*			 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\i18n\GettextMessageSource::getBehaviors*			 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\i18n\GettextMessageSource::attachBehavior* 		 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\i18n\GettextMessageSource::attachBehaviors*		 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\i18n\GettextMessageSource::detachBehavior* 		 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\i18n\GettextMessageSource::detachBehaviors*		 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\i18n\GettextMessageSource::ensureBehaviors*		 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\i18n\GettextMessageSource::loadMessages*			 protected
+>
+ loadMessages($category, $language)
+<
+(array) The loaded messages. The keys are original messages, and the values
+are translated messages.
+
+ If translation for specific locale code such as 'en-US' isn't found it tries
+ more generic 'en'.
+    [$category] (string) The message category
+    [$language] (string) The target language
+
+
+*yii\i18n\GettextMessageSource::translate*			 public
+ See |yii\i18n\MessageSource::translate|
+
+
+*yii\i18n\GettextMessageSource::translateMessage*		 protected
+ See |yii\i18n\MessageSource::translateMessage|
+
+
+*yii\i18n\GettextMessageSource::getMessageFilePath*		 protected
+>
+ getMessageFilePath($language)
+<
+(string) Path to message file
+
+
+    [$language] (string) The target language
+
+
+*yii\i18n\GettextMessageSource::loadMessagesFromFile*		 protected
+>
+ loadMessagesFromFile($messageFile, $category)
+<
+(array|null) Array of messages or null if file not found
+
+
+    [$messageFile] (string) Path to message file
+    [$category] (string) The message category
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

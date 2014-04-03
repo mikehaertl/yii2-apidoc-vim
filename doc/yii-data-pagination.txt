@@ -1,0 +1,292 @@
+
+*yii\data\Pagination*   >> yii\base\Object
+=====================
+
+ When data needs to be rendered in multiple pages, Pagination can be used to
+ represent information such as [[totalCount|total item count]],
+ [[pageSize|page size]], [[page|current page]], etc. These information can be
+ passed to [[\yii\widgets\LinkPager|pagers]] to render pagination buttons or
+ links.
+
+ The following example shows how to create a pagination object and feed it to
+ a pager.
+
+ Controller action:
+
+   function actionIndex()
+   {
+       $query = Article::find()->where(['status' => 1]);
+       $countQuery = clone $query;
+       $pages = new Pagination(['totalCount' => $countQuery->count()]);
+       $models = $query->offset($pages->offset)
+           ->limit($pages->limit)
+           ->all();
+
+       return $this->render('index', [
+            'models' => $models,
+            'pages' => $pages,
+       ]);
+   }
+
+ View:
+
+   foreach ($models as $model) {
+       // display $model here
+   }
+
+   // display pagination
+   echo LinkPager::widget([
+       'pagination' => $pages,
+   ]);
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$pageParam>				*yii\data\Pagination::$pageParam*
+ (string) Name of the parameter storing the current page index.
+
+<$pageSizeParam>			*yii\data\Pagination::$pageSizeParam*
+ (string) Name of the parameter storing the page size.
+
+<$forcePageParam>			*yii\data\Pagination::$forcePageParam*
+ (boolean) Whether to always have the page parameter in the URL created by
+ [[createUrl()]]. If false and [[page]] is 0, the page parameter will not be
+ put in the URL.
+
+<$route>				*yii\data\Pagination::$route*
+ (string) The route of the controller action for displaying the paged
+ contents. If not set, it means using the currently requested route.
+
+<$params>				*yii\data\Pagination::$params*
+ (array) Parameters (name => value) that should be used to obtain the current
+ page number and to create new pagination URLs. If not set, all parameters
+ from $_GET will be used instead.
+
+ In order to add hash to all links use 'array_merge($_GET, ['#' =>
+ 'my-hash'])'.
+
+ The array element indexed by [[pageParam]] is considered to be the current
+ page number (defaults to 0); while the element indexed by [[pageSizeParam]]
+ is treated as the page size (defaults to [[defaultPageSize]]).
+
+<$urlManager>				*yii\data\Pagination::$urlManager*
+ (\yii\web\UrlManager) The URL manager used for creating pagination URLs. If
+ not set, the "urlManager" application component will be used.
+
+<$validatePage> 			*yii\data\Pagination::$validatePage*
+ (boolean) Whether to check if [[page]] is within valid range. When this
+ property is true, the value of [[page]] will always be between 0 and
+ ([[pageCount]]-1). Because [[pageCount]] relies on the correct value of
+ [[totalCount]] which may not be available in some cases (e.g. MongoDB), you
+ may want to set this property to be false to disable the page number
+ validation. By doing so, [[page]] will return the value indexed by
+ [[pageParam]] in [[params]].
+
+<$totalCount>				*yii\data\Pagination::$totalCount*
+ (integer) Total number of items.
+
+<$defaultPageSize>			*yii\data\Pagination::$defaultPageSize*
+ (integer) The default page size. This property will be returned by
+ [[pageSize]] when page size cannot be determined by [[pageSizeParam]] from
+ [[params]].
+
+<$pageSizeLimit>			*yii\data\Pagination::$pageSizeLimit*
+ (array|boolean) The page size limits. The first array element stands for the
+ minimal page size, and the second the maximal page size. If this is false, it
+ means [[pageSize]] should always return the value of [[defaultPageSize]].
+
+<$pageCount>				*yii\data\Pagination::$pageCount*
+ (integer) Number of pages
+
+<$page> 				*yii\data\Pagination::$page*
+ (integer) The zero-based current page number.
+
+<$pageSize>				*yii\data\Pagination::$pageSize*
+ (integer) The number of items per page.
+
+<$offset>				*yii\data\Pagination::$offset*
+ (integer) The offset of the data. This may be used to set the OFFSET value
+ for a SQL statement for fetching the current page of data.
+
+<$limit>				*yii\data\Pagination::$limit*
+ (integer) The limit of the data. This may be used to set the LIMIT value for
+ a SQL statement for fetching the current page of data. Note that if the page
+ size is infinite, a value -1 will be returned.
+
+<$links>				*yii\data\Pagination::$links*
+ (array) The links for navigational purpose. The array keys specify the
+ purpose of the links (e.g. [[LINK_FIRST]]), and the array values are the
+ corresponding URLs.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\data\Pagination::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\data\Pagination::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\data\Pagination::init*					 public
+ See |yii\base\Object::init|
+
+
+*yii\data\Pagination::__get*					 public
+ See |yii\base\Object::__get|
+
+
+*yii\data\Pagination::__set*					 public
+ See |yii\base\Object::__set|
+
+
+*yii\data\Pagination::__isset*					 public
+ See |yii\base\Object::__isset|
+
+
+*yii\data\Pagination::__unset*					 public
+ See |yii\base\Object::__unset|
+
+
+*yii\data\Pagination::__call*					 public
+ See |yii\base\Object::__call|
+
+
+*yii\data\Pagination::hasProperty*				 public
+ See |yii\base\Object::hasProperty|
+
+
+*yii\data\Pagination::canGetProperty*				 public
+ See |yii\base\Object::canGetProperty|
+
+
+*yii\data\Pagination::canSetProperty*				 public
+ See |yii\base\Object::canSetProperty|
+
+
+*yii\data\Pagination::hasMethod*				 public
+ See |yii\base\Object::hasMethod|
+
+
+*yii\data\Pagination::getPageCount*				 public
+>
+ getPageCount()
+<
+(integer) Number of pages
+
+
+
+
+*yii\data\Pagination::getPage*					 public
+>
+ getPage($recalculate='false')
+<
+(integer) The zero-based current page number.
+
+
+    [$recalculate] (boolean) Whether to recalculate the current page based on
+    the page size and item count.
+
+
+*yii\data\Pagination::setPage*					 public
+>
+ setPage($value, $validatePage='false')
+<
+(void)
+
+
+    [$value] (integer) The zero-based index of the current page.
+    [$validatePage] (boolean) Whether to validate the page number. Note that
+    in order to validate the page number, both [[validatePage]] and this
+    parameter must be true.
+
+
+*yii\data\Pagination::getPageSize*				 public
+>
+ getPageSize()
+<
+(integer) The number of items per page.
+
+ By default, this method will try to determine the page size by
+ [[pageSizeParam]] in [[params]]. If the page size cannot be determined this
+ way, [[defaultPageSize]] will be returned.
+
+
+*yii\data\Pagination::setPageSize*				 public
+>
+ setPageSize($value, $validatePageSize='false')
+<
+(void)
+
+
+    [$value] (integer) The number of items per page.
+    [$validatePageSize] (boolean) Whether to validate page size.
+
+
+*yii\data\Pagination::createUrl*				 public
+>
+ createUrl($page, $absolute='false')
+<
+(string) The created URL
+
+ This method is mainly called by pagers when creating URLs used to perform
+ pagination.
+    [$page] (integer) The zero-based page number that the URL should point to.
+    [$absolute] (boolean) Whether to create an absolute URL. Defaults to
+    'false'.
+
+
+*yii\data\Pagination::getOffset*				 public
+>
+ getOffset()
+<
+(integer) The offset of the data. This may be used to set the OFFSET value for
+a SQL statement for fetching the current page of data.
+
+
+
+
+*yii\data\Pagination::getLimit* 				 public
+>
+ getLimit()
+<
+(integer) The limit of the data. This may be used to set the LIMIT value for a
+SQL statement for fetching the current page of data. Note that if the page
+size is infinite, a value -1 will be returned.
+
+
+
+
+*yii\data\Pagination::getLinks* 				 public
+>
+ getLinks($absolute='false')
+<
+(array) The links for navigational purpose. The array keys specify the purpose
+of the links (e.g. [[LINK_FIRST]]), and the array values are the corresponding
+URLs.
+
+
+    [$absolute] (boolean) Whether the generated URLs should be absolute.
+
+
+*yii\data\Pagination::getQueryParam*				 protected
+>
+ getQueryParam($name, $defaultValue='null')
+<
+(string) The parameter value
+
+ This method returns the named parameter value from [[params]]. Null is
+ returned if the value does not exist.
+    [$name] (string) The parameter name
+    [$defaultValue] (string) The value to be returned when the specified
+    parameter does not exist in [[params]].
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

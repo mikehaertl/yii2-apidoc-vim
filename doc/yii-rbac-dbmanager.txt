@@ -1,0 +1,467 @@
+
+*yii\rbac\DbManager*   >> yii\rbac\Manager
+====================
+
+ The database connection is specified by [[db]]. And the database schema
+ should be as described in "framework/rbac/*.sql". You may change the names of
+ the three tables used to store the authorization data by setting
+ [[itemTable]], [[itemChildTable]] and [[assignmentTable]].
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$showErrors>				*yii\rbac\DbManager::$showErrors*
+ See |yii\rbac\Manager::$showErrors|
+
+<$defaultRoles> 			*yii\rbac\DbManager::$defaultRoles*
+ See |yii\rbac\Manager::$defaultRoles|
+
+<$db>					*yii\rbac\DbManager::$db*
+ (\yii\db\Connection|string) The DB connection object or the application
+ component ID of the DB connection. After the DbManager object is created, if
+ you want to change this property, you should only assign it with a DB
+ connection object.
+
+<$itemTable>				*yii\rbac\DbManager::$itemTable*
+ (string) The name of the table storing authorization items. Defaults to
+ 'auth_item'.
+
+<$itemChildTable>			*yii\rbac\DbManager::$itemChildTable*
+ (string) The name of the table storing authorization item hierarchy. Defaults
+ to 'auth_item_child'.
+
+<$assignmentTable>			*yii\rbac\DbManager::$assignmentTable*
+ (string) The name of the table storing authorization item assignments.
+ Defaults to 'auth_assignment'.
+
+<$behaviors>				*yii\rbac\DbManager::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+<$roles>				*yii\rbac\DbManager::$roles*
+ (\yii\rbac\Item[]) Roles (name => AuthItem)
+
+<$tasks>				*yii\rbac\DbManager::$tasks*
+ (\yii\rbac\Item[]) Tasks (name => AuthItem)
+
+<$operations>				*yii\rbac\DbManager::$operations*
+ (\yii\rbac\Item[]) Operations (name => AuthItem)
+
+<$items>				*yii\rbac\DbManager::$items*
+ (\yii\rbac\Item[]) The authorization items of the specific type.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\rbac\DbManager::className* 				 public
+ See |yii\base\Object::className|
+
+
+*yii\rbac\DbManager::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\rbac\DbManager::init*					 public
+>
+ init()
+<
+(void)
+
+ This method overrides the parent implementation by establishing the database
+ connection.
+
+
+*yii\rbac\DbManager::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\rbac\DbManager::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\rbac\DbManager::__isset*					 public
+ See |yii\base\Component::__isset|
+
+
+*yii\rbac\DbManager::__unset*					 public
+ See |yii\base\Component::__unset|
+
+
+*yii\rbac\DbManager::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\rbac\DbManager::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\rbac\DbManager::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\rbac\DbManager::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\rbac\DbManager::hasMethod* 				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\rbac\DbManager::__clone*					 public
+ See |yii\base\Component::__clone|
+
+
+*yii\rbac\DbManager::behaviors* 				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\rbac\DbManager::hasEventHandlers*				 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\rbac\DbManager::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\rbac\DbManager::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\rbac\DbManager::trigger*					 public
+ See |yii\base\Component::trigger|
+
+
+*yii\rbac\DbManager::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\rbac\DbManager::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\rbac\DbManager::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\rbac\DbManager::attachBehaviors*				 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\rbac\DbManager::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\rbac\DbManager::detachBehaviors*				 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\rbac\DbManager::ensureBehaviors*				 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\rbac\DbManager::createRole*				 public
+ See |yii\rbac\Manager::createRole|
+
+
+*yii\rbac\DbManager::createTask*				 public
+ See |yii\rbac\Manager::createTask|
+
+
+*yii\rbac\DbManager::createOperation*				 public
+ See |yii\rbac\Manager::createOperation|
+
+
+*yii\rbac\DbManager::getRoles*					 public
+ See |yii\rbac\Manager::getRoles|
+
+
+*yii\rbac\DbManager::getTasks*					 public
+ See |yii\rbac\Manager::getTasks|
+
+
+*yii\rbac\DbManager::getOperations*				 public
+ See |yii\rbac\Manager::getOperations|
+
+
+*yii\rbac\DbManager::executeBizRule*				 public
+ See |yii\rbac\Manager::executeBizRule|
+
+
+*yii\rbac\DbManager::checkItemChildType*			 protected
+ See |yii\rbac\Manager::checkItemChildType|
+
+
+*yii\rbac\DbManager::checkAccess*				 public
+>
+ checkAccess($userId, $itemName, $params='[]')
+<
+(boolean) Whether the operations can be performed by the user.
+
+
+    [$userId] (mixed) The user ID. This should can be either an integer or a
+    string representing the unique identifier of a user. See
+    [[\yii\web\User::id]].
+    [$itemName] (string) The name of the operation that need access check
+    [$params] (array) Name-value pairs that would be passed to biz rules
+    associated with the tasks and roles assigned to the user. A param with
+    name 'userId' is added to this array, which holds the value of '$userId'.
+
+
+*yii\rbac\DbManager::createItem*				 public
+>
+ createItem($name, $type, $description='''', $bizRule='null', $data='null')
+<
+(\yii\rbac\Item) The authorization item
+
+ An authorization item represents an action permission (e.g. creating a post).
+ It has three types: operation, task and role. Authorization items form a
+ hierarchy. Higher level items inheirt permissions representing by lower level
+ items.
+    [$name] (string) The item name. This must be a unique identifier.
+    [$type] (integer) The item type (0: operation, 1: task, 2: role).
+    [$description] (string) Description of the item
+    [$bizRule] (string) Business rule associated with the item. This is a
+    piece of PHP code that will be executed when [[checkAccess()]] is called
+    for the item.
+    [$data] (mixed) Additional data associated with the item.
+
+
+*yii\rbac\DbManager::removeItem*				 public
+>
+ removeItem($name)
+<
+(boolean) Whether the item exists in the storage and has been removed
+
+
+    [$name] (string) The name of the item to be removed
+
+
+*yii\rbac\DbManager::getItems*					 public
+>
+ getItems($userId='null', $type=null)
+<
+(\yii\rbac\Item[]) The authorization items of the specific type.
+
+
+    [$userId] (mixed) The user ID. Defaults to null, meaning returning all
+    items even if they are not assigned to a user.
+    [$type] (integer) The item type (0: operation, 1: task, 2: role). Defaults
+    to null, meaning returning all items regardless of their type.
+
+
+*yii\rbac\DbManager::getItem*					 public
+>
+ getItem($name)
+<
+(\yii\rbac\Item) The authorization item. Null if the item cannot be found.
+
+
+    [$name] (string) The name of the item
+
+
+*yii\rbac\DbManager::saveItem*					 public
+>
+ saveItem($item, $oldName='null')
+<
+(void)
+
+
+    [$item] (\yii\rbac\Item) The item to be saved.
+    [$oldName] (string) The old item name. If null, it means the item name is
+    not changed.
+
+
+*yii\rbac\DbManager::addItemChild*				 public
+>
+ addItemChild($itemName, $childName)
+<
+(boolean) Whether the item is added successfully
+
+
+    [$itemName] (string) The parent item name
+    [$childName] (string) The child item name
+
+
+*yii\rbac\DbManager::removeItemChild*				 public
+>
+ removeItemChild($itemName, $childName)
+<
+(boolean) Whether the removal is successful
+
+ Note, the child item is not deleted. Only the parent-child relationship is
+ removed.
+    [$itemName] (string) The parent item name
+    [$childName] (string) The child item name
+
+
+*yii\rbac\DbManager::hasItemChild*				 public
+>
+ hasItemChild($itemName, $childName)
+<
+(boolean) Whether the child exists
+
+
+    [$itemName] (string) The parent item name
+    [$childName] (string) The child item name
+
+
+*yii\rbac\DbManager::getItemChildren*				 public
+>
+ getItemChildren($names)
+<
+(\yii\rbac\Item[]) All child items of the parent
+
+
+    [$names] (mixed) The parent item name. This can be either a string or an
+    array. The latter represents a list of item names.
+
+
+*yii\rbac\DbManager::assign*					 public
+>
+ assign($userId, $itemName, $bizRule='null', $data='null')
+<
+(\yii\rbac\Assignment) The authorization assignment information.
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$itemName] (string) The item name
+    [$bizRule] (string) The business rule to be executed when
+    [[checkAccess()]] is called for this particular authorization item.
+    [$data] (mixed) Additional data associated with this assignment
+
+
+*yii\rbac\DbManager::revoke*					 public
+>
+ revoke($userId, $itemName)
+<
+(boolean) Whether removal is successful
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$itemName] (string) The item name
+
+
+*yii\rbac\DbManager::revokeAll* 				 public
+>
+ revokeAll($userId)
+<
+(boolean) Whether removal is successful
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+
+
+*yii\rbac\DbManager::isAssigned*				 public
+>
+ isAssigned($userId, $itemName)
+<
+(boolean) Whether the item has been assigned to the user.
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$itemName] (string) The item name
+
+
+*yii\rbac\DbManager::getAssignment*				 public
+>
+ getAssignment($userId, $itemName)
+<
+(\yii\rbac\Assignment) The item assignment information. Null is returned if
+the item is not assigned to the user.
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$itemName] (string) The item name
+
+
+*yii\rbac\DbManager::getAssignments*				 public
+>
+ getAssignments($userId)
+<
+(\yii\rbac\Assignment[]) The item assignment information for the user. An
+empty array will be returned if there is no item assigned to the user.
+
+
+    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+
+
+*yii\rbac\DbManager::saveAssignment*				 public
+>
+ saveAssignment($assignment)
+<
+(void)
+
+
+    [$assignment] (\yii\rbac\Assignment) The assignment that has been changed.
+
+
+*yii\rbac\DbManager::clearAll*					 public
+>
+ clearAll()
+<
+(void)
+
+
+
+
+*yii\rbac\DbManager::clearAssignments*				 public
+>
+ clearAssignments()
+<
+(void)
+
+
+
+
+*yii\rbac\DbManager::save*					 public
+>
+ save()
+<
+(void)
+
+
+
+
+*yii\rbac\DbManager::checkAccessRecursive*			 protected
+>
+ checkAccessRecursive($userId, $itemName, $params, $assignments)
+<
+(boolean) Whether the operations can be performed by the user.
+
+ This method is internally called by [[checkAccess()]].
+    [$userId] (mixed) The user ID. This should can be either an integer or a
+    string representing the unique identifier of a user. See
+    [[\yii\web\User::id]].
+    [$itemName] (string) The name of the operation that need access check
+    [$params] (array) Name-value pairs that would be passed to biz rules
+    associated with the tasks and roles assigned to the user. A param with
+    name 'userId' is added to this array, which holds the value of '$userId'.
+    [$assignments] (\yii\rbac\Assignment[]) The assignments to the specified
+    user
+
+
+*yii\rbac\DbManager::detectLoop*				 protected
+>
+ detectLoop($itemName, $childName)
+<
+(boolean) Whether a loop exists
+
+
+    [$itemName] (string) Parent item name
+    [$childName] (string) The name of the child item that is to be added to
+    the hierarchy
+
+
+*yii\rbac\DbManager::usingSqlite*				 protected
+>
+ usingSqlite()
+<
+(boolean) Whether the database is a SQLite database
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

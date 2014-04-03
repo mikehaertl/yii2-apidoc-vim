@@ -1,0 +1,289 @@
+
+*yii\caching\ApcCache*   >> yii\caching\Cache
+======================
+
+ To use this application component, the [APC PHP
+ extension](http://www.php.net/apc) must be loaded. In order to enable APC for
+ CLI you should add "apc.enable_cli = 1" to your php.ini.
+
+ See [[Cache]] for common cache operations that ApcCache supports.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+<$keyPrefix>				*yii\caching\ApcCache::$keyPrefix*
+ See |yii\caching\Cache::$keyPrefix|
+
+<$serializer>				*yii\caching\ApcCache::$serializer*
+ See |yii\caching\Cache::$serializer|
+
+<$behaviors>				*yii\caching\ApcCache::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii\caching\ApcCache::className*				 public
+ See |yii\base\Object::className|
+
+
+*yii\caching\ApcCache::__construct*				 public
+ See |yii\base\Object::__construct|
+
+
+*yii\caching\ApcCache::init*					 public
+ See |yii\caching\Cache::init|
+
+
+*yii\caching\ApcCache::__get*					 public
+ See |yii\base\Component::__get|
+
+
+*yii\caching\ApcCache::__set*					 public
+ See |yii\base\Component::__set|
+
+
+*yii\caching\ApcCache::__isset* 				 public
+ See |yii\base\Component::__isset|
+
+
+*yii\caching\ApcCache::__unset* 				 public
+ See |yii\base\Component::__unset|
+
+
+*yii\caching\ApcCache::__call*					 public
+ See |yii\base\Component::__call|
+
+
+*yii\caching\ApcCache::hasProperty*				 public
+ See |yii\base\Component::hasProperty|
+
+
+*yii\caching\ApcCache::canGetProperty*				 public
+ See |yii\base\Component::canGetProperty|
+
+
+*yii\caching\ApcCache::canSetProperty*				 public
+ See |yii\base\Component::canSetProperty|
+
+
+*yii\caching\ApcCache::hasMethod*				 public
+ See |yii\base\Component::hasMethod|
+
+
+*yii\caching\ApcCache::__clone* 				 public
+ See |yii\base\Component::__clone|
+
+
+*yii\caching\ApcCache::behaviors*				 public
+ See |yii\base\Component::behaviors|
+
+
+*yii\caching\ApcCache::hasEventHandlers*			 public
+ See |yii\base\Component::hasEventHandlers|
+
+
+*yii\caching\ApcCache::on*					 public
+ See |yii\base\Component::on|
+
+
+*yii\caching\ApcCache::off*					 public
+ See |yii\base\Component::off|
+
+
+*yii\caching\ApcCache::trigger* 				 public
+ See |yii\base\Component::trigger|
+
+
+*yii\caching\ApcCache::getBehavior*				 public
+ See |yii\base\Component::getBehavior|
+
+
+*yii\caching\ApcCache::getBehaviors*				 public
+ See |yii\base\Component::getBehaviors|
+
+
+*yii\caching\ApcCache::attachBehavior*				 public
+ See |yii\base\Component::attachBehavior|
+
+
+*yii\caching\ApcCache::attachBehaviors* 			 public
+ See |yii\base\Component::attachBehaviors|
+
+
+*yii\caching\ApcCache::detachBehavior*				 public
+ See |yii\base\Component::detachBehavior|
+
+
+*yii\caching\ApcCache::detachBehaviors* 			 public
+ See |yii\base\Component::detachBehaviors|
+
+
+*yii\caching\ApcCache::ensureBehaviors* 			 public
+ See |yii\base\Component::ensureBehaviors|
+
+
+*yii\caching\ApcCache::buildKey*				 protected
+ See |yii\caching\Cache::buildKey|
+
+
+*yii\caching\ApcCache::get*					 public
+ See |yii\caching\Cache::get|
+
+
+*yii\caching\ApcCache::exists*					 public
+>
+ exists($key)
+<
+(boolean) True if a value exists in cache, false if the value is not in the
+cache or expired.
+
+ This can be faster than getting the value from the cache if the data is big.
+ Note that this method does not check whether the dependency associated with
+ the cached data, if there is any, has changed. So a call to [[get]] may
+ return false while exists returns true.
+    [$key] (mixed) A key identifying the cached value. This can be a simple
+    string or a complex data structure consisting of factors representing the
+    key.
+
+
+*yii\caching\ApcCache::mget*					 public
+ See |yii\caching\Cache::mget|
+
+
+*yii\caching\ApcCache::set*					 public
+ See |yii\caching\Cache::set|
+
+
+*yii\caching\ApcCache::mset*					 public
+ See |yii\caching\Cache::mset|
+
+
+*yii\caching\ApcCache::madd*					 public
+ See |yii\caching\Cache::madd|
+
+
+*yii\caching\ApcCache::add*					 public
+ See |yii\caching\Cache::add|
+
+
+*yii\caching\ApcCache::delete*					 public
+ See |yii\caching\Cache::delete|
+
+
+*yii\caching\ApcCache::flush*					 public
+ See |yii\caching\Cache::flush|
+
+
+*yii\caching\ApcCache::getValue*				 protected
+>
+ getValue($key)
+<
+(string|boolean) The value stored in cache, false if the value is not in the
+cache or expired.
+
+ This is the implementation of the method declared in the parent class.
+    [$key] (string) A unique key identifying the cached value
+
+
+*yii\caching\ApcCache::setValue*				 protected
+>
+ setValue($key, $value, $duration)
+<
+(boolean) True if the value is successfully stored into cache, false otherwise
+
+ This is the implementation of the method declared in the parent class.
+    [$key] (string) The key identifying the value to be cached
+    [$value] (string) The value to be cached
+    [$duration] (integer) The number of seconds in which the cached value will
+    expire. 0 means never expire.
+
+
+*yii\caching\ApcCache::addValue*				 protected
+>
+ addValue($key, $value, $duration)
+<
+(boolean) True if the value is successfully stored into cache, false otherwise
+
+ This is the implementation of the method declared in the parent class.
+    [$key] (string) The key identifying the value to be cached
+    [$value] (string) The value to be cached
+    [$duration] (integer) The number of seconds in which the cached value will
+    expire. 0 means never expire.
+
+
+*yii\caching\ApcCache::deleteValue*				 protected
+>
+ deleteValue($key)
+<
+(boolean) If no error happens during deletion
+
+
+    [$key] (string) The key of the value to be deleted
+
+
+*yii\caching\ApcCache::flushValues*				 protected
+>
+ flushValues()
+<
+(boolean) Whether the flush operation was successful.
+
+ This is the implementation of the method declared in the parent class.
+
+
+*yii\caching\ApcCache::getValues*				 protected
+>
+ getValues($keys)
+<
+(array) A list of cached values indexed by the keys
+
+
+    [$keys] (array) A list of keys identifying the cached values
+
+
+*yii\caching\ApcCache::setValues*				 protected
+>
+ setValues($data, $duration)
+<
+(array) Array of failed keys
+
+
+    [$data] (array) Array where key corresponds to cache key while value
+    [$duration] (integer) The number of seconds in which the cached values
+    will expire. 0 means never expire.
+
+
+*yii\caching\ApcCache::addValues*				 protected
+>
+ addValues($data, $duration)
+<
+(array) Array of failed keys
+
+
+    [$data] (array) Array where key corresponds to cache key while value is
+    the value stored
+    [$duration] (integer) The number of seconds in which the cached values
+    will expire. 0 means never expire.
+
+
+*yii\caching\ApcCache::offsetExists*				 public
+ See |yii\caching\Cache::offsetExists|
+
+
+*yii\caching\ApcCache::offsetGet*				 public
+ See |yii\caching\Cache::offsetGet|
+
+
+*yii\caching\ApcCache::offsetSet*				 public
+ See |yii\caching\Cache::offsetSet|
+
+
+*yii\caching\ApcCache::offsetUnset*				 public
+ See |yii\caching\Cache::offsetUnset|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
