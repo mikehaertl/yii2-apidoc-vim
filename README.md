@@ -23,14 +23,14 @@ ask for help on Yii 2 classes like this:
 :help yii\web\Controller
 ```
 
-If you want to use keyword search (which allows to press `<S-k>` over any keyword)
-then you should add this line to your `.vimrc`:
-
-```vim
-autocmd BufNewFile,Bufread *.php set keywordprg="help"
-```
-
 ## Create custom version
 
 The package also contains the Yii 2 command that was used to create the help files.
-You should install the package `mikehaertl/yii2-vim-apidoc` with composer.
+You should install the package `mikehaertl/yii2-vim-apidoc` with composer. Then you
+can create the docs with
+
+```
+./vendor/bin/apidocvim api ./vendor/yiisoft/yii2 ./docs
+```
+
+You can modify the view files and adjust the render methods in `src/templates/ApiRenderer.php`.
