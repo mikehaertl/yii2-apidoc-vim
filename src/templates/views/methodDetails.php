@@ -11,7 +11,7 @@ METHOD DETAILS
 	,65
 ).($method->definedBy != $type->name ? "\n" : "\n>\n"); ?>
 <?php if($method->definedBy != $type->name): ?>
- See |<?php echo $method->definedBy.'::'.$method->name ?>|
+ See |<?php echo $this->context->convertTagNames($method->definedBy).'::'.$method->name ?>|
 <?php else: ?>
  <?= $this->context->renderMethodSignature($method)."\n<\n"; ?>
 <?= $this->context->renderMethodReturnValue($method)."\n"; ?>

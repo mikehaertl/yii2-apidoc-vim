@@ -73,51 +73,51 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$dsn>					*yii\db\Connection::$dsn*
+<$dsn>					*yii.db.Connection::$dsn*
  (string) The Data Source Name, or DSN, contains the information required to
  connect to the database. Please refer to the [PHP
  manual](http://www.php.net/manual/en/function.PDO-construct.php) on the
  format of the DSN string.
 
-<$username>				*yii\db\Connection::$username*
+<$username>				*yii.db.Connection::$username*
  (string) The username for establishing DB connection. Defaults to 'null'
  meaning no username to use.
 
-<$password>				*yii\db\Connection::$password*
+<$password>				*yii.db.Connection::$password*
  (string) The password for establishing DB connection. Defaults to 'null'
  meaning no password to use.
 
-<$attributes>				*yii\db\Connection::$attributes*
+<$attributes>				*yii.db.Connection::$attributes*
  (array) PDO attributes (name => value) that should be set when calling
  [[open()]] to establish a DB connection. Please refer to the [PHP
  manual](http://www.php.net/manual/en/function.PDO-setAttribute.php) for
  details about available attributes.
 
-<$pdo>					*yii\db\Connection::$pdo*
+<$pdo>					*yii.db.Connection::$pdo*
  (\PDO) The PHP PDO instance associated with this DB connection. This property
  is mainly managed by [[open()]] and [[close()]] methods. When a DB connection
  is active, this property will represent a PDO instance; otherwise, it will be
  null.
 
-<$enableSchemaCache>			*yii\db\Connection::$enableSchemaCache*
+<$enableSchemaCache>			*yii.db.Connection::$enableSchemaCache*
  (boolean) Whether to enable schema caching. Note that in order to enable
  truly schema caching, a valid cache component as specified by [[schemaCache]]
  must be enabled and [[enableSchemaCache]] must be set true.
 
-<$schemaCacheDuration>			*yii\db\Connection::$schemaCacheDuration*
+<$schemaCacheDuration>			*yii.db.Connection::$schemaCacheDuration*
  (integer) Number of seconds that table metadata can remain valid in cache.
  Use 0 to indicate that the cached data will never expire.
 
-<$schemaCacheExclude>			*yii\db\Connection::$schemaCacheExclude*
+<$schemaCacheExclude>			*yii.db.Connection::$schemaCacheExclude*
  (array) List of tables whose metadata should NOT be cached. Defaults to empty
  array. The table names may contain schema prefix, if any. Do not quote the
  table names.
 
-<$schemaCache>				*yii\db\Connection::$schemaCache*
+<$schemaCache>				*yii.db.Connection::$schemaCache*
  (\yii\caching\Cache|string) The cache object or the ID of the cache
  application component that is used to cache the table metadata.
 
-<$enableQueryCache>			*yii\db\Connection::$enableQueryCache*
+<$enableQueryCache>			*yii.db.Connection::$enableQueryCache*
  (boolean) Whether to enable query caching. Note that in order to enable query
  caching, a valid cache component as specified by [[queryCache]] must be
  enabled and [[enableQueryCache]] must be set true.
@@ -125,20 +125,20 @@ PROPERTY DETAILS
  Methods [[beginCache()]] and [[endCache()]] can be used as shortcuts to turn
  on and off query caching on the fly.
 
-<$queryCacheDuration>			*yii\db\Connection::$queryCacheDuration*
+<$queryCacheDuration>			*yii.db.Connection::$queryCacheDuration*
  (integer) Number of seconds that query results can remain valid in cache.
  Defaults to 3600, meaning 3600 seconds, or one hour. Use 0 to indicate that
  the cached data will never expire.
 
-<$queryCacheDependency> 		*yii\db\Connection::$queryCacheDependency*
+<$queryCacheDependency> 		*yii.db.Connection::$queryCacheDependency*
  (\yii\caching\Dependency) The dependency that will be used when saving query
  results into cache. Defaults to null, meaning no dependency.
 
-<$queryCache>				*yii\db\Connection::$queryCache*
+<$queryCache>				*yii.db.Connection::$queryCache*
  (\yii\caching\Cache|string) The cache object or the ID of the cache
  application component that is used for query caching.
 
-<$charset>				*yii\db\Connection::$charset*
+<$charset>				*yii.db.Connection::$charset*
  (string) The charset used for database connection. The property is only used
  for MySQL, PostgreSQL and CUBRID databases. Defaults to null, meaning using
  default charset as specified by the database.
@@ -146,19 +146,19 @@ PROPERTY DETAILS
  Note that if you're using GBK or BIG5 then it's highly recommended to specify
  charset via DSN like 'mysql:dbname=mydatabase;host=127.0.0.1;charset=GBK;'.
 
-<$emulatePrepare>			*yii\db\Connection::$emulatePrepare*
+<$emulatePrepare>			*yii.db.Connection::$emulatePrepare*
  (boolean) Whether to turn on prepare emulation. Defaults to false, meaning
  PDO will use the native prepare support if available. For some databases
  (such as MySQL), this may need to be set true so that PDO can emulate the
  prepare support to bypass the buggy native prepare support. The default value
  is null, which means the PDO ATTR_EMULATE_PREPARES value will not be changed.
 
-<$tablePrefix>				*yii\db\Connection::$tablePrefix*
+<$tablePrefix>				*yii.db.Connection::$tablePrefix*
  (string) The common prefix or suffix for table names. If a table name is
  given as '{{%TableName}}', then the percentage character '%' will be replaced
  with this property value. For example, '{{%post}}' becomes '{{tbl_post}}'.
 
-<$schemaMap>				*yii\db\Connection::$schemaMap*
+<$schemaMap>				*yii.db.Connection::$schemaMap*
  (array) Mapping between PDO driver names and [[Schema]] classes. The keys of
  the array are PDO driver names while the values the corresponding schema
  class name or configuration. Please refer to [[Yii::createObject()]] for
@@ -169,38 +169,38 @@ PROPERTY DETAILS
  want to use your own [[Schema]] class to support DBMS that is not supported
  by Yii.
 
-<$pdoClass>				*yii\db\Connection::$pdoClass*
+<$pdoClass>				*yii.db.Connection::$pdoClass*
  (string) Custom PDO wrapper class. If not set, it will use "PDO" or
  "yii\db\mssql\PDO" when MSSQL is used.
 
-<$enableSavepoint>			*yii\db\Connection::$enableSavepoint*
+<$enableSavepoint>			*yii.db.Connection::$enableSavepoint*
  (boolean) Whether to enable
  [savepoint](http://en.wikipedia.org/wiki/Savepoint). Note that if the
  underlying DBMS does not support savepoint, setting this property to be true
  will have no effect.
 
-<$behaviors>				*yii\db\Connection::$behaviors*
+<$behaviors>				*yii.db.Connection::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$isActive>				*yii\db\Connection::$isActive*
+<$isActive>				*yii.db.Connection::$isActive*
  (boolean) Whether the DB connection is established
 
-<$transaction>				*yii\db\Connection::$transaction*
+<$transaction>				*yii.db.Connection::$transaction*
  (\yii\db\Transaction) The currently active transaction. Null if no active
  transaction.
 
-<$schema>				*yii\db\Connection::$schema*
+<$schema>				*yii.db.Connection::$schema*
  (\yii\db\Schema) The schema information for the database opened by this
  connection.
 
-<$queryBuilder> 			*yii\db\Connection::$queryBuilder*
+<$queryBuilder> 			*yii.db.Connection::$queryBuilder*
  (\yii\db\QueryBuilder) The query builder for the current DB connection.
 
-<$lastInsertID> 			*yii\db\Connection::$lastInsertID*
+<$lastInsertID> 			*yii.db.Connection::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
-<$driverName>				*yii\db\Connection::$driverName*
+<$driverName>				*yii.db.Connection::$driverName*
  (string) Name of the DB driver
 
 
@@ -208,107 +208,107 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii\db\Connection::className*					 public
- See |yii\base\Object::className|
+*yii.db.Connection::className*					 public
+ See |yii.base.Object::className|
 
 
-*yii\db\Connection::__construct*				 public
- See |yii\base\Object::__construct|
+*yii.db.Connection::__construct*				 public
+ See |yii.base.Object::__construct|
 
 
-*yii\db\Connection::init*					 public
- See |yii\base\Object::init|
+*yii.db.Connection::init*					 public
+ See |yii.base.Object::init|
 
 
-*yii\db\Connection::__get*					 public
- See |yii\base\Component::__get|
+*yii.db.Connection::__get*					 public
+ See |yii.base.Component::__get|
 
 
-*yii\db\Connection::__set*					 public
- See |yii\base\Component::__set|
+*yii.db.Connection::__set*					 public
+ See |yii.base.Component::__set|
 
 
-*yii\db\Connection::__isset*					 public
- See |yii\base\Component::__isset|
+*yii.db.Connection::__isset*					 public
+ See |yii.base.Component::__isset|
 
 
-*yii\db\Connection::__unset*					 public
- See |yii\base\Component::__unset|
+*yii.db.Connection::__unset*					 public
+ See |yii.base.Component::__unset|
 
 
-*yii\db\Connection::__call*					 public
- See |yii\base\Component::__call|
+*yii.db.Connection::__call*					 public
+ See |yii.base.Component::__call|
 
 
-*yii\db\Connection::hasProperty*				 public
- See |yii\base\Component::hasProperty|
+*yii.db.Connection::hasProperty*				 public
+ See |yii.base.Component::hasProperty|
 
 
-*yii\db\Connection::canGetProperty*				 public
- See |yii\base\Component::canGetProperty|
+*yii.db.Connection::canGetProperty*				 public
+ See |yii.base.Component::canGetProperty|
 
 
-*yii\db\Connection::canSetProperty*				 public
- See |yii\base\Component::canSetProperty|
+*yii.db.Connection::canSetProperty*				 public
+ See |yii.base.Component::canSetProperty|
 
 
-*yii\db\Connection::hasMethod*					 public
- See |yii\base\Component::hasMethod|
+*yii.db.Connection::hasMethod*					 public
+ See |yii.base.Component::hasMethod|
 
 
-*yii\db\Connection::__clone*					 public
- See |yii\base\Component::__clone|
+*yii.db.Connection::__clone*					 public
+ See |yii.base.Component::__clone|
 
 
-*yii\db\Connection::behaviors*					 public
- See |yii\base\Component::behaviors|
+*yii.db.Connection::behaviors*					 public
+ See |yii.base.Component::behaviors|
 
 
-*yii\db\Connection::hasEventHandlers*				 public
- See |yii\base\Component::hasEventHandlers|
+*yii.db.Connection::hasEventHandlers*				 public
+ See |yii.base.Component::hasEventHandlers|
 
 
-*yii\db\Connection::on* 					 public
- See |yii\base\Component::on|
+*yii.db.Connection::on* 					 public
+ See |yii.base.Component::on|
 
 
-*yii\db\Connection::off*					 public
- See |yii\base\Component::off|
+*yii.db.Connection::off*					 public
+ See |yii.base.Component::off|
 
 
-*yii\db\Connection::trigger*					 public
- See |yii\base\Component::trigger|
+*yii.db.Connection::trigger*					 public
+ See |yii.base.Component::trigger|
 
 
-*yii\db\Connection::getBehavior*				 public
- See |yii\base\Component::getBehavior|
+*yii.db.Connection::getBehavior*				 public
+ See |yii.base.Component::getBehavior|
 
 
-*yii\db\Connection::getBehaviors*				 public
- See |yii\base\Component::getBehaviors|
+*yii.db.Connection::getBehaviors*				 public
+ See |yii.base.Component::getBehaviors|
 
 
-*yii\db\Connection::attachBehavior*				 public
- See |yii\base\Component::attachBehavior|
+*yii.db.Connection::attachBehavior*				 public
+ See |yii.base.Component::attachBehavior|
 
 
-*yii\db\Connection::attachBehaviors*				 public
- See |yii\base\Component::attachBehaviors|
+*yii.db.Connection::attachBehaviors*				 public
+ See |yii.base.Component::attachBehaviors|
 
 
-*yii\db\Connection::detachBehavior*				 public
- See |yii\base\Component::detachBehavior|
+*yii.db.Connection::detachBehavior*				 public
+ See |yii.base.Component::detachBehavior|
 
 
-*yii\db\Connection::detachBehaviors*				 public
- See |yii\base\Component::detachBehaviors|
+*yii.db.Connection::detachBehaviors*				 public
+ See |yii.base.Component::detachBehaviors|
 
 
-*yii\db\Connection::ensureBehaviors*				 public
- See |yii\base\Component::ensureBehaviors|
+*yii.db.Connection::ensureBehaviors*				 public
+ See |yii.base.Component::ensureBehaviors|
 
 
-*yii\db\Connection::getIsActive*				 public
+*yii.db.Connection::getIsActive*				 public
 >
  getIsActive()
 <
@@ -317,7 +317,7 @@ METHOD DETAILS
 
 
 
-*yii\db\Connection::beginCache* 				 public
+*yii.db.Connection::beginCache* 				 public
 >
  beginCache($duration=null, $dependency='null')
 <
@@ -333,7 +333,7 @@ METHOD DETAILS
     query result. See [[queryCacheDependency]] for more details.
 
 
-*yii\db\Connection::endCache*					 public
+*yii.db.Connection::endCache*					 public
 >
  endCache()
 <
@@ -342,7 +342,7 @@ METHOD DETAILS
 
 
 
-*yii\db\Connection::open*					 public
+*yii.db.Connection::open*					 public
 >
  open()
 <
@@ -351,7 +351,7 @@ METHOD DETAILS
  It does nothing if a DB connection has already been established.
 
 
-*yii\db\Connection::close*					 public
+*yii.db.Connection::close*					 public
 >
  close()
 <
@@ -360,7 +360,7 @@ METHOD DETAILS
  It does nothing if the connection is already closed.
 
 
-*yii\db\Connection::createPdoInstance*				 protected
+*yii.db.Connection::createPdoInstance*				 protected
 >
  createPdoInstance()
 <
@@ -371,7 +371,7 @@ METHOD DETAILS
  if the default PDO needs to be adapted for certain DBMS.
 
 
-*yii\db\Connection::initConnection*				 protected
+*yii.db.Connection::initConnection*				 protected
 >
  initConnection()
 <
@@ -383,7 +383,7 @@ METHOD DETAILS
  empty. It then triggers an [[EVENT_AFTER_OPEN]] event.
 
 
-*yii\db\Connection::createCommand*				 public
+*yii.db.Connection::createCommand*				 public
 >
  createCommand($sql='null', $params='[]')
 <
@@ -394,7 +394,7 @@ METHOD DETAILS
     [$params] (array) The parameters to be bound to the SQL statement
 
 
-*yii\db\Connection::getTransaction*				 public
+*yii.db.Connection::getTransaction*				 public
 >
  getTransaction()
 <
@@ -404,7 +404,7 @@ transaction.
 
 
 
-*yii\db\Connection::beginTransaction*				 public
+*yii.db.Connection::beginTransaction*				 public
 >
  beginTransaction()
 <
@@ -413,7 +413,7 @@ transaction.
 
 
 
-*yii\db\Connection::getSchema*					 public
+*yii.db.Connection::getSchema*					 public
 >
  getSchema()
 <
@@ -423,7 +423,7 @@ connection.
 
 
 
-*yii\db\Connection::getQueryBuilder*				 public
+*yii.db.Connection::getQueryBuilder*				 public
 >
  getQueryBuilder()
 <
@@ -432,7 +432,7 @@ connection.
 
 
 
-*yii\db\Connection::getTableSchema*				 public
+*yii.db.Connection::getTableSchema*				 public
 >
  getTableSchema($name, $refresh='false')
 <
@@ -445,7 +445,7 @@ not exist.
     found in the cache.
 
 
-*yii\db\Connection::getLastInsertID*				 public
+*yii.db.Connection::getLastInsertID*				 public
 >
  getLastInsertID($sequenceName='''')
 <
@@ -457,7 +457,7 @@ the sequence object
     DBMS)
 
 
-*yii\db\Connection::quoteValue* 				 public
+*yii.db.Connection::quoteValue* 				 public
 >
  quoteValue($str)
 <
@@ -468,7 +468,7 @@ the sequence object
     [$str] (string) String to be quoted
 
 
-*yii\db\Connection::quoteTableName*				 public
+*yii.db.Connection::quoteTableName*				 public
 >
  quoteTableName($name)
 <
@@ -480,7 +480,7 @@ the sequence object
     [$name] (string) Table name
 
 
-*yii\db\Connection::quoteColumnName*				 public
+*yii.db.Connection::quoteColumnName*				 public
 >
  quoteColumnName($name)
 <
@@ -492,7 +492,7 @@ the sequence object
     [$name] (string) Column name
 
 
-*yii\db\Connection::quoteSql*					 public
+*yii.db.Connection::quoteSql*					 public
 >
  quoteSql($sql)
 <
@@ -505,7 +505,7 @@ the sequence object
     [$sql] (string) The SQL to be quoted
 
 
-*yii\db\Connection::getDriverName*				 public
+*yii.db.Connection::getDriverName*				 public
 >
  getDriverName()
 <

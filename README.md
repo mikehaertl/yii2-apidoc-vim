@@ -14,14 +14,18 @@ If the help is not available after installation, you can try to issue this comma
 :helptags ~/.vimrc/doc
 ```
 
-## Use
+## How to use
 
-There's no real configuration required for this plugin. After installing it, you can
-ask for help on Yii 2 classes like this:
+There is no configuration required for this plugin.
 
 ```vim
-:help yii\web\Controller
+:help yii/web/Controller
 ```
+
+You should note though, that we use a dot instead of a backslash (`\`) as namespace separator.
+This was neccessary because Vim tries to read any tag search argument as regular expression.
+So any backslash would indicate the start of a search pattern and you would have to type e.g.
+`yii\\base\\Controller`. Autocomplete wouldn't work very well either.
 
 ## Create custom version
 

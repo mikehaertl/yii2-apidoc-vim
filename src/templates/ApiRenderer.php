@@ -38,8 +38,7 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
         }
         $done = 0;
         foreach ($types as $type) {
-            //$fileContent = $this->getView()->render('@mikehaertl/yii2/apidoc/vim/templates/views/class.php', [
-            $fileContent = $this->getView()->render('class', [
+            $fileContent = $this->getView()->render('type', [
                 'type' => $type,
                 'apiContext' => $context,
                 'types' => $types,
@@ -80,7 +79,7 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
 
     protected function generateFileName($typeName)
     {
-        return strtolower(str_replace('\\', '-', $typeName)) . '.txt';
+        return strtolower(strtr($typeName, ['\\'=>'-', '/'=>'-'])) . '.txt';
     }
 
     protected function generateLink($text, $href, $options = [])
@@ -205,9 +204,19 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
      */
     public function createTag($class,$property=null,$surround='')
     {
+        $class = $this->convertTagNames($class);
         if ($property===null)
             return $surround.$class.$surround;
         return $surround.$class.self::SEP.$property.$surround;
+    }
+
+    /**
+     * @param string $text
+     * @return string the text with tag names converted to dot notation
+     */
+    public function convertTagNames($text)
+    {
+        return strtr($text, ['\\'=>'.']);
     }
 
     /**

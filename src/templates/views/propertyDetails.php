@@ -7,7 +7,7 @@ PROPERTY DETAILS
 
 <?= $this->context->renderTitleTag('<'.$property->name.'>',$this->context->createTag($type->name,$property->name,'*'))."\n"; ?>
 <?php if($property->definedBy != $type->name): ?>
- See |<?php echo $property->definedBy.'::'.$property->name ?>|
+ See |<?php echo $this->context->convertTagNames($property->definedBy).'::'.$property->name ?>|
 <?php else: ?>
 <?= $this->context->renderDescription("($property->type) ".$property->description,1); ?>
 
