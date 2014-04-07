@@ -1,13 +1,15 @@
 
-*yii\web\Response*   >> yii\base\Response
+*yii/web/Response*   >> |yii/base/Response|
 ==================
 
- It holds the [[headers]], [[cookies]] and [[content]] that is to be sent to
- the client. It also controls the HTTP [[statusCode|status code]].
+DESCRIPTION
+------------------------------------------------------------------------------
 
- Response is configured as an application component in
- [[\yii\web\Application]] by default. You can access that instance via
- 'Yii::$app->response'.
+ It holds the 'headers', 'cookies' and 'content' that is to be sent to the
+ client. It also controls the HTTP 'statusCode|status code'.
+
+ Response is configured as an application component in '\yii\web\Application'
+ by default. You can access that instance via 'Yii::$app->response'.
 
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
@@ -24,113 +26,111 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$exitStatus>				*yii.web.Response::$exitStatus*
- See |yii.base.Response::$exitStatus|
+$exitStatus				*yii/web/Response::$exitStatus*
+ See |yii/base/Response::$exitStatus|
 
-<$format>				*yii.web.Response::$format*
- (string) The response format. This determines how to convert [[data]] into
- [[content]] when the latter is not set. By default, the following formats are
+$format 				*yii/web/Response::$format*
+ (string) The response format. This determines how to convert 'data' into
+ 'content' when the latter is not set. By default, the following formats are
  supported:
 
- - [[FORMAT_RAW]]: the data will be treated as the response content without
- any conversion.   No extra HTTP header will be added. - [[FORMAT_HTML]]: the
- data will be treated as the response content without any conversion.   The
+ - 'FORMAT_RAW': the data will be treated as the response content without any
+ conversion.   No extra HTTP header will be added. - 'FORMAT_HTML': the data
+ will be treated as the response content without any conversion.   The
  "Content-Type" header will set as "text/html" if it is not set previously. -
- [[FORMAT_JSON]]: the data will be converted into JSON format, and the
- "Content-Type"   header will be set as "application/json". -
- [[FORMAT_JSONP]]: the data will be converted into JSONP format, and the
- "Content-Type"   header will be set as "text/javascript". Note that in this
- case '$data' must be an array   with "data" and "callback" elements. The
- former refers to the actual data to be sent,   while the latter refers to the
- name of the JavaScript callback. - [[FORMAT_XML]]: the data will be converted
- into XML format. Please refer to [[XmlResponseFormatter]]   for more details.
+ 'FORMAT_JSON': the data will be converted into JSON format, and the
+ "Content-Type"   header will be set as "application/json". - 'FORMAT_JSONP':
+ the data will be converted into JSONP format, and the "Content-Type"   header
+ will be set as "text/javascript". Note that in this case '$data' must be an
+ array   with "data" and "callback" elements. The former refers to the actual
+ data to be sent,   while the latter refers to the name of the JavaScript
+ callback. - 'FORMAT_XML': the data will be converted into XML format. Please
+ refer to 'XmlResponseFormatter'   for more details.
 
  You may customize the formatting process or support additional formats by
- configuring [[formatters]].
+ configuring 'formatters'.
 
-<$formatters>				*yii.web.Response::$formatters*
+$formatters				*yii/web/Response::$formatters*
  (array) The formatters for converting data into the response content of the
- specified [[format]]. The array keys are the format names, and the array
- values are the corresponding configurations for creating the formatter
- objects.
+ specified 'format'. The array keys are the format names, and the array values
+ are the corresponding configurations for creating the formatter objects.
 
-<$data> 				*yii.web.Response::$data*
+$data					*yii/web/Response::$data*
  (mixed) The original response data. When this is not null, it will be
- converted into [[content]] according to [[format]] when the response is being
+ converted into 'content' according to 'format' when the response is being
  sent out.
 
-<$content>				*yii.web.Response::$content*
- (string) The response content. When [[data]] is not null, it will be
- converted into [[content]] according to [[format]] when the response is being
- sent out.
+$content				*yii/web/Response::$content*
+ (string) The response content. When 'data' is not null, it will be converted
+ into 'content' according to 'format' when the response is being sent out.
 
-<$stream>				*yii.web.Response::$stream*
+$stream 				*yii/web/Response::$stream*
  (resource|array) The stream to be sent. This can be a stream handle or an
  array of stream handle, the begin position and the end position. Note that
- when this property is set, the [[data]] and [[content]] properties will be
- ignored by [[send()]].
+ when this property is set, the 'data' and 'content' properties will be
+ ignored by 'send()'.
 
-<$charset>				*yii.web.Response::$charset*
+$charset				*yii/web/Response::$charset*
  (string) The charset of the text response. If not set, it will use the value
- of [[Application::charset]].
+ of 'Application::charset'.
 
-<$statusText>				*yii.web.Response::$statusText*
+$statusText				*yii/web/Response::$statusText*
  (string) The HTTP status description that comes together with the status
  code.
 
-<$version>				*yii.web.Response::$version*
+$version				*yii/web/Response::$version*
  (string) The version of the HTTP protocol to use. If not set, it will be
  determined via '$_SERVER['SERVER_PROTOCOL']', or '1.1' if that is not
  available.
 
-<$isSent>				*yii.web.Response::$isSent*
+$isSent 				*yii/web/Response::$isSent*
  (boolean) Whether the response has been sent. If this is true, calling
- [[send()]] will do nothing.
+ 'send()' will do nothing.
 
-<$httpStatuses> 			*yii.web.Response::$httpStatuses*
+$httpStatuses				*yii/web/Response::$httpStatuses*
  (array) List of HTTP status codes and the corresponding texts
 
-<$behaviors>				*yii.web.Response::$behaviors*
+$behaviors				*yii/web/Response::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$statusCode>				*yii.web.Response::$statusCode*
+$statusCode				*yii/web/Response::$statusCode*
  (integer) The HTTP status code to send with the response.
 
-<$headers>				*yii.web.Response::$headers*
+$headers				*yii/web/Response::$headers*
  (\yii\web\HeaderCollection) The header collection
 
-<$cookies>				*yii.web.Response::$cookies*
+$cookies				*yii/web/Response::$cookies*
  (\yii\web\CookieCollection) The cookie collection.
 
-<$isInvalid>				*yii.web.Response::$isInvalid*
- (boolean) Whether this response has a valid [[statusCode]].
+$isInvalid				*yii/web/Response::$isInvalid*
+ (boolean) Whether this response has a valid 'statusCode'.
 
-<$isInformational>			*yii.web.Response::$isInformational*
+$isInformational			*yii/web/Response::$isInformational*
  (boolean) Whether this response is informational
 
-<$isSuccessful> 			*yii.web.Response::$isSuccessful*
+$isSuccessful				*yii/web/Response::$isSuccessful*
  (boolean) Whether this response is successful
 
-<$isRedirection>			*yii.web.Response::$isRedirection*
+$isRedirection				*yii/web/Response::$isRedirection*
  (boolean) Whether this response is a redirection
 
-<$isClientError>			*yii.web.Response::$isClientError*
+$isClientError				*yii/web/Response::$isClientError*
  (boolean) Whether this response indicates a client error
 
-<$isServerError>			*yii.web.Response::$isServerError*
+$isServerError				*yii/web/Response::$isServerError*
  (boolean) Whether this response indicates a server error
 
-<$isOk> 				*yii.web.Response::$isOk*
+$isOk					*yii/web/Response::$isOk*
  (boolean) Whether this response is OK
 
-<$isForbidden>				*yii.web.Response::$isForbidden*
+$isForbidden				*yii/web/Response::$isForbidden*
  (boolean) Whether this response indicates the current request is forbidden
 
-<$isNotFound>				*yii.web.Response::$isNotFound*
+$isNotFound				*yii/web/Response::$isNotFound*
  (boolean) Whether this response indicates the currently requested resource is
  not found
 
-<$isEmpty>				*yii.web.Response::$isEmpty*
+$isEmpty				*yii/web/Response::$isEmpty*
  (boolean) Whether this response is empty
 
 
@@ -138,15 +138,15 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.web.Response::className*					 public
- See |yii.base.Object::className|
+yii/web/Response::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.web.Response::__construct* 				 public
- See |yii.base.Object::__construct|
+yii/web/Response::__construct				       public
+ See |yii/base/Object::__construct|
 
 
-*yii.web.Response::init*					 public
+yii/web/Response::init					       public
 >
  init()
 <
@@ -155,95 +155,95 @@ METHOD DETAILS
 
 
 
-*yii.web.Response::__get*					 public
- See |yii.base.Component::__get|
+yii/web/Response::__get 				       public
+ See |yii/base/Component::__get|
 
 
-*yii.web.Response::__set*					 public
- See |yii.base.Component::__set|
+yii/web/Response::__set 				       public
+ See |yii/base/Component::__set|
 
 
-*yii.web.Response::__isset*					 public
- See |yii.base.Component::__isset|
+yii/web/Response::__isset				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.web.Response::__unset*					 public
- See |yii.base.Component::__unset|
+yii/web/Response::__unset				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.web.Response::__call*					 public
- See |yii.base.Component::__call|
+yii/web/Response::__call				       public
+ See |yii/base/Component::__call|
 
 
-*yii.web.Response::hasProperty* 				 public
- See |yii.base.Component::hasProperty|
+yii/web/Response::hasProperty				       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.web.Response::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/web/Response::canGetProperty			       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.web.Response::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/web/Response::canSetProperty			       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.web.Response::hasMethod*					 public
- See |yii.base.Component::hasMethod|
+yii/web/Response::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.web.Response::__clone*					 public
- See |yii.base.Component::__clone|
+yii/web/Response::__clone				       public
+ See |yii/base/Component::__clone|
 
 
-*yii.web.Response::behaviors*					 public
- See |yii.base.Component::behaviors|
+yii/web/Response::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.web.Response::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/web/Response::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.web.Response::on*						 public
- See |yii.base.Component::on|
+yii/web/Response::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.web.Response::off* 					 public
- See |yii.base.Component::off|
+yii/web/Response::off					       public
+ See |yii/base/Component::off|
 
 
-*yii.web.Response::trigger*					 public
- See |yii.base.Component::trigger|
+yii/web/Response::trigger				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.web.Response::getBehavior* 				 public
- See |yii.base.Component::getBehavior|
+yii/web/Response::getBehavior				       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.web.Response::getBehaviors*				 public
- See |yii.base.Component::getBehaviors|
+yii/web/Response::getBehaviors				       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.web.Response::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/web/Response::attachBehavior			       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.web.Response::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/web/Response::attachBehaviors			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.web.Response::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/web/Response::detachBehavior			       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.web.Response::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/web/Response::detachBehaviors			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.web.Response::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/web/Response::ensureBehaviors			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.web.Response::send*					 public
+yii/web/Response::send					       public
 >
  send()
 <
@@ -252,11 +252,11 @@ METHOD DETAILS
 
 
 
-*yii.web.Response::clearOutputBuffers*				 public
- See |yii.base.Response::clearOutputBuffers|
+yii/web/Response::clearOutputBuffers			       public
+ See |yii/base/Response::clearOutputBuffers|
 
 
-*yii.web.Response::getStatusCode*				 public
+yii/web/Response::getStatusCode 			       public
 >
  getStatusCode()
 <
@@ -265,7 +265,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Response::setStatusCode*				 public
+yii/web/Response::setStatusCode 			       public
 >
  setStatusCode($value, $text='null')
 <
@@ -277,7 +277,7 @@ METHOD DETAILS
     based on the status code.
 
 
-*yii.web.Response::getHeaders*					 public
+yii/web/Response::getHeaders				       public
 >
  getHeaders()
 <
@@ -286,7 +286,7 @@ METHOD DETAILS
  The header collection contains the currently registered HTTP headers.
 
 
-*yii.web.Response::clear*					 public
+yii/web/Response::clear 				       public
 >
  clear()
 <
@@ -295,7 +295,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Response::sendHeaders* 				 protected
+yii/web/Response::sendHeaders				       protected
 >
  sendHeaders()
 <
@@ -304,7 +304,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Response::sendCookies* 				 protected
+yii/web/Response::sendCookies				       protected
 >
  sendCookies()
 <
@@ -313,7 +313,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Response::sendContent* 				 protected
+yii/web/Response::sendContent				       protected
 >
  sendContent()
 <
@@ -322,15 +322,15 @@ METHOD DETAILS
 
 
 
-*yii.web.Response::sendFile*					 public
+yii/web/Response::sendFile				       public
 >
  sendFile($filePath, $attachmentName='null', $mimeType='null')
 <
 (static) The response object itself
 
  Note that this method only prepares the response for file sending. The file
- is not sent until [[send()]] is called explicitly or implicitly. The latter
- is done after you return from a controller action.
+ is not sent until 'send()' is called explicitly or implicitly. The latter is
+ done after you return from a controller action.
     [$filePath] (string) The path of the file to be sent.
     [$attachmentName] (string) The file name shown to the user. If null, it
     will be determined from '$filePath'.
@@ -338,36 +338,36 @@ METHOD DETAILS
     guessed based on '$filePath'
 
 
-*yii.web.Response::sendContentAsFile*				 public
+yii/web/Response::sendContentAsFile			       public
 >
  sendContentAsFile($content, $attachmentName, $mimeType=''application/octet-stream'')
 <
 (static) The response object itself
 
  Note that this method only prepares the response for file sending. The file
- is not sent until [[send()]] is called explicitly or implicitly. The latter
- is done after you return from a controller action.
-    [$content] (string) The content to be sent. The existing [[content]] will
-    be discarded.
+ is not sent until 'send()' is called explicitly or implicitly. The latter is
+ done after you return from a controller action.
+    [$content] (string) The content to be sent. The existing 'content' will be
+    discarded.
     [$attachmentName] (string) The file name shown to the user.
     [$mimeType] (string) The MIME type of the content.
 
 
-*yii.web.Response::sendStreamAsFile*				 public
+yii/web/Response::sendStreamAsFile			       public
 >
  sendStreamAsFile($handle, $attachmentName, $mimeType=''application/octet-stream'')
 <
 (static) The response object itself
 
  Note that this method only prepares the response for file sending. The file
- is not sent until [[send()]] is called explicitly or implicitly. The latter
- is done after you return from a controller action.
+ is not sent until 'send()' is called explicitly or implicitly. The latter is
+ done after you return from a controller action.
     [$handle] (resource) The handle of the stream to be sent.
     [$attachmentName] (string) The file name shown to the user.
     [$mimeType] (string) The MIME type of the stream content.
 
 
-*yii.web.Response::getHttpRange*				 protected
+yii/web/Response::getHttpRange				       protected
 >
  getHttpRange($fileSize)
 <
@@ -379,7 +379,7 @@ invalid.
     the requested HTTP range.
 
 
-*yii.web.Response::xSendFile*					 public
+yii/web/Response::xSendFile				       public
 >
  xSendFile($filePath, $attachmentName='null', $mimeType='null', $xHeader=''X-Sendfile'')
 <
@@ -443,15 +443,15 @@ invalid.
     [$xHeader] (string) The name of the x-sendfile header.
 
 
-*yii.web.Response::redirect*					 public
+yii/web/Response::redirect				       public
 >
  redirect($url, $statusCode=302)
 <
 (static) The response object itself
 
  This method adds a "Location" header to the current response. Note that it
- does not send out the header until [[send()]] is called. In a controller
- action you may use this method as follows:
+ does not send out the header until 'send()' is called. In a controller action
+ you may use this method as follows:
 
    return Yii::$app->getResponse()->redirect($url);
 
@@ -484,8 +484,8 @@ invalid.
     representing a URL alias (e.g. "@example.com") - an array in the format of
     '[$route, ...name-value pairs...]' (e.g. '['site/index', 'ref' => 1]').  
     Note that the route is with respect to the whole application, instead of
-    relative to a controller or module.   [[Url::to()]] will be used to
-    convert the array into a URL.
+    relative to a controller or module.   'Url::to()' will be used to convert
+    the array into a URL.
 
     Any relative URL will be converted into an absolute one by prepending it
     with the host info of the current request.
@@ -494,7 +494,7 @@ invalid.
     HTTP status code
 
 
-*yii.web.Response::refresh*					 public
+yii/web/Response::refresh				       public
 >
  refresh($anchor='''')
 <
@@ -513,7 +513,7 @@ invalid.
     to specify it.
 
 
-*yii.web.Response::getCookies*					 public
+yii/web/Response::getCookies				       public
 >
  getCookies()
 <
@@ -535,16 +535,16 @@ invalid.
 
 
 
-*yii.web.Response::getIsInvalid*				 public
+yii/web/Response::getIsInvalid				       public
 >
  getIsInvalid()
 <
-(boolean) Whether this response has a valid [[statusCode]].
+(boolean) Whether this response has a valid 'statusCode'.
 
 
 
 
-*yii.web.Response::getIsInformational*				 public
+yii/web/Response::getIsInformational			       public
 >
  getIsInformational()
 <
@@ -553,7 +553,7 @@ invalid.
 
 
 
-*yii.web.Response::getIsSuccessful*				 public
+yii/web/Response::getIsSuccessful			       public
 >
  getIsSuccessful()
 <
@@ -562,7 +562,7 @@ invalid.
 
 
 
-*yii.web.Response::getIsRedirection*				 public
+yii/web/Response::getIsRedirection			       public
 >
  getIsRedirection()
 <
@@ -571,7 +571,7 @@ invalid.
 
 
 
-*yii.web.Response::getIsClientError*				 public
+yii/web/Response::getIsClientError			       public
 >
  getIsClientError()
 <
@@ -580,7 +580,7 @@ invalid.
 
 
 
-*yii.web.Response::getIsServerError*				 public
+yii/web/Response::getIsServerError			       public
 >
  getIsServerError()
 <
@@ -589,7 +589,7 @@ invalid.
 
 
 
-*yii.web.Response::getIsOk*					 public
+yii/web/Response::getIsOk				       public
 >
  getIsOk()
 <
@@ -598,7 +598,7 @@ invalid.
 
 
 
-*yii.web.Response::getIsForbidden*				 public
+yii/web/Response::getIsForbidden			       public
 >
  getIsForbidden()
 <
@@ -607,7 +607,7 @@ invalid.
 
 
 
-*yii.web.Response::getIsNotFound*				 public
+yii/web/Response::getIsNotFound 			       public
 >
  getIsNotFound()
 <
@@ -617,7 +617,7 @@ not found
 
 
 
-*yii.web.Response::getIsEmpty*					 public
+yii/web/Response::getIsEmpty				       public
 >
  getIsEmpty()
 <
@@ -626,14 +626,14 @@ not found
 
 
 
-*yii.web.Response::prepare*					 protected
+yii/web/Response::prepare				       protected
 >
  prepare()
 <
 (void)
 
- The default implementation will convert [[data]] into [[content]] and set
- headers accordingly.
+ The default implementation will convert 'data' into 'content' and set headers
+ accordingly.
 
 
 

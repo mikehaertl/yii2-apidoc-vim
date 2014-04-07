@@ -1,47 +1,50 @@
 
-*yii\db\QueryTrait*  
+*yii/db/QueryTrait*  
 ===================
 
- It is supposed to be used in a class that implements the [[QueryInterface]].
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It is supposed to be used in a class that implements the 'QueryInterface'.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$where>				*yii.db.QueryTrait::$where*
+$where					*yii/db/QueryTrait::$where*
  (string|array) Query condition. This refers to the WHERE clause in a SQL
  statement. For example, 'age > 31 AND team = 1'.
 
-<$limit>				*yii.db.QueryTrait::$limit*
+$limit					*yii/db/QueryTrait::$limit*
  (integer) Maximum number of records to be returned. If not set or less than
  0, it means no limit.
 
-<$offset>				*yii.db.QueryTrait::$offset*
+$offset 				*yii/db/QueryTrait::$offset*
  (integer) Zero-based offset from where the records are to be returned. If not
  set or less than 0, it means starting from the beginning.
 
-<$orderBy>				*yii.db.QueryTrait::$orderBy*
+$orderBy				*yii/db/QueryTrait::$orderBy*
  (array) How to sort the query results. This is used to construct the ORDER BY
  clause in a SQL statement. The array keys are the columns to be sorted by,
  and the array values are the corresponding sort directions which can be
  either
  [SORT_ASC](http://php.net/manual/en/array.constants.php#constant.sort-asc) or
  [SORT_DESC](http://php.net/manual/en/array.constants.php#constant.sort-desc).
- The array may also contain [[Expression]] objects. If that is the case, the
+ The array may also contain 'Expression' objects. If that is the case, the
  expressions will be converted into strings without any change.
 
-<$indexBy>				*yii.db.QueryTrait::$indexBy*
+$indexBy				*yii/db/QueryTrait::$indexBy*
  (string|callable) The name of the column by which the query results should be
  indexed by. This can also be a callable (e.g. anonymous function) that
  returns the index value based on the given row data. For more details, see
- [[indexBy()]]. This property is only used by [[QueryInterface::all()|all()]].
+ 'indexBy()'. This property is only used by 'QueryInterface::all()|all()'.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.db.QueryTrait::indexBy*					 public
+yii/db/QueryTrait::indexBy				       public
 >
  indexBy($column)
 <
@@ -61,18 +64,18 @@ METHOD DETAILS
 
 
 
-*yii.db.QueryTrait::where*					 public
+yii/db/QueryTrait::where				       public
 >
  where($condition)
 <
 (static) The query object itself
 
- See [[QueryInterface::where()]] for detailed documentation.
+ See 'QueryInterface::where()' for detailed documentation.
     [$condition] (string|array) The conditions that should be put in the WHERE
     part.
 
 
-*yii.db.QueryTrait::andWhere*					 public
+yii/db/QueryTrait::andWhere				       public
 >
  andWhere($condition)
 <
@@ -81,10 +84,10 @@ METHOD DETAILS
  The new condition and the existing one will be joined using the 'AND'
  operator.
     [$condition] (string|array) The new WHERE condition. Please refer to
-    [[where()]] on how to specify this parameter.
+    'where()' on how to specify this parameter.
 
 
-*yii.db.QueryTrait::orWhere*					 public
+yii/db/QueryTrait::orWhere				       public
 >
  orWhere($condition)
 <
@@ -93,21 +96,21 @@ METHOD DETAILS
  The new condition and the existing one will be joined using the 'OR'
  operator.
     [$condition] (string|array) The new WHERE condition. Please refer to
-    [[where()]] on how to specify this parameter.
+    'where()' on how to specify this parameter.
 
 
-*yii.db.QueryTrait::filterWhere*				 public
+yii/db/QueryTrait::filterWhere				       public
 >
  filterWhere($condition)
 <
 (static) The query object itself
 
- This method is similar to [[where()]]. The main difference is that this
- method will remove [[isEmpty()|empty query operands]]. As a result, this
- method is best suited for building query conditions based on filter values
- entered by users.
+ This method is similar to 'where()'. The main difference is that this method
+ will remove 'isEmpty()|empty query operands'. As a result, this method is
+ best suited for building query conditions based on filter values entered by
+ users.
 
- The following code shows the difference between this method and [[where()]]:
+ The following code shows the difference between this method and 'where()':
 
    // WHERE `age`=:age
    $query->filterWhere(['name' => null, 'age' => 20]);
@@ -116,13 +119,13 @@ METHOD DETAILS
    // WHERE `name` IS NULL AND `age`=:age
    $query->where(['name' => null, 'age' => 20]);
 
- Note that unlike [[where()]], you cannot pass binding parameters to this
+ Note that unlike 'where()', you cannot pass binding parameters to this
  method.
     [$condition] (array) The conditions that should be put in the WHERE part.
-    See [[where()]] on how to specify this parameter.
+    See 'where()' on how to specify this parameter.
 
 
-*yii.db.QueryTrait::andFilterWhere*				 public
+yii/db/QueryTrait::andFilterWhere			       public
 >
  andFilterWhere($condition)
 <
@@ -131,15 +134,15 @@ METHOD DETAILS
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
- This method is similar to [[andWhere()]]. The main difference is that this
- method will remove [[isEmpty()|empty query operands]]. As a result, this
- method is best suited for building query conditions based on filter values
- entered by users.
-    [$condition] (array) The new WHERE condition. Please refer to [[where()]]
-    on how to specify this parameter.
+ This method is similar to 'andWhere()'. The main difference is that this
+ method will remove 'isEmpty()|empty query operands'. As a result, this method
+ is best suited for building query conditions based on filter values entered
+ by users.
+    [$condition] (array) The new WHERE condition. Please refer to 'where()' on
+    how to specify this parameter.
 
 
-*yii.db.QueryTrait::orFilterWhere*				 public
+yii/db/QueryTrait::orFilterWhere			       public
 >
  orFilterWhere($condition)
 <
@@ -148,25 +151,25 @@ METHOD DETAILS
  The new condition and the existing one will be joined using the 'OR'
  operator.
 
- This method is similar to [[orWhere()]]. The main difference is that this
- method will remove [[isEmpty()|empty query operands]]. As a result, this
- method is best suited for building query conditions based on filter values
- entered by users.
-    [$condition] (array) The new WHERE condition. Please refer to [[where()]]
-    on how to specify this parameter.
+ This method is similar to 'orWhere()'. The main difference is that this
+ method will remove 'isEmpty()|empty query operands'. As a result, this method
+ is best suited for building query conditions based on filter values entered
+ by users.
+    [$condition] (array) The new WHERE condition. Please refer to 'where()' on
+    how to specify this parameter.
 
 
-*yii.db.QueryTrait::filterCondition*				 protected
+yii/db/QueryTrait::filterCondition			       protected
 >
  filterCondition($condition)
 <
-(array) The condition with [[isEmpty()|empty operands]] removed.
+(array) The condition with 'isEmpty()|empty operands' removed.
 
 
     [$condition] (array) The original condition
 
 
-*yii.db.QueryTrait::isEmpty*					 protected
+yii/db/QueryTrait::isEmpty				       protected
 >
  isEmpty($value)
 <
@@ -180,7 +183,7 @@ METHOD DETAILS
     [$value] (mixed) 
 
 
-*yii.db.QueryTrait::orderBy*					 public
+yii/db/QueryTrait::orderBy				       public
 >
  orderBy($columns)
 <
@@ -197,7 +200,7 @@ METHOD DETAILS
     not be able to correctly determine the order-by columns.
 
 
-*yii.db.QueryTrait::addOrderBy* 				 public
+yii/db/QueryTrait::addOrderBy				       public
 >
  addOrderBy($columns)
 <
@@ -211,7 +214,7 @@ METHOD DETAILS
     parenthesis (which means the column contains a DB expression).
 
 
-*yii.db.QueryTrait::normalizeOrderBy*				 protected
+yii/db/QueryTrait::normalizeOrderBy			       protected
 >
  normalizeOrderBy($columns)
 <
@@ -220,7 +223,7 @@ METHOD DETAILS
     [$columns] () 
 
 
-*yii.db.QueryTrait::limit*					 public
+yii/db/QueryTrait::limit				       public
 >
  limit($limit)
 <
@@ -230,7 +233,7 @@ METHOD DETAILS
     [$limit] (integer) The limit. Use null or negative value to disable limit.
 
 
-*yii.db.QueryTrait::offset*					 public
+yii/db/QueryTrait::offset				       public
 >
  offset($offset)
 <

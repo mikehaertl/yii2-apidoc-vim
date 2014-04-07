@@ -1,66 +1,76 @@
 
-*yii\log\Target*   >> yii\base\Component
+*yii/log/Target*   >> |yii/base/Component|
 ================
 
- A log target object will filter the messages logged by [[Logger]] according
- to its [[levels]] and [[categories]] properties. It may also export the
- filtered messages to specific destination defined by the target, such as
- emails, files.
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/log/DbTarget|
+|yii/log/FileTarget|
+|yii/log/EmailTarget|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ A log target object will filter the messages logged by 'Logger' according to
+ its 'levels' and 'categories' properties. It may also export the filtered
+ messages to specific destination defined by the target, such as emails,
+ files.
 
  Level filter and category filter are combinatorial, i.e., only messages
  satisfying both filter conditions will be handled. Additionally, you may
- specify [[except]] to exclude messages of certain categories.
+ specify 'except' to exclude messages of certain categories.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$enabled>				*yii.log.Target::$enabled*
+$enabled				*yii/log/Target::$enabled*
  (boolean) Whether to enable this log target. Defaults to true.
 
-<$categories>				*yii.log.Target::$categories*
+$categories				*yii/log/Target::$categories*
  (array) List of message categories that this target is interested in.
  Defaults to empty, meaning all categories. You can use an asterisk at the end
  of a category so that the category may be used to match those categories
  sharing the same common prefix. For example, 'yii\db\*' will match categories
  starting with 'yii\db\', such as 'yii\db\Connection'.
 
-<$except>				*yii.log.Target::$except*
+$except 				*yii/log/Target::$except*
  (array) List of message categories that this target is NOT interested in.
  Defaults to empty, meaning no uninteresting messages. If this property is not
- empty, then any category listed here will be excluded from [[categories]].
- You can use an asterisk at the end of a category so that the category can be
- used to match those categories sharing the same common prefix. For example,
+ empty, then any category listed here will be excluded from 'categories'. You
+ can use an asterisk at the end of a category so that the category can be used
+ to match those categories sharing the same common prefix. For example,
  'yii\db\*' will match categories starting with 'yii\db\', such as
  'yii\db\Connection'.
 
-<$logVars>				*yii.log.Target::$logVars*
+$logVars				*yii/log/Target::$logVars*
  (array) List of the PHP predefined variables that should be logged in a
  message. Note that a variable must be accessible via '$GLOBALS'. Otherwise it
  won't be logged. Defaults to '['_GET', '_POST', '_FILES', '_COOKIE',
  '_SESSION', '_SERVER']'.
 
-<$prefix>				*yii.log.Target::$prefix*
+$prefix 				*yii/log/Target::$prefix*
  (callable) A PHP callable that returns a string to be prefix to every
- exported message. If not set, [[getMessagePrefix()]] will be used, which
+ exported message. If not set, 'getMessagePrefix()' will be used, which
  prefixes user IP, user ID and session ID to every message. The signature of
  the callable should be 'function ($message)'.
 
-<$exportInterval>			*yii.log.Target::$exportInterval*
+$exportInterval 			*yii/log/Target::$exportInterval*
  (integer) How many messages should be accumulated before they are exported.
  Defaults to 1000. Note that messages will always be exported when the
  application terminates. Set this property to be 0 if you don't want to export
  messages until the application terminates.
 
-<$messages>				*yii.log.Target::$messages*
+$messages				*yii/log/Target::$messages*
  (array) The messages that are retrieved from the logger so far by this log
- target. Please refer to [[Logger::messages]] for the details about the
- message structure.
+ target. Please refer to 'Logger::messages' for the details about the message
+ structure.
 
-<$behaviors>				*yii.log.Target::$behaviors*
+$behaviors				*yii/log/Target::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$levels>				*yii.log.Target::$levels*
+$levels 				*yii/log/Target::$levels*
  (integer) The message levels that this target is interested in. This is a
  bitmap of level values. Defaults to 0, meaning  all available levels.
 
@@ -69,107 +79,107 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.log.Target::className*					 public
- See |yii.base.Object::className|
+yii/log/Target::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.log.Target::__construct*					 public
- See |yii.base.Object::__construct|
+yii/log/Target::__construct				       public
+ See |yii/base/Object::__construct|
 
 
-*yii.log.Target::init*						 public
- See |yii.base.Object::init|
+yii/log/Target::init					       public
+ See |yii/base/Object::init|
 
 
-*yii.log.Target::__get* 					 public
- See |yii.base.Component::__get|
+yii/log/Target::__get					       public
+ See |yii/base/Component::__get|
 
 
-*yii.log.Target::__set* 					 public
- See |yii.base.Component::__set|
+yii/log/Target::__set					       public
+ See |yii/base/Component::__set|
 
 
-*yii.log.Target::__isset*					 public
- See |yii.base.Component::__isset|
+yii/log/Target::__isset 				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.log.Target::__unset*					 public
- See |yii.base.Component::__unset|
+yii/log/Target::__unset 				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.log.Target::__call*					 public
- See |yii.base.Component::__call|
+yii/log/Target::__call					       public
+ See |yii/base/Component::__call|
 
 
-*yii.log.Target::hasProperty*					 public
- See |yii.base.Component::hasProperty|
+yii/log/Target::hasProperty				       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.log.Target::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/log/Target::canGetProperty				       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.log.Target::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/log/Target::canSetProperty				       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.log.Target::hasMethod*					 public
- See |yii.base.Component::hasMethod|
+yii/log/Target::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.log.Target::__clone*					 public
- See |yii.base.Component::__clone|
+yii/log/Target::__clone 				       public
+ See |yii/base/Component::__clone|
 
 
-*yii.log.Target::behaviors*					 public
- See |yii.base.Component::behaviors|
+yii/log/Target::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.log.Target::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/log/Target::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.log.Target::on*						 public
- See |yii.base.Component::on|
+yii/log/Target::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.log.Target::off*						 public
- See |yii.base.Component::off|
+yii/log/Target::off					       public
+ See |yii/base/Component::off|
 
 
-*yii.log.Target::trigger*					 public
- See |yii.base.Component::trigger|
+yii/log/Target::trigger 				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.log.Target::getBehavior*					 public
- See |yii.base.Component::getBehavior|
+yii/log/Target::getBehavior				       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.log.Target::getBehaviors*					 public
- See |yii.base.Component::getBehaviors|
+yii/log/Target::getBehaviors				       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.log.Target::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/log/Target::attachBehavior				       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.log.Target::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/log/Target::attachBehaviors 			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.log.Target::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/log/Target::detachBehavior				       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.log.Target::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/log/Target::detachBehaviors 			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.log.Target::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/log/Target::ensureBehaviors 			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.log.Target::export*					 public
+yii/log/Target::export					       public
 >
  export()
 <
@@ -178,22 +188,22 @@ METHOD DETAILS
  Child classes must implement this method.
 
 
-*yii.log.Target::collect*					 public
+yii/log/Target::collect 				       public
 >
  collect($messages, $final)
 <
 (void)
 
- This method will filter the given messages with [[levels]] and
- [[categories]]. And if requested, it will also export the filtering result to
- specific medium (e.g. email).
-    [$messages] (array) Log messages to be processed. See [[Logger::messages]]
+ This method will filter the given messages with 'levels' and 'categories'.
+ And if requested, it will also export the filtering result to specific medium
+ (e.g. email).
+    [$messages] (array) Log messages to be processed. See 'Logger::messages'
     for the structure of each message.
     [$final] (boolean) Whether this method is called at the end of the current
     application
 
 
-*yii.log.Target::getContextMessage*				 protected
+yii/log/Target::getContextMessage			       protected
 >
  getContextMessage()
 <
@@ -203,7 +213,7 @@ information.
  The default implementation will dump user information, system variables, etc.
 
 
-*yii.log.Target::getLevels*					 public
+yii/log/Target::getLevels				       public
 >
  getLevels()
 <
@@ -213,7 +223,7 @@ bitmap of level values. Defaults to 0, meaning  all available levels.
 
 
 
-*yii.log.Target::setLevels*					 public
+yii/log/Target::setLevels				       public
 >
  setLevels($levels)
 <
@@ -222,9 +232,8 @@ bitmap of level values. Defaults to 0, meaning  all available levels.
  The parameter can be either an array of interested level names or an integer
  representing the bitmap of the interested level values. Valid level names
  include: 'error', 'warning', 'info', 'trace' and 'profile'; valid level
- values include: [[Logger::LEVEL_ERROR]], [[Logger::LEVEL_WARNING]],
- [[Logger::LEVEL_INFO]], [[Logger::LEVEL_TRACE]] and
- [[Logger::LEVEL_PROFILE]].
+ values include: 'Logger::LEVEL_ERROR', 'Logger::LEVEL_WARNING',
+ 'Logger::LEVEL_INFO', 'Logger::LEVEL_TRACE' and 'Logger::LEVEL_PROFILE'.
 
  For example,
 
@@ -237,7 +246,7 @@ bitmap of level values. Defaults to 0, meaning  all available levels.
     in.
 
 
-*yii.log.Target::filterMessages*				 public
+yii/log/Target::filterMessages				       public
 >
  filterMessages($messages, $levels=0, $categories='[]', $except='[]')
 <
@@ -253,17 +262,17 @@ bitmap of level values. Defaults to 0, meaning  all available levels.
     all categories are allowed.
 
 
-*yii.log.Target::formatMessage* 				 public
+yii/log/Target::formatMessage				       public
 >
  formatMessage($message)
 <
 (string) The formatted message
 
- The message structure follows that in [[Logger::messages]].
+ The message structure follows that in 'Logger::messages'.
     [$message] (array) The log message to be formatted.
 
 
-*yii.log.Target::getMessagePrefix*				 public
+yii/log/Target::getMessagePrefix			       public
 >
  getMessagePrefix($message)
 <

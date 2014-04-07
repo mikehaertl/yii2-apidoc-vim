@@ -103,12 +103,13 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
      * @param string $tag on the right, including '*'s
      * @param int $column position where tag should start
      * @param int $tabstop width of a single tab (spaces)
+     * @param string $ignore character to ignore for width (e.g. '*')
      * @return string string with as many tabs as possible between title and tag
      */
-    public function renderTitleTag($title,$tag,$column=40,$tabstop=8) 
+    public function renderTitleTag($title,$tag,$column=40,$tabstop=8,$ignore='') 
     {
         $out=sprintf("%-{$column}s%s",$title,$tag);	// first use spaces
-        return $this->spaces2tabs($out,$tabstop);	// then convert to tabs
+        return $this->spaces2tabs($out,$tabstop,$ignore);	// then convert to tabs
     }
 
     /**
@@ -122,14 +123,28 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
             while ($class->parentClass !== null) {
                 if (isset($this->apiContext->classes[$class->parentClass])) {
                     $class = $this->apiContext->classes[$class->parentClass];
-                    $parents[] = $class;
+                    $parents[] = $this->convertNamespace($class);
                 } else {
-                    $parents[] = $class->parentClass;
+                    $parents[] = '|'.$this->convertNamespace($class->parentClass).'|';
                     break;
                 }
             }
         }
         return count($parents) ? ' >> '.implode(' >> ',$parents) : '';
+    }
+
+    /**
+     * @param mixed $type
+     * @return string the subclasses
+     */
+    public function renderSubclasses($type)
+    {
+        $classes = [];
+        foreach($type->subclasses as $class) {
+            $classes[] = '|'.$this->convertNamespace($class).'|';
+        }
+
+        return implode($classes, "\n");
     }
 
     /**
@@ -204,7 +219,7 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
      */
     public function createTag($class,$property=null,$surround='')
     {
-        $class = $this->convertTagNames($class);
+        $class = $this->convertNamespace($class);
         if ($property===null)
             return $surround.$class.$surround;
         return $surround.$class.self::SEP.$property.$surround;
@@ -214,9 +229,9 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
      * @param string $text
      * @return string the text with tag names converted to dot notation
      */
-    public function convertTagNames($text)
+    public function convertNamespace($text)
     {
-        return strtr($text, ['\\'=>'.']);
+        return strtr($text, ['\\'=>'/']);
     }
 
     /**
@@ -234,6 +249,8 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
 
         $content = strtr($content, [
             '`' => "'",
+            '[[' => "'",
+            ']]' => "'",
         ]);
 
         // Now put back code blocks in same order
@@ -315,11 +332,15 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
     /**
      * @param string text where start is aligned to a tab or left border
      * @param int $ts tabstop (default 8)
+     * @param string $ignore character to ignore, e.g. '*'. Will be removed before conversion
      * @return string text with as many spaces as possible replaced with tabs
      */
-    protected function spaces2tabs($text,$ts=8)
+    protected function spaces2tabs($text,$ts=8,$ignore='')
     {
         $out='';
+        if($ignore) {
+            $text = strtr($text, [$ignore => '']);
+        }
         foreach(str_split($text,$ts) as $n=>$chunk)
         {
             $chunk=rtrim($chunk,' ');

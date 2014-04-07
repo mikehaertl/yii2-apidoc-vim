@@ -22,10 +22,10 @@ There is no configuration required for this plugin.
 :help yii/web/Controller
 ```
 
-You should note though, that we use a dot instead of a backslash (`\`) as namespace separator.
-This was neccessary because Vim tries to read any tag search argument as regular expression.
-So any backslash would indicate the start of a search pattern and you would have to type e.g.
-`yii\\base\\Controller`. Autocomplete wouldn't work very well either.
+You should note though, that we use a forward slash (`/`)  instead of a backslash (`\`) as
+namespace separator. This was neccessary because when searching for tags, Vim uses regular
+expressions. So any backslash would indicate the start of a search pattern and you would
+have to type e.g. `yii\\base\\Controller`. Autocomplete wouldn't work very well either.
 
 ## Create custom version
 

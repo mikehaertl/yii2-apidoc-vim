@@ -1,21 +1,29 @@
 
-*yii\helpers\BaseUrl*  
+*yii/helpers/BaseUrl*  
 =====================
 
- Do not use BaseUrl. Use [[Url]] instead.
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/helpers/Url|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Do not use BaseUrl. Use 'Url' instead.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.helpers.BaseUrl::toRoute*					 public
+yii/helpers/BaseUrl::toRoute				       public
 >
  toRoute($route, $scheme='false')
 <
 (string) The generated URL
 
- This method will use [[\yii\web\UrlManager]] to create a URL.
+ This method will use '\yii\web\UrlManager' to create a URL.
 
  You may specify the route as a string, e.g., 'site/index'. You may also use
  an array if you want to specify additional query parameters for the URL being
@@ -36,13 +44,13 @@ METHOD DETAILS
  one by the following rules:
 
  - If the route is an empty string, the current
- [[\yii\web\Controller::route|route]] will be used; - If the route contains no
+ '\yii\web\Controller::route|route' will be used; - If the route contains no
  slashes at all (e.g. 'index'), it is considered to be an action ID   of the
  current controller and will be prepended with
- [[\yii\web\Controller::uniqueId]]; - If the route has no leading slash (e.g.
+ '\yii\web\Controller::uniqueId'; - If the route has no leading slash (e.g.
  'site/index'), it is considered to be a route relative   to the current
  module and will be prepended with the module's
- [[\yii\base\Module::uniqueId|uniqueId]].
+ '\yii\base\Module::uniqueId|uniqueId'.
 
  Below are some examples of using this method:
 
@@ -70,7 +78,7 @@ METHOD DETAILS
     'https').
 
 
-*yii.helpers.BaseUrl::normalizeRoute*				 protected
+yii/helpers/BaseUrl::normalizeRoute			       protected
 >
  normalizeRoute($route)
 <
@@ -80,34 +88,34 @@ METHOD DETAILS
  "post/view".
 
  - If the route is an empty string, the current
- [[\yii\web\Controller::route|route]] will be used; - If the route contains no
+ '\yii\web\Controller::route|route' will be used; - If the route contains no
  slashes at all, it is considered to be an action ID   of the current
- controller and will be prepended with [[\yii\web\Controller::uniqueId]]; - If
+ controller and will be prepended with '\yii\web\Controller::uniqueId'; - If
  the route has no leading slash, it is considered to be a route relative   to
  the current module and will be prepended with the module's uniqueId.
     [$route] (string) The route. This can be either an absolute route or a
     relative route.
 
 
-*yii.helpers.BaseUrl::to*					 public
+yii/helpers/BaseUrl::to 				       public
 >
  to($url='\'\'', $scheme='false')
 <
 (string) The generated URL
 
- This method is very similar to [[toRoute()]]. The only difference is that
- this method requires a route to be specified as an array only. If a string is
+ This method is very similar to 'toRoute()'. The only difference is that this
+ method requires a route to be specified as an array only. If a string is
  given, it will be treated as a URL which will be prefixed with the base URL
  if it does not start with a slash. In particular, if '$url' is
 
- - an array: [[toRoute()]] will be called to generate the URL. For example:  
- '['site/index']', '['post/index', 'page' => 2]'. Please refer to
- [[toRoute()]] for more details   on how to specify a route. - a string with a
- leading '@': it is treated as an alias and the corresponding aliased string  
- will be subject to the following rules. - an empty string: the currently
- requested URL will be returned; - a string without a leading slash: it will
- be prefixed with [[\yii\web\Request::baseUrl]]. - a string with a leading
- slash: it will be returned as is.
+ - an array: 'toRoute()' will be called to generate the URL. For example:  
+ '['site/index']', '['post/index', 'page' => 2]'. Please refer to 'toRoute()'
+ for more details   on how to specify a route. - a string with a leading '@':
+ it is treated as an alias and the corresponding aliased string   will be
+ subject to the following rules. - an empty string: the currently requested
+ URL will be returned; - a string without a leading slash: it will be prefixed
+ with '\yii\web\Request::baseUrl'. - a string with a leading slash: it will be
+ returned as is.
 
  Note that in case '$scheme' is specified (either a string or true), an
  absolute URL with host info will be returned.
@@ -142,7 +150,7 @@ METHOD DETAILS
     'https').
 
 
-*yii.helpers.BaseUrl::base*					 public
+yii/helpers/BaseUrl::base				       public
 >
  base($scheme='false')
 <
@@ -157,22 +165,22 @@ METHOD DETAILS
     scheme (either 'http' or 'https').
 
 
-*yii.helpers.BaseUrl::remember* 				 public
+yii/helpers/BaseUrl::remember				       public
 >
  remember($url='\'\'', $name='null')
 <
 (void)
 
 
-    [$url] (string|array) The URL to remember. Please refer to [[to()]] for
+    [$url] (string|array) The URL to remember. Please refer to 'to()' for
     acceptable formats. If this parameter is not specified, the currently
     requested URL will be used.
     [$name] (string) The name associated with the URL to be remembered. This
-    can be used later by [[previous()]]. If not set, it will use
-    [[\yii\web\User::returnUrlParam]].
+    can be used later by 'previous()'. If not set, it will use
+    '\yii\web\User::returnUrlParam'.
 
 
-*yii.helpers.BaseUrl::previous* 				 public
+yii/helpers/BaseUrl::previous				       public
 >
  previous($name='null')
 <
@@ -181,26 +189,26 @@ remembered with the given name.
 
 
     [$name] (string) The named associated with the URL that was remembered
-    previously. If not set, it will use [[\yii\web\User::returnUrlParam]].
+    previously. If not set, it will use '\yii\web\User::returnUrlParam'.
 
 
-*yii.helpers.BaseUrl::canonical*				 public
+yii/helpers/BaseUrl::canonical				       public
 >
  canonical()
 <
 (string) The canonical URL of the currently requested page
 
  The canonical URL is constructed using the current controller's
- [[yii\web\Controller::route]] and [[yii\web\Controller::actionParams]]. You
- may use the following code in the layout view to add a link tag about
- canonical URL:
+ 'yii\web\Controller::route' and 'yii\web\Controller::actionParams'. You may
+ use the following code in the layout view to add a link tag about canonical
+ URL:
 
    $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
 
 
 
 
-*yii.helpers.BaseUrl::home*					 public
+yii/helpers/BaseUrl::home				       public
 >
  home($scheme='false')
 <

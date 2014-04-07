@@ -1,9 +1,164 @@
 
-*yii\base\Component*   >> yii\base\Object
+*yii/base/Component*   >> |yii/base/Object|
 ====================
 
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/di/ServiceLocator|
+|yii/di/Container|
+|yii/captcha/CaptchaAction|
+|yii/captcha/CaptchaValidator|
+|yii/captcha/Captcha|
+|yii/mutex/FileMutex|
+|yii/mutex/Mutex|
+|yii/mutex/MysqlMutex|
+|yii/mutex/DbMutex|
+|yii/base/Request|
+|yii/base/Controller|
+|yii/base/Application|
+|yii/base/ViewRenderer|
+|yii/base/InlineAction|
+|yii/base/Widget|
+|yii/base/Action|
+|yii/base/Formatter|
+|yii/base/Theme|
+|yii/base/DynamicModel|
+|yii/base/Response|
+|yii/base/ErrorHandler|
+|yii/base/View|
+|yii/base/Model|
+|yii/base/Module|
+|yii/db/Command|
+|yii/db/Migration|
+|yii/db/ActiveQuery|
+|yii/db/Query|
+|yii/db/ActiveRecord|
+|yii/db/Connection|
+|yii/db/BaseActiveRecord|
+|yii/test/Fixture|
+|yii/test/DbFixture|
+|yii/test/InitDbFixture|
+|yii/test/ActiveFixture|
+|yii/test/BaseActiveFixture|
+|yii/i18n/GettextFile|
+|yii/i18n/PhpMessageSource|
+|yii/i18n/GettextMoFile|
+|yii/i18n/MessageFormatter|
+|yii/i18n/Formatter|
+|yii/i18n/MessageSource|
+|yii/i18n/GettextMessageSource|
+|yii/i18n/I18N|
+|yii/i18n/GettextPoFile|
+|yii/i18n/DbMessageSource|
+|yii/console/Request|
+|yii/console/Controller|
+|yii/console/Application|
+|yii/console/controllers/HelpController|
+|yii/console/controllers/CacheController|
+|yii/console/controllers/MessageController|
+|yii/console/controllers/AssetController|
+|yii/console/controllers/FixtureController|
+|yii/console/controllers/MigrateController|
+|yii/console/Response|
+|yii/console/ErrorHandler|
+|yii/rbac/Manager|
+|yii/rbac/DbManager|
+|yii/rbac/PhpManager|
+|yii/web/Request|
+|yii/web/AccessRule|
+|yii/web/Controller|
+|yii/web/AssetManager|
+|yii/web/Application|
+|yii/web/UrlManager|
+|yii/web/ErrorAction|
+|yii/web/ViewAction|
+|yii/web/AssetConverter|
+|yii/web/User|
+|yii/web/CacheSession|
+|yii/web/Session|
+|yii/web/DbSession|
+|yii/web/ContentTypeNegotiator|
+|yii/web/Response|
+|yii/web/ErrorHandler|
+|yii/web/View|
+|yii/web/XmlResponseFormatter|
+|yii/rest/RateLimiter|
+|yii/rest/Controller|
+|yii/rest/ActiveController|
+|yii/rest/ViewAction|
+|yii/rest/HttpBearerAuth|
+|yii/rest/OptionsAction|
+|yii/rest/IndexAction|
+|yii/rest/Action|
+|yii/rest/UpdateAction|
+|yii/rest/CreateAction|
+|yii/rest/Serializer|
+|yii/rest/QueryParamAuth|
+|yii/rest/HttpBasicAuth|
+|yii/rest/DeleteAction|
+|yii/validators/DefaultValueValidator|
+|yii/validators/BooleanValidator|
+|yii/validators/CompareValidator|
+|yii/validators/RegularExpressionValidator|
+|yii/validators/RangeValidator|
+|yii/validators/StringValidator|
+|yii/validators/FileValidator|
+|yii/validators/NumberValidator|
+|yii/validators/Validator|
+|yii/validators/DateValidator|
+|yii/validators/ExistValidator|
+|yii/validators/FilterValidator|
+|yii/validators/UniqueValidator|
+|yii/validators/InlineValidator|
+|yii/validators/SafeValidator|
+|yii/validators/UrlValidator|
+|yii/validators/ImageValidator|
+|yii/validators/RequiredValidator|
+|yii/validators/EmailValidator|
+|yii/mail/BaseMailer|
+|yii/caching/XCache|
+|yii/caching/DummyCache|
+|yii/caching/WinCache|
+|yii/caching/DbCache|
+|yii/caching/ApcCache|
+|yii/caching/ZendDataCache|
+|yii/caching/Cache|
+|yii/caching/MemCache|
+|yii/caching/FileCache|
+|yii/log/DbTarget|
+|yii/log/FileTarget|
+|yii/log/Target|
+|yii/log/Logger|
+|yii/log/EmailTarget|
+|yii/log/Dispatcher|
+|yii/data/SqlDataProvider|
+|yii/data/ArrayDataProvider|
+|yii/data/BaseDataProvider|
+|yii/data/ActiveDataProvider|
+|yii/widgets/Breadcrumbs|
+|yii/widgets/ActiveField|
+|yii/widgets/ContentDecorator|
+|yii/widgets/ListView|
+|yii/widgets/DetailView|
+|yii/widgets/ActiveForm|
+|yii/widgets/InputWidget|
+|yii/widgets/MaskedInput|
+|yii/widgets/Menu|
+|yii/widgets/Spaceless|
+|yii/widgets/BaseListView|
+|yii/widgets/LinkSorter|
+|yii/widgets/Block|
+|yii/widgets/FragmentCache|
+|yii/widgets/Pjax|
+|yii/widgets/LinkPager|
+|yii/grid/GridView|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
  Component provides the *event* and *behavior* features, in addition to the
- *property* feature which is implemented in its parent class [[Object]].
+ *property* feature which is implemented in its parent class 'Object'.
 
  Event is a way to "inject" custom code into existing code at certain places.
  For example, a comment object can trigger an "add" event when the user adds a
@@ -15,11 +170,11 @@
  defined at. Event names are *case-sensitive*.
 
  One or multiple PHP callbacks, called *event handlers*, can be attached to an
- event. You can call [[trigger()]] to raise an event. When an event is raised,
+ event. You can call 'trigger()' to raise an event. When an event is raised,
  the event handlers will be invoked automatically in the order they were
  attached.
 
- To attach an event handler to an event, call [[on()]]:
+ To attach an event handler to an event, call 'on()':
 
    $post->on('update', function ($event) {
        // send email notification
@@ -36,8 +191,8 @@
 
    function foo($event)
 
- where '$event' is an [[Event]] object which includes parameters associated
- with the event.
+ where '$event' is an 'Event' object which includes parameters associated with
+ the event.
 
  You can also attach a handler to an event when configuring a component with a
  configuration array. The syntax is like the following:
@@ -56,13 +211,13 @@
        // the data can be accessed via $event->data
    }, $data);
 
- A behavior is an instance of [[Behavior]] or its child class. A component can
+ A behavior is an instance of 'Behavior' or its child class. A component can
  be attached with one or multiple behaviors. When a behavior is attached to a
  component, its public properties and methods can be accessed via the
  component directly, as if the component owns those properties and methods.
 
- To attach a behavior to a component, declare it in [[behaviors()]], or
- explicitly call [[attachBehavior]]. Behaviors declared in [[behaviors()]] are
+ To attach a behavior to a component, declare it in 'behaviors()', or
+ explicitly call 'attachBehavior'. Behaviors declared in 'behaviors()' are
  automatically attached to the corresponding component.
 
  One can also attach a behavior to a component when configuring it with a
@@ -75,13 +230,13 @@
    ]
 
  where 'as tree' stands for attaching a behavior named 'tree', and the array
- will be passed to [[\Yii::createObject()]] to create the behavior object.
+ will be passed to '\Yii::createObject()' to create the behavior object.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$behaviors>				*yii.base.Component::$behaviors*
+$behaviors				*yii/base/Component::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 
@@ -89,19 +244,19 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.base.Component::className* 				 public
- See |yii.base.Object::className|
+yii/base/Component::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.base.Component::__construct*				 public
- See |yii.base.Object::__construct|
+yii/base/Component::__construct 			       public
+ See |yii/base/Object::__construct|
 
 
-*yii.base.Component::init*					 public
- See |yii.base.Object::init|
+yii/base/Component::init				       public
+ See |yii/base/Object::init|
 
 
-*yii.base.Component::__get*					 public
+yii/base/Component::__get				       public
 >
  __get($name)
 <
@@ -117,7 +272,7 @@ METHOD DETAILS
     [$name] (string) The property name
 
 
-*yii.base.Component::__set*					 public
+yii/base/Component::__set				       public
 >
  __set($name, $value)
 <
@@ -136,7 +291,7 @@ METHOD DETAILS
     [$value] (mixed) The property value
 
 
-*yii.base.Component::__isset*					 public
+yii/base/Component::__isset				       public
 >
  __isset($name)
 <
@@ -152,7 +307,7 @@ METHOD DETAILS
     [$name] (string) The property name or the event name
 
 
-*yii.base.Component::__unset*					 public
+yii/base/Component::__unset				       public
 >
  __unset($name)
 <
@@ -168,7 +323,7 @@ METHOD DETAILS
     [$name] (string) The property name
 
 
-*yii.base.Component::__call*					 public
+yii/base/Component::__call				       public
 >
  __call($name, $params)
 <
@@ -183,7 +338,7 @@ METHOD DETAILS
     [$params] (array) Method parameters
 
 
-*yii.base.Component::hasProperty*				 public
+yii/base/Component::hasProperty 			       public
 >
  hasProperty($name, $checkVars='true', $checkBehaviors='true')
 <
@@ -201,7 +356,7 @@ METHOD DETAILS
     properties of this component
 
 
-*yii.base.Component::canGetProperty*				 public
+yii/base/Component::canGetProperty			       public
 >
  canGetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
@@ -219,7 +374,7 @@ METHOD DETAILS
     properties of this component
 
 
-*yii.base.Component::canSetProperty*				 public
+yii/base/Component::canSetProperty			       public
 >
  canSetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
@@ -237,7 +392,7 @@ METHOD DETAILS
     properties of this component
 
 
-*yii.base.Component::hasMethod* 				 public
+yii/base/Component::hasMethod				       public
 >
  hasMethod($name, $checkBehaviors='true')
 <
@@ -252,7 +407,7 @@ METHOD DETAILS
     of this component
 
 
-*yii.base.Component::__clone*					 public
+yii/base/Component::__clone				       public
 >
  __clone()
 <
@@ -261,7 +416,7 @@ METHOD DETAILS
  It removes all behaviors because they are attached to the old object.
 
 
-*yii.base.Component::behaviors* 				 public
+yii/base/Component::behaviors				       public
 >
  behaviors()
 <
@@ -281,9 +436,9 @@ METHOD DETAILS
        'property2' => 'value2',
    ]
 
- Note that a behavior class must extend from [[Behavior]]. Behavior names can
- be strings or integers. If the former, they uniquely identify the behaviors.
- If the latter, the corresponding behaviors are anonymous and their properties
+ Note that a behavior class must extend from 'Behavior'. Behavior names can be
+ strings or integers. If the former, they uniquely identify the behaviors. If
+ the latter, the corresponding behaviors are anonymous and their properties
  and methods will NOT be made available via the component (however, the
  behaviors can still respond to the component's events).
 
@@ -291,7 +446,7 @@ METHOD DETAILS
  automatically (on demand).
 
 
-*yii.base.Component::hasEventHandlers*				 public
+yii/base/Component::hasEventHandlers			       public
 >
  hasEventHandlers($name)
 <
@@ -301,7 +456,7 @@ METHOD DETAILS
     [$name] (string) The event name
 
 
-*yii.base.Component::on*					 public
+yii/base/Component::on					       public
 >
  on($name, $handler, $data='null')
 <
@@ -319,28 +474,28 @@ METHOD DETAILS
 
    function ($event)
 
- where '$event' is an [[Event]] object which includes parameters associated
- with the event.
+ where '$event' is an 'Event' object which includes parameters associated with
+ the event.
     [$name] (string) The event name
     [$handler] (callable) The event handler
     [$data] (mixed) The data to be passed to the event handler when the event
     is triggered. When the event handler is invoked, this data can be accessed
-    via [[Event::data]].
+    via 'Event::data'.
 
 
-*yii.base.Component::off*					 public
+yii/base/Component::off 				       public
 >
  off($name, $handler='null')
 <
 (boolean) If a handler is found and detached
 
- This method is the opposite of [[on()]].
+ This method is the opposite of 'on()'.
     [$name] (string) Event name
     [$handler] (callable) The event handler to be removed. If it is null, all
     handlers attached to the named event will be removed.
 
 
-*yii.base.Component::trigger*					 public
+yii/base/Component::trigger				       public
 >
  trigger($name, $event='null')
 <
@@ -350,10 +505,10 @@ METHOD DETAILS
  handlers for the event including class-level handlers.
     [$name] (string) The event name
     [$event] (\yii\base\Event) The event parameter. If not set, a default
-    [[Event]] object will be created.
+    'Event' object will be created.
 
 
-*yii.base.Component::getBehavior*				 public
+yii/base/Component::getBehavior 			       public
 >
  getBehavior($name)
 <
@@ -364,7 +519,7 @@ exist
     [$name] (string) The behavior name
 
 
-*yii.base.Component::getBehaviors*				 public
+yii/base/Component::getBehaviors			       public
 >
  getBehaviors()
 <
@@ -373,7 +528,7 @@ exist
 
 
 
-*yii.base.Component::attachBehavior*				 public
+yii/base/Component::attachBehavior			       public
 >
  attachBehavior($name, $behavior)
 <
@@ -381,40 +536,40 @@ exist
 
  This method will create the behavior object based on the given configuration.
  After that, the behavior object will be attached to this component by calling
- the [[Behavior::attach()]] method.
+ the 'Behavior::attach()' method.
     [$name] (string) The name of the behavior.
     [$behavior] (string|array|\yii\base\Behavior) The behavior configuration.
     This can be one of the following:
 
-     - a [[Behavior]] object  - a string specifying the behavior class  - an
-    object configuration array that will be passed to [[Yii::createObject()]]
-    to create the behavior object.
+     - a 'Behavior' object  - a string specifying the behavior class  - an
+    object configuration array that will be passed to 'Yii::createObject()' to
+    create the behavior object.
 
 
-*yii.base.Component::attachBehaviors*				 public
+yii/base/Component::attachBehaviors			       public
 >
  attachBehaviors($behaviors)
 <
 (void)
 
- Each behavior is indexed by its name and should be a [[Behavior]] object, a
+ Each behavior is indexed by its name and should be a 'Behavior' object, a
  string specifying the behavior class, or an configuration array for creating
  the behavior.
     [$behaviors] (array) List of behaviors to be attached to the component
 
 
-*yii.base.Component::detachBehavior*				 public
+yii/base/Component::detachBehavior			       public
 >
  detachBehavior($name)
 <
 (\yii\base\Behavior) The detached behavior. Null if the behavior does not
 exist.
 
- The behavior's [[Behavior::detach()]] method will be invoked.
+ The behavior's 'Behavior::detach()' method will be invoked.
     [$name] (string) The behavior's name.
 
 
-*yii.base.Component::detachBehaviors*				 public
+yii/base/Component::detachBehaviors			       public
 >
  detachBehaviors()
 <
@@ -423,7 +578,7 @@ exist.
 
 
 
-*yii.base.Component::ensureBehaviors*				 public
+yii/base/Component::ensureBehaviors			       public
 >
  ensureBehaviors()
 <

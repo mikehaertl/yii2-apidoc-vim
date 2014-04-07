@@ -1,10 +1,27 @@
 
-*yii\web\HttpException*   >> yii\base\UserException
+*yii/web/HttpException*   >> |yii/base/UserException|
 =======================
 
- HttpException can be differentiated via its [[statusCode]] property value
- which keeps a standard HTTP status code (e.g. 404, 500). Error handlers may
- use this status code to decide how to format the error page.
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/web/UnsupportedMediaTypeHttpException|
+|yii/web/GoneHttpException|
+|yii/web/ConflictHttpException|
+|yii/web/BadRequestHttpException|
+|yii/web/NotFoundHttpException|
+|yii/web/UnauthorizedHttpException|
+|yii/web/TooManyRequestsHttpException|
+|yii/web/MethodNotAllowedHttpException|
+|yii/web/ForbiddenHttpException|
+|yii/web/NotAcceptableHttpException|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ HttpException can be differentiated via its 'statusCode' property value which
+ keeps a standard HTTP status code (e.g. 404, 500). Error handlers may use
+ this status code to decide how to format the error page.
 
  Throwing an HttpException like in the following example will result in the
  404 page to be displayed.
@@ -20,7 +37,7 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$statusCode>				*yii.web.HttpException::$statusCode*
+$statusCode				*yii/web/HttpException::$statusCode*
  (integer) HTTP status code, such as 403, 404, 500, etc.
 
 
@@ -28,7 +45,7 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.web.HttpException::getName*				 public
+yii/web/HttpException::getName				       public
 >
  getName()
 <
@@ -37,7 +54,7 @@ METHOD DETAILS
 
 
 
-*yii.web.HttpException::__construct*				 public
+yii/web/HttpException::__construct			       public
 >
  __construct($status, $message='null', $code=0, $previous='null')
 <

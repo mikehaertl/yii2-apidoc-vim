@@ -1,12 +1,21 @@
 
-*yii\web\Session*   >> yii\base\Component
+*yii/web/Session*   >> |yii/base/Component|
 =================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/web/CacheSession|
+|yii/web/DbSession|
+
+DESCRIPTION
+------------------------------------------------------------------------------
 
  Session is a Web application component that can be accessed via
  'Yii::$app->session'.
 
- To start the session, call [[open()]]; To complete and send out session data,
- call [[close()]]; To destroy the session, call [[destroy()]].
+ To start the session, call 'open()'; To complete and send out session data,
+ call 'close()'; To destroy the session, call 'destroy()'.
 
  Session can be used like an array to set and get session data. For example,
 
@@ -18,80 +27,80 @@
    $session['name3'] = $value3;  // set session variable 'name3'
 
  Session can be extended to support customized session storage. To do so,
- override [[useCustomStorage()]] so that it returns true, and override these
- methods with the actual logic about using custom storage: [[openSession()]],
- [[closeSession()]], [[readSession()]], [[writeSession()]],
- [[destroySession()]] and [[gcSession()]].
+ override 'useCustomStorage()' so that it returns true, and override these
+ methods with the actual logic about using custom storage: 'openSession()',
+ 'closeSession()', 'readSession()', 'writeSession()', 'destroySession()' and
+ 'gcSession()'.
 
  Session also supports a special type of session data, called *flash
  messages*. A flash message is available only in the current request and the
  next request. After that, it will be deleted automatically. Flash messages
  are particularly useful for displaying confirmation messages. To use flash
- messages, simply call methods such as [[setFlash()]], [[getFlash()]].
+ messages, simply call methods such as 'setFlash()', 'getFlash()'.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$flashParam>				*yii.web.Session::$flashParam*
+$flashParam				*yii/web/Session::$flashParam*
  (string) The name of the session variable that stores the flash message data.
 
-<$handler>				*yii.web.Session::$handler*
+$handler				*yii/web/Session::$handler*
  (\SessionHandlerInterface|array) An object implementing the
  SessionHandlerInterface or a configuration array. If set, will be used to
  provide persistency instead of build-in methods.
 
-<$behaviors>				*yii.web.Session::$behaviors*
+$behaviors				*yii/web/Session::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$useCustomStorage>			*yii.web.Session::$useCustomStorage*
+$useCustomStorage			*yii/web/Session::$useCustomStorage*
  (boolean) Whether to use custom storage.
 
-<$isActive>				*yii.web.Session::$isActive*
+$isActive				*yii/web/Session::$isActive*
  (boolean) Whether the session has started
 
-<$hasSessionId> 			*yii.web.Session::$hasSessionId*
+$hasSessionId				*yii/web/Session::$hasSessionId*
  (boolean) Whether the current request has sent the session ID.
 
-<$id>					*yii.web.Session::$id*
+$id					*yii/web/Session::$id*
  (string) The current session ID
 
-<$name> 				*yii.web.Session::$name*
+$name					*yii/web/Session::$name*
  (string) The current session name
 
-<$savePath>				*yii.web.Session::$savePath*
+$savePath				*yii/web/Session::$savePath*
  (string) The current session save path, defaults to '/tmp'.
 
-<$cookieParams> 			*yii.web.Session::$cookieParams*
+$cookieParams				*yii/web/Session::$cookieParams*
  (array) The session cookie parameters.
 
-<$useCookies>				*yii.web.Session::$useCookies*
+$useCookies				*yii/web/Session::$useCookies*
  (boolean|null) The value indicating whether cookies should be used to store
  session IDs.
 
-<$gCProbability>			*yii.web.Session::$gCProbability*
+$gCProbability				*yii/web/Session::$gCProbability*
  (float) The probability (percentage) that the GC (garbage collection) process
  is started on every session initialization, defaults to 1 meaning 1% chance.
 
-<$useTransparentSessionID>		*yii.web.Session::$useTransparentSessionID*
+$useTransparentSessionID		*yii/web/Session::$useTransparentSessionID*
  (boolean) Whether transparent sid support is enabled or not, defaults to
  false.
 
-<$timeout>				*yii.web.Session::$timeout*
+$timeout				*yii/web/Session::$timeout*
  (integer) The number of seconds after which data will be seen as 'garbage'
  and cleaned up. The default value is 1440 seconds (or the value of
  "session.gc_maxlifetime" set in php.ini).
 
-<$iterator>				*yii.web.Session::$iterator*
+$iterator				*yii/web/Session::$iterator*
  (\yii\web\SessionIterator) An iterator for traversing the session variables.
 
-<$count>				*yii.web.Session::$count*
+$count					*yii/web/Session::$count*
  (integer) The number of session variables
 
-<$allFlashes>				*yii.web.Session::$allFlashes*
+$allFlashes				*yii/web/Session::$allFlashes*
  (array) Flash messages (key => message).
 
-<$flash>				*yii.web.Session::$flash*
+$flash					*yii/web/Session::$flash*
  (string) The key identifying the flash message. Note that flash messages and
  normal session variables share the same name space. If you have a normal
  session variable using the same name, its value will be overwritten by this
@@ -102,15 +111,15 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.web.Session::className*					 public
- See |yii.base.Object::className|
+yii/web/Session::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.web.Session::__construct*					 public
- See |yii.base.Object::__construct|
+yii/web/Session::__construct				       public
+ See |yii/base/Object::__construct|
 
 
-*yii.web.Session::init* 					 public
+yii/web/Session::init					       public
 >
  init()
 <
@@ -120,95 +129,95 @@ METHOD DETAILS
  application.
 
 
-*yii.web.Session::__get*					 public
- See |yii.base.Component::__get|
+yii/web/Session::__get					       public
+ See |yii/base/Component::__get|
 
 
-*yii.web.Session::__set*					 public
- See |yii.base.Component::__set|
+yii/web/Session::__set					       public
+ See |yii/base/Component::__set|
 
 
-*yii.web.Session::__isset*					 public
- See |yii.base.Component::__isset|
+yii/web/Session::__isset				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.web.Session::__unset*					 public
- See |yii.base.Component::__unset|
+yii/web/Session::__unset				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.web.Session::__call*					 public
- See |yii.base.Component::__call|
+yii/web/Session::__call 				       public
+ See |yii/base/Component::__call|
 
 
-*yii.web.Session::hasProperty*					 public
- See |yii.base.Component::hasProperty|
+yii/web/Session::hasProperty				       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.web.Session::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/web/Session::canGetProperty 			       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.web.Session::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/web/Session::canSetProperty 			       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.web.Session::hasMethod*					 public
- See |yii.base.Component::hasMethod|
+yii/web/Session::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.web.Session::__clone*					 public
- See |yii.base.Component::__clone|
+yii/web/Session::__clone				       public
+ See |yii/base/Component::__clone|
 
 
-*yii.web.Session::behaviors*					 public
- See |yii.base.Component::behaviors|
+yii/web/Session::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.web.Session::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/web/Session::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.web.Session::on*						 public
- See |yii.base.Component::on|
+yii/web/Session::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.web.Session::off*						 public
- See |yii.base.Component::off|
+yii/web/Session::off					       public
+ See |yii/base/Component::off|
 
 
-*yii.web.Session::trigger*					 public
- See |yii.base.Component::trigger|
+yii/web/Session::trigger				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.web.Session::getBehavior*					 public
- See |yii.base.Component::getBehavior|
+yii/web/Session::getBehavior				       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.web.Session::getBehaviors* 				 public
- See |yii.base.Component::getBehaviors|
+yii/web/Session::getBehaviors				       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.web.Session::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/web/Session::attachBehavior 			       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.web.Session::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/web/Session::attachBehaviors			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.web.Session::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/web/Session::detachBehavior 			       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.web.Session::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/web/Session::detachBehaviors			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.web.Session::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/web/Session::ensureBehaviors			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.web.Session::getUseCustomStorage*				 public
+yii/web/Session::getUseCustomStorage			       public
 >
  getUseCustomStorage()
 <
@@ -216,12 +225,11 @@ METHOD DETAILS
 
  This method should be overridden to return true by child classes that
  implement custom session storage. To implement custom session storage,
- override these methods: [[openSession()]], [[closeSession()]],
- [[readSession()]], [[writeSession()]], [[destroySession()]] and
- [[gcSession()]].
+ override these methods: 'openSession()', 'closeSession()', 'readSession()',
+ 'writeSession()', 'destroySession()' and 'gcSession()'.
 
 
-*yii.web.Session::open* 					 public
+yii/web/Session::open					       public
 >
  open()
 <
@@ -230,7 +238,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::registerSessionHandler*			 protected
+yii/web/Session::registerSessionHandler 		       protected
 >
  registerSessionHandler()
 <
@@ -239,7 +247,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::close*					 public
+yii/web/Session::close					       public
 >
  close()
 <
@@ -248,7 +256,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::destroy*					 public
+yii/web/Session::destroy				       public
 >
  destroy()
 <
@@ -257,7 +265,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::getIsActive*					 public
+yii/web/Session::getIsActive				       public
 >
  getIsActive()
 <
@@ -266,7 +274,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::getHasSessionId*				 public
+yii/web/Session::getHasSessionId			       public
 >
  getHasSessionId()
 <
@@ -274,11 +282,11 @@ METHOD DETAILS
 
  The default implementation will check cookie and $_GET using the session
  name. If you send session ID via other ways, you may need to override this
- method or call [[setHasSessionId()]] to explicitly set whether the session ID
+ method or call 'setHasSessionId()' to explicitly set whether the session ID
  is sent.
 
 
-*yii.web.Session::setHasSessionId*				 public
+yii/web/Session::setHasSessionId			       public
 >
  setHasSessionId($value)
 <
@@ -289,7 +297,7 @@ METHOD DETAILS
     [$value] (boolean) Whether the current request has sent the session ID.
 
 
-*yii.web.Session::getId*					 public
+yii/web/Session::getId					       public
 >
  getId()
 <
@@ -298,7 +306,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::setId*					 public
+yii/web/Session::setId					       public
 >
  setId($value)
 <
@@ -308,7 +316,7 @@ METHOD DETAILS
     [$value] (string) The session ID for the current session
 
 
-*yii.web.Session::regenerateID* 				 public
+yii/web/Session::regenerateID				       public
 >
  regenerateID($deleteOldSession='false')
 <
@@ -319,7 +327,7 @@ METHOD DETAILS
     file or not.
 
 
-*yii.web.Session::getName*					 public
+yii/web/Session::getName				       public
 >
  getName()
 <
@@ -328,7 +336,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::setName*					 public
+yii/web/Session::setName				       public
 >
  setName($value)
 <
@@ -339,7 +347,7 @@ METHOD DETAILS
     alphanumeric string. It defaults to "PHPSESSID".
 
 
-*yii.web.Session::getSavePath*					 public
+yii/web/Session::getSavePath				       public
 >
  getSavePath()
 <
@@ -348,7 +356,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::setSavePath*					 public
+yii/web/Session::setSavePath				       public
 >
  setSavePath($value)
 <
@@ -359,7 +367,7 @@ METHOD DETAILS
     directory name or a path alias.
 
 
-*yii.web.Session::getCookieParams*				 public
+yii/web/Session::getCookieParams			       public
 >
  getCookieParams()
 <
@@ -368,7 +376,7 @@ METHOD DETAILS
 
 
 
-*yii.web.Session::setCookieParams*				 public
+yii/web/Session::setCookieParams			       public
 >
  setCookieParams($value)
 <
@@ -380,7 +388,7 @@ METHOD DETAILS
     'path', 'domain', 'secure' and 'httponly'.
 
 
-*yii.web.Session::getUseCookies*				 public
+yii/web/Session::getUseCookies				       public
 >
  getUseCookies()
 <
@@ -390,7 +398,7 @@ session IDs.
 
 
 
-*yii.web.Session::setUseCookies*				 public
+yii/web/Session::setUseCookies				       public
 >
  setUseCookies($value)
 <
@@ -406,7 +414,7 @@ session IDs.
     used to store session IDs.
 
 
-*yii.web.Session::getGCProbability*				 public
+yii/web/Session::getGCProbability			       public
 >
  getGCProbability()
 <
@@ -416,7 +424,7 @@ is started on every session initialization, defaults to 1 meaning 1% chance.
 
 
 
-*yii.web.Session::setGCProbability*				 public
+yii/web/Session::setGCProbability			       public
 >
  setGCProbability($value)
 <
@@ -427,7 +435,7 @@ is started on every session initialization, defaults to 1 meaning 1% chance.
     collection) process is started on every session initialization.
 
 
-*yii.web.Session::getUseTransparentSessionID*			 public
+yii/web/Session::getUseTransparentSessionID		       public
 >
  getUseTransparentSessionID()
 <
@@ -437,7 +445,7 @@ false.
 
 
 
-*yii.web.Session::setUseTransparentSessionID*			 public
+yii/web/Session::setUseTransparentSessionID		       public
 >
  setUseTransparentSessionID($value)
 <
@@ -447,7 +455,7 @@ false.
     [$value] (boolean) Whether transparent sid support is enabled or not.
 
 
-*yii.web.Session::getTimeout*					 public
+yii/web/Session::getTimeout				       public
 >
  getTimeout()
 <
@@ -458,7 +466,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 
 
 
-*yii.web.Session::setTimeout*					 public
+yii/web/Session::setTimeout				       public
 >
  setTimeout($value)
 <
@@ -469,75 +477,75 @@ cleaned up. The default value is 1440 seconds (or the value of
     'garbage' and cleaned up
 
 
-*yii.web.Session::openSession*					 public
+yii/web/Session::openSession				       public
 >
  openSession($savePath, $sessionName)
 <
 (boolean) Whether session is opened successfully
 
- This method should be overridden if [[useCustomStorage()]] returns true. Do
- not call this method directly.
+ This method should be overridden if 'useCustomStorage()' returns true. Do not
+ call this method directly.
     [$savePath] (string) Session save path
     [$sessionName] (string) Session name
 
 
-*yii.web.Session::closeSession* 				 public
+yii/web/Session::closeSession				       public
 >
  closeSession()
 <
 (boolean) Whether session is closed successfully
 
- This method should be overridden if [[useCustomStorage()]] returns true. Do
- not call this method directly.
+ This method should be overridden if 'useCustomStorage()' returns true. Do not
+ call this method directly.
 
 
-*yii.web.Session::readSession*					 public
+yii/web/Session::readSession				       public
 >
  readSession($id)
 <
 (string) The session data
 
- This method should be overridden if [[useCustomStorage()]] returns true. Do
- not call this method directly.
+ This method should be overridden if 'useCustomStorage()' returns true. Do not
+ call this method directly.
     [$id] (string) Session ID
 
 
-*yii.web.Session::writeSession* 				 public
+yii/web/Session::writeSession				       public
 >
  writeSession($id, $data)
 <
 (boolean) Whether session write is successful
 
- This method should be overridden if [[useCustomStorage()]] returns true. Do
- not call this method directly.
+ This method should be overridden if 'useCustomStorage()' returns true. Do not
+ call this method directly.
     [$id] (string) Session ID
     [$data] (string) Session data
 
 
-*yii.web.Session::destroySession*				 public
+yii/web/Session::destroySession 			       public
 >
  destroySession($id)
 <
 (boolean) Whether session is destroyed successfully
 
- This method should be overridden if [[useCustomStorage()]] returns true. Do
- not call this method directly.
+ This method should be overridden if 'useCustomStorage()' returns true. Do not
+ call this method directly.
     [$id] (string) Session ID
 
 
-*yii.web.Session::gcSession*					 public
+yii/web/Session::gcSession				       public
 >
  gcSession($maxLifetime)
 <
 (boolean) Whether session is GCed successfully
 
- This method should be overridden if [[useCustomStorage()]] returns true. Do
- not call this method directly.
+ This method should be overridden if 'useCustomStorage()' returns true. Do not
+ call this method directly.
     [$maxLifetime] (integer) The number of seconds after which data will be
     seen as 'garbage' and cleaned up.
 
 
-*yii.web.Session::getIterator*					 public
+yii/web/Session::getIterator				       public
 >
  getIterator()
 <
@@ -546,7 +554,7 @@ cleaned up. The default value is 1440 seconds (or the value of
  This method is required by the interface IteratorAggregate.
 
 
-*yii.web.Session::getCount*					 public
+yii/web/Session::getCount				       public
 >
  getCount()
 <
@@ -555,7 +563,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 
 
 
-*yii.web.Session::count*					 public
+yii/web/Session::count					       public
 >
  count()
 <
@@ -564,7 +572,7 @@ cleaned up. The default value is 1440 seconds (or the value of
  This method is required by Countable interface.
 
 
-*yii.web.Session::get*						 public
+yii/web/Session::get					       public
 >
  get($key, $defaultValue='null')
 <
@@ -577,7 +585,7 @@ does not exist.
     variable does not exist.
 
 
-*yii.web.Session::set*						 public
+yii/web/Session::set					       public
 >
  set($key, $value)
 <
@@ -588,7 +596,7 @@ does not exist.
     [$value] (mixed) Session variable value
 
 
-*yii.web.Session::remove*					 public
+yii/web/Session::remove 				       public
 >
  remove($key)
 <
@@ -598,7 +606,7 @@ does not exist.
     [$key] (string) The name of the session variable to be removed
 
 
-*yii.web.Session::removeAll*					 public
+yii/web/Session::removeAll				       public
 >
  removeAll()
 <
@@ -607,7 +615,7 @@ does not exist.
 
 
 
-*yii.web.Session::has*						 public
+yii/web/Session::has					       public
 >
  has($key)
 <
@@ -617,16 +625,16 @@ does not exist.
     [$key] (mixed) Session variable name
 
 
-*yii.web.Session::updateFlashCounters*				 protected
+yii/web/Session::updateFlashCounters			       protected
 >
  updateFlashCounters()
 <
 (void)
 
- This method should only be called once in [[init()]].
+ This method should only be called once in 'init()'.
 
 
-*yii.web.Session::getFlash*					 public
+yii/web/Session::getFlash				       public
 >
  getFlash($key, $defaultValue='null', $delete='false')
 <
@@ -642,7 +650,7 @@ does not exist.
     deleted after the next request.
 
 
-*yii.web.Session::getAllFlashes*				 public
+yii/web/Session::getAllFlashes				       public
 >
  getAllFlashes()
 <
@@ -651,7 +659,7 @@ does not exist.
 
 
 
-*yii.web.Session::setFlash*					 public
+yii/web/Session::setFlash				       public
 >
  setFlash($key, $value='true')
 <
@@ -666,7 +674,7 @@ does not exist.
     [$value] (mixed) Flash message
 
 
-*yii.web.Session::removeFlash*					 public
+yii/web/Session::removeFlash				       public
 >
  removeFlash($key)
 <
@@ -680,7 +688,7 @@ does not exist.
     this method.
 
 
-*yii.web.Session::removeAllFlashes*				 public
+yii/web/Session::removeAllFlashes			       public
 >
  removeAllFlashes()
 <
@@ -691,7 +699,7 @@ does not exist.
  removed by this method.
 
 
-*yii.web.Session::hasFlash*					 public
+yii/web/Session::hasFlash				       public
 >
  hasFlash($key)
 <
@@ -701,7 +709,7 @@ does not exist.
     [$key] (string) Key identifying the flash message
 
 
-*yii.web.Session::offsetExists* 				 public
+yii/web/Session::offsetExists				       public
 >
  offsetExists($offset)
 <
@@ -711,7 +719,7 @@ does not exist.
     [$offset] (mixed) The offset to check on
 
 
-*yii.web.Session::offsetGet*					 public
+yii/web/Session::offsetGet				       public
 >
  offsetGet($offset)
 <
@@ -721,7 +729,7 @@ does not exist.
     [$offset] (integer) The offset to retrieve element.
 
 
-*yii.web.Session::offsetSet*					 public
+yii/web/Session::offsetSet				       public
 >
  offsetSet($offset, $item)
 <
@@ -732,7 +740,7 @@ does not exist.
     [$item] (mixed) The element value
 
 
-*yii.web.Session::offsetUnset*					 public
+yii/web/Session::offsetUnset				       public
 >
  offsetUnset($offset)
 <

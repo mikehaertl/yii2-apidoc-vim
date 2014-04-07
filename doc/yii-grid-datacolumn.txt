@@ -1,74 +1,77 @@
 
-*yii\grid\DataColumn*   >> yii\grid\Column
+*yii/grid/DataColumn*   >> |yii/grid/Column|
 =====================
 
- It is used to show data columns and allows [[enableSorting|sorting]] and
- [[filter|filtering]] them.
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It is used to show data columns and allows 'enableSorting|sorting' and
+ 'filter|filtering' them.
 
  A simple data column definition refers to an attribute in the data model of
  the GridView's data provider. The name of the attribute is specified by
- [[attribute]].
+ 'attribute'.
 
- By setting [[value]] and [[label]], the header and cell content can be
+ By setting 'value' and 'label', the header and cell content can be
  customized.
 
- A data column differentiates between the [[getDataCellValue|data cell value]]
- and the [[renderDataCellContent|data cell content]]. The cell value is an
+ A data column differentiates between the 'getDataCellValue|data cell value'
+ and the 'renderDataCellContent|data cell content'. The cell value is an
  un-formatted value that may be used for calculation, while the actual cell
- content is a [[format|formatted]] version of that value which may contain
- HTML markup.
+ content is a 'format|formatted' version of that value which may contain HTML
+ markup.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$grid> 				*yii.grid.DataColumn::$grid*
- See |yii.grid.Column::$grid|
+$grid					*yii/grid/DataColumn::$grid*
+ See |yii/grid/Column::$grid|
 
-<$header>				*yii.grid.DataColumn::$header*
- See |yii.grid.Column::$header|
+$header 				*yii/grid/DataColumn::$header*
+ See |yii/grid/Column::$header|
 
-<$footer>				*yii.grid.DataColumn::$footer*
- See |yii.grid.Column::$footer|
+$footer 				*yii/grid/DataColumn::$footer*
+ See |yii/grid/Column::$footer|
 
-<$content>				*yii.grid.DataColumn::$content*
- See |yii.grid.Column::$content|
+$content				*yii/grid/DataColumn::$content*
+ See |yii/grid/Column::$content|
 
-<$visible>				*yii.grid.DataColumn::$visible*
- See |yii.grid.Column::$visible|
+$visible				*yii/grid/DataColumn::$visible*
+ See |yii/grid/Column::$visible|
 
-<$options>				*yii.grid.DataColumn::$options*
- See |yii.grid.Column::$options|
+$options				*yii/grid/DataColumn::$options*
+ See |yii/grid/Column::$options|
 
-<$headerOptions>			*yii.grid.DataColumn::$headerOptions*
- See |yii.grid.Column::$headerOptions|
+$headerOptions				*yii/grid/DataColumn::$headerOptions*
+ See |yii/grid/Column::$headerOptions|
 
-<$contentOptions>			*yii.grid.DataColumn::$contentOptions*
- See |yii.grid.Column::$contentOptions|
+$contentOptions 			*yii/grid/DataColumn::$contentOptions*
+ See |yii/grid/Column::$contentOptions|
 
-<$footerOptions>			*yii.grid.DataColumn::$footerOptions*
- See |yii.grid.Column::$footerOptions|
+$footerOptions				*yii/grid/DataColumn::$footerOptions*
+ See |yii/grid/Column::$footerOptions|
 
-<$filterOptions>			*yii.grid.DataColumn::$filterOptions*
- See |yii.grid.Column::$filterOptions|
+$filterOptions				*yii/grid/DataColumn::$filterOptions*
+ See |yii/grid/Column::$filterOptions|
 
-<$attribute>				*yii.grid.DataColumn::$attribute*
+$attribute				*yii/grid/DataColumn::$attribute*
  (string) The attribute name associated with this column. When neither
- [[content]] nor [[value]] is specified, the value of the specified attribute
- will be retrieved from each data model and displayed.
+ 'content' nor 'value' is specified, the value of the specified attribute will
+ be retrieved from each data model and displayed.
 
- Also, if [[label]] is not specified, the label associated with the attribute
+ Also, if 'label' is not specified, the label associated with the attribute
  will be displayed.
 
-<$label>				*yii.grid.DataColumn::$label*
- (string) Label to be displayed in the [[header|header cell]] and also to be
+$label					*yii/grid/DataColumn::$label*
+ (string) Label to be displayed in the 'header|header cell' and also to be
  used as the sorting link label when sorting is enabled for this column. If it
  is not set and the models provided by the GridViews data provider are
- instances of [[\yii\db\ActiveRecord]], the label will be determined using
- [[\yii\db\ActiveRecord::getAttributeLabel()]]. Otherwise
- [[\yii\helpers\Inflector::camel2words()]] will be used to get a label.
+ instances of '\yii\db\ActiveRecord', the label will be determined using
+ '\yii\db\ActiveRecord::getAttributeLabel()'. Otherwise
+ '\yii\helpers\Inflector::camel2words()' will be used to get a label.
 
-<$value>				*yii.grid.DataColumn::$value*
+$value					*yii/grid/DataColumn::$value*
  (string|\Closure) An anonymous function that returns the value to be
  displayed for every data model. The signature of this function is 'function
  ($model, $index, $widget)'. If this is not set, '$model[$attribute]' will be
@@ -76,113 +79,113 @@ PROPERTY DETAILS
 
  You may also set this property to a string representing the attribute name to
  be displayed in this column. This can be used when the attribute to be
- displayed is different from the [[attribute]] that is used for sorting and
+ displayed is different from the 'attribute' that is used for sorting and
  filtering.
 
-<$format>				*yii.grid.DataColumn::$format*
+$format 				*yii/grid/DataColumn::$format*
  (string|array) In which format should the value of each data model be
  displayed as (e.g. "raw", "text", "html", ['date', 'Y-m-d']). Supported
- formats are determined by the [[GridView::formatter|formatter]] used by the
- [[GridView]]. Default format is "text" which will format the value as an
- HTML-encoded plain text when [[\yii\base\Formatter::format()]] or
- [[\yii\i18n\Formatter::format()]] is used.
+ formats are determined by the 'GridView::formatter|formatter' used by the
+ 'GridView'. Default format is "text" which will format the value as an
+ HTML-encoded plain text when '\yii\base\Formatter::format()' or
+ '\yii\i18n\Formatter::format()' is used.
 
-<$enableSorting>			*yii.grid.DataColumn::$enableSorting*
- (boolean) Whether to allow sorting by this column. If true and [[attribute]]
- is found in the sort definition of [[GridView::dataProvider]], then the
- header cell of this column will contain a link that may trigger the sorting
- when being clicked.
+$enableSorting				*yii/grid/DataColumn::$enableSorting*
+ (boolean) Whether to allow sorting by this column. If true and 'attribute' is
+ found in the sort definition of 'GridView::dataProvider', then the header
+ cell of this column will contain a link that may trigger the sorting when
+ being clicked.
 
-<$sortLinkOptions>			*yii.grid.DataColumn::$sortLinkOptions*
+$sortLinkOptions			*yii/grid/DataColumn::$sortLinkOptions*
  (array) The HTML attributes for the link tag in the header cell generated by
- [[\yii\data\Sort::link]] when sorting is enabled for this column.
+ '\yii\data\Sort::link' when sorting is enabled for this column.
 
-<$filter>				*yii.grid.DataColumn::$filter*
+$filter 				*yii/grid/DataColumn::$filter*
  (string|array|boolean) The HTML code representing a filter input (e.g. a text
  field, a dropdown list) that is used for this data column. This property is
- effective only when [[GridView::filterModel]] is set.
+ effective only when 'GridView::filterModel' is set.
 
  - If this property is not set, a text field will be generated as the filter
  input; - If this property is an array, a dropdown list will be generated that
  uses this property value as   the list options. - If you don't want a filter
  for this data column, set this value to be false.
 
-<$filterInputOptions>			*yii.grid.DataColumn::$filterInputOptions*
+$filterInputOptions			*yii/grid/DataColumn::$filterInputOptions*
  (array) The HTML attributes for the filter input fields. This property is
- used in combination with the [[filter]] property. When [[filter]] is not set
- or is an array, this property will be used to render the HTML attributes for
- the generated filter input fields.
+ used in combination with the 'filter' property. When 'filter' is not set or
+ is an array, this property will be used to render the HTML attributes for the
+ generated filter input fields.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.grid.DataColumn::className*				 public
- See |yii.base.Object::className|
+yii/grid/DataColumn::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.grid.DataColumn::__construct*				 public
- See |yii.base.Object::__construct|
+yii/grid/DataColumn::__construct			       public
+ See |yii/base/Object::__construct|
 
 
-*yii.grid.DataColumn::init*					 public
- See |yii.base.Object::init|
+yii/grid/DataColumn::init				       public
+ See |yii/base/Object::init|
 
 
-*yii.grid.DataColumn::__get*					 public
- See |yii.base.Object::__get|
+yii/grid/DataColumn::__get				       public
+ See |yii/base/Object::__get|
 
 
-*yii.grid.DataColumn::__set*					 public
- See |yii.base.Object::__set|
+yii/grid/DataColumn::__set				       public
+ See |yii/base/Object::__set|
 
 
-*yii.grid.DataColumn::__isset*					 public
- See |yii.base.Object::__isset|
+yii/grid/DataColumn::__isset				       public
+ See |yii/base/Object::__isset|
 
 
-*yii.grid.DataColumn::__unset*					 public
- See |yii.base.Object::__unset|
+yii/grid/DataColumn::__unset				       public
+ See |yii/base/Object::__unset|
 
 
-*yii.grid.DataColumn::__call*					 public
- See |yii.base.Object::__call|
+yii/grid/DataColumn::__call				       public
+ See |yii/base/Object::__call|
 
 
-*yii.grid.DataColumn::hasProperty*				 public
- See |yii.base.Object::hasProperty|
+yii/grid/DataColumn::hasProperty			       public
+ See |yii/base/Object::hasProperty|
 
 
-*yii.grid.DataColumn::canGetProperty*				 public
- See |yii.base.Object::canGetProperty|
+yii/grid/DataColumn::canGetProperty			       public
+ See |yii/base/Object::canGetProperty|
 
 
-*yii.grid.DataColumn::canSetProperty*				 public
- See |yii.base.Object::canSetProperty|
+yii/grid/DataColumn::canSetProperty			       public
+ See |yii/base/Object::canSetProperty|
 
 
-*yii.grid.DataColumn::hasMethod*				 public
- See |yii.base.Object::hasMethod|
+yii/grid/DataColumn::hasMethod				       public
+ See |yii/base/Object::hasMethod|
 
 
-*yii.grid.DataColumn::renderHeaderCell* 			 public
- See |yii.grid.Column::renderHeaderCell|
+yii/grid/DataColumn::renderHeaderCell			       public
+ See |yii/grid/Column::renderHeaderCell|
 
 
-*yii.grid.DataColumn::renderFooterCell* 			 public
- See |yii.grid.Column::renderFooterCell|
+yii/grid/DataColumn::renderFooterCell			       public
+ See |yii/grid/Column::renderFooterCell|
 
 
-*yii.grid.DataColumn::renderDataCell*				 public
- See |yii.grid.Column::renderDataCell|
+yii/grid/DataColumn::renderDataCell			       public
+ See |yii/grid/Column::renderDataCell|
 
 
-*yii.grid.DataColumn::renderFilterCell* 			 public
- See |yii.grid.Column::renderFilterCell|
+yii/grid/DataColumn::renderFilterCell			       public
+ See |yii/grid/Column::renderFilterCell|
 
 
-*yii.grid.DataColumn::renderHeaderCellContent*			 protected
+yii/grid/DataColumn::renderHeaderCellContent		       protected
 >
  renderHeaderCellContent()
 <
@@ -191,11 +194,11 @@ METHOD DETAILS
 
 
 
-*yii.grid.DataColumn::renderFooterCellContent*			 protected
- See |yii.grid.Column::renderFooterCellContent|
+yii/grid/DataColumn::renderFooterCellContent		       protected
+ See |yii/grid/Column::renderFooterCellContent|
 
 
-*yii.grid.DataColumn::renderDataCellContent*			 protected
+yii/grid/DataColumn::renderDataCellContent		       protected
 >
  renderDataCellContent($model, $key, $index)
 <
@@ -207,7 +210,7 @@ METHOD DETAILS
     [$index] () 
 
 
-*yii.grid.DataColumn::renderFilterCellContent*			 protected
+yii/grid/DataColumn::renderFilterCellContent		       protected
 >
  renderFilterCellContent()
 <
@@ -216,7 +219,7 @@ METHOD DETAILS
 
 
 
-*yii.grid.DataColumn::getDataCellValue* 			 protected
+yii/grid/DataColumn::getDataCellValue			       protected
 >
  getDataCellValue($model, $key, $index)
 <

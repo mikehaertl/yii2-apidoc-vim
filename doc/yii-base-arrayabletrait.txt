@@ -1,22 +1,25 @@
 
-*yii\base\ArrayableTrait*  
+*yii/base/ArrayableTrait*  
 =========================
 
- ArrayableTrait implements [[toArray()]] by respecting the field definitions
- as declared in [[fields()]] and [[extraFields()]].
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ ArrayableTrait implements 'toArray()' by respecting the field definitions as
+ declared in 'fields()' and 'extraFields()'.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.base.ArrayableTrait::fields*				 public
+yii/base/ArrayableTrait::fields 			       public
 >
  fields()
 <
 (array) The list of field names or field definitions.
 
- A field is a named element in the returned array by [[toArray()]].
+ A field is a named element in the returned array by 'toArray()'.
 
  This method should return an array of field names or field definitions. If
  the former, the field name will be treated as an object property name whose
@@ -56,17 +59,17 @@ METHOD DETAILS
  variables.
 
 
-*yii.base.ArrayableTrait::extraFields*				 public
+yii/base/ArrayableTrait::extraFields			       public
 >
  extraFields()
 <
 (array) The list of expandable field names or field definitions. Please refer
-to [[fields()]] on the format of the return value.
+to 'fields()' on the format of the return value.
 
- This method is similar to [[fields()]] except that the list of fields
- returned by this method are not returned by default by [[toArray()]]. Only
- when field names to be expanded are explicitly specified when calling
- [[toArray()]], will their values be exported.
+ This method is similar to 'fields()' except that the list of fields returned
+ by this method are not returned by default by 'toArray()'. Only when field
+ names to be expanded are explicitly specified when calling 'toArray()', will
+ their values be exported.
 
  The default implementation returns an empty array.
 
@@ -74,29 +77,29 @@ to [[fields()]] on the format of the return value.
  some context information (e.g. the current application user).
 
 
-*yii.base.ArrayableTrait::toArray*				 public
+yii/base/ArrayableTrait::toArray			       public
 >
  toArray($fields='[]', $expand='[]', $recursive='true')
 <
 (array) The array representation of the object
 
  This method will first identify which fields to be included in the resulting
- array by calling [[resolveFields()]]. It will then turn the model into an
- array with these fields. If '$recursive' is true, any embedded objects will
- also be converted into arrays.
+ array by calling 'resolveFields()'. It will then turn the model into an array
+ with these fields. If '$recursive' is true, any embedded objects will also be
+ converted into arrays.
 
- If the model implements the [[Linkable]] interface, the resulting array will
+ If the model implements the 'Linkable' interface, the resulting array will
  also have a '_link' element which refers to a list of links as specified by
  the interface.
     [$fields] (array) The fields being requested. If empty, all fields as
-    specified by [[fields()]] will be returned.
+    specified by 'fields()' will be returned.
     [$expand] (array) The additional fields being requested for exporting.
-    Only fields declared in [[extraFields()]] will be considered.
+    Only fields declared in 'extraFields()' will be considered.
     [$recursive] (boolean) Whether to recursively return array representation
     of embedded objects.
 
 
-*yii.base.ArrayableTrait::resolveFields*			 protected
+yii/base/ArrayableTrait::resolveFields			       protected
 >
  resolveFields($fields, $expand)
 <
@@ -105,7 +108,7 @@ and the array values are the corresponding object property names or PHP
 callables returning the field values.
 
  This method will check the requested fields against those declared in
- [[fields()]] and [[extraFields()]] to determine which fields can be returned.
+ 'fields()' and 'extraFields()' to determine which fields can be returned.
     [$fields] (array) The fields being requested for exporting
     [$expand] (array) The additional fields being requested for exporting
 

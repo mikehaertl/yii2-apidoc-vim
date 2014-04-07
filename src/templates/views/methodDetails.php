@@ -7,11 +7,13 @@ METHOD DETAILS
 
 <?= $this->context->renderTitleTag(
 	$this->context->createTag($type->name,$method->name,'*'),
-	$method->visibility
-	,65
+	$method->visibility,
+	65,
+	8,
+	'*'
 ).($method->definedBy != $type->name ? "\n" : "\n>\n"); ?>
 <?php if($method->definedBy != $type->name): ?>
- See |<?php echo $this->context->convertTagNames($method->definedBy).'::'.$method->name ?>|
+ See |<?php echo $this->context->convertNamespace($method->definedBy).'::'.$method->name ?>|
 <?php else: ?>
  <?= $this->context->renderMethodSignature($method)."\n<\n"; ?>
 <?= $this->context->renderMethodReturnValue($method)."\n"; ?>

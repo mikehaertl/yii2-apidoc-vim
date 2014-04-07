@@ -1,24 +1,27 @@
 
-*yii\base\Theme*   >> yii\base\Component
+*yii/base/Theme*   >> |yii/base/Component|
 ================
 
- When [[View]] renders a view file, it will check the [[View::theme|active
- theme]] to see if there is a themed version of the view file exists. If so,
- the themed version will be rendered instead.
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ When 'View' renders a view file, it will check the 'View::theme|active theme'
+ to see if there is a themed version of the view file exists. If so, the
+ themed version will be rendered instead.
 
  A theme is a directory consisting of view files which are meant to replace
  their non-themed counterparts.
 
- Theme uses [[pathMap]] to achieve the view file replacement:
+ Theme uses 'pathMap' to achieve the view file replacement:
 
- 1. It first looks for a key in [[pathMap]] that is a substring of the given
+ 1. It first looks for a key in 'pathMap' that is a substring of the given
  view file path; 2. If such a key exists, the corresponding value will be used
  to replace the corresponding part    in the view file path; 3. It will then
  check if the updated view file exists or not. If so, that file will be used  
   to replace the original view file. 4. If Step 2 or 3 fails, the original
  view file will be used.
 
- For example, if [[pathMap]] is '['@app/views' => '@app/themes/basic']', then
+ For example, if 'pathMap' is '['@app/views' => '@app/themes/basic']', then
  the themed version for a view file '@app/views/site/index.php' will be
  '@app/themes/basic/site/index.php'.
 
@@ -35,8 +38,8 @@
  '@app/themes/christmas/site/index.php' or '@app/themes/basic/site/index.php'.
  The former has precedence over the latter if both files exist.
 
- To use a theme, you should configure the [[View::theme|theme]] property of
- the "view" application component like the following:
+ To use a theme, you should configure the 'View::theme|theme' property of the
+ "view" application component like the following:
 
    'view' => [
        'theme' => [
@@ -48,27 +51,27 @@
  The above configuration specifies a theme located under the "themes/basic"
  directory of the Web folder that contains the entry script of the
  application. If your theme is designed to handle modules, you may configure
- the [[pathMap]] property like described above.
+ the 'pathMap' property like described above.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$pathMap>				*yii.base.Theme::$pathMap*
+$pathMap				*yii/base/Theme::$pathMap*
  (array) The mapping between view directories and their corresponding themed
  versions. If not set, it will be initialized as a mapping from
- [[Application::basePath]] to [[basePath]]. This property is used by
- [[applyTo()]] when a view is trying to apply the theme. Path aliases can be
- used when specifying directories.
+ 'Application::basePath' to 'basePath'. This property is used by 'applyTo()'
+ when a view is trying to apply the theme. Path aliases can be used when
+ specifying directories.
 
-<$behaviors>				*yii.base.Theme::$behaviors*
+$behaviors				*yii/base/Theme::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$baseUrl>				*yii.base.Theme::$baseUrl*
+$baseUrl				*yii/base/Theme::$baseUrl*
  (string) The base URL (without ending slash) for this theme. All resources of
  this theme are considered to be under this base URL.
 
-<$basePath>				*yii.base.Theme::$basePath*
+$basePath				*yii/base/Theme::$basePath*
  (string) The root path of this theme. All resources of this theme are located
  under this directory.
 
@@ -77,15 +80,15 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.base.Theme::className*					 public
- See |yii.base.Object::className|
+yii/base/Theme::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.base.Theme::__construct*					 public
- See |yii.base.Object::__construct|
+yii/base/Theme::__construct				       public
+ See |yii/base/Object::__construct|
 
 
-*yii.base.Theme::init*						 public
+yii/base/Theme::init					       public
 >
  init()
 <
@@ -94,95 +97,95 @@ METHOD DETAILS
 
 
 
-*yii.base.Theme::__get* 					 public
- See |yii.base.Component::__get|
+yii/base/Theme::__get					       public
+ See |yii/base/Component::__get|
 
 
-*yii.base.Theme::__set* 					 public
- See |yii.base.Component::__set|
+yii/base/Theme::__set					       public
+ See |yii/base/Component::__set|
 
 
-*yii.base.Theme::__isset*					 public
- See |yii.base.Component::__isset|
+yii/base/Theme::__isset 				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.base.Theme::__unset*					 public
- See |yii.base.Component::__unset|
+yii/base/Theme::__unset 				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.base.Theme::__call*					 public
- See |yii.base.Component::__call|
+yii/base/Theme::__call					       public
+ See |yii/base/Component::__call|
 
 
-*yii.base.Theme::hasProperty*					 public
- See |yii.base.Component::hasProperty|
+yii/base/Theme::hasProperty				       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.base.Theme::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/base/Theme::canGetProperty				       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.base.Theme::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/base/Theme::canSetProperty				       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.base.Theme::hasMethod*					 public
- See |yii.base.Component::hasMethod|
+yii/base/Theme::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.base.Theme::__clone*					 public
- See |yii.base.Component::__clone|
+yii/base/Theme::__clone 				       public
+ See |yii/base/Component::__clone|
 
 
-*yii.base.Theme::behaviors*					 public
- See |yii.base.Component::behaviors|
+yii/base/Theme::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.base.Theme::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/base/Theme::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.base.Theme::on*						 public
- See |yii.base.Component::on|
+yii/base/Theme::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.base.Theme::off*						 public
- See |yii.base.Component::off|
+yii/base/Theme::off					       public
+ See |yii/base/Component::off|
 
 
-*yii.base.Theme::trigger*					 public
- See |yii.base.Component::trigger|
+yii/base/Theme::trigger 				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.base.Theme::getBehavior*					 public
- See |yii.base.Component::getBehavior|
+yii/base/Theme::getBehavior				       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.base.Theme::getBehaviors*					 public
- See |yii.base.Component::getBehaviors|
+yii/base/Theme::getBehaviors				       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.base.Theme::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/base/Theme::attachBehavior				       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.base.Theme::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/base/Theme::attachBehaviors 			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.base.Theme::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/base/Theme::detachBehavior				       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.base.Theme::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/base/Theme::detachBehaviors 			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.base.Theme::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/base/Theme::ensureBehaviors 			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.base.Theme::getBaseUrl*					 public
+yii/base/Theme::getBaseUrl				       public
 >
  getBaseUrl()
 <
@@ -192,7 +195,7 @@ this theme are considered to be under this base URL.
 
 
 
-*yii.base.Theme::setBaseUrl*					 public
+yii/base/Theme::setBaseUrl				       public
 >
  setBaseUrl($url)
 <
@@ -203,7 +206,7 @@ this theme are considered to be under this base URL.
     of this theme are considered to be under this base URL.
 
 
-*yii.base.Theme::getBasePath*					 public
+yii/base/Theme::getBasePath				       public
 >
  getBasePath()
 <
@@ -213,7 +216,7 @@ under this directory.
 
 
 
-*yii.base.Theme::setBasePath*					 public
+yii/base/Theme::setBasePath				       public
 >
  setBasePath($path)
 <
@@ -224,7 +227,7 @@ under this directory.
     of this theme are located under this directory.
 
 
-*yii.base.Theme::applyTo*					 public
+yii/base/Theme::applyTo 				       public
 >
  applyTo($path)
 <
@@ -235,7 +238,7 @@ available.
     [$path] (string) The file to be themed
 
 
-*yii.base.Theme::getUrl*					 public
+yii/base/Theme::getUrl					       public
 >
  getUrl($url)
 <
@@ -245,7 +248,7 @@ available.
     [$url] (string) The relative URL to be converted.
 
 
-*yii.base.Theme::getPath*					 public
+yii/base/Theme::getPath 				       public
 >
  getPath($path)
 <

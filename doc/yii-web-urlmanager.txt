@@ -1,9 +1,12 @@
 
-*yii\web\UrlManager*   >> yii\base\Component
+*yii/web/UrlManager*   >> |yii/base/Component|
 ====================
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
  UrlManager is configured as an application component in
- [[\yii\base\Application]] by default. You can access that instance via
+ '\yii\base\Application' by default. You can access that instance via
  'Yii::$app->urlManager'.
 
  You can modify its configuration by adding an array to your application
@@ -23,40 +26,40 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$enablePrettyUrl>			*yii.web.UrlManager::$enablePrettyUrl*
+$enablePrettyUrl			*yii/web/UrlManager::$enablePrettyUrl*
  (boolean) Whether to enable pretty URLs. Instead of putting all parameters in
  the query string part of a URL, pretty URLs allow using path info to
  represent some of the parameters and can thus produce more user-friendly
  URLs, such as "/news/Yii-is-released", instead of
  "/index.php?r=news/view&id=100".
 
-<$enableStrictParsing>			*yii.web.UrlManager::$enableStrictParsing*
+$enableStrictParsing			*yii/web/UrlManager::$enableStrictParsing*
  (boolean) Whether to enable strict parsing. If strict parsing is enabled, the
- incoming requested URL must match at least one of the [[rules]] in order to
- be treated as a valid request. Otherwise, the path info part of the request
- will be treated as the requested route. This property is used only when
- [[enablePrettyUrl]] is true.
+ incoming requested URL must match at least one of the 'rules' in order to be
+ treated as a valid request. Otherwise, the path info part of the request will
+ be treated as the requested route. This property is used only when
+ 'enablePrettyUrl' is true.
 
-<$rules>				*yii.web.UrlManager::$rules*
- (array) The rules for creating and parsing URLs when [[enablePrettyUrl]] is
- true. This property is used only if [[enablePrettyUrl]] is true. Each element
+$rules					*yii/web/UrlManager::$rules*
+ (array) The rules for creating and parsing URLs when 'enablePrettyUrl' is
+ true. This property is used only if 'enablePrettyUrl' is true. Each element
  in the array is the configuration array for creating a single URL rule. The
- configuration will be merged with [[ruleConfig]] first before it is used for
+ configuration will be merged with 'ruleConfig' first before it is used for
  creating the rule object.
 
  A special shortcut format can be used if a rule only specifies
- [[UrlRule::pattern|pattern]] and [[UrlRule::route|route]]: ''pattern' =>
+ 'UrlRule::pattern|pattern' and 'UrlRule::route|route': ''pattern' =>
  'route''. That is, instead of using a configuration array, one can use the
  key to represent the pattern and the value the corresponding route. For
  example, ''post/<id:\d+>' => 'post/view''.
 
  For RESTful routing the mentioned shortcut format also allows you to specify
- the [[UrlRule::verb|HTTP verb]] that the rule should apply for. You can do
- that  by prepending it to the pattern, separated by space. For example, ''PUT
+ the 'UrlRule::verb|HTTP verb' that the rule should apply for. You can do that
+  by prepending it to the pattern, separated by space. For example, ''PUT
  post/<id:\d+>' => 'post/update''. You may specify multiple verbs by
  separating them with comma like this: ''POST,PUT post/index' =>
  'post/create''. The supported verbs in the shortcut format are: GET, HEAD,
- POST, PUT, PATCH and DELETE. Note that [[UrlRule::mode|mode]] will be set to
+ POST, PUT, PATCH and DELETE. Note that 'UrlRule::mode|mode' will be set to
  PARSING_ONLY when specifying verb in this way so you normally would not
  specify a verb for normal GET request.
 
@@ -78,20 +81,20 @@ PROPERTY DETAILS
  make sure you populate the array with rule objects instead of rule
  configurations.
 
-<$suffix>				*yii.web.UrlManager::$suffix*
+$suffix 				*yii/web/UrlManager::$suffix*
  (string) The URL suffix used when in 'path' format. For example, ".html" can
  be used so that the URL looks like pointing to a static HTML page. This
- property is used only if [[enablePrettyUrl]] is true.
+ property is used only if 'enablePrettyUrl' is true.
 
-<$showScriptName>			*yii.web.UrlManager::$showScriptName*
+$showScriptName 			*yii/web/UrlManager::$showScriptName*
  (boolean) Whether to show entry script name in the constructed URL. Defaults
- to true. This property is used only if [[enablePrettyUrl]] is true.
+ to true. This property is used only if 'enablePrettyUrl' is true.
 
-<$routeParam>				*yii.web.UrlManager::$routeParam*
+$routeParam				*yii/web/UrlManager::$routeParam*
  (string) The GET parameter name for route. This property is used only if
- [[enablePrettyUrl]] is false.
+ 'enablePrettyUrl' is false.
 
-<$cache>				*yii.web.UrlManager::$cache*
+$cache					*yii/web/UrlManager::$cache*
  (\yii\caching\Cache|string) The cache object or the application component ID
  of the cache object. Compiled URL rules will be cached through this cache
  object, if it is available.
@@ -100,36 +103,36 @@ PROPERTY DETAILS
  you should only assign it with a cache object. Set this property to null if
  you do not want to cache the URL rules.
 
-<$ruleConfig>				*yii.web.UrlManager::$ruleConfig*
+$ruleConfig				*yii/web/UrlManager::$ruleConfig*
  (array) The default configuration of URL rules. Individual rule
- configurations specified via [[rules]] will take precedence when the same
+ configurations specified via 'rules' will take precedence when the same
  property of the rule is configured.
 
-<$behaviors>				*yii.web.UrlManager::$behaviors*
+$behaviors				*yii/web/UrlManager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$baseUrl>				*yii.web.UrlManager::$baseUrl*
- (string) The base URL that is used by [[createUrl()]] to prepend URLs it
+$baseUrl				*yii/web/UrlManager::$baseUrl*
+ (string) The base URL that is used by 'createUrl()' to prepend URLs it
  creates.
 
-<$hostInfo>				*yii.web.UrlManager::$hostInfo*
+$hostInfo				*yii/web/UrlManager::$hostInfo*
  (string) The host info (e.g. "http://www.example.com") that is used by
- [[createAbsoluteUrl()]] to prepend URLs it creates.
+ 'createAbsoluteUrl()' to prepend URLs it creates.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.web.UrlManager::className* 				 public
- See |yii.base.Object::className|
+yii/web/UrlManager::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.web.UrlManager::__construct*				 public
- See |yii.base.Object::__construct|
+yii/web/UrlManager::__construct 			       public
+ See |yii/base/Object::__construct|
 
 
-*yii.web.UrlManager::init*					 public
+yii/web/UrlManager::init				       public
 >
  init()
 <
@@ -138,95 +141,95 @@ METHOD DETAILS
 
 
 
-*yii.web.UrlManager::__get*					 public
- See |yii.base.Component::__get|
+yii/web/UrlManager::__get				       public
+ See |yii/base/Component::__get|
 
 
-*yii.web.UrlManager::__set*					 public
- See |yii.base.Component::__set|
+yii/web/UrlManager::__set				       public
+ See |yii/base/Component::__set|
 
 
-*yii.web.UrlManager::__isset*					 public
- See |yii.base.Component::__isset|
+yii/web/UrlManager::__isset				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.web.UrlManager::__unset*					 public
- See |yii.base.Component::__unset|
+yii/web/UrlManager::__unset				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.web.UrlManager::__call*					 public
- See |yii.base.Component::__call|
+yii/web/UrlManager::__call				       public
+ See |yii/base/Component::__call|
 
 
-*yii.web.UrlManager::hasProperty*				 public
- See |yii.base.Component::hasProperty|
+yii/web/UrlManager::hasProperty 			       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.web.UrlManager::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/web/UrlManager::canGetProperty			       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.web.UrlManager::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/web/UrlManager::canSetProperty			       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.web.UrlManager::hasMethod* 				 public
- See |yii.base.Component::hasMethod|
+yii/web/UrlManager::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.web.UrlManager::__clone*					 public
- See |yii.base.Component::__clone|
+yii/web/UrlManager::__clone				       public
+ See |yii/base/Component::__clone|
 
 
-*yii.web.UrlManager::behaviors* 				 public
- See |yii.base.Component::behaviors|
+yii/web/UrlManager::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.web.UrlManager::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/web/UrlManager::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.web.UrlManager::on*					 public
- See |yii.base.Component::on|
+yii/web/UrlManager::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.web.UrlManager::off*					 public
- See |yii.base.Component::off|
+yii/web/UrlManager::off 				       public
+ See |yii/base/Component::off|
 
 
-*yii.web.UrlManager::trigger*					 public
- See |yii.base.Component::trigger|
+yii/web/UrlManager::trigger				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.web.UrlManager::getBehavior*				 public
- See |yii.base.Component::getBehavior|
+yii/web/UrlManager::getBehavior 			       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.web.UrlManager::getBehaviors*				 public
- See |yii.base.Component::getBehaviors|
+yii/web/UrlManager::getBehaviors			       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.web.UrlManager::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/web/UrlManager::attachBehavior			       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.web.UrlManager::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/web/UrlManager::attachBehaviors			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.web.UrlManager::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/web/UrlManager::detachBehavior			       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.web.UrlManager::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/web/UrlManager::detachBehaviors			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.web.UrlManager::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/web/UrlManager::ensureBehaviors			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.web.UrlManager::compileRules*				 protected
+yii/web/UrlManager::compileRules			       protected
 >
  compileRules()
 <
@@ -235,19 +238,19 @@ METHOD DETAILS
 
 
 
-*yii.web.UrlManager::parseRequest*				 public
+yii/web/UrlManager::parseRequest			       public
 >
  parseRequest($request)
 <
 (array|boolean) The route and the associated parameters. The latter is always
-empty if [[enablePrettyUrl]] is false. False is returned if the current
-request cannot be successfully parsed.
+empty if 'enablePrettyUrl' is false. False is returned if the current request
+cannot be successfully parsed.
 
 
     [$request] (\yii\web\Request) The request component
 
 
-*yii.web.UrlManager::createUrl* 				 public
+yii/web/UrlManager::createUrl				       public
 >
  createUrl($params)
 <
@@ -266,27 +269,26 @@ request cannot be successfully parsed.
    // generates: /index.php?r=site/index&param1=value1#name
    ['site/index', 'param1' => 'value1', '#' => 'name']
 
- The URL created is a relative one. Use [[createAbsoluteUrl()]] to create an
+ The URL created is a relative one. Use 'createAbsoluteUrl()' to create an
  absolute URL.
 
- Note that unlike [[\yii\helpers\Url::toRoute()]], this method always treats
- the given route as an absolute route.
+ Note that unlike '\yii\helpers\Url::toRoute()', this method always treats the
+ given route as an absolute route.
     [$params] (string|array) Use a string to represent a route (e.g.
     'site/index'), or an array to represent a route with query parameters
     (e.g. '['site/index', 'param1' => 'value1']').
 
 
-*yii.web.UrlManager::createAbsoluteUrl* 			 public
+yii/web/UrlManager::createAbsoluteUrl			       public
 >
  createAbsoluteUrl($params, $scheme='null')
 <
 (string) The created URL
 
- This method prepends the URL created by [[createUrl()]] with the
- [[hostInfo]].
+ This method prepends the URL created by 'createUrl()' with the 'hostInfo'.
 
- Note that unlike [[\yii\helpers\Url::toRoute()]], this method always treats
- the given route as an absolute route.
+ Note that unlike '\yii\helpers\Url::toRoute()', this method always treats the
+ given route as an absolute route.
     [$params] (string|array) Use a string to represent a route (e.g.
     'site/index'), or an array to represent a route with query parameters
     (e.g. '['site/index', 'param1' => 'value1']').
@@ -294,39 +296,39 @@ request cannot be successfully parsed.
     'https'). If not specified the scheme of the current request will be used.
 
 
-*yii.web.UrlManager::getBaseUrl*				 public
+yii/web/UrlManager::getBaseUrl				       public
 >
  getBaseUrl()
 <
-(string) The base URL that is used by [[createUrl()]] to prepend URLs it
+(string) The base URL that is used by 'createUrl()' to prepend URLs it
 creates.
 
- It defaults to [[Request::scriptUrl]] if [[showScriptName]] is true or
- [[enablePrettyUrl]] is false; otherwise, it defaults to [[Request::baseUrl]].
+ It defaults to 'Request::scriptUrl' if 'showScriptName' is true or
+ 'enablePrettyUrl' is false; otherwise, it defaults to 'Request::baseUrl'.
 
 
-*yii.web.UrlManager::setBaseUrl*				 public
+yii/web/UrlManager::setBaseUrl				       public
 >
  setBaseUrl($value)
 <
 (void)
 
 
-    [$value] (string) The base URL that is used by [[createUrl()]] to prepend
+    [$value] (string) The base URL that is used by 'createUrl()' to prepend
     URLs it creates.
 
 
-*yii.web.UrlManager::getHostInfo*				 public
+yii/web/UrlManager::getHostInfo 			       public
 >
  getHostInfo()
 <
 (string) The host info (e.g. "http://www.example.com") that is used by
-[[createAbsoluteUrl()]] to prepend URLs it creates.
+'createAbsoluteUrl()' to prepend URLs it creates.
 
 
 
 
-*yii.web.UrlManager::setHostInfo*				 public
+yii/web/UrlManager::setHostInfo 			       public
 >
  setHostInfo($value)
 <
@@ -334,7 +336,7 @@ creates.
 
 
     [$value] (string) The host info (e.g. "http://www.example.com") that is
-    used by [[createAbsoluteUrl()]] to prepend URLs it creates.
+    used by 'createAbsoluteUrl()' to prepend URLs it creates.
 
 
 

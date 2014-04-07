@@ -1,21 +1,29 @@
 
-*yii\base\View*   >> yii\base\Component
+*yii/base/View*   >> |yii/base/Component|
 ===============
 
- View provides a set of methods (e.g. [[render()]]) for rendering purpose.
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/web/View|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ View provides a set of methods (e.g. 'render()') for rendering purpose.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$context>				*yii.base.View::$context*
- (\yii\base\ViewContextInterface) The context under which the [[renderFile()]]
+$context				*yii/base/View::$context*
+ (\yii\base\ViewContextInterface) The context under which the 'renderFile()'
  method is being invoked.
 
-<$params>				*yii.base.View::$params*
+$params 				*yii/base/View::$params*
  (mixed) Custom parameters that are shared among view templates.
 
-<$renderers>				*yii.base.View::$renderers*
+$renderers				*yii/base/View::$renderers*
  (array) A list of available renderers indexed by their corresponding
  supported file extensions. Each renderer may be a view renderer object or the
  configuration for creating the renderer object. For example, the following
@@ -27,36 +35,36 @@ PROPERTY DETAILS
    ]
 
  If no renderer is available for the given view file, the view file will be
- treated as a normal PHP and rendered via [[renderPhpFile()]].
+ treated as a normal PHP and rendered via 'renderPhpFile()'.
 
-<$defaultExtension>			*yii.base.View::$defaultExtension*
+$defaultExtension			*yii/base/View::$defaultExtension*
  (string) The default view file extension. This will be appended to view file
  names if they don't have file extensions.
 
-<$theme>				*yii.base.View::$theme*
+$theme					*yii/base/View::$theme*
  (\yii\base\Theme|array) The theme object or the configuration array for
  creating the theme object. If not set, it means theming is not enabled.
 
-<$blocks>				*yii.base.View::$blocks*
+$blocks 				*yii/base/View::$blocks*
  (array) A list of named output blocks. The keys are the block names and the
- values are the corresponding block content. You can call [[beginBlock()]] and
- [[endBlock()]] to capture small fragments of a view. They can be later
- accessed somewhere else through this property.
+ values are the corresponding block content. You can call 'beginBlock()' and
+ 'endBlock()' to capture small fragments of a view. They can be later accessed
+ somewhere else through this property.
 
-<$cacheStack>				*yii.base.View::$cacheStack*
+$cacheStack				*yii/base/View::$cacheStack*
  (array) A list of currently active fragment cache widgets. This property is
  used internally to implement the content caching feature. Do not modify it
  directly.
 
-<$dynamicPlaceholders>			*yii.base.View::$dynamicPlaceholders*
+$dynamicPlaceholders			*yii/base/View::$dynamicPlaceholders*
  (array) A list of placeholders for embedding dynamic contents. This property
  is used internally to implement the content caching feature. Do not modify it
  directly.
 
-<$behaviors>				*yii.base.View::$behaviors*
+$behaviors				*yii/base/View::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$viewFile>				*yii.base.View::$viewFile*
+$viewFile				*yii/base/View::$viewFile*
  (string|boolean) The view file currently being rendered. False if no view
  file is being rendered.
 
@@ -65,15 +73,15 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.base.View::className*					 public
- See |yii.base.Object::className|
+yii/base/View::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.base.View::__construct*					 public
- See |yii.base.Object::__construct|
+yii/base/View::__construct				       public
+ See |yii/base/Object::__construct|
 
 
-*yii.base.View::init*						 public
+yii/base/View::init					       public
 >
  init()
 <
@@ -82,95 +90,95 @@ METHOD DETAILS
 
 
 
-*yii.base.View::__get*						 public
- See |yii.base.Component::__get|
+yii/base/View::__get					       public
+ See |yii/base/Component::__get|
 
 
-*yii.base.View::__set*						 public
- See |yii.base.Component::__set|
+yii/base/View::__set					       public
+ See |yii/base/Component::__set|
 
 
-*yii.base.View::__isset*					 public
- See |yii.base.Component::__isset|
+yii/base/View::__isset					       public
+ See |yii/base/Component::__isset|
 
 
-*yii.base.View::__unset*					 public
- See |yii.base.Component::__unset|
+yii/base/View::__unset					       public
+ See |yii/base/Component::__unset|
 
 
-*yii.base.View::__call* 					 public
- See |yii.base.Component::__call|
+yii/base/View::__call					       public
+ See |yii/base/Component::__call|
 
 
-*yii.base.View::hasProperty*					 public
- See |yii.base.Component::hasProperty|
+yii/base/View::hasProperty				       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.base.View::canGetProperty* 				 public
- See |yii.base.Component::canGetProperty|
+yii/base/View::canGetProperty				       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.base.View::canSetProperty* 				 public
- See |yii.base.Component::canSetProperty|
+yii/base/View::canSetProperty				       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.base.View::hasMethod*					 public
- See |yii.base.Component::hasMethod|
+yii/base/View::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.base.View::__clone*					 public
- See |yii.base.Component::__clone|
+yii/base/View::__clone					       public
+ See |yii/base/Component::__clone|
 
 
-*yii.base.View::behaviors*					 public
- See |yii.base.Component::behaviors|
+yii/base/View::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.base.View::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/base/View::hasEventHandlers 			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.base.View::on*						 public
- See |yii.base.Component::on|
+yii/base/View::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.base.View::off*						 public
- See |yii.base.Component::off|
+yii/base/View::off					       public
+ See |yii/base/Component::off|
 
 
-*yii.base.View::trigger*					 public
- See |yii.base.Component::trigger|
+yii/base/View::trigger					       public
+ See |yii/base/Component::trigger|
 
 
-*yii.base.View::getBehavior*					 public
- See |yii.base.Component::getBehavior|
+yii/base/View::getBehavior				       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.base.View::getBehaviors*					 public
- See |yii.base.Component::getBehaviors|
+yii/base/View::getBehaviors				       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.base.View::attachBehavior* 				 public
- See |yii.base.Component::attachBehavior|
+yii/base/View::attachBehavior				       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.base.View::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/base/View::attachBehaviors				       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.base.View::detachBehavior* 				 public
- See |yii.base.Component::detachBehavior|
+yii/base/View::detachBehavior				       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.base.View::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/base/View::detachBehaviors				       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.base.View::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/base/View::ensureBehaviors				       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.base.View::render* 					 public
+yii/base/View::render					       public
 >
  render($view, $params='[]', $context='null')
 <
@@ -181,27 +189,27 @@ METHOD DETAILS
  - path alias (e.g. "@app/views/site/index"); - absolute path within
  application (e.g. "//site/index"): the view name starts with double slashes. 
   The actual view file will be looked for under the
- [[Application::viewPath|view path]] of the application. - absolute path
- within current module (e.g. "/site/index"): the view name starts with a
- single slash.   The actual view file will be looked for under the
- [[Module::viewPath|view path]] of [[module]]. - relative view (e.g. "index"):
- the view name does not start with '@' or '/'. The corresponding view file
- will be   looked for under the [[ViewContextInterface::getViewPath()|view
- path]] of the view '$context'.   If '$context' is not given, it will be
- looked for under the directory containing the view currently   being rendered
- (i.e., this happens when rendering a view within another view).
+ 'Application::viewPath|view path' of the application. - absolute path within
+ current module (e.g. "/site/index"): the view name starts with a single
+ slash.   The actual view file will be looked for under the
+ 'Module::viewPath|view path' of 'module'. - relative view (e.g. "index"): the
+ view name does not start with '@' or '/'. The corresponding view file will be
+   looked for under the 'ViewContextInterface::getViewPath()|view path' of the
+ view '$context'.   If '$context' is not given, it will be looked for under
+ the directory containing the view currently   being rendered (i.e., this
+ happens when rendering a view within another view).
     [$view] (string) The view name. Please refer to
-    [[Controller::findViewFile()]] and [[Widget::findViewFile()]] on how to
+    'Controller::findViewFile()' and 'Widget::findViewFile()' on how to
     specify this parameter.
     [$params] (array) The parameters (name-value pairs) that will be extracted
     and made available in the view file.
     [$context] (object) The context to be assigned to the view and can later
-    be accessed via [[context]] in the view. If the context implements
-    [[ViewContextInterface]], it may also be used to locate the view file
+    be accessed via 'context' in the view. If the context implements
+    'ViewContextInterface', it may also be used to locate the view file
     corresponding to a relative view name.
 
 
-*yii.base.View::findViewFile*					 protected
+yii/base/View::findViewFile				       protected
 >
  findViewFile($view, $context='null')
 <
@@ -209,25 +217,25 @@ METHOD DETAILS
 
 
     [$view] (string) The view name or the path alias of the view file. Please
-    refer to [[render()]] on how to specify this parameter.
+    refer to 'render()' on how to specify this parameter.
     [$context] (object) The context to be assigned to the view and can later
-    be accessed via [[context]] in the view. If the context implements
-    [[ViewContextInterface]], it may also be used to locate the view file
+    be accessed via 'context' in the view. If the context implements
+    'ViewContextInterface', it may also be used to locate the view file
     corresponding to a relative view name.
 
 
-*yii.base.View::renderFile*					 public
+yii/base/View::renderFile				       public
 >
  renderFile($viewFile, $params='[]', $context='null')
 <
 (string) The rendering result
 
- If [[theme]] is enabled (not null), it will try to render the themed version
- of the view file as long as it is available.
+ If 'theme' is enabled (not null), it will try to render the themed version of
+ the view file as long as it is available.
 
- The method will call [[FileHelper::localize()]] to localize the view file.
+ The method will call 'FileHelper::localize()' to localize the view file.
 
- If [[renderer]] is enabled (not null), the method will use it to render the
+ If 'renderer' is enabled (not null), the method will use it to render the
  view file. Otherwise, it will simply include the view file as a normal PHP
  file, capture its output and return it as a string.
     [$viewFile] (string) The view file. This can be either a file path or a
@@ -235,10 +243,10 @@ METHOD DETAILS
     [$params] (array) The parameters (name-value pairs) that will be extracted
     and made available in the view file.
     [$context] (object) The context that the view should use for rendering the
-    view. If null, existing [[context]] will be used.
+    view. If null, existing 'context' will be used.
 
 
-*yii.base.View::getViewFile*					 public
+yii/base/View::getViewFile				       public
 >
  getViewFile()
 <
@@ -248,29 +256,29 @@ is being rendered.
 
 
 
-*yii.base.View::beforeRender*					 public
+yii/base/View::beforeRender				       public
 >
  beforeRender()
 <
 (boolean) Whether to continue rendering the view file.
 
- The default implementation will trigger the [[EVENT_BEFORE_RENDER]] event. If
+ The default implementation will trigger the 'EVENT_BEFORE_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
 
 
-*yii.base.View::afterRender*					 public
+yii/base/View::afterRender				       public
 >
  afterRender($output)
 <
 (void)
 
- The default implementation will trigger the [[EVENT_AFTER_RENDER]] event. If
+ The default implementation will trigger the 'EVENT_AFTER_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
     [$output] (string) The rendering result of the view file. Updates to this
-    parameter will be passed back and returned by [[renderFile()]].
+    parameter will be passed back and returned by 'renderFile()'.
 
 
-*yii.base.View::renderPhpFile*					 public
+yii/base/View::renderPhpFile				       public
 >
  renderPhpFile($_file_, $_params_='[]')
 <
@@ -281,13 +289,13 @@ is being rendered.
  method captures the output of the included view file and returns it as a
  string.
 
- This method should mainly be called by view renderer or [[renderFile()]].
+ This method should mainly be called by view renderer or 'renderFile()'.
     [$_file_] (string) The view file.
     [$_params_] (array) The parameters (name-value pairs) that will be
     extracted and made available in the view file.
 
 
-*yii.base.View::renderDynamic*					 public
+yii/base/View::renderDynamic				       public
 >
  renderDynamic($statements)
 <
@@ -302,7 +310,7 @@ there is no active content cache currently.
     content.
 
 
-*yii.base.View::addDynamicPlaceholder*				 public
+yii/base/View::addDynamicPlaceholder			       public
 >
  addDynamicPlaceholder($placeholder, $statements)
 <
@@ -314,7 +322,7 @@ there is no active content cache currently.
     content
 
 
-*yii.base.View::evaluateDynamicContent* 			 public
+yii/base/View::evaluateDynamicContent			       public
 >
  evaluateDynamicContent($statements)
 <
@@ -324,19 +332,19 @@ there is no active content cache currently.
     [$statements] (string) The PHP statements to be evaluated.
 
 
-*yii.base.View::beginBlock*					 public
+yii/base/View::beginBlock				       public
 >
  beginBlock($id, $renderInPlace='false')
 <
 (\yii\widgets\Block) The Block widget instance
 
- This method is a shortcut to beginning [[Block]]
+ This method is a shortcut to beginning 'Block'
     [$id] (string) The block ID.
     [$renderInPlace] (boolean) Whether to render the block content in place.
     Defaults to false, meaning the captured block will not be displayed.
 
 
-*yii.base.View::endBlock*					 public
+yii/base/View::endBlock 				       public
 >
  endBlock()
 <
@@ -345,7 +353,7 @@ there is no active content cache currently.
 
 
 
-*yii.base.View::beginContent*					 public
+yii/base/View::beginContent				       public
 >
  beginContent($viewFile, $params='[]')
 <
@@ -367,7 +375,7 @@ there is no active content cache currently.
     available in the decorative view.
 
 
-*yii.base.View::endContent*					 public
+yii/base/View::endContent				       public
 >
  endContent()
 <
@@ -376,7 +384,7 @@ there is no active content cache currently.
 
 
 
-*yii.base.View::beginCache*					 public
+yii/base/View::beginCache				       public
 >
  beginCache($id, $properties='[]')
 <
@@ -384,9 +392,8 @@ there is no active content cache currently.
 cached version is available.
 
  This method will display cached content if it is available. If not, it will
- start caching and would expect an [[endCache()]] call to end the cache and
- save the content into cache. A typical usage of fragment caching is as
- follows,
+ start caching and would expect an 'endCache()' call to end the cache and save
+ the content into cache. A typical usage of fragment caching is as follows,
 
    if ($this->beginCache($id)) {
        // ...generate content here
@@ -395,10 +402,10 @@ cached version is available.
 
 
     [$id] (string) A unique ID identifying the fragment to be cached.
-    [$properties] (array) Initial property values for [[FragmentCache]]
+    [$properties] (array) Initial property values for 'FragmentCache'
 
 
-*yii.base.View::endCache*					 public
+yii/base/View::endCache 				       public
 >
  endCache()
 <
@@ -407,7 +414,7 @@ cached version is available.
 
 
 
-*yii.base.View::beginPage*					 public
+yii/base/View::beginPage				       public
 >
  beginPage()
 <
@@ -416,7 +423,7 @@ cached version is available.
 
 
 
-*yii.base.View::endPage*					 public
+yii/base/View::endPage					       public
 >
  endPage()
 <

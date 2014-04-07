@@ -1,14 +1,23 @@
 
-*yii\rbac\Manager*   >> yii\base\Component
+*yii/rbac/Manager*   >> |yii/base/Component|
 ==================
 
- Manager extends [[Component]] and implements some methods that are common
- among authorization manager classes.
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/rbac/DbManager|
+|yii/rbac/PhpManager|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Manager extends 'Component' and implements some methods that are common among
+ authorization manager classes.
 
  Manager together with its concrete child classes implement the Role-Based
  Access Control (RBAC).
 
- The main idea is that permissions are organized as a hierarchy of [[Item]]
+ The main idea is that permissions are organized as a hierarchy of 'Item'
  authorization items. Items on higher level inherit the permissions
  represented by items on lower level. And roles are simply top-level
  authorization items that may be assigned to individual users. A user is said
@@ -19,38 +28,38 @@
  hierarchy and assignments have to be established. Manager and its child
  classes provides APIs to accomplish this task. Developers may need to develop
  some GUI so that it is more intuitive to end-users. Second, developers call
- [[Manager::checkAccess()]] at appropriate places in the application code to
+ 'Manager::checkAccess()' at appropriate places in the application code to
  check if the current user has the needed permission for an operation.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$showErrors>				*yii.rbac.Manager::$showErrors*
+$showErrors				*yii/rbac/Manager::$showErrors*
  (boolean) Enable error reporting for bizRules.
 
-<$defaultRoles> 			*yii.rbac.Manager::$defaultRoles*
+$defaultRoles				*yii/rbac/Manager::$defaultRoles*
  (array) List of role names that are assigned to all users implicitly. These
  roles do not need to be explicitly assigned to any user. When calling
- [[checkAccess()]], these roles will be checked first. For performance reason,
+ 'checkAccess()', these roles will be checked first. For performance reason,
  you should minimize the number of such roles. A typical usage of such roles
  is to define an 'authenticated' role and associate it with a biz rule which
  checks if the current user is authenticated. And then declare 'authenticated'
  in this property so that it can be applied to every authenticated user.
 
-<$behaviors>				*yii.rbac.Manager::$behaviors*
+$behaviors				*yii/rbac/Manager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-<$roles>				*yii.rbac.Manager::$roles*
+$roles					*yii/rbac/Manager::$roles*
  (\yii\rbac\Item[]) Roles (name => AuthItem)
 
-<$tasks>				*yii.rbac.Manager::$tasks*
+$tasks					*yii/rbac/Manager::$tasks*
  (\yii\rbac\Item[]) Tasks (name => AuthItem)
 
-<$operations>				*yii.rbac.Manager::$operations*
+$operations				*yii/rbac/Manager::$operations*
  (\yii\rbac\Item[]) Operations (name => AuthItem)
 
-<$items>				*yii.rbac.Manager::$items*
+$items					*yii/rbac/Manager::$items*
  (\yii\rbac\Item[]) The authorization items of the specific type.
 
 
@@ -58,113 +67,113 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.rbac.Manager::className*					 public
- See |yii.base.Object::className|
+yii/rbac/Manager::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.rbac.Manager::__construct* 				 public
- See |yii.base.Object::__construct|
+yii/rbac/Manager::__construct				       public
+ See |yii/base/Object::__construct|
 
 
-*yii.rbac.Manager::init*					 public
- See |yii.base.Object::init|
+yii/rbac/Manager::init					       public
+ See |yii/base/Object::init|
 
 
-*yii.rbac.Manager::__get*					 public
- See |yii.base.Component::__get|
+yii/rbac/Manager::__get 				       public
+ See |yii/base/Component::__get|
 
 
-*yii.rbac.Manager::__set*					 public
- See |yii.base.Component::__set|
+yii/rbac/Manager::__set 				       public
+ See |yii/base/Component::__set|
 
 
-*yii.rbac.Manager::__isset*					 public
- See |yii.base.Component::__isset|
+yii/rbac/Manager::__isset				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.rbac.Manager::__unset*					 public
- See |yii.base.Component::__unset|
+yii/rbac/Manager::__unset				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.rbac.Manager::__call*					 public
- See |yii.base.Component::__call|
+yii/rbac/Manager::__call				       public
+ See |yii/base/Component::__call|
 
 
-*yii.rbac.Manager::hasProperty* 				 public
- See |yii.base.Component::hasProperty|
+yii/rbac/Manager::hasProperty				       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.rbac.Manager::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/rbac/Manager::canGetProperty			       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.rbac.Manager::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/rbac/Manager::canSetProperty			       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.rbac.Manager::hasMethod*					 public
- See |yii.base.Component::hasMethod|
+yii/rbac/Manager::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.rbac.Manager::__clone*					 public
- See |yii.base.Component::__clone|
+yii/rbac/Manager::__clone				       public
+ See |yii/base/Component::__clone|
 
 
-*yii.rbac.Manager::behaviors*					 public
- See |yii.base.Component::behaviors|
+yii/rbac/Manager::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.rbac.Manager::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/rbac/Manager::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.rbac.Manager::on*						 public
- See |yii.base.Component::on|
+yii/rbac/Manager::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.rbac.Manager::off* 					 public
- See |yii.base.Component::off|
+yii/rbac/Manager::off					       public
+ See |yii/base/Component::off|
 
 
-*yii.rbac.Manager::trigger*					 public
- See |yii.base.Component::trigger|
+yii/rbac/Manager::trigger				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.rbac.Manager::getBehavior* 				 public
- See |yii.base.Component::getBehavior|
+yii/rbac/Manager::getBehavior				       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.rbac.Manager::getBehaviors*				 public
- See |yii.base.Component::getBehaviors|
+yii/rbac/Manager::getBehaviors				       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.rbac.Manager::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/rbac/Manager::attachBehavior			       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.rbac.Manager::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/rbac/Manager::attachBehaviors			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.rbac.Manager::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/rbac/Manager::detachBehavior			       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.rbac.Manager::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/rbac/Manager::detachBehaviors			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.rbac.Manager::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/rbac/Manager::ensureBehaviors			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.rbac.Manager::createRole*					 public
+yii/rbac/Manager::createRole				       public
 >
  createRole($name, $description='''', $bizRule='null', $data='null')
 <
 (\yii\rbac\Item) The authorization item
 
- This is a shortcut method to [[Manager::createItem()]].
+ This is a shortcut method to 'Manager::createItem()'.
     [$name] (string) The item name
     [$description] (string) The item description.
     [$bizRule] (string) The business rule associated with this item
@@ -172,13 +181,13 @@ METHOD DETAILS
     rule
 
 
-*yii.rbac.Manager::createTask*					 public
+yii/rbac/Manager::createTask				       public
 >
  createTask($name, $description='''', $bizRule='null', $data='null')
 <
 (\yii\rbac\Item) The authorization item
 
- This is a shortcut method to [[Manager::createItem()]].
+ This is a shortcut method to 'Manager::createItem()'.
     [$name] (string) The item name
     [$description] (string) The item description.
     [$bizRule] (string) The business rule associated with this item
@@ -186,13 +195,13 @@ METHOD DETAILS
     rule
 
 
-*yii.rbac.Manager::createOperation*				 public
+yii/rbac/Manager::createOperation			       public
 >
  createOperation($name, $description='''', $bizRule='null', $data='null')
 <
 (\yii\rbac\Item) The authorization item
 
- This is a shortcut method to [[Manager::createItem()]].
+ This is a shortcut method to 'Manager::createItem()'.
     [$name] (string) The item name
     [$description] (string) The item description.
     [$bizRule] (string) The business rule associated with this item
@@ -200,43 +209,43 @@ METHOD DETAILS
     rule
 
 
-*yii.rbac.Manager::getRoles*					 public
+yii/rbac/Manager::getRoles				       public
 >
  getRoles($userId='null')
 <
 (\yii\rbac\Item[]) Roles (name => AuthItem)
 
- This is a shortcut method to [[Manager::getItems()]].
+ This is a shortcut method to 'Manager::getItems()'.
     [$userId] (mixed) The user ID. If not null, only the roles directly
     assigned to the user will be returned. Otherwise, all roles will be
     returned.
 
 
-*yii.rbac.Manager::getTasks*					 public
+yii/rbac/Manager::getTasks				       public
 >
  getTasks($userId='null')
 <
 (\yii\rbac\Item[]) Tasks (name => AuthItem)
 
- This is a shortcut method to [[Manager::getItems()]].
+ This is a shortcut method to 'Manager::getItems()'.
     [$userId] (mixed) The user ID. If not null, only the tasks directly
     assigned to the user will be returned. Otherwise, all tasks will be
     returned.
 
 
-*yii.rbac.Manager::getOperations*				 public
+yii/rbac/Manager::getOperations 			       public
 >
  getOperations($userId='null')
 <
 (\yii\rbac\Item[]) Operations (name => AuthItem)
 
- This is a shortcut method to [[Manager::getItems()]].
+ This is a shortcut method to 'Manager::getItems()'.
     [$userId] (mixed) The user ID. If not null, only the operations directly
     assigned to the user will be returned. Otherwise, all operations will be
     returned.
 
 
-*yii.rbac.Manager::executeBizRule*				 public
+yii/rbac/Manager::executeBizRule			       public
 >
  executeBizRule($bizRule, $params, $data)
 <
@@ -245,12 +254,12 @@ empty, it will still return true.
 
 
     [$bizRule] (string) The business rule to be executed.
-    [$params] (array) Parameters passed to [[Manager::checkAccess()]].
+    [$params] (array) Parameters passed to 'Manager::checkAccess()'.
     [$data] (mixed) Additional data associated with the authorization item or
     assignment.
 
 
-*yii.rbac.Manager::checkItemChildType*				 protected
+yii/rbac/Manager::checkItemChildType			       protected
 >
  checkItemChildType($parentType, $childType)
 <
@@ -261,7 +270,7 @@ empty, it will still return true.
     [$childType] (integer) Child item type
 
 
-*yii.rbac.Manager::checkAccess* 				 public
+yii/rbac/Manager::checkAccess				       public
 >
  checkAccess($userId, $itemName, $params='[]')
 <
@@ -270,14 +279,14 @@ empty, it will still return true.
 
     [$userId] (mixed) The user ID. This should be either an integer or a
     string representing the unique identifier of a user. See
-    [[\yii\web\User::id]].
+    '\yii\web\User::id'.
     [$itemName] (string) The name of the operation that we are checking access
     to
     [$params] (array) Name-value pairs that would be passed to biz rules
     associated with the tasks and roles assigned to the user.
 
 
-*yii.rbac.Manager::createItem*					 public
+yii/rbac/Manager::createItem				       public
 >
  createItem($name, $type, $description='''', $bizRule='null', $data='null')
 <
@@ -291,12 +300,12 @@ empty, it will still return true.
     [$type] (integer) The item type (0: operation, 1: task, 2: role).
     [$description] (string) Description of the item
     [$bizRule] (string) Business rule associated with the item. This is a
-    piece of PHP code that will be executed when [[checkAccess()]] is called
-    for the item.
+    piece of PHP code that will be executed when 'checkAccess()' is called for
+    the item.
     [$data] (mixed) Additional data associated with the item.
 
 
-*yii.rbac.Manager::removeItem*					 public
+yii/rbac/Manager::removeItem				       public
 >
  removeItem($name)
 <
@@ -306,7 +315,7 @@ empty, it will still return true.
     [$name] (string) The name of the item to be removed
 
 
-*yii.rbac.Manager::getItems*					 public
+yii/rbac/Manager::getItems				       public
 >
  getItems($userId='null', $type=null)
 <
@@ -319,7 +328,7 @@ empty, it will still return true.
     to null, meaning returning all items regardless of their type.
 
 
-*yii.rbac.Manager::getItem*					 public
+yii/rbac/Manager::getItem				       public
 >
  getItem($name)
 <
@@ -329,7 +338,7 @@ empty, it will still return true.
     [$name] (string) The name of the item
 
 
-*yii.rbac.Manager::saveItem*					 public
+yii/rbac/Manager::saveItem				       public
 >
  saveItem($item, $oldName='null')
 <
@@ -341,7 +350,7 @@ empty, it will still return true.
     not changed.
 
 
-*yii.rbac.Manager::addItemChild*				 public
+yii/rbac/Manager::addItemChild				       public
 >
  addItemChild($itemName, $childName)
 <
@@ -352,7 +361,7 @@ empty, it will still return true.
     [$childName] (string) The child item name
 
 
-*yii.rbac.Manager::removeItemChild*				 public
+yii/rbac/Manager::removeItemChild			       public
 >
  removeItemChild($itemName, $childName)
 <
@@ -364,7 +373,7 @@ empty, it will still return true.
     [$childName] (string) The child item name
 
 
-*yii.rbac.Manager::hasItemChild*				 public
+yii/rbac/Manager::hasItemChild				       public
 >
  hasItemChild($itemName, $childName)
 <
@@ -375,7 +384,7 @@ empty, it will still return true.
     [$childName] (string) The child item name
 
 
-*yii.rbac.Manager::getItemChildren*				 public
+yii/rbac/Manager::getItemChildren			       public
 >
  getItemChildren($itemName)
 <
@@ -386,53 +395,53 @@ empty, it will still return true.
     an array. The latter represents a list of item names.
 
 
-*yii.rbac.Manager::assign*					 public
+yii/rbac/Manager::assign				       public
 >
  assign($userId, $itemName, $bizRule='null', $data='null')
 <
 (\yii\rbac\Assignment) The authorization assignment information.
 
 
-    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
     [$itemName] (string) The item name
-    [$bizRule] (string) The business rule to be executed when
-    [[checkAccess()]] is called for this particular authorization item.
+    [$bizRule] (string) The business rule to be executed when 'checkAccess()'
+    is called for this particular authorization item.
     [$data] (mixed) Additional data associated with this assignment
 
 
-*yii.rbac.Manager::revoke*					 public
+yii/rbac/Manager::revoke				       public
 >
  revoke($userId, $itemName)
 <
 (boolean) Whether removal is successful
 
 
-    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
     [$itemName] (string) The item name
 
 
-*yii.rbac.Manager::revokeAll*					 public
+yii/rbac/Manager::revokeAll				       public
 >
  revokeAll($userId)
 <
 (boolean) Whether removal is successful
 
 
-    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
 
 
-*yii.rbac.Manager::isAssigned*					 public
+yii/rbac/Manager::isAssigned				       public
 >
  isAssigned($userId, $itemName)
 <
 (boolean) Whether the item has been assigned to the user.
 
 
-    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
     [$itemName] (string) The item name
 
 
-*yii.rbac.Manager::getAssignment*				 public
+yii/rbac/Manager::getAssignment 			       public
 >
  getAssignment($userId, $itemName)
 <
@@ -440,11 +449,11 @@ empty, it will still return true.
 the item is not assigned to the user.
 
 
-    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
     [$itemName] (string) The item name
 
 
-*yii.rbac.Manager::getAssignments*				 public
+yii/rbac/Manager::getAssignments			       public
 >
  getAssignments($userId)
 <
@@ -452,10 +461,10 @@ the item is not assigned to the user.
 array will be returned if there is no item assigned to the user.
 
 
-    [$userId] (mixed) The user ID (see [[\yii\web\User::id]])
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
 
 
-*yii.rbac.Manager::saveAssignment*				 public
+yii/rbac/Manager::saveAssignment			       public
 >
  saveAssignment($assignment)
 <
@@ -465,7 +474,7 @@ array will be returned if there is no item assigned to the user.
     [$assignment] (\yii\rbac\Assignment) The assignment that has been changed.
 
 
-*yii.rbac.Manager::clearAll*					 public
+yii/rbac/Manager::clearAll				       public
 >
  clearAll()
 <
@@ -474,7 +483,7 @@ array will be returned if there is no item assigned to the user.
 
 
 
-*yii.rbac.Manager::clearAssignments*				 public
+yii/rbac/Manager::clearAssignments			       public
 >
  clearAssignments()
 <
@@ -483,7 +492,7 @@ array will be returned if there is no item assigned to the user.
 
 
 
-*yii.rbac.Manager::save*					 public
+yii/rbac/Manager::save					       public
 >
  save()
 <

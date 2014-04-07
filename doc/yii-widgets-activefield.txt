@@ -1,6 +1,9 @@
 
-*yii\widgets\ActiveField*   >> yii\base\Component
+*yii/widgets/ActiveField*   >> |yii/base/Component|
 =========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
 
 
 
@@ -8,74 +11,74 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$form> 				*yii.widgets.ActiveField::$form*
+$form					*yii/widgets/ActiveField::$form*
  (\yii\widgets\ActiveForm) The form that this field is associated with.
 
-<$model>				*yii.widgets.ActiveField::$model*
+$model					*yii/widgets/ActiveField::$model*
  (\yii\base\Model) The data model that this field is associated with
 
-<$attribute>				*yii.widgets.ActiveField::$attribute*
+$attribute				*yii/widgets/ActiveField::$attribute*
  (string) The model attribute that this field is associated with
 
-<$options>				*yii.widgets.ActiveField::$options*
+$options				*yii/widgets/ActiveField::$options*
  (array) The HTML attributes (name-value pairs) for the field container tag.
- The values will be HTML-encoded using [[Html::encode()]]. If a value is null,
+ The values will be HTML-encoded using 'Html::encode()'. If a value is null,
  the corresponding attribute will not be rendered. The following special
  options are recognized:
 
  - tag: the tag name of the container element. Defaults to "div".
 
-<$template>				*yii.widgets.ActiveField::$template*
+$template				*yii/widgets/ActiveField::$template*
  (string) The template that is used to arrange the label, the input field, the
  error message and the hint text. The following tokens will be replaced when
- [[render()]] is called: '{label}', '{input}', '{error}' and '{hint}'.
+ 'render()' is called: '{label}', '{input}', '{error}' and '{hint}'.
 
-<$inputOptions> 			*yii.widgets.ActiveField::$inputOptions*
+$inputOptions				*yii/widgets/ActiveField::$inputOptions*
  (array) The default options for the input tags. The parameter passed to
- individual input methods (e.g. [[textInput()]]) will be merged with this
+ individual input methods (e.g. 'textInput()') will be merged with this
  property when rendering the input tag.
 
-<$errorOptions> 			*yii.widgets.ActiveField::$errorOptions*
+$errorOptions				*yii/widgets/ActiveField::$errorOptions*
  (array) The default options for the error tags. The parameter passed to
- [[error()]] will be merged with this property when rendering the error tag.
- The following special options are recognized:
-
- - tag: the tag name of the container element. Defaults to "div".
-
-<$labelOptions> 			*yii.widgets.ActiveField::$labelOptions*
- (array) The default options for the label tags. The parameter passed to
- [[label()]] will be merged with this property when rendering the label tag.
-
-<$hintOptions>				*yii.widgets.ActiveField::$hintOptions*
- (array) The default options for the hint tags. The parameter passed to
- [[hint()]] will be merged with this property when rendering the hint tag. The
+ 'error()' will be merged with this property when rendering the error tag. The
  following special options are recognized:
 
  - tag: the tag name of the container element. Defaults to "div".
 
-<$enableClientValidation>		*yii.widgets.ActiveField::$enableClientValidation*
+$labelOptions				*yii/widgets/ActiveField::$labelOptions*
+ (array) The default options for the label tags. The parameter passed to
+ 'label()' will be merged with this property when rendering the label tag.
+
+$hintOptions				*yii/widgets/ActiveField::$hintOptions*
+ (array) The default options for the hint tags. The parameter passed to
+ 'hint()' will be merged with this property when rendering the hint tag. The
+ following special options are recognized:
+
+ - tag: the tag name of the container element. Defaults to "div".
+
+$enableClientValidation 		*yii/widgets/ActiveField::$enableClientValidation*
  (boolean) Whether to enable client-side data validation. If not set, it will
- take the value of [[ActiveForm::enableClientValidation]].
+ take the value of 'ActiveForm::enableClientValidation'.
 
-<$enableAjaxValidation> 		*yii.widgets.ActiveField::$enableAjaxValidation*
+$enableAjaxValidation			*yii/widgets/ActiveField::$enableAjaxValidation*
  (boolean) Whether to enable AJAX-based data validation. If not set, it will
- take the value of [[ActiveForm::enableAjaxValidation]].
+ take the value of 'ActiveForm::enableAjaxValidation'.
 
-<$validateOnChange>			*yii.widgets.ActiveField::$validateOnChange*
+$validateOnChange			*yii/widgets/ActiveField::$validateOnChange*
  (boolean) Whether to perform validation when the input field loses focus and
  its value is found changed. If not set, it will take the value of
- [[ActiveForm::validateOnChange]].
+ 'ActiveForm::validateOnChange'.
 
-<$validateOnType>			*yii.widgets.ActiveField::$validateOnType*
+$validateOnType 			*yii/widgets/ActiveField::$validateOnType*
  (boolean) Whether to perform validation while the user is typing in the input
- field. If not set, it will take the value of [[ActiveForm::validateOnType]].
+ field. If not set, it will take the value of 'ActiveForm::validateOnType'.
 
-<$validationDelay>			*yii.widgets.ActiveField::$validationDelay*
+$validationDelay			*yii/widgets/ActiveField::$validationDelay*
  (integer) Number of milliseconds that the validation should be delayed when
  the input field is changed or the user types in the field. If not set, it
- will take the value of [[ActiveForm::validationDelay]].
+ will take the value of 'ActiveForm::validationDelay'.
 
-<$selectors>				*yii.widgets.ActiveField::$selectors*
+$selectors				*yii/widgets/ActiveField::$selectors*
  (array) The jQuery selectors for selecting the container, input and error
  tags. The array keys should be "container", "input", and/or "error", and the
  array values are the corresponding selectors. For example, '['input' =>
@@ -87,15 +90,15 @@ PROPERTY DETAILS
  You normally do not need to set this property as the default selectors should
  work well for most cases.
 
-<$parts>				*yii.widgets.ActiveField::$parts*
+$parts					*yii/widgets/ActiveField::$parts*
  (array) Different parts of the field (e.g. input, label). This will be used
- together with [[template]] to generate the final field HTML code. The keys
- are the token names in [[template]], while the values are the corresponding
- HTML code. Valid tokens include '{input}', '{label}' and '{error}'. Note that
- you normally don't need to access this property directly as it is maintained
- by various methods of this class.
+ together with 'template' to generate the final field HTML code. The keys are
+ the token names in 'template', while the values are the corresponding HTML
+ code. Valid tokens include '{input}', '{label}' and '{error}'. Note that you
+ normally don't need to access this property directly as it is maintained by
+ various methods of this class.
 
-<$behaviors>				*yii.widgets.ActiveField::$behaviors*
+$behaviors				*yii/widgets/ActiveField::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 
@@ -103,107 +106,107 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.widgets.ActiveField::className*				 public
- See |yii.base.Object::className|
+yii/widgets/ActiveField::className			       public
+ See |yii/base/Object::className|
 
 
-*yii.widgets.ActiveField::__construct*				 public
- See |yii.base.Object::__construct|
+yii/widgets/ActiveField::__construct			       public
+ See |yii/base/Object::__construct|
 
 
-*yii.widgets.ActiveField::init* 				 public
- See |yii.base.Object::init|
+yii/widgets/ActiveField::init				       public
+ See |yii/base/Object::init|
 
 
-*yii.widgets.ActiveField::__get*				 public
- See |yii.base.Component::__get|
+yii/widgets/ActiveField::__get				       public
+ See |yii/base/Component::__get|
 
 
-*yii.widgets.ActiveField::__set*				 public
- See |yii.base.Component::__set|
+yii/widgets/ActiveField::__set				       public
+ See |yii/base/Component::__set|
 
 
-*yii.widgets.ActiveField::__isset*				 public
- See |yii.base.Component::__isset|
+yii/widgets/ActiveField::__isset			       public
+ See |yii/base/Component::__isset|
 
 
-*yii.widgets.ActiveField::__unset*				 public
- See |yii.base.Component::__unset|
+yii/widgets/ActiveField::__unset			       public
+ See |yii/base/Component::__unset|
 
 
-*yii.widgets.ActiveField::__call*				 public
- See |yii.base.Component::__call|
+yii/widgets/ActiveField::__call 			       public
+ See |yii/base/Component::__call|
 
 
-*yii.widgets.ActiveField::hasProperty*				 public
- See |yii.base.Component::hasProperty|
+yii/widgets/ActiveField::hasProperty			       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.widgets.ActiveField::canGetProperty*			 public
- See |yii.base.Component::canGetProperty|
+yii/widgets/ActiveField::canGetProperty 		       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.widgets.ActiveField::canSetProperty*			 public
- See |yii.base.Component::canSetProperty|
+yii/widgets/ActiveField::canSetProperty 		       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.widgets.ActiveField::hasMethod*				 public
- See |yii.base.Component::hasMethod|
+yii/widgets/ActiveField::hasMethod			       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.widgets.ActiveField::__clone*				 public
- See |yii.base.Component::__clone|
+yii/widgets/ActiveField::__clone			       public
+ See |yii/base/Component::__clone|
 
 
-*yii.widgets.ActiveField::behaviors*				 public
- See |yii.base.Component::behaviors|
+yii/widgets/ActiveField::behaviors			       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.widgets.ActiveField::hasEventHandlers*			 public
- See |yii.base.Component::hasEventHandlers|
+yii/widgets/ActiveField::hasEventHandlers		       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.widgets.ActiveField::on*					 public
- See |yii.base.Component::on|
+yii/widgets/ActiveField::on				       public
+ See |yii/base/Component::on|
 
 
-*yii.widgets.ActiveField::off*					 public
- See |yii.base.Component::off|
+yii/widgets/ActiveField::off				       public
+ See |yii/base/Component::off|
 
 
-*yii.widgets.ActiveField::trigger*				 public
- See |yii.base.Component::trigger|
+yii/widgets/ActiveField::trigger			       public
+ See |yii/base/Component::trigger|
 
 
-*yii.widgets.ActiveField::getBehavior*				 public
- See |yii.base.Component::getBehavior|
+yii/widgets/ActiveField::getBehavior			       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.widgets.ActiveField::getBehaviors* 			 public
- See |yii.base.Component::getBehaviors|
+yii/widgets/ActiveField::getBehaviors			       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.widgets.ActiveField::attachBehavior*			 public
- See |yii.base.Component::attachBehavior|
+yii/widgets/ActiveField::attachBehavior 		       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.widgets.ActiveField::attachBehaviors*			 public
- See |yii.base.Component::attachBehaviors|
+yii/widgets/ActiveField::attachBehaviors		       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.widgets.ActiveField::detachBehavior*			 public
- See |yii.base.Component::detachBehavior|
+yii/widgets/ActiveField::detachBehavior 		       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.widgets.ActiveField::detachBehaviors*			 public
- See |yii.base.Component::detachBehaviors|
+yii/widgets/ActiveField::detachBehaviors		       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.widgets.ActiveField::ensureBehaviors*			 public
- See |yii.base.Component::ensureBehaviors|
+yii/widgets/ActiveField::ensureBehaviors		       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.widgets.ActiveField::__toString*				 public
+yii/widgets/ActiveField::__toString			       public
 >
  __toString()
 <
@@ -212,14 +215,14 @@ METHOD DETAILS
 
 
 
-*yii.widgets.ActiveField::render*				 public
+yii/widgets/ActiveField::render 			       public
 >
  render($content='null')
 <
 (string) The rendering result
 
  This method will generate the label, error tag, input tag and hint tag (if
- any), and assemble them into HTML according to [[template]].
+ any), and assemble them into HTML according to 'template'.
     [$content] (string|callable) The content within the field container. If
     null (not set), the default methods will be called to generate the label,
     error tag and input tag, and use them as the content. If a callable, it
@@ -233,7 +236,7 @@ METHOD DETAILS
 
 
 
-*yii.widgets.ActiveField::begin*				 public
+yii/widgets/ActiveField::begin				       public
 >
  begin()
 <
@@ -242,7 +245,7 @@ METHOD DETAILS
 
 
 
-*yii.widgets.ActiveField::end*					 public
+yii/widgets/ActiveField::end				       public
 >
  end()
 <
@@ -251,7 +254,7 @@ METHOD DETAILS
 
 
 
-*yii.widgets.ActiveField::label*				 public
+yii/widgets/ActiveField::label				       public
 >
  label($label='null', $options='[]')
 <
@@ -259,16 +262,16 @@ METHOD DETAILS
 
 
     [$label] (string) The label to use. If null, it will be generated via
-    [[Model::getAttributeLabel()]]. Note that this will NOT be
-    [[Html::encode()|encoded]].
+    'Model::getAttributeLabel()'. Note that this will NOT be
+    'Html::encode()|encoded'.
     [$options] (array) The tag options in terms of name-value pairs. It will
-    be merged with [[labelOptions]]. The options will be rendered as the
+    be merged with 'labelOptions'. The options will be rendered as the
     attributes of the resulting tag. The values will be HTML-encoded using
-    [[Html::encode()]]. If a value is null, the corresponding attribute will
-    not be rendered.
+    'Html::encode()'. If a value is null, the corresponding attribute will not
+    be rendered.
 
 
-*yii.widgets.ActiveField::error*				 public
+yii/widgets/ActiveField::error				       public
 >
  error($options='[]')
 <
@@ -277,17 +280,17 @@ METHOD DETAILS
  Note that even if there is no validation error, this method will still return
  an empty error tag.
     [$options] (array) The tag options in terms of name-value pairs. It will
-    be merged with [[errorOptions]]. The options will be rendered as the
+    be merged with 'errorOptions'. The options will be rendered as the
     attributes of the resulting tag. The values will be HTML-encoded using
-    [[Html::encode()]]. If a value is null, the corresponding attribute will
-    not be rendered.
+    'Html::encode()'. If a value is null, the corresponding attribute will not
+    be rendered.
 
     The following options are specially handled:
 
     - tag: this specifies the tag name. If not set, "div" will be used.
 
 
-*yii.widgets.ActiveField::hint* 				 public
+yii/widgets/ActiveField::hint				       public
 >
  hint($content, $options='[]')
 <
@@ -297,14 +300,14 @@ METHOD DETAILS
     [$content] (string) The hint content. It will NOT be HTML-encoded.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the hint tag. The values will be
-    HTML-encoded using [[Html::encode()]].
+    HTML-encoded using 'Html::encode()'.
 
     The following options are specially handled:
 
     - tag: this specifies the tag name. If not set, "div" will be used.
 
 
-*yii.widgets.ActiveField::input*				 public
+yii/widgets/ActiveField::input				       public
 >
  input($type, $options='[]')
 <
@@ -314,10 +317,10 @@ METHOD DETAILS
     [$type] (string) The input type (e.g. 'text', 'password')
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
-    be HTML-encoded using [[Html::encode()]].
+    be HTML-encoded using 'Html::encode()'.
 
 
-*yii.widgets.ActiveField::textInput*				 public
+yii/widgets/ActiveField::textInput			       public
 >
  textInput($options='[]')
 <
@@ -327,10 +330,10 @@ METHOD DETAILS
  for the model attribute unless they are explicitly specified in '$options'.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
-    be HTML-encoded using [[Html::encode()]].
+    be HTML-encoded using 'Html::encode()'.
 
 
-*yii.widgets.ActiveField::hiddenInput*				 public
+yii/widgets/ActiveField::hiddenInput			       public
 >
  hiddenInput($options='[]')
 <
@@ -338,16 +341,16 @@ METHOD DETAILS
 
  Note that this method is provided for completeness. In most cases because you
  do not need to validate a hidden input, you should not need to use this
- method. Instead, you should use [[\yii\helpers\Html::activeHiddenInput()]].
+ method. Instead, you should use '\yii\helpers\Html::activeHiddenInput()'.
 
  This method will generate the "name" and "value" tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
-    be HTML-encoded using [[Html::encode()]].
+    be HTML-encoded using 'Html::encode()'.
 
 
-*yii.widgets.ActiveField::passwordInput*			 public
+yii/widgets/ActiveField::passwordInput			       public
 >
  passwordInput($options='[]')
 <
@@ -357,10 +360,10 @@ METHOD DETAILS
  for the model attribute unless they are explicitly specified in '$options'.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
-    be HTML-encoded using [[Html::encode()]].
+    be HTML-encoded using 'Html::encode()'.
 
 
-*yii.widgets.ActiveField::fileInput*				 public
+yii/widgets/ActiveField::fileInput			       public
 >
  fileInput($options='[]')
 <
@@ -370,10 +373,10 @@ METHOD DETAILS
  for the model attribute unless they are explicitly specified in '$options'.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
-    be HTML-encoded using [[Html::encode()]].
+    be HTML-encoded using 'Html::encode()'.
 
 
-*yii.widgets.ActiveField::textarea*				 public
+yii/widgets/ActiveField::textarea			       public
 >
  textarea($options='[]')
 <
@@ -382,10 +385,10 @@ METHOD DETAILS
  The model attribute value will be used as the content in the textarea.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
-    be HTML-encoded using [[Html::encode()]].
+    be HTML-encoded using 'Html::encode()'.
 
 
-*yii.widgets.ActiveField::radio*				 public
+yii/widgets/ActiveField::radio				       public
 >
  radio($options='[]', $enclosedByLabel='true')
 <
@@ -403,21 +406,21 @@ METHOD DETAILS
     submitted to the server   via the hidden input. - label: string, a label
     displayed next to the radio button.  It will NOT be HTML-encoded.
     Therefore you can pass   in HTML code such as an image tag. If this is is
-    coming from end users, you should [[Html::encode()]] it to prevent XSS
+    coming from end users, you should 'Html::encode()' it to prevent XSS
     attacks.   When this option is specified, the radio button will be
     enclosed by a label tag. - labelOptions: array, the HTML attributes for
     the label tag. This is only used when the "label" option is specified.
 
     The rest of the options will be rendered as the attributes of the
-    resulting tag. The values will be HTML-encoded using [[Html::encode()]].
-    If a value is null, the corresponding attribute will not be rendered.
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is null, the corresponding attribute will not be rendered.
     [$enclosedByLabel] (boolean) Whether to enclose the radio within the
-    label. If true, the method will still use [[template]] to layout the
+    label. If true, the method will still use 'template' to layout the
     checkbox and the error message except that the radio is enclosed by the
     label tag.
 
 
-*yii.widgets.ActiveField::checkbox*				 public
+yii/widgets/ActiveField::checkbox			       public
 >
  checkbox($options='[]', $enclosedByLabel='true')
 <
@@ -435,21 +438,21 @@ METHOD DETAILS
     submitted to the server   via the hidden input. - label: string, a label
     displayed next to the checkbox.  It will NOT be HTML-encoded. Therefore
     you can pass   in HTML code such as an image tag. If this is is coming
-    from end users, you should [[Html::encode()]] it to prevent XSS attacks.  
+    from end users, you should 'Html::encode()' it to prevent XSS attacks.  
     When this option is specified, the checkbox will be enclosed by a label
     tag. - labelOptions: array, the HTML attributes for the label tag. This is
     only used when the "label" option is specified.
 
     The rest of the options will be rendered as the attributes of the
-    resulting tag. The values will be HTML-encoded using [[Html::encode()]].
-    If a value is null, the corresponding attribute will not be rendered.
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is null, the corresponding attribute will not be rendered.
     [$enclosedByLabel] (boolean) Whether to enclose the checkbox within the
-    label. If true, the method will still use [[template]] to layout the
+    label. If true, the method will still use 'template' to layout the
     checkbox and the error message except that the checkbox is enclosed by the
     label tag.
 
 
-*yii.widgets.ActiveField::dropDownList* 			 public
+yii/widgets/ActiveField::dropDownList			       public
 >
  dropDownList($items, $options='[]')
 <
@@ -462,7 +465,7 @@ METHOD DETAILS
     also be nested (i.e. some array values are arrays too). For each
     sub-array, an option group will be generated whose label is the key
     associated with the sub-array. If you have a list of data models, you may
-    convert them into the format described above using [[ArrayHelper::map()]].
+    convert them into the format described above using 'ArrayHelper::map()'.
 
     Note, the values and labels will be automatically HTML-encoded by this
     method, and the blank spaces in the labels will also be HTML-encoded.
@@ -484,11 +487,11 @@ METHOD DETAILS
     represent the optgroup labels specified in $items.
 
     The rest of the options will be rendered as the attributes of the
-    resulting tag. The values will be HTML-encoded using [[Html::encode()]].
-    If a value is null, the corresponding attribute will not be rendered.
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is null, the corresponding attribute will not be rendered.
 
 
-*yii.widgets.ActiveField::listBox*				 public
+yii/widgets/ActiveField::listBox			       public
 >
  listBox($items, $options='[]')
 <
@@ -501,7 +504,7 @@ METHOD DETAILS
     sub-array, an option group will be generated whose label is the key
     associated with the sub-array. If you have a list of data models, you may
     convert them into the format described above using
-    [[\yii\helpers\ArrayHelper::map()]].
+    '\yii\helpers\ArrayHelper::map()'.
 
     Note, the values and labels will be automatically HTML-encoded by this
     method, and the blank spaces in the labels will also be HTML-encoded.
@@ -527,19 +530,19 @@ METHOD DETAILS
     value.
 
     The rest of the options will be rendered as the attributes of the
-    resulting tag. The values will be HTML-encoded using [[Html::encode()]].
-    If a value is null, the corresponding attribute will not be rendered.
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is null, the corresponding attribute will not be rendered.
 
 
-*yii.widgets.ActiveField::checkboxList* 			 public
+yii/widgets/ActiveField::checkboxList			       public
 >
  checkboxList($items, $options='[]')
 <
 (static) The field object itself
 
- A checkbox list allows multiple selection, like [[listBox()]]. As a result,
- the corresponding submitted value is an array. The selection of the checkbox
- list is taken from the value of the model attribute.
+ A checkbox list allows multiple selection, like 'listBox()'. As a result, the
+ corresponding submitted value is an array. The selection of the checkbox list
+ is taken from the value of the model attribute.
     [$items] (array) The data item used to generate the checkboxes. The array
     values are the labels, while the array keys are the corresponding checkbox
     values. Note that the labels will NOT be HTML-encoded, while the values
@@ -561,7 +564,7 @@ METHOD DETAILS
     represent the name, value and the checked status of the checkbox input.
 
 
-*yii.widgets.ActiveField::radioList*				 public
+yii/widgets/ActiveField::radioList			       public
 >
  radioList($items, $options='[]')
 <
@@ -592,24 +595,23 @@ METHOD DETAILS
     button input.
 
 
-*yii.widgets.ActiveField::widget*				 public
+yii/widgets/ActiveField::widget 			       public
 >
  widget($class, $config='[]')
 <
 (static) The field object itself
 
  Note that the widget must have both 'model' and 'attribute' properties. They
- will be initialized with [[model]] and [[attribute]] of this field,
- respectively.
+ will be initialized with 'model' and 'attribute' of this field, respectively.
 
  If you want to use a widget that does not have 'model' and 'attribute'
- properties, please use [[render()]] instead.
+ properties, please use 'render()' instead.
     [$class] (string) The widget class name
     [$config] (array) Name-value pairs that will be used to initialize the
     widget
 
 
-*yii.widgets.ActiveField::adjustLabelFor*			 protected
+yii/widgets/ActiveField::adjustLabelFor 		       protected
 >
  adjustLabelFor($options)
 <
@@ -619,7 +621,7 @@ METHOD DETAILS
     [$options] (array) The input options
 
 
-*yii.widgets.ActiveField::getClientOptions*			 protected
+yii/widgets/ActiveField::getClientOptions		       protected
 >
  getClientOptions()
 <

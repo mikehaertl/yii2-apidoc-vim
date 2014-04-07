@@ -1,6 +1,9 @@
 
-*yii\web\AccessRule*   >> yii\base\Component
+*yii/web/AccessRule*   >> |yii/base/Component|
 ====================
+
+DESCRIPTION
+------------------------------------------------------------------------------
 
 
 
@@ -8,67 +11,67 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$allow>				*yii.web.AccessRule::$allow*
+$allow					*yii/web/AccessRule::$allow*
  (boolean) Whether this is an 'allow' rule or 'deny' rule.
 
-<$actions>				*yii.web.AccessRule::$actions*
+$actions				*yii/web/AccessRule::$actions*
  (array) List of action IDs that this rule applies to. The comparison is
  case-sensitive. If not set or empty, it means this rule applies to all
  actions.
 
-<$controllers>				*yii.web.AccessRule::$controllers*
+$controllers				*yii/web/AccessRule::$controllers*
  (array) List of controller IDs that this rule applies to. The comparison is
  case-sensitive. If not set or empty, it means this rule applies to all
  controllers.
 
-<$roles>				*yii.web.AccessRule::$roles*
+$roles					*yii/web/AccessRule::$roles*
  (array) List of roles that this rule applies to. Two special roles are
- recognized, and they are checked via [[User::isGuest]]:
+ recognized, and they are checked via 'User::isGuest':
 
  - '?': matches a guest user (not authenticated yet) - '@': matches an
  authenticated user
 
  Using additional role names requires RBAC (Role-Based Access Control), and
- [[User::checkAccess()]] will be called.
+ 'User::checkAccess()' will be called.
 
  If this property is not set or empty, it means this rule applies to all
  roles.
 
-<$ips>					*yii.web.AccessRule::$ips*
+$ips					*yii/web/AccessRule::$ips*
  (array) List of user IP addresses that this rule applies to. An IP address
  can contain the wildcard '*' at the end so that it matches IP addresses with
  the same prefix. For example, '192.168.*' matches all IP addresses in the
  segment '192.168.'. If not set or empty, it means this rule applies to all IP
  addresses.
 
-<$verbs>				*yii.web.AccessRule::$verbs*
+$verbs					*yii/web/AccessRule::$verbs*
  (array) List of request methods (e.g. 'GET', 'POST') that this rule applies
  to. The request methods must be specified in uppercase. If not set or empty,
  it means this rule applies to all request methods.
 
-<$matchCallback>			*yii.web.AccessRule::$matchCallback*
+$matchCallback				*yii/web/AccessRule::$matchCallback*
  (callable) A callback that will be called to determine if the rule should be
  applied. The signature of the callback should be as follows:
 
    function ($rule, $action)
 
- where '$rule' is this rule, and '$action' is the current [[Action|action]]
+ where '$rule' is this rule, and '$action' is the current 'Action|action'
  object. The callback should return a boolean value indicating whether this
  rule should be applied.
 
-<$denyCallback> 			*yii.web.AccessRule::$denyCallback*
+$denyCallback				*yii/web/AccessRule::$denyCallback*
  (callable) A callback that will be called if this rule determines the access
  to the current action should be denied. If not set, the behavior will be
- determined by [[AccessControl]].
+ determined by 'AccessControl'.
 
  The signature of the callback should be as follows:
 
    function ($rule, $action)
 
- where '$rule' is this rule, and '$action' is the current [[Action|action]]
+ where '$rule' is this rule, and '$action' is the current 'Action|action'
  object.
 
-<$behaviors>				*yii.web.AccessRule::$behaviors*
+$behaviors				*yii/web/AccessRule::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 
@@ -76,107 +79,107 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.web.AccessRule::className* 				 public
- See |yii.base.Object::className|
+yii/web/AccessRule::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.web.AccessRule::__construct*				 public
- See |yii.base.Object::__construct|
+yii/web/AccessRule::__construct 			       public
+ See |yii/base/Object::__construct|
 
 
-*yii.web.AccessRule::init*					 public
- See |yii.base.Object::init|
+yii/web/AccessRule::init				       public
+ See |yii/base/Object::init|
 
 
-*yii.web.AccessRule::__get*					 public
- See |yii.base.Component::__get|
+yii/web/AccessRule::__get				       public
+ See |yii/base/Component::__get|
 
 
-*yii.web.AccessRule::__set*					 public
- See |yii.base.Component::__set|
+yii/web/AccessRule::__set				       public
+ See |yii/base/Component::__set|
 
 
-*yii.web.AccessRule::__isset*					 public
- See |yii.base.Component::__isset|
+yii/web/AccessRule::__isset				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.web.AccessRule::__unset*					 public
- See |yii.base.Component::__unset|
+yii/web/AccessRule::__unset				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.web.AccessRule::__call*					 public
- See |yii.base.Component::__call|
+yii/web/AccessRule::__call				       public
+ See |yii/base/Component::__call|
 
 
-*yii.web.AccessRule::hasProperty*				 public
- See |yii.base.Component::hasProperty|
+yii/web/AccessRule::hasProperty 			       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.web.AccessRule::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/web/AccessRule::canGetProperty			       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.web.AccessRule::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/web/AccessRule::canSetProperty			       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.web.AccessRule::hasMethod* 				 public
- See |yii.base.Component::hasMethod|
+yii/web/AccessRule::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.web.AccessRule::__clone*					 public
- See |yii.base.Component::__clone|
+yii/web/AccessRule::__clone				       public
+ See |yii/base/Component::__clone|
 
 
-*yii.web.AccessRule::behaviors* 				 public
- See |yii.base.Component::behaviors|
+yii/web/AccessRule::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.web.AccessRule::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/web/AccessRule::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.web.AccessRule::on*					 public
- See |yii.base.Component::on|
+yii/web/AccessRule::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.web.AccessRule::off*					 public
- See |yii.base.Component::off|
+yii/web/AccessRule::off 				       public
+ See |yii/base/Component::off|
 
 
-*yii.web.AccessRule::trigger*					 public
- See |yii.base.Component::trigger|
+yii/web/AccessRule::trigger				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.web.AccessRule::getBehavior*				 public
- See |yii.base.Component::getBehavior|
+yii/web/AccessRule::getBehavior 			       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.web.AccessRule::getBehaviors*				 public
- See |yii.base.Component::getBehaviors|
+yii/web/AccessRule::getBehaviors			       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.web.AccessRule::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/web/AccessRule::attachBehavior			       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.web.AccessRule::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/web/AccessRule::attachBehaviors			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.web.AccessRule::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/web/AccessRule::detachBehavior			       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.web.AccessRule::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/web/AccessRule::detachBehaviors			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.web.AccessRule::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/web/AccessRule::ensureBehaviors			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.web.AccessRule::allows*					 public
+yii/web/AccessRule::allows				       public
 >
  allows($action, $user, $request)
 <
@@ -189,7 +192,7 @@ if the rule does not apply to the user
     [$request] (\yii\web\Request) 
 
 
-*yii.web.AccessRule::matchAction*				 protected
+yii/web/AccessRule::matchAction 			       protected
 >
  matchAction($action)
 <
@@ -199,7 +202,7 @@ if the rule does not apply to the user
     [$action] (\yii\base\Action) The action
 
 
-*yii.web.AccessRule::matchController*				 protected
+yii/web/AccessRule::matchController			       protected
 >
  matchController($controller)
 <
@@ -209,7 +212,7 @@ if the rule does not apply to the user
     [$controller] (\yii\web\Controller) The controller
 
 
-*yii.web.AccessRule::matchRole* 				 protected
+yii/web/AccessRule::matchRole				       protected
 >
  matchRole($user)
 <
@@ -219,7 +222,7 @@ if the rule does not apply to the user
     [$user] (\yii\web\User) The user object
 
 
-*yii.web.AccessRule::matchIP*					 protected
+yii/web/AccessRule::matchIP				       protected
 >
  matchIP($ip)
 <
@@ -229,7 +232,7 @@ if the rule does not apply to the user
     [$ip] (string) The IP address
 
 
-*yii.web.AccessRule::matchVerb* 				 protected
+yii/web/AccessRule::matchVerb				       protected
 >
  matchVerb($verb)
 <
@@ -239,7 +242,7 @@ if the rule does not apply to the user
     [$verb] (string) The request method
 
 
-*yii.web.AccessRule::matchCustom*				 protected
+yii/web/AccessRule::matchCustom 			       protected
 >
  matchCustom($action)
 <

@@ -1,15 +1,23 @@
 
-*yii\helpers\BaseFileHelper*  
+*yii/helpers/BaseFileHelper*  
 ============================
 
- Do not use BaseFileHelper. Use [[FileHelper]] instead.
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/helpers/FileHelper|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Do not use BaseFileHelper. Use 'FileHelper' instead.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.helpers.BaseFileHelper::normalizePath*			 public
+yii/helpers/BaseFileHelper::normalizePath		       public
 >
  normalizePath($path, $ds='DIRECTORY_SEPARATOR')
 <
@@ -23,7 +31,7 @@ METHOD DETAILS
     result. Defaults to 'DIRECTORY_SEPARATOR'.
 
 
-*yii.helpers.BaseFileHelper::localize*				 public
+yii/helpers/BaseFileHelper::localize			       public
 >
  localize($file, $language='null', $sourceLanguage='null')
 <
@@ -43,14 +51,14 @@ same, the original file will be returned.
  will be returned.
     [$file] (string) The original file
     [$language] (string) The target language that the file should be localized
-    to. If not set, the value of [[\yii\base\Application::language]] will be
+    to. If not set, the value of '\yii\base\Application::language' will be
     used.
     [$sourceLanguage] (string) The language that the original file is in. If
-    not set, the value of [[\yii\base\Application::sourceLanguage]] will be
+    not set, the value of '\yii\base\Application::sourceLanguage' will be
     used.
 
 
-*yii.helpers.BaseFileHelper::getMimeType*			 public
+yii/helpers/BaseFileHelper::getMimeType 		       public
 >
  getMimeType($file, $magicFile='null', $checkExtension='true')
 <
@@ -59,7 +67,7 @@ cannot be determined.
 
  This method will first try to determine the MIME type based on
  [finfo_open](http://php.net/manual/en/function.finfo-open.php). If this
- doesn't work, it will fall back to [[getMimeTypeByExtension()]].
+ doesn't work, it will fall back to 'getMimeTypeByExtension()'.
     [$file] (string) The file name.
     [$magicFile] (string) Name of the optional magic database file, usually
     something like '/path/to/magic.mime'. This will be passed as the second
@@ -69,7 +77,7 @@ cannot be determined.
     the MIME type in case 'finfo_open()' cannot determine it.
 
 
-*yii.helpers.BaseFileHelper::getMimeTypeByExtension*		 public
+yii/helpers/BaseFileHelper::getMimeTypeByExtension	       public
 >
  getMimeTypeByExtension($file, $magicFile='null')
 <
@@ -83,7 +91,7 @@ determined.
     '@yii/util/mimeTypes.php' will be used.
 
 
-*yii.helpers.BaseFileHelper::copyDirectory*			 public
+yii/helpers/BaseFileHelper::copyDirectory		       public
 >
  copyDirectory($src, $dst, $options='[]')
 <
@@ -133,7 +141,7 @@ determined.
     sub-directory or   file copied from, while '$to' is the copy target.
 
 
-*yii.helpers.BaseFileHelper::removeDirectory*			 public
+yii/helpers/BaseFileHelper::removeDirectory		       public
 >
  removeDirectory($dir)
 <
@@ -143,7 +151,7 @@ determined.
     [$dir] (string) The directory to be deleted recursively.
 
 
-*yii.helpers.BaseFileHelper::findFiles* 			 public
+yii/helpers/BaseFileHelper::findFiles			       public
 >
  findFiles($dir, $options='[]')
 <
@@ -190,7 +198,7 @@ determined.
     under the subdirectories should also be looked for. Defaults to true.
 
 
-*yii.helpers.BaseFileHelper::filterPath*			 public
+yii/helpers/BaseFileHelper::filterPath			       public
 >
  filterPath($path, $options)
 <
@@ -198,11 +206,11 @@ determined.
 
 
     [$path] (string) The path of the file or directory to be checked
-    [$options] (array) The filtering options. See [[findFiles()]] for
+    [$options] (array) The filtering options. See 'findFiles()' for
     explanations of the supported options.
 
 
-*yii.helpers.BaseFileHelper::createDirectory*			 public
+yii/helpers/BaseFileHelper::createDirectory		       public
 >
  createDirectory($path, $mode=509, $recursive='true')
 <

@@ -1,36 +1,39 @@
 
-*yii\db\ActiveQuery*   >> yii\db\Query
+*yii/db/ActiveQuery*   >> |yii/db/Query|
 ====================
+
+DESCRIPTION
+------------------------------------------------------------------------------
 
  An ActiveQuery can be a normal query or be used in a relational context.
 
- ActiveQuery instances are usually created by [[ActiveRecord::find()]] and
- [[ActiveRecord::findBySql()]]. Relational queries are created by
- [[ActiveRecord::hasOne()]] and [[ActiveRecord::hasMany()]].
+ ActiveQuery instances are usually created by 'ActiveRecord::find()' and
+ 'ActiveRecord::findBySql()'. Relational queries are created by
+ 'ActiveRecord::hasOne()' and 'ActiveRecord::hasMany()'.
 
  Normal Query ------------
 
  ActiveQuery mainly provides the following methods to retrieve the query
  results:
 
- - [[one()]]: returns a single record populated with the first row of data. -
- [[all()]]: returns all records based on the query results. - [[count()]]:
- returns the number of records. - [[sum()]]: returns the sum over the
- specified column. - [[average()]]: returns the average over the specified
- column. - [[min()]]: returns the min over the specified column. - [[max()]]:
- returns the max over the specified column. - [[scalar()]]: returns the value
- of the first column in the first row of the query result. - [[column()]]:
- returns the value of the first column in the query result. - [[exists()]]:
- returns a value indicating whether the query result has data or not.
+ - 'one()': returns a single record populated with the first row of data. -
+ 'all()': returns all records based on the query results. - 'count()': returns
+ the number of records. - 'sum()': returns the sum over the specified column.
+ - 'average()': returns the average over the specified column. - 'min()':
+ returns the min over the specified column. - 'max()': returns the max over
+ the specified column. - 'scalar()': returns the value of the first column in
+ the first row of the query result. - 'column()': returns the value of the
+ first column in the query result. - 'exists()': returns a value indicating
+ whether the query result has data or not.
 
- Because ActiveQuery extends from [[Query]], one can use query methods, such
- as [[where()]], [[orderBy()]] to customize the query options.
+ Because ActiveQuery extends from 'Query', one can use query methods, such as
+ 'where()', 'orderBy()' to customize the query options.
 
  ActiveQuery also provides the following additional query options:
 
- - [[with()]]: list of relations that this query should be performed with. -
- [[indexBy()]]: the name of the column by which the query result should be
- indexed. - [[asArray()]]: whether to return each record as an array.
+ - 'with()': list of relations that this query should be performed with. -
+ 'indexBy()': the name of the column by which the query result should be
+ indexed. - 'asArray()': whether to return each record as an array.
 
  These options can be configured using methods of the same name. For example:
 
@@ -42,105 +45,105 @@
  Record classes.
 
  Relational ActiveQuery instances are usually created by calling
- [[ActiveRecord::hasOne()]] and [[ActiveRecord::hasMany()]]. An Active Record
+ 'ActiveRecord::hasOne()' and 'ActiveRecord::hasMany()'. An Active Record
  class declares a relation by defining a getter method which calls one of the
  above methods and returns the created ActiveQuery object.
 
- A relation is specified by [[link]] which represents the association between
+ A relation is specified by 'link' which represents the association between
  columns of different tables; and the multiplicity of the relation is
- indicated by [[multiple]].
+ indicated by 'multiple'.
 
- If a relation involves a pivot table, it may be specified by [[via()]] or
- [[viaTable()]] method. These methods may only be called in a relational
- context. Same is true for [[inverseOf()]], which marks a relation as inverse
- of another relation and [[onCondition()]] which adds a condition that is to
- be added to relational query join condition.
+ If a relation involves a pivot table, it may be specified by 'via()' or
+ 'viaTable()' method. These methods may only be called in a relational
+ context. Same is true for 'inverseOf()', which marks a relation as inverse of
+ another relation and 'onCondition()' which adds a condition that is to be
+ added to relational query join condition.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-<$where>				*yii.db.ActiveQuery::$where*
- See |yii.db.QueryTrait::$where|
+$where					*yii/db/ActiveQuery::$where*
+ See |yii/db/QueryTrait::$where|
 
-<$limit>				*yii.db.ActiveQuery::$limit*
- See |yii.db.QueryTrait::$limit|
+$limit					*yii/db/ActiveQuery::$limit*
+ See |yii/db/QueryTrait::$limit|
 
-<$offset>				*yii.db.ActiveQuery::$offset*
- See |yii.db.QueryTrait::$offset|
+$offset 				*yii/db/ActiveQuery::$offset*
+ See |yii/db/QueryTrait::$offset|
 
-<$orderBy>				*yii.db.ActiveQuery::$orderBy*
- See |yii.db.QueryTrait::$orderBy|
+$orderBy				*yii/db/ActiveQuery::$orderBy*
+ See |yii/db/QueryTrait::$orderBy|
 
-<$indexBy>				*yii.db.ActiveQuery::$indexBy*
- See |yii.db.QueryTrait::$indexBy|
+$indexBy				*yii/db/ActiveQuery::$indexBy*
+ See |yii/db/QueryTrait::$indexBy|
 
-<$select>				*yii.db.ActiveQuery::$select*
- See |yii.db.Query::$select|
+$select 				*yii/db/ActiveQuery::$select*
+ See |yii/db/Query::$select|
 
-<$selectOption> 			*yii.db.ActiveQuery::$selectOption*
- See |yii.db.Query::$selectOption|
+$selectOption				*yii/db/ActiveQuery::$selectOption*
+ See |yii/db/Query::$selectOption|
 
-<$distinct>				*yii.db.ActiveQuery::$distinct*
- See |yii.db.Query::$distinct|
+$distinct				*yii/db/ActiveQuery::$distinct*
+ See |yii/db/Query::$distinct|
 
-<$from> 				*yii.db.ActiveQuery::$from*
- See |yii.db.Query::$from|
+$from					*yii/db/ActiveQuery::$from*
+ See |yii/db/Query::$from|
 
-<$groupBy>				*yii.db.ActiveQuery::$groupBy*
- See |yii.db.Query::$groupBy|
+$groupBy				*yii/db/ActiveQuery::$groupBy*
+ See |yii/db/Query::$groupBy|
 
-<$join> 				*yii.db.ActiveQuery::$join*
- See |yii.db.Query::$join|
+$join					*yii/db/ActiveQuery::$join*
+ See |yii/db/Query::$join|
 
-<$having>				*yii.db.ActiveQuery::$having*
- See |yii.db.Query::$having|
+$having 				*yii/db/ActiveQuery::$having*
+ See |yii/db/Query::$having|
 
-<$union>				*yii.db.ActiveQuery::$union*
- See |yii.db.Query::$union|
+$union					*yii/db/ActiveQuery::$union*
+ See |yii/db/Query::$union|
 
-<$params>				*yii.db.ActiveQuery::$params*
- See |yii.db.Query::$params|
+$params 				*yii/db/ActiveQuery::$params*
+ See |yii/db/Query::$params|
 
-<$multiple>				*yii.db.ActiveQuery::$multiple*
- See |yii.db.ActiveRelationTrait::$multiple|
+$multiple				*yii/db/ActiveQuery::$multiple*
+ See |yii/db/ActiveRelationTrait::$multiple|
 
-<$primaryModel> 			*yii.db.ActiveQuery::$primaryModel*
- See |yii.db.ActiveRelationTrait::$primaryModel|
+$primaryModel				*yii/db/ActiveQuery::$primaryModel*
+ See |yii/db/ActiveRelationTrait::$primaryModel|
 
-<$link> 				*yii.db.ActiveQuery::$link*
- See |yii.db.ActiveRelationTrait::$link|
+$link					*yii/db/ActiveQuery::$link*
+ See |yii/db/ActiveRelationTrait::$link|
 
-<$via>					*yii.db.ActiveQuery::$via*
- See |yii.db.ActiveRelationTrait::$via|
+$via					*yii/db/ActiveQuery::$via*
+ See |yii/db/ActiveRelationTrait::$via|
 
-<$inverseOf>				*yii.db.ActiveQuery::$inverseOf*
- See |yii.db.ActiveRelationTrait::$inverseOf|
+$inverseOf				*yii/db/ActiveQuery::$inverseOf*
+ See |yii/db/ActiveRelationTrait::$inverseOf|
 
-<$modelClass>				*yii.db.ActiveQuery::$modelClass*
- See |yii.db.ActiveQueryTrait::$modelClass|
+$modelClass				*yii/db/ActiveQuery::$modelClass*
+ See |yii/db/ActiveQueryTrait::$modelClass|
 
-<$with> 				*yii.db.ActiveQuery::$with*
- See |yii.db.ActiveQueryTrait::$with|
+$with					*yii/db/ActiveQuery::$with*
+ See |yii/db/ActiveQueryTrait::$with|
 
-<$asArray>				*yii.db.ActiveQuery::$asArray*
- See |yii.db.ActiveQueryTrait::$asArray|
+$asArray				*yii/db/ActiveQuery::$asArray*
+ See |yii/db/ActiveQueryTrait::$asArray|
 
-<$sql>					*yii.db.ActiveQuery::$sql*
+$sql					*yii/db/ActiveQuery::$sql*
  (string) The SQL statement to be executed for retrieving AR records. This is
- set by [[ActiveRecord::findBySql()]].
+ set by 'ActiveRecord::findBySql()'.
 
-<$on>					*yii.db.ActiveQuery::$on*
+$on					*yii/db/ActiveQuery::$on*
  (string|array) The join condition to be used when this query is used in a
  relational context. The condition will be used in the ON part when
- [[ActiveQuery::joinWith()]] is called. Otherwise, the condition will be used
- in the WHERE part of a query. Please refer to [[Query::where()]] on how to
- specify this parameter.
+ 'ActiveQuery::joinWith()' is called. Otherwise, the condition will be used in
+ the WHERE part of a query. Please refer to 'Query::where()' on how to specify
+ this parameter.
 
-<$joinWith>				*yii.db.ActiveQuery::$joinWith*
+$joinWith				*yii/db/ActiveQuery::$joinWith*
  (array) A list of relations that this query should be joined with
 
-<$behaviors>				*yii.db.ActiveQuery::$behaviors*
+$behaviors				*yii/db/ActiveQuery::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 
@@ -148,11 +151,11 @@ PROPERTY DETAILS
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-*yii.db.ActiveQuery::className* 				 public
- See |yii.base.Object::className|
+yii/db/ActiveQuery::className				       public
+ See |yii/base/Object::className|
 
 
-*yii.db.ActiveQuery::__construct*				 public
+yii/db/ActiveQuery::__construct 			       public
 >
  __construct($modelClass, $config='[]')
 <
@@ -164,155 +167,155 @@ METHOD DETAILS
     object
 
 
-*yii.db.ActiveQuery::init*					 public
- See |yii.base.Object::init|
+yii/db/ActiveQuery::init				       public
+ See |yii/base/Object::init|
 
 
-*yii.db.ActiveQuery::__get*					 public
- See |yii.base.Component::__get|
+yii/db/ActiveQuery::__get				       public
+ See |yii/base/Component::__get|
 
 
-*yii.db.ActiveQuery::__set*					 public
- See |yii.base.Component::__set|
+yii/db/ActiveQuery::__set				       public
+ See |yii/base/Component::__set|
 
 
-*yii.db.ActiveQuery::__isset*					 public
- See |yii.base.Component::__isset|
+yii/db/ActiveQuery::__isset				       public
+ See |yii/base/Component::__isset|
 
 
-*yii.db.ActiveQuery::__unset*					 public
- See |yii.base.Component::__unset|
+yii/db/ActiveQuery::__unset				       public
+ See |yii/base/Component::__unset|
 
 
-*yii.db.ActiveQuery::__call*					 public
- See |yii.base.Component::__call|
+yii/db/ActiveQuery::__call				       public
+ See |yii/base/Component::__call|
 
 
-*yii.db.ActiveQuery::hasProperty*				 public
- See |yii.base.Component::hasProperty|
+yii/db/ActiveQuery::hasProperty 			       public
+ See |yii/base/Component::hasProperty|
 
 
-*yii.db.ActiveQuery::canGetProperty*				 public
- See |yii.base.Component::canGetProperty|
+yii/db/ActiveQuery::canGetProperty			       public
+ See |yii/base/Component::canGetProperty|
 
 
-*yii.db.ActiveQuery::canSetProperty*				 public
- See |yii.base.Component::canSetProperty|
+yii/db/ActiveQuery::canSetProperty			       public
+ See |yii/base/Component::canSetProperty|
 
 
-*yii.db.ActiveQuery::hasMethod* 				 public
- See |yii.base.Component::hasMethod|
+yii/db/ActiveQuery::hasMethod				       public
+ See |yii/base/Component::hasMethod|
 
 
-*yii.db.ActiveQuery::__clone*					 public
- See |yii.db.ActiveRelationTrait::__clone|
+yii/db/ActiveQuery::__clone				       public
+ See |yii/db/ActiveRelationTrait::__clone|
 
 
-*yii.db.ActiveQuery::behaviors* 				 public
- See |yii.base.Component::behaviors|
+yii/db/ActiveQuery::behaviors				       public
+ See |yii/base/Component::behaviors|
 
 
-*yii.db.ActiveQuery::hasEventHandlers*				 public
- See |yii.base.Component::hasEventHandlers|
+yii/db/ActiveQuery::hasEventHandlers			       public
+ See |yii/base/Component::hasEventHandlers|
 
 
-*yii.db.ActiveQuery::on*					 public
- See |yii.base.Component::on|
+yii/db/ActiveQuery::on					       public
+ See |yii/base/Component::on|
 
 
-*yii.db.ActiveQuery::off*					 public
- See |yii.base.Component::off|
+yii/db/ActiveQuery::off 				       public
+ See |yii/base/Component::off|
 
 
-*yii.db.ActiveQuery::trigger*					 public
- See |yii.base.Component::trigger|
+yii/db/ActiveQuery::trigger				       public
+ See |yii/base/Component::trigger|
 
 
-*yii.db.ActiveQuery::getBehavior*				 public
- See |yii.base.Component::getBehavior|
+yii/db/ActiveQuery::getBehavior 			       public
+ See |yii/base/Component::getBehavior|
 
 
-*yii.db.ActiveQuery::getBehaviors*				 public
- See |yii.base.Component::getBehaviors|
+yii/db/ActiveQuery::getBehaviors			       public
+ See |yii/base/Component::getBehaviors|
 
 
-*yii.db.ActiveQuery::attachBehavior*				 public
- See |yii.base.Component::attachBehavior|
+yii/db/ActiveQuery::attachBehavior			       public
+ See |yii/base/Component::attachBehavior|
 
 
-*yii.db.ActiveQuery::attachBehaviors*				 public
- See |yii.base.Component::attachBehaviors|
+yii/db/ActiveQuery::attachBehaviors			       public
+ See |yii/base/Component::attachBehaviors|
 
 
-*yii.db.ActiveQuery::detachBehavior*				 public
- See |yii.base.Component::detachBehavior|
+yii/db/ActiveQuery::detachBehavior			       public
+ See |yii/base/Component::detachBehavior|
 
 
-*yii.db.ActiveQuery::detachBehaviors*				 public
- See |yii.base.Component::detachBehaviors|
+yii/db/ActiveQuery::detachBehaviors			       public
+ See |yii/base/Component::detachBehaviors|
 
 
-*yii.db.ActiveQuery::ensureBehaviors*				 public
- See |yii.base.Component::ensureBehaviors|
+yii/db/ActiveQuery::ensureBehaviors			       public
+ See |yii/base/Component::ensureBehaviors|
 
 
-*yii.db.ActiveQuery::indexBy*					 public
- See |yii.db.QueryTrait::indexBy|
+yii/db/ActiveQuery::indexBy				       public
+ See |yii/db/QueryTrait::indexBy|
 
 
-*yii.db.ActiveQuery::where*					 public
- See |yii.db.QueryTrait::where|
+yii/db/ActiveQuery::where				       public
+ See |yii/db/QueryTrait::where|
 
 
-*yii.db.ActiveQuery::andWhere*					 public
- See |yii.db.QueryTrait::andWhere|
+yii/db/ActiveQuery::andWhere				       public
+ See |yii/db/QueryTrait::andWhere|
 
 
-*yii.db.ActiveQuery::orWhere*					 public
- See |yii.db.QueryTrait::orWhere|
+yii/db/ActiveQuery::orWhere				       public
+ See |yii/db/QueryTrait::orWhere|
 
 
-*yii.db.ActiveQuery::filterWhere*				 public
- See |yii.db.QueryTrait::filterWhere|
+yii/db/ActiveQuery::filterWhere 			       public
+ See |yii/db/QueryTrait::filterWhere|
 
 
-*yii.db.ActiveQuery::andFilterWhere*				 public
- See |yii.db.QueryTrait::andFilterWhere|
+yii/db/ActiveQuery::andFilterWhere			       public
+ See |yii/db/QueryTrait::andFilterWhere|
 
 
-*yii.db.ActiveQuery::orFilterWhere*				 public
- See |yii.db.QueryTrait::orFilterWhere|
+yii/db/ActiveQuery::orFilterWhere			       public
+ See |yii/db/QueryTrait::orFilterWhere|
 
 
-*yii.db.ActiveQuery::filterCondition*				 protected
- See |yii.db.QueryTrait::filterCondition|
+yii/db/ActiveQuery::filterCondition			       protected
+ See |yii/db/QueryTrait::filterCondition|
 
 
-*yii.db.ActiveQuery::isEmpty*					 protected
- See |yii.db.QueryTrait::isEmpty|
+yii/db/ActiveQuery::isEmpty				       protected
+ See |yii/db/QueryTrait::isEmpty|
 
 
-*yii.db.ActiveQuery::orderBy*					 public
- See |yii.db.QueryTrait::orderBy|
+yii/db/ActiveQuery::orderBy				       public
+ See |yii/db/QueryTrait::orderBy|
 
 
-*yii.db.ActiveQuery::addOrderBy*				 public
- See |yii.db.QueryTrait::addOrderBy|
+yii/db/ActiveQuery::addOrderBy				       public
+ See |yii/db/QueryTrait::addOrderBy|
 
 
-*yii.db.ActiveQuery::normalizeOrderBy*				 protected
- See |yii.db.QueryTrait::normalizeOrderBy|
+yii/db/ActiveQuery::normalizeOrderBy			       protected
+ See |yii/db/QueryTrait::normalizeOrderBy|
 
 
-*yii.db.ActiveQuery::limit*					 public
- See |yii.db.QueryTrait::limit|
+yii/db/ActiveQuery::limit				       public
+ See |yii/db/QueryTrait::limit|
 
 
-*yii.db.ActiveQuery::offset*					 public
- See |yii.db.QueryTrait::offset|
+yii/db/ActiveQuery::offset				       public
+ See |yii/db/QueryTrait::offset|
 
 
-*yii.db.ActiveQuery::createCommand*				 public
+yii/db/ActiveQuery::createCommand			       public
 >
  createCommand($db='null')
 <
@@ -320,11 +323,10 @@ METHOD DETAILS
 
 
     [$db] (\yii\db\Connection) The DB connection used to create the DB
-    command. If null, the DB connection returned by [[modelClass]] will be
-    used.
+    command. If null, the DB connection returned by 'modelClass' will be used.
 
 
-*yii.db.ActiveQuery::prepareBuild*				 public
+yii/db/ActiveQuery::prepareBuild			       public
 >
  prepareBuild($builder)
 <
@@ -334,15 +336,15 @@ METHOD DETAILS
     [$builder] () 
 
 
-*yii.db.ActiveQuery::batch*					 public
- See |yii.db.Query::batch|
+yii/db/ActiveQuery::batch				       public
+ See |yii/db/Query::batch|
 
 
-*yii.db.ActiveQuery::each*					 public
- See |yii.db.Query::each|
+yii/db/ActiveQuery::each				       public
+ See |yii/db/Query::each|
 
 
-*yii.db.ActiveQuery::all*					 public
+yii/db/ActiveQuery::all 				       public
 >
  all($db='null')
 <
@@ -351,11 +353,10 @@ nothing, an empty array will be returned.
 
 
     [$db] (\yii\db\Connection) The DB connection used to create the DB
-    command. If null, the DB connection returned by [[modelClass]] will be
-    used.
+    command. If null, the DB connection returned by 'modelClass' will be used.
 
 
-*yii.db.ActiveQuery::prepareResult*				 public
+yii/db/ActiveQuery::prepareResult			       public
 >
  prepareResult($rows)
 <
@@ -365,141 +366,140 @@ nothing, an empty array will be returned.
     [$rows] () 
 
 
-*yii.db.ActiveQuery::one*					 public
+yii/db/ActiveQuery::one 				       public
 >
  one($db='null')
 <
 (\yii\db\ActiveRecord|array|null) A single row of query result. Depending on
-the setting of [[asArray]], the query result may be either an array or an
+the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. Null will be returned if the query results in nothing.
 
 
     [$db] (\yii\db\Connection) The DB connection used to create the DB
-    command. If null, the DB connection returned by [[modelClass]] will be
-    used.
+    command. If null, the DB connection returned by 'modelClass' will be used.
 
 
-*yii.db.ActiveQuery::scalar*					 public
- See |yii.db.Query::scalar|
+yii/db/ActiveQuery::scalar				       public
+ See |yii/db/Query::scalar|
 
 
-*yii.db.ActiveQuery::column*					 public
- See |yii.db.Query::column|
+yii/db/ActiveQuery::column				       public
+ See |yii/db/Query::column|
 
 
-*yii.db.ActiveQuery::count*					 public
- See |yii.db.Query::count|
+yii/db/ActiveQuery::count				       public
+ See |yii/db/Query::count|
 
 
-*yii.db.ActiveQuery::sum*					 public
- See |yii.db.Query::sum|
+yii/db/ActiveQuery::sum 				       public
+ See |yii/db/Query::sum|
 
 
-*yii.db.ActiveQuery::average*					 public
- See |yii.db.Query::average|
+yii/db/ActiveQuery::average				       public
+ See |yii/db/Query::average|
 
 
-*yii.db.ActiveQuery::min*					 public
- See |yii.db.Query::min|
+yii/db/ActiveQuery::min 				       public
+ See |yii/db/Query::min|
 
 
-*yii.db.ActiveQuery::max*					 public
- See |yii.db.Query::max|
+yii/db/ActiveQuery::max 				       public
+ See |yii/db/Query::max|
 
 
-*yii.db.ActiveQuery::exists*					 public
- See |yii.db.Query::exists|
+yii/db/ActiveQuery::exists				       public
+ See |yii/db/Query::exists|
 
 
-*yii.db.ActiveQuery::select*					 public
- See |yii.db.Query::select|
+yii/db/ActiveQuery::select				       public
+ See |yii/db/Query::select|
 
 
-*yii.db.ActiveQuery::distinct*					 public
- See |yii.db.Query::distinct|
+yii/db/ActiveQuery::distinct				       public
+ See |yii/db/Query::distinct|
 
 
-*yii.db.ActiveQuery::from*					 public
- See |yii.db.Query::from|
+yii/db/ActiveQuery::from				       public
+ See |yii/db/Query::from|
 
 
-*yii.db.ActiveQuery::join*					 public
- See |yii.db.Query::join|
+yii/db/ActiveQuery::join				       public
+ See |yii/db/Query::join|
 
 
-*yii.db.ActiveQuery::innerJoin* 				 public
- See |yii.db.Query::innerJoin|
+yii/db/ActiveQuery::innerJoin				       public
+ See |yii/db/Query::innerJoin|
 
 
-*yii.db.ActiveQuery::leftJoin*					 public
- See |yii.db.Query::leftJoin|
+yii/db/ActiveQuery::leftJoin				       public
+ See |yii/db/Query::leftJoin|
 
 
-*yii.db.ActiveQuery::rightJoin* 				 public
- See |yii.db.Query::rightJoin|
+yii/db/ActiveQuery::rightJoin				       public
+ See |yii/db/Query::rightJoin|
 
 
-*yii.db.ActiveQuery::groupBy*					 public
- See |yii.db.Query::groupBy|
+yii/db/ActiveQuery::groupBy				       public
+ See |yii/db/Query::groupBy|
 
 
-*yii.db.ActiveQuery::addGroupBy*				 public
- See |yii.db.Query::addGroupBy|
+yii/db/ActiveQuery::addGroupBy				       public
+ See |yii/db/Query::addGroupBy|
 
 
-*yii.db.ActiveQuery::having*					 public
- See |yii.db.Query::having|
+yii/db/ActiveQuery::having				       public
+ See |yii/db/Query::having|
 
 
-*yii.db.ActiveQuery::andHaving* 				 public
- See |yii.db.Query::andHaving|
+yii/db/ActiveQuery::andHaving				       public
+ See |yii/db/Query::andHaving|
 
 
-*yii.db.ActiveQuery::orHaving*					 public
- See |yii.db.Query::orHaving|
+yii/db/ActiveQuery::orHaving				       public
+ See |yii/db/Query::orHaving|
 
 
-*yii.db.ActiveQuery::union*					 public
- See |yii.db.Query::union|
+yii/db/ActiveQuery::union				       public
+ See |yii/db/Query::union|
 
 
-*yii.db.ActiveQuery::params*					 public
- See |yii.db.Query::params|
+yii/db/ActiveQuery::params				       public
+ See |yii/db/Query::params|
 
 
-*yii.db.ActiveQuery::addParams* 				 public
- See |yii.db.Query::addParams|
+yii/db/ActiveQuery::addParams				       public
+ See |yii/db/Query::addParams|
 
 
-*yii.db.ActiveQuery::via*					 public
- See |yii.db.ActiveRelationTrait::via|
+yii/db/ActiveQuery::via 				       public
+ See |yii/db/ActiveRelationTrait::via|
 
 
-*yii.db.ActiveQuery::inverseOf* 				 public
- See |yii.db.ActiveRelationTrait::inverseOf|
+yii/db/ActiveQuery::inverseOf				       public
+ See |yii/db/ActiveRelationTrait::inverseOf|
 
 
-*yii.db.ActiveQuery::findFor*					 public
- See |yii.db.ActiveRelationTrait::findFor|
+yii/db/ActiveQuery::findFor				       public
+ See |yii/db/ActiveRelationTrait::findFor|
 
 
-*yii.db.ActiveQuery::populateRelation*				 public
- See |yii.db.ActiveRelationTrait::populateRelation|
+yii/db/ActiveQuery::populateRelation			       public
+ See |yii/db/ActiveRelationTrait::populateRelation|
 
 
-*yii.db.ActiveQuery::asArray*					 public
- See |yii.db.ActiveQueryTrait::asArray|
+yii/db/ActiveQuery::asArray				       public
+ See |yii/db/ActiveQueryTrait::asArray|
 
 
-*yii.db.ActiveQuery::with*					 public
- See |yii.db.ActiveQueryTrait::with|
+yii/db/ActiveQuery::with				       public
+ See |yii/db/ActiveQueryTrait::with|
 
 
-*yii.db.ActiveQuery::findWith*					 public
- See |yii.db.ActiveQueryTrait::findWith|
+yii/db/ActiveQuery::findWith				       public
+ See |yii/db/ActiveQueryTrait::findWith|
 
 
-*yii.db.ActiveQuery::createCommandInternal*			 protected
+yii/db/ActiveQuery::createCommandInternal		       protected
 >
  createCommandInternal($db)
 <
@@ -507,11 +507,10 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
 
     [$db] (\yii\db\Connection|null) The DB connection used to create the DB
-    command. If null, the DB connection returned by [[modelClass]] will be
-    used.
+    command. If null, the DB connection returned by 'modelClass' will be used.
 
 
-*yii.db.ActiveQuery::joinWith*					 public
+yii/db/ActiveQuery::joinWith				       public
 >
  joinWith($with, $eagerLoading='true', $joinType='\'LEFTJOIN\'')
 <
@@ -522,21 +521,21 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  will append one or multiple JOIN statements to the current query.
 
  If the '$eagerLoading' parameter is true, the method will also eager loading
- the specified relations, which is equivalent to calling [[with()]] using the
+ the specified relations, which is equivalent to calling 'with()' using the
  specified relations.
 
  Note that because a JOIN query will be performed, you are responsible to
  disambiguate column names.
 
- This method differs from [[with()]] in that it will build up and execute a
- JOIN SQL statement for the primary table. And when '$eagerLoading' is true,
- it will call [[with()]] in addition with the specified relations.
+ This method differs from 'with()' in that it will build up and execute a JOIN
+ SQL statement for the primary table. And when '$eagerLoading' is true, it
+ will call 'with()' in addition with the specified relations.
     [$with] (array) The relations to be joined. Each array element represents
     a single relation. The array keys are relation names, and the array values
     are the corresponding anonymous functions that can be used to modify the
     relation queries on-the-fly. If a relation query does not need
     modification, you may use the relation name as the array value.
-    Sub-relations can also be specified (see [[with()]]). For example,
+    Sub-relations can also be specified (see 'with()'). For example,
 
       // find all orders that contain books, and eager loading "books"
       Order::find()->joinWith('books', true, 'INNER JOIN')->all();
@@ -559,29 +558,29 @@ ActiveRecord object. Null will be returned if the query results in nothing.
     specify different join types for different relations.
 
 
-*yii.db.ActiveQuery::innerJoinWith*				 public
+yii/db/ActiveQuery::innerJoinWith			       public
 >
  innerJoinWith($with, $eagerLoading='true')
 <
 (static) The query object itself
 
- This is a shortcut method to [[joinWith()]] with the join type set as "INNER
- JOIN". Please refer to [[joinWith()]] for detailed usage of this method.
+ This is a shortcut method to 'joinWith()' with the join type set as "INNER
+ JOIN". Please refer to 'joinWith()' for detailed usage of this method.
     [$with] (array) The relations to be joined with
     [$eagerLoading] (boolean|array) Whether to eager loading the relations
 
 
-*yii.db.ActiveQuery::onCondition*				 public
+yii/db/ActiveQuery::onCondition 			       public
 >
  onCondition($condition, $params='[]')
 <
 (static) The query object itself
 
- The condition will be used in the ON part when [[ActiveQuery::joinWith()]] is
+ The condition will be used in the ON part when 'ActiveQuery::joinWith()' is
  called. Otherwise, the condition will be used in the WHERE part of a query.
 
  Use this method to specify additional conditions when declaring a relation in
- the [[ActiveRecord]] class:
+ the 'ActiveRecord' class:
 
    public function getActiveUsers()
    {
@@ -591,11 +590,11 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
 
     [$condition] (string|array) The ON condition. Please refer to
-    [[Query::where()]] on how to specify this parameter.
+    'Query::where()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
 
 
-*yii.db.ActiveQuery::andOnCondition*				 public
+yii/db/ActiveQuery::andOnCondition			       public
 >
  andOnCondition($condition, $params='[]')
 <
@@ -604,11 +603,11 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  The new condition and the existing one will be joined using the 'AND'
  operator.
     [$condition] (string|array) The new ON condition. Please refer to
-    [[where()]] on how to specify this parameter.
+    'where()' on how to specify this parameter.
     [$params] () 
 
 
-*yii.db.ActiveQuery::orOnCondition*				 public
+yii/db/ActiveQuery::orOnCondition			       public
 >
  orOnCondition($condition, $params='[]')
 <
@@ -617,18 +616,18 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  The new condition and the existing one will be joined using the 'OR'
  operator.
     [$condition] (string|array) The new ON condition. Please refer to
-    [[where()]] on how to specify this parameter.
+    'where()' on how to specify this parameter.
     [$params] () 
 
 
-*yii.db.ActiveQuery::viaTable*					 public
+yii/db/ActiveQuery::viaTable				       public
 >
  viaTable($tableName, $link, $callable='null')
 <
 (static) 
 
  Use this method to specify a pivot table when declaring a relation in the
- [[ActiveRecord]] class:
+ 'ActiveRecord' class:
 
    public function getItems()
    {
@@ -639,8 +638,8 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
     [$tableName] (string) The name of the pivot table.
     [$link] (array) The link between the pivot table and the table associated
-    with [[primaryModel]]. The keys of the array represent the columns in the
-    pivot table, and the values represent the columns in the [[primaryModel]]
+    with 'primaryModel'. The keys of the array represent the columns in the
+    pivot table, and the values represent the columns in the 'primaryModel'
     table.
     [$callable] (callable) A PHP callback for customizing the relation
     associated with the pivot table. Its signature should be

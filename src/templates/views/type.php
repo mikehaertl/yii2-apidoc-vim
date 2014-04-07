@@ -1,11 +1,26 @@
 <?php
-$l=strlen($type->name)+2; 
-echo "\n*".$type->name.'*  '.$this->context->renderInheritance($type);
+$name = $this->context->convertNamespace($type->name);
+$inheritance = $this->context->renderInheritance($type);
+$l=strlen($name)+2; 
+echo "\n*$name*  $inheritance";
 printf("\n%'={$l}s\n",''); 
 ?>
+<?php if(!empty($type->subclasses)): ?>
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+<?= $this->context->renderSubclasses($type) ?>
+
+<?php endif; ?>
+<?php if(!empty($type->description)): ?>
+
+DESCRIPTION
+------------------------------------------------------------------------------
 
 <?= $this->context->renderDescription($type->description,1); ?>
 
+<?php endif; ?>
 <?= $this->render('propertyDetails',array('type'=>$type)); ?>
 
 <?= $this->render('methodDetails',array('type'=>$type)); ?>
