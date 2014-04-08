@@ -337,20 +337,29 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
      */
     protected function spaces2tabs($text,$ts=8,$ignore='')
     {
-        $out='';
-        if($ignore) {
-            $text = strtr($text, [$ignore => '']);
+        $len = strlen($text);
+        $out = '';
+        $offset = 0;
+        for($x=0; $x < $len; $x+=$ts) {
+            $addTab = false;
+            for($y=0; $y < $ts && ($x+$y+$offset) < $len; $y++) {
+                $char = $text[$x+$y+$offset];
+                if($char===$ignore) {
+                    $offset++;
+                    $out .= $char;
+                    $char = $text[$x+$y+$offset];
+                }
+                if($char===' ') {
+                    $addTab = true;
+                } else {
+                    $out .= $char;
+                    $addTab = false;
+                }
+            }
+            if($addTab) {
+                $out .= "\t";
+            }
         }
-        foreach(str_split($text,$ts) as $n=>$chunk)
-        {
-            $chunk=rtrim($chunk,' ');
-            if (!isset($chunk[$ts-1]))	// last char stripped off
-                // append \t if more than 2 spaces where cut off.
-                // add back single space if only 1 space was cut off
-                $out.=($chunk . (isset($chunk[$ts-2]) ? ' ':"\t"));
-            else
-                $out.=$chunk;
-        }
-        return rtrim($out);
+        return $out;
     }
 }
