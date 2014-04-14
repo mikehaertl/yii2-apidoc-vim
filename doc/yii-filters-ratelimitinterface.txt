@@ -1,0 +1,53 @@
+
+*yii/filters/RateLimitInterface*  
+================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/filters/RateLimitInterface::getRateLimit*		public
+>
+ getRateLimit($request, $action)
+<
+(array) An array of two elements. The first element is the maximum number of
+allowed requests, and the second element is the size of the window in seconds.
+
+
+    [$request] (\yii\web\Request) The current request
+    [$action] (\yii\base\Action) The action to be executed
+
+
+*yii/filters/RateLimitInterface::loadAllowance*		public
+>
+ loadAllowance($request, $action)
+<
+(array) An array of two elements. The first element is the number of allowed
+requests, and the second element is the corresponding UNIX timestamp.
+
+
+    [$request] (\yii\web\Request) The current request
+    [$action] (\yii\base\Action) The action to be executed
+
+
+*yii/filters/RateLimitInterface::saveAllowance*		public
+>
+ saveAllowance($request, $action, $allowance, $timestamp)
+<
+(void)
+
+
+    [$request] (\yii\web\Request) The current request
+    [$action] (\yii\base\Action) The action to be executed
+    [$allowance] (integer) The number of allowed requests remaining.
+    [$timestamp] (integer) The current timestamp.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

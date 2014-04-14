@@ -30,7 +30,7 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
      */
     public function render($context, $targetDir)
     {
-        $types = array_merge($context->classes, $context->traits);
+        $types = array_merge($context->classes, $context->traits, $context->interfaces);
         $typeCount = count($types) + 1;
 
         if ($this->controller !== null) {

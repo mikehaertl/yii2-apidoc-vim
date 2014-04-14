@@ -1,0 +1,115 @@
+
+*yii/db/ActiveQueryInterface*  
+=============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ That are methods for either normal queries that return active records but
+ also relational queries in which the query represents a relation between two
+ active record classes and will return related records only.
+
+ A class implementing this interface should also use 'ActiveQueryTrait' and
+ 'ActiveRelationTrait'.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/db/ActiveQueryInterface::asArray*			public
+>
+ asArray($value='true')
+<
+(static) The query object itself
+
+
+    [$value] (boolean) Whether to return the query results in terms of arrays
+    instead of Active Records.
+
+
+*yii/db/ActiveQueryInterface::indexBy*			public
+>
+ indexBy($column)
+<
+(static) The query object itself
+
+
+    [$column] (string|callable) The name of the column by which the query
+    results should be indexed by. This can also be a callable (e.g. anonymous
+    function) that returns the index value based on the given row or model
+    data. The signature of the callable should be:
+
+      // $model is an AR instance when `asArray` is false,
+      // or an array of column values when `asArray` is true.
+      function ($model)
+      {
+          // return the index value corresponding to $model
+      }
+
+
+
+
+*yii/db/ActiveQueryInterface::with*			public
+>
+ with()
+<
+(static) The query object itself
+
+ The parameters to this method can be either one or multiple strings, or a
+ single array of relation names and the optional callbacks to customize the
+ relations.
+
+ A relation name can refer to a relation defined in
+ 'ActiveQueryTrait::modelClass|modelClass' or a sub-relation that stands for a
+ relation of a related record. For example, 'orders.address' means the
+ 'address' relation defined in the model class corresponding to the 'orders'
+ relation.
+
+ The followings are some usage examples:
+
+   // find customers together with their orders and country
+   Customer::find()->with('orders', 'country')->all();
+   // find customers together with their orders and the orders' shipping
+ address
+   Customer::find()->with('orders.address')->all();
+   // find customers together with their country and orders of status 1
+   Customer::find()->with([
+       'orders' => function ($query) {
+           $query->andWhere('status = 1');
+       },
+       'country',
+   ])->all();
+
+
+
+
+*yii/db/ActiveQueryInterface::via*			public
+>
+ via($relationName, $callable='null')
+<
+(static) The relation object itself.
+
+
+    [$relationName] (string) The relation name. This refers to a relation
+    declared in the 'ActiveRelationTrait::primaryModel|primaryModel' of the
+    relation.
+    [$callable] (callable) A PHP callback for customizing the relation
+    associated with the pivot table. Its signature should be
+    'function($query)', where '$query' is the query to be customized.
+
+
+*yii/db/ActiveQueryInterface::findFor*			public
+>
+ findFor($name, $model)
+<
+(mixed) The related record(s)
+
+ This method is invoked when a relation of an ActiveRecord is being accessed
+ in a lazy fashion.
+    [$name] (string) The relation name
+    [$model] (\yii\db\ActiveRecordInterface) The primary model
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

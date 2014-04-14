@@ -1,0 +1,292 @@
+
+*yii/rbac/ManagerInterface*  
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/rbac/ManagerInterface::checkAccess*			public
+>
+ checkAccess($userId, $permissionName, $params='[]')
+<
+(boolean) Whether the user has the specified permission.
+
+
+    [$userId] (string|integer) The user ID. This should be either an integer
+    or a string representing the unique identifier of a user. See
+    '\yii\web\User::id'.
+    [$permissionName] (string) The name of the permission to be checked
+    against
+    [$params] (array) Name-value pairs that will be passed to the rules
+    associated with the roles and permissions assigned to the user.
+
+
+*yii/rbac/ManagerInterface::createRole*			public
+>
+ createRole($name)
+<
+(\yii\rbac\Role) The new Role object
+
+ Note that the newly created role is not added to the RBAC system yet. You
+ must fill in the needed data and call 'add()' to add it to the system.
+    [$name] (string) The role name
+
+
+*yii/rbac/ManagerInterface::createPermission*		public
+>
+ createPermission($name)
+<
+(\yii\rbac\Permission) The new Permission object
+
+ Note that the newly created permission is not added to the RBAC system yet.
+ You must fill in the needed data and call 'add()' to add it to the system.
+    [$name] (string) The permission name
+
+
+*yii/rbac/ManagerInterface::add*				public
+>
+ add($object)
+<
+(boolean) Whether the role, permission or rule is successfully added to the
+system
+
+
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
+
+
+*yii/rbac/ManagerInterface::remove*			public
+>
+ remove($object)
+<
+(boolean) Whether the role, permission or rule is successfully removed
+
+
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
+
+
+*yii/rbac/ManagerInterface::update*			public
+>
+ update($name, $object)
+<
+(boolean) Whether the update is successful
+
+
+    [$name] (string) The old name of the role, permission or rule
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
+
+
+*yii/rbac/ManagerInterface::getRole*			public
+>
+ getRole($name)
+<
+(\yii\rbac\Role) The role corresponding to the specified name. Null is
+returned if no such role.
+
+
+    [$name] (string) The role name.
+
+
+*yii/rbac/ManagerInterface::getRoles*			public
+>
+ getRoles()
+<
+(\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+names.
+
+
+
+
+*yii/rbac/ManagerInterface::getRolesByUser*		public
+>
+ getRolesByUser($userId)
+<
+(\yii\rbac\Role[]) All roles directly or indirectly assigned to the user. The
+array is indexed by the role names.
+
+ Note that child roles that are not assigned directly to the user will not be
+ returned.
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/ManagerInterface::getPermission*		public
+>
+ getPermission($name)
+<
+(\yii\rbac\Permission) The permission corresponding to the specified name.
+Null is returned if no such permission.
+
+
+    [$name] (string) The permission name.
+
+
+*yii/rbac/ManagerInterface::getPermissions*		public
+>
+ getPermissions()
+<
+(\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+by the permission names.
+
+
+
+
+*yii/rbac/ManagerInterface::getPermissionsByRole*		public
+>
+ getPermissionsByRole($roleName)
+<
+(\yii\rbac\Permission[]) All permissions that the role represents. The array
+is indexed by the permission names.
+
+
+    [$roleName] (string) The role name
+
+
+*yii/rbac/ManagerInterface::getPermissionsByUser*		public
+>
+ getPermissionsByUser($userId)
+<
+(\yii\rbac\Permission[]) All permissions that the user has. The array is
+indexed by the permission names.
+
+
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/ManagerInterface::getRule*			public
+>
+ getRule($name)
+<
+(\yii\rbac\Rule) The rule object, or null if the specified name does not
+correspond to a rule.
+
+
+    [$name] (string) The rule name
+
+
+*yii/rbac/ManagerInterface::getRules*			public
+>
+ getRules()
+<
+(\yii\rbac\Rule[]) The rules indexed by the rule names
+
+
+
+
+*yii/rbac/ManagerInterface::addChild*			public
+>
+ addChild($parent, $child)
+<
+(void)
+
+
+    [$parent] (\yii\rbac\Item) 
+    [$child] (\yii\rbac\Item) 
+
+
+*yii/rbac/ManagerInterface::removeChild*			public
+>
+ removeChild($parent, $child)
+<
+(boolean) Whether the removal is successful
+
+ Note, the child item is not deleted. Only the parent-child relationship is
+ removed.
+    [$parent] (\yii\rbac\Item) 
+    [$child] (\yii\rbac\Item) 
+
+
+*yii/rbac/ManagerInterface::getChildren*			public
+>
+ getChildren($name)
+<
+(\yii\rbac\Item[]) The child permissions and/or roles
+
+
+    [$name] (string) The parent name
+
+
+*yii/rbac/ManagerInterface::assign*			public
+>
+ assign($role, $userId, $rule='null', $data='null')
+<
+(\yii\rbac\Assignment) The role assignment information.
+
+
+    [$role] (\yii\rbac\Role) 
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$rule] (\yii\rbac\Rule) The rule to be associated with this assignment.
+    If not null, the rule will be executed when 'allow()' is called to check
+    the user permission.
+    [$data] (mixed) Additional data associated with this assignment.
+
+
+*yii/rbac/ManagerInterface::revoke*			public
+>
+ revoke($role, $userId)
+<
+(boolean) Whether the revoking is successful
+
+
+    [$role] (\yii\rbac\Role) 
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/ManagerInterface::revokeAll*			public
+>
+ revokeAll($userId)
+<
+(boolean) Whether the revoking is successful
+
+
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/ManagerInterface::getAssignment*		public
+>
+ getAssignment($roleName, $userId)
+<
+(\yii\rbac\Assignment) The assignment information. Null is returned if the
+role is not assigned to the user.
+
+
+    [$roleName] (string) The role name
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/ManagerInterface::getAssignments*		public
+>
+ getAssignments($userId)
+<
+(\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
+will be returned if there is no role assigned to the user.
+
+
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/ManagerInterface::clearAll*			public
+>
+ clearAll()
+<
+(void)
+
+
+
+
+*yii/rbac/ManagerInterface::clearAssignments*		public
+>
+ clearAssignments()
+<
+(void)
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

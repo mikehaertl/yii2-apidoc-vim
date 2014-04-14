@@ -1,0 +1,58 @@
+
+*yii/base/BootstrapInterface*  
+=============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ The main method 'bootstrap()' will be invoked by an application at the
+ beginning of its 'init()' method.
+
+ Bootstrap classes can be registered in two approaches.
+
+ The first approach is mainly used by extensions and is managed by the
+ Composer installation process. You mainly need to list the bootstrap class of
+ your extension in the 'composer.json' file like following,
+
+ '''json {     // ...     "extra": {         "bootstrap":
+ "path\\to\\MyBootstrapClass"     } } '''
+
+ If the extension is installed, the bootstrap information will be saved in
+ 'Application::extensions'.
+
+ The second approach is used by application code which needs to register some
+ code to be run during the bootstrap process. This is done by configuring the
+ 'Application::bootstrap' property:
+
+   return [
+       // ...
+       'bootstrap' => [
+           "path\\to\\MyBootstrapClass1",
+           [
+               'class' => "path\\to\\MyBootstrapClass2",
+               'prop1' => 'value1',
+               'prop2' => 'value2',
+           ],
+       ],
+   ];
+
+ As you can see, you can register a bootstrap class in terms of either a class
+ name or a configuration class.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/base/BootstrapInterface::bootstrap*			public
+>
+ bootstrap($app)
+<
+(void)
+
+
+    [$app] (\yii\base\Application) The application currently running
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

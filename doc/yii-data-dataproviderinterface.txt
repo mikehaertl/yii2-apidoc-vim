@@ -1,0 +1,93 @@
+
+*yii/data/DataProviderInterface*  
+================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Data providers are components that sort and paginate data, and provide them
+ to widgets such as '\yii\grid\GridView', '\yii\widgets\ListView'.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/data/DataProviderInterface::prepare*			public
+>
+ prepare($forcePrepare='false')
+<
+(void)
+
+ This method will prepare the data models and keys that can be retrieved via
+ 'getModels()' and 'getKeys()'.
+
+ This method will be implicitly called by 'getModels()' and 'getKeys()' if it
+ has not been called before.
+    [$forcePrepare] (boolean) Whether to force data preparation even if it has
+    been done before.
+
+
+*yii/data/DataProviderInterface::getCount*		public
+>
+ getCount()
+<
+(integer) The number of data models in the current page.
+
+ This is equivalent to 'count($provider->getModels())'. When
+ 'getPagination|pagination' is false, this is the same as
+ 'getTotalCount|totalCount'.
+
+
+*yii/data/DataProviderInterface::getTotalCount*		public
+>
+ getTotalCount()
+<
+(integer) Total number of possible data models.
+
+ When 'getPagination|pagination' is false, this is the same as
+ 'getCount|count'.
+
+
+*yii/data/DataProviderInterface::getModels*		public
+>
+ getModels()
+<
+(array) The list of data models in the current page.
+
+
+
+
+*yii/data/DataProviderInterface::getKeys*			public
+>
+ getKeys()
+<
+(array) The list of key values corresponding to 'getModels|models'. Each data
+model in 'getModels|models' is uniquely identified by the corresponding key
+value in this array.
+
+
+
+
+*yii/data/DataProviderInterface::getSort*			public
+>
+ getSort()
+<
+(\yii\data\Sort) The sorting object. If this is false, it means the sorting is
+disabled.
+
+
+
+
+*yii/data/DataProviderInterface::getPagination*		public
+>
+ getPagination()
+<
+(\yii\data\Pagination) The pagination object. If this is false, it means the
+pagination is disabled.
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

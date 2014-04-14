@@ -1,0 +1,431 @@
+
+*yii/db/ActiveRecordInterface*  
+==============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/db/ActiveRecordInterface::primaryKey*		public
+>
+ primaryKey()
+<
+(string[]) The primary key name(s) for this AR class.
+
+ Note that an array should be returned even when the record only has a single
+ primary key.
+
+ For the primary key **value** see 'getPrimaryKey()' instead.
+
+
+*yii/db/ActiveRecordInterface::attributes*		public
+>
+ attributes()
+<
+(array) List of attribute names.
+
+
+
+
+*yii/db/ActiveRecordInterface::getAttribute*		public
+>
+ getAttribute($name)
+<
+(mixed) The attribute value. Null if the attribute is not set or does not
+exist.
+
+ If this record is the result of a query and the attribute is not loaded, null
+ will be returned.
+    [$name] (string) The attribute name
+
+
+*yii/db/ActiveRecordInterface::setAttribute*		public
+>
+ setAttribute($name, $value)
+<
+(void)
+
+
+    [$name] (string) The attribute name.
+    [$value] (mixed) The attribute value.
+
+
+*yii/db/ActiveRecordInterface::hasAttribute*		public
+>
+ hasAttribute($name)
+<
+(boolean) Whether the record has an attribute with the specified name.
+
+
+    [$name] (string) The name of the attribute
+
+
+*yii/db/ActiveRecordInterface::getPrimaryKey*		public
+>
+ getPrimaryKey($asArray='false')
+<
+(mixed) The primary key value. An array (attribute name => attribute value) is
+returned if the primary key is composite or '$asArray' is true. A string is
+returned otherwise (null will be returned if the key value is null).
+
+
+    [$asArray] (boolean) Whether to return the primary key value as an array.
+    If true, the return value will be an array with attribute names as keys
+    and attribute values as values. Note that for composite primary keys, an
+    array will always be returned regardless of this parameter value.
+
+
+*yii/db/ActiveRecordInterface::getOldPrimaryKey*		public
+>
+ getOldPrimaryKey($asArray='false')
+<
+(mixed) The old primary key value. An array (column name => column value) is
+returned if the primary key is composite or '$asArray' is true. A string is
+returned otherwise (null will be returned if the key value is null).
+
+ This refers to the primary key value that is populated into the record after
+ executing a find method (e.g. find(), findOne()). The value remains unchanged
+ even if the primary key attribute is manually assigned with a different
+ value.
+    [$asArray] (boolean) Whether to return the primary key value as an array.
+    If true, the return value will be an array with column name as key and
+    column value as value. If this is false (default), a scalar value will be
+    returned for non-composite primary key.
+
+
+*yii/db/ActiveRecordInterface::isPrimaryKey*		public
+>
+ isPrimaryKey($keys)
+<
+(boolean) Whether the given set of attributes represents the primary key for
+this model
+
+
+    [$keys] (array) The set of attributes to check
+
+
+*yii/db/ActiveRecordInterface::find*			public
+>
+ find()
+<
+(\yii\db\ActiveQueryInterface) The newly created
+'ActiveQueryInterface|ActiveQuery' instance.
+
+ The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
+ customized by calling methods defined in 'ActiveQueryInterface' before
+ 'one()' or 'all()' is called to return populated ActiveRecord instances. For
+ example,
+
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
+
+
+*yii/db/ActiveRecordInterface::findOne*			public
+>
+ findOne($condition)
+<
+(static) ActiveRecord instance matching the condition, or null if nothing
+matches.
+
+ The method accepts:
+
+  - a scalar value (integer or string): query by a single primary key value
+ and return the    corresponding record (or null if not found).  - an array of
+ name-value pairs: query by a set of attribute values and return a single
+ record    matching all of them (or null if not found).
+
+ Note that this method will automatically call the 'one()' method and return
+ an 'ActiveRecordInterface|ActiveRecord' instance. For example,
+
+   // find a single customer whose primary key value is 10
+   $customer = Customer::findOne(10);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the first customer whose age is 30 and whose status is 1
+   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
+
+
+    [$condition] (mixed) Primary key value or a set of column values
+
+
+*yii/db/ActiveRecordInterface::findAll*			public
+>
+ findAll($condition)
+<
+(array) An array of ActiveRecord instance, or an empty array if nothing
+matches.
+
+ The method accepts:
+
+  - a scalar value (integer or string): query by a single primary key value
+ and return the    corresponding record (or null if not found).  - an array of
+ name-value pairs: query by a set of attribute values and return a single
+ record    matching all of them (or null if not found).
+
+ Note that this method will automatically call the 'all()' method and return
+ an array of 'ActiveRecordInterface|ActiveRecord' instances. For example,
+
+   // find the customers whose primary key value is 10
+   $customers = Customer::findAll(10);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => 10])->all();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findAll([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+   // find customers whose age is 30 and whose status is 1
+   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
+
+
+    [$condition] (mixed) Primary key value or a set of column values
+
+
+*yii/db/ActiveRecordInterface::updateAll*			public
+>
+ updateAll($attributes, $condition='null')
+<
+(integer) The number of rows updated
+
+ For example, to change the status to be 1 for all customers whose status is
+ 2:
+
+   Customer::updateAll(['status' => 1], ['status' => '2']);
+
+
+    [$attributes] (array) Attribute values (name-value pairs) to be saved for
+    the record. Unlike 'update()' these are not going to be validated.
+    [$condition] (array) The condition that matches the records that should
+    get updated. Please refer to 'QueryInterface::where()' on how to specify
+    this parameter. An empty condition will match all records.
+
+
+*yii/db/ActiveRecordInterface::deleteAll*			public
+>
+ deleteAll($condition='null')
+<
+(integer) The number of rows deleted
+
+ WARNING: If you do not specify any condition, this method will delete ALL
+ rows in the table.
+
+ For example, to delete all customers whose status is 3:
+
+   Customer::deleteAll([status = 3]);
+
+
+    [$condition] (array) The condition that matches the records that should
+    get deleted. Please refer to 'QueryInterface::where()' on how to specify
+    this parameter. An empty condition will match all records.
+
+
+*yii/db/ActiveRecordInterface::save*			public
+>
+ save($runValidation='true', $attributeNames='null')
+<
+(boolean) Whether the saving succeeds
+
+ This method will call 'insert()' when 'getIsNewRecord()|isNewRecord' is true,
+ or 'update()' when 'getIsNewRecord()|isNewRecord' is false.
+
+ For example, to save a customer record:
+
+   $customer = new Customer; // or $customer = Customer::findOne($id);
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->save();
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be saved to database.
+    'false' will be returned in this case.
+    [$attributeNames] (array) List of attributes that need to be saved.
+    Defaults to null, meaning all attributes that are loaded from DB will be
+    saved.
+
+
+*yii/db/ActiveRecordInterface::insert*			public
+>
+ insert($runValidation='true', $attributes='null')
+<
+(boolean) Whether the attributes are valid and the record is inserted
+successfully.
+
+ Usage example:
+
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be inserted into the
+    database.
+    [$attributes] (array) List of attributes that need to be saved. Defaults
+    to null, meaning all attributes that are loaded from DB will be saved.
+
+
+*yii/db/ActiveRecordInterface::update*			public
+>
+ update($runValidation='true', $attributeNames='null')
+<
+(integer|boolean) The number of rows affected, or false if validation fails or
+updating process is stopped for other reasons. Note that it is possible that
+the number of rows affected is 0, even though the update execution is
+successful.
+
+ Usage example:
+
+   $customer = Customer::findOne($id);
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->update();
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be inserted into the
+    database.
+    [$attributeNames] (array) List of attributes that need to be saved.
+    Defaults to null, meaning all attributes that are loaded from DB will be
+    saved.
+
+
+*yii/db/ActiveRecordInterface::delete*			public
+>
+ delete()
+<
+(integer|boolean) The number of rows deleted, or false if the deletion is
+unsuccessful for some reason. Note that it is possible that the number of rows
+deleted is 0, even though the deletion execution is successful.
+
+
+
+
+*yii/db/ActiveRecordInterface::getIsNewRecord*		public
+>
+ getIsNewRecord()
+<
+(boolean) Whether the record is new and should be inserted when calling
+'save()'.
+
+
+
+
+*yii/db/ActiveRecordInterface::equals*			public
+>
+ equals($record)
+<
+(boolean) Whether the two active records refer to the same row in the same
+database table.
+
+ Two 'getIsNewRecord()|new' records are considered to be not equal.
+    [$record] (static) Record to compare to
+
+
+*yii/db/ActiveRecordInterface::getRelation*		public
+>
+ getRelation($name, $throwException='true')
+<
+(\yii\db\ActiveQueryInterface) The relational query object
+
+ A relation is defined by a getter method which returns an object implementing
+ the 'ActiveQueryInterface' (normally this would be a relational 'ActiveQuery'
+ object). It can be declared in either the ActiveRecord class itself or one of
+ its behaviors.
+    [$name] (string) The relation name
+    [$throwException] (boolean) Whether to throw exception if the relation
+    does not exist.
+
+
+*yii/db/ActiveRecordInterface::link*			public
+>
+ link($name, $model, $extraColumns='[]')
+<
+(void)
+
+ The relationship is established by setting the foreign key value(s) in one
+ record to be the corresponding primary key value(s) in the other record. The
+ record with the foreign key will be saved into database without performing
+ validation.
+
+ If the relationship involves a pivot table, a new row will be inserted into
+ the pivot table which contains the primary key values from both records.
+
+ This method requires that the primary key value is not null.
+    [$name] (string) The case sensitive name of the relationship.
+    [$model] (static) The record to be linked with the current one.
+    [$extraColumns] (array) Additional column values to be saved into the
+    pivot table. This parameter is only meaningful for a relationship
+    involving a pivot table (i.e., a relation set with
+    ''ActiveQueryInterface::via()''.)
+
+
+*yii/db/ActiveRecordInterface::unlink*			public
+>
+ unlink($name, $model, $delete='false')
+<
+(void)
+
+ The record with the foreign key of the relationship will be deleted if
+ '$delete' is true. Otherwise, the foreign key will be set null and the record
+ will be saved without validation.
+    [$name] (string) The case sensitive name of the relationship.
+    [$model] (static) The model to be unlinked from the current one.
+    [$delete] (boolean) Whether to delete the model that contains the foreign
+    key. If false, the model's foreign key will be set null and saved. If
+    true, the model containing the foreign key will be deleted.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

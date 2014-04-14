@@ -1,0 +1,106 @@
+
+*yii/web/IdentityInterface*  
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This interface can typically be implemented by a user model class. For
+ example, the following code shows how to implement this interface by a User
+ ActiveRecord class:
+
+   class User extends ActiveRecord implements IdentityInterface
+   {
+       public static function findIdentity($id)
+       {
+           return static::findOne($id);
+       }
+
+       public static function findIdentityByAccessToken($token)
+       {
+           return static::findOne(['access_token' => $token]);
+       }
+
+       public function getId()
+       {
+           return $this->id;
+       }
+
+       public function getAuthKey()
+       {
+           return $this->authKey;
+       }
+
+       public function validateAuthKey($authKey)
+       {
+           return $this->authKey === $authKey;
+       }
+   }
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/web/IdentityInterface::findIdentity*			public
+>
+ findIdentity($id)
+<
+(\yii\web\IdentityInterface) The identity object that matches the given ID.
+Null should be returned if such an identity cannot be found or the identity is
+not in an active state (disabled, deleted, etc.)
+
+
+    [$id] (string|integer) The ID to be looked for
+
+
+*yii/web/IdentityInterface::findIdentityByAccessToken*	public
+>
+ findIdentityByAccessToken($token)
+<
+(\yii\web\IdentityInterface) The identity object that matches the given token.
+Null should be returned if such an identity cannot be found or the identity is
+not in an active state (disabled, deleted, etc.)
+
+
+    [$token] (string) The secrete token
+
+
+*yii/web/IdentityInterface::getId*			public
+>
+ getId()
+<
+(string|integer) An ID that uniquely identifies a user identity.
+
+
+
+
+*yii/web/IdentityInterface::getAuthKey*			public
+>
+ getAuthKey()
+<
+(string) A key that is used to check the validity of a given identity ID.
+
+ The key should be unique for each individual user, and should be persistent
+ so that it can be used to check the validity of the user identity.
+
+ The space of such keys should be big enough to defeat potential identity
+ attacks.
+
+ This is required if 'User::enableAutoLogin' is enabled.
+
+
+*yii/web/IdentityInterface::validateAuthKey*		public
+>
+ validateAuthKey($authKey)
+<
+(boolean) Whether the given auth key is valid.
+
+ This is required if 'User::enableAutoLogin' is enabled.
+    [$authKey] (string) The given auth key
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

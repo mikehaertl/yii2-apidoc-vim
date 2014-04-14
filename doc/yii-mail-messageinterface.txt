@@ -1,0 +1,274 @@
+
+*yii/mail/MessageInterface*  
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ A message represents the settings and content of an email, such as the
+ sender, recipient, subject, body, etc.
+
+ Messages are sent by a '\yii\mail\MailerInterface|mailer', like the
+ following,
+
+   Yii::$app->mail->compose()
+       ->setFrom('from@domain.com')
+       ->setTo($form->email)
+       ->setSubject($form->subject)
+       ->setTextBody('Plain text content')
+       ->setHtmlBody('<b>HTML content</b>')
+       ->send();
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mail/MessageInterface::getCharset*			public
+>
+ getCharset()
+<
+(string) The character set of this message.
+
+
+
+
+*yii/mail/MessageInterface::setCharset*			public
+>
+ setCharset($charset)
+<
+(static) Self reference.
+
+
+    [$charset] (string) Character set name.
+
+
+*yii/mail/MessageInterface::getFrom*			public
+>
+ getFrom()
+<
+(string) The sender
+
+
+
+
+*yii/mail/MessageInterface::setFrom*			public
+>
+ setFrom($from)
+<
+(static) Self reference.
+
+
+    [$from] (string|array) Sender email address. You may pass an array of
+    addresses if this message is from multiple people. You may also specify
+    sender name in addition to email address using format: '[email => name]'.
+
+
+*yii/mail/MessageInterface::getTo*			public
+>
+ getTo()
+<
+(array) The message recipients
+
+
+
+
+*yii/mail/MessageInterface::setTo*			public
+>
+ setTo($to)
+<
+(static) Self reference.
+
+
+    [$to] (string|array) Receiver email address. You may pass an array of
+    addresses if multiple recipients should receive this message. You may also
+    specify receiver name in addition to email address using format: '[email
+    => name]'.
+
+
+*yii/mail/MessageInterface::getReplyTo*			public
+>
+ getReplyTo()
+<
+(string) The reply-to address of this message.
+
+
+
+
+*yii/mail/MessageInterface::setReplyTo*			public
+>
+ setReplyTo($replyTo)
+<
+(static) Self reference.
+
+
+    [$replyTo] (string|array) The reply-to address. You may pass an array of
+    addresses if this message should be replied to multiple people. You may
+    also specify reply-to name in addition to email address using format:
+    '[email => name]'.
+
+
+*yii/mail/MessageInterface::getCc*			public
+>
+ getCc()
+<
+(array) The Cc (additional copy receiver) addresses of this message.
+
+
+
+
+*yii/mail/MessageInterface::setCc*			public
+>
+ setCc($cc)
+<
+(static) Self reference.
+
+
+    [$cc] (string|array) Copy receiver email address. You may pass an array of
+    addresses if multiple recipients should receive this message. You may also
+    specify receiver name in addition to email address using format: '[email
+    => name]'.
+
+
+*yii/mail/MessageInterface::getBcc*			public
+>
+ getBcc()
+<
+(array) The Bcc (hidden copy receiver) addresses of this message.
+
+
+
+
+*yii/mail/MessageInterface::setBcc*			public
+>
+ setBcc($bcc)
+<
+(static) Self reference.
+
+
+    [$bcc] (string|array) Hidden copy receiver email address. You may pass an
+    array of addresses if multiple recipients should receive this message. You
+    may also specify receiver name in addition to email address using format:
+    '[email => name]'.
+
+
+*yii/mail/MessageInterface::getSubject*			public
+>
+ getSubject()
+<
+(string) The message subject
+
+
+
+
+*yii/mail/MessageInterface::setSubject*			public
+>
+ setSubject($subject)
+<
+(static) Self reference.
+
+
+    [$subject] (string) Message subject
+
+
+*yii/mail/MessageInterface::setTextBody*			public
+>
+ setTextBody($text)
+<
+(static) Self reference.
+
+
+    [$text] (string) Message plain text content.
+
+
+*yii/mail/MessageInterface::setHtmlBody*			public
+>
+ setHtmlBody($html)
+<
+(static) Self reference.
+
+
+    [$html] (string) Message HTML content.
+
+
+*yii/mail/MessageInterface::attach*			public
+>
+ attach($fileName, $options='[]')
+<
+(static) Self reference.
+
+
+    [$fileName] (string) Full file name
+    [$options] (array) Options for embed file. Valid options are:
+
+    - fileName: name, which should be used to attach file. - contentType:
+    attached file MIME type.
+
+
+*yii/mail/MessageInterface::attachContent*		public
+>
+ attachContent($content, $options='[]')
+<
+(static) Self reference.
+
+
+    [$content] (string) Attachment file content.
+    [$options] (array) Options for embed file. Valid options are:
+
+    - fileName: name, which should be used to attach file. - contentType:
+    attached file MIME type.
+
+
+*yii/mail/MessageInterface::embed*			public
+>
+ embed($fileName, $options='[]')
+<
+(string) Attachment CID.
+
+ This method should be used when embedding images or other data in a message.
+    [$fileName] (string) File name.
+    [$options] (array) Options for embed file. Valid options are:
+
+    - fileName: name, which should be used to attach file. - contentType:
+    attached file MIME type.
+
+
+*yii/mail/MessageInterface::embedContent*			public
+>
+ embedContent($content, $options='[]')
+<
+(string) Attachment CID.
+
+ This method should be used when embedding images or other data in a message.
+    [$content] (string) Attachment file content.
+    [$options] (array) Options for embed file. Valid options are:
+
+    - fileName: name, which should be used to attach file. - contentType:
+    attached file MIME type.
+
+
+*yii/mail/MessageInterface::send*				public
+>
+ send($mailer='null')
+<
+(boolean) Whether this message is sent successfully.
+
+
+    [$mailer] (\yii\mail\MailerInterface) The mailer that should be used to
+    send this message. If null, the "mail" application component will be used
+    instead.
+
+
+*yii/mail/MessageInterface::toString*			public
+>
+ toString()
+<
+(string) The string representation of this message.
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
