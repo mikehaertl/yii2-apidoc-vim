@@ -62,11 +62,9 @@ SUBCLASSES
 |yii/console/controllers/MigrateController|
 |yii/console/Response|
 |yii/console/ErrorHandler|
-|yii/rbac/Manager|
 |yii/rbac/DbManager|
-|yii/rbac/PhpManager|
+|yii/rbac/BaseManager|
 |yii/web/Request|
-|yii/web/AccessRule|
 |yii/web/Controller|
 |yii/web/AssetManager|
 |yii/web/Application|
@@ -78,24 +76,21 @@ SUBCLASSES
 |yii/web/CacheSession|
 |yii/web/Session|
 |yii/web/DbSession|
-|yii/web/ContentTypeNegotiator|
+|yii/web/HtmlResponseFormatter|
 |yii/web/Response|
+|yii/web/JsonResponseFormatter|
 |yii/web/ErrorHandler|
 |yii/web/View|
 |yii/web/XmlResponseFormatter|
-|yii/rest/RateLimiter|
 |yii/rest/Controller|
 |yii/rest/ActiveController|
 |yii/rest/ViewAction|
-|yii/rest/HttpBearerAuth|
 |yii/rest/OptionsAction|
 |yii/rest/IndexAction|
 |yii/rest/Action|
 |yii/rest/UpdateAction|
 |yii/rest/CreateAction|
 |yii/rest/Serializer|
-|yii/rest/QueryParamAuth|
-|yii/rest/HttpBasicAuth|
 |yii/rest/DeleteAction|
 |yii/validators/DefaultValueValidator|
 |yii/validators/BooleanValidator|
@@ -127,6 +122,7 @@ SUBCLASSES
 |yii/caching/MemCache|
 |yii/caching/FileCache|
 |yii/log/DbTarget|
+|yii/log/SyslogTarget|
 |yii/log/FileTarget|
 |yii/log/Target|
 |yii/log/Logger|
@@ -152,6 +148,7 @@ SUBCLASSES
 |yii/widgets/FragmentCache|
 |yii/widgets/Pjax|
 |yii/widgets/LinkPager|
+|yii/filters/AccessRule|
 |yii/grid/GridView|
 
 DESCRIPTION
@@ -458,7 +455,7 @@ METHOD DETAILS
 
 *yii/base/Component::on*					public
 >
- on($name, $handler, $data='null')
+ on($name, $handler, $data='null', $append='true')
 <
 (void)
 
@@ -481,6 +478,9 @@ METHOD DETAILS
     [$data] (mixed) The data to be passed to the event handler when the event
     is triggered. When the event handler is invoked, this data can be accessed
     via 'Event::data'.
+    [$append] (boolean) Whether to append new event handler to the end of the
+    existing handler list. If false, the new handler will be inserted at the
+    beginning of the existing handler list.
 
 
 *yii/base/Component::off*					public

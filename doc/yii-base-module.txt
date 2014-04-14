@@ -27,10 +27,6 @@ PROPERTY DETAILS
 $params					*yii/base/Module::$params*
  (array) Custom module parameters (name => value).
 
-$preload				*yii/base/Module::$preload*
- (array) The IDs of the components or modules that should be preloaded right
- after initialization.
-
 $id					*yii/base/Module::$id*
  (string) An ID that uniquely identifies this module among other modules which
  have the same 'module|parent'.
@@ -72,7 +68,10 @@ $controllerNamespace			*yii/base/Module::$controllerNamespace*
  controller namespace would be "foo\bar\controllers".
 
 $defaultRoute				*yii/base/Module::$defaultRoute*
- ()
+ (string) The default route of this module. Defaults to 'default'. The route
+ may consist of child module ID, controller ID, and/or action ID. For example,
+ 'help', 'post/create', 'admin/post/create'. If action ID is not given, it
+ will take the default value as specified in 'Controller::defaultAction'.
 
 $behaviors				*yii/base/Module::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -141,8 +140,8 @@ METHOD DETAILS
 (void)
 
  This method is called after the module is created and initialized with
- property values given in configuration. The default implementation will call
- 'preloadComponents()' to load components that are declared in 'preload'.
+ property values given in configuration. The default implementation will
+ initialize 'controllerNamespace' if it is not set.
 
  If you override this method, please make sure you call the parent
  implementation.
@@ -440,15 +439,6 @@ exist.
     [$modules] (array) Modules (id => module configuration or instances)
 
 
-*yii/base/Module::preloadComponents*			public
->
- preloadComponents()
-<
-(void)
-
-
-
-
 *yii/base/Module::runAction*				public
 >
  runAction($route, $params='[]')
@@ -509,8 +499,22 @@ controller ID is invalid.
 <
 (boolean) Whether the action should continue to be executed.
 
- Make sure you call the parent implementation so that the relevant event is
- triggered.
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
+
+ If you override this method, your code should look like the following:
+
+   public function beforeAction($action)
+   {
+       if (parent::beforeAction($action)) {
+           // your custom code here
+           return true;  // or false if needed
+       } else {
+           return false;
+       }
+   }
+
+
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -520,10 +524,19 @@ controller ID is invalid.
 <
 (mixed) The processed action result.
 
- You may override this method to do some postprocessing for the action. Make
- sure you call the parent implementation so that the relevant event is
- triggered. Also make sure you return the action result, whether it is
- processed or not.
+ The method will trigger the 'EVENT_AFTER_ACTION' event. The return value of
+ the method will be used as the action return value.
+
+ If you override this method, your code should look like the following:
+
+   public function afterAction($action, $result)
+   {
+       $result = parent::afterAction($action, $result);
+       // your custom code here
+       return $result;
+   }
+
+
     [$action] (\yii\base\Action) The action just executed.
     [$result] (mixed) The action return result.
 

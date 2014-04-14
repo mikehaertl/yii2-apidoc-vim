@@ -48,6 +48,10 @@ $action					*yii/base/Controller::$action*
 $behaviors				*yii/base/Controller::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
+$modules				*yii/base/Controller::$modules*
+ (\yii\base\Module[]) All ancestor modules that this controller is located
+ within.
+
 $uniqueId				*yii/base/Controller::$uniqueId*
  (string) The controller ID that is prefixed with the module ID (if any).
 
@@ -259,11 +263,24 @@ resolve into any action.
 >
  beforeAction($action)
 <
-(boolean) Whether the action should continue to be executed.
+(boolean) Whether the action should continue to run.
 
- You may override this method to do last-minute preparation for the action. If
- you override this method, please make sure you call the parent implementation
- first.
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
+
+ If you override this method, your code should look like the following:
+
+   public function beforeAction($action)
+   {
+       if (parent::beforeAction($action)) {
+           // your custom code here
+           return true;  // or false if needed
+       } else {
+           return false;
+       }
+   }
+
+
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -273,12 +290,32 @@ resolve into any action.
 <
 (mixed) The processed action result.
 
- You may override this method to do some postprocessing for the action. If you
- override this method, please make sure you call the parent implementation
- first. Also make sure you return the action result, whether it is processed
- or not.
+ The method will trigger the 'EVENT_AFTER_ACTION' event. The return value of
+ the method will be used as the action return value.
+
+ If you override this method, your code should look like the following:
+
+   public function afterAction($action, $result)
+   {
+       $result = parent::afterAction($action, $result);
+       // your custom code here
+       return $result;
+   }
+
+
     [$action] (\yii\base\Action) The action just executed.
     [$result] (mixed) The action return result.
+
+
+*yii/base/Controller::getModules*				public
+>
+ getModules()
+<
+(\yii\base\Module[]) All ancestor modules that this controller is located
+within.
+
+ The first module in the array is the outermost one (i.e., the application
+ instance), while the last is the innermost one.
 
 
 *yii/base/Controller::getUniqueId*			public

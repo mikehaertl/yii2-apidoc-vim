@@ -13,10 +13,10 @@ DESCRIPTION
  Controller implements the following steps in a RESTful API request handling
  cycle:
 
- 1. Resolving response format and API version number (see 'supportedFormats',
- 'supportedVersions' and 'version'); 2. Validating request method (see
- 'verbs()'). 3. Authenticating user (see 'authenticate()'); 4. Formatting
- response data (see 'serializeData()').
+ 1. Resolving response format (see 'ContentNegotiator'); 2. Validating request
+ method (see 'verbs()'). 3. Authenticating user (see
+ '\yii\filters\auth\AuthInterface'); 4. Rate limiting (see 'RateLimiter'); 5.
+ Formatting response data (see 'serializeData()').
 
 
 PROPERTY DETAILS
@@ -43,44 +43,16 @@ $enableCsrfValidation			*yii/rest/Controller::$enableCsrfValidation*
 $actionParams				*yii/rest/Controller::$actionParams*
  See |yii/web/Controller::$actionParams|
 
-$versionHeaderParam			*yii/rest/Controller::$versionHeaderParam*
- (string) The name of the header parameter representing the API version
- number.
-
 $serializer				*yii/rest/Controller::$serializer*
  (string|array) The configuration for creating the serializer that formats the
  response data.
 
-$authMethods				*yii/rest/Controller::$authMethods*
- (array) The supported authentication methods. This property should take a
- list of supported authentication methods, each represented by an
- authentication class or configuration. If this is not set or empty, it means
- authentication is disabled.
-
-$rateLimiter				*yii/rest/Controller::$rateLimiter*
- (string|array) The rate limiter class or configuration. If this is not set or
- empty, the rate limiting will be disabled. Note that if the user is not
- authenticated, the rate limiting will also NOT be performed.
-
-$version				*yii/rest/Controller::$version*
- (string) The chosen API version number, or null if 'supportedVersions' is
- empty.
-
-$supportedVersions			*yii/rest/Controller::$supportedVersions*
- (array) List of supported API version numbers. If the current request does
- not specify a version number, the first element will be used as the
- 'version|chosen version number'. For this reason, you should put the latest
- version number at the first. If this property is empty, 'version' will not be
- set.
-
-$supportedFormats			*yii/rest/Controller::$supportedFormats*
- (array) List of supported response formats. The array keys are the requested
- content MIME types, and the array values are the corresponding response
- formats. The first element will be used as the response format if the current
- request does not specify a content type.
-
 $behaviors				*yii/rest/Controller::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$modules				*yii/rest/Controller::$modules*
+ (\yii\base\Module[]) All ancestor modules that this controller is located
+ within.
 
 $uniqueId				*yii/rest/Controller::$uniqueId*
  (string) The controller ID that is prefixed with the module ID (if any).
@@ -110,12 +82,7 @@ METHOD DETAILS
 
 
 *yii/rest/Controller::init*				public
->
- init()
-<
-(void)
-
-
+ See |yii/base/Object::init|
 
 
 *yii/rest/Controller::__get*				public
@@ -232,13 +199,7 @@ METHOD DETAILS
 
 
 *yii/rest/Controller::beforeAction*			public
->
- beforeAction($action)
-<
-(boolean) Whether the action should continue to be executed.
-
-
-    [$action] () 
+ See |yii/web/Controller::beforeAction|
 
 
 *yii/rest/Controller::afterAction*			public
@@ -250,6 +211,10 @@ METHOD DETAILS
 
     [$action] () 
     [$result] () 
+
+
+*yii/rest/Controller::getModules*				public
+ See |yii/base/Controller::getModules|
 
 
 *yii/rest/Controller::getUniqueId*			public
@@ -308,15 +273,6 @@ METHOD DETAILS
  See |yii/web/Controller::refresh|
 
 
-*yii/rest/Controller::resolveFormatAndVersion*		protected
->
- resolveFormatAndVersion()
-<
-(void)
-
-
-
-
 *yii/rest/Controller::verbs*				protected
 >
  verbs()
@@ -324,29 +280,6 @@ METHOD DETAILS
 (array) The allowed HTTP verbs.
 
  Please refer to 'VerbFilter::actions' on how to declare the allowed verbs.
-
-
-*yii/rest/Controller::authenticate*			protected
->
- authenticate($action)
-<
-(void)
-
- This method implements the user authentication based on an access token sent
- through the 'Authorization' HTTP header.
-    [$action] (\yii\base\Action) The action to be executed
-
-
-*yii/rest/Controller::checkRateLimit*			protected
->
- checkRateLimit($action)
-<
-(void)
-
- This method will use 'rateLimiter' to check rate limit. In order to perform
- rate limiting check, the user must be authenticated and the user identity
- object ('Yii::$app->user->identity') must implement 'RateLimitInterface'.
-    [$action] (\yii\base\Action) The action to be executed
 
 
 *yii/rest/Controller::serializeData*			protected

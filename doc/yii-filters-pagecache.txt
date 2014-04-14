@@ -1,0 +1,204 @@
+
+*yii/filters/PageCache*   >> |yii/base/ActionFilter|
+=======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It is an action filter that can be added to a controller and handles the
+ 'beforeAction' event.
+
+ To use PageCache, declare it in the 'behaviors()' method of your controller
+ class. In the following example the filter will be applied to the
+ 'list'-action and cache the whole page for maximum 60 seconds or until the
+ count of entries in the post table changes. It also stores different versions
+ of the page depended on the route ('varyByRoute' is true by default), the
+ application language and user id.
+
+   public function behaviors()
+   {
+       return [
+           'pageCache' => [
+               'class' => \yii\filters\PageCache::className(),
+               'only' => ['list'],
+               'duration' => 60,
+               'dependency' => [
+                   'class' => 'yii\caching\DbDependency',
+                   'sql' => 'SELECT COUNT(*) FROM post',
+               ],
+               'variations' => [
+                   Yii::$app->language,
+                   Yii::$app->user->id
+               ]
+           ],
+       ];
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$owner					*yii/filters/PageCache::$owner*
+ See |yii/base/Behavior::$owner|
+
+$only					*yii/filters/PageCache::$only*
+ See |yii/base/ActionFilter::$only|
+
+$except					*yii/filters/PageCache::$except*
+ See |yii/base/ActionFilter::$except|
+
+$varyByRoute				*yii/filters/PageCache::$varyByRoute*
+ (boolean) Whether the content being cached should be differentiated according
+ to the route. A route consists of the requested controller ID and action ID.
+ Defaults to true.
+
+$cache					*yii/filters/PageCache::$cache*
+ (string) The application component ID of the '\yii\caching\Cache|cache'
+ object.
+
+$duration				*yii/filters/PageCache::$duration*
+ (integer) Number of seconds that the data can remain valid in cache. Use 0 to
+ indicate that the cached data will never expire.
+
+$dependency				*yii/filters/PageCache::$dependency*
+ (array|\yii\caching\Dependency) The dependency that the cached content
+ depends on. This can be either a 'Dependency' object or a configuration array
+ for creating the dependency object. For example,
+
+   [
+       'class' => 'yii\caching\DbDependency',
+       'sql' => 'SELECT MAX(lastModified) FROM Post',
+   ]
+
+ would make the output cache depends on the last modified time of all posts.
+ If any post has its modification time changed, the cached content would be
+ invalidated.
+
+$variations				*yii/filters/PageCache::$variations*
+ (array) List of factors that would cause the variation of the content being
+ cached. Each factor is a string representing a variation (e.g. the language,
+ a GET parameter). The following variation setting will cause the content to
+ be cached in different versions according to the current application
+ language:
+
+   [
+       Yii::$app->language,
+   ]
+
+
+
+$enabled				*yii/filters/PageCache::$enabled*
+ (boolean) Whether to enable the fragment cache. You may use this property to
+ turn on and off the fragment cache according to specific setting (e.g. enable
+ fragment cache only for GET requests).
+
+$view					*yii/filters/PageCache::$view*
+ (\yii\base\View) The view component to use for caching. If not set, the
+ default application view component '\yii\web\Application::view' will be used.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/filters/PageCache::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/filters/PageCache::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/filters/PageCache::init*				public
+>
+ init()
+<
+(void)
+
+
+
+*yii/filters/PageCache::__get*				public
+ See |yii/base/Object::__get|
+
+
+*yii/filters/PageCache::__set*				public
+ See |yii/base/Object::__set|
+
+
+*yii/filters/PageCache::__isset*				public
+ See |yii/base/Object::__isset|
+
+
+*yii/filters/PageCache::__unset*				public
+ See |yii/base/Object::__unset|
+
+
+*yii/filters/PageCache::__call*				public
+ See |yii/base/Object::__call|
+
+
+*yii/filters/PageCache::hasProperty*			public
+ See |yii/base/Object::hasProperty|
+
+
+*yii/filters/PageCache::canGetProperty*			public
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/filters/PageCache::canSetProperty*			public
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/filters/PageCache::hasMethod*			public
+ See |yii/base/Object::hasMethod|
+
+
+*yii/filters/PageCache::events*				public
+ See |yii/base/Behavior::events|
+
+
+*yii/filters/PageCache::attach*				public
+ See |yii/base/ActionFilter::attach|
+
+
+*yii/filters/PageCache::detach*				public
+ See |yii/base/ActionFilter::detach|
+
+
+*yii/filters/PageCache::beforeFilter*			public
+ See |yii/base/ActionFilter::beforeFilter|
+
+
+*yii/filters/PageCache::afterFilter*			public
+ See |yii/base/ActionFilter::afterFilter|
+
+
+*yii/filters/PageCache::beforeAction*			public
+>
+ beforeAction($action)
+<
+(boolean) Whether the action should continue to be executed.
+
+
+    [$action] (\yii\base\Action) The action to be executed.
+
+
+*yii/filters/PageCache::afterAction*			public
+>
+ afterAction($action, $result)
+<
+(mixed) The processed action result.
+
+
+    [$action] () 
+    [$result] () 
+
+
+*yii/filters/PageCache::isActive*				protected
+ See |yii/base/ActionFilter::isActive|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

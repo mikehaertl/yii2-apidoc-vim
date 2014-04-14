@@ -1,5 +1,5 @@
 
-*yii/rbac/DbManager*   >> |yii/rbac/Manager|
+*yii/rbac/DbManager*   >> |yii/rbac/BaseManager|
 ====================
 
 DESCRIPTION
@@ -14,11 +14,8 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-$showErrors				*yii/rbac/DbManager::$showErrors*
- See |yii/rbac/Manager::$showErrors|
-
 $defaultRoles				*yii/rbac/DbManager::$defaultRoles*
- See |yii/rbac/Manager::$defaultRoles|
+ See |yii/rbac/BaseManager::$defaultRoles|
 
 $db					*yii/rbac/DbManager::$db*
  (\yii\db\Connection|string) The DB connection object or the application
@@ -28,30 +25,30 @@ $db					*yii/rbac/DbManager::$db*
 
 $itemTable				*yii/rbac/DbManager::$itemTable*
  (string) The name of the table storing authorization items. Defaults to
- 'auth_item'.
+ "auth_item".
 
 $itemChildTable				*yii/rbac/DbManager::$itemChildTable*
  (string) The name of the table storing authorization item hierarchy. Defaults
- to 'auth_item_child'.
+ to "auth_item_child".
 
 $assignmentTable			*yii/rbac/DbManager::$assignmentTable*
  (string) The name of the table storing authorization item assignments.
- Defaults to 'auth_assignment'.
+ Defaults to "auth_assignment".
+
+$ruleTable				*yii/rbac/DbManager::$ruleTable*
+ (string) The name of the table storing rules. Defaults to "auth_rule".
 
 $behaviors				*yii/rbac/DbManager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 $roles					*yii/rbac/DbManager::$roles*
- (\yii\rbac\Item[]) Roles (name => AuthItem)
+ ()
 
-$tasks					*yii/rbac/DbManager::$tasks*
- (\yii\rbac\Item[]) Tasks (name => AuthItem)
+$permissions				*yii/rbac/DbManager::$permissions*
+ ()
 
-$operations				*yii/rbac/DbManager::$operations*
- (\yii\rbac\Item[]) Operations (name => AuthItem)
-
-$items					*yii/rbac/DbManager::$items*
- (\yii\rbac\Item[]) The authorization items of the specific type.
+$rules					*yii/rbac/DbManager::$rules*
+ (\yii\rbac\Rule[]) The rules indexed by the rule names
 
 
 
@@ -164,240 +161,281 @@ METHOD DETAILS
  See |yii/base/Component::ensureBehaviors|
 
 
+*yii/rbac/DbManager::getItem*				protected
+>
+ getItem($name)
+<
+(\yii\rbac\Item) The auth item corresponding to the specified name. Null is
+returned if no such item.
+
+
+    [$name] () 
+
+
+*yii/rbac/DbManager::getItems*				protected
+>
+ getItems($type)
+<
+(\yii\rbac\Item[]) The auth items of the specified type.
+
+
+    [$type] () 
+
+
+*yii/rbac/DbManager::addItem*				protected
+>
+ addItem($item)
+<
+(boolean) Whether the auth item is successfully added to the system
+
+
+    [$item] () 
+
+
+*yii/rbac/DbManager::addRule*				protected
+>
+ addRule($rule)
+<
+(boolean) Whether the rule is successfully added to the system
+
+
+    [$rule] () 
+
+
+*yii/rbac/DbManager::removeItem*				protected
+>
+ removeItem($item)
+<
+(boolean) Whether the role or permission is successfully removed
+
+
+    [$item] () 
+
+
+*yii/rbac/DbManager::removeRule*				protected
+>
+ removeRule($rule)
+<
+(boolean) Whether the rule is successfully removed
+
+
+    [$rule] () 
+
+
+*yii/rbac/DbManager::updateItem*				protected
+>
+ updateItem($name, $item)
+<
+(boolean) Whether the auth item is successfully updated
+
+
+    [$name] () 
+    [$item] () 
+
+
+*yii/rbac/DbManager::updateRule*				protected
+>
+ updateRule($name, $rule)
+<
+(boolean) Whether the rule is successfully updated
+
+
+    [$name] () 
+    [$rule] () 
+
+
 *yii/rbac/DbManager::createRole*				public
- See |yii/rbac/Manager::createRole|
+ See |yii/rbac/BaseManager::createRole|
 
 
-*yii/rbac/DbManager::createTask*				public
- See |yii/rbac/Manager::createTask|
+*yii/rbac/DbManager::createPermission*			public
+ See |yii/rbac/BaseManager::createPermission|
 
 
-*yii/rbac/DbManager::createOperation*			public
- See |yii/rbac/Manager::createOperation|
+*yii/rbac/DbManager::add*					public
+ See |yii/rbac/BaseManager::add|
+
+
+*yii/rbac/DbManager::remove*				public
+ See |yii/rbac/BaseManager::remove|
+
+
+*yii/rbac/DbManager::update*				public
+ See |yii/rbac/BaseManager::update|
+
+
+*yii/rbac/DbManager::getRole*				public
+ See |yii/rbac/BaseManager::getRole|
+
+
+*yii/rbac/DbManager::getPermission*			public
+ See |yii/rbac/BaseManager::getPermission|
 
 
 *yii/rbac/DbManager::getRoles*				public
- See |yii/rbac/Manager::getRoles|
+ See |yii/rbac/BaseManager::getRoles|
 
 
-*yii/rbac/DbManager::getTasks*				public
- See |yii/rbac/Manager::getTasks|
+*yii/rbac/DbManager::getPermissions*			public
+ See |yii/rbac/BaseManager::getPermissions|
 
 
-*yii/rbac/DbManager::getOperations*			public
- See |yii/rbac/Manager::getOperations|
-
-
-*yii/rbac/DbManager::executeBizRule*			public
- See |yii/rbac/Manager::executeBizRule|
-
-
-*yii/rbac/DbManager::checkItemChildType*			protected
- See |yii/rbac/Manager::checkItemChildType|
+*yii/rbac/DbManager::executeRule*				protected
+ See |yii/rbac/BaseManager::executeRule|
 
 
 *yii/rbac/DbManager::checkAccess*				public
 >
- checkAccess($userId, $itemName, $params='[]')
+ checkAccess($userId, $permissionName, $params='[]')
 <
-(boolean) Whether the operations can be performed by the user.
+(boolean) Whether the user has the specified permission.
 
 
-    [$userId] (mixed) The user ID. This should can be either an integer or a
-    string representing the unique identifier of a user. See
-    '\yii\web\User::id'.
-    [$itemName] (string) The name of the operation that need access check
-    [$params] (array) Name-value pairs that would be passed to biz rules
-    associated with the tasks and roles assigned to the user. A param with
-    name 'userId' is added to this array, which holds the value of '$userId'.
+    [$userId] () 
+    [$permissionName] () 
+    [$params] () 
 
 
-*yii/rbac/DbManager::createItem*				public
+*yii/rbac/DbManager::getRolesByUser*			public
 >
- createItem($name, $type, $description='''', $bizRule='null', $data='null')
+ getRolesByUser($userId)
 <
-(\yii\rbac\Item) The authorization item
-
- An authorization item represents an action permission (e.g. creating a post).
- It has three types: operation, task and role. Authorization items form a
- hierarchy. Higher level items inheirt permissions representing by lower level
- items.
-    [$name] (string) The item name. This must be a unique identifier.
-    [$type] (integer) The item type (0: operation, 1: task, 2: role).
-    [$description] (string) Description of the item
-    [$bizRule] (string) Business rule associated with the item. This is a
-    piece of PHP code that will be executed when 'checkAccess()' is called for
-    the item.
-    [$data] (mixed) Additional data associated with the item.
+(\yii\rbac\Role[]) All roles directly or indirectly assigned to the user. The
+array is indexed by the role names.
 
 
-*yii/rbac/DbManager::removeItem*				public
+    [$userId] () 
+
+
+*yii/rbac/DbManager::getPermissionsByRole*		public
 >
- removeItem($name)
+ getPermissionsByRole($roleName)
 <
-(boolean) Whether the item exists in the storage and has been removed
+(\yii\rbac\Permission[]) All permissions that the role represents. The array
+is indexed by the permission names.
 
 
-    [$name] (string) The name of the item to be removed
+    [$roleName] () 
 
 
-*yii/rbac/DbManager::getItems*				public
+*yii/rbac/DbManager::getPermissionsByUser*		public
 >
- getItems($userId='null', $type=null)
+ getPermissionsByUser($userId)
 <
-(\yii\rbac\Item[]) The authorization items of the specific type.
+(\yii\rbac\Permission[]) All permissions that the user has. The array is
+indexed by the permission names.
 
 
-    [$userId] (mixed) The user ID. Defaults to null, meaning returning all
-    items even if they are not assigned to a user.
-    [$type] (integer) The item type (0: operation, 1: task, 2: role). Defaults
-    to null, meaning returning all items regardless of their type.
+    [$userId] () 
 
 
-*yii/rbac/DbManager::getItem*				public
+*yii/rbac/DbManager::getRule*				public
 >
- getItem($name)
+ getRule($name)
 <
-(\yii\rbac\Item) The authorization item. Null if the item cannot be found.
+(\yii\rbac\Rule) The rule object, or null if the specified name does not
+correspond to a rule.
 
 
-    [$name] (string) The name of the item
+    [$name] () 
 
 
-*yii/rbac/DbManager::saveItem*				public
+*yii/rbac/DbManager::getRules*				public
 >
- saveItem($item, $oldName='null')
+ getRules()
+<
+(\yii\rbac\Rule[]) The rules indexed by the rule names
+
+
+
+
+*yii/rbac/DbManager::addChild*				public
+>
+ addChild($parent, $child)
 <
 (void)
 
 
-    [$item] (\yii\rbac\Item) The item to be saved.
-    [$oldName] (string) The old item name. If null, it means the item name is
-    not changed.
+    [$parent] () 
+    [$child] () 
 
 
-*yii/rbac/DbManager::addItemChild*			public
+*yii/rbac/DbManager::removeChild*				public
 >
- addItemChild($itemName, $childName)
-<
-(boolean) Whether the item is added successfully
-
-
-    [$itemName] (string) The parent item name
-    [$childName] (string) The child item name
-
-
-*yii/rbac/DbManager::removeItemChild*			public
->
- removeItemChild($itemName, $childName)
+ removeChild($parent, $child)
 <
 (boolean) Whether the removal is successful
 
- Note, the child item is not deleted. Only the parent-child relationship is
- removed.
-    [$itemName] (string) The parent item name
-    [$childName] (string) The child item name
+
+    [$parent] () 
+    [$child] () 
 
 
-*yii/rbac/DbManager::hasItemChild*			public
+*yii/rbac/DbManager::getChildren*				public
 >
- hasItemChild($itemName, $childName)
+ getChildren($name)
 <
-(boolean) Whether the child exists
+(\yii\rbac\Item[]) The child permissions and/or roles
 
 
-    [$itemName] (string) The parent item name
-    [$childName] (string) The child item name
-
-
-*yii/rbac/DbManager::getItemChildren*			public
->
- getItemChildren($names)
-<
-(\yii\rbac\Item[]) All child items of the parent
-
-
-    [$names] (mixed) The parent item name. This can be either a string or an
-    array. The latter represents a list of item names.
+    [$name] () 
 
 
 *yii/rbac/DbManager::assign*				public
 >
- assign($userId, $itemName, $bizRule='null', $data='null')
+ assign($role, $userId, $rule='null', $data='null')
 <
-(\yii\rbac\Assignment) The authorization assignment information.
+(\yii\rbac\Assignment) The role assignment information.
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
-    [$bizRule] (string) The business rule to be executed when 'checkAccess()'
-    is called for this particular authorization item.
-    [$data] (mixed) Additional data associated with this assignment
+    [$role] () 
+    [$userId] () 
+    [$rule] () 
+    [$data] () 
 
 
 *yii/rbac/DbManager::revoke*				public
 >
- revoke($userId, $itemName)
+ revoke($role, $userId)
 <
-(boolean) Whether removal is successful
+(boolean) Whether the revoking is successful
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
+    [$role] () 
+    [$userId] () 
 
 
 *yii/rbac/DbManager::revokeAll*				public
 >
  revokeAll($userId)
 <
-(boolean) Whether removal is successful
+(boolean) Whether the revoking is successful
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-
-
-*yii/rbac/DbManager::isAssigned*				public
->
- isAssigned($userId, $itemName)
-<
-(boolean) Whether the item has been assigned to the user.
-
-
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
+    [$userId] () 
 
 
 *yii/rbac/DbManager::getAssignment*			public
 >
- getAssignment($userId, $itemName)
+ getAssignment($roleName, $userId)
 <
-(\yii\rbac\Assignment) The item assignment information. Null is returned if
-the item is not assigned to the user.
+(\yii\rbac\Assignment) The assignment information. Null is returned if the
+role is not assigned to the user.
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
+    [$roleName] () 
+    [$userId] () 
 
 
 *yii/rbac/DbManager::getAssignments*			public
 >
  getAssignments($userId)
 <
-(\yii\rbac\Assignment[]) The item assignment information for the user. An
-empty array will be returned if there is no item assigned to the user.
+(\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
+will be returned if there is no role assigned to the user.
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-
-
-*yii/rbac/DbManager::saveAssignment*			public
->
- saveAssignment($assignment)
-<
-(void)
-
-
-    [$assignment] (\yii\rbac\Assignment) The assignment that has been changed.
+    [$userId] () 
 
 
 *yii/rbac/DbManager::clearAll*				public
@@ -418,52 +456,75 @@ empty array will be returned if there is no item assigned to the user.
 
 
 
-*yii/rbac/DbManager::save*				public
->
- save()
-<
-(void)
-
-
-
-
 *yii/rbac/DbManager::checkAccessRecursive*		protected
 >
- checkAccessRecursive($userId, $itemName, $params, $assignments)
+ checkAccessRecursive($user, $itemName, $params, $assignments)
 <
 (boolean) Whether the operations can be performed by the user.
 
  This method is internally called by 'checkAccess()'.
-    [$userId] (mixed) The user ID. This should can be either an integer or a
-    string representing the unique identifier of a user. See
+    [$user] (string|integer) The user ID. This should can be either an integer
+    or a string representing the unique identifier of a user. See
     '\yii\web\User::id'.
     [$itemName] (string) The name of the operation that need access check
-    [$params] (array) Name-value pairs that would be passed to biz rules
+    [$params] (array) Name-value pairs that would be passed to rules
     associated with the tasks and roles assigned to the user. A param with
-    name 'userId' is added to this array, which holds the value of '$userId'.
+    name 'user' is added to this array, which holds the value of '$userId'.
     [$assignments] (\yii\rbac\Assignment[]) The assignments to the specified
     user
 
 
+*yii/rbac/DbManager::supportsCascadeUpdate*		protected
+>
+ supportsCascadeUpdate()
+<
+(boolean) Whether the database supports cascading update and delete.
+
+ The default implementation will return false for SQLite database and true for
+ all other databases.
+
+
+*yii/rbac/DbManager::populateItem*			protected
+>
+ populateItem($row)
+<
+(\yii\rbac\Item) The populated auth item instance (either Role or Permission)
+
+
+    [$row] (array) The data from the auth item table
+
+
+*yii/rbac/DbManager::getChildrenList*			protected
+>
+ getChildrenList()
+<
+(array) The children list. Each array key is a parent item name, and the
+corresponding array value is a list of child item names.
+
+
+
+
+*yii/rbac/DbManager::getChildrenRecursive*		protected
+>
+ getChildrenRecursive($name, $childrenList, $result)
+<
+(void)
+
+
+    [$name] (string) The name of the item whose children are to be looked for.
+    [$childrenList] (array) The child list built via 'getChildrenList()'
+    [$result] (array) The children and grand children (in array keys)
+
+
 *yii/rbac/DbManager::detectLoop*				protected
 >
- detectLoop($itemName, $childName)
+ detectLoop($parent, $child)
 <
 (boolean) Whether a loop exists
 
 
-    [$itemName] (string) Parent item name
-    [$childName] (string) The name of the child item that is to be added to
-    the hierarchy
-
-
-*yii/rbac/DbManager::usingSqlite*				protected
->
- usingSqlite()
-<
-(boolean) Whether the database is a SQLite database
-
-
+    [$parent] (\yii\rbac\Item) The parent item
+    [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
 
 
 

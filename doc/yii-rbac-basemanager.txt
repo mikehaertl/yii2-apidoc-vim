@@ -1,0 +1,392 @@
+
+*yii/rbac/BaseManager*   >> |yii/base/Component|
+======================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/rbac/DbManager|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$defaultRoles				*yii/rbac/BaseManager::$defaultRoles*
+ (array) A list of role names that are assigned to every user automatically
+ without calling 'assign()'.
+
+$behaviors				*yii/rbac/BaseManager::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$roles					*yii/rbac/BaseManager::$roles*
+ ()
+
+$permissions				*yii/rbac/BaseManager::$permissions*
+ ()
+
+$rules					*yii/rbac/BaseManager::$rules*
+ (\yii\rbac\Rule[]) The rules indexed by the rule names
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/rbac/BaseManager::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/rbac/BaseManager::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/rbac/BaseManager::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/rbac/BaseManager::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/rbac/BaseManager::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/rbac/BaseManager::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/rbac/BaseManager::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/rbac/BaseManager::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/rbac/BaseManager::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/rbac/BaseManager::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/rbac/BaseManager::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/rbac/BaseManager::hasMethod*				public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/rbac/BaseManager::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/rbac/BaseManager::behaviors*				public
+ See |yii/base/Component::behaviors|
+
+
+*yii/rbac/BaseManager::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/rbac/BaseManager::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/rbac/BaseManager::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/rbac/BaseManager::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/rbac/BaseManager::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/rbac/BaseManager::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/rbac/BaseManager::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/rbac/BaseManager::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/rbac/BaseManager::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/rbac/BaseManager::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/rbac/BaseManager::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/rbac/BaseManager::getItem*				protected
+>
+ getItem($name)
+<
+(\yii\rbac\Item) The auth item corresponding to the specified name. Null is
+returned if no such item.
+
+
+    [$name] (string) The auth item name.
+
+
+*yii/rbac/BaseManager::getItems*				protected
+>
+ getItems($type)
+<
+(\yii\rbac\Item[]) The auth items of the specified type.
+
+
+    [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
+    'Item::TYPE_PERMISSION'
+
+
+*yii/rbac/BaseManager::addItem*				protected
+>
+ addItem($item)
+<
+(boolean) Whether the auth item is successfully added to the system
+
+
+    [$item] (\yii\rbac\Item) 
+
+
+*yii/rbac/BaseManager::addRule*				protected
+>
+ addRule($rule)
+<
+(boolean) Whether the rule is successfully added to the system
+
+
+    [$rule] (\yii\rbac\Rule) 
+
+
+*yii/rbac/BaseManager::removeItem*			protected
+>
+ removeItem($item)
+<
+(boolean) Whether the role or permission is successfully removed
+
+
+    [$item] (\yii\rbac\Item) 
+
+
+*yii/rbac/BaseManager::removeRule*			protected
+>
+ removeRule($rule)
+<
+(boolean) Whether the rule is successfully removed
+
+
+    [$rule] (\yii\rbac\Rule) 
+
+
+*yii/rbac/BaseManager::updateItem*			protected
+>
+ updateItem($name, $item)
+<
+(boolean) Whether the auth item is successfully updated
+
+
+    [$name] (string) The old name of the auth item
+    [$item] (\yii\rbac\Item) 
+
+
+*yii/rbac/BaseManager::updateRule*			protected
+>
+ updateRule($name, $rule)
+<
+(boolean) Whether the rule is successfully updated
+
+
+    [$name] (string) The old name of the rule
+    [$rule] (\yii\rbac\Rule) 
+
+
+*yii/rbac/BaseManager::createRole*			public
+>
+ createRole($name)
+<
+(void)
+
+
+    [$name] () 
+
+
+*yii/rbac/BaseManager::createPermission*			public
+>
+ createPermission($name)
+<
+(void)
+
+
+    [$name] () 
+
+
+*yii/rbac/BaseManager::add*				public
+>
+ add($object)
+<
+(void)
+
+
+    [$object] () 
+
+
+*yii/rbac/BaseManager::remove*				public
+>
+ remove($object)
+<
+(void)
+
+
+    [$object] () 
+
+
+*yii/rbac/BaseManager::update*				public
+>
+ update($name, $object)
+<
+(void)
+
+
+    [$name] () 
+    [$object] () 
+
+
+*yii/rbac/BaseManager::getRole*				public
+>
+ getRole($name)
+<
+(void)
+
+
+    [$name] () 
+
+
+*yii/rbac/BaseManager::getPermission*			public
+>
+ getPermission($name)
+<
+(void)
+
+
+    [$name] () 
+
+
+*yii/rbac/BaseManager::getRoles*				public
+>
+ getRoles()
+<
+(void)
+
+
+
+
+*yii/rbac/BaseManager::getPermissions*			public
+>
+ getPermissions()
+<
+(void)
+
+
+
+
+*yii/rbac/BaseManager::executeRule*			protected
+>
+ executeRule($item, $params)
+<
+(boolean) The return value of 'Rule::execute()'. If the auth item does not
+specify a rule, true will be returned.
+
+ If the item does not specify a rule, this method will return true. Otherwise,
+ it will return the value of 'Rule::execute()'.
+    [$item] (\yii\rbac\Item) The auth item that needs to execute its rule
+    [$params] (array) Parameters passed to 'ManagerInterface::checkAccess()'
+    and will be passed to the rule
+
+
+*yii/rbac/BaseManager::checkAccess*			public
+ See |yii/rbac/ManagerInterface::checkAccess|
+
+
+*yii/rbac/BaseManager::getRolesByUser*			public
+ See |yii/rbac/ManagerInterface::getRolesByUser|
+
+
+*yii/rbac/BaseManager::getPermissionsByRole*		public
+ See |yii/rbac/ManagerInterface::getPermissionsByRole|
+
+
+*yii/rbac/BaseManager::getPermissionsByUser*		public
+ See |yii/rbac/ManagerInterface::getPermissionsByUser|
+
+
+*yii/rbac/BaseManager::getRule*				public
+ See |yii/rbac/ManagerInterface::getRule|
+
+
+*yii/rbac/BaseManager::getRules*				public
+ See |yii/rbac/ManagerInterface::getRules|
+
+
+*yii/rbac/BaseManager::addChild*				public
+ See |yii/rbac/ManagerInterface::addChild|
+
+
+*yii/rbac/BaseManager::removeChild*			public
+ See |yii/rbac/ManagerInterface::removeChild|
+
+
+*yii/rbac/BaseManager::getChildren*			public
+ See |yii/rbac/ManagerInterface::getChildren|
+
+
+*yii/rbac/BaseManager::assign*				public
+ See |yii/rbac/ManagerInterface::assign|
+
+
+*yii/rbac/BaseManager::revoke*				public
+ See |yii/rbac/ManagerInterface::revoke|
+
+
+*yii/rbac/BaseManager::revokeAll*				public
+ See |yii/rbac/ManagerInterface::revokeAll|
+
+
+*yii/rbac/BaseManager::getAssignment*			public
+ See |yii/rbac/ManagerInterface::getAssignment|
+
+
+*yii/rbac/BaseManager::getAssignments*			public
+ See |yii/rbac/ManagerInterface::getAssignments|
+
+
+*yii/rbac/BaseManager::clearAll*				public
+ See |yii/rbac/ManagerInterface::clearAll|
+
+
+*yii/rbac/BaseManager::clearAssignments*			public
+ See |yii/rbac/ManagerInterface::clearAssignments|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

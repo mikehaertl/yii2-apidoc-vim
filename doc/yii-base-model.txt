@@ -25,8 +25,7 @@ DESCRIPTION
  'EVENT_AFTER_VALIDATE': an event raised at the end of 'validate()'
 
  You may directly use Model to store model data, or extend it with
- customization. You may also customize Model by attaching 'ModelBehavior|model
- behaviors'.
+ customization.
 
 
 PROPERTY DETAILS
@@ -351,7 +350,7 @@ callables returning the field values.
 <
 (string) The form name of this model class.
 
- The form name is mainly used by '\yii\web\ActiveForm' to determine how to
+ The form name is mainly used by '\yii\widgets\ActiveForm' to determine how to
  name the input fields for the attributes in a model. If the form name is "A"
  and an attribute name is "b", then the corresponding input name would be
  "A[b]". If the form name is an empty string, then the input name would be
@@ -392,7 +391,7 @@ callables returning the field values.
 
 *yii/base/Model::validate*				public
 >
- validate($attributes='null', $clearErrors='true')
+ validate($attributeNames='null', $clearErrors='true')
 <
 (boolean) Whether the validation is successful without any error.
 
@@ -410,9 +409,9 @@ callables returning the field values.
 
  Errors found during the validation can be retrieved via 'getErrors()',
  'getFirstErrors()' and 'getFirstError()'.
-    [$attributes] (array) List of attributes that should be validated. If this
-    parameter is empty, it means any attribute listed in the applicable
-    validation rules should be validated.
+    [$attributeNames] (array) List of attribute names that should be
+    validated. If this parameter is empty, it means any attribute listed in
+    the applicable validation rules should be validated.
     [$clearErrors] (boolean) Whether to call 'clearErrors()' before performing
     validation
 
@@ -730,7 +729,7 @@ returned if there is no error.
 
 *yii/base/Model::validateMultiple*			public
 >
- validateMultiple($models, $attributes='null')
+ validateMultiple($models, $attributeNames='null')
 <
 (boolean) Whether all models are valid. False will be returned if one or
 multiple models have validation error.
@@ -738,9 +737,9 @@ multiple models have validation error.
  This method will validate every model. The models being validated may be of
  the same or different types.
     [$models] (array) The models to be validated
-    [$attributes] (array) List of attributes that should be validated. If this
-    parameter is empty, it means any attribute listed in the applicable
-    validation rules should be validated.
+    [$attributeNames] (array) List of attribute names that should be
+    validated. If this parameter is empty, it means any attribute listed in
+    the applicable validation rules should be validated.
 
 
 *yii/base/Model::getIterator*				public

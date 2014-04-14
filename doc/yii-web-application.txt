@@ -14,9 +14,6 @@ PROPERTY DETAILS
 $params					*yii/web/Application::$params*
  See |yii/base/Module::$params|
 
-$preload				*yii/web/Application::$preload*
- See |yii/base/Module::$preload|
-
 $id					*yii/web/Application::$id*
  See |yii/base/Module::$id|
 
@@ -173,8 +170,8 @@ $mail					*yii/web/Application::$mail*
  (\yii\mail\MailerInterface) The mailer interface
 
 $authManager				*yii/web/Application::$authManager*
- (\yii\rbac\Manager) The auth manager for this application. Null is returned
- if auth manager is not configured.
+ (\yii\rbac\ManagerInterface) The auth manager for this application. Null is
+ returned if auth manager is not configured.
 
 $assetManager				*yii/web/Application::$assetManager*
  (\yii\web\AssetManager) The asset manager component
@@ -373,15 +370,6 @@ METHOD DETAILS
  See |yii/base/Module::setModules|
 
 
-*yii/web/Application::preloadComponents*			public
->
- preloadComponents()
-<
-(void)
-
-
-
-
 *yii/web/Application::runAction*				public
  See |yii/base/Module::runAction|
 
@@ -406,8 +394,13 @@ METHOD DETAILS
  See |yii/base/Application::preInit|
 
 
-*yii/web/Application::initExtensions*			protected
- See |yii/base/Application::initExtensions|
+*yii/web/Application::bootstrap*				protected
+>
+ bootstrap()
+<
+(void)
+
+
 
 
 *yii/web/Application::registerErrorHandler*		protected

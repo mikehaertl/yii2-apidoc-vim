@@ -418,13 +418,26 @@ to 'fields()' on the format of the return value.
     [$offset] (mixed) The offset to unset element
 
 
-*yii/db/BaseActiveRecord::find*				public
+*yii/db/BaseActiveRecord::findOne*			public
 >
- find()
+ findOne($condition)
 <
-(void)
+(static) ActiveRecord instance matching the condition, or null if nothing
+matches.
 
 
+    [$condition] () 
+
+
+*yii/db/BaseActiveRecord::findAll*			public
+>
+ findAll($condition)
+<
+(static[]|array) An array of ActiveRecord instance, or an empty array if
+nothing matches.
+
+
+    [$condition] () 
 
 
 *yii/db/BaseActiveRecord::updateAll*			public
@@ -717,7 +730,7 @@ does not exist.
 
 *yii/db/BaseActiveRecord::save*				public
 >
- save($runValidation='true', $attributes='null')
+ save($runValidation='true', $attributeNames='null')
 <
 (boolean) Whether the saving succeeds
 
@@ -726,7 +739,7 @@ does not exist.
 
  For example, to save a customer record:
 
-   $customer = new Customer;  // or $customer = Customer::find($id);
+   $customer = new Customer;  // or $customer = Customer::findOne($id);
    $customer->name = $name;
    $customer->email = $email;
    $customer->save();
@@ -734,13 +747,14 @@ does not exist.
 
     [$runValidation] (boolean) Whether to perform validation before saving the
     record. If the validation fails, the record will not be saved to database.
-    [$attributes] (array) List of attributes that need to be saved. Defaults
-    to null, meaning all attributes that are loaded from DB will be saved.
+    [$attributeNames] (array) List of attribute names that need to be saved.
+    Defaults to null, meaning all attributes that are loaded from DB will be
+    saved.
 
 
 *yii/db/BaseActiveRecord::update*				public
 >
- update($runValidation='true', $attributes='null')
+ update($runValidation='true', $attributeNames='null')
 <
 (integer|boolean) The number of rows affected, or false if validation fails or
 'beforeSave()' stops the updating process.
@@ -763,7 +777,7 @@ does not exist.
 
  For example, to update a customer record:
 
-   $customer = Customer::find($id);
+   $customer = Customer::findOne($id);
    $customer->name = $name;
    $customer->email = $email;
    $customer->update();
@@ -782,8 +796,9 @@ does not exist.
     [$runValidation] (boolean) Whether to perform validation before saving the
     record. If the validation fails, the record will not be inserted into the
     database.
-    [$attributes] (array) List of attributes that need to be saved. Defaults
-    to null, meaning all attributes that are loaded from DB will be saved.
+    [$attributeNames] (array) List of attribute names that need to be saved.
+    Defaults to null, meaning all attributes that are loaded from DB will be
+    saved.
 
 
 *yii/db/BaseActiveRecord::updateAttributes*		public
@@ -827,7 +842,7 @@ stops the updating process.
 
  An example usage is as follows:
 
-   $post = Post::find($id);
+   $post = Post::findOne($id);
    $post->updateCounters(['view_count' => 1]);
 
 
@@ -1009,7 +1024,7 @@ returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
 
  This refers to the primary key value that is populated into the record after
- executing a find method (e.g. find(), findAll()). The value remains unchanged
+ executing a find method (e.g. find(), findOne()). The value remains unchanged
  even if the primary key attribute is manually assigned with a different
  value.
     [$asArray] (boolean) Whether to return the primary key value as an array.
@@ -1123,8 +1138,8 @@ this model
  See |yii/db/ActiveRecordInterface::primaryKey|
 
 
-*yii/db/BaseActiveRecord::createQuery*			public
- See |yii/db/ActiveRecordInterface::createQuery|
+*yii/db/BaseActiveRecord::find*				public
+ See |yii/db/ActiveRecordInterface::find|
 
 
 *yii/db/BaseActiveRecord::insert*				public

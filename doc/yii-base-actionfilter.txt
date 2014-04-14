@@ -5,15 +5,27 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/web/AccessControl|
-|yii/web/HttpCache|
-|yii/web/PageCache|
+|yii/filters/RateLimiter|
+|yii/filters/auth/HttpBearerAuth|
+|yii/filters/auth/AuthMethod|
+|yii/filters/auth/CompositeAuth|
+|yii/filters/auth/QueryParamAuth|
+|yii/filters/auth/HttpBasicAuth|
+|yii/filters/AccessControl|
+|yii/filters/HttpCache|
+|yii/filters/PageCache|
+|yii/filters/ContentNegotiator|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- Check implementation of '\yii\web\AccessControl', '\yii\web\PageCache' and
- '\yii\web\HttpCache' as examples on how to use it.
+ An action filter will participate in the action execution workflow by
+ responding to the 'beforeAction' and 'afterAction' events triggered by
+ modules and controllers.
+
+ Check implementation of '\yii\filters\AccessControl',
+ '\yii\filters\PageCache' and '\yii\filters\HttpCache' as examples on how to
+ use it.
 
 
 PROPERTY DETAILS
@@ -27,6 +39,9 @@ $only					*yii/base/ActionFilter::$only*
  is not set, then the filter applies to all actions, unless they are listed in
  'except'. If an action ID appears in both 'only' and 'except', this filter
  will NOT apply to it.
+
+ Note that if the filter is attached to a module, the action IDs should also
+ include child module IDs (if any) and controller IDs.
 
 $except					*yii/base/ActionFilter::$except*
  (array) List of action IDs that this filter should not apply to.
@@ -85,28 +100,33 @@ METHOD DETAILS
 
 
 *yii/base/ActionFilter::events*				public
->
- events()
-<
-(array) Events (array keys) and the corresponding event handler methods (array
-values).
-
-
+ See |yii/base/Behavior::events|
 
 
 *yii/base/ActionFilter::attach*				public
- See |yii/base/Behavior::attach|
+>
+ attach($owner)
+<
+(void)
+
+
+    [$owner] () 
 
 
 *yii/base/ActionFilter::detach*				public
- See |yii/base/Behavior::detach|
+>
+ detach()
+<
+(void)
+
+
 
 
 *yii/base/ActionFilter::beforeFilter*			public
 >
  beforeFilter($event)
 <
-(boolean) 
+(void)
 
 
     [$event] (\yii\base\ActionEvent) 
@@ -116,7 +136,7 @@ values).
 >
  afterFilter($event)
 <
-(boolean) 
+(void)
 
 
     [$event] (\yii\base\ActionEvent) 

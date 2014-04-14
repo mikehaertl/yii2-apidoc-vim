@@ -31,8 +31,9 @@ $exitStatus				*yii/web/Response::$exitStatus*
 
 $format					*yii/web/Response::$format*
  (string) The response format. This determines how to convert 'data' into
- 'content' when the latter is not set. By default, the following formats are
- supported:
+ 'content' when the latter is not set. The value of this property must be one
+ of the keys declared in the 'formatters] array. By default, the following
+ formats are supported:
 
  - 'FORMAT_RAW': the data will be treated as the response content without any
  conversion.   No extra HTTP header will be added. - 'FORMAT_HTML': the data
@@ -49,6 +50,17 @@ $format					*yii/web/Response::$format*
 
  You may customize the formatting process or support additional formats by
  configuring 'formatters'.
+
+$acceptMimeType				*yii/web/Response::$acceptMimeType*
+ (string) The MIME type (e.g. 'application/json') from the request ACCEPT
+ header chosen for this response. This property is mainly set by
+ [\yii\filters\ContentNegotiator'.
+
+$acceptParams				*yii/web/Response::$acceptParams*
+ (array) The parameters (e.g. '['q' => 1, 'version' => '1.0']') associated
+ with the 'acceptMimeType|chosen MIME type'. This is a list of name-value
+ pairs associated with 'acceptMimeType' from the ACCEPT HTTP header. This
+ property is mainly set by [\yii\filters\ContentNegotiator'.
 
 $formatters				*yii/web/Response::$formatters*
  (array) The formatters for converting data into the response content of the

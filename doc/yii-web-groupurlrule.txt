@@ -1,0 +1,151 @@
+
+*yii/web/GroupUrlRule*   >> |yii/web/CompositeUrlRule|
+======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ GroupUrlRule is best used by a module which often uses module ID as the
+ prefix for the URL rules. For example, the following code creates a rule for
+ the 'admin' module:
+
+   new GroupUrlRule([
+       'prefix' => 'admin',
+       'rules' => [
+           'login' => 'user/login',
+           'logout' => 'user/logout',
+           'dashboard' => 'default/dashboard',
+       ],
+   ]);
+
+   // the above rule is equivalent to the following three rules:
+
+   [
+       'admin/login' => 'admin/user/login',
+       'admin/logout' => 'admin/user/logout',
+       'admin/dashboard' => 'admin/default/dashboard',
+   ]
+
+ The above example assumes the prefix for patterns and routes are the same.
+ They can be made different by configuring 'prefix' and 'routePrefix'
+ separately.
+
+ Using a GroupUrlRule is more efficient than directly declaring the individual
+ rules it contains. This is because GroupUrlRule can quickly determine if it
+ should process a URL parsing or creation request by simply checking if the
+ prefix matches.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$rules					*yii/web/GroupUrlRule::$rules*
+ (array) The rules contained within this composite rule. Please refer to
+ 'UrlManager::rules' for the format of this property.
+
+$prefix					*yii/web/GroupUrlRule::$prefix*
+ (string) The prefix for the pattern part of every rule declared in 'rules'.
+ The prefix and the pattern will be separated with a slash.
+
+$routePrefix				*yii/web/GroupUrlRule::$routePrefix*
+ (string) The prefix for the route part of every rule declared in 'rules'. The
+ prefix and the route will be separated with a slash. If this property is not
+ set, it will take the value of 'prefix'.
+
+$ruleConfig				*yii/web/GroupUrlRule::$ruleConfig*
+ (array) The default configuration of URL rules. Individual rule
+ configurations specified via 'rules' will take precedence when the same
+ property of the rule is configured.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/web/GroupUrlRule::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/web/GroupUrlRule::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/web/GroupUrlRule::init*				public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii/web/GroupUrlRule::__get*				public
+ See |yii/base/Object::__get|
+
+
+*yii/web/GroupUrlRule::__set*				public
+ See |yii/base/Object::__set|
+
+
+*yii/web/GroupUrlRule::__isset*				public
+ See |yii/base/Object::__isset|
+
+
+*yii/web/GroupUrlRule::__unset*				public
+ See |yii/base/Object::__unset|
+
+
+*yii/web/GroupUrlRule::__call*				public
+ See |yii/base/Object::__call|
+
+
+*yii/web/GroupUrlRule::hasProperty*			public
+ See |yii/base/Object::hasProperty|
+
+
+*yii/web/GroupUrlRule::canGetProperty*			public
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/web/GroupUrlRule::canSetProperty*			public
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/web/GroupUrlRule::hasMethod*				public
+ See |yii/base/Object::hasMethod|
+
+
+*yii/web/GroupUrlRule::createRules*			protected
+>
+ createRules()
+<
+(\yii\web\UrlRuleInterface[]) The URL rules
+
+
+
+
+*yii/web/GroupUrlRule::parseRequest*			public
+>
+ parseRequest($manager, $request)
+<
+(void)
+
+
+    [$manager] () 
+    [$request] () 
+
+
+*yii/web/GroupUrlRule::createUrl*				public
+>
+ createUrl($manager, $route, $params)
+<
+(void)
+
+
+    [$manager] () 
+    [$route] () 
+    [$params] () 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

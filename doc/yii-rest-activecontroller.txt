@@ -49,26 +49,8 @@ $enableCsrfValidation			*yii/rest/ActiveController::$enableCsrfValidation*
 $actionParams				*yii/rest/ActiveController::$actionParams*
  See |yii/web/Controller::$actionParams|
 
-$versionHeaderParam			*yii/rest/ActiveController::$versionHeaderParam*
- See |yii/rest/Controller::$versionHeaderParam|
-
 $serializer				*yii/rest/ActiveController::$serializer*
  See |yii/rest/Controller::$serializer|
-
-$authMethods				*yii/rest/ActiveController::$authMethods*
- See |yii/rest/Controller::$authMethods|
-
-$rateLimiter				*yii/rest/ActiveController::$rateLimiter*
- See |yii/rest/Controller::$rateLimiter|
-
-$version				*yii/rest/ActiveController::$version*
- See |yii/rest/Controller::$version|
-
-$supportedVersions			*yii/rest/ActiveController::$supportedVersions*
- See |yii/rest/Controller::$supportedVersions|
-
-$supportedFormats			*yii/rest/ActiveController::$supportedFormats*
- See |yii/rest/Controller::$supportedFormats|
 
 $modelClass				*yii/rest/ActiveController::$modelClass*
  (string) The model class name. This property must be set.
@@ -85,6 +67,10 @@ $transactional				*yii/rest/ActiveController::$transactional*
 
 $behaviors				*yii/rest/ActiveController::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$modules				*yii/rest/ActiveController::$modules*
+ (\yii\base\Module[]) All ancestor modules that this controller is located
+ within.
 
 $uniqueId				*yii/rest/ActiveController::$uniqueId*
  (string) The controller ID that is prefixed with the module ID (if any).
@@ -236,11 +222,15 @@ METHOD DETAILS
 
 
 *yii/rest/ActiveController::beforeAction*			public
- See |yii/rest/Controller::beforeAction|
+ See |yii/web/Controller::beforeAction|
 
 
 *yii/rest/ActiveController::afterAction*			public
  See |yii/rest/Controller::afterAction|
+
+
+*yii/rest/ActiveController::getModules*			public
+ See |yii/base/Controller::getModules|
 
 
 *yii/rest/ActiveController::getUniqueId*			public
@@ -299,10 +289,6 @@ METHOD DETAILS
  See |yii/web/Controller::refresh|
 
 
-*yii/rest/ActiveController::resolveFormatAndVersion*	protected
- See |yii/rest/Controller::resolveFormatAndVersion|
-
-
 *yii/rest/ActiveController::verbs*			protected
 >
  verbs()
@@ -310,14 +296,6 @@ METHOD DETAILS
 (array) The allowed HTTP verbs.
 
 
-
-
-*yii/rest/ActiveController::authenticate*			protected
- See |yii/rest/Controller::authenticate|
-
-
-*yii/rest/ActiveController::checkRateLimit*		protected
- See |yii/rest/Controller::checkRateLimit|
 
 
 *yii/rest/ActiveController::serializeData*		protected
