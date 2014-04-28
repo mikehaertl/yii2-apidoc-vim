@@ -1,0 +1,372 @@
+
+*yii/gii/Module*   >> |yii/base/Module|
+================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ To use Gii, include it as a module in the application configuration like the
+ following:
+
+   return [
+       'bootstrap' => ['gii'],
+       'modules' => [
+           'gii' => ['class' => 'yii\gii\Module'],
+       ],
+   ]
+
+ Because Gii generates new code files on the server, you should only use it on
+ your own development machine. To prevent other people from using this module,
+ by default, Gii can only be accessed by localhost. You may configure its
+ 'allowedIPs' property if you want to make it accessible on other machines.
+
+ With the above configuration, you will be able to access GiiModule in your
+ browser using the URL 'http://localhost/path/to/index.php?r=gii'
+
+ If your application enables '\yii\web\UrlManager::enablePrettyUrl|pretty
+ URLs', you can then access Gii via URL:
+ 'http://localhost/path/to/index.php/gii'
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$params					*yii/gii/Module::$params*
+ See |yii/base/Module::$params|
+
+$id					*yii/gii/Module::$id*
+ See |yii/base/Module::$id|
+
+$module					*yii/gii/Module::$module*
+ See |yii/base/Module::$module|
+
+$layout					*yii/gii/Module::$layout*
+ See |yii/base/Module::$layout|
+
+$controllerMap				*yii/gii/Module::$controllerMap*
+ See |yii/base/Module::$controllerMap|
+
+$controllerNamespace			*yii/gii/Module::$controllerNamespace*
+ ()
+
+$defaultRoute				*yii/gii/Module::$defaultRoute*
+ See |yii/base/Module::$defaultRoute|
+
+$allowedIPs				*yii/gii/Module::$allowedIPs*
+ (array) The list of IPs that are allowed to access this module. Each array
+ element represents a single IP filter which can be either an IP address or an
+ address with wildcard (e.g. 192.168.0.*) to represent a network segment. The
+ default value is '['127.0.0.1', '::1']', which means the module can only be
+ accessed by localhost.
+
+$generators				*yii/gii/Module::$generators*
+ (array|\yii\gii\Generator[]) A list of generator configurations or instances.
+ The array keys are the generator IDs (e.g. "crud"), and the array elements
+ are the corresponding generator configurations or the instances.
+
+ After the module is initialized, this property will become an array of
+ generator instances which are created based on the configurations previously
+ taken by this property.
+
+ Newly assigned generators will be merged with the 'coreGenerators()|core
+ ones', and the former takes precedence in case when they have the same
+ generator ID.
+
+$newFileMode				*yii/gii/Module::$newFileMode*
+ (integer) The permission to be set for newly generated code files. This value
+ will be used by PHP chmod function. Defaults to 0666, meaning the file is
+ read-writable by all users.
+
+$newDirMode				*yii/gii/Module::$newDirMode*
+ (integer) The permission to be set for newly generated directories. This
+ value will be used by PHP chmod function. Defaults to 0777, meaning the
+ directory can be read, written and executed by all users.
+
+$behaviors				*yii/gii/Module::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$components				*yii/gii/Module::$components*
+ (array) The list of the component definitions or the loaded component
+ instances (ID => definition or instance).
+
+$uniqueId				*yii/gii/Module::$uniqueId*
+ (string) The unique ID of the module.
+
+$basePath				*yii/gii/Module::$basePath*
+ (string) The root directory of the module.
+
+$controllerPath				*yii/gii/Module::$controllerPath*
+ (string) The directory that contains the controller classes.
+
+$viewPath				*yii/gii/Module::$viewPath*
+ (string) The root directory of view files. Defaults to "'basePath'/view".
+
+$layoutPath				*yii/gii/Module::$layoutPath*
+ (string) The root directory of layout files. Defaults to
+ "'viewPath'/layouts".
+
+$aliases				*yii/gii/Module::$aliases*
+ (array) List of path aliases to be defined. The array keys are alias names
+ (must start with '@') and the array values are the corresponding paths or
+ aliases. For example,
+
+   [
+       '@models' => '@app/models', // an existing alias
+       '@backend' => __DIR__ . '/../backend',  // a directory
+   ]
+
+
+
+$modules				*yii/gii/Module::$modules*
+ (array) The modules (indexed by their IDs)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/gii/Module::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/gii/Module::__construct*				public
+ See |yii/base/Module::__construct|
+
+
+*yii/gii/Module::init*					public
+ See |yii/base/Module::init|
+
+
+*yii/gii/Module::__get*					public
+ See |yii/di/ServiceLocator::__get|
+
+
+*yii/gii/Module::__set*					public
+ See |yii/base/Component::__set|
+
+
+*yii/gii/Module::__isset*					public
+ See |yii/di/ServiceLocator::__isset|
+
+
+*yii/gii/Module::__unset*					public
+ See |yii/base/Component::__unset|
+
+
+*yii/gii/Module::__call*					public
+ See |yii/base/Component::__call|
+
+
+*yii/gii/Module::hasProperty*				public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/gii/Module::canGetProperty*				public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/gii/Module::canSetProperty*				public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/gii/Module::hasMethod*				public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/gii/Module::__clone*					public
+ See |yii/base/Component::__clone|
+
+
+*yii/gii/Module::behaviors*				public
+ See |yii/base/Component::behaviors|
+
+
+*yii/gii/Module::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/gii/Module::on*					public
+ See |yii/base/Component::on|
+
+
+*yii/gii/Module::off*					public
+ See |yii/base/Component::off|
+
+
+*yii/gii/Module::trigger*					public
+ See |yii/base/Component::trigger|
+
+
+*yii/gii/Module::getBehavior*				public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/gii/Module::getBehaviors*				public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/gii/Module::attachBehavior*				public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/gii/Module::attachBehaviors*				public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/gii/Module::detachBehavior*				public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/gii/Module::detachBehaviors*				public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/gii/Module::ensureBehaviors*				public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/gii/Module::has*					public
+ See |yii/di/ServiceLocator::has|
+
+
+*yii/gii/Module::get*					public
+ See |yii/di/ServiceLocator::get|
+
+
+*yii/gii/Module::set*					public
+ See |yii/di/ServiceLocator::set|
+
+
+*yii/gii/Module::clear*					public
+ See |yii/di/ServiceLocator::clear|
+
+
+*yii/gii/Module::getComponents*				public
+ See |yii/di/ServiceLocator::getComponents|
+
+
+*yii/gii/Module::setComponents*				public
+ See |yii/di/ServiceLocator::setComponents|
+
+
+*yii/gii/Module::getUniqueId*				public
+ See |yii/base/Module::getUniqueId|
+
+
+*yii/gii/Module::getBasePath*				public
+ See |yii/base/Module::getBasePath|
+
+
+*yii/gii/Module::setBasePath*				public
+ See |yii/base/Module::setBasePath|
+
+
+*yii/gii/Module::getControllerPath*			public
+ See |yii/base/Module::getControllerPath|
+
+
+*yii/gii/Module::getViewPath*				public
+ See |yii/base/Module::getViewPath|
+
+
+*yii/gii/Module::setViewPath*				public
+ See |yii/base/Module::setViewPath|
+
+
+*yii/gii/Module::getLayoutPath*				public
+ See |yii/base/Module::getLayoutPath|
+
+
+*yii/gii/Module::setLayoutPath*				public
+ See |yii/base/Module::setLayoutPath|
+
+
+*yii/gii/Module::setAliases*				public
+ See |yii/base/Module::setAliases|
+
+
+*yii/gii/Module::hasModule*				public
+ See |yii/base/Module::hasModule|
+
+
+*yii/gii/Module::getModule*				public
+ See |yii/base/Module::getModule|
+
+
+*yii/gii/Module::setModule*				public
+ See |yii/base/Module::setModule|
+
+
+*yii/gii/Module::getModules*				public
+ See |yii/base/Module::getModules|
+
+
+*yii/gii/Module::setModules*				public
+ See |yii/base/Module::setModules|
+
+
+*yii/gii/Module::runAction*				public
+ See |yii/base/Module::runAction|
+
+
+*yii/gii/Module::createController*			public
+ See |yii/base/Module::createController|
+
+
+*yii/gii/Module::createControllerByID*			public
+ See |yii/base/Module::createControllerByID|
+
+
+*yii/gii/Module::beforeAction*				public
+>
+ beforeAction($action)
+<
+(boolean) Whether the action should continue to be executed.
+
+
+    [$action] () 
+
+
+*yii/gii/Module::afterAction*				public
+ See |yii/base/Module::afterAction|
+
+
+*yii/gii/Module::bootstrap*				public
+>
+ bootstrap($app)
+<
+(void)
+
+
+    [$app] () 
+
+
+*yii/gii/Module::resetGlobalSettings*			protected
+>
+ resetGlobalSettings()
+<
+(void)
+
+
+
+
+*yii/gii/Module::checkAccess*				protected
+>
+ checkAccess()
+<
+(boolean) Whether the module can be accessed by the current user
+
+
+
+
+*yii/gii/Module::coreGenerators*				protected
+>
+ coreGenerators()
+<
+(array) The list of the core code generator configurations.
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

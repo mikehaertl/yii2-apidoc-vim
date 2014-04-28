@@ -1,0 +1,139 @@
+
+*yii/imagine/BaseImage*  
+=======================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/imagine/Image|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Do not use BaseImage. Use 'Image' instead.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$driver					*yii/imagine/BaseImage::$driver*
+ (array|string) The driver to use. This can be either a single driver name or
+ an array of driver names. If the latter, the first available driver will be
+ used.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/imagine/BaseImage::getImagine*			public
+>
+ getImagine()
+<
+(\Imagine\Image\ImagineInterface) The 'Imagine' object
+
+
+
+
+*yii/imagine/BaseImage::setImagine*			public
+>
+ setImagine($imagine)
+<
+(void)
+
+
+    [$imagine] (\Imagine\Image\ImagineInterface) The 'Imagine' object.
+
+
+*yii/imagine/BaseImage::createImagine*			protected
+>
+ createImagine()
+<
+(\Imagine\Image\ImagineInterface) The new 'Imagine' object
+
+
+
+
+*yii/imagine/BaseImage::crop*				public
+>
+ crop($filename, $width, $height, $start='[0,0]')
+<
+(\Imagine\Image\ImageInterface) 
+
+ For example,
+
+   $obj->crop('path\to\image.jpg', 200, 200, [5, 5]);
+
+   $point = new \Imagine\Image\Point(5, 5);
+   $obj->crop('path\to\image.jpg', 200, 200, $point);
+
+
+    [$filename] (string) The image file path or path alias.
+    [$width] (integer) The crop width
+    [$height] (integer) The crop height
+    [$start] (array) The starting point. This must be an array with two
+    elements representing 'x' and 'y' coordinates.
+
+
+*yii/imagine/BaseImage::thumbnail*			public
+>
+ thumbnail($filename, $width, $height, $mode='\Imagine\Image\ManipulatorInterface::THUMBNAIL_OUTBOUND')
+<
+(\Imagine\Image\ImageInterface) 
+
+
+    [$filename] (string) The image file path or path alias.
+    [$width] (integer) The width in pixels to create the thumbnail
+    [$height] (integer) The height in pixels to create the thumbnail
+    [$mode] (string) 
+
+
+*yii/imagine/BaseImage::watermark*			public
+>
+ watermark($filename, $watermarkFilename, $start='[0,0]')
+<
+(\Imagine\Image\ImageInterface) 
+
+
+    [$filename] (string) The image file path or path alias.
+    [$watermarkFilename] (string) The file path or path alias of the watermark
+    image.
+    [$start] (array) The starting point. This must be an array with two
+    elements representing 'x' and 'y' coordinates.
+
+
+*yii/imagine/BaseImage::text*				public
+>
+ text($filename, $text, $fontFile, $start='[0,0]', $fontOptions='[]')
+<
+(\Imagine\Image\ImageInterface) 
+
+
+    [$filename] (string) The image file path or path alias.
+    [$text] (string) The text to write to the image
+    [$fontFile] (string) The file path or path alias
+    [$start] (array) The starting position of the text. This must be an array
+    with two elements representing 'x' and 'y' coordinates.
+    [$fontOptions] (array) The font options. The following options may be
+    specified:
+
+    - color: The font color. Defaults to "fff". - size: The font size.
+    Defaults to 12. - angle: The angle to use to write the text. Defaults to
+    0.
+
+
+*yii/imagine/BaseImage::frame*				public
+>
+ frame($filename, $margin=20, $color=''666'', $alpha=100)
+<
+(\Imagine\Image\ImageInterface) 
+
+
+    [$filename] (string) The full path to the image file
+    [$margin] (integer) The frame size to add around the image
+    [$color] (string) The frame color
+    [$alpha] (integer) The alpha value of the frame.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

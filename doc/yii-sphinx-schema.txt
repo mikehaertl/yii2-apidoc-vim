@@ -1,0 +1,341 @@
+
+*yii/sphinx/Schema*   >> |yii/base/Object|
+===================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/sphinx/Schema::$db*
+ (\yii\sphinx\Connection) The Sphinx connection
+
+$typeMap				*yii/sphinx/Schema::$typeMap*
+ (array) Mapping from physical column types (keys) to abstract column types
+ (values)
+
+$indexSchemas				*yii/sphinx/Schema::$indexSchemas*
+ (\yii\sphinx\IndexSchema[]) The metadata for all indexes in the Sphinx. Each
+ array element is an instance of 'IndexSchema' or its child class.
+
+$indexNames				*yii/sphinx/Schema::$indexNames*
+ (string[]) All index names in the Sphinx.
+
+$indexTypes				*yii/sphinx/Schema::$indexTypes*
+ (array) All index types in the Sphinx in format: index name => index type.
+
+$queryBuilder				*yii/sphinx/Schema::$queryBuilder*
+ (\yii\sphinx\QueryBuilder) The query builder for this connection.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/sphinx/Schema::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/sphinx/Schema::__construct*				public
+ See |yii/base/Object::__construct|
+
+
+*yii/sphinx/Schema::init*					public
+ See |yii/base/Object::init|
+
+
+*yii/sphinx/Schema::__get*				public
+ See |yii/base/Object::__get|
+
+
+*yii/sphinx/Schema::__set*				public
+ See |yii/base/Object::__set|
+
+
+*yii/sphinx/Schema::__isset*				public
+ See |yii/base/Object::__isset|
+
+
+*yii/sphinx/Schema::__unset*				public
+ See |yii/base/Object::__unset|
+
+
+*yii/sphinx/Schema::__call*				public
+ See |yii/base/Object::__call|
+
+
+*yii/sphinx/Schema::hasProperty*				public
+ See |yii/base/Object::hasProperty|
+
+
+*yii/sphinx/Schema::canGetProperty*			public
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/sphinx/Schema::canSetProperty*			public
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/sphinx/Schema::hasMethod*				public
+ See |yii/base/Object::hasMethod|
+
+
+*yii/sphinx/Schema::loadIndexSchema*			protected
+>
+ loadIndexSchema($name)
+<
+(\yii\sphinx\IndexSchema) Driver dependent index metadata. Null if the index
+does not exist.
+
+
+    [$name] (string) Index name
+
+
+*yii/sphinx/Schema::resolveIndexNames*			protected
+>
+ resolveIndexNames($index, $name)
+<
+(void)
+
+
+    [$index] (\yii\sphinx\IndexSchema) The index metadata object
+    [$name] (string) The index name
+
+
+*yii/sphinx/Schema::resolveIndexType*			protected
+>
+ resolveIndexType($index)
+<
+(void)
+
+
+    [$index] (\yii\sphinx\IndexSchema) The index metadata object
+
+
+*yii/sphinx/Schema::getIndexSchema*			public
+>
+ getIndexSchema($name, $refresh='false')
+<
+(\yii\sphinx\IndexSchema) Index metadata. Null if the named index does not
+exist.
+
+
+    [$name] (string) Index name. The index name may contain schema name if
+    any. Do not quote the index name.
+    [$refresh] (boolean) Whether to reload the index schema even if it is
+    found in the cache.
+
+
+*yii/sphinx/Schema::getCacheKey*				protected
+>
+ getCacheKey($name)
+<
+(mixed) The cache key
+
+
+    [$name] (string) The index name
+
+
+*yii/sphinx/Schema::getCacheGroup*			protected
+>
+ getCacheGroup()
+<
+(string) The cache group name
+
+ This allows 'refresh()' to invalidate all cached index schemas.
+
+
+*yii/sphinx/Schema::getIndexSchemas*			public
+>
+ getIndexSchemas($refresh='false')
+<
+(\yii\sphinx\IndexSchema[]) The metadata for all indexes in the Sphinx. Each
+array element is an instance of 'IndexSchema' or its child class.
+
+
+    [$refresh] (boolean) Whether to fetch the latest available index schemas.
+    If this is false, cached data may be returned if available.
+
+
+*yii/sphinx/Schema::getIndexNames*			public
+>
+ getIndexNames($refresh='false')
+<
+(string[]) All index names in the Sphinx.
+
+
+    [$refresh] (boolean) Whether to fetch the latest available index names. If
+    this is false, index names fetched previously (if available) will be
+    returned.
+
+
+*yii/sphinx/Schema::getIndexTypes*			public
+>
+ getIndexTypes($refresh='false')
+<
+(array) All index types in the Sphinx in format: index name => index type.
+
+
+    [$refresh] (boolean) Whether to fetch the latest available index types. If
+    this is false, index types fetched previously (if available) will be
+    returned.
+
+
+*yii/sphinx/Schema::initIndexesInfo*			protected
+>
+ initIndexesInfo()
+<
+(void)
+
+
+
+
+*yii/sphinx/Schema::findIndexes*				protected
+>
+ findIndexes()
+<
+(array) All index names in the Sphinx.
+
+
+
+
+*yii/sphinx/Schema::getQueryBuilder*			public
+>
+ getQueryBuilder()
+<
+(\yii\sphinx\QueryBuilder) The query builder for this connection.
+
+
+
+
+*yii/sphinx/Schema::getPdoType*				public
+>
+ getPdoType($data)
+<
+(integer) The PDO type
+
+
+    [$data] (mixed) The data whose PDO type is to be determined
+
+
+*yii/sphinx/Schema::refresh*				public
+>
+ refresh()
+<
+(void)
+
+ This method cleans up all cached index schemas so that they can be re-created
+ later to reflect the Sphinx schema change.
+
+
+*yii/sphinx/Schema::createQueryBuilder*			public
+>
+ createQueryBuilder()
+<
+(\yii\sphinx\QueryBuilder) Query builder instance
+
+
+
+
+*yii/sphinx/Schema::quoteValue*				public
+>
+ quoteValue($str)
+<
+(string) The properly quoted string
+
+ Note that if the parameter is not a string, it will be returned without
+ change.
+    [$str] (string) String to be quoted
+
+
+*yii/sphinx/Schema::quoteIndexName*			public
+>
+ quoteIndexName($name)
+<
+(string) The properly quoted index name
+
+ If the index name contains schema prefix, the prefix will also be properly
+ quoted. If the index name is already quoted or contains '(' or '{{', then
+ this method will do nothing.
+    [$name] (string) Index name
+
+
+*yii/sphinx/Schema::quoteColumnName*			public
+>
+ quoteColumnName($name)
+<
+(string) The properly quoted column name
+
+ If the column name contains prefix, the prefix will also be properly quoted.
+ If the column name is already quoted or contains '(', ''' or '{{', then this
+ method will do nothing.
+    [$name] (string) Column name
+
+
+*yii/sphinx/Schema::quoteSimpleIndexName*			public
+>
+ quoteSimpleIndexName($name)
+<
+(string) The properly quoted index name
+
+ A simple index name has no schema prefix.
+    [$name] (string) Index name
+
+
+*yii/sphinx/Schema::quoteSimpleColumnName*		public
+>
+ quoteSimpleColumnName($name)
+<
+(string) The properly quoted column name
+
+ A simple column name has no prefix.
+    [$name] (string) Column name
+
+
+*yii/sphinx/Schema::getRawIndexName*			public
+>
+ getRawIndexName($name)
+<
+(string) The real name of the given index name
+
+ This method will strip off curly brackets from the given index name and
+ replace the percentage character '%' with 'Connection::indexPrefix'.
+    [$name] (string) The index name to be converted
+
+
+*yii/sphinx/Schema::getColumnPhpType*			protected
+>
+ getColumnPhpType($column)
+<
+(string) PHP type name
+
+
+    [$column] (\yii\sphinx\ColumnSchema) The column schema information
+
+
+*yii/sphinx/Schema::findColumns*				protected
+>
+ findColumns($index)
+<
+(boolean) Whether the index exists in the database
+
+
+    [$index] (\yii\sphinx\IndexSchema) The index metadata
+
+
+*yii/sphinx/Schema::loadColumnSchema*			protected
+>
+ loadColumnSchema($info)
+<
+(\yii\sphinx\ColumnSchema) The column schema object
+
+
+    [$info] (array) Column information
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

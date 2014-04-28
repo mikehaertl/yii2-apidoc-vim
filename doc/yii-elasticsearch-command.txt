@@ -1,0 +1,427 @@
+
+*yii/elasticsearch/Command*   >> |yii/base/Component|
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Check the [elasticsearch
+ guide](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/index.html)
+ for details on these commands.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/elasticsearch/Command::$db*
+ (\yii\elasticsearch\Connection)
+
+$index					*yii/elasticsearch/Command::$index*
+ (string|array) The indexes to execute the query on. Defaults to null meaning
+ all indexes
+
+$type					*yii/elasticsearch/Command::$type*
+ (string|array) The types to execute the query on. Defaults to null meaning
+ all types
+
+$queryParts				*yii/elasticsearch/Command::$queryParts*
+ (array) List of arrays or json strings that become parts of a query
+
+$options				*yii/elasticsearch/Command::$options*
+ ()
+
+$behaviors				*yii/elasticsearch/Command::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$indexStatus				*yii/elasticsearch/Command::$indexStatus*
+ (mixed)
+
+$mapping				*yii/elasticsearch/Command::$mapping*
+ (mixed)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/elasticsearch/Command::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/elasticsearch/Command::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/elasticsearch/Command::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/elasticsearch/Command::__get*			public
+ See |yii/base/Component::__get|
+
+
+*yii/elasticsearch/Command::__set*			public
+ See |yii/base/Component::__set|
+
+
+*yii/elasticsearch/Command::__isset*			public
+ See |yii/base/Component::__isset|
+
+
+*yii/elasticsearch/Command::__unset*			public
+ See |yii/base/Component::__unset|
+
+
+*yii/elasticsearch/Command::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/elasticsearch/Command::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/elasticsearch/Command::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/elasticsearch/Command::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/elasticsearch/Command::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/elasticsearch/Command::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/elasticsearch/Command::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/elasticsearch/Command::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/elasticsearch/Command::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/elasticsearch/Command::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/elasticsearch/Command::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/elasticsearch/Command::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/elasticsearch/Command::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/elasticsearch/Command::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/elasticsearch/Command::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/elasticsearch/Command::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/elasticsearch/Command::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/elasticsearch/Command::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/elasticsearch/Command::search*			public
+>
+ search($options='[]')
+<
+(mixed) 
+
+
+    [$options] (array) 
+
+
+*yii/elasticsearch/Command::insert*			public
+>
+ insert($index, $type, $data, $id='null', $options='[]')
+<
+(mixed) 
+
+
+    [$index] (string) 
+    [$type] (string) 
+    [$data] (string|array) Json string or array of data to store
+    [$id] (null) The documents id. If not specified Id will be automatically
+    chosen
+    [$options] (array) 
+
+
+*yii/elasticsearch/Command::get*				public
+>
+ get($index, $type, $id, $options='[]')
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] () 
+    [$id] () 
+    [$options] (array) 
+
+
+*yii/elasticsearch/Command::mget*				public
+>
+ mget($index, $type, $ids, $options='[]')
+<
+(mixed) 
+
+ TODO allow specifying type and index + fields
+    [$index] () 
+    [$type] () 
+    [$ids] () 
+    [$options] (array) 
+
+
+*yii/elasticsearch/Command::getSource*			public
+>
+ getSource($index, $type, $id)
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] () 
+    [$id] () 
+
+
+*yii/elasticsearch/Command::exists*			public
+>
+ exists($index, $type, $id)
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] () 
+    [$id] () 
+
+
+*yii/elasticsearch/Command::delete*			public
+>
+ delete($index, $type, $id, $options='[]')
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] () 
+    [$id] () 
+    [$options] (array) 
+
+
+*yii/elasticsearch/Command::createIndex*			public
+>
+ createIndex($index, $configuration='null')
+<
+(mixed) 
+
+
+    [$index] () 
+    [$configuration] (array) 
+
+
+*yii/elasticsearch/Command::deleteIndex*			public
+>
+ deleteIndex($index)
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::deleteAllIndexes*		public
+>
+ deleteAllIndexes()
+<
+(mixed) 
+
+
+
+
+*yii/elasticsearch/Command::indexExists*			public
+>
+ indexExists($index)
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::typeExists*			public
+>
+ typeExists($index, $type)
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] () 
+
+
+*yii/elasticsearch/Command::openIndex*			public
+>
+ openIndex($index)
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::closeIndex*			public
+>
+ closeIndex($index)
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::getIndexStatus*		public
+>
+ getIndexStatus($index='\'_all\'')
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::clearIndexCache*		public
+>
+ clearIndexCache($index)
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::flushIndex*			public
+>
+ flushIndex($index='\'_all\'')
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::refreshIndex*			public
+>
+ refreshIndex($index)
+<
+(mixed) 
+
+
+    [$index] () 
+
+
+*yii/elasticsearch/Command::setMapping*			public
+>
+ setMapping($index, $type, $mapping, $options='[]')
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] () 
+    [$mapping] () 
+    [$options] () 
+
+
+*yii/elasticsearch/Command::getMapping*			public
+>
+ getMapping($index=''_all'', $type=''_all'')
+<
+(mixed) 
+
+
+    [$index] (string) 
+    [$type] (string) 
+
+
+*yii/elasticsearch/Command::deleteMapping*		public
+>
+ deleteMapping($index, $type)
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] () 
+
+
+*yii/elasticsearch/Command::getFieldMapping*		public
+>
+ getFieldMapping($index, $type=''_all'')
+<
+(mixed) 
+
+
+    [$index] () 
+    [$type] (string) 
+
+
+*yii/elasticsearch/Command::createTemplate*		public
+>
+ createTemplate($name, $pattern, $settings, $mappings, $order=0)
+<
+(mixed) 
+
+
+    [$name] () 
+    [$pattern] () 
+    [$settings] () 
+    [$mappings] () 
+    [$order] (integer) 
+
+
+*yii/elasticsearch/Command::deleteTemplate*		public
+>
+ deleteTemplate($name)
+<
+(mixed) 
+
+
+    [$name] () 
+
+
+*yii/elasticsearch/Command::getTemplate*			public
+>
+ getTemplate($name)
+<
+(mixed) 
+
+
+    [$name] () 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,543 @@
+
+*yii/sphinx/ActiveQuery*   >> |yii/sphinx/Query|
+========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ An ActiveQuery can be a normal query or be used in a relational context.
+
+ ActiveQuery instances are usually created by 'ActiveRecord::find()' and
+ 'ActiveRecord::findBySql()'. Relational queries are created by
+ 'ActiveRecord::hasOne()' and 'ActiveRecord::hasMany()'.
+
+ Normal Query ------------
+
+ Because ActiveQuery extends from 'Query', one can use query methods, such as
+ 'where()', 'orderBy()' to customize the query options.
+
+ ActiveQuery also provides the following additional query options:
+
+ - 'with()': list of relations that this query should be performed with. -
+ 'indexBy()': the name of the column by which the query result should be
+ indexed. - 'asArray()': whether to return each record as an array.
+
+ These options can be configured using methods of the same name. For example:
+
+   $articles = Article::find()->with('source')->asArray()->all();
+
+ ActiveQuery allows to build the snippets using sources provided by
+ ActiveRecord. You can use 'snippetByModel()' method to enable this. For
+ example:
+
+   class Article extends ActiveRecord
+   {
+       public function getSource()
+       {
+           return $this->hasOne('db', ArticleDb::className(), ['id' => 'id']);
+       }
+
+       public function getSnippetSource()
+       {
+           return $this->source->content;
+       }
+
+       ...
+   }
+
+   $articles = Article::find()->with('source')->snippetByModel()->all();
+
+ Relational query ----------------
+
+ In relational context ActiveQuery represents a relation between two Active
+ Record classes.
+
+ Relational ActiveQuery instances are usually created by calling
+ 'ActiveRecord::hasOne()' and 'ActiveRecord::hasMany()'. An Active Record
+ class declares a relation by defining a getter method which calls one of the
+ above methods and returns the created ActiveQuery object.
+
+ A relation is specified by 'link' which represents the association between
+ columns of different tables; and the multiplicity of the relation is
+ indicated by 'multiple'.
+
+ If a relation involves a pivot table, it may be specified by 'via()'. This
+ methods may only be called in a relational context. Same is true for
+ 'inverseOf()', which marks a relation as inverse of another relation.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$where					*yii/sphinx/ActiveQuery::$where*
+ See |yii/db/QueryTrait::$where|
+
+$limit					*yii/sphinx/ActiveQuery::$limit*
+ See |yii/db/QueryTrait::$limit|
+
+$offset					*yii/sphinx/ActiveQuery::$offset*
+ See |yii/db/QueryTrait::$offset|
+
+$orderBy				*yii/sphinx/ActiveQuery::$orderBy*
+ See |yii/db/QueryTrait::$orderBy|
+
+$indexBy				*yii/sphinx/ActiveQuery::$indexBy*
+ See |yii/db/QueryTrait::$indexBy|
+
+$select					*yii/sphinx/ActiveQuery::$select*
+ See |yii/sphinx/Query::$select|
+
+$selectOption				*yii/sphinx/ActiveQuery::$selectOption*
+ See |yii/sphinx/Query::$selectOption|
+
+$distinct				*yii/sphinx/ActiveQuery::$distinct*
+ See |yii/sphinx/Query::$distinct|
+
+$from					*yii/sphinx/ActiveQuery::$from*
+ See |yii/sphinx/Query::$from|
+
+$match					*yii/sphinx/ActiveQuery::$match*
+ See |yii/sphinx/Query::$match|
+
+$groupBy				*yii/sphinx/ActiveQuery::$groupBy*
+ See |yii/sphinx/Query::$groupBy|
+
+$within					*yii/sphinx/ActiveQuery::$within*
+ See |yii/sphinx/Query::$within|
+
+$options				*yii/sphinx/ActiveQuery::$options*
+ See |yii/sphinx/Query::$options|
+
+$params					*yii/sphinx/ActiveQuery::$params*
+ See |yii/sphinx/Query::$params|
+
+$snippetCallback			*yii/sphinx/ActiveQuery::$snippetCallback*
+ See |yii/sphinx/Query::$snippetCallback|
+
+$snippetOptions				*yii/sphinx/ActiveQuery::$snippetOptions*
+ See |yii/sphinx/Query::$snippetOptions|
+
+$multiple				*yii/sphinx/ActiveQuery::$multiple*
+ See |yii/db/ActiveRelationTrait::$multiple|
+
+$primaryModel				*yii/sphinx/ActiveQuery::$primaryModel*
+ See |yii/db/ActiveRelationTrait::$primaryModel|
+
+$link					*yii/sphinx/ActiveQuery::$link*
+ See |yii/db/ActiveRelationTrait::$link|
+
+$via					*yii/sphinx/ActiveQuery::$via*
+ See |yii/db/ActiveRelationTrait::$via|
+
+$inverseOf				*yii/sphinx/ActiveQuery::$inverseOf*
+ See |yii/db/ActiveRelationTrait::$inverseOf|
+
+$modelClass				*yii/sphinx/ActiveQuery::$modelClass*
+ See |yii/db/ActiveQueryTrait::$modelClass|
+
+$with					*yii/sphinx/ActiveQuery::$with*
+ See |yii/db/ActiveQueryTrait::$with|
+
+$asArray				*yii/sphinx/ActiveQuery::$asArray*
+ See |yii/db/ActiveQueryTrait::$asArray|
+
+$sql					*yii/sphinx/ActiveQuery::$sql*
+ (string) The SQL statement to be executed for retrieving AR records. This is
+ set by 'ActiveRecord::findBySql()'.
+
+$behaviors				*yii/sphinx/ActiveQuery::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$connection				*yii/sphinx/ActiveQuery::$connection*
+ (\yii\sphinx\Connection) Sphinx connection instance
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/sphinx/ActiveQuery::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/sphinx/ActiveQuery::__construct*			public
+>
+ __construct($modelClass, $config='[]')
+<
+(void)
+
+
+    [$modelClass] (array) The model class associated with this query
+    [$config] (array) Configurations to be applied to the newly created query
+    object
+
+
+*yii/sphinx/ActiveQuery::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/sphinx/ActiveQuery::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/sphinx/ActiveQuery::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/sphinx/ActiveQuery::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/sphinx/ActiveQuery::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/sphinx/ActiveQuery::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/sphinx/ActiveQuery::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/sphinx/ActiveQuery::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/sphinx/ActiveQuery::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/sphinx/ActiveQuery::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/sphinx/ActiveQuery::__clone*				public
+ See |yii/db/ActiveRelationTrait::__clone|
+
+
+*yii/sphinx/ActiveQuery::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/sphinx/ActiveQuery::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/sphinx/ActiveQuery::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/sphinx/ActiveQuery::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/sphinx/ActiveQuery::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/sphinx/ActiveQuery::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/sphinx/ActiveQuery::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/sphinx/ActiveQuery::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/sphinx/ActiveQuery::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/sphinx/ActiveQuery::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/sphinx/ActiveQuery::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/sphinx/ActiveQuery::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/sphinx/ActiveQuery::indexBy*				public
+ See |yii/db/QueryTrait::indexBy|
+
+
+*yii/sphinx/ActiveQuery::where*				public
+ See |yii/db/QueryTrait::where|
+
+
+*yii/sphinx/ActiveQuery::andWhere*			public
+ See |yii/db/QueryTrait::andWhere|
+
+
+*yii/sphinx/ActiveQuery::orWhere*				public
+ See |yii/db/QueryTrait::orWhere|
+
+
+*yii/sphinx/ActiveQuery::filterWhere*			public
+ See |yii/db/QueryTrait::filterWhere|
+
+
+*yii/sphinx/ActiveQuery::andFilterWhere*			public
+ See |yii/db/QueryTrait::andFilterWhere|
+
+
+*yii/sphinx/ActiveQuery::orFilterWhere*			public
+ See |yii/db/QueryTrait::orFilterWhere|
+
+
+*yii/sphinx/ActiveQuery::filterCondition*			protected
+ See |yii/db/QueryTrait::filterCondition|
+
+
+*yii/sphinx/ActiveQuery::isEmpty*				protected
+ See |yii/db/QueryTrait::isEmpty|
+
+
+*yii/sphinx/ActiveQuery::orderBy*				public
+ See |yii/db/QueryTrait::orderBy|
+
+
+*yii/sphinx/ActiveQuery::addOrderBy*			public
+ See |yii/db/QueryTrait::addOrderBy|
+
+
+*yii/sphinx/ActiveQuery::normalizeOrderBy*		protected
+ See |yii/db/QueryTrait::normalizeOrderBy|
+
+
+*yii/sphinx/ActiveQuery::limit*				public
+ See |yii/db/QueryTrait::limit|
+
+
+*yii/sphinx/ActiveQuery::offset*				public
+ See |yii/db/QueryTrait::offset|
+
+
+*yii/sphinx/ActiveQuery::setConnection*			public
+ See |yii/sphinx/Query::setConnection|
+
+
+*yii/sphinx/ActiveQuery::getConnection*			public
+ See |yii/sphinx/Query::getConnection|
+
+
+*yii/sphinx/ActiveQuery::defaultConnection*		protected
+>
+ defaultConnection()
+<
+(\yii\sphinx\Connection) Default connection value.
+
+
+
+
+*yii/sphinx/ActiveQuery::createCommand*			public
+>
+ createCommand($db='null')
+<
+(\yii\sphinx\Command) The created DB command instance.
+
+
+    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
+    command. If null, the DB connection returned by 'modelClass' will be used.
+
+
+*yii/sphinx/ActiveQuery::all*				public
+>
+ all($db='null')
+<
+(array) The query results. If the query results in nothing, an empty array
+will be returned.
+
+
+    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
+    command. If null, the DB connection returned by 'modelClass' will be used.
+
+
+*yii/sphinx/ActiveQuery::one*				public
+>
+ one($db='null')
+<
+(\yii\sphinx\ActiveRecord|array|null) A single row of query result. Depending
+on the setting of 'asArray', the query result may be either an array or an
+ActiveRecord object. Null will be returned if the query results in nothing.
+
+
+    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
+    command. If null, the DB connection returned by 'modelClass' will be used.
+
+
+*yii/sphinx/ActiveQuery::scalar*				public
+ See |yii/sphinx/Query::scalar|
+
+
+*yii/sphinx/ActiveQuery::column*				public
+ See |yii/sphinx/Query::column|
+
+
+*yii/sphinx/ActiveQuery::count*				public
+ See |yii/sphinx/Query::count|
+
+
+*yii/sphinx/ActiveQuery::sum*				public
+ See |yii/sphinx/Query::sum|
+
+
+*yii/sphinx/ActiveQuery::average*				public
+ See |yii/sphinx/Query::average|
+
+
+*yii/sphinx/ActiveQuery::min*				public
+ See |yii/sphinx/Query::min|
+
+
+*yii/sphinx/ActiveQuery::max*				public
+ See |yii/sphinx/Query::max|
+
+
+*yii/sphinx/ActiveQuery::exists*				public
+ See |yii/sphinx/Query::exists|
+
+
+*yii/sphinx/ActiveQuery::select*				public
+ See |yii/sphinx/Query::select|
+
+
+*yii/sphinx/ActiveQuery::distinct*			public
+ See |yii/sphinx/Query::distinct|
+
+
+*yii/sphinx/ActiveQuery::from*				public
+ See |yii/sphinx/Query::from|
+
+
+*yii/sphinx/ActiveQuery::match*				public
+ See |yii/sphinx/Query::match|
+
+
+*yii/sphinx/ActiveQuery::groupBy*				public
+ See |yii/sphinx/Query::groupBy|
+
+
+*yii/sphinx/ActiveQuery::addGroupBy*			public
+ See |yii/sphinx/Query::addGroupBy|
+
+
+*yii/sphinx/ActiveQuery::params*				public
+ See |yii/sphinx/Query::params|
+
+
+*yii/sphinx/ActiveQuery::addParams*			public
+ See |yii/sphinx/Query::addParams|
+
+
+*yii/sphinx/ActiveQuery::options*				public
+ See |yii/sphinx/Query::options|
+
+
+*yii/sphinx/ActiveQuery::addOptions*			public
+ See |yii/sphinx/Query::addOptions|
+
+
+*yii/sphinx/ActiveQuery::within*				public
+ See |yii/sphinx/Query::within|
+
+
+*yii/sphinx/ActiveQuery::addWithin*			public
+ See |yii/sphinx/Query::addWithin|
+
+
+*yii/sphinx/ActiveQuery::snippetCallback*			public
+ See |yii/sphinx/Query::snippetCallback|
+
+
+*yii/sphinx/ActiveQuery::snippetOptions*			public
+ See |yii/sphinx/Query::snippetOptions|
+
+
+*yii/sphinx/ActiveQuery::fillUpSnippets*			protected
+ See |yii/sphinx/Query::fillUpSnippets|
+
+
+*yii/sphinx/ActiveQuery::callSnippets*			protected
+>
+ callSnippets($source)
+<
+(array) Snippets list.
+
+
+    [$source] () 
+
+
+*yii/sphinx/ActiveQuery::callSnippetsInternal*		protected
+ See |yii/sphinx/Query::callSnippetsInternal|
+
+
+*yii/sphinx/ActiveQuery::via*				public
+ See |yii/db/ActiveRelationTrait::via|
+
+
+*yii/sphinx/ActiveQuery::inverseOf*			public
+ See |yii/db/ActiveRelationTrait::inverseOf|
+
+
+*yii/sphinx/ActiveQuery::findFor*				public
+ See |yii/db/ActiveRelationTrait::findFor|
+
+
+*yii/sphinx/ActiveQuery::populateRelation*		public
+ See |yii/db/ActiveRelationTrait::populateRelation|
+
+
+*yii/sphinx/ActiveQuery::asArray*				public
+ See |yii/db/ActiveQueryTrait::asArray|
+
+
+*yii/sphinx/ActiveQuery::with*				public
+ See |yii/db/ActiveQueryTrait::with|
+
+
+*yii/sphinx/ActiveQuery::findWith*			public
+ See |yii/db/ActiveQueryTrait::findWith|
+
+
+*yii/sphinx/ActiveQuery::snippetByModel*			public
+>
+ snippetByModel()
+<
+(static) The query object itself
+
+ For example:
+
+   class Article extends ActiveRecord
+   {
+       public function getSnippetSource()
+       {
+           return file_get_contents('/path/to/source/files/' . $this->id .
+ '.txt');;
+       }
+   }
+
+   $articles = Article::find()->snippetByModel()->all();
+
+ Warning: this option should NOT be used with 'asArray' at the same time!
+
+
+*yii/sphinx/ActiveQuery::fetchSnippetSourceFromModels*	protected
+>
+ fetchSnippetSourceFromModels($models)
+<
+(array) Snippet source strings
+
+
+    [$models] (\yii\sphinx\ActiveRecord[]) Raw query result rows.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

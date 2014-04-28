@@ -1,0 +1,766 @@
+
+*yii/sphinx/Query*   >> |yii/base/Component|
+==================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/sphinx/ActiveQuery|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Query provides a set of methods to facilitate the specification of different
+ clauses in a SELECT statement. These methods can be chained together.
+
+ By calling 'createCommand()', we can get a 'Command' instance which can be
+ further used to perform/execute the Sphinx query.
+
+ For example,
+
+   $query = new Query;
+   $query->select('id, groupd_id')
+       ->from('idx_item')
+       ->limit(10);
+   // build and execute the query
+   $command = $query->createCommand();
+   // $command->sql returns the actual SQL
+   $rows = $command->queryAll();
+
+ Since Sphinx does not store the original indexed text, the snippets for the
+ rows in query result should be build separately via another query. You can
+ simplify this workflow using 'snippetCallback'.
+
+ Warning: even if you do not set any query limit, implicit LIMIT 0,20 is
+ present by default!
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$where					*yii/sphinx/Query::$where*
+ See |yii/db/QueryTrait::$where|
+
+$limit					*yii/sphinx/Query::$limit*
+ See |yii/db/QueryTrait::$limit|
+
+$offset					*yii/sphinx/Query::$offset*
+ See |yii/db/QueryTrait::$offset|
+
+$orderBy				*yii/sphinx/Query::$orderBy*
+ See |yii/db/QueryTrait::$orderBy|
+
+$indexBy				*yii/sphinx/Query::$indexBy*
+ See |yii/db/QueryTrait::$indexBy|
+
+$select					*yii/sphinx/Query::$select*
+ (array) The columns being selected. For example, '['id', 'group_id']'. This
+ is used to construct the SELECT clause in a SQL statement. If not set, if
+ means selecting all columns.
+
+$selectOption				*yii/sphinx/Query::$selectOption*
+ (string) Additional option that should be appended to the 'SELECT' keyword.
+
+$distinct				*yii/sphinx/Query::$distinct*
+ (boolean) Whether to select distinct rows of data only. If this is set true,
+ the SELECT clause would be changed to SELECT DISTINCT.
+
+$from					*yii/sphinx/Query::$from*
+ (array) The index(es) to be selected from. For example, '['idx_user',
+ 'idx_user_delta']'. This is used to construct the FROM clause in a SQL
+ statement.
+
+$match					*yii/sphinx/Query::$match*
+ (string) Text, which should be searched in fulltext mode. This value will be
+ composed into MATCH operator inside the WHERE clause.
+
+$groupBy				*yii/sphinx/Query::$groupBy*
+ (array) How to group the query results. For example, '['company',
+ 'department']'. This is used to construct the GROUP BY clause in a SQL
+ statement.
+
+$within					*yii/sphinx/Query::$within*
+ (string) WITHIN GROUP ORDER BY clause. This is a Sphinx specific extension
+ that lets you control how the best row within a group will to be selected.
+ The possible value matches the 'orderBy' one.
+
+$options				*yii/sphinx/Query::$options*
+ (array) Per-query options in format: optionName => optionValue They will
+ compose OPTION clause. This is a Sphinx specific extension that lets you
+ control a number of per-query options.
+
+$params					*yii/sphinx/Query::$params*
+ (array) List of query parameter values indexed by parameter placeholders. For
+ example, '[':name' => 'Dan', ':age' => 31]'.
+
+$snippetCallback			*yii/sphinx/Query::$snippetCallback*
+ (callable) PHP callback, which should be used to fetch source data for the
+ snippets. Such callback will receive array of query result rows as an
+ argument and must return the array of snippet source strings in the order,
+ which match one of incoming rows. For example:
+
+   $query = new Query;
+   $query->from('idx_item')
+       ->match('pencil')
+       ->snippetCallback(function ($rows) {
+           $result = [];
+           foreach ($rows as $row) {
+               $result[] = file_get_contents('/path/to/index/files/' .
+ $row['id'] . '.txt');
+           }
+           return $result;
+       })
+       ->all();
+
+
+
+$snippetOptions				*yii/sphinx/Query::$snippetOptions*
+ (array) Query options for the call snippet.
+
+$behaviors				*yii/sphinx/Query::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$connection				*yii/sphinx/Query::$connection*
+ (\yii\sphinx\Connection) Sphinx connection instance
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/sphinx/Query::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/sphinx/Query::__construct*				public
+ See |yii/base/Object::__construct|
+
+
+*yii/sphinx/Query::init*					public
+ See |yii/base/Object::init|
+
+
+*yii/sphinx/Query::__get*					public
+ See |yii/base/Component::__get|
+
+
+*yii/sphinx/Query::__set*					public
+ See |yii/base/Component::__set|
+
+
+*yii/sphinx/Query::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/sphinx/Query::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/sphinx/Query::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/sphinx/Query::hasProperty*				public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/sphinx/Query::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/sphinx/Query::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/sphinx/Query::hasMethod*				public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/sphinx/Query::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/sphinx/Query::behaviors*				public
+ See |yii/base/Component::behaviors|
+
+
+*yii/sphinx/Query::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/sphinx/Query::on*					public
+ See |yii/base/Component::on|
+
+
+*yii/sphinx/Query::off*					public
+ See |yii/base/Component::off|
+
+
+*yii/sphinx/Query::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/sphinx/Query::getBehavior*				public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/sphinx/Query::getBehaviors*				public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/sphinx/Query::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/sphinx/Query::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/sphinx/Query::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/sphinx/Query::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/sphinx/Query::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/sphinx/Query::indexBy*				public
+ See |yii/db/QueryTrait::indexBy|
+
+
+*yii/sphinx/Query::where*					public
+>
+ where($condition, $params='[]')
+<
+(static) The query object itself
+
+ The method requires a $condition parameter, and optionally a $params
+ parameter specifying the values to be bound to the query.
+
+ The $condition parameter should be either a string (e.g. 'id=1') or an array.
+ If the latter, it must be in one of the following two formats:
+
+ - hash format: '['column1' => value1, 'column2' => value2, ...]' - operator
+ format: '[operator, operand1, operand2, ...]'
+
+ A condition in hash format represents the following SQL expression in
+ general: 'column1=value1 AND column2=value2 AND ...'. In case when a value is
+ an array or a Query object, an 'IN' expression will be generated. And if a
+ value is null, 'IS NULL' will be used in the generated expression. Below are
+ some examples:
+
+ - '['type' => 1, 'status' => 2]' generates '(type = 1) AND (status = 2)'. -
+ '['id' => [1, 2, 3], 'status' => 2]' generates '(id IN (1, 2, 3)) AND (status
+ = 2)'. - '['status' => null] generates 'status IS NULL'. - '['id' => $query]'
+ generates 'id IN (...sub-query...)'
+
+ A condition in operator format generates the SQL expression according to the
+ specified operator, which can be one of the followings:
+
+ - 'and': the operands should be concatenated together using 'AND'. For
+ example,   '['and', 'id=1', 'id=2']' will generate 'id=1 AND id=2'. If an
+ operand is an array,   it will be converted into a string using the rules
+ described here. For example,   '['and', 'type=1', ['or', 'id=1', 'id=2'''
+ will generate 'type=1 AND (id=1 OR id=2)'.   The method will NOT do any
+ quoting or escaping.
+
+ - 'or': similar to the 'and' operator except that the operands are
+ concatenated using 'OR'.
+
+ - 'between': operand 1 should be the column name, and operand 2 and 3 should
+ be the   starting and ending values of the range that the column is in.   For
+ example, '['between', 'id', 1, 10]' will generate 'id BETWEEN 1 AND 10'.
+
+ - 'not between': similar to 'between' except the 'BETWEEN' is replaced with
+ 'NOT BETWEEN'   in the generated condition.
+
+ - 'in': operand 1 should be a column or DB expression with parenthesis.
+ Operand 2 can be an array   or a Query object. If the former, the array
+ represents the range of the values that the column   or DB expression should
+ be in. If the latter, a sub-query will be generated to represent the range.  
+ For example, '['in', 'id', [1, 2, 3'' will generate 'id IN (1, 2, 3)';  
+ '['in', 'id', (new Query)->select('id')->from('user'))]' will generate   'id
+ IN (SELECT id FROM user)'. The method will properly quote the column name and
+ escape values in the range.   The 'in' operator also supports composite
+ columns. In this case, operand 1 should be an array of the columns,   while
+ operand 2 should be an array of arrays or a 'Query' object representing the
+ range of the columns.
+
+ - 'not in': similar to the 'in' operator except that 'IN' is replaced with
+ 'NOT IN' in the generated condition.
+
+ - 'like': operand 1 should be a column or DB expression, and operand 2 be a
+ string or an array representing   the values that the column or DB expression
+ should be like.   For example, '['like', 'name', '%tester%']' will generate
+ 'name LIKE '%tester%''.   When the value range is given as an array, multiple
+ 'LIKE' predicates will be generated and concatenated   using 'AND'. For
+ example, '['like', 'name', ['%test%', '%sample%''' will generate   'name LIKE
+ '%test%' AND name LIKE '%sample%''.   The method will properly quote the
+ column name and escape values in the range.   Sometimes, you may want to add
+ the percentage characters to the matching value by yourself, you may supply  
+ a third operand 'false' to do so. For example, '['like', 'name', '%tester',
+ false]' will generate 'name LIKE '%tester''.
+
+ - 'or like': similar to the 'like' operator except that 'OR' is used to
+ concatenate the 'LIKE'   predicates when operand 2 is an array.
+
+ - 'not like': similar to the 'like' operator except that 'LIKE' is replaced
+ with 'NOT LIKE'   in the generated condition.
+
+ - 'or not like': similar to the 'not like' operator except that 'OR' is used
+ to concatenate   the 'NOT LIKE' predicates.
+    [$condition] (string|array) The conditions that should be put in the WHERE
+    part.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii/sphinx/Query::andWhere*				public
+>
+ andWhere($condition, $params='[]')
+<
+(static) The query object itself
+
+ The new condition and the existing one will be joined using the 'AND'
+ operator.
+    [$condition] (string|array) The new WHERE condition. Please refer to
+    'where()' on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii/sphinx/Query::orWhere*				public
+>
+ orWhere($condition, $params='[]')
+<
+(static) The query object itself
+
+ The new condition and the existing one will be joined using the 'OR'
+ operator.
+    [$condition] (string|array) The new WHERE condition. Please refer to
+    'where()' on how to specify this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii/sphinx/Query::filterWhere*				public
+ See |yii/db/QueryTrait::filterWhere|
+
+
+*yii/sphinx/Query::andFilterWhere*			public
+ See |yii/db/QueryTrait::andFilterWhere|
+
+
+*yii/sphinx/Query::orFilterWhere*				public
+ See |yii/db/QueryTrait::orFilterWhere|
+
+
+*yii/sphinx/Query::filterCondition*			protected
+ See |yii/db/QueryTrait::filterCondition|
+
+
+*yii/sphinx/Query::isEmpty*				protected
+ See |yii/db/QueryTrait::isEmpty|
+
+
+*yii/sphinx/Query::orderBy*				public
+ See |yii/db/QueryTrait::orderBy|
+
+
+*yii/sphinx/Query::addOrderBy*				public
+ See |yii/db/QueryTrait::addOrderBy|
+
+
+*yii/sphinx/Query::normalizeOrderBy*			protected
+ See |yii/db/QueryTrait::normalizeOrderBy|
+
+
+*yii/sphinx/Query::limit*					public
+ See |yii/db/QueryTrait::limit|
+
+
+*yii/sphinx/Query::offset*				public
+ See |yii/db/QueryTrait::offset|
+
+
+*yii/sphinx/Query::setConnection*				public
+>
+ setConnection($connection)
+<
+(static) The query object itself
+
+
+    [$connection] (\yii\sphinx\Connection) Sphinx connection instance
+
+
+*yii/sphinx/Query::getConnection*				public
+>
+ getConnection()
+<
+(\yii\sphinx\Connection) Sphinx connection instance
+
+
+
+
+*yii/sphinx/Query::defaultConnection*			protected
+>
+ defaultConnection()
+<
+(\yii\sphinx\Connection) Default connection value.
+
+
+
+
+*yii/sphinx/Query::createCommand*				public
+>
+ createCommand($connection='null')
+<
+(\yii\sphinx\Command) The created Sphinx command instance.
+
+
+    [$connection] (\yii\sphinx\Connection) The Sphinx connection used to
+    generate the SQL statement. If this parameter is not given, the 'sphinx'
+    application component will be used.
+
+
+*yii/sphinx/Query::all*					public
+>
+ all($db='null')
+<
+(array) The query results. If the query results in nothing, an empty array
+will be returned.
+
+
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::one*					public
+>
+ one($db='null')
+<
+(array|boolean) The first row (in terms of an array) of the query result.
+False is returned if the query results in nothing.
+
+
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::scalar*				public
+>
+ scalar($db='null')
+<
+(string|boolean) The value of the first column in the first row of the query
+result. False is returned if the query result is empty.
+
+ The value returned will be the first column in the first row of the query
+ results.
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::column*				public
+>
+ column($db='null')
+<
+(array) The first column of the query result. An empty array is returned if
+the query results in nothing.
+
+
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::count*					public
+>
+ count($q=''*'', $db='null')
+<
+(integer) Number of records
+
+
+    [$q] (string) The COUNT expression. Defaults to '*'. Make sure you
+    properly quote column names in the expression.
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::sum*					public
+>
+ sum($q, $db='null')
+<
+(integer) The sum of the specified column values
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::average*				public
+>
+ average($q, $db='null')
+<
+(integer) The average of the specified column values.
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::min*					public
+>
+ min($q, $db='null')
+<
+(integer) The minimum of the specified column values.
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::max*					public
+>
+ max($q, $db='null')
+<
+(integer) The maximum of the specified column values.
+
+
+    [$q] (string) The column name or expression. Make sure you properly quote
+    column names in the expression.
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::exists*				public
+>
+ exists($db='null')
+<
+(boolean) Whether the query result contains any row of data.
+
+
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement. If this parameter is not given, the 'sphinx' application
+    component will be used.
+
+
+*yii/sphinx/Query::select*				public
+>
+ select($columns, $option='null')
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) The columns to be selected. Columns can be
+    specified in either a string (e.g. "id, name") or an array (e.g. ['id',
+    'name']). The method will automatically quote the column names unless a
+    column contains some parenthesis (which means the column contains a Sphinx
+    expression).
+    [$option] (string) Additional option that should be appended to the
+    'SELECT' keyword.
+
+
+*yii/sphinx/Query::distinct*				public
+>
+ distinct($value='true')
+<
+(static) The query object itself
+
+
+    [$value] (boolean) Whether to SELECT DISTINCT or not.
+
+
+*yii/sphinx/Query::from*					public
+>
+ from($tables)
+<
+(static) The query object itself
+
+
+    [$tables] (string|array) The table(s) to be selected from. This can be
+    either a string (e.g. ''idx_user'') or an array (e.g. '['idx_user',
+    'idx_user_delta']') specifying one or several index names. The method will
+    automatically quote the table names unless it contains some parenthesis
+    (which means the table is given as a sub-query or Sphinx expression).
+
+
+*yii/sphinx/Query::match*					public
+>
+ match($query)
+<
+(static) The query object itself
+
+
+    [$query] (string) Fulltext query text.
+
+
+*yii/sphinx/Query::groupBy*				public
+>
+ groupBy($columns)
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) The columns to be grouped by. Columns can be
+    specified in either a string (e.g. "id, name") or an array (e.g. ['id',
+    'name']). The method will automatically quote the column names unless a
+    column contains some parenthesis (which means the column contains a DB
+    expression).
+
+
+*yii/sphinx/Query::addGroupBy*				public
+>
+ addGroupBy($columns)
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) Additional columns to be grouped by. Columns can
+    be specified in either a string (e.g. "id, name") or an array (e.g. ['id',
+    'name']). The method will automatically quote the column names unless a
+    column contains some parenthesis (which means the column contains a DB
+    expression).
+
+
+*yii/sphinx/Query::params*				public
+>
+ params($params)
+<
+(static) The query object itself
+
+
+    [$params] (array) List of query parameter values indexed by parameter
+    placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
+
+
+*yii/sphinx/Query::addParams*				public
+>
+ addParams($params)
+<
+(static) The query object itself
+
+
+    [$params] (array) List of query parameter values indexed by parameter
+    placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
+
+
+*yii/sphinx/Query::options*				public
+>
+ options($options)
+<
+(static) The query object itself
+
+
+    [$options] (array) Query options in format: optionName => optionValue
+
+
+*yii/sphinx/Query::addOptions*				public
+>
+ addOptions($options)
+<
+(static) The query object itself
+
+
+    [$options] (array) Query options in format: optionName => optionValue
+
+
+*yii/sphinx/Query::within*				public
+>
+ within($columns)
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) The columns (and the directions) to find best
+    row within a group. Columns can be specified in either a string (e.g. "id
+    ASC, name DESC") or an array (e.g. '['id' => Query::SORT_ASC, 'name' =>
+    Query::SORT_DESC]'). The method will automatically quote the column names
+    unless a column contains some parenthesis (which means the column contains
+    a DB expression).
+
+
+*yii/sphinx/Query::addWithin*				public
+>
+ addWithin($columns)
+<
+(static) The query object itself
+
+
+    [$columns] (string|array) The columns (and the directions) to find best
+    row within a group. Columns can be specified in either a string (e.g. "id
+    ASC, name DESC") or an array (e.g. '['id' => Query::SORT_ASC, 'name' =>
+    Query::SORT_DESC]'). The method will automatically quote the column names
+    unless a column contains some parenthesis (which means the column contains
+    a DB expression).
+
+
+*yii/sphinx/Query::snippetCallback*			public
+>
+ snippetCallback($callback)
+<
+(static) The query object itself
+
+
+    [$callback] (callable) PHP callback, which should be used to fetch source
+    data for the snippets.
+
+
+*yii/sphinx/Query::snippetOptions*			public
+>
+ snippetOptions($options)
+<
+(static) The query object itself
+
+
+    [$options] (array) Call snippet options in format: option_name =>
+    option_value
+
+
+*yii/sphinx/Query::fillUpSnippets*			protected
+>
+ fillUpSnippets($rows)
+<
+(array|\yii\sphinx\ActiveRecord[]) Query result rows with filled up snippets.
+
+
+    [$rows] (array) Raw query result rows.
+
+
+*yii/sphinx/Query::callSnippets*				protected
+>
+ callSnippets($source)
+<
+(array) Snippets list.
+
+
+    [$source] (array) The source data to extract a snippet from.
+
+
+*yii/sphinx/Query::callSnippetsInternal*			protected
+>
+ callSnippetsInternal($source, $from)
+<
+(array) Snippets list.
+
+
+    [$source] (array) The source data to extract a snippet from.
+    [$from] (string) Name of the source index.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

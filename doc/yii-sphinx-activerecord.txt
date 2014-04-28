@@ -1,0 +1,877 @@
+
+*yii/sphinx/ActiveRecord*   >> |yii/db/BaseActiveRecord|
+=========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Warning: optimistic lock will NOT work in case of updating fields (not
+ attributes) for the runtime indexes!
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$behaviors				*yii/sphinx/ActiveRecord::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$validators				*yii/sphinx/ActiveRecord::$validators*
+ (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
+ model.
+
+$activeValidators			*yii/sphinx/ActiveRecord::$activeValidators*
+ (\yii\validators\Validator[]) The validators applicable to the current
+ 'scenario'.
+
+$errors					*yii/sphinx/ActiveRecord::$errors*
+ (array) Errors for all attributes or the specified attribute. Empty array is
+ returned if no error. Note that when returning errors for all attributes, the
+ result is a two-dimensional array, like the following:
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+
+
+$firstErrors				*yii/sphinx/ActiveRecord::$firstErrors*
+ (array) The first errors. The array keys are the attribute names, and the
+ array values are the corresponding error messages. An empty array will be
+ returned if there is no error.
+
+$attributes				*yii/sphinx/ActiveRecord::$attributes*
+ (array) Attribute values (name => value).
+
+$scenario				*yii/sphinx/ActiveRecord::$scenario*
+ (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+
+$iterator				*yii/sphinx/ActiveRecord::$iterator*
+ (\ArrayIterator) An iterator for traversing the items in the list.
+
+$relatedRecords				*yii/sphinx/ActiveRecord::$relatedRecords*
+ (array) An array of related records indexed by relation names.
+
+$oldAttributes				*yii/sphinx/ActiveRecord::$oldAttributes*
+ (array) The old attribute values (name-value pairs)
+
+$dirtyAttributes			*yii/sphinx/ActiveRecord::$dirtyAttributes*
+ (array) The changed attribute values (name-value pairs)
+
+$isNewRecord				*yii/sphinx/ActiveRecord::$isNewRecord*
+ (boolean) Whether the record is new and should be inserted when calling
+ 'save()'.
+
+$primaryKey				*yii/sphinx/ActiveRecord::$primaryKey*
+ (mixed) The primary key value. An array (attribute name => attribute value)
+ is returned if the primary key is composite or '$asArray' is true. A string
+ is returned otherwise (null will be returned if the key value is null).
+
+$oldPrimaryKey				*yii/sphinx/ActiveRecord::$oldPrimaryKey*
+ (mixed) The old primary key value. An array (column name => column value) is
+ returned if the primary key is composite or '$asArray' is true. A string is
+ returned otherwise (null will be returned if the key value is null).
+
+$snippet				*yii/sphinx/ActiveRecord::$snippet*
+ (string)
+
+$snippetSource				*yii/sphinx/ActiveRecord::$snippetSource*
+ (string) Snippet source string.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/sphinx/ActiveRecord::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/sphinx/ActiveRecord::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/sphinx/ActiveRecord::init*				public
+ See |yii/db/BaseActiveRecord::init|
+
+
+*yii/sphinx/ActiveRecord::__get*				public
+ See |yii/db/BaseActiveRecord::__get|
+
+
+*yii/sphinx/ActiveRecord::__set*				public
+ See |yii/db/BaseActiveRecord::__set|
+
+
+*yii/sphinx/ActiveRecord::__isset*			public
+ See |yii/db/BaseActiveRecord::__isset|
+
+
+*yii/sphinx/ActiveRecord::__unset*			public
+ See |yii/db/BaseActiveRecord::__unset|
+
+
+*yii/sphinx/ActiveRecord::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/sphinx/ActiveRecord::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/sphinx/ActiveRecord::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/sphinx/ActiveRecord::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/sphinx/ActiveRecord::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/sphinx/ActiveRecord::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/sphinx/ActiveRecord::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/sphinx/ActiveRecord::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/sphinx/ActiveRecord::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/sphinx/ActiveRecord::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/sphinx/ActiveRecord::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/sphinx/ActiveRecord::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/sphinx/ActiveRecord::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/sphinx/ActiveRecord::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/sphinx/ActiveRecord::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/sphinx/ActiveRecord::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/sphinx/ActiveRecord::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/sphinx/ActiveRecord::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/sphinx/ActiveRecord::fields*				public
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/sphinx/ActiveRecord::extraFields*			public
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/sphinx/ActiveRecord::toArray*			public
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/sphinx/ActiveRecord::resolveFields*			protected
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/sphinx/ActiveRecord::rules*				public
+ See |yii/base/Model::rules|
+
+
+*yii/sphinx/ActiveRecord::scenarios*			public
+ See |yii/base/Model::scenarios|
+
+
+*yii/sphinx/ActiveRecord::formName*			public
+ See |yii/base/Model::formName|
+
+
+*yii/sphinx/ActiveRecord::attributes*			public
+>
+ attributes()
+<
+(array) List of attribute names.
+
+ The default implementation will return all column names of the table
+ associated with this AR class.
+
+
+*yii/sphinx/ActiveRecord::attributeLabels*		public
+ See |yii/base/Model::attributeLabels|
+
+
+*yii/sphinx/ActiveRecord::validate*			public
+ See |yii/base/Model::validate|
+
+
+*yii/sphinx/ActiveRecord::beforeValidate*			public
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/sphinx/ActiveRecord::afterValidate*			public
+ See |yii/base/Model::afterValidate|
+
+
+*yii/sphinx/ActiveRecord::getValidators*			public
+ See |yii/base/Model::getValidators|
+
+
+*yii/sphinx/ActiveRecord::getActiveValidators*		public
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/sphinx/ActiveRecord::createValidators*		public
+ See |yii/base/Model::createValidators|
+
+
+*yii/sphinx/ActiveRecord::isAttributeRequired*		public
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/sphinx/ActiveRecord::isAttributeSafe*		public
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/sphinx/ActiveRecord::isAttributeActive*		public
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/sphinx/ActiveRecord::getAttributeLabel*		public
+ See |yii/db/BaseActiveRecord::getAttributeLabel|
+
+
+*yii/sphinx/ActiveRecord::hasErrors*			public
+ See |yii/base/Model::hasErrors|
+
+
+*yii/sphinx/ActiveRecord::getErrors*			public
+ See |yii/base/Model::getErrors|
+
+
+*yii/sphinx/ActiveRecord::getFirstErrors*			public
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/sphinx/ActiveRecord::getFirstError*			public
+ See |yii/base/Model::getFirstError|
+
+
+*yii/sphinx/ActiveRecord::addError*			public
+ See |yii/base/Model::addError|
+
+
+*yii/sphinx/ActiveRecord::clearErrors*			public
+ See |yii/base/Model::clearErrors|
+
+
+*yii/sphinx/ActiveRecord::generateAttributeLabel*		public
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/sphinx/ActiveRecord::getAttributes*			public
+ See |yii/base/Model::getAttributes|
+
+
+*yii/sphinx/ActiveRecord::setAttributes*			public
+ See |yii/base/Model::setAttributes|
+
+
+*yii/sphinx/ActiveRecord::onUnsafeAttribute*		public
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/sphinx/ActiveRecord::getScenario*			public
+ See |yii/base/Model::getScenario|
+
+
+*yii/sphinx/ActiveRecord::setScenario*			public
+ See |yii/base/Model::setScenario|
+
+
+*yii/sphinx/ActiveRecord::safeAttributes*			public
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/sphinx/ActiveRecord::activeAttributes*		public
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/sphinx/ActiveRecord::load*				public
+ See |yii/base/Model::load|
+
+
+*yii/sphinx/ActiveRecord::loadMultiple*			public
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/sphinx/ActiveRecord::validateMultiple*		public
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/sphinx/ActiveRecord::getIterator*			public
+ See |yii/base/Model::getIterator|
+
+
+*yii/sphinx/ActiveRecord::offsetExists*			public
+ See |yii/db/BaseActiveRecord::offsetExists|
+
+
+*yii/sphinx/ActiveRecord::offsetGet*			public
+ See |yii/base/Model::offsetGet|
+
+
+*yii/sphinx/ActiveRecord::offsetSet*			public
+ See |yii/base/Model::offsetSet|
+
+
+*yii/sphinx/ActiveRecord::offsetUnset*			public
+ See |yii/db/BaseActiveRecord::offsetUnset|
+
+
+*yii/sphinx/ActiveRecord::findOne*			public
+ See |yii/db/ActiveRecordInterface::findOne|
+
+
+*yii/sphinx/ActiveRecord::findAll*			public
+ See |yii/db/ActiveRecordInterface::findAll|
+
+
+*yii/sphinx/ActiveRecord::updateAll*			public
+>
+ updateAll($attributes, $condition='\'\'', $params='[]')
+<
+(integer) The number of rows updated
+
+ For example, to change the status to be 1 for all articles which status is 2:
+
+   Article::updateAll(['status' => 1], 'status = 2');
+
+
+    [$attributes] (array) Attribute values (name-value pairs) to be saved into
+    the table
+    [$condition] (string|array) The conditions that will be put in the WHERE
+    part of the UPDATE SQL. Please refer to 'Query::where()' on how to specify
+    this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii/sphinx/ActiveRecord::updateAllCounters*		public
+ See |yii/db/BaseActiveRecord::updateAllCounters|
+
+
+*yii/sphinx/ActiveRecord::deleteAll*			public
+>
+ deleteAll($condition='\'\'', $params='[]')
+<
+(integer) The number of rows deleted
+
+ For example, to delete all articles whose status is 3:
+
+   Article::deleteAll('status = 3');
+
+
+    [$condition] (string|array) The conditions that will be put in the WHERE
+    part of the DELETE SQL. Please refer to 'Query::where()' on how to specify
+    this parameter.
+    [$params] (array) The parameters (name => value) to be bound to the query.
+
+
+*yii/sphinx/ActiveRecord::optimisticLock*			public
+ See |yii/db/BaseActiveRecord::optimisticLock|
+
+
+*yii/sphinx/ActiveRecord::hasOne*				public
+ See |yii/db/BaseActiveRecord::hasOne|
+
+
+*yii/sphinx/ActiveRecord::hasMany*			public
+ See |yii/db/BaseActiveRecord::hasMany|
+
+
+*yii/sphinx/ActiveRecord::populateRelation*		public
+ See |yii/db/BaseActiveRecord::populateRelation|
+
+
+*yii/sphinx/ActiveRecord::isRelationPopulated*		public
+ See |yii/db/BaseActiveRecord::isRelationPopulated|
+
+
+*yii/sphinx/ActiveRecord::getRelatedRecords*		public
+ See |yii/db/BaseActiveRecord::getRelatedRecords|
+
+
+*yii/sphinx/ActiveRecord::hasAttribute*			public
+ See |yii/db/ActiveRecordInterface::hasAttribute|
+
+
+*yii/sphinx/ActiveRecord::getAttribute*			public
+ See |yii/db/ActiveRecordInterface::getAttribute|
+
+
+*yii/sphinx/ActiveRecord::setAttribute*			public
+ See |yii/db/ActiveRecordInterface::setAttribute|
+
+
+*yii/sphinx/ActiveRecord::getOldAttributes*		public
+ See |yii/db/BaseActiveRecord::getOldAttributes|
+
+
+*yii/sphinx/ActiveRecord::setOldAttributes*		public
+ See |yii/db/BaseActiveRecord::setOldAttributes|
+
+
+*yii/sphinx/ActiveRecord::getOldAttribute*		public
+ See |yii/db/BaseActiveRecord::getOldAttribute|
+
+
+*yii/sphinx/ActiveRecord::setOldAttribute*		public
+ See |yii/db/BaseActiveRecord::setOldAttribute|
+
+
+*yii/sphinx/ActiveRecord::markAttributeDirty*		public
+ See |yii/db/BaseActiveRecord::markAttributeDirty|
+
+
+*yii/sphinx/ActiveRecord::isAttributeChanged*		public
+ See |yii/db/BaseActiveRecord::isAttributeChanged|
+
+
+*yii/sphinx/ActiveRecord::getDirtyAttributes*		public
+ See |yii/db/BaseActiveRecord::getDirtyAttributes|
+
+
+*yii/sphinx/ActiveRecord::save*				public
+ See |yii/db/ActiveRecordInterface::save|
+
+
+*yii/sphinx/ActiveRecord::update*				public
+>
+ update($runValidation='true', $attributeNames='null')
+<
+(integer|boolean) The number of rows affected, or false if validation fails or
+'beforeSave()' stops the updating process.
+
+ This method performs the following steps in order:
+
+ 1. call 'beforeValidate()' when '$runValidation' is true. If validation   
+ fails, it will skip the rest of the steps; 2. call 'afterValidate()' when
+ '$runValidation' is true. 3. call 'beforeSave()'. If the method returns
+ false, it will skip the    rest of the steps; 4. save the record into index.
+ If this fails, it will skip the rest of the steps; 5. call 'afterSave()';
+
+ In the above step 1, 2, 3 and 5, events 'EVENT_BEFORE_VALIDATE',
+ 'EVENT_BEFORE_UPDATE', 'EVENT_AFTER_UPDATE' and 'EVENT_AFTER_VALIDATE' will
+ be raised by the corresponding methods.
+
+ Only the 'changedAttributes|changed attribute values' will be saved into
+ database.
+
+ For example, to update an article record:
+
+   $article = Article::findOne($id);
+   $article->genre_id = $genreId;
+   $article->group_id = $groupId;
+   $article->update();
+
+ Note that it is possible the update does not affect any row in the table. In
+ this case, this method will return 0. For this reason, you should use the
+ following code to check if update() is successful or not:
+
+   if ($this->update() !== false) {
+       // update successful
+   } else {
+       // update failed
+   }
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be inserted into the
+    database.
+    [$attributeNames] (array) List of attributes that need to be saved.
+    Defaults to null, meaning all attributes that are loaded from DB will be
+    saved.
+
+
+*yii/sphinx/ActiveRecord::updateAttributes*		public
+ See |yii/db/BaseActiveRecord::updateAttributes|
+
+
+*yii/sphinx/ActiveRecord::updateInternal*			protected
+>
+ updateInternal($attributes='null')
+<
+(void)
+
+
+    [$attributes] () 
+
+
+*yii/sphinx/ActiveRecord::updateCounters*			public
+ See |yii/db/BaseActiveRecord::updateCounters|
+
+
+*yii/sphinx/ActiveRecord::delete*				public
+>
+ delete()
+<
+(integer|boolean) The number of rows deleted, or false if the deletion is
+unsuccessful for some reason. Note that it is possible the number of rows
+deleted is 0, even though the deletion execution is successful.
+
+ This method performs the following steps in order:
+
+ 1. call 'beforeDelete()'. If the method returns false, it will skip the   
+ rest of the steps; 2. delete the record from the index; 3. call
+ 'afterDelete()'.
+
+ In the above step 1 and 3, events named 'EVENT_BEFORE_DELETE' and
+ 'EVENT_AFTER_DELETE' will be raised by the corresponding methods.
+
+
+*yii/sphinx/ActiveRecord::getIsNewRecord*			public
+ See |yii/db/ActiveRecordInterface::getIsNewRecord|
+
+
+*yii/sphinx/ActiveRecord::setIsNewRecord*			public
+ See |yii/db/BaseActiveRecord::setIsNewRecord|
+
+
+*yii/sphinx/ActiveRecord::afterFind*			public
+ See |yii/db/BaseActiveRecord::afterFind|
+
+
+*yii/sphinx/ActiveRecord::beforeSave*			public
+ See |yii/db/BaseActiveRecord::beforeSave|
+
+
+*yii/sphinx/ActiveRecord::afterSave*			public
+ See |yii/db/BaseActiveRecord::afterSave|
+
+
+*yii/sphinx/ActiveRecord::beforeDelete*			public
+ See |yii/db/BaseActiveRecord::beforeDelete|
+
+
+*yii/sphinx/ActiveRecord::afterDelete*			public
+ See |yii/db/BaseActiveRecord::afterDelete|
+
+
+*yii/sphinx/ActiveRecord::refresh*			public
+ See |yii/db/BaseActiveRecord::refresh|
+
+
+*yii/sphinx/ActiveRecord::equals*				public
+>
+ equals($record)
+<
+(boolean) Whether the two active records refer to the same row in the same
+index.
+
+ The comparison is made by comparing the index names and the primary key
+ values of the two active records. If one of the records 'isNewRecord|is new'
+ they are also considered not equal.
+    [$record] (\yii\sphinx\ActiveRecord) Record to compare to
+
+
+*yii/sphinx/ActiveRecord::getPrimaryKey*			public
+ See |yii/db/ActiveRecordInterface::getPrimaryKey|
+
+
+*yii/sphinx/ActiveRecord::getOldPrimaryKey*		public
+ See |yii/db/ActiveRecordInterface::getOldPrimaryKey|
+
+
+*yii/sphinx/ActiveRecord::populateRecord*			public
+>
+ populateRecord($record, $row)
+<
+(void)
+
+
+    [$record] () 
+    [$row] () 
+
+
+*yii/sphinx/ActiveRecord::instantiate*			public
+ See |yii/db/BaseActiveRecord::instantiate|
+
+
+*yii/sphinx/ActiveRecord::getRelation*			public
+ See |yii/db/ActiveRecordInterface::getRelation|
+
+
+*yii/sphinx/ActiveRecord::link*				public
+ See |yii/db/ActiveRecordInterface::link|
+
+
+*yii/sphinx/ActiveRecord::unlink*				public
+ See |yii/db/ActiveRecordInterface::unlink|
+
+
+*yii/sphinx/ActiveRecord::isPrimaryKey*			public
+ See |yii/db/ActiveRecordInterface::isPrimaryKey|
+
+
+*yii/sphinx/ActiveRecord::primaryKey*			public
+>
+ primaryKey()
+<
+(string[]) The primary keys of the associated Sphinx index.
+
+ The default implementation will return the primary key as declared in the
+ Sphinx index, which is associated with this AR class.
+
+ Note that an array should be returned even for a table with single primary
+ key.
+
+
+*yii/sphinx/ActiveRecord::find*				public
+>
+ find()
+<
+(\yii\db\ActiveQueryInterface) The newly created
+'ActiveQueryInterface|ActiveQuery' instance.
+
+
+
+
+*yii/sphinx/ActiveRecord::insert*				public
+>
+ insert($runValidation='true', $attributes='null')
+<
+(boolean) Whether the attributes are valid and the record is inserted
+successfully.
+
+ This method performs the following steps in order:
+
+ 1. call 'beforeValidate()' when '$runValidation' is true. If validation   
+ fails, it will skip the rest of the steps; 2. call 'afterValidate()' when
+ '$runValidation' is true. 3. call 'beforeSave()'. If the method returns
+ false, it will skip the    rest of the steps; 4. insert the record into
+ index. If this fails, it will skip the rest of the steps; 5. call
+ 'afterSave()';
+
+ In the above step 1, 2, 3 and 5, events 'EVENT_BEFORE_VALIDATE',
+ 'EVENT_BEFORE_INSERT', 'EVENT_AFTER_INSERT' and 'EVENT_AFTER_VALIDATE' will
+ be raised by the corresponding methods.
+
+ Only the 'changedAttributes|changed attribute values' will be inserted.
+
+ For example, to insert an article record:
+
+   $article = new Article;
+   $article->id = $id;
+   $article->genre_id = $genreId;
+   $article->content = $content;
+   $article->insert();
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be inserted.
+    [$attributes] (array) List of attributes that need to be saved. Defaults
+    to null, meaning all attributes that are loaded from index will be saved.
+
+
+*yii/sphinx/ActiveRecord::getDb*				public
+>
+ getDb()
+<
+(\yii\sphinx\Connection) The Sphinx connection used by this AR class.
+
+ By default, the "sphinx" application component is used as the Sphinx
+ connection. You may override this method if you want to use a different
+ Sphinx connection.
+
+
+*yii/sphinx/ActiveRecord::findBySql*			public
+>
+ findBySql($sql, $params='[]')
+<
+(\yii\sphinx\ActiveQuery) The newly created 'ActiveQuery' instance
+
+ Note that because the SQL statement is already specified, calling additional
+ query modification methods (such as 'where()', 'order()') on the created
+ 'ActiveQuery' instance will have no effect. However, calling 'with()',
+ 'asArray()' or 'indexBy()' is still fine.
+
+ Below is an example:
+
+   $customers = Article::findBySql("SELECT * FROM `idx_article` WHERE
+ MATCH('development')")->all();
+
+
+    [$sql] (string) The SQL statement to be executed
+    [$params] (array) Parameters to be bound to the SQL statement during
+    execution.
+
+
+*yii/sphinx/ActiveRecord::indexName*			public
+>
+ indexName()
+<
+(string) The index name
+
+ By default this method returns the class name as the index name by calling
+ 'Inflector::camel2id()'. For example, 'Article' becomes 'article', and
+ 'StockItem' becomes 'stock_item'. You may override this method if the index
+ is not named after this convention.
+
+
+*yii/sphinx/ActiveRecord::getIndexSchema*			public
+>
+ getIndexSchema()
+<
+(\yii\sphinx\IndexSchema) The schema information of the Sphinx index
+associated with this AR class.
+
+
+
+
+*yii/sphinx/ActiveRecord::callSnippets*			public
+>
+ callSnippets($source, $match, $options='[]')
+<
+(string|array) Built snippet in case "source" is a string, list of built
+snippets in case "source" is an array.
+
+
+    [$source] (string|array) Is the source data to extract a snippet from. It
+    could be either a single string or array of strings.
+    [$match] (string) The full-text query to build snippets for.
+    [$options] (array) List of options in format: optionName => optionValue
+
+
+*yii/sphinx/ActiveRecord::callKeywords*			public
+>
+ callKeywords($text, $fetchStatistic='false')
+<
+(array) Keywords and statistics
+
+
+    [$text] (string) The text to break down to keywords.
+    [$fetchStatistic] (boolean) Whether to return document and hit occurrence
+    statistics
+
+
+*yii/sphinx/ActiveRecord::setSnippet*			public
+>
+ setSnippet($snippet)
+<
+(void)
+
+
+    [$snippet] (string) 
+
+
+*yii/sphinx/ActiveRecord::getSnippet*			public
+>
+ getSnippet($match='null', $options='[]')
+<
+(string) Snippet value
+
+
+    [$match] (string) Snippet source query
+    [$options] (array) List of options in format: optionName => optionValue
+
+
+*yii/sphinx/ActiveRecord::fetchSnippet*			protected
+>
+ fetchSnippet($match, $options='[]')
+<
+(string) Snippet value.
+
+
+    [$match] (string) The full-text query to build snippets for.
+    [$options] (array) List of options in format: optionName => optionValue
+
+
+*yii/sphinx/ActiveRecord::getSnippetSource*		public
+>
+ getSnippetSource()
+<
+(string) Snippet source string.
+
+ Child classes must implement this method to return the actual snippet source
+ text. For example:
+
+   public function getSnippetSource()
+   {
+       return $this->snippetSourceRelation->content;
+   }
+
+
+
+
+*yii/sphinx/ActiveRecord::transactions*			public
+>
+ transactions()
+<
+(array) The declarations of transactional operations. The array keys are
+scenarios names, and the array values are the corresponding transaction
+operations.
+
+ The supported DB operations are: 'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE',
+ which correspond to the 'insert()', 'update()' and 'delete()' methods,
+ respectively. By default, these methods are NOT enclosed in a transaction.
+
+ In some scenarios, to ensure data consistency, you may want to enclose some
+ or all of them in transactions. You can do so by overriding this method and
+ returning the operations that need to be transactional. For example,
+
+   return [
+       'admin' => self::OP_INSERT,
+       'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
+       // the above is equivalent to the following:
+       // 'api' => self::OP_ALL,
+
+   ];
+
+ The above declaration specifies that in the "admin" scenario, the insert
+ operation ('insert()') should be done in a transaction; and in the "api"
+ scenario, all the operations should be done in a transaction.
+
+
+*yii/sphinx/ActiveRecord::isTransactional*		public
+>
+ isTransactional($operation)
+<
+(boolean) Whether the specified operation is transactional in the current
+'scenario'.
+
+
+    [$operation] (integer) The operation to check. Possible values are
+    'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE'.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

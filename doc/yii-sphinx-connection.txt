@@ -1,0 +1,365 @@
+
+*yii/sphinx/Connection*   >> |yii/db/Connection|
+=======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This class uses [PDO](http://www.php.net/manual/en/ref.pdo.php) to maintain
+ such connection. Note: although PDO supports numerous database drivers, this
+ class supports only MySQL.
+
+ In order to setup Sphinx "searchd" to support MySQL protocol following
+ configuration should be added:
+
+   searchd
+   {
+       listen = localhost:9306:mysql41
+       ...
+   }
+
+ The following example shows how to create a Connection instance and establish
+ the Sphinx connection:
+
+   $connection = new \yii\db\Connection([
+       'dsn' => 'mysql:host=127.0.0.1;port=9306;',
+       'username' => $username,
+       'password' => $password,
+   ]);
+   $connection->open();
+
+ After the Sphinx connection is established, one can execute SQL statements
+ like the following:
+
+   $command = $connection->createCommand("SELECT * FROM idx_article WHERE
+ MATCH('programming')");
+   $articles = $command->queryAll();
+   $command = $connection->createCommand('UPDATE idx_article SET status=2
+ WHERE id=1');
+   $command->execute();
+
+ For more information about how to perform various DB queries, please refer to
+ 'Command'.
+
+ This class supports transactions exactly as "yii\db\Connection".
+
+ Note: while this class extends "yii\db\Connection" some of its methods are
+ not supported.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$dsn					*yii/sphinx/Connection::$dsn*
+ See |yii/db/Connection::$dsn|
+
+$username				*yii/sphinx/Connection::$username*
+ See |yii/db/Connection::$username|
+
+$password				*yii/sphinx/Connection::$password*
+ See |yii/db/Connection::$password|
+
+$attributes				*yii/sphinx/Connection::$attributes*
+ See |yii/db/Connection::$attributes|
+
+$pdo					*yii/sphinx/Connection::$pdo*
+ See |yii/db/Connection::$pdo|
+
+$enableSchemaCache			*yii/sphinx/Connection::$enableSchemaCache*
+ See |yii/db/Connection::$enableSchemaCache|
+
+$schemaCacheDuration			*yii/sphinx/Connection::$schemaCacheDuration*
+ See |yii/db/Connection::$schemaCacheDuration|
+
+$schemaCacheExclude			*yii/sphinx/Connection::$schemaCacheExclude*
+ See |yii/db/Connection::$schemaCacheExclude|
+
+$schemaCache				*yii/sphinx/Connection::$schemaCache*
+ See |yii/db/Connection::$schemaCache|
+
+$enableQueryCache			*yii/sphinx/Connection::$enableQueryCache*
+ See |yii/db/Connection::$enableQueryCache|
+
+$queryCacheDuration			*yii/sphinx/Connection::$queryCacheDuration*
+ See |yii/db/Connection::$queryCacheDuration|
+
+$queryCacheDependency			*yii/sphinx/Connection::$queryCacheDependency*
+ See |yii/db/Connection::$queryCacheDependency|
+
+$queryCache				*yii/sphinx/Connection::$queryCache*
+ See |yii/db/Connection::$queryCache|
+
+$charset				*yii/sphinx/Connection::$charset*
+ See |yii/db/Connection::$charset|
+
+$emulatePrepare				*yii/sphinx/Connection::$emulatePrepare*
+ See |yii/db/Connection::$emulatePrepare|
+
+$tablePrefix				*yii/sphinx/Connection::$tablePrefix*
+ See |yii/db/Connection::$tablePrefix|
+
+$schemaMap				*yii/sphinx/Connection::$schemaMap*
+ ()
+
+$pdoClass				*yii/sphinx/Connection::$pdoClass*
+ See |yii/db/Connection::$pdoClass|
+
+$enableSavepoint			*yii/sphinx/Connection::$enableSavepoint*
+ See |yii/db/Connection::$enableSavepoint|
+
+$behaviors				*yii/sphinx/Connection::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$isActive				*yii/sphinx/Connection::$isActive*
+ (boolean) Whether the DB connection is established
+
+$transaction				*yii/sphinx/Connection::$transaction*
+ (\yii\db\Transaction) The currently active transaction. Null if no active
+ transaction.
+
+$schema					*yii/sphinx/Connection::$schema*
+ (\yii\db\Schema) The schema information for the database opened by this
+ connection.
+
+$queryBuilder				*yii/sphinx/Connection::$queryBuilder*
+ (\yii\db\QueryBuilder) The query builder for the current DB connection.
+
+$lastInsertID				*yii/sphinx/Connection::$lastInsertID*
+ (string) The row ID of the last row inserted, or the last value retrieved
+ from the sequence object
+
+$driverName				*yii/sphinx/Connection::$driverName*
+ (string) Name of the DB driver
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/sphinx/Connection::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/sphinx/Connection::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/sphinx/Connection::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/sphinx/Connection::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/sphinx/Connection::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/sphinx/Connection::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/sphinx/Connection::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/sphinx/Connection::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/sphinx/Connection::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/sphinx/Connection::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/sphinx/Connection::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/sphinx/Connection::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/sphinx/Connection::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/sphinx/Connection::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/sphinx/Connection::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/sphinx/Connection::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/sphinx/Connection::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/sphinx/Connection::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/sphinx/Connection::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/sphinx/Connection::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/sphinx/Connection::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/sphinx/Connection::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/sphinx/Connection::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/sphinx/Connection::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/sphinx/Connection::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/sphinx/Connection::getIsActive*			public
+ See |yii/db/Connection::getIsActive|
+
+
+*yii/sphinx/Connection::beginCache*			public
+ See |yii/db/Connection::beginCache|
+
+
+*yii/sphinx/Connection::endCache*				public
+ See |yii/db/Connection::endCache|
+
+
+*yii/sphinx/Connection::open*				public
+ See |yii/db/Connection::open|
+
+
+*yii/sphinx/Connection::close*				public
+ See |yii/db/Connection::close|
+
+
+*yii/sphinx/Connection::createPdoInstance*		protected
+ See |yii/db/Connection::createPdoInstance|
+
+
+*yii/sphinx/Connection::initConnection*			protected
+ See |yii/db/Connection::initConnection|
+
+
+*yii/sphinx/Connection::createCommand*			public
+>
+ createCommand($sql='null', $params='[]')
+<
+(\yii\sphinx\Command) The Sphinx command
+
+
+    [$sql] (string) The SQL statement to be executed
+    [$params] (array) The parameters to be bound to the SQL statement
+
+
+*yii/sphinx/Connection::getTransaction*			public
+ See |yii/db/Connection::getTransaction|
+
+
+*yii/sphinx/Connection::beginTransaction*			public
+ See |yii/db/Connection::beginTransaction|
+
+
+*yii/sphinx/Connection::getSchema*			public
+ See |yii/db/Connection::getSchema|
+
+
+*yii/sphinx/Connection::getQueryBuilder*			public
+ See |yii/db/Connection::getQueryBuilder|
+
+
+*yii/sphinx/Connection::getTableSchema*			public
+ See |yii/db/Connection::getTableSchema|
+
+
+*yii/sphinx/Connection::getLastInsertID*			public
+>
+ getLastInsertID($sequenceName='''')
+<
+(string) The row ID of the last row inserted, or the last value retrieved from
+the sequence object
+
+
+    [$sequenceName] (string) Name of the sequence object
+
+
+*yii/sphinx/Connection::quoteValue*			public
+ See |yii/db/Connection::quoteValue|
+
+
+*yii/sphinx/Connection::quoteTableName*			public
+>
+ quoteTableName($name)
+<
+(string) The properly quoted table name
+
+
+    [$name] (string) Table name
+
+
+*yii/sphinx/Connection::quoteColumnName*			public
+ See |yii/db/Connection::quoteColumnName|
+
+
+*yii/sphinx/Connection::quoteSql*				public
+ See |yii/db/Connection::quoteSql|
+
+
+*yii/sphinx/Connection::getDriverName*			public
+ See |yii/db/Connection::getDriverName|
+
+
+*yii/sphinx/Connection::setDriverName*			public
+ See |yii/db/Connection::setDriverName|
+
+
+*yii/sphinx/Connection::getIndexSchema*			public
+>
+ getIndexSchema($name, $refresh='false')
+<
+(\yii\sphinx\IndexSchema) Index schema information. Null if the named index
+does not exist.
+
+
+    [$name] (string) Index name.
+    [$refresh] (boolean) Whether to reload the table schema even if it is
+    found in the cache.
+
+
+*yii/sphinx/Connection::quoteIndexName*			public
+>
+ quoteIndexName($name)
+<
+(string) The properly quoted index name
+
+ If the index name contains schema prefix, the prefix will also be properly
+ quoted. If the index name is already quoted or contains special characters
+ including '(', ''' and '{{', then this method will do nothing.
+    [$name] (string) Index name
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

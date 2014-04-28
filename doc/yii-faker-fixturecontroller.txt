@@ -1,0 +1,541 @@
+
+*yii/faker/FixtureController*   >> |yii/console/controllers/FixtureController|
+=============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Fixtures are one of the important paths in unit testing. To speed up
+ developers work these fixtures can be generated automatically, based on
+ prepared template. This command is a simple wrapper for the fixtures library
+ [Faker](https://github.com/fzaninotto/Faker).
+
+ You should configure this command as follows (you can use any alias, not only
+ "fixture"):
+
+   'controllerMap' => [
+       'fixture' => [
+           'class' => 'yii\faker\FixtureController',
+       ],
+   ],
+
+ To start using this command you need to be familiar (read guide) for the
+ Faker library and generate fixtures template files, according to the given
+ format:
+
+   #users.php file under $templatePath
+
+   return [
+      [
+          'table_column0' => 'faker_formatter',
+          ...
+          'table_columnN' => 'other_faker_formatter
+          'table_columnN+1' => function ($fixture, $faker, $index) {
+              //set needed fixture fields based on different conditions
+              return $fixture;
+          }
+      ],
+   ];
+
+ If you use callback as a attribute value, then it will be called as shown
+ with three parameters:
+
+ - '$fixture' - current fixture array. - '$faker' - faker generator instance -
+ '$index' - current fixture index. For example if user need to generate 3
+ fixtures for user table, it will be 0..2
+
+ After you set all needed fields in callback, you need to return $fixture
+ array back from the callback.
+
+ After you prepared needed templates for tables you can simply generate your
+ fixtures via command
+
+   yii fixture/generate users
+
+   //also a short version of this command (generate action is default)
+   yii fixture users
+
+   //to generate fixtures for several tables, use "," as a separator, for
+ example:
+   yii fixture users,profile
+
+ In the code above "users" is template name, after this command run, new file
+ named same as template will be created under the '$fixtureDataPath' folder.
+ You can generate fixtures for all templates by specifying keyword "all"
+
+   yii fixture/generate all
+
+ This command will generate fixtures for all template files that are stored
+ under $templatePath and store fixtures under '$fixtureDataPath' with file
+ names same as templates names.
+
+ You can specify how many fixtures per file you need by the second parameter.
+ In the code below we generate all fixtures and in each file there will be 3
+ rows (fixtures).
+
+   yii fixture/generate all 3
+
+ You can specify different options of this command:
+
+   //generate fixtures in russian language
+   yii fixture/generate users 5 --language=ru_RU
+
+   //read templates from the other path
+   yii fixture/generate all --templatePath=@app/path/to/my/custom/templates
+
+   //generate fixtures into other folders
+   yii fixture/generate all
+ --fixtureDataPath=@tests/unit/fixtures/subfolder1/subfolder2/subfolder3
+
+ You also can create your own data providers for custom tables fields, see
+ Faker library guide for more info (https://github.com/fzaninotto/Faker);
+ After you created custom provider, for example:
+
+   class Book extends \Faker\Provider\Base
+   {
+       public function title($nbWords = 5)
+       {
+           $sentence = $this->generator->sentence($nbWords);
+           return mb_substr($sentence, 0, mb_strlen($sentence) - 1);
+       }
+
+       public function ISBN()
+       {
+           return $this->generator->randomNumber(13);
+       }
+   }
+
+ you can use it by adding it to the $providers property of the current
+ command. In your console.php config:
+
+      'controllerMap' => [
+          'fixture' => [
+              'class' => 'yii\faker\FixtureController',
+              'providers' => [
+                  'app\tests\unit\faker\providers\Book',
+              ],
+          ],
+      ],
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$id					*yii/faker/FixtureController::$id*
+ See |yii/base/Controller::$id|
+
+$module					*yii/faker/FixtureController::$module*
+ See |yii/base/Controller::$module|
+
+$defaultAction				*yii/faker/FixtureController::$defaultAction*
+ (string) Controller default action ID.
+
+$layout					*yii/faker/FixtureController::$layout*
+ See |yii/base/Controller::$layout|
+
+$action					*yii/faker/FixtureController::$action*
+ See |yii/base/Controller::$action|
+
+$interactive				*yii/faker/FixtureController::$interactive*
+ See |yii/console/Controller::$interactive|
+
+$color					*yii/faker/FixtureController::$color*
+ See |yii/console/Controller::$color|
+
+$namespace				*yii/faker/FixtureController::$namespace*
+ See |yii/console/controllers/FixtureController::$namespace|
+
+$globalFixtures				*yii/faker/FixtureController::$globalFixtures*
+ See |yii/console/controllers/FixtureController::$globalFixtures|
+
+$templatePath				*yii/faker/FixtureController::$templatePath*
+ (string) Alias to the template path, where all tables templates are stored.
+
+$fixtureDataPath			*yii/faker/FixtureController::$fixtureDataPath*
+ (string) Alias to the fixture data path, where data files should be written.
+
+$language				*yii/faker/FixtureController::$language*
+ (string) Language to use when generating fixtures data.
+
+$providers				*yii/faker/FixtureController::$providers*
+ (array) Additional data providers that can be created by user and will be
+ added to the Faker generator. More info in
+ [Faker](https://github.com/fzaninotto/Faker.) library docs.
+
+$behaviors				*yii/faker/FixtureController::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$modules				*yii/faker/FixtureController::$modules*
+ (\yii\base\Module[]) All ancestor modules that this controller is located
+ within.
+
+$uniqueId				*yii/faker/FixtureController::$uniqueId*
+ (string) The controller ID that is prefixed with the module ID (if any).
+
+$route					*yii/faker/FixtureController::$route*
+ (string) The route (module ID, controller ID and action ID) of the current
+ request.
+
+$view					*yii/faker/FixtureController::$view*
+ (\yii\base\View|\yii\web\View) The view object that can be used to render
+ views or view files.
+
+$viewPath				*yii/faker/FixtureController::$viewPath*
+ (string) The directory containing the view files for this controller.
+
+$fixtures				*yii/faker/FixtureController::$fixtures*
+ (\yii\test\Fixture[]) The loaded fixtures for the current test case
+
+$generator				*yii/faker/FixtureController::$generator*
+ (\Faker\Generator)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/faker/FixtureController::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/faker/FixtureController::__construct*		public
+ See |yii/base/Controller::__construct|
+
+
+*yii/faker/FixtureController::init*			public
+ See |yii/base/Object::init|
+
+
+*yii/faker/FixtureController::__get*			public
+ See |yii/base/Component::__get|
+
+
+*yii/faker/FixtureController::__set*			public
+ See |yii/base/Component::__set|
+
+
+*yii/faker/FixtureController::__isset*			public
+ See |yii/base/Component::__isset|
+
+
+*yii/faker/FixtureController::__unset*			public
+ See |yii/base/Component::__unset|
+
+
+*yii/faker/FixtureController::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/faker/FixtureController::hasProperty*		public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/faker/FixtureController::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/faker/FixtureController::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/faker/FixtureController::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/faker/FixtureController::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/faker/FixtureController::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/faker/FixtureController::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/faker/FixtureController::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/faker/FixtureController::off*			public
+ See |yii/base/Component::off|
+
+
+*yii/faker/FixtureController::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/faker/FixtureController::getBehavior*		public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/faker/FixtureController::getBehaviors*		public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/faker/FixtureController::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/faker/FixtureController::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/faker/FixtureController::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/faker/FixtureController::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/faker/FixtureController::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/faker/FixtureController::actions*			public
+ See |yii/base/Controller::actions|
+
+
+*yii/faker/FixtureController::runAction*			public
+ See |yii/console/Controller::runAction|
+
+
+*yii/faker/FixtureController::run*			public
+ See |yii/base/Controller::run|
+
+
+*yii/faker/FixtureController::bindActionParams*		public
+ See |yii/console/Controller::bindActionParams|
+
+
+*yii/faker/FixtureController::createAction*		public
+ See |yii/base/Controller::createAction|
+
+
+*yii/faker/FixtureController::beforeAction*		public
+>
+ beforeAction($action)
+<
+(void)
+
+    [$action] () 
+
+
+*yii/faker/FixtureController::afterAction*		public
+ See |yii/base/Controller::afterAction|
+
+
+*yii/faker/FixtureController::getModules*			public
+ See |yii/base/Controller::getModules|
+
+
+*yii/faker/FixtureController::getUniqueId*		public
+ See |yii/base/Controller::getUniqueId|
+
+
+*yii/faker/FixtureController::getRoute*			public
+ See |yii/base/Controller::getRoute|
+
+
+*yii/faker/FixtureController::render*			public
+ See |yii/base/Controller::render|
+
+
+*yii/faker/FixtureController::renderPartial*		public
+ See |yii/base/Controller::renderPartial|
+
+
+*yii/faker/FixtureController::renderFile*			public
+ See |yii/base/Controller::renderFile|
+
+
+*yii/faker/FixtureController::getView*			public
+ See |yii/base/Controller::getView|
+
+
+*yii/faker/FixtureController::setView*			public
+ See |yii/base/Controller::setView|
+
+
+*yii/faker/FixtureController::getViewPath*		public
+ See |yii/base/Controller::getViewPath|
+
+
+*yii/faker/FixtureController::findLayoutFile*		protected
+ See |yii/base/Controller::findLayoutFile|
+
+
+*yii/faker/FixtureController::isColorEnabled*		public
+ See |yii/console/Controller::isColorEnabled|
+
+
+*yii/faker/FixtureController::ansiFormat*			public
+ See |yii/console/Controller::ansiFormat|
+
+
+*yii/faker/FixtureController::stdout*			public
+ See |yii/console/Controller::stdout|
+
+
+*yii/faker/FixtureController::stderr*			public
+ See |yii/console/Controller::stderr|
+
+
+*yii/faker/FixtureController::prompt*			public
+ See |yii/console/Controller::prompt|
+
+
+*yii/faker/FixtureController::confirm*			public
+ See |yii/console/Controller::confirm|
+
+
+*yii/faker/FixtureController::select*			public
+ See |yii/console/Controller::select|
+
+
+*yii/faker/FixtureController::options*			public
+>
+ options($actionId)
+<
+(array) The names of the options valid for the action
+
+
+    [$actionId] () 
+
+
+*yii/faker/FixtureController::fixtures*			public
+ See |yii/test/FixtureTrait::fixtures|
+
+
+*yii/faker/FixtureController::globalFixtures*		public
+ See |yii/test/FixtureTrait::globalFixtures|
+
+
+*yii/faker/FixtureController::loadFixtures*		public
+ See |yii/test/FixtureTrait::loadFixtures|
+
+
+*yii/faker/FixtureController::unloadFixtures*		public
+ See |yii/test/FixtureTrait::unloadFixtures|
+
+
+*yii/faker/FixtureController::getFixtures*		public
+ See |yii/test/FixtureTrait::getFixtures|
+
+
+*yii/faker/FixtureController::getFixture*			public
+ See |yii/test/FixtureTrait::getFixture|
+
+
+*yii/faker/FixtureController::createFixtures*		protected
+ See |yii/test/FixtureTrait::createFixtures|
+
+
+*yii/faker/FixtureController::actionLoad*			public
+ See |yii/console/controllers/FixtureController::actionLoad|
+
+
+*yii/faker/FixtureController::actionUnload*		public
+ See |yii/console/controllers/FixtureController::actionUnload|
+
+
+*yii/faker/FixtureController::needToApplyAll*		public
+ See |yii/console/controllers/FixtureController::needToApplyAll|
+
+
+*yii/faker/FixtureController::actionGenerate*		public
+>
+ actionGenerate($file, $times=2)
+<
+(void)
+
+
+    [$file] (array|string) Filename for the table template. You can generate
+    all fixtures for all tables by specifying keyword "all" as filename.
+    [$times] (integer) How much fixtures do you want per table
+
+
+*yii/faker/FixtureController::getGenerator*		public
+>
+ getGenerator()
+<
+(\Faker\Generator) 
+
+
+
+
+*yii/faker/FixtureController::checkPaths*			public
+>
+ checkPaths()
+<
+(void)
+
+
+
+
+*yii/faker/FixtureController::addProviders*		public
+>
+ addProviders()
+<
+(void)
+
+
+
+
+*yii/faker/FixtureController::needToGenerateAll*		public
+>
+ needToGenerateAll($file)
+<
+(bool) 
+
+
+    [$file] (string) 
+
+
+*yii/faker/FixtureController::getTemplate*		public
+>
+ getTemplate($file)
+<
+(array) Generator template
+
+
+    [$file] (string) Template file
+
+
+*yii/faker/FixtureController::exportFixtures*		public
+>
+ exportFixtures($fixtures)
+<
+(string) Exported fixtures format
+
+
+    [$fixtures] (array) 
+
+
+*yii/faker/FixtureController::generateFixture*		public
+>
+ generateFixture($template, $index)
+<
+(array) Fixture
+
+
+    [$template] (array) Fixture template
+    [$index] (integer) Current fixture index
+
+
+*yii/faker/FixtureController::confirmGeneration*		public
+>
+ confirmGeneration($files)
+<
+(boolean) 
+
+
+    [$files] (array) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

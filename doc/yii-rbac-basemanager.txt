@@ -6,6 +6,7 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/rbac/DbManager|
+|yii/rbac/PhpManager|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -312,13 +313,16 @@ returned if no such item.
 
 *yii/rbac/BaseManager::executeRule*			protected
 >
- executeRule($item, $params)
+ executeRule($user, $item, $params)
 <
 (boolean) The return value of 'Rule::execute()'. If the auth item does not
 specify a rule, true will be returned.
 
  If the item does not specify a rule, this method will return true. Otherwise,
  it will return the value of 'Rule::execute()'.
+    [$user] (string|integer) The user ID. This should be either an integer or
+    a string representing the unique identifier of a user. See
+    '\yii\web\User::id'.
     [$item] (\yii\rbac\Item) The auth item that needs to execute its rule
     [$params] (array) Parameters passed to 'ManagerInterface::checkAccess()'
     and will be passed to the rule
@@ -356,6 +360,10 @@ specify a rule, true will be returned.
  See |yii/rbac/ManagerInterface::removeChild|
 
 
+*yii/rbac/BaseManager::hasChild*				public
+ See |yii/rbac/ManagerInterface::hasChild|
+
+
 *yii/rbac/BaseManager::getChildren*			public
  See |yii/rbac/ManagerInterface::getChildren|
 
@@ -380,12 +388,24 @@ specify a rule, true will be returned.
  See |yii/rbac/ManagerInterface::getAssignments|
 
 
-*yii/rbac/BaseManager::clearAll*				public
- See |yii/rbac/ManagerInterface::clearAll|
+*yii/rbac/BaseManager::removeAll*				public
+ See |yii/rbac/ManagerInterface::removeAll|
 
 
-*yii/rbac/BaseManager::clearAssignments*			public
- See |yii/rbac/ManagerInterface::clearAssignments|
+*yii/rbac/BaseManager::removeAllPermissions*		public
+ See |yii/rbac/ManagerInterface::removeAllPermissions|
+
+
+*yii/rbac/BaseManager::removeAllRoles*			public
+ See |yii/rbac/ManagerInterface::removeAllRoles|
+
+
+*yii/rbac/BaseManager::removeAllRules*			public
+ See |yii/rbac/ManagerInterface::removeAllRules|
+
+
+*yii/rbac/BaseManager::removeAllAssignments*		public
+ See |yii/rbac/ManagerInterface::removeAllAssignments|
 
 
 

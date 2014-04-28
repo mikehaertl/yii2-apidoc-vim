@@ -1,0 +1,305 @@
+
+*yii/mongodb/Connection*   >> |yii/base/Component|
+========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Connection works together with 'Database' and 'Collection' to provide data
+ access to the Mongo database. They are wrappers of the 'MongoDB PHP
+ extension'(http://us1.php.net/manual/en/book.mongo.php).
+
+ To establish a DB connection, set 'dsn' and then call 'open()' to be true.
+
+ The following example shows how to create a Connection instance and establish
+ the DB connection:
+
+   $connection = new \yii\mongodb\Connection([
+       'dsn' => $dsn,
+   ]);
+   $connection->open();
+
+ After the Mongo connection is established, one can access Mongo databases and
+ collections:
+
+   $database = $connection->getDatabase('my_mongo_db');
+   $collection = $database->getCollection('customer');
+   $collection->insert(['name' => 'John Smith', 'status' => 1]);
+
+ You can work with several different databases at the same server using this
+ class. However, while it is unlikely your application will actually need it,
+ the Connection class provides ability to use 'defaultDatabaseName' as well as
+ a shortcut method 'getCollection()' to retrieve a particular collection
+ instance:
+
+   // get collection 'customer' from default database:
+   $collection = $connection->getCollection('customer');
+   // get collection 'customer' from database 'mydatabase':
+   $collection = $connection->getCollection(['mydatabase', 'customer']);
+
+ Connection is often used as an application component and configured in the
+ application configuration like the following:
+
+   [
+        'components' => [
+            'mongodb' => [
+                'class' => '\yii\mongodb\Connection',
+                'dsn' =>
+ 'mongodb://developer:password@localhost:27017/mydatabase',
+            ],
+        ],
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$dsn					*yii/mongodb/Connection::$dsn*
+ (string) Host:port
+
+ Correct syntax is:
+ mongodb://[username:password@]host1[:port1][,host2[:port2:],...][/dbname] For
+ example: mongodb://localhost:27017
+ mongodb://developer:password@localhost:27017
+ mongodb://developer:password@localhost:27017/mydatabase
+
+$options				*yii/mongodb/Connection::$options*
+ (array) Connection options. for example:
+
+   [
+       'socketTimeoutMS' => 1000, // how long a send or receive on a socket
+ can take before timing out
+       'journal' => true // block write operations until the journal be
+ flushed the to disk
+   ]
+
+
+
+$defaultDatabaseName			*yii/mongodb/Connection::$defaultDatabaseName*
+ (string) Name of the Mongo database to use by default. If this field left
+ blank, connection instance will attempt to determine it from 'options' and
+ 'dsn' automatically, if needed.
+
+$mongoClient				*yii/mongodb/Connection::$mongoClient*
+ (\MongoClient) Mongo client instance.
+
+$behaviors				*yii/mongodb/Connection::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$database				*yii/mongodb/Connection::$database*
+ (\yii\mongodb\Database) Database instance.
+
+$fileCollection				*yii/mongodb/Connection::$fileCollection*
+ (\yii\mongodb\file\Collection) Mongo GridFS collection instance.
+
+$isActive				*yii/mongodb/Connection::$isActive*
+ (boolean) Whether the Mongo connection is established
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/Connection::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/Connection::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/Connection::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/Connection::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/mongodb/Connection::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/mongodb/Connection::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/mongodb/Connection::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/mongodb/Connection::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/mongodb/Connection::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/mongodb/Connection::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/mongodb/Connection::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/mongodb/Connection::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/mongodb/Connection::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/mongodb/Connection::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/mongodb/Connection::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/mongodb/Connection::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/mongodb/Connection::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/mongodb/Connection::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/mongodb/Connection::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/mongodb/Connection::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/mongodb/Connection::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/mongodb/Connection::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/mongodb/Connection::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/mongodb/Connection::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/mongodb/Connection::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/Connection::getDatabase*			public
+>
+ getDatabase($name='null', $refresh='false')
+<
+(\yii\mongodb\Database) Database instance.
+
+
+    [$name] (string|null) Collection name, if null default one will be used.
+    [$refresh] (boolean) Whether to reestablish the database connection even
+    if it is found in the cache.
+
+
+*yii/mongodb/Connection::fetchDefaultDatabaseName*	protected
+>
+ fetchDefaultDatabaseName()
+<
+(string) Default database name
+
+
+
+
+*yii/mongodb/Connection::selectDatabase*			protected
+>
+ selectDatabase($name)
+<
+(\yii\mongodb\Database) Database instance.
+
+
+    [$name] (string) Database name.
+
+
+*yii/mongodb/Connection::getCollection*			public
+>
+ getCollection($name, $refresh='false')
+<
+(\yii\mongodb\Collection) Mongo collection instance.
+
+
+    [$name] (string|array) Collection name. If string considered as the name
+    of the collection inside the default database. If array - first element
+    considered as the name of the database, second - as name of collection
+    inside that database
+    [$refresh] (boolean) Whether to reload the collection instance even if it
+    is found in the cache.
+
+
+*yii/mongodb/Connection::getFileCollection*		public
+>
+ getFileCollection($prefix='\'fs\'', $refresh='false')
+<
+(\yii\mongodb\file\Collection) Mongo GridFS collection instance.
+
+
+    [$prefix] (string|array) Collection prefix. If string considered as the
+    prefix of the GridFS collection inside the default database. If array -
+    first element considered as the name of the database, second - as prefix
+    of the GridFS collection inside that database, if no second element
+    present default "fs" prefix will be used.
+    [$refresh] (boolean) Whether to reload the collection instance even if it
+    is found in the cache.
+
+
+*yii/mongodb/Connection::getIsActive*			public
+>
+ getIsActive()
+<
+(boolean) Whether the Mongo connection is established
+
+
+
+
+*yii/mongodb/Connection::open*				public
+>
+ open()
+<
+(void)
+
+ It does nothing if a Mongo connection has already been established.
+
+
+*yii/mongodb/Connection::close*				public
+>
+ close()
+<
+(void)
+
+ It does nothing if the connection is already closed.
+
+
+*yii/mongodb/Connection::initConnection*			protected
+>
+ initConnection()
+<
+(void)
+
+ This method is invoked right after the DB connection is established. The
+ default implementation triggers an 'EVENT_AFTER_OPEN' event.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

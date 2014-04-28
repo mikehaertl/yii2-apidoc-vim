@@ -1,0 +1,667 @@
+
+*yii/mongodb/file/ActiveRecord*   >> |yii/mongodb/ActiveRecord|
+===============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ To specify source file use the 'file' attribute. It can be specified in one
+ of the following ways:  - string - full name of the file, which content
+ should be stored in GridFS  - \yii\web\UploadedFile - uploaded file instance,
+ which content should be stored in GridFS
+
+ For example:
+
+   $record = new ImageFile();
+   $record->file = '/path/to/some/file.jpg';
+   $record->save();
+
+ You can also specify file content via 'newFileContent' attribute:
+
+   $record = new ImageFile();
+   $record->newFileContent = 'New file content';
+   $record->save();
+
+ Note: 'newFileContent' always takes precedence over 'file'.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$behaviors				*yii/mongodb/file/ActiveRecord::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$validators				*yii/mongodb/file/ActiveRecord::$validators*
+ (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
+ model.
+
+$activeValidators			*yii/mongodb/file/ActiveRecord::$activeValidators*
+ (\yii\validators\Validator[]) The validators applicable to the current
+ 'scenario'.
+
+$errors					*yii/mongodb/file/ActiveRecord::$errors*
+ (array) Errors for all attributes or the specified attribute. Empty array is
+ returned if no error. Note that when returning errors for all attributes, the
+ result is a two-dimensional array, like the following:
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+
+
+$firstErrors				*yii/mongodb/file/ActiveRecord::$firstErrors*
+ (array) The first errors. The array keys are the attribute names, and the
+ array values are the corresponding error messages. An empty array will be
+ returned if there is no error.
+
+$attributes				*yii/mongodb/file/ActiveRecord::$attributes*
+ (array) Attribute values (name => value).
+
+$scenario				*yii/mongodb/file/ActiveRecord::$scenario*
+ (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+
+$iterator				*yii/mongodb/file/ActiveRecord::$iterator*
+ (\ArrayIterator) An iterator for traversing the items in the list.
+
+$relatedRecords				*yii/mongodb/file/ActiveRecord::$relatedRecords*
+ (array) An array of related records indexed by relation names.
+
+$oldAttributes				*yii/mongodb/file/ActiveRecord::$oldAttributes*
+ (array) The old attribute values (name-value pairs)
+
+$dirtyAttributes			*yii/mongodb/file/ActiveRecord::$dirtyAttributes*
+ (array) The changed attribute values (name-value pairs)
+
+$isNewRecord				*yii/mongodb/file/ActiveRecord::$isNewRecord*
+ (boolean) Whether the record is new and should be inserted when calling
+ 'save()'.
+
+$primaryKey				*yii/mongodb/file/ActiveRecord::$primaryKey*
+ (mixed) The primary key value. An array (attribute name => attribute value)
+ is returned if the primary key is composite or '$asArray' is true. A string
+ is returned otherwise (null will be returned if the key value is null).
+
+$oldPrimaryKey				*yii/mongodb/file/ActiveRecord::$oldPrimaryKey*
+ (mixed) The old primary key value. An array (column name => column value) is
+ returned if the primary key is composite or '$asArray' is true. A string is
+ returned otherwise (null will be returned if the key value is null).
+
+$fileContent				*yii/mongodb/file/ActiveRecord::$fileContent*
+ (null|string) File content.
+
+$fileResource				*yii/mongodb/file/ActiveRecord::$fileResource*
+ (resource) File stream resource.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/file/ActiveRecord::className*		public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/file/ActiveRecord::__construct*		public
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/file/ActiveRecord::init*			public
+ See |yii/db/BaseActiveRecord::init|
+
+
+*yii/mongodb/file/ActiveRecord::__get*			public
+ See |yii/db/BaseActiveRecord::__get|
+
+
+*yii/mongodb/file/ActiveRecord::__set*			public
+ See |yii/db/BaseActiveRecord::__set|
+
+
+*yii/mongodb/file/ActiveRecord::__isset*			public
+ See |yii/db/BaseActiveRecord::__isset|
+
+
+*yii/mongodb/file/ActiveRecord::__unset*			public
+ See |yii/db/BaseActiveRecord::__unset|
+
+
+*yii/mongodb/file/ActiveRecord::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/mongodb/file/ActiveRecord::hasProperty*		public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/mongodb/file/ActiveRecord::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/mongodb/file/ActiveRecord::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/mongodb/file/ActiveRecord::hasMethod*		public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/mongodb/file/ActiveRecord::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/mongodb/file/ActiveRecord::behaviors*		public
+ See |yii/base/Component::behaviors|
+
+
+*yii/mongodb/file/ActiveRecord::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/mongodb/file/ActiveRecord::on*			public
+ See |yii/base/Component::on|
+
+
+*yii/mongodb/file/ActiveRecord::off*			public
+ See |yii/base/Component::off|
+
+
+*yii/mongodb/file/ActiveRecord::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/mongodb/file/ActiveRecord::getBehavior*		public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/mongodb/file/ActiveRecord::getBehaviors*		public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/mongodb/file/ActiveRecord::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/mongodb/file/ActiveRecord::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/mongodb/file/ActiveRecord::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/mongodb/file/ActiveRecord::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/mongodb/file/ActiveRecord::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/file/ActiveRecord::fields*			public
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/mongodb/file/ActiveRecord::extraFields*		public
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/mongodb/file/ActiveRecord::toArray*			public
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/mongodb/file/ActiveRecord::resolveFields*		protected
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/mongodb/file/ActiveRecord::rules*			public
+ See |yii/base/Model::rules|
+
+
+*yii/mongodb/file/ActiveRecord::scenarios*		public
+ See |yii/base/Model::scenarios|
+
+
+*yii/mongodb/file/ActiveRecord::formName*			public
+ See |yii/base/Model::formName|
+
+
+*yii/mongodb/file/ActiveRecord::attributes*		public
+>
+ attributes()
+<
+(array) List of attribute names.
+
+ This method could be overridden by child classes to define available
+ attributes. Note: all attributes defined in base Active Record class should
+ be always present in returned array. For example:
+
+   public function attributes()
+   {
+       return array_merge(
+           parent::attributes(),
+           ['tags', 'status']
+       );
+   }
+
+
+
+
+*yii/mongodb/file/ActiveRecord::attributeLabels*		public
+ See |yii/base/Model::attributeLabels|
+
+
+*yii/mongodb/file/ActiveRecord::validate*			public
+ See |yii/base/Model::validate|
+
+
+*yii/mongodb/file/ActiveRecord::beforeValidate*		public
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/mongodb/file/ActiveRecord::afterValidate*		public
+ See |yii/base/Model::afterValidate|
+
+
+*yii/mongodb/file/ActiveRecord::getValidators*		public
+ See |yii/base/Model::getValidators|
+
+
+*yii/mongodb/file/ActiveRecord::getActiveValidators*	public
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/mongodb/file/ActiveRecord::createValidators*		public
+ See |yii/base/Model::createValidators|
+
+
+*yii/mongodb/file/ActiveRecord::isAttributeRequired*	public
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/mongodb/file/ActiveRecord::isAttributeSafe*		public
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/mongodb/file/ActiveRecord::isAttributeActive*	public
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/mongodb/file/ActiveRecord::getAttributeLabel*	public
+ See |yii/db/BaseActiveRecord::getAttributeLabel|
+
+
+*yii/mongodb/file/ActiveRecord::hasErrors*		public
+ See |yii/base/Model::hasErrors|
+
+
+*yii/mongodb/file/ActiveRecord::getErrors*		public
+ See |yii/base/Model::getErrors|
+
+
+*yii/mongodb/file/ActiveRecord::getFirstErrors*		public
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/mongodb/file/ActiveRecord::getFirstError*		public
+ See |yii/base/Model::getFirstError|
+
+
+*yii/mongodb/file/ActiveRecord::addError*			public
+ See |yii/base/Model::addError|
+
+
+*yii/mongodb/file/ActiveRecord::clearErrors*		public
+ See |yii/base/Model::clearErrors|
+
+
+*yii/mongodb/file/ActiveRecord::generateAttributeLabel*	public
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/mongodb/file/ActiveRecord::getAttributes*		public
+ See |yii/base/Model::getAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::setAttributes*		public
+ See |yii/base/Model::setAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::onUnsafeAttribute*	public
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/mongodb/file/ActiveRecord::getScenario*		public
+ See |yii/base/Model::getScenario|
+
+
+*yii/mongodb/file/ActiveRecord::setScenario*		public
+ See |yii/base/Model::setScenario|
+
+
+*yii/mongodb/file/ActiveRecord::safeAttributes*		public
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::activeAttributes*		public
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::load*			public
+ See |yii/base/Model::load|
+
+
+*yii/mongodb/file/ActiveRecord::loadMultiple*		public
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/mongodb/file/ActiveRecord::validateMultiple*		public
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/mongodb/file/ActiveRecord::getIterator*		public
+ See |yii/base/Model::getIterator|
+
+
+*yii/mongodb/file/ActiveRecord::offsetExists*		public
+ See |yii/db/BaseActiveRecord::offsetExists|
+
+
+*yii/mongodb/file/ActiveRecord::offsetGet*		public
+ See |yii/base/Model::offsetGet|
+
+
+*yii/mongodb/file/ActiveRecord::offsetSet*		public
+ See |yii/base/Model::offsetSet|
+
+
+*yii/mongodb/file/ActiveRecord::offsetUnset*		public
+ See |yii/db/BaseActiveRecord::offsetUnset|
+
+
+*yii/mongodb/file/ActiveRecord::findOne*			public
+ See |yii/db/ActiveRecordInterface::findOne|
+
+
+*yii/mongodb/file/ActiveRecord::findAll*			public
+ See |yii/db/ActiveRecordInterface::findAll|
+
+
+*yii/mongodb/file/ActiveRecord::updateAll*		public
+ See |yii/db/ActiveRecordInterface::updateAll|
+
+
+*yii/mongodb/file/ActiveRecord::updateAllCounters*	public
+ See |yii/db/BaseActiveRecord::updateAllCounters|
+
+
+*yii/mongodb/file/ActiveRecord::deleteAll*		public
+ See |yii/db/ActiveRecordInterface::deleteAll|
+
+
+*yii/mongodb/file/ActiveRecord::optimisticLock*		public
+ See |yii/db/BaseActiveRecord::optimisticLock|
+
+
+*yii/mongodb/file/ActiveRecord::hasOne*			public
+ See |yii/db/BaseActiveRecord::hasOne|
+
+
+*yii/mongodb/file/ActiveRecord::hasMany*			public
+ See |yii/db/BaseActiveRecord::hasMany|
+
+
+*yii/mongodb/file/ActiveRecord::populateRelation*		public
+ See |yii/db/BaseActiveRecord::populateRelation|
+
+
+*yii/mongodb/file/ActiveRecord::isRelationPopulated*	public
+ See |yii/db/BaseActiveRecord::isRelationPopulated|
+
+
+*yii/mongodb/file/ActiveRecord::getRelatedRecords*	public
+ See |yii/db/BaseActiveRecord::getRelatedRecords|
+
+
+*yii/mongodb/file/ActiveRecord::hasAttribute*		public
+ See |yii/db/ActiveRecordInterface::hasAttribute|
+
+
+*yii/mongodb/file/ActiveRecord::getAttribute*		public
+ See |yii/db/ActiveRecordInterface::getAttribute|
+
+
+*yii/mongodb/file/ActiveRecord::setAttribute*		public
+ See |yii/db/ActiveRecordInterface::setAttribute|
+
+
+*yii/mongodb/file/ActiveRecord::getOldAttributes*		public
+ See |yii/db/BaseActiveRecord::getOldAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::setOldAttributes*		public
+ See |yii/db/BaseActiveRecord::setOldAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::getOldAttribute*		public
+ See |yii/db/BaseActiveRecord::getOldAttribute|
+
+
+*yii/mongodb/file/ActiveRecord::setOldAttribute*		public
+ See |yii/db/BaseActiveRecord::setOldAttribute|
+
+
+*yii/mongodb/file/ActiveRecord::markAttributeDirty*	public
+ See |yii/db/BaseActiveRecord::markAttributeDirty|
+
+
+*yii/mongodb/file/ActiveRecord::isAttributeChanged*	public
+ See |yii/db/BaseActiveRecord::isAttributeChanged|
+
+
+*yii/mongodb/file/ActiveRecord::getDirtyAttributes*	public
+ See |yii/db/BaseActiveRecord::getDirtyAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::save*			public
+ See |yii/db/ActiveRecordInterface::save|
+
+
+*yii/mongodb/file/ActiveRecord::update*			public
+ See |yii/db/ActiveRecordInterface::update|
+
+
+*yii/mongodb/file/ActiveRecord::updateAttributes*		public
+ See |yii/db/BaseActiveRecord::updateAttributes|
+
+
+*yii/mongodb/file/ActiveRecord::updateInternal*		protected
+>
+ updateInternal($attributes='null')
+<
+(void)
+
+
+    [$attributes] () 
+
+
+*yii/mongodb/file/ActiveRecord::updateCounters*		public
+ See |yii/db/BaseActiveRecord::updateCounters|
+
+
+*yii/mongodb/file/ActiveRecord::delete*			public
+ See |yii/db/ActiveRecordInterface::delete|
+
+
+*yii/mongodb/file/ActiveRecord::getIsNewRecord*		public
+ See |yii/db/ActiveRecordInterface::getIsNewRecord|
+
+
+*yii/mongodb/file/ActiveRecord::setIsNewRecord*		public
+ See |yii/db/BaseActiveRecord::setIsNewRecord|
+
+
+*yii/mongodb/file/ActiveRecord::afterFind*		public
+ See |yii/db/BaseActiveRecord::afterFind|
+
+
+*yii/mongodb/file/ActiveRecord::beforeSave*		public
+ See |yii/db/BaseActiveRecord::beforeSave|
+
+
+*yii/mongodb/file/ActiveRecord::afterSave*		public
+ See |yii/db/BaseActiveRecord::afterSave|
+
+
+*yii/mongodb/file/ActiveRecord::beforeDelete*		public
+ See |yii/db/BaseActiveRecord::beforeDelete|
+
+
+*yii/mongodb/file/ActiveRecord::afterDelete*		public
+ See |yii/db/BaseActiveRecord::afterDelete|
+
+
+*yii/mongodb/file/ActiveRecord::refresh*			public
+ See |yii/db/BaseActiveRecord::refresh|
+
+
+*yii/mongodb/file/ActiveRecord::equals*			public
+ See |yii/db/ActiveRecordInterface::equals|
+
+
+*yii/mongodb/file/ActiveRecord::getPrimaryKey*		public
+ See |yii/db/ActiveRecordInterface::getPrimaryKey|
+
+
+*yii/mongodb/file/ActiveRecord::getOldPrimaryKey*		public
+ See |yii/db/ActiveRecordInterface::getOldPrimaryKey|
+
+
+*yii/mongodb/file/ActiveRecord::populateRecord*		public
+ See |yii/db/BaseActiveRecord::populateRecord|
+
+
+*yii/mongodb/file/ActiveRecord::instantiate*		public
+ See |yii/db/BaseActiveRecord::instantiate|
+
+
+*yii/mongodb/file/ActiveRecord::getRelation*		public
+ See |yii/db/ActiveRecordInterface::getRelation|
+
+
+*yii/mongodb/file/ActiveRecord::link*			public
+ See |yii/db/ActiveRecordInterface::link|
+
+
+*yii/mongodb/file/ActiveRecord::unlink*			public
+ See |yii/db/ActiveRecordInterface::unlink|
+
+
+*yii/mongodb/file/ActiveRecord::isPrimaryKey*		public
+ See |yii/db/ActiveRecordInterface::isPrimaryKey|
+
+
+*yii/mongodb/file/ActiveRecord::primaryKey*		public
+ See |yii/db/ActiveRecordInterface::primaryKey|
+
+
+*yii/mongodb/file/ActiveRecord::find*			public
+>
+ find()
+<
+(\yii\db\ActiveQueryInterface) The newly created
+'ActiveQueryInterface|ActiveQuery' instance.
+
+
+
+
+*yii/mongodb/file/ActiveRecord::insert*			public
+ See |yii/db/ActiveRecordInterface::insert|
+
+
+*yii/mongodb/file/ActiveRecord::getDb*			public
+ See |yii/mongodb/ActiveRecord::getDb|
+
+
+*yii/mongodb/file/ActiveRecord::collectionName*		public
+ See |yii/mongodb/ActiveRecord::collectionName|
+
+
+*yii/mongodb/file/ActiveRecord::getCollection*		public
+>
+ getCollection()
+<
+(\yii\mongodb\file\Collection) Collection instance.
+
+
+
+
+*yii/mongodb/file/ActiveRecord::insertInternal*		protected
+>
+ insertInternal($attributes='null')
+<
+(void)
+
+
+    [$attributes] () 
+
+
+*yii/mongodb/file/ActiveRecord::deleteInternal*		protected
+ See |yii/mongodb/ActiveRecord::deleteInternal|
+
+
+*yii/mongodb/file/ActiveRecord::extractFileName*		protected
+>
+ extractFileName($file)
+<
+(string) File name.
+
+
+    [$file] (mixed) Raw file value.
+
+
+*yii/mongodb/file/ActiveRecord::refreshFile*		public
+>
+ refreshFile()
+<
+(\MongoGridFSFile|null) Refreshed file value.
+
+
+
+
+*yii/mongodb/file/ActiveRecord::getFileContent*		public
+>
+ getFileContent()
+<
+(null|string) File content.
+
+
+
+
+*yii/mongodb/file/ActiveRecord::writeFile*		public
+>
+ writeFile($filename)
+<
+(boolean) Whether the operation was successful.
+
+
+    [$filename] (string) Full filename to be written.
+
+
+*yii/mongodb/file/ActiveRecord::getFileResource*		public
+>
+ getFileResource()
+<
+(resource) File stream resource.
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -229,13 +229,34 @@ METHOD DETAILS
  See |yii/base/Component::ensureBehaviors|
 
 
-*yii/web/UrlManager::compileRules*			protected
+*yii/web/UrlManager::addRules*				public
 >
- compileRules()
+ addRules($rules, $append='true')
 <
 (void)
 
+ This method will call 'buildRules()' to parse the given rule declarations and
+ then append or insert them to the existing 'rules'.
 
+ Note that if 'enablePrettyUrl' is false, this method will do nothing.
+    [$rules] (array) The new rules to be added. Each array element represents
+    a single rule declaration. Please refer to 'rules' for the acceptable rule
+    format.
+    [$append] (boolean) Whether to add the new rules by appending them to the
+    end of the existing rules.
+
+
+*yii/web/UrlManager::buildRules*				protected
+>
+ buildRules($rules)
+<
+(\yii\web\UrlRuleInterface[]) The rule objects built from the given rule
+declarations
+
+
+    [$rules] (array) The rule declarations. Each array element represents a
+    single rule declaration. Please refer to 'rules' for the acceptable rule
+    formats.
 
 
 *yii/web/UrlManager::parseRequest*			public

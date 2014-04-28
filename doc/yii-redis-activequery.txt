@@ -1,0 +1,454 @@
+
+*yii/redis/ActiveQuery*   >> |yii/base/Component|
+=======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ An ActiveQuery can be a normal query or be used in a relational context.
+
+ ActiveQuery instances are usually created by 'ActiveRecord::find()'.
+ Relational queries are created by 'ActiveRecord::hasOne()' and
+ 'ActiveRecord::hasMany()'.
+
+ Normal Query ------------
+
+ ActiveQuery mainly provides the following methods to retrieve the query
+ results:
+
+ - 'one()': returns a single record populated with the first row of data. -
+ 'all()': returns all records based on the query results. - 'count()': returns
+ the number of records. - 'sum()': returns the sum over the specified column.
+ - 'average()': returns the average over the specified column. - 'min()':
+ returns the min over the specified column. - 'max()': returns the max over
+ the specified column. - 'scalar()': returns the value of the first column in
+ the first row of the query result. - 'exists()': returns a value indicating
+ whether the query result has data or not.
+
+ You can use query methods, such as 'where()', 'limit()' and 'orderBy()' to
+ customize the query options.
+
+ ActiveQuery also provides the following additional query options:
+
+ - 'with()': list of relations that this query should be performed with. -
+ 'indexBy()': the name of the column by which the query result should be
+ indexed. - 'asArray()': whether to return each record as an array.
+
+ These options can be configured using methods of the same name. For example:
+
+   $customers = Customer::find()->with('orders')->asArray()->all();
+
+ Relational query ----------------
+
+ In relational context ActiveQuery represents a relation between two Active
+ Record classes.
+
+ Relational ActiveQuery instances are usually created by calling
+ 'ActiveRecord::hasOne()' and 'ActiveRecord::hasMany()'. An Active Record
+ class declares a relation by defining a getter method which calls one of the
+ above methods and returns the created ActiveQuery object.
+
+ A relation is specified by 'link' which represents the association between
+ columns of different tables; and the multiplicity of the relation is
+ indicated by 'multiple'.
+
+ If a relation involves a pivot table, it may be specified by 'via()'. This
+ methods may only be called in a relational context. Same is true for
+ 'inverseOf()', which marks a relation as inverse of another relation.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$multiple				*yii/redis/ActiveQuery::$multiple*
+ See |yii/db/ActiveRelationTrait::$multiple|
+
+$primaryModel				*yii/redis/ActiveQuery::$primaryModel*
+ See |yii/db/ActiveRelationTrait::$primaryModel|
+
+$link					*yii/redis/ActiveQuery::$link*
+ See |yii/db/ActiveRelationTrait::$link|
+
+$via					*yii/redis/ActiveQuery::$via*
+ See |yii/db/ActiveRelationTrait::$via|
+
+$inverseOf				*yii/redis/ActiveQuery::$inverseOf*
+ See |yii/db/ActiveRelationTrait::$inverseOf|
+
+$modelClass				*yii/redis/ActiveQuery::$modelClass*
+ See |yii/db/ActiveQueryTrait::$modelClass|
+
+$with					*yii/redis/ActiveQuery::$with*
+ See |yii/db/ActiveQueryTrait::$with|
+
+$asArray				*yii/redis/ActiveQuery::$asArray*
+ See |yii/db/ActiveQueryTrait::$asArray|
+
+$where					*yii/redis/ActiveQuery::$where*
+ See |yii/db/QueryTrait::$where|
+
+$limit					*yii/redis/ActiveQuery::$limit*
+ See |yii/db/QueryTrait::$limit|
+
+$offset					*yii/redis/ActiveQuery::$offset*
+ See |yii/db/QueryTrait::$offset|
+
+$orderBy				*yii/redis/ActiveQuery::$orderBy*
+ See |yii/db/QueryTrait::$orderBy|
+
+$indexBy				*yii/redis/ActiveQuery::$indexBy*
+ See |yii/db/QueryTrait::$indexBy|
+
+$behaviors				*yii/redis/ActiveQuery::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/redis/ActiveQuery::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/redis/ActiveQuery::__construct*			public
+>
+ __construct($modelClass, $config='[]')
+<
+(void)
+
+
+    [$modelClass] (array) The model class associated with this query
+    [$config] (array) Configurations to be applied to the newly created query
+    object
+
+
+*yii/redis/ActiveQuery::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/redis/ActiveQuery::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/redis/ActiveQuery::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/redis/ActiveQuery::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/redis/ActiveQuery::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/redis/ActiveQuery::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/redis/ActiveQuery::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/redis/ActiveQuery::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/redis/ActiveQuery::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/redis/ActiveQuery::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/redis/ActiveQuery::__clone*				public
+ See |yii/db/ActiveRelationTrait::__clone|
+
+
+*yii/redis/ActiveQuery::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/redis/ActiveQuery::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/redis/ActiveQuery::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/redis/ActiveQuery::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/redis/ActiveQuery::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/redis/ActiveQuery::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/redis/ActiveQuery::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/redis/ActiveQuery::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/redis/ActiveQuery::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/redis/ActiveQuery::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/redis/ActiveQuery::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/redis/ActiveQuery::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/redis/ActiveQuery::via*				public
+ See |yii/db/ActiveRelationTrait::via|
+
+
+*yii/redis/ActiveQuery::inverseOf*			public
+ See |yii/db/ActiveRelationTrait::inverseOf|
+
+
+*yii/redis/ActiveQuery::findFor*				public
+ See |yii/db/ActiveRelationTrait::findFor|
+
+
+*yii/redis/ActiveQuery::populateRelation*			public
+ See |yii/db/ActiveRelationTrait::populateRelation|
+
+
+*yii/redis/ActiveQuery::asArray*				public
+ See |yii/db/ActiveQueryTrait::asArray|
+
+
+*yii/redis/ActiveQuery::with*				public
+ See |yii/db/ActiveQueryTrait::with|
+
+
+*yii/redis/ActiveQuery::findWith*				public
+ See |yii/db/ActiveQueryTrait::findWith|
+
+
+*yii/redis/ActiveQuery::indexBy*				public
+ See |yii/db/QueryTrait::indexBy|
+
+
+*yii/redis/ActiveQuery::where*				public
+ See |yii/db/QueryTrait::where|
+
+
+*yii/redis/ActiveQuery::andWhere*				public
+ See |yii/db/QueryTrait::andWhere|
+
+
+*yii/redis/ActiveQuery::orWhere*				public
+ See |yii/db/QueryTrait::orWhere|
+
+
+*yii/redis/ActiveQuery::filterWhere*			public
+ See |yii/db/QueryTrait::filterWhere|
+
+
+*yii/redis/ActiveQuery::andFilterWhere*			public
+ See |yii/db/QueryTrait::andFilterWhere|
+
+
+*yii/redis/ActiveQuery::orFilterWhere*			public
+ See |yii/db/QueryTrait::orFilterWhere|
+
+
+*yii/redis/ActiveQuery::filterCondition*			protected
+ See |yii/db/QueryTrait::filterCondition|
+
+
+*yii/redis/ActiveQuery::isEmpty*				protected
+ See |yii/db/QueryTrait::isEmpty|
+
+
+*yii/redis/ActiveQuery::orderBy*				public
+ See |yii/db/QueryTrait::orderBy|
+
+
+*yii/redis/ActiveQuery::addOrderBy*			public
+ See |yii/db/QueryTrait::addOrderBy|
+
+
+*yii/redis/ActiveQuery::normalizeOrderBy*			protected
+ See |yii/db/QueryTrait::normalizeOrderBy|
+
+
+*yii/redis/ActiveQuery::limit*				public
+ See |yii/db/QueryTrait::limit|
+
+
+*yii/redis/ActiveQuery::offset*				public
+ See |yii/db/QueryTrait::offset|
+
+
+*yii/redis/ActiveQuery::all*				public
+>
+ all($db='null')
+<
+(array|\yii\redis\ActiveRecord[]) The query results. If the query results in
+nothing, an empty array will be returned.
+
+
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::one*				public
+>
+ one($db='null')
+<
+(\yii\redis\ActiveRecord|array|null) A single row of query result. Depending
+on the setting of 'asArray', the query result may be either an array or an
+ActiveRecord object. Null will be returned if the query results in nothing.
+
+
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::count*				public
+>
+ count($q=''*'', $db='null')
+<
+(integer) Number of records
+
+
+    [$q] (string) The COUNT expression. This parameter is ignored by this
+    implementation.
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::exists*				public
+>
+ exists($db='null')
+<
+(boolean) Whether the query result contains any row of data.
+
+
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::column*				public
+>
+ column($column, $db='null')
+<
+(array) The first column of the query result. An empty array is returned if
+the query results in nothing.
+
+
+    [$column] (string) Name of the column to select
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::sum*				public
+>
+ sum($column, $db='null')
+<
+(integer) Number of records
+
+
+    [$column] (string) The column to sum up
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::average*				public
+>
+ average($column, $db='null')
+<
+(integer) The average of the specified column values.
+
+
+    [$column] (string) The column name or expression. Make sure you properly
+    quote column names in the expression.
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::min*				public
+>
+ min($column, $db='null')
+<
+(integer) The minimum of the specified column values.
+
+
+    [$column] (string) The column name or expression. Make sure you properly
+    quote column names in the expression.
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::max*				public
+>
+ max($column, $db='null')
+<
+(integer) The maximum of the specified column values.
+
+
+    [$column] (string) The column name or expression. Make sure you properly
+    quote column names in the expression.
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::scalar*				public
+>
+ scalar($attribute, $db='null')
+<
+(string) The value of the specified attribute in the first record of the query
+result. Null is returned if the query result is empty.
+
+ The value returned will be the specified attribute in the first record of the
+ query results.
+    [$attribute] (string) Name of the attribute to select
+    [$db] (\yii\redis\Connection) The database connection used to execute the
+    query. If this parameter is not given, the 'db' application component will
+    be used.
+
+
+*yii/redis/ActiveQuery::executeScript*			protected
+>
+ executeScript($db, $type, $columnName='null')
+<
+(array|bool|null|string) 
+
+
+    [$db] (\yii\redis\Connection|null) The database connection used to execute
+    the query. If this parameter is not given, the 'db' application component
+    will be used.
+    [$type] (string) The type of the script to generate
+    [$columnName] (string) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

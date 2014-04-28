@@ -1,0 +1,341 @@
+
+*yii/authclient/widgets/AuthChoice*   >> |yii/base/Widget|
+===================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It opens a popup window for the client authentication process. By default
+ this widget relies on presence of '\yii\authclient\Collection' among
+ application components to get auth clients information.
+
+ Example:
+
+   php
+   <?= yii\authclient\widgets\AuthChoice::widget([
+       'baseAuthUrl' => ['site/auth']
+   ]); ?>
+
+ You can customize the widget appearance by using 'begin()' and 'end()' syntax
+ along with using method {@link clientLink()} or {@link createClientUrl()}.
+ For example:
+
+   php
+   <?php
+   use yii\authclient\widgets\AuthChoice;
+   ?>
+   <?php $authAuthChoice = AuthChoice::begin([
+       'baseAuthUrl' => ['site/auth']
+   ]); ?>
+   <ul>
+   <?php foreach ($authAuthChoice->getClients() as $client): ?>
+       <li><?= $authAuthChoice->clientLink($client) ?></li>
+   <?php endforeach; ?>
+   </ul>
+   <?php AuthChoice::end(); ?>
+
+ This widget supports following keys for 'ClientInterface::getViewOptions()'
+ result:  - popupWidth - integer width of the popup window in pixels.  -
+ popupHeight - integer height of the popup window in pixels.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$counter				*yii/authclient/widgets/AuthChoice::$counter*
+ See |yii/base/Widget::$counter|
+
+$autoIdPrefix				*yii/authclient/widgets/AuthChoice::$autoIdPrefix*
+ See |yii/base/Widget::$autoIdPrefix|
+
+$stack					*yii/authclient/widgets/AuthChoice::$stack*
+ See |yii/base/Widget::$stack|
+
+$clientCollection			*yii/authclient/widgets/AuthChoice::$clientCollection*
+ (string) Name of the auth client collection application component. This
+ component will be used to fetch services value if it is not set.
+
+$clientIdGetParamName			*yii/authclient/widgets/AuthChoice::$clientIdGetParamName*
+ (string) Name of the GET param , which should be used to passed auth client
+ id to URL defined by 'baseAuthUrl'.
+
+$options				*yii/authclient/widgets/AuthChoice::$options*
+ (array) The HTML attributes that should be rendered in the div HTML tag
+ representing the container element.
+
+$popupMode				*yii/authclient/widgets/AuthChoice::$popupMode*
+ (boolean) Indicates if popup window should be used instead of direct links.
+
+$autoRender				*yii/authclient/widgets/AuthChoice::$autoRender*
+ (boolean) Indicates if widget content, should be rendered automatically.
+ Note: this value automatically set to 'false' at the first call of
+ 'createClientUrl()'
+
+$behaviors				*yii/authclient/widgets/AuthChoice::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$id					*yii/authclient/widgets/AuthChoice::$id*
+ (string) ID of the widget.
+
+$view					*yii/authclient/widgets/AuthChoice::$view*
+ (\yii\web\View) The view object that can be used to render views or view
+ files.
+
+$viewPath				*yii/authclient/widgets/AuthChoice::$viewPath*
+ (string) The directory containing the view files for this widget.
+
+$clients				*yii/authclient/widgets/AuthChoice::$clients*
+ (\yii\authclient\ClientInterface[]) Auth providers
+
+$baseAuthUrl				*yii/authclient/widgets/AuthChoice::$baseAuthUrl*
+ (array) Base auth URL configuration.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/authclient/widgets/AuthChoice::className*		public
+ See |yii/base/Object::className|
+
+
+*yii/authclient/widgets/AuthChoice::__construct*		public
+ See |yii/base/Object::__construct|
+
+
+*yii/authclient/widgets/AuthChoice::init*			public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii/authclient/widgets/AuthChoice::__get*		public
+ See |yii/base/Component::__get|
+
+
+*yii/authclient/widgets/AuthChoice::__set*		public
+ See |yii/base/Component::__set|
+
+
+*yii/authclient/widgets/AuthChoice::__isset*		public
+ See |yii/base/Component::__isset|
+
+
+*yii/authclient/widgets/AuthChoice::__unset*		public
+ See |yii/base/Component::__unset|
+
+
+*yii/authclient/widgets/AuthChoice::__call*		public
+ See |yii/base/Component::__call|
+
+
+*yii/authclient/widgets/AuthChoice::hasProperty*		public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/authclient/widgets/AuthChoice::canGetProperty*	public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/authclient/widgets/AuthChoice::canSetProperty*	public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/authclient/widgets/AuthChoice::hasMethod*		public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/authclient/widgets/AuthChoice::__clone*		public
+ See |yii/base/Component::__clone|
+
+
+*yii/authclient/widgets/AuthChoice::behaviors*		public
+ See |yii/base/Component::behaviors|
+
+
+*yii/authclient/widgets/AuthChoice::hasEventHandlers*	public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/authclient/widgets/AuthChoice::on*			public
+ See |yii/base/Component::on|
+
+
+*yii/authclient/widgets/AuthChoice::off*			public
+ See |yii/base/Component::off|
+
+
+*yii/authclient/widgets/AuthChoice::trigger*		public
+ See |yii/base/Component::trigger|
+
+
+*yii/authclient/widgets/AuthChoice::getBehavior*		public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/authclient/widgets/AuthChoice::getBehaviors*		public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/authclient/widgets/AuthChoice::attachBehavior*	public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/authclient/widgets/AuthChoice::attachBehaviors*	public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/authclient/widgets/AuthChoice::detachBehavior*	public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/authclient/widgets/AuthChoice::detachBehaviors*	public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/authclient/widgets/AuthChoice::ensureBehaviors*	public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/authclient/widgets/AuthChoice::begin*		public
+ See |yii/base/Widget::begin|
+
+
+*yii/authclient/widgets/AuthChoice::end*			public
+ See |yii/base/Widget::end|
+
+
+*yii/authclient/widgets/AuthChoice::widget*		public
+ See |yii/base/Widget::widget|
+
+
+*yii/authclient/widgets/AuthChoice::getId*		public
+ See |yii/base/Widget::getId|
+
+
+*yii/authclient/widgets/AuthChoice::setId*		public
+ See |yii/base/Widget::setId|
+
+
+*yii/authclient/widgets/AuthChoice::getView*		public
+ See |yii/base/Widget::getView|
+
+
+*yii/authclient/widgets/AuthChoice::setView*		public
+ See |yii/base/Widget::setView|
+
+
+*yii/authclient/widgets/AuthChoice::run*			public
+>
+ run()
+<
+(void)
+
+
+
+
+*yii/authclient/widgets/AuthChoice::render*		public
+ See |yii/base/Widget::render|
+
+
+*yii/authclient/widgets/AuthChoice::renderFile*		public
+ See |yii/base/Widget::renderFile|
+
+
+*yii/authclient/widgets/AuthChoice::getViewPath*		public
+ See |yii/base/Widget::getViewPath|
+
+
+*yii/authclient/widgets/AuthChoice::setClients*		public
+>
+ setClients($clients)
+<
+(void)
+
+
+    [$clients] (\yii\authclient\ClientInterface[]) Auth providers
+
+
+*yii/authclient/widgets/AuthChoice::getClients*		public
+>
+ getClients()
+<
+(\yii\authclient\ClientInterface[]) Auth providers
+
+
+
+
+*yii/authclient/widgets/AuthChoice::setBaseAuthUrl*	public
+>
+ setBaseAuthUrl($baseAuthUrl)
+<
+(void)
+
+
+    [$baseAuthUrl] (array) Base auth URL configuration.
+
+
+*yii/authclient/widgets/AuthChoice::getBaseAuthUrl*	public
+>
+ getBaseAuthUrl()
+<
+(array) Base auth URL configuration.
+
+
+
+
+*yii/authclient/widgets/AuthChoice::defaultClients*	protected
+>
+ defaultClients()
+<
+(\yii\authclient\ClientInterface[]) Auth clients list.
+
+
+
+
+*yii/authclient/widgets/AuthChoice::defaultBaseAuthUrl*	protected
+>
+ defaultBaseAuthUrl()
+<
+(array) Base auth URL configuration.
+
+
+
+
+*yii/authclient/widgets/AuthChoice::clientLink*		public
+>
+ clientLink($client, $text='null', $htmlOptions='[]')
+<
+(void)
+
+
+    [$client] (\yii\authclient\ClientInterface) External auth client instance.
+    [$text] (string) Link text, if not set - default value will be generated.
+    [$htmlOptions] (array) Link HTML options.
+
+
+*yii/authclient/widgets/AuthChoice::createClientUrl*	public
+>
+ createClientUrl($provider)
+<
+(string) Auth URL.
+
+
+    [$provider] (\yii\authclient\ClientInterface) External auth client
+    instance.
+
+
+*yii/authclient/widgets/AuthChoice::renderMainContent*	protected
+>
+ renderMainContent()
+<
+(void)
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

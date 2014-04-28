@@ -1,0 +1,354 @@
+
+*yii/authclient/AuthAction*   >> |yii/base/Action|
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It supports 'OpenId', 'OAuth1] and 'OAuth2' client types.
+
+ Usage:
+
+   class SiteController extends Controller
+   {
+       public function actions()
+       {
+           return [
+               'auth' => [
+                   'class' => 'yii\authclient\AuthAction',
+                   'successCallback' => [$this, 'successCallback'],
+               ],
+           ]
+       }
+
+       public function successCallback($client)
+       {
+           $attributes = $client->getUserAttributes();
+           // user login or signup comes here
+       }
+   }
+
+ Usually authentication via external services is performed inside the popup
+ window. This action handles the redirection and closing of popup window
+ correctly.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$id					*yii/authclient/AuthAction::$id*
+ See |yii/base/Action::$id|
+
+$controller				*yii/authclient/AuthAction::$controller*
+ See |yii/base/Action::$controller|
+
+$clientCollection			*yii/authclient/AuthAction::$clientCollection*
+ (string) Name of the auth client collection application component. It should
+ point to 'Collection' instance.
+
+$clientIdGetParamName			*yii/authclient/AuthAction::$clientIdGetParamName*
+ (string) Name of the GET param, which is used to passed auth client id to
+ this action. Note: watch for the naming, make sure you do not choose name
+ used in some auth protocol.
+
+$successCallback			*yii/authclient/AuthAction::$successCallback*
+ (callable) PHP callback, which should be triggered in case of successful
+ authentication. This callback should accept 'ClientInterface' instance as an
+ argument. For example:
+
+   public function onAuthSuccess($client)
+   {
+       $attributes = $client->getUserAttributes();
+       // user login or signup comes here
+   }
+
+ If this callback returns 'Response' instance, it will be used as action
+ response, otherwise redirection to 'successUrl' will be performed.
+
+$redirectView				*yii/authclient/AuthAction::$redirectView*
+ (string) Name or alias of the view file, which should be rendered in order to
+ perform redirection. If not set default one will be used.
+
+$behaviors				*yii/authclient/AuthAction::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$uniqueId				*yii/authclient/AuthAction::$uniqueId*
+ (string) The unique ID of this action among the whole application.
+
+$successUrl				*yii/authclient/AuthAction::$successUrl*
+ (string) Successful URL.
+
+$cancelUrl				*yii/authclient/AuthAction::$cancelUrl*
+ (string) Cancel URL.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/authclient/AuthAction::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/authclient/AuthAction::__construct*			public
+ See |yii/base/Action::__construct|
+
+
+*yii/authclient/AuthAction::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/authclient/AuthAction::__get*			public
+ See |yii/base/Component::__get|
+
+
+*yii/authclient/AuthAction::__set*			public
+ See |yii/base/Component::__set|
+
+
+*yii/authclient/AuthAction::__isset*			public
+ See |yii/base/Component::__isset|
+
+
+*yii/authclient/AuthAction::__unset*			public
+ See |yii/base/Component::__unset|
+
+
+*yii/authclient/AuthAction::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/authclient/AuthAction::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/authclient/AuthAction::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/authclient/AuthAction::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/authclient/AuthAction::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/authclient/AuthAction::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/authclient/AuthAction::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/authclient/AuthAction::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/authclient/AuthAction::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/authclient/AuthAction::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/authclient/AuthAction::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/authclient/AuthAction::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/authclient/AuthAction::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/authclient/AuthAction::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/authclient/AuthAction::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/authclient/AuthAction::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/authclient/AuthAction::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/authclient/AuthAction::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/authclient/AuthAction::getUniqueId*			public
+ See |yii/base/Action::getUniqueId|
+
+
+*yii/authclient/AuthAction::runWithParams*		public
+ See |yii/base/Action::runWithParams|
+
+
+*yii/authclient/AuthAction::beforeRun*			protected
+ See |yii/base/Action::beforeRun|
+
+
+*yii/authclient/AuthAction::afterRun*			protected
+ See |yii/base/Action::afterRun|
+
+
+*yii/authclient/AuthAction::setSuccessUrl*		public
+>
+ setSuccessUrl($url)
+<
+(void)
+
+
+    [$url] (string) Successful URL.
+
+
+*yii/authclient/AuthAction::getSuccessUrl*		public
+>
+ getSuccessUrl()
+<
+(string) Successful URL.
+
+
+
+
+*yii/authclient/AuthAction::setCancelUrl*			public
+>
+ setCancelUrl($url)
+<
+(void)
+
+
+    [$url] (string) Cancel URL.
+
+
+*yii/authclient/AuthAction::getCancelUrl*			public
+>
+ getCancelUrl()
+<
+(string) Cancel URL.
+
+
+
+
+*yii/authclient/AuthAction::defaultSuccessUrl*		protected
+>
+ defaultSuccessUrl()
+<
+(string) Success URL value.
+
+
+
+
+*yii/authclient/AuthAction::defaultCancelUrl*		protected
+>
+ defaultCancelUrl()
+<
+(string) Cancel URL value.
+
+
+
+
+*yii/authclient/AuthAction::run*				public
+>
+ run()
+<
+(void)
+
+
+
+
+*yii/authclient/AuthAction::auth*				protected
+>
+ auth($client)
+<
+(\yii\web\Response) Response instance.
+
+
+    [$client] (mixed) Auth client instance.
+
+
+*yii/authclient/AuthAction::authSuccess*			protected
+>
+ authSuccess($client)
+<
+(\yii\web\Response) Response instance.
+
+
+    [$client] (\yii\authclient\ClientInterface) Auth client instance.
+
+
+*yii/authclient/AuthAction::redirect*			public
+>
+ redirect($url, $enforceRedirect='true')
+<
+(\yii\web\Response) Response instance.
+
+
+    [$url] (mixed) URL to redirect, could be a string or array config to
+    generate a valid URL.
+    [$enforceRedirect] (boolean) Indicates if redirect should be performed
+    even in case of popup window.
+
+
+*yii/authclient/AuthAction::redirectSuccess*		public
+>
+ redirectSuccess($url='null')
+<
+(\yii\web\Response) Response instance.
+
+
+    [$url] (string) URL to redirect.
+
+
+*yii/authclient/AuthAction::redirectCancel*		public
+>
+ redirectCancel($url='null')
+<
+(\yii\web\Response) Response instance.
+
+
+    [$url] (string) URL to redirect.
+
+
+*yii/authclient/AuthAction::authOpenId*			protected
+>
+ authOpenId($client)
+<
+(\yii\web\Response) Action response.
+
+
+    [$client] (\yii\authclient\OpenId) Auth client instance.
+
+
+*yii/authclient/AuthAction::authOAuth1*			protected
+>
+ authOAuth1($client)
+<
+(\yii\web\Response) Action response.
+
+
+    [$client] (\yii\authclient\OAuth1) Auth client instance.
+
+
+*yii/authclient/AuthAction::authOAuth2*			protected
+>
+ authOAuth2($client)
+<
+(\yii\web\Response) Action response.
+
+
+    [$client] (\yii\authclient\OAuth2) Auth client instance.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

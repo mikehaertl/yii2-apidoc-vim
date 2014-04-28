@@ -1,0 +1,534 @@
+
+*yii/authclient/OAuth1*   >> |yii/authclient/BaseOAuth|
+=======================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/authclient/clients/Twitter|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ In oder to acquire access token perform following sequence:
+
+   use yii\authclient\OAuth1;
+
+   $oauthClient = new OAuth1();
+   $requestToken = $oauthClient->fetchRequestToken(); // Get request token
+   $url = $oauthClient->buildAuthUrl($requestToken); // Get authorization URL
+   return Yii::$app->getResponse()->redirect($url); // Redirect to
+ authorization URL
+   // After user returns at our site:
+   $accessToken = $oauthClient->fetchAccessToken($requestToken); // Upgrade to
+ access token
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$version				*yii/authclient/OAuth1::$version*
+ (string) Protocol version.
+
+$apiBaseUrl				*yii/authclient/OAuth1::$apiBaseUrl*
+ See |yii/authclient/BaseOAuth::$apiBaseUrl|
+
+$authUrl				*yii/authclient/OAuth1::$authUrl*
+ See |yii/authclient/BaseOAuth::$authUrl|
+
+$scope					*yii/authclient/OAuth1::$scope*
+ See |yii/authclient/BaseOAuth::$scope|
+
+$consumerKey				*yii/authclient/OAuth1::$consumerKey*
+ (string) OAuth consumer key.
+
+$consumerSecret				*yii/authclient/OAuth1::$consumerSecret*
+ (string) OAuth consumer secret.
+
+$requestTokenUrl			*yii/authclient/OAuth1::$requestTokenUrl*
+ (string) OAuth request token URL.
+
+$requestTokenMethod			*yii/authclient/OAuth1::$requestTokenMethod*
+ (string) Request token HTTP method.
+
+$accessTokenUrl				*yii/authclient/OAuth1::$accessTokenUrl*
+ (string) OAuth access token URL.
+
+$accessTokenMethod			*yii/authclient/OAuth1::$accessTokenMethod*
+ (string) Access token HTTP method.
+
+$behaviors				*yii/authclient/OAuth1::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$id					*yii/authclient/OAuth1::$id*
+ (string) Service id.
+
+$name					*yii/authclient/OAuth1::$name*
+ (string) Service name.
+
+$title					*yii/authclient/OAuth1::$title*
+ (string) Service title.
+
+$userAttributes				*yii/authclient/OAuth1::$userAttributes*
+ (array) List of user attributes
+
+$normalizeUserAttributeMap		*yii/authclient/OAuth1::$normalizeUserAttributeMap*
+ (array) Normalize user attribute map.
+
+$viewOptions				*yii/authclient/OAuth1::$viewOptions*
+ (array) View options in format: optionName => optionValue
+
+$returnUrl				*yii/authclient/OAuth1::$returnUrl*
+ (string) Return URL
+
+$curlOptions				*yii/authclient/OAuth1::$curlOptions*
+ (array) CURL options.
+
+$accessToken				*yii/authclient/OAuth1::$accessToken*
+ (array|\yii\authclient\OAuthToken)
+
+$signatureMethod			*yii/authclient/OAuth1::$signatureMethod*
+ (array|\yii\authclient\signature\BaseMethod) Signature method instance or its
+ array configuration.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/authclient/OAuth1::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/authclient/OAuth1::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/authclient/OAuth1::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/authclient/OAuth1::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/authclient/OAuth1::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/authclient/OAuth1::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/authclient/OAuth1::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/authclient/OAuth1::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/authclient/OAuth1::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/authclient/OAuth1::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/authclient/OAuth1::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/authclient/OAuth1::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/authclient/OAuth1::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/authclient/OAuth1::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/authclient/OAuth1::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/authclient/OAuth1::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/authclient/OAuth1::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/authclient/OAuth1::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/authclient/OAuth1::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/authclient/OAuth1::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/authclient/OAuth1::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/authclient/OAuth1::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/authclient/OAuth1::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/authclient/OAuth1::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/authclient/OAuth1::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/authclient/OAuth1::setId*				public
+ See |yii/authclient/ClientInterface::setId|
+
+
+*yii/authclient/OAuth1::getId*				public
+ See |yii/authclient/ClientInterface::getId|
+
+
+*yii/authclient/OAuth1::setName*				public
+ See |yii/authclient/ClientInterface::setName|
+
+
+*yii/authclient/OAuth1::getName*				public
+ See |yii/authclient/ClientInterface::getName|
+
+
+*yii/authclient/OAuth1::setTitle*				public
+ See |yii/authclient/ClientInterface::setTitle|
+
+
+*yii/authclient/OAuth1::getTitle*				public
+ See |yii/authclient/ClientInterface::getTitle|
+
+
+*yii/authclient/OAuth1::setUserAttributes*		public
+ See |yii/authclient/BaseClient::setUserAttributes|
+
+
+*yii/authclient/OAuth1::getUserAttributes*		public
+ See |yii/authclient/ClientInterface::getUserAttributes|
+
+
+*yii/authclient/OAuth1::setNormalizeUserAttributeMap*	public
+ See |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
+
+
+*yii/authclient/OAuth1::getNormalizeUserAttributeMap*	public
+ See |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
+
+
+*yii/authclient/OAuth1::setViewOptions*			public
+ See |yii/authclient/BaseClient::setViewOptions|
+
+
+*yii/authclient/OAuth1::getViewOptions*			public
+ See |yii/authclient/ClientInterface::getViewOptions|
+
+
+*yii/authclient/OAuth1::defaultName*			protected
+ See |yii/authclient/BaseClient::defaultName|
+
+
+*yii/authclient/OAuth1::defaultTitle*			protected
+ See |yii/authclient/BaseClient::defaultTitle|
+
+
+*yii/authclient/OAuth1::initUserAttributes*		protected
+ See |yii/authclient/BaseClient::initUserAttributes|
+
+
+*yii/authclient/OAuth1::defaultNormalizeUserAttributeMap*	protected
+ See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
+
+
+*yii/authclient/OAuth1::defaultViewOptions*		protected
+ See |yii/authclient/BaseClient::defaultViewOptions|
+
+
+*yii/authclient/OAuth1::normalizeUserAttributes*		protected
+ See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/OAuth1::setReturnUrl*			public
+ See |yii/authclient/BaseOAuth::setReturnUrl|
+
+
+*yii/authclient/OAuth1::getReturnUrl*			public
+ See |yii/authclient/BaseOAuth::getReturnUrl|
+
+
+*yii/authclient/OAuth1::setCurlOptions*			public
+ See |yii/authclient/BaseOAuth::setCurlOptions|
+
+
+*yii/authclient/OAuth1::getCurlOptions*			public
+ See |yii/authclient/BaseOAuth::getCurlOptions|
+
+
+*yii/authclient/OAuth1::setAccessToken*			public
+ See |yii/authclient/BaseOAuth::setAccessToken|
+
+
+*yii/authclient/OAuth1::getAccessToken*			public
+ See |yii/authclient/BaseOAuth::getAccessToken|
+
+
+*yii/authclient/OAuth1::setSignatureMethod*		public
+ See |yii/authclient/BaseOAuth::setSignatureMethod|
+
+
+*yii/authclient/OAuth1::getSignatureMethod*		public
+ See |yii/authclient/BaseOAuth::getSignatureMethod|
+
+
+*yii/authclient/OAuth1::defaultReturnUrl*			protected
+>
+ defaultReturnUrl()
+<
+(string) Return URL.
+
+
+
+
+*yii/authclient/OAuth1::sendRequest*			protected
+ See |yii/authclient/BaseOAuth::sendRequest|
+
+
+*yii/authclient/OAuth1::mergeCurlOptions*			protected
+ See |yii/authclient/BaseOAuth::mergeCurlOptions|
+
+
+*yii/authclient/OAuth1::defaultCurlOptions*		protected
+ See |yii/authclient/BaseOAuth::defaultCurlOptions|
+
+
+*yii/authclient/OAuth1::processResponse*			protected
+ See |yii/authclient/BaseOAuth::processResponse|
+
+
+*yii/authclient/OAuth1::convertXmlToArray*		protected
+ See |yii/authclient/BaseOAuth::convertXmlToArray|
+
+
+*yii/authclient/OAuth1::determineContentTypeByHeaders*	protected
+ See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
+
+
+*yii/authclient/OAuth1::determineContentTypeByRaw*	protected
+ See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
+
+
+*yii/authclient/OAuth1::createSignatureMethod*		protected
+ See |yii/authclient/BaseOAuth::createSignatureMethod|
+
+
+*yii/authclient/OAuth1::createToken*			protected
+ See |yii/authclient/BaseOAuth::createToken|
+
+
+*yii/authclient/OAuth1::composeUrl*			protected
+ See |yii/authclient/BaseOAuth::composeUrl|
+
+
+*yii/authclient/OAuth1::saveAccessToken*			protected
+ See |yii/authclient/BaseOAuth::saveAccessToken|
+
+
+*yii/authclient/OAuth1::restoreAccessToken*		protected
+ See |yii/authclient/BaseOAuth::restoreAccessToken|
+
+
+*yii/authclient/OAuth1::setState*				protected
+ See |yii/authclient/BaseOAuth::setState|
+
+
+*yii/authclient/OAuth1::getState*				protected
+ See |yii/authclient/BaseOAuth::getState|
+
+
+*yii/authclient/OAuth1::removeState*			protected
+ See |yii/authclient/BaseOAuth::removeState|
+
+
+*yii/authclient/OAuth1::getStateKeyPrefix*		protected
+ See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+
+
+*yii/authclient/OAuth1::api*				public
+ See |yii/authclient/BaseOAuth::api|
+
+
+*yii/authclient/OAuth1::composeRequestCurlOptions*	protected
+>
+ composeRequestCurlOptions($method, $url, $params)
+<
+(array) CUrl options.
+
+
+    [$method] (string) Request type.
+    [$url] (string) Request URL.
+    [$params] (array) Request params.
+
+
+*yii/authclient/OAuth1::refreshAccessToken*		public
+>
+ refreshAccessToken($token)
+<
+(\yii\authclient\OAuthToken) New auth token.
+
+
+    [$token] (\yii\authclient\OAuthToken) Expired auth token.
+
+
+*yii/authclient/OAuth1::apiInternal*			protected
+>
+ apiInternal($accessToken, $url, $method, $params)
+<
+(array) API response.
+
+
+    [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
+    [$url] (string) Absolute API URL.
+    [$method] (string) Request method.
+    [$params] (array) Request parameters.
+
+
+*yii/authclient/OAuth1::fetchRequestToken*		public
+>
+ fetchRequestToken($params='[]')
+<
+(\yii\authclient\OAuthToken) Request token.
+
+
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/OAuth1::buildAuthUrl*			public
+>
+ buildAuthUrl($requestToken='null', $params='[]')
+<
+(string) Authorize URL
+
+
+    [$requestToken] (\yii\authclient\OAuthToken) OAuth request token.
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/OAuth1::fetchAccessToken*			public
+>
+ fetchAccessToken($requestToken='null', $oauthVerifier='null', $params='[]')
+<
+(\yii\authclient\OAuthToken) OAuth access token.
+
+
+    [$requestToken] (\yii\authclient\OAuthToken) OAuth request token.
+    [$oauthVerifier] (string) OAuth verifier.
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/OAuth1::sendSignedRequest*		protected
+>
+ sendSignedRequest($method, $url, $params='[]')
+<
+(array) Response.
+
+
+    [$method] (string) Request type.
+    [$url] (string) Request URL.
+    [$params] (array) Request params.
+
+
+*yii/authclient/OAuth1::generateNonce*			protected
+>
+ generateNonce()
+<
+(string) Nonce value.
+
+
+
+
+*yii/authclient/OAuth1::generateTimestamp*		protected
+>
+ generateTimestamp()
+<
+(integer) Timestamp.
+
+
+
+
+*yii/authclient/OAuth1::generateCommonRequestParams*	protected
+>
+ generateCommonRequestParams()
+<
+(array) Common request params.
+
+
+
+
+*yii/authclient/OAuth1::signRequest*			protected
+>
+ signRequest($method, $url, $params)
+<
+(array) Signed request params.
+
+
+    [$method] (string) Request method.
+    [$url] (string) Request URL.
+    [$params] (array) Request params.
+
+
+*yii/authclient/OAuth1::composeSignatureBaseString*	protected
+>
+ composeSignatureBaseString($method, $url, $params)
+<
+(string) Base signature string.
+
+
+    [$method] (string) Request method.
+    [$url] (string) Request URL.
+    [$params] (array) Request params.
+
+
+*yii/authclient/OAuth1::composeSignatureKey*		protected
+>
+ composeSignatureKey()
+<
+(string) Signature key.
+
+
+
+
+*yii/authclient/OAuth1::composeAuthorizationHeader*	protected
+>
+ composeAuthorizationHeader($params, $realm='''')
+<
+(string) Authorization header content.
+
+
+    [$params] (array) Request params.
+    [$realm] (string) Authorization realm.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

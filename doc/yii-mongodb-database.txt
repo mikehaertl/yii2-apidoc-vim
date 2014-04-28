@@ -1,0 +1,164 @@
+
+*yii/mongodb/Database*   >> |yii/base/Object|
+======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$mongoDb				*yii/mongodb/Database::$mongoDb*
+ (\MongoDB) Mongo database instance.
+
+$name					*yii/mongodb/Database::$name*
+ (string) Name of this database.
+
+$fileCollection				*yii/mongodb/Database::$fileCollection*
+ (\yii\mongodb\file\Collection) Mongo GridFS collection.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/Database::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/Database::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/Database::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/Database::__get*				public
+ See |yii/base/Object::__get|
+
+
+*yii/mongodb/Database::__set*				public
+ See |yii/base/Object::__set|
+
+
+*yii/mongodb/Database::__isset*				public
+ See |yii/base/Object::__isset|
+
+
+*yii/mongodb/Database::__unset*				public
+ See |yii/base/Object::__unset|
+
+
+*yii/mongodb/Database::__call*				public
+ See |yii/base/Object::__call|
+
+
+*yii/mongodb/Database::hasProperty*			public
+ See |yii/base/Object::hasProperty|
+
+
+*yii/mongodb/Database::canGetProperty*			public
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/mongodb/Database::canSetProperty*			public
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/mongodb/Database::hasMethod*				public
+ See |yii/base/Object::hasMethod|
+
+
+*yii/mongodb/Database::getName*				public
+>
+ getName()
+<
+(string) Name of this database.
+
+
+
+
+*yii/mongodb/Database::getCollection*			public
+>
+ getCollection($name, $refresh='false')
+<
+(\yii\mongodb\Collection) Mongo collection instance.
+
+
+    [$name] (string) Collection name
+    [$refresh] (boolean) Whether to reload the collection instance even if it
+    is found in the cache.
+
+
+*yii/mongodb/Database::getFileCollection*			public
+>
+ getFileCollection($prefix=''fs'', $refresh='false')
+<
+(\yii\mongodb\file\Collection) Mongo GridFS collection.
+
+
+    [$prefix] (string) Collection prefix.
+    [$refresh] (boolean) Whether to reload the collection instance even if it
+    is found in the cache.
+
+
+*yii/mongodb/Database::selectCollection*			protected
+>
+ selectCollection($name)
+<
+(\yii\mongodb\Collection) Collection instance.
+
+
+    [$name] (string) Collection name.
+
+
+*yii/mongodb/Database::selectFileCollection*		protected
+>
+ selectFileCollection($prefix)
+<
+(\yii\mongodb\file\Collection) File collection instance.
+
+
+    [$prefix] (string) File collection prefix.
+
+
+*yii/mongodb/Database::createCollection*			public
+>
+ createCollection($name, $options='[]')
+<
+(\MongoCollection) New Mongo collection instance.
+
+ Note: Mongo creates new collections automatically on the first demand, this
+ method makes sense only for the migration script or for the case you need to
+ create collection with the specific options.
+    [$name] (string) Name of the collection
+    [$options] (array) Collection options in format: "name" => "value"
+
+
+*yii/mongodb/Database::executeCommand*			public
+>
+ executeCommand($command, $options='[]')
+<
+(array) Database response.
+
+
+    [$command] (array) Command specification.
+    [$options] (array) Options in format: "name" => "value"
+
+
+*yii/mongodb/Database::tryResultError*			protected
+>
+ tryResultError($result)
+<
+(void)
+
+
+    [$result] (mixed) Raw command execution result.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

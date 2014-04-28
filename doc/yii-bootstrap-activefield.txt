@@ -1,0 +1,418 @@
+
+*yii/bootstrap/ActiveField*   >> |yii/widgets/ActiveField|
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This class adds some useful features to 'yii\widgets\ActiveField|ActiveField'
+ to render all sorts of Bootstrap 3 form fields in different form layouts:
+
+ - 'inputTemplate' is an optional template to render complex inputs, for
+ example input groups - 'horizontalClass' defines the CSS grid classes to add
+ to label, wrapper, error and hint   in horizontal forms - 'inline'/'inline()'
+ is used to render inline 'checkboxList()' and 'radioList()' - 'enableError'
+ can be set to 'false' to disable to the error - 'enableLabel' can be set to
+ 'false' to disable to the label - 'label()' can be used with a 'boolean'
+ argument to enable/disable the label
+
+ There are also some new placeholders that you can use in the 'template'
+ configuration:
+
+ - '{beginLabel}': the opening label tag - '{labelTitle}': the label title for
+ use with '{beginLabel}'/'{endLabel}' - '{endLabel}': the closing label tag -
+ '{beginWrapper}': the opening wrapper tag - '{endWrapper}': the closing
+ wrapper tag
+
+ The wrapper tag is only used for some layouts and form elements.
+
+ Note that some elements use slightly different defaults for 'template' and
+ other options. In particular the elements are 'checkbox()', 'checkboxList()'
+ and 'radioList()'. So to further customize these elements you may want to
+ pass your custom options.
+
+ Example:
+
+   use yii\bootstrap\ActiveForm;
+
+   $form = ActiveForm::begin(['layout' => 'horizontal'])
+
+   // Form field without label
+   echo $form->field($model, 'demo', [
+       'inputOptions' => [
+           'placeholder' => $model->getAttributeLabel('demo'),
+       ],
+   ])->label(false);
+
+   // Inline radio list
+   echo $form->field($model, 'demo')->inline()->radioList($items);
+
+   // Control sizing in horizontal mode
+   echo $form->field($model, 'demo', [
+       'horizontalCssClasses' => [
+           'wrapper' => 'col-sm-2',
+       ]
+   ]);
+
+   // With 'default' layout you would use 'template' to size a specific field:
+   // echo $form->field($model, 'demo', [
+   //     'template' => '{label} <div class="row"><div
+ class="col-sm-4">{input}{error}{hint}</div></div>'
+   // ]);
+
+    // Input group
+    echo $form->field($model, 'demo', [
+        'inputTemplate' => '<div class="input-group"><span
+ class="input-group-addon">@</span>{input}</div>',
+    ]);
+
+    ActiveForm::end();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$form					*yii/bootstrap/ActiveField::$form*
+ See |yii/widgets/ActiveField::$form|
+
+$model					*yii/bootstrap/ActiveField::$model*
+ See |yii/widgets/ActiveField::$model|
+
+$attribute				*yii/bootstrap/ActiveField::$attribute*
+ See |yii/widgets/ActiveField::$attribute|
+
+$options				*yii/bootstrap/ActiveField::$options*
+ See |yii/widgets/ActiveField::$options|
+
+$template				*yii/bootstrap/ActiveField::$template*
+ See |yii/widgets/ActiveField::$template|
+
+$inputOptions				*yii/bootstrap/ActiveField::$inputOptions*
+ See |yii/widgets/ActiveField::$inputOptions|
+
+$errorOptions				*yii/bootstrap/ActiveField::$errorOptions*
+ See |yii/widgets/ActiveField::$errorOptions|
+
+$labelOptions				*yii/bootstrap/ActiveField::$labelOptions*
+ See |yii/widgets/ActiveField::$labelOptions|
+
+$hintOptions				*yii/bootstrap/ActiveField::$hintOptions*
+ See |yii/widgets/ActiveField::$hintOptions|
+
+$enableClientValidation			*yii/bootstrap/ActiveField::$enableClientValidation*
+ See |yii/widgets/ActiveField::$enableClientValidation|
+
+$enableAjaxValidation			*yii/bootstrap/ActiveField::$enableAjaxValidation*
+ See |yii/widgets/ActiveField::$enableAjaxValidation|
+
+$validateOnChange			*yii/bootstrap/ActiveField::$validateOnChange*
+ See |yii/widgets/ActiveField::$validateOnChange|
+
+$validateOnType				*yii/bootstrap/ActiveField::$validateOnType*
+ See |yii/widgets/ActiveField::$validateOnType|
+
+$validationDelay			*yii/bootstrap/ActiveField::$validationDelay*
+ See |yii/widgets/ActiveField::$validationDelay|
+
+$selectors				*yii/bootstrap/ActiveField::$selectors*
+ See |yii/widgets/ActiveField::$selectors|
+
+$parts					*yii/bootstrap/ActiveField::$parts*
+ See |yii/widgets/ActiveField::$parts|
+
+$inline					*yii/bootstrap/ActiveField::$inline*
+ (bool) Whether to render 'checkboxList()' and 'radioList()' inline.
+
+$inputTemplate				*yii/bootstrap/ActiveField::$inputTemplate*
+ (string|null) Optional template to render the '{input}' placeholder content
+
+$wrapperOptions				*yii/bootstrap/ActiveField::$wrapperOptions*
+ (array) Options for the wrapper tag, used in the '{beginWrapper}' placeholder
+
+$horizontalCssClasses			*yii/bootstrap/ActiveField::$horizontalCssClasses*
+ (null|array) CSS grid classes for horizontal layout. This must be an array
+ with these keys:  - 'offset' the offset grid class to append to the wrapper
+ if no label is rendered  - 'label' the label grid class  - 'wrapper' the
+ wrapper grid class  - 'error' the error grid class  - 'hint' the hint grid
+ class
+
+$enableError				*yii/bootstrap/ActiveField::$enableError*
+ (bool) Whether to render the error. Default is 'true' except for layout
+ 'inline'.
+
+$enableLabel				*yii/bootstrap/ActiveField::$enableLabel*
+ (bool) Whether to render the label. Default is 'true'.
+
+$behaviors				*yii/bootstrap/ActiveField::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/bootstrap/ActiveField::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/bootstrap/ActiveField::__construct*			public
+>
+ __construct($config='[]')
+<
+(void)
+
+
+    [$config] () 
+
+
+*yii/bootstrap/ActiveField::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/bootstrap/ActiveField::__get*			public
+ See |yii/base/Component::__get|
+
+
+*yii/bootstrap/ActiveField::__set*			public
+ See |yii/base/Component::__set|
+
+
+*yii/bootstrap/ActiveField::__isset*			public
+ See |yii/base/Component::__isset|
+
+
+*yii/bootstrap/ActiveField::__unset*			public
+ See |yii/base/Component::__unset|
+
+
+*yii/bootstrap/ActiveField::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/bootstrap/ActiveField::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/bootstrap/ActiveField::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/bootstrap/ActiveField::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/bootstrap/ActiveField::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/bootstrap/ActiveField::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/bootstrap/ActiveField::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/bootstrap/ActiveField::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/bootstrap/ActiveField::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/bootstrap/ActiveField::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/bootstrap/ActiveField::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/bootstrap/ActiveField::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/bootstrap/ActiveField::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/bootstrap/ActiveField::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/bootstrap/ActiveField::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/bootstrap/ActiveField::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/bootstrap/ActiveField::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/bootstrap/ActiveField::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/bootstrap/ActiveField::__toString*			public
+ See |yii/widgets/ActiveField::__toString|
+
+
+*yii/bootstrap/ActiveField::render*			public
+>
+ render($content='null')
+<
+(string) The rendering result
+
+
+    [$content] () 
+
+
+*yii/bootstrap/ActiveField::begin*			public
+ See |yii/widgets/ActiveField::begin|
+
+
+*yii/bootstrap/ActiveField::end*				public
+ See |yii/widgets/ActiveField::end|
+
+
+*yii/bootstrap/ActiveField::label*			public
+>
+ label($label='null', $options='[]')
+<
+(static) The field object itself
+
+
+    [$label] () 
+    [$options] () 
+
+
+*yii/bootstrap/ActiveField::error*			public
+ See |yii/widgets/ActiveField::error|
+
+
+*yii/bootstrap/ActiveField::hint*				public
+ See |yii/widgets/ActiveField::hint|
+
+
+*yii/bootstrap/ActiveField::input*			public
+ See |yii/widgets/ActiveField::input|
+
+
+*yii/bootstrap/ActiveField::textInput*			public
+ See |yii/widgets/ActiveField::textInput|
+
+
+*yii/bootstrap/ActiveField::hiddenInput*			public
+ See |yii/widgets/ActiveField::hiddenInput|
+
+
+*yii/bootstrap/ActiveField::passwordInput*		public
+ See |yii/widgets/ActiveField::passwordInput|
+
+
+*yii/bootstrap/ActiveField::fileInput*			public
+ See |yii/widgets/ActiveField::fileInput|
+
+
+*yii/bootstrap/ActiveField::textarea*			public
+ See |yii/widgets/ActiveField::textarea|
+
+
+*yii/bootstrap/ActiveField::radio*			public
+ See |yii/widgets/ActiveField::radio|
+
+
+*yii/bootstrap/ActiveField::checkbox*			public
+>
+ checkbox($options='[]', $enclosedByLabel='true')
+<
+(static) The field object itself
+
+
+    [$options] () 
+    [$enclosedByLabel] () 
+
+
+*yii/bootstrap/ActiveField::dropDownList*			public
+ See |yii/widgets/ActiveField::dropDownList|
+
+
+*yii/bootstrap/ActiveField::listBox*			public
+ See |yii/widgets/ActiveField::listBox|
+
+
+*yii/bootstrap/ActiveField::checkboxList*			public
+>
+ checkboxList($items, $options='[]')
+<
+(static) The field object itself
+
+
+    [$items] () 
+    [$options] () 
+
+
+*yii/bootstrap/ActiveField::radioList*			public
+>
+ radioList($items, $options='[]')
+<
+(static) The field object itself
+
+
+    [$items] () 
+    [$options] () 
+
+
+*yii/bootstrap/ActiveField::widget*			public
+ See |yii/widgets/ActiveField::widget|
+
+
+*yii/bootstrap/ActiveField::adjustLabelFor*		protected
+ See |yii/widgets/ActiveField::adjustLabelFor|
+
+
+*yii/bootstrap/ActiveField::getClientOptions*		protected
+ See |yii/widgets/ActiveField::getClientOptions|
+
+
+*yii/bootstrap/ActiveField::inline*			public
+>
+ inline($value='true')
+<
+(static) The field object itself Make sure you call this method before
+'checkboxList()' or 'radioList()' to have any effect.
+
+
+    [$value] (bool) Whether to render a inline list
+
+
+*yii/bootstrap/ActiveField::createLayoutConfig*		protected
+>
+ createLayoutConfig($instanceConfig)
+<
+(array) The layout specific default configuration for this instance
+
+
+    [$instanceConfig] (array) The configuration passed to this instance's
+    constructor
+
+
+*yii/bootstrap/ActiveField::renderLabelParts*		protected
+>
+ renderLabelParts($label='null', $options='[]')
+<
+(void)
+
+
+    [$label] (string|null) The label or null to use model label
+    [$options] (array) The tag options
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

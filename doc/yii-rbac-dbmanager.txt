@@ -371,6 +371,17 @@ correspond to a rule.
     [$child] () 
 
 
+*yii/rbac/DbManager::hasChild*				public
+>
+ hasChild($parent, $child)
+<
+(boolean) Whether '$child' is already a child of '$parent'
+
+
+    [$parent] () 
+    [$child] () 
+
+
 *yii/rbac/DbManager::getChildren*				public
 >
  getChildren($name)
@@ -438,18 +449,45 @@ will be returned if there is no role assigned to the user.
     [$userId] () 
 
 
-*yii/rbac/DbManager::clearAll*				public
+*yii/rbac/DbManager::removeAll*				public
 >
- clearAll()
+ removeAll()
 <
 (void)
 
 
 
 
-*yii/rbac/DbManager::clearAssignments*			public
+*yii/rbac/DbManager::removeAllPermissions*		public
 >
- clearAssignments()
+ removeAllPermissions()
+<
+(void)
+
+
+
+
+*yii/rbac/DbManager::removeAllRoles*			public
+>
+ removeAllRoles()
+<
+(void)
+
+
+
+
+*yii/rbac/DbManager::removeAllRules*			public
+>
+ removeAllRules()
+<
+(void)
+
+
+
+
+*yii/rbac/DbManager::removeAllAssignments*		public
+>
+ removeAllAssignments()
 <
 (void)
 
@@ -525,6 +563,17 @@ corresponding array value is a list of child item names.
 
     [$parent] (\yii\rbac\Item) The parent item
     [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
+
+
+*yii/rbac/DbManager::removeAllItems*			protected
+>
+ removeAllItems($type)
+<
+(void)
+
+
+    [$type] (integer) The auth item type (either Item::TYPE_PERMISSION or
+    Item::TYPE_ROLE)
 
 
 

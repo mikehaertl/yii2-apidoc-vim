@@ -54,6 +54,10 @@ $only					*yii/filters/AccessControl::$only*
 $except					*yii/filters/AccessControl::$except*
  See |yii/base/ActionFilter::$except|
 
+$user					*yii/filters/AccessControl::$user*
+ (\yii\web\User|string) The user object representing the authentication status
+ or the ID of the user application component.
+
 $denyCallback				*yii/filters/AccessControl::$denyCallback*
  (callable) A callback that will be called if the access should be denied to
  the current user. If not set, 'denyAccess()' will be called.
@@ -62,9 +66,9 @@ $denyCallback				*yii/filters/AccessControl::$denyCallback*
 
    function ($rule, $action)
 
- where '$rule' is this rule, and '$action' is the current 'Action|action'
- object. '$rule' will be 'null' if access is denied because none of the rules
- matched.
+ where '$rule' is the rule that denies the user, and '$action' is the current
+ 'Action|action' object. '$rule' can be 'null' if access is denied because
+ none of the rules matched.
 
 $ruleConfig				*yii/filters/AccessControl::$ruleConfig*
  (array) The default configuration of access rules. Individual rule

@@ -1,0 +1,737 @@
+
+*yii/mongodb/ActiveRecord*   >> |yii/db/BaseActiveRecord|
+==========================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/mongodb/file/ActiveRecord|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$behaviors				*yii/mongodb/ActiveRecord::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$validators				*yii/mongodb/ActiveRecord::$validators*
+ (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
+ model.
+
+$activeValidators			*yii/mongodb/ActiveRecord::$activeValidators*
+ (\yii\validators\Validator[]) The validators applicable to the current
+ 'scenario'.
+
+$errors					*yii/mongodb/ActiveRecord::$errors*
+ (array) Errors for all attributes or the specified attribute. Empty array is
+ returned if no error. Note that when returning errors for all attributes, the
+ result is a two-dimensional array, like the following:
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+
+
+$firstErrors				*yii/mongodb/ActiveRecord::$firstErrors*
+ (array) The first errors. The array keys are the attribute names, and the
+ array values are the corresponding error messages. An empty array will be
+ returned if there is no error.
+
+$attributes				*yii/mongodb/ActiveRecord::$attributes*
+ (array) Attribute values (name => value).
+
+$scenario				*yii/mongodb/ActiveRecord::$scenario*
+ (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+
+$iterator				*yii/mongodb/ActiveRecord::$iterator*
+ (\ArrayIterator) An iterator for traversing the items in the list.
+
+$relatedRecords				*yii/mongodb/ActiveRecord::$relatedRecords*
+ (array) An array of related records indexed by relation names.
+
+$oldAttributes				*yii/mongodb/ActiveRecord::$oldAttributes*
+ (array) The old attribute values (name-value pairs)
+
+$dirtyAttributes			*yii/mongodb/ActiveRecord::$dirtyAttributes*
+ (array) The changed attribute values (name-value pairs)
+
+$isNewRecord				*yii/mongodb/ActiveRecord::$isNewRecord*
+ (boolean) Whether the record is new and should be inserted when calling
+ 'save()'.
+
+$primaryKey				*yii/mongodb/ActiveRecord::$primaryKey*
+ (mixed) The primary key value. An array (attribute name => attribute value)
+ is returned if the primary key is composite or '$asArray' is true. A string
+ is returned otherwise (null will be returned if the key value is null).
+
+$oldPrimaryKey				*yii/mongodb/ActiveRecord::$oldPrimaryKey*
+ (mixed) The old primary key value. An array (column name => column value) is
+ returned if the primary key is composite or '$asArray' is true. A string is
+ returned otherwise (null will be returned if the key value is null).
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/ActiveRecord::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/ActiveRecord::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/ActiveRecord::init*				public
+ See |yii/db/BaseActiveRecord::init|
+
+
+*yii/mongodb/ActiveRecord::__get*				public
+ See |yii/db/BaseActiveRecord::__get|
+
+
+*yii/mongodb/ActiveRecord::__set*				public
+ See |yii/db/BaseActiveRecord::__set|
+
+
+*yii/mongodb/ActiveRecord::__isset*			public
+ See |yii/db/BaseActiveRecord::__isset|
+
+
+*yii/mongodb/ActiveRecord::__unset*			public
+ See |yii/db/BaseActiveRecord::__unset|
+
+
+*yii/mongodb/ActiveRecord::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/mongodb/ActiveRecord::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/mongodb/ActiveRecord::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/mongodb/ActiveRecord::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/mongodb/ActiveRecord::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/mongodb/ActiveRecord::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/mongodb/ActiveRecord::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/mongodb/ActiveRecord::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/mongodb/ActiveRecord::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/mongodb/ActiveRecord::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/mongodb/ActiveRecord::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/mongodb/ActiveRecord::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/mongodb/ActiveRecord::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/mongodb/ActiveRecord::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/mongodb/ActiveRecord::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/mongodb/ActiveRecord::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/mongodb/ActiveRecord::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/mongodb/ActiveRecord::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/ActiveRecord::fields*			public
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/mongodb/ActiveRecord::extraFields*			public
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/mongodb/ActiveRecord::toArray*			public
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/mongodb/ActiveRecord::resolveFields*			protected
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/mongodb/ActiveRecord::rules*				public
+ See |yii/base/Model::rules|
+
+
+*yii/mongodb/ActiveRecord::scenarios*			public
+ See |yii/base/Model::scenarios|
+
+
+*yii/mongodb/ActiveRecord::formName*			public
+ See |yii/base/Model::formName|
+
+
+*yii/mongodb/ActiveRecord::attributes*			public
+>
+ attributes()
+<
+(array) List of attribute names.
+
+ This method must be overridden by child classes to define available
+ attributes. Note: primary key attribute "_id" should be always present in
+ returned array. For example:
+
+   public function attributes()
+   {
+       return ['_id', 'name', 'address', 'status'];
+   }
+
+
+
+
+*yii/mongodb/ActiveRecord::attributeLabels*		public
+ See |yii/base/Model::attributeLabels|
+
+
+*yii/mongodb/ActiveRecord::validate*			public
+ See |yii/base/Model::validate|
+
+
+*yii/mongodb/ActiveRecord::beforeValidate*		public
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/mongodb/ActiveRecord::afterValidate*			public
+ See |yii/base/Model::afterValidate|
+
+
+*yii/mongodb/ActiveRecord::getValidators*			public
+ See |yii/base/Model::getValidators|
+
+
+*yii/mongodb/ActiveRecord::getActiveValidators*		public
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/mongodb/ActiveRecord::createValidators*		public
+ See |yii/base/Model::createValidators|
+
+
+*yii/mongodb/ActiveRecord::isAttributeRequired*		public
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/mongodb/ActiveRecord::isAttributeSafe*		public
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/mongodb/ActiveRecord::isAttributeActive*		public
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/mongodb/ActiveRecord::getAttributeLabel*		public
+ See |yii/db/BaseActiveRecord::getAttributeLabel|
+
+
+*yii/mongodb/ActiveRecord::hasErrors*			public
+ See |yii/base/Model::hasErrors|
+
+
+*yii/mongodb/ActiveRecord::getErrors*			public
+ See |yii/base/Model::getErrors|
+
+
+*yii/mongodb/ActiveRecord::getFirstErrors*		public
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/mongodb/ActiveRecord::getFirstError*			public
+ See |yii/base/Model::getFirstError|
+
+
+*yii/mongodb/ActiveRecord::addError*			public
+ See |yii/base/Model::addError|
+
+
+*yii/mongodb/ActiveRecord::clearErrors*			public
+ See |yii/base/Model::clearErrors|
+
+
+*yii/mongodb/ActiveRecord::generateAttributeLabel*	public
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/mongodb/ActiveRecord::getAttributes*			public
+ See |yii/base/Model::getAttributes|
+
+
+*yii/mongodb/ActiveRecord::setAttributes*			public
+ See |yii/base/Model::setAttributes|
+
+
+*yii/mongodb/ActiveRecord::onUnsafeAttribute*		public
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/mongodb/ActiveRecord::getScenario*			public
+ See |yii/base/Model::getScenario|
+
+
+*yii/mongodb/ActiveRecord::setScenario*			public
+ See |yii/base/Model::setScenario|
+
+
+*yii/mongodb/ActiveRecord::safeAttributes*		public
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/mongodb/ActiveRecord::activeAttributes*		public
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/mongodb/ActiveRecord::load*				public
+ See |yii/base/Model::load|
+
+
+*yii/mongodb/ActiveRecord::loadMultiple*			public
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/mongodb/ActiveRecord::validateMultiple*		public
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/mongodb/ActiveRecord::getIterator*			public
+ See |yii/base/Model::getIterator|
+
+
+*yii/mongodb/ActiveRecord::offsetExists*			public
+ See |yii/db/BaseActiveRecord::offsetExists|
+
+
+*yii/mongodb/ActiveRecord::offsetGet*			public
+ See |yii/base/Model::offsetGet|
+
+
+*yii/mongodb/ActiveRecord::offsetSet*			public
+ See |yii/base/Model::offsetSet|
+
+
+*yii/mongodb/ActiveRecord::offsetUnset*			public
+ See |yii/db/BaseActiveRecord::offsetUnset|
+
+
+*yii/mongodb/ActiveRecord::findOne*			public
+ See |yii/db/ActiveRecordInterface::findOne|
+
+
+*yii/mongodb/ActiveRecord::findAll*			public
+ See |yii/db/ActiveRecordInterface::findAll|
+
+
+*yii/mongodb/ActiveRecord::updateAll*			public
+>
+ updateAll($attributes, $condition='[]', $options='[]')
+<
+(integer) The number of documents updated.
+
+ For example, to change the status to be 1 for all customers whose status is
+ 2:
+
+   Customer::updateAll(['status' => 1], ['status' => 2]);
+
+
+    [$attributes] (array) Attribute values (name-value pairs) to be saved into
+    the collection
+    [$condition] (array) Description of the objects to update. Please refer to
+    'Query::where()' on how to specify this parameter.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/ActiveRecord::updateAllCounters*		public
+>
+ updateAllCounters($counters, $condition='[]', $options='[]')
+<
+(integer) The number of documents updated.
+
+ For example, to increment all customers' age by 1,
+
+   Customer::updateAllCounters(['age' => 1]);
+
+
+    [$counters] (array) The counters to be updated (attribute name =>
+    increment value). Use negative values if you want to decrement the
+    counters.
+    [$condition] (array) Description of the objects to update. Please refer to
+    'Query::where()' on how to specify this parameter.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/ActiveRecord::deleteAll*			public
+>
+ deleteAll($condition='[]', $options='[]')
+<
+(integer) The number of documents deleted.
+
+ WARNING: If you do not specify any condition, this method will delete
+ documents rows in the collection.
+
+ For example, to delete all customers whose status is 3:
+
+   Customer::deleteAll(['status' => 3]);
+
+
+    [$condition] (array) Description of the objects to delete. Please refer to
+    'Query::where()' on how to specify this parameter.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/ActiveRecord::optimisticLock*		public
+ See |yii/db/BaseActiveRecord::optimisticLock|
+
+
+*yii/mongodb/ActiveRecord::hasOne*			public
+ See |yii/db/BaseActiveRecord::hasOne|
+
+
+*yii/mongodb/ActiveRecord::hasMany*			public
+ See |yii/db/BaseActiveRecord::hasMany|
+
+
+*yii/mongodb/ActiveRecord::populateRelation*		public
+ See |yii/db/BaseActiveRecord::populateRelation|
+
+
+*yii/mongodb/ActiveRecord::isRelationPopulated*		public
+ See |yii/db/BaseActiveRecord::isRelationPopulated|
+
+
+*yii/mongodb/ActiveRecord::getRelatedRecords*		public
+ See |yii/db/BaseActiveRecord::getRelatedRecords|
+
+
+*yii/mongodb/ActiveRecord::hasAttribute*			public
+ See |yii/db/ActiveRecordInterface::hasAttribute|
+
+
+*yii/mongodb/ActiveRecord::getAttribute*			public
+ See |yii/db/ActiveRecordInterface::getAttribute|
+
+
+*yii/mongodb/ActiveRecord::setAttribute*			public
+ See |yii/db/ActiveRecordInterface::setAttribute|
+
+
+*yii/mongodb/ActiveRecord::getOldAttributes*		public
+ See |yii/db/BaseActiveRecord::getOldAttributes|
+
+
+*yii/mongodb/ActiveRecord::setOldAttributes*		public
+ See |yii/db/BaseActiveRecord::setOldAttributes|
+
+
+*yii/mongodb/ActiveRecord::getOldAttribute*		public
+ See |yii/db/BaseActiveRecord::getOldAttribute|
+
+
+*yii/mongodb/ActiveRecord::setOldAttribute*		public
+ See |yii/db/BaseActiveRecord::setOldAttribute|
+
+
+*yii/mongodb/ActiveRecord::markAttributeDirty*		public
+ See |yii/db/BaseActiveRecord::markAttributeDirty|
+
+
+*yii/mongodb/ActiveRecord::isAttributeChanged*		public
+ See |yii/db/BaseActiveRecord::isAttributeChanged|
+
+
+*yii/mongodb/ActiveRecord::getDirtyAttributes*		public
+ See |yii/db/BaseActiveRecord::getDirtyAttributes|
+
+
+*yii/mongodb/ActiveRecord::save*				public
+ See |yii/db/ActiveRecordInterface::save|
+
+
+*yii/mongodb/ActiveRecord::update*			public
+ See |yii/db/ActiveRecordInterface::update|
+
+
+*yii/mongodb/ActiveRecord::updateAttributes*		public
+ See |yii/db/BaseActiveRecord::updateAttributes|
+
+
+*yii/mongodb/ActiveRecord::updateInternal*		protected
+>
+ updateInternal($attributes='null')
+<
+(void)
+
+
+    [$attributes] () 
+
+
+*yii/mongodb/ActiveRecord::updateCounters*		public
+ See |yii/db/BaseActiveRecord::updateCounters|
+
+
+*yii/mongodb/ActiveRecord::delete*			public
+>
+ delete()
+<
+(integer|boolean) The number of documents deleted, or false if the deletion is
+unsuccessful for some reason. Note that it is possible the number of documents
+deleted is 0, even though the deletion execution is successful.
+
+ This method performs the following steps in order:
+
+ 1. call 'beforeDelete()'. If the method returns false, it will skip the   
+ rest of the steps; 2. delete the document from the collection; 3. call
+ 'afterDelete()'.
+
+ In the above step 1 and 3, events named 'EVENT_BEFORE_DELETE' and
+ 'EVENT_AFTER_DELETE' will be raised by the corresponding methods.
+
+
+*yii/mongodb/ActiveRecord::getIsNewRecord*		public
+ See |yii/db/ActiveRecordInterface::getIsNewRecord|
+
+
+*yii/mongodb/ActiveRecord::setIsNewRecord*		public
+ See |yii/db/BaseActiveRecord::setIsNewRecord|
+
+
+*yii/mongodb/ActiveRecord::afterFind*			public
+ See |yii/db/BaseActiveRecord::afterFind|
+
+
+*yii/mongodb/ActiveRecord::beforeSave*			public
+ See |yii/db/BaseActiveRecord::beforeSave|
+
+
+*yii/mongodb/ActiveRecord::afterSave*			public
+ See |yii/db/BaseActiveRecord::afterSave|
+
+
+*yii/mongodb/ActiveRecord::beforeDelete*			public
+ See |yii/db/BaseActiveRecord::beforeDelete|
+
+
+*yii/mongodb/ActiveRecord::afterDelete*			public
+ See |yii/db/BaseActiveRecord::afterDelete|
+
+
+*yii/mongodb/ActiveRecord::refresh*			public
+ See |yii/db/BaseActiveRecord::refresh|
+
+
+*yii/mongodb/ActiveRecord::equals*			public
+>
+ equals($record)
+<
+(boolean) Whether the two active records refer to the same row in the same
+Mongo collection.
+
+ The comparison is made by comparing the table names and the primary key
+ values of the two active records. If one of the records 'isNewRecord|is new'
+ they are also considered not equal.
+    [$record] (\yii\mongodb\ActiveRecord) Record to compare to
+
+
+*yii/mongodb/ActiveRecord::getPrimaryKey*			public
+ See |yii/db/ActiveRecordInterface::getPrimaryKey|
+
+
+*yii/mongodb/ActiveRecord::getOldPrimaryKey*		public
+ See |yii/db/ActiveRecordInterface::getOldPrimaryKey|
+
+
+*yii/mongodb/ActiveRecord::populateRecord*		public
+ See |yii/db/BaseActiveRecord::populateRecord|
+
+
+*yii/mongodb/ActiveRecord::instantiate*			public
+ See |yii/db/BaseActiveRecord::instantiate|
+
+
+*yii/mongodb/ActiveRecord::getRelation*			public
+ See |yii/db/ActiveRecordInterface::getRelation|
+
+
+*yii/mongodb/ActiveRecord::link*				public
+ See |yii/db/ActiveRecordInterface::link|
+
+
+*yii/mongodb/ActiveRecord::unlink*			public
+ See |yii/db/ActiveRecordInterface::unlink|
+
+
+*yii/mongodb/ActiveRecord::isPrimaryKey*			public
+ See |yii/db/ActiveRecordInterface::isPrimaryKey|
+
+
+*yii/mongodb/ActiveRecord::primaryKey*			public
+>
+ primaryKey()
+<
+(string[]) The primary keys of the associated Mongo collection.
+
+ The default implementation will return ['_id'].
+
+ Note that an array should be returned even for a collection with single
+ primary key.
+
+
+*yii/mongodb/ActiveRecord::find*				public
+>
+ find()
+<
+(\yii\db\ActiveQueryInterface) The newly created
+'ActiveQueryInterface|ActiveQuery' instance.
+
+
+
+
+*yii/mongodb/ActiveRecord::insert*			public
+>
+ insert($runValidation='true', $attributes='null')
+<
+(boolean) Whether the attributes are valid and the record is inserted
+successfully.
+
+ This method performs the following steps in order:
+
+ 1. call 'beforeValidate()' when '$runValidation' is true. If validation   
+ fails, it will skip the rest of the steps; 2. call 'afterValidate()' when
+ '$runValidation' is true. 3. call 'beforeSave()'. If the method returns
+ false, it will skip the    rest of the steps; 4. insert the record into
+ collection. If this fails, it will skip the rest of the steps; 5. call
+ 'afterSave()';
+
+ In the above step 1, 2, 3 and 5, events 'EVENT_BEFORE_VALIDATE',
+ 'EVENT_BEFORE_INSERT', 'EVENT_AFTER_INSERT' and 'EVENT_AFTER_VALIDATE' will
+ be raised by the corresponding methods.
+
+ Only the 'dirtyAttributes|changed attribute values' will be inserted into
+ database.
+
+ If the primary key  is null during insertion, it will be populated with the
+ actual value after insertion.
+
+ For example, to insert a customer record:
+
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be inserted into the
+    collection.
+    [$attributes] (array) List of attributes that need to be saved. Defaults
+    to null, meaning all attributes that are loaded will be saved.
+
+
+*yii/mongodb/ActiveRecord::getDb*				public
+>
+ getDb()
+<
+(\yii\mongodb\Connection) The database connection used by this AR class.
+
+ By default, the "mongodb" application component is used as the Mongo
+ connection. You may override this method if you want to use a different
+ database connection.
+
+
+*yii/mongodb/ActiveRecord::collectionName*		public
+>
+ collectionName()
+<
+(string|array) The collection name
+
+ Collection name can be either a string or array:  - if string considered as
+ the name of the collection inside the default database.  - if array - first
+ element considered as the name of the database, second - as    name of
+ collection inside that database
+
+ By default this method returns the class name as the collection name by
+ calling 'Inflector::camel2id()'. For example, 'Customer' becomes 'customer',
+ and 'OrderItem' becomes 'order_item'. You may override this method if the
+ table is not named after this convention.
+
+
+*yii/mongodb/ActiveRecord::getCollection*			public
+>
+ getCollection()
+<
+(\yii\mongodb\Collection) Collection instance.
+
+
+
+
+*yii/mongodb/ActiveRecord::insertInternal*		protected
+>
+ insertInternal($attributes='null')
+<
+(void)
+
+
+    [$attributes] () 
+
+
+*yii/mongodb/ActiveRecord::deleteInternal*		protected
+>
+ deleteInternal()
+<
+(void)
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

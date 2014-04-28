@@ -30,9 +30,9 @@ $link					*yii/db/ActiveRelationTrait::$link*
  Yii. This property is only used in relational context.
 
 $via					*yii/db/ActiveRelationTrait::$via*
- (array) The query associated with the pivot table. Please call 'via()' to set
- this property instead of directly setting it. This property is only used in
- relational context.
+ (array|object) The query associated with the pivot table. Please call 'via()'
+ to set this property instead of directly setting it. This property is only
+ used in relational context.
 
 $inverseOf				*yii/db/ActiveRelationTrait::$inverseOf*
  (string) The name of the relation that is the inverse of this relation. For
@@ -75,7 +75,7 @@ METHOD DETAILS
    public function getOrderItems()
    {
        return $this->hasMany(Item::className(), ['id' => 'item_id'])
-                   ->via('orders', ['order_id' => 'id']);
+                   ->via('orders');
    }
 
 

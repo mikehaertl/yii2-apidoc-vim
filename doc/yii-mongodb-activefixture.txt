@@ -1,0 +1,266 @@
+
+*yii/mongodb/ActiveFixture*   >> |yii/test/BaseActiveFixture|
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Either 'modelClass' or 'collectionName' must be set. You should also provide
+ fixture data in the file specified by 'dataFile' or overriding 'getData()' if
+ you want to use code to generate the fixture data.
+
+ When the fixture is being loaded, it will first call 'resetCollection()' to
+ remove any existing data in the collection. It will then populate the table
+ with the data returned by 'getData()'.
+
+ After the fixture is loaded, you can access the loaded data via the 'data'
+ property. If you set 'modelClass', you will also be able to retrieve an
+ instance of 'modelClass' with the populated data via 'getModel()'.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$depends				*yii/mongodb/ActiveFixture::$depends*
+ See |yii/test/Fixture::$depends|
+
+$db					*yii/mongodb/ActiveFixture::$db*
+ (\yii\mongodb\Connection|string) The DB connection object or the application
+ component ID of the DB connection.
+
+$modelClass				*yii/mongodb/ActiveFixture::$modelClass*
+ See |yii/test/BaseActiveFixture::$modelClass|
+
+$data					*yii/mongodb/ActiveFixture::$data*
+ See |yii/test/BaseActiveFixture::$data|
+
+$dataFile				*yii/mongodb/ActiveFixture::$dataFile*
+ See |yii/test/BaseActiveFixture::$dataFile|
+
+$collectionName				*yii/mongodb/ActiveFixture::$collectionName*
+ (string|array) The collection name that this fixture is about. If this
+ property is not set, the table name will be determined via 'modelClass'.
+
+$behaviors				*yii/mongodb/ActiveFixture::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$iterator				*yii/mongodb/ActiveFixture::$iterator*
+ (\ArrayIterator) An iterator for traversing the cookies in the collection.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/ActiveFixture::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/ActiveFixture::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/ActiveFixture::init*				public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii/mongodb/ActiveFixture::__get*			public
+ See |yii/base/Component::__get|
+
+
+*yii/mongodb/ActiveFixture::__set*			public
+ See |yii/base/Component::__set|
+
+
+*yii/mongodb/ActiveFixture::__isset*			public
+ See |yii/base/Component::__isset|
+
+
+*yii/mongodb/ActiveFixture::__unset*			public
+ See |yii/base/Component::__unset|
+
+
+*yii/mongodb/ActiveFixture::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/mongodb/ActiveFixture::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/mongodb/ActiveFixture::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/mongodb/ActiveFixture::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/mongodb/ActiveFixture::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/mongodb/ActiveFixture::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/mongodb/ActiveFixture::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/mongodb/ActiveFixture::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/mongodb/ActiveFixture::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/mongodb/ActiveFixture::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/mongodb/ActiveFixture::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/mongodb/ActiveFixture::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/mongodb/ActiveFixture::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/mongodb/ActiveFixture::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/mongodb/ActiveFixture::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/mongodb/ActiveFixture::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/mongodb/ActiveFixture::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/mongodb/ActiveFixture::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/ActiveFixture::load*				public
+>
+ load()
+<
+(void)
+
+ Data will be batch inserted into the given collection.
+
+
+*yii/mongodb/ActiveFixture::beforeLoad*			public
+ See |yii/test/Fixture::beforeLoad|
+
+
+*yii/mongodb/ActiveFixture::afterLoad*			public
+ See |yii/test/Fixture::afterLoad|
+
+
+*yii/mongodb/ActiveFixture::unload*			public
+>
+ unload()
+<
+(void)
+
+ The default implementation will clean up the colection by calling
+ 'resetCollection()'.
+
+
+*yii/mongodb/ActiveFixture::beforeUnload*			public
+ See |yii/test/Fixture::beforeUnload|
+
+
+*yii/mongodb/ActiveFixture::afterUnload*			public
+ See |yii/test/Fixture::afterUnload|
+
+
+*yii/mongodb/ActiveFixture::getIterator*			public
+ See |yii/base/ArrayAccessTrait::getIterator|
+
+
+*yii/mongodb/ActiveFixture::count*			public
+ See |yii/base/ArrayAccessTrait::count|
+
+
+*yii/mongodb/ActiveFixture::offsetExists*			public
+ See |yii/base/ArrayAccessTrait::offsetExists|
+
+
+*yii/mongodb/ActiveFixture::offsetGet*			public
+ See |yii/base/ArrayAccessTrait::offsetGet|
+
+
+*yii/mongodb/ActiveFixture::offsetSet*			public
+ See |yii/base/ArrayAccessTrait::offsetSet|
+
+
+*yii/mongodb/ActiveFixture::offsetUnset*			public
+ See |yii/base/ArrayAccessTrait::offsetUnset|
+
+
+*yii/mongodb/ActiveFixture::getModel*			public
+ See |yii/test/BaseActiveFixture::getModel|
+
+
+*yii/mongodb/ActiveFixture::getData*			protected
+>
+ getData()
+<
+(array) The data rows to be inserted into the collection.
+
+ This method is called by 'loadData()' to get the needed fixture data.
+
+ The default implementation will try to return the fixture data by including
+ the external file specified by 'dataFile'. The file should return an array of
+ data rows (column name => column value), each corresponding to a row in the
+ table.
+
+ If the data file does not exist, an empty array will be returned.
+
+
+*yii/mongodb/ActiveFixture::getCollection*		protected
+>
+ getCollection()
+<
+(void)
+
+
+
+*yii/mongodb/ActiveFixture::getCollectionName*		protected
+>
+ getCollectionName()
+<
+(void)
+
+
+
+*yii/mongodb/ActiveFixture::resetCollection*		protected
+>
+ resetCollection()
+<
+(void)
+
+ This method is called before populating fixture data into the collection
+ associated with this fixture.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

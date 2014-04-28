@@ -1,0 +1,323 @@
+
+*yii/bootstrap/ActiveForm*   >> |yii/widgets/ActiveForm|
+==========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This class mainly adds the 'layout' property to choose a Bootstrap 3 form
+ layout. So for example to render a horizontal form you would:
+
+   use yii\bootstrap\ActiveForm;
+
+   $form = ActiveForm::begin(['layout' => 'horizontal'])
+
+ This will set default values for the 'yii\bootstrap\ActiveField|ActiveField'
+ to render horizontal form fields. In particular the
+ 'yii\bootstrap\ActiveField::template|template' is set to '{label}
+ {beginWrapper} {input} {error} {endWrapper} {hint}' and the
+ 'yii\bootstrap\ActiveField::horizontalCssClasses|horizontalCssClasses' are
+ set to:
+
+   [
+       'offset' => 'col-sm-offset-3',
+       'label' => 'col-sm-3',
+       'wrapper' => 'col-sm-6',
+       'error' => '',
+       'hint' => 'col-sm-3',
+   ]
+
+ To get a different column layout in horizontal mode you can modify those
+ options through 'fieldConfig':
+
+   $form = ActiveForm::begin([
+       'layout' => 'horizontal',
+       'fieldConfig' => [
+           'template' =>
+ "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+           'horizontalCssClasses' => [
+               'label' => 'col-sm-4',
+               'offset' => 'col-sm-offset-4',
+               'wrapper' => 'col-sm-8',
+               'error' => '',
+               'hint' => '',
+           ],
+       ],
+   ]);
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$counter				*yii/bootstrap/ActiveForm::$counter*
+ See |yii/base/Widget::$counter|
+
+$autoIdPrefix				*yii/bootstrap/ActiveForm::$autoIdPrefix*
+ See |yii/base/Widget::$autoIdPrefix|
+
+$stack					*yii/bootstrap/ActiveForm::$stack*
+ See |yii/base/Widget::$stack|
+
+$action					*yii/bootstrap/ActiveForm::$action*
+ See |yii/widgets/ActiveForm::$action|
+
+$method					*yii/bootstrap/ActiveForm::$method*
+ See |yii/widgets/ActiveForm::$method|
+
+$options				*yii/bootstrap/ActiveForm::$options*
+ (array) HTML attributes for the form tag. Default is '['role' => 'form']'.
+
+$fieldConfig				*yii/bootstrap/ActiveForm::$fieldConfig*
+ See |yii/widgets/ActiveForm::$fieldConfig|
+
+$errorSummaryCssClass			*yii/bootstrap/ActiveForm::$errorSummaryCssClass*
+ See |yii/widgets/ActiveForm::$errorSummaryCssClass|
+
+$requiredCssClass			*yii/bootstrap/ActiveForm::$requiredCssClass*
+ See |yii/widgets/ActiveForm::$requiredCssClass|
+
+$errorCssClass				*yii/bootstrap/ActiveForm::$errorCssClass*
+ See |yii/widgets/ActiveForm::$errorCssClass|
+
+$successCssClass			*yii/bootstrap/ActiveForm::$successCssClass*
+ See |yii/widgets/ActiveForm::$successCssClass|
+
+$validatingCssClass			*yii/bootstrap/ActiveForm::$validatingCssClass*
+ See |yii/widgets/ActiveForm::$validatingCssClass|
+
+$enableClientValidation			*yii/bootstrap/ActiveForm::$enableClientValidation*
+ See |yii/widgets/ActiveForm::$enableClientValidation|
+
+$enableAjaxValidation			*yii/bootstrap/ActiveForm::$enableAjaxValidation*
+ See |yii/widgets/ActiveForm::$enableAjaxValidation|
+
+$validationUrl				*yii/bootstrap/ActiveForm::$validationUrl*
+ See |yii/widgets/ActiveForm::$validationUrl|
+
+$validateOnSubmit			*yii/bootstrap/ActiveForm::$validateOnSubmit*
+ See |yii/widgets/ActiveForm::$validateOnSubmit|
+
+$validateOnChange			*yii/bootstrap/ActiveForm::$validateOnChange*
+ See |yii/widgets/ActiveForm::$validateOnChange|
+
+$validateOnType				*yii/bootstrap/ActiveForm::$validateOnType*
+ See |yii/widgets/ActiveForm::$validateOnType|
+
+$validationDelay			*yii/bootstrap/ActiveForm::$validationDelay*
+ See |yii/widgets/ActiveForm::$validationDelay|
+
+$ajaxParam				*yii/bootstrap/ActiveForm::$ajaxParam*
+ See |yii/widgets/ActiveForm::$ajaxParam|
+
+$ajaxDataType				*yii/bootstrap/ActiveForm::$ajaxDataType*
+ See |yii/widgets/ActiveForm::$ajaxDataType|
+
+$beforeSubmit				*yii/bootstrap/ActiveForm::$beforeSubmit*
+ See |yii/widgets/ActiveForm::$beforeSubmit|
+
+$beforeValidate				*yii/bootstrap/ActiveForm::$beforeValidate*
+ See |yii/widgets/ActiveForm::$beforeValidate|
+
+$afterValidate				*yii/bootstrap/ActiveForm::$afterValidate*
+ See |yii/widgets/ActiveForm::$afterValidate|
+
+$attributes				*yii/bootstrap/ActiveForm::$attributes*
+ See |yii/widgets/ActiveForm::$attributes|
+
+$layout					*yii/bootstrap/ActiveForm::$layout*
+ (string) The form layout. Either 'default', 'horizontal' or 'inline'. By
+ choosing a layout, an appropriate default field configuration is applied.
+ This will render the form fields with slightly different markup for each
+ layout. You can override these defaults through 'fieldConfig'.
+
+$behaviors				*yii/bootstrap/ActiveForm::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$id					*yii/bootstrap/ActiveForm::$id*
+ (string) ID of the widget.
+
+$view					*yii/bootstrap/ActiveForm::$view*
+ (\yii\web\View) The view object that can be used to render views or view
+ files.
+
+$viewPath				*yii/bootstrap/ActiveForm::$viewPath*
+ (string) The directory containing the view files for this widget.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/bootstrap/ActiveForm::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/bootstrap/ActiveForm::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/bootstrap/ActiveForm::init*				public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii/bootstrap/ActiveForm::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/bootstrap/ActiveForm::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/bootstrap/ActiveForm::__isset*			public
+ See |yii/base/Component::__isset|
+
+
+*yii/bootstrap/ActiveForm::__unset*			public
+ See |yii/base/Component::__unset|
+
+
+*yii/bootstrap/ActiveForm::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/bootstrap/ActiveForm::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/bootstrap/ActiveForm::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/bootstrap/ActiveForm::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/bootstrap/ActiveForm::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/bootstrap/ActiveForm::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/bootstrap/ActiveForm::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/bootstrap/ActiveForm::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/bootstrap/ActiveForm::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/bootstrap/ActiveForm::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/bootstrap/ActiveForm::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/bootstrap/ActiveForm::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/bootstrap/ActiveForm::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/bootstrap/ActiveForm::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/bootstrap/ActiveForm::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/bootstrap/ActiveForm::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/bootstrap/ActiveForm::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/bootstrap/ActiveForm::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/bootstrap/ActiveForm::begin*				public
+ See |yii/base/Widget::begin|
+
+
+*yii/bootstrap/ActiveForm::end*				public
+ See |yii/base/Widget::end|
+
+
+*yii/bootstrap/ActiveForm::widget*			public
+ See |yii/base/Widget::widget|
+
+
+*yii/bootstrap/ActiveForm::getId*				public
+ See |yii/base/Widget::getId|
+
+
+*yii/bootstrap/ActiveForm::setId*				public
+ See |yii/base/Widget::setId|
+
+
+*yii/bootstrap/ActiveForm::getView*			public
+ See |yii/base/Widget::getView|
+
+
+*yii/bootstrap/ActiveForm::setView*			public
+ See |yii/base/Widget::setView|
+
+
+*yii/bootstrap/ActiveForm::run*				public
+ See |yii/widgets/ActiveForm::run|
+
+
+*yii/bootstrap/ActiveForm::render*			public
+ See |yii/base/Widget::render|
+
+
+*yii/bootstrap/ActiveForm::renderFile*			public
+ See |yii/base/Widget::renderFile|
+
+
+*yii/bootstrap/ActiveForm::getViewPath*			public
+ See |yii/base/Widget::getViewPath|
+
+
+*yii/bootstrap/ActiveForm::getClientOptions*		protected
+ See |yii/widgets/ActiveForm::getClientOptions|
+
+
+*yii/bootstrap/ActiveForm::errorSummary*			public
+ See |yii/widgets/ActiveForm::errorSummary|
+
+
+*yii/bootstrap/ActiveForm::field*				public
+ See |yii/widgets/ActiveForm::field|
+
+
+*yii/bootstrap/ActiveForm::validate*			public
+ See |yii/widgets/ActiveForm::validate|
+
+
+*yii/bootstrap/ActiveForm::validateMultiple*		public
+ See |yii/widgets/ActiveForm::validateMultiple|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

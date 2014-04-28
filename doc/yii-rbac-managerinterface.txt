@@ -201,6 +201,17 @@ correspond to a rule.
     [$child] (\yii\rbac\Item) 
 
 
+*yii/rbac/ManagerInterface::hasChild*			public
+>
+ hasChild($parent, $child)
+<
+(boolean) Whether '$child' is already a child of '$parent'
+
+
+    [$parent] (\yii\rbac\Item) 
+    [$child] (\yii\rbac\Item) 
+
+
 *yii/rbac/ManagerInterface::getChildren*			public
 >
  getChildren($name)
@@ -270,18 +281,45 @@ will be returned if there is no role assigned to the user.
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
-*yii/rbac/ManagerInterface::clearAll*			public
+*yii/rbac/ManagerInterface::removeAll*			public
 >
- clearAll()
+ removeAll()
 <
 (void)
 
 
 
 
-*yii/rbac/ManagerInterface::clearAssignments*		public
+*yii/rbac/ManagerInterface::removeAllPermissions*		public
 >
- clearAssignments()
+ removeAllPermissions()
+<
+(void)
+
+ All parent child relations will be adjusted accordingly.
+
+
+*yii/rbac/ManagerInterface::removeAllRoles*		public
+>
+ removeAllRoles()
+<
+(void)
+
+ All parent child relations will be adjusted accordingly.
+
+
+*yii/rbac/ManagerInterface::removeAllRules*		public
+>
+ removeAllRules()
+<
+(void)
+
+ All roles and permissions which have rules will be adjusted accordingly.
+
+
+*yii/rbac/ManagerInterface::removeAllAssignments*		public
+>
+ removeAllAssignments()
 <
 (void)
 

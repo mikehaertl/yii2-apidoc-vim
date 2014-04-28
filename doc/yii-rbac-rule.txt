@@ -75,14 +75,18 @@ METHOD DETAILS
 
 *yii/rbac/Rule::execute*					public
 >
- execute($item, $params)
+ execute($user, $item, $params)
 <
 (boolean) A value indicating whether the rule permits the auth item it is
 associated with.
 
 
-    [$item] (\yii\rbac\Item) The auth item that this rule is associated with
-    [$params] (array) Parameters passed to 'ManagerInterface::allow()'.
+    [$user] (string|integer) The user ID. This should be either an integer or
+    a string representing the unique identifier of a user. See
+    '\yii\web\User::id'.
+    [$item] (\yii\rbac\Item) The role or permission that this rule is
+    associated with
+    [$params] (array) Parameters passed to 'ManagerInterface::checkAccess()'.
 
 
 

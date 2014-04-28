@@ -1,0 +1,827 @@
+
+*yii/elasticsearch/ActiveRecord*   >> |yii/db/BaseActiveRecord|
+================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This class implements the ActiveRecord pattern for the fulltext search and
+ data storage [elasticsearch](http://www.elasticsearch.org/).
+
+ For defining a record a subclass should at least implement the 'attributes()'
+ method to define attributes. The primary key (the '_id' field in
+ elasticsearch terms) is represented by 'getId()' and 'setId()'. The primary
+ key is not part of the attributes.
+
+ The following is an example model called 'Customer':
+
+   class Customer extends \yii\elasticsearch\ActiveRecord
+   {
+       public function attributes()
+       {
+           return ['id', 'name', 'address', 'registration_date'];
+       }
+   }
+
+ You may override 'index()' and 'type()' to define the index and type this
+ record represents.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$behaviors				*yii/elasticsearch/ActiveRecord::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$validators				*yii/elasticsearch/ActiveRecord::$validators*
+ (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
+ model.
+
+$activeValidators			*yii/elasticsearch/ActiveRecord::$activeValidators*
+ (\yii\validators\Validator[]) The validators applicable to the current
+ 'scenario'.
+
+$errors					*yii/elasticsearch/ActiveRecord::$errors*
+ (array) Errors for all attributes or the specified attribute. Empty array is
+ returned if no error. Note that when returning errors for all attributes, the
+ result is a two-dimensional array, like the following:
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+
+
+$firstErrors				*yii/elasticsearch/ActiveRecord::$firstErrors*
+ (array) The first errors. The array keys are the attribute names, and the
+ array values are the corresponding error messages. An empty array will be
+ returned if there is no error.
+
+$attributes				*yii/elasticsearch/ActiveRecord::$attributes*
+ (array) Attribute values (name => value).
+
+$scenario				*yii/elasticsearch/ActiveRecord::$scenario*
+ (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+
+$iterator				*yii/elasticsearch/ActiveRecord::$iterator*
+ (\ArrayIterator) An iterator for traversing the items in the list.
+
+$relatedRecords				*yii/elasticsearch/ActiveRecord::$relatedRecords*
+ (array) An array of related records indexed by relation names.
+
+$oldAttributes				*yii/elasticsearch/ActiveRecord::$oldAttributes*
+ (array) The old attribute values (name-value pairs)
+
+$dirtyAttributes			*yii/elasticsearch/ActiveRecord::$dirtyAttributes*
+ (array) The changed attribute values (name-value pairs)
+
+$isNewRecord				*yii/elasticsearch/ActiveRecord::$isNewRecord*
+ (boolean) Whether the record is new and should be inserted when calling
+ 'save()'.
+
+$primaryKey				*yii/elasticsearch/ActiveRecord::$primaryKey*
+ (mixed) The primary key value. An array (column name => column value) is
+ returned if the primary key is composite or '$asArray' is true. A string is
+ returned otherwise (null will be returned if the key value is null).
+
+$oldPrimaryKey				*yii/elasticsearch/ActiveRecord::$oldPrimaryKey*
+ (mixed) The old primary key value. An array (column name => column value) is
+ returned if the primary key is composite or '$asArray' is true. A string is
+ returned otherwise (null will be returned if the key value is null).
+
+$score					*yii/elasticsearch/ActiveRecord::$score*
+ (float) Returns the score of this record when it was retrieved via a 'find()'
+ query.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/elasticsearch/ActiveRecord::className*		public
+ See |yii/base/Object::className|
+
+
+*yii/elasticsearch/ActiveRecord::__construct*		public
+ See |yii/base/Object::__construct|
+
+
+*yii/elasticsearch/ActiveRecord::init*			public
+ See |yii/db/BaseActiveRecord::init|
+
+
+*yii/elasticsearch/ActiveRecord::__get*			public
+ See |yii/db/BaseActiveRecord::__get|
+
+
+*yii/elasticsearch/ActiveRecord::__set*			public
+ See |yii/db/BaseActiveRecord::__set|
+
+
+*yii/elasticsearch/ActiveRecord::__isset*			public
+ See |yii/db/BaseActiveRecord::__isset|
+
+
+*yii/elasticsearch/ActiveRecord::__unset*			public
+ See |yii/db/BaseActiveRecord::__unset|
+
+
+*yii/elasticsearch/ActiveRecord::__call*			public
+ See |yii/base/Component::__call|
+
+
+*yii/elasticsearch/ActiveRecord::hasProperty*		public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/elasticsearch/ActiveRecord::canGetProperty*		public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/elasticsearch/ActiveRecord::canSetProperty*		public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/elasticsearch/ActiveRecord::hasMethod*		public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/elasticsearch/ActiveRecord::__clone*			public
+ See |yii/base/Component::__clone|
+
+
+*yii/elasticsearch/ActiveRecord::behaviors*		public
+ See |yii/base/Component::behaviors|
+
+
+*yii/elasticsearch/ActiveRecord::hasEventHandlers*	public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/elasticsearch/ActiveRecord::on*			public
+ See |yii/base/Component::on|
+
+
+*yii/elasticsearch/ActiveRecord::off*			public
+ See |yii/base/Component::off|
+
+
+*yii/elasticsearch/ActiveRecord::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/elasticsearch/ActiveRecord::getBehavior*		public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/elasticsearch/ActiveRecord::getBehaviors*		public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/elasticsearch/ActiveRecord::attachBehavior*		public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/elasticsearch/ActiveRecord::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/elasticsearch/ActiveRecord::detachBehavior*		public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/elasticsearch/ActiveRecord::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/elasticsearch/ActiveRecord::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/elasticsearch/ActiveRecord::fields*			public
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/elasticsearch/ActiveRecord::extraFields*		public
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/elasticsearch/ActiveRecord::toArray*			public
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/elasticsearch/ActiveRecord::resolveFields*		protected
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/elasticsearch/ActiveRecord::rules*			public
+ See |yii/base/Model::rules|
+
+
+*yii/elasticsearch/ActiveRecord::scenarios*		public
+ See |yii/base/Model::scenarios|
+
+
+*yii/elasticsearch/ActiveRecord::formName*		public
+ See |yii/base/Model::formName|
+
+
+*yii/elasticsearch/ActiveRecord::attributes*		public
+>
+ attributes()
+<
+(string[]) List of attribute names.
+
+ This method must be overridden by child classes to define available
+ attributes.
+
+ Attributes are names of fields of the corresponding elasticsearch document.
+ The primaryKey for elasticsearch documents is the '_id' field by default
+ which is not part of the attributes. You may define [path
+ mapping](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-id-field.html)
+ for the '_id' field so that it is part of the '_source' fields and thus
+ becomes part of the attributes.
+
+
+*yii/elasticsearch/ActiveRecord::attributeLabels*		public
+ See |yii/base/Model::attributeLabels|
+
+
+*yii/elasticsearch/ActiveRecord::validate*		public
+ See |yii/base/Model::validate|
+
+
+*yii/elasticsearch/ActiveRecord::beforeValidate*		public
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/elasticsearch/ActiveRecord::afterValidate*		public
+ See |yii/base/Model::afterValidate|
+
+
+*yii/elasticsearch/ActiveRecord::getValidators*		public
+ See |yii/base/Model::getValidators|
+
+
+*yii/elasticsearch/ActiveRecord::getActiveValidators*	public
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/elasticsearch/ActiveRecord::createValidators*	public
+ See |yii/base/Model::createValidators|
+
+
+*yii/elasticsearch/ActiveRecord::isAttributeRequired*	public
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/elasticsearch/ActiveRecord::isAttributeSafe*		public
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/elasticsearch/ActiveRecord::isAttributeActive*	public
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/elasticsearch/ActiveRecord::getAttributeLabel*	public
+ See |yii/db/BaseActiveRecord::getAttributeLabel|
+
+
+*yii/elasticsearch/ActiveRecord::hasErrors*		public
+ See |yii/base/Model::hasErrors|
+
+
+*yii/elasticsearch/ActiveRecord::getErrors*		public
+ See |yii/base/Model::getErrors|
+
+
+*yii/elasticsearch/ActiveRecord::getFirstErrors*		public
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/elasticsearch/ActiveRecord::getFirstError*		public
+ See |yii/base/Model::getFirstError|
+
+
+*yii/elasticsearch/ActiveRecord::addError*		public
+ See |yii/base/Model::addError|
+
+
+*yii/elasticsearch/ActiveRecord::clearErrors*		public
+ See |yii/base/Model::clearErrors|
+
+
+*yii/elasticsearch/ActiveRecord::generateAttributeLabel*	public
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/elasticsearch/ActiveRecord::getAttributes*		public
+ See |yii/base/Model::getAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::setAttributes*		public
+ See |yii/base/Model::setAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::onUnsafeAttribute*	public
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/elasticsearch/ActiveRecord::getScenario*		public
+ See |yii/base/Model::getScenario|
+
+
+*yii/elasticsearch/ActiveRecord::setScenario*		public
+ See |yii/base/Model::setScenario|
+
+
+*yii/elasticsearch/ActiveRecord::safeAttributes*		public
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::activeAttributes*	public
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::load*			public
+ See |yii/base/Model::load|
+
+
+*yii/elasticsearch/ActiveRecord::loadMultiple*		public
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/elasticsearch/ActiveRecord::validateMultiple*	public
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/elasticsearch/ActiveRecord::getIterator*		public
+ See |yii/base/Model::getIterator|
+
+
+*yii/elasticsearch/ActiveRecord::offsetExists*		public
+ See |yii/db/BaseActiveRecord::offsetExists|
+
+
+*yii/elasticsearch/ActiveRecord::offsetGet*		public
+ See |yii/base/Model::offsetGet|
+
+
+*yii/elasticsearch/ActiveRecord::offsetSet*		public
+ See |yii/base/Model::offsetSet|
+
+
+*yii/elasticsearch/ActiveRecord::offsetUnset*		public
+ See |yii/db/BaseActiveRecord::offsetUnset|
+
+
+*yii/elasticsearch/ActiveRecord::findOne*			public
+>
+ findOne($condition)
+<
+(static) ActiveRecord instance matching the condition, or null if nothing
+matches.
+
+
+    [$condition] () 
+
+
+*yii/elasticsearch/ActiveRecord::findAll*			public
+>
+ findAll($condition)
+<
+(static[]|array) An array of ActiveRecord instance, or an empty array if
+nothing matches.
+
+
+    [$condition] () 
+
+
+*yii/elasticsearch/ActiveRecord::updateAll*		public
+>
+ updateAll($attributes, $condition='[]')
+<
+(integer) The number of rows updated
+
+ For example, to change the status to be 1 for all customers whose status is
+ 2:
+
+   Customer::updateAll(['status' => 1], [2, 3, 4]);
+
+
+    [$attributes] (array) Attribute values (name-value pairs) to be saved into
+    the table
+    [$condition] (array) The conditions that will be put in the WHERE part of
+    the UPDATE SQL. Please refer to 'ActiveQuery::where()' on how to specify
+    this parameter.
+
+
+*yii/elasticsearch/ActiveRecord::updateAllCounters*	public
+>
+ updateAllCounters($counters, $condition='[]')
+<
+(integer) The number of rows updated
+
+ For example, to increment all customers' age by 1,
+
+   Customer::updateAllCounters(['age' => 1]);
+
+
+    [$counters] (array) The counters to be updated (attribute name =>
+    increment value). Use negative values if you want to decrement the
+    counters.
+    [$condition] (string|array) The conditions that will be put in the WHERE
+    part of the UPDATE SQL. Please refer to 'Query::where()' on how to specify
+    this parameter.
+
+
+*yii/elasticsearch/ActiveRecord::deleteAll*		public
+>
+ deleteAll($condition='[]')
+<
+(integer) The number of rows deleted
+
+ WARNING: If you do not specify any condition, this method will delete ALL
+ rows in the table.
+
+ For example, to delete all customers whose status is 3:
+
+   Customer::deleteAll('status = 3');
+
+
+    [$condition] (array) The conditions that will be put in the WHERE part of
+    the DELETE SQL. Please refer to 'ActiveQuery::where()' on how to specify
+    this parameter.
+
+
+*yii/elasticsearch/ActiveRecord::optimisticLock*		public
+ See |yii/db/BaseActiveRecord::optimisticLock|
+
+
+*yii/elasticsearch/ActiveRecord::hasOne*			public
+ See |yii/db/BaseActiveRecord::hasOne|
+
+
+*yii/elasticsearch/ActiveRecord::hasMany*			public
+ See |yii/db/BaseActiveRecord::hasMany|
+
+
+*yii/elasticsearch/ActiveRecord::populateRelation*	public
+ See |yii/db/BaseActiveRecord::populateRelation|
+
+
+*yii/elasticsearch/ActiveRecord::isRelationPopulated*	public
+ See |yii/db/BaseActiveRecord::isRelationPopulated|
+
+
+*yii/elasticsearch/ActiveRecord::getRelatedRecords*	public
+ See |yii/db/BaseActiveRecord::getRelatedRecords|
+
+
+*yii/elasticsearch/ActiveRecord::hasAttribute*		public
+ See |yii/db/BaseActiveRecord::hasAttribute|
+
+
+*yii/elasticsearch/ActiveRecord::getAttribute*		public
+ See |yii/db/BaseActiveRecord::getAttribute|
+
+
+*yii/elasticsearch/ActiveRecord::setAttribute*		public
+ See |yii/db/BaseActiveRecord::setAttribute|
+
+
+*yii/elasticsearch/ActiveRecord::getOldAttributes*	public
+ See |yii/db/BaseActiveRecord::getOldAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::setOldAttributes*	public
+ See |yii/db/BaseActiveRecord::setOldAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::getOldAttribute*		public
+ See |yii/db/BaseActiveRecord::getOldAttribute|
+
+
+*yii/elasticsearch/ActiveRecord::setOldAttribute*		public
+ See |yii/db/BaseActiveRecord::setOldAttribute|
+
+
+*yii/elasticsearch/ActiveRecord::markAttributeDirty*	public
+ See |yii/db/BaseActiveRecord::markAttributeDirty|
+
+
+*yii/elasticsearch/ActiveRecord::isAttributeChanged*	public
+ See |yii/db/BaseActiveRecord::isAttributeChanged|
+
+
+*yii/elasticsearch/ActiveRecord::getDirtyAttributes*	public
+ See |yii/db/BaseActiveRecord::getDirtyAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::save*			public
+ See |yii/db/BaseActiveRecord::save|
+
+
+*yii/elasticsearch/ActiveRecord::update*			public
+ See |yii/db/BaseActiveRecord::update|
+
+
+*yii/elasticsearch/ActiveRecord::updateAttributes*	public
+ See |yii/db/BaseActiveRecord::updateAttributes|
+
+
+*yii/elasticsearch/ActiveRecord::updateInternal*		protected
+ See |yii/db/BaseActiveRecord::updateInternal|
+
+
+*yii/elasticsearch/ActiveRecord::updateCounters*		public
+ See |yii/db/BaseActiveRecord::updateCounters|
+
+
+*yii/elasticsearch/ActiveRecord::delete*			public
+ See |yii/db/BaseActiveRecord::delete|
+
+
+*yii/elasticsearch/ActiveRecord::getIsNewRecord*		public
+ See |yii/db/BaseActiveRecord::getIsNewRecord|
+
+
+*yii/elasticsearch/ActiveRecord::setIsNewRecord*		public
+ See |yii/db/BaseActiveRecord::setIsNewRecord|
+
+
+*yii/elasticsearch/ActiveRecord::afterFind*		public
+ See |yii/db/BaseActiveRecord::afterFind|
+
+
+*yii/elasticsearch/ActiveRecord::beforeSave*		public
+ See |yii/db/BaseActiveRecord::beforeSave|
+
+
+*yii/elasticsearch/ActiveRecord::afterSave*		public
+ See |yii/db/BaseActiveRecord::afterSave|
+
+
+*yii/elasticsearch/ActiveRecord::beforeDelete*		public
+ See |yii/db/BaseActiveRecord::beforeDelete|
+
+
+*yii/elasticsearch/ActiveRecord::afterDelete*		public
+ See |yii/db/BaseActiveRecord::afterDelete|
+
+
+*yii/elasticsearch/ActiveRecord::refresh*			public
+ See |yii/db/BaseActiveRecord::refresh|
+
+
+*yii/elasticsearch/ActiveRecord::equals*			public
+ See |yii/db/BaseActiveRecord::equals|
+
+
+*yii/elasticsearch/ActiveRecord::getPrimaryKey*		public
+>
+ getPrimaryKey($asArray='false')
+<
+(mixed) The primary key value. An array (column name => column value) is
+returned if the primary key is composite or '$asArray' is true. A string is
+returned otherwise (null will be returned if the key value is null).
+
+
+    [$asArray] () 
+
+
+*yii/elasticsearch/ActiveRecord::getOldPrimaryKey*	public
+>
+ getOldPrimaryKey($asArray='false')
+<
+(mixed) The old primary key value. An array (column name => column value) is
+returned if the primary key is composite or '$asArray' is true. A string is
+returned otherwise (null will be returned if the key value is null).
+
+
+    [$asArray] () 
+
+
+*yii/elasticsearch/ActiveRecord::populateRecord*		public
+>
+ populateRecord($record, $row)
+<
+(void)
+
+
+    [$record] () 
+    [$row] () 
+
+
+*yii/elasticsearch/ActiveRecord::instantiate*		public
+>
+ instantiate($row)
+<
+(static) The newly created active record
+
+ This method is called together with 'populateRecord()' by 'ActiveQuery'. It
+ is not meant to be used for creating new records directly.
+
+ You may override this method if the instance being created depends on the row
+ data to be populated into the record. For example, by creating a record based
+ on the value of a column, you may implement the so-called single-table
+ inheritance mapping.
+    [$row] (array) Row data to be populated into the record. This array
+    consists of the following keys:  - '_source': refers to the attributes of
+    the record.  - '_type': the type this record is stored in.  - '_index':
+    the index this record is stored in.
+
+
+*yii/elasticsearch/ActiveRecord::getRelation*		public
+ See |yii/db/BaseActiveRecord::getRelation|
+
+
+*yii/elasticsearch/ActiveRecord::link*			public
+ See |yii/db/BaseActiveRecord::link|
+
+
+*yii/elasticsearch/ActiveRecord::unlink*			public
+ See |yii/db/BaseActiveRecord::unlink|
+
+
+*yii/elasticsearch/ActiveRecord::isPrimaryKey*		public
+ See |yii/db/BaseActiveRecord::isPrimaryKey|
+
+
+*yii/elasticsearch/ActiveRecord::primaryKey*		public
+>
+ primaryKey()
+<
+(string[]) Array of primary key attributes. Only the first element of the
+array will be used.
+
+ The primaryKey for elasticsearch documents is the '_id' field by default.
+ This field is not part of the ActiveRecord attributes so you should never add
+ '_id' to the list of 'attributes()|attributes'.
+
+ You may overide this method to define the primary key name when you have
+ defined [path
+ mapping](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-id-field.html)
+ for the '_id' field so that it is part of the '_source' and thus part of the
+ 'attributes()|attributes'.
+
+ Note that elasticsearch only supports _one_ attribute to be the primary key.
+ However to match the signature of the
+ '\yii\db\ActiveRecordInterface|ActiveRecordInterface' this methods returns an
+ array instead of a single string.
+
+
+*yii/elasticsearch/ActiveRecord::find*			public
+>
+ find()
+<
+(\yii\db\ActiveQueryInterface) The newly created
+'ActiveQueryInterface|ActiveQuery' instance.
+
+
+
+
+*yii/elasticsearch/ActiveRecord::insert*			public
+>
+ insert($runValidation='true', $attributes='null', $options='[\'op_type\'=>\'create\']')
+<
+(boolean) Whether the attributes are valid and the record is inserted
+successfully.
+
+ This method performs the following steps in order:
+
+ 1. call 'beforeValidate()' when '$runValidation' is true. If validation   
+ fails, it will skip the rest of the steps; 2. call 'afterValidate()' when
+ '$runValidation' is true. 3. call 'beforeSave()'. If the method returns
+ false, it will skip the    rest of the steps; 4. insert the record into
+ database. If this fails, it will skip the rest of the steps; 5. call
+ 'afterSave()';
+
+ In the above step 1, 2, 3 and 5, events 'EVENT_BEFORE_VALIDATE',
+ 'EVENT_BEFORE_INSERT', 'EVENT_AFTER_INSERT' and 'EVENT_AFTER_VALIDATE' will
+ be raised by the corresponding methods.
+
+ Only the 'dirtyAttributes|changed attribute values' will be inserted into
+ database.
+
+ If the 'primaryKey|primary key' is not set (null) during insertion, it will
+ be populated with a [randomly generated
+ value](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html#_automatic_id_generation)
+ after insertion.
+
+ For example, to insert a customer record:
+
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be inserted into the
+    database.
+    [$attributes] (array) List of attributes that need to be saved. Defaults
+    to null, meaning all attributes will be saved.
+    [$options] (array) Options given in this parameter are passed to
+    elasticsearch as request URI parameters. These are among others:
+
+    - 'routing' define shard placement of this record. - 'parent' by giving
+    the primaryKey of another record this defines a parent-child relation -
+    'timestamp' specifies the timestamp to store along with the document.
+    Default is indexing time.
+
+    Please refer to the [elasticsearch
+    documentation](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html)
+    for more details on these options.
+
+    By default the 'op_type' is set to 'create'.
+
+
+*yii/elasticsearch/ActiveRecord::getDb*			public
+>
+ getDb()
+<
+(\yii\elasticsearch\Connection) The database connection used by this AR class.
+
+ By default, the "elasticsearch" application component is used as the database
+ connection. You may override this method if you want to use a different
+ database connection.
+
+
+*yii/elasticsearch/ActiveRecord::get*			public
+>
+ get($primaryKey, $options='[]')
+<
+(static|null) The record instance or null if it was not found.
+
+
+    [$primaryKey] (mixed) The primaryKey value
+    [$options] (array) Options given in this parameter are passed to
+    elasticsearch as request URI parameters. Please refer to the
+    [elasticsearch
+    documentation](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html)
+    for more details on these options.
+
+
+*yii/elasticsearch/ActiveRecord::mget*			public
+>
+ mget($primaryKeys, $options='[]')
+<
+(array) The record instances, or empty array if nothing was found
+
+
+    [$primaryKeys] (array) An array of primaryKey values
+    [$options] (array) Options given in this parameter are passed to
+    elasticsearch as request URI parameters.
+
+    Please refer to the [elasticsearch
+    documentation](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html)
+    for more details on these options.
+
+
+*yii/elasticsearch/ActiveRecord::getScore*		public
+>
+ getScore()
+<
+(float) Returns the score of this record when it was retrieved via a 'find()'
+query.
+
+
+
+
+*yii/elasticsearch/ActiveRecord::setPrimaryKey*		public
+>
+ setPrimaryKey($value)
+<
+(void)
+
+
+    [$value] (mixed) 
+
+
+*yii/elasticsearch/ActiveRecord::index*			public
+>
+ index()
+<
+(string) The name of the index this record is stored in.
+
+
+
+
+*yii/elasticsearch/ActiveRecord::type*			public
+>
+ type()
+<
+(string) The name of the type of this record.
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

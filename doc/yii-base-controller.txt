@@ -15,6 +15,12 @@ SUBCLASSES
 |yii/web/Controller|
 |yii/rest/Controller|
 |yii/rest/ActiveController|
+|yii/gii/controllers/DefaultController|
+|yii/debug/controllers/DefaultController|
+|yii/faker/FixtureController|
+|yii/apidoc/components/BaseController|
+|yii/apidoc/commands/ApiController|
+|yii/apidoc/commands/GuideController|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -60,8 +66,8 @@ $route					*yii/base/Controller::$route*
  request.
 
 $view					*yii/base/Controller::$view*
- (\yii\base\View) The view object that can be used to render views or view
- files.
+ (\yii\base\View|\yii\web\View) The view object that can be used to render
+ views or view files.
 
 $viewPath				*yii/base/Controller::$viewPath*
  (string) The directory containing the view files for this controller.
@@ -415,8 +421,8 @@ request.
 >
  getView()
 <
-(\yii\base\View) The view object that can be used to render views or view
-files.
+(\yii\base\View|\yii\web\View) The view object that can be used to render
+views or view files.
 
  The 'render()', 'renderPartial()' and 'renderFile()' methods will use this
  view object to implement the actual view rendering. If not set, it will
@@ -430,8 +436,8 @@ files.
 (void)
 
 
-    [$view] (\yii\base\View) The view object that can be used to render views
-    or view files.
+    [$view] (\yii\base\View|\yii\web\View) The view object that can be used to
+    render views or view files.
 
 
 *yii/base/Controller::getViewPath*			public

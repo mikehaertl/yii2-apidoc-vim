@@ -23,9 +23,13 @@ METHOD DETAILS
 <
 (string) The normalized file/directory path
 
- After normalization, the directory separators in the path will be
- 'DIRECTORY_SEPARATOR', and any trailing directory separators will be removed.
- For example, '/home\demo/' on Linux will be normalized as '/home/demo'.
+ The normalization does the following work:
+
+ - Convert all directory separators into 'DIRECTORY_SEPARATOR' (e.g. "\a/b\c"
+ becomes "/a/b/c") - Remove trailing directory separators (e.g. "/a/b/c/"
+ becomes "/a/b/c") - Turn multiple consecutive slashes into a single one (e.g.
+ "/a///b/c" becomes "/a/b/c") - Remove ".." and "." based on their meanings
+ (e.g. "/a/./b/../c" becomes "/a/c")
     [$path] (string) The file/directory path to be normalized
     [$ds] (string) The directory separator to be used in the normalized
     result. Defaults to 'DIRECTORY_SEPARATOR'.

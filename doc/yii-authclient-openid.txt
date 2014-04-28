@@ -1,0 +1,553 @@
+
+*yii/authclient/OpenId*   >> |yii/authclient/BaseClient|
+=======================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/authclient/clients/GoogleOpenId|
+|yii/authclient/clients/YandexOpenId|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Supports Yadis and HTML discovery.
+
+ Usage:
+
+   use yii\authclient\OpenId;
+
+   $client = new OpenId();
+   $client->authUrl = 'https://open.id.provider.url'; // Setup provider
+ endpoint
+   $url = $client->buildAuthUrl(); // Get authentication URL
+   return Yii::$app->getResponse()->redirect($url); // Redirect to
+ authentication URL
+   // After user returns at our site:
+   if ($client->validate()) { // validate response
+       $userAttributes = $client->getUserAttributes(); // get account info
+       ...
+   }
+
+ AX and SREG extensions are supported. To use them, specify
+ 'requiredAttributes' and/or 'optionalAttributes'.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$authUrl				*yii/authclient/OpenId::$authUrl*
+ (string) Authentication base URL, which should be used to compose actual
+ authentication URL by 'buildAuthUrl()' method.
+
+$requiredAttributes			*yii/authclient/OpenId::$requiredAttributes*
+ (array) List of attributes, which always should be returned from server.
+ Attribute names should be always specified in AX format. For example:
+
+   ['namePerson/friendly', 'contact/email']
+
+
+
+$optionalAttributes			*yii/authclient/OpenId::$optionalAttributes*
+ (array) List of attributes, which could be returned from server. Attribute
+ names should be always specified in AX format. For example:
+
+   ['namePerson/first', 'namePerson/last']
+
+
+
+$verifyPeer				*yii/authclient/OpenId::$verifyPeer*
+ (boolean) Whether to verify the peer's certificate.
+
+$capath					*yii/authclient/OpenId::$capath*
+ (string) Directory that holds multiple CA certificates. This value will take
+ effect only if 'verifyPeer' is set.
+
+$cainfo					*yii/authclient/OpenId::$cainfo*
+ (string) The name of a file holding one or more certificates to verify the
+ peer with. This value will take effect only if 'verifyPeer' is set.
+
+$data					*yii/authclient/OpenId::$data*
+ (array) Data, which should be used to retrieve the OpenID response. If not
+ set combination of GET and POST will be used.
+
+$axToSregMap				*yii/authclient/OpenId::$axToSregMap*
+ (array) Map of matches between AX and SREG attribute names in format:
+ axAttributeName => sregAttributeName
+
+$behaviors				*yii/authclient/OpenId::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$id					*yii/authclient/OpenId::$id*
+ (string) Service id.
+
+$name					*yii/authclient/OpenId::$name*
+ (string) Service name.
+
+$title					*yii/authclient/OpenId::$title*
+ (string) Service title.
+
+$userAttributes				*yii/authclient/OpenId::$userAttributes*
+ (array) List of user attributes
+
+$normalizeUserAttributeMap		*yii/authclient/OpenId::$normalizeUserAttributeMap*
+ (array) Normalize user attribute map.
+
+$viewOptions				*yii/authclient/OpenId::$viewOptions*
+ (array) View options in format: optionName => optionValue
+
+$claimedId				*yii/authclient/OpenId::$claimedId*
+ (string) Claimed identifier (identity).
+
+$returnUrl				*yii/authclient/OpenId::$returnUrl*
+ (string) Authentication return URL.
+
+$trustRoot				*yii/authclient/OpenId::$trustRoot*
+ (string) Client trust root (realm).
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/authclient/OpenId::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/authclient/OpenId::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/authclient/OpenId::init*				public
+>
+ init()
+<
+(void)
+
+
+
+
+*yii/authclient/OpenId::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/authclient/OpenId::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/authclient/OpenId::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/authclient/OpenId::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/authclient/OpenId::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/authclient/OpenId::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/authclient/OpenId::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/authclient/OpenId::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/authclient/OpenId::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/authclient/OpenId::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/authclient/OpenId::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/authclient/OpenId::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/authclient/OpenId::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/authclient/OpenId::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/authclient/OpenId::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/authclient/OpenId::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/authclient/OpenId::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/authclient/OpenId::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/authclient/OpenId::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/authclient/OpenId::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/authclient/OpenId::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/authclient/OpenId::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/authclient/OpenId::setId*				public
+ See |yii/authclient/BaseClient::setId|
+
+
+*yii/authclient/OpenId::getId*				public
+ See |yii/authclient/BaseClient::getId|
+
+
+*yii/authclient/OpenId::setName*				public
+ See |yii/authclient/BaseClient::setName|
+
+
+*yii/authclient/OpenId::getName*				public
+ See |yii/authclient/BaseClient::getName|
+
+
+*yii/authclient/OpenId::setTitle*				public
+ See |yii/authclient/BaseClient::setTitle|
+
+
+*yii/authclient/OpenId::getTitle*				public
+ See |yii/authclient/BaseClient::getTitle|
+
+
+*yii/authclient/OpenId::setUserAttributes*		public
+ See |yii/authclient/BaseClient::setUserAttributes|
+
+
+*yii/authclient/OpenId::getUserAttributes*		public
+ See |yii/authclient/BaseClient::getUserAttributes|
+
+
+*yii/authclient/OpenId::setNormalizeUserAttributeMap*	public
+ See |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
+
+
+*yii/authclient/OpenId::getNormalizeUserAttributeMap*	public
+ See |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
+
+
+*yii/authclient/OpenId::setViewOptions*			public
+ See |yii/authclient/BaseClient::setViewOptions|
+
+
+*yii/authclient/OpenId::getViewOptions*			public
+ See |yii/authclient/BaseClient::getViewOptions|
+
+
+*yii/authclient/OpenId::defaultName*			protected
+ See |yii/authclient/BaseClient::defaultName|
+
+
+*yii/authclient/OpenId::defaultTitle*			protected
+ See |yii/authclient/BaseClient::defaultTitle|
+
+
+*yii/authclient/OpenId::initUserAttributes*		protected
+>
+ initUserAttributes()
+<
+(array) Auth user attributes.
+
+
+
+
+*yii/authclient/OpenId::defaultNormalizeUserAttributeMap*	protected
+ See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
+
+
+*yii/authclient/OpenId::defaultViewOptions*		protected
+ See |yii/authclient/BaseClient::defaultViewOptions|
+
+
+*yii/authclient/OpenId::normalizeUserAttributes*		protected
+ See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/OpenId::setClaimedId*			public
+>
+ setClaimedId($claimedId)
+<
+(void)
+
+
+    [$claimedId] (string) Claimed identifier (identity).
+
+
+*yii/authclient/OpenId::getClaimedId*			public
+>
+ getClaimedId()
+<
+(string) Claimed identifier (identity).
+
+
+
+
+*yii/authclient/OpenId::setReturnUrl*			public
+>
+ setReturnUrl($returnUrl)
+<
+(void)
+
+
+    [$returnUrl] (string) Authentication return URL.
+
+
+*yii/authclient/OpenId::getReturnUrl*			public
+>
+ getReturnUrl()
+<
+(string) Authentication return URL.
+
+
+
+
+*yii/authclient/OpenId::setTrustRoot*			public
+>
+ setTrustRoot($value)
+<
+(void)
+
+
+    [$value] (string) Client trust root (realm).
+
+
+*yii/authclient/OpenId::getTrustRoot*			public
+>
+ getTrustRoot()
+<
+(string) Client trust root (realm).
+
+
+
+
+*yii/authclient/OpenId::defaultReturnUrl*			protected
+>
+ defaultReturnUrl()
+<
+(string) Default authentication return URL.
+
+
+
+
+*yii/authclient/OpenId::hostExists*			public
+>
+ hostExists($url)
+<
+(boolean) True, if the server exists; false otherwise
+
+
+    [$url] (string) URL to check
+
+
+*yii/authclient/OpenId::sendCurlRequest*			protected
+>
+ sendCurlRequest($url, $method=''GET'', $params='[]')
+<
+(array|string) Response.
+
+
+    [$url] (string) Request URL.
+    [$method] (string) Request method.
+    [$params] (array) Request params.
+
+
+*yii/authclient/OpenId::sendStreamRequest*		protected
+>
+ sendStreamRequest($url, $method=''GET'', $params='[]')
+<
+(array|string) Response.
+
+
+    [$url] (string) Request URL.
+    [$method] (string) Request method.
+    [$params] (array) Request params.
+
+
+*yii/authclient/OpenId::sendRequest*			protected
+>
+ sendRequest($url, $method=''GET'', $params='[]')
+<
+(array|string) Response.
+
+
+    [$url] (string) Request URL.
+    [$method] (string) Request method.
+    [$params] (array) Request parameters.
+
+
+*yii/authclient/OpenId::buildUrl*				protected
+>
+ buildUrl($baseUrl, $additionalUrl)
+<
+(string) Composed URL.
+
+
+    [$baseUrl] (string) Base URL.
+    [$additionalUrl] (string|array) Additional URL string or information
+    array.
+
+
+*yii/authclient/OpenId::extractHtmlTagValue*		protected
+>
+ extractHtmlTagValue($content, $tag, $matchAttributeName, $matchAttributeValue, $valueAttributeName)
+<
+(string|boolean) Searched value, "false" on failure.
+
+
+    [$content] (string) HTML content to be be parsed.
+    [$tag] (string) Name of the source tag.
+    [$matchAttributeName] (string) Name of the source tag attribute, which
+    should contain $matchAttributeValue
+    [$matchAttributeValue] (string) Required value of $matchAttributeName
+    [$valueAttributeName] (string) Name of the source tag attribute, which
+    should contain searched value.
+
+
+*yii/authclient/OpenId::discover*				public
+>
+ discover($url)
+<
+(array) OpenID provider info, following keys will be available: - 'url' -
+string OP Endpoint (i.e. OpenID provider address). - 'version' - integer
+OpenID protocol version used by provider. - 'identity' - string identity
+value. - 'identifier_select' - boolean whether to request OP to select
+identity for an user in OpenID 2, does not affect OpenID 1. - 'ax' - boolean
+whether AX attributes should be used. - 'sreg' - boolean whether SREG
+attributes should be used.
+
+
+    [$url] (string) Identity URL.
+
+
+*yii/authclient/OpenId::buildSregParams*			protected
+>
+ buildSregParams()
+<
+(array) SREG parameters.
+
+
+
+
+*yii/authclient/OpenId::buildAxParams*			protected
+>
+ buildAxParams()
+<
+(array) AX parameters.
+
+
+
+
+*yii/authclient/OpenId::buildAuthUrlV1*			protected
+>
+ buildAuthUrlV1($serverInfo)
+<
+(string) Authentication URL.
+
+
+    [$serverInfo] (array) OpenID server info.
+
+
+*yii/authclient/OpenId::buildAuthUrlV2*			protected
+>
+ buildAuthUrlV2($serverInfo)
+<
+(string) Authentication URL.
+
+
+    [$serverInfo] (array) OpenID server info.
+
+
+*yii/authclient/OpenId::buildAuthUrl*			public
+>
+ buildAuthUrl($identifierSelect='null')
+<
+(string) The authentication URL.
+
+
+    [$identifierSelect] (boolean) Whether to request OP to select identity for
+    an user in OpenID 2, does not affect OpenID 1.
+
+
+*yii/authclient/OpenId::validate*				public
+>
+ validate($validateRequiredAttributes='true')
+<
+(boolean) Whether the verification was successful.
+
+
+    [$validateRequiredAttributes] (boolean) Whether to validate required
+    attributes.
+
+
+*yii/authclient/OpenId::validateRequiredAttributes*	protected
+>
+ validateRequiredAttributes()
+<
+(boolean) Whether all required attributes are present.
+
+
+
+
+*yii/authclient/OpenId::fetchAxAttributes*		protected
+>
+ fetchAxAttributes()
+<
+(array) Array of attributes.
+
+
+
+
+*yii/authclient/OpenId::fetchSregAttributes*		protected
+>
+ fetchSregAttributes()
+<
+(array) Array of attributes with keys being the AX schema names, e.g.
+'contact/email'
+
+
+
+
+*yii/authclient/OpenId::fetchAttributes*			public
+>
+ fetchAttributes()
+<
+(array) Array of attributes with keys being the AX schema names, e.g.
+'contact/email'
+
+ Note that it does not guarantee that any of the required/optional parameters
+ will be present, or that there will be no other attributes besides those
+ specified. In other words. OP may provide whatever information it wants to.
+ SREG names will be mapped to AX names.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

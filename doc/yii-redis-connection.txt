@@ -1,0 +1,259 @@
+
+*yii/redis/Connection*   >> |yii/base/Component|
+======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ By default it assumes there is a redis server running on localhost at port
+ 6379 and uses the database number 0.
+
+ It also supports [the AUTH command](http://redis.io/commands/auth) of redis.
+ When the server needs authentication, you can set the 'password' property to
+ authenticate with the server after connect.
+
+ The ecexution of [redis commands](http://redis.io/commands) is possible with
+ via 'executeCommand()'.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$hostname				*yii/redis/Connection::$hostname*
+ (string) The hostname or ip address to use for connecting to the redis
+ server. Defaults to 'localhost'.
+
+$port					*yii/redis/Connection::$port*
+ (integer) The port to use for connecting to the redis server. Default port is
+ 6379.
+
+$password				*yii/redis/Connection::$password*
+ (string) The password for establishing DB connection. Defaults to null
+ meaning no AUTH command is send. See http://redis.io/commands/auth
+
+$database				*yii/redis/Connection::$database*
+ (integer) The redis database to use. This is an integer value starting from
+ 0. Defaults to 0.
+
+$connectionTimeout			*yii/redis/Connection::$connectionTimeout*
+ (float) Timeout to use for connection to redis. If not set the timeout set in
+ php.ini will be used: ini_get("default_socket_timeout")
+
+$dataTimeout				*yii/redis/Connection::$dataTimeout*
+ (float) Timeout to use for redis socket when reading and writing data. If not
+ set the php default value will be used.
+
+$redisCommands				*yii/redis/Connection::$redisCommands*
+ (array) List of available redis commands http://redis.io/commands
+
+$behaviors				*yii/redis/Connection::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$isActive				*yii/redis/Connection::$isActive*
+ (boolean) Whether the DB connection is established
+
+$driverName				*yii/redis/Connection::$driverName*
+ (string) Name of the DB driver
+
+$luaScriptBuilder			*yii/redis/Connection::$luaScriptBuilder*
+ (\yii\redis\LuaScriptBuilder)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/redis/Connection::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/redis/Connection::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/redis/Connection::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/redis/Connection::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/redis/Connection::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/redis/Connection::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/redis/Connection::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/redis/Connection::__call*				public
+>
+ __call($name, $params)
+<
+(mixed) 
+
+
+    [$name] (string) 
+    [$params] (array) 
+
+
+*yii/redis/Connection::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/redis/Connection::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/redis/Connection::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/redis/Connection::hasMethod*				public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/redis/Connection::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/redis/Connection::behaviors*				public
+ See |yii/base/Component::behaviors|
+
+
+*yii/redis/Connection::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/redis/Connection::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/redis/Connection::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/redis/Connection::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/redis/Connection::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/redis/Connection::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/redis/Connection::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/redis/Connection::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/redis/Connection::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/redis/Connection::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/redis/Connection::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/redis/Connection::__sleep*				public
+>
+ __sleep()
+<
+(array) 
+
+
+
+
+*yii/redis/Connection::getIsActive*			public
+>
+ getIsActive()
+<
+(boolean) Whether the DB connection is established
+
+
+
+
+*yii/redis/Connection::open*				public
+>
+ open()
+<
+(void)
+
+ It does nothing if a DB connection has already been established.
+
+
+*yii/redis/Connection::close*				public
+>
+ close()
+<
+(void)
+
+ It does nothing if the connection is already closed.
+
+
+*yii/redis/Connection::initConnection*			protected
+>
+ initConnection()
+<
+(void)
+
+ This method is invoked right after the DB connection is established. The
+ default implementation triggers an 'EVENT_AFTER_OPEN' event.
+
+
+*yii/redis/Connection::getDriverName*			public
+>
+ getDriverName()
+<
+(string) Name of the DB driver
+
+
+
+
+*yii/redis/Connection::getLuaScriptBuilder*		public
+>
+ getLuaScriptBuilder()
+<
+(\yii\redis\LuaScriptBuilder) 
+
+
+
+
+*yii/redis/Connection::executeCommand*			public
+>
+ executeCommand($name, $params='[]')
+<
+(array|bool|null|string) Dependend on the executed command this method will
+return different data types:
+
+- 'true' for commands that return "status reply". - 'string' for commands that
+return "integer reply"   as the value is in the range of a signed 64 bit
+integer. - 'string' or 'null' for commands that return "bulk reply". - 'array'
+for commands that return "Multi-bulk replies".
+
+See [redis protocol description](http://redis.io/topics/protocol) for details
+on the mentioned reply types.
+
+ For a list of available commands and their parameters see
+ http://redis.io/commands.
+    [$name] (string) The name of the command
+    [$params] (array) List of parameters for the command
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

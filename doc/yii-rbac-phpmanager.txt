@@ -1,5 +1,5 @@
 
-*yii/rbac/PhpManager*   >> |yii/rbac/Manager|
+*yii/rbac/PhpManager*   >> |yii/rbac/BaseManager|
 =====================
 
 DESCRIPTION
@@ -16,11 +16,8 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-$showErrors				*yii/rbac/PhpManager::$showErrors*
- See |yii/rbac/Manager::$showErrors|
-
 $defaultRoles				*yii/rbac/PhpManager::$defaultRoles*
- See |yii/rbac/Manager::$defaultRoles|
+ See |yii/rbac/BaseManager::$defaultRoles|
 
 $authFile				*yii/rbac/PhpManager::$authFile*
  (string) The path of the PHP script that contains the authorization data.
@@ -32,16 +29,13 @@ $behaviors				*yii/rbac/PhpManager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 $roles					*yii/rbac/PhpManager::$roles*
- (\yii\rbac\Item[]) Roles (name => AuthItem)
+ ()
 
-$tasks					*yii/rbac/PhpManager::$tasks*
- (\yii\rbac\Item[]) Tasks (name => AuthItem)
+$permissions				*yii/rbac/PhpManager::$permissions*
+ ()
 
-$operations				*yii/rbac/PhpManager::$operations*
- (\yii\rbac\Item[]) Operations (name => AuthItem)
-
-$items					*yii/rbac/PhpManager::$items*
- (\yii\rbac\Item[]) The authorization items of the specific type.
+$rules					*yii/rbac/PhpManager::$rules*
+ (\yii\rbac\Rule[]) The rules indexed by the rule names
 
 
 
@@ -154,254 +148,394 @@ METHOD DETAILS
  See |yii/base/Component::ensureBehaviors|
 
 
-*yii/rbac/PhpManager::createRole*				public
- See |yii/rbac/Manager::createRole|
-
-
-*yii/rbac/PhpManager::createTask*				public
- See |yii/rbac/Manager::createTask|
-
-
-*yii/rbac/PhpManager::createOperation*			public
- See |yii/rbac/Manager::createOperation|
-
-
-*yii/rbac/PhpManager::getRoles*				public
- See |yii/rbac/Manager::getRoles|
-
-
-*yii/rbac/PhpManager::getTasks*				public
- See |yii/rbac/Manager::getTasks|
-
-
-*yii/rbac/PhpManager::getOperations*			public
- See |yii/rbac/Manager::getOperations|
-
-
-*yii/rbac/PhpManager::executeBizRule*			public
- See |yii/rbac/Manager::executeBizRule|
-
-
-*yii/rbac/PhpManager::checkItemChildType*			protected
- See |yii/rbac/Manager::checkItemChildType|
-
-
-*yii/rbac/PhpManager::checkAccess*			public
->
- checkAccess($userId, $itemName, $params='[]')
-<
-(boolean) Whether the operations can be performed by the user.
-
-
-    [$userId] (mixed) The user ID. This can be either an integer or a string
-    representing
-    [$itemName] (string) The name of the operation that need access check the
-    unique identifier of a user. See '\yii\web\User::id'.
-    [$params] (array) Name-value pairs that would be passed to biz rules
-    associated with the tasks and roles assigned to the user. A param with
-    name 'userId' is added to this array, which holds the value of '$userId'.
-
-
-*yii/rbac/PhpManager::createItem*				public
->
- createItem($name, $type, $description='''', $bizRule='null', $data='null')
-<
-(\yii\rbac\Item) The authorization item
-
- An authorization item represents an action permission (e.g. creating a post).
- It has three types: operation, task and role. Authorization items form a
- hierarchy. Higher level items inheirt permissions representing by lower level
- items.
-    [$name] (string) The item name. This must be a unique identifier.
-    [$type] (integer) The item type (0: operation, 1: task, 2: role).
-    [$description] (string) Description of the item
-    [$bizRule] (string) Business rule associated with the item. This is a
-    piece of PHP code that will be executed when 'checkAccess()' is called for
-    the item.
-    [$data] (mixed) Additional data associated with the item.
-
-
-*yii/rbac/PhpManager::removeItem*				public
->
- removeItem($name)
-<
-(boolean) Whether the item exists in the storage and has been removed
-
-
-    [$name] (string) The name of the item to be removed
-
-
-*yii/rbac/PhpManager::getItems*				public
->
- getItems($userId='null', $type=null)
-<
-(\yii\rbac\Item[]) The authorization items of the specific type.
-
-
-    [$userId] (mixed) The user ID. Defaults to null, meaning returning all
-    items even if they are not assigned to a user.
-    [$type] (integer) The item type (0: operation, 1: task, 2: role). Defaults
-    to null, meaning returning all items regardless of their type.
-
-
 *yii/rbac/PhpManager::getItem*				public
 >
  getItem($name)
 <
-(\yii\rbac\Item) The authorization item. Null if the item cannot be found.
+(\yii\rbac\Item) The auth item corresponding to the specified name. Null is
+returned if no such item.
 
 
-    [$name] (string) The name of the item
+    [$name] () 
 
 
-*yii/rbac/PhpManager::saveItem*				public
+*yii/rbac/PhpManager::getItems*				public
 >
- saveItem($item, $oldName='null')
+ getItems($type)
+<
+(\yii\rbac\Item[]) The auth items of the specified type.
+
+
+    [$type] () 
+
+
+*yii/rbac/PhpManager::addItem*				protected
+>
+ addItem($item)
+<
+(boolean) Whether the auth item is successfully added to the system
+
+
+    [$item] () 
+
+
+*yii/rbac/PhpManager::addRule*				protected
+>
+ addRule($rule)
+<
+(boolean) Whether the rule is successfully added to the system
+
+
+    [$rule] () 
+
+
+*yii/rbac/PhpManager::removeItem*				public
+>
+ removeItem($item)
+<
+(boolean) Whether the role or permission is successfully removed
+
+
+    [$item] () 
+
+
+*yii/rbac/PhpManager::removeRule*				protected
+>
+ removeRule($rule)
+<
+(boolean) Whether the rule is successfully removed
+
+
+    [$rule] () 
+
+
+*yii/rbac/PhpManager::updateItem*				protected
+>
+ updateItem($name, $item)
+<
+(boolean) Whether the auth item is successfully updated
+
+
+    [$name] () 
+    [$item] () 
+
+
+*yii/rbac/PhpManager::updateRule*				public
+>
+ updateRule($name, $rule)
+<
+(boolean) Whether the rule is successfully updated
+
+
+    [$name] () 
+    [$rule] () 
+
+
+*yii/rbac/PhpManager::createRole*				public
+ See |yii/rbac/BaseManager::createRole|
+
+
+*yii/rbac/PhpManager::createPermission*			public
+ See |yii/rbac/BaseManager::createPermission|
+
+
+*yii/rbac/PhpManager::add*				public
+ See |yii/rbac/BaseManager::add|
+
+
+*yii/rbac/PhpManager::remove*				public
+ See |yii/rbac/BaseManager::remove|
+
+
+*yii/rbac/PhpManager::update*				public
+ See |yii/rbac/BaseManager::update|
+
+
+*yii/rbac/PhpManager::getRole*				public
+ See |yii/rbac/BaseManager::getRole|
+
+
+*yii/rbac/PhpManager::getPermission*			public
+ See |yii/rbac/BaseManager::getPermission|
+
+
+*yii/rbac/PhpManager::getRoles*				public
+ See |yii/rbac/BaseManager::getRoles|
+
+
+*yii/rbac/PhpManager::getPermissions*			public
+ See |yii/rbac/BaseManager::getPermissions|
+
+
+*yii/rbac/PhpManager::executeRule*			protected
+ See |yii/rbac/BaseManager::executeRule|
+
+
+*yii/rbac/PhpManager::checkAccess*			public
+>
+ checkAccess($userId, $permissionName, $params='[]')
+<
+(boolean) Whether the user has the specified permission.
+
+
+    [$userId] () 
+    [$permissionName] () 
+    [$params] () 
+
+
+*yii/rbac/PhpManager::getRolesByUser*			public
+>
+ getRolesByUser($userId)
+<
+(\yii\rbac\Role[]) All roles directly or indirectly assigned to the user. The
+array is indexed by the role names.
+
+
+    [$userId] () 
+
+
+*yii/rbac/PhpManager::getPermissionsByRole*		public
+>
+ getPermissionsByRole($roleName)
+<
+(\yii\rbac\Permission[]) All permissions that the role represents. The array
+is indexed by the permission names.
+
+
+    [$roleName] () 
+
+
+*yii/rbac/PhpManager::getPermissionsByUser*		public
+>
+ getPermissionsByUser($userId)
+<
+(\yii\rbac\Permission[]) All permissions that the user has. The array is
+indexed by the permission names.
+
+
+    [$userId] () 
+
+
+*yii/rbac/PhpManager::getRule*				public
+>
+ getRule($name)
+<
+(\yii\rbac\Rule) The rule object, or null if the specified name does not
+correspond to a rule.
+
+
+    [$name] () 
+
+
+*yii/rbac/PhpManager::getRules*				public
+>
+ getRules()
+<
+(\yii\rbac\Rule[]) The rules indexed by the rule names
+
+
+
+
+*yii/rbac/PhpManager::addChild*				public
+>
+ addChild($parent, $child)
 <
 (void)
 
 
-    [$item] (\yii\rbac\Item) The item to be saved.
-    [$oldName] (string) The old item name. If null, it means the item name is
-    not changed.
+    [$parent] () 
+    [$child] () 
 
 
-*yii/rbac/PhpManager::addItemChild*			public
+*yii/rbac/PhpManager::removeChild*			public
 >
- addItemChild($itemName, $childName)
-<
-(boolean) Whether the item is added successfully
-
-
-    [$itemName] (string) The parent item name
-    [$childName] (string) The child item name
-
-
-*yii/rbac/PhpManager::removeItemChild*			public
->
- removeItemChild($itemName, $childName)
+ removeChild($parent, $child)
 <
 (boolean) Whether the removal is successful
 
- Note, the child item is not deleted. Only the parent-child relationship is
- removed.
-    [$itemName] (string) The parent item name
-    [$childName] (string) The child item name
+
+    [$parent] () 
+    [$child] () 
 
 
-*yii/rbac/PhpManager::hasItemChild*			public
+*yii/rbac/PhpManager::hasChild*				public
 >
- hasItemChild($itemName, $childName)
+ hasChild($parent, $child)
 <
-(boolean) Whether the child exists
+(boolean) Whether '$child' is already a child of '$parent'
 
 
-    [$itemName] (string) The parent item name
-    [$childName] (string) The child item name
+    [$parent] () 
+    [$child] () 
 
 
-*yii/rbac/PhpManager::getItemChildren*			public
+*yii/rbac/PhpManager::getChildren*			public
 >
- getItemChildren($names)
+ getChildren($name)
 <
-(\yii\rbac\Item[]) All child items of the parent
+(\yii\rbac\Item[]) The child permissions and/or roles
 
 
-    [$names] (string|array) The parent item name. This can be either a string
-    or an array. The latter represents a list of item names.
+    [$name] () 
 
 
 *yii/rbac/PhpManager::assign*				public
 >
- assign($userId, $itemName, $bizRule='null', $data='null')
+ assign($role, $userId, $ruleName='null', $data='null')
 <
-(\yii\rbac\Assignment) The authorization assignment information.
+(\yii\rbac\Assignment) The role assignment information.
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
-    [$bizRule] (string) The business rule to be executed when 'checkAccess()'
-    is called for this particular authorization item.
-    [$data] (mixed) Additional data associated with this assignment
+    [$role] () 
+    [$userId] () 
+    [$ruleName] () 
+    [$data] () 
 
 
 *yii/rbac/PhpManager::revoke*				public
 >
- revoke($userId, $itemName)
+ revoke($role, $userId)
 <
-(boolean) Whether removal is successful
+(boolean) Whether the revoking is successful
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
+    [$role] () 
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::revokeAll*				public
 >
  revokeAll($userId)
 <
-(boolean) Whether removal is successful
+(boolean) Whether the revoking is successful
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-
-
-*yii/rbac/PhpManager::isAssigned*				public
->
- isAssigned($userId, $itemName)
-<
-(boolean) Whether the item has been assigned to the user.
-
-
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::getAssignment*			public
 >
- getAssignment($userId, $itemName)
+ getAssignment($roleName, $userId)
 <
-(\yii\rbac\Assignment) The item assignment information. Null is returned if
-the item is not assigned to the user.
+(\yii\rbac\Assignment) The assignment information. Null is returned if the
+role is not assigned to the user.
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
-    [$itemName] (string) The item name
+    [$roleName] () 
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::getAssignments*			public
 >
  getAssignments($userId)
 <
-(\yii\rbac\Assignment[]) The item assignment information for the user. An
-empty array will be returned if there is no item assigned to the user.
+(\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
+will be returned if there is no role assigned to the user.
 
 
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
+    [$userId] () 
 
 
-*yii/rbac/PhpManager::saveAssignment*			public
+*yii/rbac/PhpManager::removeAll*				public
 >
- saveAssignment($assignment)
-<
-(void)
-
-
-    [$assignment] (\yii\rbac\Assignment) The assignment that has been changed.
-
-
-*yii/rbac/PhpManager::clearAll*				public
->
- clearAll()
+ removeAll()
 <
 (void)
 
 
 
 
-*yii/rbac/PhpManager::clearAssignments*			public
+*yii/rbac/PhpManager::removeAllPermissions*		public
 >
- clearAssignments()
+ removeAllPermissions()
+<
+(void)
+
+
+
+
+*yii/rbac/PhpManager::removeAllRoles*			public
+>
+ removeAllRoles()
+<
+(void)
+
+
+
+
+*yii/rbac/PhpManager::removeAllRules*			public
+>
+ removeAllRules()
+<
+(void)
+
+
+
+
+*yii/rbac/PhpManager::removeAllAssignments*		public
+>
+ removeAllAssignments()
+<
+(void)
+
+
+
+
+*yii/rbac/PhpManager::checkAccessRecursive*		protected
+>
+ checkAccessRecursive($user, $itemName, $params, $assignments)
+<
+(boolean) Whether the operations can be performed by the user.
+
+ This method is internally called by 'checkAccess()'.
+    [$user] (string|integer) The user ID. This should can be either an integer
+    or a string representing the unique identifier of a user. See
+    '\yii\web\User::id'.
+    [$itemName] (string) The name of the operation that need access check
+    [$params] (array) Name-value pairs that would be passed to rules
+    associated with the tasks and roles assigned to the user. A param with
+    name 'user' is added to this array, which holds the value of '$userId'.
+    [$assignments] (\yii\rbac\Assignment[]) The assignments to the specified
+    user
+
+
+*yii/rbac/PhpManager::detectLoop*				protected
+>
+ detectLoop($parent, $child)
+<
+(boolean) Whether a loop exists
+
+
+    [$parent] (\yii\rbac\Item) Parent item
+    [$child] (\yii\rbac\Item) The child item that is to be added to the
+    hierarchy
+
+
+*yii/rbac/PhpManager::getChildrenRecursive*		protected
+>
+ getChildrenRecursive($name, $result)
+<
+(void)
+
+
+    [$name] (string) The name of the item whose children are to be looked for.
+    [$result] (array) The children and grand children (in array keys)
+
+
+*yii/rbac/PhpManager::removeAllItems*			protected
+>
+ removeAllItems($type)
+<
+(void)
+
+
+    [$type] (integer) The auth item type (either Item::TYPE_PERMISSION or
+    Item::TYPE_ROLE)
+
+
+*yii/rbac/PhpManager::load*				public
+>
+ load()
 <
 (void)
 
@@ -414,29 +548,7 @@ empty array will be returned if there is no item assigned to the user.
 <
 (void)
 
- If any change is made to the authorization data, please make sure you call
- this method to save the changed data into persistent storage.
 
-
-*yii/rbac/PhpManager::load*				public
->
- load()
-<
-(void)
-
-
-
-
-*yii/rbac/PhpManager::detectLoop*				protected
->
- detectLoop($itemName, $childName)
-<
-(boolean) Whether a loop exists
-
-
-    [$itemName] (string) Parent item name
-    [$childName] (string) The name of the child item that is to be added to
-    the hierarchy
 
 
 *yii/rbac/PhpManager::loadFromFile*			protected

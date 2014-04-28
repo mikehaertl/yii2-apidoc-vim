@@ -1,0 +1,396 @@
+
+*yii/mongodb/ActiveQuery*   >> |yii/mongodb/Query|
+=========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ An ActiveQuery can be a normal query or be used in a relational context.
+
+ ActiveQuery instances are usually created by 'ActiveRecord::find()'.
+ Relational queries are created by 'ActiveRecord::hasOne()' and
+ 'ActiveRecord::hasMany()'.
+
+ Normal Query ------------
+
+ ActiveQuery instances are usually created by 'ActiveRecord::find()'.
+
+ Because ActiveQuery extends from 'Query', one can use query methods, such as
+ 'where()', 'orderBy()' to customize the query options.
+
+ ActiveQuery also provides the following additional query options:
+
+ - 'with()': list of relations that this query should be performed with. -
+ 'asArray()': whether to return each record as an array.
+
+ These options can be configured using methods of the same name. For example:
+
+   $customers = Customer::find()->with('orders')->asArray()->all();
+
+ Relational query ----------------
+
+ In relational context ActiveQuery represents a relation between two Active
+ Record classes.
+
+ Relational ActiveQuery instances are usually created by calling
+ 'ActiveRecord::hasOne()' and 'ActiveRecord::hasMany()'. An Active Record
+ class declares a relation by defining a getter method which calls one of the
+ above methods and returns the created ActiveQuery object.
+
+ A relation is specified by 'link' which represents the association between
+ columns of different tables; and the multiplicity of the relation is
+ indicated by 'multiple'.
+
+ If a relation involves a pivot table, it may be specified by 'via()'. This
+ methods may only be called in a relational context. Same is true for
+ 'inverseOf()', which marks a relation as inverse of another relation.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$where					*yii/mongodb/ActiveQuery::$where*
+ See |yii/db/QueryTrait::$where|
+
+$limit					*yii/mongodb/ActiveQuery::$limit*
+ See |yii/db/QueryTrait::$limit|
+
+$offset					*yii/mongodb/ActiveQuery::$offset*
+ See |yii/db/QueryTrait::$offset|
+
+$orderBy				*yii/mongodb/ActiveQuery::$orderBy*
+ See |yii/db/QueryTrait::$orderBy|
+
+$indexBy				*yii/mongodb/ActiveQuery::$indexBy*
+ See |yii/db/QueryTrait::$indexBy|
+
+$select					*yii/mongodb/ActiveQuery::$select*
+ See |yii/mongodb/Query::$select|
+
+$from					*yii/mongodb/ActiveQuery::$from*
+ See |yii/mongodb/Query::$from|
+
+$multiple				*yii/mongodb/ActiveQuery::$multiple*
+ See |yii/db/ActiveRelationTrait::$multiple|
+
+$primaryModel				*yii/mongodb/ActiveQuery::$primaryModel*
+ See |yii/db/ActiveRelationTrait::$primaryModel|
+
+$link					*yii/mongodb/ActiveQuery::$link*
+ See |yii/db/ActiveRelationTrait::$link|
+
+$via					*yii/mongodb/ActiveQuery::$via*
+ See |yii/db/ActiveRelationTrait::$via|
+
+$inverseOf				*yii/mongodb/ActiveQuery::$inverseOf*
+ See |yii/db/ActiveRelationTrait::$inverseOf|
+
+$modelClass				*yii/mongodb/ActiveQuery::$modelClass*
+ See |yii/db/ActiveQueryTrait::$modelClass|
+
+$with					*yii/mongodb/ActiveQuery::$with*
+ See |yii/db/ActiveQueryTrait::$with|
+
+$asArray				*yii/mongodb/ActiveQuery::$asArray*
+ See |yii/db/ActiveQueryTrait::$asArray|
+
+$behaviors				*yii/mongodb/ActiveQuery::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$collection				*yii/mongodb/ActiveQuery::$collection*
+ (\yii\mongodb\Collection) Collection instance.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/ActiveQuery::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/ActiveQuery::__construct*			public
+>
+ __construct($modelClass, $config='[]')
+<
+(void)
+
+
+    [$modelClass] (array) The model class associated with this query
+    [$config] (array) Configurations to be applied to the newly created query
+    object
+
+
+*yii/mongodb/ActiveQuery::init*				public
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/ActiveQuery::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/mongodb/ActiveQuery::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/mongodb/ActiveQuery::__isset*			public
+ See |yii/base/Component::__isset|
+
+
+*yii/mongodb/ActiveQuery::__unset*			public
+ See |yii/base/Component::__unset|
+
+
+*yii/mongodb/ActiveQuery::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/mongodb/ActiveQuery::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/mongodb/ActiveQuery::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/mongodb/ActiveQuery::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/mongodb/ActiveQuery::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/mongodb/ActiveQuery::__clone*			public
+ See |yii/db/ActiveRelationTrait::__clone|
+
+
+*yii/mongodb/ActiveQuery::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/mongodb/ActiveQuery::hasEventHandlers*		public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/mongodb/ActiveQuery::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/mongodb/ActiveQuery::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/mongodb/ActiveQuery::trigger*			public
+ See |yii/base/Component::trigger|
+
+
+*yii/mongodb/ActiveQuery::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/mongodb/ActiveQuery::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/mongodb/ActiveQuery::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/mongodb/ActiveQuery::attachBehaviors*		public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/mongodb/ActiveQuery::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/mongodb/ActiveQuery::detachBehaviors*		public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/mongodb/ActiveQuery::ensureBehaviors*		public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/ActiveQuery::indexBy*			public
+ See |yii/db/QueryTrait::indexBy|
+
+
+*yii/mongodb/ActiveQuery::where*				public
+ See |yii/db/QueryTrait::where|
+
+
+*yii/mongodb/ActiveQuery::andWhere*			public
+ See |yii/db/QueryTrait::andWhere|
+
+
+*yii/mongodb/ActiveQuery::orWhere*			public
+ See |yii/db/QueryTrait::orWhere|
+
+
+*yii/mongodb/ActiveQuery::filterWhere*			public
+ See |yii/db/QueryTrait::filterWhere|
+
+
+*yii/mongodb/ActiveQuery::andFilterWhere*			public
+ See |yii/db/QueryTrait::andFilterWhere|
+
+
+*yii/mongodb/ActiveQuery::orFilterWhere*			public
+ See |yii/db/QueryTrait::orFilterWhere|
+
+
+*yii/mongodb/ActiveQuery::filterCondition*		protected
+ See |yii/db/QueryTrait::filterCondition|
+
+
+*yii/mongodb/ActiveQuery::isEmpty*			protected
+ See |yii/db/QueryTrait::isEmpty|
+
+
+*yii/mongodb/ActiveQuery::orderBy*			public
+ See |yii/db/QueryTrait::orderBy|
+
+
+*yii/mongodb/ActiveQuery::addOrderBy*			public
+ See |yii/db/QueryTrait::addOrderBy|
+
+
+*yii/mongodb/ActiveQuery::normalizeOrderBy*		protected
+ See |yii/db/QueryTrait::normalizeOrderBy|
+
+
+*yii/mongodb/ActiveQuery::limit*				public
+ See |yii/db/QueryTrait::limit|
+
+
+*yii/mongodb/ActiveQuery::offset*				public
+ See |yii/db/QueryTrait::offset|
+
+
+*yii/mongodb/ActiveQuery::getCollection*			public
+>
+ getCollection($db='null')
+<
+(\yii\mongodb\Collection) Collection instance.
+
+
+    [$db] (\yii\mongodb\Connection) Mongo connection.
+
+
+*yii/mongodb/ActiveQuery::select*				public
+ See |yii/mongodb/Query::select|
+
+
+*yii/mongodb/ActiveQuery::from*				public
+ See |yii/mongodb/Query::from|
+
+
+*yii/mongodb/ActiveQuery::buildCursor*			protected
+>
+ buildCursor($db='null')
+<
+(\MongoCursor) Mongo cursor instance.
+
+
+    [$db] () 
+
+
+*yii/mongodb/ActiveQuery::fetchRows*			protected
+ See |yii/mongodb/Query::fetchRows|
+
+
+*yii/mongodb/ActiveQuery::fetchRowsInternal*		protected
+ See |yii/mongodb/Query::fetchRowsInternal|
+
+
+*yii/mongodb/ActiveQuery::all*				public
+>
+ all($db='null')
+<
+(array) The query results. If the query results in nothing, an empty array
+will be returned.
+
+
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If null, the Mongo connection returned by 'modelClass' will be
+    used.
+
+
+*yii/mongodb/ActiveQuery::one*				public
+>
+ one($db='null')
+<
+(\yii\mongodb\ActiveRecord|array|null) A single row of query result. Depending
+on the setting of 'asArray', the query result may be either an array or an
+ActiveRecord object. Null will be returned if the query results in nothing.
+
+
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If null, the Mongo connection returned by 'modelClass' will be
+    used.
+
+
+*yii/mongodb/ActiveQuery::count*				public
+ See |yii/mongodb/Query::count|
+
+
+*yii/mongodb/ActiveQuery::exists*				public
+ See |yii/mongodb/Query::exists|
+
+
+*yii/mongodb/ActiveQuery::sum*				public
+ See |yii/mongodb/Query::sum|
+
+
+*yii/mongodb/ActiveQuery::average*			public
+ See |yii/mongodb/Query::average|
+
+
+*yii/mongodb/ActiveQuery::min*				public
+ See |yii/mongodb/Query::min|
+
+
+*yii/mongodb/ActiveQuery::max*				public
+ See |yii/mongodb/Query::max|
+
+
+*yii/mongodb/ActiveQuery::aggregate*			protected
+ See |yii/mongodb/Query::aggregate|
+
+
+*yii/mongodb/ActiveQuery::distinct*			public
+ See |yii/mongodb/Query::distinct|
+
+
+*yii/mongodb/ActiveQuery::via*				public
+ See |yii/db/ActiveRelationTrait::via|
+
+
+*yii/mongodb/ActiveQuery::inverseOf*			public
+ See |yii/db/ActiveRelationTrait::inverseOf|
+
+
+*yii/mongodb/ActiveQuery::findFor*			public
+ See |yii/db/ActiveRelationTrait::findFor|
+
+
+*yii/mongodb/ActiveQuery::populateRelation*		public
+ See |yii/db/ActiveRelationTrait::populateRelation|
+
+
+*yii/mongodb/ActiveQuery::asArray*			public
+ See |yii/db/ActiveQueryTrait::asArray|
+
+
+*yii/mongodb/ActiveQuery::with*				public
+ See |yii/db/ActiveQueryTrait::with|
+
+
+*yii/mongodb/ActiveQuery::findWith*			public
+ See |yii/db/ActiveQueryTrait::findWith|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

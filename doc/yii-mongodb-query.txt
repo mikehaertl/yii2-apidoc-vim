@@ -1,0 +1,427 @@
+
+*yii/mongodb/Query*   >> |yii/base/Component|
+===================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/mongodb/file/ActiveQuery|
+|yii/mongodb/file/Query|
+|yii/mongodb/ActiveQuery|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Query provides a set of methods to facilitate the specification of "find"
+ command. These methods can be chained together.
+
+ For example,
+
+   $query = new Query;
+   // compose the query
+   $query->select(['name', 'status'])
+       ->from('customer')
+       ->limit(10);
+   // execute the query
+   $rows = $query->all();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$where					*yii/mongodb/Query::$where*
+ See |yii/db/QueryTrait::$where|
+
+$limit					*yii/mongodb/Query::$limit*
+ See |yii/db/QueryTrait::$limit|
+
+$offset					*yii/mongodb/Query::$offset*
+ See |yii/db/QueryTrait::$offset|
+
+$orderBy				*yii/mongodb/Query::$orderBy*
+ See |yii/db/QueryTrait::$orderBy|
+
+$indexBy				*yii/mongodb/Query::$indexBy*
+ See |yii/db/QueryTrait::$indexBy|
+
+$select					*yii/mongodb/Query::$select*
+ (array) The fields of the results to return. For example, '['name',
+ 'group_id']'. The "_id" field is always returned. If not set, if means
+ selecting all columns.
+
+$from					*yii/mongodb/Query::$from*
+ (string|array) The collection to be selected from. If string considered as
+ the name of the collection inside the default database. If array - first
+ element considered as the name of the database, second - as name of
+ collection inside that database
+
+$behaviors				*yii/mongodb/Query::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+$collection				*yii/mongodb/Query::$collection*
+ (\yii\mongodb\Collection) Collection instance.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/Query::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/Query::__construct*				public
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/Query::init*					public
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/Query::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/mongodb/Query::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/mongodb/Query::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/mongodb/Query::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/mongodb/Query::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/mongodb/Query::hasProperty*				public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/mongodb/Query::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/mongodb/Query::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/mongodb/Query::hasMethod*				public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/mongodb/Query::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/mongodb/Query::behaviors*				public
+ See |yii/base/Component::behaviors|
+
+
+*yii/mongodb/Query::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/mongodb/Query::on*					public
+ See |yii/base/Component::on|
+
+
+*yii/mongodb/Query::off*					public
+ See |yii/base/Component::off|
+
+
+*yii/mongodb/Query::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/mongodb/Query::getBehavior*				public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/mongodb/Query::getBehaviors*				public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/mongodb/Query::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/mongodb/Query::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/mongodb/Query::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/mongodb/Query::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/mongodb/Query::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/Query::indexBy*				public
+ See |yii/db/QueryTrait::indexBy|
+
+
+*yii/mongodb/Query::where*				public
+ See |yii/db/QueryTrait::where|
+
+
+*yii/mongodb/Query::andWhere*				public
+ See |yii/db/QueryTrait::andWhere|
+
+
+*yii/mongodb/Query::orWhere*				public
+ See |yii/db/QueryTrait::orWhere|
+
+
+*yii/mongodb/Query::filterWhere*				public
+ See |yii/db/QueryTrait::filterWhere|
+
+
+*yii/mongodb/Query::andFilterWhere*			public
+ See |yii/db/QueryTrait::andFilterWhere|
+
+
+*yii/mongodb/Query::orFilterWhere*			public
+ See |yii/db/QueryTrait::orFilterWhere|
+
+
+*yii/mongodb/Query::filterCondition*			protected
+ See |yii/db/QueryTrait::filterCondition|
+
+
+*yii/mongodb/Query::isEmpty*				protected
+ See |yii/db/QueryTrait::isEmpty|
+
+
+*yii/mongodb/Query::orderBy*				public
+ See |yii/db/QueryTrait::orderBy|
+
+
+*yii/mongodb/Query::addOrderBy*				public
+ See |yii/db/QueryTrait::addOrderBy|
+
+
+*yii/mongodb/Query::normalizeOrderBy*			protected
+ See |yii/db/QueryTrait::normalizeOrderBy|
+
+
+*yii/mongodb/Query::limit*				public
+ See |yii/db/QueryTrait::limit|
+
+
+*yii/mongodb/Query::offset*				public
+ See |yii/db/QueryTrait::offset|
+
+
+*yii/mongodb/Query::getCollection*			public
+>
+ getCollection($db='null')
+<
+(\yii\mongodb\Collection) Collection instance.
+
+
+    [$db] (\yii\mongodb\Connection) Mongo connection.
+
+
+*yii/mongodb/Query::select*				public
+>
+ select($fields)
+<
+(static) The query object itself.
+
+
+    [$fields] (array) Fields of the results to return.
+
+
+*yii/mongodb/Query::from*					public
+>
+ from($collection)
+<
+(static) The query object itself.
+
+
+    [$collection] () 
+
+
+*yii/mongodb/Query::buildCursor*				protected
+>
+ buildCursor($db='null')
+<
+(\MongoCursor) Mongo cursor instance.
+
+
+    [$db] (\yii\mongodb\Connection) The database connection used to execute
+    the query.
+
+
+*yii/mongodb/Query::fetchRows*				protected
+>
+ fetchRows($cursor, $all='true', $indexBy='null')
+<
+(array|boolean) Result.
+
+
+    [$cursor] (\MongoCursor) Mongo cursor instance to fetch data from.
+    [$all] (boolean) Whether to fetch all rows or only first one.
+    [$indexBy] (string|callable) The column name or PHP callback, by which the
+    query results should be indexed by.
+
+
+*yii/mongodb/Query::fetchRowsInternal*			protected
+>
+ fetchRowsInternal($cursor, $all, $indexBy)
+<
+(array|boolean) Result.
+
+
+    [$cursor] (\MongoCursor) Mongo cursor instance to fetch data from.
+    [$all] (boolean) Whether to fetch all rows or only first one.
+    [$indexBy] (string|callable) Value to index by.
+
+
+*yii/mongodb/Query::all*					public
+>
+ all($db='null')
+<
+(array) The query results. If the query results in nothing, an empty array
+will be returned.
+
+
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+*yii/mongodb/Query::one*					public
+>
+ one($db='null')
+<
+(array|boolean) The first row (in terms of an array) of the query result.
+False is returned if the query results in nothing.
+
+
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+*yii/mongodb/Query::count*				public
+>
+ count($q=''*'', $db='null')
+<
+(integer) Number of records
+
+
+    [$q] (string) Kept to match 'QueryInterface', its value is ignored.
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+*yii/mongodb/Query::exists*				public
+>
+ exists($db='null')
+<
+(boolean) Whether the query result contains any row of data.
+
+
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+*yii/mongodb/Query::sum*					public
+>
+ sum($q, $db='null')
+<
+(integer) The sum of the specified column values
+
+
+    [$q] (string) The column name. Make sure you properly quote column names
+    in the expression.
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+*yii/mongodb/Query::average*				public
+>
+ average($q, $db='null')
+<
+(integer) The average of the specified column values.
+
+
+    [$q] (string) The column name. Make sure you properly quote column names
+    in the expression.
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+*yii/mongodb/Query::min*					public
+>
+ min($q, $db='null')
+<
+(integer) The minimum of the specified column values.
+
+
+    [$q] (string) The column name. Make sure you properly quote column names
+    in the expression.
+    [$db] (\yii\mongodb\Connection) The database connection used to generate
+    the SQL statement. If this parameter is not given, the 'db' application
+    component will be used.
+
+
+*yii/mongodb/Query::max*					public
+>
+ max($q, $db='null')
+<
+(integer) The maximum of the specified column values.
+
+
+    [$q] (string) The column name. Make sure you properly quote column names
+    in the expression.
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+*yii/mongodb/Query::aggregate*				protected
+>
+ aggregate($column, $operator, $db)
+<
+(integer) Aggregation result.
+
+
+    [$column] (string) Column name.
+    [$operator] (string) Aggregation operator.
+    [$db] (\yii\mongodb\Connection) The database connection used to execute
+    the query.
+
+
+*yii/mongodb/Query::distinct*				public
+>
+ distinct($q, $db='null')
+<
+(array) Array of distinct values
+
+
+    [$q] (string) Column to use.
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query. If this parameter is not given, the 'mongodb' application component
+    will be used.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
