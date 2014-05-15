@@ -7,22 +7,10 @@ DESCRIPTION
 
  Example application configuration:
 
-   'components' => [
-       'authClientCollection' => [
-           'class' => 'yii\authclient\Collection',
-           'clients' => [
-               'google' => [
-                   'class' => 'yii\authclient\clients\GoogleOpenId'
-               ],
-               'facebook' => [
-                   'class' => 'yii\authclient\clients\Facebook',
-                   'clientId' => 'facebook_client_id',
-                   'clientSecret' => 'facebook_client_secret',
-               ],
-           ],
-       ]
-       ...
-   ]
+   php
+   <?= yii\authclient\widgets\AuthChoice::widget([
+       'baseAuthUrl' => ['site/auth']
+   ]); ?>
 
 
 
@@ -147,7 +135,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$clients] (array) List of auth clients
 
 
@@ -159,13 +146,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/Collection::getClient*			public
 >
  getClient($id)
 <
 (\yii\authclient\ClientInterface) Auth client instance.
-
 
     [$id] (string) Service id.
 
@@ -176,7 +161,6 @@ METHOD DETAILS
 <
 (boolean) Whether client exist.
 
-
     [$id] (string) Client id.
 
 
@@ -185,7 +169,6 @@ METHOD DETAILS
  createClient($id, $config)
 <
 (\yii\authclient\ClientInterface) Auth client instance.
-
 
     [$id] (string) Auth client id.
     [$config] (array) Auth client instance configuration.

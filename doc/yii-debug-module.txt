@@ -2,11 +2,6 @@
 *yii/debug/Module*   >> |yii/base/Module|
 ==================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -92,8 +87,13 @@ $aliases				*yii/debug/Module::$aliases*
  aliases. For example,
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
    ]
 
 
@@ -120,7 +120,12 @@ METHOD DETAILS
 <
 (void)
 
+ This method is called after the module is created and initialized with
+ property values given in configuration. The default implementation will
+ initialize 'controllerNamespace' if it is not set.
 
+ If you override this method, please make sure you call the parent
+ implementation.
 
 
 *yii/debug/Module::__get*					public
@@ -309,8 +314,22 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
 
-    [$action] () 
+ If you override this method, your code should look like the following:
+
+   return [
+       'action1' => 'app\components\Action1',
+       'action2' => [
+           'class' => 'app\components\Action2',
+           'property1' => 'value1',
+           'property2' => 'value2',
+       ],
+   ];
+
+
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/debug/Module::afterAction*				public
@@ -325,13 +344,11 @@ METHOD DETAILS
 
 
 
-
 *yii/debug/Module::initPanels*				protected
 >
  initPanels()
 <
 (void)
-
 
 
 
@@ -341,8 +358,7 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$app] () 
+    [$app] (\yii\base\Application) The application currently running
 
 
 *yii/debug/Module::resetGlobalSettings*			protected
@@ -353,13 +369,11 @@ METHOD DETAILS
 
 
 
-
 *yii/debug/Module::renderToolbar*				public
 >
  renderToolbar($event)
 <
 (void)
-
 
     [$event] (\yii\base\Event) 
 
@@ -372,13 +386,11 @@ METHOD DETAILS
 
 
 
-
 *yii/debug/Module::corePanels*				protected
 >
  corePanels()
 <
 (array) Default set of panels
-
 
 
 

@@ -2,11 +2,6 @@
 *yii/db/sqlite/Schema*   >> |yii/db/Schema|
 ======================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -16,6 +11,9 @@ $db					*yii/db/sqlite/Schema::$db*
 
 $defaultSchema				*yii/db/sqlite/Schema::$defaultSchema*
  See |yii/db/Schema::$defaultSchema|
+
+$exceptionMap				*yii/db/sqlite/Schema::$exceptionMap*
+ See |yii/db/Schema::$exceptionMap|
 
 $typeMap				*yii/db/sqlite/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
@@ -95,7 +93,6 @@ METHOD DETAILS
 (\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
 not exist.
 
-
     [$name] (string) Table name
 
 
@@ -146,7 +143,6 @@ not exist.
  findTableNames($schema='''')
 <
 (array) All table names in the database. The names have NO schema name prefix.
-
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -229,12 +225,15 @@ not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
+*yii/db/sqlite/Schema::handleException*			public
+ See |yii/db/Schema::handleException|
+
+
 *yii/db/sqlite/Schema::findColumns*			protected
 >
  findColumns($table)
 <
 (boolean) Whether the table exists in the database
-
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -245,7 +244,6 @@ not exist.
 <
 (void)
 
-
     [$table] (\yii\db\TableSchema) The table metadata
 
 
@@ -254,7 +252,6 @@ not exist.
  loadColumnSchema($info)
 <
 (\yii\db\ColumnSchema) The column schema object
-
 
     [$info] (array) Column information
 

@@ -2,11 +2,6 @@
 *yii/filters/AccessRule*   >> |yii/base/Component|
 ========================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -28,8 +23,9 @@ $roles					*yii/filters/AccessRule::$roles*
  (array) List of roles that this rule applies to. Two special roles are
  recognized, and they are checked via 'User::isGuest':
 
- - '?': matches a guest user (not authenticated yet) - '@': matches an
- authenticated user
+
+   - '?': matches a guest user (not authenticated yet) 
+   - '@': matches an authenticated user
 
  Using other role names requires RBAC (Role-Based Access Control), and
  'User::can()' will be called.
@@ -53,7 +49,21 @@ $matchCallback				*yii/filters/AccessRule::$matchCallback*
  (callable) A callback that will be called to determine if the rule should be
  applied. The signature of the callback should be as follows:
 
-   function ($rule, $action)
+   array(
+       'summary' => array(
+           'total' => total number of checks,
+           'errors' => number of errors,
+           'warnings' => number of warnings,
+       ),
+       'requirements' => array(
+           array(
+               ...
+               'error' => is there an error,
+               'warning' => is there a warning,
+           ),
+           ...
+       ),
+   )
 
  where '$rule' is this rule, and '$action' is the current 'Action|action'
  object. The callback should return a boolean value indicating whether this
@@ -66,7 +76,14 @@ $denyCallback				*yii/filters/AccessRule::$denyCallback*
 
  The signature of the callback should be as follows:
 
-   function ($rule, $action)
+   public function behaviors()
+   {
+       return [
+           'rateLimiter' => [
+               'class' => \yii\filters\RateLimiter::className(),
+           ],
+       ];
+   }
 
  where '$rule' is this rule, and '$action' is the current 'Action|action'
  object.
@@ -186,7 +203,6 @@ METHOD DETAILS
 (boolean|null) True if the user is allowed, false if the user is denied, null
 if the rule does not apply to the user
 
-
     [$action] (\yii\base\Action) The action to be performed
     [$user] (\yii\web\User) The user object
     [$request] (\yii\web\Request) 
@@ -198,7 +214,6 @@ if the rule does not apply to the user
 <
 (boolean) Whether the rule applies to the action
 
-
     [$action] (\yii\base\Action) The action
 
 
@@ -207,7 +222,6 @@ if the rule does not apply to the user
  matchController($controller)
 <
 (boolean) Whether the rule applies to the controller
-
 
     [$controller] (\yii\web\Controller) The controller
 
@@ -218,7 +232,6 @@ if the rule does not apply to the user
 <
 (boolean) Whether the rule applies to the role
 
-
     [$user] (\yii\web\User) The user object
 
 
@@ -227,7 +240,6 @@ if the rule does not apply to the user
  matchIP($ip)
 <
 (boolean) Whether the rule applies to the IP address
-
 
     [$ip] (string) The IP address
 
@@ -238,7 +250,6 @@ if the rule does not apply to the user
 <
 (boolean) Whether the rule applies to the request
 
-
     [$verb] (string) The request method
 
 
@@ -247,7 +258,6 @@ if the rule does not apply to the user
  matchCustom($action)
 <
 (boolean) Whether the rule should be applied
-
 
     [$action] (\yii\base\Action) The action to be performed
 

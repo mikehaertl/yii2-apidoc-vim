@@ -2,11 +2,6 @@
 *yii/twig/ViewRenderer*   >> |yii/base/ViewRenderer|
 =======================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -45,11 +40,14 @@ $extensions				*yii/twig/ViewRenderer::$extensions*
 $lexerOptions				*yii/twig/ViewRenderer::$lexerOptions*
  (array) Twig lexer options. Example: Smarty-like syntax:
 
-   [
-       'tag_comment'  => ['{*', '*}'],
-       'tag_block'    => ['{', '}'],
-       'tag_variable' => ['{$', '}']
-   ]
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
 
 
 
@@ -188,7 +186,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$globals] (array) @see self::$globals
 
 
@@ -197,7 +194,6 @@ METHOD DETAILS
  addFunctions($functions)
 <
 (void)
-
 
     [$functions] (array) @see self::$functions
 
@@ -208,7 +204,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$filters] (array) @see self::$filters
 
 
@@ -218,7 +213,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$extensions] (array) @see self::$extensions
 
 
@@ -227,7 +221,6 @@ METHOD DETAILS
  setLexerOptions($options)
 <
 (void)
-
 
     [$options] (array) @see self::$lexerOptions
 

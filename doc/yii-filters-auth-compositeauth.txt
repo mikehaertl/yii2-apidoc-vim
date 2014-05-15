@@ -11,18 +11,7 @@ DESCRIPTION
 
  The following example shows how to support three authentication methods:
 
-   public function behaviors()
-   {
-       return [
-           'compositeAuth' => [
-               'class' => \yii\filters\auth\CompositeAuth::className(),
-               'authMethods' => [
-                   \yii\filters\auth\HttpBasicAuth::className(),
-                   \yii\filters\auth\QueryParamAuth::className(),
-               ],
-           ],
-       ];
-   }
+   function ($rule, $action)
 
 
 
@@ -137,8 +126,7 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
-
-    [$action] () 
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/filters/auth/CompositeAuth::afterAction*		public
@@ -160,10 +148,9 @@ METHOD DETAILS
 (\yii\web\IdentityInterface) The authenticated user identity. If
 authentication information is not provided, null will be returned.
 
-
-    [$user] () 
-    [$request] () 
-    [$response] () 
+    [$user] (\yii\web\User) 
+    [$request] (\yii\web\Request) 
+    [$response] (\yii\web\Response) 
 
 
 

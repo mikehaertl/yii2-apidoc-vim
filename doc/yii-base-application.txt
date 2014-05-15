@@ -8,11 +8,6 @@ SUBCLASSES
 |yii/console/Application|
 |yii/web/Application|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -95,8 +90,11 @@ $bootstrap				*yii/base/Application::$bootstrap*
 
  Each component may be specified in one of the following formats:
 
- - an application component ID as specified via 'components'. - a module ID as
- specified via 'modules'. - a class name. - a configuration array.
+
+   - an application component ID as specified via 'components'. 
+   - a module ID as specified via 'modules'. 
+   - a class name. 
+   - a configuration array.
 
  During the bootstrapping process, each component will be instantiated. If the
  component class implements 'BootstrapInterface', its
@@ -213,7 +211,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties. Note that the configuration must contain both 'id' and
     'basePath'.
@@ -225,7 +222,12 @@ METHOD DETAILS
 <
 (void)
 
+ This method is called after the module is created and initialized with
+ property values given in configuration. The default implementation will
+ initialize 'controllerNamespace' if it is not set.
 
+ If you override this method, please make sure you call the parent
+ implementation.
 
 
 *yii/base/Application::__get*				public
@@ -456,7 +458,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$config] () 
 
 
@@ -489,13 +490,11 @@ subdirectory under 'basePath'.
 
 
 
-
 *yii/base/Application::setRuntimePath*			public
 >
  setRuntimePath($path)
 <
 (void)
-
 
     [$path] (string) The directory that stores runtime files.
 
@@ -509,13 +508,11 @@ directory under 'basePath'.
 
 
 
-
 *yii/base/Application::setVendorPath*			public
 >
  setVendorPath($path)
 <
 (void)
-
 
     [$path] (string) The directory that stores vendor files.
 
@@ -551,13 +548,11 @@ directory under 'basePath'.
 
 
 
-
 *yii/base/Application::getLog*				public
 >
  getLog()
 <
 (\yii\log\Dispatcher) The log dispatcher component
-
 
 
 
@@ -570,14 +565,12 @@ application component.
 
 
 
-
 *yii/base/Application::getCache*				public
 >
  getCache()
 <
 (\yii\caching\Cache) The cache application component. Null if the component is
 not enabled.
-
 
 
 
@@ -589,7 +582,6 @@ not enabled.
 
 
 
-
 *yii/base/Application::getRequest*			public
 >
  getRequest()
@@ -598,13 +590,11 @@ not enabled.
 
 
 
-
 *yii/base/Application::getResponse*			public
 >
  getResponse()
 <
 (\yii\web\Response|\yii\console\Response) The response component
-
 
 
 
@@ -617,13 +607,11 @@ view files.
 
 
 
-
 *yii/base/Application::getUrlManager*			public
 >
  getUrlManager()
 <
 (\yii\web\UrlManager) The URL manager for this application.
-
 
 
 
@@ -635,13 +623,11 @@ view files.
 
 
 
-
 *yii/base/Application::getMail*				public
 >
  getMail()
 <
 (\yii\mail\MailerInterface) The mailer interface
-
 
 
 
@@ -654,7 +640,6 @@ returned if auth manager is not configured.
 
 
 
-
 *yii/base/Application::getAssetManager*			public
 >
  getAssetManager()
@@ -663,13 +648,11 @@ returned if auth manager is not configured.
 
 
 
-
 *yii/base/Application::coreComponents*			public
 >
  coreComponents()
 <
 (void)
-
 
 
 

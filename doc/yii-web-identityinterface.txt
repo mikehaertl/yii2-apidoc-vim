@@ -9,33 +9,18 @@ DESCRIPTION
  example, the following code shows how to implement this interface by a User
  ActiveRecord class:
 
-   class User extends ActiveRecord implements IdentityInterface
-   {
-       public static function findIdentity($id)
-       {
-           return static::findOne($id);
-       }
-
-       public static function findIdentityByAccessToken($token)
-       {
-           return static::findOne(['access_token' => $token]);
-       }
-
-       public function getId()
-       {
-           return $this->id;
-       }
-
-       public function getAuthKey()
-       {
-           return $this->authKey;
-       }
-
-       public function validateAuthKey($authKey)
-       {
-           return $this->authKey === $authKey;
-       }
-   }
+   // find customers together with their orders and country
+   Customer::find()->with('orders', 'country')->all();
+   // find customers together with their orders and the orders' shipping
+ address
+   Customer::find()->with('orders.address')->all();
+   // find customers together with their country and orders of status 1
+   Customer::find()->with([
+       'orders' => function ($query) {
+           $query->andWhere('status = 1');
+       },
+       'country',
+   ])->all();
 
 
 
@@ -52,20 +37,21 @@ METHOD DETAILS
 Null should be returned if such an identity cannot be found or the identity is
 not in an active state (disabled, deleted, etc.)
 
-
     [$id] (string|integer) The ID to be looked for
 
 
 *yii/web/IdentityInterface::findIdentityByAccessToken*	public
 >
- findIdentityByAccessToken($token)
+ findIdentityByAccessToken($token, $type='null')
 <
 (\yii\web\IdentityInterface) The identity object that matches the given token.
 Null should be returned if such an identity cannot be found or the identity is
 not in an active state (disabled, deleted, etc.)
 
-
     [$token] (string) The secrete token
+    [$type] (mixed) The type of the token. The value of this parameter depends
+    on the implementation. For example, '\yii\filters\auth\HttpBearerAuth'
+    will set this parameter to be 'yii\filters\auth\HttpBearerAuth'.
 
 
 *yii/web/IdentityInterface::getId*			public
@@ -73,7 +59,6 @@ not in an active state (disabled, deleted, etc.)
  getId()
 <
 (string|integer) An ID that uniquely identifies a user identity.
-
 
 
 

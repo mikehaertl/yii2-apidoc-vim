@@ -24,7 +24,20 @@ DESCRIPTION
  a controller action. The 'yii' program is used when calling a console
  command, like the following:
 
-   yii <route> [--param1=value1 --param2 ...]
+   CREATE TABLE source_message (
+       id INTEGER PRIMARY KEY AUTO_INCREMENT,
+       category VARCHAR(32),
+       message TEXT
+   );
+
+   CREATE TABLE message (
+       id INTEGER,
+       language VARCHAR(16),
+       translation TEXT,
+       PRIMARY KEY (id, language),
+       CONSTRAINT fk_message_source_message FOREIGN KEY (id)
+           REFERENCES source_message (id) ON DELETE CASCADE ON UPDATE RESTRICT
+   );
 
 
 
@@ -269,7 +282,7 @@ mean abnormal.
 
 *yii/console/Controller::isColorEnabled*			public
 >
- isColorEnabled($stream='STDOUT')
+ isColorEnabled($stream='\\STDOUT')
 <
 (boolean) Whether to enable ANSI style in output.
 
@@ -289,8 +302,7 @@ mean abnormal.
 
  Example:
 
-   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
- Console::UNDERLINE);
+   yii <route> [--param1=value1 --param2 ...]
 
 
     [$string] (string) The string to be formatted
@@ -307,7 +319,7 @@ mean abnormal.
 
  Example:
 
-   $this->stdout('This will be red and underlined.', Console::FG_RED,
+   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
  Console::UNDERLINE);
 
 
@@ -325,7 +337,7 @@ mean abnormal.
 
  Example:
 
-   $this->stderr('This will be red and underlined.', Console::FG_RED,
+   $this->stdout('This will be red and underlined.', Console::FG_RED,
  Console::UNDERLINE);
 
 
@@ -338,16 +350,17 @@ mean abnormal.
 <
 (string) The user input
 
-
     [$text] (string) Prompt string
     [$options] (array) The options to validate the input:
 
-     - required: whether it is required or not  - default: default value if no
-    input is inserted by the user  - pattern: regular expression pattern to
-    validate user input  - validator: a callable function to validate input.
-    The function must accept two parameters:      - $input: the user input to
-    validate      - $error: the error value passed by reference if validation
-    failed.
+     
+      - required: whether it is required or not  
+      - default: default value if no input is inserted by the user  
+      - pattern: regular expression pattern to validate user input  
+      - validator: a callable function to validate input. The function
+      must accept two parameters:      
+      - $input: the user input to validate      
+      - $error: the error value passed by reference if validation failed.
 
 
 *yii/console/Controller::confirm*				public
@@ -355,7 +368,6 @@ mean abnormal.
  confirm($message, $default='false')
 <
 (boolean) Whether user confirmed. Will return true if 'interactive' is false.
-
 
     [$message] (string) To echo out before waiting for user input
     [$default] (boolean) This value is returned if no selection is made.
@@ -366,7 +378,6 @@ mean abnormal.
  select($prompt, $options='[]')
 <
 (string) An option character the user chose
-
 
     [$prompt] (string) The prompt message
     [$options] (array) Key-value array of options to choose from

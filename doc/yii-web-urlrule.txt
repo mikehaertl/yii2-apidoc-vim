@@ -8,11 +8,16 @@ DESCRIPTION
  To define your own URL parsing and creation logic you can extend from this
  class and add it to 'UrlManager::rules' like this:
 
-   'rules' => [
-       ['class' => 'MyUrlRule', 'pattern' => '...', 'route' => 'site/index',
- ...],
-       // ...
-   ]
+   // add a cookie
+   $response->cookies->add(new Cookie([
+       'name' => $name,
+       'value' => $value,
+   ]);
+
+   // remove a cookie
+   $response->cookies->remove('name');
+   // alternatively
+   unset($response->cookies['name']);
 
 
 
@@ -78,7 +83,6 @@ METHOD DETAILS
 
 
 
-
 *yii/web/UrlRule::__get*					public
  See |yii/base/Object::__get|
 
@@ -123,7 +127,6 @@ METHOD DETAILS
 as an array. If false, it means this rule cannot be used to parse this path
 info.
 
-
     [$manager] (\yii\web\UrlManager) The URL manager
     [$request] (\yii\web\Request) The request component
 
@@ -134,7 +137,6 @@ info.
 <
 (string|boolean) The created URL, or false if this rule cannot be used for
 creating this URL.
-
 
     [$manager] (\yii\web\UrlManager) The URL manager
     [$route] (string) The route. It should not have slashes at the beginning

@@ -8,11 +8,6 @@ SUBCLASSES
 |yii/bootstrap/ActiveField|
 |yii/gii/components/ActiveField|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -32,7 +27,8 @@ $options				*yii/widgets/ActiveField::$options*
  the corresponding attribute will not be rendered. The following special
  options are recognized:
 
- - tag: the tag name of the container element. Defaults to "div".
+
+   - tag: the tag name of the container element. Defaults to "div".
 
 $template				*yii/widgets/ActiveField::$template*
  (string) The template that is used to arrange the label, the input field, the
@@ -49,7 +45,8 @@ $errorOptions				*yii/widgets/ActiveField::$errorOptions*
  'error()' will be merged with this property when rendering the error tag. The
  following special options are recognized:
 
- - tag: the tag name of the container element. Defaults to "div".
+
+   - tag: the tag name of the container element. Defaults to "div".
 
 $labelOptions				*yii/widgets/ActiveField::$labelOptions*
  (array) The default options for the label tags. The parameter passed to
@@ -60,7 +57,8 @@ $hintOptions				*yii/widgets/ActiveField::$hintOptions*
  'hint()' will be merged with this property when rendering the hint tag. The
  following special options are recognized:
 
- - tag: the tag name of the container element. Defaults to "div".
+
+   - tag: the tag name of the container element. Defaults to "div".
 
 $enableClientValidation			*yii/widgets/ActiveField::$enableClientValidation*
  (boolean) Whether to enable client-side data validation. If not set, it will
@@ -220,7 +218,6 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/ActiveField::render*				public
 >
  render($content='null')
@@ -235,9 +232,11 @@ METHOD DETAILS
     will be called to generate the content. The signature of the callable
     should be:
 
-      function ($field) {
-          return $html;
-      }
+      // $this is the view object currently being used
+      echo Breadcrumbs::widget([
+          'links' => isset($this->params['breadcrumbs']) ?
+    $this->params['breadcrumbs'] : [],
+      ]);
 
 
 
@@ -250,7 +249,6 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/ActiveField::end*				public
 >
  end()
@@ -259,13 +257,11 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/ActiveField::label*				public
 >
  label($label='null', $options='[]')
 <
 (static) The field object itself
-
 
     [$label] (string|boolean) The label to use. If null, the label will be
     generated via 'Model::getAttributeLabel()'. If false, the generated field
@@ -294,7 +290,8 @@ METHOD DETAILS
 
     The following options are specially handled:
 
-    - tag: this specifies the tag name. If not set, "div" will be used.
+
+      - tag: this specifies the tag name. If not set, "div" will be used.
 
     If this parameter is false, no error tag will be rendered.
 
@@ -305,7 +302,6 @@ METHOD DETAILS
 <
 (static) The field object itself
 
-
     [$content] (string) The hint content. It will NOT be HTML-encoded.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the hint tag. The values will be
@@ -313,7 +309,8 @@ METHOD DETAILS
 
     The following options are specially handled:
 
-    - tag: this specifies the tag name. If not set, "div" will be used.
+
+      - tag: this specifies the tag name. If not set, "div" will be used.
 
 
 *yii/widgets/ActiveField::input*				public
@@ -321,7 +318,6 @@ METHOD DETAILS
  input($type, $options='[]')
 <
 (static) The field object itself
-
 
     [$type] (string) The input type (e.g. 'text', 'password')
     [$options] (array) The tag options in terms of name-value pairs. These
@@ -408,17 +404,19 @@ METHOD DETAILS
     [$options] (array) The tag options in terms of name-value pairs. The
     following options are specially handled:
 
-    - uncheck: string, the value associated with the uncheck state of the
-    radio button. If not set,   it will take the default value '0'. This
+
+      - uncheck: string, the value associated with the uncheck state of
+      the radio button. If not set,   it will take the default value '0'. This
     method will render a hidden input so that if the radio button   is not
     checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. - label: string, a label
-    displayed next to the radio button.  It will NOT be HTML-encoded.
-    Therefore you can pass   in HTML code such as an image tag. If this is is
-    coming from end users, you should 'Html::encode()' it to prevent XSS
-    attacks.   When this option is specified, the radio button will be
-    enclosed by a label tag. - labelOptions: array, the HTML attributes for
-    the label tag. This is only used when the "label" option is specified.
+    submitted to the server   via the hidden input. 
+      - label: string, a label displayed next to the radio button.  It
+      will NOT be HTML-encoded. Therefore you can pass   in HTML code such as
+    an image tag. If this is is coming from end users, you should
+    'Html::encode()' it to prevent XSS attacks.   When this option is
+    specified, the radio button will be enclosed by a label tag. 
+      - labelOptions: array, the HTML attributes for the label tag. This
+      is only used when the "label" option is specified.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
@@ -440,17 +438,19 @@ METHOD DETAILS
     [$options] (array) The tag options in terms of name-value pairs. The
     following options are specially handled:
 
-    - uncheck: string, the value associated with the uncheck state of the
-    radio button. If not set,   it will take the default value '0'. This
+
+      - uncheck: string, the value associated with the uncheck state of
+      the radio button. If not set,   it will take the default value '0'. This
     method will render a hidden input so that if the radio button   is not
     checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. - label: string, a label
-    displayed next to the checkbox.  It will NOT be HTML-encoded. Therefore
-    you can pass   in HTML code such as an image tag. If this is is coming
-    from end users, you should 'Html::encode()' it to prevent XSS attacks.  
-    When this option is specified, the checkbox will be enclosed by a label
-    tag. - labelOptions: array, the HTML attributes for the label tag. This is
-    only used when the "label" option is specified.
+    submitted to the server   via the hidden input. 
+      - label: string, a label displayed next to the checkbox.  It will
+      NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
+    image tag. If this is is coming from end users, you should
+    'Html::encode()' it to prevent XSS attacks.   When this option is
+    specified, the checkbox will be enclosed by a label tag. 
+      - labelOptions: array, the HTML attributes for the label tag. This
+      is only used when the "label" option is specified.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
@@ -481,18 +481,21 @@ METHOD DETAILS
     [$options] (array) The tag options in terms of name-value pairs. The
     following options are specially handled:
 
-    - prompt: string, a prompt text to be displayed as the first option; -
-    options: array, the attributes for the select option tags. The array keys
-    must be valid option values,   and the array values are the extra
-    attributes for the corresponding option tags. For example,
+
+      - prompt: string, a prompt text to be displayed as the first option; 
+      - options: array, the attributes for the select option tags. The
+      array keys must be valid option values,   and the array values are the
+    extra attributes for the corresponding option tags. For example,
 
       [
-          'value1' => ['disabled' => true],
-          'value2' => ['label' => 'value 2'],
-      ];
+          'label' => 'label of the link',  // required
+          'url' => 'url of the link',      // optional, will be processed by
+    Url::to()
+      ]
 
-    - groups: array, the attributes for the optgroup tags. The structure of
-    this is similar to that of 'options',   except that the array keys
+
+      - groups: array, the attributes for the optgroup tags. The structure
+      of this is similar to that of 'options',   except that the array keys
     represent the optgroup labels specified in $items.
 
     The rest of the options will be rendered as the attributes of the
@@ -520,23 +523,24 @@ METHOD DETAILS
     [$options] (array) The tag options in terms of name-value pairs. The
     following options are specially handled:
 
-    - prompt: string, a prompt text to be displayed as the first option; -
-    options: array, the attributes for the select option tags. The array keys
-    must be valid option values,   and the array values are the extra
-    attributes for the corresponding option tags. For example,
 
-      [
-          'value1' => ['disabled' => true],
-          'value2' => ['label' => 'value 2'],
-      ];
+      - prompt: string, a prompt text to be displayed as the first option; 
+      - options: array, the attributes for the select option tags. The
+      array keys must be valid option values,   and the array values are the
+    extra attributes for the corresponding option tags. For example,
 
-    - groups: array, the attributes for the optgroup tags. The structure of
-    this is similar to that of 'options',   except that the array keys
-    represent the optgroup labels specified in $items. - unselect: string, the
-    value that will be submitted when no option is selected.   When this
-    attribute is set, a hidden field will be generated so that if no option is
-    selected in multiple   mode, we can still obtain the posted unselect
-    value.
+      function ($field) {
+          return $html;
+      }
+
+
+      - groups: array, the attributes for the optgroup tags. The structure
+      of this is similar to that of 'options',   except that the array keys
+    represent the optgroup labels specified in $items. 
+      - unselect: string, the value that will be submitted when no option
+      is selected.   When this attribute is set, a hidden field will be
+    generated so that if no option is selected in multiple   mode, we can
+    still obtain the posted unselect value.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
@@ -559,14 +563,19 @@ METHOD DETAILS
     [$options] (array) Options (name => config) for the checkbox list. The
     following options are specially handled:
 
-    - unselect: string, the value that should be submitted when none of the
-    checkboxes is selected.   By setting this option, a hidden input will be
-    generated. - separator: string, the HTML code that separates items. -
-    item: callable, a callback that can be used to customize the generation of
-    the HTML code   corresponding to a single item in $items. The signature of
-    this callback must be:
 
-      function ($index, $label, $name, $checked, $value)
+      - unselect: string, the value that should be submitted when none of
+      the checkboxes is selected.   By setting this option, a hidden input
+    will be generated. 
+      - separator: string, the HTML code that separates items. 
+      - item: callable, a callback that can be used to customize the
+      generation of the HTML code   corresponding to a single item in $items.
+    The signature of this callback must be:
+
+      [
+          'value1' => ['disabled' => true],
+          'value2' => ['label' => 'value 2'],
+      ];
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label is the label for the checkbox; and $name, $value and $checked
@@ -589,14 +598,19 @@ METHOD DETAILS
     [$options] (array) Options (name => config) for the radio button list. The
     following options are specially handled:
 
-    - unselect: string, the value that should be submitted when none of the
-    radio buttons is selected.   By setting this option, a hidden input will
-    be generated. - separator: string, the HTML code that separates items. -
-    item: callable, a callback that can be used to customize the generation of
-    the HTML code   corresponding to a single item in $items. The signature of
-    this callback must be:
 
-      function ($index, $label, $name, $checked, $value)
+      - unselect: string, the value that should be submitted when none of
+      the radio buttons is selected.   By setting this option, a hidden input
+    will be generated. 
+      - separator: string, the HTML code that separates items. 
+      - item: callable, a callback that can be used to customize the
+      generation of the HTML code   corresponding to a single item in $items.
+    The signature of this callback must be:
+
+      [
+          'value1' => ['disabled' => true],
+          'value2' => ['label' => 'value 2'],
+      ];
 
     where $index is the zero-based index of the radio button in the whole
     list; $label is the label for the radio button; and $name, $value and
@@ -626,7 +640,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$options] (array) The input options
 
 
@@ -635,7 +648,6 @@ METHOD DETAILS
  getClientOptions()
 <
 (array) The JS options
-
 
 
 

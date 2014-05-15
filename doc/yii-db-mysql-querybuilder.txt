@@ -2,11 +2,6 @@
 *yii/db/mysql/QueryBuilder*   >> |yii/db/QueryBuilder|
 ===========================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -20,6 +15,9 @@ $separator				*yii/db/mysql/QueryBuilder::$separator*
 $typeMap				*yii/db/mysql/QueryBuilder::$typeMap*
  (array) Mapping from abstract column types (keys) to physical column types
  (values).
+
+$conditionBuilders			*yii/db/mysql/QueryBuilder::$conditionBuilders*
+ See |yii/db/QueryBuilder::$conditionBuilders|
 
 
 
@@ -117,7 +115,6 @@ METHOD DETAILS
 (string) The SQL statement for removing a primary key constraint from an
 existing table.
 
-
     [$name] (string) The name of the primary key constraint to be removed.
     [$table] (string) The table that the primary key constraint will be
     removed from.
@@ -141,7 +138,6 @@ existing table.
 <
 (string) The SQL statement for renaming a DB column.
 
-
     [$table] (string) The table whose column is to be renamed. The name will
     be properly quoted by the method.
     [$oldName] (string) The old name of the column. The name will be properly
@@ -163,7 +159,6 @@ existing table.
  dropForeignKey($name, $table)
 <
 (string) The SQL statement for dropping a foreign key constraint.
-
 
     [$name] (string) The name of the foreign key constraint to be dropped. The
     name will be properly quoted by the method.
@@ -199,7 +194,6 @@ existing table.
  checkIntegrity($check='true', $schema='''', $table='''')
 <
 (string) The SQL statement for checking integrity
-
 
     [$check] (boolean) Whether to turn on or off the integrity check.
     [$schema] (string) The schema of the tables. Meaningless for MySQL.
@@ -244,9 +238,8 @@ existing table.
 <
 (string) The LIMIT and OFFSET clauses
 
-
-    [$limit] () 
-    [$offset] () 
+    [$limit] (integer) 
+    [$offset] (integer) 
 
 
 *yii/db/mysql/QueryBuilder::hasLimit*			protected

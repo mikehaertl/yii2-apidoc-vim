@@ -42,7 +42,7 @@ $defaultExtension			*yii/base/View::$defaultExtension*
  names if they don't have file extensions.
 
 $theme					*yii/base/View::$theme*
- (\yii\base\Theme|array) The theme object or the configuration array for
+ (\yii\base\Theme|array|string) The theme object or the configuration for
  creating the theme object. If not set, it means theming is not enabled.
 
 $blocks					*yii/base/View::$blocks*
@@ -86,7 +86,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -186,15 +185,17 @@ METHOD DETAILS
 
  The view to be rendered can be specified in one of the following formats:
 
- - path alias (e.g. "@app/views/site/index"); - absolute path within
- application (e.g. "//site/index"): the view name starts with double slashes. 
-  The actual view file will be looked for under the
- 'Application::viewPath|view path' of the application. - absolute path within
- current module (e.g. "/site/index"): the view name starts with a single
- slash.   The actual view file will be looked for under the
- 'Module::viewPath|view path' of the 'Controller::module|current module'. -
- relative view (e.g. "index"): the view name does not start with '@' or '/'.
- The corresponding view file will be   looked for under the
+
+   - path alias (e.g. "@app/views/site/index"); 
+   - absolute path within application (e.g. "//site/index"): the view
+   name starts with double slashes.   The actual view file will be looked for
+ under the 'Application::viewPath|view path' of the application. 
+   - absolute path within current module (e.g. "/site/index"): the view
+   name starts with a single slash.   The actual view file will be looked for
+ under the 'Module::viewPath|view path' of the 'Controller::module|current
+ module'. 
+   - relative view (e.g. "index"): the view name does not start with
+   '@' or '/'. The corresponding view file will be   looked for under the
  'ViewContextInterface::getViewPath()|view path' of the view '$context'.   If
  '$context' is not given, it will be looked for under the directory containing
  the view currently   being rendered (i.e., this happens when rendering a view
@@ -213,7 +214,6 @@ METHOD DETAILS
  findViewFile($view, $context='null')
 <
 (string) The view file path. Note that the file may not exist.
-
 
     [$view] (string) The view name or the path alias of the view file. Please
     refer to 'render()' on how to specify this parameter.
@@ -251,7 +251,6 @@ METHOD DETAILS
 <
 (string|boolean) The view file currently being rendered. False if no view file
 is being rendered.
-
 
 
 
@@ -351,7 +350,6 @@ there is no active content cache currently.
 
 
 
-
 *yii/base/View::beginContent*				public
 >
  beginContent($viewFile, $params='[]')
@@ -379,7 +377,6 @@ there is no active content cache currently.
  endContent()
 <
 (void)
-
 
 
 
@@ -412,7 +409,6 @@ cached version is available.
 
 
 
-
 *yii/base/View::beginPage*				public
 >
  beginPage()
@@ -421,13 +417,11 @@ cached version is available.
 
 
 
-
 *yii/base/View::endPage*					public
 >
  endPage()
 <
 (void)
-
 
 
 

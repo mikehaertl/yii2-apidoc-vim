@@ -15,24 +15,7 @@ DESCRIPTION
  of the page depended on the route ('varyByRoute' is true by default), the
  application language and user id.
 
-   public function behaviors()
-   {
-       return [
-           'pageCache' => [
-               'class' => \yii\filters\PageCache::className(),
-               'only' => ['list'],
-               'duration' => 60,
-               'dependency' => [
-                   'class' => 'yii\caching\DbDependency',
-                   'sql' => 'SELECT COUNT(*) FROM post',
-               ],
-               'variations' => [
-                   Yii::$app->language,
-                   Yii::$app->user->id
-               ]
-           ],
-       ];
-   }
+   function ($action, $params)
 
 
 
@@ -67,10 +50,7 @@ $dependency				*yii/filters/PageCache::$dependency*
  depends on. This can be either a 'Dependency' object or a configuration array
  for creating the dependency object. For example,
 
-   [
-       'class' => 'yii\caching\DbDependency',
-       'sql' => 'SELECT MAX(lastModified) FROM Post',
-   ]
+   function ($action, $params)
 
  would make the output cache depends on the last modified time of all posts.
  If any post has its modification time changed, the cached content would be
@@ -83,9 +63,24 @@ $variations				*yii/filters/PageCache::$variations*
  be cached in different versions according to the current application
  language:
 
-   [
-       Yii::$app->language,
-   ]
+   public function behaviors()
+   {
+       return [
+           'pageCache' => [
+               'class' => \yii\filters\PageCache::className(),
+               'only' => ['list'],
+               'duration' => 60,
+               'dependency' => [
+                   'class' => 'yii\caching\DbDependency',
+                   'sql' => 'SELECT COUNT(*) FROM post',
+               ],
+               'variations' => [
+                   Yii::$app->language,
+                   Yii::$app->user->id
+               ]
+           ],
+       ];
+   }
 
 
 
@@ -181,7 +176,6 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
-
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -191,9 +185,9 @@ METHOD DETAILS
 <
 (mixed) The processed action result.
 
-
-    [$action] () 
-    [$result] () 
+ You may override this method to do some postprocessing for the action.
+    [$action] (\yii\base\Action) The action just executed.
+    [$result] (mixed) The action execution result
 
 
 *yii/filters/PageCache::isActive*				protected

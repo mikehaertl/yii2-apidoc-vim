@@ -104,9 +104,17 @@ $beforeSubmit				*yii/widgets/ActiveForm::$beforeSubmit*
  (string|\yii\web\JsExpression) A JS callback that will be called when the
  form is being submitted. The signature of the callback should be:
 
-   function ($form) {
-       ...return false to cancel submission...
-   }
+   echo DetailView::widget([
+       'model' => $model,
+       'attributes' => [
+           'title',             // title attribute (in plain text)
+           'description:html',  // description attribute in HTML
+           [                    // the owner name of the model
+               'label' => 'Owner',
+               'value' => $model->owner->name,
+           ],
+       ],
+   ]);
 
 
 
@@ -114,9 +122,7 @@ $beforeValidate				*yii/widgets/ActiveForm::$beforeValidate*
  (string|\yii\web\JsExpression) A JS callback that is called before validating
  an attribute. The signature of the callback should be:
 
-   function ($form, attribute, messages) {
-       ...return false to cancel the validation...
-   }
+   function ($attribute, $index, $widget)
 
 
 
@@ -124,7 +130,8 @@ $afterValidate				*yii/widgets/ActiveForm::$afterValidate*
  (string|\yii\web\JsExpression) A JS callback that is called after validating
  an attribute. The signature of the callback should be:
 
-   function ($form, attribute, messages) {
+   function ($form) {
+       ...return false to cancel submission...
    }
 
 
@@ -313,7 +320,6 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/ActiveForm::errorSummary*			public
 >
  errorSummary($models, $options='[]')
@@ -327,9 +333,10 @@ METHOD DETAILS
     [$options] (array) The tag options in terms of name-value pairs. The
     following options are specially handled:
 
-    - header: string, the header HTML for the error summary. If not set, a
-    default prompt string will be used. - footer: string, the footer HTML for
-    the error summary.
+
+      - header: string, the header HTML for the error summary. If not set,
+      a default prompt string will be used. 
+      - footer: string, the footer HTML for the error summary.
 
     The rest of the options will be rendered as the attributes of the
     container tag. The values will be HTML-encoded using
@@ -364,18 +371,15 @@ METHOD DETAILS
  For example, you may use the following code in a controller action to respond
  to an AJAX validation request:
 
-   $model = new Post;
-   $model->load($_POST);
-   if (Yii::$app->request->isAjax) {
-       Yii::$app->response->format = Response::FORMAT_JSON;
-       return ActiveForm::validate($model);
+   function ($form, attribute, messages) {
+       ...return false to cancel the validation...
    }
-   // ... respond to non-AJAX request ...
 
  To validate multiple models, simply pass each model as a parameter to this
  method, like the following:
 
-   ActiveForm::validate($model1, $model2, ...);
+   function ($form, attribute, messages) {
+   }
 
 
     [$model] (\yii\base\Model) The model to be validated
@@ -399,10 +403,11 @@ METHOD DETAILS
  For example, you may use the following code in a controller action to respond
  to an AJAX validation request:
 
-   // ... load $models ...
+   $model = new Post;
+   $model->load($_POST);
    if (Yii::$app->request->isAjax) {
        Yii::$app->response->format = Response::FORMAT_JSON;
-       return ActiveForm::validateMultiple($models);
+       return ActiveForm::validate($model);
    }
    // ... respond to non-AJAX request ...
 

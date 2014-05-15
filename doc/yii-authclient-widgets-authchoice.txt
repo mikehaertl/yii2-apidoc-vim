@@ -11,32 +11,37 @@ DESCRIPTION
 
  Example:
 
-   php
-   <?= yii\authclient\widgets\AuthChoice::widget([
-       'baseAuthUrl' => ['site/auth']
-   ]); ?>
+   'components' => [
+       'authClientCollection' => [
+           'class' => 'yii\authclient\Collection',
+           'clients' => [
+               'twitter' => [
+                   'class' => 'yii\authclient\clients\Twitter',
+                   'consumerKey' => 'twitter_consumer_key',
+                   'consumerSecret' => 'twitter_consumer_secret',
+               ],
+           ],
+       ]
+       ...
+   ]
 
  You can customize the widget appearance by using 'begin()' and 'end()' syntax
  along with using method {@link clientLink()} or {@link createClientUrl()}.
  For example:
 
-   php
-   <?php
-   use yii\authclient\widgets\AuthChoice;
-   ?>
-   <?php $authAuthChoice = AuthChoice::begin([
-       'baseAuthUrl' => ['site/auth']
-   ]); ?>
-   <ul>
-   <?php foreach ($authAuthChoice->getClients() as $client): ?>
-       <li><?= $authAuthChoice->clientLink($client) ?></li>
-   <?php endforeach; ?>
-   </ul>
-   <?php AuthChoice::end(); ?>
+   use yii\authclient\OAuth2;
+
+   $oauthClient = new OAuth2();
+   $url = $oauthClient->buildAuthUrl(); // Build authorization URL
+   Yii::$app->getResponse()->redirect($url); // Redirect to authorization URL.
+   // After user returns at our site:
+   $code = $_GET['code'];
+   $accessToken = $oauthClient->fetchAccessToken($code); // Get access token
 
  This widget supports following keys for 'ClientInterface::getViewOptions()'
- result:  - popupWidth - integer width of the popup window in pixels.  -
- popupHeight - integer height of the popup window in pixels.
+ result:  
+   - popupWidth - integer width of the popup window in pixels.  
+   - popupHeight - integer height of the popup window in pixels.
 
 
 PROPERTY DETAILS
@@ -108,7 +113,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -236,7 +240,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/widgets/AuthChoice::render*		public
  See |yii/base/Widget::render|
 
@@ -255,7 +258,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$clients] (\yii\authclient\ClientInterface[]) Auth providers
 
 
@@ -267,13 +269,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/widgets/AuthChoice::setBaseAuthUrl*	public
 >
  setBaseAuthUrl($baseAuthUrl)
 <
 (void)
-
 
     [$baseAuthUrl] (array) Base auth URL configuration.
 
@@ -286,13 +286,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/widgets/AuthChoice::defaultClients*	protected
 >
  defaultClients()
 <
 (\yii\authclient\ClientInterface[]) Auth clients list.
-
 
 
 
@@ -304,16 +302,15 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/widgets/AuthChoice::clientLink*		public
 >
  clientLink($client, $text='null', $htmlOptions='[]')
 <
 (void)
 
-
     [$client] (\yii\authclient\ClientInterface) External auth client instance.
-    [$text] (string) Link text, if not set - default value will be generated.
+    [$text] (string) Link text, if not set 
+      - default value will be generated.
     [$htmlOptions] (array) Link HTML options.
 
 
@@ -322,7 +319,6 @@ METHOD DETAILS
  createClientUrl($provider)
 <
 (string) Auth URL.
-
 
     [$provider] (\yii\authclient\ClientInterface) External auth client
     instance.
@@ -333,7 +329,6 @@ METHOD DETAILS
  renderMainContent()
 <
 (void)
-
 
 
 

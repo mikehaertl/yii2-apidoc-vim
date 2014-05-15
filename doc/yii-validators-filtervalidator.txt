@@ -10,7 +10,18 @@ DESCRIPTION
  processed value back to the attribute. The filter must be a valid PHP
  callback with the following signature:
 
-   function foo($value) {...return $newValue; }
+   // a1 needs to exist
+   ['a1', 'exist']
+   // a1 needs to exist, but its value will use a2 to check for the existence
+   ['a1', 'exist', 'targetAttribute' => 'a2']
+   // a1 and a2 need to exist together, and they both will receive error
+ message
+   [['a1', 'a2'], 'exist', 'targetAttribute' => ['a1', 'a2']]
+   // a1 and a2 need to exist together, only a1 will receive error message
+   ['a1', 'exist', 'targetAttribute' => ['a1', 'a2']]
+   // a1 needs to exist by checking the existence of both a2 and a3 (using a1
+ value)
+   ['a1', 'exist', 'targetAttribute' => ['a2', 'a1' => 'a3']]
 
  Many PHP functions qualify this signature (e.g. 'trim()').
 
@@ -88,7 +99,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/validators/FilterValidator::__get*			public
@@ -193,9 +205,10 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$object] () 
-    [$attribute] () 
+ Child classes must implement this method to provide the actual validation
+ logic.
+    [$object] (\yii\base\Model) The data object to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/FilterValidator::validate*		public

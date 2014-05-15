@@ -14,31 +14,22 @@ DESCRIPTION
  You may configure the targets in application configuration, like the
  following:
 
-   [
-       'components' => [
-           'log' => [
-               'targets' => [
-                   'file' => [
-                       'class' => 'yii\log\FileTarget',
-                       'levels' => ['trace', 'info'],
-                       'categories' => ['yii\*'],
-                   ],
-                   'email' => [
-                       'class' => 'yii\log\EmailTarget',
-                       'levels' => ['error', 'warning'],
-                       'message' => [
-                           'to' => 'admin@example.com',
-                       ],
-                   ],
-               ],
-           ],
-       ],
-   ]
+   ['error', 'warning']
+   // which is equivalent to:
+   Logger::LEVEL_ERROR | Logger::LEVEL_WARNING
 
  Each log target can have a name and can be referenced via the 'targets'
  property as follows:
 
-   Yii::$app->log->targets['file']->enabled = false;
+   [
+     [0] => message (mixed, can be a string or some complex data, such as an
+ exception object)
+     [1] => level (integer)
+     [2] => category (string)
+     [3] => timestamp (float, obtained by microtime(true))
+     [4] => traces (array, debug backtrace, contains the application code call
+ stacks)
+   ]
 
 
 
@@ -81,8 +72,20 @@ METHOD DETAILS
 <
 (void)
 
+ The default implementation does two things:
 
-    [$config] () 
+
+   - Initializes the object with the given configuration '$config'. 
+   - Call 'init()'.
+
+ If this method is overridden in a child class, it is recommended that
+
+
+   - the last parameter of the constructor is a configuration array,
+   like '$config' here. 
+   - call the parent implementation at the end of the constructor.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
 
 
 *yii/log/Dispatcher::init*				public
@@ -91,7 +94,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/log/Dispatcher::__get*				public
@@ -197,7 +201,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$value] (\yii\log\Logger) The logger.
 
 
@@ -210,13 +213,11 @@ message. This method returns the value of 'Logger::traceLevel'. Defaults to 0.
 
 
 
-
 *yii/log/Dispatcher::setTraceLevel*			public
 >
  setTraceLevel($value)
 <
 (void)
-
 
     [$value] (integer) How many application call stacks should be logged
     together with each message. This method will set the value of
@@ -234,13 +235,11 @@ This method returns the value of 'Logger::flushInterval'.
 
 
 
-
 *yii/log/Dispatcher::setFlushInterval*			public
 >
  setFlushInterval($value)
 <
 (void)
-
 
     [$value] (integer) How many messages should be logged before they are sent
     to targets. This method will set the value of 'Logger::flushInterval'.
@@ -257,7 +256,6 @@ This method returns the value of 'Logger::flushInterval'.
  dispatch($messages, $final)
 <
 (void)
-
 
     [$messages] (array) The logged messages
     [$final] (boolean) Whether this method is called at the end of the current

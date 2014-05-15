@@ -21,11 +21,6 @@ SUBCLASSES
 |yii/jui/Slider|
 |yii/jui/DatePicker|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -63,9 +58,14 @@ $clientEvents				*yii/jui/Widget::$clientEvents*
 
  For example you could write the following in your widget configuration:
 
-   'clientEvents' => [
-       'change' => 'function () { alert('event "change" occured.'); }'
-   ],
+      'controllerMap' => [
+          'fixture' => [
+              'class' => 'yii\faker\FixtureController',
+              'providers' => [
+                  'app\tests\unit\faker\providers\Book',
+              ],
+          ],
+      ],
 
 
 
@@ -247,7 +247,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$assetBundle] (string) The asset bundle for the widget
 
 
@@ -256,7 +255,6 @@ METHOD DETAILS
  registerClientOptions($name, $id)
 <
 (void)
-
 
     [$name] (string) The name of the jQuery UI widget
     [$id] (string) The ID of the widget
@@ -268,7 +266,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$name] (string) The name of the jQuery UI widget
     [$id] (string) The ID of the widget
 
@@ -278,7 +275,6 @@ METHOD DETAILS
  registerWidget($name, $assetBundle, $id='null')
 <
 (void)
-
 
     [$name] (string) The name of the jQuery UI widget
     [$assetBundle] (string) The asset bundle for the widget

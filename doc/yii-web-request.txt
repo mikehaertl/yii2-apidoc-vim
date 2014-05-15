@@ -119,9 +119,6 @@ $bodyParams				*yii/web/Request::$bodyParams*
 $queryParams				*yii/web/Request::$queryParams*
  (array) The request GET parameter values.
 
-$					*yii/web/Request::$*
- (array|mixed)
-
 $hostInfo				*yii/web/Request::$hostInfo*
  (string) Schema and hostname part (with port number if needed) of the request
  URL (e.g. 'http://www.yiiframework.com')
@@ -329,7 +326,6 @@ parameters.
 
 
 
-
 *yii/web/Request::getIsConsoleRequest*			public
  See |yii/base/Request::getIsConsoleRequest|
 
@@ -377,13 +373,11 @@ value returned is turned into upper case.
 
 
 
-
 *yii/web/Request::getIsGet*				public
 >
  getIsGet()
 <
 (boolean) Whether this is a GET request.
-
 
 
 
@@ -395,13 +389,11 @@ value returned is turned into upper case.
 
 
 
-
 *yii/web/Request::getIsHead*				public
 >
  getIsHead()
 <
 (boolean) Whether this is a HEAD request.
-
 
 
 
@@ -413,13 +405,11 @@ value returned is turned into upper case.
 
 
 
-
 *yii/web/Request::getIsDelete*				public
 >
  getIsDelete()
 <
 (boolean) Whether this is a DELETE request.
-
 
 
 
@@ -431,13 +421,11 @@ value returned is turned into upper case.
 
 
 
-
 *yii/web/Request::getIsPatch*				public
 >
  getIsPatch()
 <
 (boolean) Whether this is a PATCH request.
-
 
 
 
@@ -449,13 +437,11 @@ value returned is turned into upper case.
 
 
 
-
 *yii/web/Request::getIsPjax*				public
 >
  getIsPjax()
 <
 (boolean) Whether this is a PJAX request
-
 
 
 
@@ -467,13 +453,11 @@ value returned is turned into upper case.
 
 
 
-
 *yii/web/Request::getRawBody*				public
 >
  getRawBody()
 <
 (string) The request body
-
 
 
 
@@ -494,7 +478,6 @@ value returned is turned into upper case.
 <
 (void)
 
-
     [$values] (array) The request body parameters (name-value pairs)
 
 
@@ -503,7 +486,6 @@ value returned is turned into upper case.
  getBodyParam($name, $defaultValue='null')
 <
 (mixed) The parameter value
-
 
     [$name] (string) The parameter name
     [$defaultValue] (mixed) The default parameter value if the parameter does
@@ -515,7 +497,6 @@ value returned is turned into upper case.
  post($name='null', $defaultValue='null')
 <
 (array|mixed) 
-
 
     [$name] (string) The parameter name
     [$defaultValue] (mixed) The default parameter value if the parameter does
@@ -538,7 +519,6 @@ value returned is turned into upper case.
 <
 (void)
 
-
     [$values] (array) The request query parameters (name-value pairs)
 
 
@@ -547,7 +527,6 @@ value returned is turned into upper case.
  get($name='null', $defaultValue='null')
 <
 (array|mixed) 
-
 
     [$name] (string) The parameter name
     [$defaultValue] (mixed) The default parameter value if the parameter does
@@ -719,13 +698,11 @@ that the URI returned is URL-encoded.
 
 
 
-
 *yii/web/Request::getIsSecureConnection*			public
 >
  getIsSecureConnection()
 <
 (boolean) If the request is sent via secure channel (https)
-
 
 
 
@@ -737,13 +714,11 @@ that the URI returned is URL-encoded.
 
 
 
-
 *yii/web/Request::getServerPort*				public
 >
  getServerPort()
 <
 (integer) Server port number
-
 
 
 
@@ -755,13 +730,11 @@ that the URI returned is URL-encoded.
 
 
 
-
 *yii/web/Request::getUserAgent*				public
 >
  getUserAgent()
 <
 (string) User agent, null if not present
-
 
 
 
@@ -773,13 +746,11 @@ that the URI returned is URL-encoded.
 
 
 
-
 *yii/web/Request::getUserHost*				public
 >
  getUserHost()
 <
 (string) User host name, null if cannot be determined
-
 
 
 
@@ -792,14 +763,12 @@ not given
 
 
 
-
 *yii/web/Request::getAuthPassword*			public
 >
  getAuthPassword()
 <
 (string) The password sent via HTTP authentication, null if the password is
 not given
-
 
 
 
@@ -856,16 +825,10 @@ in the header.
 
  This is determined by the 'Accept' HTTP header. For example,
 
-   $_SERVER['HTTP_ACCEPT'] = 'text/plain; q=0.5, application/json;
- version=1.0, application/xml; version=2.0;';
-   $types = $request->getAcceptableContentTypes();
-   print_r($types);
-   // displays:
-   // [
-   //     'application/json' => ['q' => 1, 'version' => '1.0'],
-   //      'application/xml' => ['q' => 1, 'version' => '2.0'],
-   //           'text/plain' => ['q' => 0.5],
-   // ]
+   if ($item === null) { // item does not exist
+       throw new \yii\web\HttpException(404, 'The requested Item could not be
+ found.');
+   }
 
 
 
@@ -908,7 +871,6 @@ represents the most preferred language.
 <
 (void)
 
-
     [$value] (array) The languages that are acceptable by the end user. They
     should be ordered by the preference level.
 
@@ -927,10 +889,10 @@ the highest scores will be returned first.
  acceptable values with the highest quality scores will be returned first. For
  example,
 
-   $header = 'text/plain; q=0.5, application/json; version=1.0,
- application/xml; version=2.0;';
-   $accepts = $request->parseAcceptHeader($header);
-   print_r($accepts);
+   $_SERVER['HTTP_ACCEPT'] = 'text/plain; q=0.5, application/json;
+ version=1.0, application/xml; version=2.0;';
+   $types = $request->getAcceptableContentTypes();
+   print_r($types);
    // displays:
    // [
    //     'application/json' => ['q' => 1, 'version' => '1.0'],
@@ -965,13 +927,16 @@ the highest scores will be returned first.
  Through the returned cookie collection, you may access a cookie using the
  following syntax:
 
-   $cookie = $request->cookies['name']
-   if ($cookie !== null) {
-       $value = $cookie->value;
-   }
-
-   // alternatively
-   $value = $request->cookies->getValue('name');
+   $header = 'text/plain; q=0.5, application/json; version=1.0,
+ application/xml; version=2.0;';
+   $accepts = $request->parseAcceptHeader($header);
+   print_r($accepts);
+   // displays:
+   // [
+   //     'application/json' => ['q' => 1, 'version' => '1.0'],
+   //      'application/xml' => ['q' => 1, 'version' => '2.0'],
+   //           'text/plain' => ['q' => 0.5],
+   // ]
 
 
 
@@ -984,7 +949,6 @@ the highest scores will be returned first.
 
 
 
-
 *yii/web/Request::getCookieValidationKey*			public
 >
  getCookieValidationKey()
@@ -994,13 +958,11 @@ previously, a random key will be generated and used.
 
 
 
-
 *yii/web/Request::setCookieValidationKey*			public
 >
  setCookieValidationKey($value)
 <
 (void)
-
 
     [$value] (string) The secret key used for cookie validation.
 
@@ -1033,7 +995,6 @@ previously, a random key will be generated and used.
 <
 (string) The CSRF token sent via 'CSRF_HEADER' by browser. Null is returned if
 no such header is sent.
-
 
 
 

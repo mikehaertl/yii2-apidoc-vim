@@ -21,12 +21,10 @@ DESCRIPTION
 
  Session can be used like an array to set and get session data. For example,
 
-   $session = new Session;
-   $session->open();
-   $value1 = $session['name1'];  // get session variable 'name1'
-   $value2 = $session['name2'];  // get session variable 'name2'
-   foreach ($session as $name => $value) // traverse all session variables
-   $session['name3'] = $value3;  // set session variable 'name3'
+   public $depends = [
+      'yii\web\YiiAsset',
+      'yii\bootstrap\BootstrapAsset',
+   ];
 
  Session can be extended to support customized session storage. To do so,
  override 'useCustomStorage' so that it returns true, and override these
@@ -239,13 +237,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Session::registerSessionHandler*			protected
 >
  registerSessionHandler()
 <
 (void)
-
 
 
 
@@ -257,7 +253,6 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Session::destroy*				public
 >
  destroy()
@@ -266,13 +261,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Session::getIsActive*				public
 >
  getIsActive()
 <
 (boolean) Whether the session has started
-
 
 
 
@@ -307,13 +300,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Session::setId*					public
 >
  setId($value)
 <
 (void)
-
 
     [$value] (string) The session ID for the current session
 
@@ -337,13 +328,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Session::setName*				public
 >
  setName($value)
 <
 (void)
-
 
     [$value] (string) The session name for the current session, must be an
     alphanumeric string. It defaults to "PHPSESSID".
@@ -357,13 +346,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Session::setSavePath*				public
 >
  setSavePath($value)
 <
 (void)
-
 
     [$value] (string) The current session save path. This can be either a
     directory name or a path alias.
@@ -374,7 +361,6 @@ METHOD DETAILS
  getCookieParams()
 <
 (array) The session cookie parameters.
-
 
 
 
@@ -399,7 +385,6 @@ session IDs.
 
 
 
-
 *yii/web/Session::setUseCookies*				public
 >
  setUseCookies($value)
@@ -408,10 +393,11 @@ session IDs.
 
  Three states are possible:
 
- - true: cookies and only cookies will be used to store session IDs. - false:
- cookies will not be used to store session IDs. - null: if possible, cookies
- will be used to store session IDs; if not, other mechanisms will be used
- (e.g. GET parameter)
+
+   - true: cookies and only cookies will be used to store session IDs. 
+   - false: cookies will not be used to store session IDs. 
+   - null: if possible, cookies will be used to store session IDs; if
+   not, other mechanisms will be used (e.g. GET parameter)
     [$value] (boolean|null) The value indicating whether cookies should be
     used to store session IDs.
 
@@ -425,13 +411,11 @@ is started on every session initialization, defaults to 1 meaning 1% chance.
 
 
 
-
 *yii/web/Session::setGCProbability*			public
 >
  setGCProbability($value)
 <
 (void)
-
 
     [$value] (float) The probability (percentage) that the GC (garbage
     collection) process is started on every session initialization.
@@ -446,13 +430,11 @@ false.
 
 
 
-
 *yii/web/Session::setUseTransparentSessionID*		public
 >
  setUseTransparentSessionID($value)
 <
 (void)
-
 
     [$value] (boolean) Whether transparent sid support is enabled or not.
 
@@ -467,13 +449,11 @@ cleaned up. The default value is 1440 seconds (or the value of
 
 
 
-
 *yii/web/Session::setTimeout*				public
 >
  setTimeout($value)
 <
 (void)
-
 
     [$value] (integer) The number of seconds after which data will be seen as
     'garbage' and cleaned up
@@ -564,7 +544,6 @@ cleaned up. The default value is 1440 seconds (or the value of
 
 
 
-
 *yii/web/Session::count*					public
 >
  count()
@@ -604,7 +583,6 @@ does not exist.
 <
 (mixed) The removed value, null if no such session variable.
 
-
     [$key] (string) The name of the session variable to be removed
 
 
@@ -616,13 +594,11 @@ does not exist.
 
 
 
-
 *yii/web/Session::has*					public
 >
  has($key)
 <
 (boolean) Whether there is the named session variable
-
 
     [$key] (mixed) Session variable name
 
@@ -657,7 +633,6 @@ does not exist.
  getAllFlashes()
 <
 (array) Flash messages (key => message).
-
 
 
 
@@ -707,7 +682,6 @@ does not exist.
 <
 (boolean) Whether the specified flash message exists
 
-
     [$key] (string) Key identifying the flash message
 
 
@@ -716,7 +690,6 @@ does not exist.
  offsetExists($offset)
 <
 (boolean) 
-
 
     [$offset] (mixed) The offset to check on
 
@@ -727,7 +700,6 @@ does not exist.
 <
 (mixed) The element at the offset, null if no element is found at the offset
 
-
     [$offset] (integer) The offset to retrieve element.
 
 
@@ -736,7 +708,6 @@ does not exist.
  offsetSet($offset, $item)
 <
 (void)
-
 
     [$offset] (integer) The offset to set element
     [$item] (mixed) The element value
@@ -747,7 +718,6 @@ does not exist.
  offsetUnset($offset)
 <
 (void)
-
 
     [$offset] (mixed) The offset to unset element
 

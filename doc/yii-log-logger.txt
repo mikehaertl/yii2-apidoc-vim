@@ -10,8 +10,13 @@ DESCRIPTION
  methods are provided for logging messages of various severity levels via the
  'Yii' class:
 
- - 'Yii::trace()' - 'Yii::error()' - 'Yii::warning()' - 'Yii::info()' -
- 'Yii::beginProfile()' - 'Yii::endProfile()'
+
+   - 'Yii::trace()' 
+   - 'Yii::error()' 
+   - 'Yii::warning()' 
+   - 'Yii::info()' 
+   - 'Yii::beginProfile()' 
+   - 'Yii::endProfile()'
 
  When the application ends or 'flushInterval' is reached, Logger will call
  'flush()' to send logged messages to different log targets, such as file,
@@ -25,15 +30,15 @@ $messages				*yii/log/Logger::$messages*
  (array) Logged messages. This property is managed by 'log()' and 'flush()'.
  Each log message is of the following structure:
 
-   [
-     [0] => message (mixed, can be a string or some complex data, such as an
- exception object)
-     [1] => level (integer)
-     [2] => category (string)
-     [3] => timestamp (float, obtained by microtime(true))
-     [4] => traces (array, debug backtrace, contains the application code call
- stacks)
-   ]
+   CREATE TABLE log (
+       id       BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+       level    INTEGER,
+       category VARCHAR(255),
+       log_time INTEGER,
+       message  TEXT,
+       INDEX idx_log_level (level),
+       INDEX idx_log_category (category)
+   )
 
 
 
@@ -87,7 +92,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -201,7 +205,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$final] (boolean) Whether this is a final call during a request.
 
 
@@ -251,7 +254,6 @@ the second element the total time spent in SQL execution.
 (array) Timings. Each element is an array consisting of these elements:
 'info', 'category', 'timestamp', 'trace', 'level', 'duration'.
 
-
     [$messages] (array) The log messages obtained from profiling
 
 
@@ -260,7 +262,6 @@ the second element the total time spent in SQL execution.
  getLevelName($level)
 <
 (string) The text display of the level
-
 
     [$level] (integer) The message level, e.g. 'LEVEL_ERROR', 'LEVEL_WARNING'.
 

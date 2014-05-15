@@ -15,11 +15,7 @@ DESCRIPTION
  The following example shows how you can configure the application to use
  DbCache:
 
-   'cache' => [
-       'class' => 'yii\caching\DbCache',
-       // 'db' => 'mydb',
-       // 'cacheTable' => 'my_cache',
-   ]
+   function ($mailer, $message)
 
 
 
@@ -43,16 +39,19 @@ $cacheTable				*yii/caching/DbCache::$cacheTable*
  (string) Name of the DB table to store cache content. The table should be
  pre-created as follows:
 
-   CREATE TABLE cache (
-       id char(128) NOT NULL PRIMARY KEY,
-       expire int(11),
-       data BLOB
-   );
+   'cache' => [
+       'class' => 'yii\caching\DbCache',
+       // 'db' => 'mydb',
+       // 'cacheTable' => 'my_cache',
+   ]
 
  where 'BLOB' refers to the BLOB-type of your preferred DBMS. Below are the
  BLOB type that can be used for some popular DBMS:
 
- - MySQL: LONGBLOB - PostgreSQL: BYTEA - MSSQL: BLOB
+
+   - MySQL: LONGBLOB 
+   - PostgreSQL: BYTEA 
+   - MSSQL: BLOB
 
  When using DbCache in a production server, we recommend you create a DB index
  for the 'expire' column in the cache table to improve the performance.
@@ -272,7 +271,6 @@ cache or expired.
 <
 (boolean) If no error happens during deletion
 
-
     [$key] (string) The key of the value to be deleted
 
 
@@ -290,7 +288,6 @@ cache or expired.
  getValues($keys)
 <
 (array) A list of cached values indexed by the keys
-
 
     [$keys] (array) A list of keys identifying the cached values
 
@@ -324,7 +321,6 @@ cache or expired.
  gc($force='false')
 <
 (void)
-
 
     [$force] (boolean) Whether to enforce the garbage collection regardless of
     'gcProbability'. Defaults to false, meaning the actual deletion happens

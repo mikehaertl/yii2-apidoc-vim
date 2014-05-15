@@ -2,11 +2,6 @@
 *yii/widgets/ListView*   >> |yii/widgets/BaseListView|
 ======================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -63,10 +58,12 @@ $itemView				*yii/widgets/ListView::$itemView*
  callback (e.g. an anonymous function) for rendering each data item. If it
  specifies a view name, the following variables will be available in the view:
 
- - '$model': mixed, the data model - '$key': mixed, the key value associated
- with the data item - '$index': integer, the zero-based index of the data item
- in the items array returned by 'dataProvider'. - '$widget': ListView, this
- widget instance
+
+   - '$model': mixed, the data model 
+   - '$key': mixed, the key value associated with the data item 
+   - '$index': integer, the zero-based index of the data item in the
+   items array returned by 'dataProvider'. 
+   - '$widget': ListView, this widget instance
 
  Note that the view name is resolved into the view file by the current context
  of the 'view' object.
@@ -74,7 +71,7 @@ $itemView				*yii/widgets/ListView::$itemView*
  If this property is specified as a callback, it should have the following
  signature:
 
-   function ($model, $key, $index, $widget)
+   function ($index, $label, $name, $checked, $value)
 
 
 
@@ -256,7 +253,6 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/ListView::renderSection*			public
  See |yii/widgets/BaseListView::renderSection|
 
@@ -282,7 +278,6 @@ METHOD DETAILS
  renderItem($model, $key, $index)
 <
 (string) The rendering result
-
 
     [$model] (mixed) The data model to be rendered
     [$key] (mixed) The key value associated with the data model

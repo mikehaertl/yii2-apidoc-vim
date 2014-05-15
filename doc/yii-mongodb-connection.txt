@@ -14,17 +14,22 @@ DESCRIPTION
  The following example shows how to create a Connection instance and establish
  the DB connection:
 
-   $connection = new \yii\mongodb\Connection([
-       'dsn' => $dsn,
-   ]);
-   $connection->open();
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
 
  After the Mongo connection is established, one can access Mongo databases and
  collections:
 
-   $database = $connection->getDatabase('my_mongo_db');
-   $collection = $database->getCollection('customer');
-   $collection->insert(['name' => 'John Smith', 'status' => 1]);
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
 
  You can work with several different databases at the same server using this
  class. However, while it is unlikely your application will actually need it,
@@ -32,23 +37,17 @@ DESCRIPTION
  a shortcut method 'getCollection()' to retrieve a particular collection
  instance:
 
-   // get collection 'customer' from default database:
-   $collection = $connection->getCollection('customer');
-   // get collection 'customer' from database 'mydatabase':
-   $collection = $connection->getCollection(['mydatabase', 'customer']);
+   $connection = new \yii\mongodb\Connection([
+       'dsn' => $dsn,
+   ]);
+   $connection->open();
 
  Connection is often used as an application component and configured in the
  application configuration like the following:
 
-   [
-        'components' => [
-            'mongodb' => [
-                'class' => '\yii\mongodb\Connection',
-                'dsn' =>
- 'mongodb://developer:password@localhost:27017/mydatabase',
-            ],
-        ],
-   ]
+   $database = $connection->getDatabase('my_mongo_db');
+   $collection = $database->getCollection('customer');
+   $collection->insert(['name' => 'John Smith', 'status' => 1]);
 
 
 
@@ -68,12 +67,10 @@ $dsn					*yii/mongodb/Connection::$dsn*
 $options				*yii/mongodb/Connection::$options*
  (array) Connection options. for example:
 
-   [
-       'socketTimeoutMS' => 1000, // how long a send or receive on a socket
- can take before timing out
-       'journal' => true // block write operations until the journal be
- flushed the to disk
-   ]
+   // get collection 'customer' from default database:
+   $collection = $connection->getCollection('customer');
+   // get collection 'customer' from database 'mydatabase':
+   $collection = $connection->getCollection(['mydatabase', 'customer']);
 
 
 
@@ -208,7 +205,6 @@ METHOD DETAILS
 <
 (\yii\mongodb\Database) Database instance.
 
-
     [$name] (string|null) Collection name, if null default one will be used.
     [$refresh] (boolean) Whether to reestablish the database connection even
     if it is found in the cache.
@@ -222,13 +218,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mongodb/Connection::selectDatabase*			protected
 >
  selectDatabase($name)
 <
 (\yii\mongodb\Database) Database instance.
-
 
     [$name] (string) Database name.
 
@@ -239,11 +233,10 @@ METHOD DETAILS
 <
 (\yii\mongodb\Collection) Mongo collection instance.
 
-
     [$name] (string|array) Collection name. If string considered as the name
-    of the collection inside the default database. If array - first element
-    considered as the name of the database, second - as name of collection
-    inside that database
+    of the collection inside the default database. If array 
+      - first element considered as the name of the database, second 
+      - as name of collection inside that database
     [$refresh] (boolean) Whether to reload the collection instance even if it
     is found in the cache.
 
@@ -254,12 +247,11 @@ METHOD DETAILS
 <
 (\yii\mongodb\file\Collection) Mongo GridFS collection instance.
 
-
     [$prefix] (string|array) Collection prefix. If string considered as the
-    prefix of the GridFS collection inside the default database. If array -
-    first element considered as the name of the database, second - as prefix
-    of the GridFS collection inside that database, if no second element
-    present default "fs" prefix will be used.
+    prefix of the GridFS collection inside the default database. If array 
+      - first element considered as the name of the database, second 
+      - as prefix of the GridFS collection inside that database, if no
+      second element present default "fs" prefix will be used.
     [$refresh] (boolean) Whether to reload the collection instance even if it
     is found in the cache.
 
@@ -269,7 +261,6 @@ METHOD DETAILS
  getIsActive()
 <
 (boolean) Whether the Mongo connection is established
-
 
 
 

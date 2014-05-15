@@ -17,13 +17,11 @@ DESCRIPTION
 
  For example,
 
-   $query = new Query;
-   // compose the query
-   $query->select(['name', 'status'])
-       ->from('customer')
-       ->limit(10);
-   // execute the query
-   $rows = $query->all();
+   'session' => [
+       'class' => 'yii\mongodb\Session',
+       // 'db' => 'mymongodb',
+       // 'sessionCollection' => 'my_session',
+   ]
 
 
 
@@ -53,9 +51,9 @@ $select					*yii/mongodb/Query::$select*
 
 $from					*yii/mongodb/Query::$from*
  (string|array) The collection to be selected from. If string considered as
- the name of the collection inside the default database. If array - first
- element considered as the name of the database, second - as name of
- collection inside that database
+ the name of the collection inside the default database. If array 
+   - first element considered as the name of the database, second 
+   - as name of collection inside that database
 
 $behaviors				*yii/mongodb/Query::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -230,7 +228,6 @@ METHOD DETAILS
 <
 (\yii\mongodb\Collection) Collection instance.
 
-
     [$db] (\yii\mongodb\Connection) Mongo connection.
 
 
@@ -239,7 +236,6 @@ METHOD DETAILS
  select($fields)
 <
 (static) The query object itself.
-
 
     [$fields] (array) Fields of the results to return.
 
@@ -250,7 +246,6 @@ METHOD DETAILS
 <
 (static) The query object itself.
 
-
     [$collection] () 
 
 
@@ -259,7 +254,6 @@ METHOD DETAILS
  buildCursor($db='null')
 <
 (\MongoCursor) Mongo cursor instance.
-
 
     [$db] (\yii\mongodb\Connection) The database connection used to execute
     the query.
@@ -270,7 +264,6 @@ METHOD DETAILS
  fetchRows($cursor, $all='true', $indexBy='null')
 <
 (array|boolean) Result.
-
 
     [$cursor] (\MongoCursor) Mongo cursor instance to fetch data from.
     [$all] (boolean) Whether to fetch all rows or only first one.
@@ -284,7 +277,6 @@ METHOD DETAILS
 <
 (array|boolean) Result.
 
-
     [$cursor] (\MongoCursor) Mongo cursor instance to fetch data from.
     [$all] (boolean) Whether to fetch all rows or only first one.
     [$indexBy] (string|callable) Value to index by.
@@ -296,7 +288,6 @@ METHOD DETAILS
 <
 (array) The query results. If the query results in nothing, an empty array
 will be returned.
-
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
@@ -310,7 +301,6 @@ will be returned.
 (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
 
-
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
     will be used.
@@ -321,7 +311,6 @@ False is returned if the query results in nothing.
  count($q=''*'', $db='null')
 <
 (integer) Number of records
-
 
     [$q] (string) Kept to match 'QueryInterface', its value is ignored.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -335,7 +324,6 @@ False is returned if the query results in nothing.
 <
 (boolean) Whether the query result contains any row of data.
 
-
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
     will be used.
@@ -346,7 +334,6 @@ False is returned if the query results in nothing.
  sum($q, $db='null')
 <
 (integer) The sum of the specified column values
-
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -361,7 +348,6 @@ False is returned if the query results in nothing.
 <
 (integer) The average of the specified column values.
 
-
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -374,7 +360,6 @@ False is returned if the query results in nothing.
  min($q, $db='null')
 <
 (integer) The minimum of the specified column values.
-
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -389,7 +374,6 @@ False is returned if the query results in nothing.
 <
 (integer) The maximum of the specified column values.
 
-
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -403,7 +387,6 @@ False is returned if the query results in nothing.
 <
 (integer) Aggregation result.
 
-
     [$column] (string) Column name.
     [$operator] (string) Aggregation operator.
     [$db] (\yii\mongodb\Connection) The database connection used to execute
@@ -415,7 +398,6 @@ False is returned if the query results in nothing.
  distinct($q, $db='null')
 <
 (array) Array of distinct values
-
 
     [$q] (string) Column to use.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the

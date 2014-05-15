@@ -36,15 +36,27 @@ DESCRIPTION
  Validator declares a set of 'builtInValidators|built-in validators] which can
  be referenced using short names. They are listed as follows:
 
- - 'boolean': 'BooleanValidator' - 'captcha': '\yii\captcha\CaptchaValidator'
- - 'compare': 'CompareValidator' - 'date': 'DateValidator' - 'default':
- 'DefaultValueValidator' - 'double': 'NumberValidator' - 'email':
- 'EmailValidator' - 'exist': 'ExistValidator' - 'file': 'FileValidator' -
- 'filter': 'FilterValidator' - 'image': 'ImageValidator' - 'in':
- 'RangeValidator' - 'integer': 'NumberValidator' - 'match':
- 'RegularExpressionValidator' - 'required': 'RequiredValidator' - 'safe':
- 'SafeValidator' - 'string': 'StringValidator' - 'trim': 'FilterValidator' -
- 'unique': 'UniqueValidator' - 'url': 'UrlValidator'
+
+   - 'boolean': 'BooleanValidator' 
+   - 'captcha': '\yii\captcha\CaptchaValidator' 
+   - 'compare': 'CompareValidator' 
+   - 'date': 'DateValidator' 
+   - 'default': 'DefaultValueValidator' 
+   - 'double': 'NumberValidator' 
+   - 'email': 'EmailValidator' 
+   - 'exist': 'ExistValidator' 
+   - 'file': 'FileValidator' 
+   - 'filter': 'FilterValidator' 
+   - 'image': 'ImageValidator' 
+   - 'in': 'RangeValidator' 
+   - 'integer': 'NumberValidator' 
+   - 'match': 'RegularExpressionValidator' 
+   - 'required': 'RequiredValidator' 
+   - 'safe': 'SafeValidator' 
+   - 'string': 'StringValidator' 
+   - 'trim': 'FilterValidator' 
+   - 'unique': 'UniqueValidator' 
+   - 'url': 'UrlValidator'
 
 
 PROPERTY DETAILS
@@ -62,8 +74,9 @@ $message				*yii/validators/Validator::$message*
  (string) The user-defined error message. It may contain the following
  placeholders which will be replaced accordingly by the validator:
 
- - '{attribute}': the label of the attribute being validated - '{value}': the
- value of the attribute being validated
+
+   - '{attribute}': the label of the attribute being validated 
+   - '{value}': the value of the attribute being validated
 
 $on					*yii/validators/Validator::$on*
  (array|string) Scenarios that the validator can be applied to. For multiple
@@ -110,9 +123,11 @@ $when					*yii/validators/Validator::$when*
  The following example will enable the validator only when the country
  currently selected is USA:
 
-   function ($model) {
-       return $model->country == Country::USA;
-   }
+   [
+       'class' => 'yii\rest\UrlRule',
+       'controller' => ['user', 'post'],
+       'except' => ['delete'],
+   ]
 
 
 
@@ -130,8 +145,8 @@ $whenClient				*yii/validators/Validator::$whenClient*
  The following example will enable the validator only when the country
  currently selected is USA:
 
-   function (attribute, value) {
-       return $('#country').value == 'USA';
+   function ($model) {
+       return $model->country == Country::USA;
    }
 
 
@@ -158,7 +173,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/validators/Validator::__get*				public
@@ -255,7 +271,6 @@ METHOD DETAILS
 <
 (\yii\validators\Validator) The validator
 
-
     [$type] (mixed) The validator type. This can be a built-in validator name,
     a method name of the model class, an anonymous function, or a validator
     class name.
@@ -271,7 +286,6 @@ METHOD DETAILS
  validateAttributes($object, $attributes='null')
 <
 (void)
-
 
     [$object] (\yii\base\Model) The data object being validated
     [$attributes] (array|null) The list of attributes to be validated. Note
@@ -330,9 +344,11 @@ support client-side validation.
  The following JavaScript variables are predefined and can be used in the
  validation code:
 
- - 'attribute': the name of the attribute being validated. - 'value': the
- value being validated. - 'messages': an array used to hold the validation
- error messages for the attribute.
+
+   - 'attribute': the name of the attribute being validated. 
+   - 'value': the value being validated. 
+   - 'messages': an array used to hold the validation error messages
+   for the attribute.
     [$object] (\yii\base\Model) The data object being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
@@ -347,8 +363,9 @@ support client-side validation.
 
  A validator is active if
 
- - the validator's 'on' property is empty, or - the validator's 'on' property
- contains the specified scenario
+
+   - the validator's 'on' property is empty, or 
+   - the validator's 'on' property contains the specified scenario
     [$scenario] (string) Scenario name
 
 

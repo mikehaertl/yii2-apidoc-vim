@@ -7,24 +7,14 @@ DESCRIPTION
 
  For example:
 
-   echo Nav::widget([
-       'items' => [
-           [
-               'label' => 'Home',
-               'url' => ['site/index'],
-               'linkOptions' => [...],
-           ],
-           [
-               'label' => 'Dropdown',
-               'items' => [
-                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
-                    '<li class="divider"></li>',
-                    '<li class="dropdown-header">Dropdown Header</li>',
-                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
-               ],
-           ],
-       ],
-   ]);
+   [
+       // required, the amount of progress as a percentage.
+       'percent' => 30,
+       // optional, the label to be displayed on the bar
+       'label' => '30%',
+       // optional, array, additional HTML attributes for the bar tag
+       'options' => [],
+   ]
 
  Note: Multilevel dropdowns beyond Level 1 are not supported in Bootstrap 3.
 
@@ -55,15 +45,20 @@ $items					*yii/bootstrap/Nav::$items*
  single menu item which can be either a string or an array with the following
  structure:
 
- - label: string, required, the nav item label. - url: optional, the item's
- URL. Defaults to "#". - visible: boolean, optional, whether this menu item is
- visible. Defaults to true. - linkOptions: array, optional, the HTML
- attributes of the item's link. - options: array, optional, the HTML
- attributes of the item container (LI). - active: boolean, optional, whether
- the item should be on active state or not. - items: array|string, optional,
- the configuration array for creating a 'Dropdown' widget,   or a string
- representing the dropdown menu. Note that Bootstrap does not support
- sub-dropdown menus.
+
+   - label: string, required, the nav item label. 
+   - url: optional, the item's URL. Defaults to "#". 
+   - visible: boolean, optional, whether this menu item is visible.
+   Defaults to true. 
+   - linkOptions: array, optional, the HTML attributes of the item's
+   link. 
+   - options: array, optional, the HTML attributes of the item
+   container (LI). 
+   - active: boolean, optional, whether the item should be on active
+   state or not. 
+   - items: array|string, optional, the configuration array for
+   creating a 'Dropdown' widget,   or a string representing the dropdown menu.
+ Note that Bootstrap does not support sub-dropdown menus.
 
  If a menu item is a string, it will be rendered directly without HTML
  encoding.
@@ -118,7 +113,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -246,7 +240,6 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Nav::render*				public
  See |yii/base/Widget::render|
 
@@ -271,13 +264,11 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Nav::renderItem*				public
 >
  renderItem($item)
 <
 (string) The rendering result.
-
 
     [$item] (string|array) The item to render.
 
@@ -287,7 +278,6 @@ METHOD DETAILS
  isChildActive($items, $active)
 <
 (array) @see items
-
 
     [$items] (array) @see items
     [$active] (boolean) Should the parent be active too

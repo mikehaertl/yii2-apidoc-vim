@@ -14,10 +14,10 @@ DESCRIPTION
        'authClientCollection' => [
            'class' => 'yii\authclient\Collection',
            'clients' => [
-               'linkedin' => [
-                   'class' => 'yii\authclient\clients\LinkedIn',
-                   'clientId' => 'linkedin_client_id',
-                   'clientSecret' => 'linkedin_client_secret',
+               'facebook' => [
+                   'class' => 'yii\authclient\clients\Facebook',
+                   'clientId' => 'facebook_client_id',
+                   'clientSecret' => 'facebook_client_secret',
                ],
            ],
        ]
@@ -104,7 +104,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/authclient/clients/LinkedIn::__get*			public
@@ -251,13 +252,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/clients/LinkedIn::defaultTitle*		protected
 >
  defaultTitle()
 <
 (string) Service title.
-
 
 
 
@@ -269,14 +268,14 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/clients/LinkedIn::defaultNormalizeUserAttributeMap*protected
 >
  defaultNormalizeUserAttributeMap()
 <
 (array) Normalize attribute map.
 
-
+ Particular client may override this method in order to provide specific
+ default map.
 
 
 *yii/authclient/clients/LinkedIn::defaultViewOptions*	protected
@@ -324,7 +323,6 @@ METHOD DETAILS
  defaultReturnUrl()
 <
 (string) Return URL.
-
 
 
 
@@ -410,11 +408,10 @@ METHOD DETAILS
 <
 (array) API response.
 
-
-    [$accessToken] () 
-    [$url] () 
-    [$method] () 
-    [$params] () 
+    [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
+    [$url] (string) Absolute API URL.
+    [$method] (string) Request method.
+    [$params] (array) Request parameters.
 
 
 *yii/authclient/clients/LinkedIn::buildAuthUrl*		public
@@ -423,8 +420,7 @@ METHOD DETAILS
 <
 (string) Authorization URL.
 
-
-    [$params] () 
+    [$params] (array) Additional auth GET params.
 
 
 *yii/authclient/clients/LinkedIn::fetchAccessToken*	public
@@ -433,9 +429,8 @@ METHOD DETAILS
 <
 (\yii\authclient\OAuthToken) Access token.
 
-
-    [$authCode] () 
-    [$params] () 
+    [$authCode] (string) Authorization code, usually comes at $_GET['code'].
+    [$params] (array) Additional request params.
 
 
 *yii/authclient/clients/LinkedIn::generateAuthState*	protected
@@ -443,7 +438,6 @@ METHOD DETAILS
  generateAuthState()
 <
 (string) Auth state value.
-
 
 
 

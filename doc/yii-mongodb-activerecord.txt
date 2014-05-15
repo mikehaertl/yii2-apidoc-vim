@@ -7,11 +7,6 @@ SUBCLASSES
 
 |yii/mongodb/file/ActiveRecord|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -32,15 +27,13 @@ $errors					*yii/mongodb/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   $query = new Query;
+   // compose the query
+   $query->select(['name', 'status'])
+       ->from('customer')
+       ->limit(10);
+   // execute the query
+   $rows = $query->all();
 
 
 
@@ -224,10 +217,11 @@ METHOD DETAILS
  attributes. Note: primary key attribute "_id" should be always present in
  returned array. For example:
 
-   public function attributes()
-   {
-       return ['_id', 'name', 'address', 'status'];
-   }
+   'cache' => [
+       'class' => 'yii\mongodb\Cache',
+       // 'db' => 'mymongodb',
+       // 'cacheCollection' => 'my_cache',
+   ]
 
 
 
@@ -381,7 +375,15 @@ METHOD DETAILS
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   Customer::updateAll(['status' => 1], ['status' => 2]);
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -399,7 +401,10 @@ METHOD DETAILS
 
  For example, to increment all customers' age by 1,
 
-   Customer::updateAllCounters(['age' => 1]);
+   public function attributes()
+   {
+       return ['_id', 'name', 'address', 'status'];
+   }
 
 
     [$counters] (array) The counters to be updated (attribute name =>
@@ -421,7 +426,7 @@ METHOD DETAILS
 
  For example, to delete all customers whose status is 3:
 
-   Customer::deleteAll(['status' => 3]);
+   Customer::updateAll(['status' => 1], ['status' => 2]);
 
 
     [$condition] (array) Description of the objects to delete. Please refer to
@@ -510,7 +515,6 @@ METHOD DETAILS
  updateInternal($attributes='null')
 <
 (void)
-
 
     [$attributes] () 
 
@@ -633,7 +637,32 @@ Mongo collection.
 (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
+ The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
+ customized by calling methods defined in 'ActiveQueryInterface' before
+ 'one()' or 'all()' is called to return populated ActiveRecord instances. For
+ example,
 
+   Customer::updateAllCounters(['age' => 1]);
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   Customer::deleteAll(['status' => 3]);
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
 
 
 *yii/mongodb/ActiveRecord::insert*			public
@@ -664,10 +693,14 @@ successfully.
 
  For example, to insert a customer record:
 
-   $customer = new Customer;
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->insert();
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -694,10 +727,11 @@ successfully.
 <
 (string|array) The collection name
 
- Collection name can be either a string or array:  - if string considered as
- the name of the collection inside the default database.  - if array - first
- element considered as the name of the database, second - as    name of
- collection inside that database
+ Collection name can be either a string or array:  
+   - if string considered as the name of the collection inside the
+   default database.  
+   - if array - first element considered as the name of the database,
+   second - as    name of collection inside that database
 
  By default this method returns the class name as the collection name by
  calling 'Inflector::camel2id()'. For example, 'Customer' becomes 'customer',
@@ -713,13 +747,11 @@ successfully.
 
 
 
-
 *yii/mongodb/ActiveRecord::insertInternal*		protected
 >
  insertInternal($attributes='null')
 <
 (void)
-
 
     [$attributes] () 
 
@@ -729,7 +761,6 @@ successfully.
  deleteInternal()
 <
 (void)
-
 
 
 

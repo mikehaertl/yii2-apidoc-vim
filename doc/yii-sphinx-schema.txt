@@ -2,11 +2,6 @@
 *yii/sphinx/Schema*   >> |yii/base/Object|
 ===================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -91,7 +86,6 @@ METHOD DETAILS
 (\yii\sphinx\IndexSchema) Driver dependent index metadata. Null if the index
 does not exist.
 
-
     [$name] (string) Index name
 
 
@@ -100,7 +94,6 @@ does not exist.
  resolveIndexNames($index, $name)
 <
 (void)
-
 
     [$index] (\yii\sphinx\IndexSchema) The index metadata object
     [$name] (string) The index name
@@ -112,7 +105,6 @@ does not exist.
 <
 (void)
 
-
     [$index] (\yii\sphinx\IndexSchema) The index metadata object
 
 
@@ -122,7 +114,6 @@ does not exist.
 <
 (\yii\sphinx\IndexSchema) Index metadata. Null if the named index does not
 exist.
-
 
     [$name] (string) Index name. The index name may contain schema name if
     any. Do not quote the index name.
@@ -135,7 +126,6 @@ exist.
  getCacheKey($name)
 <
 (mixed) The cache key
-
 
     [$name] (string) The index name
 
@@ -156,7 +146,6 @@ exist.
 (\yii\sphinx\IndexSchema[]) The metadata for all indexes in the Sphinx. Each
 array element is an instance of 'IndexSchema' or its child class.
 
-
     [$refresh] (boolean) Whether to fetch the latest available index schemas.
     If this is false, cached data may be returned if available.
 
@@ -166,7 +155,6 @@ array element is an instance of 'IndexSchema' or its child class.
  getIndexNames($refresh='false')
 <
 (string[]) All index names in the Sphinx.
-
 
     [$refresh] (boolean) Whether to fetch the latest available index names. If
     this is false, index names fetched previously (if available) will be
@@ -178,7 +166,6 @@ array element is an instance of 'IndexSchema' or its child class.
  getIndexTypes($refresh='false')
 <
 (array) All index types in the Sphinx in format: index name => index type.
-
 
     [$refresh] (boolean) Whether to fetch the latest available index types. If
     this is false, index types fetched previously (if available) will be
@@ -193,13 +180,11 @@ array element is an instance of 'IndexSchema' or its child class.
 
 
 
-
 *yii/sphinx/Schema::findIndexes*				protected
 >
  findIndexes()
 <
 (array) All index names in the Sphinx.
-
 
 
 
@@ -211,13 +196,11 @@ array element is an instance of 'IndexSchema' or its child class.
 
 
 
-
 *yii/sphinx/Schema::getPdoType*				public
 >
  getPdoType($data)
 <
 (integer) The PDO type
-
 
     [$data] (mixed) The data whose PDO type is to be determined
 
@@ -237,7 +220,6 @@ array element is an instance of 'IndexSchema' or its child class.
  createQueryBuilder()
 <
 (\yii\sphinx\QueryBuilder) Query builder instance
-
 
 
 
@@ -313,7 +295,6 @@ array element is an instance of 'IndexSchema' or its child class.
 <
 (string) PHP type name
 
-
     [$column] (\yii\sphinx\ColumnSchema) The column schema information
 
 
@@ -322,7 +303,6 @@ array element is an instance of 'IndexSchema' or its child class.
  findColumns($index)
 <
 (boolean) Whether the index exists in the database
-
 
     [$index] (\yii\sphinx\IndexSchema) The index metadata
 
@@ -333,8 +313,17 @@ array element is an instance of 'IndexSchema' or its child class.
 <
 (\yii\sphinx\ColumnSchema) The column schema object
 
-
     [$info] (array) Column information
+
+
+*yii/sphinx/Schema::handleException*			public
+>
+ handleException($e, $rawSql)
+<
+(void)
+
+    [$e] (\Exception) 
+    [$rawSql] (string) SQL that produced exception
 
 
 

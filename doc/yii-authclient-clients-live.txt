@@ -14,10 +14,8 @@ DESCRIPTION
        'authClientCollection' => [
            'class' => 'yii\authclient\Collection',
            'clients' => [
-               'live' => [
-                   'class' => 'yii\authclient\clients\Live',
-                   'clientId' => 'live_client_id',
-                   'clientSecret' => 'live_client_secret',
+               'google' => [
+                   'class' => 'yii\authclient\clients\GoogleOpenId'
                ],
            ],
        ]
@@ -104,7 +102,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/authclient/clients/Live::__get*			public
@@ -251,7 +250,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/clients/Live::defaultTitle*		protected
 >
  defaultTitle()
@@ -260,13 +258,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/clients/Live::initUserAttributes*		protected
 >
  initUserAttributes()
 <
 (array) Auth user attributes.
-
 
 
 

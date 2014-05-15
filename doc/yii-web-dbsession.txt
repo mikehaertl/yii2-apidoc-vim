@@ -12,11 +12,12 @@ DESCRIPTION
  The following example shows how you can configure the application to use
  DbSession: Add the following to your application config under 'components':
 
-   'session' => [
-       'class' => 'yii\web\DbSession',
-       // 'db' => 'mydb',
-       // 'sessionTable' => 'my_session',
-   ]
+   $session = new Session;
+   $session->open();
+   $value1 = $session['name1'];  // get session variable 'name1'
+   $value2 = $session['name2'];  // get session variable 'name2'
+   foreach ($session as $name => $value) // traverse all session variables
+   $session['name3'] = $value3;  // set session variable 'name3'
 
 
 
@@ -40,17 +41,19 @@ $sessionTable				*yii/web/DbSession::$sessionTable*
  (string) The name of the DB table that stores the session data. The table
  should be pre-created as follows:
 
-   CREATE TABLE session
-   (
-       id CHAR(40) NOT NULL PRIMARY KEY,
-       expire INTEGER,
-       data BLOB
-   )
+   'session' => [
+       'class' => 'yii\web\DbSession',
+       // 'db' => 'mydb',
+       // 'sessionTable' => 'my_session',
+   ]
 
  where 'BLOB' refers to the BLOB-type of your preferred DBMS. Below are the
  BLOB type that can be used for some popular DBMS:
 
- - MySQL: LONGBLOB - PostgreSQL: BYTEA - MSSQL: BLOB
+
+   - MySQL: LONGBLOB 
+   - PostgreSQL: BYTEA 
+   - MSSQL: BLOB
 
  When using DbSession in a production server, we recommend you create a DB
  index for the 'expire' column in the session table to improve the

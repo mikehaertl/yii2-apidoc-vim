@@ -2,11 +2,6 @@
 *yii/widgets/FragmentCache*   >> |yii/base/Widget|
 ===========================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -34,10 +29,23 @@ $dependency				*yii/widgets/FragmentCache::$dependency*
  depends on. This can be either a 'Dependency' object or a configuration array
  for creating the dependency object. For example,
 
-   [
-       'class' => 'yii\caching\DbDependency',
-       'sql' => 'SELECT MAX(lastModified) FROM Post',
-   ]
+   echo Menu::widget([
+       'items' => [
+           // Important: you need to specify url as 'controller/action',
+           // not just as 'controller' even if default action is used.
+           ['label' => 'Home', 'url' => ['site/index']],
+           // 'Products' menu item will be selected as long as the route is
+ 'product/index'
+           ['label' => 'Products', 'url' => ['product/index'], 'items' => [
+               ['label' => 'New Arrivals', 'url' => ['product/index', 'tag' =>
+ 'new']],
+               ['label' => 'Most Popular', 'url' => ['product/index', 'tag' =>
+ 'popular']],
+           ]],
+           ['label' => 'Login', 'url' => ['site/login'], 'visible' =>
+ Yii::$app->user->isGuest],
+       ],
+   ]);
 
  would make the output cache depends on the last modified time of all posts.
  If any post has its modification time changed, the cached content would be
@@ -97,7 +105,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -246,7 +253,6 @@ METHOD DETAILS
 <
 (string|boolean) The cached content. False is returned if valid content is not
 found in the cache.
-
 
 
 

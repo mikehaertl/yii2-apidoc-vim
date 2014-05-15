@@ -32,15 +32,20 @@ DESCRIPTION
 
  Model implements the following commonly used features:
 
- - attribute declaration: by default, every public class member is considered
- as   a model attribute - attribute labels: each attribute may be associated
- with a label for display purpose - massive attribute assignment -
- scenario-based validation
+
+   - attribute declaration: by default, every public class member is
+   considered as   a model attribute 
+   - attribute labels: each attribute may be associated with a label
+   for display purpose 
+   - massive attribute assignment 
+   - scenario-based validation
 
  Model also raises the following events when performing data validation:
 
- - 'EVENT_BEFORE_VALIDATE': an event raised at the beginning of 'validate()' -
- 'EVENT_AFTER_VALIDATE': an event raised at the end of 'validate()'
+
+   - 'EVENT_BEFORE_VALIDATE': an event raised at the beginning of
+   'validate()' 
+   - 'EVENT_AFTER_VALIDATE': an event raised at the end of 'validate()'
 
  You may directly use Model to store model data, or extend it with
  customization.
@@ -218,11 +223,13 @@ METHOD DETAILS
 
  For example, the following code declares four fields:
 
- - 'email': the field name is the same as the property name 'email'; -
- 'firstName' and 'lastName': the field names are 'firstName' and 'lastName',
- and their   values are obtained from the 'first_name' and 'last_name'
- properties; - 'fullName': the field name is 'fullName'. Its value is obtained
- by concatenating 'first_name'   and 'last_name'.
+
+   - 'email': the field name is the same as the property name 'email'; 
+   - 'firstName' and 'lastName': the field names are 'firstName' and
+   'lastName', and their   values are obtained from the 'first_name' and
+ 'last_name' properties; 
+   - 'fullName': the field name is 'fullName'. Its value is obtained by
+   concatenating 'first_name'   and 'last_name'.
 
    return [
        'email',
@@ -285,15 +292,18 @@ callables returning the field values.
 
  where
 
-  - attribute list: required, specifies the attributes array to be validated,
- for single attribute you can pass string;  - validator type: required,
- specifies the validator to be used. It can be a built-in validator name,    a
- method name of the model class, an anonymous function, or a validator class
- name.  - on: optional, specifies the 'scenario|scenarios' array when the
- validation    rule can be applied. If this option is not set, the rule will
- apply to all scenarios.  - additional name-value pairs can be specified to
- initialize the corresponding validator properties.    Please refer to
- individual validator class API for possible properties.
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array when the
+   validation    rule can be applied. If this option is not set, the rule will
+ apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
 
  A validator can be either an object of a class extending 'Validator', or a
  model class method (called *inline validator*) that has the following
@@ -417,8 +427,10 @@ callables returning the field values.
  'scenario'. The following criteria are used to determine whether a rule is
  currently applicable:
 
- - the rule must be associated with the attributes relevant to the current
- scenario; - the rules must be effective for the current scenario.
+
+   - the rule must be associated with the attributes relevant to the
+   current scenario; 
+   - the rules must be effective for the current scenario.
 
  This method will call 'beforeValidate()' and 'afterValidate()' before and
  after the actual validation, respectively. If 'beforeValidate()' returns
@@ -483,7 +495,6 @@ model.
 (\yii\validators\Validator[]) The validators applicable to the current
 'scenario'.
 
-
     [$attribute] (string) The name of the attribute whose applicable
     validators should be returned. If this is null, the validators for ALL
     attributes in the model will be returned.
@@ -517,7 +528,6 @@ model.
 <
 (boolean) Whether the attribute is safe for massive assignments
 
-
     [$attribute] (string) Attribute name
 
 
@@ -526,7 +536,6 @@ model.
  isAttributeActive($attribute)
 <
 (boolean) Whether the attribute is active in the current scenario
-
 
     [$attribute] (string) Attribute name
 
@@ -537,7 +546,6 @@ model.
 <
 (string) The attribute label
 
-
     [$attribute] (string) The attribute name
 
 
@@ -546,7 +554,6 @@ model.
  hasErrors($attribute='null')
 <
 (boolean) Whether there is any error.
-
 
     [$attribute] (string|null) Attribute name. Use null to check all
     attributes.
@@ -572,7 +579,6 @@ result is a two-dimensional array, like the following:
 
 
 
-
     [$attribute] (string) Attribute name. Use null to retrieve errors for all
     attributes.
 
@@ -587,13 +593,11 @@ returned if there is no error.
 
 
 
-
 *yii/base/Model::getFirstError*				public
 >
  getFirstError($attribute)
 <
 (string) The error message. Null is returned if no error.
-
 
     [$attribute] (string) Attribute name.
 
@@ -604,7 +608,6 @@ returned if there is no error.
 <
 (void)
 
-
     [$attribute] (string) Attribute name
     [$error] (string) New error message
 
@@ -614,7 +617,6 @@ returned if there is no error.
  clearErrors($attribute='null')
 <
 (void)
-
 
     [$attribute] (string) Attribute name. Use null to remove errors for all
     attribute.
@@ -638,7 +640,6 @@ returned if there is no error.
 <
 (array) Attribute values (name => value).
 
-
     [$names] (array) List of attributes whose value needs to be returned.
     Defaults to null, meaning all attributes listed in 'attributes()' will be
     returned. If it is an array, only the attributes in the array will be
@@ -651,7 +652,6 @@ returned if there is no error.
  setAttributes($values, $safeOnly='true')
 <
 (void)
-
 
     [$values] (array) Attribute values (name => value) to be assigned to the
     model.
@@ -701,13 +701,11 @@ returned if there is no error.
 
 
 
-
 *yii/base/Model::activeAttributes*			public
 >
  activeAttributes()
 <
 (string[]) Safe attribute names
-
 
 
 

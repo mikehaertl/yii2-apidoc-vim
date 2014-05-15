@@ -15,34 +15,26 @@ DESCRIPTION
 
  SqlDataProvider may be used in the following way:
 
-   $count = Yii::$app->db->createCommand('
-       SELECT COUNT(*) FROM user WHERE status=:status
-   ', [':status' => 1])->queryScalar();
-
-   $dataProvider = new SqlDataProvider([
-       'sql' => 'SELECT * FROM user WHERE status=:status',
-       'params' => [':status' => 1],
-       'totalCount' => $count,
-       'sort' => [
-           'attributes' => [
-               'age',
-               'name' => [
-                   'asc' => ['first_name' => SORT_ASC, 'last_name' =>
- SORT_ASC],
-                   'desc' => ['first_name' => SORT_DESC, 'last_name' =>
- SORT_DESC],
-                   'default' => SORT_DESC,
-                   'label' => 'Name',
+   [
+       'components' => [
+           'log' => [
+               'targets' => [
+                   'file' => [
+                       'class' => 'yii\log\FileTarget',
+                       'levels' => ['trace', 'info'],
+                       'categories' => ['yii\*'],
+                   ],
+                   'email' => [
+                       'class' => 'yii\log\EmailTarget',
+                       'levels' => ['error', 'warning'],
+                       'message' => [
+                           'to' => 'admin@example.com',
+                       ],
+                   ],
                ],
            ],
        ],
-       'pagination' => [
-           'pageSize' => 20,
-       ],
-   ]);
-
-   // get the user records in the current page
-   $models = $dataProvider->getModels();
+   ]
 
  Note: if you want to use the pagination feature, you must configure the
  'totalCount' property to be the total number of rows (without pagination).
@@ -216,15 +208,13 @@ METHOD DETAILS
 
 
 
-
 *yii/data/SqlDataProvider::prepareKeys*			protected
 >
  prepareKeys($models)
 <
 (array) The keys
 
-
-    [$models] () 
+    [$models] (array) The available data models
 
 
 *yii/data/SqlDataProvider::prepareTotalCount*		protected
@@ -232,7 +222,6 @@ METHOD DETAILS
  prepareTotalCount()
 <
 (integer) Total number of data models in this data provider.
-
 
 
 

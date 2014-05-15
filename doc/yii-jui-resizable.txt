@@ -7,15 +7,26 @@ DESCRIPTION
 
  For example:
 
-   Resizable::begin([
-       'clientOptions' => [
-           'grid' => [20, 10],
+   echo Accordion::widget([
+       'items' => [
+           [
+               'header' => 'Section 1',
+               'content' => 'Mauris mauris ante, blandit et, ultrices a,
+ suscipit eget...',
+           ],
+           [
+               'header' => 'Section 2',
+               'headerOptions' => ['tag' => 'h3'],
+               'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit
+ amet purus...',
+               'options' => ['tag' => 'div'],
+           ],
        ],
+       'options' => ['tag' => 'div'],
+       'itemOptions' => ['tag' => 'div'],
+       'headerOptions' => ['tag' => 'h3'],
+       'clientOptions' => ['collapsible' => false],
    ]);
-
-   echo 'Resizable contents here...';
-
-   Resizable::end();
 
 
 
@@ -78,7 +89,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -203,7 +213,6 @@ METHOD DETAILS
  run()
 <
 (void)
-
 
 
 

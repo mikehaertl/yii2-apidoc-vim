@@ -2,11 +2,6 @@
 *yii/db/mysql/Schema*   >> |yii/db/Schema|
 =====================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -16,6 +11,9 @@ $db					*yii/db/mysql/Schema::$db*
 
 $defaultSchema				*yii/db/mysql/Schema::$defaultSchema*
  See |yii/db/Schema::$defaultSchema|
+
+$exceptionMap				*yii/db/mysql/Schema::$exceptionMap*
+ See |yii/db/Schema::$exceptionMap|
 
 $typeMap				*yii/db/mysql/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
@@ -95,7 +93,6 @@ METHOD DETAILS
 (\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
 not exist.
 
-
     [$name] (string) Table name
 
 
@@ -139,13 +136,11 @@ not exist.
 
 
 
-
 *yii/db/mysql/Schema::findTableNames*			protected
 >
  findTableNames($schema='''')
 <
 (array) All table names in the database. The names have NO schema name prefix.
-
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -228,12 +223,15 @@ not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
+*yii/db/mysql/Schema::handleException*			public
+ See |yii/db/Schema::handleException|
+
+
 *yii/db/mysql/Schema::resolveTableNames*			protected
 >
  resolveTableNames($table, $name)
 <
 (void)
-
 
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
@@ -245,7 +243,6 @@ not exist.
 <
 (\yii\db\ColumnSchema) The column schema object
 
-
     [$info] (array) Column information
 
 
@@ -254,7 +251,6 @@ not exist.
  findColumns($table)
 <
 (boolean) Whether the table exists in the database
-
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -265,7 +261,6 @@ not exist.
 <
 (string) $sql the result of 'SHOW CREATE TABLE'
 
-
     [$table] (\yii\db\TableSchema) The table metadata
 
 
@@ -274,7 +269,6 @@ not exist.
  findConstraints($table)
 <
 (void)
-
 
     [$table] (\yii\db\TableSchema) The table metadata
 

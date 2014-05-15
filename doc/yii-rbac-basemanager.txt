@@ -8,11 +8,6 @@ SUBCLASSES
 |yii/rbac/DbManager|
 |yii/rbac/PhpManager|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -25,10 +20,12 @@ $behaviors				*yii/rbac/BaseManager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 $roles					*yii/rbac/BaseManager::$roles*
- ()
+ (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+ names.
 
 $permissions				*yii/rbac/BaseManager::$permissions*
- ()
+ (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+ by the permission names.
 
 $rules					*yii/rbac/BaseManager::$rules*
  (\yii\rbac\Rule[]) The rules indexed by the rule names
@@ -145,7 +142,6 @@ METHOD DETAILS
 (\yii\rbac\Item) The auth item corresponding to the specified name. Null is
 returned if no such item.
 
-
     [$name] (string) The auth item name.
 
 
@@ -154,7 +150,6 @@ returned if no such item.
  getItems($type)
 <
 (\yii\rbac\Item[]) The auth items of the specified type.
-
 
     [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
     'Item::TYPE_PERMISSION'
@@ -166,7 +161,6 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully added to the system
 
-
     [$item] (\yii\rbac\Item) 
 
 
@@ -175,7 +169,6 @@ returned if no such item.
  addRule($rule)
 <
 (boolean) Whether the rule is successfully added to the system
-
 
     [$rule] (\yii\rbac\Rule) 
 
@@ -186,7 +179,6 @@ returned if no such item.
 <
 (boolean) Whether the role or permission is successfully removed
 
-
     [$item] (\yii\rbac\Item) 
 
 
@@ -196,7 +188,6 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully removed
 
-
     [$rule] (\yii\rbac\Rule) 
 
 
@@ -205,7 +196,6 @@ returned if no such item.
  updateItem($name, $item)
 <
 (boolean) Whether the auth item is successfully updated
-
 
     [$name] (string) The old name of the auth item
     [$item] (\yii\rbac\Item) 
@@ -217,7 +207,6 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully updated
 
-
     [$name] (string) The old name of the rule
     [$rule] (\yii\rbac\Rule) 
 
@@ -226,79 +215,79 @@ returned if no such item.
 >
  createRole($name)
 <
-(void)
+(\yii\rbac\Role) The new Role object
 
-
-    [$name] () 
+ Note that the newly created role is not added to the RBAC system yet. You
+ must fill in the needed data and call 'add()' to add it to the system.
+    [$name] (string) The role name
 
 
 *yii/rbac/BaseManager::createPermission*			public
 >
  createPermission($name)
 <
-(void)
+(\yii\rbac\Permission) The new Permission object
 
-
-    [$name] () 
+ Note that the newly created permission is not added to the RBAC system yet.
+ You must fill in the needed data and call 'add()' to add it to the system.
+    [$name] (string) The permission name
 
 
 *yii/rbac/BaseManager::add*				public
 >
  add($object)
 <
-(void)
+(boolean) Whether the role, permission or rule is successfully added to the
+system
 
-
-    [$object] () 
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
 *yii/rbac/BaseManager::remove*				public
 >
  remove($object)
 <
-(void)
+(boolean) Whether the role, permission or rule is successfully removed
 
-
-    [$object] () 
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
 *yii/rbac/BaseManager::update*				public
 >
  update($name, $object)
 <
-(void)
+(boolean) Whether the update is successful
 
-
-    [$name] () 
-    [$object] () 
+    [$name] (string) The old name of the role, permission or rule
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
 *yii/rbac/BaseManager::getRole*				public
 >
  getRole($name)
 <
-(void)
+(\yii\rbac\Role) The role corresponding to the specified name. Null is
+returned if no such role.
 
-
-    [$name] () 
+    [$name] (string) The role name.
 
 
 *yii/rbac/BaseManager::getPermission*			public
 >
  getPermission($name)
 <
-(void)
+(\yii\rbac\Permission) The permission corresponding to the specified name.
+Null is returned if no such permission.
 
-
-    [$name] () 
+    [$name] (string) The permission name.
 
 
 *yii/rbac/BaseManager::getRoles*				public
 >
  getRoles()
 <
-(void)
-
+(\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+names.
 
 
 
@@ -306,8 +295,8 @@ returned if no such item.
 >
  getPermissions()
 <
-(void)
-
+(\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+by the permission names.
 
 
 

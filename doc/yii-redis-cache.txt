@@ -22,13 +22,10 @@ DESCRIPTION
 
    [
        'components' => [
-           'cache' => [
-               'class' => 'yii\redis\Cache',
-               'redis' => [
-                   'hostname' => 'localhost',
-                   'port' => 6379,
-                   'database' => 0,
-               ]
+           'session' => [
+               'class' => 'yii\redis\Session',
+               // 'redis' => 'redis' // id of the connection application
+ component
            ],
        ],
    ]
@@ -36,15 +33,7 @@ DESCRIPTION
  Or if you have configured the redis 'Connection' as an application component,
  the following is sufficient:
 
-   [
-       'components' => [
-           'cache' => [
-               'class' => 'yii\redis\Cache',
-               // 'redis' => 'redis' // id of the connection application
- component
-           ],
-       ],
-   ]
+   $customers = Customer::find()->with('orders')->asArray()->all();
 
 
 
@@ -239,8 +228,9 @@ cache or expired.
 (string|boolean) The value stored in cache, false if the value is not in the
 cache or expired.
 
-
-    [$key] () 
+ This method should be implemented by child classes to retrieve the data from
+ specific cache storage.
+    [$key] (string) A unique key identifying the cached value
 
 
 *yii/redis/Cache::setValue*				protected
@@ -249,9 +239,10 @@ cache or expired.
 <
 (boolean) True if the value is successfully stored into cache, false otherwise
 
-
-    [$key] () 
-    [$value] () 
+ This method should be implemented by child classes to store the data in
+ specific cache storage.
+    [$key] (string) The key identifying the value to be cached
+    [$value] (string) The value to be cached
     [$expire] () 
 
 
@@ -261,9 +252,10 @@ cache or expired.
 <
 (boolean) True if the value is successfully stored into cache, false otherwise
 
-
-    [$key] () 
-    [$value] () 
+ This method should be implemented by child classes to store the data in
+ specific cache storage.
+    [$key] (string) The key identifying the value to be cached
+    [$value] (string) The value to be cached
     [$expire] () 
 
 
@@ -273,8 +265,7 @@ cache or expired.
 <
 (boolean) If no error happens during deletion
 
-
-    [$key] () 
+    [$key] (string) The key of the value to be deleted
 
 
 *yii/redis/Cache::flushValues*				protected
@@ -283,7 +274,7 @@ cache or expired.
 <
 (boolean) Whether the flush operation was successful.
 
-
+ Child classes may implement this method to realize the flush operation.
 
 
 *yii/redis/Cache::getValues*				protected
@@ -292,8 +283,10 @@ cache or expired.
 <
 (array) A list of cached values indexed by the keys
 
-
-    [$keys] () 
+ The default implementation calls 'getValue()' multiple times to retrieve the
+ cached values one by one. If the underlying cache storage supports multiget,
+ this method should be overridden to exploit that feature.
+    [$keys] (array) A list of keys identifying the cached values
 
 
 *yii/redis/Cache::setValues*				protected
@@ -302,8 +295,11 @@ cache or expired.
 <
 (array) Array of failed keys
 
-
-    [$data] () 
+ The default implementation calls 'setValue()' multiple times store values one
+ by one. If the underlying cache storage supports multi-set, this method
+ should be overridden to exploit that feature.
+    [$data] (array) Array where key corresponds to cache key while value is
+    the value stored
     [$expire] () 
 
 

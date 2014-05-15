@@ -2,11 +2,6 @@
 *yii/db/mssql/Schema*   >> |yii/db/Schema|
 =====================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -16,6 +11,9 @@ $db					*yii/db/mssql/Schema::$db*
 
 $defaultSchema				*yii/db/mssql/Schema::$defaultSchema*
  (string) The default schema used for the current session.
+
+$exceptionMap				*yii/db/mssql/Schema::$exceptionMap*
+ See |yii/db/Schema::$exceptionMap|
 
 $typeMap				*yii/db/mssql/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
@@ -95,7 +93,6 @@ METHOD DETAILS
 (\yii\db\mssql\TableSchema|null) Driver dependent table metadata. Null if the
 table does not exist.
 
-
     [$name] (string) Table name
 
 
@@ -139,13 +136,11 @@ table does not exist.
 
 
 
-
 *yii/db/mssql/Schema::findTableNames*			protected
 >
  findTableNames($schema='''')
 <
 (array) All table names in the database. The names have NO schema name prefix.
-
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -169,8 +164,7 @@ table does not exist.
 <
 (void)
 
-
-    [$name] () 
+    [$name] (string) The savepoint name
 
 
 *yii/db/mssql/Schema::releaseSavepoint*			public
@@ -179,8 +173,7 @@ table does not exist.
 <
 (void)
 
-
-    [$name] () 
+    [$name] (string) The savepoint name
 
 
 *yii/db/mssql/Schema::rollBackSavepoint*			public
@@ -189,8 +182,7 @@ table does not exist.
 <
 (void)
 
-
-    [$name] () 
+    [$name] (string) The savepoint name
 
 
 *yii/db/mssql/Schema::quoteValue*				public
@@ -233,12 +225,15 @@ table does not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
+*yii/db/mssql/Schema::handleException*			public
+ See |yii/db/Schema::handleException|
+
+
 *yii/db/mssql/Schema::resolveTableNames*			protected
 >
  resolveTableNames($table, $name)
 <
 (void)
-
 
     [$table] (\yii\db\mssql\TableSchema) The table metadata object
     [$name] (string) The table name
@@ -250,7 +245,6 @@ table does not exist.
 <
 (\yii\db\ColumnSchema) The column schema object
 
-
     [$info] (array) Column information
 
 
@@ -259,7 +253,6 @@ table does not exist.
  findColumns($table)
 <
 (boolean) Whether the table exists in the database
-
 
     [$table] (\yii\db\mssql\TableSchema) The table metadata
 
@@ -270,7 +263,6 @@ table does not exist.
 <
 (void)
 
-
     [$table] (\yii\db\mssql\TableSchema) The table metadata
 
 
@@ -279,7 +271,6 @@ table does not exist.
  findForeignKeys($table)
 <
 (void)
-
 
     [$table] (\yii\db\mssql\TableSchema) The table metadata
 

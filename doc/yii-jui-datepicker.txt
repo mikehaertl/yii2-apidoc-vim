@@ -7,24 +7,28 @@ DESCRIPTION
 
  For example:
 
-   echo DatePicker::widget([
-       'language' => 'ru',
-       'model' => $model,
-       'attribute' => 'country',
-       'clientOptions' => [
-           'dateFormat' => 'yy-mm-dd',
+   echo Sortable::widget([
+       'items' => [
+           'Item 1',
+           ['content' => 'Item2'],
+           [
+               'content' => 'Item3',
+               'options' => ['tag' => 'li'],
+           ],
        ],
+       'options' => ['tag' => 'ul'],
+       'itemOptions' => ['tag' => 'li'],
+       'clientOptions' => ['cursor' => 'move'],
    ]);
 
  The following example will use the name property instead:
 
-   echo DatePicker::widget([
-       'language' => 'ru',
-       'name'  => 'country',
-       'clientOptions' => [
-           'dateFormat' => 'yy-mm-dd',
-       ],
-   ]);
+   [
+       'content' => 'item content',
+       // the HTML attributes of the item container tag. This will overwrite
+ "itemOptions".
+       'options' => [],
+   ]
 
 
 
@@ -113,7 +117,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ If you override this method, make sure you call the parent implementation
+ first.
 
 
 *yii/jui/DatePicker::__get*				public
@@ -240,7 +245,6 @@ METHOD DETAILS
 
 
 
-
 *yii/jui/DatePicker::render*				public
  See |yii/base/Widget::render|
 
@@ -278,7 +282,6 @@ METHOD DETAILS
  renderWidget()
 <
 (string) The rendering result.
-
 
 
 

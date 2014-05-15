@@ -2,11 +2,6 @@
 *yii/apidoc/commands/GuideController*   >> |yii/apidoc/components/BaseController|
 =====================================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -270,8 +265,11 @@ METHOD DETAILS
 <
 (array) The names of the options valid for the action
 
+ Child classes may override this method to specify possible options.
 
-    [$actionId] () 
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+    [$actionId] (string) The action id of the current request
 
 
 *yii/apidoc/commands/GuideController::normalizeTargetDir*	protected
@@ -287,7 +285,6 @@ METHOD DETAILS
  findFiles($path, $except='[]')
 <
 (void)
-
 
     [$path] () 
     [$except] () 
@@ -311,8 +308,7 @@ METHOD DETAILS
 <
 (\yii\apidoc\renderers\GuideRenderer) 
 
-
-    [$template] () 
+    [$template] (string) 
 
 
 *yii/apidoc/commands/GuideController::actionIndex*	public
@@ -320,7 +316,6 @@ METHOD DETAILS
  actionIndex($sourceDirs, $targetDir)
 <
 (int) 
-
 
     [$sourceDirs] (array) 
     [$targetDir] (string) 

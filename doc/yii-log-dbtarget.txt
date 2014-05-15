@@ -44,15 +44,12 @@ $logTable				*yii/log/DbTarget::$logTable*
  (string) Name of the DB table to store cache content. The table should be
  pre-created as follows:
 
-   CREATE TABLE log (
-       id       BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-       level    INTEGER,
-       category VARCHAR(255),
-       log_time INTEGER,
-       message  TEXT,
-       INDEX idx_log_level (level),
-       INDEX idx_log_category (category)
-   )
+   \Yii::beginProfile('block1');
+   // some code to be profiled
+       \Yii::beginProfile('block2');
+       // some other code to be profiled
+       \Yii::endProfile('block2');
+   \Yii::endProfile('block1');
 
  Note that the 'id' column must be created as an auto-incremental column. The
  above SQL uses the MySQL syntax. If you are using other DBMS, you need to
@@ -187,7 +184,6 @@ METHOD DETAILS
  export()
 <
 (void)
-
 
 
 

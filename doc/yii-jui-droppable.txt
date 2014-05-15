@@ -7,13 +7,19 @@ DESCRIPTION
 
  For example:
 
-   Droppable::begin([
-       'clientOptions' => ['accept' => '.special'],
-   ]);
+   class Book extends \Faker\Provider\Base
+   {
+       public function title($nbWords = 5)
+       {
+           $sentence = $this->generator->sentence($nbWords);
+           return mb_substr($sentence, 0, mb_strlen($sentence) - 1);
+       }
 
-   echo 'Droppable body here...';
-
-   Droppable::end();
+       public function ISBN()
+       {
+           return $this->generator->randomNumber(13);
+       }
+   }
 
 
 
@@ -76,7 +82,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -201,7 +206,6 @@ METHOD DETAILS
  run()
 <
 (void)
-
 
 
 

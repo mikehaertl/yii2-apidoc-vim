@@ -27,6 +27,10 @@ $db					*yii/db/Schema::$db*
 $defaultSchema				*yii/db/Schema::$defaultSchema*
  (string) The default schema name used for the current session.
 
+$exceptionMap				*yii/db/Schema::$exceptionMap*
+ (array) Map of DB errors and corresponding exceptions If left part is found
+ in DB error message exception class from the right part is used.
+
 $tableSchemas				*yii/db/Schema::$tableSchemas*
  (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
  array element is an instance of 'TableSchema' or its child class.
@@ -101,7 +105,6 @@ METHOD DETAILS
 (\yii\db\TableSchema) DBMS-dependent table metadata, null if the table does
 not exist.
 
-
     [$name] (string) Table name
 
 
@@ -110,7 +113,6 @@ not exist.
  getTableSchema($name, $refresh='false')
 <
 (\yii\db\TableSchema) Table metadata. Null if the named table does not exist.
-
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -123,7 +125,6 @@ not exist.
  getCacheKey($name)
 <
 (mixed) The cache key
-
 
     [$name] (string) The table name
 
@@ -144,7 +145,6 @@ not exist.
 (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
 array element is an instance of 'TableSchema' or its child class.
 
-
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
     [$refresh] (boolean) Whether to fetch the latest available table schemas.
@@ -156,7 +156,6 @@ array element is an instance of 'TableSchema' or its child class.
  getTableNames($schema='''', $refresh='false')
 <
 (string[]) All table names in the database.
-
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name. If not empty, the returned
@@ -174,13 +173,11 @@ array element is an instance of 'TableSchema' or its child class.
 
 
 
-
 *yii/db/Schema::getPdoType*				public
 >
  getPdoType($data)
 <
 (integer) The PDO type
-
 
     [$data] (mixed) The data whose PDO type is to be determined
 
@@ -242,7 +239,6 @@ array element is an instance of 'TableSchema' or its child class.
 (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
-
     [$sequenceName] (string) Name of the sequence object (required by some
     DBMS)
 
@@ -256,13 +252,11 @@ the sequence object
 
 
 
-
 *yii/db/Schema::createSavepoint*				public
 >
  createSavepoint($name)
 <
 (void)
-
 
     [$name] (string) The savepoint name
 
@@ -273,7 +267,6 @@ the sequence object
 <
 (void)
 
-
     [$name] (string) The savepoint name
 
 
@@ -282,7 +275,6 @@ the sequence object
  rollBackSavepoint($name)
 <
 (void)
-
 
     [$name] (string) The savepoint name
 
@@ -362,8 +354,17 @@ the sequence object
 <
 (string) PHP type name
 
-
     [$column] (\yii\db\ColumnSchema) The column schema information
+
+
+*yii/db/Schema::handleException*				public
+>
+ handleException($e, $rawSql)
+<
+(void)
+
+    [$e] (\Exception) 
+    [$rawSql] (string) SQL that produced exception
 
 
 

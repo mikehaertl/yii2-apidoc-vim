@@ -12,18 +12,15 @@ use yii\helpers\Console;
  */
 class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
 {
-    const URL_PATTERN='/\{\{(.*?)\|(.*?)\}\}/s';
     const CODE_PATTERN='/\s*(?:~~~|```php)(.*?)(?:~~~|```)\s*/is';
-    const UL_PATTERN='|\s*<ul>(.*?)</ul>\s*|is';
-    const OL_PATTERN='|\s*<ol>(.*?)</ol>\s*|is';
-    const LI_PATTERN='|\s*<li>(.*?)</li>\s*|is';
-    const A_PATTERN='|<a.*?>(.*?)</a>|is';
+    const LISTITEM_PATTERN='/(- .*)/i';
 
     // Separator between classname and property/method
     const SEP='::';
 
     protected $_view;
     protected $_codeBlocks = [];
+    protected $_listItems = [];
 
     /**
      * @inheritDoc
@@ -240,8 +237,11 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
      */
     protected function processMarkdown($content)
     {
-        // Cut out and store code blocks, replace with placeholder
+        // TODO: All this needs to be improved!
+
+        // Cut out and store code and list blocks, replace with placeholder
         $content=preg_replace_callback(self::CODE_PATTERN,[$this,'captureCodeBlocks'],$content);
+        $content=preg_replace_callback(self::LISTITEM_PATTERN,[$this,'captureListItems'],$content);
 
         // Replace all linebreaks with space, but keep paragraphs
         $content=trim(strtr($content,[ "\n\n"=>'---LB---',"\n"=>' ']));
@@ -255,6 +255,7 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
 
         // Now put back code blocks in same order
         $content=preg_replace_callback('/###CODE###/',[ $this,'insertCodeBlocks' ],$content);
+        $content=preg_replace_callback('/###LISTITEM###/',[ $this,'insertListItems' ],$content);
 
         return $content;
     }
@@ -281,9 +282,28 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
     protected function insertCodeBlocks($matches)
     {
         $code = array_shift($this->_codeBlocks);
-        // Indent by 4 spaces
+        // Indent by 2 spaces
         $code = preg_replace('/^(?=.+)/m',sprintf("%2s",''),$code);
         return "\n\n".$code."\n\n";
+    }
+
+    protected function captureListItems($matches)
+    {
+        $this->_listItems[]=htmlspecialchars_decode($matches[1]);
+        return '###LISTITEM###';
+    }
+
+    protected function insertListItems($matches)
+    {
+        $item = array_shift($this->_listItems);
+        $item = strtr($item, [
+            '`' => "'",
+            '[[' => "'",
+            ']]' => "'",
+        ]);
+        // Indent by 2 spaces
+        $item = $this->wrapindent($item, 2, 70);
+        return "\n".$item;
     }
 
     /**

@@ -9,17 +9,24 @@ DESCRIPTION
  treated as the content of the navbar. You may use widgets such as 'Nav' or
  '\yii\widgets\Menu' to build up such content. For example,
 
-   use yii\bootstrap\NavBar;
-   use yii\widgets\Menu;
-
-   NavBar::begin(['brandLabel' => 'NavBar Test']);
    echo Nav::widget([
        'items' => [
-           ['label' => 'Home', 'url' => ['/site/index']],
-           ['label' => 'About', 'url' => ['/site/about']],
+           [
+               'label' => 'Home',
+               'url' => ['site/index'],
+               'linkOptions' => [...],
+           ],
+           [
+               'label' => 'Dropdown',
+               'items' => [
+                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
+                    '<li class="divider"></li>',
+                    '<li class="dropdown-header">Dropdown Header</li>',
+                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+               ],
+           ],
        ],
    ]);
-   NavBar::end();
 
 
 
@@ -40,7 +47,8 @@ $options				*yii/bootstrap/NavBar::$options*
  (array) The HTML attributes for the widget container tag. The following
  special options are recognized:
 
- - tag: string, defaults to "nav", the name of the container tag.
+
+   - tag: string, defaults to "nav", the name of the container tag.
 
 $clientOptions				*yii/bootstrap/NavBar::$clientOptions*
  See |yii/bootstrap/Widget::$clientOptions|
@@ -52,7 +60,8 @@ $containerOptions			*yii/bootstrap/NavBar::$containerOptions*
  (array) The HTML attributes for the container tag. The following special
  options are recognized:
 
- - tag: string, defaults to "div", the name of the container tag.
+
+   - tag: string, defaults to "div", the name of the container tag.
 
 $brandLabel				*yii/bootstrap/NavBar::$brandLabel*
  (string) The text of the brand. Note that this is not HTML-encoded.
@@ -105,7 +114,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -233,7 +241,6 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/NavBar::render*				public
  See |yii/base/Widget::render|
 
@@ -255,7 +262,6 @@ METHOD DETAILS
  renderToggleButton()
 <
 (string) The rendering toggle button.
-
 
 
 

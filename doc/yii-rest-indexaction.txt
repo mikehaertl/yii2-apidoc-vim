@@ -2,11 +2,6 @@
 *yii/rest/IndexAction*   >> |yii/rest/Action|
 ======================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -31,9 +26,14 @@ $prepareDataProvider			*yii/rest/IndexAction::$prepareDataProvider*
  should return a collection of the models. If not set, 'prepareDataProvider()'
  will be used instead. The signature of the callable should be:
 
-   function ($action) {
-       // $action is the action object currently running
-   }
+   return [
+       'action1' => 'app\components\Action1',
+       'action2' => [
+           'class' => 'app\components\Action2',
+           'property1' => 'value1',
+           'property2' => 'value2',
+       ],
+   ];
 
  The callable should return an instance of 'ActiveDataProvider'.
 
@@ -176,13 +176,11 @@ METHOD DETAILS
 
 
 
-
 *yii/rest/IndexAction::prepareDataProvider*		protected
 >
  prepareDataProvider()
 <
 (\yii\data\ActiveDataProvider) 
-
 
 
 

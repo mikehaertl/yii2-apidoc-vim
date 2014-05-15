@@ -7,25 +7,9 @@ DESCRIPTION
 
  For example:
 
-   echo Accordion::widget([
-       'items' => [
-           [
-               'header' => 'Section 1',
-               'content' => 'Mauris mauris ante, blandit et, ultrices a,
- suscipit eget...',
-           ],
-           [
-               'header' => 'Section 2',
-               'headerOptions' => ['tag' => 'h3'],
-               'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit
- amet purus...',
-               'options' => ['tag' => 'div'],
-           ],
-       ],
-       'options' => ['tag' => 'div'],
-       'itemOptions' => ['tag' => 'div'],
-       'headerOptions' => ['tag' => 'h3'],
-       'clientOptions' => ['collapsible' => false],
+   echo Spinner::widget([
+       'name'  => 'country',
+       'clientOptions' => ['step' => 2],
    ]);
 
 
@@ -50,8 +34,9 @@ $options				*yii/jui/Accordion::$options*
  (array) The HTML attributes for the widget container tag. The following
  special options are recognized:
 
- - tag: string, defaults to "div", the tag name of the container tag of this
- widget
+
+   - tag: string, defaults to "div", the tag name of the container tag
+   of this widget
 
 $clientOptions				*yii/jui/Accordion::$clientOptions*
  See |yii/jui/Widget::$clientOptions|
@@ -66,16 +51,36 @@ $items					*yii/jui/Accordion::$items*
  (array) List of collapsible items. Each item can be an array of the following
  structure:
 
-   [
-       'header' => 'Item header',
-       'content' => 'Item content',
-       // the HTML attributes of the item header container tag. This will
- overwrite "headerOptions".
-       'headerOptions' => [],
-       // the HTML attributes of the item container tag. This will overwrite
- "itemOptions".
-       'options' => [],
-   ]
+   echo Tabs::widget([
+       'items' => [
+           [
+               'label' => 'Tab one',
+               'content' => 'Mauris mauris ante, blandit et, ultrices a,
+ suscipit eget...',
+           ],
+           [
+               'label' => 'Tab two',
+               'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit
+ amet purus...',
+               'options' => ['tag' => 'div'],
+               'headerOptions' => ['class' => 'my-class'],
+           ],
+           [
+               'label' => 'Tab with custom id',
+               'content' => 'Morbi tincidunt, dui sit amet facilisis
+ feugiat...',
+               'options' => ['id' => 'my-tab'],
+           ],
+           [
+               'label' => 'Ajax tab',
+               'url' => ['ajax/content'],
+           ],
+       ],
+       'options' => ['tag' => 'div'],
+       'itemOptions' => ['tag' => 'div'],
+       'headerOptions' => ['class' => 'my-class'],
+       'clientOptions' => ['collapsible' => false],
+   ]);
 
 
 
@@ -84,14 +89,18 @@ $itemOptions				*yii/jui/Accordion::$itemOptions*
  overwritten by the "options" set in individual 'items'. The following special
  options are recognized:
 
- - tag: string, defaults to "div", the tag name of the item container tags.
+
+   - tag: string, defaults to "div", the tag name of the item container
+   tags.
 
 $headerOptions				*yii/jui/Accordion::$headerOptions*
  (array) List of HTML attributes for the item header container tags. This will
  be overwritten by the "headerOptions" set in individual 'items'. The
  following special options are recognized:
 
- - tag: string, defaults to "h3", the tag name of the item container tags.
+
+   - tag: string, defaults to "h3", the tag name of the item container
+   tags.
 
 $behaviors				*yii/jui/Accordion::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -247,7 +256,6 @@ METHOD DETAILS
 
 
 
-
 *yii/jui/Accordion::render*				public
  See |yii/base/Widget::render|
 
@@ -281,7 +289,6 @@ METHOD DETAILS
  renderItems()
 <
 (string) The rendering result.
-
 
 
 

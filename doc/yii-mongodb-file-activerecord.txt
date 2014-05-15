@@ -6,21 +6,22 @@ DESCRIPTION
 ------------------------------------------------------------------------------
 
  To specify source file use the 'file' attribute. It can be specified in one
- of the following ways:  - string - full name of the file, which content
- should be stored in GridFS  - \yii\web\UploadedFile - uploaded file instance,
- which content should be stored in GridFS
+ of the following ways:  
+   - string - full name of the file, which content should be stored in
+   GridFS  
+   - \yii\web\UploadedFile - uploaded file instance, which content
+   should be stored in GridFS
 
  For example:
 
-   $record = new ImageFile();
-   $record->file = '/path/to/some/file.jpg';
-   $record->save();
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
 
  You can also specify file content via 'newFileContent' attribute:
 
-   $record = new ImageFile();
-   $record->newFileContent = 'New file content';
-   $record->save();
+   $images = ImageFile::find()->with('tags')->asArray()->all();
 
  Note: 'newFileContent' always takes precedence over 'file'.
 
@@ -44,15 +45,9 @@ $errors					*yii/mongodb/file/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   $record = new ImageFile();
+   $record->file = '/path/to/some/file.jpg';
+   $record->save();
 
 
 
@@ -242,13 +237,9 @@ METHOD DETAILS
  attributes. Note: all attributes defined in base Active Record class should
  be always present in returned array. For example:
 
-   public function attributes()
-   {
-       return array_merge(
-           parent::attributes(),
-           ['tags', 'status']
-       );
-   }
+   $record = new ImageFile();
+   $record->newFileContent = 'New file content';
+   $record->save();
 
 
 
@@ -487,7 +478,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$attributes] () 
 
 
@@ -578,7 +568,46 @@ METHOD DETAILS
 (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
+ The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
+ customized by calling methods defined in 'ActiveQueryInterface' before
+ 'one()' or 'all()' is called to return populated ActiveRecord instances. For
+ example,
 
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   public function attributes()
+   {
+       return array_merge(
+           parent::attributes(),
+           ['tags', 'status']
+       );
+   }
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
 
 
 *yii/mongodb/file/ActiveRecord::insert*			public
@@ -601,13 +630,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mongodb/file/ActiveRecord::insertInternal*		protected
 >
  insertInternal($attributes='null')
 <
 (void)
-
 
     [$attributes] () 
 
@@ -622,7 +649,6 @@ METHOD DETAILS
 <
 (string) File name.
 
-
     [$file] (mixed) Raw file value.
 
 
@@ -634,13 +660,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mongodb/file/ActiveRecord::getFileContent*		public
 >
  getFileContent()
 <
 (null|string) File content.
-
 
 
 
@@ -650,7 +674,6 @@ METHOD DETAILS
 <
 (boolean) Whether the operation was successful.
 
-
     [$filename] (string) Full filename to be written.
 
 
@@ -659,7 +682,6 @@ METHOD DETAILS
  getFileResource()
 <
 (resource) File stream resource.
-
 
 
 

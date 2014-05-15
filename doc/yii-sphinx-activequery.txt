@@ -18,34 +18,29 @@ DESCRIPTION
 
  ActiveQuery also provides the following additional query options:
 
- - 'with()': list of relations that this query should be performed with. -
- 'indexBy()': the name of the column by which the query result should be
- indexed. - 'asArray()': whether to return each record as an array.
+
+   - 'with()': list of relations that this query should be performed
+   with. 
+   - 'indexBy()': the name of the column by which the query result
+   should be indexed. 
+   - 'asArray()': whether to return each record as an array.
 
  These options can be configured using methods of the same name. For example:
 
-   $articles = Article::find()->with('source')->asArray()->all();
+   $connection->createCommand()->insert('idx_user', [
+       'name' => 'Sam',
+       'age' => 30,
+   ])->execute();
 
  ActiveQuery allows to build the snippets using sources provided by
  ActiveRecord. You can use 'snippetByModel()' method to enable this. For
  example:
 
-   class Article extends ActiveRecord
-   {
-       public function getSource()
-       {
-           return $this->hasOne('db', ArticleDb::className(), ['id' => 'id']);
-       }
-
-       public function getSnippetSource()
-       {
-           return $this->source->content;
-       }
-
-       ...
-   }
-
-   $articles = Article::find()->with('source')->snippetByModel()->all();
+   $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
+       ['Tom', 30],
+       ['Jane', 20],
+       ['Linda', 25],
+   ])->execute();
 
  Relational query ----------------
 
@@ -165,7 +160,6 @@ METHOD DETAILS
  __construct($modelClass, $config='[]')
 <
 (void)
-
 
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
@@ -336,13 +330,11 @@ METHOD DETAILS
 
 
 
-
 *yii/sphinx/ActiveQuery::createCommand*			public
 >
  createCommand($db='null')
 <
 (\yii\sphinx\Command) The created DB command instance.
-
 
     [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
@@ -355,7 +347,6 @@ METHOD DETAILS
 (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
-
     [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
 
@@ -367,7 +358,6 @@ will be returned.
 (\yii\sphinx\ActiveRecord|array|null) A single row of query result. Depending
 on the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. Null will be returned if the query results in nothing.
-
 
     [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
@@ -471,8 +461,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 <
 (array) Snippets list.
 
-
-    [$source] () 
+    [$source] (array) The source data to extract a snippet from.
 
 
 *yii/sphinx/ActiveQuery::callSnippetsInternal*		protected
@@ -515,16 +504,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
  For example:
 
-   class Article extends ActiveRecord
-   {
-       public function getSnippetSource()
-       {
-           return file_get_contents('/path/to/source/files/' . $this->id .
- '.txt');;
-       }
-   }
-
-   $articles = Article::find()->snippetByModel()->all();
+   $articles = Article::find()->with('source')->asArray()->all();
 
  Warning: this option should NOT be used with 'asArray' at the same time!
 
@@ -534,7 +514,6 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  fetchSnippetSourceFromModels($models)
 <
 (array) Snippet source strings
-
 
     [$models] (\yii\sphinx\ActiveRecord[]) Raw query result rows.
 

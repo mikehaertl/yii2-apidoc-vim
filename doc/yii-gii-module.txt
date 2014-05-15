@@ -8,12 +8,8 @@ DESCRIPTION
  To use Gii, include it as a module in the application configuration like the
  following:
 
-   return [
-       'bootstrap' => ['gii'],
-       'modules' => [
-           'gii' => ['class' => 'yii\gii\Module'],
-       ],
-   ]
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
  Because Gii generates new code files on the server, you should only use it on
  your own development machine. To prevent other people from using this module,
@@ -111,9 +107,21 @@ $aliases				*yii/gii/Module::$aliases*
  aliases. For example,
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
-   ]
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
 
 
 
@@ -323,8 +331,20 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
 
-    [$action] () 
+ If you override this method, your code should look like the following:
+
+   return [
+       'bootstrap' => ['gii'],
+       'modules' => [
+           'gii' => ['class' => 'yii\gii\Module'],
+       ],
+   ]
+
+
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/gii/Module::afterAction*				public
@@ -337,8 +357,7 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$app] () 
+    [$app] (\yii\base\Application) The application currently running
 
 
 *yii/gii/Module::resetGlobalSettings*			protected
@@ -346,7 +365,6 @@ METHOD DETAILS
  resetGlobalSettings()
 <
 (void)
-
 
 
 
@@ -358,13 +376,11 @@ METHOD DETAILS
 
 
 
-
 *yii/gii/Module::coreGenerators*				protected
 >
  coreGenerators()
 <
 (array) The list of the core code generator configurations.
-
 
 
 

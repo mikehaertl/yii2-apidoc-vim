@@ -25,24 +25,10 @@ DESCRIPTION
  component. Note that in this case, the content negotiation applies to the
  whole application.
 
-   // in application configuration
-   use yii\web\Response;
-
-   return [
-       'bootstrap' => [
-           [
-               'class' => 'yii\filters\ContentNegotiator',
-               'formats' => [
-                   'application/json' => Response::FORMAT_JSON,
-                   'application/xml' => Response::FORMAT_XML,
-               ],
-               'languages' => [
-                   'en',
-                   'de',
-               ],
-           ],
-       ],
-   ];
+   [
+       'class' => 'yii\caching\DbDependency',
+       'sql' => 'SELECT MAX(lastModified) FROM Post',
+   ]
 
  The following code shows how you can use ContentNegotiator as an action
  filter in either a controller or a module. In this case, the content
@@ -50,26 +36,9 @@ DESCRIPTION
  even specific actions if you configure the 'only' or 'except' property of the
  filter.
 
-   use yii\web\Response;
-
-   public function behaviors()
-   {
-       return [
-           [
-               'class' => 'yii\filters\ContentNegotiator',
-               'only' => ['view', 'index'],  // in a controller
-               // if in a module, use the following IDs for user actions
-               // 'only' => ['user/view', 'user/index']
-               'formats' => [
-                   'application/json' => Response::FORMAT_JSON,
-               ],
-               'languages' => [
-                   'en',
-                   'de',
-               ],
-           ],
-       ];
-   }
+   [
+       Yii::$app->language,
+   ]
 
 
 
@@ -209,8 +178,7 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
-
-    [$action] () 
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/filters/ContentNegotiator::afterAction*		public
@@ -227,8 +195,7 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$app] () 
+    [$app] (\yii\base\Application) The application currently running
 
 
 *yii/filters/ContentNegotiator::negotiate*		public
@@ -239,13 +206,11 @@ METHOD DETAILS
 
 
 
-
 *yii/filters/ContentNegotiator::negotiateContentType*	protected
 >
  negotiateContentType($request, $response)
 <
 (void)
-
 
     [$request] (\yii\web\Request) 
     [$response] (\yii\web\Response) 
@@ -257,7 +222,6 @@ METHOD DETAILS
 <
 (string) The chosen language
 
-
     [$request] (\yii\web\Request) 
 
 
@@ -266,7 +230,6 @@ METHOD DETAILS
  isLanguageSupported($requested, $supported)
 <
 (boolean) Whether the requested language is supported
-
 
     [$requested] (string) The requested language code
     [$supported] (string) The supported language code

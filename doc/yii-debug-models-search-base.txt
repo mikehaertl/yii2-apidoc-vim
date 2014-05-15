@@ -11,11 +11,6 @@ SUBCLASSES
 |yii/debug/models/search/Db|
 |yii/debug/models/search/Mail|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -36,15 +31,8 @@ $errors					*yii/debug/models/search/Base::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
 
 
@@ -336,7 +324,6 @@ METHOD DETAILS
  addCondition($filter, $attribute, $partial='false')
 <
 (void)
-
 
     [$filter] (\yii\debug\components\search\Filter) Filter instance
     [$attribute] (string) Attribute to filter

@@ -15,31 +15,49 @@ DESCRIPTION
 
  Controller action:
 
-   function actionIndex()
-   {
-       $query = Article::find()->where(['status' => 1]);
-       $countQuery = clone $query;
-       $pages = new Pagination(['totalCount' => $countQuery->count()]);
-       $models = $query->offset($pages->offset)
-           ->limit($pages->limit)
-           ->all();
+   $count = Yii::$app->db->createCommand('
+       SELECT COUNT(*) FROM user WHERE status=:status
+   ', [':status' => 1])->queryScalar();
 
-       return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages,
-       ]);
-   }
+   $dataProvider = new SqlDataProvider([
+       'sql' => 'SELECT * FROM user WHERE status=:status',
+       'params' => [':status' => 1],
+       'totalCount' => $count,
+       'sort' => [
+           'attributes' => [
+               'age',
+               'name' => [
+                   'asc' => ['first_name' => SORT_ASC, 'last_name' =>
+ SORT_ASC],
+                   'desc' => ['first_name' => SORT_DESC, 'last_name' =>
+ SORT_DESC],
+                   'default' => SORT_DESC,
+                   'label' => 'Name',
+               ],
+           ],
+       ],
+       'pagination' => [
+           'pageSize' => 20,
+       ],
+   ]);
+
+   // get the user records in the current page
+   $models = $dataProvider->getModels();
 
  View:
 
-   foreach ($models as $model) {
-       // display $model here
-   }
-
-   // display pagination
-   echo LinkPager::widget([
-       'pagination' => $pages,
+   $query = new Query;
+   $provider = new ArrayDataProvider([
+       'allModels' => $query->from('post')->all(),
+       'sort' => [
+           'attributes' => ['id', 'username', 'email'],
+       ],
+       'pagination' => [
+           'pageSize' => 10,
+       ],
    ]);
+   // get the posts in the current page
+   $posts = $provider->getModels();
 
 
 
@@ -182,13 +200,11 @@ METHOD DETAILS
 
 
 
-
 *yii/data/Pagination::getPage*				public
 >
  getPage($recalculate='false')
 <
 (integer) The zero-based current page number.
-
 
     [$recalculate] (boolean) Whether to recalculate the current page based on
     the page size and item count.
@@ -199,7 +215,6 @@ METHOD DETAILS
  setPage($value, $validatePage='false')
 <
 (void)
-
 
     [$value] (integer) The zero-based index of the current page.
     [$validatePage] (boolean) Whether to validate the page number. Note that
@@ -223,7 +238,6 @@ METHOD DETAILS
  setPageSize($value, $validatePageSize='false')
 <
 (void)
-
 
     [$value] (integer) The number of items per page.
     [$validatePageSize] (boolean) Whether to validate page size.
@@ -251,7 +265,6 @@ a SQL statement for fetching the current page of data.
 
 
 
-
 *yii/data/Pagination::getLimit*				public
 >
  getLimit()
@@ -262,7 +275,6 @@ size is infinite, a value -1 will be returned.
 
 
 
-
 *yii/data/Pagination::getLinks*				public
 >
  getLinks($absolute='false')
@@ -270,7 +282,6 @@ size is infinite, a value -1 will be returned.
 (array) The links for navigational purpose. The array keys specify the purpose
 of the links (e.g. 'LINK_FIRST'), and the array values are the corresponding
 URLs.
-
 
     [$absolute] (boolean) Whether the generated URLs should be absolute.
 

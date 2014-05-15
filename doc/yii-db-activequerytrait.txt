@@ -2,11 +2,6 @@
 *yii/db/ActiveQueryTrait*  
 =========================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -32,7 +27,6 @@ METHOD DETAILS
 <
 (static) The query object itself
 
-
     [$value] (boolean) Whether to return the query results in terms of arrays
     instead of Active Records.
 
@@ -54,24 +48,20 @@ METHOD DETAILS
 
  The followings are some usage examples:
 
-   // find customers together with their orders and country
-   Customer::find()->with('orders', 'country')->all();
-   // find customers together with their orders and the orders' shipping
- address
-   Customer::find()->with('orders.address')->all();
-   // find customers together with their country and orders of status 1
-   Customer::find()->with([
-       'orders' => function ($query) {
-           $query->andWhere('status = 1');
-       },
-       'country',
-   ])->all();
+   function ($row)
+   {
+       // return the index value corresponding to $row
+   }
 
  You can call 'with()' multiple times. Each call will add relations to the
  existing ones. For example, the following two statements are equivalent:
 
-   Customer::find()->with('orders', 'country')->all();
-   Customer::find()->with('orders')->with('country')->all();
+   // WHERE `age`=:age
+   $query->filterWhere(['name' => null, 'age' => 20]);
+   // WHERE `age`=:age
+   $query->where(['age' => 20]);
+   // WHERE `name` IS NULL AND `age`=:age
+   $query->where(['name' => null, 'age' => 20]);
 
 
 
@@ -81,7 +71,6 @@ METHOD DETAILS
  findWith($with, $models)
 <
 (void)
-
 
     [$with] (array) A list of relations that this query should be performed
     with. Please refer to 'with()' for details about specifying this

@@ -5,10 +5,16 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- The database connection is specified by 'db'. And the database schema should
- be as described in "framework/rbac/*.sql". You may change the names of the
- three tables used to store the authorization data by setting 'itemTable',
- 'itemChildTable' and 'assignmentTable'.
+ The database connection is specified by 'db'. The database schema could be
+ initialized by applying migration:
+
+ ''' yii migrate --migrationPath=@yii/rbac/migrations/ '''
+
+ If you don't want to use migration and need SQL instead, files for all
+ databases are in migrations directory.
+
+ You may change the names of the three tables used to store the authorization
+ data by setting 'itemTable', 'itemChildTable' and 'assignmentTable'.
 
 
 PROPERTY DETAILS
@@ -42,10 +48,12 @@ $behaviors				*yii/rbac/DbManager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 $roles					*yii/rbac/DbManager::$roles*
- ()
+ (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+ names.
 
 $permissions				*yii/rbac/DbManager::$permissions*
- ()
+ (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+ by the permission names.
 
 $rules					*yii/rbac/DbManager::$rules*
  (\yii\rbac\Rule[]) The rules indexed by the rule names
@@ -168,8 +176,7 @@ METHOD DETAILS
 (\yii\rbac\Item) The auth item corresponding to the specified name. Null is
 returned if no such item.
 
-
-    [$name] () 
+    [$name] (string) The auth item name.
 
 
 *yii/rbac/DbManager::getItems*				protected
@@ -178,8 +185,8 @@ returned if no such item.
 <
 (\yii\rbac\Item[]) The auth items of the specified type.
 
-
-    [$type] () 
+    [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
+    'Item::TYPE_PERMISSION'
 
 
 *yii/rbac/DbManager::addItem*				protected
@@ -188,8 +195,7 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully added to the system
 
-
-    [$item] () 
+    [$item] (\yii\rbac\Item) 
 
 
 *yii/rbac/DbManager::addRule*				protected
@@ -198,8 +204,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully added to the system
 
-
-    [$rule] () 
+    [$rule] (\yii\rbac\Rule) 
 
 
 *yii/rbac/DbManager::removeItem*				protected
@@ -208,8 +213,7 @@ returned if no such item.
 <
 (boolean) Whether the role or permission is successfully removed
 
-
-    [$item] () 
+    [$item] (\yii\rbac\Item) 
 
 
 *yii/rbac/DbManager::removeRule*				protected
@@ -218,8 +222,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully removed
 
-
-    [$rule] () 
+    [$rule] (\yii\rbac\Rule) 
 
 
 *yii/rbac/DbManager::updateItem*				protected
@@ -228,9 +231,8 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully updated
 
-
-    [$name] () 
-    [$item] () 
+    [$name] (string) The old name of the auth item
+    [$item] (\yii\rbac\Item) 
 
 
 *yii/rbac/DbManager::updateRule*				protected
@@ -239,9 +241,8 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully updated
 
-
-    [$name] () 
-    [$rule] () 
+    [$name] (string) The old name of the rule
+    [$rule] (\yii\rbac\Rule) 
 
 
 *yii/rbac/DbManager::createRole*				public
@@ -290,10 +291,13 @@ returned if no such item.
 <
 (boolean) Whether the user has the specified permission.
 
-
-    [$userId] () 
-    [$permissionName] () 
-    [$params] () 
+    [$userId] (string|integer) The user ID. This should be either an integer
+    or a string representing the unique identifier of a user. See
+    '\yii\web\User::id'.
+    [$permissionName] (string) The name of the permission to be checked
+    against
+    [$params] (array) Name-value pairs that will be passed to the rules
+    associated with the roles and permissions assigned to the user.
 
 
 *yii/rbac/DbManager::getRolesByUser*			public
@@ -303,8 +307,9 @@ returned if no such item.
 (\yii\rbac\Role[]) All roles directly or indirectly assigned to the user. The
 array is indexed by the role names.
 
-
-    [$userId] () 
+ Note that child roles that are not assigned directly to the user will not be
+ returned.
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getPermissionsByRole*		public
@@ -314,8 +319,7 @@ array is indexed by the role names.
 (\yii\rbac\Permission[]) All permissions that the role represents. The array
 is indexed by the permission names.
 
-
-    [$roleName] () 
+    [$roleName] (string) The role name
 
 
 *yii/rbac/DbManager::getPermissionsByUser*		public
@@ -325,8 +329,7 @@ is indexed by the permission names.
 (\yii\rbac\Permission[]) All permissions that the user has. The array is
 indexed by the permission names.
 
-
-    [$userId] () 
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getRule*				public
@@ -336,8 +339,7 @@ indexed by the permission names.
 (\yii\rbac\Rule) The rule object, or null if the specified name does not
 correspond to a rule.
 
-
-    [$name] () 
+    [$name] (string) The rule name
 
 
 *yii/rbac/DbManager::getRules*				public
@@ -348,16 +350,14 @@ correspond to a rule.
 
 
 
-
 *yii/rbac/DbManager::addChild*				public
 >
  addChild($parent, $child)
 <
 (void)
 
-
-    [$parent] () 
-    [$child] () 
+    [$parent] (\yii\rbac\Item) 
+    [$child] (\yii\rbac\Item) 
 
 
 *yii/rbac/DbManager::removeChild*				public
@@ -366,9 +366,10 @@ correspond to a rule.
 <
 (boolean) Whether the removal is successful
 
-
-    [$parent] () 
-    [$child] () 
+ Note, the child item is not deleted. Only the parent-child relationship is
+ removed.
+    [$parent] (\yii\rbac\Item) 
+    [$child] (\yii\rbac\Item) 
 
 
 *yii/rbac/DbManager::hasChild*				public
@@ -377,9 +378,8 @@ correspond to a rule.
 <
 (boolean) Whether '$child' is already a child of '$parent'
 
-
-    [$parent] () 
-    [$child] () 
+    [$parent] (\yii\rbac\Item) 
+    [$child] (\yii\rbac\Item) 
 
 
 *yii/rbac/DbManager::getChildren*				public
@@ -388,8 +388,7 @@ correspond to a rule.
 <
 (\yii\rbac\Item[]) The child permissions and/or roles
 
-
-    [$name] () 
+    [$name] (string) The parent name
 
 
 *yii/rbac/DbManager::assign*				public
@@ -398,11 +397,12 @@ correspond to a rule.
 <
 (\yii\rbac\Assignment) The role assignment information.
 
-
-    [$role] () 
-    [$userId] () 
-    [$rule] () 
-    [$data] () 
+    [$role] (\yii\rbac\Role) 
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$rule] (\yii\rbac\Rule) The rule to be associated with this assignment.
+    If not null, the rule will be executed when 'allow()' is called to check
+    the user permission.
+    [$data] (mixed) Additional data associated with this assignment.
 
 
 *yii/rbac/DbManager::revoke*				public
@@ -411,9 +411,8 @@ correspond to a rule.
 <
 (boolean) Whether the revoking is successful
 
-
-    [$role] () 
-    [$userId] () 
+    [$role] (\yii\rbac\Role) 
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::revokeAll*				public
@@ -422,8 +421,7 @@ correspond to a rule.
 <
 (boolean) Whether the revoking is successful
 
-
-    [$userId] () 
+    [$userId] (mixed) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getAssignment*			public
@@ -433,9 +431,8 @@ correspond to a rule.
 (\yii\rbac\Assignment) The assignment information. Null is returned if the
 role is not assigned to the user.
 
-
-    [$roleName] () 
-    [$userId] () 
+    [$roleName] (string) The role name
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getAssignments*			public
@@ -445,8 +442,7 @@ role is not assigned to the user.
 (\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
 will be returned if there is no role assigned to the user.
 
-
-    [$userId] () 
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::removeAll*				public
@@ -457,14 +453,13 @@ will be returned if there is no role assigned to the user.
 
 
 
-
 *yii/rbac/DbManager::removeAllPermissions*		public
 >
  removeAllPermissions()
 <
 (void)
 
-
+ All parent child relations will be adjusted accordingly.
 
 
 *yii/rbac/DbManager::removeAllRoles*			public
@@ -473,7 +468,7 @@ will be returned if there is no role assigned to the user.
 <
 (void)
 
-
+ All parent child relations will be adjusted accordingly.
 
 
 *yii/rbac/DbManager::removeAllRules*			public
@@ -482,7 +477,7 @@ will be returned if there is no role assigned to the user.
 <
 (void)
 
-
+ All roles and permissions which have rules will be adjusted accordingly.
 
 
 *yii/rbac/DbManager::removeAllAssignments*		public
@@ -490,7 +485,6 @@ will be returned if there is no role assigned to the user.
  removeAllAssignments()
 <
 (void)
-
 
 
 
@@ -528,7 +522,6 @@ will be returned if there is no role assigned to the user.
 <
 (\yii\rbac\Item) The populated auth item instance (either Role or Permission)
 
-
     [$row] (array) The data from the auth item table
 
 
@@ -541,13 +534,11 @@ corresponding array value is a list of child item names.
 
 
 
-
 *yii/rbac/DbManager::getChildrenRecursive*		protected
 >
  getChildrenRecursive($name, $childrenList, $result)
 <
 (void)
-
 
     [$name] (string) The name of the item whose children are to be looked for.
     [$childrenList] (array) The child list built via 'getChildrenList()'
@@ -560,7 +551,6 @@ corresponding array value is a list of child item names.
 <
 (boolean) Whether a loop exists
 
-
     [$parent] (\yii\rbac\Item) The parent item
     [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
 
@@ -570,7 +560,6 @@ corresponding array value is a list of child item names.
  removeAllItems($type)
 <
 (void)
-
 
     [$type] (integer) The auth item type (either Item::TYPE_PERMISSION or
     Item::TYPE_ROLE)

@@ -7,34 +7,15 @@ DESCRIPTION
 
  For example:
 
-   echo Tabs::widget([
-       'items' => [
-           [
-               'label' => 'One',
-               'content' => 'Anim pariatur cliche...',
-               'active' => true
-           ],
-           [
-               'label' => 'Two',
-               'content' => 'Anim pariatur cliche...',
-               'headerOptions' => [...],
-               'options' => ['id' => 'myveryownID'],
-           ],
-           [
-               'label' => 'Dropdown',
-               'items' => [
-                    [
-                        'label' => 'DropdownA',
-                        'content' => 'DropdownA, Anim pariatur cliche...',
-                    ],
-                    [
-                        'label' => 'DropdownB',
-                        'content' => 'DropdownB, Anim pariatur cliche...',
-                    ],
-               ],
-           ],
-       ],
-   ]);
+   [
+       // required, slide content (HTML), such as an image tag
+       'content' => '<img
+ src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"/>',
+       // optional, the caption (HTML) of the slide
+       'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
+       // optional the HTML attributes of the slide container
+       'options' => [],
+   ]
 
 
 
@@ -64,14 +45,20 @@ $items					*yii/bootstrap/Tabs::$items*
  (array) List of tabs in the tabs widget. Each array element represents a
  single tab with the following structure:
 
- - label: string, required, the tab header label. - headerOptions: array,
- optional, the HTML attributes of the tab header. - linkOptions: array,
- optional, the HTML attributes of the tab header link tags. - content: array,
- required if 'items' is not set. The content (HTML) of the tab pane. -
- options: array, optional, the HTML attributes of the tab pane container. -
- active: boolean, optional, whether the item tab header and pane should be
- visible or not. - items: array, optional, if not set then 'content' will be
- required. The 'items' specify a dropdown items   configuration array. Each
+
+   - label: string, required, the tab header label. 
+   - headerOptions: array, optional, the HTML attributes of the tab
+   header. 
+   - linkOptions: array, optional, the HTML attributes of the tab
+   header link tags. 
+   - content: array, required if 'items' is not set. The content (HTML)
+   of the tab pane. 
+   - options: array, optional, the HTML attributes of the tab pane
+   container. 
+   - active: boolean, optional, whether the item tab header and pane
+   should be visible or not. 
+   - items: array, optional, if not set then 'content' will be
+   required. The 'items' specify a dropdown items   configuration array. Each
  item can hold two extra keys, besides the above ones:     * active: boolean,
  optional, whether the item tab header and pane should be visible or not.    
  * content: string, required if 'items' is not set. The content (HTML) of the
@@ -83,7 +70,9 @@ $itemOptions				*yii/bootstrap/Tabs::$itemOptions*
  overwritten by the "options" set in individual 'items'. The following special
  options are recognized:
 
- - tag: string, defaults to "div", the tag name of the item container tags.
+
+   - tag: string, defaults to "div", the tag name of the item container
+   tags.
 
 $headerOptions				*yii/bootstrap/Tabs::$headerOptions*
  (array) List of HTML attributes for the header container tags. This will be
@@ -130,7 +119,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -258,7 +246,6 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Tabs::render*				public
  See |yii/base/Widget::render|
 
@@ -283,7 +270,6 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Tabs::hasActiveTab*			protected
 >
  hasActiveTab()
@@ -292,13 +278,11 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Tabs::renderDropdown*			protected
 >
  renderDropdown($items, $panes)
 <
 (boolean) Whether any of the dropdown items is 'active' or not.
-
 
     [$items] (array) The dropdown items configuration.
     [$panes] (array) The panes reference array.

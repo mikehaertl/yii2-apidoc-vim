@@ -8,13 +8,9 @@ DESCRIPTION
  To use TimestampBehavior, simply insert the following code to your
  ActiveRecord class:
 
-   use yii\behaviors\TimestampBehavior;
-
-   public function behaviors()
+   function ($event)
    {
-       return [
-           TimestampBehavior::className(),
-       ];
+       // return value will be assigned to the attribute
    }
 
  By default, TimestampBehavior will fill the 'created_at' and 'updated_at'
@@ -26,27 +22,23 @@ DESCRIPTION
  calculating the timestamp, you may configure the 'attributes' and 'value'
  properties like the following:
 
-   use yii\db\Expression;
-
-   public function behaviors()
-   {
-       return [
-           'timestamp' => [
-               'class' => TimestampBehavior::className(),
-               'attributes' => [
-                   ActiveRecord::EVENT_BEFORE_INSERT => 'creation_time',
-                   ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
-               ],
-               'value' => new Expression('NOW()'),
-           ],
-       ];
-   }
+   [
+       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+   ]
 
  TimestampBehavior also provides a method named 'touch()' that allows you to
  assign the current timestamp to the specified attribute(s) and save them to
  the database. For example,
 
-   $this->timestamp->touch('creation_time');
+   use yii\behaviors\TimestampBehavior;
+
+   public function behaviors()
+   {
+       return [
+           TimestampBehavior::className(),
+       ];
+   }
 
 
 
@@ -148,8 +140,10 @@ METHOD DETAILS
 <
 (mixed) The attribute value
 
-
-    [$event] () 
+ This method is called by 'evaluateAttributes()'. Its return value will be
+ assigned to the attributes corresponding to the triggering event.
+    [$event] (\yii\base\Event) The event that triggers the current attribute
+    updating.
 
 
 *yii/behaviors/TimestampBehavior::touch*			public
@@ -160,7 +154,21 @@ METHOD DETAILS
 
 
 
-   $model->touch('lastVisit');
+   use yii\db\Expression;
+
+   public function behaviors()
+   {
+       return [
+           'timestamp' => [
+               'class' => TimestampBehavior::className(),
+               'attributes' => [
+                   ActiveRecord::EVENT_BEFORE_INSERT => 'creation_time',
+                   ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
+               ],
+               'value' => new Expression('NOW()'),
+           ],
+       ];
+   }
 
 
     [$attribute] (string) The name of the attribute to update.

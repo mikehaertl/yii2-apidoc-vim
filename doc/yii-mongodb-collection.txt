@@ -16,8 +16,15 @@ DESCRIPTION
  Collection provides the basic interface for the Mongo queries, mostly:
  insert, update, delete operations. For example:
 
-   $collection = Yii::$app->mongodb->getCollection('customer');
-   $collection->insert(['name' => 'John Smith', 'status' => 1]);
+   [
+        'components' => [
+            'mongodb' => [
+                'class' => '\yii\mongodb\Connection',
+                'dsn' =>
+ 'mongodb://developer:password@localhost:27017/mydatabase',
+            ],
+        ],
+   ]
 
  To perform "find" queries, please use 'Query' instead.
 
@@ -25,25 +32,11 @@ DESCRIPTION
  syntax. However Collection class provides the ability of "translating" common
  condition format used "yii\db\*" into Mongo condition. For example:
 
-   $condition = [
-       [
-           'OR',
-           ['AND', ['first_name' => 'John'], ['last_name' => 'Smith']],
-           ['status' => [1, 2, 3]]
-       ],
-   ];
-   print_r($collection->buildCondition($condition));
-   // outputs :
    [
-       '$or' => [
-           [
-               'first_name' => 'John',
-               'last_name' => 'John',
-           ],
-           [
-               'status' => ['$in' => [1, 2, 3]],
-           ]
-       ]
+       'socketTimeoutMS' => 1000, // how long a send or receive on a socket
+ can take before timing out
+       'journal' => true // block write operations until the journal be
+ flushed the to disk
    ]
 
  Note: condition values for the key '_id' will be automatically cast to
@@ -128,13 +121,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mongodb/Collection::getFullName*			public
 >
  getFullName()
 <
 (string) Full name of this collection, including database name.
-
 
 
 
@@ -146,13 +137,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mongodb/Collection::composeLogToken*			protected
 >
  composeLogToken($command, $arguments='[]')
 <
 (string) Token.
-
 
     [$command] (string) Command name
     [$arguments] (array) Command arguments.
@@ -164,7 +153,6 @@ METHOD DETAILS
 <
 (string) Encoded data string.
 
-
     [$data] (mixed) Raw data.
 
 
@@ -173,7 +161,6 @@ METHOD DETAILS
  processLogData($data)
 <
 (mixed) The processed data.
-
 
     [$data] (mixed) Raw data.
 
@@ -186,13 +173,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mongodb/Collection::createIndex*			public
 >
  createIndex($columns, $options='[]')
 <
 (boolean) Whether the operation successful.
-
 
     [$columns] (array|string) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
@@ -200,10 +185,8 @@ METHOD DETAILS
     field using native numeric key with the field name as a value, in this
     case ascending sort will be used. For example:
 
-      [
-          'name',
-          'status' => -1,
-      ]
+      $collection = Yii::$app->mongodb->getCollection('customer');
+      $collection->insert(['name' => 'John Smith', 'status' => 1]);
 
 
     [$options] (array) List of options in format: optionName => optionValue.
@@ -215,7 +198,6 @@ METHOD DETAILS
 <
 (boolean) Whether the operation successful.
 
-
     [$columns] (string|array) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
     either 1 for ascending sort, or -1 for descending sort. Use value 'text'
@@ -223,10 +205,25 @@ METHOD DETAILS
     the field name as a value, in this case ascending sort will be used. For
     example:
 
+      $condition = [
+          [
+              'OR',
+              ['AND', ['first_name' => 'John'], ['last_name' => 'Smith']],
+              ['status' => [1, 2, 3]]
+          ],
+      ];
+      print_r($collection->buildCondition($condition));
+      // outputs :
       [
-          'name',
-          'status' => -1,
-          'description' => 'text',
+          '$or' => [
+              [
+                  'first_name' => 'John',
+                  'last_name' => 'John',
+              ],
+              [
+                  'status' => ['$in' => [1, 2, 3]],
+              ]
+          ]
       ]
 
 
@@ -238,7 +235,6 @@ METHOD DETAILS
 <
 (array) Normalizes index keys array.
 
-
     [$columns] (array) Raw columns/keys list.
 
 
@@ -247,7 +243,6 @@ METHOD DETAILS
  dropAllIndexes()
 <
 (integer) Count of dropped indexes.
-
 
 
 
@@ -269,7 +264,6 @@ METHOD DETAILS
 (array|null) The single document. Null is returned if the query results in
 nothing.
 
-
     [$condition] (array) Query condition
     [$fields] (array) Fields to be selected
 
@@ -280,7 +274,6 @@ nothing.
 <
 (array|null) The original document, or the modified document when
 $options['new'] is set.
-
 
     [$condition] (array) Query condition
     [$update] (array) Update criteria
@@ -294,7 +287,6 @@ $options['new'] is set.
 <
 (\MongoId) New record id instance.
 
-
     [$data] (array|object) Data to be inserted.
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -304,7 +296,6 @@ $options['new'] is set.
  batchInsert($rows, $options='[]')
 <
 (array) Inserted data, each row will have "_id" key assigned to it.
-
 
     [$rows] (array) Array of arrays or objects to be inserted.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -331,7 +322,6 @@ successful.
 <
 (\MongoId) Updated/new record id instance.
 
-
     [$data] (array|object) Data to be updated/inserted.
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -343,7 +333,6 @@ successful.
 (integer|boolean) Number of updated documents or whether operation was
 successful.
 
-
     [$condition] (array) Description of records to remove.
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -354,7 +343,6 @@ successful.
 <
 (array|boolean) Array of distinct values, or "false" on failure.
 
-
     [$column] (string) Column to use.
     [$condition] (array) Query parameters.
 
@@ -364,7 +352,6 @@ successful.
  aggregate($pipeline, $pipelineOperator='[]')
 <
 (array) The result of the aggregation.
-
 
     [$pipeline] (array) List of pipeline operators, or just the first operator
     [$pipelineOperator] (array) Additional pipeline operator. You can specify
@@ -377,7 +364,6 @@ successful.
 <
 (array) The result of the aggregation.
 
-
     [$keys] (mixed) Fields to group by. If an array or non-code object is
     passed, it will be the key used to group results. If instance of
     '\MongoCode' passed, it will be treated as a function that returns the key
@@ -387,9 +373,10 @@ successful.
     current document and the aggregation to this point) and does the
     aggregation. Argument will be automatically cast to '\MongoCode'.
     [$options] (array) Optional parameters to the group command. Valid options
-    include:  - condition - criteria for including a document in the
-    aggregation.  - finalize - function called once per unique key that takes
-    the final output of the reduce function.
+    include:  
+      - condition - criteria for including a document in the aggregation.  
+      - finalize - function called once per unique key that takes the
+      final output of the reduce function.
 
 
 *yii/mongodb/Collection::mapReduce*			public
@@ -402,15 +389,10 @@ successful.
  write it inside the another Mongo collection specified by "out" parameter.
  For example:
 
-   $customerCollection = Yii::$app->mongo->getCollection('customer');
-   $resultCollectionName = $customerCollection->mapReduce(
-       'function () {emit(this.status, this.amount)}',
-       'function (key, values) {return Array.sum(values)}',
-       'mapReduceOut',
-       ['status' => 3]
-   );
-   $query = new Query();
-   $results = $query->from($resultCollectionName)->all();
+   [
+       'name',
+       'status' => -1,
+   ]
 
 
     [$map] (\MongoCode|string) Function, which emits map data from collection.
@@ -424,16 +406,20 @@ successful.
     fetch the result at once without temporary collection usage.
     [$condition] (array) Criteria for including a document in the aggregation.
     [$options] (array) Additional optional parameters to the mapReduce
-    command. Valid options include:  - sort - array - key to sort the input
-    documents. The sort key must be in an existing index for this collection. 
-    - limit - the maximum number of documents to return in the collection.  -
-    finalize - function, which follows the reduce method and modifies the
-    output.  - scope - array - specifies global variables that are accessible
-    in the map, reduce and finalize functions.  - jsMode - boolean -Specifies
-    whether to convert intermediate data into BSON format between the
-    execution of the map and reduce functions.  - verbose - boolean -
-    specifies whether to include the timing information in the result
-    information.
+    command. Valid options include:  
+      - sort - array - key to sort the input documents. The sort key must
+      be in an existing index for this collection.  
+      - limit - the maximum number of documents to return in the
+      collection.  
+      - finalize - function, which follows the reduce method and modifies
+      the output.  
+      - scope - array - specifies global variables that are accessible in
+      the map, reduce and finalize functions.  
+      - jsMode - boolean -Specifies whether to convert intermediate data
+      into BSON format between the execution of the map and reduce
+      functions.  
+      - verbose - boolean - specifies whether to include the timing
+      information in the result information.
 
 
 *yii/mongodb/Collection::fullTextSearch*			public
@@ -442,17 +428,17 @@ successful.
 <
 (array) The highest scoring documents, in descending order by score.
 
-
     [$search] (string) String of terms that MongoDB parses and uses to query
     the text index.
     [$condition] (array) Criteria for filtering a results list.
     [$fields] (array) List of fields to be returned in result.
     [$options] (array) Additional optional parameters to the mapReduce
-    command. Valid options include:  - limit - the maximum number of documents
-    to include in the response (by default 100).  - language - the language
-    that determines the list of stop words for the search    and the rules for
-    the stemmer and tokenizer. If not specified, the search uses the default  
-     language of the index.
+    command. Valid options include:  
+      - limit - the maximum number of documents to include in the response
+      (by default 100).  
+      - language - the language that determines the list of stop words for
+      the search    and the rules for the stemmer and tokenizer. If not
+    specified, the search uses the default    language of the index.
 
 
 *yii/mongodb/Collection::tryResultError*			protected
@@ -460,7 +446,6 @@ successful.
  tryResultError($result)
 <
 (void)
-
 
     [$result] (mixed) Raw command execution result.
 
@@ -473,13 +458,11 @@ successful.
 
 
 
-
 *yii/mongodb/Collection::normalizeConditionKeyword*	protected
 >
  normalizeConditionKeyword($key)
 <
 (string) Actual key.
-
 
     [$key] (string) Raw condition key.
 
@@ -500,7 +483,6 @@ successful.
 <
 (array) The generated Mongo condition
 
-
     [$condition] (array) The condition specification. Please refer to
     'Query::where()' on how to specify a condition.
 
@@ -511,7 +493,6 @@ successful.
 <
 (array) The generated Mongo condition.
 
-
     [$condition] (array) The condition specification.
 
 
@@ -520,7 +501,6 @@ successful.
  buildAndCondition($operator, $operands)
 <
 (array) The generated Mongo condition.
-
 
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The Mongo conditions to connect.
@@ -532,7 +512,6 @@ successful.
 <
 (array) The generated Mongo condition.
 
-
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The Mongo conditions to connect.
 
@@ -542,7 +521,6 @@ successful.
  buildBetweenCondition($operator, $operands)
 <
 (array) The generated Mongo condition.
-
 
     [$operator] (string) The operator to use
     [$operands] (array) The first operand is the column name. The second and
@@ -555,7 +533,6 @@ successful.
 <
 (array) The generated Mongo condition.
 
-
     [$operator] (string) The operator to use (e.g. 'IN' or 'NOT IN')
     [$operands] (array) The first operand is the column name. If it is an
     array a composite IN condition will be generated. The second operand is an
@@ -567,7 +544,6 @@ successful.
  buildLikeCondition($operator, $operands)
 <
 (array) The generated Mongo condition.
-
 
     [$operator] (string) The operator to use
     [$operands] (array) The first operand is the column name. The second

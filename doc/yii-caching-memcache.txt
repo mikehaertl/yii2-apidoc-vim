@@ -22,25 +22,8 @@ DESCRIPTION
  To use MemCache as the cache application component, configure the application
  as follows,
 
-   [
-       'components' => [
-           'cache' => [
-               'class' => 'yii\caching\MemCache',
-               'servers' => [
-                   [
-                       'host' => 'server1',
-                       'port' => 11211,
-                       'weight' => 60,
-                   ],
-                   [
-                       'host' => 'server2',
-                       'port' => 11211,
-                       'weight' => 40,
-                   ],
-               ],
-           ],
-       ],
-   ]
+   $cache['foo'] = 'some data';
+   echo $cache['foo'];
 
  In the above, two memcache servers are used: server1 and server2. You can
  configure more properties of each server, such as 'persistent', 'weight',
@@ -265,7 +248,6 @@ cache or expired.
 <
 (boolean) If no error happens during deletion
 
-
     [$key] (string) The key of the value to be deleted
 
 
@@ -284,7 +266,6 @@ cache or expired.
 <
 (array) A list of cached values indexed by the keys
 
-
     [$keys] (array) A list of keys identifying the cached values
 
 
@@ -293,7 +274,6 @@ cache or expired.
  setValues($data, $duration)
 <
 (array) Array of failed keys. Always empty in case of using memcached.
-
 
     [$data] (array) Array where key corresponds to cache key while value is
     the value stored
@@ -330,7 +310,6 @@ component.
 
 
 
-
 *yii/caching/MemCache::getServers*			public
 >
  getServers()
@@ -339,13 +318,11 @@ component.
 
 
 
-
 *yii/caching/MemCache::setServers*			public
 >
  setServers($config)
 <
 (void)
-
 
     [$config] (array) List of memcache server configurations. Each element
     must be an array with the following keys: host, port, persistent, weight,

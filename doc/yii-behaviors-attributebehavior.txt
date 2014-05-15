@@ -17,23 +17,7 @@ DESCRIPTION
  'value' property with a PHP callable whose return value will be used to
  assign to the current attribute(s). For example,
 
-   use yii\behaviors\AttributeBehavior;
-
-   public function behaviors()
-   {
-       return [
-           'attributeStamp' => [
-               'class' => AttributeBehavior::className(),
-               'attributes' => [
-                   ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
-                   ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
-               ],
-               'value' => function ($event) {
-                   return 'some value';
-               },
-           ],
-       ];
-   }
+   echo HtmlPurifier::process($html);
 
 
 
@@ -51,10 +35,9 @@ $attributes				*yii/behaviors/AttributeBehavior::$attributes*
  attribute(s) to be updated. You can use a string to represent a single
  attribute, or an array to represent a list of attributes. For example,
 
-   [
-       ActiveRecord::EVENT_BEFORE_INSERT => ['attribute1', 'attribute2'],
-       ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
-   ]
+   echo HtmlPurifier::process($html, [
+       'Attr.EnableID' => true,
+   ]);
 
 
 
@@ -64,9 +47,22 @@ $value					*yii/behaviors/AttributeBehavior::$value*
  value of the function will be assigned to the attributes. The signature of
  the function should be as follows,
 
-   function ($event)
+   use yii\behaviors\AttributeBehavior;
+
+   public function behaviors()
    {
-       // return value will be assigned to the attribute
+       return [
+           'attributeStamp' => [
+               'class' => AttributeBehavior::className(),
+               'attributes' => [
+                   ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
+                   ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+               ],
+               'value' => function ($event) {
+                   return 'some value';
+               },
+           ],
+       ];
    }
 
 
@@ -131,6 +127,29 @@ METHOD DETAILS
 (array) Events (array keys) and the corresponding event handler methods (array
 values).
 
+ Child classes may override this method to declare what PHP callbacks should
+ be attached to the events of the 'owner' component.
+
+ The callbacks will be attached to the 'owner''s events when the behavior is
+ attached to the owner; and they will be detached from the events when the
+ behavior is detached from the component.
+
+ The callbacks can be any of the followings:
+
+
+   - method in this behavior: ''handleClick'', equivalent to '[$this,
+   'handleClick']' 
+   - object method: '[$object, 'handleClick']' 
+   - static method: '['Page', 'handleClick']' 
+   - anonymous function: 'function ($event) { ... }'
+
+ The following is an example:
+
+   [
+       ActiveRecord::EVENT_BEFORE_INSERT => ['attribute1', 'attribute2'],
+       ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+   ]
+
 
 
 
@@ -147,7 +166,6 @@ values).
  evaluateAttributes($event)
 <
 (void)
-
 
     [$event] (\yii\base\Event) 
 

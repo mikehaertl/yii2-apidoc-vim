@@ -2,11 +2,6 @@
 *yii/validators/DateValidator*   >> |yii/validators/Validator|
 ==============================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -76,7 +71,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/validators/DateValidator::__get*			public
@@ -181,9 +177,10 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$object] () 
-    [$attribute] () 
+ Child classes must implement this method to provide the actual validation
+ logic.
+    [$object] (\yii\base\Model) The data object to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/DateValidator::validate*			public
@@ -197,8 +194,9 @@ METHOD DETAILS
 (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
 
-
-    [$value] () 
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/DateValidator::clientValidateAttribute*	public

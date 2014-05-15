@@ -105,10 +105,13 @@ $filter					*yii/grid/DataColumn::$filter*
  field, a dropdown list) that is used for this data column. This property is
  effective only when 'GridView::filterModel' is set.
 
- - If this property is not set, a text field will be generated as the filter
- input; - If this property is an array, a dropdown list will be generated that
- uses this property value as   the list options. - If you don't want a filter
- for this data column, set this value to be false.
+
+   - If this property is not set, a text field will be generated as the
+   filter input; 
+   - If this property is an array, a dropdown list will be generated
+   that uses this property value as   the list options. 
+   - If you don't want a filter for this data column, set this value to
+   be false.
 
 $filterInputOptions			*yii/grid/DataColumn::$filterInputOptions*
  (array) The HTML attributes for the filter input fields. This property is
@@ -191,7 +194,8 @@ METHOD DETAILS
 <
 (string) The rendering result
 
-
+ The default implementation simply renders 'header'. This method may be
+ overridden to customize the rendering of the header cell.
 
 
 *yii/grid/DataColumn::renderFooterCellContent*		protected
@@ -204,10 +208,10 @@ METHOD DETAILS
 <
 (string) The rendering result
 
-
-    [$model] () 
-    [$key] () 
-    [$index] () 
+    [$model] (mixed) The data model
+    [$key] (mixed) The key associated with the data model
+    [$index] (integer) The zero-based index of the data model among the models
+    array returned by 'GridView::dataProvider'.
 
 
 *yii/grid/DataColumn::renderFilterCellContent*		protected
@@ -216,7 +220,8 @@ METHOD DETAILS
 <
 (string) The rendering result
 
-
+ The default implementation simply renders a space. This method may be
+ overridden to customize the rendering of the filter cell (if any).
 
 
 *yii/grid/DataColumn::getDataCellValue*			public
@@ -224,7 +229,6 @@ METHOD DETAILS
  getDataCellValue($model, $key, $index)
 <
 (string) The data cell value
-
 
     [$model] (mixed) The data model
     [$key] (mixed) The key associated with the data model

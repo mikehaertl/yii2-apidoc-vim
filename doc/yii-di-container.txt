@@ -88,9 +88,6 @@ PROPERTY DETAILS
 $behaviors				*yii/di/Container::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
-$					*yii/di/Container::$*
- (string) Class name, interface name or alias name
-
 $singleton				*yii/di/Container::$singleton*
  (string) Class name, interface name or alias name
 
@@ -279,17 +276,19 @@ METHOD DETAILS
     [$definition] (mixed) The definition associated with '$class'. It can be
     one of the followings:
 
-    - a PHP callable: The callable will be executed when 'get()' is invoked.
-    The signature of the callable   should be 'function ($container, $params,
-    $config)', where '$params' stands for the list of constructor  
-    parameters, '$config' the object configuration, and '$container' the
-    container object. The return value   of the callable will be returned by
-    'get()' as the object instance requested. - a configuration array: the
-    array contains name-value pairs that will be used to initialize the
-    property   values of the newly created object when 'get()' is called. The
-    'class' element stands for the   the class of the object to be created. If
-    'class' is not specified, '$class' will be used as the class name. - a
-    string: a class name, an interface name or an alias name.
+
+      - a PHP callable: The callable will be executed when 'get()' is
+      invoked. The signature of the callable   should be 'function
+    ($container, $params, $config)', where '$params' stands for the list of
+    constructor   parameters, '$config' the object configuration, and
+    '$container' the container object. The return value   of the callable will
+    be returned by 'get()' as the object instance requested. 
+      - a configuration array: the array contains name-value pairs that
+      will be used to initialize the property   values of the newly created
+    object when 'get()' is called. The 'class' element stands for the   the
+    class of the object to be created. If 'class' is not specified, '$class'
+    will be used as the class name. 
+      - a string: a class name, an interface name or an alias name.
     [$params] (array) The list of constructor parameters. The parameters will
     be passed to the class constructor when 'get()' is called.
 
@@ -316,7 +315,6 @@ METHOD DETAILS
 <
 (boolean) Whether the container has the definition of the specified name..
 
-
     [$class] (string) Class name, interface name or alias name
 
 
@@ -327,7 +325,6 @@ METHOD DETAILS
 (boolean) Whether the given name corresponds to a registered singleton. If
 '$checkInstance' is true, the method should return a value indicating whether
 the singleton has been instantiated.
-
 
     [$class] (string) Class name, interface name or alias name
     [$checkInstance] (boolean) Whether to check if the singleton has been
@@ -340,7 +337,6 @@ the singleton has been instantiated.
 <
 (void)
 
-
     [$class] (string) Class name, interface name or alias name
 
 
@@ -349,7 +345,6 @@ the singleton has been instantiated.
  normalizeDefinition($class, $definition)
 <
 (array) The normalized class definition
-
 
     [$class] (string) Class name
     [$definition] (string|array|callable) The class definition
@@ -361,7 +356,6 @@ the singleton has been instantiated.
 <
 (array) The list of the object definitions or the loaded shared objects (type
 or ID => definition or instance).
-
 
 
 
@@ -384,7 +378,6 @@ or ID => definition or instance).
 <
 (array) The merged parameters
 
-
     [$class] (string) Class name, interface name or alias name
     [$params] (array) The constructor parameters
 
@@ -395,7 +388,6 @@ or ID => definition or instance).
 <
 (array) The dependencies of the specified class.
 
-
     [$class] (string) Class name, interface name or alias name
 
 
@@ -404,7 +396,6 @@ or ID => definition or instance).
  resolveDependencies($dependencies, $reflection='null')
 <
 (array) The resolved dependencies
-
 
     [$dependencies] (array) The dependencies
     [$reflection] (\ReflectionClass) The class reflection associated with the

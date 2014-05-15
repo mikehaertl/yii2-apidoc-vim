@@ -13,6 +13,51 @@ DESCRIPTION
 
    function actionIndex()
    {
+       $query = Article::find()->where(['status' => 1]);
+       $countQuery = clone $query;
+       $pages = new Pagination(['totalCount' => $countQuery->count()]);
+       $models = $query->offset($pages->offset)
+           ->limit($pages->limit)
+           ->all();
+
+       return $this->render('index', [
+            'models' => $models,
+            'pages' => $pages,
+       ]);
+   }
+
+ View:
+
+   foreach ($models as $model) {
+       // display $model here
+   }
+
+   // display pagination
+   echo LinkPager::widget([
+       'pagination' => $pages,
+   ]);
+
+ In the above, we declare two 'attributes' that support sorting: name and age.
+ We pass the sort information to the Article query so that the query results
+ are sorted by the orders specified by the Sort object. In the view, we show
+ two hyperlinks that can lead to pages with the data sorted by the
+ corresponding attributes.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$enableMultiSort			*yii/data/Sort::$enableMultiSort*
+ (boolean) Whether the sorting can be applied to multiple attributes
+ simultaneously. Defaults to false, which means each time the data can only be
+ sorted by one attribute.
+
+$attributes				*yii/data/Sort::$attributes*
+ (array) List of attributes that are allowed to be sorted. Its syntax can be
+ described using the following example:
+
+   function actionIndex()
+   {
        $sort = new Sort([
            'attributes' => [
                'age',
@@ -38,7 +83,8 @@ DESCRIPTION
        ]);
    }
 
- View:
+ In the above, two attributes are declared: "age" and "name". The "age"
+ attribute is a simple attribute which is equivalent to the following:
 
    // display links leading to sort actions
    echo $sort->link('name') . ' | ' . $sort->link('age');
@@ -47,55 +93,20 @@ DESCRIPTION
        // display $model here
    }
 
- In the above, we declare two 'attributes' that support sorting: name and age.
- We pass the sort information to the Article query so that the query results
- are sorted by the orders specified by the Sort object. In the view, we show
- two hyperlinks that can lead to pages with the data sorted by the
- corresponding attributes.
-
-
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$enableMultiSort			*yii/data/Sort::$enableMultiSort*
- (boolean) Whether the sorting can be applied to multiple attributes
- simultaneously. Defaults to false, which means each time the data can only be
- sorted by one attribute.
-
-$attributes				*yii/data/Sort::$attributes*
- (array) List of attributes that are allowed to be sorted. Its syntax can be
- described using the following example:
-
-   [
-       'age',
-       'name' => [
-           'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
-           'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
-           'default' => SORT_DESC,
-           'label' => 'Name',
-       ],
-   ]
-
- In the above, two attributes are declared: "age" and "name". The "age"
- attribute is a simple attribute which is equivalent to the following:
-
-   'age' => [
-       'asc' => ['age' => SORT_ASC],
-       'desc' => ['age' => SORT_DESC],
-       'default' => SORT_ASC,
-       'label' => Inflector::camel2words('age'),
-   ]
-
  The "name" attribute is a composite attribute:
 
- - The "name" key represents the attribute name which will appear in the URLs
- leading   to sort actions. - The "asc" and "desc" elements specify how to
- sort by the attribute in ascending   and descending orders, respectively.
- Their values represent the actual columns and   the directions by which the
- data should be sorted by. - The "default" element specifies by which
- direction the attribute should be sorted   if it is not currently sorted (the
- default value is ascending order). - The "label" element specifies what label
- should be used when calling 'link()' to create   a sort link. If not set,
+
+   - The "name" key represents the attribute name which will appear in
+   the URLs leading   to sort actions. 
+   - The "asc" and "desc" elements specify how to sort by the attribute
+   in ascending   and descending orders, respectively. Their values represent
+ the actual columns and   the directions by which the data should be sorted
+ by. 
+   - The "default" element specifies by which direction the attribute
+   should be sorted   if it is not currently sorted (the default value is
+ ascending order). 
+   - The "label" element specifies what label should be used when
+   calling 'link()' to create   a sort link. If not set,
  'Inflector::camel2words()' will be called to get a label.   Note that it will
  not be HTML-encoded.
 
@@ -113,8 +124,13 @@ $defaultOrder				*yii/data/Sort::$defaultOrder*
  are the corresponding sort directions. For example,
 
    [
-       'name' => SORT_ASC,
-       'created_at' => SORT_DESC,
+       'age',
+       'name' => [
+           'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
+           'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
+           'default' => SORT_DESC,
+           'label' => 'Name',
+       ],
    ]
 
 
@@ -172,7 +188,6 @@ METHOD DETAILS
 
 
 
-
 *yii/data/Sort::__get*					public
  See |yii/base/Object::__get|
 
@@ -216,7 +231,6 @@ METHOD DETAILS
 (array) The columns (keys) and their corresponding sort directions (values).
 This can be passed to '\yii\db\Query::orderBy()' to construct a DB query.
 
-
     [$recalculate] (boolean) Whether to recalculate the sort directions
 
 
@@ -226,7 +240,6 @@ This can be passed to '\yii\db\Query::orderBy()' to construct a DB query.
 <
 (array) Sort directions indexed by attribute names. Sort direction can be
 either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
-
 
     [$recalculate] (boolean) Whether to recalculate the sort directions
 
@@ -238,7 +251,6 @@ either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
 (boolean|null) Sort direction of the attribute. Can be either 'SORT_ASC' for
 ascending order or 'SORT_DESC' for descending order. Null is returned if the
 attribute is invalid or does not need to be sorted.
-
 
     [$attribute] (string) The attribute name
 
@@ -291,7 +303,6 @@ attribute is invalid or does not need to be sorted.
  hasAttribute($name)
 <
 (boolean) Whether the sort definition supports sorting by the named attribute.
-
 
     [$name] (string) The attribute name
 

@@ -165,6 +165,10 @@ METHOD DETAILS
  See |yii/base/ErrorHandler::register|
 
 
+*yii/web/ErrorHandler::unregister*			public
+ See |yii/base/ErrorHandler::unregister|
+
+
 *yii/web/ErrorHandler::handleException*			public
  See |yii/base/ErrorHandler::handleException|
 
@@ -182,7 +186,6 @@ METHOD DETAILS
  renderException($exception)
 <
 (void)
-
 
     [$exception] (\Exception) The exception to be rendered.
 
@@ -209,7 +212,6 @@ METHOD DETAILS
 <
 (array) The array representation of the exception.
 
-
     [$exception] (\Exception) The exception being converted
 
 
@@ -218,7 +220,6 @@ METHOD DETAILS
  htmlEncode($text)
 <
 (string) Encoded original text.
-
 
     [$text] (string) To encode.
 
@@ -229,7 +230,6 @@ METHOD DETAILS
 <
 (string) Linkified with HTML type/class name.
 
-
     [$code] (string) Type/class name to be linkified.
 
 
@@ -238,7 +238,6 @@ METHOD DETAILS
  renderFile($_file_, $_params_)
 <
 (string) The rendering result
-
 
     [$_file_] (string) The view file.
     [$_params_] (array) The parameters (name-value pairs) that will be
@@ -252,7 +251,6 @@ METHOD DETAILS
 (string) HTML content of the rendered previous exceptions. Empty string if
 there are none.
 
-
     [$exception] (\Exception) The exception whose precursors should be
     rendered.
 
@@ -262,7 +260,6 @@ there are none.
  renderCallStackItem($file, $line, $class, $method, $args, $index)
 <
 (string) HTML content of the rendered call stack element.
-
 
     [$file] (string|null) Name where call has happened.
     [$line] (integer|null) Number on which call has happened.
@@ -280,13 +277,11 @@ there are none.
 
 
 
-
 *yii/web/ErrorHandler::isCoreFile*			public
 >
  isCoreFile($file)
 <
 (boolean) Whether given name of the file belongs to the framework.
-
 
     [$file] (string) Name to be checked.
 
@@ -296,7 +291,6 @@ there are none.
  createHttpStatusLink($statusCode, $statusDescription)
 <
 (string) Generated HTML with HTTP status code information.
-
 
     [$statusCode] (integer) To be used to generate information link.
     [$statusDescription] (string) Description to display after the the status
@@ -311,13 +305,11 @@ there are none.
 
 
 
-
 *yii/web/ErrorHandler::createFrameworkVersionLink*	public
 >
  createFrameworkVersionLink()
 <
 (string) Framework version information hyperlink.
-
 
 
 
@@ -327,8 +319,16 @@ there are none.
 <
 (string) String representation of the arguments array
 
-
     [$args] (array) Arguments array to be converted
+
+
+*yii/web/ErrorHandler::getExceptionName*			public
+>
+ getExceptionName($exception)
+<
+(string) Human-readable exception name or null if it cannot be determined
+
+    [$exception] (\Exception) 
 
 
 

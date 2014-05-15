@@ -7,22 +7,13 @@ DESCRIPTION
 
  For example:
 
-   echo Collapse::widget([
-       'items' => [
-           // equivalent to the above
-           'Collapsible Group Item #1' => [
-               'content' => 'Anim pariatur cliche...',
-               // open its content by default
-               'contentOptions' => ['class' => 'in']
-           ],
-           // another group item
-           'Collapsible Group Item #2' => [
-               'content' => 'Anim pariatur cliche...',
-               'contentOptions' => [...],
-               'options' => [...],
-           ],
-       ]
-   ]);
+   [
+       'offset' => 'col-sm-offset-3',
+       'label' => 'col-sm-3',
+       'wrapper' => 'col-sm-6',
+       'error' => '',
+       'hint' => 'col-sm-3',
+   ]
 
 
 
@@ -52,15 +43,20 @@ $items					*yii/bootstrap/Collapse::$items*
  (array) List of groups in the collapse widget. Each array element represents
  a single group with the following structure:
 
-   // item key is the actual group header
-   'Collapsible Group Item #1' => [
-       // required, the content (HTML) of the group
-       'content' => 'Anim pariatur cliche...',
-       // optional the HTML attributes of the content group
-       'contentOptions' => [],
-       // optional the HTML attributes of the group
-       'options' => [],
-   ]
+   $form = ActiveForm::begin([
+       'layout' => 'horizontal',
+       'fieldConfig' => [
+           'template' =>
+ "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+           'horizontalCssClasses' => [
+               'label' => 'col-sm-4',
+               'offset' => 'col-sm-offset-4',
+               'wrapper' => 'col-sm-8',
+               'error' => '',
+               'hint' => '',
+           ],
+       ],
+   ]);
 
 
 
@@ -95,7 +91,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -223,7 +218,6 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Collapse::render*				public
  See |yii/base/Widget::render|
 
@@ -248,13 +242,11 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Collapse::renderItem*			public
 >
  renderItem($header, $item, $index)
 <
 (string) The rendering result
-
 
     [$header] (string) A label of the item group 'items'
     [$item] (array) A single item from 'items'

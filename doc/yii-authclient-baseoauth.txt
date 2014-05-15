@@ -8,17 +8,13 @@ SUBCLASSES
 |yii/authclient/clients/Facebook|
 |yii/authclient/clients/YandexOAuth|
 |yii/authclient/clients/LinkedIn|
+|yii/authclient/clients/VKontakte|
 |yii/authclient/clients/GoogleOAuth|
 |yii/authclient/clients/Live|
 |yii/authclient/clients/GitHub|
 |yii/authclient/clients/Twitter|
 |yii/authclient/OAuth2|
 |yii/authclient/OAuth1|
-
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
 
 
 PROPERTY DETAILS
@@ -253,7 +249,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$returnUrl] (string) Return URL
 
 
@@ -265,13 +260,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::setCurlOptions*		public
 >
  setCurlOptions($curlOptions)
 <
 (void)
-
 
     [$curlOptions] (array) CURL options.
 
@@ -284,13 +277,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::setAccessToken*		public
 >
  setAccessToken($token)
 <
 (void)
-
 
     [$token] (array|\yii\authclient\OAuthToken) 
 
@@ -303,13 +294,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::setSignatureMethod*		public
 >
  setSignatureMethod($signatureMethod)
 <
 (void)
-
 
     [$signatureMethod] (array|\yii\authclient\signature\BaseMethod) Signature
     method instance or its array configuration.
@@ -323,7 +312,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::defaultReturnUrl*		protected
 >
  defaultReturnUrl()
@@ -332,13 +320,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::sendRequest*			protected
 >
  sendRequest($method, $url, $params='[]')
 <
 (array) Response.
-
 
     [$method] (string) Request type.
     [$url] (string) Request URL.
@@ -366,13 +352,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::processResponse*		protected
 >
  processResponse($rawResponse, $contentType='self::CONTENT_TYPE_AUTO')
 <
 (array) Actual response.
-
 
     [$rawResponse] (string) Raw response.
     [$contentType] (string) Response content type.
@@ -384,7 +368,6 @@ METHOD DETAILS
 <
 (array) XML array representation.
 
-
     [$xml] (string|\SimpleXMLElement) Xml to process.
 
 
@@ -393,7 +376,6 @@ METHOD DETAILS
  determineContentTypeByHeaders($headers)
 <
 (string) Content type.
-
 
     [$headers] (array) Request headers.
 
@@ -404,7 +386,6 @@ METHOD DETAILS
 <
 (string) Response type.
 
-
     [$rawContent] (string) Raw response content.
 
 
@@ -413,7 +394,6 @@ METHOD DETAILS
  createSignatureMethod($signatureMethodConfig)
 <
 (\yii\authclient\signature\BaseMethod) Signature method instance.
-
 
     [$signatureMethodConfig] (array) Signature method configuration.
 
@@ -424,7 +404,6 @@ METHOD DETAILS
 <
 (\yii\authclient\OAuthToken) Token instance.
 
-
     [$tokenConfig] (array) Token configuration.
 
 
@@ -433,7 +412,6 @@ METHOD DETAILS
  composeUrl($url, $params='[]')
 <
 (string) Composed URL.
-
 
     [$url] (string) Base URL.
     [$params] (array) GET params.
@@ -444,7 +422,6 @@ METHOD DETAILS
  saveAccessToken($token)
 <
 (static) Self reference.
-
 
     [$token] (\yii\authclient\OAuthToken) Auth token
 
@@ -457,13 +434,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::setState*			protected
 >
  setState($key, $value)
 <
 (static) Self reference.
-
 
     [$key] (string) State key.
     [$value] (mixed) State value
@@ -475,7 +450,6 @@ METHOD DETAILS
 <
 (mixed) State value.
 
-
     [$key] (string) State key.
 
 
@@ -484,7 +458,6 @@ METHOD DETAILS
  removeState($key)
 <
 (boolean) Success.
-
 
     [$key] (string) State key.
 
@@ -497,13 +470,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/BaseOAuth::api*				public
 >
  api($apiSubUrl, $method=''GET'', $params='[]')
 <
 (array) API response
-
 
     [$apiSubUrl] (string) API sub URL, which will be append to 'apiBaseUrl',
     or absolute API URL.
@@ -517,7 +488,6 @@ METHOD DETAILS
 <
 (array) CUrl options.
 
-
     [$method] (string) Request type.
     [$url] (string) Request URL.
     [$params] (array) Request params.
@@ -529,7 +499,6 @@ METHOD DETAILS
 <
 (\yii\authclient\OAuthToken) New auth token.
 
-
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
@@ -538,7 +507,6 @@ METHOD DETAILS
  apiInternal($accessToken, $url, $method, $params)
 <
 (array) API response.
-
 
     [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
     [$url] (string) Absolute API URL.

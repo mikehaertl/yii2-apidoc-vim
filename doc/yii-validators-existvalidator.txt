@@ -14,18 +14,9 @@ DESCRIPTION
 
  The followings are examples of validation rules using this validator:
 
-   // a1 needs to exist
-   ['a1', 'exist']
-   // a1 needs to exist, but its value will use a2 to check for the existence
-   ['a1', 'exist', 'targetAttribute' => 'a2']
-   // a1 and a2 need to exist together, and they both will receive error
- message
-   [['a1', 'a2'], 'exist', 'targetAttribute' => ['a1', 'a2']]
-   // a1 and a2 need to exist together, only a1 will receive error message
-   ['a1', 'exist', 'targetAttribute' => ['a1', 'a2']]
-   // a1 needs to exist by checking the existence of both a2 and a3 (using a1
- value)
-   ['a1', 'exist', 'targetAttribute' => ['a2', 'a1' => 'a3']]
+   function (attribute, value) {
+       return $('#country').value == 'USA';
+   }
 
 
 
@@ -88,6 +79,9 @@ $filter					*yii/validators/ExistValidator::$filter*
  function with the signature 'function ($query)', where '$query' is the
  '\yii\db\Query|Query' object that you can modify in the function.
 
+$allowArray				*yii/validators/ExistValidator::$allowArray*
+ (boolean) Whether to allow array type attribute.
+
 $behaviors				*yii/validators/ExistValidator::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
@@ -110,7 +104,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/validators/ExistValidator::__get*			public
@@ -215,9 +210,10 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$object] () 
-    [$attribute] () 
+ Child classes must implement this method to provide the actual validation
+ logic.
+    [$object] (\yii\base\Model) The data object to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/ExistValidator::validate*			public
@@ -231,8 +227,9 @@ METHOD DETAILS
 (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
 
-
-    [$value] () 
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/ExistValidator::clientValidateAttribute*	public
@@ -256,7 +253,6 @@ error message. Null should be returned if the data is valid.
  createQuery($targetClass, $condition)
 <
 (\yii\db\ActiveQueryInterface) The query instance
-
 
     [$targetClass] (string) The target AR class
     [$condition] (mixed) Query condition

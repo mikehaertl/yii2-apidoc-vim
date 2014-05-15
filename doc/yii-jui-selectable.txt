@@ -7,29 +7,16 @@ DESCRIPTION
 
  For example:
 
-   echo Selectable::widget([
-       'items' => [
-           'Item 1',
-           [
-               'content' => 'Item2',
-           ],
-           [
-               'content' => 'Item3',
-               'options' => [
-                   'tag' => 'li',
-               ],
-           ],
-       ),
-       'options' => [
-           'tag' => 'ul',
-       ],
-       'itemOptions' => [
-           'tag' => 'li',
-       ],
-       'clientOptions' => [
-           'tolerance' => 'fit',
-       ],
-   ]);
+   [
+       'header' => 'Item header',
+       'content' => 'Item content',
+       // the HTML attributes of the item header container tag. This will
+ overwrite "headerOptions".
+       'headerOptions' => [],
+       // the HTML attributes of the item container tag. This will overwrite
+ "itemOptions".
+       'options' => [],
+   ]
 
 
 
@@ -53,8 +40,9 @@ $options				*yii/jui/Selectable::$options*
  (array) The HTML attributes for the widget container tag. The following
  special options are recognized:
 
- - tag: string, defaults to "ul", the tag name of the container tag of this
- widget.
+
+   - tag: string, defaults to "ul", the tag name of the container tag
+   of this widget.
 
 $clientOptions				*yii/jui/Selectable::$clientOptions*
  See |yii/jui/Widget::$clientOptions|
@@ -69,12 +57,15 @@ $items					*yii/jui/Selectable::$items*
  (array) List of selectable items. Each item can be a string representing the
  item content or an array of the following structure:
 
-   [
-       'content' => 'item content',
-       // the HTML attributes of the item container tag. This will overwrite
- "itemOptions".
-       'options' => [],
-   ]
+   Resizable::begin([
+       'clientOptions' => [
+           'grid' => [20, 10],
+       ],
+   ]);
+
+   echo 'Resizable contents here...';
+
+   Resizable::end();
 
 
 
@@ -83,7 +74,9 @@ $itemOptions				*yii/jui/Selectable::$itemOptions*
  overwritten by the "options" set in individual 'items'. The following special
  options are recognized:
 
- - tag: string, defaults to "li", the tag name of the item container tags.
+
+   - tag: string, defaults to "li", the tag name of the item container
+   tags.
 
 $behaviors				*yii/jui/Selectable::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -239,7 +232,6 @@ METHOD DETAILS
 
 
 
-
 *yii/jui/Selectable::render*				public
  See |yii/base/Widget::render|
 
@@ -273,7 +265,6 @@ METHOD DETAILS
  renderItems()
 <
 (string) The rendering result.
-
 
 
 

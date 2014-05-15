@@ -10,29 +10,20 @@ DESCRIPTION
  The following is an example of using ActiveDataProvider to provide
  ActiveRecord instances:
 
-   $provider = new ActiveDataProvider([
-       'query' => Post::find(),
-       'pagination' => [
-           'pageSize' => 20,
-       ],
-   ]);
-
-   // get the posts in the current page
-   $posts = $provider->getModels();
+   'age' => [
+       'asc' => ['age' => SORT_ASC],
+       'desc' => ['age' => SORT_DESC],
+       'default' => SORT_ASC,
+       'label' => Inflector::camel2words('age'),
+   ]
 
  And the following example shows how to use ActiveDataProvider without
  ActiveRecord:
 
-   $query = new Query;
-   $provider = new ActiveDataProvider([
-       'query' => $query->from('post'),
-       'pagination' => [
-           'pageSize' => 20,
-       ],
-   ]);
-
-   // get the posts in the current page
-   $posts = $provider->getModels();
+   [
+       'name' => SORT_ASC,
+       'created_at' => SORT_DESC,
+   ]
 
 
 
@@ -55,9 +46,10 @@ $key					*yii/data/ActiveDataProvider::$key*
  If this is not set, the following rules will be used to determine the keys of
  the data models:
 
- - If 'query' is an '\yii\db\ActiveQuery' instance, the primary keys of
- '\yii\db\ActiveQuery::modelClass' will be used. - Otherwise, the keys of the
- 'models' array will be used.
+
+   - If 'query' is an '\yii\db\ActiveQuery' instance, the primary keys
+   of '\yii\db\ActiveQuery::modelClass' will be used. 
+   - Otherwise, the keys of the 'models' array will be used.
 
 $db					*yii/data/ActiveDataProvider::$db*
  (\yii\db\Connection|string) The DB connection object or the application
@@ -207,15 +199,13 @@ METHOD DETAILS
 
 
 
-
 *yii/data/ActiveDataProvider::prepareKeys*		protected
 >
  prepareKeys($models)
 <
 (array) The keys
 
-
-    [$models] () 
+    [$models] (array) The available data models
 
 
 *yii/data/ActiveDataProvider::prepareTotalCount*		protected
@@ -223,7 +213,6 @@ METHOD DETAILS
  prepareTotalCount()
 <
 (integer) Total number of data models in this data provider.
-
 
 
 
@@ -277,8 +266,14 @@ METHOD DETAILS
 <
 (void)
 
+    [$value] (array|\yii\data\Sort|boolean) The sort definition to be used by
+    this data provider. This can be one of the following:
 
-    [$value] () 
+
+      - a configuration array for creating the sort definition object. The
+      "class" element defaults   to 'yii\data\Sort' 
+      - an instance of 'Sort' or its subclass 
+      - false, if sorting needs to be disabled.
 
 
 *yii/data/ActiveDataProvider::refresh*			public

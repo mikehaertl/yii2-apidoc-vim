@@ -28,10 +28,13 @@ $message				*yii/validators/CompareValidator::$message*
  (string) The user-defined error message. It may contain the following
  placeholders which will be replaced accordingly by the validator:
 
- - '{attribute}': the label of the attribute being validated - '{value}': the
- value of the attribute being validated - '{compareValue}': the value or the
- attribute label to be compared with - '{compareAttribute}': the label of the
- attribute to be compared with
+
+   - '{attribute}': the label of the attribute being validated 
+   - '{value}': the value of the attribute being validated 
+   - '{compareValue}': the value or the attribute label to be compared
+   with 
+   - '{compareAttribute}': the label of the attribute to be compared
+   with
 
 $on					*yii/validators/CompareValidator::$on*
  See |yii/validators/Validator::$on|
@@ -72,17 +75,23 @@ $compareValue				*yii/validators/CompareValidator::$compareValue*
 $operator				*yii/validators/CompareValidator::$operator*
  (string) The operator for comparison. The following operators are supported:
 
- - '==': validates to see if the two values are equal. The comparison is done
- is non-strict mode. - '===': validates to see if the two values are equal.
- The comparison is done is strict mode. - '!=': validates to see if the two
- values are NOT equal. The comparison is done is non-strict mode. - '!==':
- validates to see if the two values are NOT equal. The comparison is done is
- strict mode. - '>': validates to see if the value being validated is greater
- than the value being compared with. - '>=': validates to see if the value
- being validated is greater than or equal to the value being compared with. -
- '<': validates to see if the value being validated is less than the value
- being compared with. - '<=': validates to see if the value being validated is
- less than or equal to the value being compared with.
+
+   - '==': validates to see if the two values are equal. The comparison
+   is done is non-strict mode. 
+   - '===': validates to see if the two values are equal. The
+   comparison is done is strict mode. 
+   - '!=': validates to see if the two values are NOT equal. The
+   comparison is done is non-strict mode. 
+   - '!==': validates to see if the two values are NOT equal. The
+   comparison is done is strict mode. 
+   - '>': validates to see if the value being validated is greater than
+   the value being compared with. 
+   - '>=': validates to see if the value being validated is greater
+   than or equal to the value being compared with. 
+   - '<': validates to see if the value being validated is less than
+   the value being compared with. 
+   - '<=': validates to see if the value being validated is less than
+   or equal to the value being compared with.
 
 $behaviors				*yii/validators/CompareValidator::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -106,7 +115,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/validators/CompareValidator::__get*			public
@@ -211,9 +221,10 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$object] () 
-    [$attribute] () 
+ Child classes must implement this method to provide the actual validation
+ logic.
+    [$object] (\yii\base\Model) The data object to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/CompareValidator::validate*		public
@@ -227,8 +238,9 @@ METHOD DETAILS
 (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
 
-
-    [$value] () 
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/CompareValidator::clientValidateAttribute*public
@@ -238,10 +250,21 @@ error message. Null should be returned if the data is valid.
 (string) The client-side validation script. Null if the validator does not
 support client-side validation.
 
+ You may override this method to return the JavaScript validation code if the
+ validator can support client-side validation.
 
-    [$object] () 
-    [$attribute] () 
-    [$view] () 
+ The following JavaScript variables are predefined and can be used in the
+ validation code:
+
+
+   - 'attribute': the name of the attribute being validated. 
+   - 'value': the value being validated. 
+   - 'messages': an array used to hold the validation error messages
+   for the attribute.
+    [$object] (\yii\base\Model) The data object being validated
+    [$attribute] (string) The name of the attribute to be validated.
+    [$view] (\yii\web\View) The view object that is going to be used to render
+    views or view files containing a model form with this validator applied.
 
 
 *yii/validators/CompareValidator::isActive*		public
@@ -261,7 +284,6 @@ support client-side validation.
  compareValues($operator, $value, $compareValue)
 <
 (boolean) Whether the comparison using the specified operator is true.
-
 
     [$operator] (string) The comparison operator
     [$value] (mixed) The value being compared

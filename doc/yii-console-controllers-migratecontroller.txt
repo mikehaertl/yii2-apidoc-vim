@@ -18,21 +18,22 @@ DESCRIPTION
  command is executed, if it does not exist. You may also manually create it as
  follows:
 
+   #load fixtures from UsersFixture class with default namespace
+ "tests\unit\fixtures"
+   yii fixture/load User
+
+   #also a short version of this command (generate action is default)
+   yii fixture User
+
+   #load fixtures with different namespace.
+   yii fixture/load User --namespace=alias\my\custom\namespace\goes\here
+
+ Below are some common usages of this command:
+
    CREATE TABLE migration (
        version varchar(180) PRIMARY KEY,
        apply_time integer
    )
-
- Below are some common usages of this command:
-
-   # creates a new migration named 'create_user_table'
-   yii migrate/create create_user_table
-
-   # applies ALL new migrations
-   yii migrate
-
-   # reverts the last applied migration
-   yii migrate/down
 
 
 
@@ -56,7 +57,7 @@ $action					*yii/console/controllers/MigrateController::$action*
  See |yii/base/Controller::$action|
 
 $interactive				*yii/console/controllers/MigrateController::$interactive*
- (boolean) Whether to execute the migration in an interactive mode.
+ See |yii/console/Controller::$interactive|
 
 $color					*yii/console/controllers/MigrateController::$color*
  See |yii/console/Controller::$color|
@@ -228,7 +229,6 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
-
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -310,20 +310,30 @@ METHOD DETAILS
 <
 (array) The names of the options valid for the action
 
+ Child classes may override this method to specify possible options.
 
-    [$actionId] () 
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+    [$actionId] (string) The action id of the current request
 
 
 *yii/console/controllers/MigrateController::actionUp*	public
 >
  actionUp($limit=0)
 <
-(void)
+(integer) The status of the action execution. 0 means normal, other values
+mean abnormal.
 
  For example,
 
-   yii migrate     # apply all new migrations
-   yii migrate 3   # apply the first 3 new migrations
+   # creates a new migration named 'create_user_table'
+   yii migrate/create create_user_table
+
+   # applies ALL new migrations
+   yii migrate
+
+   # reverts the last applied migration
+   yii migrate/down
 
 
     [$limit] (integer) The number of new migrations to be applied. If 0, it
@@ -334,12 +344,13 @@ METHOD DETAILS
 >
  actionDown($limit=1)
 <
-(void)
+(integer) The status of the action execution. 0 means normal, other values
+mean abnormal.
 
  For example,
 
-   yii migrate/down     # revert the last migration
-   yii migrate/down 3   # revert the last 3 migrations
+   yii migrate     # apply all new migrations
+   yii migrate 3   # apply the first 3 new migrations
 
 
     [$limit] (integer) The number of migrations to be reverted. Defaults to 1,
@@ -350,13 +361,15 @@ METHOD DETAILS
 >
  actionRedo($limit=1)
 <
-(void)
+(integer) The status of the action execution. 0 means normal, other values
+mean abnormal.
 
  This command will first revert the specified migrations, and then apply them
  again. For example,
 
-   yii migrate/redo     # redo the last applied migration
-   yii migrate/redo 3   # redo the last 3 applied migrations
+   yii migrate/down     # revert the last migration
+   yii migrate/down 3   # revert the last 3 migrations
+   yii migrate/down all # revert all migrations
 
 
     [$limit] (integer) The number of migrations to be redone. Defaults to 1,
@@ -377,11 +390,8 @@ METHOD DETAILS
  This command will first revert the specified migrations, and then apply them
  again. For example,
 
-   yii migrate/to 101129_185401                      # using timestamp
-   yii migrate/to m101129_185401_create_user_table   # using full name
-   yii migrate/to 1392853618                         # using UNIX timestamp
-   yii migrate/to "2014-02-15 13:00:50"              # using strtotime()
- parseable string
+   yii migrate/redo     # redo the last applied migration
+   yii migrate/redo 3   # redo the last 3 applied migrations
 
 
     [$version] (string) Either the version name or the certain time value in
@@ -398,8 +408,11 @@ METHOD DETAILS
 
  No actual migration will be performed.
 
-   yii migrate/mark 101129_185401                      # using timestamp
-   yii migrate/mark m101129_185401_create_user_table   # using full name
+   yii migrate/to 101129_185401                      # using timestamp
+   yii migrate/to m101129_185401_create_user_table   # using full name
+   yii migrate/to 1392853618                         # using UNIX timestamp
+   yii migrate/to "2014-02-15 13:00:50"              # using strtotime()
+ parseable string
 
 
     [$version] (string) The version at which the migration history should be
@@ -416,9 +429,8 @@ METHOD DETAILS
  This command will show the list of migrations that have been applied so far.
  For example,
 
-   yii migrate/history     # showing the last 10 migrations
-   yii migrate/history 5   # showing the last 5 migrations
-   yii migrate/history 0   # showing the whole history
+   yii migrate/mark 101129_185401                      # using timestamp
+   yii migrate/mark m101129_185401_create_user_table   # using full name
 
 
     [$limit] (integer) The maximum number of migrations to be displayed. If it
@@ -434,9 +446,9 @@ METHOD DETAILS
  This command will show the new migrations that have not been applied. For
  example,
 
-   yii migrate/new     # showing the first 10 new migrations
-   yii migrate/new 5   # showing the first 5 new migrations
-   yii migrate/new 0   # showing all new migrations
+   yii migrate/history     # showing the last 10 migrations
+   yii migrate/history 5   # showing the last 5 migrations
+   yii migrate/history 0   # showing the whole history
 
 
     [$limit] (integer) The maximum number of new migrations to be displayed.
@@ -453,7 +465,9 @@ METHOD DETAILS
  After using this command, developers should modify the created migration
  skeleton by filling up the actual migration logic.
 
-   yii migrate/create create_user_table
+   yii migrate/new     # showing the first 10 new migrations
+   yii migrate/new 5   # showing the first 5 new migrations
+   yii migrate/new 0   # showing all new migrations
 
 
     [$name] (string) The name of the new migration. This should only contain
@@ -466,7 +480,6 @@ METHOD DETAILS
 <
 (boolean) Whether the migration is successful
 
-
     [$class] (string) The migration class name
 
 
@@ -475,7 +488,6 @@ METHOD DETAILS
  migrateDown($class)
 <
 (boolean) Whether the migration is successful
-
 
     [$class] (string) The migration class name
 
@@ -486,7 +498,6 @@ METHOD DETAILS
 <
 (\yii\db\Migration) The migration instance
 
-
     [$class] (string) The migration class name
 
 
@@ -495,7 +506,6 @@ METHOD DETAILS
  migrateToTime($time)
 <
 (void)
-
 
     [$time] (integer) UNIX timestamp value.
 
@@ -506,7 +516,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$version] (string) Name in the full format.
 
 
@@ -515,7 +524,6 @@ METHOD DETAILS
  getMigrationHistory($limit)
 <
 (array) The migration history
-
 
     [$limit] (integer) The maximum number of records in the history to be
     returned
@@ -529,13 +537,11 @@ METHOD DETAILS
 
 
 
-
 *yii/console/controllers/MigrateController::getNewMigrations*protected
 >
  getNewMigrations()
 <
 (array) List of new migrations
-
 
 
 

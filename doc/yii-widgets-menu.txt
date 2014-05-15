@@ -23,23 +23,12 @@ DESCRIPTION
 
  The following example shows how to use Menu:
 
-   echo Menu::widget([
-       'items' => [
-           // Important: you need to specify url as 'controller/action',
-           // not just as 'controller' even if default action is used.
-           ['label' => 'Home', 'url' => ['site/index']],
-           // 'Products' menu item will be selected as long as the route is
- 'product/index'
-           ['label' => 'Products', 'url' => ['product/index'], 'items' => [
-               ['label' => 'New Arrivals', 'url' => ['product/index', 'tag' =>
- 'new']],
-               ['label' => 'Most Popular', 'url' => ['product/index', 'tag' =>
- 'popular']],
-           ]],
-           ['label' => 'Login', 'url' => ['site/login'], 'visible' =>
- Yii::$app->user->isGuest],
-       ],
-   ]);
+   // ... load $models ...
+   if (Yii::$app->request->isAjax) {
+       Yii::$app->response->format = Response::FORMAT_JSON;
+       return ActiveForm::validateMultiple($models);
+   }
+   // ... respond to non-AJAX request ...
 
 
 
@@ -60,32 +49,39 @@ $items					*yii/widgets/Menu::$items*
  (array) List of menu items. Each menu item should be an array of the
  following structure:
 
- - label: string, optional, specifies the menu item label. When 'encodeLabels'
- is true, the label   will be HTML-encoded. If the label is not specified, an
- empty string will be used. - url: string or array, optional, specifies the
- URL of the menu item. It will be processed by 'Url::to'.   When this is set,
- the actual menu item content will be generated using 'linkTemplate';  
- otherwise, 'labelTemplate' will be used. - visible: boolean, optional,
- whether this menu item is visible. Defaults to true. - items: array,
- optional, specifies the sub-menu items. Its format is the same as the parent
- items. - active: boolean, optional, whether this menu item is in active state
- (currently selected).   If a menu item is active, its CSS class will be
- appended with 'activeCssClass'.   If this option is not set, the menu item
+
+   - label: string, optional, specifies the menu item label. When
+   'encodeLabels' is true, the label   will be HTML-encoded. If the label is
+ not specified, an empty string will be used. 
+   - url: string or array, optional, specifies the URL of the menu
+   item. It will be processed by 'Url::to'.   When this is set, the actual
+ menu item content will be generated using 'linkTemplate';   otherwise,
+ 'labelTemplate' will be used. 
+   - visible: boolean, optional, whether this menu item is visible.
+   Defaults to true. 
+   - items: array, optional, specifies the sub-menu items. Its format
+   is the same as the parent items. 
+   - active: boolean, optional, whether this menu item is in active
+   state (currently selected).   If a menu item is active, its CSS class will
+ be appended with 'activeCssClass'.   If this option is not set, the menu item
  will be set active automatically when the current request   is triggered by
- 'url'. For more details, please refer to 'isItemActive()'. - template:
- string, optional, the template used to render the content of this menu item. 
-  The token '{url}' will be replaced by the URL associated with this menu
- item,   and the token '{label}' will be replaced by the label of the menu
- item.   If this option is not set, 'linkTemplate' or 'labelTemplate' will be
- used instead. - options: array, optional, the HTML attributes for the menu
- container tag.
+ 'url'. For more details, please refer to 'isItemActive()'. 
+   - template: string, optional, the template used to render the
+   content of this menu item.   The token '{url}' will be replaced by the URL
+ associated with this menu item,   and the token '{label}' will be replaced by
+ the label of the menu item.   If this option is not set, 'linkTemplate' or
+ 'labelTemplate' will be used instead. 
+   - options: array, optional, the HTML attributes for the menu
+   container tag.
 
 $itemOptions				*yii/widgets/Menu::$itemOptions*
  (array) List of HTML attributes for the menu container tag. This will be
  overwritten by the "options" set in individual 'items'. The following special
  options are recognized:
 
- - tag: string, defaults to "li", the tag name of the item container tags.
+
+   - tag: string, defaults to "li", the tag name of the item container
+   tags.
 
 $linkTemplate				*yii/widgets/Menu::$linkTemplate*
  (string) The template used to render the body of a menu which is a link. In
@@ -127,7 +123,9 @@ $options				*yii/widgets/Menu::$options*
  (array) The HTML attributes for the menu's container tag. The following
  special options are recognized:
 
- - tag: string, defaults to "ul", the tag name of the item container tags.
+
+   - tag: string, defaults to "ul", the tag name of the item container
+   tags.
 
 $firstItemCssClass			*yii/widgets/Menu::$firstItemCssClass*
  (string) The CSS class that will be assigned to the first item in the main
@@ -301,7 +299,6 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/Menu::render*				public
  See |yii/base/Widget::render|
 
@@ -319,7 +316,6 @@ METHOD DETAILS
  renderItems($items)
 <
 (string) The rendering result
-
 
     [$items] (array) The menu items to be rendered recursively
 
@@ -340,7 +336,6 @@ METHOD DETAILS
  normalizeItems($items, $active)
 <
 (array) The normalized menu items
-
 
     [$items] (array) The items to be normalized.
     [$active] (boolean) Whether there is an active child menu item.

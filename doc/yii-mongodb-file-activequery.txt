@@ -12,12 +12,21 @@ DESCRIPTION
 
  ActiveQuery also provides the following additional query options:
 
- - 'with()': list of relations that this query should be performed with. -
- 'asArray()': whether to return each record as an array.
+
+   - 'with()': list of relations that this query should be performed
+   with. 
+   - 'asArray()': whether to return each record as an array.
 
  These options can be configured using methods of the same name. For example:
 
-   $images = ImageFile::find()->with('tags')->asArray()->all();
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
 
 
 
@@ -90,7 +99,6 @@ METHOD DETAILS
  __construct($modelClass, $config='[]')
 <
 (void)
-
 
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
@@ -251,7 +259,6 @@ METHOD DETAILS
 <
 (\yii\mongodb\file\Collection) Collection instance.
 
-
     [$db] (\yii\mongodb\Connection) Mongo connection.
 
 
@@ -282,7 +289,6 @@ METHOD DETAILS
 (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
-
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If null, the Mongo connection returned by 'modelClass' will be
     used.
@@ -296,7 +302,6 @@ will be returned.
 Depending on the setting of 'asArray', the query result may be either an array
 or an ActiveRecord object. Null will be returned if the query results in
 nothing.
-
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If null, the Mongo connection returned by 'modelClass' will be

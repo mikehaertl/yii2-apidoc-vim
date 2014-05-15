@@ -7,25 +7,20 @@ DESCRIPTION
 
  For example,
 
-   echo Alert::widget([
-       'options' => [
-           'class' => 'alert-info',
-       ],
-       'body' => 'Say hello...',
-   ]);
+   $command = $connection->createCommand("SELECT * FROM idx_article WHERE
+ MATCH('programming')");
+   $articles = $command->queryAll();
+   $command = $connection->createCommand('UPDATE idx_article SET status=2
+ WHERE id=1');
+   $command->execute();
 
  The following example will show the content enclosed between the 'begin()'
  and 'end()' calls within the alert box:
 
-   Alert::begin([
-       'options' => [
-           'class' => 'alert-warning',
-       ],
+   echo Button::widget([
+       'label' => 'Action',
+       'options' => ['class' => 'btn-lg'],
    ]);
-
-   echo 'Say hello...';
-
-   Alert::end();
 
 
 
@@ -63,8 +58,9 @@ $closeButton				*yii/bootstrap/Alert::$closeButton*
 
  The following special options are supported:
 
- - tag: string, the tag name of the button. Defaults to 'button'. - label:
- string, the label of the button. Defaults to '&times;'.
+
+   - tag: string, the tag name of the button. Defaults to 'button'. 
+   - label: string, the label of the button. Defaults to '&times;'.
 
  The rest of the options will be rendered as the HTML attributes of the button
  tag. Please refer to the [Alert
@@ -102,7 +98,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -230,7 +225,6 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Alert::render*				public
  See |yii/base/Widget::render|
 
@@ -255,7 +249,6 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Alert::renderBodyEnd*			protected
 >
  renderBodyEnd()
@@ -264,13 +257,11 @@ METHOD DETAILS
 
 
 
-
 *yii/bootstrap/Alert::renderCloseButton*			protected
 >
  renderCloseButton()
 <
 (string) The rendering result
-
 
 
 

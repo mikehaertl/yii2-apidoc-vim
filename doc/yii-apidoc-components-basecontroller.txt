@@ -8,11 +8,6 @@ SUBCLASSES
 |yii/apidoc/commands/ApiController|
 |yii/apidoc/commands/GuideController|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -272,8 +267,11 @@ METHOD DETAILS
 <
 (array) The names of the options valid for the action
 
+ Child classes may override this method to specify possible options.
 
-    [$actionId] () 
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+    [$actionId] (string) The action id of the current request
 
 
 *yii/apidoc/components/BaseController::normalizeTargetDir*protected
@@ -329,7 +327,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$context] (\yii\apidoc\models\Context) 
 
 
@@ -338,7 +335,6 @@ METHOD DETAILS
  findRenderer($template)
 <
 (\yii\apidoc\renderers\BaseRenderer) 
-
 
     [$template] (string) 
 

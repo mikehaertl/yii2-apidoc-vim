@@ -16,25 +16,40 @@ DESCRIPTION
  ActiveQuery mainly provides the following methods to retrieve the query
  results:
 
- - 'one()': returns a single record populated with the first row of data. -
- 'all()': returns all records based on the query results. - 'count()': returns
- the number of records. - 'scalar()': returns the value of the first column in
- the first row of the query result. - 'column()': returns the value of the
- first column in the query result. - 'exists()': returns a value indicating
- whether the query result has data or not.
+
+   - 'one()': returns a single record populated with the first row of
+   data. 
+   - 'all()': returns all records based on the query results. 
+   - 'count()': returns the number of records. 
+   - 'scalar()': returns the value of the first column in the first row
+   of the query result. 
+   - 'column()': returns the value of the first column in the query
+   result. 
+   - 'exists()': returns a value indicating whether the query result
+   has data or not.
 
  Because ActiveQuery extends from 'Query', one can use query methods, such as
  'where()', 'orderBy()' to customize the query options.
 
  ActiveQuery also provides the following additional query options:
 
- - 'with()': list of relations that this query should be performed with. -
- 'indexBy()': the name of the column by which the query result should be
- indexed. - 'asArray()': whether to return each record as an array.
+
+   - 'with()': list of relations that this query should be performed
+   with. 
+   - 'indexBy()': the name of the column by which the query result
+   should be indexed. 
+   - 'asArray()': whether to return each record as an array.
 
  These options can be configured using methods of the same name. For example:
 
-   $customers = Customer::find()->with('orders')->asArray()->all();
+   echo DatePicker::widget([
+       'language' => 'ru',
+       'model' => $model,
+       'attribute' => 'country',
+       'clientOptions' => [
+           'dateFormat' => 'yy-mm-dd',
+       ],
+   ]);
 
  > NOTE: elasticsearch limits the number of records returned to 10 records by
  default. > If you expect to get more records you should specify limit
@@ -85,6 +100,9 @@ $indexBy				*yii/elasticsearch/ActiveQuery::$indexBy*
 
 $fields					*yii/elasticsearch/ActiveQuery::$fields*
  See |yii/elasticsearch/Query::$fields|
+
+$source					*yii/elasticsearch/ActiveQuery::$source*
+ See |yii/elasticsearch/Query::$source|
 
 $index					*yii/elasticsearch/ActiveQuery::$index*
  See |yii/elasticsearch/Query::$index|
@@ -145,7 +163,6 @@ METHOD DETAILS
  __construct($modelClass, $config='[]')
 <
 (void)
-
 
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
@@ -306,7 +323,6 @@ METHOD DETAILS
 <
 (\yii\elasticsearch\Command) The created DB command instance.
 
-
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
     DB command. If null, the DB connection returned by 'modelClass' will be
     used.
@@ -318,7 +334,6 @@ METHOD DETAILS
 <
 (array) The query results. If the query results in nothing, an empty array
 will be returned.
-
 
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
     DB command. If null, the DB connection returned by 'modelClass' will be
@@ -334,7 +349,6 @@ Depending on the setting of 'asArray', the query result may be either an array
 or an ActiveRecord object. Null will be returned if the query results in
 nothing.
 
-
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
     DB command. If null, the DB connection returned by 'modelClass' will be
     used.
@@ -346,9 +360,20 @@ nothing.
 <
 (array) The query results.
 
+    [$db] (\yii\elasticsearch\Connection) The database connection used to
+    execute the query. If this parameter is not given, the 'elasticsearch'
+    application component will be used.
+    [$options] (array) The options given with this query. Possible options
+    are:
 
-    [$db] () 
-    [$options] () 
+     
+      -
+     
+    [routing](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search.html#search-routing)
+     
+      -
+     
+    [search_type](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-search-type.html)
 
 
 *yii/elasticsearch/ActiveQuery::delete*			public
@@ -356,16 +381,7 @@ nothing.
 
 
 *yii/elasticsearch/ActiveQuery::scalar*			public
->
- scalar($field, $db='null')
-<
-(string) The value of the specified attribute in the first record of the query
-result. Null is returned if the query result is empty or the field does not
-exist.
-
-
-    [$field] () 
-    [$db] () 
+ See |yii/elasticsearch/Query::scalar|
 
 
 *yii/elasticsearch/ActiveQuery::column*			public
@@ -375,9 +391,10 @@ exist.
 (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
-
-    [$field] () 
-    [$db] () 
+    [$field] (string) The field to query over
+    [$db] (\yii\elasticsearch\Connection) The database connection used to
+    execute the query. If this parameter is not given, the 'elasticsearch'
+    application component will be used.
 
 
 *yii/elasticsearch/ActiveQuery::count*			public
@@ -442,6 +459,10 @@ the query results in nothing.
 
 *yii/elasticsearch/ActiveQuery::fields*			public
  See |yii/elasticsearch/Query::fields|
+
+
+*yii/elasticsearch/ActiveQuery::source*			public
+ See |yii/elasticsearch/Query::source|
 
 
 *yii/elasticsearch/ActiveQuery::timeout*			public

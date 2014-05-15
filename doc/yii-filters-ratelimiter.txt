@@ -8,14 +8,12 @@ DESCRIPTION
  You may use RateLimiter by attaching it as a behavior to a controller or
  module, like the following,
 
-   public function behaviors()
-   {
-       return [
-           'rateLimiter' => [
-               'class' => \yii\filters\RateLimiter::className(),
-           ],
-       ];
-   }
+   $requirements = array(
+       array(
+           'name' => 'Upload max file size',
+           'condition' => 'eval:$this->checkUploadMaxFileSize("5M")',
+       ),
+   );
 
  When the user has exceeded his rate limit, RateLimiter will throw a
  'TooManyRequestsHttpException' exception.
@@ -135,8 +133,7 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
-
-    [$action] () 
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/filters/RateLimiter::afterAction*			public
@@ -153,7 +150,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$user] (\yii\filters\RateLimitInterface) The current user
     [$request] (\yii\web\Request) 
     [$response] (\yii\web\Response) 
@@ -165,7 +161,6 @@ METHOD DETAILS
  addRateLimitHeaders($response, $limit, $remaining, $reset)
 <
 (void)
-
 
     [$response] (\yii\web\Response) 
     [$limit] (integer) The maximum number of allowed requests during a period

@@ -9,21 +9,8 @@ DESCRIPTION
  prefix for the URL rules. For example, the following code creates a rule for
  the 'admin' module:
 
-   new GroupUrlRule([
-       'prefix' => 'admin',
-       'rules' => [
-           'login' => 'user/login',
-           'logout' => 'user/logout',
-           'dashboard' => 'default/dashboard',
-       ],
-   ]);
-
-   // the above rule is equivalent to the following three rules:
-
-   [
-       'admin/login' => 'admin/user/login',
-       'admin/logout' => 'admin/user/logout',
-       'admin/dashboard' => 'admin/default/dashboard',
+   'errorHandler' => [
+       'errorAction' => 'site/error',
    ]
 
  The above example assumes the prefix for patterns and routes are the same.
@@ -76,7 +63,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/web/GroupUrlRule::__get*				public
@@ -123,28 +111,29 @@ METHOD DETAILS
 
 
 
-
 *yii/web/GroupUrlRule::parseRequest*			public
 >
  parseRequest($manager, $request)
 <
-(void)
+(array|boolean) The parsing result. The route and the parameters are returned
+as an array. If false, it means this rule cannot be used to parse this path
+info.
 
-
-    [$manager] () 
-    [$request] () 
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$request] (\yii\web\Request) The request component
 
 
 *yii/web/GroupUrlRule::createUrl*				public
 >
  createUrl($manager, $route, $params)
 <
-(void)
+(string|boolean) The created URL, or false if this rule cannot be used for
+creating this URL.
 
-
-    [$manager] () 
-    [$route] () 
-    [$params] () 
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$route] (string) The route. It should not have slashes at the beginning
+    or the end.
+    [$params] (array) The parameters
 
 
 

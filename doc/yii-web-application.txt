@@ -2,11 +2,6 @@
 *yii/web/Application*   >> |yii/base/Application|
 =====================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -76,11 +71,7 @@ $catchAll				*yii/web/Application::$catchAll*
  action. The rest of the array elements (key-value pairs) specify the
  parameters to be bound to the action. For example,
 
-   [
-       'offline/notice',
-       'param1' => 'value1',
-       'param2' => 'value2',
-   ]
+   Options FollowSymLinks
 
  Defaults to null, meaning catch-all is not used.
 
@@ -113,8 +104,9 @@ $aliases				*yii/web/Application::$aliases*
  aliases. For example,
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
+       'offline/notice',
+       'param1' => 'value1',
+       'param2' => 'value2',
    ]
 
 
@@ -400,17 +392,13 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is called by 'init()' after the application has been fully
+ configured. If you override this method, make sure you also call the parent
+ implementation.
 
 
 *yii/web/Application::registerErrorHandler*		protected
->
- registerErrorHandler($config)
-<
-(void)
-
-
-    [$config] () 
+ See |yii/base/Application::registerErrorHandler|
 
 
 *yii/web/Application::run*				public
@@ -422,7 +410,6 @@ METHOD DETAILS
  handleRequest($request)
 <
 (\yii\web\Response) The resulting response
-
 
     [$request] (\yii\web\Request) The request to be handled
 
@@ -511,7 +498,6 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Application::end*				public
  See |yii/base/Application::end|
 
@@ -524,13 +510,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Application::setHomeUrl*				public
 >
  setHomeUrl($value)
 <
 (void)
-
 
     [$value] (string) The homepage URL
 
@@ -543,13 +527,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Application::getUser*				public
 >
  getUser()
 <
 (\yii\web\User) The user component
-
 
 
 

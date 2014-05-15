@@ -16,24 +16,33 @@ DESCRIPTION
  ActiveQuery mainly provides the following methods to retrieve the query
  results:
 
- - 'one()': returns a single record populated with the first row of data. -
- 'all()': returns all records based on the query results. - 'count()': returns
- the number of records. - 'sum()': returns the sum over the specified column.
- - 'average()': returns the average over the specified column. - 'min()':
- returns the min over the specified column. - 'max()': returns the max over
- the specified column. - 'scalar()': returns the value of the first column in
- the first row of the query result. - 'column()': returns the value of the
- first column in the query result. - 'exists()': returns a value indicating
- whether the query result has data or not.
+
+   - 'one()': returns a single record populated with the first row of
+   data. 
+   - 'all()': returns all records based on the query results. 
+   - 'count()': returns the number of records. 
+   - 'sum()': returns the sum over the specified column. 
+   - 'average()': returns the average over the specified column. 
+   - 'min()': returns the min over the specified column. 
+   - 'max()': returns the max over the specified column. 
+   - 'scalar()': returns the value of the first column in the first row
+   of the query result. 
+   - 'column()': returns the value of the first column in the query
+   result. 
+   - 'exists()': returns a value indicating whether the query result
+   has data or not.
 
  Because ActiveQuery extends from 'Query', one can use query methods, such as
  'where()', 'orderBy()' to customize the query options.
 
  ActiveQuery also provides the following additional query options:
 
- - 'with()': list of relations that this query should be performed with. -
- 'indexBy()': the name of the column by which the query result should be
- indexed. - 'asArray()': whether to return each record as an array.
+
+   - 'with()': list of relations that this query should be performed
+   with. 
+   - 'indexBy()': the name of the column by which the query result
+   should be indexed. 
+   - 'asArray()': whether to return each record as an array.
 
  These options can be configured using methods of the same name. For example:
 
@@ -160,7 +169,6 @@ METHOD DETAILS
  __construct($modelClass, $config='[]')
 <
 (void)
-
 
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
@@ -321,7 +329,6 @@ METHOD DETAILS
 <
 (\yii\db\Command) The created DB command instance.
 
-
     [$db] (\yii\db\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
 
@@ -332,8 +339,10 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$builder] () 
+ This method is called by 'QueryBuilder' when it starts to build SQL from a
+ query object. You may override this method to do some final preparation work
+ when converting a query into a SQL statement.
+    [$builder] (\yii\db\QueryBuilder) 
 
 
 *yii/db/ActiveQuery::batch*				public
@@ -351,7 +360,6 @@ METHOD DETAILS
 (array|\yii\db\ActiveRecord[]) The query results. If the query results in
 nothing, an empty array will be returned.
 
-
     [$db] (\yii\db\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
 
@@ -362,8 +370,9 @@ nothing, an empty array will be returned.
 <
 (array) The converted query result
 
-
-    [$rows] () 
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
+    [$rows] (array) The raw query result from database
 
 
 *yii/db/ActiveQuery::one*					public
@@ -373,7 +382,6 @@ nothing, an empty array will be returned.
 (\yii\db\ActiveRecord|array|null) A single row of query result. Depending on
 the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. Null will be returned if the query results in nothing.
-
 
     [$db] (\yii\db\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
@@ -508,7 +516,6 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  createCommandInternal($db)
 <
 (\yii\db\Command) The created DB command instance.
-
 
     [$db] (\yii\db\Connection|null) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.

@@ -47,7 +47,6 @@ METHOD DETAILS
 
 
 
-
 *yii/BaseYii::getAlias*					public
 >
  getAlias($alias, $throwException='true')
@@ -115,13 +114,15 @@ is not previously registered.
     [$alias] (string) The alias name (e.g. "@yii"). It must start with a '@'
     character. It may contain the forward slash '/' which serves as boundary
     character when performing alias translation by 'getAlias()'.
-    [$path] (string) The path corresponding to the alias. Trailing '/' and '\'
-    characters will be trimmed. This can be
+    [$path] (string) The path corresponding to the alias. If this is null, the
+    alias will be removed. Trailing '/' and '\' characters will be trimmed.
+    This can be
 
-    - a directory or a file path (e.g. '/tmp', '/tmp/main.txt') - a URL (e.g.
-    'http://www.yiiframework.com') - a path alias (e.g. '@yii/base'). In this
-    case, the path alias will be converted into the   actual path first by
-    calling 'getAlias()'.
+
+      - a directory or a file path (e.g. '/tmp', '/tmp/main.txt') 
+      - a URL (e.g. 'http://www.yiiframework.com') 
+      - a path alias (e.g. '@yii/base'). In this case, the path alias will
+      be converted into the   actual path first by calling 'getAlias()'.
 
 
 *yii/BaseYii::autoload*					public
@@ -163,20 +164,25 @@ is not previously registered.
 
  Below are some usage examples:
 
-   // create an object using a class name
-   $object = Yii::createObject('yii\db\Connection');
-
-   // create an object using a configuration array
-   $object = Yii::createObject([
-       'class' => 'yii\db\Connection',
-       'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
-       'username' => 'root',
-       'password' => '',
-       'charset' => 'utf8',
-   ]);
-
-   // create an object with two constructor parameters
-   $object = \Yii::createObject('MyClass', [$param1, $param2]);
+   [
+       'components' => [
+           'cache' => [
+               'class' => 'yii\caching\MemCache',
+               'servers' => [
+                   [
+                       'host' => 'server1',
+                       'port' => 11211,
+                       'weight' => 60,
+                   ],
+                   [
+                       'host' => 'server2',
+                       'port' => 11211,
+                       'weight' => 40,
+                   ],
+               ],
+           ],
+       ],
+   ]
 
  Using '\yii\di\Container|dependency injection container', this method can
  also identify dependent objects, instantiate them and inject them into the
@@ -184,13 +190,14 @@ is not previously registered.
     [$type] (string|array|callable) The object type. This can be specified in
     one of the following forms:
 
-    - a string: representing the class name of the object to be created - a
-    configuration array: the array must contain a 'class' element which is
-    treated as the object class,   and the rest of the name-value pairs will
-    be used to initialize the corresponding object properties - a PHP
-    callable: either an anonymous function or an array representing a class
-    method ('[$class or $object, $method]').   The callable should return a
-    new instance of the object being created.
+
+      - a string: representing the class name of the object to be created 
+      - a configuration array: the array must contain a 'class' element
+      which is treated as the object class,   and the rest of the name-value
+    pairs will be used to initialize the corresponding object properties 
+      - a PHP callable: either an anonymous function or an array
+      representing a class method ('[$class or $object, $method]').   The
+    callable should return a new instance of the object being created.
     [$params] (array) The constructor parameters
 
 
@@ -202,13 +209,11 @@ is not previously registered.
 
 
 
-
 *yii/BaseYii::setLogger*					public
 >
  setLogger($logger)
 <
 (void)
-
 
     [$logger] (\yii\log\Logger) The logger object.
 
@@ -268,16 +273,9 @@ is not previously registered.
 (void)
 
  This has to be matched with a call to 'endProfile' with the same category
- name. The begin- and end- calls must also be properly nested. For example,
-
-   \Yii::beginProfile('block1');
-   // some code to be profiled
-       \Yii::beginProfile('block2');
-       // some other code to be profiled
-       \Yii::endProfile('block2');
-   \Yii::endProfile('block1');
-
-
+ name. The begin
+   - and end- calls must also be properly nested. For
+   example,###CODE###
     [$token] (string) Token for the code block
     [$category] (string) The category of this log message
 
@@ -303,7 +301,6 @@ is not previously registered.
 
 
 
-
 *yii/BaseYii::t*						public
 >
  t($category, $message, $params='[]', $language='null')
@@ -320,8 +317,20 @@ is not previously registered.
  curly brackets around the parameter name as you can see in the following
  example:
 
-   $username = 'Alexander';
-   echo \Yii::t('app', 'Hello, {username}!', ['username' => $username]);
+   // create an object using a class name
+   $object = Yii::createObject('yii\db\Connection');
+
+   // create an object using a configuration array
+   $object = Yii::createObject([
+       'class' => 'yii\db\Connection',
+       'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
+       'username' => 'root',
+       'password' => '',
+       'charset' => 'utf8',
+   ]);
+
+   // create an object with two constructor parameters
+   $object = \Yii::createObject('MyClass', [$param1, $param2]);
 
  Further formatting of message parameters is supported using the [PHP intl
  extensions](http://www.php.net/manual/en/intro.intl.php) message formatter.
@@ -340,7 +349,6 @@ is not previously registered.
  configure($object, $properties)
 <
 (object) The object itself
-
 
     [$object] (object) The object to be configured
     [$properties] (array) The property initial values given in terms of

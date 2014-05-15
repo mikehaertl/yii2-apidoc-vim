@@ -10,19 +10,24 @@ DESCRIPTION
 
  Example application configuration:
 
-   'components' => [
-       'authClientCollection' => [
-           'class' => 'yii\authclient\Collection',
-           'clients' => [
-               'facebook' => [
-                   'class' => 'yii\authclient\clients\Facebook',
-                   'clientId' => 'facebook_client_id',
-                   'clientSecret' => 'facebook_client_secret',
+   class SiteController extends Controller
+   {
+       public function actions()
+       {
+           return [
+               'auth' => [
+                   'class' => 'yii\authclient\AuthAction',
+                   'successCallback' => [$this, 'successCallback'],
                ],
-           ],
-       ]
-       ...
-   ]
+           ]
+       }
+
+       public function successCallback($client)
+       {
+           $attributes = $client->getUserAttributes();
+           // user login or signup comes here
+       }
+   }
 
 
 
@@ -246,7 +251,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/clients/Facebook::defaultTitle*		protected
 >
  defaultTitle()
@@ -255,13 +259,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/clients/Facebook::initUserAttributes*	protected
 >
  initUserAttributes()
 <
 (array) Auth user attributes.
-
 
 
 

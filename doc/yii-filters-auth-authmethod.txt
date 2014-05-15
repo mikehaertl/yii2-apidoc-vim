@@ -10,11 +10,6 @@ SUBCLASSES
 |yii/filters/auth/QueryParamAuth|
 |yii/filters/auth/HttpBasicAuth|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -119,8 +114,7 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
-
-    [$action] () 
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/filters/auth/AuthMethod::afterAction*		public
@@ -137,8 +131,9 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$response] () 
+ The implementation should normally throw UnauthorizedHttpException to
+ indicate authentication failure.
+    [$response] (\yii\web\Response) 
 
 
 *yii/filters/auth/AuthMethod::authenticate*		public

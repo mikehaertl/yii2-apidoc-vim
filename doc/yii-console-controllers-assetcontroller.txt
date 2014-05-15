@@ -52,28 +52,24 @@ $targets				*yii/console/controllers/AssetController::$targets*
  can specify the name of the output compressed file using 'css' and 'js' keys:
  For example:
 
-   'app\config\AllAsset' => [
-       'js' => 'js/all-{ts}.js',
-       'css' => 'css/all-{ts}.css',
-       'depends' => [ ... ],
-   ]
+   yii help [command name]
 
  File names can contain placeholder "{ts}", which will be filled by current
  timestamp, while file creation.
 
 $jsCompressor				*yii/console/controllers/AssetController::$jsCompressor*
  (string|callable) JavaScript file compressor. If a string, it is treated as
- shell command template, which should contain placeholders {from} - source
- file name - and {to} - output file name. Otherwise, it is treated as PHP
- callback, which should perform the compression.
+ shell command template, which should contain placeholders {from} 
+   - source file name - and {to} - output file name. Otherwise, it is treated
+ as PHP callback, which should perform the compression.
 
  Default value relies on usage of "Closure Compiler"
 
 $cssCompressor				*yii/console/controllers/AssetController::$cssCompressor*
  (string|callable) CSS file compressor. If a string, it is treated as shell
- command template, which should contain placeholders {from} - source file name
- - and {to} - output file name. Otherwise, it is treated as PHP callback,
- which should perform the compression.
+ command template, which should contain placeholders {from} 
+   - source file name - and {to} - output file name. Otherwise, it is treated
+ as PHP callback, which should perform the compression.
 
  Default value relies on usage of "YUI Compressor"
 
@@ -314,13 +310,11 @@ METHOD DETAILS
 
 
 
-
 *yii/console/controllers/AssetController::setAssetManager*public
 >
  setAssetManager($assetManager)
 <
 (void)
-
 
     [$assetManager] (\yii\web\AssetManager|array) Asset manager instance or
     its array configuration.
@@ -345,7 +339,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$configFile] (string) Configuration file name.
 
 
@@ -355,7 +348,6 @@ METHOD DETAILS
 <
 (\yii\web\AssetBundle[]) List of source asset bundles.
 
-
     [$bundles] (string[]) List of asset bundle names
 
 
@@ -364,7 +356,6 @@ METHOD DETAILS
  loadDependency($bundle, $result)
 <
 (void)
-
 
     [$bundle] (\yii\web\AssetBundle) Bundle instance
     [$result] (array) Already loaded bundles list.
@@ -376,7 +367,6 @@ METHOD DETAILS
 <
 (\yii\web\AssetBundle[]) List of output asset bundles.
 
-
     [$targets] (array) Output asset bundles configuration.
     [$bundles] (\yii\web\AssetBundle[]) List of source asset bundles.
 
@@ -386,7 +376,6 @@ METHOD DETAILS
  buildTarget($target, $type, $bundles, $timestamp)
 <
 (void)
-
 
     [$target] (\yii\web\AssetBundle) Output asset bundle
     [$type] (string) Either 'js' or 'css'.
@@ -400,7 +389,6 @@ METHOD DETAILS
 <
 (\yii\web\AssetBundle[]) Output asset bundles.
 
-
     [$targets] (\yii\web\AssetBundle[]) Output asset bundles.
     [$bundles] (\yii\web\AssetBundle[]) Source asset bundles.
 
@@ -410,7 +398,6 @@ METHOD DETAILS
  registerBundle($bundles, $name, $registered)
 <
 (void)
-
 
     [$bundles] (\yii\web\AssetBundle[]) Asset bundles list.
     [$name] (string) Bundle name.
@@ -423,7 +410,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$targets] (\yii\web\AssetBundle[]) List of asset bundles to be saved.
     [$bundleFile] (string) Output file name.
 
@@ -433,7 +419,6 @@ METHOD DETAILS
  compressJsFiles($inputFiles, $outputFile)
 <
 (void)
-
 
     [$inputFiles] (array) List of source file names.
     [$outputFile] (string) Output file name.
@@ -445,7 +430,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$inputFiles] (array) List of source file names.
     [$outputFile] (string) Output file name.
 
@@ -455,7 +439,6 @@ METHOD DETAILS
  combineJsFiles($inputFiles, $outputFile)
 <
 (void)
-
 
     [$inputFiles] (array) Source file names.
     [$outputFile] (string) Output file name.
@@ -467,7 +450,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$inputFiles] (array) Source file names.
     [$outputFile] (string) Output file name.
 
@@ -477,7 +459,6 @@ METHOD DETAILS
  adjustCssUrl($cssContent, $inputFilePath, $outputFilePath)
 <
 (string) Adjusted CSS content.
-
 
     [$cssContent] (string) Source CSS content.
     [$inputFilePath] (string) Input CSS file name.
@@ -489,7 +470,6 @@ METHOD DETAILS
  actionTemplate($configFile)
 <
 (void)
-
 
     [$configFile] (string) Output file name.
 

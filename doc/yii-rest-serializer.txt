@@ -54,21 +54,10 @@ $collectionEnvelope			*yii/rest/Serializer::$collectionEnvelope*
  When this is set and pagination is enabled, the serializer will return a
  collection in the following format:
 
-   [
-       'items' => [...],  // assuming collectionEnvelope is "items"
-       '_links' => {  // pagination links as returned by
- Pagination::getLinks()
-           'self' => '...',
-           'next' => '...',
-           'last' => '...',
-       },
-       '_meta' => {  // meta information as returned by Pagination::toArray()
-           'totalCount' => 100,
-           'pageCount' => 5,
-           'currentPage' => 1,
-           'perPage' => 20,
-       },
-   ]
+   function ($action, $model = null) {
+       // $model is the requested model instance.
+       // If null, it means no specific model (e.g. IndexAction)
+   }
 
  If this property is not set, the resource arrays will be directly returned
  without using envelope. The pagination information as shown in '_links' and
@@ -104,7 +93,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/rest/Serializer::__get*				public
@@ -219,13 +209,11 @@ an array of the extra fields requested in addition to the default fields.
 
 
 
-
 *yii/rest/Serializer::serializeDataProvider*		protected
 >
  serializeDataProvider($dataProvider)
 <
 (array) The array representation of the data provider.
-
 
     [$dataProvider] (\yii\data\DataProviderInterface) 
 
@@ -236,7 +224,6 @@ an array of the extra fields requested in addition to the default fields.
 <
 (array) The array representation of the pagination
 
-
     [$pagination] (\yii\data\Pagination) 
 
 
@@ -245,7 +232,6 @@ an array of the extra fields requested in addition to the default fields.
  addPaginationHeaders($pagination)
 <
 (void)
-
 
     [$pagination] (\yii\data\Pagination) 
 
@@ -256,8 +242,7 @@ an array of the extra fields requested in addition to the default fields.
 <
 (array) The array representation of the model
 
-
-    [$model] (\yii\base\Model) 
+    [$model] (\yii\base\Arrayable) 
 
 
 *yii/rest/Serializer::serializeModelErrors*		protected
@@ -265,7 +250,6 @@ an array of the extra fields requested in addition to the default fields.
  serializeModelErrors($model)
 <
 (array) The array representation of the errors
-
 
     [$model] (\yii\base\Model) 
 
@@ -275,7 +259,6 @@ an array of the extra fields requested in addition to the default fields.
  serializeModels($models)
 <
 (array) The array representation of the models
-
 
     [$models] (array) 
 

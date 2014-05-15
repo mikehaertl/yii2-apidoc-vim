@@ -234,7 +234,46 @@ METHOD DETAILS
 <
 (array) The list of field names or field definitions.
 
+ A field is a named element in the returned array by 'toArray()'.
 
+ This method should return an array of field names or field definitions. If
+ the former, the field name will be treated as an object property name whose
+ value will be used as the field value. If the latter, the array key should be
+ the field name while the array value should be the corresponding field
+ definition which can be either an object property name or a PHP callable
+ returning the corresponding field value. The signature of the callable should
+ be:
+
+   function ($field, $model) {
+       // return field value
+   }
+
+ For example, the following code declares four fields:
+
+
+   - 'email': the field name is the same as the property name 'email'; 
+   - 'firstName' and 'lastName': the field names are 'firstName' and
+   'lastName', and their   values are obtained from the 'first_name' and
+ 'last_name' properties; 
+   - 'fullName': the field name is 'fullName'. Its value is obtained by
+   concatenating 'first_name'   and 'last_name'.
+
+   return [
+       'email',
+       'firstName' => 'first_name',
+       'lastName' => 'last_name',
+       'fullName' => function () {
+           return $this->first_name . ' ' . $this->last_name;
+       },
+   ];
+
+ In this method, you may also want to return different lists of fields based
+ on some context information. For example, depending on 'scenario' or the
+ privilege of the current application user, you may return different sets of
+ visible fields or filter out some fields.
+
+ The default implementation of this method returns 'attributes()' indexed by
+ the same attribute names.
 
 
 *yii/db/BaseActiveRecord::extraFields*			public
@@ -244,7 +283,15 @@ METHOD DETAILS
 (array) The list of expandable field names or field definitions. Please refer
 to 'fields()' on the format of the return value.
 
+ This method is similar to 'fields()' except that the list of fields returned
+ by this method are not returned by default by 'toArray()'. Only when field
+ names to be expanded are explicitly specified when calling 'toArray()', will
+ their values be exported.
 
+ The default implementation returns an empty array.
+
+ You may override this method to return a list of expandable fields based on
+ some context information (e.g. the current application user).
 
 
 *yii/db/BaseActiveRecord::toArray*			public
@@ -430,19 +477,78 @@ to 'fields()' on the format of the return value.
 (static) ActiveRecord instance matching the condition, or null if nothing
 matches.
 
+ The method accepts:
 
-    [$condition] () 
+  
+   - a scalar value (integer or string): query by a single primary key
+   value and return the    corresponding record (or null if not found).  
+   - an array of name-value pairs: query by a set of attribute values
+   and return a single record    matching all of them (or null if not found).
+
+ Note that this method will automatically call the 'one()' method and return
+ an 'ActiveRecordInterface|ActiveRecord' instance. For example,
+
+   // find a single customer whose primary key value is 10
+   $customer = Customer::findOne(10);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the first customer whose age is 30 and whose status is 1
+   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
+
+
+    [$condition] (mixed) Primary key value or a set of column values
 
 
 *yii/db/BaseActiveRecord::findAll*			public
 >
  findAll($condition)
 <
-(static[]|array) An array of ActiveRecord instance, or an empty array if
-nothing matches.
+(static[]) An array of ActiveRecord instance, or an empty array if nothing
+matches.
+
+ The method accepts:
+
+  
+   - a scalar value (integer or string): query by a single primary key
+   value and return an array containing the    corresponding record (or an
+ empty array if not found).  
+   - an array of scalar values (integer or string): query by a list of
+   primary key values and return the    corresponding records (or an empty
+ array if none was found).    Note that an empty condition will result in an
+ empty result as it will be interpreted as a search for    primary keys and
+ not an empty 'WHERE' condition.  
+   - an array of name-value pairs: query by a set of attribute values
+   and return an array of records    matching all of them (or an empty array
+ if none was found).
+
+ Note that this method will automatically call the 'all()' method and return
+ an array of 'ActiveRecordInterface|ActiveRecord' instances. For example,
+
+   // find the customers whose primary key value is 10
+   $customers = Customer::findAll(10);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => 10])->all();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findAll([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+   // find customers whose age is 30 and whose status is 1
+   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
-    [$condition] () 
+    [$condition] (mixed) Primary key value or a set of column values
 
 
 *yii/db/BaseActiveRecord::updateAll*			public
@@ -611,7 +717,6 @@ is returned (default implemented), optimistic locking will not be supported.
 <
 (boolean) Whether relation has been populated with records.
 
-
     [$name] (string) The relation name (case-sensitive)
 
 
@@ -623,13 +728,11 @@ is returned (default implemented), optimistic locking will not be supported.
 
 
 
-
 *yii/db/BaseActiveRecord::hasAttribute*			public
 >
  hasAttribute($name)
 <
 (boolean) Whether the model has an attribute with the specified name.
-
 
     [$name] (string) The name of the attribute
 
@@ -652,7 +755,6 @@ exist.
 <
 (void)
 
-
     [$name] (string) The attribute name
     [$value] (mixed) The attribute value.
 
@@ -662,7 +764,6 @@ exist.
  getOldAttributes()
 <
 (array) The old attribute values (name-value pairs)
-
 
 
 
@@ -695,7 +796,6 @@ does not exist.
 <
 (void)
 
-
     [$name] (string) The attribute name
     [$value] (mixed) The old attribute value.
 
@@ -717,7 +817,6 @@ does not exist.
 <
 (boolean) Whether the attribute has been changed
 
-
     [$name] (string) The name of the attribute
 
 
@@ -726,7 +825,6 @@ does not exist.
  getDirtyAttributes($names='null')
 <
 (array) The changed attribute values (name-value pairs)
-
 
     [$names] (string[]|null) The names of the attributes whose values may be
     returned if they are changed recently. If null, 'attributes()' will be
@@ -832,7 +930,6 @@ stops the updating process.
 <
 (void)
 
-
     [$attributes] () 
 
 
@@ -883,13 +980,11 @@ deleted is 0, even though the deletion execution is successful.
 
 
 
-
 *yii/db/BaseActiveRecord::setIsNewRecord*			public
 >
  setIsNewRecord($value)
 <
 (void)
-
 
     [$value] (boolean) Whether the record is new and should be inserted when
     calling 'save()'.
@@ -991,7 +1086,6 @@ remain unchanged.
 
 
 
-
 *yii/db/BaseActiveRecord::equals*				public
 >
  equals($record)
@@ -1012,7 +1106,6 @@ database table.
 (mixed) The primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
-
 
     [$asArray] (boolean) Whether to return the primary key value as an array.
     If true, the return value will be an array with column names as keys and
@@ -1134,7 +1227,6 @@ will be returned.
 <
 (boolean) Whether the given set of attributes represents the primary key for
 this model
-
 
     [$keys] (array) The set of attributes to check
 

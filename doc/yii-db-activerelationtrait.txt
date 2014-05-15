@@ -2,11 +2,6 @@
 *yii/db/ActiveRelationTrait*  
 ============================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -57,7 +52,6 @@ METHOD DETAILS
 
 
 
-
 *yii/db/ActiveRelationTrait::via*				public
 >
  via($relationName, $callable='null')
@@ -67,15 +61,8 @@ METHOD DETAILS
  Use this method to specify a pivot record/table when declaring a relation in
  the 'ActiveRecord' class:
 
-   public function getOrders()
-   {
-       return $this->hasOne(Order::className(), ['id' => 'order_id']);
-   }
-
-   public function getOrderItems()
-   {
-       return $this->hasMany(Item::className(), ['id' => 'item_id'])
-                   ->via('orders');
+   function ($field, $model) {
+       // return field value
    }
 
 
@@ -101,11 +88,14 @@ METHOD DETAILS
 
  Use this method when declaring a relation in the 'ActiveRecord' class:
 
-   public function getOrders()
-   {
-       return $this->hasMany(Order::className(), ['customer_id' =>
- 'id'])->inverseOf('customer');
-   }
+   return [
+       'email',
+       'firstName' => 'first_name',
+       'lastName' => 'last_name',
+       'fullName' => function () {
+           return $this->first_name . ' ' . $this->last_name;
+       },
+   ];
 
 
     [$relationName] (string) The name of the relation that is the inverse of
@@ -130,7 +120,6 @@ METHOD DETAILS
  populateRelation($name, $primaryModels)
 <
 (array) The related models
-
 
     [$name] (string) The relation name
     [$primaryModels] (array) Primary models

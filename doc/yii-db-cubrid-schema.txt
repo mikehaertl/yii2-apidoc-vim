@@ -2,11 +2,6 @@
 *yii/db/cubrid/Schema*   >> |yii/db/Schema|
 ======================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -16,6 +11,10 @@ $db					*yii/db/cubrid/Schema::$db*
 
 $defaultSchema				*yii/db/cubrid/Schema::$defaultSchema*
  See |yii/db/Schema::$defaultSchema|
+
+$exceptionMap				*yii/db/cubrid/Schema::$exceptionMap*
+ (array) Map of DB errors and corresponding exceptions If left part is found
+ in DB error message exception class from the right part is used.
 
 $typeMap				*yii/db/cubrid/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
@@ -97,7 +96,6 @@ METHOD DETAILS
 (\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
 not exist.
 
-
     [$name] (string) Table name
 
 
@@ -131,7 +129,6 @@ not exist.
 <
 (integer) The PDO type
 
-
     [$data] (mixed) The data whose PDO type is to be determined
 
 
@@ -147,13 +144,11 @@ not exist.
 
 
 
-
 *yii/db/cubrid/Schema::findTableNames*			protected
 >
  findTableNames($schema='''')
 <
 (array) All table names in the database. The names have NO schema name prefix.
-
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -181,8 +176,7 @@ not exist.
 <
 (void)
 
-
-    [$name] () 
+    [$name] (string) The savepoint name
 
 
 *yii/db/cubrid/Schema::rollBackSavepoint*			public
@@ -236,12 +230,15 @@ not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
+*yii/db/cubrid/Schema::handleException*			public
+ See |yii/db/Schema::handleException|
+
+
 *yii/db/cubrid/Schema::loadColumnSchema*			protected
 >
  loadColumnSchema($info)
 <
 (\yii\db\ColumnSchema) The column schema object
-
 
     [$info] (array) Column information
 

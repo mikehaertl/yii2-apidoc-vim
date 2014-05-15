@@ -34,13 +34,11 @@ METHOD DETAILS
 
 
 
-
 *yii/imagine/BaseImage::setImagine*			public
 >
  setImagine($imagine)
 <
 (void)
-
 
     [$imagine] (\Imagine\Image\ImagineInterface) The 'Imagine' object.
 
@@ -53,7 +51,6 @@ METHOD DETAILS
 
 
 
-
 *yii/imagine/BaseImage::crop*				public
 >
  crop($filename, $width, $height, $start='[0,0]')
@@ -62,10 +59,22 @@ METHOD DETAILS
 
  For example,
 
-   $obj->crop('path\to\image.jpg', 200, 200, [5, 5]);
-
-   $point = new \Imagine\Image\Point(5, 5);
-   $obj->crop('path\to\image.jpg', 200, 200, $point);
+   'components' => [
+       'authClientCollection' => [
+           'class' => 'yii\authclient\Collection',
+           'clients' => [
+               'google' => [
+                   'class' => 'yii\authclient\clients\GoogleOpenId'
+               ],
+               'facebook' => [
+                   'class' => 'yii\authclient\clients\Facebook',
+                   'clientId' => 'facebook_client_id',
+                   'clientSecret' => 'facebook_client_secret',
+               ],
+           ],
+       ]
+       ...
+   ]
 
 
     [$filename] (string) The image file path or path alias.
@@ -81,7 +90,6 @@ METHOD DETAILS
 <
 (\Imagine\Image\ImageInterface) 
 
-
     [$filename] (string) The image file path or path alias.
     [$width] (integer) The width in pixels to create the thumbnail
     [$height] (integer) The height in pixels to create the thumbnail
@@ -93,7 +101,6 @@ METHOD DETAILS
  watermark($filename, $watermarkFilename, $start='[0,0]')
 <
 (\Imagine\Image\ImageInterface) 
-
 
     [$filename] (string) The image file path or path alias.
     [$watermarkFilename] (string) The file path or path alias of the watermark
@@ -108,7 +115,6 @@ METHOD DETAILS
 <
 (\Imagine\Image\ImageInterface) 
 
-
     [$filename] (string) The image file path or path alias.
     [$text] (string) The text to write to the image
     [$fontFile] (string) The file path or path alias
@@ -117,9 +123,10 @@ METHOD DETAILS
     [$fontOptions] (array) The font options. The following options may be
     specified:
 
-    - color: The font color. Defaults to "fff". - size: The font size.
-    Defaults to 12. - angle: The angle to use to write the text. Defaults to
-    0.
+
+      - color: The font color. Defaults to "fff". 
+      - size: The font size. Defaults to 12. 
+      - angle: The angle to use to write the text. Defaults to 0.
 
 
 *yii/imagine/BaseImage::frame*				public
@@ -127,7 +134,6 @@ METHOD DETAILS
  frame($filename, $margin=20, $color=''666'', $alpha=100)
 <
 (\Imagine\Image\ImageInterface) 
-
 
     [$filename] (string) The full path to the image file
     [$margin] (integer) The frame size to add around the image

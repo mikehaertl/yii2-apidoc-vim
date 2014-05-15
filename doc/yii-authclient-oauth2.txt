@@ -8,6 +8,7 @@ SUBCLASSES
 |yii/authclient/clients/Facebook|
 |yii/authclient/clients/YandexOAuth|
 |yii/authclient/clients/LinkedIn|
+|yii/authclient/clients/VKontakte|
 |yii/authclient/clients/GoogleOAuth|
 |yii/authclient/clients/Live|
 |yii/authclient/clients/GitHub|
@@ -17,14 +18,17 @@ DESCRIPTION
 
  In oder to acquire access token perform following sequence:
 
-   use yii\authclient\OAuth2;
-
-   $oauthClient = new OAuth2();
-   $url = $oauthClient->buildAuthUrl(); // Build authorization URL
-   Yii::$app->getResponse()->redirect($url); // Redirect to authorization URL.
-   // After user returns at our site:
-   $code = $_GET['code'];
-   $accessToken = $oauthClient->fetchAccessToken($code); // Get access token
+   'components' => [
+       'authClientCollection' => [
+           'class' => 'yii\authclient\Collection',
+           'clients' => [
+               'yandex' => [
+                   'class' => 'yii\authclient\clients\YandexOpenId'
+               ],
+           ],
+       ]
+       ...
+   ]
 
 
 
@@ -304,7 +308,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OAuth2::sendRequest*			protected
  See |yii/authclient/BaseOAuth::sendRequest|
 
@@ -342,7 +345,6 @@ METHOD DETAILS
  createToken($tokenConfig='[]')
 <
 (\yii\authclient\OAuthToken) Token instance.
-
 
     [$tokenConfig] (array) Token configuration.
 
@@ -385,7 +387,6 @@ METHOD DETAILS
 <
 (array) CUrl options.
 
-
     [$method] (string) Request type.
     [$url] (string) Request URL.
     [$params] (array) Request params.
@@ -397,7 +398,6 @@ METHOD DETAILS
 <
 (\yii\authclient\OAuthToken) New auth token.
 
-
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
@@ -406,7 +406,6 @@ METHOD DETAILS
  apiInternal($accessToken, $url, $method, $params)
 <
 (array) API response.
-
 
     [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
     [$url] (string) Absolute API URL.
@@ -420,7 +419,6 @@ METHOD DETAILS
 <
 (string) Authorization URL.
 
-
     [$params] (array) Additional auth GET params.
 
 
@@ -429,7 +427,6 @@ METHOD DETAILS
  fetchAccessToken($authCode, $params='[]')
 <
 (\yii\authclient\OAuthToken) Access token.
-
 
     [$authCode] (string) Authorization code, usually comes at $_GET['code'].
     [$params] (array) Additional request params.

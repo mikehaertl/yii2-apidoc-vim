@@ -14,8 +14,10 @@ DESCRIPTION
        'authClientCollection' => [
            'class' => 'yii\authclient\Collection',
            'clients' => [
-               'yandex' => [
-                   'class' => 'yii\authclient\clients\YandexOpenId'
+               'live' => [
+                   'class' => 'yii\authclient\clients\Live',
+                   'clientId' => 'live_client_id',
+                   'clientSecret' => 'live_client_secret',
                ],
            ],
        ]
@@ -243,13 +245,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/clients/YandexOpenId::defaultTitle*	protected
 >
  defaultTitle()
 <
 (string) Service title.
-
 
 
 
@@ -263,7 +263,8 @@ METHOD DETAILS
 <
 (array) Normalize attribute map.
 
-
+ Particular client may override this method in order to provide specific
+ default map.
 
 
 *yii/authclient/clients/YandexOpenId::defaultViewOptions*	protected
@@ -272,7 +273,8 @@ METHOD DETAILS
 <
 (array) List of default 'viewOptions'
 
-
+ Particular client may override this method in order to provide specific
+ default view options.
 
 
 *yii/authclient/clients/YandexOpenId::normalizeUserAttributes*protected

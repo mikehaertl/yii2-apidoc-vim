@@ -13,11 +13,9 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   'view' => [
-       'theme' => 'app\themes\MyTheme',
-       'renderers' => [
-           // you may add Smarty or Twig renderer here
-       ]
+   'rules' => [
+       ['class' => 'MyUrlRule', 'pattern' => '...', 'route' => 'site/index',
+ ...],
        // ...
    ]
 
@@ -266,7 +264,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$ajaxMode] (boolean) Whether the view is rendering in AJAX mode. If true,
     the JS scripts registered at 'POS_READY' and 'POS_LOAD' positions will be
     rendered at the end of the view like normal scripts.
@@ -280,7 +277,6 @@ METHOD DETAILS
 
 
 
-
 *yii/web/View::beginBody*					public
 >
  beginBody()
@@ -289,13 +285,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/View::endBody*					public
 >
  endBody()
 <
 (void)
-
 
 
 
@@ -327,13 +321,11 @@ application component.
 
 
 
-
 *yii/web/View::setAssetManager*				public
 >
  setAssetManager($value)
 <
 (void)
-
 
     [$value] (\yii\web\AssetManager) The asset manager
 
@@ -343,7 +335,6 @@ application component.
  clear()
 <
 (void)
-
 
 
 
@@ -368,7 +359,6 @@ application component.
 <
 (void)
 
-
     [$options] (array) The HTML attributes for the meta tag.
     [$key] (string) The key that identifies the meta tag. If two meta tags are
     registered with the same key, the latter will overwrite the former. If
@@ -380,7 +370,6 @@ application component.
  registerLinkTag($options, $key='null')
 <
 (void)
-
 
     [$options] (array) The HTML attributes for the link tag.
     [$key] (string) The key that identifies the link tag. If two link tags are
@@ -394,7 +383,6 @@ application component.
 <
 (void)
 
-
     [$css] (string) The CSS code block to be registered
     [$options] (array) The HTML attributes for the style tag.
     [$key] (string) The key that identifies the CSS code block. If null, it
@@ -407,7 +395,6 @@ application component.
  registerCssFile($url, $depends='[]', $options='[]', $key='null')
 <
 (void)
-
 
     [$url] (string) The CSS file to be registered.
     [$depends] (array) The names of the asset bundles that this CSS file
@@ -425,18 +412,20 @@ application component.
 <
 (void)
 
-
     [$js] (string) The JS code block to be registered
     [$position] (integer) The position at which the JS script tag should be
     inserted in a page. The possible values are:
 
-    - 'POS_HEAD': in the head section - 'POS_BEGIN': at the beginning of the
-    body section - 'POS_END': at the end of the body section - 'POS_LOAD':
-    enclosed within jQuery(window).load().   Note that by using this position,
-    the method will automatically register the jQuery js file. - 'POS_READY':
-    enclosed within jQuery(document).ready(). This is the default value.  
-    Note that by using this position, the method will automatically register
-    the jQuery js file.
+
+      - 'POS_HEAD': in the head section 
+      - 'POS_BEGIN': at the beginning of the body section 
+      - 'POS_END': at the end of the body section 
+      - 'POS_LOAD': enclosed within jQuery(window).load().   Note that by
+    using this position, the method will automatically register the jQuery js
+    file. 
+      - 'POS_READY': enclosed within jQuery(document).ready(). This is the
+      default value.   Note that by using this position, the method will
+    automatically register the jQuery js file.
     [$key] (string) The key that identifies the JS code block. If null, it
     will use $js as the key. If two JS code blocks are registered with the
     same key, the latter will overwrite the former.
@@ -448,7 +437,6 @@ application component.
 <
 (void)
 
-
     [$url] (string) The JS file to be registered.
     [$depends] (array) The names of the asset bundles that this JS file
     depends on
@@ -456,9 +444,11 @@ application component.
     option named "position" is supported which specifies where the JS script
     tag should be inserted in a page. The possible values of "position" are:
 
-    - 'POS_HEAD': in the head section - 'POS_BEGIN': at the beginning of the
-    body section - 'POS_END': at the end of the body section. This is the
-    default value.
+
+      - 'POS_HEAD': in the head section 
+      - 'POS_BEGIN': at the beginning of the body section 
+      - 'POS_END': at the end of the body section. This is the default
+      value.
 
     Please refer to 'Html::jsFile()' for other supported options.
     [$key] (string) The key that identifies the JS script file. If null, it

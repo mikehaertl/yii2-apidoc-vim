@@ -12,15 +12,11 @@ DESCRIPTION
 
 
 
-   #load fixtures from UsersFixture class with default namespace
- "tests\unit\fixtures"
-   yii fixture/load User
-
-   #also a short version of this command (generate action is default)
-   yii fixture User
-
-   #load fixtures with different namespace.
-   yii fixture/load User --namespace=alias\my\custom\namespace\goes\here
+   'app\config\AllAsset' => [
+       'js' => 'js/all-{ts}.js',
+       'css' => 'css/all-{ts}.css',
+       'depends' => [ ... ],
+   ]
 
 
 
@@ -288,8 +284,11 @@ METHOD DETAILS
 <
 (array) The names of the options valid for the action
 
+ Child classes may override this method to specify possible options.
 
-    [$actionId] () 
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+    [$actionId] (string) The action id of the current request
 
 
 *yii/console/controllers/FixtureController::fixtures*	public
@@ -326,7 +325,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$fixtures] (array) 
     [$except] (array) 
 
@@ -337,7 +335,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$fixtures] (array|string) 
     [$except] (array|string) 
 
@@ -347,7 +344,6 @@ METHOD DETAILS
  needToApplyAll($fixture)
 <
 (bool) 
-
 
     [$fixture] (string) 
 

@@ -54,10 +54,12 @@ $layout					*yii/grid/GridView::$layout*
  should be organized. The following tokens will be replaced with the
  corresponding section contents:
 
- - '{summary}': the summary section. See 'renderSummary()'. - '{errors}': the
- filter model error summary. See 'renderErrors()'. - '{items}': the list
- items. See 'renderItems()'. - '{sorter}': the sorter. See 'renderSorter()'. -
- '{pager}': the pager. See 'renderPager()'.
+
+   - '{summary}': the summary section. See 'renderSummary()'. 
+   - '{errors}': the filter model error summary. See 'renderErrors()'. 
+   - '{items}': the list items. See 'renderItems()'. 
+   - '{sorter}': the sorter. See 'renderSorter()'. 
+   - '{pager}': the pager. See 'renderPager()'.
 
 $dataColumnClass			*yii/grid/GridView::$dataColumnClass*
  (string) The default data column class if the class name is not explicitly
@@ -85,12 +87,28 @@ $rowOptions				*yii/grid/GridView::$rowOptions*
  anonymous function will be called once for every data model returned by
  'dataProvider'. It should have the following signature:
 
-   function ($model, $key, $index, $grid)
+   public function behaviors()
+   {
+       return [
+           'verbs' => [
+               'class' => \yii\filters\VerbFilter::className(),
+               'actions' => [
+                   'index'  => ['get'],
+                   'view'   => ['get'],
+                   'create' => ['get', 'post'],
+                   'update' => ['get', 'put', 'post'],
+                   'delete' => ['post', 'delete'],
+               ],
+           ],
+       ];
+   }
 
- - '$model': the current data model being rendered - '$key': the key value
- associated with the current data model - '$index': the zero-based index of
- the data model in the model array returned by 'dataProvider' - '$grid': the
- GridView object
+
+   - '$model': the current data model being rendered 
+   - '$key': the key value associated with the current data model 
+   - '$index': the zero-based index of the data model in the model
+   array returned by 'dataProvider' 
+   - '$grid': the GridView object
 
 $beforeRow				*yii/grid/GridView::$beforeRow*
  (\Closure) An anonymous function that is called once BEFORE rendering each
@@ -119,14 +137,10 @@ $columns				*yii/grid/GridView::$columns*
  configuration for one particular grid column. For example,
 
    [
-       ['class' => SerialColumn::className()],
-       [
-           'class' => DataColumn::className(),
-           'attribute' => 'name',
-           'format' => 'text',
-           'label' => 'Name',
-       ],
-       ['class' => CheckboxColumn::className()],
+     'create' => ['get', 'post'],
+     'update' => ['get', 'put', 'post'],
+     'delete' => ['post', 'delete'],
+     '*' => ['get'],
    ]
 
  If a column is of class 'DataColumn', the "class" element can be omitted.
@@ -165,10 +179,13 @@ $filterPosition				*yii/grid/GridView::$filterPosition*
  (string) Whether the filters should be displayed in the grid view. Valid
  values include:
 
- - 'FILTER_POS_HEADER': the filters will be displayed on top of each column's
- header cell. - 'FILTER_POS_BODY': the filters will be displayed right below
- each column's header cell. - 'FILTER_POS_FOOTER': the filters will be
- displayed below each column's footer cell.
+
+   - 'FILTER_POS_HEADER': the filters will be displayed on top of each
+   column's header cell. 
+   - 'FILTER_POS_BODY': the filters will be displayed right below each
+   column's header cell. 
+   - 'FILTER_POS_FOOTER': the filters will be displayed below each
+   column's footer cell.
 
 $filterRowOptions			*yii/grid/GridView::$filterRowOptions*
  (array) The HTML attributes for the filter row element.
@@ -342,7 +359,6 @@ METHOD DETAILS
 
 
 
-
 *yii/grid/GridView::render*				public
  See |yii/base/Widget::render|
 
@@ -363,7 +379,6 @@ METHOD DETAILS
 
 
 
-
 *yii/grid/GridView::renderSection*			public
 >
  renderSection($name)
@@ -371,8 +386,8 @@ METHOD DETAILS
 (string|boolean) The rendering result of the section, or false if the named
 section is not supported.
 
-
-    [$name] () 
+ If the named section is not supported, false will be returned.
+    [$name] (string) The section name, e.g., '{summary}', '{items}'.
 
 
 *yii/grid/GridView::renderEmpty*				public
@@ -399,13 +414,11 @@ section is not supported.
 
 
 
-
 *yii/grid/GridView::getClientOptions*			protected
 >
  getClientOptions()
 <
 (array) The options
-
 
 
 
@@ -418,14 +431,12 @@ should be rendered.
 
 
 
-
 *yii/grid/GridView::renderColumnGroup*			public
 >
  renderColumnGroup()
 <
 (bool|string) The column group HTML or 'false' if no column group should be
 rendered.
-
 
 
 
@@ -437,13 +448,11 @@ rendered.
 
 
 
-
 *yii/grid/GridView::renderTableFooter*			public
 >
  renderTableFooter()
 <
 (string) The rendering result.
-
 
 
 
@@ -455,7 +464,6 @@ rendered.
 
 
 
-
 *yii/grid/GridView::renderTableBody*			public
 >
  renderTableBody()
@@ -464,13 +472,11 @@ rendered.
 
 
 
-
 *yii/grid/GridView::renderTableRow*			public
 >
  renderTableRow($model, $key, $index)
 <
 (string) The rendering result
-
 
     [$model] (mixed) The data model to be rendered
     [$key] (mixed) The key associated with the data model
@@ -486,13 +492,11 @@ rendered.
 
 
 
-
 *yii/grid/GridView::createDataColumn*			protected
 >
  createDataColumn($text)
 <
 (\yii\grid\DataColumn) The column instance
-
 
     [$text] (string) The column specification string
 
@@ -502,7 +506,6 @@ rendered.
  guessColumns()
 <
 (void)
-
 
 
 

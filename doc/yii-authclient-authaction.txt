@@ -9,24 +9,7 @@ DESCRIPTION
 
  Usage:
 
-   class SiteController extends Controller
-   {
-       public function actions()
-       {
-           return [
-               'auth' => [
-                   'class' => 'yii\authclient\AuthAction',
-                   'successCallback' => [$this, 'successCallback'],
-               ],
-           ]
-       }
-
-       public function successCallback($client)
-       {
-           $attributes = $client->getUserAttributes();
-           // user login or signup comes here
-       }
-   }
+   ['namePerson/friendly', 'contact/email']
 
  Usually authentication via external services is performed inside the popup
  window. This action handles the redirection and closing of popup window
@@ -56,11 +39,7 @@ $successCallback			*yii/authclient/AuthAction::$successCallback*
  authentication. This callback should accept 'ClientInterface' instance as an
  argument. For example:
 
-   public function onAuthSuccess($client)
-   {
-       $attributes = $client->getUserAttributes();
-       // user login or signup comes here
-   }
+   ['namePerson/first', 'namePerson/last']
 
  If this callback returns 'Response' instance, it will be used as action
  response, otherwise redirection to 'successUrl' will be performed.
@@ -208,7 +187,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$url] (string) Successful URL.
 
 
@@ -220,13 +198,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/AuthAction::setCancelUrl*			public
 >
  setCancelUrl($url)
 <
 (void)
-
 
     [$url] (string) Cancel URL.
 
@@ -239,13 +215,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/AuthAction::defaultSuccessUrl*		protected
 >
  defaultSuccessUrl()
 <
 (string) Success URL value.
-
 
 
 
@@ -257,7 +231,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/AuthAction::run*				public
 >
  run()
@@ -266,13 +239,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/AuthAction::auth*				protected
 >
  auth($client)
 <
 (\yii\web\Response) Response instance.
-
 
     [$client] (mixed) Auth client instance.
 
@@ -283,7 +254,6 @@ METHOD DETAILS
 <
 (\yii\web\Response) Response instance.
 
-
     [$client] (\yii\authclient\ClientInterface) Auth client instance.
 
 
@@ -292,7 +262,6 @@ METHOD DETAILS
  redirect($url, $enforceRedirect='true')
 <
 (\yii\web\Response) Response instance.
-
 
     [$url] (mixed) URL to redirect, could be a string or array config to
     generate a valid URL.
@@ -306,7 +275,6 @@ METHOD DETAILS
 <
 (\yii\web\Response) Response instance.
 
-
     [$url] (string) URL to redirect.
 
 
@@ -315,7 +283,6 @@ METHOD DETAILS
  redirectCancel($url='null')
 <
 (\yii\web\Response) Response instance.
-
 
     [$url] (string) URL to redirect.
 
@@ -326,7 +293,6 @@ METHOD DETAILS
 <
 (\yii\web\Response) Action response.
 
-
     [$client] (\yii\authclient\OpenId) Auth client instance.
 
 
@@ -336,7 +302,6 @@ METHOD DETAILS
 <
 (\yii\web\Response) Action response.
 
-
     [$client] (\yii\authclient\OAuth1) Auth client instance.
 
 
@@ -345,7 +310,6 @@ METHOD DETAILS
  authOAuth2($client)
 <
 (\yii\web\Response) Action response.
-
 
     [$client] (\yii\authclient\OAuth2) Auth client instance.
 

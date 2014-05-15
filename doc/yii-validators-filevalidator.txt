@@ -7,11 +7,6 @@ SUBCLASSES
 
 |yii/validators/ImageValidator|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -77,29 +72,37 @@ $tooBig					*yii/validators/FileValidator::$tooBig*
  (string) The error message used when the uploaded file is too large. You may
  use the following tokens in the message:
 
- - {attribute}: the attribute name - {file}: the uploaded file name - {limit}:
- the maximum size allowed (see 'getSizeLimit()')
+
+   - {attribute}: the attribute name 
+   - {file}: the uploaded file name 
+   - {limit}: the maximum size allowed (see 'getSizeLimit()')
 
 $tooSmall				*yii/validators/FileValidator::$tooSmall*
  (string) The error message used when the uploaded file is too small. You may
  use the following tokens in the message:
 
- - {attribute}: the attribute name - {file}: the uploaded file name - {limit}:
- the value of 'minSize'
+
+   - {attribute}: the attribute name 
+   - {file}: the uploaded file name 
+   - {limit}: the value of 'minSize'
 
 $wrongType				*yii/validators/FileValidator::$wrongType*
  (string) The error message used when the uploaded file has an extension name
  that is not listed in 'types'. You may use the following tokens in the
  message:
 
- - {attribute}: the attribute name - {file}: the uploaded file name -
- {extensions}: the list of the allowed extensions.
+
+   - {attribute}: the attribute name 
+   - {file}: the uploaded file name 
+   - {extensions}: the list of the allowed extensions.
 
 $tooMany				*yii/validators/FileValidator::$tooMany*
  (string) The error message used if the count of multiple uploads exceeds
  limit. You may use the following tokens in the message:
 
- - {attribute}: the attribute name - {limit}: the value of 'maxFiles'
+
+   - {attribute}: the attribute name 
+   - {limit}: the value of 'maxFiles'
 
 $behaviors				*yii/validators/FileValidator::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -126,7 +129,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/validators/FileValidator::__get*			public
@@ -231,9 +235,10 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$object] () 
-    [$attribute] () 
+ Child classes must implement this method to provide the actual validation
+ logic.
+    [$object] (\yii\base\Model) The data object to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/FileValidator::validate*			public
@@ -247,7 +252,8 @@ METHOD DETAILS
 (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
 
-
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
     [$file] () 
 
 
@@ -269,8 +275,10 @@ error message. Null should be returned if the data is valid.
 <
 (boolean) Whether the value is empty
 
-
-    [$value] () 
+ A value is considered empty if it is null, an empty array, or the trimmed
+ result is an empty string. Note that this method is different from PHP
+ empty(). It will return false when the value is 0.
+    [$value] (mixed) The value to be checked
     [$trim] () 
 
 
@@ -282,7 +290,10 @@ error message. Null should be returned if the data is valid.
 
  This is determined based on three factors:
 
- - 'upload_max_filesize' in php.ini - 'MAX_FILE_SIZE' hidden field - 'maxSize'
+
+   - 'upload_max_filesize' in php.ini 
+   - 'MAX_FILE_SIZE' hidden field 
+   - 'maxSize'
 
 
 

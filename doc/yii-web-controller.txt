@@ -10,11 +10,6 @@ SUBCLASSES
 |yii/gii/controllers/DefaultController|
 |yii/debug/controllers/DefaultController|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -204,8 +199,21 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to run.
 
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
 
-    [$action] () 
+ If you override this method, your code should look like the following:
+
+   $cookie = $request->cookies['name']
+   if ($cookie !== null) {
+       $value = $cookie->value;
+   }
+
+   // alternatively
+   $value = $request->cookies->getValue('name');
+
+
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/web/Controller::afterAction*				public
@@ -278,17 +286,26 @@ METHOD DETAILS
 
  You can use it in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to login page
-   return $this->redirect(['login']);
+   public function beforeAction($action)
+   {
+       if (parent::beforeAction($action)) {
+           // your custom code here
+           return true;  // or false if needed
+       } else {
+           return false;
+       }
+   }
 
 
     [$url] (string|array) The URL to be redirected to. This can be in one of
     the following formats:
 
-    - a string representing a URL (e.g. "http://example.com") - a string
-    representing a URL alias (e.g. "@example.com") - an array in the format of
-    '[$route, ...name-value pairs...]' (e.g. '['site/index', 'ref' => 1]')  
-    'Url::to()' will be used to convert the array into a URL.
+
+      - a string representing a URL (e.g. "http://example.com") 
+      - a string representing a URL alias (e.g. "@example.com") 
+      - an array in the format of '[$route, ...name-value pairs...]' (e.g.
+      '['site/index', 'ref' => 1]')   'Url::to()' will be used to convert the
+    array into a URL.
 
     Any relative URL will be converted into an absolute one by prepending it
     with the host info of the current request.
@@ -305,8 +322,8 @@ METHOD DETAILS
 
  You can use this method in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to home page
-   return $this->goHome();
+   // stop executing this action and redirect to login page
+   return $this->redirect(['login']);
 
 
 
@@ -319,8 +336,8 @@ METHOD DETAILS
 
  You can use this method in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to last visited page
-   return $this->goBack();
+   // stop executing this action and redirect to home page
+   return $this->goHome();
 
 
     [$defaultUrl] (string|array) The default return URL in case it was not set
@@ -339,8 +356,8 @@ METHOD DETAILS
 
  You can use it in an action by returning the 'Response' directly:
 
-   // stop executing this action and refresh the current page
-   return $this->refresh();
+   // stop executing this action and redirect to last visited page
+   return $this->goBack();
 
 
     [$anchor] (string) The anchor that should be appended to the redirection

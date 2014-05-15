@@ -8,11 +8,6 @@ SUBCLASSES
 |yii/web/GroupUrlRule|
 |yii/rest/UrlRule|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -40,7 +35,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/web/CompositeUrlRule::__get*				public
@@ -87,28 +83,29 @@ METHOD DETAILS
 
 
 
-
 *yii/web/CompositeUrlRule::parseRequest*			public
 >
  parseRequest($manager, $request)
 <
-(void)
+(array|boolean) The parsing result. The route and the parameters are returned
+as an array. If false, it means this rule cannot be used to parse this path
+info.
 
-
-    [$manager] () 
-    [$request] () 
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$request] (\yii\web\Request) The request component
 
 
 *yii/web/CompositeUrlRule::createUrl*			public
 >
  createUrl($manager, $route, $params)
 <
-(void)
+(string|boolean) The created URL, or false if this rule cannot be used for
+creating this URL.
 
-
-    [$manager] () 
-    [$route] () 
-    [$params] () 
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$route] (string) The route. It should not have slashes at the beginning
+    or the end.
+    [$params] (array) The parameters
 
 
 

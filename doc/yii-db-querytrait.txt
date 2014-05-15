@@ -50,15 +50,20 @@ METHOD DETAILS
 <
 (static) The query object itself
 
-
     [$column] (string|callable) The name of the column by which the query
     results should be indexed by. This can also be a callable (e.g. anonymous
     function) that returns the index value based on the given row data. The
     signature of the callable should be:
 
-      function ($row)
+      public function getOrders()
       {
-          // return the index value corresponding to $row
+          return $this->hasOne(Order::className(), ['id' => 'order_id']);
+      }
+
+      public function getOrderItems()
+      {
+          return $this->hasMany(Item::className(), ['id' => 'item_id'])
+                      ->via('orders');
       }
 
 
@@ -112,12 +117,11 @@ METHOD DETAILS
 
  The following code shows the difference between this method and 'where()':
 
-   // WHERE `age`=:age
-   $query->filterWhere(['name' => null, 'age' => 20]);
-   // WHERE `age`=:age
-   $query->where(['age' => 20]);
-   // WHERE `name` IS NULL AND `age`=:age
-   $query->where(['name' => null, 'age' => 20]);
+   public function getOrders()
+   {
+       return $this->hasMany(Order::className(), ['customer_id' =>
+ 'id'])->inverseOf('customer');
+   }
 
  Note that unlike 'where()', you cannot pass binding parameters to this
  method.
@@ -165,7 +169,6 @@ METHOD DETAILS
 <
 (array) The condition with 'isEmpty()|empty operands' removed.
 
-
     [$condition] (array) The original condition
 
 
@@ -178,8 +181,11 @@ METHOD DETAILS
  The value is considered "empty", if one of the following conditions is
  satisfied:
 
- - it is 'null', - an empty string (''''), - a string containing only
- whitespace characters, - or an empty array.
+
+   - it is 'null', 
+   - an empty string (''''), 
+   - a string containing only whitespace characters, 
+   - or an empty array.
     [$value] (mixed) 
 
 
@@ -188,7 +194,6 @@ METHOD DETAILS
  orderBy($columns)
 <
 (static) The query object itself
-
 
     [$columns] (string|array) The columns (and the directions) to be ordered
     by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
@@ -205,7 +210,6 @@ METHOD DETAILS
  addOrderBy($columns)
 <
 (static) The query object itself
-
 
     [$columns] (string|array) The columns (and the directions) to be ordered
     by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
@@ -229,7 +233,6 @@ METHOD DETAILS
 <
 (static) The query object itself
 
-
     [$limit] (integer) The limit. Use null or negative value to disable limit.
 
 
@@ -238,7 +241,6 @@ METHOD DETAILS
  offset($offset)
 <
 (static) The query object itself
-
 
     [$offset] (integer) The offset. Use null or negative value to disable
     offset.

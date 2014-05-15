@@ -18,14 +18,13 @@ DESCRIPTION
 
  For example,
 
-   $query = new Query;
-   $query->fields('id, name')
-       ->from('myindex', 'users')
-       ->limit(10);
-   // build and execute the query
-   $command = $query->createCommand();
-   $rows = $command->search(); // this way you get the raw output of
- elasticsearch.
+   echo DatePicker::widget([
+       'language' => 'ru',
+       'name'  => 'country',
+       'clientOptions' => [
+           'dateFormat' => 'yy-mm-dd',
+       ],
+   ]);
 
  You would normally call '$query->search()' instead of creating a command as
  this method adds the 'indexBy()' feature and also removes some
@@ -33,12 +32,17 @@ DESCRIPTION
 
  Query also provides some methods to easier get some parts of the result only:
 
- - 'one()': returns a single record populated with the first row of data. -
- 'all()': returns all records based on the query results. - 'count()': returns
- the number of records. - 'scalar()': returns the value of the first column in
- the first row of the query result. - 'column()': returns the value of the
- first column in the query result. - 'exists()': returns a value indicating
- whether the query result has data or not.
+
+   - 'one()': returns a single record populated with the first row of
+   data. 
+   - 'all()': returns all records based on the query results. 
+   - 'count()': returns the number of records. 
+   - 'scalar()': returns the value of the first column in the first row
+   of the query result. 
+   - 'column()': returns the value of the first column in the query
+   result. 
+   - 'exists()': returns a value indicating whether the query result
+   has data or not.
 
  NOTE: elasticsearch limits the number of records returned to 10 records by
  default. If you expect to get more records you should specify limit
@@ -65,9 +69,32 @@ $indexBy				*yii/elasticsearch/Query::$indexBy*
 
 $fields					*yii/elasticsearch/Query::$fields*
  (array) The fields being retrieved from the documents. For example, '['id',
- 'name']'. If not set, it means retrieving all fields. An empty array will
- result in no fields being retrieved. This means that only the primaryKey of a
- record will be available in the result.
+ 'name']'. If not set, this option will not be applied to the query and no
+ fields will be returned. In this case the '_source' field will be returned by
+ default which can be configured using 'source'. Setting this to an empty
+ array will result in no fields being retrieved, which means that only the
+ primaryKey of a record will be available in the result.
+
+ For each field you may also add an array representing a [script field].
+ Example:
+
+   $customers = Customer::find()->with('orders')->asArray()->all();
+
+ > Note: Field values are [always returned as arrays] even if they only have
+ one value.
+
+ [always returned as arrays]:
+ http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/_return_values.html#_return_values
+ [script field]:
+ http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-script-fields.html
+
+$source					*yii/elasticsearch/Query::$source*
+ (array) This option controls how the '_source' field is returned from the
+ documents. For example, '['id', 'name']' means that only the 'id' and 'name'
+ field should be returned from '_source'. If not set, it means retrieving the
+ full '_source' field unless 'fields' are specified. Setting this option to
+ 'false' will disable return of the '_source' field, this means that only the
+ primaryKey of a record will be available in the result.
 
 $index					*yii/elasticsearch/Query::$index*
  (string|array) The index to retrieve data from. This can be a string
@@ -271,7 +298,6 @@ METHOD DETAILS
 <
 (\yii\elasticsearch\Command) The created DB command instance.
 
-
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -283,7 +309,6 @@ METHOD DETAILS
 <
 (array) The query results. If the query results in nothing, an empty array
 will be returned.
-
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -297,7 +322,6 @@ will be returned.
 (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
 
-
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -309,16 +333,19 @@ False is returned if the query results in nothing.
 <
 (array) The query results.
 
-
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
     [$options] (array) The options given with this query. Possible options
     are:
 
-     -
+     
+      -
+     
     [routing](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search.html#search-routing)
-     -
+     
+      -
+     
     [search_type](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-search-type.html)
 
 
@@ -358,7 +385,6 @@ exist.
 (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
-
     [$field] (string) The field to query over
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -370,7 +396,6 @@ the query results in nothing.
  count($q=''*'', $db='null')
 <
 (integer) Number of records
-
 
     [$q] (string) The COUNT expression. This parameter is ignored by this
     implementation.
@@ -385,7 +410,6 @@ the query results in nothing.
 <
 (boolean) Whether the query result contains any row of data.
 
-
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -396,7 +420,6 @@ the query results in nothing.
  addFacet($name, $type, $options)
 <
 (static) The query object itself
-
 
     [$name] (string) The name of this facet
     [$type] (string) The facet type. e.g. 'terms', 'range', 'histogram'...
@@ -410,7 +433,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$name] (string) The name of this facet
     [$options] (array) Additional option. Please refer to the elasticsearch
     documentation for details.
@@ -421,7 +443,6 @@ the query results in nothing.
  addRangeFacet($name, $options)
 <
 (static) The query object itself
-
 
     [$name] (string) The name of this facet
     [$options] (array) Additional option. Please refer to the elasticsearch
@@ -446,7 +467,6 @@ the query results in nothing.
  addDateHistogramFacet($name, $options)
 <
 (static) The query object itself
-
 
     [$name] (string) The name of this facet
     [$options] (array) Additional option. Please refer to the elasticsearch
@@ -481,7 +501,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$name] (string) The name of this facet
     [$options] (array) Additional option. Please refer to the elasticsearch
     documentation for details.
@@ -492,7 +511,6 @@ the query results in nothing.
  addTermsStatsFacet($name, $options)
 <
 (static) The query object itself
-
 
     [$name] (string) The name of this facet
     [$options] (array) Additional option. Please refer to the elasticsearch
@@ -505,7 +523,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$name] (string) The name of this facet
     [$options] (array) Additional option. Please refer to the elasticsearch
     documentation for details.
@@ -517,7 +534,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$query] (string) 
 
 
@@ -527,7 +543,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$filter] (string) 
 
 
@@ -536,7 +551,6 @@ the query results in nothing.
  from($index, $type='null')
 <
 (static) The query object itself
-
 
     [$index] (string|array) The index to retrieve data from. This can be a
     string representing a single index or a an array of multiple indexes. If
@@ -552,8 +566,16 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$fields] (array) The fields to be selected.
+
+
+*yii/elasticsearch/Query::source*				public
+>
+ source($source)
+<
+(static) The query object itself
+
+    [$source] (array) The source patterns to be selected.
 
 
 *yii/elasticsearch/Query::timeout*			public
@@ -561,7 +583,6 @@ the query results in nothing.
  timeout($timeout)
 <
 (static) The query object itself
-
 
     [$timeout] (integer) A search timeout, bounding the search request to be
     executed within the specified time value and bail with the hits

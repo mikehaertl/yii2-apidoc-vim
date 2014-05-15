@@ -16,11 +16,7 @@ DESCRIPTION
  The following example shows how you can configure the application to use
  Cache:
 
-   'cache' => [
-       'class' => 'yii\mongodb\Cache',
-       // 'db' => 'mymongodb',
-       // 'cacheCollection' => 'my_cache',
-   ]
+   $customers = Customer::find()->with('orders')->asArray()->all();
 
 
 
@@ -252,7 +248,6 @@ cache or expired.
 <
 (boolean) If no error happens during deletion
 
-
     [$key] (string) The key of the value to be deleted
 
 
@@ -298,7 +293,6 @@ cache or expired.
  gc($force='false')
 <
 (void)
-
 
     [$force] (boolean) Whether to enforce the garbage collection regardless of
     'gcProbability'. Defaults to false, meaning the actual deletion happens

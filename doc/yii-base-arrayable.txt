@@ -35,26 +35,30 @@ METHOD DETAILS
  returning the corresponding field value. The signature of the callable should
  be:
 
-   function ($field, $model) {
-       // return field value
-   }
+   Customer::find()->with('orders', 'country')->all();
+   Customer::find()->with('orders')->with('country')->all();
 
  For example, the following code declares four fields:
 
- - 'email': the field name is the same as the property name 'email'; -
- 'firstName' and 'lastName': the field names are 'firstName' and 'lastName',
- and their   values are obtained from the 'first_name' and 'last_name'
- properties; - 'fullName': the field name is 'fullName'. Its value is obtained
- by concatenating 'first_name'   and 'last_name'.
 
-   return [
-       'email',
-       'firstName' => 'first_name',
-       'lastName' => 'last_name',
-       'fullName' => function () {
-           return $this->first_name . ' ' . $this->last_name;
-       },
-   ];
+   - 'email': the field name is the same as the property name 'email'; 
+   - 'firstName' and 'lastName': the field names are 'firstName' and
+   'lastName', and their   values are obtained from the 'first_name' and
+ 'last_name' properties; 
+   - 'fullName': the field name is 'fullName'. Its value is obtained by
+   concatenating 'first_name'   and 'last_name'.
+
+   [
+       // anonymous fixture
+       PostFixture::className(),
+       // "users" fixture
+       'users' => UserFixture::className(),
+       // "cache" fixture with configuration
+       'cache' => [
+            'class' => CacheFixture::className(),
+            'host' => 'xxx',
+       ],
+   ]
 
 
 
@@ -77,7 +81,6 @@ to 'fields()' on the format of the return value.
  toArray($fields='[]', $expand='[]', $recursive='true')
 <
 (array) The array representation of the object
-
 
     [$fields] (array) The fields that the output array should contain. Fields
     not specified in 'fields()' will be ignored. If this parameter is empty,

@@ -9,9 +9,13 @@ DESCRIPTION
  must implement '\yii\db\ActiveRecordInterface'. By default, the following
  actions are supported:
 
- - 'index': list of models - 'view': return the details of a model - 'create':
- create a new model - 'update': update an existing model - 'delete': delete an
- existing model - 'options': return the allowed HTTP methods
+
+   - 'index': list of models 
+   - 'view': return the details of a model 
+   - 'create': create a new model 
+   - 'update': update an existing model 
+   - 'delete': delete an existing model 
+   - 'options': return the allowed HTTP methods
 
  You may disable some of these actions by overriding 'actions()' and unsetting
  the corresponding actions.
@@ -61,10 +65,6 @@ $updateScenario				*yii/rest/ActiveController::$updateScenario*
 $createScenario				*yii/rest/ActiveController::$createScenario*
  (string) The scenario used for creating a model.
 
-$transactional				*yii/rest/ActiveController::$transactional*
- (boolean) Whether to use a DB transaction when creating, updating or deleting
- a model. This property is only useful for relational database.
-
 $behaviors				*yii/rest/ActiveController::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
@@ -105,7 +105,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/rest/ActiveController::__get*			public
@@ -202,7 +203,20 @@ METHOD DETAILS
 <
 (void)
 
+ This method is meant to be overwritten to declare external actions for the
+ controller. It should return an array, with array keys being action IDs, and
+ array values the corresponding action class names or action configuration
+ arrays. For example,
 
+   public function afterAction($action, $result)
+   {
+       $result = parent::afterAction($action, $result);
+       // your custom code here
+       return $result;
+   }
+
+ '\Yii::createObject()' will be used later to create the requested action
+ using the configuration provided here.
 
 
 *yii/rest/ActiveController::runAction*			public
@@ -295,7 +309,7 @@ METHOD DETAILS
 <
 (array) The allowed HTTP verbs.
 
-
+ Please refer to 'VerbFilter::actions' on how to declare the allowed verbs.
 
 
 *yii/rest/ActiveController::serializeData*		protected

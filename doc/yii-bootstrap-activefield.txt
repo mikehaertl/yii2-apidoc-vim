@@ -5,24 +5,32 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- This class adds some useful features to 'yii\widgets\ActiveField|ActiveField'
- to render all sorts of Bootstrap 3 form fields in different form layouts:
+ This class adds some useful features to
+ '\yii\widgets\ActiveField|ActiveField' to render all sorts of Bootstrap 3
+ form fields in different form layouts:
 
- - 'inputTemplate' is an optional template to render complex inputs, for
- example input groups - 'horizontalClass' defines the CSS grid classes to add
- to label, wrapper, error and hint   in horizontal forms - 'inline'/'inline()'
- is used to render inline 'checkboxList()' and 'radioList()' - 'enableError'
- can be set to 'false' to disable to the error - 'enableLabel' can be set to
- 'false' to disable to the label - 'label()' can be used with a 'boolean'
- argument to enable/disable the label
+
+   - 'inputTemplate' is an optional template to render complex inputs,
+   for example input groups 
+   - 'horizontalCssClasses' defines the CSS grid classes to add to
+   label, wrapper, error and hint   in horizontal forms 
+   - 'inline'/'inline()' is used to render inline 'checkboxList()' and
+   'radioList()' 
+   - 'enableError' can be set to 'false' to disable to the error 
+   - 'enableLabel' can be set to 'false' to disable to the label 
+   - 'label()' can be used with a 'boolean' argument to enable/disable
+   the label
 
  There are also some new placeholders that you can use in the 'template'
  configuration:
 
- - '{beginLabel}': the opening label tag - '{labelTitle}': the label title for
- use with '{beginLabel}'/'{endLabel}' - '{endLabel}': the closing label tag -
- '{beginWrapper}': the opening wrapper tag - '{endWrapper}': the closing
- wrapper tag
+
+   - '{beginLabel}': the opening label tag 
+   - '{labelTitle}': the label title for use with
+   '{beginLabel}'/'{endLabel}' 
+   - '{endLabel}': the closing label tag 
+   - '{beginWrapper}': the opening wrapper tag 
+   - '{endWrapper}': the closing wrapper tag
 
  The wrapper tag is only used for some layouts and form elements.
 
@@ -33,40 +41,12 @@ DESCRIPTION
 
  Example:
 
-   use yii\bootstrap\ActiveForm;
-
-   $form = ActiveForm::begin(['layout' => 'horizontal'])
-
-   // Form field without label
-   echo $form->field($model, 'demo', [
-       'inputOptions' => [
-           'placeholder' => $model->getAttributeLabel('demo'),
+   echo Alert::widget([
+       'options' => [
+           'class' => 'alert-info',
        ],
-   ])->label(false);
-
-   // Inline radio list
-   echo $form->field($model, 'demo')->inline()->radioList($items);
-
-   // Control sizing in horizontal mode
-   echo $form->field($model, 'demo', [
-       'horizontalCssClasses' => [
-           'wrapper' => 'col-sm-2',
-       ]
+       'body' => 'Say hello...',
    ]);
-
-   // With 'default' layout you would use 'template' to size a specific field:
-   // echo $form->field($model, 'demo', [
-   //     'template' => '{label} <div class="row"><div
- class="col-sm-4">{input}{error}{hint}</div></div>'
-   // ]);
-
-    // Input group
-    echo $form->field($model, 'demo', [
-        'inputTemplate' => '<div class="input-group"><span
- class="input-group-addon">@</span>{input}</div>',
-    ]);
-
-    ActiveForm::end();
 
 
 
@@ -133,10 +113,13 @@ $wrapperOptions				*yii/bootstrap/ActiveField::$wrapperOptions*
 
 $horizontalCssClasses			*yii/bootstrap/ActiveField::$horizontalCssClasses*
  (null|array) CSS grid classes for horizontal layout. This must be an array
- with these keys:  - 'offset' the offset grid class to append to the wrapper
- if no label is rendered  - 'label' the label grid class  - 'wrapper' the
- wrapper grid class  - 'error' the error grid class  - 'hint' the hint grid
- class
+ with these keys:  
+   - 'offset' the offset grid class to append to the wrapper if no
+   label is rendered  
+   - 'label' the label grid class  
+   - 'wrapper' the wrapper grid class  
+   - 'error' the error grid class  
+   - 'hint' the hint grid class
 
 $enableError				*yii/bootstrap/ActiveField::$enableError*
  (bool) Whether to render the error. Default is 'true' except for layout
@@ -163,8 +146,20 @@ METHOD DETAILS
 <
 (void)
 
+ The default implementation does two things:
 
-    [$config] () 
+
+   - Initializes the object with the given configuration '$config'. 
+   - Call 'init()'.
+
+ If this method is overridden in a child class, it is recommended that
+
+
+   - the last parameter of the constructor is a configuration array,
+   like '$config' here. 
+   - call the parent implementation at the end of the constructor.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
 
 
 *yii/bootstrap/ActiveField::init*				public
@@ -269,8 +264,25 @@ METHOD DETAILS
 <
 (string) The rendering result
 
+ This method will generate the label, error tag, input tag and hint tag (if
+ any), and assemble them into HTML according to 'template'.
+    [$content] (string|callable) The content within the field container. If
+    null (not set), the default methods will be called to generate the label,
+    error tag and input tag, and use them as the content. If a callable, it
+    will be called to generate the content. The signature of the callable
+    should be:
 
-    [$content] () 
+      Alert::begin([
+          'options' => [
+              'class' => 'alert-warning',
+          ],
+      ]);
+
+      echo 'Say hello...';
+
+      Alert::end();
+
+
 
 
 *yii/bootstrap/ActiveField::begin*			public
@@ -287,9 +299,15 @@ METHOD DETAILS
 <
 (static) The field object itself
 
-
-    [$label] () 
-    [$options] () 
+    [$label] (string|boolean) The label to use. If null, the label will be
+    generated via 'Model::getAttributeLabel()'. If false, the generated field
+    will not contain the label part. Note that this will NOT be
+    'Html::encode()|encoded'.
+    [$options] (array) The tag options in terms of name-value pairs. It will
+    be merged with 'labelOptions'. The options will be rendered as the
+    attributes of the resulting tag. The values will be HTML-encoded using
+    'Html::encode()'. If a value is null, the corresponding attribute will not
+    be rendered.
 
 
 *yii/bootstrap/ActiveField::error*			public
@@ -334,9 +352,32 @@ METHOD DETAILS
 <
 (static) The field object itself
 
+ This method will generate the "checked" tag attribute according to the model
+ attribute value.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
 
-    [$options] () 
-    [$enclosedByLabel] () 
+
+      - uncheck: string, the value associated with the uncheck state of
+      the radio button. If not set,   it will take the default value '0'. This
+    method will render a hidden input so that if the radio button   is not
+    checked and is submitted, the value of this attribute will still be
+    submitted to the server   via the hidden input. 
+      - label: string, a label displayed next to the checkbox.  It will
+      NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
+    image tag. If this is is coming from end users, you should
+    'Html::encode()' it to prevent XSS attacks.   When this option is
+    specified, the checkbox will be enclosed by a label tag. 
+      - labelOptions: array, the HTML attributes for the label tag. This
+      is only used when the "label" option is specified.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is null, the corresponding attribute will not be rendered.
+    [$enclosedByLabel] (boolean) Whether to enclose the checkbox within the
+    label. If true, the method will still use 'template' to layout the
+    checkbox and the error message except that the checkbox is enclosed by the
+    label tag.
 
 
 *yii/bootstrap/ActiveField::dropDownList*			public
@@ -353,9 +394,64 @@ METHOD DETAILS
 <
 (static) The field object itself
 
+ A checkbox list allows multiple selection, like 'listBox()'. As a result, the
+ corresponding submitted value is an array. The selection of the checkbox list
+ is taken from the value of the model attribute.
+    [$items] (array) The data item used to generate the checkboxes. The array
+    values are the labels, while the array keys are the corresponding checkbox
+    values. Note that the labels will NOT be HTML-encoded, while the values
+    will.
+    [$options] (array) Options (name => config) for the checkbox list. The
+    following options are specially handled:
 
-    [$items] () 
-    [$options] () 
+
+      - unselect: string, the value that should be submitted when none of
+      the checkboxes is selected.   By setting this option, a hidden input
+    will be generated. 
+      - separator: string, the HTML code that separates items. 
+      - item: callable, a callback that can be used to customize the
+      generation of the HTML code   corresponding to a single item in $items.
+    The signature of this callback must be:
+
+      use yii\bootstrap\ActiveForm;
+
+      $form = ActiveForm::begin(['layout' => 'horizontal'])
+
+      // Form field without label
+      echo $form->field($model, 'demo', [
+          'inputOptions' => [
+              'placeholder' => $model->getAttributeLabel('demo'),
+          ],
+      ])->label(false);
+
+      // Inline radio list
+      echo $form->field($model, 'demo')->inline()->radioList($items);
+
+      // Control sizing in horizontal mode
+      echo $form->field($model, 'demo', [
+          'horizontalCssClasses' => [
+              'wrapper' => 'col-sm-2',
+          ]
+      ]);
+
+      // With 'default' layout you would use 'template' to size a specific
+    field:
+      // echo $form->field($model, 'demo', [
+      //     'template' => '{label} <div class="row"><div
+    class="col-sm-4">{input}{error}{hint}</div></div>'
+      // ]);
+
+       // Input group
+       echo $form->field($model, 'demo', [
+           'inputTemplate' => '<div class="input-group"><span
+    class="input-group-addon">@</span>{input}</div>',
+       ]);
+
+       ActiveForm::end();
+
+    where $index is the zero-based index of the checkbox in the whole list;
+    $label is the label for the checkbox; and $name, $value and $checked
+    represent the name, value and the checked status of the checkbox input.
 
 
 *yii/bootstrap/ActiveField::radioList*			public
@@ -364,9 +460,33 @@ METHOD DETAILS
 <
 (static) The field object itself
 
+ A radio button list is like a checkbox list, except that it only allows
+ single selection. The selection of the radio buttons is taken from the value
+ of the model attribute.
+    [$items] (array) The data item used to generate the radio buttons. The
+    array keys are the labels, while the array values are the corresponding
+    radio button values. Note that the labels will NOT be HTML-encoded, while
+    the values will.
+    [$options] (array) Options (name => config) for the radio button list. The
+    following options are specially handled:
 
-    [$items] () 
-    [$options] () 
+
+      - unselect: string, the value that should be submitted when none of
+      the radio buttons is selected.   By setting this option, a hidden input
+    will be generated. 
+      - separator: string, the HTML code that separates items. 
+      - item: callable, a callback that can be used to customize the
+      generation of the HTML code   corresponding to a single item in $items.
+    The signature of this callback must be:
+
+      function ($field) {
+          return $html;
+      }
+
+    where $index is the zero-based index of the radio button in the whole
+    list; $label is the label for the radio button; and $name, $value and
+    $checked represent the name, value and the checked status of the radio
+    button input.
 
 
 *yii/bootstrap/ActiveField::widget*			public
@@ -388,7 +508,6 @@ METHOD DETAILS
 (static) The field object itself Make sure you call this method before
 'checkboxList()' or 'radioList()' to have any effect.
 
-
     [$value] (bool) Whether to render a inline list
 
 
@@ -397,7 +516,6 @@ METHOD DETAILS
  createLayoutConfig($instanceConfig)
 <
 (array) The layout specific default configuration for this instance
-
 
     [$instanceConfig] (array) The configuration passed to this instance's
     constructor
@@ -408,7 +526,6 @@ METHOD DETAILS
  renderLabelParts($label='null', $options='[]')
 <
 (void)
-
 
     [$label] (string|null) The label or null to use model label
     [$options] (array) The tag options

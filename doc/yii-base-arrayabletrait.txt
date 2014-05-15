@@ -29,26 +29,27 @@ METHOD DETAILS
  returning the corresponding field value. The signature of the callable should
  be:
 
-   function ($field, $model) {
-       // return field value
-   }
+   $obj->crop('path\to\image.jpg', 200, 200, [5, 5]);
+
+   $point = new \Imagine\Image\Point(5, 5);
+   $obj->crop('path\to\image.jpg', 200, 200, $point);
 
  For example, the following code declares four fields:
 
- - 'email': the field name is the same as the property name 'email'; -
- 'firstName' and 'lastName': the field names are 'firstName' and 'lastName',
- and their   values are obtained from the 'first_name' and 'last_name'
- properties; - 'fullName': the field name is 'fullName'. Its value is obtained
- by concatenating 'first_name'   and 'last_name'.
 
-   return [
-       'email',
-       'firstName' => 'first_name',
-       'lastName' => 'last_name',
-       'fullName' => function () {
-           return $this->first_name . ' ' . $this->last_name;
-       },
-   ];
+   - 'email': the field name is the same as the property name 'email'; 
+   - 'firstName' and 'lastName': the field names are 'firstName' and
+   'lastName', and their   values are obtained from the 'first_name' and
+ 'last_name' properties; 
+   - 'fullName': the field name is 'fullName'. Its value is obtained by
+   concatenating 'first_name'   and 'last_name'.
+
+   php
+   // thumb - saved on runtime path
+   $imagePath = Yii::$app->getBasePath() . '/web/img/test-image.jpg';
+   $runtimePath = Yii::$app->getRuntimePath();
+   Image::thumbnail('@app/web/img/test-image.jpg', 120, 120)
+       ->save('thumb-test-image.jpg', ['quality' => 50]);
 
  In this method, you may also want to return different lists of fields based
  on some context information. For example, depending on the privilege of the

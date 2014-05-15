@@ -14,10 +14,10 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   'response' => [
-       'format' => yii\web\Response::FORMAT_JSON,
-       'charset' => 'UTF-8',
-       // ...
+   'request' => [
+       'parsers' => [
+           'application/json' => 'yii\web\JsonParser',
+       ]
    ]
 
 
@@ -35,18 +35,21 @@ $format					*yii/web/Response::$format*
  of the keys declared in the 'formatters] array. By default, the following
  formats are supported:
 
- - 'FORMAT_RAW': the data will be treated as the response content without any
- conversion.   No extra HTTP header will be added. - 'FORMAT_HTML': the data
- will be treated as the response content without any conversion.   The
- "Content-Type" header will set as "text/html" if it is not set previously. -
- 'FORMAT_JSON': the data will be converted into JSON format, and the
- "Content-Type"   header will be set as "application/json". - 'FORMAT_JSONP':
- the data will be converted into JSONP format, and the "Content-Type"   header
- will be set as "text/javascript". Note that in this case '$data' must be an
- array   with "data" and "callback" elements. The former refers to the actual
- data to be sent,   while the latter refers to the name of the JavaScript
- callback. - 'FORMAT_XML': the data will be converted into XML format. Please
- refer to 'XmlResponseFormatter'   for more details.
+
+   - 'FORMAT_RAW': the data will be treated as the response content
+   without any conversion.   No extra HTTP header will be added. 
+   - 'FORMAT_HTML': the data will be treated as the response content
+   without any conversion.   The "Content-Type" header will set as "text/html"
+ if it is not set previously. 
+   - 'FORMAT_JSON': the data will be converted into JSON format, and
+   the "Content-Type"   header will be set as "application/json". 
+   - 'FORMAT_JSONP': the data will be converted into JSONP format, and
+   the "Content-Type"   header will be set as "text/javascript". Note that in
+ this case '$data' must be an array   with "data" and "callback" elements. The
+ former refers to the actual data to be sent,   while the latter refers to the
+ name of the JavaScript callback. 
+   - 'FORMAT_XML': the data will be converted into XML format. Please
+   refer to 'XmlResponseFormatter'   for more details.
 
  You may customize the formatting process or support additional formats by
  configuring 'formatters'.
@@ -166,7 +169,6 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Response::__get*					public
  See |yii/base/Component::__get|
 
@@ -263,7 +265,6 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Response::clearOutputBuffers*			public
  See |yii/base/Response::clearOutputBuffers|
 
@@ -273,7 +274,6 @@ METHOD DETAILS
  getStatusCode()
 <
 (integer) The HTTP status code to send with the response.
-
 
 
 
@@ -306,13 +306,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Response::sendHeaders*				protected
 >
  sendHeaders()
 <
 (void)
-
 
 
 
@@ -324,13 +322,11 @@ METHOD DETAILS
 
 
 
-
 *yii/web/Response::sendContent*				protected
 >
  sendContent()
 <
 (void)
-
 
 
 
@@ -386,7 +382,6 @@ METHOD DETAILS
 (array|boolean) The range (begin, end), or false if the range request is
 invalid.
 
-
     [$fileSize] (integer) The size of the file that will be used to validate
     the requested HTTP range.
 
@@ -412,12 +407,19 @@ invalid.
  As this header directive is non-standard different directives exists for
  different web servers applications:
 
- - Apache: [X-Sendfile](http://tn123.org/mod_xsendfile) - Lighttpd v1.4:
+
+   - Apache: [X-Sendfile](http://tn123.org/mod_xsendfile) 
+   - Lighttpd v1.4:
+  
  [X-LIGHTTPD-send-file](http://redmine.lighttpd.net/projects/lighttpd/wiki/X-LIGHTTPD-send-file)
- - Lighttpd v1.5:
+
+   - Lighttpd v1.5:
+  
  [X-Sendfile](http://redmine.lighttpd.net/projects/lighttpd/wiki/X-LIGHTTPD-send-file)
- - Nginx: [X-Accel-Redirect](http://wiki.nginx.org/XSendfile) - Cherokee:
- [X-Sendfile and
+
+   - Nginx: [X-Accel-Redirect](http://wiki.nginx.org/XSendfile) 
+   - Cherokee: [X-Sendfile and
+  
  X-Accel-Redirect](http://www.cherokee-project.com/doc/other_goodies.html#x-sendfile)
 
  So for this method to work the X-SENDFILE option/module should be enabled by
@@ -444,7 +446,11 @@ invalid.
 
  **Example**
 
-   Yii::$app->response->xSendFile('/home/user/Pictures/picture1.jpg');
+   'response' => [
+       'format' => yii\web\Response::FORMAT_JSON,
+       'charset' => 'UTF-8',
+       // ...
+   ]
 
 
     [$filePath] (string) File name with full path
@@ -465,13 +471,12 @@ invalid.
  does not send out the header until 'send()' is called. In a controller action
  you may use this method as follows:
 
-   return Yii::$app->getResponse()->redirect($url);
+   Yii::$app->response->xSendFile('/home/user/Pictures/picture1.jpg');
 
  In other places, if you want to send out the "Location" header immediately,
  you should use the following code:
 
-   Yii::$app->getResponse()->redirect($url)->send();
-   return;
+   return Yii::$app->getResponse()->redirect($url);
 
  In AJAX mode, this normally will not work as expected unless there are some
  client-side JavaScript code handling the redirection. To help achieve this
@@ -481,23 +486,20 @@ invalid.
  as described above. Otherwise, you should write the following JavaScript code
  to handle the redirection:
 
-   $document.ajaxComplete(function (event, xhr, settings) {
-       var url = xhr.getResponseHeader('X-Redirect');
-       if (url) {
-           window.location = url;
-       }
-   });
+   Yii::$app->getResponse()->redirect($url)->send();
+   return;
 
 
     [$url] (string|array) The URL to be redirected to. This can be in one of
     the following formats:
 
-    - a string representing a URL (e.g. "http://example.com") - a string
-    representing a URL alias (e.g. "@example.com") - an array in the format of
-    '[$route, ...name-value pairs...]' (e.g. '['site/index', 'ref' => 1]').  
-    Note that the route is with respect to the whole application, instead of
-    relative to a controller or module.   'Url::to()' will be used to convert
-    the array into a URL.
+
+      - a string representing a URL (e.g. "http://example.com") 
+      - a string representing a URL alias (e.g. "@example.com") 
+      - an array in the format of '[$route, ...name-value pairs...]' (e.g.
+      '['site/index', 'ref' => 1]').   Note that the route is with respect to
+    the whole application, instead of relative to a controller or module.  
+    'Url::to()' will be used to convert the array into a URL.
 
     Any relative URL will be converted into an absolute one by prepending it
     with the host info of the current request.
@@ -517,7 +519,12 @@ invalid.
 
  In a controller action you may use this method like this:
 
-   return Yii::$app->getResponse()->refresh();
+   $document.ajaxComplete(function (event, xhr, settings) {
+       var url = xhr.getResponseHeader('X-Redirect');
+       if (url) {
+           window.location = url;
+       }
+   });
 
 
     [$anchor] (string) The anchor that should be appended to the redirection
@@ -533,16 +540,7 @@ invalid.
 
  Through the returned cookie collection, you add or remove cookies as follows,
 
-   // add a cookie
-   $response->cookies->add(new Cookie([
-       'name' => $name,
-       'value' => $value,
-   ]);
-
-   // remove a cookie
-   $response->cookies->remove('name');
-   // alternatively
-   unset($response->cookies['name']);
+   return Yii::$app->getResponse()->refresh();
 
 
 
@@ -555,13 +553,11 @@ invalid.
 
 
 
-
 *yii/web/Response::getIsInformational*			public
 >
  getIsInformational()
 <
 (boolean) Whether this response is informational
-
 
 
 
@@ -573,13 +569,11 @@ invalid.
 
 
 
-
 *yii/web/Response::getIsRedirection*			public
 >
  getIsRedirection()
 <
 (boolean) Whether this response is a redirection
-
 
 
 
@@ -591,13 +585,11 @@ invalid.
 
 
 
-
 *yii/web/Response::getIsServerError*			public
 >
  getIsServerError()
 <
 (boolean) Whether this response indicates a server error
-
 
 
 
@@ -609,13 +601,11 @@ invalid.
 
 
 
-
 *yii/web/Response::getIsForbidden*			public
 >
  getIsForbidden()
 <
 (boolean) Whether this response indicates the current request is forbidden
-
 
 
 
@@ -628,7 +618,6 @@ not found
 
 
 
-
 *yii/web/Response::getIsEmpty*				public
 >
  getIsEmpty()
@@ -637,13 +626,11 @@ not found
 
 
 
-
 *yii/web/Response::defaultFormatters*			protected
 >
  defaultFormatters()
 <
 (array) The formatters that are supported by default
-
 
 
 

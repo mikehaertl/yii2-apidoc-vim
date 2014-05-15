@@ -11,13 +11,33 @@ DESCRIPTION
  Messages are sent by a '\yii\mail\MailerInterface|mailer', like the
  following,
 
-   Yii::$app->mail->compose()
-       ->setFrom('from@domain.com')
-       ->setTo($form->email)
-       ->setSubject($form->subject)
-       ->setTextBody('Plain text content')
-       ->setHtmlBody('<b>HTML content</b>')
-       ->send();
+   class User extends ActiveRecord implements IdentityInterface
+   {
+       public static function findIdentity($id)
+       {
+           return static::findOne($id);
+       }
+
+       public static function findIdentityByAccessToken($token, $type = null)
+       {
+           return static::findOne(['access_token' => $token]);
+       }
+
+       public function getId()
+       {
+           return $this->id;
+       }
+
+       public function getAuthKey()
+       {
+           return $this->authKey;
+       }
+
+       public function validateAuthKey($authKey)
+       {
+           return $this->authKey === $authKey;
+       }
+   }
 
 
 
@@ -34,13 +54,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mail/MessageInterface::setCharset*			public
 >
  setCharset($charset)
 <
 (static) Self reference.
-
 
     [$charset] (string) Character set name.
 
@@ -53,13 +71,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mail/MessageInterface::setFrom*			public
 >
  setFrom($from)
 <
 (static) Self reference.
-
 
     [$from] (string|array) Sender email address. You may pass an array of
     addresses if this message is from multiple people. You may also specify
@@ -74,13 +90,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mail/MessageInterface::setTo*			public
 >
  setTo($to)
 <
 (static) Self reference.
-
 
     [$to] (string|array) Receiver email address. You may pass an array of
     addresses if multiple recipients should receive this message. You may also
@@ -96,13 +110,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mail/MessageInterface::setReplyTo*			public
 >
  setReplyTo($replyTo)
 <
 (static) Self reference.
-
 
     [$replyTo] (string|array) The reply-to address. You may pass an array of
     addresses if this message should be replied to multiple people. You may
@@ -118,13 +130,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mail/MessageInterface::setCc*			public
 >
  setCc($cc)
 <
 (static) Self reference.
-
 
     [$cc] (string|array) Copy receiver email address. You may pass an array of
     addresses if multiple recipients should receive this message. You may also
@@ -140,13 +150,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mail/MessageInterface::setBcc*			public
 >
  setBcc($bcc)
 <
 (static) Self reference.
-
 
     [$bcc] (string|array) Hidden copy receiver email address. You may pass an
     array of addresses if multiple recipients should receive this message. You
@@ -162,13 +170,11 @@ METHOD DETAILS
 
 
 
-
 *yii/mail/MessageInterface::setSubject*			public
 >
  setSubject($subject)
 <
 (static) Self reference.
-
 
     [$subject] (string) Message subject
 
@@ -179,7 +185,6 @@ METHOD DETAILS
 <
 (static) Self reference.
 
-
     [$text] (string) Message plain text content.
 
 
@@ -188,7 +193,6 @@ METHOD DETAILS
  setHtmlBody($html)
 <
 (static) Self reference.
-
 
     [$html] (string) Message HTML content.
 
@@ -199,12 +203,12 @@ METHOD DETAILS
 <
 (static) Self reference.
 
-
     [$fileName] (string) Full file name
     [$options] (array) Options for embed file. Valid options are:
 
-    - fileName: name, which should be used to attach file. - contentType:
-    attached file MIME type.
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
 
 
 *yii/mail/MessageInterface::attachContent*		public
@@ -213,12 +217,12 @@ METHOD DETAILS
 <
 (static) Self reference.
 
-
     [$content] (string) Attachment file content.
     [$options] (array) Options for embed file. Valid options are:
 
-    - fileName: name, which should be used to attach file. - contentType:
-    attached file MIME type.
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
 
 
 *yii/mail/MessageInterface::embed*			public
@@ -231,8 +235,9 @@ METHOD DETAILS
     [$fileName] (string) File name.
     [$options] (array) Options for embed file. Valid options are:
 
-    - fileName: name, which should be used to attach file. - contentType:
-    attached file MIME type.
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
 
 
 *yii/mail/MessageInterface::embedContent*			public
@@ -245,8 +250,9 @@ METHOD DETAILS
     [$content] (string) Attachment file content.
     [$options] (array) Options for embed file. Valid options are:
 
-    - fileName: name, which should be used to attach file. - contentType:
-    attached file MIME type.
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
 
 
 *yii/mail/MessageInterface::send*				public
@@ -254,7 +260,6 @@ METHOD DETAILS
  send($mailer='null')
 <
 (boolean) Whether this message is sent successfully.
-
 
     [$mailer] (\yii\mail\MailerInterface) The mailer that should be used to
     send this message. If null, the "mail" application component will be used
@@ -266,7 +271,6 @@ METHOD DETAILS
  toString()
 <
 (string) The string representation of this message.
-
 
 
 

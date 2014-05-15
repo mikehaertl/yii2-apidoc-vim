@@ -15,19 +15,15 @@ DESCRIPTION
 
  Usage:
 
-   use yii\authclient\OpenId;
-
-   $client = new OpenId();
-   $client->authUrl = 'https://open.id.provider.url'; // Setup provider
- endpoint
-   $url = $client->buildAuthUrl(); // Get authentication URL
-   return Yii::$app->getResponse()->redirect($url); // Redirect to
- authentication URL
-   // After user returns at our site:
-   if ($client->validate()) { // validate response
-       $userAttributes = $client->getUserAttributes(); // get account info
-       ...
-   }
+   $customerCollection = Yii::$app->mongo->getCollection('customer');
+   $resultCollectionName = $customerCollection->mapReduce(
+       'function () {emit(this.status, this.amount)}',
+       'function (key, values) {return Array.sum(values)}',
+       'mapReduceOut',
+       ['status' => 3]
+   );
+   $query = new Query();
+   $results = $query->from($resultCollectionName)->all();
 
  AX and SREG extensions are supported. To use them, specify
  'requiredAttributes' and/or 'optionalAttributes'.
@@ -44,7 +40,24 @@ $requiredAttributes			*yii/authclient/OpenId::$requiredAttributes*
  (array) List of attributes, which always should be returned from server.
  Attribute names should be always specified in AX format. For example:
 
-   ['namePerson/friendly', 'contact/email']
+   echo Nav::widget([
+       'items' => [
+           [
+               'label' => 'Home',
+               'url' => ['site/index'],
+               'linkOptions' => [...],
+           ],
+           [
+               'label' => 'Dropdown',
+               'items' => [
+                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
+                    '<li class="divider"></li>',
+                    '<li class="dropdown-header">Dropdown Header</li>',
+                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+               ],
+           ],
+       ],
+   ]);
 
 
 
@@ -52,7 +65,19 @@ $optionalAttributes			*yii/authclient/OpenId::$optionalAttributes*
  (array) List of attributes, which could be returned from server. Attribute
  names should be always specified in AX format. For example:
 
-   ['namePerson/first', 'namePerson/last']
+   use yii\authclient\OpenId;
+
+   $client = new OpenId();
+   $client->authUrl = 'https://open.id.provider.url'; // Setup provider
+ endpoint
+   $url = $client->buildAuthUrl(); // Get authentication URL
+   return Yii::$app->getResponse()->redirect($url); // Redirect to
+ authentication URL
+   // After user returns at our site:
+   if ($client->validate()) { // validate response
+       $userAttributes = $client->getUserAttributes(); // get account info
+       ...
+   }
 
 
 
@@ -124,7 +149,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/authclient/OpenId::__get*				public
@@ -279,7 +305,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OpenId::defaultNormalizeUserAttributeMap*	protected
  See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
 
@@ -298,7 +323,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$claimedId] (string) Claimed identifier (identity).
 
 
@@ -310,13 +334,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OpenId::setReturnUrl*			public
 >
  setReturnUrl($returnUrl)
 <
 (void)
-
 
     [$returnUrl] (string) Authentication return URL.
 
@@ -329,13 +351,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OpenId::setTrustRoot*			public
 >
  setTrustRoot($value)
 <
 (void)
-
 
     [$value] (string) Client trust root (realm).
 
@@ -348,13 +368,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OpenId::defaultReturnUrl*			protected
 >
  defaultReturnUrl()
 <
 (string) Default authentication return URL.
-
 
 
 
@@ -364,7 +382,6 @@ METHOD DETAILS
 <
 (boolean) True, if the server exists; false otherwise
 
-
     [$url] (string) URL to check
 
 
@@ -373,7 +390,6 @@ METHOD DETAILS
  sendCurlRequest($url, $method=''GET'', $params='[]')
 <
 (array|string) Response.
-
 
     [$url] (string) Request URL.
     [$method] (string) Request method.
@@ -386,7 +402,6 @@ METHOD DETAILS
 <
 (array|string) Response.
 
-
     [$url] (string) Request URL.
     [$method] (string) Request method.
     [$params] (array) Request params.
@@ -397,7 +412,6 @@ METHOD DETAILS
  sendRequest($url, $method=''GET'', $params='[]')
 <
 (array|string) Response.
-
 
     [$url] (string) Request URL.
     [$method] (string) Request method.
@@ -410,7 +424,6 @@ METHOD DETAILS
 <
 (string) Composed URL.
 
-
     [$baseUrl] (string) Base URL.
     [$additionalUrl] (string|array) Additional URL string or information
     array.
@@ -421,7 +434,6 @@ METHOD DETAILS
  extractHtmlTagValue($content, $tag, $matchAttributeName, $matchAttributeValue, $valueAttributeName)
 <
 (string|boolean) Searched value, "false" on failure.
-
 
     [$content] (string) HTML content to be be parsed.
     [$tag] (string) Name of the source tag.
@@ -436,14 +448,14 @@ METHOD DETAILS
 >
  discover($url)
 <
-(array) OpenID provider info, following keys will be available: - 'url' -
-string OP Endpoint (i.e. OpenID provider address). - 'version' - integer
-OpenID protocol version used by provider. - 'identity' - string identity
-value. - 'identifier_select' - boolean whether to request OP to select
-identity for an user in OpenID 2, does not affect OpenID 1. - 'ax' - boolean
-whether AX attributes should be used. - 'sreg' - boolean whether SREG
-attributes should be used.
-
+(array) OpenID provider info, following keys will be available: 
+  - 'url' - string OP Endpoint (i.e. OpenID provider address). 
+  - 'version' - integer OpenID protocol version used by provider. 
+  - 'identity' - string identity value. 
+  - 'identifier_select' - boolean whether to request OP to select
+  identity for an user in OpenID 2, does not affect OpenID 1. 
+  - 'ax' - boolean whether AX attributes should be used. 
+  - 'sreg' - boolean whether SREG attributes should be used.
 
     [$url] (string) Identity URL.
 
@@ -456,7 +468,6 @@ attributes should be used.
 
 
 
-
 *yii/authclient/OpenId::buildAxParams*			protected
 >
  buildAxParams()
@@ -465,13 +476,11 @@ attributes should be used.
 
 
 
-
 *yii/authclient/OpenId::buildAuthUrlV1*			protected
 >
  buildAuthUrlV1($serverInfo)
 <
 (string) Authentication URL.
-
 
     [$serverInfo] (array) OpenID server info.
 
@@ -482,7 +491,6 @@ attributes should be used.
 <
 (string) Authentication URL.
 
-
     [$serverInfo] (array) OpenID server info.
 
 
@@ -491,7 +499,6 @@ attributes should be used.
  buildAuthUrl($identifierSelect='null')
 <
 (string) The authentication URL.
-
 
     [$identifierSelect] (boolean) Whether to request OP to select identity for
     an user in OpenID 2, does not affect OpenID 1.
@@ -502,7 +509,6 @@ attributes should be used.
  validate($validateRequiredAttributes='true')
 <
 (boolean) Whether the verification was successful.
-
 
     [$validateRequiredAttributes] (boolean) Whether to validate required
     attributes.
@@ -516,13 +522,11 @@ attributes should be used.
 
 
 
-
 *yii/authclient/OpenId::fetchAxAttributes*		protected
 >
  fetchAxAttributes()
 <
 (array) Array of attributes.
-
 
 
 
@@ -532,7 +536,6 @@ attributes should be used.
 <
 (array) Array of attributes with keys being the AX schema names, e.g.
 'contact/email'
-
 
 
 

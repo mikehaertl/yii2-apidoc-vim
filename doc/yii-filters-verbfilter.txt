@@ -12,21 +12,24 @@ DESCRIPTION
  class. For example, the following declarations will define a typical set of
  allowed request methods for REST CRUD actions.
 
-   public function behaviors()
-   {
-       return [
-           'verbs' => [
-               'class' => \yii\filters\VerbFilter::className(),
-               'actions' => [
-                   'index'  => ['get'],
-                   'view'   => ['get'],
-                   'create' => ['get', 'post'],
-                   'update' => ['get', 'put', 'post'],
-                   'delete' => ['post', 'delete'],
+   // in application configuration
+   use yii\web\Response;
+
+   return [
+       'bootstrap' => [
+           [
+               'class' => 'yii\filters\ContentNegotiator',
+               'formats' => [
+                   'application/json' => Response::FORMAT_JSON,
+                   'application/xml' => Response::FORMAT_XML,
+               ],
+               'languages' => [
+                   'en',
+                   'de',
                ],
            ],
-       ];
-   }
+       ],
+   ];
 
 
 
@@ -49,12 +52,26 @@ $actions				*yii/filters/VerbFilter::$actions*
 
  For example,
 
-   [
-     'create' => ['get', 'post'],
-     'update' => ['get', 'put', 'post'],
-     'delete' => ['post', 'delete'],
-     '*' => ['get'],
-   ]
+   use yii\web\Response;
+
+   public function behaviors()
+   {
+       return [
+           [
+               'class' => 'yii\filters\ContentNegotiator',
+               'only' => ['view', 'index'],  // in a controller
+               // if in a module, use the following IDs for user actions
+               // 'only' => ['user/view', 'user/index']
+               'formats' => [
+                   'application/json' => Response::FORMAT_JSON,
+               ],
+               'languages' => [
+                   'en',
+                   'de',
+               ],
+           ],
+       ];
+   }
 
 
 
@@ -120,7 +137,6 @@ values).
 
 
 
-
 *yii/filters/VerbFilter::attach*				public
  See |yii/base/Behavior::attach|
 
@@ -134,7 +150,6 @@ values).
  beforeAction($event)
 <
 (boolean) 
-
 
     [$event] (\yii\base\ActionEvent) 
 

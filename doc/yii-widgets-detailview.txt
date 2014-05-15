@@ -14,17 +14,7 @@ DESCRIPTION
 
  A typical usage of DetailView is as follows:
 
-   echo DetailView::widget([
-       'model' => $model,
-       'attributes' => [
-           'title',             // title attribute (in plain text)
-           'description:html',  // description attribute in HTML
-           [                    // the owner name of the model
-               'label' => 'Owner',
-               'value' => $model->owner->name,
-           ],
-       ],
-   ]);
+   function ($index, $label, $name, $checked, $value)
 
 
 
@@ -60,17 +50,20 @@ $attributes				*yii/widgets/DetailView::$attributes*
  An attribute can also be specified in terms of an array with the following
  elements:
 
- - attribute: the attribute name. This is required if either "label" or
- "value" is not specified. - label: the label associated with the attribute.
- If this is not specified, it will be generated from the attribute name. -
- value: the value to be displayed. If this is not specified, it will be
- retrieved from 'model' using the attribute name   by calling
+
+   - attribute: the attribute name. This is required if either "label"
+   or "value" is not specified. 
+   - label: the label associated with the attribute. If this is not
+   specified, it will be generated from the attribute name. 
+   - value: the value to be displayed. If this is not specified, it
+   will be retrieved from 'model' using the attribute name   by calling
  'ArrayHelper::getValue()'. Note that this value will be formatted into a
- displayable text   according to the "format" option. - format: the type of
- the value that determines how the value would be formatted into a displayable
- text.   Please refer to 'Formatter' for supported types. - visible: whether
- the attribute is visible. If set to 'false', the attribute will NOT be
- displayed.
+ displayable text   according to the "format" option. 
+   - format: the type of the value that determines how the value would
+   be formatted into a displayable text.   Please refer to 'Formatter' for
+ supported types. 
+   - visible: whether the attribute is visible. If set to 'false', the
+   attribute will NOT be displayed.
 
 $template				*yii/widgets/DetailView::$template*
  (string|callable) The template used to render a single attribute. If a
@@ -78,7 +71,7 @@ $template				*yii/widgets/DetailView::$template*
  the value of the corresponding attribute. If a callback (e.g. an anonymous
  function), the signature must be as follows:
 
-   function ($attribute, $index, $widget)
+   function ($model, $key, $index, $widget)
 
  where '$attribute' refer to the specification of the attribute being
  rendered, '$index' is the zero-based index of the attribute in the
@@ -273,7 +266,6 @@ METHOD DETAILS
 <
 (string) The rendering result
 
-
     [$attribute] (array) The specification of the attribute to be rendered.
     [$index] (integer) The zero-based index of the attribute in the
     'attributes' array
@@ -284,7 +276,6 @@ METHOD DETAILS
  normalizeAttributes()
 <
 (void)
-
 
 
 

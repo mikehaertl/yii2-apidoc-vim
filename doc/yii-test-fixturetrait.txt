@@ -27,17 +27,18 @@ METHOD DETAILS
  The return value of this method must be an array of fixture configurations.
  For example,
 
-   [
-       // anonymous fixture
-       PostFixture::className(),
-       // "users" fixture
-       'users' => UserFixture::className(),
-       // "cache" fixture with configuration
-       'cache' => [
-            'class' => CacheFixture::className(),
-            'host' => 'xxx',
-       ],
-   ]
+   // find customers together with their orders and country
+   Customer::find()->with('orders', 'country')->all();
+   // find customers together with their orders and the orders' shipping
+ address
+   Customer::find()->with('orders.address')->all();
+   // find customers together with their country and orders of status 1
+   Customer::find()->with([
+       'orders' => function ($query) {
+           $query->andWhere('status = 1');
+       },
+       'country',
+   ])->all();
 
  Note that the actual fixtures used for a test case will include both
  'globalFixtures()' and 'fixtures()'.
@@ -85,14 +86,12 @@ METHOD DETAILS
 
 
 
-
 *yii/test/FixtureTrait::getFixture*			public
 >
  getFixture($name)
 <
 (\yii\test\Fixture) The fixture object, or null if the named fixture does not
 exist.
-
 
     [$name] (string) The fixture name. This can be either the fixture alias
     name, or the class name if the alias is not used.

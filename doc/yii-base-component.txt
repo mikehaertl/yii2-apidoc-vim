@@ -266,6 +266,7 @@ SUBCLASSES
 |yii/authclient/clients/Facebook|
 |yii/authclient/clients/YandexOAuth|
 |yii/authclient/clients/LinkedIn|
+|yii/authclient/clients/VKontakte|
 |yii/authclient/clients/GoogleOpenId|
 |yii/authclient/clients/GoogleOAuth|
 |yii/authclient/clients/Live|
@@ -306,9 +307,11 @@ DESCRIPTION
  In the above, an anonymous function is attached to the "update" event of the
  post. You may attach the following types of event handlers:
 
- - anonymous function: 'function ($event) { ... }' - object method: '[$object,
- 'handleAdd']' - static class method: '['Page', 'handleAdd']' - global
- function: ''handleAdd''
+
+   - anonymous function: 'function ($event) { ... }' 
+   - object method: '[$object, 'handleAdd']' 
+   - static class method: '['Page', 'handleAdd']' 
+   - global function: ''handleAdd''
 
  The signature of an event handler should be like the following:
 
@@ -387,8 +390,9 @@ METHOD DETAILS
 
  This method will check in the following order and act accordingly:
 
-  - a property defined by a getter: return the getter result  - a property of
- a behavior: return the behavior property value
+  
+   - a property defined by a getter: return the getter result  
+   - a property of a behavior: return the behavior property value
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing '$value = $component->property;'.
@@ -403,10 +407,13 @@ METHOD DETAILS
 
  This method will check in the following order and act accordingly:
 
-  - a property defined by a setter: set the property value  - an event in the
- format of "on xyz": attach the handler to the event "xyz"  - a behavior in
- the format of "as xyz": attach the behavior named as "xyz"  - a property of a
- behavior: set the behavior property value
+  
+   - a property defined by a setter: set the property value  
+   - an event in the format of "on xyz": attach the handler to the
+   event "xyz"  
+   - a behavior in the format of "as xyz": attach the behavior named as
+   "xyz"  
+   - a property of a behavior: set the behavior property value
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing '$component->property = $value;'.
@@ -422,8 +429,11 @@ METHOD DETAILS
 
  This method will check in the following order and act accordingly:
 
-  - a property defined by a setter: return whether the property value is null 
- - a property of a behavior: return whether the property value is null
+  
+   - a property defined by a setter: return whether the property value
+   is null  
+   - a property of a behavior: return whether the property value is
+   null
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing 'isset($component->property)'.
@@ -438,8 +448,9 @@ METHOD DETAILS
 
  This method will check in the following order and act accordingly:
 
-  - a property defined by a setter: set the property value to be null  - a
- property of a behavior: set the property value to be null
+  
+   - a property defined by a setter: set the property value to be null  
+   - a property of a behavior: set the property value to be null
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing 'unset($component->property)'.
@@ -469,10 +480,13 @@ METHOD DETAILS
 
  A property is defined if:
 
- - the class has a getter or setter method associated with the specified name 
-  (in this case, property name is case-insensitive); - the class has a member
- variable with the specified name (when '$checkVars' is true); - an attached
- behavior has a property of the given name (when '$checkBehaviors' is true).
+
+   - the class has a getter or setter method associated with the
+   specified name   (in this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a property of the given name (when
+   '$checkBehaviors' is true).
     [$name] (string) The property name
     [$checkVars] (boolean) Whether to treat member variables as properties
     [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
@@ -487,10 +501,13 @@ METHOD DETAILS
 
  A property can be read if:
 
- - the class has a getter method associated with the specified name   (in this
- case, property name is case-insensitive); - the class has a member variable
- with the specified name (when '$checkVars' is true); - an attached behavior
- has a readable property of the given name (when '$checkBehaviors' is true).
+
+   - the class has a getter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a readable property of the given name
+   (when '$checkBehaviors' is true).
     [$name] (string) The property name
     [$checkVars] (boolean) Whether to treat member variables as properties
     [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
@@ -505,10 +522,13 @@ METHOD DETAILS
 
  A property can be written if:
 
- - the class has a setter method associated with the specified name   (in this
- case, property name is case-insensitive); - the class has a member variable
- with the specified name (when '$checkVars' is true); - an attached behavior
- has a writable property of the given name (when '$checkBehaviors' is true).
+
+   - the class has a setter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a writable property of the given name
+   (when '$checkBehaviors' is true).
     [$name] (string) The property name
     [$checkVars] (boolean) Whether to treat member variables as properties
     [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
@@ -523,8 +543,10 @@ METHOD DETAILS
 
  A method is defined if:
 
- - the class has a method with the specified name - an attached behavior has a
- method with the given name (when '$checkBehaviors' is true).
+
+   - the class has a method with the specified name 
+   - an attached behavior has a method with the given name (when
+   '$checkBehaviors' is true).
     [$name] (string) The property name
     [$checkBehaviors] (boolean) Whether to treat behaviors' methods as methods
     of this component
@@ -574,7 +596,6 @@ METHOD DETAILS
  hasEventHandlers($name)
 <
 (boolean) Whether there is any handler attached to the event.
-
 
     [$name] (string) The event name
 
@@ -641,7 +662,6 @@ METHOD DETAILS
 (\yii\base\Behavior) The behavior object, or null if the behavior does not
 exist
 
-
     [$name] (string) The behavior name
 
 
@@ -650,7 +670,6 @@ exist
  getBehaviors()
 <
 (\yii\base\Behavior[]) List of behaviors attached to this component
-
 
 
 
@@ -667,9 +686,11 @@ exist
     [$behavior] (string|array|\yii\base\Behavior) The behavior configuration.
     This can be one of the following:
 
-     - a 'Behavior' object  - a string specifying the behavior class  - an
-    object configuration array that will be passed to 'Yii::createObject()' to
-    create the behavior object.
+     
+      - a 'Behavior' object  
+      - a string specifying the behavior class  
+      - an object configuration array that will be passed to
+      'Yii::createObject()' to create the behavior object.
 
 
 *yii/base/Component::attachBehaviors*			public
@@ -703,13 +724,11 @@ exist.
 
 
 
-
 *yii/base/Component::ensureBehaviors*			public
 >
  ensureBehaviors()
 <
 (void)
-
 
 
 

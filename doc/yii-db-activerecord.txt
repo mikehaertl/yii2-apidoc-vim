@@ -680,9 +680,15 @@ database table.
 <
 (void)
 
+ This is an internal method meant to be called to create active record objects
+ after fetching data from the database. It is mainly used by 'ActiveQuery' to
+ populate the query results into active records.
 
-    [$record] () 
-    [$row] () 
+ When calling this method manually you should call 'afterFind()' on the
+ created record to trigger the 'EVENT_AFTER_FIND|afterFind Event'.
+    [$record] (\yii\db\BaseActiveRecord) The record to be populated. In most
+    cases this will be an instance created by 'instantiate()' beforehand.
+    [$row] (array) Attribute values (name => value)
 
 
 *yii/db/ActiveRecord::instantiate*			public
@@ -729,7 +735,46 @@ database table.
 (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
+ The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
+ customized by calling methods defined in 'ActiveQueryInterface' before
+ 'one()' or 'all()' is called to return populated ActiveRecord instances. For
+ example,
 
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
 
 
 *yii/db/ActiveRecord::insert*				public
@@ -778,7 +823,6 @@ successfully.
  loadDefaultValues($skipIfSet='true')
 <
 (static) Model instance
-
 
     [$skipIfSet] (boolean) If existing value should be preserved
 
@@ -837,7 +881,6 @@ this AR class.
 
 
 
-
 *yii/db/ActiveRecord::transactions*			public
 >
  transactions()
@@ -873,7 +916,6 @@ operations.
 <
 (boolean) Whether the record is inserted successfully.
 
-
     [$attributes] (array) List of attributes that need to be saved. Defaults
     to null, meaning all attributes that are loaded from DB will be saved.
 
@@ -888,14 +930,12 @@ deleted is 0, even though the deletion execution is successful.
 
 
 
-
 *yii/db/ActiveRecord::isTransactional*			public
 >
  isTransactional($operation)
 <
 (boolean) Whether the specified operation is transactional in the current
 'scenario'.
-
 
     [$operation] (integer) The operation to check. Possible values are
     'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE'.

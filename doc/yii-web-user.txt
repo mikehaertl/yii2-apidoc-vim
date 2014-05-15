@@ -11,11 +11,14 @@ DESCRIPTION
 
  You may call various methods to change the user authentication status:
 
- - 'login()': sets the specified identity and remembers the authentication
- status in session and cookie. - 'logout()': marks the user as a guest and
- clears the relevant information from session and cookie. - 'setIdentity()':
- changes the user identity without touching session or cookie.   This is best
- used in stateless RESTful API implementation.
+
+   - 'login()': sets the specified identity and remembers the
+   authentication status in session and cookie. 
+   - 'logout()': marks the user as a guest and clears the relevant
+   information from session and cookie. 
+   - 'setIdentity()': changes the user identity without touching
+   session or cookie.   This is best used in stateless RESTful API
+ implementation.
 
  Note that User only maintains the user authentication status. It does NOT
  handle how to authenticate a user. The logic of how to authenticate a user
@@ -28,13 +31,9 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   'user' => [
-       'identityClass' => 'app\models\User', // User must implement the
- IdentityInterface
-       'enableAutoLogin' => true,
-       // 'loginUrl' => ['user/login'],
-       // ...
-   ]
+   if (isset($request->cookies['name'])) {
+       $value = (string) $request->cookies['name'];
+   }
 
 
 
@@ -55,7 +54,13 @@ $loginUrl				*yii/web/User::$loginUrl*
  login action, and the rest of the name-value pairs are GET parameters used to
  construct the login URL. For example,
 
-   ['site/login', 'ref' => 1]
+   'user' => [
+       'identityClass' => 'app\models\User', // User must implement the
+ IdentityInterface
+       'enableAutoLogin' => true,
+       // 'loginUrl' => ['user/login'],
+       // ...
+   ]
 
  If this property is null, a 403 HTTP exception will be raised when
  'loginRequired()' is called.
@@ -124,7 +129,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -224,7 +228,6 @@ METHOD DETAILS
 currently logged-in user. 'null' is returned if the user is not logged in (not
 authenticated).
 
-
     [$checkSession] (boolean) Whether to check the session if the identity has
     never been determined before. If the identity is already determined (e.g.,
     by calling 'setIdentity()' or 'login()'), then this parameter has no
@@ -259,13 +262,15 @@ authenticated).
 
  The login status is maintained according to the '$duration' parameter:
 
- - '$duration == 0': the identity information will be stored in session and
- will be available   via 'identity' as long as the session remains active. -
- '$duration > 0': the identity information will be stored in session. If
- 'enableAutoLogin' is true,   it will also be stored in a cookie which will
- expire in '$duration' seconds. As long as   the cookie remains valid or the
- session is active, you may obtain the user identity information   via
- 'identity'.
+
+   - '$duration == 0': the identity information will be stored in
+   session and will be available   via 'identity' as long as the session
+ remains active. 
+   - '$duration > 0': the identity information will be stored in
+   session. If 'enableAutoLogin' is true,   it will also be stored in a cookie
+ which will expire in '$duration' seconds. As long as   the cookie remains
+ valid or the session is active, you may obtain the user identity information 
+  via 'identity'.
     [$identity] (\yii\web\IdentityInterface) The user identity (which should
     already be authenticated)
     [$duration] (integer) Number of seconds that the user can remain in
@@ -276,7 +281,7 @@ authenticated).
 
 *yii/web/User::loginByAccessToken*			public
 >
- loginByAccessToken($token)
+ loginByAccessToken($token, $type='null')
 <
 (\yii\web\IdentityInterface) The identity associated with the given access
 token. Null is returned if the access token is invalid.
@@ -285,6 +290,9 @@ token. Null is returned if the access token is invalid.
  the user authentication status. Also if the access token is invalid, the user
  will remain as a guest.
     [$token] (string) The access token
+    [$type] (mixed) The type of the token. The value of this parameter depends
+    on the implementation. For example, '\yii\filters\auth\HttpBearerAuth'
+    will set this parameter to be 'yii\filters\auth\HttpBearerAuth'.
 
 
 *yii/web/User::loginByCookie*				protected
@@ -315,7 +323,6 @@ token. Null is returned if the access token is invalid.
 <
 (boolean) Whether the current user is a guest.
 
-
     [$checkSession] (boolean) Whether to check the session to determine if the
     user is a guest. Note that if this is false, it is possible that the user
     may not be a guest while this method still returns true. This is because
@@ -328,7 +335,6 @@ token. Null is returned if the access token is invalid.
 <
 (string|integer) The unique identifier for the user. If null, it means the
 user is a guest.
-
 
     [$checkSession] (boolean) Whether to check the session to determine the
     user ID. Note that if this is false, it is possible that this method
@@ -357,14 +363,13 @@ user is a guest.
 <
 (void)
 
-
     [$url] (string|array) The URL that the user should be redirected to after
     login. If an array is given, 'UrlManager::createUrl()' will be called to
     create the corresponding URL. The first element of the array should be the
     route, and the rest of the name-value pairs are GET parameters used to
     construct the URL. For example,
 
-      ['admin/index', 'ref' => 1]
+      ['site/login', 'ref' => 1]
 
 
 

@@ -16,16 +16,22 @@ DESCRIPTION
    public function behaviors()
    {
        return [
-           'httpCache' => [
-               'class' => \yii\filters\HttpCache::className(),
-               'only' => ['index'],
-               'lastModified' => function ($action, $params) {
-                   $q = new \yii\db\Query();
-                   return $q->from('user')->max('updated_at');
-               },
-   //            'etagSeed' => function ($action, $params) {
-   //                return // generate etag seed here
-   //            }
+           'access' => [
+               'class' => \yii\filters\AccessControl::className(),
+               'only' => ['create', 'update'],
+               'rules' => [
+                   // deny all POST requests
+                   [
+                       'allow' => false,
+                       'verbs' => ['POST']
+                   ],
+                   // allow authenticated users
+                   [
+                       'allow' => true,
+                       'roles' => ['@'],
+                   ],
+                   // everything else is denied
+               ],
            ],
        ];
    }
@@ -49,7 +55,7 @@ $lastModified				*yii/filters/HttpCache::$lastModified*
  (callable) A PHP callback that returns the UNIX timestamp of the last
  modification time. The callback's signature should be:
 
-   function ($action, $params)
+   function ($rule, $action)
 
  where '$action' is the 'Action' object that this filter is currently
  handling; '$params' takes the value of 'params'. The callback should return a
@@ -59,7 +65,22 @@ $etagSeed				*yii/filters/HttpCache::$etagSeed*
  (callable) A PHP callback that generates the Etag seed string. The callback's
  signature should be:
 
-   function ($action, $params)
+   public function behaviors()
+   {
+       return [
+           'httpCache' => [
+               'class' => \yii\filters\HttpCache::className(),
+               'only' => ['index'],
+               'lastModified' => function ($action, $params) {
+                   $q = new \yii\db\Query();
+                   return $q->from('user')->max('updated_at');
+               },
+   //            'etagSeed' => function ($action, $params) {
+   //                return // generate etag seed here
+   //            }
+           ],
+       ];
+   }
 
  where '$action' is the 'Action' object that this filter is currently
  handling; '$params' takes the value of 'params'. The callback should return a
@@ -151,7 +172,6 @@ METHOD DETAILS
 <
 (boolean) Whether the action should continue to be executed.
 
-
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -169,7 +189,6 @@ METHOD DETAILS
 <
 (boolean) Whether the HTTP cache is still valid.
 
-
     [$lastModified] (integer) The calculated Last-Modified value in terms of a
     UNIX timestamp. If null, the Last-Modified header will not be validated.
     [$etag] (string) The calculated ETag value. If null, the ETag header will
@@ -184,13 +203,11 @@ METHOD DETAILS
 
 
 
-
 *yii/filters/HttpCache::generateEtag*			protected
 >
  generateEtag($seed)
 <
 (string) The generated Etag
-
 
     [$seed] (string) Seed for the ETag
 

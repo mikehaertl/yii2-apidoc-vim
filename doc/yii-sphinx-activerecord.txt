@@ -28,15 +28,14 @@ $errors					*yii/sphinx/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   $query = new Query;
+   $query->select('id, groupd_id')
+       ->from('idx_item')
+       ->limit(10);
+   // build and execute the query
+   $command = $query->createCommand();
+   // $command->sql returns the actual SQL
+   $rows = $command->queryAll();
 
 
 
@@ -374,7 +373,18 @@ METHOD DETAILS
 
  For example, to change the status to be 1 for all articles which status is 2:
 
-   Article::updateAll(['status' => 1], 'status = 2');
+   $query = new Query;
+   $query->from('idx_item')
+       ->match('pencil')
+       ->snippetCallback(function ($rows) {
+           $result = [];
+           foreach ($rows as $row) {
+               $result[] = file_get_contents('/path/to/index/files/' .
+ $row['id'] . '.txt');
+           }
+           return $result;
+       })
+       ->all();
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -397,7 +407,15 @@ METHOD DETAILS
 
  For example, to delete all articles whose status is 3:
 
-   Article::deleteAll('status = 3');
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
 
     [$condition] (string|array) The conditions that will be put in the WHERE
@@ -498,20 +516,13 @@ METHOD DETAILS
 
  For example, to update an article record:
 
-   $article = Article::findOne($id);
-   $article->genre_id = $genreId;
-   $article->group_id = $groupId;
-   $article->update();
+   Article::updateAll(['status' => 1], 'status = 2');
 
  Note that it is possible the update does not affect any row in the table. In
  this case, this method will return 0. For this reason, you should use the
  following code to check if update() is successful or not:
 
-   if ($this->update() !== false) {
-       // update successful
-   } else {
-       // update failed
-   }
+   Article::deleteAll('status = 3');
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -531,7 +542,6 @@ METHOD DETAILS
  updateInternal($attributes='null')
 <
 (void)
-
 
     [$attributes] () 
 
@@ -617,9 +627,15 @@ index.
 <
 (void)
 
+ This is an internal method meant to be called to create active record objects
+ after fetching data from the database. It is mainly used by 'ActiveQuery' to
+ populate the query results into active records.
 
-    [$record] () 
-    [$row] () 
+ When calling this method manually you should call 'afterFind()' on the
+ created record to trigger the 'EVENT_AFTER_FIND|afterFind Event'.
+    [$record] (\yii\db\BaseActiveRecord) The record to be populated. In most
+    cases this will be an instance created by 'instantiate()' beforehand.
+    [$row] (array) Attribute values (name => value)
 
 
 *yii/sphinx/ActiveRecord::instantiate*			public
@@ -662,7 +678,39 @@ index.
 (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
+ The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
+ customized by calling methods defined in 'ActiveQueryInterface' before
+ 'one()' or 'all()' is called to return populated ActiveRecord instances. For
+ example,
 
+   $article = Article::findOne($id);
+   $article->genre_id = $genreId;
+   $article->group_id = $groupId;
+   $article->update();
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   if ($this->update() !== false) {
+       // update successful
+   } else {
+       // update failed
+   }
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
 
 
 *yii/sphinx/ActiveRecord::insert*				public
@@ -689,11 +737,14 @@ successfully.
 
  For example, to insert an article record:
 
-   $article = new Article;
-   $article->id = $id;
-   $article->genre_id = $genreId;
-   $article->content = $content;
-   $article->insert();
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -726,8 +777,14 @@ successfully.
 
  Below is an example:
 
-   $customers = Article::findBySql("SELECT * FROM `idx_article` WHERE
- MATCH('development')")->all();
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
 
 
     [$sql] (string) The SQL statement to be executed
@@ -756,14 +813,12 @@ associated with this AR class.
 
 
 
-
 *yii/sphinx/ActiveRecord::callSnippets*			public
 >
  callSnippets($source, $match, $options='[]')
 <
 (string|array) Built snippet in case "source" is a string, list of built
 snippets in case "source" is an array.
-
 
     [$source] (string|array) Is the source data to extract a snippet from. It
     could be either a single string or array of strings.
@@ -777,7 +832,6 @@ snippets in case "source" is an array.
 <
 (array) Keywords and statistics
 
-
     [$text] (string) The text to break down to keywords.
     [$fetchStatistic] (boolean) Whether to return document and hit occurrence
     statistics
@@ -789,7 +843,6 @@ snippets in case "source" is an array.
 <
 (void)
 
-
     [$snippet] (string) 
 
 
@@ -798,7 +851,6 @@ snippets in case "source" is an array.
  getSnippet($match='null', $options='[]')
 <
 (string) Snippet value
-
 
     [$match] (string) Snippet source query
     [$options] (array) List of options in format: optionName => optionValue
@@ -809,7 +861,6 @@ snippets in case "source" is an array.
  fetchSnippet($match, $options='[]')
 <
 (string) Snippet value.
-
 
     [$match] (string) The full-text query to build snippets for.
     [$options] (array) List of options in format: optionName => optionValue
@@ -824,10 +875,11 @@ snippets in case "source" is an array.
  Child classes must implement this method to return the actual snippet source
  text. For example:
 
-   public function getSnippetSource()
-   {
-       return $this->snippetSourceRelation->content;
-   }
+   $article = new Article;
+   $article->id = $id;
+   $article->genre_id = $genreId;
+   $article->content = $content;
+   $article->insert();
 
 
 
@@ -848,13 +900,8 @@ operations.
  or all of them in transactions. You can do so by overriding this method and
  returning the operations that need to be transactional. For example,
 
-   return [
-       'admin' => self::OP_INSERT,
-       'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
-       // the above is equivalent to the following:
-       // 'api' => self::OP_ALL,
-
-   ];
+   $customers = Article::findBySql("SELECT * FROM `idx_article` WHERE
+ MATCH('development')")->all();
 
  The above declaration specifies that in the "admin" scenario, the insert
  operation ('insert()') should be done in a transaction; and in the "api"
@@ -867,7 +914,6 @@ operations.
 <
 (boolean) Whether the specified operation is transactional in the current
 'scenario'.
-
 
     [$operation] (integer) The operation to check. Possible values are
     'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE'.

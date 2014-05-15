@@ -16,27 +16,46 @@ DESCRIPTION
  ActiveQuery mainly provides the following methods to retrieve the query
  results:
 
- - 'one()': returns a single record populated with the first row of data. -
- 'all()': returns all records based on the query results. - 'count()': returns
- the number of records. - 'sum()': returns the sum over the specified column.
- - 'average()': returns the average over the specified column. - 'min()':
- returns the min over the specified column. - 'max()': returns the max over
- the specified column. - 'scalar()': returns the value of the first column in
- the first row of the query result. - 'exists()': returns a value indicating
- whether the query result has data or not.
+
+   - 'one()': returns a single record populated with the first row of
+   data. 
+   - 'all()': returns all records based on the query results. 
+   - 'count()': returns the number of records. 
+   - 'sum()': returns the sum over the specified column. 
+   - 'average()': returns the average over the specified column. 
+   - 'min()': returns the min over the specified column. 
+   - 'max()': returns the max over the specified column. 
+   - 'scalar()': returns the value of the first column in the first row
+   of the query result. 
+   - 'exists()': returns a value indicating whether the query result
+   has data or not.
 
  You can use query methods, such as 'where()', 'limit()' and 'orderBy()' to
  customize the query options.
 
  ActiveQuery also provides the following additional query options:
 
- - 'with()': list of relations that this query should be performed with. -
- 'indexBy()': the name of the column by which the query result should be
- indexed. - 'asArray()': whether to return each record as an array.
+
+   - 'with()': list of relations that this query should be performed
+   with. 
+   - 'indexBy()': the name of the column by which the query result
+   should be indexed. 
+   - 'asArray()': whether to return each record as an array.
 
  These options can be configured using methods of the same name. For example:
 
-   $customers = Customer::find()->with('orders')->asArray()->all();
+   [
+       'components' => [
+           'session' => [
+               'class' => 'yii\redis\Session',
+               'redis' => [
+                   'hostname' => 'localhost',
+                   'port' => 6379,
+                   'database' => 0,
+               ]
+           ],
+       ],
+   ]
 
  Relational query ----------------
 
@@ -116,7 +135,6 @@ METHOD DETAILS
  __construct($modelClass, $config='[]')
 <
 (void)
-
 
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
@@ -306,7 +324,6 @@ METHOD DETAILS
 (array|\yii\redis\ActiveRecord[]) The query results. If the query results in
 nothing, an empty array will be returned.
 
-
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -320,7 +337,6 @@ nothing, an empty array will be returned.
 on the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. Null will be returned if the query results in nothing.
 
-
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -331,7 +347,6 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  count($q=''*'', $db='null')
 <
 (integer) Number of records
-
 
     [$q] (string) The COUNT expression. This parameter is ignored by this
     implementation.
@@ -346,7 +361,6 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 <
 (boolean) Whether the query result contains any row of data.
 
-
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -358,7 +372,6 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 <
 (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
-
 
     [$column] (string) Name of the column to select
     [$db] (\yii\redis\Connection) The database connection used to execute the
@@ -372,7 +385,6 @@ the query results in nothing.
 <
 (integer) Number of records
 
-
     [$column] (string) The column to sum up
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
@@ -384,7 +396,6 @@ the query results in nothing.
  average($column, $db='null')
 <
 (integer) The average of the specified column values.
-
 
     [$column] (string) The column name or expression. Make sure you properly
     quote column names in the expression.
@@ -399,7 +410,6 @@ the query results in nothing.
 <
 (integer) The minimum of the specified column values.
 
-
     [$column] (string) The column name or expression. Make sure you properly
     quote column names in the expression.
     [$db] (\yii\redis\Connection) The database connection used to execute the
@@ -412,7 +422,6 @@ the query results in nothing.
  max($column, $db='null')
 <
 (integer) The maximum of the specified column values.
-
 
     [$column] (string) The column name or expression. Make sure you properly
     quote column names in the expression.
@@ -441,7 +450,6 @@ result. Null is returned if the query result is empty.
  executeScript($db, $type, $columnName='null')
 <
 (array|bool|null|string) 
-
 
     [$db] (\yii\redis\Connection|null) The database connection used to execute
     the query. If this parameter is not given, the 'db' application component

@@ -11,11 +11,6 @@ SUBCLASSES
 |yii/rest/CreateAction|
 |yii/rest/DeleteAction|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -36,10 +31,7 @@ $findModel				*yii/rest/Action::$findModel*
  corresponding to the specified primary key value. If not set, 'findModel()'
  will be used instead. The signature of the callable should be:
 
-   function ($id, $action) {
-       // $id is the primary key value. If composite primary key, the key
- values
-       // will be separated by comma.
+   function ($action) {
        // $action is the action object currently running
    }
 
@@ -52,9 +44,11 @@ $checkAccess				*yii/rest/Action::$checkAccess*
  not set, the access check will not be performed. The signature of the
  callable should be as follows,
 
-   function ($action, $model = null) {
-       // $model is the requested model instance.
-       // If null, it means no specific model (e.g. IndexAction)
+   function ($id, $action) {
+       // $id is the primary key value. If composite primary key, the key
+ values
+       // will be separated by comma.
+       // $action is the action object currently running
    }
 
 
@@ -84,7 +78,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/rest/Action::__get*					public

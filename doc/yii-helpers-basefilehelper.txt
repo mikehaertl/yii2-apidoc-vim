@@ -25,11 +25,15 @@ METHOD DETAILS
 
  The normalization does the following work:
 
- - Convert all directory separators into 'DIRECTORY_SEPARATOR' (e.g. "\a/b\c"
- becomes "/a/b/c") - Remove trailing directory separators (e.g. "/a/b/c/"
- becomes "/a/b/c") - Turn multiple consecutive slashes into a single one (e.g.
- "/a///b/c" becomes "/a/b/c") - Remove ".." and "." based on their meanings
- (e.g. "/a/./b/../c" becomes "/a/c")
+
+   - Convert all directory separators into 'DIRECTORY_SEPARATOR' (e.g.
+   "\a/b\c" becomes "/a/b/c") 
+   - Remove trailing directory separators (e.g. "/a/b/c/" becomes
+   "/a/b/c") 
+   - Turn multiple consecutive slashes into a single one (e.g.
+   "/a///b/c" becomes "/a/b/c") 
+   - Remove ".." and "." based on their meanings (e.g. "/a/./b/../c"
+   becomes "/a/c")
     [$path] (string) The file/directory path to be normalized
     [$ds] (string) The directory separator to be used in the normalized
     result. Defaults to 'DIRECTORY_SEPARATOR'.
@@ -106,13 +110,15 @@ determined.
     [$dst] (string) The destination directory
     [$options] (array) Options for directory copy. Valid options are:
 
-    - dirMode: integer, the permission to be set for newly copied directories.
-    Defaults to 0775. - fileMode:  integer, the permission to be set for newly
-    copied files. Defaults to the current environment setting. - filter:
-    callback, a PHP callback that is called for each directory or file.   The
-    signature of the callback should be: 'function ($path)', where '$path'
-    refers the full path to be filtered.   The callback can return one of the
-    following values:
+
+      - dirMode: integer, the permission to be set for newly copied
+      directories. Defaults to 0775. 
+      - fileMode:  integer, the permission to be set for newly copied
+      files. Defaults to the current environment setting. 
+      - filter: callback, a PHP callback that is called for each directory
+      or file.   The signature of the callback should be: 'function ($path)',
+    where '$path' refers the full path to be filtered.   The callback can
+    return one of the following values:
 
       * true: the directory or file will be copied (the "only" and "except"
     options will be ignored)   * false: the directory or file will NOT be
@@ -120,27 +126,31 @@ determined.
     "only" and "except" options will determine whether the directory or file
     should be copied
 
-    - only: array, list of patterns that the file paths should match if they
-    want to be copied.   A path matches a pattern if it contains the pattern
-    string at its end.   For example, '.php' matches all file paths ending
-    with '.php'.   Note, the '/' characters in a pattern matches both '/' and
-    '\' in the paths.   If a file path matches a pattern in both "only" and
-    "except", it will NOT be copied. - except: array, list of patterns that
-    the files or directories should match if they want to be excluded from
-    being copied.   A path matches a pattern if it contains the pattern string
-    at its end.   Patterns ending with '/' apply to directory paths only, and
-    patterns not ending with '/'   apply to file paths only. For example,
-    '/a/b' matches all file paths ending with '/a/b';   and '.svn/' matches
-    directory paths ending with '.svn'. Note, the '/' characters in a pattern
-    matches   both '/' and '\' in the paths. - recursive: boolean, whether the
-    files under the subdirectories should also be copied. Defaults to true. -
-    beforeCopy: callback, a PHP callback that is called before copying each
-    sub-directory or file.   If the callback returns false, the copy operation
-    for the sub-directory or file will be cancelled.   The signature of the
-    callback should be: 'function ($from, $to)', where '$from' is the
+
+      - only: array, list of patterns that the file paths should match if
+      they want to be copied.   A path matches a pattern if it contains the
+    pattern string at its end.   For example, '.php' matches all file paths
+    ending with '.php'.   Note, the '/' characters in a pattern matches both
+    '/' and '\' in the paths.   If a file path matches a pattern in both
+    "only" and "except", it will NOT be copied. 
+      - except: array, list of patterns that the files or directories
+      should match if they want to be excluded from being copied.   A path
+    matches a pattern if it contains the pattern string at its end.   Patterns
+    ending with '/' apply to directory paths only, and patterns not ending
+    with '/'   apply to file paths only. For example, '/a/b' matches all file
+    paths ending with '/a/b';   and '.svn/' matches directory paths ending
+    with '.svn'. Note, the '/' characters in a pattern matches   both '/' and
+    '\' in the paths. 
+      - recursive: boolean, whether the files under the subdirectories
+      should also be copied. Defaults to true. 
+      - beforeCopy: callback, a PHP callback that is called before copying
+      each sub-directory or file.   If the callback returns false, the copy
+    operation for the sub-directory or file will be cancelled.   The signature
+    of the callback should be: 'function ($from, $to)', where '$from' is the
     sub-directory or   file to be copied from, while '$to' is the copy target.
-    - afterCopy: callback, a PHP callback that is called after each
-    sub-directory or file is successfully copied.   The signature of the
+
+      - afterCopy: callback, a PHP callback that is called after each
+      sub-directory or file is successfully copied.   The signature of the
     callback should be: 'function ($from, $to)', where '$from' is the
     sub-directory or   file copied from, while '$to' is the copy target.
 
@@ -151,7 +161,6 @@ determined.
 <
 (void)
 
-
     [$dir] (string) The directory to be deleted recursively.
 
 
@@ -161,14 +170,14 @@ determined.
 <
 (array) Files found under the directory. The file list is sorted.
 
-
     [$dir] (string) The directory under which the files will be looked for.
     [$options] (array) Options for file searching. Valid options are:
 
-    - filter: callback, a PHP callback that is called for each directory or
-    file.   The signature of the callback should be: 'function ($path)', where
-    '$path' refers the full path to be filtered.   The callback can return one
-    of the following values:
+
+      - filter: callback, a PHP callback that is called for each directory
+      or file.   The signature of the callback should be: 'function ($path)',
+    where '$path' refers the full path to be filtered.   The callback can
+    return one of the following values:
 
       * true: the directory or file will be returned (the "only" and "except"
     options will be ignored)   * false: the directory or file will NOT be
@@ -176,30 +185,33 @@ determined.
     "only" and "except" options will determine whether the directory or file
     should be returned
 
-    - except: array, list of patterns excluding from the results matching file
-    or directory paths.   Patterns ending with '/' apply to directory paths
-    only, and patterns not ending with '/'   apply to file paths only. For
-    example, '/a/b' matches all file paths ending with '/a/b';   and '.svn/'
-    matches directory paths ending with '.svn'.   If the pattern does not
-    contain a slash /, it is treated as a shell glob pattern and checked for a
-    match against the pathname relative to $dir.   Otherwise, the pattern is
-    treated as a shell glob suitable for consumption by fnmatch(3) with the
-    FNM_PATHNAME flag: wildcards in the pattern will not match a / in the
-    pathname.   For example, "views/*.php" matches "views/index.php" but not
-    "views/controller/index.php".   A leading slash matches the beginning of
-    the pathname. For example, "/*.php" matches "index.php" but not
-    "views/start/index.php".   An optional prefix "!" which negates the
-    pattern; any matching file excluded by a previous pattern will become
-    included again.   If a negated pattern matches, this will override lower
-    precedence patterns sources. Put a backslash ("\") in front of the first
-    "!"   for patterns that begin with a literal "!", for example,
-    "\!important!.txt".   Note, the '/' characters in a pattern matches both
-    '/' and '\' in the paths. - only: array, list of patterns that the file
-    paths should match if they are to be returned. Directory paths are not
-    checked against them.   Same pattern matching rules as in the "except"
-    option are used.   If a file path matches a pattern in both "only" and
-    "except", it will NOT be returned. - recursive: boolean, whether the files
-    under the subdirectories should also be looked for. Defaults to true.
+
+      - except: array, list of patterns excluding from the results
+      matching file or directory paths.   Patterns ending with '/' apply to
+    directory paths only, and patterns not ending with '/'   apply to file
+    paths only. For example, '/a/b' matches all file paths ending with '/a/b';
+      and '.svn/' matches directory paths ending with '.svn'.   If the pattern
+    does not contain a slash /, it is treated as a shell glob pattern and
+    checked for a match against the pathname relative to $dir.   Otherwise,
+    the pattern is treated as a shell glob suitable for consumption by
+    fnmatch(3) with the FNM_PATHNAME flag: wildcards in the pattern will not
+    match a / in the pathname.   For example, "views/*.php" matches
+    "views/index.php" but not "views/controller/index.php".   A leading slash
+    matches the beginning of the pathname. For example, "/*.php" matches
+    "index.php" but not "views/start/index.php".   An optional prefix "!"
+    which negates the pattern; any matching file excluded by a previous
+    pattern will become included again.   If a negated pattern matches, this
+    will override lower precedence patterns sources. Put a backslash ("\") in
+    front of the first "!"   for patterns that begin with a literal "!", for
+    example, "\!important!.txt".   Note, the '/' characters in a pattern
+    matches both '/' and '\' in the paths. 
+      - only: array, list of patterns that the file paths should match if
+      they are to be returned. Directory paths are not checked against
+      them.   Same pattern matching rules as in the "except" option are used. 
+     If a file path matches a pattern in both "only" and "except", it will NOT
+    be returned. 
+      - recursive: boolean, whether the files under the subdirectories
+      should also be looked for. Defaults to true.
 
 
 *yii/helpers/BaseFileHelper::filterPath*			public
@@ -207,7 +219,6 @@ determined.
  filterPath($path, $options)
 <
 (boolean) Whether the file or directory satisfies the filtering options.
-
 
     [$path] (string) The path of the file or directory to be checked
     [$options] (array) The filtering options. See 'findFiles()' for

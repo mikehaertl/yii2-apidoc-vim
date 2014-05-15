@@ -18,14 +18,9 @@ DESCRIPTION
 
  For example,
 
-   $query = new Query;
-   $query->select('id, groupd_id')
-       ->from('idx_item')
-       ->limit(10);
-   // build and execute the query
-   $command = $query->createCommand();
-   // $command->sql returns the actual SQL
-   $rows = $command->queryAll();
+   $params = [];
+   $sql = $queryBuilder->update('idx_user', ['status' => 1], 'age > 30',
+ $params);
 
  Since Sphinx does not store the original indexed text, the snippets for the
  rows in query result should be build separately via another query. You can
@@ -99,18 +94,7 @@ $snippetCallback			*yii/sphinx/Query::$snippetCallback*
  argument and must return the array of snippet source strings in the order,
  which match one of incoming rows. For example:
 
-   $query = new Query;
-   $query->from('idx_item')
-       ->match('pencil')
-       ->snippetCallback(function ($rows) {
-           $result = [];
-           foreach ($rows as $row) {
-               $result[] = file_get_contents('/path/to/index/files/' .
- $row['id'] . '.txt');
-           }
-           return $result;
-       })
-       ->all();
+   $sql = $queryBuilder->delete('idx_user', 'status = 0');
 
 
 
@@ -244,8 +228,9 @@ METHOD DETAILS
  The $condition parameter should be either a string (e.g. 'id=1') or an array.
  If the latter, it must be in one of the following two formats:
 
- - hash format: '['column1' => value1, 'column2' => value2, ...]' - operator
- format: '[operator, operand1, operand2, ...]'
+
+   - hash format: '['column1' => value1, 'column2' => value2, ...]' 
+   - operator format: '[operator, operand1, operand2, ...]'
 
  A condition in hash format represents the following SQL expression in
  general: 'column1=value1 AND column2=value2 AND ...'. In case when a value is
@@ -253,66 +238,80 @@ METHOD DETAILS
  value is null, 'IS NULL' will be used in the generated expression. Below are
  some examples:
 
- - '['type' => 1, 'status' => 2]' generates '(type = 1) AND (status = 2)'. -
- '['id' => [1, 2, 3], 'status' => 2]' generates '(id IN (1, 2, 3)) AND (status
- = 2)'. - '['status' => null] generates 'status IS NULL'. - '['id' => $query]'
- generates 'id IN (...sub-query...)'
+
+   - '['type' => 1, 'status' => 2]' generates '(type = 1) AND (status =
+   2)'. 
+   - '['id' => [1, 2, 3], 'status' => 2]' generates '(id IN (1, 2, 3))
+   AND (status = 2)'. 
+   - '['status' => null] generates 'status IS NULL'. 
+   - '['id' => $query]' generates 'id IN (...sub-query...)'
 
  A condition in operator format generates the SQL expression according to the
  specified operator, which can be one of the followings:
 
- - 'and': the operands should be concatenated together using 'AND'. For
- example,   '['and', 'id=1', 'id=2']' will generate 'id=1 AND id=2'. If an
- operand is an array,   it will be converted into a string using the rules
+
+   - 'and': the operands should be concatenated together using 'AND'.
+   For example,   '['and', 'id=1', 'id=2']' will generate 'id=1 AND id=2'. If
+ an operand is an array,   it will be converted into a string using the rules
  described here. For example,   '['and', 'type=1', ['or', 'id=1', 'id=2'''
  will generate 'type=1 AND (id=1 OR id=2)'.   The method will NOT do any
  quoting or escaping.
 
- - 'or': similar to the 'and' operator except that the operands are
- concatenated using 'OR'.
 
- - 'between': operand 1 should be the column name, and operand 2 and 3 should
- be the   starting and ending values of the range that the column is in.   For
- example, '['between', 'id', 1, 10]' will generate 'id BETWEEN 1 AND 10'.
+   - 'or': similar to the 'and' operator except that the operands are
+   concatenated using 'OR'.
 
- - 'not between': similar to 'between' except the 'BETWEEN' is replaced with
- 'NOT BETWEEN'   in the generated condition.
 
- - 'in': operand 1 should be a column or DB expression with parenthesis.
- Operand 2 can be an array   or a Query object. If the former, the array
- represents the range of the values that the column   or DB expression should
- be in. If the latter, a sub-query will be generated to represent the range.  
- For example, '['in', 'id', [1, 2, 3'' will generate 'id IN (1, 2, 3)';  
- '['in', 'id', (new Query)->select('id')->from('user'))]' will generate   'id
- IN (SELECT id FROM user)'. The method will properly quote the column name and
- escape values in the range.   The 'in' operator also supports composite
- columns. In this case, operand 1 should be an array of the columns,   while
- operand 2 should be an array of arrays or a 'Query' object representing the
- range of the columns.
+   - 'between': operand 1 should be the column name, and operand 2 and
+   3 should be the   starting and ending values of the range that the column
+ is in.   For example, '['between', 'id', 1, 10]' will generate 'id BETWEEN 1
+ AND 10'.
 
- - 'not in': similar to the 'in' operator except that 'IN' is replaced with
- 'NOT IN' in the generated condition.
 
- - 'like': operand 1 should be a column or DB expression, and operand 2 be a
- string or an array representing   the values that the column or DB expression
- should be like.   For example, '['like', 'name', '%tester%']' will generate
- 'name LIKE '%tester%''.   When the value range is given as an array, multiple
- 'LIKE' predicates will be generated and concatenated   using 'AND'. For
- example, '['like', 'name', ['%test%', '%sample%''' will generate   'name LIKE
- '%test%' AND name LIKE '%sample%''.   The method will properly quote the
+   - 'not between': similar to 'between' except the 'BETWEEN' is
+   replaced with 'NOT BETWEEN'   in the generated condition.
+
+
+   - 'in': operand 1 should be a column or DB expression with
+   parenthesis. Operand 2 can be an array   or a Query object. If the former,
+ the array represents the range of the values that the column   or DB
+ expression should be in. If the latter, a sub-query will be generated to
+ represent the range.   For example, '['in', 'id', [1, 2, 3'' will generate
+ 'id IN (1, 2, 3)';   '['in', 'id', (new Query)->select('id')->from('user'))]'
+ will generate   'id IN (SELECT id FROM user)'. The method will properly quote
+ the column name and escape values in the range.   The 'in' operator also
+ supports composite columns. In this case, operand 1 should be an array of the
+ columns,   while operand 2 should be an array of arrays or a 'Query' object
+ representing the range of the columns.
+
+
+   - 'not in': similar to the 'in' operator except that 'IN' is
+   replaced with 'NOT IN' in the generated condition.
+
+
+   - 'like': operand 1 should be a column or DB expression, and operand
+   2 be a string or an array representing   the values that the column or DB
+ expression should be like.   For example, '['like', 'name', '%tester%']' will
+ generate 'name LIKE '%tester%''.   When the value range is given as an array,
+ multiple 'LIKE' predicates will be generated and concatenated   using 'AND'.
+ For example, '['like', 'name', ['%test%', '%sample%''' will generate   'name
+ LIKE '%test%' AND name LIKE '%sample%''.   The method will properly quote the
  column name and escape values in the range.   Sometimes, you may want to add
  the percentage characters to the matching value by yourself, you may supply  
  a third operand 'false' to do so. For example, '['like', 'name', '%tester',
  false]' will generate 'name LIKE '%tester''.
 
- - 'or like': similar to the 'like' operator except that 'OR' is used to
- concatenate the 'LIKE'   predicates when operand 2 is an array.
 
- - 'not like': similar to the 'like' operator except that 'LIKE' is replaced
- with 'NOT LIKE'   in the generated condition.
+   - 'or like': similar to the 'like' operator except that 'OR' is used
+   to concatenate the 'LIKE'   predicates when operand 2 is an array.
 
- - 'or not like': similar to the 'not like' operator except that 'OR' is used
- to concatenate   the 'NOT LIKE' predicates.
+
+   - 'not like': similar to the 'like' operator except that 'LIKE' is
+   replaced with 'NOT LIKE'   in the generated condition.
+
+
+   - 'or not like': similar to the 'not like' operator except that 'OR'
+   is used to concatenate   the 'NOT LIKE' predicates.
     [$condition] (string|array) The conditions that should be put in the WHERE
     part.
     [$params] (array) The parameters (name => value) to be bound to the query.
@@ -390,7 +389,6 @@ METHOD DETAILS
 <
 (static) The query object itself
 
-
     [$connection] (\yii\sphinx\Connection) Sphinx connection instance
 
 
@@ -402,7 +400,6 @@ METHOD DETAILS
 
 
 
-
 *yii/sphinx/Query::defaultConnection*			protected
 >
  defaultConnection()
@@ -411,13 +408,11 @@ METHOD DETAILS
 
 
 
-
 *yii/sphinx/Query::createCommand*				public
 >
  createCommand($connection='null')
 <
 (\yii\sphinx\Command) The created Sphinx command instance.
-
 
     [$connection] (\yii\sphinx\Connection) The Sphinx connection used to
     generate the SQL statement. If this parameter is not given, the 'sphinx'
@@ -431,7 +426,6 @@ METHOD DETAILS
 (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
-
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
     SQL statement. If this parameter is not given, the 'sphinx' application
     component will be used.
@@ -443,7 +437,6 @@ will be returned.
 <
 (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
-
 
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
     SQL statement. If this parameter is not given, the 'sphinx' application
@@ -471,7 +464,6 @@ result. False is returned if the query result is empty.
 (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
-
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
     SQL statement. If this parameter is not given, the 'sphinx' application
     component will be used.
@@ -482,7 +474,6 @@ the query results in nothing.
  count($q=''*'', $db='null')
 <
 (integer) Number of records
-
 
     [$q] (string) The COUNT expression. Defaults to '*'. Make sure you
     properly quote column names in the expression.
@@ -497,7 +488,6 @@ the query results in nothing.
 <
 (integer) The sum of the specified column values
 
-
     [$q] (string) The column name or expression. Make sure you properly quote
     column names in the expression.
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
@@ -510,7 +500,6 @@ the query results in nothing.
  average($q, $db='null')
 <
 (integer) The average of the specified column values.
-
 
     [$q] (string) The column name or expression. Make sure you properly quote
     column names in the expression.
@@ -525,7 +514,6 @@ the query results in nothing.
 <
 (integer) The minimum of the specified column values.
 
-
     [$q] (string) The column name or expression. Make sure you properly quote
     column names in the expression.
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
@@ -538,7 +526,6 @@ the query results in nothing.
  max($q, $db='null')
 <
 (integer) The maximum of the specified column values.
-
 
     [$q] (string) The column name or expression. Make sure you properly quote
     column names in the expression.
@@ -553,7 +540,6 @@ the query results in nothing.
 <
 (boolean) Whether the query result contains any row of data.
 
-
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
     SQL statement. If this parameter is not given, the 'sphinx' application
     component will be used.
@@ -564,7 +550,6 @@ the query results in nothing.
  select($columns, $option='null')
 <
 (static) The query object itself
-
 
     [$columns] (string|array) The columns to be selected. Columns can be
     specified in either a string (e.g. "id, name") or an array (e.g. ['id',
@@ -581,7 +566,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$value] (boolean) Whether to SELECT DISTINCT or not.
 
 
@@ -590,7 +574,6 @@ the query results in nothing.
  from($tables)
 <
 (static) The query object itself
-
 
     [$tables] (string|array) The table(s) to be selected from. This can be
     either a string (e.g. ''idx_user'') or an array (e.g. '['idx_user',
@@ -605,7 +588,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$query] (string) Fulltext query text.
 
 
@@ -614,7 +596,6 @@ the query results in nothing.
  groupBy($columns)
 <
 (static) The query object itself
-
 
     [$columns] (string|array) The columns to be grouped by. Columns can be
     specified in either a string (e.g. "id, name") or an array (e.g. ['id',
@@ -629,7 +610,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$columns] (string|array) Additional columns to be grouped by. Columns can
     be specified in either a string (e.g. "id, name") or an array (e.g. ['id',
     'name']). The method will automatically quote the column names unless a
@@ -643,7 +623,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
 
@@ -653,7 +632,6 @@ the query results in nothing.
  addParams($params)
 <
 (static) The query object itself
-
 
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
@@ -665,7 +643,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$options] (array) Query options in format: optionName => optionValue
 
 
@@ -675,7 +652,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$options] (array) Query options in format: optionName => optionValue
 
 
@@ -684,7 +660,6 @@ the query results in nothing.
  within($columns)
 <
 (static) The query object itself
-
 
     [$columns] (string|array) The columns (and the directions) to find best
     row within a group. Columns can be specified in either a string (e.g. "id
@@ -700,7 +675,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$columns] (string|array) The columns (and the directions) to find best
     row within a group. Columns can be specified in either a string (e.g. "id
     ASC, name DESC") or an array (e.g. '['id' => Query::SORT_ASC, 'name' =>
@@ -715,7 +689,6 @@ the query results in nothing.
 <
 (static) The query object itself
 
-
     [$callback] (callable) PHP callback, which should be used to fetch source
     data for the snippets.
 
@@ -725,7 +698,6 @@ the query results in nothing.
  snippetOptions($options)
 <
 (static) The query object itself
-
 
     [$options] (array) Call snippet options in format: option_name =>
     option_value
@@ -737,7 +709,6 @@ the query results in nothing.
 <
 (array|\yii\sphinx\ActiveRecord[]) Query result rows with filled up snippets.
 
-
     [$rows] (array) Raw query result rows.
 
 
@@ -747,7 +718,6 @@ the query results in nothing.
 <
 (array) Snippets list.
 
-
     [$source] (array) The source data to extract a snippet from.
 
 
@@ -756,7 +726,6 @@ the query results in nothing.
  callSnippetsInternal($source, $from)
 <
 (array) Snippets list.
-
 
     [$source] (array) The source data to extract a snippet from.
     [$from] (string) Name of the source index.

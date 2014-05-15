@@ -2,11 +2,6 @@
 *yii/gii/generators/model/Generator*   >> |yii/gii/Generator|
 ====================================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -63,15 +58,8 @@ $errors					*yii/gii/generators/model/Generator::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
 
 
@@ -228,7 +216,79 @@ METHOD DETAILS
 <
 (array) Validation rules
 
+ Validation rules are used by 'validate()' to check if attribute values are
+ valid. Child classes may override this method to declare different validation
+ rules.
 
+ Each rule is an array with the following structure:
+
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
+
+ where
+
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array when the
+   validation    rule can be applied. If this option is not set, the rule will
+ apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
+
+ A validator can be either an object of a class extending 'Validator', or a
+ model class method (called *inline validator*) that has the following
+ signature:
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+ In the above '$attribute' refers to currently validated attribute name while
+ '$params' contains an array of validator configuration options such as 'max'
+ in case of 'string' validator. Currently validate attribute value can be
+ accessed as '$this->[$attribute]'.
+
+ Yii also provides a set of 'Validator::builtInValidators|built-in
+ validators'. They each has an alias name which can be used when specifying a
+ validation rule.
+
+ Below are some examples:
+
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       ...other parameters...
+   ]
+
+ Note, in order to inherit rules defined in the parent class, a child class
+ needs to merge the parent rules with child rules using functions such as
+ 'array_merge()'.
 
 
 *yii/gii/generators/model/Generator::scenarios*		public
@@ -249,7 +309,16 @@ METHOD DETAILS
 <
 (array) Attribute labels (name => label)
 
+ Attribute labels are mainly used for display purpose. For example, given an
+ attribute 'firstName', we can declare a label 'First Name' which is more
+ user-friendly and can be displayed to end users.
 
+ By default an attribute label is generated using 'generateAttributeLabel()'.
+ This method allows you to explicitly specify attribute labels.
+
+ Note, in order to inherit labels defined in the parent class, a child class
+ needs to merge the parent labels with child labels using functions such as
+ 'array_merge()'.
 
 
 *yii/gii/generators/model/Generator::validate*		public
@@ -388,14 +457,15 @@ METHOD DETAILS
 
 
 
-
 *yii/gii/generators/model/Generator::generate*		public
 >
  generate()
 <
 (\yii\gii\CodeFile[]) A list of code files to be created.
 
-
+ This is the main method that child classes should implement. Please refer to
+ '\yii\gii\generators\controller\Generator::generate()' as an example on how
+ to implement this method.
 
 
 *yii/gii/generators/model/Generator::requiredTemplates*	public
@@ -405,7 +475,8 @@ METHOD DETAILS
 (array) List of code template files that are required. They should be file
 paths relative to 'templatePath'.
 
-
+ Derived classes usually should override this method if they require the
+ existence of certain template files.
 
 
 *yii/gii/generators/model/Generator::stickyAttributes*	public
@@ -414,7 +485,8 @@ paths relative to 'templatePath'.
 <
 (array) List of sticky attributes
 
-
+ A sticky attribute will remember its value and will initialize the attribute
+ with this value when the generator is restarted.
 
 
 *yii/gii/generators/model/Generator::hints*		public
@@ -423,7 +495,9 @@ paths relative to 'templatePath'.
 <
 (array) The list of hint messages
 
-
+ The array keys are the attribute names, and the array values are the
+ corresponding hint messages. Hint messages will be displayed to end users
+ when they are filling the form for the generator.
 
 
 *yii/gii/generators/model/Generator::autoCompleteData*	public
@@ -432,7 +506,9 @@ paths relative to 'templatePath'.
 <
 (array) The list of auto complete values
 
-
+ The array keys are the attribute names, and the array values are the
+ corresponding auto complete values. Auto complete values can also be callable
+ typed in order one want to make postponed data generation.
 
 
 *yii/gii/generators/model/Generator::successMessage*	public
@@ -452,7 +528,6 @@ paths relative to 'templatePath'.
  getDescription()
 <
 (string) The detailed description of the generator.
-
 
 
 
@@ -510,7 +585,6 @@ paths relative to 'templatePath'.
 <
 (array) The generated attribute labels (name => label)
 
-
     [$table] (\yii\db\TableSchema) The table schema
 
 
@@ -519,7 +593,6 @@ paths relative to 'templatePath'.
  generateRules($table)
 <
 (array) The generated validation rules
-
 
     [$table] (\yii\db\TableSchema) The table schema
 
@@ -532,13 +605,11 @@ paths relative to 'templatePath'.
 
 
 
-
 *yii/gii/generators/model/Generator::generateRelationLink*protected
 >
  generateRelationLink($refs)
 <
 (string) The generated link parameter.
-
 
     [$refs] (array) Reference constraint
 
@@ -561,7 +632,6 @@ is a pivot table, or false if the table is not a pivot table.
 <
 (string) The relation name
 
-
     [$relations] (array) The relations being generated currently.
     [$className] (string) The class name that will contain the relation
     declarations
@@ -578,13 +648,11 @@ is a pivot table, or false if the table is not a pivot table.
 
 
 
-
 *yii/gii/generators/model/Generator::validateNamespace*	public
 >
  validateNamespace()
 <
 (void)
-
 
 
 
@@ -596,7 +664,6 @@ is a pivot table, or false if the table is not a pivot table.
 
 
 
-
 *yii/gii/generators/model/Generator::validateTableName*	public
 >
  validateTableName()
@@ -605,13 +672,11 @@ is a pivot table, or false if the table is not a pivot table.
 
 
 
-
 *yii/gii/generators/model/Generator::getTableNames*	protected
 >
  getTableNames()
 <
 (array) The table names that match the pattern specified by 'tableName'.
-
 
 
 
@@ -631,7 +696,6 @@ is a pivot table, or false if the table is not a pivot table.
 <
 (string) The generated class name
 
-
     [$tableName] (string) The table name (which may contain schema prefix)
 
 
@@ -643,13 +707,11 @@ is a pivot table, or false if the table is not a pivot table.
 
 
 
-
 *yii/gii/generators/model/Generator::isColumnAutoIncremental*protected
 >
  isColumnAutoIncremental($table, $columns)
 <
 (boolean) Whether any of the specified columns is auto incremental.
-
 
     [$table] (\yii\db\TableSchema) The table schema
     [$columns] (array) Columns to check for autoIncrement property

@@ -10,7 +10,10 @@ DESCRIPTION
 
  This command can be used as follows on command line:
 
-   yii help [command name]
+   [
+       '@models' => '@app/models', // an existing alias
+       '@backend' => __DIR__ . '/../backend',  // a directory
+   ]
 
  In the above, if the command name is not provided, all available commands
  will be displayed.
@@ -275,7 +278,6 @@ METHOD DETAILS
 <
 (integer) The exit status
 
-
     [$command] (string) The name of the command to show help about. If not
     provided, all available commands will be displayed.
 
@@ -288,13 +290,11 @@ METHOD DETAILS
 
 
 
-
 *yii/console/controllers/HelpController::getCommandDescriptions*protected
 >
  getCommandDescriptions()
 <
 (array) All available commands as keys and their description as values.
-
 
 
 
@@ -304,7 +304,6 @@ METHOD DETAILS
 <
 (array) All available action IDs.
 
-
     [$controller] (\yii\console\Controller) The controller instance
 
 
@@ -313,7 +312,6 @@ METHOD DETAILS
  getModuleCommands($module)
 <
 (array) The available command names
-
 
     [$module] (\yii\base\Module) The module instance
 
@@ -326,13 +324,11 @@ METHOD DETAILS
 
 
 
-
 *yii/console/controllers/HelpController::getControllerHelp*protected
 >
  getControllerHelp($controller)
 <
 (void)
-
 
     [$controller] (\yii\console\Controller) The controller instance
 
@@ -342,7 +338,6 @@ METHOD DETAILS
  getActionSummary($controller, $actionID)
 <
 (string) The summary about the action
-
 
     [$controller] (\yii\console\Controller) The controller instance
     [$actionID] (string) Action ID
@@ -354,7 +349,6 @@ METHOD DETAILS
 <
 (void)
 
-
     [$controller] (\yii\console\Controller) The controller instance
     [$actionID] (string) Action ID
 
@@ -365,7 +359,6 @@ METHOD DETAILS
 <
 (array) The required and optional argument help information
 
-
     [$method] (\ReflectionMethod) 
     [$tags] (string) The parsed comment block related with arguments
 
@@ -375,7 +368,6 @@ METHOD DETAILS
  getOptionHelps($controller, $actionID)
 <
 (array) The help information about the options
-
 
     [$controller] (\yii\console\Controller) The console controller
     [$actionID] (string) Name of the action, if set include local options for
@@ -388,7 +380,6 @@ METHOD DETAILS
 <
 (array) The parsed tags
 
-
     [$comment] (string) The comment block
 
 
@@ -397,7 +388,6 @@ METHOD DETAILS
  formatOptionHelp($name, $required, $type, $defaultValue, $comment)
 <
 (string) The formatted string for the argument or option
-
 
     [$name] (string) The name of the argument or option
     [$required] (boolean) Whether the argument is required
@@ -411,7 +401,6 @@ METHOD DETAILS
  getScriptName()
 <
 (string) The name of the cli script currently running.
-
 
 
 

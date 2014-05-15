@@ -2,11 +2,6 @@
 *yii/db/pgsql/Schema*   >> |yii/db/Schema|
 =====================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -16,6 +11,9 @@ $db					*yii/db/pgsql/Schema::$db*
 
 $defaultSchema				*yii/db/pgsql/Schema::$defaultSchema*
  (string) The default schema used for the current session.
+
+$exceptionMap				*yii/db/pgsql/Schema::$exceptionMap*
+ See |yii/db/Schema::$exceptionMap|
 
 $typeMap				*yii/db/pgsql/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
@@ -95,7 +93,6 @@ METHOD DETAILS
 (\yii\db\TableSchema|null) Driver dependent table metadata. Null if the table
 does not exist.
 
-
     [$name] (string) Table name
 
 
@@ -129,7 +126,6 @@ does not exist.
 <
 (integer) The PDO type
 
-
     [$data] (mixed) The data whose PDO type is to be determined
 
 
@@ -145,13 +141,11 @@ does not exist.
 
 
 
-
 *yii/db/pgsql/Schema::findTableNames*			protected
 >
  findTableNames($schema='''')
 <
 (array) All table names in the database. The names have NO schema name prefix.
-
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -228,12 +222,15 @@ does not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
+*yii/db/pgsql/Schema::handleException*			public
+ See |yii/db/Schema::handleException|
+
+
 *yii/db/pgsql/Schema::resolveTableNames*			protected
 >
  resolveTableNames($table, $name)
 <
 (void)
-
 
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
@@ -245,7 +242,6 @@ does not exist.
 <
 (void)
 
-
     [$table] (\yii\db\TableSchema) The table metadata
 
 
@@ -254,7 +250,6 @@ does not exist.
  getUniqueIndexInformation($table)
 <
 (array) With index names, columns and if it is an expression tree
-
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -265,7 +260,6 @@ does not exist.
 <
 (boolean) Whether the table exists in the database
 
-
     [$table] (\yii\db\TableSchema) The table metadata
 
 
@@ -274,7 +268,6 @@ does not exist.
  loadColumnSchema($info)
 <
 (\yii\db\ColumnSchema) The column schema object
-
 
     [$info] (array) Column information
 

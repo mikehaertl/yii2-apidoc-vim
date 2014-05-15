@@ -12,10 +12,7 @@ DESCRIPTION
  To use MaskedInput, you must set the 'mask' property. The following example
  shows how to use MaskedInput to collect phone numbers:
 
-   echo MaskedInput::widget([
-       'name' => 'phone',
-       'mask' => '999-999-9999',
-   ]);
+   ActiveForm::validate($model1, $model2, ...);
 
  The masked text field is implemented based on the [jQuery masked input
  plugin](http://digitalbush.com/projects/masked-input-plugin).
@@ -52,10 +49,12 @@ $mask					*yii/widgets/MaskedInput::$mask*
  (string) The input mask (e.g. '99/99/9999' for date input). The following
  characters are predefined:
 
- - 'a': represents an alpha character (A-Z, a-z) - '9': represents a numeric
- character (0-9) - '*': represents an alphanumeric character (A-Z, a-z, 0-9) -
- '?': anything listed after '?' within the mask is considered optional user
- input
+
+   - 'a': represents an alpha character (A-Z, a-z) 
+   - '9': represents a numeric character (0-9) 
+   - '*': represents an alphanumeric character (A-Z, a-z, 0-9) 
+   - '?': anything listed after '?' within the mask is considered
+   optional user input
 
  Additional characters can be defined by specifying the 'charMap' property.
 
@@ -102,7 +101,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -230,7 +228,6 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/MaskedInput::render*				public
  See |yii/base/Widget::render|
 
@@ -255,13 +252,11 @@ METHOD DETAILS
 
 
 
-
 *yii/widgets/MaskedInput::getClientOptions*		protected
 >
  getClientOptions()
 <
 (array) The options for the text field
-
 
 
 

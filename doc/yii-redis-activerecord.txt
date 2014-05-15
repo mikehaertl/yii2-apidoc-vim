@@ -14,13 +14,18 @@ DESCRIPTION
 
  The following is an example model called 'Customer':
 
-   class Customer extends \yii\redis\ActiveRecord
-   {
-       public function attributes()
-       {
-           return ['id', 'name', 'address', 'registration_date'];
-       }
-   }
+   [
+       'components' => [
+           'cache' => [
+               'class' => 'yii\redis\Cache',
+               'redis' => [
+                   'hostname' => 'localhost',
+                   'port' => 6379,
+                   'database' => 0,
+               ]
+           ],
+       ],
+   ]
 
 
 
@@ -45,13 +50,13 @@ $errors					*yii/redis/ActiveRecord::$errors*
  result is a two-dimensional array, like the following:
 
    [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
+       'components' => [
+           'cache' => [
+               'class' => 'yii\redis\Cache',
+               // 'redis' => 'redis' // id of the connection application
+ component
+           ],
        ],
-       'email' => [
-           'Email address is invalid.',
-       ]
    ]
 
 
@@ -385,7 +390,13 @@ METHOD DETAILS
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   Customer::updateAll(['status' => 1], ['id' => 2]);
+   class Customer extends \yii\redis\ActiveRecord
+   {
+       public function attributes()
+       {
+           return ['id', 'name', 'address', 'registration_date'];
+       }
+   }
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -403,7 +414,15 @@ METHOD DETAILS
 
  For example, to increment all customers' age by 1,
 
-   Customer::updateAllCounters(['age' => 1]);
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
 
     [$counters] (array) The counters to be updated (attribute name =>
@@ -425,7 +444,7 @@ METHOD DETAILS
 
  For example, to delete all customers whose status is 3:
 
-   Customer::deleteAll(['status' => 3]);
+   Customer::updateAll(['status' => 1], ['id' => 2]);
 
 
     [$condition] (array) The conditions that will be put in the WHERE part of
@@ -607,7 +626,32 @@ METHOD DETAILS
 (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
+ The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
+ customized by calling methods defined in 'ActiveQueryInterface' before
+ 'one()' or 'all()' is called to return populated ActiveRecord instances. For
+ example,
 
+   Customer::updateAllCounters(['age' => 1]);
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   Customer::deleteAll(['status' => 3]);
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
 
 
 *yii/redis/ActiveRecord::insert*				public
@@ -617,9 +661,23 @@ METHOD DETAILS
 (boolean) Whether the attributes are valid and the record is inserted
 successfully.
 
+ Usage example:
 
-    [$runValidation] () 
-    [$attributes] () 
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
+
+
+    [$runValidation] (boolean) Whether to perform validation before saving the
+    record. If the validation fails, the record will not be inserted into the
+    database.
+    [$attributes] (array) List of attributes that need to be saved. Defaults
+    to null, meaning all attributes that are loaded from DB will be saved.
 
 
 *yii/redis/ActiveRecord::getDb*				public
@@ -650,7 +708,6 @@ successfully.
  buildKey($key)
 <
 (string) The generated key
-
 
     [$key] (mixed) The key to be normalized
 

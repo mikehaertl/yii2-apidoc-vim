@@ -12,31 +12,30 @@ DESCRIPTION
  In order to setup Sphinx "searchd" to support MySQL protocol following
  configuration should be added:
 
-   searchd
+   public function getSnippetSource()
    {
-       listen = localhost:9306:mysql41
-       ...
+       return $this->snippetSourceRelation->content;
    }
 
  The following example shows how to create a Connection instance and establish
  the Sphinx connection:
 
-   $connection = new \yii\db\Connection([
-       'dsn' => 'mysql:host=127.0.0.1;port=9306;',
-       'username' => $username,
-       'password' => $password,
-   ]);
-   $connection->open();
+   return [
+       'admin' => self::OP_INSERT,
+       'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
+       // the above is equivalent to the following:
+       // 'api' => self::OP_ALL,
+
+   ];
 
  After the Sphinx connection is established, one can execute SQL statements
  like the following:
 
-   $command = $connection->createCommand("SELECT * FROM idx_article WHERE
- MATCH('programming')");
-   $articles = $command->queryAll();
-   $command = $connection->createCommand('UPDATE idx_article SET status=2
- WHERE id=1');
-   $command->execute();
+   searchd
+   {
+       listen = localhost:9306:mysql41
+       ...
+   }
 
  For more information about how to perform various DB queries, please refer to
  'Command'.
@@ -270,7 +269,6 @@ METHOD DETAILS
 <
 (\yii\sphinx\Command) The Sphinx command
 
-
     [$sql] (string) The SQL statement to be executed
     [$params] (array) The parameters to be bound to the SQL statement
 
@@ -302,7 +300,6 @@ METHOD DETAILS
 (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
-
     [$sequenceName] (string) Name of the sequence object
 
 
@@ -315,7 +312,6 @@ the sequence object
  quoteTableName($name)
 <
 (string) The properly quoted table name
-
 
     [$name] (string) Table name
 
@@ -342,7 +338,6 @@ the sequence object
 <
 (\yii\sphinx\IndexSchema) Index schema information. Null if the named index
 does not exist.
-
 
     [$name] (string) Index name.
     [$refresh] (boolean) Whether to reload the table schema even if it is

@@ -48,11 +48,13 @@ $length					*yii/validators/StringValidator::$length*
  (integer|array) Specifies the length limit of the value to be validated. This
  can be specified in one of the following forms:
 
- - an integer: the exact length that the value should be of; - an array of one
- element: the minimum length that the value should be of. For example, '[8]'. 
-  This will overwrite 'min'. - an array of two elements: the minimum and
- maximum lengths that the value should be of.   For example, '[8, 128]'. This
- will overwrite both 'min' and 'max'.
+
+   - an integer: the exact length that the value should be of; 
+   - an array of one element: the minimum length that the value should
+   be of. For example, '[8]'.   This will overwrite 'min'. 
+   - an array of two elements: the minimum and maximum lengths that the
+   value should be of.   For example, '[8, 128]'. This will overwrite both
+ 'min' and 'max'.
 
 $max					*yii/validators/StringValidator::$max*
  (integer) Maximum length. If not set, it means no maximum length limit.
@@ -98,7 +100,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/validators/StringValidator::__get*			public
@@ -203,9 +206,10 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$object] () 
-    [$attribute] () 
+ Child classes must implement this method to provide the actual validation
+ logic.
+    [$object] (\yii\base\Model) The data object to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/StringValidator::validate*		public
@@ -219,8 +223,9 @@ METHOD DETAILS
 (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
 
-
-    [$value] () 
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/StringValidator::clientValidateAttribute*	public
@@ -230,10 +235,21 @@ error message. Null should be returned if the data is valid.
 (string) The client-side validation script. Null if the validator does not
 support client-side validation.
 
+ You may override this method to return the JavaScript validation code if the
+ validator can support client-side validation.
 
-    [$object] () 
-    [$attribute] () 
-    [$view] () 
+ The following JavaScript variables are predefined and can be used in the
+ validation code:
+
+
+   - 'attribute': the name of the attribute being validated. 
+   - 'value': the value being validated. 
+   - 'messages': an array used to hold the validation error messages
+   for the attribute.
+    [$object] (\yii\base\Model) The data object being validated
+    [$attribute] (string) The name of the attribute to be validated.
+    [$view] (\yii\web\View) The view object that is going to be used to render
+    views or view files containing a model form with this validator applied.
 
 
 *yii/validators/StringValidator::isActive*		public

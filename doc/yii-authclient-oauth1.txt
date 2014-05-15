@@ -12,16 +12,19 @@ DESCRIPTION
 
  In oder to acquire access token perform following sequence:
 
-   use yii\authclient\OAuth1;
-
-   $oauthClient = new OAuth1();
-   $requestToken = $oauthClient->fetchRequestToken(); // Get request token
-   $url = $oauthClient->buildAuthUrl($requestToken); // Get authorization URL
-   return Yii::$app->getResponse()->redirect($url); // Redirect to
- authorization URL
-   // After user returns at our site:
-   $accessToken = $oauthClient->fetchAccessToken($requestToken); // Upgrade to
- access token
+   php
+   <?php
+   use yii\authclient\widgets\AuthChoice;
+   ?>
+   <?php $authAuthChoice = AuthChoice::begin([
+       'baseAuthUrl' => ['site/auth']
+   ]); ?>
+   <ul>
+   <?php foreach ($authAuthChoice->getClients() as $client): ?>
+       <li><?= $authAuthChoice->clientLink($client) ?></li>
+   <?php endforeach; ?>
+   </ul>
+   <?php AuthChoice::end(); ?>
 
 
 
@@ -310,7 +313,6 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OAuth1::sendRequest*			protected
  See |yii/authclient/BaseOAuth::sendRequest|
 
@@ -385,7 +387,6 @@ METHOD DETAILS
 <
 (array) CUrl options.
 
-
     [$method] (string) Request type.
     [$url] (string) Request URL.
     [$params] (array) Request params.
@@ -397,7 +398,6 @@ METHOD DETAILS
 <
 (\yii\authclient\OAuthToken) New auth token.
 
-
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
@@ -406,7 +406,6 @@ METHOD DETAILS
  apiInternal($accessToken, $url, $method, $params)
 <
 (array) API response.
-
 
     [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
     [$url] (string) Absolute API URL.
@@ -420,7 +419,6 @@ METHOD DETAILS
 <
 (\yii\authclient\OAuthToken) Request token.
 
-
     [$params] (array) Additional request params.
 
 
@@ -429,7 +427,6 @@ METHOD DETAILS
  buildAuthUrl($requestToken='null', $params='[]')
 <
 (string) Authorize URL
-
 
     [$requestToken] (\yii\authclient\OAuthToken) OAuth request token.
     [$params] (array) Additional request params.
@@ -441,7 +438,6 @@ METHOD DETAILS
 <
 (\yii\authclient\OAuthToken) OAuth access token.
 
-
     [$requestToken] (\yii\authclient\OAuthToken) OAuth request token.
     [$oauthVerifier] (string) OAuth verifier.
     [$params] (array) Additional request params.
@@ -452,7 +448,6 @@ METHOD DETAILS
  sendSignedRequest($method, $url, $params='[]')
 <
 (array) Response.
-
 
     [$method] (string) Request type.
     [$url] (string) Request URL.
@@ -467,13 +462,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OAuth1::generateTimestamp*		protected
 >
  generateTimestamp()
 <
 (integer) Timestamp.
-
 
 
 
@@ -485,13 +478,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OAuth1::signRequest*			protected
 >
  signRequest($method, $url, $params)
 <
 (array) Signed request params.
-
 
     [$method] (string) Request method.
     [$url] (string) Request URL.
@@ -503,7 +494,6 @@ METHOD DETAILS
  composeSignatureBaseString($method, $url, $params)
 <
 (string) Base signature string.
-
 
     [$method] (string) Request method.
     [$url] (string) Request URL.
@@ -518,13 +508,11 @@ METHOD DETAILS
 
 
 
-
 *yii/authclient/OAuth1::composeAuthorizationHeader*	protected
 >
  composeAuthorizationHeader($params, $realm='''')
 <
 (string) Authorization header content.
-
 
     [$params] (array) Request params.
     [$realm] (string) Authorization realm.

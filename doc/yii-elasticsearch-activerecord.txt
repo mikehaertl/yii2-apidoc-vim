@@ -15,13 +15,14 @@ DESCRIPTION
 
  The following is an example model called 'Customer':
 
-   class Customer extends \yii\elasticsearch\ActiveRecord
-   {
-       public function attributes()
-       {
-           return ['id', 'name', 'address', 'registration_date'];
-       }
-   }
+   $query = new Query;
+   $query->fields('id, name')
+       ->from('myindex', 'users')
+       ->limit(10);
+   // build and execute the query
+   $command = $query->createCommand();
+   $rows = $command->search(); // this way you get the raw output of
+ elasticsearch.
 
  You may override 'index()' and 'type()' to define the index and type this
  record represents.
@@ -46,14 +47,18 @@ $errors					*yii/elasticsearch/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
+   $query->fields = [
+       'id',
+       'name',
+       'value_times_two' => [
+           'script' => "doc['my_field_name'].value * 2",
        ],
-       'email' => [
-           'Email address is invalid.',
-       ]
+       'value_times_factor' => [
+           'script' => "doc['my_field_name'].value * factor",
+           'params' => [
+               'factor' => 2.0
+           ],
+       ],
    ]
 
 
@@ -388,19 +393,66 @@ METHOD DETAILS
 (static) ActiveRecord instance matching the condition, or null if nothing
 matches.
 
+ The method accepts:
 
-    [$condition] () 
+  
+   - a scalar value (integer or string): query by a single primary key
+   value and return the    corresponding record (or null if not found).  
+   - an array of name-value pairs: query by a set of attribute values
+   and return a single record    matching all of them (or null if not found).
+
+ Note that this method will automatically call the 'one()' method and return
+ an 'ActiveRecordInterface|ActiveRecord' instance. For example,
+
+   class Customer extends \yii\elasticsearch\ActiveRecord
+   {
+       public function attributes()
+       {
+           return ['id', 'name', 'address', 'registration_date'];
+       }
+   }
+
+
+    [$condition] (mixed) Primary key value or a set of column values
 
 
 *yii/elasticsearch/ActiveRecord::findAll*			public
 >
  findAll($condition)
 <
-(static[]|array) An array of ActiveRecord instance, or an empty array if
-nothing matches.
+(static[]) An array of ActiveRecord instance, or an empty array if nothing
+matches.
+
+ The method accepts:
+
+  
+   - a scalar value (integer or string): query by a single primary key
+   value and return an array containing the    corresponding record (or an
+ empty array if not found).  
+   - an array of scalar values (integer or string): query by a list of
+   primary key values and return the    corresponding records (or an empty
+ array if none was found).    Note that an empty condition will result in an
+ empty result as it will be interpreted as a search for    primary keys and
+ not an empty 'WHERE' condition.  
+   - an array of name-value pairs: query by a set of attribute values
+   and return an array of records    matching all of them (or an empty array
+ if none was found).
+
+ Note that this method will automatically call the 'all()' method and return
+ an array of 'ActiveRecordInterface|ActiveRecord' instances. For example,
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
 
-    [$condition] () 
+    [$condition] (mixed) Primary key value or a set of column values
 
 
 *yii/elasticsearch/ActiveRecord::updateAll*		public
@@ -412,7 +464,17 @@ nothing matches.
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   Customer::updateAll(['status' => 1], [2, 3, 4]);
+   // find a single customer whose primary key value is 10
+   $customer = Customer::findOne(10);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the first customer whose age is 30 and whose status is 1
+   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -430,7 +492,23 @@ nothing matches.
 
  For example, to increment all customers' age by 1,
 
-   Customer::updateAllCounters(['age' => 1]);
+   // find the customers whose primary key value is 10
+   $customers = Customer::findAll(10);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => 10])->all();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findAll([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+   // find customers whose age is 30 and whose status is 1
+   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
     [$counters] (array) The counters to be updated (attribute name =>
@@ -452,7 +530,7 @@ nothing matches.
 
  For example, to delete all customers whose status is 3:
 
-   Customer::deleteAll('status = 3');
+   Customer::updateAll(['status' => 1], [2, 3, 4]);
 
 
     [$condition] (array) The conditions that will be put in the WHERE part of
@@ -592,8 +670,10 @@ nothing matches.
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
 
-
-    [$asArray] () 
+    [$asArray] (boolean) Whether to return the primary key value as an array.
+    If true, the return value will be an array with column names as keys and
+    column values as values. Note that for composite primary keys, an array
+    will always be returned regardless of this parameter value.
 
 
 *yii/elasticsearch/ActiveRecord::getOldPrimaryKey*	public
@@ -604,8 +684,14 @@ returned otherwise (null will be returned if the key value is null).
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
 
-
-    [$asArray] () 
+ This refers to the primary key value that is populated into the record after
+ executing a find method (e.g. find(), findOne()). The value remains unchanged
+ even if the primary key attribute is manually assigned with a different
+ value.
+    [$asArray] (boolean) Whether to return the primary key value as an array.
+    If true, the return value will be an array with column name as key and
+    column value as value. If this is false (default), a scalar value will be
+    returned for non-composite primary key.
 
 
 *yii/elasticsearch/ActiveRecord::populateRecord*		public
@@ -614,9 +700,15 @@ returned otherwise (null will be returned if the key value is null).
 <
 (void)
 
+ This is an internal method meant to be called to create active record objects
+ after fetching data from the database. It is mainly used by 'ActiveQuery' to
+ populate the query results into active records.
 
-    [$record] () 
-    [$row] () 
+ When calling this method manually you should call 'afterFind()' on the
+ created record to trigger the 'EVENT_AFTER_FIND|afterFind Event'.
+    [$record] (\yii\db\BaseActiveRecord) The record to be populated. In most
+    cases this will be an instance created by 'instantiate()' beforehand.
+    [$row] (array) Attribute values (name => value)
 
 
 *yii/elasticsearch/ActiveRecord::instantiate*		public
@@ -633,9 +725,10 @@ returned otherwise (null will be returned if the key value is null).
  on the value of a column, you may implement the so-called single-table
  inheritance mapping.
     [$row] (array) Row data to be populated into the record. This array
-    consists of the following keys:  - '_source': refers to the attributes of
-    the record.  - '_type': the type this record is stored in.  - '_index':
-    the index this record is stored in.
+    consists of the following keys:  
+      - '_source': refers to the attributes of the record.  
+      - '_type': the type this record is stored in.  
+      - '_index': the index this record is stored in.
 
 
 *yii/elasticsearch/ActiveRecord::getRelation*		public
@@ -684,7 +777,32 @@ array will be used.
 (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
+ The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
+ customized by calling methods defined in 'ActiveQueryInterface' before
+ 'one()' or 'all()' is called to return populated ActiveRecord instances. For
+ example,
 
+   Customer::updateAllCounters(['age' => 1]);
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   Customer::deleteAll('status = 3');
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
 
 
 *yii/elasticsearch/ActiveRecord::insert*			public
@@ -717,10 +835,14 @@ successfully.
 
  For example, to insert a customer record:
 
-   $customer = new Customer;
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->insert();
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -731,10 +853,12 @@ successfully.
     [$options] (array) Options given in this parameter are passed to
     elasticsearch as request URI parameters. These are among others:
 
-    - 'routing' define shard placement of this record. - 'parent' by giving
-    the primaryKey of another record this defines a parent-child relation -
-    'timestamp' specifies the timestamp to store along with the document.
-    Default is indexing time.
+
+      - 'routing' define shard placement of this record. 
+      - 'parent' by giving the primaryKey of another record this defines a
+      parent-child relation 
+      - 'timestamp' specifies the timestamp to store along with the
+      document. Default is indexing time.
 
     Please refer to the [elasticsearch
     documentation](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html)
@@ -760,7 +884,6 @@ successfully.
 <
 (static|null) The record instance or null if it was not found.
 
-
     [$primaryKey] (mixed) The primaryKey value
     [$options] (array) Options given in this parameter are passed to
     elasticsearch as request URI parameters. Please refer to the
@@ -774,7 +897,6 @@ successfully.
  mget($primaryKeys, $options='[]')
 <
 (array) The record instances, or empty array if nothing was found
-
 
     [$primaryKeys] (array) An array of primaryKey values
     [$options] (array) Options given in this parameter are passed to
@@ -794,13 +916,11 @@ query.
 
 
 
-
 *yii/elasticsearch/ActiveRecord::setPrimaryKey*		public
 >
  setPrimaryKey($value)
 <
 (void)
-
 
     [$value] (mixed) 
 
@@ -813,13 +933,11 @@ query.
 
 
 
-
 *yii/elasticsearch/ActiveRecord::type*			public
 >
  type()
 <
 (string) The name of the type of this record.
-
 
 
 

@@ -2,11 +2,6 @@
 *yii/db/oci/Schema*   >> |yii/db/Schema|
 ===================
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
-
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -16,6 +11,9 @@ $db					*yii/db/oci/Schema::$db*
 
 $defaultSchema				*yii/db/oci/Schema::$defaultSchema*
  See |yii/db/Schema::$defaultSchema|
+
+$exceptionMap				*yii/db/oci/Schema::$exceptionMap*
+ See |yii/db/Schema::$exceptionMap|
 
 $tableSchemas				*yii/db/oci/Schema::$tableSchemas*
  (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
@@ -50,7 +48,8 @@ METHOD DETAILS
 <
 (void)
 
-
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/db/oci/Schema::__get*				public
@@ -96,8 +95,7 @@ METHOD DETAILS
 (\yii\db\TableSchema) DBMS-dependent table metadata, null if the table does
 not exist.
 
-
-    [$name] () 
+    [$name] (string) Table name
 
 
 *yii/db/oci/Schema::getTableSchema*			public
@@ -138,17 +136,20 @@ not exist.
 <
 (\yii\db\QueryBuilder) Query builder instance
 
-
+ This method may be overridden by child classes to create a DBMS-specific
+ query builder.
 
 
 *yii/db/oci/Schema::findTableNames*			protected
 >
- findTableNames($schema='\'\'')
+ findTableNames($schema='''')
 <
 (array) All table names in the database. The names have NO schema name prefix.
 
-
-    [$schema] () 
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
 
 
 *yii/db/oci/Schema::findUniqueIndexes*			public
@@ -173,8 +174,7 @@ not exist.
 <
 (void)
 
-
-    [$name] () 
+    [$name] (string) The savepoint name
 
 
 *yii/db/oci/Schema::rollBackSavepoint*			public
@@ -199,8 +199,9 @@ not exist.
 <
 (string) The properly quoted table name
 
-
-    [$name] () 
+ A simple table name should contain the table name only without any schema
+ prefix. If the table name is already quoted, this method will do nothing.
+    [$name] (string) Table name
 
 
 *yii/db/oci/Schema::quoteSimpleColumnName*		public
@@ -209,8 +210,10 @@ not exist.
 <
 (string) The properly quoted column name
 
-
-    [$name] () 
+ A simple column name should contain the column name only without any prefix.
+ If the column name is already quoted or is the asterisk character '*', this
+ method will do nothing.
+    [$name] (string) Column name
 
 
 *yii/db/oci/Schema::getRawTableName*			public
@@ -221,12 +224,15 @@ not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
+*yii/db/oci/Schema::handleException*			public
+ See |yii/db/Schema::handleException|
+
+
 *yii/db/oci/Schema::resolveTableNames*			protected
 >
  resolveTableNames($table, $name)
 <
 (void)
-
 
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
@@ -237,7 +243,6 @@ not exist.
  findColumns($table)
 <
 (boolean) Whether the table exists
-
 
     [$table] (\yii\db\TableSchema) The table schema
 
@@ -266,7 +271,6 @@ not exist.
 <
 (void)
 
-
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) DB type
 
@@ -276,7 +280,6 @@ not exist.
  extractColumnSize($column, $dbType)
 <
 (void)
-
 
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) The column's DB type

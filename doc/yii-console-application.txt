@@ -9,11 +9,14 @@ DESCRIPTION
  that are specific to console requests. In particular, it deals with console
  requests through a command-based approach:
 
- - A console application consists of one or several possible user commands; -
- Each user command is implemented as a class extending
- '\yii\console\Controller'; - User specifies which command to run on the
- command line; - The command processes the user request with the specified
- parameters.
+
+   - A console application consists of one or several possible user
+   commands; 
+   - Each user command is implemented as a class extending
+   '\yii\console\Controller'; 
+   - User specifies which command to run on the command line; 
+   - The command processes the user request with the specified
+   parameters.
 
  The command classes should be under the namespace specified by
  'controllerNamespace'. Their naming should follow the same naming convention
@@ -22,7 +25,8 @@ DESCRIPTION
 
  To run the console application, enter the following on the command line:
 
-   yii <route> [--param1=value1 --param2 ...]
+   $this->stderr('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE);
 
  where '<route>' refers to a controller route in the form of
  'ModuleID/ControllerID/ActionID' (e.g. 'sitemap/create'), and 'param1',
@@ -34,7 +38,7 @@ DESCRIPTION
  A 'help' command is provided by default, which lists available commands and
  shows their usage. To use this command, simply type:
 
-   yii help
+   yii <route> [--param1=value1 --param2 ...]
 
 
 
@@ -132,10 +136,7 @@ $aliases				*yii/console/Application::$aliases*
  (must start with '@') and the array values are the corresponding paths or
  aliases. For example,
 
-   [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
-   ]
+   yii help
 
 
 
@@ -211,8 +212,9 @@ METHOD DETAILS
 <
 (void)
 
-
-    [$config] () 
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties. Note that the configuration must contain both 'id' and
+    'basePath'.
 
 
 *yii/console/Application::init*				public
@@ -220,7 +222,6 @@ METHOD DETAILS
  init()
 <
 (void)
-
 
 
 
@@ -432,13 +433,7 @@ and other values mean abnormal.
 
 
 *yii/console/Application::registerErrorHandler*		protected
->
- registerErrorHandler($config)
-<
-(void)
-
-
-    [$config] () 
+ See |yii/base/Application::registerErrorHandler|
 
 
 *yii/console/Application::run*				public
@@ -450,7 +445,6 @@ and other values mean abnormal.
  handleRequest($request)
 <
 (\yii\console\Response) The resulting response
-
 
     [$request] (\yii\console\Request) The request to be handled
 
@@ -539,7 +533,6 @@ and other values mean abnormal.
 
 
 
-
 *yii/console/Application::end*				public
  See |yii/base/Application::end|
 
@@ -562,7 +555,6 @@ and other values mean abnormal.
  coreCommands()
 <
 (array) The configuration of the built-in commands.
-
 
 
 

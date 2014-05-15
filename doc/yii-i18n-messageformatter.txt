@@ -10,19 +10,22 @@ DESCRIPTION
 
  The following enhancements are provided:
 
- - It accepts named arguments and mixed numeric and named arguments. - Issues
- no error when an insufficient number of arguments have been provided.
- Instead, the placeholders will not be   substituted. - Fixes PHP 5.5 weird
- placeholder replacement in case no arguments are provided at all
- (https://bugs.php.net/bug.php?id=65920). - Offers limited support for message
- formatting in case PHP intl extension is not installed.   However it is
- highly recommended that you install [PHP intl
- extension](http://php.net/manual/en/book.intl.php) if you want   to use
- MessageFormatter features.
 
-   The fallback implementation only supports the following message formats:  
- - plural formatting for english ('one' and 'other' selectors)   - select
- format   - simple parameters   - integer number parameters
+   - It accepts named arguments and mixed numeric and named arguments. 
+   - Issues no error when an insufficient number of arguments have been
+   provided. Instead, the placeholders will not be   substituted. 
+   - Fixes PHP 5.5 weird placeholder replacement in case no arguments
+   are provided at all (https://bugs.php.net/bug.php?id=65920). 
+   - Offers limited support for message formatting in case PHP intl
+   extension is not installed.   However it is highly recommended that you
+ install [PHP intl extension](http://php.net/manual/en/book.intl.php) if you
+ want   to use MessageFormatter features.
+
+   The fallback implementation only supports the following message formats:   
+   - plural formatting for english ('one' and 'other' selectors)   
+   - select format   
+   - simple parameters   
+   - integer number parameters
 
    The fallback implementation does NOT support the ['apostrophe-friendly'
  syntax](http://www.php.net/manual/en/messageformatter.formatmessage.php).  
@@ -156,13 +159,11 @@ METHOD DETAILS
 
 
 
-
 *yii/i18n/MessageFormatter::getErrorMessage*		public
 >
  getErrorMessage()
 <
 (string) Description of the last error.
-
 
 
 
@@ -204,7 +205,6 @@ METHOD DETAILS
  fallbackFormat($pattern, $args, $locale)
 <
 (string|boolean) The formatted pattern string or 'FALSE' if an error occurred
-
 
     [$pattern] (string) The pattern string to insert things into.
     [$args] (array) The array of values to insert into the format string
