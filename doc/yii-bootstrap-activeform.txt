@@ -8,7 +8,9 @@ DESCRIPTION
  This class mainly adds the 'layout' property to choose a Bootstrap 3 form
  layout. So for example to render a horizontal form you would:
 
-   function ($index, $label, $name, $checked, $value)
+   use yii\bootstrap\ActiveForm;
+
+   $form = ActiveForm::begin(['layout' => 'horizontal'])
 
  This will set default values for the 'yii\bootstrap\ActiveField|ActiveField'
  to render horizontal form fields. In particular the
@@ -17,14 +19,31 @@ DESCRIPTION
  'yii\bootstrap\ActiveField::horizontalCssClasses|horizontalCssClasses' are
  set to:
 
-   function ($index, $label, $name, $checked, $value)
+   [
+       'offset' => 'col-sm-offset-3',
+       'label' => 'col-sm-3',
+       'wrapper' => 'col-sm-6',
+       'error' => '',
+       'hint' => 'col-sm-3',
+   ]
 
  To get a different column layout in horizontal mode you can modify those
  options through 'fieldConfig':
 
-   use yii\bootstrap\ActiveForm;
-
-   $form = ActiveForm::begin(['layout' => 'horizontal'])
+   $form = ActiveForm::begin([
+       'layout' => 'horizontal',
+       'fieldConfig' => [
+           'template' =>
+ "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+           'horizontalCssClasses' => [
+               'label' => 'col-sm-4',
+               'offset' => 'col-sm-offset-4',
+               'wrapper' => 'col-sm-8',
+               'error' => '',
+               'hint' => '',
+           ],
+       ],
+   ]);
 
 
 
@@ -265,7 +284,7 @@ METHOD DETAILS
 
 
 *yii/bootstrap/ActiveForm::run*				public
- See |yii/widgets/ActiveForm::run|
+ See |yii/base/Widget::run|
 
 
 *yii/bootstrap/ActiveForm::render*			public

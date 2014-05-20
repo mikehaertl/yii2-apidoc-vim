@@ -7,13 +7,19 @@ DESCRIPTION
 
  For example:
 
-   Draggable::begin([
-       'clientOptions' => ['grid' => [50, 20]],
+   echo Sortable::widget([
+       'items' => [
+           'Item 1',
+           ['content' => 'Item2'],
+           [
+               'content' => 'Item3',
+               'options' => ['tag' => 'li'],
+           ],
+       ],
+       'options' => ['tag' => 'ul'],
+       'itemOptions' => ['tag' => 'li'],
+       'clientOptions' => ['cursor' => 'move'],
    ]);
-
-   echo 'Draggable contents here...';
-
-   Draggable::end();
 
 
 
@@ -54,15 +60,12 @@ $items					*yii/jui/Sortable::$items*
  (array) List of sortable items. Each item can be a string representing the
  item content or an array of the following structure:
 
-   Dialog::begin([
-       'clientOptions' => [
-           'modal' => true,
-       ],
-   ]);
-
-   echo 'Dialog contents here...';
-
-   Dialog::end();
+   [
+       'content' => 'item content',
+       // the HTML attributes of the item container tag. This will overwrite
+ "itemOptions".
+       'options' => [],
+   ]
 
 
 

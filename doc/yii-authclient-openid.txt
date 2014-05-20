@@ -15,15 +15,19 @@ DESCRIPTION
 
  Usage:
 
-   $customerCollection = Yii::$app->mongo->getCollection('customer');
-   $resultCollectionName = $customerCollection->mapReduce(
-       'function () {emit(this.status, this.amount)}',
-       'function (key, values) {return Array.sum(values)}',
-       'mapReduceOut',
-       ['status' => 3]
-   );
-   $query = new Query();
-   $results = $query->from($resultCollectionName)->all();
+   use yii\authclient\OpenId;
+
+   $client = new OpenId();
+   $client->authUrl = 'https://open.id.provider.url'; // Setup provider
+ endpoint
+   $url = $client->buildAuthUrl(); // Get authentication URL
+   return Yii::$app->getResponse()->redirect($url); // Redirect to
+ authentication URL
+   // After user returns at our site:
+   if ($client->validate()) { // validate response
+       $userAttributes = $client->getUserAttributes(); // get account info
+       ...
+   }
 
  AX and SREG extensions are supported. To use them, specify
  'requiredAttributes' and/or 'optionalAttributes'.
@@ -40,24 +44,7 @@ $requiredAttributes			*yii/authclient/OpenId::$requiredAttributes*
  (array) List of attributes, which always should be returned from server.
  Attribute names should be always specified in AX format. For example:
 
-   echo Nav::widget([
-       'items' => [
-           [
-               'label' => 'Home',
-               'url' => ['site/index'],
-               'linkOptions' => [...],
-           ],
-           [
-               'label' => 'Dropdown',
-               'items' => [
-                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
-                    '<li class="divider"></li>',
-                    '<li class="dropdown-header">Dropdown Header</li>',
-                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
-               ],
-           ],
-       ],
-   ]);
+   ['namePerson/friendly', 'contact/email']
 
 
 
@@ -65,19 +52,7 @@ $optionalAttributes			*yii/authclient/OpenId::$optionalAttributes*
  (array) List of attributes, which could be returned from server. Attribute
  names should be always specified in AX format. For example:
 
-   use yii\authclient\OpenId;
-
-   $client = new OpenId();
-   $client->authUrl = 'https://open.id.provider.url'; // Setup provider
- endpoint
-   $url = $client->buildAuthUrl(); // Get authentication URL
-   return Yii::$app->getResponse()->redirect($url); // Redirect to
- authentication URL
-   // After user returns at our site:
-   if ($client->validate()) { // validate response
-       $userAttributes = $client->getUserAttributes(); // get account info
-       ...
-   }
+   ['namePerson/first', 'namePerson/last']
 
 
 

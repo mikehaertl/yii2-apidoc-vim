@@ -12,19 +12,16 @@ DESCRIPTION
 
  In oder to acquire access token perform following sequence:
 
-   php
-   <?php
-   use yii\authclient\widgets\AuthChoice;
-   ?>
-   <?php $authAuthChoice = AuthChoice::begin([
-       'baseAuthUrl' => ['site/auth']
-   ]); ?>
-   <ul>
-   <?php foreach ($authAuthChoice->getClients() as $client): ?>
-       <li><?= $authAuthChoice->clientLink($client) ?></li>
-   <?php endforeach; ?>
-   </ul>
-   <?php AuthChoice::end(); ?>
+   use yii\authclient\OAuth1;
+
+   $oauthClient = new OAuth1();
+   $requestToken = $oauthClient->fetchRequestToken(); // Get request token
+   $url = $oauthClient->buildAuthUrl($requestToken); // Get authorization URL
+   return Yii::$app->getResponse()->redirect($url); // Redirect to
+ authorization URL
+   // After user returns at our site:
+   $accessToken = $oauthClient->fetchAccessToken($requestToken); // Upgrade to
+ access token
 
 
 

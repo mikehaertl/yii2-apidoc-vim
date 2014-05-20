@@ -27,14 +27,7 @@ DESCRIPTION
 
  These options can be configured using methods of the same name. For example:
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   $customers = Customer::find()->with('orders')->asArray()->all();
 
  Relational query ----------------
 

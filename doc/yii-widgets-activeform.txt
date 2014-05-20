@@ -32,6 +32,25 @@ $method					*yii/widgets/ActiveForm::$method*
  (string) The form submission method. This should be either 'post' or 'get'.
  Defaults to 'post'.
 
+ When you set this to 'get' you may see the url parameters repeated on each
+ request. This is because the default value of 'action' is set to be the
+ current request url and each submit will add new parameters instead of
+ replacing existing ones. You may set 'action' explicitly to avoid this:
+
+   echo DetailView::widget([
+       'model' => $model,
+       'attributes' => [
+           'title',             // title attribute (in plain text)
+           'description:html',  // description attribute in HTML
+           [                    // the owner name of the model
+               'label' => 'Owner',
+               'value' => $model->owner->name,
+           ],
+       ],
+   ]);
+
+
+
 $options				*yii/widgets/ActiveForm::$options*
  (array) The HTML attributes (name-value pairs) for the form tag.
 
@@ -104,17 +123,7 @@ $beforeSubmit				*yii/widgets/ActiveForm::$beforeSubmit*
  (string|\yii\web\JsExpression) A JS callback that will be called when the
  form is being submitted. The signature of the callback should be:
 
-   echo DetailView::widget([
-       'model' => $model,
-       'attributes' => [
-           'title',             // title attribute (in plain text)
-           'description:html',  // description attribute in HTML
-           [                    // the owner name of the model
-               'label' => 'Owner',
-               'value' => $model->owner->name,
-           ],
-       ],
-   ]);
+   function ($attribute, $index, $widget)
 
 
 
@@ -122,7 +131,10 @@ $beforeValidate				*yii/widgets/ActiveForm::$beforeValidate*
  (string|\yii\web\JsExpression) A JS callback that is called before validating
  an attribute. The signature of the callback should be:
 
-   function ($attribute, $index, $widget)
+   $form = ActiveForm::begin([
+       'method' => 'get',
+       'action' => ['controller/action'],
+   ]);
 
 
 

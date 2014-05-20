@@ -41,12 +41,40 @@ DESCRIPTION
 
  Example:
 
-   echo Alert::widget([
-       'options' => [
-           'class' => 'alert-info',
+   use yii\bootstrap\ActiveForm;
+
+   $form = ActiveForm::begin(['layout' => 'horizontal'])
+
+   // Form field without label
+   echo $form->field($model, 'demo', [
+       'inputOptions' => [
+           'placeholder' => $model->getAttributeLabel('demo'),
        ],
-       'body' => 'Say hello...',
+   ])->label(false);
+
+   // Inline radio list
+   echo $form->field($model, 'demo')->inline()->radioList($items);
+
+   // Control sizing in horizontal mode
+   echo $form->field($model, 'demo', [
+       'horizontalCssClasses' => [
+           'wrapper' => 'col-sm-2',
+       ]
    ]);
+
+   // With 'default' layout you would use 'template' to size a specific field:
+   // echo $form->field($model, 'demo', [
+   //     'template' => '{label} <div class="row"><div
+ class="col-sm-4">{input}{error}{hint}</div></div>'
+   // ]);
+
+    // Input group
+    echo $form->field($model, 'demo', [
+        'inputTemplate' => '<div class="input-group"><span
+ class="input-group-addon">@</span>{input}</div>',
+    ]);
+
+    ActiveForm::end();
 
 
 
@@ -272,15 +300,9 @@ METHOD DETAILS
     will be called to generate the content. The signature of the callable
     should be:
 
-      Alert::begin([
-          'options' => [
-              'class' => 'alert-warning',
-          ],
-      ]);
-
-      echo 'Say hello...';
-
-      Alert::end();
+      function ($field) {
+          return $html;
+      }
 
 
 
@@ -413,41 +435,7 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      use yii\bootstrap\ActiveForm;
-
-      $form = ActiveForm::begin(['layout' => 'horizontal'])
-
-      // Form field without label
-      echo $form->field($model, 'demo', [
-          'inputOptions' => [
-              'placeholder' => $model->getAttributeLabel('demo'),
-          ],
-      ])->label(false);
-
-      // Inline radio list
-      echo $form->field($model, 'demo')->inline()->radioList($items);
-
-      // Control sizing in horizontal mode
-      echo $form->field($model, 'demo', [
-          'horizontalCssClasses' => [
-              'wrapper' => 'col-sm-2',
-          ]
-      ]);
-
-      // With 'default' layout you would use 'template' to size a specific
-    field:
-      // echo $form->field($model, 'demo', [
-      //     'template' => '{label} <div class="row"><div
-    class="col-sm-4">{input}{error}{hint}</div></div>'
-      // ]);
-
-       // Input group
-       echo $form->field($model, 'demo', [
-           'inputTemplate' => '<div class="input-group"><span
-    class="input-group-addon">@</span>{input}</div>',
-       ]);
-
-       ActiveForm::end();
+      function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label is the label for the checkbox; and $name, $value and $checked
@@ -479,9 +467,7 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      function ($field) {
-          return $html;
-      }
+      function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the radio button in the whole
     list; $label is the label for the radio button; and $name, $value and

@@ -317,7 +317,18 @@ METHOD DETAILS
 
 
 *yii/rest/ActiveController::checkAccess*			public
- See |yii/rest/Controller::checkAccess|
+>
+ checkAccess($action, $model='null', $params='[]')
+<
+(void)
+
+ This method should be overridden to check whether the current user has the
+ privilege to run the specified action against the specified data model. If
+ the user does not have access, a 'ForbiddenHttpException' should be thrown.
+    [$action] (string) The ID of the action to be executed
+    [$model] (object) The model to be accessed. If null, it means no specific
+    model is being accessed.
+    [$params] (array) Additional parameters
 
 
 

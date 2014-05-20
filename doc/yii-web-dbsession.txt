@@ -12,12 +12,10 @@ DESCRIPTION
  The following example shows how you can configure the application to use
  DbSession: Add the following to your application config under 'components':
 
-   $session = new Session;
-   $session->open();
-   $value1 = $session['name1'];  // get session variable 'name1'
-   $value2 = $session['name2'];  // get session variable 'name2'
-   foreach ($session as $name => $value) // traverse all session variables
-   $session['name3'] = $value3;  // set session variable 'name3'
+   <?php
+   foreach(Yii::$app->session->getAllFlashes() as $key => $message) {
+       echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+   } ?>
 
 
 

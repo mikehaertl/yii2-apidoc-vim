@@ -7,16 +7,29 @@ DESCRIPTION
 
  For example:
 
-   [
-       'header' => 'Item header',
-       'content' => 'Item content',
-       // the HTML attributes of the item header container tag. This will
- overwrite "headerOptions".
-       'headerOptions' => [],
-       // the HTML attributes of the item container tag. This will overwrite
- "itemOptions".
-       'options' => [],
-   ]
+   echo Selectable::widget([
+       'items' => [
+           'Item 1',
+           [
+               'content' => 'Item2',
+           ],
+           [
+               'content' => 'Item3',
+               'options' => [
+                   'tag' => 'li',
+               ],
+           ],
+       ),
+       'options' => [
+           'tag' => 'ul',
+       ],
+       'itemOptions' => [
+           'tag' => 'li',
+       ],
+       'clientOptions' => [
+           'tolerance' => 'fit',
+       ],
+   ]);
 
 
 
@@ -57,15 +70,12 @@ $items					*yii/jui/Selectable::$items*
  (array) List of selectable items. Each item can be a string representing the
  item content or an array of the following structure:
 
-   Resizable::begin([
-       'clientOptions' => [
-           'grid' => [20, 10],
-       ],
-   ]);
-
-   echo 'Resizable contents here...';
-
-   Resizable::end();
+   [
+       'content' => 'item content',
+       // the HTML attributes of the item container tag. This will overwrite
+ "itemOptions".
+       'options' => [],
+   ]
 
 
 

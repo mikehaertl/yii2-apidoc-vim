@@ -5,6 +5,8 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/redis/Cache|
+|yii/mongodb/Cache|
 |yii/caching/XCache|
 |yii/caching/DummyCache|
 |yii/caching/WinCache|
@@ -13,8 +15,6 @@ SUBCLASSES
 |yii/caching/ZendDataCache|
 |yii/caching/MemCache|
 |yii/caching/FileCache|
-|yii/redis/Cache|
-|yii/mongodb/Cache|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -60,11 +60,10 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $keyPrefix				*yii/caching/Cache::$keyPrefix*
- (string) A string prefixed to every cache key so that it is unique. If not
- set, it will use a prefix generated from '\yii\base\Application::id'. You may
- set this property to be an empty string if you don't want to use key prefix.
- It is recommended that you explicitly set this property to some static value
- if the cached data needs to be shared among multiple applications.
+ (string) A string prefixed to every cache key so that it is unique globally
+ in the whole cache storage. It is recommended that you set a unique cache key
+ prefix for each application if the same cache storage is being used by
+ different applications.
 
  To ensure interoperability, only alphanumeric characters should be used.
 
@@ -97,13 +96,7 @@ METHOD DETAILS
 
 
 *yii/caching/Cache::init*					public
->
- init()
-<
-(void)
-
- This method overrides the parent implementation by setting default cache key
- prefix.
+ See |yii/base/Object::init|
 
 
 *yii/caching/Cache::__get*				public

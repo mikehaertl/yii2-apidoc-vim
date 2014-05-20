@@ -87,13 +87,8 @@ $aliases				*yii/debug/Module::$aliases*
  aliases. For example,
 
    [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
+       '@models' => '@app/models', // an existing alias
+       '@backend' => __DIR__ . '/../backend',  // a directory
    ]
 
 
@@ -319,14 +314,15 @@ METHOD DETAILS
 
  If you override this method, your code should look like the following:
 
-   return [
-       'action1' => 'app\components\Action1',
-       'action2' => [
-           'class' => 'app\components\Action2',
-           'property1' => 'value1',
-           'property2' => 'value2',
-       ],
-   ];
+   public function beforeAction($action)
+   {
+       if (parent::beforeAction($action)) {
+           // your custom code here
+           return true;  // or false if needed
+       } else {
+           return false;
+       }
+   }
 
 
     [$action] (\yii\base\Action) The action to be executed.

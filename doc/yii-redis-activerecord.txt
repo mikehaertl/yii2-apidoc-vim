@@ -14,18 +14,13 @@ DESCRIPTION
 
  The following is an example model called 'Customer':
 
-   [
-       'components' => [
-           'cache' => [
-               'class' => 'yii\redis\Cache',
-               'redis' => [
-                   'hostname' => 'localhost',
-                   'port' => 6379,
-                   'database' => 0,
-               ]
-           ],
-       ],
-   ]
+   class Customer extends \yii\redis\ActiveRecord
+   {
+       public function attributes()
+       {
+           return ['id', 'name', 'address', 'registration_date'];
+       }
+   }
 
 
 
@@ -50,13 +45,13 @@ $errors					*yii/redis/ActiveRecord::$errors*
  result is a two-dimensional array, like the following:
 
    [
-       'components' => [
-           'cache' => [
-               'class' => 'yii\redis\Cache',
-               // 'redis' => 'redis' // id of the connection application
- component
-           ],
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
        ],
+       'email' => [
+           'Email address is invalid.',
+       ]
    ]
 
 
@@ -116,19 +111,19 @@ METHOD DETAILS
 
 
 *yii/redis/ActiveRecord::__get*				public
- See |yii/db/BaseActiveRecord::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/redis/ActiveRecord::__set*				public
- See |yii/db/BaseActiveRecord::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/redis/ActiveRecord::__isset*				public
- See |yii/db/BaseActiveRecord::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/redis/ActiveRecord::__unset*				public
- See |yii/db/BaseActiveRecord::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/redis/ActiveRecord::__call*				public
@@ -282,7 +277,7 @@ METHOD DETAILS
 
 
 *yii/redis/ActiveRecord::getAttributeLabel*		public
- See |yii/db/BaseActiveRecord::getAttributeLabel|
+ See |yii/base/Model::getAttributeLabel|
 
 
 *yii/redis/ActiveRecord::hasErrors*			public
@@ -358,7 +353,7 @@ METHOD DETAILS
 
 
 *yii/redis/ActiveRecord::offsetExists*			public
- See |yii/db/BaseActiveRecord::offsetExists|
+ See |yii/base/Model::offsetExists|
 
 
 *yii/redis/ActiveRecord::offsetGet*			public
@@ -370,7 +365,7 @@ METHOD DETAILS
 
 
 *yii/redis/ActiveRecord::offsetUnset*			public
- See |yii/db/BaseActiveRecord::offsetUnset|
+ See |yii/base/Model::offsetUnset|
 
 
 *yii/redis/ActiveRecord::findOne*				public
@@ -390,13 +385,7 @@ METHOD DETAILS
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   class Customer extends \yii\redis\ActiveRecord
-   {
-       public function attributes()
-       {
-           return ['id', 'name', 'address', 'registration_date'];
-       }
-   }
+   Customer::updateAll(['status' => 1], ['id' => 2]);
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -414,15 +403,7 @@ METHOD DETAILS
 
  For example, to increment all customers' age by 1,
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   Customer::updateAllCounters(['age' => 1]);
 
 
     [$counters] (array) The counters to be updated (attribute name =>
@@ -444,7 +425,7 @@ METHOD DETAILS
 
  For example, to delete all customers whose status is 3:
 
-   Customer::updateAll(['status' => 1], ['id' => 2]);
+   Customer::deleteAll(['status' => 3]);
 
 
     [$condition] (array) The conditions that will be put in the WHERE part of
@@ -631,14 +612,28 @@ METHOD DETAILS
  'one()' or 'all()' is called to return populated ActiveRecord instances. For
  example,
 
-   Customer::updateAllCounters(['age' => 1]);
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
  This method is also called by 'BaseActiveRecord::hasOne()' and
  'BaseActiveRecord::hasMany()' to create a relational query.
 
  You may override this method to return a customized query. For example,
 
-   Customer::deleteAll(['status' => 3]);
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
 
  The following code shows how to apply a default condition for all queries:
 
@@ -663,14 +658,10 @@ successfully.
 
  Usage example:
 
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
-
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the

@@ -167,21 +167,13 @@ METHOD DETAILS
  array values the corresponding action class names or action configuration
  arrays. For example,
 
-   [
-       // built-in "required" validator
-       [['username', 'password'], 'required'],
-       // built-in "string" validator customized with "min" and "max"
- properties
-       ['username', 'string', 'min' => 3, 'max' => 12],
-       // built-in "compare" validator that is used in "register" scenario
- only
-       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
- 'register'],
-       // an inline validator defined via the "authenticate()" method in the
- model class
-       ['password', 'authenticate', 'on' => 'login'],
-       // a validator of class "DateRangeValidator"
-       ['dateRange', 'DateRangeValidator'],
+   return [
+       'action1' => 'app\components\Action1',
+       'action2' => [
+           'class' => 'app\components\Action2',
+           'property1' => 'value1',
+           'property2' => 'value2',
+       ],
    ];
 
  '\Yii::createObject()' will be used later to create the requested action
@@ -197,7 +189,7 @@ METHOD DETAILS
 
 
 *yii/debug/controllers/DefaultController::bindActionParams*public
- See |yii/web/Controller::bindActionParams|
+ See |yii/base/Controller::bindActionParams|
 
 
 *yii/debug/controllers/DefaultController::createAction*	public
@@ -205,7 +197,7 @@ METHOD DETAILS
 
 
 *yii/debug/controllers/DefaultController::beforeAction*	public
- See |yii/web/Controller::beforeAction|
+ See |yii/base/Controller::beforeAction|
 
 
 *yii/debug/controllers/DefaultController::afterAction*	public

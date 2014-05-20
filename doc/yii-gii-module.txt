@@ -8,8 +8,12 @@ DESCRIPTION
  To use Gii, include it as a module in the application configuration like the
  following:
 
-   // $params refers to validation parameters given in the rule
-   function validatorName($attribute, $params)
+   return [
+       'bootstrap' => ['gii'],
+       'modules' => [
+           'gii' => ['class' => 'yii\gii\Module'],
+       ],
+   ]
 
  Because Gii generates new code files on the server, you should only use it on
  your own development machine. To prevent other people from using this module,
@@ -107,21 +111,9 @@ $aliases				*yii/gii/Module::$aliases*
  aliases. For example,
 
    [
-       // built-in "required" validator
-       [['username', 'password'], 'required'],
-       // built-in "string" validator customized with "min" and "max"
- properties
-       ['username', 'string', 'min' => 3, 'max' => 12],
-       // built-in "compare" validator that is used in "register" scenario
- only
-       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
- 'register'],
-       // an inline validator defined via the "authenticate()" method in the
- model class
-       ['password', 'authenticate', 'on' => 'login'],
-       // a validator of class "DateRangeValidator"
-       ['dateRange', 'DateRangeValidator'],
-   ];
+       '@models' => '@app/models', // an existing alias
+       '@backend' => __DIR__ . '/../backend',  // a directory
+   ]
 
 
 
@@ -336,12 +328,15 @@ METHOD DETAILS
 
  If you override this method, your code should look like the following:
 
-   return [
-       'bootstrap' => ['gii'],
-       'modules' => [
-           'gii' => ['class' => 'yii\gii\Module'],
-       ],
-   ]
+   public function beforeAction($action)
+   {
+       if (parent::beforeAction($action)) {
+           // your custom code here
+           return true;  // or false if needed
+       } else {
+           return false;
+       }
+   }
 
 
     [$action] (\yii\base\Action) The action to be executed.

@@ -27,7 +27,7 @@ DESCRIPTION
 
    [
        'class' => 'yii\caching\DbDependency',
-       'sql' => 'SELECT MAX(lastModified) FROM Post',
+       'sql' => 'SELECT MAX(updated_at) FROM post',
    ]
 
  The following code shows how you can use ContentNegotiator as an action
@@ -60,7 +60,7 @@ $formatParam				*yii/filters/ContentNegotiator::$formatParam*
  Note that if the specified format does not exist in 'formats', a
  'UnsupportedMediaTypeHttpException' exception will be thrown.  If the
  parameter value is empty or if this property is null, the response format
- will be determined based on the 'Accept' HTTP header.
+ will be determined based on the 'Accept' HTTP header only.
 
 $languageParam				*yii/filters/ContentNegotiator::$languageParam*
  (string) The name of the GET parameter that specifies the
@@ -68,7 +68,7 @@ $languageParam				*yii/filters/ContentNegotiator::$languageParam*
  specified language does not match any of 'languages', the first language in
  'languages' will be used. If the parameter value is empty or if this property
  is null, the application language will be determined based on the
- 'Accept-Language' HTTP header.
+ 'Accept-Language' HTTP header only.
 
 $formats				*yii/filters/ContentNegotiator::$formats*
  (array) List of supported response formats. The keys are MIME types (e.g.

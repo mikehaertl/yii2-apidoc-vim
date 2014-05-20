@@ -10,24 +10,19 @@ DESCRIPTION
 
  Example application configuration:
 
-   class SiteController extends Controller
-   {
-       public function actions()
-       {
-           return [
-               'auth' => [
-                   'class' => 'yii\authclient\AuthAction',
-                   'successCallback' => [$this, 'successCallback'],
+   'components' => [
+       'authClientCollection' => [
+           'class' => 'yii\authclient\Collection',
+           'clients' => [
+               'facebook' => [
+                   'class' => 'yii\authclient\clients\Facebook',
+                   'clientId' => 'facebook_client_id',
+                   'clientSecret' => 'facebook_client_secret',
                ],
-           ]
-       }
-
-       public function successCallback($client)
-       {
-           $attributes = $client->getUserAttributes();
-           // user login or signup comes here
-       }
-   }
+           ],
+       ]
+       ...
+   ]
 
 
 

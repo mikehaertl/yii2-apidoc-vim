@@ -5,10 +5,10 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/web/CacheSession|
-|yii/web/DbSession|
 |yii/redis/Session|
 |yii/mongodb/Session|
+|yii/web/CacheSession|
+|yii/web/DbSession|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -634,6 +634,20 @@ does not exist.
 <
 (array) Flash messages (key => message).
 
+ You may use this method to display all the flash messages in a view file:
+
+   $session = new Session;
+   $session->open();
+   $value1 = $session['name1'];  // get session variable 'name1'
+   $value2 = $session['name2'];  // get session variable 'name2'
+   foreach ($session as $name => $value) // traverse all session variables
+   $session['name3'] = $value3;  // set session variable 'name3'
+
+ With the above code you can use the [bootstrap alert][] classes such as
+ 'success', 'info', 'danger' as the flash message key to influence the color
+ of the div.
+
+ [bootstrap alert]: http://getbootstrap.com/components/#alerts
 
 
 *yii/web/Session::setFlash*				public

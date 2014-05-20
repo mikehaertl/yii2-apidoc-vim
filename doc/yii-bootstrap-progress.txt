@@ -7,15 +7,41 @@ DESCRIPTION
 
  For example,
 
-   // a button group using Dropdown widget
-   echo ButtonDropdown::widget([
-       'label' => 'Action',
-       'dropdown' => [
-           'items' => [
-               ['label' => 'DropdownA', 'url' => '/'],
-               ['label' => 'DropdownB', 'url' => '#'],
-           ],
-       ],
+   // default with label
+   echo Progress::widget([
+       'percent' => 60,
+       'label' => 'test',
+   ]);
+
+   // styled
+   echo Progress::widget([
+       'percent' => 65,
+       'barOptions' => ['class' => 'progress-bar-danger']
+   ]);
+
+   // striped
+   echo Progress::widget([
+       'percent' => 70,
+       'barOptions' => ['class' => 'progress-bar-warning'],
+       'options' => ['class' => 'progress-striped']
+   ]);
+
+   // striped animated
+   echo Progress::widget([
+       'percent' => 70,
+       'barOptions' => ['class' => 'progress-bar-success'],
+       'options' => ['class' => 'active progress-striped']
+   ]);
+
+   // stacked bars
+   echo Progress::widget([
+       'bars' => [
+           ['percent' => 30, 'options' => ['class' => 'progress-bar-danger']],
+           ['percent' => 30, 'label' => 'test', 'options' => ['class' =>
+ 'progress-bar-success']],
+           ['percent' => 35, 'options' => ['class' =>
+ 'progress-bar-warning']],
+       ]
    ]);
 
 
@@ -55,34 +81,14 @@ $bars					*yii/bootstrap/Progress::$bars*
  (array) A set of bars that are stacked together to form a single progress
  bar. Each bar is an array of the following structure:
 
-   echo Tabs::widget([
-       'items' => [
-           [
-               'label' => 'One',
-               'content' => 'Anim pariatur cliche...',
-               'active' => true
-           ],
-           [
-               'label' => 'Two',
-               'content' => 'Anim pariatur cliche...',
-               'headerOptions' => [...],
-               'options' => ['id' => 'myveryownID'],
-           ],
-           [
-               'label' => 'Dropdown',
-               'items' => [
-                    [
-                        'label' => 'DropdownA',
-                        'content' => 'DropdownA, Anim pariatur cliche...',
-                    ],
-                    [
-                        'label' => 'DropdownB',
-                        'content' => 'DropdownB, Anim pariatur cliche...',
-                    ],
-               ],
-           ],
-       ],
-   ]);
+   [
+       // required, the amount of progress as a percentage.
+       'percent' => 30,
+       // optional, the label to be displayed on the bar
+       'label' => '30%',
+       // optional, array, additional HTML attributes for the bar tag
+       'options' => [],
+   ]
 
 
 

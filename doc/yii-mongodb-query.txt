@@ -17,11 +17,13 @@ DESCRIPTION
 
  For example,
 
-   'session' => [
-       'class' => 'yii\mongodb\Session',
-       // 'db' => 'mymongodb',
-       // 'sessionCollection' => 'my_session',
-   ]
+   $query = new Query;
+   // compose the query
+   $query->select(['name', 'status'])
+       ->from('customer')
+       ->limit(10);
+   // execute the query
+   $rows = $query->all();
 
 
 

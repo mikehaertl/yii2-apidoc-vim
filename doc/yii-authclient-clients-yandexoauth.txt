@@ -10,11 +10,19 @@ DESCRIPTION
 
  Example application configuration:
 
-   public function onAuthSuccess($client)
-   {
-       $attributes = $client->getUserAttributes();
-       // user login or signup comes here
-   }
+   'components' => [
+       'authClientCollection' => [
+           'class' => 'yii\authclient\Collection',
+           'clients' => [
+               'yandex' => [
+                   'class' => 'yii\authclient\clients\YandexOAuth',
+                   'clientId' => 'yandex_client_id',
+                   'clientSecret' => 'yandex_client_secret',
+               ],
+           ],
+       ]
+       ...
+   ]
 
 
 

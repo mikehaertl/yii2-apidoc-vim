@@ -15,22 +15,30 @@ DESCRIPTION
  application as follows,
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
+       'components' => [
+           'session' => [
+               'class' => 'yii\redis\Session',
+               'redis' => [
+                   'hostname' => 'localhost',
+                   'port' => 6379,
+                   'database' => 0,
+               ]
+           ],
+       ],
    ]
 
  Or if you have configured the redis 'Connection' as an application component,
  the following is sufficient:
 
-   public function beforeAction($action)
-   {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
-           return false;
-       }
-   }
+   [
+       'components' => [
+           'session' => [
+               'class' => 'yii\redis\Session',
+               // 'redis' => 'redis' // id of the connection application
+ component
+           ],
+       ],
+   ]
 
 
 

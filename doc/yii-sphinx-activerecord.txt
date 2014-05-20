@@ -28,14 +28,15 @@ $errors					*yii/sphinx/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   $query = new Query;
-   $query->select('id, groupd_id')
-       ->from('idx_item')
-       ->limit(10);
-   // build and execute the query
-   $command = $query->createCommand();
-   // $command->sql returns the actual SQL
-   $rows = $command->queryAll();
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
 
 
@@ -100,19 +101,19 @@ METHOD DETAILS
 
 
 *yii/sphinx/ActiveRecord::__get*				public
- See |yii/db/BaseActiveRecord::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/sphinx/ActiveRecord::__set*				public
- See |yii/db/BaseActiveRecord::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/sphinx/ActiveRecord::__isset*			public
- See |yii/db/BaseActiveRecord::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/sphinx/ActiveRecord::__unset*			public
- See |yii/db/BaseActiveRecord::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/sphinx/ActiveRecord::__call*				public
@@ -266,7 +267,7 @@ METHOD DETAILS
 
 
 *yii/sphinx/ActiveRecord::getAttributeLabel*		public
- See |yii/db/BaseActiveRecord::getAttributeLabel|
+ See |yii/base/Model::getAttributeLabel|
 
 
 *yii/sphinx/ActiveRecord::hasErrors*			public
@@ -342,7 +343,7 @@ METHOD DETAILS
 
 
 *yii/sphinx/ActiveRecord::offsetExists*			public
- See |yii/db/BaseActiveRecord::offsetExists|
+ See |yii/base/Model::offsetExists|
 
 
 *yii/sphinx/ActiveRecord::offsetGet*			public
@@ -354,7 +355,7 @@ METHOD DETAILS
 
 
 *yii/sphinx/ActiveRecord::offsetUnset*			public
- See |yii/db/BaseActiveRecord::offsetUnset|
+ See |yii/base/Model::offsetUnset|
 
 
 *yii/sphinx/ActiveRecord::findOne*			public
@@ -373,18 +374,7 @@ METHOD DETAILS
 
  For example, to change the status to be 1 for all articles which status is 2:
 
-   $query = new Query;
-   $query->from('idx_item')
-       ->match('pencil')
-       ->snippetCallback(function ($rows) {
-           $result = [];
-           foreach ($rows as $row) {
-               $result[] = file_get_contents('/path/to/index/files/' .
- $row['id'] . '.txt');
-           }
-           return $result;
-       })
-       ->all();
+   Article::updateAll(['status' => 1], 'status = 2');
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -407,15 +397,7 @@ METHOD DETAILS
 
  For example, to delete all articles whose status is 3:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   Article::deleteAll('status = 3');
 
 
     [$condition] (string|array) The conditions that will be put in the WHERE
@@ -516,13 +498,20 @@ METHOD DETAILS
 
  For example, to update an article record:
 
-   Article::updateAll(['status' => 1], 'status = 2');
+   $article = Article::findOne($id);
+   $article->genre_id = $genreId;
+   $article->group_id = $groupId;
+   $article->update();
 
  Note that it is possible the update does not affect any row in the table. In
  this case, this method will return 0. For this reason, you should use the
  following code to check if update() is successful or not:
 
-   Article::deleteAll('status = 3');
+   if ($this->update() !== false) {
+       // update successful
+   } else {
+       // update failed
+   }
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -683,20 +672,27 @@ index.
  'one()' or 'all()' is called to return populated ActiveRecord instances. For
  example,
 
-   $article = Article::findOne($id);
-   $article->genre_id = $genreId;
-   $article->group_id = $groupId;
-   $article->update();
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
  This method is also called by 'BaseActiveRecord::hasOne()' and
  'BaseActiveRecord::hasMany()' to create a relational query.
 
  You may override this method to return a customized query. For example,
 
-   if ($this->update() !== false) {
-       // update successful
-   } else {
-       // update failed
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
    }
 
  The following code shows how to apply a default condition for all queries:
@@ -737,14 +733,11 @@ successfully.
 
  For example, to insert an article record:
 
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
-
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
+   $article = new Article;
+   $article->id = $id;
+   $article->genre_id = $genreId;
+   $article->content = $content;
+   $article->insert();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -777,14 +770,8 @@ successfully.
 
  Below is an example:
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   $customers = Article::findBySql("SELECT * FROM `idx_article` WHERE
+ MATCH('development')")->all();
 
 
     [$sql] (string) The SQL statement to be executed
@@ -875,11 +862,10 @@ snippets in case "source" is an array.
  Child classes must implement this method to return the actual snippet source
  text. For example:
 
-   $article = new Article;
-   $article->id = $id;
-   $article->genre_id = $genreId;
-   $article->content = $content;
-   $article->insert();
+   public function getSnippetSource()
+   {
+       return $this->snippetSourceRelation->content;
+   }
 
 
 
@@ -900,8 +886,13 @@ operations.
  or all of them in transactions. You can do so by overriding this method and
  returning the operations that need to be transactional. For example,
 
-   $customers = Article::findBySql("SELECT * FROM `idx_article` WHERE
- MATCH('development')")->all();
+   return [
+       'admin' => self::OP_INSERT,
+       'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
+       // the above is equivalent to the following:
+       // 'api' => self::OP_ALL,
+
+   ];
 
  The above declaration specifies that in the "admin" scenario, the insert
  operation ('insert()') should be done in a transaction; and in the "api"

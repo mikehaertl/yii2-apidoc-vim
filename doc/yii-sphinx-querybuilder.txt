@@ -103,22 +103,11 @@ element). The parameters returned include those provided in '$params'.
 
  For example,
 
-   class Article extends ActiveRecord
-   {
-       public function getSource()
-       {
-           return $this->hasOne('db', ArticleDb::className(), ['id' => 'id']);
-       }
-
-       public function getSnippetSource()
-       {
-           return $this->source->content;
-       }
-
-       ...
-   }
-
-   $articles = Article::find()->with('source')->snippetByModel()->all();
+   $sql = $queryBuilder->insert('idx_user', [
+       'name' => 'Sam',
+       'age' => 30,
+       'id' => 10,
+   ], $params);
 
  The method will properly escape the index and column names.
     [$index] (string) The index that new rows will be inserted into.
@@ -136,16 +125,11 @@ element). The parameters returned include those provided in '$params'.
 
  For example,
 
-   class Article extends ActiveRecord
-   {
-       public function getSnippetSource()
-       {
-           return file_get_contents('/path/to/source/files/' . $this->id .
- '.txt');;
-       }
-   }
-
-   $articles = Article::find()->snippetByModel()->all();
+   $sql = $queryBuilder->replace('idx_user', [
+       'name' => 'Sam',
+       'age' => 30,
+       'id' => 10,
+   ], $params);
 
  The method will properly escape the index and column names.
     [$index] (string) The index that new rows will be replaced.
@@ -176,10 +160,10 @@ element). The parameters returned include those provided in '$params'.
 
  For example,
 
-   $sql = $queryBuilder->insert('idx_user', [
-       'name' => 'Sam',
-       'age' => 30,
-       'id' => 10,
+   $sql = $queryBuilder->batchInsert('idx_user', ['id', 'name', 'age'], [
+       [1, 'Tom', 30],
+       [2, 'Jane', 20],
+       [3, 'Linda', 25],
    ], $params);
 
  Note that the values in each row must match the corresponding column names.
@@ -198,10 +182,10 @@ element). The parameters returned include those provided in '$params'.
 
  For example,
 
-   $sql = $queryBuilder->replace('idx_user', [
-       'name' => 'Sam',
-       'age' => 30,
-       'id' => 10,
+   $sql = $queryBuilder->batchReplace('idx_user', ['id', 'name', 'age'], [
+       [1, 'Tom', 30],
+       [2, 'Jane', 20],
+       [3, 'Linda', 25],
    ], $params);
 
  Note that the values in each row must match the corresponding column names.
@@ -234,11 +218,9 @@ element). The parameters returned include those provided in '$params'.
 
  For example,
 
-   $sql = $queryBuilder->batchInsert('idx_user', ['id', 'name', 'age'], [
-       [1, 'Tom', 30],
-       [2, 'Jane', 20],
-       [3, 'Linda', 25],
-   ], $params);
+   $params = [];
+   $sql = $queryBuilder->update('idx_user', ['status' => 1], 'age > 30',
+ $params);
 
  The method will properly escape the index and column names.
     [$index] (string) The index to be updated.
@@ -258,11 +240,7 @@ element). The parameters returned include those provided in '$params'.
 
  For example,
 
-   $sql = $queryBuilder->batchReplace('idx_user', ['id', 'name', 'age'], [
-       [1, 'Tom', 30],
-       [2, 'Jane', 20],
-       [3, 'Linda', 25],
-   ], $params);
+   $sql = $queryBuilder->delete('idx_user', 'status = 0');
 
  The method will properly escape the index and column names.
     [$index] (string) The index where the data will be deleted from.

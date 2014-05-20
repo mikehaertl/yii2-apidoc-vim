@@ -8,26 +8,6 @@ DESCRIPTION
  To use Mailer, you should configure it in the application configuration like
  the following,
 
-   $customer = new Customer;
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->insert();
-
- You may also skip the configuration of the 'transport' property. In that
- case, the default PHP 'mail()' function will be used to send emails.
-
- You specify the transport constructor arguments using 'constructArgs' key in
- the config. You can also specify the list of plugins, which should be
- registered to the transport using 'plugins' key. For example:
-
-   [
-       'tag_comment'  => ['{*', '*}'],
-       'tag_block'    => ['{', '}'],
-       'tag_variable' => ['{$', '}']
-   ]
-
- To send an email, you may use the following code:
-
    'components' => [
        ...
        'mail' => [
@@ -43,6 +23,32 @@ DESCRIPTION
        ],
        ...
    ],
+
+ You may also skip the configuration of the 'transport' property. In that
+ case, the default PHP 'mail()' function will be used to send emails.
+
+ You specify the transport constructor arguments using 'constructArgs' key in
+ the config. You can also specify the list of plugins, which should be
+ registered to the transport using 'plugins' key. For example:
+
+   'transport' => [
+       'class' => 'Swift_SmtpTransport',
+       'constructArgs' => ['localhost', 25]
+       'plugins' => [
+           [
+               'class' => 'Swift_Plugins_ThrottlerPlugin',
+               'constructArgs' => [20],
+           ],
+       ],
+   ],
+
+ To send an email, you may use the following code:
+
+   Yii::$app->mail->compose('contact/html', ['contactForm' => $form])
+       ->setFrom('from@domain.com')
+       ->setTo($form->email)
+       ->setSubject($form->subject)
+       ->send();
 
 
 

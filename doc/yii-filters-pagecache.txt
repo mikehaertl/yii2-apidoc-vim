@@ -67,16 +67,15 @@ $variations				*yii/filters/PageCache::$variations*
    {
        return [
            'pageCache' => [
-               'class' => \yii\filters\PageCache::className(),
-               'only' => ['list'],
+               'class' => 'yii\filters\PageCache',
+               'only' => ['index'],
                'duration' => 60,
                'dependency' => [
                    'class' => 'yii\caching\DbDependency',
                    'sql' => 'SELECT COUNT(*) FROM post',
                ],
                'variations' => [
-                   Yii::$app->language,
-                   Yii::$app->user->id
+                   \Yii::$app->language,
                ]
            ],
        ];

@@ -27,20 +27,28 @@ DESCRIPTION
 
  These options can be configured using methods of the same name. For example:
 
-   $connection->createCommand()->insert('idx_user', [
-       'name' => 'Sam',
-       'age' => 30,
-   ])->execute();
+   $articles = Article::find()->with('source')->asArray()->all();
 
  ActiveQuery allows to build the snippets using sources provided by
  ActiveRecord. You can use 'snippetByModel()' method to enable this. For
  example:
 
-   $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
-       ['Tom', 30],
-       ['Jane', 20],
-       ['Linda', 25],
-   ])->execute();
+   class Article extends ActiveRecord
+   {
+       public function getSource()
+       {
+           return $this->hasOne('db', ArticleDb::className(), ['id' => 'id']);
+       }
+
+       public function getSnippetSource()
+       {
+           return $this->source->content;
+       }
+
+       ...
+   }
+
+   $articles = Article::find()->with('source')->snippetByModel()->all();
 
  Relational query ----------------
 
@@ -504,7 +512,16 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
  For example:
 
-   $articles = Article::find()->with('source')->asArray()->all();
+   class Article extends ActiveRecord
+   {
+       public function getSnippetSource()
+       {
+           return file_get_contents('/path/to/source/files/' . $this->id .
+ '.txt');;
+       }
+   }
+
+   $articles = Article::find()->snippetByModel()->all();
 
  Warning: this option should NOT be used with 'asArray' at the same time!
 
