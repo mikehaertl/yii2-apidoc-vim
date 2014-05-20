@@ -14,22 +14,31 @@ DESCRIPTION
  You may configure the targets in application configuration, like the
  following:
 
-   ['error', 'warning']
-   // which is equivalent to:
-   Logger::LEVEL_ERROR | Logger::LEVEL_WARNING
+   [
+       'components' => [
+           'log' => [
+               'targets' => [
+                   'file' => [
+                       'class' => 'yii\log\FileTarget',
+                       'levels' => ['trace', 'info'],
+                       'categories' => ['yii\*'],
+                   ],
+                   'email' => [
+                       'class' => 'yii\log\EmailTarget',
+                       'levels' => ['error', 'warning'],
+                       'message' => [
+                           'to' => 'admin@example.com',
+                       ],
+                   ],
+               ],
+           ],
+       ],
+   ]
 
  Each log target can have a name and can be referenced via the 'targets'
  property as follows:
 
-   [
-     [0] => message (mixed, can be a string or some complex data, such as an
- exception object)
-     [1] => level (integer)
-     [2] => category (string)
-     [3] => timestamp (float, obtained by microtime(true))
-     [4] => traces (array, debug backtrace, contains the application code call
- stacks)
-   ]
+   Yii::$app->log->targets['file']->enabled = false;
 
 
 

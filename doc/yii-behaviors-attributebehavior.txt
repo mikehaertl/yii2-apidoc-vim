@@ -17,7 +17,23 @@ DESCRIPTION
  'value' property with a PHP callable whose return value will be used to
  assign to the current attribute(s). For example,
 
-   echo HtmlPurifier::process($html);
+   use yii\behaviors\AttributeBehavior;
+
+   public function behaviors()
+   {
+       return [
+           'attributeStamp' => [
+               'class' => AttributeBehavior::className(),
+               'attributes' => [
+                   ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
+                   ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+               ],
+               'value' => function ($event) {
+                   return 'some value';
+               },
+           ],
+       ];
+   }
 
 
 
@@ -35,9 +51,10 @@ $attributes				*yii/behaviors/AttributeBehavior::$attributes*
  attribute(s) to be updated. You can use a string to represent a single
  attribute, or an array to represent a list of attributes. For example,
 
-   echo HtmlPurifier::process($html, [
-       'Attr.EnableID' => true,
-   ]);
+   [
+       ActiveRecord::EVENT_BEFORE_INSERT => ['attribute1', 'attribute2'],
+       ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+   ]
 
 
 
@@ -47,22 +64,9 @@ $value					*yii/behaviors/AttributeBehavior::$value*
  value of the function will be assigned to the attributes. The signature of
  the function should be as follows,
 
-   use yii\behaviors\AttributeBehavior;
-
-   public function behaviors()
+   function ($event)
    {
-       return [
-           'attributeStamp' => [
-               'class' => AttributeBehavior::className(),
-               'attributes' => [
-                   ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
-                   ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
-               ],
-               'value' => function ($event) {
-                   return 'some value';
-               },
-           ],
-       ];
+       // return value will be assigned to the attribute
    }
 
 
@@ -146,8 +150,8 @@ values).
  The following is an example:
 
    [
-       ActiveRecord::EVENT_BEFORE_INSERT => ['attribute1', 'attribute2'],
-       ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
    ]
 
 

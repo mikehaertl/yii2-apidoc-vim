@@ -567,7 +567,10 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-      VarDumper::dump($var);
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -607,18 +610,10 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-      // generates the hash (usually done during user registration or when the
-    password is changed)
-      $hash = Security::generatePasswordHash($password);
-      // ...save $hash in database...
-
-      // during login, validate if the password entered is correct using $hash
-    fetched from database
-      if (Security::validatePassword($password, $hash) {
-          // password is good
-      } else {
-          // password is bad
-      }
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -665,10 +660,7 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+        function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label   is the label for the checkbox; and $name, $value and $checked
@@ -708,10 +700,7 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+        function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the radio button in the whole
     list; $label   is the label for the radio button; and $name, $value and
@@ -743,7 +732,7 @@ is empty.
       - item: callable, a callback that is used to generate each
       individual list item.   The signature of this callback must be:
 
-        function ($index, $label, $name, $checked, $value)
+        function ($item, $index)
 
     where $index is the array key corresponding to '$item' in '$items'. The
     callback should return   the whole list item tag.
@@ -773,7 +762,7 @@ is empty.
       - item: callable, a callback that is used to generate each
       individual list item.   The signature of this callback must be:
 
-        function ($index, $label, $name, $checked, $value)
+        function ($item, $index)
 
     where $index is the array key corresponding to '$item' in '$items'. The
     callback should return   the whole list item tag.
@@ -1058,7 +1047,10 @@ is empty.
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-        function ($item, $index)
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -1100,7 +1092,10 @@ is empty.
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-        function ($item, $index)
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -1146,10 +1141,7 @@ is empty.
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+        function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label   is the label for the checkbox; and $name, $value and $checked
@@ -1188,10 +1180,7 @@ is empty.
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+        function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the radio button in the whole
     list; $label   is the label for the radio button; and $name, $value and
@@ -1283,7 +1272,7 @@ will be returned.
 
  For example,
 
-     function ($index, $label, $name, $checked, $value)
+   Html::addCssStyle($options, 'width: 100px; height: 200px');
 
 
     [$options] (array) The HTML options to be modified.
@@ -1301,7 +1290,7 @@ will be returned.
 
  For example,
 
-     function ($index, $label, $name, $checked, $value)
+   Html::removeCssStyle($options, ['width', 'height']);
 
 
     [$options] (array) The HTML options to be modified.
@@ -1318,7 +1307,9 @@ returned.
 
  For example,
 
-   Html::addCssStyle($options, 'width: 100px; height: 200px');
+   print_r(Html::cssStyleFromArray(['width' => '100px', 'height' =>
+ '200px']));
+   // will display: 'width: 100px; height: 200px;'
 
 
     [$style] (array) The CSS style array. The array keys are the CSS property
@@ -1336,7 +1327,8 @@ returned.
 
  For example,
 
-   Html::removeCssStyle($options, ['width', 'height']);
+   print_r(Html::cssStyleToArray('width: 100px; height: 200px;'));
+   // will display: ['width' => '100px', 'height' => '200px']
 
 
     [$style] (string) The CSS style string

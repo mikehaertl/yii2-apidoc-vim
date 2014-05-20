@@ -11,7 +11,18 @@ DESCRIPTION
 
  The following example shows how to support three authentication methods:
 
-   function ($rule, $action)
+   public function behaviors()
+   {
+       return [
+           'compositeAuth' => [
+               'class' => \yii\filters\auth\CompositeAuth::className(),
+               'authMethods' => [
+                   \yii\filters\auth\HttpBasicAuth::className(),
+                   \yii\filters\auth\QueryParamAuth::className(),
+               ],
+           ],
+       ];
+   }
 
 
 

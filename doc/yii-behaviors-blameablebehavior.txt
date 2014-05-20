@@ -8,7 +8,14 @@ DESCRIPTION
  To use BlameableBehavior, simply insert the following code to your
  ActiveRecord class:
 
-   $this->timestamp->touch('creation_time');
+   use yii\behaviors\BlameableBehavior;
+
+   public function behaviors()
+   {
+       return [
+           BlameableBehavior::className(),
+       ];
+   }
 
  By default, BlameableBehavior will fill the 'created_by' and 'updated_by'
  attributes with the current user ID when the associated AR object is being
@@ -16,7 +23,18 @@ DESCRIPTION
  when the AR object is being updated. If your attribute names are different,
  you may configure the 'attributes' property like the following:
 
-   $model->touch('lastVisit');
+   public function behaviors()
+   {
+       return [
+           [
+               'class' => BlameableBehavior::className(),
+               'attributes' => [
+                   ActiveRecord::EVENT_BEFORE_INSERT => 'author_id',
+                   ActiveRecord::EVENT_BEFORE_UPDATE => 'updater_id',
+               ],
+           ],
+       ];
+   }
 
 
 
@@ -41,13 +59,8 @@ $value					*yii/behaviors/BlameableBehavior::$value*
  a valid PHP callable whose return value will be assigned to the current
  attribute(s). The signature of the callable should be:
 
-   use yii\behaviors\BlameableBehavior;
-
-   public function behaviors()
-   {
-       return [
-           BlameableBehavior::className(),
-       ];
+   function ($event) {
+       // return value will be assigned to the attribute(s)
    }
 
  If this property is not set, the value of 'Yii::$app->user->id' will be

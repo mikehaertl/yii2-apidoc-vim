@@ -20,7 +20,18 @@ DESCRIPTION
 
  ArrayDataProvider may be used in the following way:
 
-   Yii::$app->log->targets['file']->enabled = false;
+   $query = new Query;
+   $provider = new ArrayDataProvider([
+       'allModels' => $query->from('post')->all(),
+       'sort' => [
+           'attributes' => ['id', 'username', 'email'],
+       ],
+       'pagination' => [
+           'pageSize' => 10,
+       ],
+   ]);
+   // get the posts in the current page
+   $posts = $provider->getModels();
 
  Note: if you want to use the sorting feature, you must configure the 'sort'
  property so that the provider knows which columns can be sorted.

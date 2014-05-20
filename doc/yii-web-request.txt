@@ -825,10 +825,16 @@ in the header.
 
  This is determined by the 'Accept' HTTP header. For example,
 
-   if ($item === null) { // item does not exist
-       throw new \yii\web\HttpException(404, 'The requested Item could not be
- found.');
-   }
+   $_SERVER['HTTP_ACCEPT'] = 'text/plain; q=0.5, application/json;
+ version=1.0, application/xml; version=2.0;';
+   $types = $request->getAcceptableContentTypes();
+   print_r($types);
+   // displays:
+   // [
+   //     'application/json' => ['q' => 1, 'version' => '1.0'],
+   //      'application/xml' => ['q' => 1, 'version' => '2.0'],
+   //           'text/plain' => ['q' => 0.5],
+   // ]
 
 
 
@@ -889,10 +895,10 @@ the highest scores will be returned first.
  acceptable values with the highest quality scores will be returned first. For
  example,
 
-   $_SERVER['HTTP_ACCEPT'] = 'text/plain; q=0.5, application/json;
- version=1.0, application/xml; version=2.0;';
-   $types = $request->getAcceptableContentTypes();
-   print_r($types);
+   $header = 'text/plain; q=0.5, application/json; version=1.0,
+ application/xml; version=2.0;';
+   $accepts = $request->parseAcceptHeader($header);
+   print_r($accepts);
    // displays:
    // [
    //     'application/json' => ['q' => 1, 'version' => '1.0'],
@@ -927,16 +933,13 @@ the highest scores will be returned first.
  Through the returned cookie collection, you may access a cookie using the
  following syntax:
 
-   $header = 'text/plain; q=0.5, application/json; version=1.0,
- application/xml; version=2.0;';
-   $accepts = $request->parseAcceptHeader($header);
-   print_r($accepts);
-   // displays:
-   // [
-   //     'application/json' => ['q' => 1, 'version' => '1.0'],
-   //      'application/xml' => ['q' => 1, 'version' => '2.0'],
-   //           'text/plain' => ['q' => 0.5],
-   // ]
+   $cookie = $request->cookies['name']
+   if ($cookie !== null) {
+       $value = $cookie->value;
+   }
+
+   // alternatively
+   $value = $request->cookies->getValue('name');
 
 
 

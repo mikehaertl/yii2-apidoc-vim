@@ -24,20 +24,7 @@ DESCRIPTION
  a controller action. The 'yii' program is used when calling a console
  command, like the following:
 
-   CREATE TABLE source_message (
-       id INTEGER PRIMARY KEY AUTO_INCREMENT,
-       category VARCHAR(32),
-       message TEXT
-   );
-
-   CREATE TABLE message (
-       id INTEGER,
-       language VARCHAR(16),
-       translation TEXT,
-       PRIMARY KEY (id, language),
-       CONSTRAINT fk_message_source_message FOREIGN KEY (id)
-           REFERENCES source_message (id) ON DELETE CASCADE ON UPDATE RESTRICT
-   );
+   yii <route> [--param1=value1 --param2 ...]
 
 
 
@@ -302,7 +289,8 @@ mean abnormal.
 
  Example:
 
-   yii <route> [--param1=value1 --param2 ...]
+   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE);
 
 
     [$string] (string) The string to be formatted
@@ -319,7 +307,7 @@ mean abnormal.
 
  Example:
 
-   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
+   $this->stdout('This will be red and underlined.', Console::FG_RED,
  Console::UNDERLINE);
 
 
@@ -337,7 +325,7 @@ mean abnormal.
 
  Example:
 
-   $this->stdout('This will be red and underlined.', Console::FG_RED,
+   $this->stderr('This will be red and underlined.', Console::FG_RED,
  Console::UNDERLINE);
 
 

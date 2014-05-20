@@ -229,10 +229,7 @@ METHOD DETAILS
 
  This is equal to calling
 
-   [
-       'class' => 'yii\caching\DbDependency',
-       'sql' => 'SELECT MAX(updated_at) FROM post',
-   ]
+   echo Console::ansiFormatCode([Console::RESET])
 
 
 
@@ -453,15 +450,21 @@ determine size.
 
  The following example shows a simple usage of a progress bar:
 
-   use yii\widgets\Pjax;
-
-   Pjax::begin();
-   echo GridView::widget([...]);
-   Pjax::end();
+   Console::startProgress(0, 1000);
+   for ($n = 1; $n <= 1000; $n++) {
+       usleep(1000);
+       Console::updateProgress($n, 1000);
+   }
+   Console::endProgress();
 
  Git clone like progress (showing only status information):
 
-   echo Console::ansiFormatCode([Console::RESET])
+   Console::startProgress(0, 1000, 'Counting objects: ', false);
+   for ($n = 1; $n <= 1000; $n++) {
+       usleep(1000);
+       Console::updateProgress($n, 1000);
+   }
+   Console::endProgress("done." . PHP_EOL);
 
 
     [$done] (integer) The number of items that are completed.

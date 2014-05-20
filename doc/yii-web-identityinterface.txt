@@ -9,18 +9,33 @@ DESCRIPTION
  example, the following code shows how to implement this interface by a User
  ActiveRecord class:
 
-   // find customers together with their orders and country
-   Customer::find()->with('orders', 'country')->all();
-   // find customers together with their orders and the orders' shipping
- address
-   Customer::find()->with('orders.address')->all();
-   // find customers together with their country and orders of status 1
-   Customer::find()->with([
-       'orders' => function ($query) {
-           $query->andWhere('status = 1');
-       },
-       'country',
-   ])->all();
+   class User extends ActiveRecord implements IdentityInterface
+   {
+       public static function findIdentity($id)
+       {
+           return static::findOne($id);
+       }
+
+       public static function findIdentityByAccessToken($token, $type = null)
+       {
+           return static::findOne(['access_token' => $token]);
+       }
+
+       public function getId()
+       {
+           return $this->id;
+       }
+
+       public function getAuthKey()
+       {
+           return $this->authKey;
+       }
+
+       public function validateAuthKey($authKey)
+       {
+           return $this->authKey === $authKey;
+       }
+   }
 
 
 

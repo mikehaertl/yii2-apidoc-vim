@@ -19,8 +19,22 @@ DESCRIPTION
    public function behaviors()
    {
        return [
-           'basicAuth' => [
-               'class' => \yii\filters\auth\HttpBasicAuth::className(),
+           'access' => [
+               'class' => \yii\filters\AccessControl::className(),
+               'only' => ['create', 'update'],
+               'rules' => [
+                   // deny all POST requests
+                   [
+                       'allow' => false,
+                       'verbs' => ['POST']
+                   ],
+                   // allow authenticated users
+                   [
+                       'allow' => true,
+                       'roles' => ['@'],
+                   ],
+                   // everything else is denied
+               ],
            ],
        ];
    }
@@ -50,12 +64,7 @@ $denyCallback				*yii/filters/AccessControl::$denyCallback*
 
  The signature of the callback should be as follows:
 
-   function ($username, $password) {
-       return \app\models\User::findOne([
-           'username' => $username,
-           'password' => $password,
-       ]);
-   }
+   function ($rule, $action)
 
  where '$rule' is the rule that denies the user, and '$action' is the current
  'Action|action' object. '$rule' can be 'null' if access is denied because

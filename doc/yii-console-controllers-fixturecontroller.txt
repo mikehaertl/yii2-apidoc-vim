@@ -12,11 +12,15 @@ DESCRIPTION
 
 
 
-   'app\config\AllAsset' => [
-       'js' => 'js/all-{ts}.js',
-       'css' => 'css/all-{ts}.css',
-       'depends' => [ ... ],
-   ]
+   #load fixtures from UsersFixture class with default namespace
+ "tests\unit\fixtures"
+   yii fixture/load User
+
+   #also a short version of this command (generate action is default)
+   yii fixture User
+
+   #load fixtures with different namespace.
+   yii fixture/load User --namespace=alias\my\custom\namespace\goes\here
 
 
 

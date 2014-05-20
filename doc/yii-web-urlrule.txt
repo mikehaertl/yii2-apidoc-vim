@@ -8,16 +8,11 @@ DESCRIPTION
  To define your own URL parsing and creation logic you can extend from this
  class and add it to 'UrlManager::rules' like this:
 
-   // add a cookie
-   $response->cookies->add(new Cookie([
-       'name' => $name,
-       'value' => $value,
-   ]);
-
-   // remove a cookie
-   $response->cookies->remove('name');
-   // alternatively
-   unset($response->cookies['name']);
+   'rules' => [
+       ['class' => 'MyUrlRule', 'pattern' => '...', 'route' => 'site/index',
+ ...],
+       // ...
+   ]
 
 
 

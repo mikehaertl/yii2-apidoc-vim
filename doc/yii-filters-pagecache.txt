@@ -15,7 +15,23 @@ DESCRIPTION
  of the page depended on the route ('varyByRoute' is true by default), the
  application language and user id.
 
-   function ($action, $params)
+   public function behaviors()
+   {
+       return [
+           'pageCache' => [
+               'class' => 'yii\filters\PageCache',
+               'only' => ['index'],
+               'duration' => 60,
+               'dependency' => [
+                   'class' => 'yii\caching\DbDependency',
+                   'sql' => 'SELECT COUNT(*) FROM post',
+               ],
+               'variations' => [
+                   \Yii::$app->language,
+               ]
+           ],
+       ];
+   }
 
 
 
@@ -50,7 +66,10 @@ $dependency				*yii/filters/PageCache::$dependency*
  depends on. This can be either a 'Dependency' object or a configuration array
  for creating the dependency object. For example,
 
-   function ($action, $params)
+   [
+       'class' => 'yii\caching\DbDependency',
+       'sql' => 'SELECT MAX(updated_at) FROM post',
+   ]
 
  would make the output cache depends on the last modified time of all posts.
  If any post has its modification time changed, the cached content would be
@@ -63,23 +82,9 @@ $variations				*yii/filters/PageCache::$variations*
  be cached in different versions according to the current application
  language:
 
-   public function behaviors()
-   {
-       return [
-           'pageCache' => [
-               'class' => 'yii\filters\PageCache',
-               'only' => ['index'],
-               'duration' => 60,
-               'dependency' => [
-                   'class' => 'yii\caching\DbDependency',
-                   'sql' => 'SELECT COUNT(*) FROM post',
-               ],
-               'variations' => [
-                   \Yii::$app->language,
-               ]
-           ],
-       ];
-   }
+   [
+       Yii::$app->language,
+   ]
 
 
 

@@ -10,20 +10,29 @@ DESCRIPTION
  The following is an example of using ActiveDataProvider to provide
  ActiveRecord instances:
 
-   'age' => [
-       'asc' => ['age' => SORT_ASC],
-       'desc' => ['age' => SORT_DESC],
-       'default' => SORT_ASC,
-       'label' => Inflector::camel2words('age'),
-   ]
+   $provider = new ActiveDataProvider([
+       'query' => Post::find(),
+       'pagination' => [
+           'pageSize' => 20,
+       ],
+   ]);
+
+   // get the posts in the current page
+   $posts = $provider->getModels();
 
  And the following example shows how to use ActiveDataProvider without
  ActiveRecord:
 
-   [
-       'name' => SORT_ASC,
-       'created_at' => SORT_DESC,
-   ]
+   $query = new Query;
+   $provider = new ActiveDataProvider([
+       'query' => $query->from('post'),
+       'pagination' => [
+           'pageSize' => 20,
+       ],
+   ]);
+
+   // get the posts in the current page
+   $posts = $provider->getModels();
 
 
 

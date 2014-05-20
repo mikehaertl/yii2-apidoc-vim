@@ -31,9 +31,13 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   if (isset($request->cookies['name'])) {
-       $value = (string) $request->cookies['name'];
-   }
+   'user' => [
+       'identityClass' => 'app\models\User', // User must implement the
+ IdentityInterface
+       'enableAutoLogin' => true,
+       // 'loginUrl' => ['user/login'],
+       // ...
+   ]
 
 
 
@@ -54,13 +58,7 @@ $loginUrl				*yii/web/User::$loginUrl*
  login action, and the rest of the name-value pairs are GET parameters used to
  construct the login URL. For example,
 
-   'user' => [
-       'identityClass' => 'app\models\User', // User must implement the
- IdentityInterface
-       'enableAutoLogin' => true,
-       // 'loginUrl' => ['user/login'],
-       // ...
-   ]
+   ['site/login', 'ref' => 1]
 
  If this property is null, a 403 HTTP exception will be raised when
  'loginRequired()' is called.
@@ -369,7 +367,7 @@ user is a guest.
     route, and the rest of the name-value pairs are GET parameters used to
     construct the URL. For example,
 
-      ['site/login', 'ref' => 1]
+      ['admin/index', 'ref' => 1]
 
 
 

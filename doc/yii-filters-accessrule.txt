@@ -49,21 +49,7 @@ $matchCallback				*yii/filters/AccessRule::$matchCallback*
  (callable) A callback that will be called to determine if the rule should be
  applied. The signature of the callback should be as follows:
 
-   array(
-       'summary' => array(
-           'total' => total number of checks,
-           'errors' => number of errors,
-           'warnings' => number of warnings,
-       ),
-       'requirements' => array(
-           array(
-               ...
-               'error' => is there an error,
-               'warning' => is there a warning,
-           ),
-           ...
-       ),
-   )
+   function ($rule, $action)
 
  where '$rule' is this rule, and '$action' is the current 'Action|action'
  object. The callback should return a boolean value indicating whether this
@@ -76,14 +62,7 @@ $denyCallback				*yii/filters/AccessRule::$denyCallback*
 
  The signature of the callback should be as follows:
 
-   public function behaviors()
-   {
-       return [
-           'rateLimiter' => [
-               'class' => \yii\filters\RateLimiter::className(),
-           ],
-       ];
-   }
+   function ($rule, $action)
 
  where '$rule' is this rule, and '$action' is the current 'Action|action'
  object.

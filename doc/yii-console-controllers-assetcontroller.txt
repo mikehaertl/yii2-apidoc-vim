@@ -52,7 +52,11 @@ $targets				*yii/console/controllers/AssetController::$targets*
  can specify the name of the output compressed file using 'css' and 'js' keys:
  For example:
 
-   yii help [command name]
+   'app\config\AllAsset' => [
+       'js' => 'js/all-{ts}.js',
+       'css' => 'css/all-{ts}.css',
+       'depends' => [ ... ],
+   ]
 
  File names can contain placeholder "{ts}", which will be filled by current
  timestamp, while file creation.

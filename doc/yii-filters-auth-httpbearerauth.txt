@@ -8,7 +8,14 @@ DESCRIPTION
  You may use HttpBearerAuth by attaching it as a behavior to a controller or
  module, like the following:
 
-   function ($rule, $action)
+   public function behaviors()
+   {
+       return [
+           'bearerAuth' => [
+               'class' => \yii\filters\auth\HttpBearerAuth::className(),
+           ],
+       ];
+   }
 
 
 

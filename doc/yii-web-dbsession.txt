@@ -12,10 +12,11 @@ DESCRIPTION
  The following example shows how you can configure the application to use
  DbSession: Add the following to your application config under 'components':
 
-   <?php
-   foreach(Yii::$app->session->getAllFlashes() as $key => $message) {
-       echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
-   } ?>
+   'session' => [
+       'class' => 'yii\web\DbSession',
+       // 'db' => 'mydb',
+       // 'sessionTable' => 'my_session',
+   ]
 
 
 
@@ -39,11 +40,12 @@ $sessionTable				*yii/web/DbSession::$sessionTable*
  (string) The name of the DB table that stores the session data. The table
  should be pre-created as follows:
 
-   'session' => [
-       'class' => 'yii\web\DbSession',
-       // 'db' => 'mydb',
-       // 'sessionTable' => 'my_session',
-   ]
+   CREATE TABLE session
+   (
+       id CHAR(40) NOT NULL PRIMARY KEY,
+       expire INTEGER,
+       data BLOB
+   )
 
  where 'BLOB' refers to the BLOB-type of your preferred DBMS. Below are the
  BLOB type that can be used for some popular DBMS:

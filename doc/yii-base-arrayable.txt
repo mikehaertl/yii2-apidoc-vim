@@ -35,8 +35,9 @@ METHOD DETAILS
  returning the corresponding field value. The signature of the callable should
  be:
 
-   Customer::find()->with('orders', 'country')->all();
-   Customer::find()->with('orders')->with('country')->all();
+   function ($field, $model) {
+       // return field value
+   }
 
  For example, the following code declares four fields:
 
@@ -48,17 +49,14 @@ METHOD DETAILS
    - 'fullName': the field name is 'fullName'. Its value is obtained by
    concatenating 'first_name'   and 'last_name'.
 
-   [
-       // anonymous fixture
-       PostFixture::className(),
-       // "users" fixture
-       'users' => UserFixture::className(),
-       // "cache" fixture with configuration
-       'cache' => [
-            'class' => CacheFixture::className(),
-            'host' => 'xxx',
-       ],
-   ]
+   return [
+       'email',
+       'firstName' => 'first_name',
+       'lastName' => 'last_name',
+       'fullName' => function () {
+           return $this->first_name . ' ' . $this->last_name;
+       },
+   ];
 
 
 

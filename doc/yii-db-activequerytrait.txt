@@ -48,20 +48,24 @@ METHOD DETAILS
 
  The followings are some usage examples:
 
-   function ($row)
-   {
-       // return the index value corresponding to $row
-   }
+   // find customers together with their orders and country
+   Customer::find()->with('orders', 'country')->all();
+   // find customers together with their orders and the orders' shipping
+ address
+   Customer::find()->with('orders.address')->all();
+   // find customers together with their country and orders of status 1
+   Customer::find()->with([
+       'orders' => function ($query) {
+           $query->andWhere('status = 1');
+       },
+       'country',
+   ])->all();
 
  You can call 'with()' multiple times. Each call will add relations to the
  existing ones. For example, the following two statements are equivalent:
 
-   // WHERE `age`=:age
-   $query->filterWhere(['name' => null, 'age' => 20]);
-   // WHERE `age`=:age
-   $query->where(['age' => 20]);
-   // WHERE `name` IS NULL AND `age`=:age
-   $query->where(['name' => null, 'age' => 20]);
+   Customer::find()->with('orders', 'country')->all();
+   Customer::find()->with('orders')->with('country')->all();
 
 
 

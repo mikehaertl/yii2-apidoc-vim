@@ -136,31 +136,18 @@ tampered.
  latin1' on MySQL). Later when a password needs to be validated, the hash can
  be fetched and passed to 'validatePassword()'. For example,
 
-   $array = [
-       ['id' => '123', 'name' => 'aaa', 'class' => 'x'],
-       ['id' => '124', 'name' => 'bbb', 'class' => 'x'],
-       ['id' => '345', 'name' => 'ccc', 'class' => 'y'],
-   );
+   // generates the hash (usually done during user registration or when the
+ password is changed)
+   $hash = Security::generatePasswordHash($password);
+   // ...save $hash in database...
 
-   $result = ArrayHelper::map($array, 'id', 'name');
-   // the result is:
-   // [
-   //     '123' => 'aaa',
-   //     '124' => 'bbb',
-   //     '345' => 'ccc',
-   // ]
-
-   $result = ArrayHelper::map($array, 'id', 'name', 'class');
-   // the result is:
-   // [
-   //     'x' => [
-   //         '123' => 'aaa',
-   //         '124' => 'bbb',
-   //     ],
-   //     'y' => [
-   //         '345' => 'ccc',
-   //     ],
-   // ]
+   // during login, validate if the password entered is correct using $hash
+ fetched from database
+   if (Security::validatePassword($password, $hash) {
+       // password is good
+   } else {
+       // password is bad
+   }
 
 
     [$password] (string) The password to be hashed.

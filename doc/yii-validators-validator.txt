@@ -123,11 +123,9 @@ $when					*yii/validators/Validator::$when*
  The following example will enable the validator only when the country
  currently selected is USA:
 
-   [
-       'class' => 'yii\rest\UrlRule',
-       'controller' => ['user', 'post'],
-       'except' => ['delete'],
-   ]
+   function ($model) {
+       return $model->country == Country::USA;
+   }
 
 
 
@@ -145,8 +143,8 @@ $whenClient				*yii/validators/Validator::$whenClient*
  The following example will enable the validator only when the country
  currently selected is USA:
 
-   function ($model) {
-       return $model->country == Country::USA;
+   function (attribute, value) {
+       return $('#country').value == 'USA';
    }
 
 

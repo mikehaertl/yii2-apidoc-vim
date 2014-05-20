@@ -24,9 +24,17 @@ DESCRIPTION
  code to be run during the bootstrap process. This is done by configuring the
  'Application::bootstrap' property:
 
-   function ($field, $model) {
-       // return field value
-   }
+   return [
+       // ...
+       'bootstrap' => [
+           "path\\to\\MyBootstrapClass1",
+           [
+               'class' => "path\\to\\MyBootstrapClass2",
+               'prop1' => 'value1',
+               'prop2' => 'value2',
+           ],
+       ],
+   ];
 
  As you can see, you can register a bootstrap class in terms of either a class
  name or a configuration class.

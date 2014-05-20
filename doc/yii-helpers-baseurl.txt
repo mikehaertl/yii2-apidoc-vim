@@ -29,19 +29,14 @@ METHOD DETAILS
  an array if you want to specify additional query parameters for the URL being
  created. The array format must be:
 
-   Console::startProgress(0, 1000, 'Counting objects: ', false);
-   for ($n = 1; $n <= 1000; $n++) {
-       usleep(1000);
-       Console::updateProgress($n, 1000);
-   }
-   Console::endProgress("done." . PHP_EOL);
+   // generates: /index.php?r=site/index&param1=value1&param2=value2
+   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
 
  If you want to create a URL with an anchor, you can use the array format with
  a '#' parameter. For example,
 
-   $myHtml = Markdown::process($myText); // use original markdown flavor
-   $myHtml = Markdown::process($myText, 'gfm'); // use github flavored
- markdown
+   // generates: /index.php?r=site/index&param1=value1#name
+   ['site/index', 'param1' => 'value1', '#' => 'name']
 
  A route may be either absolute or relative. An absolute route has a leading
  slash (e.g. '/site/index'), while a relative route has none (e.g.
@@ -60,8 +55,17 @@ METHOD DETAILS
 
  Below are some examples of using this method:
 
-   // generates: /index.php?r=site/index&param1=value1&param2=value2
-   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
+   // /index?r=site/index
+   echo Url::toRoute('site/index');
+
+   // /index?r=site/index&src=ref1#name
+   echo Url::toRoute(['site/index', 'src' => 'ref1', '#' => 'name']);
+
+   // http://www.example.com/index.php?r=site/index
+   echo Url::toRoute('site/index', true);
+
+   // https://www.example.com/index.php?r=site/index
+   echo Url::toRoute('site/index', 'https');
 
 
     [$route] (string|array) Use a string to represent a route (e.g. 'index',
@@ -126,8 +130,23 @@ METHOD DETAILS
 
  Below are some examples of using this method:
 
-   // generates: /index.php?r=site/index&param1=value1#name
-   ['site/index', 'param1' => 'value1', '#' => 'name']
+   // /index?r=site/index
+   echo Url::to(['site/index']);
+
+   // /index?r=site/index&src=ref1#name
+   echo Url::to(['site/index', 'src' => 'ref1', '#' => 'name']);
+
+   // the currently requested URL
+   echo Url::to();
+
+   // /images/logo.gif
+   echo Url::to('images/logo.gif');
+
+   // http://www.example.com/index.php?r=site/index
+   echo Url::to(['site/index'], true);
+
+   // https://www.example.com/index.php?r=site/index
+   echo Url::to(['site/index'], 'https');
 
 
     [$url] (array|string) The parameter to be used to generate a valid URL
@@ -193,17 +212,7 @@ remembered with the given name.
  use the following code in the layout view to add a link tag about canonical
  URL:
 
-   // /index?r=site/index
-   echo Url::toRoute('site/index');
-
-   // /index?r=site/index&src=ref1#name
-   echo Url::toRoute(['site/index', 'src' => 'ref1', '#' => 'name']);
-
-   // http://www.example.com/index.php?r=site/index
-   echo Url::toRoute('site/index', true);
-
-   // https://www.example.com/index.php?r=site/index
-   echo Url::toRoute('site/index', 'https');
+   $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
 
 
 

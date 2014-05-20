@@ -55,15 +55,9 @@ METHOD DETAILS
     function) that returns the index value based on the given row data. The
     signature of the callable should be:
 
-      public function getOrders()
+      function ($row)
       {
-          return $this->hasOne(Order::className(), ['id' => 'order_id']);
-      }
-
-      public function getOrderItems()
-      {
-          return $this->hasMany(Item::className(), ['id' => 'item_id'])
-                      ->via('orders');
+          // return the index value corresponding to $row
       }
 
 
@@ -117,11 +111,12 @@ METHOD DETAILS
 
  The following code shows the difference between this method and 'where()':
 
-   public function getOrders()
-   {
-       return $this->hasMany(Order::className(), ['customer_id' =>
- 'id'])->inverseOf('customer');
-   }
+   // WHERE `age`=:age
+   $query->filterWhere(['name' => null, 'age' => 20]);
+   // WHERE `age`=:age
+   $query->where(['age' => 20]);
+   // WHERE `name` IS NULL AND `age`=:age
+   $query->where(['name' => null, 'age' => 20]);
 
  Note that unlike 'where()', you cannot pass binding parameters to this
  method.

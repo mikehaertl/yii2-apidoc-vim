@@ -37,16 +37,9 @@ $method					*yii/widgets/ActiveForm::$method*
  current request url and each submit will add new parameters instead of
  replacing existing ones. You may set 'action' explicitly to avoid this:
 
-   echo DetailView::widget([
-       'model' => $model,
-       'attributes' => [
-           'title',             // title attribute (in plain text)
-           'description:html',  // description attribute in HTML
-           [                    // the owner name of the model
-               'label' => 'Owner',
-               'value' => $model->owner->name,
-           ],
-       ],
+   $form = ActiveForm::begin([
+       'method' => 'get',
+       'action' => ['controller/action'],
    ]);
 
 
@@ -123,7 +116,9 @@ $beforeSubmit				*yii/widgets/ActiveForm::$beforeSubmit*
  (string|\yii\web\JsExpression) A JS callback that will be called when the
  form is being submitted. The signature of the callback should be:
 
-   function ($attribute, $index, $widget)
+   function ($form) {
+       ...return false to cancel submission...
+   }
 
 
 
@@ -131,10 +126,9 @@ $beforeValidate				*yii/widgets/ActiveForm::$beforeValidate*
  (string|\yii\web\JsExpression) A JS callback that is called before validating
  an attribute. The signature of the callback should be:
 
-   $form = ActiveForm::begin([
-       'method' => 'get',
-       'action' => ['controller/action'],
-   ]);
+   function ($form, attribute, messages) {
+       ...return false to cancel the validation...
+   }
 
 
 
@@ -142,8 +136,7 @@ $afterValidate				*yii/widgets/ActiveForm::$afterValidate*
  (string|\yii\web\JsExpression) A JS callback that is called after validating
  an attribute. The signature of the callback should be:
 
-   function ($form) {
-       ...return false to cancel submission...
+   function ($form, attribute, messages) {
    }
 
 
@@ -383,15 +376,18 @@ METHOD DETAILS
  For example, you may use the following code in a controller action to respond
  to an AJAX validation request:
 
-   function ($form, attribute, messages) {
-       ...return false to cancel the validation...
+   $model = new Post;
+   $model->load($_POST);
+   if (Yii::$app->request->isAjax) {
+       Yii::$app->response->format = Response::FORMAT_JSON;
+       return ActiveForm::validate($model);
    }
+   // ... respond to non-AJAX request ...
 
  To validate multiple models, simply pass each model as a parameter to this
  method, like the following:
 
-   function ($form, attribute, messages) {
-   }
+   ActiveForm::validate($model1, $model2, ...);
 
 
     [$model] (\yii\base\Model) The model to be validated
@@ -415,11 +411,10 @@ METHOD DETAILS
  For example, you may use the following code in a controller action to respond
  to an AJAX validation request:
 
-   $model = new Post;
-   $model->load($_POST);
+   // ... load $models ...
    if (Yii::$app->request->isAjax) {
        Yii::$app->response->format = Response::FORMAT_JSON;
-       return ActiveForm::validate($model);
+       return ActiveForm::validateMultiple($models);
    }
    // ... respond to non-AJAX request ...
 

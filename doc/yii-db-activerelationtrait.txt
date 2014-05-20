@@ -61,8 +61,15 @@ METHOD DETAILS
  Use this method to specify a pivot record/table when declaring a relation in
  the 'ActiveRecord' class:
 
-   function ($field, $model) {
-       // return field value
+   public function getOrders()
+   {
+       return $this->hasOne(Order::className(), ['id' => 'order_id']);
+   }
+
+   public function getOrderItems()
+   {
+       return $this->hasMany(Item::className(), ['id' => 'item_id'])
+                   ->via('orders');
    }
 
 
@@ -88,14 +95,11 @@ METHOD DETAILS
 
  Use this method when declaring a relation in the 'ActiveRecord' class:
 
-   return [
-       'email',
-       'firstName' => 'first_name',
-       'lastName' => 'last_name',
-       'fullName' => function () {
-           return $this->first_name . ' ' . $this->last_name;
-       },
-   ];
+   public function getOrders()
+   {
+       return $this->hasMany(Order::className(), ['customer_id' =>
+ 'id'])->inverseOf('customer');
+   }
 
 
     [$relationName] (string) The name of the relation that is the inverse of

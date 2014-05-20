@@ -11,7 +11,7 @@ DESCRIPTION
    'columns' => [
        // ...
        [
-           'class' => 'yii\grid\CheckboxColumn',
+           'class' => 'yii\grid\ActionColumn',
            // you may configure additional properties here
        ],
    ]
@@ -73,9 +73,9 @@ $buttons				*yii/grid/ActionColumn::$buttons*
  (without curly brackets), and the values are the corresponding button
  rendering callbacks. The callbacks should use the following signature:
 
-   var keys = $('#grid').yiiGridView('getSelectedRows');
-   // keys is an array consisting of the keys associated with the selected
- rows
+   function ($url, $model) {
+       // return the button HTML code
+   }
 
  where '$url' is the URL that the column creates for the button, and '$model'
  is the model object being rendered for the current row.

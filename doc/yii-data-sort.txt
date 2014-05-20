@@ -13,51 +13,6 @@ DESCRIPTION
 
    function actionIndex()
    {
-       $query = Article::find()->where(['status' => 1]);
-       $countQuery = clone $query;
-       $pages = new Pagination(['totalCount' => $countQuery->count()]);
-       $models = $query->offset($pages->offset)
-           ->limit($pages->limit)
-           ->all();
-
-       return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages,
-       ]);
-   }
-
- View:
-
-   foreach ($models as $model) {
-       // display $model here
-   }
-
-   // display pagination
-   echo LinkPager::widget([
-       'pagination' => $pages,
-   ]);
-
- In the above, we declare two 'attributes' that support sorting: name and age.
- We pass the sort information to the Article query so that the query results
- are sorted by the orders specified by the Sort object. In the view, we show
- two hyperlinks that can lead to pages with the data sorted by the
- corresponding attributes.
-
-
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$enableMultiSort			*yii/data/Sort::$enableMultiSort*
- (boolean) Whether the sorting can be applied to multiple attributes
- simultaneously. Defaults to false, which means each time the data can only be
- sorted by one attribute.
-
-$attributes				*yii/data/Sort::$attributes*
- (array) List of attributes that are allowed to be sorted. Its syntax can be
- described using the following example:
-
-   function actionIndex()
-   {
        $sort = new Sort([
            'attributes' => [
                'age',
@@ -83,8 +38,7 @@ $attributes				*yii/data/Sort::$attributes*
        ]);
    }
 
- In the above, two attributes are declared: "age" and "name". The "age"
- attribute is a simple attribute which is equivalent to the following:
+ View:
 
    // display links leading to sort actions
    echo $sort->link('name') . ' | ' . $sort->link('age');
@@ -92,6 +46,45 @@ $attributes				*yii/data/Sort::$attributes*
    foreach ($models as $model) {
        // display $model here
    }
+
+ In the above, we declare two 'attributes' that support sorting: name and age.
+ We pass the sort information to the Article query so that the query results
+ are sorted by the orders specified by the Sort object. In the view, we show
+ two hyperlinks that can lead to pages with the data sorted by the
+ corresponding attributes.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$enableMultiSort			*yii/data/Sort::$enableMultiSort*
+ (boolean) Whether the sorting can be applied to multiple attributes
+ simultaneously. Defaults to false, which means each time the data can only be
+ sorted by one attribute.
+
+$attributes				*yii/data/Sort::$attributes*
+ (array) List of attributes that are allowed to be sorted. Its syntax can be
+ described using the following example:
+
+   [
+       'age',
+       'name' => [
+           'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
+           'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
+           'default' => SORT_DESC,
+           'label' => 'Name',
+       ],
+   ]
+
+ In the above, two attributes are declared: "age" and "name". The "age"
+ attribute is a simple attribute which is equivalent to the following:
+
+   'age' => [
+       'asc' => ['age' => SORT_ASC],
+       'desc' => ['age' => SORT_DESC],
+       'default' => SORT_ASC,
+       'label' => Inflector::camel2words('age'),
+   ]
 
  The "name" attribute is a composite attribute:
 
@@ -124,13 +117,8 @@ $defaultOrder				*yii/data/Sort::$defaultOrder*
  are the corresponding sort directions. For example,
 
    [
-       'age',
-       'name' => [
-           'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
-           'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
-           'default' => SORT_DESC,
-           'label' => 'Name',
-       ],
+       'name' => SORT_ASC,
+       'created_at' => SORT_DESC,
    ]
 
 
