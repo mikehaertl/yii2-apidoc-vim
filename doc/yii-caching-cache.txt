@@ -5,8 +5,6 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/redis/Cache|
-|yii/mongodb/Cache|
 |yii/caching/XCache|
 |yii/caching/DummyCache|
 |yii/caching/WinCache|
@@ -15,18 +13,29 @@ SUBCLASSES
 |yii/caching/ZendDataCache|
 |yii/caching/MemCache|
 |yii/caching/FileCache|
+|yii/redis/Cache|
+|yii/mongodb/Cache|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- A data item can be stored in cache by calling 'set()' and be retrieved back
- later (in the same or different request) by 'get()'. In both operations, a
- key identifying the data item is required. An expiration time and/or a
+ A data item can be stored in the cache by calling 'set()' and be retrieved
+ back later (in the same or different request) by 'get()'. In both operations,
+ a key identifying the data item is required. An expiration time and/or a
  'Dependency|dependency' can also be specified when calling 'set()'. If the
  data item expires or the dependency changes at the time of calling 'get()',
  the cache will return no data.
 
  A typical usage pattern of cache is like the following:
+
+   CREATE TABLE cache (
+       id char(128) NOT NULL PRIMARY KEY,
+       expire int(11),
+       data BLOB
+   );
+
+ Because Cache implements the ArrayAccess interface, it can be used like an
+ array. For example,
 
    $key = 'demo';
    $data = $cache->get($key);
@@ -35,13 +44,8 @@ DESCRIPTION
        $cache->set($key, $data, $duration, $dependency);
    }
 
- Because Cache implements the ArrayAccess interface, it can be used like an
- array. For example,
-
-   $cache['foo'] = 'some data';
-   echo $cache['foo'];
-
- Derived classes should implement the following methods:
+ Derived classes should implement the following methods which do the actual
+ cache storage operations:
 
 
    - 'getValue()': retrieve the value with a key (if any) from cache 
@@ -184,7 +188,7 @@ METHOD DETAILS
  See |yii/base/Component::ensureBehaviors|
 
 
-*yii/caching/Cache::buildKey*				protected
+*yii/caching/Cache::buildKey*				public
 >
  buildKey($key)
 <
@@ -238,7 +242,7 @@ expired, the corresponding array value will be false.
  Some caches (such as memcache, apc) allow retrieving multiple cached values
  at the same time, which may improve the performance. In case a cache does not
  support this feature natively, this method will try to simulate it.
-    [$keys] (array) List of keys identifying the cached values
+    [$keys] (string[]) List of string keys identifying the cached values
 
 
 *yii/caching/Cache::set*					public

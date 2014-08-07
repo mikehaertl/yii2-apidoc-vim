@@ -675,12 +675,12 @@ table.
 >
  buildCompositeInCondition($operator, $columns, $values, $params)
 <
-(void)
+(string) SQL
 
-    [$operator] () 
-    [$columns] () 
-    [$values] () 
-    [$params] () 
+    [$operator] (string) 
+    [$columns] (array) 
+    [$values] (array) 
+    [$params] (array) 
 
 
 *yii/db/QueryBuilder::buildLikeCondition*			public
@@ -720,6 +720,18 @@ table.
     [$operator] (string) The operator to use (e.g. 'EXISTS' or 'NOT EXISTS')
     [$operands] (array) Contains only one element which is a 'Query' object
     representing the sub-query.
+    [$params] (array) The binding parameters to be populated
+
+
+*yii/db/QueryBuilder::buildSimpleCondition*		public
+>
+ buildSimpleCondition($operator, $operands, $params)
+<
+(string) The generated SQL expression
+
+    [$operator] (string) The operator to use. Anything could be used e.g. '>',
+    '<=', etc.
+    [$operands] (array) Contains two column names.
     [$params] (array) The binding parameters to be populated
 
 

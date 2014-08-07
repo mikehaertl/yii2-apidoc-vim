@@ -13,8 +13,9 @@ DESCRIPTION
  configured by default. To do so, add the following to your application config
  under 'components':
 
-   'formatter' => [
-       'class' => 'yii\i18n\Formatter',
+   [
+       'core' => 'core.php',
+       'ext' => 'extensions.php',
    ]
 
 
@@ -73,6 +74,10 @@ $numberFormatOptions			*yii/i18n/Formatter::$numberFormatOptions*
  manual](http://php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute)
  for the possible options. This property is used by 'createNumberFormatter'
  when creating a new number formatter to format decimals, currencies, etc.
+
+$currencyCode				*yii/i18n/Formatter::$currencyCode*
+ (string) The international currency code displayed when formatting a number.
+ If not set, the currency code corresponding to 'locale' will be used.
 
 $behaviors				*yii/i18n/Formatter::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -339,13 +344,13 @@ METHOD DETAILS
 
 *yii/i18n/Formatter::asCurrency*				public
 >
- asCurrency($value, $currency=''USD'', $format='null')
+ asCurrency($value, $currency='null', $format='null')
 <
 (string) The formatted result.
 
     [$value] (mixed) The value to be formatted
     [$currency] (string) The 3-letter ISO 4217 currency code indicating the
-    currency to use.
+    currency to use. If null, 'currencyCode' will be used.
     [$format] (string) The format to be used. Please refer to [ICU
     manual](http://www.icu-project.org/apiref/icu4c/classDecimalFormat.html#_details)
     for details on how to specify a format.

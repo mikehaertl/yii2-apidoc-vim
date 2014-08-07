@@ -19,7 +19,8 @@ DESCRIPTION
 
  These options can be configured using methods of the same name. For example:
 
-   $images = ImageFile::find()->with('tags')->asArray()->all();
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
 
 
@@ -99,7 +100,15 @@ METHOD DETAILS
 
 
 *yii/mongodb/file/ActiveQuery::init*			public
- See |yii/base/Object::init|
+>
+ init()
+<
+(void)
+
+ This method is called at the end of the constructor. The default
+ implementation will trigger an 'EVENT_INIT' event. If you override this
+ method, make sure you call the parent implementation at the end to ensure
+ triggering of the event.
 
 
 *yii/mongodb/file/ActiveQuery::__get*			public

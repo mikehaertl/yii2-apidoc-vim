@@ -14,15 +14,26 @@ DESCRIPTION
 
  For example:
 
-   $record = new ImageFile();
-   $record->file = '/path/to/some/file.jpg';
-   $record->save();
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
 
  You can also specify file content via 'newFileContent' attribute:
 
-   $record = new ImageFile();
-   $record->newFileContent = 'New file content';
-   $record->save();
+   $images = ImageFile::find()->with('tags')->asArray()->all();
 
  Note: 'newFileContent' always takes precedence over 'file'.
 
@@ -46,15 +57,9 @@ $errors					*yii/mongodb/file/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   $record = new ImageFile();
+   $record->file = '/path/to/some/file.jpg';
+   $record->save();
 
 
 
@@ -119,19 +124,19 @@ METHOD DETAILS
 
 
 *yii/mongodb/file/ActiveRecord::__get*			public
- See |yii/base/Component::__get|
+ See |yii/db/BaseActiveRecord::__get|
 
 
 *yii/mongodb/file/ActiveRecord::__set*			public
- See |yii/base/Component::__set|
+ See |yii/db/BaseActiveRecord::__set|
 
 
 *yii/mongodb/file/ActiveRecord::__isset*			public
- See |yii/base/Component::__isset|
+ See |yii/db/BaseActiveRecord::__isset|
 
 
 *yii/mongodb/file/ActiveRecord::__unset*			public
- See |yii/base/Component::__unset|
+ See |yii/db/BaseActiveRecord::__unset|
 
 
 *yii/mongodb/file/ActiveRecord::__call*			public
@@ -244,13 +249,9 @@ METHOD DETAILS
  attributes. Note: all attributes defined in base Active Record class should
  be always present in returned array. For example:
 
-   public function attributes()
-   {
-       return array_merge(
-           parent::attributes(),
-           ['tags', 'status']
-       );
-   }
+   $record = new ImageFile();
+   $record->newFileContent = 'New file content';
+   $record->save();
 
 
 
@@ -296,7 +297,7 @@ METHOD DETAILS
 
 
 *yii/mongodb/file/ActiveRecord::getAttributeLabel*	public
- See |yii/base/Model::getAttributeLabel|
+ See |yii/db/BaseActiveRecord::getAttributeLabel|
 
 
 *yii/mongodb/file/ActiveRecord::hasErrors*		public
@@ -372,7 +373,7 @@ METHOD DETAILS
 
 
 *yii/mongodb/file/ActiveRecord::offsetExists*		public
- See |yii/base/Model::offsetExists|
+ See |yii/db/BaseActiveRecord::offsetExists|
 
 
 *yii/mongodb/file/ActiveRecord::offsetGet*		public
@@ -384,7 +385,7 @@ METHOD DETAILS
 
 
 *yii/mongodb/file/ActiveRecord::offsetUnset*		public
- See |yii/base/Model::offsetUnset|
+ See |yii/db/BaseActiveRecord::offsetUnset|
 
 
 *yii/mongodb/file/ActiveRecord::findOne*			public
@@ -395,12 +396,16 @@ METHOD DETAILS
  See |yii/db/ActiveRecordInterface::findAll|
 
 
+*yii/mongodb/file/ActiveRecord::findByCondition*		protected
+ See |yii/db/BaseActiveRecord::findByCondition|
+
+
 *yii/mongodb/file/ActiveRecord::updateAll*		public
  See |yii/db/ActiveRecordInterface::updateAll|
 
 
 *yii/mongodb/file/ActiveRecord::updateAllCounters*	public
- See |yii/mongodb/ActiveRecord::updateAllCounters|
+ See |yii/db/BaseActiveRecord::updateAllCounters|
 
 
 *yii/mongodb/file/ActiveRecord::deleteAll*		public
@@ -564,6 +569,10 @@ METHOD DETAILS
  See |yii/db/ActiveRecordInterface::unlink|
 
 
+*yii/mongodb/file/ActiveRecord::unlinkAll*		public
+ See |yii/db/BaseActiveRecord::unlinkAll|
+
+
 *yii/mongodb/file/ActiveRecord::isPrimaryKey*		public
  See |yii/db/ActiveRecordInterface::isPrimaryKey|
 
@@ -576,7 +585,7 @@ METHOD DETAILS
 >
  find()
 <
-(\yii\db\ActiveQueryInterface) The newly created
+(static|\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
  The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
@@ -584,27 +593,27 @@ METHOD DETAILS
  'one()' or 'all()' is called to return populated ActiveRecord instances. For
  example,
 
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
-
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
  This method is also called by 'BaseActiveRecord::hasOne()' and
  'BaseActiveRecord::hasMany()' to create a relational query.
 
  You may override this method to return a customized query. For example,
 
-   class Customer extends ActiveRecord
+   public function attributes()
    {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
+       return array_merge(
+           parent::attributes(),
+           ['tags', 'status']
+       );
    }
 
  The following code shows how to apply a default condition for all queries:
@@ -626,7 +635,7 @@ METHOD DETAILS
 
 
 *yii/mongodb/file/ActiveRecord::getDb*			public
- See |yii/mongodb/ActiveRecord::getDb|
+ See |yii/db/ActiveRecordInterface::getDb|
 
 
 *yii/mongodb/file/ActiveRecord::collectionName*		public

@@ -96,7 +96,30 @@ determined.
     [$file] (string) The file name.
     [$magicFile] (string) The path of the file that contains all available
     MIME type information. If this is not set, the default file aliased by
-    '@yii/util/mimeTypes.php' will be used.
+    '@yii/helpers/mimeTypes.php' will be used.
+
+
+*yii/helpers/BaseFileHelper::getExtensionsByMimeType*	public
+>
+ getExtensionsByMimeType($mimeType, $magicFile='null')
+<
+(array) The extensions corresponding to the specified MIME type
+
+ This method will use a local map between extension names and MIME types.
+    [$mimeType] (string) File MIME type.
+    [$magicFile] (string) The path of the file that contains all available
+    MIME type information. If this is not set, the default file aliased by
+    '@yii/helpers/mimeTypes.php' will be used.
+
+
+*yii/helpers/BaseFileHelper::loadMimeTypes*		protected
+>
+ loadMimeTypes($magicFile)
+<
+(array) The mapping from file extensions to MIME types
+
+    [$magicFile] (string) The file that contains MIME type information. If
+    null, the file '@yii/helpers/mimeTypes.php' will be used.
 
 
 *yii/helpers/BaseFileHelper::copyDirectory*		public
@@ -157,11 +180,18 @@ determined.
 
 *yii/helpers/BaseFileHelper::removeDirectory*		public
 >
- removeDirectory($dir)
+ removeDirectory($dir, $options='[]')
 <
 (void)
 
     [$dir] (string) The directory to be deleted recursively.
+    [$options] (array) Options for directory remove. Valid options are:
+
+
+      - traverseSymlinks: boolean, whether symlinks to the directories
+      should be traversed too.   Defaults to 'false', meaning the content of
+    the symlinked directory would not be deleted.   Only symlink would be
+    removed in that default case.
 
 
 *yii/helpers/BaseFileHelper::findFiles*			public

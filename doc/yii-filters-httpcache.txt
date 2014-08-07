@@ -8,24 +8,30 @@ DESCRIPTION
  It is an action filter that can be added to a controller and handles the
  'beforeAction' event.
 
- To use AccessControl, declare it in the 'behaviors()' method of your
- controller class. In the following example the filter will be applied to the
+ To use HttpCache, declare it in the 'behaviors()' method of your controller
+ class. In the following example the filter will be applied to the
  'list'-action and the Last-Modified header will contain the date of the last
  update to the user table in the database.
 
    public function behaviors()
    {
        return [
-           'httpCache' => [
-               'class' => 'yii\filters\HttpCache',
-               'only' => ['index'],
-               'lastModified' => function ($action, $params) {
-                   $q = new \yii\db\Query();
-                   return $q->from('user')->max('updated_at');
-               },
-   //            'etagSeed' => function ($action, $params) {
-   //                return // generate etag seed here
-   //            }
+           'access' => [
+               'class' => \yii\filters\AccessControl::className(),
+               'only' => ['create', 'update'],
+               'rules' => [
+                   // deny all POST requests
+                   [
+                       'allow' => false,
+                       'verbs' => ['POST']
+                   ],
+                   // allow authenticated users
+                   [
+                       'allow' => true,
+                       'roles' => ['@'],
+                   ],
+                   // everything else is denied
+               ],
            ],
        ];
    }
@@ -49,7 +55,7 @@ $lastModified				*yii/filters/HttpCache::$lastModified*
  (callable) A PHP callback that returns the UNIX timestamp of the last
  modification time. The callback's signature should be:
 
-   function ($action, $params)
+   function ($rule, $action)
 
  where '$action' is the 'Action' object that this filter is currently
  handling; '$params' takes the value of 'params'. The callback should return a
@@ -59,7 +65,22 @@ $etagSeed				*yii/filters/HttpCache::$etagSeed*
  (callable) A PHP callback that generates the Etag seed string. The callback's
  signature should be:
 
-   function ($action, $params)
+   public function behaviors()
+   {
+       return [
+           [
+               'class' => 'yii\filters\HttpCache',
+               'only' => ['index'],
+               'lastModified' => function ($action, $params) {
+                   $q = new \yii\db\Query();
+                   return $q->from('user')->max('updated_at');
+               },
+   //            'etagSeed' => function ($action, $params) {
+   //                return // generate etag seed here
+   //            }
+           ],
+       ];
+   }
 
  where '$action' is the 'Action' object that this filter is currently
  handling; '$params' takes the value of 'params'. The callback should return a
@@ -70,7 +91,24 @@ $params					*yii/filters/HttpCache::$params*
  'etagSeed' callbacks.
 
 $cacheControlHeader			*yii/filters/HttpCache::$cacheControlHeader*
- (string) HTTP cache control header. If null, the header will not be sent.
+ (string) The value of the 'Cache-Control' HTTP header. If null, the header
+ will not be sent.
+
+$sessionCacheLimiter			*yii/filters/HttpCache::$sessionCacheLimiter*
+ (string) The name of the cache limiter to be set when
+ [session_cache_limiter()](http://www.php.net/manual/en/function.session-cache-limiter.php)
+ is called. The default value is an empty string, meaning turning off
+ automatic sending of cache headers entirely. You may set this property to be
+ 'public', 'private', 'private_no_expire', and 'nocache'. Please refer to
+ [session_cache_limiter()](http://www.php.net/manual/en/function.session-cache-limiter.php)
+ for detailed explanation of these values.
+
+ If this property is 'null', then 'session_cache_limiter()' will not be
+ called. As a result, PHP will send headers according to the
+ 'session.cache_limiter' PHP ini setting.
+
+$enabled				*yii/filters/HttpCache::$enabled*
+ (boolean) A value indicating whether this filter should be enabled.
 
 
 

@@ -234,7 +234,7 @@ METHOD DETAILS
  See |yii/base/Controller::getViewPath|
 
 
-*yii/console/controllers/MessageController::findLayoutFile*protected
+*yii/console/controllers/MessageController::findLayoutFile*public
  See |yii/base/Controller::findLayoutFile|
 
 
@@ -319,9 +319,23 @@ METHOD DETAILS
     [$translator] (string) Name of the function used to translate messages
 
 
-*yii/console/controllers/MessageController::generateMessageFile*protected
+*yii/console/controllers/MessageController::saveMessagesToPHP*protected
 >
- generateMessageFile($messages, $fileName, $overwrite, $removeUnused, $sort, $format)
+ saveMessagesToPHP($messages, $dirName, $overwrite, $removeUnused, $sort)
+<
+(void)
+
+    [$messages] (array) 
+    [$dirName] (string) Name of the directory to write to
+    [$overwrite] (boolean) If existing file should be overwritten without
+    backup
+    [$removeUnused] (boolean) If obsolete translations should be removed
+    [$sort] (boolean) If translations should be sorted
+
+
+*yii/console/controllers/MessageController::saveMessagesCategoryToPHP*protected
+>
+ saveMessagesCategoryToPHP($messages, $fileName, $overwrite, $removeUnused, $sort, $category)
 <
 (void)
 
@@ -331,7 +345,22 @@ METHOD DETAILS
     backup
     [$removeUnused] (boolean) If obsolete translations should be removed
     [$sort] (boolean) If translations should be sorted
-    [$format] (string) Output format
+    [$category] (string) Message category
+
+
+*yii/console/controllers/MessageController::saveMessagesToPO*protected
+>
+ saveMessagesToPO($messages, $dirName, $overwrite, $removeUnused, $sort, $catalog)
+<
+(void)
+
+    [$messages] (array) 
+    [$dirName] (string) Name of the directory to write to
+    [$overwrite] (boolean) If existing file should be overwritten without
+    backup
+    [$removeUnused] (boolean) If obsolete translations should be removed
+    [$sort] (boolean) If translations should be sorted
+    [$catalog] (string) Message catalog
 
 
 

@@ -5,10 +5,10 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/gii/controllers/DefaultController|
-|yii/debug/controllers/DefaultController|
 |yii/rest/Controller|
 |yii/rest/ActiveController|
+|yii/gii/controllers/DefaultController|
+|yii/debug/controllers/DefaultController|
 
 
 PROPERTY DETAILS
@@ -204,15 +204,13 @@ METHOD DETAILS
 
  If you override this method, your code should look like the following:
 
-   public function beforeAction($action)
-   {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
-           return false;
-       }
+   $cookie = $request->cookies['name']
+   if ($cookie !== null) {
+       $value = $cookie->value;
    }
+
+   // alternatively
+   $value = $request->cookies->getValue('name');
 
 
     [$action] (\yii\base\Action) The action to be executed.
@@ -258,7 +256,7 @@ METHOD DETAILS
  See |yii/base/Controller::getViewPath|
 
 
-*yii/web/Controller::findLayoutFile*			protected
+*yii/web/Controller::findLayoutFile*			public
  See |yii/base/Controller::findLayoutFile|
 
 
@@ -288,8 +286,15 @@ METHOD DETAILS
 
  You can use it in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to login page
-   return $this->redirect(['login']);
+   public function beforeAction($action)
+   {
+       if (parent::beforeAction($action)) {
+           // your custom code here
+           return true;  // or false if needed
+       } else {
+           return false;
+       }
+   }
 
 
     [$url] (string|array) The URL to be redirected to. This can be in one of
@@ -317,8 +322,8 @@ METHOD DETAILS
 
  You can use this method in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to home page
-   return $this->goHome();
+   // stop executing this action and redirect to login page
+   return $this->redirect(['login']);
 
 
 
@@ -331,10 +336,11 @@ METHOD DETAILS
 
  You can use this method in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to last visited page
-   return $this->goBack();
+   // stop executing this action and redirect to home page
+   return $this->goHome();
 
-
+ For this function to work you have to 'User::setReturnUrl()|set the return
+ URL' in appropriate places before.
     [$defaultUrl] (string|array) The default return URL in case it was not set
     previously. If this is null and the return URL was not set previously,
     'Application::homeUrl' will be redirected to. Please refer to
@@ -351,8 +357,8 @@ METHOD DETAILS
 
  You can use it in an action by returning the 'Response' directly:
 
-   // stop executing this action and refresh the current page
-   return $this->refresh();
+   // stop executing this action and redirect to last visited page
+   return $this->goBack();
 
 
     [$anchor] (string) The anchor that should be appended to the redirection

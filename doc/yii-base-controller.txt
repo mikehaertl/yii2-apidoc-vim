@@ -5,22 +5,24 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/gii/controllers/DefaultController|
-|yii/debug/controllers/DefaultController|
-|yii/faker/FixtureController|
-|yii/apidoc/components/BaseController|
-|yii/apidoc/commands/ApiController|
-|yii/apidoc/commands/GuideController|
 |yii/console/Controller|
 |yii/console/controllers/HelpController|
 |yii/console/controllers/CacheController|
 |yii/console/controllers/MessageController|
 |yii/console/controllers/AssetController|
 |yii/console/controllers/FixtureController|
+|yii/console/controllers/BaseMigrateController|
 |yii/console/controllers/MigrateController|
 |yii/web/Controller|
 |yii/rest/Controller|
 |yii/rest/ActiveController|
+|yii/gii/controllers/DefaultController|
+|yii/debug/controllers/DefaultController|
+|yii/faker/FixtureController|
+|yii/mongodb/console/controllers/MigrateController|
+|yii/apidoc/components/BaseController|
+|yii/apidoc/commands/ApiController|
+|yii/apidoc/commands/GuideController|
 
 
 PROPERTY DETAILS
@@ -377,8 +379,8 @@ request.
    - an absolute path (e.g. "/main"): the layout name starts with a
    slash. The actual layout file will be   looked for under the
  'Application::layoutPath|layout path' of the application; 
-   - a relative path (e.g. "main"): the actual layout layout file will
-   be looked for under the   'Module::layoutPath|layout path' of the context
+   - a relative path (e.g. "main"): the actual layout file will be
+   looked for under the   'Module::layoutPath|layout path' of the context
  module.
 
  If the layout name does not contain a file extension, it will use the default
@@ -446,7 +448,7 @@ views or view files.
  under the 'module''s 'viewPath' directory.
 
 
-*yii/base/Controller::findLayoutFile*			protected
+*yii/base/Controller::findLayoutFile*			public
 >
  findLayoutFile($view)
 <

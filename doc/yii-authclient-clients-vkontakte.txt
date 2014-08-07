@@ -6,7 +6,7 @@ DESCRIPTION
 ------------------------------------------------------------------------------
 
  In order to use VKontakte OAuth you must register your application at
- <http://vk.com/apps.php?act=add&site=1>.
+ <http://vk.com/editapp?act=create>.
 
  Example application configuration:
 
@@ -14,10 +14,10 @@ DESCRIPTION
        'authClientCollection' => [
            'class' => 'yii\authclient\Collection',
            'clients' => [
-               'vkontakte' => [
-                   'class' => 'yii\authclient\clients\VKontakte',
-                   'clientId' => 'vkontakte_client_id',
-                   'clientSecret' => 'vkontakte_client_secret',
+               'yandex' => [
+                   'class' => 'yii\authclient\clients\YandexOAuth',
+                   'clientId' => 'yandex_client_id',
+                   'clientSecret' => 'yandex_client_secret',
                ],
            ],
        ]
@@ -263,7 +263,13 @@ METHOD DETAILS
 
 
 *yii/authclient/clients/VKontakte::defaultNormalizeUserAttributeMap*protected
- See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
+>
+ defaultNormalizeUserAttributeMap()
+<
+(array) Normalize attribute map.
+
+ Particular client may override this method in order to provide specific
+ default map.
 
 
 *yii/authclient/clients/VKontakte::defaultViewOptions*	protected
@@ -388,7 +394,7 @@ METHOD DETAILS
 
 *yii/authclient/clients/VKontakte::apiInternal*		protected
 >
- apiInternal($accessToken, $url, $method, $params)
+ apiInternal($accessToken, $url, $method, $params, $headers)
 <
 (array) API response.
 
@@ -396,6 +402,7 @@ METHOD DETAILS
     [$url] (string) Absolute API URL.
     [$method] (string) Request method.
     [$params] (array) Request parameters.
+    [$headers] (array) Additional request headers.
 
 
 *yii/authclient/clients/VKontakte::buildAuthUrl*		public

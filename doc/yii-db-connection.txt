@@ -14,6 +14,12 @@ DESCRIPTION
  provide data access to various DBMS in a common set of APIs. They are a thin
  wrapper of the 'PDO PHP extension'(http://www.php.net/manual/en/ref.pdo.php).
 
+ Connection supports database replication and read-write splitting. In
+ particular, a Connection component can be configured with multiple 'masters'
+ and 'slaves'. It will do load balancing and failover by choosing appropriate
+ servers. It will also automatically direct read operations to the slaves and
+ write operations to the masters.
+
  To establish a DB connection, set 'dsn', 'username' and 'password', and then
  call 'open()' to be true.
 
@@ -58,6 +64,20 @@ DESCRIPTION
    } catch (Exception $e) {
        $transaction->rollBack();
    }
+
+ You also can use shortcut for the above like the following:
+
+   $connection->transaction(function() {
+       $order = new Order($customer);
+       $order->save();
+       $order->addItems($items);
+   });
+
+ If needed you can pass transaction isolation level as a second parameter:
+
+   $connection->transaction(function(Connection $db) {
+       //return $db->...
+   }, Transaction::READ_UNCOMMITTED);
 
  Connection is often used as an application component and configured in the
  application configuration like the following:
@@ -125,19 +145,15 @@ $schemaCache				*yii/db/Connection::$schemaCache*
 $enableQueryCache			*yii/db/Connection::$enableQueryCache*
  (boolean) Whether to enable query caching. Note that in order to enable query
  caching, a valid cache component as specified by 'queryCache' must be enabled
- and 'enableQueryCache' must be set true.
-
- Methods 'beginCache()' and 'endCache()' can be used as shortcuts to turn on
- and off query caching on the fly.
+ and 'enableQueryCache' must be set true. Also, only the results of the
+ queries enclosed within 'cache()' will be cached.
 
 $queryCacheDuration			*yii/db/Connection::$queryCacheDuration*
- (integer) Number of seconds that query results can remain valid in cache.
- Defaults to 3600, meaning 3600 seconds, or one hour. Use 0 to indicate that
- the cached data will never expire.
-
-$queryCacheDependency			*yii/db/Connection::$queryCacheDependency*
- (\yii\caching\Dependency) The dependency that will be used when saving query
- results into cache. Defaults to null, meaning no dependency.
+ (integer) The default number of seconds that query results can remain valid
+ in cache. Use 0 to indicate that the cached data will never expire. Defaults
+ to 3600, meaning 3600 seconds, or one hour. Use 0 to indicate that the cached
+ data will never expire. The value of this property will be used when
+ 'cache()' is called without a cache duration.
 
 $queryCache				*yii/db/Connection::$queryCache*
  (\yii\caching\Cache|string) The cache object or the ID of the cache
@@ -184,11 +200,73 @@ $enableSavepoint			*yii/db/Connection::$enableSavepoint*
  underlying DBMS does not support savepoint, setting this property to be true
  will have no effect.
 
+$serverStatusCache			*yii/db/Connection::$serverStatusCache*
+ (\yii\caching\Cache|string) The cache object or the ID of the cache
+ application component that is used to store the health status of the DB
+ servers specified in 'masters' and 'slaves'. This is used only when
+ read/write splitting is enabled or 'masters' is not empty.
+
+$serverRetryInterval			*yii/db/Connection::$serverRetryInterval*
+ (integer) The retry interval in seconds for dead servers listed in 'masters'
+ and 'slaves'. This is used together with 'serverStatusCache'.
+
+$enableSlaves				*yii/db/Connection::$enableSlaves*
+ (boolean) Whether to enable read/write splitting by using 'slaves' to read
+ data. Note that if 'slaves' is empty, read/write splitting will NOT be
+ enabled no matter what value this property takes.
+
+$slaves					*yii/db/Connection::$slaves*
+ (array) List of slave connection configurations. Each configuration is used
+ to create a slave DB connection. When 'enableSlaves' is true, one of these
+ configurations will be chosen and used to create a DB connection for
+ performing read queries only.
+
+$slaveConfig				*yii/db/Connection::$slaveConfig*
+ (array) The configuration that should be merged with every slave
+ configuration listed in 'slaves'. For example,
+
+   [
+       'username' => 'slave',
+       'password' => 'slave',
+       'attributes' => [
+           // use a smaller connection timeout
+           PDO::ATTR_TIMEOUT => 10,
+       ],
+   ]
+
+
+
+$masters				*yii/db/Connection::$masters*
+ (array) List of master connection configurations. Each configuration is used
+ to create a master DB connection. When 'open()' is called, one of these
+ configurations will be chosen and used to create a DB connection which will
+ be used by this object. Note that when this property is not empty, the
+ connection setting (e.g. "dsn", "username") of this object will be ignored.
+
+$masterConfig				*yii/db/Connection::$masterConfig*
+ (array) The configuration that should be merged with every master
+ configuration listed in 'masters'. For example,
+
+   [
+       'username' => 'master',
+       'password' => 'master',
+       'attributes' => [
+           // use a smaller connection timeout
+           PDO::ATTR_TIMEOUT => 10,
+       ],
+   ]
+
+
+
 $behaviors				*yii/db/Connection::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 $isActive				*yii/db/Connection::$isActive*
  (boolean) Whether the DB connection is established
+
+$queryCacheInfo				*yii/db/Connection::$queryCacheInfo*
+ (array) The current query cache information, or null if query cache is not
+ enabled.
 
 $transaction				*yii/db/Connection::$transaction*
  (\yii\db\Transaction) The currently active transaction. Null if no active
@@ -207,6 +285,18 @@ $lastInsertID				*yii/db/Connection::$lastInsertID*
 
 $driverName				*yii/db/Connection::$driverName*
  (string) Name of the DB driver
+
+$slavePdo				*yii/db/Connection::$slavePdo*
+ (\PDO) The PDO instance for the currently active slave connection. Null is
+ returned if no slave connection is available and '$fallbackToMaster' is
+ false.
+
+$masterPdo				*yii/db/Connection::$masterPdo*
+ (\PDO) The PDO instance for the currently active master connection.
+
+$slave					*yii/db/Connection::$slave*
+ (\yii\db\Connection) The currently active slave connection. Null is returned
+ if there is slave available and '$fallbackToMaster' is false.
 
 
 
@@ -321,27 +411,71 @@ METHOD DETAILS
 
 
 
-*yii/db/Connection::beginCache*				public
+*yii/db/Connection::cache*				public
 >
- beginCache($duration=null, $dependency='null')
+ cache($callable, $duration=null, $dependency='null')
 <
-(void)
+(mixed) The return result of the callable
 
- This method is provided as a shortcut to setting two properties that are
- related with query caching: 'queryCacheDuration' and 'queryCacheDependency'.
-    [$duration] (integer) The number of seconds that query results may remain
-    valid in cache. If not set, it will use the value of 'queryCacheDuration'.
-    See 'queryCacheDuration' for more details.
-    [$dependency] (\yii\caching\Dependency) The dependency for the cached
-    query result. See 'queryCacheDependency' for more details.
+ When query caching is enabled ('enableQueryCache' is true and 'queryCache'
+ refers to a valid cache), queries performed within the callable will be
+ cached and their results will be fetched from cache if available. For
+ example,
+
+   // The customer will be fetched from cache if available.
+   // If not, the query will be made against DB and cached for use next time.
+   $customer = $db->cache(function (Connection $db) {
+       return $db->createCommand('SELECT * FROM customer WHERE
+ id=1')->queryOne();
+   });
+
+ Note that query cache is only meaningful for queries that return results. For
+ queries performed with 'Command::execute()', query cache will not be used.
+    [$callable] (callable) A PHP callable that contains DB queries which will
+    make use of query cache. The signature of the callable is 'function
+    (Connection $db)'.
+    [$duration] (integer) The number of seconds that query results can remain
+    valid in the cache. If this is not set, the value of 'queryCacheDuration'
+    will be used instead. Use 0 to indicate that the cached data will never
+    expire.
+    [$dependency] (\yii\caching\Dependency) The cache dependency associated
+    with the cached query results.
 
 
-*yii/db/Connection::endCache*				public
+*yii/db/Connection::noCache*				public
 >
- endCache()
+ noCache($callable)
 <
-(void)
+(mixed) The return result of the callable
 
+ Queries performed within the callable will not use query cache at all. For
+ example,
+
+   $db->cache(function (Connection $db) {
+
+       // ... queries that use query cache ...
+
+       return $db->noCache(function (Connection $db) {
+           // this query will not use query cache
+           return $db->createCommand('SELECT * FROM customer WHERE
+ id=1')->queryOne();
+       });
+   });
+
+
+    [$callable] (callable) A PHP callable that contains DB queries which
+    should not use query cache. The signature of the callable is 'function
+    (Connection $db)'.
+
+
+*yii/db/Connection::getQueryCacheInfo*			public
+>
+ getQueryCacheInfo()
+<
+(array) The current query cache information, or null if query cache is not
+enabled.
+
+ This method is used internally by 'Command'.
 
 
 *yii/db/Connection::open*					public
@@ -406,10 +540,24 @@ transaction.
 
 *yii/db/Connection::beginTransaction*			public
 >
- beginTransaction()
+ beginTransaction($isolationLevel='null')
 <
 (\yii\db\Transaction) The transaction initiated
 
+    [$isolationLevel] (string|null) The isolation level to use for this
+    transaction. See 'Transaction::begin()' for details.
+
+
+*yii/db/Connection::transaction*				public
+>
+ transaction($callback, $isolationLevel='null')
+<
+(mixed) Result of callback function
+
+    [$callback] (callable) A valid PHP callback that performs the job. Accepts
+    connection instance as parameter.
+    [$isolationLevel] (string|null) The isolation level to use for this
+    transaction. See 'Transaction::begin()' for details.
 
 
 *yii/db/Connection::getSchema*				public
@@ -454,13 +602,13 @@ the sequence object
 
 *yii/db/Connection::quoteValue*				public
 >
- quoteValue($str)
+ quoteValue($value)
 <
 (string) The properly quoted string
 
  Note that if the parameter is not a string, it will be returned without
  change.
-    [$str] (string) String to be quoted
+    [$value] (string) String to be quoted
 
 
 *yii/db/Connection::quoteTableName*			public
@@ -515,6 +663,75 @@ the sequence object
 (void)
 
     [$driverName] (string) Name of the DB driver
+
+
+*yii/db/Connection::getSlavePdo*				public
+>
+ getSlavePdo($fallbackToMaster='true')
+<
+(\PDO) The PDO instance for the currently active slave connection. Null is
+returned if no slave connection is available and '$fallbackToMaster' is false.
+
+ When 'enableSlaves' is true, one of the slaves will be used for read queries,
+ and its PDO instance will be returned by this method.
+    [$fallbackToMaster] (boolean) Whether to return a master PDO in case none
+    of the slave connections is available.
+
+
+*yii/db/Connection::getMasterPdo*				public
+>
+ getMasterPdo()
+<
+(\PDO) The PDO instance for the currently active master connection.
+
+ This method will open the master DB connection and then return 'pdo'.
+
+
+*yii/db/Connection::getSlave*				public
+>
+ getSlave($fallbackToMaster='true')
+<
+(\yii\db\Connection) The currently active slave connection. Null is returned
+if there is slave available and '$fallbackToMaster' is false.
+
+ If this method is called the first time, it will try to open a slave
+ connection when 'enableSlaves' is true.
+    [$fallbackToMaster] (boolean) Whether to return a master connection in
+    case there is no slave connection available.
+
+
+*yii/db/Connection::useMaster*				public
+>
+ useMaster($callback)
+<
+(mixed) The return value of the callback
+
+ This method is provided so that you can temporarily force using the master
+ connection to perform DB operations even if they are read queries. For
+ example,
+
+   $result = $db->useMaster(function ($db) {
+       return $db->createCommand('SELECT * FROM user LIMIT 1')->queryOne();
+   });
+
+
+    [$callback] (callable) A PHP callable to be executed by this method. Its
+    signature is 'function (Connection $db)'. Its return value will be
+    returned by this method.
+
+
+*yii/db/Connection::openFromPool*				protected
+>
+ openFromPool($pool, $sharedConfig)
+<
+(\yii\db\Connection) The opened DB connection, or null if no server is
+available
+
+ This method implements the load balancing among the given list of the
+ servers.
+    [$pool] (array) The list of connection configurations in the server pool
+    [$sharedConfig] (array) The configuration common to those given in
+    '$pool'.
 
 
 

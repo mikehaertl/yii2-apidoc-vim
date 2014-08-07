@@ -104,7 +104,7 @@ this model
 >
  find()
 <
-(\yii\db\ActiveQueryInterface) The newly created
+(static|\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
  The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
@@ -112,28 +112,31 @@ this model
  'one()' or 'all()' is called to return populated ActiveRecord instances. For
  example,
 
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
-
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
+   return [
+       'email',
+       'firstName' => 'first_name',
+       'lastName' => 'last_name',
+       'fullName' => function () {
+           return $this->first_name . ' ' . $this->last_name;
+       },
+   ];
 
  This method is also called by 'BaseActiveRecord::hasOne()' and
  'BaseActiveRecord::hasMany()' to create a relational query.
 
  You may override this method to return a customized query. For example,
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   return [
+       // ...
+       'bootstrap' => [
+           "path\\to\\MyBootstrapClass1",
+           [
+               'class' => "path\\to\\MyBootstrapClass2",
+               'prop1' => 'value1',
+               'prop2' => 'value2',
+           ],
+       ],
+   ];
 
  The following code shows how to apply a default condition for all queries:
 
@@ -167,17 +170,14 @@ matches.
  Note that this method will automatically call the 'one()' method and return
  an 'ActiveRecordInterface|ActiveRecord' instance. For example,
 
-   // find a single customer whose primary key value is 10
-   $customer = Customer::findOne(10);
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
 
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['id' => 10])->one();
-
-   // find the first customer whose age is 30 and whose status is 1
-   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
 
     [$condition] (mixed) Primary key value or a set of column values
@@ -208,23 +208,14 @@ matches.
  Note that this method will automatically call the 'all()' method and return
  an array of 'ActiveRecordInterface|ActiveRecord' instances. For example,
 
-   // find the customers whose primary key value is 10
-   $customers = Customer::findAll(10);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => 10])->all();
-
-   // find the customers whose primary key value is 10, 11 or 12.
-   $customers = Customer::findAll([10, 11, 12]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
-
-   // find customers whose age is 30 and whose status is 1
-   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
 
 
     [$condition] (mixed) Primary key value or a set of column values
@@ -239,7 +230,17 @@ matches.
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   Customer::updateAll(['status' => 1], ['status' => '2']);
+   // find a single customer whose primary key value is 10
+   $customer = Customer::findOne(10);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the first customer whose age is 30 and whose status is 1
+   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved for
@@ -260,7 +261,23 @@ matches.
 
  For example, to delete all customers whose status is 3:
 
-   Customer::deleteAll([status = 3]);
+   // find the customers whose primary key value is 10
+   $customers = Customer::findAll(10);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => 10])->all();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findAll([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+   // find customers whose age is 30 and whose status is 1
+   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
     [$condition] (array) The condition that matches the records that should
@@ -279,10 +296,7 @@ matches.
 
  For example, to save a customer record:
 
-   $customer = new Customer; // or $customer = Customer::findOne($id);
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->save();
+   Customer::updateAll(['status' => 1], ['status' => '2']);
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -302,10 +316,7 @@ successfully.
 
  Usage example:
 
-   $customer = new Customer;
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->insert();
+   Customer::deleteAll([status = 3]);
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -326,10 +337,10 @@ successful.
 
  Usage example:
 
-   $customer = Customer::findOne($id);
+   $customer = new Customer; // or $customer = Customer::findOne($id);
    $customer->name = $name;
    $customer->email = $email;
-   $customer->update();
+   $customer->save();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -422,6 +433,14 @@ database table.
     [$delete] (boolean) Whether to delete the model that contains the foreign
     key. If false, the model's foreign key will be set null and saved. If
     true, the model containing the foreign key will be deleted.
+
+
+*yii/db/ActiveRecordInterface::getDb*			public
+>
+ getDb()
+<
+(mixed) The database connection used by this AR class.
+
 
 
 

@@ -12,16 +12,19 @@ DESCRIPTION
 
  In oder to acquire access token perform following sequence:
 
-   use yii\authclient\OAuth1;
-
-   $oauthClient = new OAuth1();
-   $requestToken = $oauthClient->fetchRequestToken(); // Get request token
-   $url = $oauthClient->buildAuthUrl($requestToken); // Get authorization URL
-   return Yii::$app->getResponse()->redirect($url); // Redirect to
- authorization URL
-   // After user returns at our site:
-   $accessToken = $oauthClient->fetchAccessToken($requestToken); // Upgrade to
- access token
+   php
+   <?php
+   use yii\authclient\widgets\AuthChoice;
+   ?>
+   <?php $authAuthChoice = AuthChoice::begin([
+       'baseAuthUrl' => ['site/auth']
+   ]); ?>
+   <ul>
+   <?php foreach ($authAuthChoice->getClients() as $client): ?>
+       <li><?= $authAuthChoice->clientLink($client) ?></li>
+   <?php endforeach; ?>
+   </ul>
+   <?php AuthChoice::end(); ?>
 
 
 
@@ -400,7 +403,7 @@ METHOD DETAILS
 
 *yii/authclient/OAuth1::apiInternal*			protected
 >
- apiInternal($accessToken, $url, $method, $params)
+ apiInternal($accessToken, $url, $method, $params, $headers)
 <
 (array) API response.
 
@@ -408,6 +411,7 @@ METHOD DETAILS
     [$url] (string) Absolute API URL.
     [$method] (string) Request method.
     [$params] (array) Request parameters.
+    [$headers] (array) Additional request headers.
 
 
 *yii/authclient/OAuth1::fetchRequestToken*		public
@@ -442,13 +446,14 @@ METHOD DETAILS
 
 *yii/authclient/OAuth1::sendSignedRequest*		protected
 >
- sendSignedRequest($method, $url, $params='[]')
+ sendSignedRequest($method, $url, $params='[]', $headers='[]')
 <
 (array) Response.
 
     [$method] (string) Request type.
     [$url] (string) Request URL.
     [$params] (array) Request params.
+    [$headers] (array) Additional request headers.
 
 
 *yii/authclient/OAuth1::generateNonce*			protected

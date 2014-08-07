@@ -33,6 +33,13 @@ $lastInsertID				*yii/db/mysql/Schema::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
+$transactionIsolationLevel		*yii/db/mysql/Schema::$transactionIsolationLevel*
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
+
 
 
 METHOD DETAILS
@@ -104,8 +111,8 @@ not exist.
  See |yii/db/Schema::getCacheKey|
 
 
-*yii/db/mysql/Schema::getCacheGroup*			protected
- See |yii/db/Schema::getCacheGroup|
+*yii/db/mysql/Schema::getCacheTag*			protected
+ See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/mysql/Schema::getTableSchemas*			public
@@ -183,6 +190,10 @@ not exist.
  See |yii/db/Schema::rollBackSavepoint|
 
 
+*yii/db/mysql/Schema::setTransactionIsolationLevel*	public
+ See |yii/db/Schema::setTransactionIsolationLevel|
+
+
 *yii/db/mysql/Schema::quoteValue*				public
  See |yii/db/Schema::quoteValue|
 
@@ -223,8 +234,12 @@ not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
-*yii/db/mysql/Schema::handleException*			public
- See |yii/db/Schema::handleException|
+*yii/db/mysql/Schema::convertException*			public
+ See |yii/db/Schema::convertException|
+
+
+*yii/db/mysql/Schema::isReadQuery*			public
+ See |yii/db/Schema::isReadQuery|
 
 
 *yii/db/mysql/Schema::resolveTableNames*			protected

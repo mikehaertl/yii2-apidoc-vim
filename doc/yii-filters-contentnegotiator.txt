@@ -18,31 +18,17 @@ DESCRIPTION
  is found, the '\yii\base\Application::language' property will be set as the
  chosen language.
 
- You may use ContentNegotiator as a bootstrap component as well as an action
- filter.
+ You may use ContentNegotiator as a bootstrapping component as well as an
+ action filter.
 
- The following code shows how you can use ContentNegotiator as a bootstrap
+ The following code shows how you can use ContentNegotiator as a bootstrapping
  component. Note that in this case, the content negotiation applies to the
  whole application.
 
-   // in application configuration
-   use yii\web\Response;
-
-   return [
-       'bootstrap' => [
-           [
-               'class' => 'yii\filters\ContentNegotiator',
-               'formats' => [
-                   'application/json' => Response::FORMAT_JSON,
-                   'application/xml' => Response::FORMAT_XML,
-               ],
-               'languages' => [
-                   'en',
-                   'de',
-               ],
-           ],
-       ],
-   ];
+   [
+       'class' => 'yii\caching\DbDependency',
+       'sql' => 'SELECT MAX(updated_at) FROM post',
+   ]
 
  The following code shows how you can use ContentNegotiator as an action
  filter in either a controller or a module. In this case, the content
@@ -50,26 +36,9 @@ DESCRIPTION
  even specific actions if you configure the 'only' or 'except' property of the
  filter.
 
-   use yii\web\Response;
-
-   public function behaviors()
-   {
-       return [
-           [
-               'class' => 'yii\filters\ContentNegotiator',
-               'only' => ['view', 'index'],  // in a controller
-               // if in a module, use the following IDs for user actions
-               // 'only' => ['user/view', 'user/index']
-               'formats' => [
-                   'application/json' => Response::FORMAT_JSON,
-               ],
-               'languages' => [
-                   'en',
-                   'de',
-               ],
-           ],
-       ];
-   }
+   [
+       Yii::$app->language,
+   ]
 
 
 

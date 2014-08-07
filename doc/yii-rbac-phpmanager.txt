@@ -19,11 +19,35 @@ PROPERTY DETAILS
 $defaultRoles				*yii/rbac/PhpManager::$defaultRoles*
  See |yii/rbac/BaseManager::$defaultRoles|
 
-$authFile				*yii/rbac/PhpManager::$authFile*
- (string) The path of the PHP script that contains the authorization data.
+$itemFile				*yii/rbac/PhpManager::$itemFile*
+ (string) The path of the PHP script that contains the authorization items.
  This can be either a file path or a path alias to the file. Make sure this
  file is writable by the Web server process if the authorization needs to be
  changed online.
+
+$assignmentFile				*yii/rbac/PhpManager::$assignmentFile*
+ (string) The path of the PHP script that contains the authorization
+ assignments. This can be either a file path or a path alias to the file. Make
+ sure this file is writable by the Web server process if the authorization
+ needs to be changed online.
+
+$ruleFile				*yii/rbac/PhpManager::$ruleFile*
+ (string) The path of the PHP script that contains the authorization rules.
+ This can be either a file path or a path alias to the file. Make sure this
+ file is writable by the Web server process if the authorization needs to be
+ changed online.
+
+$items					*yii/rbac/PhpManager::$items*
+ (\yii\rbac\Item[])
+
+$children				*yii/rbac/PhpManager::$children*
+ (array)
+
+$assignments				*yii/rbac/PhpManager::$assignments*
+ (\yii\rbac\Assignment[])
+
+$rules					*yii/rbac/PhpManager::$rules*
+ (\yii\rbac\Rule[])
 
 $behaviors				*yii/rbac/PhpManager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -35,9 +59,6 @@ $roles					*yii/rbac/PhpManager::$roles*
 $permissions				*yii/rbac/PhpManager::$permissions*
  (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
  by the permission names.
-
-$rules					*yii/rbac/PhpManager::$rules*
- (\yii\rbac\Rule[]) The rules indexed by the rule names
 
 
 
@@ -374,14 +395,12 @@ correspond to a rule.
 
 *yii/rbac/PhpManager::assign*				public
 >
- assign($role, $userId, $ruleName='null', $data='null')
+ assign($role, $userId)
 <
 (\yii\rbac\Assignment) The role assignment information.
 
     [$role] (\yii\rbac\Role) 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
-    [$ruleName] () 
-    [$data] (mixed) Additional data associated with this assignment.
 
 
 *yii/rbac/PhpManager::revoke*				public
@@ -516,7 +535,7 @@ will be returned if there is no role assigned to the user.
     Item::TYPE_ROLE)
 
 
-*yii/rbac/PhpManager::load*				public
+*yii/rbac/PhpManager::load*				protected
 >
  load()
 <
@@ -524,7 +543,7 @@ will be returned if there is no role assigned to the user.
 
 
 
-*yii/rbac/PhpManager::save*				public
+*yii/rbac/PhpManager::save*				protected
 >
  save()
 <
@@ -549,6 +568,30 @@ will be returned if there is no role assigned to the user.
 
     [$data] (array) The authorization data
     [$file] (string) The file path.
+
+
+*yii/rbac/PhpManager::saveItems*				protected
+>
+ saveItems()
+<
+(void)
+
+
+
+*yii/rbac/PhpManager::saveAssignments*			protected
+>
+ saveAssignments()
+<
+(void)
+
+
+
+*yii/rbac/PhpManager::saveRules*				protected
+>
+ saveRules()
+<
+(void)
+
 
 
 

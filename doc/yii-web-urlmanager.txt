@@ -12,12 +12,9 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   'urlManager' => [
-       'enablePrettyUrl' => true,
-       'rules' => [
-           // your rules go here
-       ],
-       // ...
+   [
+       '@models' => '@app/models', // an existing alias
+       '@backend' => __DIR__ . '/../backend',  // a directory
    ]
 
 
@@ -65,17 +62,13 @@ $rules					*yii/web/UrlManager::$rules*
 
  Here is an example configuration for RESTful CRUD controller:
 
-   php
-   [
-       'dashboard' => 'site/index',
-
-       'POST <controller:\w+>s' => '<controller>/create',
-       '<controller:\w+>s' => '<controller>/index',
-
-       'PUT <controller:\w+>/<id:\d+>'    => '<controller>/update',
-       'DELETE <controller:\w+>/<id:\d+>' => '<controller>/delete',
-       '<controller:\w+>/<id:\d+>'        => '<controller>/view',
-   ];
+   'urlManager' => [
+       'enablePrettyUrl' => true,
+       'rules' => [
+           // your rules go here
+       ],
+       // ...
+   ]
 
  Note that if you modify this property after the UrlManager object is created,
  make sure you populate the array with rule objects instead of rule
@@ -112,12 +105,16 @@ $behaviors				*yii/web/UrlManager::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 $baseUrl				*yii/web/UrlManager::$baseUrl*
- (string) The base URL that is used by 'createUrl()' to prepend URLs it
- creates.
+ (string) The base URL that is used by 'createUrl()' to prepend to created
+ URLs.
+
+$scriptUrl				*yii/web/UrlManager::$scriptUrl*
+ (string) The entry script URL that is used by 'createUrl()' to prepend to
+ created URLs.
 
 $hostInfo				*yii/web/UrlManager::$hostInfo*
  (string) The host info (e.g. "http://www.example.com") that is used by
- 'createAbsoluteUrl()' to prepend URLs it creates.
+ 'createAbsoluteUrl()' to prepend to created URLs.
 
 
 
@@ -278,14 +275,23 @@ cannot be successfully parsed.
  an array if you want to specify additional query parameters for the URL being
  created. The array format must be:
 
-   // generates: /index.php?r=site/index&param1=value1&param2=value2
-   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
+   php
+   [
+       'dashboard' => 'site/index',
+
+       'POST <controller:\w+>s' => '<controller>/create',
+       '<controller:\w+>s' => '<controller>/index',
+
+       'PUT <controller:\w+>/<id:\d+>'    => '<controller>/update',
+       'DELETE <controller:\w+>/<id:\d+>' => '<controller>/delete',
+       '<controller:\w+>/<id:\d+>'        => '<controller>/view',
+   ];
 
  If you want to create a URL with an anchor, you can use the array format with
  a '#' parameter. For example,
 
-   // generates: /index.php?r=site/index&param1=value1#name
-   ['site/index', 'param1' => 'value1', '#' => 'name']
+   // generates: /index.php?r=site/index&param1=value1&param2=value2
+   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
 
  The URL created is a relative one. Use 'createAbsoluteUrl()' to create an
  absolute URL.
@@ -318,11 +324,11 @@ cannot be successfully parsed.
 >
  getBaseUrl()
 <
-(string) The base URL that is used by 'createUrl()' to prepend URLs it
-creates.
+(string) The base URL that is used by 'createUrl()' to prepend to created
+URLs.
 
- It defaults to 'Request::scriptUrl' if 'showScriptName' is true or
- 'enablePrettyUrl' is false; otherwise, it defaults to 'Request::baseUrl'.
+ It defaults to 'Request::baseUrl'. This is mainly used when 'enablePrettyUrl'
+ is true and 'showScriptName' is false.
 
 
 *yii/web/UrlManager::setBaseUrl*				public
@@ -331,8 +337,33 @@ creates.
 <
 (void)
 
-    [$value] (string) The base URL that is used by 'createUrl()' to prepend
-    URLs it creates.
+ This is mainly used when 'enablePrettyUrl' is true and 'showScriptName' is
+ false.
+    [$value] (string) The base URL that is used by 'createUrl()' to prepend to
+    created URLs.
+
+
+*yii/web/UrlManager::getScriptUrl*			public
+>
+ getScriptUrl()
+<
+(string) The entry script URL that is used by 'createUrl()' to prepend to
+created URLs.
+
+ It defaults to 'Request::scriptUrl'. This is mainly used when
+ 'enablePrettyUrl' is false or 'showScriptName' is true.
+
+
+*yii/web/UrlManager::setScriptUrl*			public
+>
+ setScriptUrl($value)
+<
+(void)
+
+ This is mainly used when 'enablePrettyUrl' is false or 'showScriptName' is
+ true.
+    [$value] (string) The entry script URL that is used by 'createUrl()' to
+    prepend to created URLs.
 
 
 *yii/web/UrlManager::getHostInfo*				public
@@ -340,7 +371,7 @@ creates.
  getHostInfo()
 <
 (string) The host info (e.g. "http://www.example.com") that is used by
-'createAbsoluteUrl()' to prepend URLs it creates.
+'createAbsoluteUrl()' to prepend to created URLs.
 
 
 
@@ -351,7 +382,7 @@ creates.
 (void)
 
     [$value] (string) The host info (e.g. "http://www.example.com") that is
-    used by 'createAbsoluteUrl()' to prepend URLs it creates.
+    used by 'createAbsoluteUrl()' to prepend to created URLs.
 
 
 

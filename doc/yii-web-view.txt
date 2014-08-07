@@ -13,11 +13,9 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   'view' => [
-       'theme' => 'app\themes\MyTheme',
-       'renderers' => [
-           // you may add Smarty or Twig renderer here
-       ]
+   'rules' => [
+       ['class' => 'MyUrlRule', 'pattern' => '...', 'route' => 'site/index',
+ ...],
        // ...
    ]
 
@@ -338,6 +336,16 @@ application component.
 <
 (void)
 
+
+
+*yii/web/View::registerAssetFiles*			protected
+>
+ registerAssetFiles($name)
+<
+(void)
+
+ Removes a bundle from 'assetBundles' once files are registered.
+    [$name] (string) Name of the bundle to register
 
 
 *yii/web/View::registerAssetBundle*			public

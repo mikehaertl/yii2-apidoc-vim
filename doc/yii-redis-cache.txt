@@ -22,13 +22,10 @@ DESCRIPTION
 
    [
        'components' => [
-           'cache' => [
-               'class' => 'yii\redis\Cache',
-               'redis' => [
-                   'hostname' => 'localhost',
-                   'port' => 6379,
-                   'database' => 0,
-               ]
+           'session' => [
+               'class' => 'yii\redis\Session',
+               // 'redis' => 'redis' // id of the connection application
+ component
            ],
        ],
    ]
@@ -36,15 +33,7 @@ DESCRIPTION
  Or if you have configured the redis 'Connection' as an application component,
  the following is sufficient:
 
-   [
-       'components' => [
-           'cache' => [
-               'class' => 'yii\redis\Cache',
-               // 'redis' => 'redis' // id of the connection application
- component
-           ],
-       ],
-   ]
+   $customers = Customer::find()->with('orders')->asArray()->all();
 
 
 
@@ -180,7 +169,7 @@ METHOD DETAILS
  See |yii/base/Component::ensureBehaviors|
 
 
-*yii/redis/Cache::buildKey*				protected
+*yii/redis/Cache::buildKey*				public
  See |yii/caching/Cache::buildKey|
 
 

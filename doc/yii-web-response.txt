@@ -14,10 +14,10 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   'response' => [
-       'format' => yii\web\Response::FORMAT_JSON,
-       'charset' => 'UTF-8',
-       // ...
+   'request' => [
+       'parsers' => [
+           'application/json' => 'yii\web\JsonParser',
+       ]
    ]
 
 
@@ -446,7 +446,11 @@ invalid.
 
  **Example**
 
-   Yii::$app->response->xSendFile('/home/user/Pictures/picture1.jpg');
+   'response' => [
+       'format' => yii\web\Response::FORMAT_JSON,
+       'charset' => 'UTF-8',
+       // ...
+   ]
 
 
     [$filePath] (string) File name with full path
@@ -467,13 +471,12 @@ invalid.
  does not send out the header until 'send()' is called. In a controller action
  you may use this method as follows:
 
-   return Yii::$app->getResponse()->redirect($url);
+   Yii::$app->response->xSendFile('/home/user/Pictures/picture1.jpg');
 
  In other places, if you want to send out the "Location" header immediately,
  you should use the following code:
 
-   Yii::$app->getResponse()->redirect($url)->send();
-   return;
+   return Yii::$app->getResponse()->redirect($url);
 
  In AJAX mode, this normally will not work as expected unless there are some
  client-side JavaScript code handling the redirection. To help achieve this
@@ -483,12 +486,8 @@ invalid.
  as described above. Otherwise, you should write the following JavaScript code
  to handle the redirection:
 
-   $document.ajaxComplete(function (event, xhr, settings) {
-       var url = xhr.getResponseHeader('X-Redirect');
-       if (url) {
-           window.location = url;
-       }
-   });
+   Yii::$app->getResponse()->redirect($url)->send();
+   return;
 
 
     [$url] (string|array) The URL to be redirected to. This can be in one of
@@ -520,7 +519,12 @@ invalid.
 
  In a controller action you may use this method like this:
 
-   return Yii::$app->getResponse()->refresh();
+   $document.ajaxComplete(function (event, xhr, settings) {
+       var url = xhr.getResponseHeader('X-Redirect');
+       if (url) {
+           window.location = url;
+       }
+   });
 
 
     [$anchor] (string) The anchor that should be appended to the redirection
@@ -536,16 +540,7 @@ invalid.
 
  Through the returned cookie collection, you add or remove cookies as follows,
 
-   // add a cookie
-   $response->cookies->add(new Cookie([
-       'name' => $name,
-       'value' => $value,
-   ]);
-
-   // remove a cookie
-   $response->cookies->remove('name');
-   // alternatively
-   unset($response->cookies['name']);
+   return Yii::$app->getResponse()->refresh();
 
 
 

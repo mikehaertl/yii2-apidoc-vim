@@ -7,25 +7,9 @@ DESCRIPTION
 
  For example:
 
-   echo Accordion::widget([
-       'items' => [
-           [
-               'header' => 'Section 1',
-               'content' => 'Mauris mauris ante, blandit et, ultrices a,
- suscipit eget...',
-           ],
-           [
-               'header' => 'Section 2',
-               'headerOptions' => ['tag' => 'h3'],
-               'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit
- amet purus...',
-               'options' => ['tag' => 'div'],
-           ],
-       ],
-       'options' => ['tag' => 'div'],
-       'itemOptions' => ['tag' => 'div'],
-       'headerOptions' => ['tag' => 'h3'],
-       'clientOptions' => ['collapsible' => false],
+   echo Spinner::widget([
+       'name'  => 'country',
+       'clientOptions' => ['step' => 2],
    ]);
 
 
@@ -67,16 +51,36 @@ $items					*yii/jui/Accordion::$items*
  (array) List of collapsible items. Each item can be an array of the following
  structure:
 
-   [
-       'header' => 'Item header',
-       'content' => 'Item content',
-       // the HTML attributes of the item header container tag. This will
- overwrite "headerOptions".
-       'headerOptions' => [],
-       // the HTML attributes of the item container tag. This will overwrite
- "itemOptions".
-       'options' => [],
-   ]
+   echo Tabs::widget([
+       'items' => [
+           [
+               'label' => 'Tab one',
+               'content' => 'Mauris mauris ante, blandit et, ultrices a,
+ suscipit eget...',
+           ],
+           [
+               'label' => 'Tab two',
+               'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit
+ amet purus...',
+               'options' => ['tag' => 'div'],
+               'headerOptions' => ['class' => 'my-class'],
+           ],
+           [
+               'label' => 'Tab with custom id',
+               'content' => 'Morbi tincidunt, dui sit amet facilisis
+ feugiat...',
+               'options' => ['id' => 'my-tab'],
+           ],
+           [
+               'label' => 'Ajax tab',
+               'url' => ['ajax/content'],
+           ],
+       ],
+       'options' => ['tag' => 'div'],
+       'itemOptions' => ['tag' => 'div'],
+       'headerOptions' => ['class' => 'my-class'],
+       'clientOptions' => ['collapsible' => false],
+   ]);
 
 
 

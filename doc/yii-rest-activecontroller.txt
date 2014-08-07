@@ -208,14 +208,12 @@ METHOD DETAILS
  array values the corresponding action class names or action configuration
  arrays. For example,
 
-   return [
-       'action1' => 'app\components\Action1',
-       'action2' => [
-           'class' => 'app\components\Action2',
-           'property1' => 'value1',
-           'property2' => 'value2',
-       ],
-   ];
+   public function afterAction($action, $result)
+   {
+       $result = parent::afterAction($action, $result);
+       // your custom code here
+       return $result;
+   }
 
  '\Yii::createObject()' will be used later to create the requested action
  using the configuration provided here.
@@ -281,7 +279,7 @@ METHOD DETAILS
  See |yii/base/Controller::getViewPath|
 
 
-*yii/rest/ActiveController::findLayoutFile*		protected
+*yii/rest/ActiveController::findLayoutFile*		public
  See |yii/base/Controller::findLayoutFile|
 
 

@@ -45,5 +45,24 @@ METHOD DETAILS
     [$highlight] (boolean) Whether the result should be syntax-highlighted
 
 
+*yii/helpers/BaseVarDumper::export*			public
+>
+ export($var)
+<
+(string) A string representation of the variable
+
+ The string is a valid PHP expression that can be evaluated by PHP parser and
+ the evaluation result will give back the variable value.
+
+ This method is similar to 'var_export()'. The main difference is that it
+ generates more compact string representation using short array syntax.
+
+ It also handles objects by using the PHP functions serialize() and
+ unserialize().
+
+ PHP 5.4 or above is required to parse the exported value.
+    [$var] (mixed) The variable to be exported.
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

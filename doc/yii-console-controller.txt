@@ -5,16 +5,18 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/faker/FixtureController|
-|yii/apidoc/components/BaseController|
-|yii/apidoc/commands/ApiController|
-|yii/apidoc/commands/GuideController|
 |yii/console/controllers/HelpController|
 |yii/console/controllers/CacheController|
 |yii/console/controllers/MessageController|
 |yii/console/controllers/AssetController|
 |yii/console/controllers/FixtureController|
+|yii/console/controllers/BaseMigrateController|
 |yii/console/controllers/MigrateController|
+|yii/faker/FixtureController|
+|yii/mongodb/console/controllers/MigrateController|
+|yii/apidoc/components/BaseController|
+|yii/apidoc/commands/ApiController|
+|yii/apidoc/commands/GuideController|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -24,7 +26,20 @@ DESCRIPTION
  a controller action. The 'yii' program is used when calling a console
  command, like the following:
 
-   yii <route> [--param1=value1 --param2 ...]
+   CREATE TABLE source_message (
+       id INTEGER PRIMARY KEY AUTO_INCREMENT,
+       category VARCHAR(32),
+       message TEXT
+   );
+
+   CREATE TABLE message (
+       id INTEGER,
+       language VARCHAR(16),
+       translation TEXT,
+       PRIMARY KEY (id, language),
+       CONSTRAINT fk_message_source_message FOREIGN KEY (id)
+           REFERENCES source_message (id) ON DELETE CASCADE ON UPDATE RESTRICT
+   );
 
 
 
@@ -263,7 +278,7 @@ mean abnormal.
  See |yii/base/Controller::getViewPath|
 
 
-*yii/console/Controller::findLayoutFile*			protected
+*yii/console/Controller::findLayoutFile*			public
  See |yii/base/Controller::findLayoutFile|
 
 
@@ -289,8 +304,7 @@ mean abnormal.
 
  Example:
 
-   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
- Console::UNDERLINE);
+   yii <route> [--param1=value1 --param2 ...]
 
 
     [$string] (string) The string to be formatted
@@ -307,7 +321,7 @@ mean abnormal.
 
  Example:
 
-   $this->stdout('This will be red and underlined.', Console::FG_RED,
+   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
  Console::UNDERLINE);
 
 
@@ -325,7 +339,7 @@ mean abnormal.
 
  Example:
 
-   $this->stderr('This will be red and underlined.', Console::FG_RED,
+   $this->stdout('This will be red and underlined.', Console::FG_RED,
  Console::UNDERLINE);
 
 

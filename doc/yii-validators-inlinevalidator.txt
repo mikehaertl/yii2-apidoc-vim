@@ -7,7 +7,19 @@ DESCRIPTION
 
  The validation method must have the following signature:
 
-   function foo($attribute, $params)
+   // a1 needs to be unique
+   ['a1', 'unique']
+   // a1 needs to be unique, but column a2 will be used to check the
+ uniqueness of the a1 value
+   ['a1', 'unique', 'targetAttribute' => 'a2']
+   // a1 and a2 need to be unique together, and they both will receive error
+ message
+   [['a1', 'a2'], 'unique', 'targetAttribute' => ['a1', 'a2']]
+   // a1 and a2 need to be unique together, only a1 will receive error message
+   ['a1', 'unique', 'targetAttribute' => ['a1', 'a2']]
+   // a1 needs to be unique by checking the uniqueness of both a2 and a3
+ (using a1 value)
+   ['a1', 'unique', 'targetAttribute' => ['a2', 'a1' => 'a3']]
 
  where '$attribute' refers to the name of the attribute being validated, while
  '$params' is an array representing the additional parameters supplied in the
@@ -68,9 +80,6 @@ $clientValidate				*yii/validators/InlineValidator::$clientValidate*
  be like the following:
 
    function foo($attribute, $params)
-   {
-       return "javascript";
-   }
 
  where '$attribute' refers to the attribute name to be validated.
 
@@ -230,7 +239,9 @@ support client-side validation.
    - 'attribute': the name of the attribute being validated. 
    - 'value': the value being validated. 
    - 'messages': an array used to hold the validation error messages
-   for the attribute.
+   for the attribute. 
+   - 'deferred': an array used to hold deferred objects for
+   asynchronous validation
     [$object] (\yii\base\Model) The data object being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render

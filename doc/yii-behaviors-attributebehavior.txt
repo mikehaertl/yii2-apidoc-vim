@@ -5,6 +5,7 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/behaviors/SluggableBehavior|
 |yii/behaviors/TimestampBehavior|
 |yii/behaviors/BlameableBehavior|
 
@@ -17,23 +18,7 @@ DESCRIPTION
  'value' property with a PHP callable whose return value will be used to
  assign to the current attribute(s). For example,
 
-   use yii\behaviors\AttributeBehavior;
-
-   public function behaviors()
-   {
-       return [
-           'attributeStamp' => [
-               'class' => AttributeBehavior::className(),
-               'attributes' => [
-                   ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
-                   ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
-               ],
-               'value' => function ($event) {
-                   return 'some value';
-               },
-           ],
-       ];
-   }
+   echo HtmlPurifier::process($html);
 
 
 
@@ -51,10 +36,9 @@ $attributes				*yii/behaviors/AttributeBehavior::$attributes*
  attribute(s) to be updated. You can use a string to represent a single
  attribute, or an array to represent a list of attributes. For example,
 
-   [
-       ActiveRecord::EVENT_BEFORE_INSERT => ['attribute1', 'attribute2'],
-       ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
-   ]
+   echo HtmlPurifier::process($html, [
+       'Attr.EnableID' => true,
+   ]);
 
 
 
@@ -64,9 +48,22 @@ $value					*yii/behaviors/AttributeBehavior::$value*
  value of the function will be assigned to the attributes. The signature of
  the function should be as follows,
 
-   function ($event)
+   use yii\behaviors\AttributeBehavior;
+
+   public function behaviors()
    {
-       // return value will be assigned to the attribute
+       return [
+           [
+               'class' => AttributeBehavior::className(),
+               'attributes' => [
+                   ActiveRecord::EVENT_BEFORE_INSERT => 'attribute1',
+                   ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
+               ],
+               'value' => function ($event) {
+                   return 'some value';
+               },
+           ],
+       ];
    }
 
 
@@ -150,8 +147,8 @@ values).
  The following is an example:
 
    [
-       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
-       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+       ActiveRecord::EVENT_BEFORE_INSERT => ['attribute1', 'attribute2'],
+       ActiveRecord::EVENT_BEFORE_UPDATE => 'attribute2',
    ]
 
 

@@ -10,19 +10,11 @@ DESCRIPTION
 
  Example application configuration:
 
-   'components' => [
-       'authClientCollection' => [
-           'class' => 'yii\authclient\Collection',
-           'clients' => [
-               'yandex' => [
-                   'class' => 'yii\authclient\clients\YandexOAuth',
-                   'clientId' => 'yandex_client_id',
-                   'clientSecret' => 'yandex_client_secret',
-               ],
-           ],
-       ]
-       ...
-   ]
+   public function onAuthSuccess($client)
+   {
+       $attributes = $client->getUserAttributes();
+       // user login or signup comes here
+   }
 
 
 
@@ -388,7 +380,7 @@ METHOD DETAILS
 
 *yii/authclient/clients/YandexOAuth::apiInternal*		protected
 >
- apiInternal($accessToken, $url, $method, $params)
+ apiInternal($accessToken, $url, $method, $params, $headers)
 <
 (array) API response.
 
@@ -396,6 +388,7 @@ METHOD DETAILS
     [$url] (string) Absolute API URL.
     [$method] (string) Request method.
     [$params] (array) Request parameters.
+    [$headers] (array) Additional request headers.
 
 
 *yii/authclient/clients/YandexOAuth::buildAuthUrl*	public

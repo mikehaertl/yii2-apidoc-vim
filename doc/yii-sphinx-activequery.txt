@@ -27,28 +27,29 @@ DESCRIPTION
 
  These options can be configured using methods of the same name. For example:
 
-   $articles = Article::find()->with('source')->asArray()->all();
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
  ActiveQuery allows to build the snippets using sources provided by
  ActiveRecord. You can use 'snippetByModel()' method to enable this. For
  example:
 
-   class Article extends ActiveRecord
-   {
-       public function getSource()
-       {
-           return $this->hasOne('db', ArticleDb::className(), ['id' => 'id']);
-       }
-
-       public function getSnippetSource()
-       {
-           return $this->source->content;
-       }
-
-       ...
-   }
-
-   $articles = Article::find()->with('source')->snippetByModel()->all();
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
 
  Relational query ----------------
 
@@ -175,7 +176,15 @@ METHOD DETAILS
 
 
 *yii/sphinx/ActiveQuery::init*				public
- See |yii/base/Object::init|
+>
+ init()
+<
+(void)
+
+ This method is called at the end of the constructor. The default
+ implementation will trigger an 'EVENT_INIT' event. If you override this
+ method, make sure you call the parent implementation at the end to ensure
+ triggering of the event.
 
 
 *yii/sphinx/ActiveQuery::__get*				public
@@ -512,16 +521,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
  For example:
 
-   class Article extends ActiveRecord
-   {
-       public function getSnippetSource()
-       {
-           return file_get_contents('/path/to/source/files/' . $this->id .
- '.txt');;
-       }
-   }
-
-   $articles = Article::find()->snippetByModel()->all();
+   $articles = Article::find()->with('source')->asArray()->all();
 
  Warning: this option should NOT be used with 'asArray' at the same time!
 

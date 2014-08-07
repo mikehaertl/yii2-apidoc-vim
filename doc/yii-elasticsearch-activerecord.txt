@@ -15,13 +15,14 @@ DESCRIPTION
 
  The following is an example model called 'Customer':
 
-   class Customer extends \yii\elasticsearch\ActiveRecord
-   {
-       public function attributes()
-       {
-           return ['id', 'name', 'address', 'registration_date'];
-       }
-   }
+   $query = new Query;
+   $query->fields('id, name')
+       ->from('myindex', 'users')
+       ->limit(10);
+   // build and execute the query
+   $command = $query->createCommand();
+   $rows = $command->search(); // this way you get the raw output of
+ elasticsearch.
 
  You may override 'index()' and 'type()' to define the index and type this
  record represents.
@@ -46,14 +47,18 @@ $errors					*yii/elasticsearch/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
+   $query->fields = [
+       'id',
+       'name',
+       'value_times_two' => [
+           'script' => "doc['my_field_name'].value * 2",
        ],
-       'email' => [
-           'Email address is invalid.',
-       ]
+       'value_times_factor' => [
+           'script' => "doc['my_field_name'].value * factor",
+           'params' => [
+               'factor' => 2.0
+           ],
+       ],
    ]
 
 
@@ -99,6 +104,10 @@ $score					*yii/elasticsearch/ActiveRecord::$score*
  (float) Returns the score of this record when it was retrieved via a 'find()'
  query.
 
+$highlight				*yii/elasticsearch/ActiveRecord::$highlight*
+ (array|null) A list of arrays with highlighted excerpts indexed by field
+ names.
+
 
 
 METHOD DETAILS
@@ -117,19 +126,19 @@ METHOD DETAILS
 
 
 *yii/elasticsearch/ActiveRecord::__get*			public
- See |yii/base/Component::__get|
+ See |yii/db/BaseActiveRecord::__get|
 
 
 *yii/elasticsearch/ActiveRecord::__set*			public
- See |yii/base/Component::__set|
+ See |yii/db/BaseActiveRecord::__set|
 
 
 *yii/elasticsearch/ActiveRecord::__isset*			public
- See |yii/base/Component::__isset|
+ See |yii/db/BaseActiveRecord::__isset|
 
 
 *yii/elasticsearch/ActiveRecord::__unset*			public
- See |yii/base/Component::__unset|
+ See |yii/db/BaseActiveRecord::__unset|
 
 
 *yii/elasticsearch/ActiveRecord::__call*			public
@@ -290,7 +299,7 @@ METHOD DETAILS
 
 
 *yii/elasticsearch/ActiveRecord::getAttributeLabel*	public
- See |yii/base/Model::getAttributeLabel|
+ See |yii/db/BaseActiveRecord::getAttributeLabel|
 
 
 *yii/elasticsearch/ActiveRecord::hasErrors*		public
@@ -366,7 +375,7 @@ METHOD DETAILS
 
 
 *yii/elasticsearch/ActiveRecord::offsetExists*		public
- See |yii/base/Model::offsetExists|
+ See |yii/db/BaseActiveRecord::offsetExists|
 
 
 *yii/elasticsearch/ActiveRecord::offsetGet*		public
@@ -378,14 +387,14 @@ METHOD DETAILS
 
 
 *yii/elasticsearch/ActiveRecord::offsetUnset*		public
- See |yii/base/Model::offsetUnset|
+ See |yii/db/BaseActiveRecord::offsetUnset|
 
 
 *yii/elasticsearch/ActiveRecord::findOne*			public
 >
  findOne($condition)
 <
-(static) ActiveRecord instance matching the condition, or null if nothing
+(static) ActiveRecord instance matching the condition, or 'null' if nothing
 matches.
 
  The method accepts:
@@ -399,17 +408,13 @@ matches.
  Note that this method will automatically call the 'one()' method and return
  an 'ActiveRecordInterface|ActiveRecord' instance. For example,
 
-   // find a single customer whose primary key value is 10
-   $customer = Customer::findOne(10);
-
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['id' => 10])->one();
-
-   // find the first customer whose age is 30 and whose status is 1
-   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
+   class Customer extends \yii\elasticsearch\ActiveRecord
+   {
+       public function attributes()
+       {
+           return ['id', 'name', 'address', 'registration_date'];
+       }
+   }
 
 
     [$condition] (mixed) Primary key value or a set of column values
@@ -419,7 +424,7 @@ matches.
 >
  findAll($condition)
 <
-(static[]) An array of ActiveRecord instance, or an empty array if nothing
+(static[]) An array of ActiveRecord instances, or an empty array if nothing
 matches.
 
  The method accepts:
@@ -440,26 +445,22 @@ matches.
  Note that this method will automatically call the 'all()' method and return
  an array of 'ActiveRecordInterface|ActiveRecord' instances. For example,
 
-   // find the customers whose primary key value is 10
-   $customers = Customer::findAll(10);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => 10])->all();
-
-   // find the customers whose primary key value is 10, 11 or 12.
-   $customers = Customer::findAll([10, 11, 12]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
-
-   // find customers whose age is 30 and whose status is 1
-   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
 
     [$condition] (mixed) Primary key value or a set of column values
+
+
+*yii/elasticsearch/ActiveRecord::findByCondition*		protected
+ See |yii/db/BaseActiveRecord::findByCondition|
 
 
 *yii/elasticsearch/ActiveRecord::updateAll*		public
@@ -471,7 +472,17 @@ matches.
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   Customer::updateAll(['status' => 1], [2, 3, 4]);
+   // find a single customer whose primary key value is 10
+   $customer = Customer::findOne(10);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the first customer whose age is 30 and whose status is 1
+   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -489,7 +500,23 @@ matches.
 
  For example, to increment all customers' age by 1,
 
-   Customer::updateAllCounters(['age' => 1]);
+   // find the customers whose primary key value is 10
+   $customers = Customer::findAll(10);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => 10])->all();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findAll([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+   // find customers whose age is 30 and whose status is 1
+   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
     [$counters] (array) The counters to be updated (attribute name =>
@@ -511,7 +538,7 @@ matches.
 
  For example, to delete all customers whose status is 3:
 
-   Customer::deleteAll('status = 3');
+   Customer::updateAll(['status' => 1], [2, 3, 4]);
 
 
     [$condition] (array) The conditions that will be put in the WHERE part of
@@ -724,6 +751,10 @@ returned otherwise (null will be returned if the key value is null).
  See |yii/db/BaseActiveRecord::unlink|
 
 
+*yii/elasticsearch/ActiveRecord::unlinkAll*		public
+ See |yii/db/BaseActiveRecord::unlinkAll|
+
+
 *yii/elasticsearch/ActiveRecord::isPrimaryKey*		public
  See |yii/db/BaseActiveRecord::isPrimaryKey|
 
@@ -755,7 +786,7 @@ array will be used.
 >
  find()
 <
-(\yii\db\ActiveQueryInterface) The newly created
+(static|\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
  The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
@@ -763,28 +794,14 @@ array will be used.
  'one()' or 'all()' is called to return populated ActiveRecord instances. For
  example,
 
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
-
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
+   Customer::updateAllCounters(['age' => 1]);
 
  This method is also called by 'BaseActiveRecord::hasOne()' and
  'BaseActiveRecord::hasMany()' to create a relational query.
 
  You may override this method to return a customized query. For example,
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   Customer::deleteAll('status = 3');
 
  The following code shows how to apply a default condition for all queries:
 
@@ -830,10 +847,14 @@ successfully.
 
  For example, to insert a customer record:
 
-   $customer = new Customer;
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->insert();
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -904,6 +925,15 @@ successfully.
 <
 (float) Returns the score of this record when it was retrieved via a 'find()'
 query.
+
+
+
+*yii/elasticsearch/ActiveRecord::getHighlight*		public
+>
+ getHighlight()
+<
+(array|null) A list of arrays with highlighted excerpts indexed by field
+names.
 
 
 

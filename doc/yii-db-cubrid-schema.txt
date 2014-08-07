@@ -36,6 +36,13 @@ $lastInsertID				*yii/db/cubrid/Schema::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
+$transactionIsolationLevel		*yii/db/cubrid/Schema::$transactionIsolationLevel*
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
+
 
 
 METHOD DETAILS
@@ -107,8 +114,8 @@ not exist.
  See |yii/db/Schema::getCacheKey|
 
 
-*yii/db/cubrid/Schema::getCacheGroup*			protected
- See |yii/db/Schema::getCacheGroup|
+*yii/db/cubrid/Schema::getCacheTag*			protected
+ See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/cubrid/Schema::getTableSchemas*			public
@@ -183,6 +190,19 @@ not exist.
  See |yii/db/Schema::rollBackSavepoint|
 
 
+*yii/db/cubrid/Schema::setTransactionIsolationLevel*	public
+>
+ setTransactionIsolationLevel($level)
+<
+(void)
+
+    [$level] (string) The transaction isolation level to use for this
+    transaction. This can be one of 'Transaction::READ_UNCOMMITTED',
+    'Transaction::READ_COMMITTED', 'Transaction::REPEATABLE_READ' and
+    'Transaction::SERIALIZABLE' but also a string containing DBMS specific
+    syntax to be used after 'SET TRANSACTION ISOLATION LEVEL'.
+
+
 *yii/db/cubrid/Schema::quoteValue*			public
 >
  quoteValue($str)
@@ -230,8 +250,12 @@ not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
-*yii/db/cubrid/Schema::handleException*			public
- See |yii/db/Schema::handleException|
+*yii/db/cubrid/Schema::convertException*			public
+ See |yii/db/Schema::convertException|
+
+
+*yii/db/cubrid/Schema::isReadQuery*			public
+ See |yii/db/Schema::isReadQuery|
 
 
 *yii/db/cubrid/Schema::loadColumnSchema*			protected

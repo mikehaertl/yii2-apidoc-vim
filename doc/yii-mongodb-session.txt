@@ -13,11 +13,14 @@ DESCRIPTION
  The following example shows how you can configure the application to use
  Session: Add the following to your application config under 'components':
 
-   'session' => [
-       'class' => 'yii\mongodb\Session',
-       // 'db' => 'mymongodb',
-       // 'sessionCollection' => 'my_session',
-   ]
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
 
 

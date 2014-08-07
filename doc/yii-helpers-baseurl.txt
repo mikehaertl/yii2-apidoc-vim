@@ -29,14 +29,19 @@ METHOD DETAILS
  an array if you want to specify additional query parameters for the URL being
  created. The array format must be:
 
-   // generates: /index.php?r=site/index&param1=value1&param2=value2
-   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
+   Console::startProgress(0, 1000, 'Counting objects: ', false);
+   for ($n = 1; $n <= 1000; $n++) {
+       usleep(1000);
+       Console::updateProgress($n, 1000);
+   }
+   Console::endProgress("done." . PHP_EOL);
 
  If you want to create a URL with an anchor, you can use the array format with
  a '#' parameter. For example,
 
-   // generates: /index.php?r=site/index&param1=value1#name
-   ['site/index', 'param1' => 'value1', '#' => 'name']
+   $myHtml = Markdown::process($myText); // use original markdown flavor
+   $myHtml = Markdown::process($myText, 'gfm'); // use github flavored
+ markdown
 
  A route may be either absolute or relative. An absolute route has a leading
  slash (e.g. '/site/index'), while a relative route has none (e.g.
@@ -55,17 +60,8 @@ METHOD DETAILS
 
  Below are some examples of using this method:
 
-   // /index?r=site/index
-   echo Url::toRoute('site/index');
-
-   // /index?r=site/index&src=ref1#name
-   echo Url::toRoute(['site/index', 'src' => 'ref1', '#' => 'name']);
-
-   // http://www.example.com/index.php?r=site/index
-   echo Url::toRoute('site/index', true);
-
-   // https://www.example.com/index.php?r=site/index
-   echo Url::toRoute('site/index', 'https');
+   // generates: /index.php?r=site/index&param1=value1&param2=value2
+   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
 
 
     [$route] (string|array) Use a string to represent a route (e.g. 'index',
@@ -75,8 +71,8 @@ METHOD DETAILS
 
 
       - 'false' (default): generating a relative URL. 
-      - 'true': generating an absolute URL whose scheme is the same as the
-      current request. 
+      - 'true': returning an absolute base URL whose scheme is the same as
+      that in '\yii\web\UrlManager::hostInfo'. 
       - string: generating an absolute URL with the specified scheme
       (either 'http' or 'https').
 
@@ -111,42 +107,26 @@ METHOD DETAILS
 
  This method is very similar to 'toRoute()'. The only difference is that this
  method requires a route to be specified as an array only. If a string is
- given, it will be treated as a URL which will be prefixed with the base URL
- if it does not start with a slash. In particular, if '$url' is
+ given, it will be treated as a URL. In particular, if '$url' is
 
 
    - an array: 'toRoute()' will be called to generate the URL. For
    example:   '['site/index']', '['post/index', 'page' => 2]'. Please refer to
  'toRoute()' for more details   on how to specify a route. 
-   - a string with a leading '@': it is treated as an alias and the
-   corresponding aliased string   will be subject to the following rules. 
+   - a string with a leading '@': it is treated as an alias, and the
+   corresponding aliased string   will be returned. 
    - an empty string: the currently requested URL will be returned; 
-   - a string without a leading slash: it will be prefixed with
-   '\yii\web\Request::baseUrl'. 
-   - a string with a leading slash: it will be returned as is.
+   - a normal string: it will be returned as is.
 
- Note that in case '$scheme' is specified (either a string or true), an
- absolute URL with host info will be returned.
+ When '$scheme' is specified (either a string or true), an absolute URL with
+ host info (obtained from '\yii\web\UrlManager::hostInfo') will be returned.
+ If '$url' is already an absolute URL, its scheme will be replaced with the
+ specified one.
 
  Below are some examples of using this method:
 
-   // /index?r=site/index
-   echo Url::to(['site/index']);
-
-   // /index?r=site/index&src=ref1#name
-   echo Url::to(['site/index', 'src' => 'ref1', '#' => 'name']);
-
-   // the currently requested URL
-   echo Url::to();
-
-   // /images/logo.gif
-   echo Url::to('images/logo.gif');
-
-   // http://www.example.com/index.php?r=site/index
-   echo Url::to(['site/index'], true);
-
-   // https://www.example.com/index.php?r=site/index
-   echo Url::to(['site/index'], 'https');
+   // generates: /index.php?r=site/index&param1=value1#name
+   ['site/index', 'param1' => 'value1', '#' => 'name']
 
 
     [$url] (array|string) The parameter to be used to generate a valid URL
@@ -154,8 +134,8 @@ METHOD DETAILS
 
 
       - 'false' (default): generating a relative URL. 
-      - 'true': generating an absolute URL whose scheme is the same as the
-      current request. 
+      - 'true': returning an absolute base URL whose scheme is the same as
+      that in '\yii\web\UrlManager::hostInfo'. 
       - string: generating an absolute URL with the specified scheme
       (either 'http' or 'https').
 
@@ -171,7 +151,7 @@ METHOD DETAILS
 
       - 'false' (default): returning the base URL without host info. 
       - 'true': returning an absolute base URL whose scheme is the same as
-      the current request. 
+      that in '\yii\web\UrlManager::hostInfo'. 
       - string: returning an absolute base URL with the specified scheme
       (either 'http' or 'https').
 
@@ -212,7 +192,17 @@ remembered with the given name.
  use the following code in the layout view to add a link tag about canonical
  URL:
 
-   $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
+   // /index?r=site/index
+   echo Url::toRoute('site/index');
+
+   // /index?r=site/index&src=ref1#name
+   echo Url::toRoute(['site/index', 'src' => 'ref1', '#' => 'name']);
+
+   // http://www.example.com/index.php?r=site/index
+   echo Url::toRoute('site/index', true);
+
+   // https://www.example.com/index.php?r=site/index
+   echo Url::toRoute('site/index', 'https');
 
 
 
@@ -227,8 +217,8 @@ remembered with the given name.
 
 
       - 'false' (default): returning a relative URL. 
-      - 'true': returning an absolute URL whose scheme is the same as the
-      current request. 
+      - 'true': returning an absolute base URL whose scheme is the same as
+      that in '\yii\web\UrlManager::hostInfo'. 
       - string: returning an absolute URL with the specified scheme
       (either 'http' or 'https').
 

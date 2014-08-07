@@ -16,8 +16,15 @@ DESCRIPTION
  Collection provides the basic interface for the Mongo queries, mostly:
  insert, update, delete operations. For example:
 
-   $collection = Yii::$app->mongodb->getCollection('customer');
-   $collection->insert(['name' => 'John Smith', 'status' => 1]);
+   [
+        'components' => [
+            'mongodb' => [
+                'class' => '\yii\mongodb\Connection',
+                'dsn' =>
+ 'mongodb://developer:password@localhost:27017/mydatabase',
+            ],
+        ],
+   ]
 
  To perform "find" queries, please use 'Query' instead.
 
@@ -25,25 +32,11 @@ DESCRIPTION
  syntax. However Collection class provides the ability of "translating" common
  condition format used "yii\db\*" into Mongo condition. For example:
 
-   $condition = [
-       [
-           'OR',
-           ['AND', ['first_name' => 'John'], ['last_name' => 'Smith']],
-           ['status' => [1, 2, 3]]
-       ],
-   ];
-   print_r($collection->buildCondition($condition));
-   // outputs :
    [
-       '$or' => [
-           [
-               'first_name' => 'John',
-               'last_name' => 'John',
-           ],
-           [
-               'status' => ['$in' => [1, 2, 3]],
-           ]
-       ]
+       'socketTimeoutMS' => 1000, // how long a send or receive on a socket
+ can take before timing out
+       'journal' => true // block write operations until the journal be
+ flushed the to disk
    ]
 
  Note: condition values for the key '_id' will be automatically cast to
@@ -192,10 +185,8 @@ METHOD DETAILS
     field using native numeric key with the field name as a value, in this
     case ascending sort will be used. For example:
 
-      [
-          'name',
-          'status' => -1,
-      ]
+      $collection = Yii::$app->mongodb->getCollection('customer');
+      $collection->insert(['name' => 'John Smith', 'status' => 1]);
 
 
     [$options] (array) List of options in format: optionName => optionValue.
@@ -214,10 +205,25 @@ METHOD DETAILS
     the field name as a value, in this case ascending sort will be used. For
     example:
 
+      $condition = [
+          [
+              'OR',
+              ['AND', ['first_name' => 'John'], ['last_name' => 'Smith']],
+              ['status' => [1, 2, 3]]
+          ],
+      ];
+      print_r($collection->buildCondition($condition));
+      // outputs :
       [
-          'name',
-          'status' => -1,
-          'description' => 'text',
+          '$or' => [
+              [
+                  'first_name' => 'John',
+                  'last_name' => 'John',
+              ],
+              [
+                  'status' => ['$in' => [1, 2, 3]],
+              ]
+          ]
       ]
 
 
@@ -383,15 +389,10 @@ successful.
  write it inside the another Mongo collection specified by "out" parameter.
  For example:
 
-   $customerCollection = Yii::$app->mongo->getCollection('customer');
-   $resultCollectionName = $customerCollection->mapReduce(
-       'function () {emit(this.status, this.amount)}',
-       'function (key, values) {return Array.sum(values)}',
-       'mapReduceOut',
-       ['status' => 3]
-   );
-   $query = new Query();
-   $results = $query->from($resultCollectionName)->all();
+   [
+       'name',
+       'status' => -1,
+   ]
 
 
     [$map] (\MongoCode|string) Function, which emits map data from collection.
@@ -536,6 +537,17 @@ successful.
     [$operands] (array) The first operand is the column name. If it is an
     array a composite IN condition will be generated. The second operand is an
     array of values that column value should be among.
+
+
+*yii/mongodb/Collection::buildRegexCondition*		public
+>
+ buildRegexCondition($operator, $operands)
+<
+(array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use
+    [$operands] (array) The first operand is the column name. The second
+    operand is a single value that column value should be compared with.
 
 
 *yii/mongodb/Collection::buildLikeCondition*		public

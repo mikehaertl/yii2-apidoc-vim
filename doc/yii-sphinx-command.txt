@@ -13,8 +13,11 @@ DESCRIPTION
  SELECT, CALL SNIPPETS, CALL KEYWORDS), use 'queryAll()', 'queryOne()',
  'queryColumn()', 'queryScalar()', or 'query()'. For example,
 
-   $articles = $connection->createCommand("SELECT * FROM `idx_article` WHERE
- MATCH('programming')")->queryAll();
+   [
+       'update' => function ($url, $model, $key) {
+           return $model->status == 'editable' ? Html::a('Update', $url) : '';
+       };
+   ],
 
  Command supports SQL statement preparation and parameter binding just as
  '\yii\db\Command' does.
@@ -22,10 +25,13 @@ DESCRIPTION
  Command also supports building SQL statements by providing methods such as
  'insert()', 'update()', etc. For example,
 
-   $connection->createCommand()->update('idx_article', [
-       'genre_id' => 15,
-       'author_id' => 157,
-   ])->execute();
+   'columns' => [
+       // ...
+       [
+           'class' => 'yii\grid\SerialColumn',
+           // you may configure additional properties here
+       ],
+   ]
 
  To build SELECT SQL statements, please use 'Query' and 'QueryBuilder'
  instead.
@@ -46,6 +52,12 @@ $fetchMode				*yii/sphinx/Command::$fetchMode*
 
 $params					*yii/sphinx/Command::$params*
  See |yii/db/Command::$params|
+
+$queryCacheDuration			*yii/sphinx/Command::$queryCacheDuration*
+ See |yii/db/Command::$queryCacheDuration|
+
+$queryCacheDependency			*yii/sphinx/Command::$queryCacheDependency*
+ See |yii/db/Command::$queryCacheDependency|
 
 $behaviors				*yii/sphinx/Command::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -162,6 +174,14 @@ METHOD DETAILS
  See |yii/base/Component::ensureBehaviors|
 
 
+*yii/sphinx/Command::cache*				public
+ See |yii/db/Command::cache|
+
+
+*yii/sphinx/Command::noCache*				public
+ See |yii/db/Command::noCache|
+
+
 *yii/sphinx/Command::getSql*				public
  See |yii/db/Command::getSql|
 
@@ -186,16 +206,16 @@ METHOD DETAILS
  See |yii/db/Command::bindParam|
 
 
+*yii/sphinx/Command::bindPendingParams*			protected
+ See |yii/db/Command::bindPendingParams|
+
+
 *yii/sphinx/Command::bindValue*				public
  See |yii/db/Command::bindValue|
 
 
 *yii/sphinx/Command::bindValues*				public
  See |yii/db/Command::bindValues|
-
-
-*yii/sphinx/Command::execute*				public
- See |yii/db/Command::execute|
 
 
 *yii/sphinx/Command::query*				public
@@ -230,11 +250,8 @@ METHOD DETAILS
 
  For example,
 
-   $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
-       ['Tom', 30],
-       ['Jane', 20],
-       ['Linda', 25],
-   ])->execute();
+   $articles = $connection->createCommand("SELECT * FROM `idx_article` WHERE
+ MATCH('programming')")->queryAll();
 
  Note that the values in each row must match the corresponding column names.
     [$index] (string) The index that new rows will be inserted into.
@@ -250,8 +267,10 @@ METHOD DETAILS
 
  For example,
 
-   $connection->createCommand()->update('user', ['status' => 1], 'age >
- 30')->execute();
+   $connection->createCommand()->update('idx_article', [
+       'genre_id' => 15,
+       'author_id' => 157,
+   ])->execute();
 
  The method will properly escape the column names and bind the values to be
  updated.
@@ -495,6 +514,10 @@ METHOD DETAILS
     [$table] (string) The table name.
 
 
+*yii/sphinx/Command::execute*				public
+ See |yii/db/Command::execute|
+
+
 *yii/sphinx/Command::replace*				public
 >
  replace($index, $columns)
@@ -503,9 +526,10 @@ METHOD DETAILS
 
  For example,
 
-   $connection->createCommand()->insert('idx_user', [
-       'name' => 'Sam',
-       'age' => 30,
+   $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
+       ['Tom', 30],
+       ['Jane', 20],
+       ['Linda', 25],
    ])->execute();
 
  The method will properly escape the column names, and bind the values to be
@@ -525,11 +549,8 @@ METHOD DETAILS
 
  For example,
 
-   $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
-       ['Tom', 30],
-       ['Jane', 20],
-       ['Linda', 25],
-   ])->execute();
+   $connection->createCommand()->update('user', ['status' => 1], 'age >
+ 30')->execute();
 
  Note that the values in each row must match the corresponding column names.
     [$index] (string) The index that new rows will be replaced.
@@ -565,7 +586,7 @@ METHOD DETAILS
 >
  callKeywords($index, $text, $fetchStatistic='false')
 <
-(string) The SQL statement for call keywords.
+(static) The command object itself
 
     [$index] (string) The name of the index from which to take the text
     processing settings

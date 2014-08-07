@@ -78,6 +78,12 @@ $message				*yii/validators/Validator::$message*
    - '{attribute}': the label of the attribute being validated 
    - '{value}': the value of the attribute being validated
 
+ Note that some validators may introduce other properties for error messages
+ used when specific validation conditions are not met. Please refer to
+ individual class API documentation for details about these properties. By
+ convention, this property represents the primary error message used when the
+ most important validation condition is not met.
+
 $on					*yii/validators/Validator::$on*
  (array|string) Scenarios that the validator can be applied to. For multiple
  scenarios, please specify them as an array; for single scenario, you may use
@@ -123,8 +129,9 @@ $when					*yii/validators/Validator::$when*
  The following example will enable the validator only when the country
  currently selected is USA:
 
-   function ($model) {
-       return $model->country == Country::USA;
+   function foo($model, $attribute) {
+       // compute value
+       return $value;
    }
 
 
@@ -143,8 +150,8 @@ $whenClient				*yii/validators/Validator::$whenClient*
  The following example will enable the validator only when the country
  currently selected is USA:
 
-   function (attribute, value) {
-       return $('#country').value == 'USA';
+   function ($model) {
+       return $model->country == Country::USA;
    }
 
 
@@ -346,7 +353,9 @@ support client-side validation.
    - 'attribute': the name of the attribute being validated. 
    - 'value': the value being validated. 
    - 'messages': an array used to hold the validation error messages
-   for the attribute.
+   for the attribute. 
+   - 'deferred': an array used to hold deferred objects for
+   asynchronous validation
     [$object] (\yii\base\Model) The data object being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render

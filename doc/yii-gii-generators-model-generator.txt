@@ -42,6 +42,12 @@ $generateLabelsFromComments		*yii/gii/generators/model/Generator::$generateLabel
 $useTablePrefix				*yii/gii/generators/model/Generator::$useTablePrefix*
  ()
 
+$tableNames				*yii/gii/generators/model/Generator::$tableNames*
+ ()
+
+$classNames				*yii/gii/generators/model/Generator::$classNames*
+ ()
+
 $behaviors				*yii/gii/generators/model/Generator::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
@@ -58,15 +64,8 @@ $errors					*yii/gii/generators/model/Generator::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
 
 
@@ -230,11 +229,21 @@ METHOD DETAILS
  Each rule is an array with the following structure:
 
    [
-       ['attribute1', 'attribute2'],
-       'validator type',
-       'on' => ['scenario1', 'scenario2'],
-       ...other parameters...
-   ]
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
 
  where
 
@@ -255,8 +264,15 @@ METHOD DETAILS
  model class method (called *inline validator*) that has the following
  signature:
 
-   // $params refers to validation parameters given in the rule
-   function validatorName($attribute, $params)
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
  In the above '$attribute' refers to currently validated attribute name while
  '$params' contains an array of validator configuration options such as 'max'
@@ -270,21 +286,11 @@ METHOD DETAILS
  Below are some examples:
 
    [
-       // built-in "required" validator
-       [['username', 'password'], 'required'],
-       // built-in "string" validator customized with "min" and "max"
- properties
-       ['username', 'string', 'min' => 3, 'max' => 12],
-       // built-in "compare" validator that is used in "register" scenario
- only
-       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
- 'register'],
-       // an inline validator defined via the "authenticate()" method in the
- model class
-       ['password', 'authenticate', 'on' => 'login'],
-       // a validator of class "DateRangeValidator"
-       ['dateRange', 'DateRangeValidator'],
-   ];
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       ...other parameters...
+   ]
 
  Note, in order to inherit rules defined in the parent class, a child class
  needs to merge the parent rules with child rules using functions such as

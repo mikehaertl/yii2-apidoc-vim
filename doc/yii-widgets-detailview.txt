@@ -14,16 +14,9 @@ DESCRIPTION
 
  A typical usage of DetailView is as follows:
 
-   echo DetailView::widget([
-       'model' => $model,
-       'attributes' => [
-           'title',             // title attribute (in plain text)
-           'description:html',  // description attribute in HTML
-           [                    // the owner name of the model
-               'label' => 'Owner',
-               'value' => $model->owner->name,
-           ],
-       ],
+   $form->field($model, 'date')->widget(\yii\widgets\MaskedInput::className(),
+ [
+       'mask' => '99/99/9999',
    ]);
 
 
@@ -81,7 +74,7 @@ $template				*yii/widgets/DetailView::$template*
  the value of the corresponding attribute. If a callback (e.g. an anonymous
  function), the signature must be as follows:
 
-   function ($attribute, $index, $widget)
+   function ($model, $key, $index, $widget)
 
  where '$attribute' refer to the specification of the attribute being
  rendered, '$index' is the zero-based index of the attribute in the

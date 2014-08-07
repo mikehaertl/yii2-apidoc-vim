@@ -18,14 +18,17 @@ DESCRIPTION
 
  In oder to acquire access token perform following sequence:
 
-   use yii\authclient\OAuth2;
-
-   $oauthClient = new OAuth2();
-   $url = $oauthClient->buildAuthUrl(); // Build authorization URL
-   Yii::$app->getResponse()->redirect($url); // Redirect to authorization URL.
-   // After user returns at our site:
-   $code = $_GET['code'];
-   $accessToken = $oauthClient->fetchAccessToken($code); // Get access token
+   'components' => [
+       'authClientCollection' => [
+           'class' => 'yii\authclient\Collection',
+           'clients' => [
+               'yandex' => [
+                   'class' => 'yii\authclient\clients\YandexOpenId'
+               ],
+           ],
+       ]
+       ...
+   ]
 
 
 
@@ -400,7 +403,7 @@ METHOD DETAILS
 
 *yii/authclient/OAuth2::apiInternal*			protected
 >
- apiInternal($accessToken, $url, $method, $params)
+ apiInternal($accessToken, $url, $method, $params, $headers)
 <
 (array) API response.
 
@@ -408,6 +411,7 @@ METHOD DETAILS
     [$url] (string) Absolute API URL.
     [$method] (string) Request method.
     [$params] (array) Request parameters.
+    [$headers] (array) Additional request headers.
 
 
 *yii/authclient/OAuth2::buildAuthUrl*			public

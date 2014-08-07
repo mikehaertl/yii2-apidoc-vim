@@ -5,6 +5,10 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/base/DynamicModel|
+|yii/db/ActiveRecord|
+|yii/db/BaseActiveRecord|
+|yii/sphinx/gii/model/Generator|
 |yii/sphinx/ActiveRecord|
 |yii/gii/Generator|
 |yii/gii/generators/crud/Generator|
@@ -21,11 +25,9 @@ SUBCLASSES
 |yii/debug/models/search/Mail|
 |yii/redis/ActiveRecord|
 |yii/elasticsearch/ActiveRecord|
+|yii/mongodb/gii/model/Generator|
 |yii/mongodb/file/ActiveRecord|
 |yii/mongodb/ActiveRecord|
-|yii/base/DynamicModel|
-|yii/db/ActiveRecord|
-|yii/db/BaseActiveRecord|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -258,17 +260,7 @@ METHOD DETAILS
 
 
 *yii/base/Model::resolveFields*				protected
->
- resolveFields($fields, $expand)
-<
-(array) The list of fields to be exported. The array keys are the field names,
-and the array values are the corresponding object property names or PHP
-callables returning the field values.
-
- This method will check the requested fields against those declared in
- 'fields()' and 'extraFields()' to determine which fields can be returned.
-    [$fields] (array) The fields being requested for exporting
-    [$expand] (array) The additional fields being requested for exporting
+ See |yii/base/ArrayableTrait::resolveFields|
 
 
 *yii/base/Model::rules*					public
@@ -519,6 +511,11 @@ model.
  This is determined by checking if the attribute is associated with a
  '\yii\validators\RequiredValidator|required' validation rule in the current
  'scenario'.
+
+ Note that when the validator has a conditional validation applied using
+ '\yii\validators\RequiredValidator::$when|$when' this method will return
+ 'false' regardless of the 'when' condition because it may be called be before
+ the model is loaded with data.
     [$attribute] (string) Attribute name
 
 

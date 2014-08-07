@@ -5,12 +5,12 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/db/ActiveRecord|
 |yii/sphinx/ActiveRecord|
 |yii/redis/ActiveRecord|
 |yii/elasticsearch/ActiveRecord|
 |yii/mongodb/file/ActiveRecord|
 |yii/mongodb/ActiveRecord|
-|yii/db/ActiveRecord|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -474,7 +474,7 @@ to 'fields()' on the format of the return value.
 >
  findOne($condition)
 <
-(static) ActiveRecord instance matching the condition, or null if nothing
+(static) ActiveRecord instance matching the condition, or 'null' if nothing
 matches.
 
  The method accepts:
@@ -508,7 +508,7 @@ matches.
 >
  findAll($condition)
 <
-(static[]) An array of ActiveRecord instance, or an empty array if nothing
+(static[]) An array of ActiveRecord instances, or an empty array if nothing
 matches.
 
  The method accepts:
@@ -549,6 +549,19 @@ matches.
 
 
     [$condition] (mixed) Primary key value or a set of column values
+
+
+*yii/db/BaseActiveRecord::findByCondition*		protected
+>
+ findByCondition($condition, $one)
+<
+(static|static[]) 
+
+ This method is internally called by 'findOne()' and 'findAll()'.
+    [$condition] (mixed) Please refer to 'findOne()' for the explanation of
+    this parameter
+    [$one] (boolean) Whether this method is called by 'findOne()' or
+    'findAll()'
 
 
 *yii/db/BaseActiveRecord::updateAll*			public
@@ -908,18 +921,18 @@ does not exist.
 >
  updateAttributes($attributes)
 <
-(integer|boolean) The number of rows affected, or false if 'beforeSave()'
-stops the updating process.
+(integer) The number of rows affected.
 
  This method is a shortcut to 'update()' when data validation is not needed
- and only a list of attributes need to be updated.
+ and only a small set attributes need to be updated.
 
  You may specify the attributes to be updated as name list or name-value
  pairs. If the latter, the corresponding attribute values will be modified
  accordingly. The method will then save the specified attributes into
  database.
 
- Note that this method will NOT perform data validation.
+ Note that this method will **not** perform data validation and will **not**
+ trigger events.
     [$attributes] (array) The attributes (names or name-value pairs) to be
     updated
 
@@ -928,9 +941,9 @@ stops the updating process.
 >
  updateInternal($attributes='null')
 <
-(void)
+(integer) Number of rows updated
 
-    [$attributes] () 
+    [$attributes] (array) Attributes to update
 
 
 *yii/db/BaseActiveRecord::updateCounters*			public
@@ -1030,16 +1043,22 @@ insertion or updating will be cancelled.
 
 *yii/db/BaseActiveRecord::afterSave*			public
 >
- afterSave($insert)
+ afterSave($insert, $changedAttributes)
 <
 (void)
 
  The default implementation will trigger an 'EVENT_AFTER_INSERT' event when
  '$insert' is true, or an 'EVENT_AFTER_UPDATE' event if '$insert' is false.
- When overriding this method, make sure you call the parent implementation so
- that the event is triggered.
+ The event class used is 'AfterSaveEvent'. When overriding this method, make
+ sure you call the parent implementation so that the event is triggered.
     [$insert] (boolean) Whether this method called while inserting a record.
     If false, it means the method is called while updating a record.
+    [$changedAttributes] (array) The old values of attributes that had changed
+    and were saved. You can use this parameter to take action based on the
+    changes made for example send an email when the password had changed or
+    implement audit trail that tracks all the changes. '$changedAttributes'
+    gives you the old attribute values while the active record ('$this') has
+    already the new, updated values.
 
 
 *yii/db/BaseActiveRecord::beforeDelete*			public
@@ -1221,6 +1240,23 @@ will be returned.
     true, the model containing the foreign key will be deleted.
 
 
+*yii/db/BaseActiveRecord::unlinkAll*			public
+>
+ unlinkAll($name, $delete='false')
+<
+(void)
+
+ The model with the foreign key of the relationship will be deleted if
+ '$delete' is true. Otherwise, the foreign key will be set null and the model
+ will be saved without validation.
+
+ Note that to destroy the relationship without removing records make sure your
+ keys can be set to null
+    [$name] (string) The case sensitive name of the relationship.
+    [$delete] (boolean) Whether to delete the model that contains the foreign
+    key.
+
+
 *yii/db/BaseActiveRecord::isPrimaryKey*			public
 >
  isPrimaryKey($keys)
@@ -1241,6 +1277,10 @@ this model
 
 *yii/db/BaseActiveRecord::insert*				public
  See |yii/db/ActiveRecordInterface::insert|
+
+
+*yii/db/BaseActiveRecord::getDb*				public
+ See |yii/db/ActiveRecordInterface::getDb|
 
 
 

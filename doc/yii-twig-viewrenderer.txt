@@ -34,23 +34,39 @@ $filters				*yii/twig/ViewRenderer::$filters*
  model|jsonEncode }}'.
 
 $extensions				*yii/twig/ViewRenderer::$extensions*
- (array) Custom extensions. Example: '['Twig_Extension_Sandbox',
- 'Twig_Extension_Text']'
+ (array) Custom extensions. Example: '['Twig_Extension_Sandbox', new
+ \Twig_Extension_Text()]'
 
 $lexerOptions				*yii/twig/ViewRenderer::$lexerOptions*
- (array) Twig lexer options. Example: Smarty-like syntax:
+ (array) Twig lexer options.
 
-   [
-       'tag_comment'  => ['{*', '*}'],
-       'tag_block'    => ['{', '}'],
-       'tag_variable' => ['{$', '}']
-   ]
+ Example: Smarty-like syntax:
+
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
+
+
+
+$uses					*yii/twig/ViewRenderer::$uses*
+ (array) Namespaces and classes to import.
+
+ Example:
+
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
 
 
 
 $twig					*yii/twig/ViewRenderer::$twig*
- (\Twig_Environment) Twig environment object that do all rendering twig
- templates
+ (\Twig_Environment) Twig environment object that renders twig templates
 
 $behaviors				*yii/twig/ViewRenderer::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -175,6 +191,16 @@ METHOD DETAILS
     [$view] (\yii\base\View) The view object used for rendering the file.
     [$file] (string) The view file.
     [$params] (array) The parameters to be passed to the view file.
+
+
+*yii/twig/ViewRenderer::addAliases*			protected
+>
+ addAliases($loader, $aliases)
+<
+(void)
+
+    [$loader] (\Twig_Loader_Filesystem) 
+    [$aliases] (array) 
 
 
 *yii/twig/ViewRenderer::addGlobals*			public

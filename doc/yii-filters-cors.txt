@@ -1,0 +1,208 @@
+
+*yii/filters/Cors*   >> |yii/base/ActionFilter|
+==================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Make sure to read carefully what CORS does and does not. CORS do not secure
+ your API, but allow the developper to grant access to third party code (ajax
+ calls from external domain)
+
+ You may use CORS filter by attaching it as a behavior to a controller or
+ module, like the following,
+
+   function ($rule, $action)
+
+ The CORS filter can be specialized to restrict parameters, like this, [MDN
+ CORS
+ Information](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
+
+   function ($rule, $action)
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$owner					*yii/filters/Cors::$owner*
+ See |yii/base/Behavior::$owner|
+
+$only					*yii/filters/Cors::$only*
+ See |yii/base/ActionFilter::$only|
+
+$except					*yii/filters/Cors::$except*
+ See |yii/base/ActionFilter::$except|
+
+$request				*yii/filters/Cors::$request*
+ (\yii\web\Request) The current request. If not set, the 'request' application
+ component will be used.
+
+$response				*yii/filters/Cors::$response*
+ (\yii\web\Response) The response to be sent. If not set, the 'response'
+ application component will be used.
+
+$actions				*yii/filters/Cors::$actions*
+ (array) Define specific CORS rules for specific actions
+
+$cors					*yii/filters/Cors::$cors*
+ (array) Basic headers handled for the CORS requests.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/filters/Cors::className*				public
+ See |yii/base/Object::className|
+
+
+*yii/filters/Cors::__construct*				public
+ See |yii/base/Object::__construct|
+
+
+*yii/filters/Cors::init*					public
+ See |yii/base/Object::init|
+
+
+*yii/filters/Cors::__get*					public
+ See |yii/base/Object::__get|
+
+
+*yii/filters/Cors::__set*					public
+ See |yii/base/Object::__set|
+
+
+*yii/filters/Cors::__isset*				public
+ See |yii/base/Object::__isset|
+
+
+*yii/filters/Cors::__unset*				public
+ See |yii/base/Object::__unset|
+
+
+*yii/filters/Cors::__call*				public
+ See |yii/base/Object::__call|
+
+
+*yii/filters/Cors::hasProperty*				public
+ See |yii/base/Object::hasProperty|
+
+
+*yii/filters/Cors::canGetProperty*			public
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/filters/Cors::canSetProperty*			public
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/filters/Cors::hasMethod*				public
+ See |yii/base/Object::hasMethod|
+
+
+*yii/filters/Cors::events*				public
+ See |yii/base/Behavior::events|
+
+
+*yii/filters/Cors::attach*				public
+ See |yii/base/ActionFilter::attach|
+
+
+*yii/filters/Cors::detach*				public
+ See |yii/base/ActionFilter::detach|
+
+
+*yii/filters/Cors::beforeFilter*				public
+ See |yii/base/ActionFilter::beforeFilter|
+
+
+*yii/filters/Cors::afterFilter*				public
+ See |yii/base/ActionFilter::afterFilter|
+
+
+*yii/filters/Cors::beforeAction*				public
+>
+ beforeAction($action)
+<
+(boolean) Whether the action should continue to be executed.
+
+    [$action] (\yii\base\Action) The action to be executed.
+
+
+*yii/filters/Cors::afterAction*				public
+ See |yii/base/ActionFilter::afterAction|
+
+
+*yii/filters/Cors::isActive*				protected
+ See |yii/base/ActionFilter::isActive|
+
+
+*yii/filters/Cors::overrideDefaultSettings*		public
+>
+ overrideDefaultSettings($action)
+<
+(void)
+
+    [$action] (\yii\base\Action) The action settings to override
+
+
+*yii/filters/Cors::extractHeaders*			public
+>
+ extractHeaders()
+<
+(array) CORS headers to handle
+
+
+
+*yii/filters/Cors::prepareHeaders*			public
+>
+ prepareHeaders($requestHeaders)
+<
+(array) CORS headers ready to be sent
+
+    [$requestHeaders] (array) CORS headers we have detected
+
+
+*yii/filters/Cors::prepareAllowHeaders*			protected
+>
+ prepareAllowHeaders($type, $requestHeaders, $responseHeaders)
+<
+(void)
+
+    [$type] (string) The kind of headers we would handle
+    [$requestHeaders] (array) CORS headers request by client
+    [$responseHeaders] (array) CORS response headers sent to the clinet
+
+
+*yii/filters/Cors::addCorsHeaders*			public
+>
+ addCorsHeaders($response, $headers)
+<
+(void)
+
+    [$response] (\yii\web\Response) 
+    [$headers] () 
+
+
+*yii/filters/Cors::headerize*				protected
+>
+ headerize($string)
+<
+(string) The result in "header" format
+
+    [$string] (string) String to convert
+
+
+*yii/filters/Cors::headerizeToPhp*			protected
+>
+ headerizeToPhp($string)
+<
+(string) The result in "php $_SERVER header" format
+
+    [$string] (string) String to convert
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -18,14 +18,9 @@ DESCRIPTION
 
  For example,
 
-   $query = new Query;
-   $query->select('id, groupd_id')
-       ->from('idx_item')
-       ->limit(10);
-   // build and execute the query
-   $command = $query->createCommand();
-   // $command->sql returns the actual SQL
-   $rows = $command->queryAll();
+   $params = [];
+   $sql = $queryBuilder->update('idx_user', ['status' => 1], 'age > 30',
+ $params);
 
  Since Sphinx does not store the original indexed text, the snippets for the
  rows in query result should be build separately via another query. You can
@@ -71,8 +66,11 @@ $from					*yii/sphinx/Query::$from*
  statement.
 
 $match					*yii/sphinx/Query::$match*
- (string) Text, which should be searched in fulltext mode. This value will be
- composed into MATCH operator inside the WHERE clause.
+ (string|\yii\db\Expression) Text, which should be searched in fulltext mode.
+ This value will be composed into MATCH operator inside the WHERE clause.
+ Note: this value will be processed by 'Connection::escapeMatchValue()', if
+ you need to compose complex match condition use 'Expression', see 'match()'
+ for details.
 
 $groupBy				*yii/sphinx/Query::$groupBy*
  (array) How to group the query results. For example, '['company',
@@ -99,18 +97,7 @@ $snippetCallback			*yii/sphinx/Query::$snippetCallback*
  argument and must return the array of snippet source strings in the order,
  which match one of incoming rows. For example:
 
-   $query = new Query;
-   $query->from('idx_item')
-       ->match('pencil')
-       ->snippetCallback(function ($rows) {
-           $result = [];
-           foreach ($rows as $row) {
-               $result[] = file_get_contents('/path/to/index/files/' .
- $row['id'] . '.txt');
-           }
-           return $result;
-       })
-       ->all();
+   $sql = $queryBuilder->delete('idx_user', 'status = 0');
 
 
 
@@ -603,6 +590,19 @@ the query results in nothing.
  match($query)
 <
 (static) The query object itself
+
+ Note: this value will be processed by 'Connection::escapeMatchValue()', if
+ you need to compose complex match condition use 'Expression':
+
+   $query = new Query;
+   $query->select('id, group_id')
+       ->from('idx_item')
+       ->limit(10);
+   // build and execute the query
+   $command = $query->createCommand();
+   // $command->sql returns the actual SQL
+   $rows = $command->queryAll();
+
 
     [$query] (string) Fulltext query text.
 

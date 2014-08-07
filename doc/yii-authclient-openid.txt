@@ -15,19 +15,15 @@ DESCRIPTION
 
  Usage:
 
-   use yii\authclient\OpenId;
-
-   $client = new OpenId();
-   $client->authUrl = 'https://open.id.provider.url'; // Setup provider
- endpoint
-   $url = $client->buildAuthUrl(); // Get authentication URL
-   return Yii::$app->getResponse()->redirect($url); // Redirect to
- authentication URL
-   // After user returns at our site:
-   if ($client->validate()) { // validate response
-       $userAttributes = $client->getUserAttributes(); // get account info
-       ...
-   }
+   $customerCollection = Yii::$app->mongo->getCollection('customer');
+   $resultCollectionName = $customerCollection->mapReduce(
+       'function () {emit(this.status, this.amount)}',
+       'function (key, values) {return Array.sum(values)}',
+       'mapReduceOut',
+       ['status' => 3]
+   );
+   $query = new Query();
+   $results = $query->from($resultCollectionName)->all();
 
  AX and SREG extensions are supported. To use them, specify
  'requiredAttributes' and/or 'optionalAttributes'.
@@ -44,7 +40,24 @@ $requiredAttributes			*yii/authclient/OpenId::$requiredAttributes*
  (array) List of attributes, which always should be returned from server.
  Attribute names should be always specified in AX format. For example:
 
-   ['namePerson/friendly', 'contact/email']
+   echo Nav::widget([
+       'items' => [
+           [
+               'label' => 'Home',
+               'url' => ['site/index'],
+               'linkOptions' => [...],
+           ],
+           [
+               'label' => 'Dropdown',
+               'items' => [
+                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
+                    '<li class="divider"></li>',
+                    '<li class="dropdown-header">Dropdown Header</li>',
+                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+               ],
+           ],
+       ],
+   ]);
 
 
 
@@ -52,7 +65,19 @@ $optionalAttributes			*yii/authclient/OpenId::$optionalAttributes*
  (array) List of attributes, which could be returned from server. Attribute
  names should be always specified in AX format. For example:
 
-   ['namePerson/first', 'namePerson/last']
+   use yii\authclient\OpenId;
+
+   $client = new OpenId();
+   $client->authUrl = 'https://open.id.provider.url'; // Setup provider
+ endpoint
+   $url = $client->buildAuthUrl(); // Get authentication URL
+   return Yii::$app->getResponse()->redirect($url); // Redirect to
+ authentication URL
+   // After user returns at our site:
+   if ($client->validate()) { // validate response
+       $userAttributes = $client->getUserAttributes(); // get account info
+       ...
+   }
 
 
 
@@ -360,28 +385,6 @@ METHOD DETAILS
     [$url] (string) URL to check
 
 
-*yii/authclient/OpenId::sendCurlRequest*			protected
->
- sendCurlRequest($url, $method=''GET'', $params='[]')
-<
-(array|string) Response.
-
-    [$url] (string) Request URL.
-    [$method] (string) Request method.
-    [$params] (array) Request params.
-
-
-*yii/authclient/OpenId::sendStreamRequest*		protected
->
- sendStreamRequest($url, $method=''GET'', $params='[]')
-<
-(array|string) Response.
-
-    [$url] (string) Request URL.
-    [$method] (string) Request method.
-    [$params] (array) Request params.
-
-
 *yii/authclient/OpenId::sendRequest*			protected
 >
  sendRequest($url, $method=''GET'', $params='[]')
@@ -525,6 +528,16 @@ METHOD DETAILS
  will be present, or that there will be no other attributes besides those
  specified. In other words. OP may provide whatever information it wants to.
  SREG names will be mapped to AX names.
+
+
+*yii/authclient/OpenId::compareUrl*			protected
+>
+ compareUrl($expectedUrl, $actualUrl)
+<
+(boolean) Whether URLs are equal.
+
+    [$expectedUrl] (string) Expected URL.
+    [$actualUrl] (string) Actual URL.
 
 
 

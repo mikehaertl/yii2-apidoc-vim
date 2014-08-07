@@ -9,11 +9,14 @@ DESCRIPTION
  messages'. It should also support composition of the message body through the
  view rendering mechanism. For example,
 
-   Yii::$app->mail->compose('contact/html', ['contactForm' => $form])
-       ->setFrom('from@domain.com')
-       ->setTo($form->email)
-       ->setSubject($form->subject)
-       ->send();
+   [
+       'self' => 'http://example.com/users/1',
+       'friends' => [
+           'http://example.com/users/2',
+           'http://example.com/users/3',
+       ],
+       'manager' => $managerLink, // $managerLink is a Link object
+   ]
 
 
 

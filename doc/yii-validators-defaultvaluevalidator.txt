@@ -47,7 +47,17 @@ $whenClient				*yii/validators/DefaultValueValidator::$whenClient*
  See |yii/validators/Validator::$whenClient|
 
 $value					*yii/validators/DefaultValueValidator::$value*
- (mixed) The default value to be set to the specified attributes.
+ (mixed) The default value or a PHP callable that returns the default value
+ which will be assigned to the attributes being validated if they are empty.
+ The signature of the PHP callable should be as follows,
+
+   [
+       'class' => 'yii\rest\UrlRule',
+       'controller' => ['user', 'post'],
+       'except' => ['delete'],
+   ]
+
+
 
 $behaviors				*yii/validators/DefaultValueValidator::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component

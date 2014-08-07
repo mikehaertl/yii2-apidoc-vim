@@ -27,7 +27,13 @@ DESCRIPTION
 
  These options can be configured using methods of the same name. For example:
 
-   $customers = Customer::find()->with('orders')->asArray()->all();
+   return [
+       // ...
+       'controllerMap' => [
+           'mongodb-migrate' =>
+ 'yii\mongodb\console\controllers\MigrateController'
+       ],
+   ];
 
  Relational query ----------------
 
@@ -123,7 +129,15 @@ METHOD DETAILS
 
 
 *yii/mongodb/ActiveQuery::init*				public
- See |yii/base/Object::init|
+>
+ init()
+<
+(void)
+
+ This method is called at the end of the constructor. The default
+ implementation will trigger an 'EVENT_INIT' event. If you override this
+ method, make sure you call the parent implementation at the end to ensure
+ triggering of the event.
 
 
 *yii/mongodb/ActiveQuery::__get*				public

@@ -30,7 +30,8 @@ $enableCsrfValidation			*yii/web/Request::$enableCsrfValidation*
 
  In JavaScript, you may get the values of 'csrfParam' and 'csrfToken' via
  'yii.getCsrfParam()' and 'yii.getCsrfToken()', respectively. The
- '\yii\web\YiiAsset' asset must be registered.
+ '\yii\web\YiiAsset' asset must be registered. You also need to include CSRF
+ meta tags in your pages by using '\yii\helpers\Html::csrfMetaTags()'.
 
 $csrfParam				*yii/web/Request::$csrfParam*
  (string) The name of the token used to prevent CSRF. Defaults to '_csrf'.
@@ -43,6 +44,10 @@ $csrfCookie				*yii/web/Request::$csrfCookie*
 $enableCookieValidation			*yii/web/Request::$enableCookieValidation*
  (boolean) Whether cookies should be validated to ensure they are not
  tampered. Defaults to true.
+
+$cookieValidationKey			*yii/web/Request::$cookieValidationKey*
+ (string) A secret key used for cookie validation. This property must be set
+ if 'enableCookieValidation' is true.
 
 $methodParam				*yii/web/Request::$methodParam*
  (string) The name of the POST parameter that is used to indicate if a request
@@ -159,7 +164,8 @@ $userAgent				*yii/web/Request::$userAgent*
  (string) User agent, null if not present
 
 $userIP					*yii/web/Request::$userIP*
- (string) User IP address
+ (string) User IP address. Null is returned if the user IP address cannot be
+ detected.
 
 $userHost				*yii/web/Request::$userHost*
  (string) User host name, null if cannot be determined
@@ -195,12 +201,11 @@ $acceptableLanguages			*yii/web/Request::$acceptableLanguages*
 $preferredLanguage			*yii/web/Request::$preferredLanguage*
  (string) The language that the application should use.
 
+$eTags					*yii/web/Request::$eTags*
+ (array) The entity tags
+
 $cookies				*yii/web/Request::$cookies*
  (\yii\web\CookieCollection) The cookie collection.
-
-$cookieValidationKey			*yii/web/Request::$cookieValidationKey*
- (string) The secret key used for cookie validation. If it was not set
- previously, a random key will be generated and used.
 
 $rawCsrfToken				*yii/web/Request::$rawCsrfToken*
  (string) The random token for CSRF validation.
@@ -742,7 +747,8 @@ that the URI returned is URL-encoded.
 >
  getUserIP()
 <
-(string) User IP address
+(string) User IP address. Null is returned if the user IP address cannot be
+detected.
 
 
 
@@ -825,16 +831,10 @@ in the header.
 
  This is determined by the 'Accept' HTTP header. For example,
 
-   $_SERVER['HTTP_ACCEPT'] = 'text/plain; q=0.5, application/json;
- version=1.0, application/xml; version=2.0;';
-   $types = $request->getAcceptableContentTypes();
-   print_r($types);
-   // displays:
-   // [
-   //     'application/json' => ['q' => 1, 'version' => '1.0'],
-   //      'application/xml' => ['q' => 1, 'version' => '2.0'],
-   //           'text/plain' => ['q' => 0.5],
-   // ]
+   if ($item === null) { // item does not exist
+       throw new \yii\web\HttpException(404, 'The requested Item could not be
+ found.');
+   }
 
 
 
@@ -895,10 +895,10 @@ the highest scores will be returned first.
  acceptable values with the highest quality scores will be returned first. For
  example,
 
-   $header = 'text/plain; q=0.5, application/json; version=1.0,
- application/xml; version=2.0;';
-   $accepts = $request->parseAcceptHeader($header);
-   print_r($accepts);
+   $_SERVER['HTTP_ACCEPT'] = 'text/plain; q=0.5, application/json;
+ version=1.0, application/xml; version=2.0;';
+   $types = $request->getAcceptableContentTypes();
+   print_r($types);
    // displays:
    // [
    //     'application/json' => ['q' => 1, 'version' => '1.0'],
@@ -924,6 +924,14 @@ the highest scores will be returned first.
     without further processing.
 
 
+*yii/web/Request::getETags*				public
+>
+ getETags()
+<
+(array) The entity tags
+
+
+
 *yii/web/Request::getCookies*				public
 >
  getCookies()
@@ -933,13 +941,16 @@ the highest scores will be returned first.
  Through the returned cookie collection, you may access a cookie using the
  following syntax:
 
-   $cookie = $request->cookies['name']
-   if ($cookie !== null) {
-       $value = $cookie->value;
-   }
-
-   // alternatively
-   $value = $request->cookies->getValue('name');
+   $header = 'text/plain; q=0.5, application/json; version=1.0,
+ application/xml; version=2.0;';
+   $accepts = $request->parseAcceptHeader($header);
+   print_r($accepts);
+   // displays:
+   // [
+   //     'application/json' => ['q' => 1, 'version' => '1.0'],
+   //      'application/xml' => ['q' => 1, 'version' => '2.0'],
+   //           'text/plain' => ['q' => 0.5],
+   // ]
 
 
 
@@ -950,24 +961,6 @@ the highest scores will be returned first.
 <
 (array) The cookies obtained from request
 
-
-
-*yii/web/Request::getCookieValidationKey*			public
->
- getCookieValidationKey()
-<
-(string) The secret key used for cookie validation. If it was not set
-previously, a random key will be generated and used.
-
-
-
-*yii/web/Request::setCookieValidationKey*			public
->
- setCookieValidationKey($value)
-<
-(void)
-
-    [$value] (string) The secret key used for cookie validation.
 
 
 *yii/web/Request::getRawCsrfToken*			public

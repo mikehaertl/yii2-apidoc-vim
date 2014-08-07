@@ -42,7 +42,14 @@ DESCRIPTION
 
  These options can be configured using methods of the same name. For example:
 
-   $customers = Customer::find()->with('orders')->asArray()->all();
+   echo DatePicker::widget([
+       'language' => 'ru',
+       'model' => $model,
+       'attribute' => 'from_date',
+       'clientOptions' => [
+           'dateFormat' => 'yy-mm-dd',
+       ],
+   ]);
 
  > NOTE: elasticsearch limits the number of records returned to 10 records by
  default. > If you expect to get more records you should specify limit
@@ -112,6 +119,9 @@ $query					*yii/elasticsearch/ActiveQuery::$query*
 $filter					*yii/elasticsearch/ActiveQuery::$filter*
  See |yii/elasticsearch/Query::$filter|
 
+$highlight				*yii/elasticsearch/ActiveQuery::$highlight*
+ See |yii/elasticsearch/Query::$highlight|
+
 $facets					*yii/elasticsearch/ActiveQuery::$facets*
  See |yii/elasticsearch/Query::$facets|
 
@@ -163,7 +173,15 @@ METHOD DETAILS
 
 
 *yii/elasticsearch/ActiveQuery::init*			public
- See |yii/elasticsearch/Query::init|
+>
+ init()
+<
+(void)
+
+ This method is called at the end of the constructor. The default
+ implementation will trigger an 'EVENT_INIT' event. If you override this
+ method, make sure you call the parent implementation at the end to ensure
+ triggering of the event.
 
 
 *yii/elasticsearch/ActiveQuery::__get*			public
@@ -452,6 +470,10 @@ the query results in nothing.
 
 *yii/elasticsearch/ActiveQuery::fields*			public
  See |yii/elasticsearch/Query::fields|
+
+
+*yii/elasticsearch/ActiveQuery::highlight*		public
+ See |yii/elasticsearch/Query::highlight|
 
 
 *yii/elasticsearch/ActiveQuery::source*			public

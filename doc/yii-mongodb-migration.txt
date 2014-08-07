@@ -1,0 +1,272 @@
+
+*yii/mongodb/Migration*   >> |yii/base/Component|
+=======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Each child class of Migration represents an individual MongoDB migration
+ which is identified by the child class name.
+
+ Within each migration, the 'up()' method should be overridden to contain the
+ logic for "upgrading" the database; while the 'down()' method for the
+ "downgrading" logic.
+
+ Migration provides a set of convenient methods for manipulating MongoDB data
+ and schema. For example, the 'createIndex()' method can be used to create a
+ collection index. Compared with the same methods in 'Collection', these
+ methods will display extra information showing the method parameters and
+ execution time, which may be useful when applying migrations.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/mongodb/Migration::$db*
+ (\yii\mongodb\Connection|string) The MongoDB connection object or the
+ application component ID of the MongoDB connection that this migration should
+ work with.
+
+$behaviors				*yii/mongodb/Migration::$behaviors*
+ (\yii\base\Behavior[]) List of behaviors attached to this component
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/mongodb/Migration::className*			public
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/Migration::__construct*			public
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/Migration::init*				public
+>
+ init()
+<
+(void)
+
+ This method will set 'db' to be the 'db' application component, if it is
+ null.
+
+
+*yii/mongodb/Migration::__get*				public
+ See |yii/base/Component::__get|
+
+
+*yii/mongodb/Migration::__set*				public
+ See |yii/base/Component::__set|
+
+
+*yii/mongodb/Migration::__isset*				public
+ See |yii/base/Component::__isset|
+
+
+*yii/mongodb/Migration::__unset*				public
+ See |yii/base/Component::__unset|
+
+
+*yii/mongodb/Migration::__call*				public
+ See |yii/base/Component::__call|
+
+
+*yii/mongodb/Migration::hasProperty*			public
+ See |yii/base/Component::hasProperty|
+
+
+*yii/mongodb/Migration::canGetProperty*			public
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/mongodb/Migration::canSetProperty*			public
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/mongodb/Migration::hasMethod*			public
+ See |yii/base/Component::hasMethod|
+
+
+*yii/mongodb/Migration::__clone*				public
+ See |yii/base/Component::__clone|
+
+
+*yii/mongodb/Migration::behaviors*			public
+ See |yii/base/Component::behaviors|
+
+
+*yii/mongodb/Migration::hasEventHandlers*			public
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/mongodb/Migration::on*				public
+ See |yii/base/Component::on|
+
+
+*yii/mongodb/Migration::off*				public
+ See |yii/base/Component::off|
+
+
+*yii/mongodb/Migration::trigger*				public
+ See |yii/base/Component::trigger|
+
+
+*yii/mongodb/Migration::getBehavior*			public
+ See |yii/base/Component::getBehavior|
+
+
+*yii/mongodb/Migration::getBehaviors*			public
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/mongodb/Migration::attachBehavior*			public
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/mongodb/Migration::attachBehaviors*			public
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/mongodb/Migration::detachBehavior*			public
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/mongodb/Migration::detachBehaviors*			public
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/mongodb/Migration::ensureBehaviors*			public
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/Migration::createCollection*			public
+>
+ createCollection($collection, $options='[]')
+<
+(void)
+
+    [$collection] (string|array) Name of the collection
+    [$options] (array) Collection options in format: "name" => "value"
+
+
+*yii/mongodb/Migration::dropCollection*			public
+>
+ dropCollection($collection)
+<
+(void)
+
+    [$collection] (string|array) Name of the collection
+
+
+*yii/mongodb/Migration::createIndex*			public
+>
+ createIndex($collection, $columns, $options='[]')
+<
+(void)
+
+    [$collection] (string|array) Name of the collection
+    [$columns] (array|string) Column name or list of column names.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Migration::dropIndex*			public
+>
+ dropIndex($collection, $columns)
+<
+(void)
+
+    [$collection] (string|array) Name of the collection
+    [$columns] (string|array) Column name or list of column names.
+
+
+*yii/mongodb/Migration::dropAllIndexes*			public
+>
+ dropAllIndexes($collection)
+<
+(void)
+
+    [$collection] (string|array) Name of the collection.
+
+
+*yii/mongodb/Migration::insert*				public
+>
+ insert($collection, $data, $options='[]')
+<
+(\MongoId) New record id instance.
+
+    [$collection] (array|string) Collection name.
+    [$data] (array|object) Data to be inserted.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Migration::batchInsert*			public
+>
+ batchInsert($collection, $rows, $options='[]')
+<
+(array) Inserted data, each row will have "_id" key assigned to it.
+
+    [$collection] (array|string) Collection name.
+    [$rows] (array) Array of arrays or objects to be inserted.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Migration::update*				public
+>
+ update($collection, $condition, $newData, $options='[]')
+<
+(integer|boolean) Number of updated documents or whether operation was
+successful.
+
+ Note: for "multiple" mode Mongo requires explicit strategy "$set" or "$inc"
+ to be specified for the "newData". If no strategy is passed "$set" will be
+ used.
+    [$collection] (array|string) Collection name.
+    [$condition] (array) Description of the objects to update.
+    [$newData] (array) The object with which to update the matching records.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Migration::save*				public
+>
+ save($collection, $data, $options='[]')
+<
+(\MongoId) Updated/new record id instance.
+
+    [$collection] (array|string) Collection name.
+    [$data] (array|object) Data to be updated/inserted.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Migration::remove*				public
+>
+ remove($collection, $condition='[]', $options='[]')
+<
+(integer|boolean) Number of updated documents or whether operation was
+successful.
+
+    [$collection] (array|string) Collection name.
+    [$condition] (array) Description of records to remove.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Migration::composeCollectionLogName*		protected
+>
+ composeCollectionLogName($collection)
+<
+(string) Collection name.
+
+    [$collection] (array|string) Collection name.
+
+
+*yii/mongodb/Migration::up*				public
+ See |yii/db/MigrationInterface::up|
+
+
+*yii/mongodb/Migration::down*				public
+ See |yii/db/MigrationInterface::down|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

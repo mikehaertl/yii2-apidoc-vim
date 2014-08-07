@@ -33,6 +33,13 @@ $lastInsertID				*yii/db/mssql/Schema::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
+$transactionIsolationLevel		*yii/db/mssql/Schema::$transactionIsolationLevel*
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
+
 
 
 METHOD DETAILS
@@ -104,8 +111,8 @@ table does not exist.
  See |yii/db/Schema::getCacheKey|
 
 
-*yii/db/mssql/Schema::getCacheGroup*			protected
- See |yii/db/Schema::getCacheGroup|
+*yii/db/mssql/Schema::getCacheTag*			protected
+ See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/mssql/Schema::getTableSchemas*			public
@@ -185,6 +192,10 @@ table does not exist.
     [$name] (string) The savepoint name
 
 
+*yii/db/mssql/Schema::setTransactionIsolationLevel*	public
+ See |yii/db/Schema::setTransactionIsolationLevel|
+
+
 *yii/db/mssql/Schema::quoteValue*				public
  See |yii/db/Schema::quoteValue|
 
@@ -225,8 +236,12 @@ table does not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
-*yii/db/mssql/Schema::handleException*			public
- See |yii/db/Schema::handleException|
+*yii/db/mssql/Schema::convertException*			public
+ See |yii/db/Schema::convertException|
+
+
+*yii/db/mssql/Schema::isReadQuery*			public
+ See |yii/db/Schema::isReadQuery|
 
 
 *yii/db/mssql/Schema::resolveTableNames*			protected

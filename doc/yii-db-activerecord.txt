@@ -412,6 +412,19 @@ METHOD DETAILS
  See |yii/db/BaseActiveRecord::findAll|
 
 
+*yii/db/ActiveRecord::findByCondition*			protected
+>
+ findByCondition($condition, $one)
+<
+(static|static[]) 
+
+ This method is internally called by 'findOne()' and 'findAll()'.
+    [$condition] (mixed) Please refer to 'findOne()' for the explanation of
+    this parameter
+    [$one] (boolean) Whether this method is called by 'findOne()' or
+    'findAll()'
+
+
 *yii/db/ActiveRecord::updateAll*				public
 >
  updateAll($attributes, $condition='\'\'', $params='[]')
@@ -707,6 +720,10 @@ database table.
  See |yii/db/BaseActiveRecord::unlink|
 
 
+*yii/db/ActiveRecord::unlinkAll*				public
+ See |yii/db/BaseActiveRecord::unlinkAll|
+
+
 *yii/db/ActiveRecord::isPrimaryKey*			public
  See |yii/db/BaseActiveRecord::isPrimaryKey|
 
@@ -732,7 +749,7 @@ database table.
 >
  find()
 <
-(\yii\db\ActiveQueryInterface) The newly created
+(static|\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
  The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
@@ -818,15 +835,6 @@ successfully.
     to null, meaning all attributes that are loaded from DB will be saved.
 
 
-*yii/db/ActiveRecord::loadDefaultValues*			public
->
- loadDefaultValues($skipIfSet='true')
-<
-(static) Model instance
-
-    [$skipIfSet] (boolean) If existing value should be preserved
-
-
 *yii/db/ActiveRecord::getDb*				public
 >
  getDb()
@@ -836,6 +844,15 @@ successfully.
  By default, the "db" application component is used as the database
  connection. You may override this method if you want to use a different
  database connection.
+
+
+*yii/db/ActiveRecord::loadDefaultValues*			public
+>
+ loadDefaultValues($skipIfSet='true')
+<
+(static) Model instance
+
+    [$skipIfSet] (boolean) If existing value should be preserved
 
 
 *yii/db/ActiveRecord::findBySql*				public

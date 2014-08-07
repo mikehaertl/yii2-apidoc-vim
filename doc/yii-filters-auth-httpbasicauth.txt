@@ -11,8 +11,8 @@ DESCRIPTION
    public function behaviors()
    {
        return [
-           'basicAuth' => [
-               'class' => \yii\filters\auth\HttpBasicAuth::className(),
+           'bearerAuth' => [
+               'class' => \yii\filters\auth\HttpBearerAuth::className(),
            ],
        ];
    }
@@ -52,11 +52,17 @@ $auth					*yii/filters/auth/HttpBasicAuth::$auth*
 
  The following code is a typical implementation of this callable:
 
-   function ($username, $password) {
-       return \app\models\User::findOne([
-           'username' => $username,
-           'password' => $password,
-       ]);
+   public function behaviors()
+   {
+       return [
+           'compositeAuth' => [
+               'class' => \yii\filters\auth\CompositeAuth::className(),
+               'authMethods' => [
+                   \yii\filters\auth\HttpBasicAuth::className(),
+                   \yii\filters\auth\QueryParamAuth::className(),
+               ],
+           ],
+       ];
    }
 
  If this property is not set, the username information will be considered as

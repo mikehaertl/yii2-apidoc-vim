@@ -5,40 +5,45 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- Dispatcher implements 'dispatch()' that forwards the log messages from
- 'Logger' to the registered log 'targets'.
+ Dispatcher implements the 'dispatch()'-method that forwards the log messages
+ from a 'Logger' to the registered log 'targets'.
 
- Dispatcher is registered as a core application component and can be accessed
- using 'Yii::$app->log'.
+ An instance of Dispatcher is registered as a core application component and
+ can be accessed using 'Yii::$app->log'.
 
  You may configure the targets in application configuration, like the
  following:
 
    [
-       'components' => [
-           'log' => [
-               'targets' => [
-                   'file' => [
-                       'class' => 'yii\log\FileTarget',
-                       'levels' => ['trace', 'info'],
-                       'categories' => ['yii\*'],
-                   ],
-                   'email' => [
-                       'class' => 'yii\log\EmailTarget',
-                       'levels' => ['error', 'warning'],
-                       'message' => [
-                           'to' => 'admin@example.com',
-                       ],
-                   ],
-               ],
-           ],
-       ],
+     [0] => message (mixed, can be a string or some complex data, such as an
+ exception object)
+     [1] => level (integer)
+     [2] => category (string)
+     [3] => timestamp (float, obtained by microtime(true))
+     [4] => traces (array, debug backtrace, contains the application code call
+ stacks)
    ]
 
  Each log target can have a name and can be referenced via the 'targets'
  property as follows:
 
-   Yii::$app->log->targets['file']->enabled = false;
+   'components' => [
+       'log' => [
+            'targets' => [
+                [
+                    'class' => 'yii\log\EmailTarget',
+                    'mailer' =>'mailer',
+                    'levels' => ['error', 'warning'],
+                    'message' => [
+                        'from' => ['log@example.com'],
+                        'to' => ['developer1@example.com',
+ 'developer2@example.com'],
+                        'subject' => 'Log message',
+                    ],
+                ],
+            ],
+       ],
+   ],
 
 
 

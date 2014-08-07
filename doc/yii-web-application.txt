@@ -71,11 +71,7 @@ $catchAll				*yii/web/Application::$catchAll*
  action. The rest of the array elements (key-value pairs) specify the
  parameters to be bound to the action. For example,
 
-   [
-       'offline/notice',
-       'param1' => 'value1',
-       'param2' => 'value2',
-   ]
+   Options FollowSymLinks
 
  Defaults to null, meaning catch-all is not used.
 
@@ -96,7 +92,7 @@ $controllerPath				*yii/web/Application::$controllerPath*
  (string) The directory that contains the controller classes.
 
 $viewPath				*yii/web/Application::$viewPath*
- (string) The root directory of view files. Defaults to "'basePath'/view".
+ (string) The root directory of view files. Defaults to "'basePath'/views".
 
 $layoutPath				*yii/web/Application::$layoutPath*
  (string) The root directory of layout files. Defaults to
@@ -108,8 +104,9 @@ $aliases				*yii/web/Application::$aliases*
  aliases. For example,
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
+       'offline/notice',
+       'param1' => 'value1',
+       'param2' => 'value2',
    ]
 
 
@@ -129,10 +126,10 @@ $timeZone				*yii/web/Application::$timeZone*
  (string) The time zone used by this application.
 
 $db					*yii/web/Application::$db*
- (\yii\db\Connection) The database connection
+ (\yii\db\Connection) The database connection.
 
 $log					*yii/web/Application::$log*
- (\yii\log\Dispatcher) The log dispatcher component
+ (\yii\log\Dispatcher) The log dispatcher application component.
 
 $errorHandler				*yii/web/Application::$errorHandler*
  (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
@@ -146,39 +143,42 @@ $formatter				*yii/web/Application::$formatter*
  (\yii\base\Formatter) The formatter application component.
 
 $request				*yii/web/Application::$request*
- (\yii\web\Request|\yii\console\Request) The request component
+ (\yii\web\Request|\yii\console\Request) The request component.
 
 $response				*yii/web/Application::$response*
- (\yii\web\Response|\yii\console\Response) The response component
+ (\yii\web\Response|\yii\console\Response) The response component.
 
 $view					*yii/web/Application::$view*
- (\yii\base\View|\yii\web\View) The view object that is used to render various
- view files.
+ (\yii\base\View|\yii\web\View) The view application component that is used to
+ render various view files.
 
 $urlManager				*yii/web/Application::$urlManager*
  (\yii\web\UrlManager) The URL manager for this application.
 
 $i18n					*yii/web/Application::$i18n*
- (\yii\i18n\I18N) The internationalization component
+ (\yii\i18n\I18N) The internationalization application component.
 
-$mail					*yii/web/Application::$mail*
- (\yii\mail\MailerInterface) The mailer interface
+$mailer					*yii/web/Application::$mailer*
+ (\yii\mail\MailerInterface) The mailer application component.
 
 $authManager				*yii/web/Application::$authManager*
- (\yii\rbac\ManagerInterface) The auth manager for this application. Null is
+ (\yii\rbac\ManagerInterface) The auth manager application component. Null is
  returned if auth manager is not configured.
 
 $assetManager				*yii/web/Application::$assetManager*
- (\yii\web\AssetManager) The asset manager component
+ (\yii\web\AssetManager) The asset manager application component.
+
+$security				*yii/web/Application::$security*
+ (\yii\base\Security) The security application component.
 
 $homeUrl				*yii/web/Application::$homeUrl*
  (string) The homepage URL
 
 $session				*yii/web/Application::$session*
- (\yii\web\Session) The session component
+ (\yii\web\Session) The session component.
 
 $user					*yii/web/Application::$user*
- (\yii\web\User) The user component
+ (\yii\web\User) The user component.
 
 
 
@@ -307,6 +307,14 @@ METHOD DETAILS
 
 *yii/web/Application::setComponents*			public
  See |yii/di/ServiceLocator::setComponents|
+
+
+*yii/web/Application::getInstance*			public
+ See |yii/base/Module::getInstance|
+
+
+*yii/web/Application::setInstance*			public
+ See |yii/base/Module::setInstance|
 
 
 *yii/web/Application::getUniqueId*			public
@@ -481,8 +489,8 @@ METHOD DETAILS
  See |yii/base/Application::getI18n|
 
 
-*yii/web/Application::getMail*				public
- See |yii/base/Application::getMail|
+*yii/web/Application::getMailer*				public
+ See |yii/base/Application::getMailer|
 
 
 *yii/web/Application::getAuthManager*			public
@@ -491,6 +499,10 @@ METHOD DETAILS
 
 *yii/web/Application::getAssetManager*			public
  See |yii/base/Application::getAssetManager|
+
+
+*yii/web/Application::getSecurity*			public
+ See |yii/base/Application::getSecurity|
 
 
 *yii/web/Application::coreComponents*			public
@@ -526,7 +538,7 @@ METHOD DETAILS
 >
  getSession()
 <
-(\yii\web\Session) The session component
+(\yii\web\Session) The session component.
 
 
 
@@ -534,7 +546,7 @@ METHOD DETAILS
 >
  getUser()
 <
-(\yii\web\User) The user component
+(\yii\web\User) The user component.
 
 
 

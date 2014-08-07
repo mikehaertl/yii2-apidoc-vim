@@ -12,31 +12,30 @@ DESCRIPTION
  In order to setup Sphinx "searchd" to support MySQL protocol following
  configuration should be added:
 
-   searchd
+   public function getSnippetSource()
    {
-       listen = localhost:9306:mysql41
-       ...
+       return $this->snippetSourceRelation->content;
    }
 
  The following example shows how to create a Connection instance and establish
  the Sphinx connection:
 
-   $connection = new \yii\db\Connection([
-       'dsn' => 'mysql:host=127.0.0.1;port=9306;',
-       'username' => $username,
-       'password' => $password,
-   ]);
-   $connection->open();
+   return [
+       'admin' => self::OP_INSERT,
+       'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
+       // the above is equivalent to the following:
+       // 'api' => self::OP_ALL,
+
+   ];
 
  After the Sphinx connection is established, one can execute SQL statements
  like the following:
 
-   $command = $connection->createCommand("SELECT * FROM idx_article WHERE
- MATCH('programming')");
-   $articles = $command->queryAll();
-   $command = $connection->createCommand('UPDATE idx_article SET status=2
- WHERE id=1');
-   $command->execute();
+   searchd
+   {
+       listen = localhost:9306:mysql41
+       ...
+   }
 
  For more information about how to perform various DB queries, please refer to
  'Command'.
@@ -83,9 +82,6 @@ $enableQueryCache			*yii/sphinx/Connection::$enableQueryCache*
 $queryCacheDuration			*yii/sphinx/Connection::$queryCacheDuration*
  See |yii/db/Connection::$queryCacheDuration|
 
-$queryCacheDependency			*yii/sphinx/Connection::$queryCacheDependency*
- See |yii/db/Connection::$queryCacheDependency|
-
 $queryCache				*yii/sphinx/Connection::$queryCache*
  See |yii/db/Connection::$queryCache|
 
@@ -107,11 +103,36 @@ $pdoClass				*yii/sphinx/Connection::$pdoClass*
 $enableSavepoint			*yii/sphinx/Connection::$enableSavepoint*
  See |yii/db/Connection::$enableSavepoint|
 
+$serverStatusCache			*yii/sphinx/Connection::$serverStatusCache*
+ See |yii/db/Connection::$serverStatusCache|
+
+$serverRetryInterval			*yii/sphinx/Connection::$serverRetryInterval*
+ See |yii/db/Connection::$serverRetryInterval|
+
+$enableSlaves				*yii/sphinx/Connection::$enableSlaves*
+ See |yii/db/Connection::$enableSlaves|
+
+$slaves					*yii/sphinx/Connection::$slaves*
+ See |yii/db/Connection::$slaves|
+
+$slaveConfig				*yii/sphinx/Connection::$slaveConfig*
+ See |yii/db/Connection::$slaveConfig|
+
+$masters				*yii/sphinx/Connection::$masters*
+ See |yii/db/Connection::$masters|
+
+$masterConfig				*yii/sphinx/Connection::$masterConfig*
+ See |yii/db/Connection::$masterConfig|
+
 $behaviors				*yii/sphinx/Connection::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
 $isActive				*yii/sphinx/Connection::$isActive*
  (boolean) Whether the DB connection is established
+
+$queryCacheInfo				*yii/sphinx/Connection::$queryCacheInfo*
+ (array) The current query cache information, or null if query cache is not
+ enabled.
 
 $transaction				*yii/sphinx/Connection::$transaction*
  (\yii\db\Transaction) The currently active transaction. Null if no active
@@ -130,6 +151,18 @@ $lastInsertID				*yii/sphinx/Connection::$lastInsertID*
 
 $driverName				*yii/sphinx/Connection::$driverName*
  (string) Name of the DB driver
+
+$slavePdo				*yii/sphinx/Connection::$slavePdo*
+ (\PDO) The PDO instance for the currently active slave connection. Null is
+ returned if no slave connection is available and '$fallbackToMaster' is
+ false.
+
+$masterPdo				*yii/sphinx/Connection::$masterPdo*
+ (\PDO) The PDO instance for the currently active master connection.
+
+$slave					*yii/sphinx/Connection::$slave*
+ (\yii\db\Connection) The currently active slave connection. Null is returned
+ if there is slave available and '$fallbackToMaster' is false.
 
 
 
@@ -240,12 +273,16 @@ METHOD DETAILS
  See |yii/db/Connection::getIsActive|
 
 
-*yii/sphinx/Connection::beginCache*			public
- See |yii/db/Connection::beginCache|
+*yii/sphinx/Connection::cache*				public
+ See |yii/db/Connection::cache|
 
 
-*yii/sphinx/Connection::endCache*				public
- See |yii/db/Connection::endCache|
+*yii/sphinx/Connection::noCache*				public
+ See |yii/db/Connection::noCache|
+
+
+*yii/sphinx/Connection::getQueryCacheInfo*		public
+ See |yii/db/Connection::getQueryCacheInfo|
 
 
 *yii/sphinx/Connection::open*				public
@@ -280,6 +317,10 @@ METHOD DETAILS
 
 *yii/sphinx/Connection::beginTransaction*			public
  See |yii/db/Connection::beginTransaction|
+
+
+*yii/sphinx/Connection::transaction*			public
+ See |yii/db/Connection::transaction|
 
 
 *yii/sphinx/Connection::getSchema*			public
@@ -333,6 +374,26 @@ the sequence object
  See |yii/db/Connection::setDriverName|
 
 
+*yii/sphinx/Connection::getSlavePdo*			public
+ See |yii/db/Connection::getSlavePdo|
+
+
+*yii/sphinx/Connection::getMasterPdo*			public
+ See |yii/db/Connection::getMasterPdo|
+
+
+*yii/sphinx/Connection::getSlave*				public
+ See |yii/db/Connection::getSlave|
+
+
+*yii/sphinx/Connection::useMaster*			public
+ See |yii/db/Connection::useMaster|
+
+
+*yii/sphinx/Connection::openFromPool*			protected
+ See |yii/db/Connection::openFromPool|
+
+
 *yii/sphinx/Connection::getIndexSchema*			public
 >
  getIndexSchema($name, $refresh='false')
@@ -355,6 +416,19 @@ does not exist.
  quoted. If the index name is already quoted or contains special characters
  including '(', ''' and '{{', then this method will do nothing.
     [$name] (string) Index name
+
+
+*yii/sphinx/Connection::escapeMatchValue*			public
+>
+ escapeMatchValue($str)
+<
+(string) The properly escaped string.
+
+ Make sure you are using this method whenever composing 'MATCH' search
+ statement. Note: this method does not perform quoting, you should place the
+ result in the quotes an perform additional escaping for it manually, the best
+ way to do it is using PDO parameter.
+    [$str] (string) String to be escaped.
 
 
 

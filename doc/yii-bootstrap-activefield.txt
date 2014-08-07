@@ -35,46 +35,29 @@ DESCRIPTION
  The wrapper tag is only used for some layouts and form elements.
 
  Note that some elements use slightly different defaults for 'template' and
- other options. In particular the elements are 'checkbox()', 'checkboxList()'
- and 'radioList()'. So to further customize these elements you may want to
- pass your custom options.
+ other options. You may want to override those predefined templates for
+ checkboxes, radio buttons, checkboxLists and radioLists in the
+ '\yii\widgets\ActiveForm::fieldConfig|fieldConfig' of the
+ '\yii\widgets\ActiveForm':
+
+
+   - 'checkboxTemplate' the template for checkboxes in default layout 
+   - 'radioTemplate' the template for radio buttons in default layout 
+   - 'horizontalCheckboxTemplate' the template for checkboxes in
+   horizontal layout 
+   - 'horizontalRadioTemplate' the template for radio buttons in
+   horizontal layout 
+   - 'inlineCheckboxListTemplate' the template for inline checkboxLists 
+   - 'inlineRadioListTemplate' the template for inline radioLists
 
  Example:
 
-   use yii\bootstrap\ActiveForm;
-
-   $form = ActiveForm::begin(['layout' => 'horizontal'])
-
-   // Form field without label
-   echo $form->field($model, 'demo', [
-       'inputOptions' => [
-           'placeholder' => $model->getAttributeLabel('demo'),
+   echo Alert::widget([
+       'options' => [
+           'class' => 'alert-info',
        ],
-   ])->label(false);
-
-   // Inline radio list
-   echo $form->field($model, 'demo')->inline()->radioList($items);
-
-   // Control sizing in horizontal mode
-   echo $form->field($model, 'demo', [
-       'horizontalCssClasses' => [
-           'wrapper' => 'col-sm-2',
-       ]
+       'body' => 'Say hello...',
    ]);
-
-   // With 'default' layout you would use 'template' to size a specific field:
-   // echo $form->field($model, 'demo', [
-   //     'template' => '{label} <div class="row"><div
- class="col-sm-4">{input}{error}{hint}</div></div>'
-   // ]);
-
-    // Input group
-    echo $form->field($model, 'demo', [
-        'inputTemplate' => '<div class="input-group"><span
- class="input-group-addon">@</span>{input}</div>',
-    ]);
-
-    ActiveForm::end();
 
 
 
@@ -148,6 +131,24 @@ $horizontalCssClasses			*yii/bootstrap/ActiveField::$horizontalCssClasses*
    - 'wrapper' the wrapper grid class  
    - 'error' the error grid class  
    - 'hint' the hint grid class
+
+$checkboxTemplate			*yii/bootstrap/ActiveField::$checkboxTemplate*
+ (string) The template for checkboxes in default layout
+
+$radioTemplate				*yii/bootstrap/ActiveField::$radioTemplate*
+ (string) The template for radios in default layout
+
+$horizontalCheckboxTemplate		*yii/bootstrap/ActiveField::$horizontalCheckboxTemplate*
+ (string) The template for checkboxes in horizontal layout
+
+$horizontalRadioTemplate		*yii/bootstrap/ActiveField::$horizontalRadioTemplate*
+ (string) The template for radio buttons in horizontal layout
+
+$inlineCheckboxListTemplate		*yii/bootstrap/ActiveField::$inlineCheckboxListTemplate*
+ (string) The template for inline checkboxLists
+
+$inlineRadioListTemplate		*yii/bootstrap/ActiveField::$inlineRadioListTemplate*
+ (string) The template for inline radioLists
 
 $enableError				*yii/bootstrap/ActiveField::$enableError*
  (bool) Whether to render the error. Default is 'true' except for layout
@@ -300,9 +301,15 @@ METHOD DETAILS
     will be called to generate the content. The signature of the callable
     should be:
 
-      function ($field) {
-          return $html;
-      }
+      Alert::begin([
+          'options' => [
+              'class' => 'alert-warning',
+          ],
+      ]);
+
+      echo 'Say hello...';
+
+      Alert::end();
 
 
 
@@ -365,7 +372,37 @@ METHOD DETAILS
 
 
 *yii/bootstrap/ActiveField::radio*			public
- See |yii/widgets/ActiveField::radio|
+>
+ radio($options='[]', $enclosedByLabel='true')
+<
+(static) The field object itself
+
+ This method will generate the "checked" tag attribute according to the model
+ attribute value.
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+
+      - uncheck: string, the value associated with the uncheck state of
+      the radio button. If not set,   it will take the default value '0'. This
+    method will render a hidden input so that if the radio button   is not
+    checked and is submitted, the value of this attribute will still be
+    submitted to the server   via the hidden input. 
+      - label: string, a label displayed next to the radio button.  It
+      will NOT be HTML-encoded. Therefore you can pass   in HTML code such as
+    an image tag. If this is is coming from end users, you should
+    'Html::encode()' it to prevent XSS attacks.   When this option is
+    specified, the radio button will be enclosed by a label tag. 
+      - labelOptions: array, the HTML attributes for the label tag. This
+      is only used when the "label" option is specified.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is null, the corresponding attribute will not be rendered.
+    [$enclosedByLabel] (boolean) Whether to enclose the radio within the
+    label. If true, the method will still use 'template' to layout the
+    checkbox and the error message except that the radio is enclosed by the
+    label tag.
 
 
 *yii/bootstrap/ActiveField::checkbox*			public
@@ -435,7 +472,41 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      function ($index, $label, $name, $checked, $value)
+      use yii\bootstrap\ActiveForm;
+
+      $form = ActiveForm::begin(['layout' => 'horizontal'])
+
+      // Form field without label
+      echo $form->field($model, 'demo', [
+          'inputOptions' => [
+              'placeholder' => $model->getAttributeLabel('demo'),
+          ],
+      ])->label(false);
+
+      // Inline radio list
+      echo $form->field($model, 'demo')->inline()->radioList($items);
+
+      // Control sizing in horizontal mode
+      echo $form->field($model, 'demo', [
+          'horizontalCssClasses' => [
+              'wrapper' => 'col-sm-2',
+          ]
+      ]);
+
+      // With 'default' layout you would use 'template' to size a specific
+    field:
+      // echo $form->field($model, 'demo', [
+      //     'template' => '{label} <div class="row"><div
+    class="col-sm-4">{input}{error}{hint}</div></div>'
+      // ]);
+
+       // Input group
+       echo $form->field($model, 'demo', [
+           'inputTemplate' => '<div class="input-group"><span
+    class="input-group-addon">@</span>{input}</div>',
+       ]);
+
+       ActiveForm::end();
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label is the label for the checkbox; and $name, $value and $checked
@@ -452,9 +523,9 @@ METHOD DETAILS
  single selection. The selection of the radio buttons is taken from the value
  of the model attribute.
     [$items] (array) The data item used to generate the radio buttons. The
-    array keys are the labels, while the array values are the corresponding
-    radio button values. Note that the labels will NOT be HTML-encoded, while
-    the values will.
+    array values are the labels, while the array keys are the corresponding
+    radio values. Note that the labels will NOT be HTML-encoded, while the
+    values will.
     [$options] (array) Options (name => config) for the radio button list. The
     following options are specially handled:
 
@@ -467,7 +538,9 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      function ($index, $label, $name, $checked, $value)
+      function ($field) {
+          return $html;
+      }
 
     where $index is the zero-based index of the radio button in the whole
     list; $label is the label for the radio button; and $name, $value and

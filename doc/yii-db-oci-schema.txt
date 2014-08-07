@@ -29,6 +29,13 @@ $lastInsertID				*yii/db/oci/Schema::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
+$transactionIsolationLevel		*yii/db/oci/Schema::$transactionIsolationLevel*
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
+
 
 
 METHOD DETAILS
@@ -106,8 +113,8 @@ not exist.
  See |yii/db/Schema::getCacheKey|
 
 
-*yii/db/oci/Schema::getCacheGroup*			protected
- See |yii/db/Schema::getCacheGroup|
+*yii/db/oci/Schema::getCacheTag*				protected
+ See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/oci/Schema::getTableSchemas*			public
@@ -157,7 +164,14 @@ not exist.
 
 
 *yii/db/oci/Schema::getLastInsertID*			public
- See |yii/db/Schema::getLastInsertID|
+>
+ getLastInsertID($sequenceName='''')
+<
+(string) The row ID of the last row inserted, or the last value retrieved from
+the sequence object
+
+    [$sequenceName] (string) Name of the sequence object (required by some
+    DBMS)
 
 
 *yii/db/oci/Schema::supportsSavepoint*			public
@@ -179,6 +193,10 @@ not exist.
 
 *yii/db/oci/Schema::rollBackSavepoint*			public
  See |yii/db/Schema::rollBackSavepoint|
+
+
+*yii/db/oci/Schema::setTransactionIsolationLevel*		public
+ See |yii/db/Schema::setTransactionIsolationLevel|
 
 
 *yii/db/oci/Schema::quoteValue*				public
@@ -205,15 +223,7 @@ not exist.
 
 
 *yii/db/oci/Schema::quoteSimpleColumnName*		public
->
- quoteSimpleColumnName($name)
-<
-(string) The properly quoted column name
-
- A simple column name should contain the column name only without any prefix.
- If the column name is already quoted or is the asterisk character '*', this
- method will do nothing.
-    [$name] (string) Column name
+ See |yii/db/Schema::quoteSimpleColumnName|
 
 
 *yii/db/oci/Schema::getRawTableName*			public
@@ -224,8 +234,12 @@ not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
-*yii/db/oci/Schema::handleException*			public
- See |yii/db/Schema::handleException|
+*yii/db/oci/Schema::convertException*			public
+ See |yii/db/Schema::convertException|
+
+
+*yii/db/oci/Schema::isReadQuery*				public
+ See |yii/db/Schema::isReadQuery|
 
 
 *yii/db/oci/Schema::resolveTableNames*			protected
@@ -247,13 +261,22 @@ not exist.
     [$table] (\yii\db\TableSchema) The table schema
 
 
+*yii/db/oci/Schema::getTableSequenceName*			protected
+>
+ getTableSequenceName($tablename)
+<
+(string) Whether the sequence exists
+
+    [$tablename] () 
+
+
 *yii/db/oci/Schema::createColumn*				protected
 >
  createColumn($column)
 <
-(void)
+(\yii\db\ColumnSchema) 
 
-    [$column] () 
+    [$column] (array) 
 
 
 *yii/db/oci/Schema::findConstraints*			protected
@@ -262,7 +285,7 @@ not exist.
 <
 (void)
 
-    [$table] () 
+    [$table] (\yii\db\TableSchema) 
 
 
 *yii/db/oci/Schema::extractColumnType*			protected

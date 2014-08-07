@@ -22,7 +22,7 @@ $controllerMap				*yii/debug/Module::$controllerMap*
  See |yii/base/Module::$controllerMap|
 
 $controllerNamespace			*yii/debug/Module::$controllerNamespace*
- (string) The namespace that controller classes are in.
+ ()
 
 $defaultRoute				*yii/debug/Module::$defaultRoute*
  See |yii/base/Module::$defaultRoute|
@@ -75,7 +75,7 @@ $controllerPath				*yii/debug/Module::$controllerPath*
  (string) The directory that contains the controller classes.
 
 $viewPath				*yii/debug/Module::$viewPath*
- (string) The root directory of view files. Defaults to "'basePath'/view".
+ (string) The root directory of view files. Defaults to "'basePath'/views".
 
 $layoutPath				*yii/debug/Module::$layoutPath*
  (string) The root directory of layout files. Defaults to
@@ -87,8 +87,13 @@ $aliases				*yii/debug/Module::$aliases*
  aliases. For example,
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
    ]
 
 
@@ -235,6 +240,14 @@ METHOD DETAILS
  See |yii/di/ServiceLocator::setComponents|
 
 
+*yii/debug/Module::getInstance*				public
+ See |yii/base/Module::getInstance|
+
+
+*yii/debug/Module::setInstance*				public
+ See |yii/base/Module::setInstance|
+
+
 *yii/debug/Module::getUniqueId*				public
  See |yii/base/Module::getUniqueId|
 
@@ -314,15 +327,14 @@ METHOD DETAILS
 
  If you override this method, your code should look like the following:
 
-   public function beforeAction($action)
-   {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
-           return false;
-       }
-   }
+   return [
+       'action1' => 'app\components\Action1',
+       'action2' => [
+           'class' => 'app\components\Action2',
+           'property1' => 'value1',
+           'property2' => 'value2',
+       ],
+   ];
 
 
     [$action] (\yii\base\Action) The action to be executed.

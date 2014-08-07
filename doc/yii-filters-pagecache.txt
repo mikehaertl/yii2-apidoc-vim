@@ -9,29 +9,12 @@ DESCRIPTION
  'beforeAction' event.
 
  To use PageCache, declare it in the 'behaviors()' method of your controller
- class. In the following example the filter will be applied to the
- 'list'-action and cache the whole page for maximum 60 seconds or until the
- count of entries in the post table changes. It also stores different versions
- of the page depended on the route ('varyByRoute' is true by default), the
- application language and user id.
+ class. In the following example the filter will be applied to the 'index'
+ action and cache the whole page for maximum 60 seconds or until the count of
+ entries in the post table changes. It also stores different versions of the
+ page depending on the application language.
 
-   public function behaviors()
-   {
-       return [
-           'pageCache' => [
-               'class' => 'yii\filters\PageCache',
-               'only' => ['index'],
-               'duration' => 60,
-               'dependency' => [
-                   'class' => 'yii\caching\DbDependency',
-                   'sql' => 'SELECT COUNT(*) FROM post',
-               ],
-               'variations' => [
-                   \Yii::$app->language,
-               ]
-           ],
-       ];
-   }
+   function ($action, $params)
 
 
 
@@ -66,10 +49,7 @@ $dependency				*yii/filters/PageCache::$dependency*
  depends on. This can be either a 'Dependency' object or a configuration array
  for creating the dependency object. For example,
 
-   [
-       'class' => 'yii\caching\DbDependency',
-       'sql' => 'SELECT MAX(updated_at) FROM post',
-   ]
+   function ($action, $params)
 
  would make the output cache depends on the last modified time of all posts.
  If any post has its modification time changed, the cached content would be
@@ -82,9 +62,23 @@ $variations				*yii/filters/PageCache::$variations*
  be cached in different versions according to the current application
  language:
 
-   [
-       Yii::$app->language,
-   ]
+   public function behaviors()
+   {
+       return [
+           'pageCache' => [
+               'class' => 'yii\filters\PageCache',
+               'only' => ['index'],
+               'duration' => 60,
+               'dependency' => [
+                   'class' => 'yii\caching\DbDependency',
+                   'sql' => 'SELECT COUNT(*) FROM post',
+               ],
+               'variations' => [
+                   \Yii::$app->language,
+               ]
+           ],
+       ];
+   }
 
 
 
@@ -116,6 +110,8 @@ METHOD DETAILS
 <
 (void)
 
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/filters/PageCache::__get*				public

@@ -18,14 +18,13 @@ DESCRIPTION
 
  For example,
 
-   $query = new Query;
-   $query->fields('id, name')
-       ->from('myindex', 'users')
-       ->limit(10);
-   // build and execute the query
-   $command = $query->createCommand();
-   $rows = $command->search(); // this way you get the raw output of
- elasticsearch.
+   echo DatePicker::widget([
+       'language' => 'ru',
+       'name'  => 'from_date',
+       'clientOptions' => [
+           'dateFormat' => 'yy-mm-dd',
+       ],
+   ]);
 
  You would normally call '$query->search()' instead of creating a command as
  this method adds the 'indexBy()' feature and also removes some
@@ -79,19 +78,7 @@ $fields					*yii/elasticsearch/Query::$fields*
  For each field you may also add an array representing a [script field].
  Example:
 
-   $query->fields = [
-       'id',
-       'name',
-       'value_times_two' => [
-           'script' => "doc['my_field_name'].value * 2",
-       ],
-       'value_times_factor' => [
-           'script' => "doc['my_field_name'].value * factor",
-           'params' => [
-               'factor' => 2.0
-           ],
-       ],
-   ]
+   $customers = Customer::find()->with('orders')->asArray()->all();
 
  > Note: Field values are [always returned as arrays] even if they only have
  one value.
@@ -133,6 +120,10 @@ $filter					*yii/elasticsearch/Query::$filter*
  (array|string) The filter part of this search query. This is an array or json
  string that follows the format of the elasticsearch [Query
  DSL](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html).
+
+$highlight				*yii/elasticsearch/Query::$highlight*
+ (array) The highlight part of this search query. This is an array that allows
+ to highlight search results on one or more fields.
 
 $facets					*yii/elasticsearch/Query::$facets*
  ()
@@ -580,6 +571,15 @@ the query results in nothing.
 (static) The query object itself
 
     [$fields] (array) The fields to be selected.
+
+
+*yii/elasticsearch/Query::highlight*			public
+>
+ highlight($highlight)
+<
+(static) The query object itself
+
+    [$highlight] (array) Array of parameters to highlight results.
 
 
 *yii/elasticsearch/Query::source*				public

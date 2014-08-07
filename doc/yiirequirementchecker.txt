@@ -10,19 +10,16 @@ DESCRIPTION
 
  Example:
 
-   php
-   require_once('path/to/YiiRequirementChecker.php');
-   $requirementsChecker = new YiiRequirementChecker();
-   $requirements = array(
-       array(
-           'name' => 'PHP Some Extension',
-           'mandatory' => true,
-           'condition' => extension_loaded('some_extension'),
-           'by' => 'Some application feature',
-           'memo' => 'PHP extension "some_extension" required',
-       ),
-   );
-   $requirementsChecker->checkYii()->check($requirements)->render();
+   public function behaviors()
+   {
+       return [
+           [
+               'class' => BlameableBehavior::className(),
+               'createdByAttribute' => 'author_id',
+               'updatedByAttribute' => 'updater_id',
+           ],
+       ];
+   }
 
  If you wish to render the report with your own representation, use
  'getResult()' instead of 'render()'
@@ -31,12 +28,9 @@ DESCRIPTION
  specified PHP expression will be evaluated in the context of this class
  instance. For example:
 
-   $requirements = array(
-       array(
-           'name' => 'Upload max file size',
-           'condition' => 'eval:$this->checkUploadMaxFileSize("5M")',
-       ),
-   );
+   function ($event) {
+       // return value will be assigned to the attribute(s)
+   }
 
  Note: this class definition does not match ordinary Yii style, because it
  should match PHP 4.3 and should not use features from newer PHP versions!
@@ -73,21 +67,19 @@ METHOD DETAILS
 <
 (array|null) Check results in format:
 
-  array(
-      'summary' => array(
-          'total' => total number of checks,
-          'errors' => number of errors,
-          'warnings' => number of warnings,
+  php
+  require_once('path/to/YiiRequirementChecker.php');
+  $requirementsChecker = new YiiRequirementChecker();
+  $requirements = array(
+      array(
+          'name' => 'PHP Some Extension',
+          'mandatory' => true,
+          'condition' => extension_loaded('some_extension'),
+          'by' => 'Some application feature',
+          'memo' => 'PHP extension "some_extension" required',
       ),
-      'requirements' => array(
-          array(
-              ...
-              'error' => is there an error,
-              'warning' => is there a warning,
-          ),
-          ...
-      ),
-  )
+  );
+  $requirementsChecker->checkYii()->check($requirements)->render();
 
 
 

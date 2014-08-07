@@ -87,11 +87,22 @@ METHOD DETAILS
  See |yii/base/Object::hasMethod|
 
 
-*yii/sphinx/ColumnSchema::typecast*			public
+*yii/sphinx/ColumnSchema::phpTypecast*			public
 >
- typecast($value)
+ phpTypecast($value)
 <
 (mixed) Converted value
+
+ If the value is null or an 'Expression', it will not be converted.
+    [$value] (mixed) Input value
+
+
+*yii/sphinx/ColumnSchema::dbTypecast*			public
+>
+ dbTypecast($value)
+<
+(mixed) Converted value. This may also be an array containing the value as the
+first element and the PDO type as the second element.
 
  If the value is null or an 'Expression', it will not be converted.
     [$value] (mixed) Input value

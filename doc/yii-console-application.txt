@@ -25,7 +25,8 @@ DESCRIPTION
 
  To run the console application, enter the following on the command line:
 
-   yii <route> [--param1=value1 --param2 ...]
+   $this->stderr('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE);
 
  where '<route>' refers to a controller route in the form of
  'ModuleID/ControllerID/ActionID' (e.g. 'sitemap/create'), and 'param1',
@@ -37,7 +38,7 @@ DESCRIPTION
  A 'help' command is provided by default, which lists available commands and
  shows their usage. To use this command, simply type:
 
-   yii help
+   yii <route> [--param1=value1 --param2 ...]
 
 
 
@@ -124,7 +125,7 @@ $controllerPath				*yii/console/Application::$controllerPath*
  (string) The directory that contains the controller classes.
 
 $viewPath				*yii/console/Application::$viewPath*
- (string) The root directory of view files. Defaults to "'basePath'/view".
+ (string) The root directory of view files. Defaults to "'basePath'/views".
 
 $layoutPath				*yii/console/Application::$layoutPath*
  (string) The root directory of layout files. Defaults to
@@ -135,10 +136,7 @@ $aliases				*yii/console/Application::$aliases*
  (must start with '@') and the array values are the corresponding paths or
  aliases. For example,
 
-   [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
-   ]
+   yii help
 
 
 
@@ -157,10 +155,10 @@ $timeZone				*yii/console/Application::$timeZone*
  (string) The time zone used by this application.
 
 $db					*yii/console/Application::$db*
- (\yii\db\Connection) The database connection
+ (\yii\db\Connection) The database connection.
 
 $log					*yii/console/Application::$log*
- (\yii\log\Dispatcher) The log dispatcher component
+ (\yii\log\Dispatcher) The log dispatcher application component.
 
 $errorHandler				*yii/console/Application::$errorHandler*
  (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
@@ -174,30 +172,33 @@ $formatter				*yii/console/Application::$formatter*
  (\yii\base\Formatter) The formatter application component.
 
 $request				*yii/console/Application::$request*
- (\yii\web\Request|\yii\console\Request) The request component
+ (\yii\web\Request|\yii\console\Request) The request component.
 
 $response				*yii/console/Application::$response*
- (\yii\web\Response|\yii\console\Response) The response component
+ (\yii\web\Response|\yii\console\Response) The response component.
 
 $view					*yii/console/Application::$view*
- (\yii\base\View|\yii\web\View) The view object that is used to render various
- view files.
+ (\yii\base\View|\yii\web\View) The view application component that is used to
+ render various view files.
 
 $urlManager				*yii/console/Application::$urlManager*
  (\yii\web\UrlManager) The URL manager for this application.
 
 $i18n					*yii/console/Application::$i18n*
- (\yii\i18n\I18N) The internationalization component
+ (\yii\i18n\I18N) The internationalization application component.
 
-$mail					*yii/console/Application::$mail*
- (\yii\mail\MailerInterface) The mailer interface
+$mailer					*yii/console/Application::$mailer*
+ (\yii\mail\MailerInterface) The mailer application component.
 
 $authManager				*yii/console/Application::$authManager*
- (\yii\rbac\ManagerInterface) The auth manager for this application. Null is
+ (\yii\rbac\ManagerInterface) The auth manager application component. Null is
  returned if auth manager is not configured.
 
 $assetManager				*yii/console/Application::$assetManager*
- (\yii\web\AssetManager) The asset manager component
+ (\yii\web\AssetManager) The asset manager application component.
+
+$security				*yii/console/Application::$security*
+ (\yii\base\Security) The security application component.
 
 
 
@@ -337,6 +338,14 @@ METHOD DETAILS
 
 *yii/console/Application::setComponents*			public
  See |yii/di/ServiceLocator::setComponents|
+
+
+*yii/console/Application::getInstance*			public
+ See |yii/base/Module::getInstance|
+
+
+*yii/console/Application::setInstance*			public
+ See |yii/base/Module::setInstance|
 
 
 *yii/console/Application::getUniqueId*			public
@@ -515,8 +524,8 @@ and other values mean abnormal.
  See |yii/base/Application::getI18n|
 
 
-*yii/console/Application::getMail*			public
- See |yii/base/Application::getMail|
+*yii/console/Application::getMailer*			public
+ See |yii/base/Application::getMailer|
 
 
 *yii/console/Application::getAuthManager*			public
@@ -525,6 +534,10 @@ and other values mean abnormal.
 
 *yii/console/Application::getAssetManager*		public
  See |yii/base/Application::getAssetManager|
+
+
+*yii/console/Application::getSecurity*			public
+ See |yii/base/Application::getSecurity|
 
 
 *yii/console/Application::coreComponents*			public

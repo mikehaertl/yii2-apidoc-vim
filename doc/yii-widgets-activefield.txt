@@ -232,9 +232,11 @@ METHOD DETAILS
     will be called to generate the content. The signature of the callable
     should be:
 
-      function ($field) {
-          return $html;
-      }
+      // $this is the view object currently being used
+      echo Breadcrumbs::widget([
+          'links' => isset($this->params['breadcrumbs']) ?
+    $this->params['breadcrumbs'] : [],
+      ]);
 
 
 
@@ -486,9 +488,12 @@ METHOD DETAILS
     extra attributes for the corresponding option tags. For example,
 
       [
-          'value1' => ['disabled' => true],
-          'value2' => ['label' => 'value 2'],
-      ];
+          'label' => 'label of the link',  // required
+          'url' => 'url of the link',      // optional, will be processed by
+    Url::to()
+          'template' => 'own template of the item', // optional, if not set
+    $this->itemTemplate will be used
+      ]
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -526,10 +531,9 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-      [
-          'value1' => ['disabled' => true],
-          'value2' => ['label' => 'value 2'],
-      ];
+      function ($field) {
+          return $html;
+      }
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -570,7 +574,10 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      function ($index, $label, $name, $checked, $value)
+      [
+          'value1' => ['disabled' => true],
+          'value2' => ['label' => 'value 2'],
+      ];
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label is the label for the checkbox; and $name, $value and $checked
@@ -587,9 +594,9 @@ METHOD DETAILS
  single selection. The selection of the radio buttons is taken from the value
  of the model attribute.
     [$items] (array) The data item used to generate the radio buttons. The
-    array keys are the labels, while the array values are the corresponding
-    radio button values. Note that the labels will NOT be HTML-encoded, while
-    the values will.
+    array values are the labels, while the array keys are the corresponding
+    radio values. Note that the labels will NOT be HTML-encoded, while the
+    values will.
     [$options] (array) Options (name => config) for the radio button list. The
     following options are specially handled:
 
@@ -602,7 +609,10 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      function ($index, $label, $name, $checked, $value)
+      [
+          'value1' => ['disabled' => true],
+          'value2' => ['label' => 'value 2'],
+      ];
 
     where $index is the zero-based index of the radio button in the whole
     list; $label is the label for the radio button; and $name, $value and
@@ -621,6 +631,13 @@ METHOD DETAILS
 
  If you want to use a widget that does not have 'model' and 'attribute'
  properties, please use 'render()' instead.
+
+ For example to use the 'MaskedInput' widget to get some date input, you can
+ use the following code, assuming that '$form' is your 'ActiveForm' instance:
+
+   function ($index, $label, $name, $checked, $value)
+
+
     [$class] (string) The widget class name
     [$config] (array) Name-value pairs that will be used to initialize the
     widget

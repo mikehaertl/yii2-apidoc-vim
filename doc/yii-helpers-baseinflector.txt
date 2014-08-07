@@ -30,7 +30,8 @@ $specials				*yii/helpers/BaseInflector::$specials*
  values are the corresponding plural form.
 
 $transliteration			*yii/helpers/BaseInflector::$transliteration*
- (array) Map of special chars and its translation. This is used by 'slug()'.
+ (array) Fallback map for transliteration used by 'slug()' when intl isn't
+ available.
 
 
 
@@ -89,7 +90,7 @@ METHOD DETAILS
 
 *yii/helpers/BaseInflector::camel2id*			public
 >
- camel2id($name, $separator=''-'')
+ camel2id($name, $separator=''-'', $strict='false')
 <
 (string) The resulting ID
 
@@ -98,6 +99,8 @@ METHOD DETAILS
     [$name] (string) The string to be converted
     [$separator] (string) The character used to concatenate the words in the
     ID
+    [$strict] (boolean|string) Whether to insert a separator between two
+    consecutive uppercase chars, defaults to false
 
 
 *yii/helpers/BaseInflector::id2camel*			public
@@ -159,10 +162,33 @@ METHOD DETAILS
 <
 (string) The converted string.
 
+ If intl extension isn't available uses fallback that converts latin
+ characters only and removes the rest. You may customize characters map via
+ $transliteration property of the helper.
     [$string] (string) An arbitrary string to convert
     [$replacement] (string) The replacement to use for spaces
     [$lowercase] (boolean) Whether to return the string in lowercase or not.
     Defaults to 'true'.
+
+
+*yii/helpers/BaseInflector::transliterate*		protected
+>
+ transliterate($string)
+<
+(string) 
+
+ If intl extension isn't available uses fallback that converts latin
+ characters only and removes the rest. You may customize characters map via
+ $transliteration property of the helper.
+    [$string] (string) Input string
+
+
+*yii/helpers/BaseInflector::hasIntl*			protected
+>
+ hasIntl()
+<
+(boolean) If intl extension is loaded
+
 
 
 *yii/helpers/BaseInflector::classify*			public

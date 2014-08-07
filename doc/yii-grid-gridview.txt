@@ -87,7 +87,21 @@ $rowOptions				*yii/grid/GridView::$rowOptions*
  anonymous function will be called once for every data model returned by
  'dataProvider'. It should have the following signature:
 
-   function ($model, $key, $index, $grid)
+   public function behaviors()
+   {
+       return [
+           'verbs' => [
+               'class' => \yii\filters\VerbFilter::className(),
+               'actions' => [
+                   'index'  => ['get'],
+                   'view'   => ['get'],
+                   'create' => ['get', 'post'],
+                   'update' => ['get', 'put', 'post'],
+                   'delete' => ['post', 'delete'],
+               ],
+           ],
+       ];
+   }
 
 
    - '$model': the current data model being rendered 
@@ -123,14 +137,10 @@ $columns				*yii/grid/GridView::$columns*
  configuration for one particular grid column. For example,
 
    [
-       ['class' => SerialColumn::className()],
-       [
-           'class' => DataColumn::className(),
-           'attribute' => 'name',
-           'format' => 'text',
-           'label' => 'Name',
-       ],
-       ['class' => CheckboxColumn::className()],
+     'create' => ['get', 'post'],
+     'update' => ['get', 'put', 'post'],
+     'delete' => ['post', 'delete'],
+     '*' => ['get'],
    ]
 
  If a column is of class 'DataColumn', the "class" element can be omitted.

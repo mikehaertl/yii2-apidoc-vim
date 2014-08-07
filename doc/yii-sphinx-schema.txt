@@ -130,11 +130,11 @@ exist.
     [$name] (string) The index name
 
 
-*yii/sphinx/Schema::getCacheGroup*			protected
+*yii/sphinx/Schema::getCacheTag*				protected
 >
- getCacheGroup()
+ getCacheTag()
 <
-(string) The cache group name
+(string) The cache tag name
 
  This allows 'refresh()' to invalidate all cached index schemas.
 
@@ -316,14 +316,23 @@ array element is an instance of 'IndexSchema' or its child class.
     [$info] (array) Column information
 
 
-*yii/sphinx/Schema::handleException*			public
+*yii/sphinx/Schema::convertException*			public
 >
- handleException($e, $rawSql)
+ convertException($e, $rawSql)
 <
-(void)
+(\yii\db\Exception) 
 
     [$e] (\Exception) 
     [$rawSql] (string) SQL that produced exception
+
+
+*yii/sphinx/Schema::isReadQuery*				public
+>
+ isReadQuery($sql)
+<
+(boolean) Whether a SQL statement is for read purpose.
+
+    [$sql] (string) The SQL statement
 
 
 

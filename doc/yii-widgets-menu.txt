@@ -23,23 +23,12 @@ DESCRIPTION
 
  The following example shows how to use Menu:
 
-   echo Menu::widget([
-       'items' => [
-           // Important: you need to specify url as 'controller/action',
-           // not just as 'controller' even if default action is used.
-           ['label' => 'Home', 'url' => ['site/index']],
-           // 'Products' menu item will be selected as long as the route is
- 'product/index'
-           ['label' => 'Products', 'url' => ['product/index'], 'items' => [
-               ['label' => 'New Arrivals', 'url' => ['product/index', 'tag' =>
- 'new']],
-               ['label' => 'Most Popular', 'url' => ['product/index', 'tag' =>
- 'popular']],
-           ]],
-           ['label' => 'Login', 'url' => ['site/login'], 'visible' =>
- Yii::$app->user->isGuest],
-       ],
-   ]);
+   // ... load $models ...
+   if (Yii::$app->request->isAjax) {
+       Yii::$app->response->format = Response::FORMAT_JSON;
+       return ActiveForm::validateMultiple($models);
+   }
+   // ... respond to non-AJAX request ...
 
 
 
@@ -64,6 +53,8 @@ $items					*yii/widgets/Menu::$items*
    - label: string, optional, specifies the menu item label. When
    'encodeLabels' is true, the label   will be HTML-encoded. If the label is
  not specified, an empty string will be used. 
+   - encode: boolean, optional, whether this item's label should be
+   HTML-encoded. This param will override   global 'encodeLabels' param. 
    - url: string or array, optional, specifies the URL of the menu
    item. It will be processed by 'Url::to'.   When this is set, the actual
  menu item content will be generated using 'linkTemplate';   otherwise,

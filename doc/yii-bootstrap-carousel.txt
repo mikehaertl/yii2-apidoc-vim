@@ -7,20 +7,18 @@ DESCRIPTION
 
  For example:
 
-   echo Carousel::widget([
+   echo Collapse::widget([
        'items' => [
-           // the item contains only the image
-           '<img
- src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"/>',
            // equivalent to the above
-           ['content' => '<img
- src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg"/>'],
-           // the item contains both the image and the caption
-           [
-               'content' => '<img
- src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg"/>',
-               'caption' => '<h4>This is title</h4><p>This is the caption
- text</p>',
+           'Collapsible Group Item #1' => [
+               'content' => 'Anim pariatur cliche...',
+               // open its content by default
+               'contentOptions' => ['class' => 'in']
+           ],
+           // another group item
+           'Collapsible Group Item #2' => [
+               'content' => 'Anim pariatur cliche...',
+               'contentOptions' => [...],
                'options' => [...],
            ],
        ]
@@ -55,17 +53,21 @@ $controls				*yii/bootstrap/Carousel::$controls*
  false, it means the previous and the next control buttons should not be
  displayed.
 
+$showIndicators				*yii/bootstrap/Carousel::$showIndicators*
+ (boolean) If false carousel indicators (<ol> tag with anchors to items)
+ should not be displayed.
+
 $items					*yii/bootstrap/Carousel::$items*
  (array) List of slides in the carousel. Each array element represents a
  single slide with the following structure:
 
-   [
-       // required, slide content (HTML), such as an image tag
-       'content' => '<img
- src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"/>',
-       // optional, the caption (HTML) of the slide
-       'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
-       // optional the HTML attributes of the slide container
+   // item key is the actual group header
+   'Collapsible Group Item #1' => [
+       // required, the content (HTML) of the group
+       'content' => 'Anim pariatur cliche...',
+       // optional the HTML attributes of the content group
+       'contentOptions' => [],
+       // optional the HTML attributes of the group
        'options' => [],
    ]
 

@@ -15,31 +15,49 @@ DESCRIPTION
 
  Controller action:
 
-   function actionIndex()
-   {
-       $query = Article::find()->where(['status' => 1]);
-       $countQuery = clone $query;
-       $pages = new Pagination(['totalCount' => $countQuery->count()]);
-       $models = $query->offset($pages->offset)
-           ->limit($pages->limit)
-           ->all();
+   $count = Yii::$app->db->createCommand('
+       SELECT COUNT(*) FROM user WHERE status=:status
+   ', [':status' => 1])->queryScalar();
 
-       return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages,
-       ]);
-   }
+   $dataProvider = new SqlDataProvider([
+       'sql' => 'SELECT * FROM user WHERE status=:status',
+       'params' => [':status' => 1],
+       'totalCount' => $count,
+       'sort' => [
+           'attributes' => [
+               'age',
+               'name' => [
+                   'asc' => ['first_name' => SORT_ASC, 'last_name' =>
+ SORT_ASC],
+                   'desc' => ['first_name' => SORT_DESC, 'last_name' =>
+ SORT_DESC],
+                   'default' => SORT_DESC,
+                   'label' => 'Name',
+               ],
+           ],
+       ],
+       'pagination' => [
+           'pageSize' => 20,
+       ],
+   ]);
+
+   // get the user records in the current page
+   $models = $dataProvider->getModels();
 
  View:
 
-   foreach ($models as $model) {
-       // display $model here
-   }
-
-   // display pagination
-   echo LinkPager::widget([
-       'pagination' => $pages,
+   $query = new Query;
+   $provider = new ArrayDataProvider([
+       'allModels' => $query->from('post')->all(),
+       'sort' => [
+           'attributes' => ['id', 'username', 'email'],
+       ],
+       'pagination' => [
+           'pageSize' => 10,
+       ],
    ]);
+   // get the posts in the current page
+   $posts = $provider->getModels();
 
 
 

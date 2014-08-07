@@ -73,7 +73,18 @@ METHOD DETAILS
 
 
 *yii/db/mssql/QueryBuilder::build*			public
- See |yii/db/QueryBuilder::build|
+>
+ build($query, $params='[]')
+<
+(array) The generated SQL statement (the first array element) and the
+corresponding parameters to be bound to the SQL statement (the second array
+element). The parameters returned include those provided in '$params'.
+
+    [$query] (\yii\db\Query) The 'Query' object from which the SQL statement
+    will be generated.
+    [$params] (array) The parameters to be bound to the generated SQL
+    statement. These parameters will be included in the result with the
+    additional parameters generated during the query building process.
 
 
 *yii/db/mssql/QueryBuilder::insert*			public
@@ -156,9 +167,9 @@ METHOD DETAILS
     will be properly quoted by the method.
     [$column] (string) The name of the column to be changed. The name will be
     properly quoted by the method.
-    [$type] (string) The new column type. The {@link getColumnType} method
-    will be invoked to convert abstract column type (if any) into the physical
-    one. Anything that is not recognized as abstract type will be kept in the
+    [$type] (string) The new column type. The 'getColumnType' method will be
+    invoked to convert abstract column type (if any) into the physical one.
+    Anything that is not recognized as abstract type will be kept in the
     generated SQL. For example, 'string' will be turned into 'varchar(255)',
     while 'string not null' will become 'varchar(255) not null'.
 
@@ -288,6 +299,27 @@ METHOD DETAILS
 
 *yii/db/mssql/QueryBuilder::buildExistsCondition*		public
  See |yii/db/QueryBuilder::buildExistsCondition|
+
+
+*yii/db/mssql/QueryBuilder::buildSimpleCondition*		public
+ See |yii/db/QueryBuilder::buildSimpleCondition|
+
+
+*yii/db/mssql/QueryBuilder::getAllColumnNames*		protected
+>
+ getAllColumnNames($modelClass='null')
+<
+(array|null) Array of column names
+
+    [$modelClass] (string) Name of the model class
+
+
+*yii/db/mssql/QueryBuilder::isOldMssql*			protected
+>
+ isOldMssql()
+<
+(boolean) Whether MSSQL used is old.
+
 
 
 

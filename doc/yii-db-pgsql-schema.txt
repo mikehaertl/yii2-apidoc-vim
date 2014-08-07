@@ -33,6 +33,13 @@ $lastInsertID				*yii/db/pgsql/Schema::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
+$transactionIsolationLevel		*yii/db/pgsql/Schema::$transactionIsolationLevel*
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
+
 
 
 METHOD DETAILS
@@ -104,8 +111,8 @@ does not exist.
  See |yii/db/Schema::getCacheKey|
 
 
-*yii/db/pgsql/Schema::getCacheGroup*			protected
- See |yii/db/Schema::getCacheGroup|
+*yii/db/pgsql/Schema::getCacheTag*			protected
+ See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/pgsql/Schema::getTableSchemas*			public
@@ -188,6 +195,10 @@ does not exist.
  See |yii/db/Schema::rollBackSavepoint|
 
 
+*yii/db/pgsql/Schema::setTransactionIsolationLevel*	public
+ See |yii/db/Schema::setTransactionIsolationLevel|
+
+
 *yii/db/pgsql/Schema::quoteValue*				public
  See |yii/db/Schema::quoteValue|
 
@@ -222,8 +233,12 @@ does not exist.
  See |yii/db/Schema::getColumnPhpType|
 
 
-*yii/db/pgsql/Schema::handleException*			public
- See |yii/db/Schema::handleException|
+*yii/db/pgsql/Schema::convertException*			public
+ See |yii/db/Schema::convertException|
+
+
+*yii/db/pgsql/Schema::isReadQuery*			public
+ See |yii/db/Schema::isReadQuery|
 
 
 *yii/db/pgsql/Schema::resolveTableNames*			protected

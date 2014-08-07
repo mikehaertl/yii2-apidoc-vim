@@ -45,6 +45,13 @@ $lastInsertID				*yii/db/Schema::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
+$transactionIsolationLevel		*yii/db/Schema::$transactionIsolationLevel*
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
+
 
 
 METHOD DETAILS
@@ -129,11 +136,11 @@ not exist.
     [$name] (string) The table name
 
 
-*yii/db/Schema::getCacheGroup*				protected
+*yii/db/Schema::getCacheTag*				protected
 >
- getCacheGroup()
+ getCacheTag()
 <
-(string) The cache group name
+(string) The cache tag name
 
  This allows 'refresh()' to invalidate all cached table schemas.
 
@@ -279,6 +286,19 @@ the sequence object
     [$name] (string) The savepoint name
 
 
+*yii/db/Schema::setTransactionIsolationLevel*		public
+>
+ setTransactionIsolationLevel($level)
+<
+(void)
+
+    [$level] (string) The transaction isolation level to use for this
+    transaction. This can be one of 'Transaction::READ_UNCOMMITTED',
+    'Transaction::READ_COMMITTED', 'Transaction::REPEATABLE_READ' and
+    'Transaction::SERIALIZABLE' but also a string containing DBMS specific
+    syntax to be used after 'SET TRANSACTION ISOLATION LEVEL'.
+
+
 *yii/db/Schema::quoteValue*				public
 >
  quoteValue($str)
@@ -357,14 +377,23 @@ the sequence object
     [$column] (\yii\db\ColumnSchema) The column schema information
 
 
-*yii/db/Schema::handleException*				public
+*yii/db/Schema::convertException*				public
 >
- handleException($e, $rawSql)
+ convertException($e, $rawSql)
 <
-(void)
+(\yii\db\Exception) 
 
     [$e] (\Exception) 
     [$rawSql] (string) SQL that produced exception
+
+
+*yii/db/Schema::isReadQuery*				public
+>
+ isReadQuery($sql)
+<
+(boolean) Whether a SQL statement is for read purpose.
+
+    [$sql] (string) The SQL statement
 
 
 

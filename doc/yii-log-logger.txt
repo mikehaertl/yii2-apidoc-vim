@@ -5,10 +5,10 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- Logger can be accessed via 'Yii::getLogger()'. You can call the method
- 'log()' to record a single log message. For convenience, a set of shortcut
- methods are provided for logging messages of various severity levels via the
- 'Yii' class:
+ A Logger instance can be accessed via 'Yii::getLogger()'. You can call the
+ method 'log()' to record a single log message. For convenience, a set of
+ shortcut methods are provided for logging messages of various severity levels
+ via the 'Yii' class:
 
 
    - 'Yii::trace()' 
@@ -19,8 +19,9 @@ DESCRIPTION
    - 'Yii::endProfile()'
 
  When the application ends or 'flushInterval' is reached, Logger will call
- 'flush()' to send logged messages to different log targets, such as file,
- email, Web, with the help of 'dispatcher'.
+ 'flush()' to send logged messages to different log targets, such as
+ 'FileTarget|file', 'EmailTarget|email', or 'DbTarget|database', with the help
+ of the 'dispatcher'.
 
 
 PROPERTY DETAILS
@@ -30,15 +31,16 @@ $messages				*yii/log/Logger::$messages*
  (array) Logged messages. This property is managed by 'log()' and 'flush()'.
  Each log message is of the following structure:
 
-   [
-     [0] => message (mixed, can be a string or some complex data, such as an
- exception object)
-     [1] => level (integer)
-     [2] => category (string)
-     [3] => timestamp (float, obtained by microtime(true))
-     [4] => traces (array, debug backtrace, contains the application code call
- stacks)
-   ]
+   CREATE TABLE log (
+       id       BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+       level    INTEGER,
+       category VARCHAR(255),
+       log_time INTEGER,
+       prefix   TEXT,
+       message  TEXT,
+       INDEX idx_log_level (level),
+       INDEX idx_log_category (category)
+   )
 
 
 
@@ -191,7 +193,9 @@ METHOD DETAILS
 
  If 'traceLevel' is greater than 0, additional call stack information about
  the application code will be logged as well.
-    [$message] (string) The message to be logged.
+    [$message] (string|array) The message to be logged. This can be a simple
+    string or a more complex data structure that will be handled by a
+    'Target|log target'.
     [$level] (integer) The level of the message. This must be one of the
     following: 'Logger::LEVEL_ERROR', 'Logger::LEVEL_WARNING',
     'Logger::LEVEL_INFO', 'Logger::LEVEL_TRACE',

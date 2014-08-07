@@ -8,11 +8,16 @@ DESCRIPTION
  To define your own URL parsing and creation logic you can extend from this
  class and add it to 'UrlManager::rules' like this:
 
-   'rules' => [
-       ['class' => 'MyUrlRule', 'pattern' => '...', 'route' => 'site/index',
- ...],
-       // ...
-   ]
+   // add a cookie
+   $response->cookies->add(new Cookie([
+       'name' => $name,
+       'value' => $value,
+   ]);
+
+   // remove a cookie
+   $response->cookies->remove('name');
+   // alternatively
+   unset($response->cookies['name']);
 
 
 
@@ -56,6 +61,9 @@ $mode					*yii/web/UrlRule::$mode*
  means the rule is both request parsing and URL creation. If it is
  'PARSING_ONLY', the rule is for request parsing only. If it is
  'CREATION_ONLY', the rule is for URL creation only.
+
+$encodeParams				*yii/web/UrlRule::$encodeParams*
+ (bool) A value indicating if parameters should be url encoded.
 
 
 

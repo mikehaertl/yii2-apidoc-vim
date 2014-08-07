@@ -51,10 +51,10 @@ $allowName				*yii/validators/EmailValidator::$allowName*
  <john.smith@example.com>"). Defaults to false.
 
 $checkDNS				*yii/validators/EmailValidator::$checkDNS*
- (boolean) Whether to check whether the emails domain exists and has either an
- A or MX record. Be aware of the fact that this check can fail due to
- temporary DNS problems even if the email address is valid and an email would
- be deliverable. Defaults to false.
+ (boolean) Whether to check whether the email's domain exists and has either
+ an A or MX record. Be aware that this check can fail due to temporary DNS
+ problems even if the email address is valid and an email would be
+ deliverable. Defaults to false.
 
 $enableIDN				*yii/validators/EmailValidator::$enableIDN*
  (boolean) Whether validation process should take into account IDN
@@ -222,7 +222,9 @@ support client-side validation.
    - 'attribute': the name of the attribute being validated. 
    - 'value': the value being validated. 
    - 'messages': an array used to hold the validation error messages
-   for the attribute.
+   for the attribute. 
+   - 'deferred': an array used to hold deferred objects for
+   asynchronous validation
     [$object] (\yii\base\Model) The data object being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render

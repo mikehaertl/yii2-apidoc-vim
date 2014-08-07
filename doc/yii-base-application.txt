@@ -29,8 +29,12 @@ $controllerMap				*yii/base/Application::$controllerMap*
  See |yii/base/Module::$controllerMap|
 
 $controllerNamespace			*yii/base/Application::$controllerNamespace*
- (string) The namespace that controller classes are in. If not set, it will
- use the "app\controllers" namespace.
+ (string) The namespace that controller classes are located in. This namespace
+ will be used to load controller classes by prepending it to the controller
+ class name. The default namespace is 'app\controllers'.
+
+ Please refer to the [guide about class
+ autoloading][guide-concept-autoloading] for more details.
 
 $defaultRoute				*yii/base/Application::$defaultRoute*
  See |yii/base/Module::$defaultRoute|
@@ -45,7 +49,10 @@ $charset				*yii/base/Application::$charset*
  (string) The charset currently used for the application.
 
 $language				*yii/base/Application::$language*
- (string) The language that is meant to be used for end users.
+ (string) The language that is meant to be used for end users. It is
+ recommended that you use [IETF language
+ tags](http://en.wikipedia.org/wiki/IETF_language_tag). For example, 'en'
+ stands for English, while 'en-US' stands for English (United States).
 
 $sourceLanguage				*yii/base/Application::$sourceLanguage*
  (string) The language that the application is written in. This mainly refers
@@ -84,6 +91,9 @@ $extensions				*yii/base/Application::$extensions*
  'BootstrapInterface', its 'BootstrapInterface::bootstrap()|bootstrap()'
  method will be also be called.
 
+ If not set explicitly in the application config, this property will be
+ populated with the contents of '@vendor/yiisoft/extensions.php'.
+
 $bootstrap				*yii/base/Application::$bootstrap*
  (array) List of components that should be run during the application
  'bootstrap()|bootstrapping process'.
@@ -121,7 +131,7 @@ $controllerPath				*yii/base/Application::$controllerPath*
  (string) The directory that contains the controller classes.
 
 $viewPath				*yii/base/Application::$viewPath*
- (string) The root directory of view files. Defaults to "'basePath'/view".
+ (string) The root directory of view files. Defaults to "'basePath'/views".
 
 $layoutPath				*yii/base/Application::$layoutPath*
  (string) The root directory of layout files. Defaults to
@@ -154,10 +164,10 @@ $timeZone				*yii/base/Application::$timeZone*
  (string) The time zone used by this application.
 
 $db					*yii/base/Application::$db*
- (\yii\db\Connection) The database connection
+ (\yii\db\Connection) The database connection.
 
 $log					*yii/base/Application::$log*
- (\yii\log\Dispatcher) The log dispatcher component
+ (\yii\log\Dispatcher) The log dispatcher application component.
 
 $errorHandler				*yii/base/Application::$errorHandler*
  (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
@@ -171,30 +181,33 @@ $formatter				*yii/base/Application::$formatter*
  (\yii\base\Formatter) The formatter application component.
 
 $request				*yii/base/Application::$request*
- (\yii\web\Request|\yii\console\Request) The request component
+ (\yii\web\Request|\yii\console\Request) The request component.
 
 $response				*yii/base/Application::$response*
- (\yii\web\Response|\yii\console\Response) The response component
+ (\yii\web\Response|\yii\console\Response) The response component.
 
 $view					*yii/base/Application::$view*
- (\yii\base\View|\yii\web\View) The view object that is used to render various
- view files.
+ (\yii\base\View|\yii\web\View) The view application component that is used to
+ render various view files.
 
 $urlManager				*yii/base/Application::$urlManager*
  (\yii\web\UrlManager) The URL manager for this application.
 
 $i18n					*yii/base/Application::$i18n*
- (\yii\i18n\I18N) The internationalization component
+ (\yii\i18n\I18N) The internationalization application component.
 
-$mail					*yii/base/Application::$mail*
- (\yii\mail\MailerInterface) The mailer interface
+$mailer					*yii/base/Application::$mailer*
+ (\yii\mail\MailerInterface) The mailer application component.
 
 $authManager				*yii/base/Application::$authManager*
- (\yii\rbac\ManagerInterface) The auth manager for this application. Null is
+ (\yii\rbac\ManagerInterface) The auth manager application component. Null is
  returned if auth manager is not configured.
 
 $assetManager				*yii/base/Application::$assetManager*
- (\yii\web\AssetManager) The asset manager component
+ (\yii\web\AssetManager) The asset manager application component.
+
+$security				*yii/base/Application::$security*
+ (\yii\base\Security) The security application component.
 
 
 
@@ -342,6 +355,14 @@ METHOD DETAILS
  See |yii/di/ServiceLocator::setComponents|
 
 
+*yii/base/Application::getInstance*			public
+ See |yii/base/Module::getInstance|
+
+
+*yii/base/Application::setInstance*			public
+ See |yii/base/Module::setInstance|
+
+
 *yii/base/Application::getUniqueId*			public
 >
  getUniqueId()
@@ -458,7 +479,7 @@ METHOD DETAILS
 <
 (void)
 
-    [$config] () 
+    [$config] (array) Application config
 
 
 *yii/base/Application::run*				public
@@ -544,7 +565,7 @@ directory under 'basePath'.
 >
  getDb()
 <
-(\yii\db\Connection) The database connection
+(\yii\db\Connection) The database connection.
 
 
 
@@ -552,7 +573,7 @@ directory under 'basePath'.
 >
  getLog()
 <
-(\yii\log\Dispatcher) The log dispatcher component
+(\yii\log\Dispatcher) The log dispatcher application component.
 
 
 
@@ -586,7 +607,7 @@ not enabled.
 >
  getRequest()
 <
-(\yii\web\Request|\yii\console\Request) The request component
+(\yii\web\Request|\yii\console\Request) The request component.
 
 
 
@@ -594,7 +615,7 @@ not enabled.
 >
  getResponse()
 <
-(\yii\web\Response|\yii\console\Response) The response component
+(\yii\web\Response|\yii\console\Response) The response component.
 
 
 
@@ -602,8 +623,8 @@ not enabled.
 >
  getView()
 <
-(\yii\base\View|\yii\web\View) The view object that is used to render various
-view files.
+(\yii\base\View|\yii\web\View) The view application component that is used to
+render various view files.
 
 
 
@@ -619,15 +640,15 @@ view files.
 >
  getI18n()
 <
-(\yii\i18n\I18N) The internationalization component
+(\yii\i18n\I18N) The internationalization application component.
 
 
 
-*yii/base/Application::getMail*				public
+*yii/base/Application::getMailer*				public
 >
- getMail()
+ getMailer()
 <
-(\yii\mail\MailerInterface) The mailer interface
+(\yii\mail\MailerInterface) The mailer application component.
 
 
 
@@ -635,7 +656,7 @@ view files.
 >
  getAuthManager()
 <
-(\yii\rbac\ManagerInterface) The auth manager for this application. Null is
+(\yii\rbac\ManagerInterface) The auth manager application component. Null is
 returned if auth manager is not configured.
 
 
@@ -644,7 +665,15 @@ returned if auth manager is not configured.
 >
  getAssetManager()
 <
-(\yii\web\AssetManager) The asset manager component
+(\yii\web\AssetManager) The asset manager application component.
+
+
+
+*yii/base/Application::getSecurity*			public
+>
+ getSecurity()
+<
+(\yii\base\Security) The security application component.
 
 
 

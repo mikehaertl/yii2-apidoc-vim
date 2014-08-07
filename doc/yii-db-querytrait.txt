@@ -48,16 +48,22 @@ METHOD DETAILS
 >
  indexBy($column)
 <
-(static) The query object itself
+(static) The query object itself.
 
     [$column] (string|callable) The name of the column by which the query
     results should be indexed by. This can also be a callable (e.g. anonymous
     function) that returns the index value based on the given row data. The
     signature of the callable should be:
 
-      function ($row)
+      public function getOrders()
       {
-          // return the index value corresponding to $row
+          return $this->hasOne(Order::className(), ['id' => 'order_id']);
+      }
+
+      public function getOrderItems()
+      {
+          return $this->hasMany(Item::className(), ['id' => 'item_id'])
+                      ->via('orders');
       }
 
 
@@ -67,7 +73,7 @@ METHOD DETAILS
 >
  where($condition)
 <
-(static) The query object itself
+(static) The query object itself.
 
  See 'QueryInterface::where()' for detailed documentation.
     [$condition] (string|array) The conditions that should be put in the WHERE
@@ -78,7 +84,7 @@ METHOD DETAILS
 >
  andWhere($condition)
 <
-(static) The query object itself
+(static) The query object itself.
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -90,7 +96,7 @@ METHOD DETAILS
 >
  orWhere($condition)
 <
-(static) The query object itself
+(static) The query object itself.
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -102,7 +108,7 @@ METHOD DETAILS
 >
  filterWhere($condition)
 <
-(static) The query object itself
+(static) The query object itself.
 
  This method is similar to 'where()'. The main difference is that this method
  will remove 'isEmpty()|empty query operands'. As a result, this method is
@@ -111,12 +117,11 @@ METHOD DETAILS
 
  The following code shows the difference between this method and 'where()':
 
-   // WHERE `age`=:age
-   $query->filterWhere(['name' => null, 'age' => 20]);
-   // WHERE `age`=:age
-   $query->where(['age' => 20]);
-   // WHERE `name` IS NULL AND `age`=:age
-   $query->where(['name' => null, 'age' => 20]);
+   public function getOrders()
+   {
+       return $this->hasMany(Order::className(), ['customer_id' =>
+ 'id'])->inverseOf('customer');
+   }
 
  Note that unlike 'where()', you cannot pass binding parameters to this
  method.
@@ -128,7 +133,7 @@ METHOD DETAILS
 >
  andFilterWhere($condition)
 <
-(static) The query object itself
+(static) The query object itself.
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -145,7 +150,7 @@ METHOD DETAILS
 >
  orFilterWhere($condition)
 <
-(static) The query object itself
+(static) The query object itself.
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -188,23 +193,23 @@ METHOD DETAILS
 >
  orderBy($columns)
 <
-(static) The query object itself
+(static) The query object itself.
 
     [$columns] (string|array) The columns (and the directions) to be ordered
-    by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
-    or an array (e.g. '['id' => SORT_ASC, 'name' => SORT_DESC]'). The method
-    will automatically quote the column names unless a column contains some
-    parenthesis (which means the column contains a DB expression). Note that
-    if your order-by is an expression containing commas, you should always use
-    an array to represent the order-by information. Otherwise, the method will
-    not be able to correctly determine the order-by columns.
+    by. Columns can be specified in either a string (e.g. '"id ASC, name
+    DESC"') or an array (e.g. '['id' => SORT_ASC, 'name' => SORT_DESC]'). The
+    method will automatically quote the column names unless a column contains
+    some parenthesis (which means the column contains a DB expression). Note
+    that if your order-by is an expression containing commas, you should
+    always use an array to represent the order-by information. Otherwise, the
+    method will not be able to correctly determine the order-by columns.
 
 
 *yii/db/QueryTrait::addOrderBy*				public
 >
  addOrderBy($columns)
 <
-(static) The query object itself
+(static) The query object itself.
 
     [$columns] (string|array) The columns (and the directions) to be ordered
     by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
@@ -217,16 +222,16 @@ METHOD DETAILS
 >
  normalizeOrderBy($columns)
 <
-(void)
+(array) 
 
-    [$columns] () 
+    [$columns] (array|string) 
 
 
 *yii/db/QueryTrait::limit*				public
 >
  limit($limit)
 <
-(static) The query object itself
+(static) The query object itself.
 
     [$limit] (integer) The limit. Use null or negative value to disable limit.
 
@@ -235,7 +240,7 @@ METHOD DETAILS
 >
  offset($offset)
 <
-(static) The query object itself
+(static) The query object itself.
 
     [$offset] (integer) The offset. Use null or negative value to disable
     offset.

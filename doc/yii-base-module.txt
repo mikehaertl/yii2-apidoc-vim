@@ -5,11 +5,11 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/gii/Module|
-|yii/debug/Module|
 |yii/base/Application|
 |yii/console/Application|
 |yii/web/Application|
+|yii/gii/Module|
+|yii/debug/Module|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -64,10 +64,16 @@ $controllerMap				*yii/base/Module::$controllerMap*
 
 
 $controllerNamespace			*yii/base/Module::$controllerNamespace*
- (string) The namespace that controller classes are in. If not set, it will
- use the "controllers" sub-namespace under the namespace of this module. For
- example, if the namespace of this module is "foo\bar", then the default
- controller namespace would be "foo\bar\controllers".
+ (string) The namespace that controller classes are in. This namespace will be
+ used to load controller classes by prepending it to the controller class
+ name.
+
+ If not set, it will use the 'controllers' sub-namespace under the namespace
+ of this module. For example, if the namespace of this module is "foo\bar",
+ then the default controller namespace would be "foo\bar\controllers".
+
+ See also the [guide section on autoloading][guide-concept-autoloading] to
+ learn more about defining namespaces and how classes are loaded.
 
 $defaultRoute				*yii/base/Module::$defaultRoute*
  (string) The default route of this module. Defaults to 'default'. The route
@@ -92,7 +98,7 @@ $controllerPath				*yii/base/Module::$controllerPath*
  (string) The directory that contains the controller classes.
 
 $viewPath				*yii/base/Module::$viewPath*
- (string) The root directory of view files. Defaults to "'basePath'/view".
+ (string) The root directory of view files. Defaults to "'basePath'/views".
 
 $layoutPath				*yii/base/Module::$layoutPath*
  (string) The root directory of layout files. Defaults to
@@ -260,6 +266,29 @@ METHOD DETAILS
  See |yii/di/ServiceLocator::setComponents|
 
 
+*yii/base/Module::getInstance*				public
+>
+ getInstance()
+<
+(static|null) The currently requested instance of this module class, or null
+if the module class is not requested.
+
+ If the module class is not currently requested, null will be returned. This
+ method is provided so that you access the module instance from anywhere
+ within the module.
+
+
+*yii/base/Module::setInstance*				public
+>
+ setInstance($instance)
+<
+(void)
+
+    [$instance] (\yii\base\Module|null) The currently requested instance of
+    this module class. If it is null, the instance of the calling class will
+    be removed, if any.
+
+
 *yii/base/Module::getUniqueId*				public
 >
  getUniqueId()
@@ -303,7 +332,7 @@ METHOD DETAILS
 >
  getViewPath()
 <
-(string) The root directory of view files. Defaults to "'basePath'/view".
+(string) The root directory of view files. Defaults to "'basePath'/views".
 
 
 
@@ -330,7 +359,7 @@ METHOD DETAILS
 <
 (void)
 
-    [$path] (string) The root directory of layout files.
+    [$path] (string) The root directory or path alias of layout files.
 
 
 *yii/base/Module::setAliases*				public

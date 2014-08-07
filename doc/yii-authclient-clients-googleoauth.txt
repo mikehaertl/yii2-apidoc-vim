@@ -5,8 +5,12 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- In order to use Google OAuth you must register your application at
- <https://code.google.com/apis/console#access>.
+ In order to use Google OAuth you must create a project at
+ <https://console.developers.google.com/project> and setup its credentials at
+ <https://console.developers.google.com/project/[yourProjectId]/apiui/credential>.
+ In order to enable using scopes for retrieving user attributes, you should
+ also enable Google+ API at
+ <https://console.developers.google.com/project/[yourProjectId]/apiui/api/plus>
 
  Example application configuration:
 
@@ -14,10 +18,10 @@ DESCRIPTION
        'authClientCollection' => [
            'class' => 'yii\authclient\Collection',
            'clients' => [
-               'google' => [
-                   'class' => 'yii\authclient\clients\GoogleOAuth',
-                   'clientId' => 'google_client_id',
-                   'clientSecret' => 'google_client_secret',
+               'vkontakte' => [
+                   'class' => 'yii\authclient\clients\VKontakte',
+                   'clientId' => 'vkontakte_client_id',
+                   'clientSecret' => 'vkontakte_client_secret',
                ],
            ],
        ]

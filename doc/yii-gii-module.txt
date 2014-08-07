@@ -8,12 +8,8 @@ DESCRIPTION
  To use Gii, include it as a module in the application configuration like the
  following:
 
-   return [
-       'bootstrap' => ['gii'],
-       'modules' => [
-           'gii' => ['class' => 'yii\gii\Module'],
-       ],
-   ]
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
  Because Gii generates new code files on the server, you should only use it on
  your own development machine. To prevent other people from using this module,
@@ -99,7 +95,7 @@ $controllerPath				*yii/gii/Module::$controllerPath*
  (string) The directory that contains the controller classes.
 
 $viewPath				*yii/gii/Module::$viewPath*
- (string) The root directory of view files. Defaults to "'basePath'/view".
+ (string) The root directory of view files. Defaults to "'basePath'/views".
 
 $layoutPath				*yii/gii/Module::$layoutPath*
  (string) The root directory of layout files. Defaults to
@@ -111,9 +107,21 @@ $aliases				*yii/gii/Module::$aliases*
  aliases. For example,
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
-   ]
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
 
 
 
@@ -249,6 +257,14 @@ METHOD DETAILS
  See |yii/di/ServiceLocator::setComponents|
 
 
+*yii/gii/Module::getInstance*				public
+ See |yii/base/Module::getInstance|
+
+
+*yii/gii/Module::setInstance*				public
+ See |yii/base/Module::setInstance|
+
+
 *yii/gii/Module::getUniqueId*				public
  See |yii/base/Module::getUniqueId|
 
@@ -328,15 +344,12 @@ METHOD DETAILS
 
  If you override this method, your code should look like the following:
 
-   public function beforeAction($action)
-   {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
-           return false;
-       }
-   }
+   return [
+       'bootstrap' => ['gii'],
+       'modules' => [
+           'gii' => ['class' => 'yii\gii\Module'],
+       ],
+   ]
 
 
     [$action] (\yii\base\Action) The action to be executed.

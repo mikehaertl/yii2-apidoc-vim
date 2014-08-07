@@ -148,6 +148,8 @@ is not previously registered.
  which points to the directory where bootstrap extension files are installed
  and all classes from other 'yii' namespaces will be loaded from the yii
  framework directory.
+
+ Also the [guide section on autoloading][guide-concept-autoloading].
     [$className] (string) The fully qualified class name without a leading
     backslash "\"
 
@@ -164,20 +166,25 @@ is not previously registered.
 
  Below are some usage examples:
 
-   // create an object using a class name
-   $object = Yii::createObject('yii\db\Connection');
-
-   // create an object using a configuration array
-   $object = Yii::createObject([
-       'class' => 'yii\db\Connection',
-       'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
-       'username' => 'root',
-       'password' => '',
-       'charset' => 'utf8',
-   ]);
-
-   // create an object with two constructor parameters
-   $object = \Yii::createObject('MyClass', [$param1, $param2]);
+   [
+       'components' => [
+           'cache' => [
+               'class' => 'yii\caching\MemCache',
+               'servers' => [
+                   [
+                       'host' => 'server1',
+                       'port' => 11211,
+                       'weight' => 60,
+                   ],
+                   [
+                       'host' => 'server2',
+                       'port' => 11211,
+                       'weight' => 40,
+                   ],
+               ],
+           ],
+       ],
+   ]
 
  Using '\yii\di\Container|dependency injection container', this method can
  also identify dependent objects, instantiate them and inject them into the
@@ -312,8 +319,20 @@ is not previously registered.
  curly brackets around the parameter name as you can see in the following
  example:
 
-   $username = 'Alexander';
-   echo \Yii::t('app', 'Hello, {username}!', ['username' => $username]);
+   // create an object using a class name
+   $object = Yii::createObject('yii\db\Connection');
+
+   // create an object using a configuration array
+   $object = Yii::createObject([
+       'class' => 'yii\db\Connection',
+       'dsn' => 'mysql:host=127.0.0.1;dbname=demo',
+       'username' => 'root',
+       'password' => '',
+       'charset' => 'utf8',
+   ]);
+
+   // create an object with two constructor parameters
+   $object = \Yii::createObject('MyClass', [$param1, $param2]);
 
  Further formatting of message parameters is supported using the [PHP intl
  extensions](http://www.php.net/manual/en/intro.intl.php) message formatter.

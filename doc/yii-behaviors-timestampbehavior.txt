@@ -5,15 +5,16 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- To use TimestampBehavior, simply insert the following code to your
- ActiveRecord class:
-
-   use yii\behaviors\TimestampBehavior;
+ To use TimestampBehavior, insert the following code to your ActiveRecord
+ class:
 
    public function behaviors()
    {
        return [
-           TimestampBehavior::className(),
+           [
+               'class' => SluggableBehavior::className(),
+               'slugAttribute' => 'alias',
+           ],
        ];
    }
 
@@ -23,30 +24,26 @@ DESCRIPTION
  AR object is being updated. The timestamp value is obtained by 'time()'.
 
  If your attribute names are different or you want to use a different way of
- calculating the timestamp, you may configure the 'attributes' and 'value'
- properties like the following:
+ calculating the timestamp, you may configure the 'createdAtAttribute',
+ 'updatedAtAttribute' and 'value' properties like the following:
 
-   use yii\db\Expression;
-
-   public function behaviors()
+   function ($event)
    {
-       return [
-           'timestamp' => [
-               'class' => TimestampBehavior::className(),
-               'attributes' => [
-                   ActiveRecord::EVENT_BEFORE_INSERT => 'creation_time',
-                   ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
-               ],
-               'value' => new Expression('NOW()'),
-           ],
-       ];
+       // return slug
    }
 
  TimestampBehavior also provides a method named 'touch()' that allows you to
  assign the current timestamp to the specified attribute(s) and save them to
  the database. For example,
 
-   $this->timestamp->touch('creation_time');
+   use yii\behaviors\TimestampBehavior;
+
+   public function behaviors()
+   {
+       return [
+           TimestampBehavior::className(),
+       ];
+   }
 
 
 
@@ -58,13 +55,7 @@ $owner					*yii/behaviors/TimestampBehavior::$owner*
  See |yii/base/Behavior::$owner|
 
 $attributes				*yii/behaviors/TimestampBehavior::$attributes*
- (array) List of attributes that are to be automatically filled with
- timestamps. The array keys are the ActiveRecord events upon which the
- attributes are to be filled with timestamps, and the array values are the
- corresponding attribute(s) to be updated. You can use a string to represent a
- single attribute, or an array to represent a list of attributes. The default
- setting is to update both of the 'created_at' and 'updated_at' attributes
- upon AR insertion, and update the 'updated_at' attribute upon AR updating.
+ See |yii/behaviors/AttributeBehavior::$attributes|
 
 $value					*yii/behaviors/TimestampBehavior::$value*
  (callable|\yii\db\Expression) The expression that will be used for generating
@@ -72,6 +63,14 @@ $value					*yii/behaviors/TimestampBehavior::$value*
  timestamp value, or an 'Expression' object representing a DB expression (e.g.
  'new Expression('NOW()')'). If not set, it will use the value of 'time()' to
  set the attributes.
+
+$createdAtAttribute			*yii/behaviors/TimestampBehavior::$createdAtAttribute*
+ (string) The attribute that will receive timestamp value Set this property to
+ be null if you do not want to record the creation time.
+
+$updatedAtAttribute			*yii/behaviors/TimestampBehavior::$updatedAtAttribute*
+ (string) The attribute that will receive timestamp value. Set this property
+ to be null if you do not want to record the update time.
 
 
 
@@ -87,7 +86,13 @@ METHOD DETAILS
 
 
 *yii/behaviors/TimestampBehavior::init*			public
- See |yii/base/Object::init|
+>
+ init()
+<
+(void)
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/behaviors/TimestampBehavior::__get*			public
@@ -162,7 +167,19 @@ METHOD DETAILS
 
 
 
-   $model->touch('lastVisit');
+   use yii\db\Expression;
+
+   public function behaviors()
+   {
+       return [
+           [
+               'class' => TimestampBehavior::className(),
+               'createdAtAttribute' => 'create_time',
+               'updatedAtAttribute' => 'update_time',
+               'value' => new Expression('NOW()'),
+           ],
+       ];
+   }
 
 
     [$attribute] (string) The name of the attribute to update.

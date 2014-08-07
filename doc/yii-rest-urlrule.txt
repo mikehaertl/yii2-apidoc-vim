@@ -9,8 +9,19 @@ DESCRIPTION
  application configuration,
 
    [
-       'class' => 'yii\rest\UrlRule',
-       'controller' => 'user',
+       'items' => [...],  // assuming collectionEnvelope is "items"
+       '_links' => {  // pagination links as returned by
+ Pagination::getLinks()
+           'self' => '...',
+           'next' => '...',
+           'last' => '...',
+       },
+       '_meta' => {  // meta information as returned by Pagination::toArray()
+           'totalCount' => 100,
+           'pageCount' => 5,
+           'currentPage' => 1,
+           'perPage' => 20,
+       },
    ]
 
  The above code will create a whole set of URL rules supporting the following
@@ -37,8 +48,7 @@ DESCRIPTION
 
    [
        'class' => 'yii\rest\UrlRule',
-       'controller' => ['user', 'post'],
-       'except' => ['delete'],
+       'controller' => 'user',
    ]
 
  The property 'controller' is required and should represent one or multiple

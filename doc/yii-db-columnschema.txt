@@ -18,8 +18,8 @@ $type					*yii/db/ColumnSchema::$type*
  timestamp, time, date, binary, and money.
 
 $phpType				*yii/db/ColumnSchema::$phpType*
- (string) The PHP type of this column. Possible PHP types include: string,
- boolean, integer, double.
+ (string) The PHP type of this column. Possible PHP types include: 'string',
+ 'boolean', 'integer', 'double'.
 
 $dbType					*yii/db/ColumnSchema::$dbType*
  (string) The DB type of this column. Possible DB types vary according to the
@@ -107,11 +107,22 @@ METHOD DETAILS
  See |yii/base/Object::hasMethod|
 
 
-*yii/db/ColumnSchema::typecast*				public
+*yii/db/ColumnSchema::phpTypecast*			public
 >
- typecast($value)
+ phpTypecast($value)
 <
 (mixed) Converted value
+
+ If the value is null or an 'Expression', it will not be converted.
+    [$value] (mixed) Input value
+
+
+*yii/db/ColumnSchema::dbTypecast*				public
+>
+ dbTypecast($value)
+<
+(mixed) Converted value. This may also be an array containing the value as the
+first element and the PDO type as the second element.
 
  If the value is null or an 'Expression', it will not be converted.
     [$value] (mixed) Input value

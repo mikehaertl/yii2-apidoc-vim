@@ -173,6 +173,14 @@ METHOD DETAILS
     'renderTagAttributes()' for details on how attributes are being rendered.
 
 
+*yii/helpers/BaseHtml::csrfMetaTags*			public
+>
+ csrfMetaTags()
+<
+(string) The generated meta tags
+
+
+
 *yii/helpers/BaseHtml::beginForm*				public
 >
  beginForm($action='\'\'', $method=''post'', $options='[]')
@@ -491,8 +499,8 @@ METHOD DETAILS
     an image tag. If this is is coming from end users, you should 'encode()'
     it to prevent XSS attacks.   When this option is specified, the radio
     button will be enclosed by a label tag. 
-      - labelOptions: array, the HTML attributes for the label tag. This
-      is only used when the "label" option is specified. 
+      - labelOptions: array, the HTML attributes for the label tag. Do not
+      set this option unless you set the "label" option. 
       - container: array|boolean, the HTML attributes for the container
       tag. This is only used when the "label" option is specified.   If it is
     false, no container will be rendered. If it is an array or not, a "div"
@@ -527,8 +535,8 @@ METHOD DETAILS
     image tag. If this is is coming from end users, you should 'encode()' it
     to prevent XSS attacks.   When this option is specified, the checkbox will
     be enclosed by a label tag. 
-      - labelOptions: array, the HTML attributes for the label tag. This
-      is only used when the "label" option is specified. 
+      - labelOptions: array, the HTML attributes for the label tag. Do not
+      set this option unless you set the "label" option. 
       - container: array|boolean, the HTML attributes for the container
       tag. This is only used when the "label" option is specified.   If it is
     false, no container will be rendered. If it is an array or not, a "div"
@@ -567,15 +575,38 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+      $array = [
+          ['id' => '123', 'name' => 'aaa', 'class' => 'x'],
+          ['id' => '124', 'name' => 'bbb', 'class' => 'x'],
+          ['id' => '345', 'name' => 'ccc', 'class' => 'y'],
+      );
+
+      $result = ArrayHelper::map($array, 'id', 'name');
+      // the result is:
+      // [
+      //     '123' => 'aaa',
+      //     '124' => 'bbb',
+      //     '345' => 'ccc',
+      // ]
+
+      $result = ArrayHelper::map($array, 'id', 'name', 'class');
+      // the result is:
+      // [
+      //     'x' => [
+      //         '123' => 'aaa',
+      //         '124' => 'bbb',
+      //     ],
+      //     'y' => [
+      //         '345' => 'ccc',
+      //     ],
+      // ]
 
 
       - groups: array, the attributes for the optgroup tags. The structure
       of this is similar to that of 'options',   except that the array keys
-    represent the optgroup labels specified in $items.
+    represent the optgroup labels specified in $items. 
+      - encodeSpaces: bool, whether to encode spaces in option prompt and
+      option value with '&nbsp;' character.   Defaults to 'false'.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -610,10 +641,7 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+      VarDumper::dump($var);
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -622,7 +650,9 @@ METHOD DETAILS
       - unselect: string, the value that will be submitted when no option
       is selected.   When this attribute is set, a hidden field will be
     generated so that if no option is selected in multiple   mode, we can
-    still obtain the posted unselect value.
+    still obtain the posted unselect value. 
+      - encodeSpaces: bool, whether to encode spaces in option prompt and
+      option value with '&nbsp;' character.   Defaults to 'false'.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -641,8 +671,8 @@ METHOD DETAILS
     [$name] (string) The name attribute of each checkbox.
     [$selection] (string|array) The selected value(s).
     [$items] (array) The data item used to generate the checkboxes. The array
-    values are the labels, while the array keys are the corresponding checkbox
-    values.
+    keys are the checkbox values, while the array values are the corresponding
+    labels.
     [$options] (array) Options (name => config) for the checkbox list
     container tag. The following options are specially handled:
 
@@ -660,7 +690,10 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        function ($index, $label, $name, $checked, $value)
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label   is the label for the checkbox; and $name, $value and $checked
@@ -682,8 +715,8 @@ METHOD DETAILS
     [$name] (string) The name attribute of each radio button.
     [$selection] (string|array) The selected value(s).
     [$items] (array) The data item used to generate the radio buttons. The
-    array values are the labels, while the array keys are the corresponding
-    radio button values.
+    array keys are the radio button values, while the array values are the
+    corresponding labels.
     [$options] (array) Options (name => config) for the radio button list. The
     following options are supported:
 
@@ -700,7 +733,10 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        function ($index, $label, $name, $checked, $value)
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
     where $index is the zero-based index of the radio button in the whole
     list; $label   is the label for the radio button; and $name, $value and
@@ -715,8 +751,8 @@ METHOD DETAILS
 >
  ul($items, $options='[]')
 <
-(string) The generated unordered list. An empty string is returned if '$items'
-is empty.
+(string) The generated unordered list. An empty list tag will be returned if
+'$items' is empty.
 
     [$items] (array|\Traversable) The items for generating the list. Each item
     generates a single list item. Note that items will be automatically HTML
@@ -732,7 +768,7 @@ is empty.
       - item: callable, a callback that is used to generate each
       individual list item.   The signature of this callback must be:
 
-        function ($item, $index)
+        function ($index, $label, $name, $checked, $value)
 
     where $index is the array key corresponding to '$item' in '$items'. The
     callback should return   the whole list item tag.
@@ -762,7 +798,7 @@ is empty.
       - item: callable, a callback that is used to generate each
       individual list item.   The signature of this callback must be:
 
-        function ($item, $index)
+        function ($index, $label, $name, $checked, $value)
 
     where $index is the array key corresponding to '$item' in '$items'. The
     callback should return   the whole list item tag.
@@ -1047,15 +1083,14 @@ is empty.
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+        function ($item, $index)
 
 
       - groups: array, the attributes for the optgroup tags. The structure
       of this is similar to that of 'options',   except that the array keys
-    represent the optgroup labels specified in $items.
+    represent the optgroup labels specified in $items. 
+      - encodeSpaces: bool, whether to encode spaces in option prompt and
+      option value with '&nbsp;' character.   Defaults to 'false'.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -1092,10 +1127,7 @@ is empty.
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-        [
-            'value1' => ['disabled' => true],
-            'value2' => ['label' => 'value 2'],
-        ];
+        function ($item, $index)
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -1104,7 +1136,9 @@ is empty.
       - unselect: string, the value that will be submitted when no option
       is selected.   When this attribute is set, a hidden field will be
     generated so that if no option is selected in multiple   mode, we can
-    still obtain the posted unselect value.
+    still obtain the posted unselect value. 
+      - encodeSpaces: bool, whether to encode spaces in option prompt and
+      option value with '&nbsp;' character.   Defaults to 'false'.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -1125,8 +1159,8 @@ is empty.
     [$attribute] (string) The attribute name or expression. See
     'getAttributeName()' for the format about attribute expression.
     [$items] (array) The data item used to generate the checkboxes. The array
-    values are the labels, while the array keys are the corresponding checkbox
-    values. Note that the labels will NOT be HTML-encoded, while the values
+    keys are the checkbox values, and the array values are the corresponding
+    labels. Note that the labels will NOT be HTML-encoded, while the values
     will.
     [$options] (array) Options (name => config) for the checkbox list. The
     following options are specially handled:
@@ -1141,7 +1175,10 @@ is empty.
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        function ($index, $label, $name, $checked, $value)
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label   is the label for the checkbox; and $name, $value and $checked
@@ -1164,8 +1201,8 @@ is empty.
     [$attribute] (string) The attribute name or expression. See
     'getAttributeName()' for the format about attribute expression.
     [$items] (array) The data item used to generate the radio buttons. The
-    array keys are the labels, while the array values are the corresponding
-    radio button values. Note that the labels will NOT be HTML-encoded, while
+    array keys are the radio values, and the array values are the
+    corresponding labels. Note that the labels will NOT be HTML-encoded, while
     the values will.
     [$options] (array) Options (name => config) for the radio button list. The
     following options are specially handled:
@@ -1180,7 +1217,10 @@ is empty.
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-        function ($index, $label, $name, $checked, $value)
+        [
+            'value1' => ['disabled' => true],
+            'value2' => ['label' => 'value 2'],
+        ];
 
     where $index is the zero-based index of the radio button in the whole
     list; $label   is the label for the radio button; and $name, $value and
@@ -1189,6 +1229,27 @@ is empty.
 
     See 'renderTagAttributes()' for details on how attributes are being
     rendered.
+
+
+*yii/helpers/BaseHtml::activeListInput*			protected
+>
+ activeListInput($type, $model, $attribute, $items, $options='[]')
+<
+(string) The generated input list
+
+ This method is mainly called by 'activeListBox()', 'activeRadioList()' and
+ 'activeCheckBoxList()'.
+    [$type] (string) The input type. This can be 'listBox', 'radioList', or
+    'checkBoxList'.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    'getAttributeName()' for the format about attribute expression.
+    [$items] (array) The data item used to generate the input fields. The
+    array keys are the input values, and the array values are the
+    corresponding labels. Note that the labels will NOT be HTML-encoded, while
+    the values will.
+    [$options] (array) Options (name => config) for the input list. The
+    supported special options depend on the input type specified by '$type'.
 
 
 *yii/helpers/BaseHtml::renderSelectOptions*		public
@@ -1234,7 +1295,9 @@ will be returned.
  The "data" attribute is specially handled when it is receiving an array
  value. In this case, the array will be "expanded" and a list data attributes
  will be rendered. For example, if ''data' => ['id' => 1, 'name' => 'yii']',
- then this will be rendered: 'data-id="1" data-name="yii"'.
+ then this will be rendered: 'data-id="1" data-name="yii"'. Additionally
+ ''data' => ['params' => ['id' => 1, 'name' => 'yii'], 'status' => 'ok']' will
+ be rendered as: 'data-params='{"id":1,"name":"yii"}' data-status="ok"'.
     [$attributes] (array) Attributes to be rendered. The attribute values will
     be HTML-encoded using 'encode()'.
 
@@ -1272,7 +1335,7 @@ will be returned.
 
  For example,
 
-   Html::addCssStyle($options, 'width: 100px; height: 200px');
+     function ($index, $label, $name, $checked, $value)
 
 
     [$options] (array) The HTML options to be modified.
@@ -1290,7 +1353,7 @@ will be returned.
 
  For example,
 
-   Html::removeCssStyle($options, ['width', 'height']);
+     function ($index, $label, $name, $checked, $value)
 
 
     [$options] (array) The HTML options to be modified.
@@ -1307,9 +1370,7 @@ returned.
 
  For example,
 
-   print_r(Html::cssStyleFromArray(['width' => '100px', 'height' =>
- '200px']));
-   // will display: 'width: 100px; height: 200px;'
+   Html::addCssStyle($options, 'width: 100px; height: 200px');
 
 
     [$style] (array) The CSS style array. The array keys are the CSS property
@@ -1327,8 +1388,7 @@ returned.
 
  For example,
 
-   print_r(Html::cssStyleToArray('width: 100px; height: 200px;'));
-   // will display: ['width' => '100px', 'height' => '200px']
+   Html::removeCssStyle($options, ['width', 'height']);
 
 
     [$style] (string) The CSS style string

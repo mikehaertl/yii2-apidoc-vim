@@ -7,18 +7,22 @@ DESCRIPTION
 
  For example:
 
-   echo Spinner::widget([
-       'model' => $model,
-       'attribute' => 'country',
-       'clientOptions' => ['step' => 2],
+   echo ProgressBar::widget([
+       'clientOptions' => [
+           'value' => 75,
+       ],
    ]);
 
  The following example will use the name property instead:
 
-   echo Spinner::widget([
-       'name'  => 'country',
-       'clientOptions' => ['step' => 2],
+   php
+   ProgressBar::begin([
+       'clientOptions' => ['value' => 75],
    ]);
+
+   echo '<div class="progress-label">Loading...</div>';
+
+   ProgressBar::end();
 
 
 
