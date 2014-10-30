@@ -500,11 +500,7 @@ METHOD DETAILS
     it to prevent XSS attacks.   When this option is specified, the radio
     button will be enclosed by a label tag. 
       - labelOptions: array, the HTML attributes for the label tag. Do not
-      set this option unless you set the "label" option. 
-      - container: array|boolean, the HTML attributes for the container
-      tag. This is only used when the "label" option is specified.   If it is
-    false, no container will be rendered. If it is an array or not, a "div"
-    container will be rendered   around the the radio button.
+      set this option unless you set the "label" option.
 
     The rest of the options will be rendered as the attributes of the
     resulting radio button tag. The values will be HTML-encoded using
@@ -536,11 +532,7 @@ METHOD DETAILS
     to prevent XSS attacks.   When this option is specified, the checkbox will
     be enclosed by a label tag. 
       - labelOptions: array, the HTML attributes for the label tag. Do not
-      set this option unless you set the "label" option. 
-      - container: array|boolean, the HTML attributes for the container
-      tag. This is only used when the "label" option is specified.   If it is
-    false, no container will be rendered. If it is an array or not, a "div"
-    container will be rendered   around the the radio button.
+      set this option unless you set the "label" option.
 
     The rest of the options will be rendered as the attributes of the
     resulting checkbox tag. The values will be HTML-encoded using 'encode()'.
@@ -575,31 +567,7 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-      $array = [
-          ['id' => '123', 'name' => 'aaa', 'class' => 'x'],
-          ['id' => '124', 'name' => 'bbb', 'class' => 'x'],
-          ['id' => '345', 'name' => 'ccc', 'class' => 'y'],
-      );
-
-      $result = ArrayHelper::map($array, 'id', 'name');
-      // the result is:
-      // [
-      //     '123' => 'aaa',
-      //     '124' => 'bbb',
-      //     '345' => 'ccc',
-      // ]
-
-      $result = ArrayHelper::map($array, 'id', 'name', 'class');
-      // the result is:
-      // [
-      //     'x' => [
-      //         '123' => 'aaa',
-      //         '124' => 'bbb',
-      //     ],
-      //     'y' => [
-      //         '345' => 'ccc',
-      //     ],
-      // ]
+      VarDumper::dump($var);
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -641,7 +609,11 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-      VarDumper::dump($var);
+        // Allow the HTML5 data attribute `data-type` on `img` elements.
+        $content = HtmlPurifier::process($content, function($config) {
+          $config->getHTMLDefinition(true)
+                 ->addAttribute('img', 'data-type', 'Text');
+        });
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -850,7 +822,8 @@ is empty.
 
       - header: string, the header HTML for the error summary. If not set,
       a default prompt string will be used. 
-      - footer: string, the footer HTML for the error summary.
+      - footer: string, the footer HTML for the error summary. 
+      - encode: boolean, if set to false then value won't be encoded.
 
     The rest of the options will be rendered as the attributes of the
     container tag. The values will be HTML-encoded using 'encode()'. If a
@@ -875,7 +848,8 @@ is empty.
     The following options are specially handled:
 
 
-      - tag: this specifies the tag name. If not set, "div" will be used.
+      - tag: this specifies the tag name. If not set, "div" will be used. 
+      - encode: boolean, if set to false then value won't be encoded.
 
     See 'renderTagAttributes()' for details on how attributes are being
     rendered.
@@ -1006,8 +980,10 @@ is empty.
       - label: string, a label displayed next to the radio button.  It
       will NOT be HTML-encoded. Therefore you can pass   in HTML code such as
     an image tag. If this is is coming from end users, you should 'encode()'
-    it to prevent XSS attacks.   When this option is specified, the radio
-    button will be enclosed by a label tag. 
+    it to prevent XSS attacks.   The radio button will be enclosed by the
+    label tag. Note that if you do not specify this option, a default label  
+    will be used based on the attribute label declaration in the model. If you
+    do not want any label, you should   explicitly set this option as null. 
       - labelOptions: array, the HTML attributes for the label tag. This
       is only used when the "label" option is specified.
 
@@ -1042,8 +1018,10 @@ is empty.
       - label: string, a label displayed next to the checkbox.  It will
       NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
     image tag. If this is is coming from end users, you should 'encode()' it
-    to prevent XSS attacks.   When this option is specified, the checkbox will
-    be enclosed by a label tag. 
+    to prevent XSS attacks.   The checkbox will be enclosed by the label tag.
+    Note that if you do not specify this option, a default label   will be
+    used based on the attribute label declaration in the model. If you do not
+    want any label, you should   explicitly set this option as null. 
       - labelOptions: array, the HTML attributes for the label tag. This
       is only used when the "label" option is specified.
 

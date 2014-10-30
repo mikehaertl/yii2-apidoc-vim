@@ -57,6 +57,10 @@ $sessionTable				*yii/web/DbSession::$sessionTable*
  index for the 'expire' column in the session table to improve the
  performance.
 
+ Note that according to the php.ini setting of 'session.hash_function', you
+ may need to adjust the length of the 'id' column. For example, if
+ 'session.hash_function=sha256', you should use length 64 instead of 40.
+
 $behaviors				*yii/web/DbSession::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
 
@@ -105,7 +109,7 @@ $count					*yii/web/DbSession::$count*
  (integer) The number of session variables
 
 $allFlashes				*yii/web/DbSession::$allFlashes*
- (array) Flash messages (key => message).
+ (array) Flash messages (key => message or key => [message1, message2]).
 
 $flash					*yii/web/DbSession::$flash*
  (string) The key identifying the flash message. Note that flash messages and
@@ -432,6 +436,10 @@ METHOD DETAILS
 
 *yii/web/DbSession::setFlash*				public
  See |yii/web/Session::setFlash|
+
+
+*yii/web/DbSession::addFlash*				public
+ See |yii/web/Session::addFlash|
 
 
 *yii/web/DbSession::removeFlash*				public

@@ -38,8 +38,15 @@ $csrfParam				*yii/web/Request::$csrfParam*
  This property is used only when 'enableCsrfValidation' is true.
 
 $csrfCookie				*yii/web/Request::$csrfCookie*
- (array) The configuration of the CSRF cookie. This property is used only when
- 'enableCsrfValidation' is true.
+ (array) The configuration for creating the CSRF 'Cookie|cookie'. This
+ property is used only when both 'enableCsrfValidation' and 'enableCsrfCookie'
+ are true.
+
+$enableCsrfCookie			*yii/web/Request::$enableCsrfCookie*
+ (boolean) Whether to use cookie to persist CSRF token. If false, CSRF token
+ will be stored in session under the name of 'csrfParam'. Note that while
+ storing CSRF tokens in session increases security, it requires starting a
+ session for every page, which will degrade your site performance.
 
 $enableCookieValidation			*yii/web/Request::$enableCookieValidation*
  (boolean) Whether cookies should be validated to ensure they are not
@@ -206,9 +213,6 @@ $eTags					*yii/web/Request::$eTags*
 
 $cookies				*yii/web/Request::$cookies*
  (\yii\web\CookieCollection) The cookie collection.
-
-$rawCsrfToken				*yii/web/Request::$rawCsrfToken*
- (string) The random token for CSRF validation.
 
 $csrfToken				*yii/web/Request::$csrfToken*
  (string) The token used to perform CSRF validation.
@@ -464,6 +468,15 @@ value returned is turned into upper case.
 <
 (string) The request body
 
+
+
+*yii/web/Request::setRawBody*				public
+>
+ setRawBody($rawBody)
+<
+(void)
+
+    [$rawBody] () 
 
 
 *yii/web/Request::getBodyParams*				public
@@ -963,19 +976,9 @@ the highest scores will be returned first.
 
 
 
-*yii/web/Request::getRawCsrfToken*			public
->
- getRawCsrfToken()
-<
-(string) The random token for CSRF validation.
-
- This token is typically sent via a cookie. If such a cookie does not exist, a
- new token will be generated.
-
-
 *yii/web/Request::getCsrfToken*				public
 >
- getCsrfToken()
+ getCsrfToken($regenerate='false')
 <
 (string) The token used to perform CSRF validation.
 
@@ -983,6 +986,26 @@ the highest scores will be returned first.
  attacks](http://breachattack.com/). This token may be passed along via a
  hidden field of an HTML form or an HTTP header value to support CSRF
  validation.
+    [$regenerate] (boolean) Whether to regenerate CSRF token. When this
+    parameter is true, each time this method is called, a new CSRF token will
+    be generated and persisted (in session or cookie).
+
+
+*yii/web/Request::loadCsrfToken*				protected
+>
+ loadCsrfToken()
+<
+(string) The CSRF token loaded from cookie or session. Null is returned if the
+cookie or session does not have CSRF token.
+
+
+
+*yii/web/Request::generateCsrfToken*			protected
+>
+ generateCsrfToken()
+<
+(string) The random token for CSRF validation.
+
 
 
 *yii/web/Request::getCsrfTokenFromHeader*			public

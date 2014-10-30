@@ -20,6 +20,10 @@ $separator				*yii/sphinx/QueryBuilder::$separator*
  Defaults to an empty space. This is mainly used by 'build()' when generating
  a SQL statement.
 
+$conditionBuilders			*yii/sphinx/QueryBuilder::$conditionBuilders*
+ (array) Map of query condition to builder methods. These methods are used by
+ 'buildCondition' to build SQL conditions from array syntax.
+
 
 
 METHOD DETAILS
@@ -337,13 +341,14 @@ element). The parameters returned include those provided in '$params'.
 
 *yii/sphinx/QueryBuilder::buildWhere*			public
 >
- buildWhere($indexes, $condition, $params)
+ buildWhere($indexes, $condition, $params, $match='null')
 <
 (string) The WHERE clause built from 'query'.
 
     [$indexes] (string[]) List of index names, which affected by query
     [$condition] (string|array) 
     [$params] (array) The binding parameters to be populated
+    [$match] (string|\yii\db\Expression|null) 
 
 
 *yii/sphinx/QueryBuilder::buildGroupBy*			public
@@ -353,6 +358,31 @@ element). The parameters returned include those provided in '$params'.
 (string) The GROUP BY clause
 
     [$columns] (array) 
+
+
+*yii/sphinx/QueryBuilder::buildHaving*			public
+>
+ buildHaving($indexes, $condition, $params)
+<
+(string) The HAVING clause built from 'Query::$having'.
+
+    [$indexes] (string[]) List of index names, which affected by query
+    [$condition] (string|array) 
+    [$params] (array) The binding parameters to be populated
+
+
+*yii/sphinx/QueryBuilder::buildOrderByAndLimit*		public
+>
+ buildOrderByAndLimit($sql, $orderBy, $limit, $offset)
+<
+(string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
+
+    [$sql] (string) The existing SQL (without ORDER BY/LIMIT/OFFSET)
+    [$orderBy] (array) The order by columns. See 'Query::orderBy' for more
+    details on how to specify this parameter.
+    [$limit] (integer) The limit number. See 'Query::limit' for more details.
+    [$offset] (integer) The offset number. See 'Query::offset' for more
+    details.
 
 
 *yii/sphinx/QueryBuilder::buildOrderBy*			public
@@ -412,6 +442,19 @@ element). The parameters returned include those provided in '$params'.
 *yii/sphinx/QueryBuilder::buildAndCondition*		public
 >
  buildAndCondition($indexes, $operator, $operands, $params)
+<
+(string) The generated SQL expression
+
+    [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
+    query
+    [$operator] (string) The operator to use for connecting the given operands
+    [$operands] (array) The SQL expressions to connect.
+    [$params] (array) The binding parameters to be populated
+
+
+*yii/sphinx/QueryBuilder::buildNotCondition*		public
+>
+ buildNotCondition($indexes, $operator, $operands, $params)
 <
 (string) The generated SQL expression
 

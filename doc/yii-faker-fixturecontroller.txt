@@ -38,10 +38,9 @@ DESCRIPTION
  with three parameters:
 
 
-   - '$fixture' - current fixture array. 
-   - '$faker' - faker generator instance 
-   - '$index' - current fixture index. For example if user need to
-   generate 3 fixtures for user table, it will be 0..2
+   - '$faker': the Faker generator instance 
+   - '$index': the current fixture index. For example if user need to
+   generate 3 fixtures for user table, it will be 0..2.
 
  After you set all needed fields in callback, you need to return $fixture
  array back from the callback.
@@ -57,20 +56,19 @@ DESCRIPTION
 
  In the code above "users" is template name, after this command run, new file
  named same as template will be created under the '$fixtureDataPath' folder.
- You can generate fixtures for all templates by specifying keyword "all"
+ You can generate fixtures for all templates, for example:
 
-   #users.php file under $templatePath
-
+   // users.php file under template path (by default
+ @tests/unit/templates/fixtures)
    return [
-      [
-          'table_column0' => 'faker_formatter',
-          ...
-          'table_columnN' => 'other_faker_formatter
-          'table_columnN+1' => function ($fixture, $faker, $index) {
-              //set needed fixture fields based on different conditions
-              return $fixture;
-          }
-      ],
+       'name' => $faker->firstName,
+       'phone' => $faker->phoneNumber,
+       'city' => $faker->city,
+       'password' =>
+ Yii::$app->getSecurity()->generatePasswordHash('password_' . $index),
+       'auth_key' => Yii::$app->getSecurity()->generateRandomString(),
+       'intro' => $faker->sentence(7, true),  // generate a sentence with 7
+ words
    ];
 
  This command will generate fixtures for all template files that are stored
@@ -81,37 +79,42 @@ DESCRIPTION
  In the code below we generate all fixtures and in each file there will be 3
  rows (fixtures).
 
-   yii fixture/generate users
+   yii fixture/generate user
 
-   //also a short version of this command (generate action is default)
-   yii fixture users
-
-   //to generate fixtures for several tables, use "," as a separator, for
- example:
-   yii fixture users,profile
+   //generate fixtures from several templates, for example:
+   yii fixture/generate user profile team
 
  You can specify different options of this command:
 
-   yii fixture/generate all
+   yii fixture/generate-all
+
+ You can see all available templates by running command:
+
+   yii fixture/generate-all --count=3
 
  You also can create your own data providers for custom tables fields, see
  Faker library guide for more info (https://github.com/fzaninotto/Faker);
  After you created custom provider, for example:
 
-   yii fixture/generate all 3
+   //generate fixtures in russian language
+   yii fixture/generate user --count=5 --language=ru_RU
+
+   //read templates from the other path
+   yii fixture/generate-all --templatePath=@app/path/to/my/custom/templates
+
+   //generate fixtures into other folders
+   yii fixture/generate-all
+ --fixtureDataPath=@tests/unit/fixtures/subfolder1/subfolder2/subfolder3
 
  you can use it by adding it to the $providers property of the current
  command. In your console.php config:
 
-   //generate fixtures in russian language
-   yii fixture/generate users 5 --language=ru_RU
+   //list all templates under default template path (i.e.
+ '@tests/unit/templates/fixtures')
+   yii fixture/templates
 
-   //read templates from the other path
-   yii fixture/generate all --templatePath=@app/path/to/my/custom/templates
-
-   //generate fixtures into other folders
-   yii fixture/generate all
- --fixtureDataPath=@tests/unit/fixtures/subfolder1/subfolder2/subfolder3
+   //list all templates under specified template path
+   yii fixture/templates --templatePath='@app/path/to/my/custom/templates'
 
 
 
@@ -126,7 +129,7 @@ $module					*yii/faker/FixtureController::$module*
  See |yii/base/Controller::$module|
 
 $defaultAction				*yii/faker/FixtureController::$defaultAction*
- (string) Controller default action ID.
+ See |yii/console/controllers/FixtureController::$defaultAction|
 
 $layout					*yii/faker/FixtureController::$layout*
  See |yii/base/Controller::$layout|
@@ -143,6 +146,9 @@ $color					*yii/faker/FixtureController::$color*
 $namespace				*yii/faker/FixtureController::$namespace*
  See |yii/console/controllers/FixtureController::$namespace|
 
+$append					*yii/faker/FixtureController::$append*
+ See |yii/console/controllers/FixtureController::$append|
+
 $globalFixtures				*yii/faker/FixtureController::$globalFixtures*
  See |yii/console/controllers/FixtureController::$globalFixtures|
 
@@ -154,6 +160,9 @@ $fixtureDataPath			*yii/faker/FixtureController::$fixtureDataPath*
 
 $language				*yii/faker/FixtureController::$language*
  (string) Language to use when generating fixtures data.
+
+$count					*yii/faker/FixtureController::$count*
+ (integer) Total count of data per fixture. Defaults to 2.
 
 $providers				*yii/faker/FixtureController::$providers*
  (array) Additional data providers that can be created by user and will be
@@ -180,6 +189,12 @@ $view					*yii/faker/FixtureController::$view*
 
 $viewPath				*yii/faker/FixtureController::$viewPath*
  (string) The directory containing the view files for this controller.
+
+$helpSummary				*yii/faker/FixtureController::$helpSummary*
+ (string)
+
+$help					*yii/faker/FixtureController::$help*
+ (string)
 
 $fixtures				*yii/faker/FixtureController::$fixtures*
  (\yii\test\Fixture[]) The loaded fixtures for the current test case
@@ -395,7 +410,7 @@ METHOD DETAILS
 
 *yii/faker/FixtureController::options*			public
 >
- options($actionId)
+ options($actionID)
 <
 (array) The names of the options valid for the action
 
@@ -403,7 +418,47 @@ METHOD DETAILS
 
  Note that the values setting via options are not available until
  'beforeAction()' is being called.
-    [$actionId] (string) The action id of the current request
+    [$actionID] (string) The action id of the current request
+
+
+*yii/faker/FixtureController::getHelpSummary*		public
+ See |yii/console/Controller::getHelpSummary|
+
+
+*yii/faker/FixtureController::getHelp*			public
+ See |yii/console/Controller::getHelp|
+
+
+*yii/faker/FixtureController::getActionHelpSummary*	public
+ See |yii/console/Controller::getActionHelpSummary|
+
+
+*yii/faker/FixtureController::getActionHelp*		public
+ See |yii/console/Controller::getActionHelp|
+
+
+*yii/faker/FixtureController::getActionArgsHelp*		public
+ See |yii/console/Controller::getActionArgsHelp|
+
+
+*yii/faker/FixtureController::getActionOptionsHelp*	public
+ See |yii/console/Controller::getActionOptionsHelp|
+
+
+*yii/faker/FixtureController::getActionMethodReflection*	protected
+ See |yii/console/Controller::getActionMethodReflection|
+
+
+*yii/faker/FixtureController::parseDocCommentTags*	protected
+ See |yii/console/Controller::parseDocCommentTags|
+
+
+*yii/faker/FixtureController::parseDocCommentSummary*	protected
+ See |yii/console/Controller::parseDocCommentSummary|
+
+
+*yii/faker/FixtureController::parseDocCommentDetail*	protected
+ See |yii/console/Controller::parseDocCommentDetail|
 
 
 *yii/faker/FixtureController::fixtures*			public
@@ -442,19 +497,54 @@ METHOD DETAILS
  See |yii/console/controllers/FixtureController::actionUnload|
 
 
+*yii/faker/FixtureController::notifyNothingToLoad*	public
+ See |yii/console/controllers/FixtureController::notifyNothingToLoad|
+
+
+*yii/faker/FixtureController::notifyNothingToUnload*	public
+ See |yii/console/controllers/FixtureController::notifyNothingToUnload|
+
+
 *yii/faker/FixtureController::needToApplyAll*		public
  See |yii/console/controllers/FixtureController::needToApplyAll|
 
 
-*yii/faker/FixtureController::actionGenerate*		public
+*yii/faker/FixtureController::actionTemplates*		public
 >
- actionGenerate($file, $times=2)
+ actionTemplates()
 <
 (void)
 
-    [$file] (array|string) Filename for the table template. You can generate
-    all fixtures for all tables by specifying keyword "all" as filename.
-    [$times] (integer) How much fixtures do you want per table
+
+
+*yii/faker/FixtureController::actionGenerate*		public
+>
+ actionGenerate()
+<
+(void)
+
+ For example,
+
+   class Book extends \Faker\Provider\Base
+   {
+
+       public function title($nbWords = 5)
+       {
+           $sentence = $this->generator->sentence($nbWords);
+           return mb_substr($sentence, 0, mb_strlen($sentence) - 1);
+       }
+
+   }
+
+
+
+
+*yii/faker/FixtureController::actionGenerateAll*		public
+>
+ actionGenerateAll()
+<
+(void)
+
 
 
 *yii/faker/FixtureController::getGenerator*		public
@@ -481,24 +571,6 @@ METHOD DETAILS
 
 
 
-*yii/faker/FixtureController::needToGenerateAll*		public
->
- needToGenerateAll($file)
-<
-(bool) 
-
-    [$file] (string) 
-
-
-*yii/faker/FixtureController::getTemplate*		public
->
- getTemplate($file)
-<
-(array) Generator template
-
-    [$file] (string) Template file
-
-
 *yii/faker/FixtureController::exportFixtures*		public
 >
  exportFixtures($fixtures)
@@ -510,12 +582,24 @@ METHOD DETAILS
 
 *yii/faker/FixtureController::generateFixture*		public
 >
- generateFixture($template, $index)
+ generateFixture($_template_, $index)
 <
 (array) Fixture
 
-    [$template] (array) Fixture template
-    [$index] (integer) Current fixture index
+    [$_template_] (string) The fixture template file
+    [$index] (integer) The current fixture index
+
+
+*yii/faker/FixtureController::generateFixtureFile*	public
+>
+ generateFixtureFile($templateName, $templatePath, $fixtureDataPath)
+<
+(void)
+
+    [$templateName] (string) Template file name
+    [$templatePath] (string) Path where templates are stored
+    [$fixtureDataPath] (string) Fixture data path where generated file should
+    be written
 
 
 *yii/faker/FixtureController::confirmGeneration*		public

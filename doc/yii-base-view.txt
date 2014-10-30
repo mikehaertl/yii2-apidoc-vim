@@ -256,22 +256,26 @@ is being rendered.
 
 *yii/base/View::beforeRender*				public
 >
- beforeRender()
+ beforeRender($viewFile, $params)
 <
 (boolean) Whether to continue rendering the view file.
 
  The default implementation will trigger the 'EVENT_BEFORE_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
+    [$viewFile] (string) The view file to be rendered.
+    [$params] (array) The parameter array passed to the 'render()' method.
 
 
 *yii/base/View::afterRender*				public
 >
- afterRender($output)
+ afterRender($viewFile, $params, $output)
 <
 (void)
 
  The default implementation will trigger the 'EVENT_AFTER_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
+    [$viewFile] (string) The view file being rendered.
+    [$params] (array) The parameter array passed to the 'render()' method.
     [$output] (string) The rendering result of the view file. Updates to this
     parameter will be passed back and returned by 'renderFile()'.
 

@@ -72,6 +72,16 @@ $compareValue				*yii/validators/CompareValidator::$compareValue*
  (mixed) The constant value to be compared with. When both this property and
  'compareAttribute' are set, this property takes precedence.
 
+$type					*yii/validators/CompareValidator::$type*
+ (string) The type of the values being compared. The follow types are
+ supported:
+
+
+   - string: the values are being compared as strings. No conversion
+   will be done before comparison. 
+   - number: the values are being compared as numbers. String values
+   will be converted into numbers before comparison.
+
 $operator				*yii/validators/CompareValidator::$operator*
  (string) The operator for comparison. The following operators are supported:
 
@@ -283,11 +293,12 @@ support client-side validation.
 
 *yii/validators/CompareValidator::compareValues*		protected
 >
- compareValues($operator, $value, $compareValue)
+ compareValues($operator, $type, $value, $compareValue)
 <
 (boolean) Whether the comparison using the specified operator is true.
 
     [$operator] (string) The comparison operator
+    [$type] (string) The type of the values being compared
     [$value] (mixed) The value being compared
     [$compareValue] (mixed) Another value being compared
 

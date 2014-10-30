@@ -12,6 +12,7 @@ SUBCLASSES
 |yii/console/controllers/FixtureController|
 |yii/console/controllers/BaseMigrateController|
 |yii/console/controllers/MigrateController|
+|yii/gii/console/GenerateController|
 |yii/faker/FixtureController|
 |yii/mongodb/console/controllers/MigrateController|
 |yii/apidoc/components/BaseController|
@@ -21,10 +22,10 @@ SUBCLASSES
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- A controller consists of one or several actions known as sub-commands. Users
- call a console command by specifying the corresponding route which identifies
- a controller action. The 'yii' program is used when calling a console
- command, like the following:
+ A console controller consists of one or several actions known as
+ sub-commands. Users call a console command by specifying the corresponding
+ route which identifies a controller action. The 'yii' program is used when
+ calling a console command, like the following:
 
    CREATE TABLE source_message (
        id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -41,7 +42,8 @@ DESCRIPTION
            REFERENCES source_message (id) ON DELETE CASCADE ON UPDATE RESTRICT
    );
 
-
+ where '<route>' is a route to a controller action and the params will be
+ populated as properties of a command. See 'options()' for details.
 
 
 PROPERTY DETAILS
@@ -89,6 +91,12 @@ $view					*yii/console/Controller::$view*
 
 $viewPath				*yii/console/Controller::$viewPath*
  (string) The directory containing the view files for this controller.
+
+$helpSummary				*yii/console/Controller::$helpSummary*
+ (string)
+
+$help					*yii/console/Controller::$help*
+ (string)
 
 
 
@@ -387,7 +395,7 @@ mean abnormal.
 
 *yii/console/Controller::options*				public
 >
- options($actionId)
+ options($actionID)
 <
 (array) The names of the options valid for the action
 
@@ -395,7 +403,122 @@ mean abnormal.
 
  Note that the values setting via options are not available until
  'beforeAction()' is being called.
-    [$actionId] (string) The action id of the current request
+    [$actionID] (string) The action id of the current request
+
+
+*yii/console/Controller::getHelpSummary*			public
+>
+ getHelpSummary()
+<
+(string) 
+
+ You may override this method to return customized summary. The default
+ implementation returns first line from the PHPDoc comment.
+
+
+*yii/console/Controller::getHelp*				public
+>
+ getHelp()
+<
+(string) 
+
+ You may override this method to return customized help. The default
+ implementation returns help information retrieved from the PHPDoc comment.
+
+
+*yii/console/Controller::getActionHelpSummary*		public
+>
+ getActionHelpSummary($action)
+<
+(string) A one-line short summary describing the specified action.
+
+    [$action] (\yii\base\Action) Action to get summary for
+
+
+*yii/console/Controller::getActionHelp*			public
+>
+ getActionHelp($action)
+<
+(string) The detailed help information for the specified action.
+
+    [$action] (\yii\base\Action) Action to get help for
+
+
+*yii/console/Controller::getActionArgsHelp*		public
+>
+ getActionArgsHelp($action)
+<
+(array) The help information of the action arguments
+
+ The returned value should be an array. The keys are the argument names, and
+ the values are the corresponding help information. Each value must be an
+ array of the following structure:
+
+
+   - required: boolean, whether this argument is required. 
+   - type: string, the PHP type of this argument. 
+   - default: string, the default value of this argument 
+   - comment: string, the comment of this argument
+
+ The default implementation will return the help information extracted from
+ the doc-comment of the parameters corresponding to the action method.
+    [$action] (\yii\base\Action) 
+
+
+*yii/console/Controller::getActionOptionsHelp*		public
+>
+ getActionOptionsHelp($action)
+<
+(array) The help information of the action options
+
+ The returned value should be an array. The keys are the option names, and the
+ values are the corresponding help information. Each value must be an array of
+ the following structure:
+
+
+   - type: string, the PHP type of this argument. 
+   - default: string, the default value of this argument 
+   - comment: string, the comment of this argument
+
+ The default implementation will return the help information extracted from
+ the doc-comment of the properties corresponding to the action options.
+    [$action] (\yii\base\Action) 
+
+
+*yii/console/Controller::getActionMethodReflection*	protected
+>
+ getActionMethodReflection($action)
+<
+(\ReflectionMethod) 
+
+    [$action] (\yii\base\Action) 
+
+
+*yii/console/Controller::parseDocCommentTags*		protected
+>
+ parseDocCommentTags($reflection)
+<
+(array) The parsed tags
+
+    [$reflection] (\Reflector) The comment block
+
+
+*yii/console/Controller::parseDocCommentSummary*		protected
+>
+ parseDocCommentSummary($reflection)
+<
+(string) 
+
+    [$reflection] (\Reflector) 
+
+
+*yii/console/Controller::parseDocCommentDetail*		protected
+>
+ parseDocCommentDetail($reflection)
+<
+(string) 
+
+    [$reflection] (\Reflector) 
 
 
 

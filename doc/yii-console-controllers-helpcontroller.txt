@@ -64,6 +64,12 @@ $view					*yii/console/controllers/HelpController::$view*
 $viewPath				*yii/console/controllers/HelpController::$viewPath*
  (string) The directory containing the view files for this controller.
 
+$helpSummary				*yii/console/controllers/HelpController::$helpSummary*
+ (string)
+
+$help					*yii/console/controllers/HelpController::$help*
+ (string)
+
 $commands				*yii/console/controllers/HelpController::$commands*
  (array) All available command names
 
@@ -272,6 +278,46 @@ METHOD DETAILS
  See |yii/console/Controller::options|
 
 
+*yii/console/controllers/HelpController::getHelpSummary*	public
+ See |yii/console/Controller::getHelpSummary|
+
+
+*yii/console/controllers/HelpController::getHelp*		public
+ See |yii/console/Controller::getHelp|
+
+
+*yii/console/controllers/HelpController::getActionHelpSummary*public
+ See |yii/console/Controller::getActionHelpSummary|
+
+
+*yii/console/controllers/HelpController::getActionHelp*	public
+ See |yii/console/Controller::getActionHelp|
+
+
+*yii/console/controllers/HelpController::getActionArgsHelp*public
+ See |yii/console/Controller::getActionArgsHelp|
+
+
+*yii/console/controllers/HelpController::getActionOptionsHelp*public
+ See |yii/console/Controller::getActionOptionsHelp|
+
+
+*yii/console/controllers/HelpController::getActionMethodReflection*protected
+ See |yii/console/Controller::getActionMethodReflection|
+
+
+*yii/console/controllers/HelpController::parseDocCommentTags*protected
+ See |yii/console/Controller::parseDocCommentTags|
+
+
+*yii/console/controllers/HelpController::parseDocCommentSummary*protected
+ See |yii/console/Controller::parseDocCommentSummary|
+
+
+*yii/console/controllers/HelpController::parseDocCommentDetail*protected
+ See |yii/console/Controller::parseDocCommentDetail|
+
+
 *yii/console/controllers/HelpController::actionIndex*	public
 >
  actionIndex($command='null')
@@ -325,71 +371,31 @@ METHOD DETAILS
     [$controllerClass] (string) 
 
 
-*yii/console/controllers/HelpController::getHelp*		protected
+*yii/console/controllers/HelpController::getDefaultHelp*	protected
 >
- getHelp()
+ getDefaultHelp()
 <
 (void)
 
 
 
-*yii/console/controllers/HelpController::getControllerHelp*protected
+*yii/console/controllers/HelpController::getCommandHelp*	protected
 >
- getControllerHelp($controller)
+ getCommandHelp($controller)
 <
 (void)
 
     [$controller] (\yii\console\Controller) The controller instance
 
 
-*yii/console/controllers/HelpController::getActionSummary*protected
+*yii/console/controllers/HelpController::getSubCommandHelp*protected
 >
- getActionSummary($controller, $actionID)
-<
-(string) The summary about the action
-
-    [$controller] (\yii\console\Controller) The controller instance
-    [$actionID] (string) Action ID
-
-
-*yii/console/controllers/HelpController::getActionHelp*	protected
->
- getActionHelp($controller, $actionID)
+ getSubCommandHelp($controller, $actionID)
 <
 (void)
 
     [$controller] (\yii\console\Controller) The controller instance
     [$actionID] (string) Action ID
-
-
-*yii/console/controllers/HelpController::getArgHelps*	protected
->
- getArgHelps($method, $tags)
-<
-(array) The required and optional argument help information
-
-    [$method] (\ReflectionMethod) 
-    [$tags] (string) The parsed comment block related with arguments
-
-
-*yii/console/controllers/HelpController::getOptionHelps*	protected
->
- getOptionHelps($controller, $actionID)
-<
-(array) The help information about the options
-
-    [$controller] (\yii\console\Controller) The console controller
-    [$actionID] (string) Name of the action, if set include local options for
-    that action
-
-
-*yii/console/controllers/HelpController::parseComment*	protected
->
- parseComment($comment)
-<
-(array) The parsed tags
-
-    [$comment] (string) The comment block
 
 
 *yii/console/controllers/HelpController::formatOptionHelp*protected

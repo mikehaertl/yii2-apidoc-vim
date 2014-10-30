@@ -82,7 +82,23 @@ METHOD DETAILS
 
 
 *yii/db/pgsql/QueryBuilder::batchInsert*			public
- See |yii/db/QueryBuilder::batchInsert|
+>
+ batchInsert($table, $columns, $rows)
+<
+(string) The batch INSERT SQL statement
+
+ For example,
+
+   $sql = $queryBuilder->batchInsert('user', ['name', 'age'], [
+       ['Tom', 30],
+       ['Jane', 20],
+       ['Linda', 25],
+   ]);
+
+ Note that the values in each row must match the corresponding column names.
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column names
+    [$rows] (array) The rows to be batch inserted into the table
 
 
 *yii/db/pgsql/QueryBuilder::update*			public
@@ -230,6 +246,10 @@ METHOD DETAILS
 
 *yii/db/pgsql/QueryBuilder::buildHaving*			public
  See |yii/db/QueryBuilder::buildHaving|
+
+
+*yii/db/pgsql/QueryBuilder::buildOrderByAndLimit*		public
+ See |yii/db/QueryBuilder::buildOrderByAndLimit|
 
 
 *yii/db/pgsql/QueryBuilder::buildOrderBy*			public

@@ -18,13 +18,8 @@ DESCRIPTION
 
  For example,
 
-   echo DatePicker::widget([
-       'language' => 'ru',
-       'name'  => 'from_date',
-       'clientOptions' => [
-           'dateFormat' => 'yy-mm-dd',
-       ],
-   ]);
+   'MM/dd/yyyy' // date in ICU format
+   'php:m/d/Y' // the same date in PHP format
 
  You would normally call '$query->search()' instead of creating a command as
  this method adds the 'indexBy()' feature and also removes some
@@ -125,8 +120,15 @@ $highlight				*yii/elasticsearch/Query::$highlight*
  (array) The highlight part of this search query. This is an array that allows
  to highlight search results on one or more fields.
 
-$facets					*yii/elasticsearch/Query::$facets*
- ()
+$aggregations				*yii/elasticsearch/Query::$aggregations*
+ (array) List of aggregations to add to this query.
+
+$stats					*yii/elasticsearch/Query::$stats*
+ (array) The 'stats' part of the query. An array of groups to maintain a
+ statistics aggregation for.
+
+$suggest				*yii/elasticsearch/Query::$suggest*
+ (array) List of suggesters to add to this query.
 
 $behaviors				*yii/elasticsearch/Query::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -150,6 +152,8 @@ METHOD DETAILS
 <
 (void)
 
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/elasticsearch/Query::__get*				public
@@ -355,15 +359,15 @@ False is returned if the query results in nothing.
 
 *yii/elasticsearch/Query::delete*				public
 >
- delete($db='null')
+ delete($db='null', $options='[]')
 <
-(array) The query results. If the query results in nothing, an empty array
-will be returned.
+(array) The query results.
 
- This will not run facet queries.
+ Everything except query and filter will be ignored.
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
+    [$options] (array) The options given with this query.
 
 
 *yii/elasticsearch/Query::scalar*				public
@@ -419,117 +423,61 @@ the query results in nothing.
     application component will be used.
 
 
-*yii/elasticsearch/Query::addFacet*			public
+*yii/elasticsearch/Query::stats*				public
 >
- addFacet($name, $type, $options)
+ stats($groups)
 <
 (static) The query object itself
 
-    [$name] (string) The name of this facet
-    [$type] (string) The facet type. e.g. 'terms', 'range', 'histogram'...
-    [$options] (string|array) The configuration options for this facet. Can be
-    an array or a json string.
+    [$groups] (array) An array of groups to maintain a statistics aggregation
+    for.
 
 
-*yii/elasticsearch/Query::addTermFacet*			public
+*yii/elasticsearch/Query::highlight*			public
 >
- addTermFacet($name, $options)
+ highlight($highlight)
 <
 (static) The query object itself
 
-    [$name] (string) The name of this facet
-    [$options] (array) Additional option. Please refer to the elasticsearch
-    documentation for details.
+    [$highlight] (array) Array of parameters to highlight results.
 
 
-*yii/elasticsearch/Query::addRangeFacet*			public
+*yii/elasticsearch/Query::addAggregation*			public
 >
- addRangeFacet($name, $options)
+ addAggregation($name, $type, $options)
 <
 (static) The query object itself
 
-    [$name] (string) The name of this facet
-    [$options] (array) Additional option. Please refer to the elasticsearch
-    documentation for details.
+    [$name] (string) The name of the aggregation
+    [$type] (string) The aggregation type. e.g. 'terms', 'range',
+    'histogram'...
+    [$options] (string|array) The configuration options for this aggregation.
+    Can be an array or a json string.
 
 
-*yii/elasticsearch/Query::addHistogramFacet*		public
+*yii/elasticsearch/Query::addAgg*				public
 >
- addHistogramFacet($name, $options)
+ addAgg($name, $type, $options)
 <
 (static) The query object itself
 
- Each value is "rounded" into an interval (or placed in a bucket), and
- statistics are provided per interval/bucket (count and total).
-    [$name] (string) The name of this facet
-    [$options] (array) Additional option. Please refer to the elasticsearch
-    documentation for details.
+ This is an alias for 'addAggregation'.
+    [$name] (string) The name of the aggregation
+    [$type] (string) The aggregation type. e.g. 'terms', 'range',
+    'histogram'...
+    [$options] (string|array) The configuration options for this aggregation.
+    Can be an array or a json string.
 
 
-*yii/elasticsearch/Query::addDateHistogramFacet*		public
+*yii/elasticsearch/Query::addSuggester*			public
 >
- addDateHistogramFacet($name, $options)
+ addSuggester($name, $definition)
 <
 (static) The query object itself
 
-    [$name] (string) The name of this facet
-    [$options] (array) Additional option. Please refer to the elasticsearch
-    documentation for details.
-
-
-*yii/elasticsearch/Query::addFilterFacet*			public
->
- addFilterFacet($name, $filter)
-<
-(static) The query object itself
-
- The filter itself can be expressed using the Query DSL.
-    [$name] (string) The name of this facet
-    [$filter] (string) The query in Query DSL
-
-
-*yii/elasticsearch/Query::addQueryFacet*			public
->
- addQueryFacet($name, $query)
-<
-(static) The query object itself
-
- The query itself can be expressed using the Query DSL.
-    [$name] (string) The name of this facet
-    [$query] (string) The query in Query DSL
-
-
-*yii/elasticsearch/Query::addStatisticalFacet*		public
->
- addStatisticalFacet($name, $options)
-<
-(static) The query object itself
-
-    [$name] (string) The name of this facet
-    [$options] (array) Additional option. Please refer to the elasticsearch
-    documentation for details.
-
-
-*yii/elasticsearch/Query::addTermsStatsFacet*		public
->
- addTermsStatsFacet($name, $options)
-<
-(static) The query object itself
-
-    [$name] (string) The name of this facet
-    [$options] (array) Additional option. Please refer to the elasticsearch
-    documentation for details.
-
-
-*yii/elasticsearch/Query::addGeoDistanceFacet*		public
->
- addGeoDistanceFacet($name, $options)
-<
-(static) The query object itself
-
-    [$name] (string) The name of this facet
-    [$options] (array) Additional option. Please refer to the elasticsearch
-    documentation for details.
+    [$name] (string) The name of the suggester
+    [$definition] (string|array) The configuration options for this suggester.
+    Can be an array or a json string.
 
 
 *yii/elasticsearch/Query::query*				public
@@ -571,15 +519,6 @@ the query results in nothing.
 (static) The query object itself
 
     [$fields] (array) The fields to be selected.
-
-
-*yii/elasticsearch/Query::highlight*			public
->
- highlight($highlight)
-<
-(static) The query object itself
-
-    [$highlight] (array) Array of parameters to highlight results.
 
 
 *yii/elasticsearch/Query::source*				public

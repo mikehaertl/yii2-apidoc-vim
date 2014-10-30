@@ -16,16 +16,18 @@ DESCRIPTION
        return [
            'corsFilter' => [
                'class' => \yii\filters\Cors::className(),
-               // restrict access to
-               'Origin' => ['http://www.myserver.com',
+               'cors' => [
+                   // restrict access to
+                   'Origin' => ['http://www.myserver.com',
  'https://www.myserver.com'],
-               'Access-Control-Request-Method' => ['POST', 'PUT'],
-               // Allow only POST and PUT methods
-               'Access-Control-Request-Headers' => ['X-Wsse'],
-               // Allow only headers 'X-Wsse'
-               'Access-Control-Allow-Credentials' => true,
-               // Allow OPTIONS caching
-               'Access-Control-Max-Age' => 3600,
+                   'Access-Control-Request-Method' => ['POST', 'PUT'],
+                   // Allow only POST and PUT methods
+                   'Access-Control-Request-Headers' => ['X-Wsse'],
+                   // Allow only headers 'X-Wsse'
+                   'Access-Control-Allow-Credentials' => true,
+                   // Allow OPTIONS caching
+                   'Access-Control-Max-Age' => 3600,
+               ],
 
            ],
        ];
@@ -153,6 +155,16 @@ METHOD DETAILS
 
 *yii/filters/auth/CompositeAuth::isActive*		protected
  See |yii/base/ActionFilter::isActive|
+
+
+*yii/filters/auth/CompositeAuth::challenge*		public
+>
+ challenge($response)
+<
+(void)
+
+ For example, some appropriate HTTP headers may be generated.
+    [$response] (\yii\web\Response) 
 
 
 *yii/filters/auth/CompositeAuth::handleFailure*		public

@@ -8,14 +8,9 @@ DESCRIPTION
  To use TimestampBehavior, insert the following code to your ActiveRecord
  class:
 
-   public function behaviors()
+   function ($event)
    {
-       return [
-           [
-               'class' => SluggableBehavior::className(),
-               'slugAttribute' => 'alias',
-           ],
-       ];
+       // return slug
    }
 
  By default, TimestampBehavior will fill the 'created_at' and 'updated_at'
@@ -27,9 +22,9 @@ DESCRIPTION
  calculating the timestamp, you may configure the 'createdAtAttribute',
  'updatedAtAttribute' and 'value' properties like the following:
 
-   function ($event)
+   function ($baseSlug, $iteration, $model)
    {
-       // return slug
+       // return uniqueSlug
    }
 
  TimestampBehavior also provides a method named 'touch()' that allows you to
@@ -66,11 +61,11 @@ $value					*yii/behaviors/TimestampBehavior::$value*
 
 $createdAtAttribute			*yii/behaviors/TimestampBehavior::$createdAtAttribute*
  (string) The attribute that will receive timestamp value Set this property to
- be null if you do not want to record the creation time.
+ false if you do not want to record the creation time.
 
 $updatedAtAttribute			*yii/behaviors/TimestampBehavior::$updatedAtAttribute*
  (string) The attribute that will receive timestamp value. Set this property
- to be null if you do not want to record the update time.
+ to false if you do not want to record the update time.
 
 
 

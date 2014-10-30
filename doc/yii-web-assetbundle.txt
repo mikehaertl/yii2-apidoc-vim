@@ -18,27 +18,10 @@ SUBCLASSES
 |yii/bootstrap/BootstrapAsset|
 |yii/bootstrap/BootstrapPluginAsset|
 |yii/gii/GiiAsset|
+|yii/gii/TypeAheadAsset|
 |yii/debug/DebugAsset|
-|yii/jui/CoreAsset|
-|yii/jui/ThemeAsset|
-|yii/jui/DatePickerRegionalAsset|
-|yii/jui/ProgressBarAsset|
-|yii/jui/SpinnerAsset|
-|yii/jui/SelectableAsset|
-|yii/jui/EffectAsset|
-|yii/jui/ButtonAsset|
-|yii/jui/ResizableAsset|
-|yii/jui/TabsAsset|
-|yii/jui/DraggableAsset|
-|yii/jui/SliderAsset|
-|yii/jui/TooltipAsset|
-|yii/jui/DialogAsset|
-|yii/jui/SortableAsset|
-|yii/jui/DatePickerAsset|
-|yii/jui/AccordionAsset|
-|yii/jui/MenuAsset|
-|yii/jui/AutoCompleteAsset|
-|yii/jui/DroppableAsset|
+|yii/jui/JuiAsset|
+|yii/jui/DatePickerLanguageAsset|
 |yii/apidoc/templates/bootstrap/assets/JsSearchAsset|
 |yii/apidoc/templates/bootstrap/assets/AssetBundle|
 |yii/authclient/widgets/AuthChoiceAsset|
@@ -60,14 +43,17 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $sourcePath				*yii/web/AssetBundle::$sourcePath*
- (string) The root directory of the source asset files. A source asset file is
- a file that is part of your source code repository of your Web application.
+ (string) The directory that contains the source asset files for this asset
+ bundle. A source asset file is a file that is part of your source code
+ repository of your Web application.
 
  You must set this property if the directory containing the source asset files
- is not Web accessible (this is usually the case for extensions).
+ is not Web accessible. By setting this property, 'AssetManager' will publish
+ the source asset files to a Web-accessible directory automatically when the
+ asset bundle is registered on a page.
 
- By setting this property, the asset manager will publish the source asset
- files to a Web-accessible directory 'basePath'.
+ If you do not set this property, it means the source asset files are located
+ under 'basePath'.
 
  You can use either a directory or an alias of the directory.
 
@@ -78,22 +64,13 @@ $basePath				*yii/web/AssetBundle::$basePath*
  If 'sourcePath' is set, this property will be *overwritten* by 'AssetManager'
  when it publishes the asset files from 'sourcePath'.
 
- If the bundle contains any assets that are specified in terms of relative
- file path, then this property must be set either manually or automatically
- (by 'AssetManager' via asset publishing).
-
  You can use either a directory or an alias of the directory.
 
 $baseUrl				*yii/web/AssetBundle::$baseUrl*
- (string) The base URL that will be prefixed to the asset files for them to be
- accessed via Web server.
+ (string) The base URL for the relative asset files listed in 'js' and 'css'.
 
  If 'sourcePath' is set, this property will be *overwritten* by 'AssetManager'
  when it publishes the asset files from 'sourcePath'.
-
- If the bundle contains any assets that are specified in terms of relative
- file path, then this property must be set either manually or automatically
- (by asset manager via asset publishing).
 
  You can use either a URL or an alias of the URL.
 
@@ -111,15 +88,22 @@ $depends				*yii/web/AssetBundle::$depends*
 
 $js					*yii/web/AssetBundle::$js*
  (array) List of JavaScript files that this bundle contains. Each JavaScript
- file can be either a file path (without leading slash) relative to 'basePath'
- or a URL representing an external JavaScript file.
+ file can be specified in one of the following formats:
 
- Note that only forward slash "/" can be used as directory separator.
+
+   - an absolute URL representing an external asset. For example,  
+ 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js' or  
+ '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'. 
+   - a relative path representing a local asset (e.g. 'js/main.js').
+   The actual file path of a local   asset can be determined by prefixing
+ 'basePath' to the relative path, and the actual URL   of the asset can be
+ determined by prefixing 'baseUrl' to the relative path.
+
+ Note that only forward slash "/" should be used as directory separators.
 
 $css					*yii/web/AssetBundle::$css*
  (array) List of CSS files that this bundle contains. Each CSS file can be
- either a file path (without leading slash) relative to 'basePath' or a URL
- representing an external CSS file.
+ specified in one of the three formats as explained in 'js'.
 
  Note that only forward slash "/" can be used as directory separator.
 
@@ -133,7 +117,8 @@ $cssOptions				*yii/web/AssetBundle::$cssOptions*
 
 $publishOptions				*yii/web/AssetBundle::$publishOptions*
  (array) The options to be passed to 'AssetManager::publish()' when the asset
- bundle is being published.
+ bundle is being published. This property is used only when 'sourcePath' is
+ set.
 
 
 
@@ -200,7 +185,7 @@ METHOD DETAILS
 <
 (static) The registered asset bundle instance
 
-    [$view] (\yii\web\View) 
+    [$view] (\yii\web\View) The view to be registered with
 
 
 *yii/web/AssetBundle::registerAssetFiles*			public

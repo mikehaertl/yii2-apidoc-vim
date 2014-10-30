@@ -164,7 +164,8 @@ METHOD DETAILS
 <
 (void)
 
- Data will be batch inserted into the given collection.
+ The default implementation will first reset the DB table and then populate it
+ with the data returned by 'getData()'.
 
 
 *yii/mongodb/ActiveFixture::beforeLoad*			public
@@ -176,13 +177,7 @@ METHOD DETAILS
 
 
 *yii/mongodb/ActiveFixture::unload*			public
->
- unload()
-<
-(void)
-
- The default implementation will clean up the colection by calling
- 'resetCollection()'.
+ See |yii/test/BaseActiveFixture::unload|
 
 
 *yii/mongodb/ActiveFixture::beforeUnload*			public

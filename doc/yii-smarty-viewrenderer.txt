@@ -14,8 +14,23 @@ $compilePath				*yii/smarty/ViewRenderer::$compilePath*
  (string) The directory or path alias pointing to where Smarty compiled
  templates will be stored.
 
+$pluginDirs				*yii/smarty/ViewRenderer::$pluginDirs*
+ (array) Add additional directories to Smarty's search path for plugins.
+
+$imports				*yii/smarty/ViewRenderer::$imports*
+ (array) Class imports similar to the use tag
+
+$widgets				*yii/smarty/ViewRenderer::$widgets*
+ (array) Widget declarations
+
 $smarty					*yii/smarty/ViewRenderer::$smarty*
- (\Smarty)
+ (\Smarty) The Smarty object used for rendering
+
+$options				*yii/smarty/ViewRenderer::$options*
+ (array) Additional Smarty options
+
+$extensionClass				*yii/smarty/ViewRenderer::$extensionClass*
+ (string) Extension class name
 
 $behaviors				*yii/smarty/ViewRenderer::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -58,7 +73,16 @@ METHOD DETAILS
 
 
 *yii/smarty/ViewRenderer::__call*				public
- See |yii/base/Component::__call|
+>
+ __call($method, $args)
+<
+(string) 
+
+ Using a magic function call would not be necessary if Smarty would support
+ closures. Smarty closure support is announced for 3.2, until its release
+ magic function calls are used to pass the tag name to the callback.
+    [$method] (string) 
+    [$args] (array) 
 
 
 *yii/smarty/ViewRenderer::hasProperty*			public
@@ -137,24 +161,31 @@ METHOD DETAILS
 
  This method is invoked by 'View' whenever it tries to render a view. Child
  classes must implement this method to render the given view file.
-    [$view] (\yii\base\View) The view object used for rendering the file.
+    [$view] (\yii\web\View) The view object used for rendering the file.
     [$file] (string) The view file.
     [$params] (array) The parameters to be passed to the view file.
 
 
-*yii/smarty/ViewRenderer::smarty_function_path*		public
+*yii/smarty/ViewRenderer::resolveTemplateDir*		protected
 >
- smarty_function_path($params, $template)
+ resolveTemplateDir($dir)
 <
-(string) 
+(string) The resolved directory name
 
- Usage is the following:
+    [$dir] (string) Directory name to be resolved
 
- {path route='blog/view' alias=$post.alias user=$user.id}
 
- where route is Yii route and the rest of parameters are passed as is.
-    [$params] () 
-    [$template] (\Smarty_Internal_Template) 
+*yii/smarty/ViewRenderer::aliasHandler*			public
+>
+ aliasHandler($type, $name, $content, $modified, $smarty)
+<
+(bool|string) Path to file or false if it's not found
+
+    [$type] (string) 
+    [$name] (string) 
+    [$content] (string) 
+    [$modified] (string) 
+    [$smarty] (\Smarty) 
 
 
 

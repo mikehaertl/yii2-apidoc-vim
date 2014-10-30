@@ -18,7 +18,7 @@ DESCRIPTION
        'depends' => [ ... ],
    ]
 
-
+ The 'unload' sub-command can be used similarly to unload fixtures.
 
 
 PROPERTY DETAILS
@@ -48,6 +48,10 @@ $color					*yii/console/controllers/FixtureController::$color*
 $namespace				*yii/console/controllers/FixtureController::$namespace*
  (string) Default namespace to search fixtures in
 
+$append					*yii/console/controllers/FixtureController::$append*
+ (bool) Whether to append new fixture data to the existing ones. Defaults to
+ false, meaning if there is any existing fixture data, it will be removed.
+
 $globalFixtures				*yii/console/controllers/FixtureController::$globalFixtures*
  (array) Global fixtures that should be applied when loading and unloading. By
  default it is set to 'InitDbFixture' that disables and enables integrity
@@ -73,6 +77,12 @@ $view					*yii/console/controllers/FixtureController::$view*
 
 $viewPath				*yii/console/controllers/FixtureController::$viewPath*
  (string) The directory containing the view files for this controller.
+
+$helpSummary				*yii/console/controllers/FixtureController::$helpSummary*
+ (string)
+
+$help					*yii/console/controllers/FixtureController::$help*
+ (string)
 
 $fixtures				*yii/console/controllers/FixtureController::$fixtures*
  (\yii\test\Fixture[]) The loaded fixtures for the current test case
@@ -280,7 +290,7 @@ METHOD DETAILS
 
 *yii/console/controllers/FixtureController::options*	public
 >
- options($actionId)
+ options($actionID)
 <
 (array) The names of the options valid for the action
 
@@ -288,7 +298,47 @@ METHOD DETAILS
 
  Note that the values setting via options are not available until
  'beforeAction()' is being called.
-    [$actionId] (string) The action id of the current request
+    [$actionID] (string) The action id of the current request
+
+
+*yii/console/controllers/FixtureController::getHelpSummary*public
+ See |yii/console/Controller::getHelpSummary|
+
+
+*yii/console/controllers/FixtureController::getHelp*	public
+ See |yii/console/Controller::getHelp|
+
+
+*yii/console/controllers/FixtureController::getActionHelpSummary*public
+ See |yii/console/Controller::getActionHelpSummary|
+
+
+*yii/console/controllers/FixtureController::getActionHelp*public
+ See |yii/console/Controller::getActionHelp|
+
+
+*yii/console/controllers/FixtureController::getActionArgsHelp*public
+ See |yii/console/Controller::getActionArgsHelp|
+
+
+*yii/console/controllers/FixtureController::getActionOptionsHelp*public
+ See |yii/console/Controller::getActionOptionsHelp|
+
+
+*yii/console/controllers/FixtureController::getActionMethodReflection*protected
+ See |yii/console/Controller::getActionMethodReflection|
+
+
+*yii/console/controllers/FixtureController::parseDocCommentTags*protected
+ See |yii/console/Controller::parseDocCommentTags|
+
+
+*yii/console/controllers/FixtureController::parseDocCommentSummary*protected
+ See |yii/console/Controller::parseDocCommentSummary|
+
+
+*yii/console/controllers/FixtureController::parseDocCommentDetail*protected
+ See |yii/console/Controller::parseDocCommentDetail|
 
 
 *yii/console/controllers/FixtureController::fixtures*	public
@@ -321,22 +371,77 @@ METHOD DETAILS
 
 *yii/console/controllers/FixtureController::actionLoad*	public
 >
- actionLoad($fixtures, $except='[]')
+ actionLoad()
 <
 (void)
 
-    [$fixtures] (array) 
-    [$except] (array) 
+ For example,
+
+   #load fixtures from UsersFixture class with default namespace
+ "tests\unit\fixtures"
+   yii fixture/load User
+
+   #also a short version of this command (generate action is default)
+   yii fixture User
+
+   #load all fixtures
+   yii fixture "*"
+
+   #load all fixtures except User
+   yii fixture "*" -User
+
+   #append fixtures to already loaded
+   yii fixture User --append
+
+   #load fixtures with different namespace.
+   yii fixture/load User --namespace=alias\my\custom\namespace\goes\here
+
+
 
 
 *yii/console/controllers/FixtureController::actionUnload*	public
 >
- actionUnload($fixtures, $except='[]')
+ actionUnload()
 <
 (void)
 
-    [$fixtures] (array|string) 
-    [$except] (array|string) 
+ For example,
+
+   # load the fixture data specified by User and UserProfile.
+   # any existing fixture data will be removed first
+   yii fixture/load User UserProfile
+
+   # load the fixture data specified by User and UserProfile.
+   # the new fixture data will be appended to the existing one
+   yii fixture/load --append User UserProfile
+
+   # load all available fixtures found under 'tests\unit\fixtures'
+   yii fixture/load "*"
+
+   # load all fixtures except User and UserProfile
+   yii fixture/load "*" -User -UserProfile
+
+
+
+
+*yii/console/controllers/FixtureController::notifyNothingToLoad*public
+>
+ notifyNothingToLoad($foundFixtures, $except)
+<
+(void)
+
+    [$foundFixtures] () 
+    [$except] () 
+
+
+*yii/console/controllers/FixtureController::notifyNothingToUnload*public
+>
+ notifyNothingToUnload($foundFixtures, $except)
+<
+(void)
+
+    [$foundFixtures] () 
+    [$except] () 
 
 
 *yii/console/controllers/FixtureController::needToApplyAll*public

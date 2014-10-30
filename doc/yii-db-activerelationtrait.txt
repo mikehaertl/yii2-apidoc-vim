@@ -25,9 +25,9 @@ $link					*yii/db/ActiveRelationTrait::$link*
  Yii. This property is only used in relational context.
 
 $via					*yii/db/ActiveRelationTrait::$via*
- (array|object) The query associated with the pivot table. Please call 'via()'
- to set this property instead of directly setting it. This property is only
- used in relational context.
+ (array|object) The query associated with the junction table. Please call
+ 'via()' to set this property instead of directly setting it. This property is
+ only used in relational context.
 
 $inverseOf				*yii/db/ActiveRelationTrait::$inverseOf*
  (string) The name of the relation that is the inverse of this relation. For
@@ -61,7 +61,7 @@ METHOD DETAILS
  Use this method to specify a pivot record/table when declaring a relation in
  the 'ActiveRecord' class:
 
-   function ($field, $model) {
+   function ($model, $field) {
        // return field value
    }
 
@@ -69,7 +69,7 @@ METHOD DETAILS
     [$relationName] (string) The relation name. This refers to a relation
     declared in 'primaryModel'.
     [$callable] (callable) A PHP callback for customizing the relation
-    associated with the pivot table. Its signature should be
+    associated with the junction table. Its signature should be
     'function($query)', where '$query' is the query to be customized.
 
 

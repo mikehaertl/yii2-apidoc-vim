@@ -60,7 +60,37 @@ $slugAttribute				*yii/behaviors/SluggableBehavior::$slugAttribute*
  (string) The attribute that will receive the slug value
 
 $attribute				*yii/behaviors/SluggableBehavior::$attribute*
- (string) The attribute whose value will be converted into a slug
+ (string|array) The attribute or list of attributes whose value will be
+ converted into a slug
+
+$ensureUnique				*yii/behaviors/SluggableBehavior::$ensureUnique*
+ (boolean) Whether to ensure generated slug value to be unique among owner
+ class records. If enabled behavior will validate slug uniqueness
+ automatically. If validation fails it will attempt generating unique slug
+ value from based one until success.
+
+$uniqueValidator			*yii/behaviors/SluggableBehavior::$uniqueValidator*
+ (array) Configuration for slug uniqueness validator. Parameter 'class' may be
+ omitted 
+   - by default 'UniqueValidator' will be used.
+
+$uniqueSlugGenerator			*yii/behaviors/SluggableBehavior::$uniqueSlugGenerator*
+ (callable) Slug unique value generator. It is used in case 'ensureUnique'
+ enabled and generated slug is not unique. This should be a PHP callable with
+ following signature:
+
+   public function behaviors()
+   {
+       return [
+           [
+               'class' => SluggableBehavior::className(),
+               'slugAttribute' => 'alias',
+           ],
+       ];
+   }
+
+ If not set unique slug will be generated adding incrementing suffix to the
+ base slug.
 
 
 

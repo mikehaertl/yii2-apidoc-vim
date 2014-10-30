@@ -7,19 +7,14 @@ DESCRIPTION
 
  For example:
 
-   class Book extends \Faker\Provider\Base
-   {
-       public function title($nbWords = 5)
-       {
-           $sentence = $this->generator->sentence($nbWords);
-           return mb_substr($sentence, 0, mb_strlen($sentence) - 1);
-       }
-
-       public function ISBN()
-       {
-           return $this->generator->randomNumber(13);
-       }
-   }
+      'controllerMap' => [
+          'fixture' => [
+              'class' => 'yii\faker\FixtureController',
+              'providers' => [
+                  'app\tests\unit\faker\providers\Book',
+              ],
+          ],
+      ],
 
 
 
@@ -35,9 +30,6 @@ $autoIdPrefix				*yii/jui/Droppable::$autoIdPrefix*
 
 $stack					*yii/jui/Droppable::$stack*
  See |yii/base/Widget::$stack|
-
-$theme					*yii/jui/Droppable::$theme*
- See |yii/jui/Widget::$theme|
 
 $options				*yii/jui/Droppable::$options*
  See |yii/jui/Widget::$options|
@@ -219,10 +211,6 @@ METHOD DETAILS
 
 *yii/jui/Droppable::getViewPath*				public
  See |yii/base/Widget::getViewPath|
-
-
-*yii/jui/Droppable::registerAssets*			protected
- See |yii/jui/Widget::registerAssets|
 
 
 *yii/jui/Droppable::registerClientOptions*		protected

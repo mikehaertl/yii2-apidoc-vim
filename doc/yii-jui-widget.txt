@@ -34,11 +34,6 @@ $autoIdPrefix				*yii/jui/Widget::$autoIdPrefix*
 $stack					*yii/jui/Widget::$stack*
  See |yii/base/Widget::$stack|
 
-$theme					*yii/jui/Widget::$theme*
- (string) The jQuery UI theme. This refers to an asset bundle class
- representing the JUI theme. The default theme is the official "Smoothness"
- theme.
-
 $options				*yii/jui/Widget::$options*
  (array) The HTML attributes for the widget container tag.
 
@@ -58,14 +53,11 @@ $clientEvents				*yii/jui/Widget::$clientEvents*
 
  For example you could write the following in your widget configuration:
 
-      'controllerMap' => [
-          'fixture' => [
-              'class' => 'yii\faker\FixtureController',
-              'providers' => [
-                  'app\tests\unit\faker\providers\Book',
-              ],
-          ],
-      ],
+   //generate fixtures in russian language
+   yii fixture/generate user --count=5 --language=ru_RU
+
+   //generate several fixtures
+   yii fixture/generate user profile team
 
 
 
@@ -241,15 +233,6 @@ METHOD DETAILS
  See |yii/base/Widget::getViewPath|
 
 
-*yii/jui/Widget::registerAssets*				protected
->
- registerAssets($assetBundle)
-<
-(void)
-
-    [$assetBundle] (string) The asset bundle for the widget
-
-
 *yii/jui/Widget::registerClientOptions*			protected
 >
  registerClientOptions($name, $id)
@@ -272,12 +255,11 @@ METHOD DETAILS
 
 *yii/jui/Widget::registerWidget*				protected
 >
- registerWidget($name, $assetBundle, $id='null')
+ registerWidget($name, $id='null')
 <
 (void)
 
     [$name] (string) The name of the jQuery UI widget
-    [$assetBundle] (string) The asset bundle for the widget
     [$id] (string) The ID of the widget. If null, it will use the 'id' value
     of 'options'.
 

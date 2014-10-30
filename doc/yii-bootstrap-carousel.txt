@@ -7,21 +7,19 @@ DESCRIPTION
 
  For example:
 
-   echo Collapse::widget([
-       'items' => [
-           // equivalent to the above
-           'Collapsible Group Item #1' => [
-               'content' => 'Anim pariatur cliche...',
-               // open its content by default
-               'contentOptions' => ['class' => 'in']
+   $form = ActiveForm::begin([
+       'layout' => 'horizontal',
+       'fieldConfig' => [
+           'template' =>
+ "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+           'horizontalCssClasses' => [
+               'label' => 'col-sm-4',
+               'offset' => 'col-sm-offset-4',
+               'wrapper' => 'col-sm-8',
+               'error' => '',
+               'hint' => '',
            ],
-           // another group item
-           'Collapsible Group Item #2' => [
-               'content' => 'Anim pariatur cliche...',
-               'contentOptions' => [...],
-               'options' => [...],
-           ],
-       ]
+       ],
    ]);
 
 
@@ -61,15 +59,24 @@ $items					*yii/bootstrap/Carousel::$items*
  (array) List of slides in the carousel. Each array element represents a
  single slide with the following structure:
 
-   // item key is the actual group header
-   'Collapsible Group Item #1' => [
-       // required, the content (HTML) of the group
-       'content' => 'Anim pariatur cliche...',
-       // optional the HTML attributes of the content group
-       'contentOptions' => [],
-       // optional the HTML attributes of the group
-       'options' => [],
-   ]
+   echo Collapse::widget([
+       'items' => [
+           // equivalent to the above
+           [
+               'label' => 'Collapsible Group Item #1',
+               'content' => 'Anim pariatur cliche...',
+               // open its content by default
+               'contentOptions' => ['class' => 'in']
+           ],
+           // another group item
+           [
+               'label' => 'Collapsible Group Item #1',
+               'content' => 'Anim pariatur cliche...',
+               'contentOptions' => [...],
+               'options' => [...],
+           ],
+       ]
+   ]);
 
 
 

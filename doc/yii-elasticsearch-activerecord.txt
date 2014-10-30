@@ -714,8 +714,8 @@ returned otherwise (null will be returned if the key value is null).
 
  When calling this method manually you should call 'afterFind()' on the
  created record to trigger the 'EVENT_AFTER_FIND|afterFind Event'.
-    [$record] (\yii\db\BaseActiveRecord) The record to be populated. In most
-    cases this will be an instance created by 'instantiate()' beforehand.
+    [$record] (\yii\elasticsearch\ActiveRecord) The record to be populated. In
+    most cases this will be an instance created by 'instantiate()' beforehand.
     [$row] (array) Attribute values (name => value)
 
 
@@ -752,7 +752,14 @@ returned otherwise (null will be returned if the key value is null).
 
 
 *yii/elasticsearch/ActiveRecord::unlinkAll*		public
- See |yii/db/BaseActiveRecord::unlinkAll|
+>
+ unlinkAll($name, $delete='false')
+<
+(void)
+
+ This method is not supported by elasticsearch.
+    [$name] () 
+    [$delete] () 
 
 
 *yii/elasticsearch/ActiveRecord::isPrimaryKey*		public
@@ -786,8 +793,7 @@ array will be used.
 >
  find()
 <
-(static|\yii\db\ActiveQueryInterface) The newly created
-'ActiveQueryInterface|ActiveQuery' instance.
+(\yii\elasticsearch\ActiveQuery) The newly created 'ActiveQuery' instance.
 
  The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
  customized by calling methods defined in 'ActiveQueryInterface' before
@@ -944,6 +950,17 @@ names.
 (void)
 
     [$value] (mixed) 
+
+
+*yii/elasticsearch/ActiveRecord::arrayAttributes*		public
+>
+ arrayAttributes()
+<
+(string[]) List of attribute names. Must be a subset of 'attributes()'.
+
+ If not listed by this method, attributes retrieved through
+ 'ActiveQuery::fields' will converted to a scalar value when the result array
+ contains only one value.
 
 
 *yii/elasticsearch/ActiveRecord::index*			public

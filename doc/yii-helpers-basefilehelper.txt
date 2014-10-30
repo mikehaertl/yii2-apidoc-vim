@@ -13,6 +13,13 @@ DESCRIPTION
  Do not use BaseFileHelper. Use 'FileHelper' instead.
 
 
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$mimeMagicFile				*yii/helpers/BaseFileHelper::$mimeMagicFile*
+ (string) The path (or alias) of a PHP file containing MIME type information.
+
+
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -74,13 +81,17 @@ same, the original file will be returned.
 cannot be determined.
 
  This method will first try to determine the MIME type based on
- [finfo_open](http://php.net/manual/en/function.finfo-open.php). If this
- doesn't work, it will fall back to 'getMimeTypeByExtension()'.
+ [finfo_open](http://php.net/manual/en/function.finfo-open.php). If the
+ 'fileinfo' extension is not installed, it will fall back to
+ 'getMimeTypeByExtension()' when '$checkExtension' is true.
     [$file] (string) The file name.
-    [$magicFile] (string) Name of the optional magic database file, usually
-    something like '/path/to/magic.mime'. This will be passed as the second
-    parameter to
-    [finfo_open](http://php.net/manual/en/function.finfo-open.php).
+    [$magicFile] (string) Name of the optional magic database file (or alias),
+    usually something like '/path/to/magic.mime'. This will be passed as the
+    second parameter to
+    [finfo_open()](http://php.net/manual/en/function.finfo-open.php) when the
+    'fileinfo' extension is installed. If the MIME type is being determined
+    based via 'getMimeTypeByExtension()' and this is null, it will use the
+    file specified by 'mimeMagicFile'.
     [$checkExtension] (boolean) Whether to use the file extension to determine
     the MIME type in case 'finfo_open()' cannot determine it.
 
@@ -94,9 +105,9 @@ determined.
 
  This method will use a local map between extension names and MIME types.
     [$file] (string) The file name.
-    [$magicFile] (string) The path of the file that contains all available
-    MIME type information. If this is not set, the default file aliased by
-    '@yii/helpers/mimeTypes.php' will be used.
+    [$magicFile] (string) The path (or alias) of the file that contains all
+    available MIME type information. If this is not set, the file specified by
+    'mimeMagicFile' will be used.
 
 
 *yii/helpers/BaseFileHelper::getExtensionsByMimeType*	public
@@ -107,9 +118,9 @@ determined.
 
  This method will use a local map between extension names and MIME types.
     [$mimeType] (string) File MIME type.
-    [$magicFile] (string) The path of the file that contains all available
-    MIME type information. If this is not set, the default file aliased by
-    '@yii/helpers/mimeTypes.php' will be used.
+    [$magicFile] (string) The path (or alias) of the file that contains all
+    available MIME type information. If this is not set, the file specified by
+    'mimeMagicFile' will be used.
 
 
 *yii/helpers/BaseFileHelper::loadMimeTypes*		protected
@@ -118,8 +129,9 @@ determined.
 <
 (array) The mapping from file extensions to MIME types
 
-    [$magicFile] (string) The file that contains MIME type information. If
-    null, the file '@yii/helpers/mimeTypes.php' will be used.
+    [$magicFile] (string) The path (or alias) of the file that contains all
+    available MIME type information. If this is not set, the file specified by
+    'mimeMagicFile' will be used.
 
 
 *yii/helpers/BaseFileHelper::copyDirectory*		public
@@ -164,6 +176,8 @@ determined.
     paths ending with '/a/b';   and '.svn/' matches directory paths ending
     with '.svn'. Note, the '/' characters in a pattern matches   both '/' and
     '\' in the paths. 
+      - caseSensitive: boolean, whether patterns specified at "only" or
+      "except" should be case sensitive. Defaults to true. 
       - recursive: boolean, whether the files under the subdirectories
       should also be copied. Defaults to true. 
       - beforeCopy: callback, a PHP callback that is called before copying
@@ -240,6 +254,8 @@ determined.
       them.   Same pattern matching rules as in the "except" option are used. 
      If a file path matches a pattern in both "only" and "except", it will NOT
     be returned. 
+      - caseSensitive: boolean, whether patterns specified at "only" or
+      "except" should be case sensitive. Defaults to true. 
       - recursive: boolean, whether the files under the subdirectories
       should also be looked for. Defaults to true.
 

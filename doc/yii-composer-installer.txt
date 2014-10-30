@@ -107,25 +107,36 @@ METHOD DETAILS
 
 
 
-*yii/composer/Installer::setPermission*			public
+*yii/composer/Installer::postCreateProject*		public
 >
- setPermission($event)
+ postCreateProject($event)
 <
 (void)
 
-    [$event] (\Composer\Script\CommandEvent) 
+    [$event] () 
+
+
+*yii/composer/Installer::setPermission*			public
+>
+ setPermission($paths)
+<
+(void)
+
+    [$paths] (array) The paths (keys) and the corresponding permission octal
+    strings (values)
 
 
 *yii/composer/Installer::generateCookieValidationKey*	public
 >
- generateCookieValidationKey($event)
+ generateCookieValidationKey()
 <
 (void)
 
-    [$event] (\Composer\Script\CommandEvent) 
+ You can provide one or multiple parameters as the configuration files which
+ need to have validation key inserted.
 
 
-*yii/composer/Installer::generateRandomString*		public
+*yii/composer/Installer::generateRandomString*		protected
 >
  generateRandomString()
 <

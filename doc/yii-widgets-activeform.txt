@@ -7,11 +7,6 @@ SUBCLASSES
 
 |yii/bootstrap/ActiveForm|
 
-DESCRIPTION
-------------------------------------------------------------------------------
-
- ..
-
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -54,9 +49,23 @@ $method					*yii/widgets/ActiveForm::$method*
 $options				*yii/widgets/ActiveForm::$options*
  (array) The HTML attributes (name-value pairs) for the form tag.
 
+$fieldClass				*yii/widgets/ActiveForm::$fieldClass*
+ (string) The default field class name when calling 'field()' to create a new
+ field.
+
 $fieldConfig				*yii/widgets/ActiveForm::$fieldConfig*
- (array) The default configuration used by 'field()' when creating a new field
- object.
+ (array|\Closure) The default configuration used by 'field()' when creating a
+ new field object. This can be either a configuration array or an anonymous
+ function returning a configuration array. If the latter, the signature should
+ be as follows,
+
+   function ($attribute, $index, $widget)
+
+ The value of this property will be merged recursively with the '$options'
+ parameter passed to 'field()'.
+
+$encodeErrorSummary			*yii/widgets/ActiveForm::$encodeErrorSummary*
+ (boolean) Whether to perform encoding on the error summary.
 
 $errorSummaryCssClass			*yii/widgets/ActiveForm::$errorSummaryCssClass*
  (string) The default CSS class for the error summary container.
@@ -87,6 +96,12 @@ $enableAjaxValidation			*yii/widgets/ActiveForm::$enableAjaxValidation*
  'ActiveField::enableAjaxValidation' is set, its value will take precedence
  for that input field.
 
+$enableClientScript			*yii/widgets/ActiveForm::$enableClientScript*
+ (boolean) Whether to hook up yii.activeForm JavaScript plugin. This property
+ must be set true if you want to support client validation and/or AJAX
+ validation, or if you want to take advantage of the yii.activeForm plugin.
+ When this is false, the form will not generate any JavaScript.
+
 $validationUrl				*yii/widgets/ActiveForm::$validationUrl*
  (array|string) The URL for performing AJAX-based validation. This property
  will be processed by 'Url::to()'. Please refer to 'Url::to()' for more
@@ -97,9 +112,14 @@ $validateOnSubmit			*yii/widgets/ActiveForm::$validateOnSubmit*
  (boolean) Whether to perform validation when the form is submitted.
 
 $validateOnChange			*yii/widgets/ActiveForm::$validateOnChange*
- (boolean) Whether to perform validation when an input field loses focus and
- its value is found changed. If 'ActiveField::validateOnChange' is set, its
- value will take precedence for that input field.
+ (boolean) Whether to perform validation when the value of an input field is
+ changed. If 'ActiveField::validateOnChange' is set, its value will take
+ precedence for that input field.
+
+$validateOnBlur				*yii/widgets/ActiveForm::$validateOnBlur*
+ (boolean) Whether to perform validation when an input field loses focus. If
+ 'ActiveField::$validateOnBlur' is set, its value will take precedence for
+ that input field.
 
 $validateOnType				*yii/widgets/ActiveForm::$validateOnType*
  (boolean) Whether to perform validation while the user is typing in an input
@@ -108,7 +128,7 @@ $validateOnType				*yii/widgets/ActiveForm::$validateOnType*
 
 $validationDelay			*yii/widgets/ActiveForm::$validationDelay*
  (integer) Number of milliseconds that the validation should be delayed when
- an input field is changed or the user types in the field. If
+ the user types in the field and 'validateOnType' is set true. If
  'ActiveField::validationDelay' is set, its value will take precedence for
  that input field.
 
@@ -118,75 +138,6 @@ $ajaxParam				*yii/widgets/ActiveForm::$ajaxParam*
 
 $ajaxDataType				*yii/widgets/ActiveForm::$ajaxDataType*
  (string) The type of data that you're expecting back from the server.
-
-$beforeSubmit				*yii/widgets/ActiveForm::$beforeSubmit*
- (string|\yii\web\JsExpression) A JS callback that will be called when the
- form is being submitted. The signature of the callback should be:
-
-   function ($attribute, $index, $widget)
-
-
-
-$beforeValidate				*yii/widgets/ActiveForm::$beforeValidate*
- (string|\yii\web\JsExpression) A JS callback that is called before validating
- an attribute. The signature of the callback should be:
-
-   $form = ActiveForm::begin([
-       'method' => 'get',
-       'action' => ['controller/action'],
-   ]);
-
-
-
-$beforeValidateAll			*yii/widgets/ActiveForm::$beforeValidateAll*
- (string|\yii\web\JsExpression) A JS callback that is called before any
- validation has run (Only called when the form is submitted). The signature of
- the callback should be:
-
-   function ($form) {
-       ...return false to cancel submission...
-   }
-
-
-
-$afterValidate				*yii/widgets/ActiveForm::$afterValidate*
- (string|\yii\web\JsExpression) A JS callback that is called after validating
- an attribute. The signature of the callback should be:
-
-   function ($form, attribute, messages) {
-       ...return false to cancel the validation...
-   }
-
-
-
-$afterValidateAll			*yii/widgets/ActiveForm::$afterValidateAll*
- (string|\yii\web\JsExpression) A JS callback that is called after all
- validation has run (Only called when the form is submitted). The signature of
- the callback should be:
-
-   function ($form, data) {
-       ...return false to cancel the validation...
-   }
-
-
-
-$ajaxBeforeSend				*yii/widgets/ActiveForm::$ajaxBeforeSend*
- (string|\yii\web\JsExpression) A JS pre-request callback function on
- AJAX-based validation. The signature of the callback should be:
-
-   function ($form, attribute, messages) {
-   }
-
-
-
-$ajaxComplete				*yii/widgets/ActiveForm::$ajaxComplete*
- (string|\yii\web\JsExpression) A JS callback to be called when the request
- finishes on AJAX-based validation. The signature of the callback should be:
-
-   function ($form, data, messages) {
-   }
-
-
 
 $attributes				*yii/widgets/ActiveForm::$attributes*
  (array) The client validation options for individual attributes. Each element
@@ -411,6 +362,30 @@ METHOD DETAILS
     [$options] (array) The additional configurations for the field object
 
 
+*yii/widgets/ActiveForm::beginField*			public
+>
+ beginField($model, $attribute, $options='[]')
+<
+(string) The opening tag
+
+ This method will create a new form field and returns its opening tag. You
+ should call 'endField()' afterwards.
+    [$model] (\yii\base\Model) The data model
+    [$attribute] (string) The attribute name or expression. See
+    'Html::getAttributeName()' for the format about attribute expression.
+    [$options] (array) The additional configurations for the field object
+
+
+*yii/widgets/ActiveForm::endField*			public
+>
+ endField()
+<
+(string) The closing tag of the form field
+
+ This method will return the closing tag of an active form field started by
+ 'beginField()'.
+
+
 *yii/widgets/ActiveForm::validate*			public
 >
  validate($model, $attributes='null')
@@ -423,14 +398,15 @@ METHOD DETAILS
  For example, you may use the following code in a controller action to respond
  to an AJAX validation request:
 
-   function ($form, jqXHR, textStatus) {
-   }
+   $form = ActiveForm::begin([
+       'method' => 'get',
+       'action' => ['controller/action'],
+   ]);
 
  To validate multiple models, simply pass each model as a parameter to this
  method, like the following:
 
-   function ($form, jqXHR, textStatus) {
-   }
+   function ($model, $attribute)
 
 
     [$model] (\yii\base\Model) The model to be validated

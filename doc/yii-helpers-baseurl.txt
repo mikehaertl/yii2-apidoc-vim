@@ -42,6 +42,7 @@ METHOD DETAILS
    $myHtml = Markdown::process($myText); // use original markdown flavor
    $myHtml = Markdown::process($myText, 'gfm'); // use github flavored
  markdown
+   $myHtml = Markdown::process($myText, 'extra'); // use markdown extra
 
  A route may be either absolute or relative. An absolute route has a leading
  slash (e.g. '/site/index'), while a relative route has none (e.g.
@@ -221,6 +222,16 @@ remembered with the given name.
       that in '\yii\web\UrlManager::hostInfo'. 
       - string: returning an absolute URL with the specified scheme
       (either 'http' or 'https').
+
+
+*yii/helpers/BaseUrl::isRelative*				public
+>
+ isRelative($url)
+<
+(boolean) Whether the URL is relative
+
+ A relative URL does not have host info part.
+    [$url] (string) The URL to be checked
 
 
 

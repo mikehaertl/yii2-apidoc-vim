@@ -46,7 +46,8 @@ $errorOptions				*yii/widgets/ActiveField::$errorOptions*
  following special options are recognized:
 
 
-   - tag: the tag name of the container element. Defaults to "div".
+   - tag: the tag name of the container element. Defaults to "div". 
+   - encode: whether to encode the error output. Defaults to true.
 
 $labelOptions				*yii/widgets/ActiveField::$labelOptions*
  (array) The default options for the label tags. The parameter passed to
@@ -69,9 +70,13 @@ $enableAjaxValidation			*yii/widgets/ActiveField::$enableAjaxValidation*
  take the value of 'ActiveForm::enableAjaxValidation'.
 
 $validateOnChange			*yii/widgets/ActiveField::$validateOnChange*
- (boolean) Whether to perform validation when the input field loses focus and
- its value is found changed. If not set, it will take the value of
+ (boolean) Whether to perform validation when the value of the input field is
+ changed. If not set, it will take the value of
  'ActiveForm::validateOnChange'.
+
+$validateOnBlur				*yii/widgets/ActiveField::$validateOnBlur*
+ (boolean) Whether to perform validation when the input field loses focus. If
+ not set, it will take the value of 'ActiveForm::validateOnBlur'.
 
 $validateOnType				*yii/widgets/ActiveField::$validateOnType*
  (boolean) Whether to perform validation while the user is typing in the input
@@ -79,7 +84,7 @@ $validateOnType				*yii/widgets/ActiveField::$validateOnType*
 
 $validationDelay			*yii/widgets/ActiveField::$validationDelay*
  (integer) Number of milliseconds that the validation should be delayed when
- the input field is changed or the user types in the field. If not set, it
+ the user types in the field and 'validateOnType' is set true. If not set, it
  will take the value of 'ActiveForm::validationDelay'.
 
 $selectors				*yii/widgets/ActiveField::$selectors*

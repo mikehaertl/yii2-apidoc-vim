@@ -43,12 +43,10 @@ DESCRIPTION
  These options can be configured using methods of the same name. For example:
 
    echo DatePicker::widget([
-       'language' => 'ru',
-       'model' => $model,
-       'attribute' => 'from_date',
-       'clientOptions' => [
-           'dateFormat' => 'yy-mm-dd',
-       ],
+       'name'  => 'from_date',
+       'value'  => $value,
+       //'language' => 'ru',
+       //'dateFormat' => 'yyyy-MM-dd',
    ]);
 
  > NOTE: elasticsearch limits the number of records returned to 10 records by
@@ -69,15 +67,17 @@ DESCRIPTION
  columns of different tables; and the multiplicity of the relation is
  indicated by 'multiple'.
 
- If a relation involves a pivot table, it may be specified by 'via()'. This
+ If a relation involves a junction table, it may be specified by 'via()'. This
  methods may only be called in a relational context. Same is true for
  'inverseOf()', which marks a relation as inverse of another relation.
 
- > NOTE: elasticsearch limits the number of records returned by any query to
+ > Note: elasticsearch limits the number of records returned by any query to
  10 records by default. > If you expect to get more records you should specify
  limit explicitly in relation definition. > This is also important for
  relations that use 'via()' so that if via records are limited to 10 > the
  relations records can also not be more than 10.
+
+ > Note: Currently 'with' is not supported in combination with 'asArray'.
 
 
 PROPERTY DETAILS
@@ -122,8 +122,14 @@ $filter					*yii/elasticsearch/ActiveQuery::$filter*
 $highlight				*yii/elasticsearch/ActiveQuery::$highlight*
  See |yii/elasticsearch/Query::$highlight|
 
-$facets					*yii/elasticsearch/ActiveQuery::$facets*
- See |yii/elasticsearch/Query::$facets|
+$aggregations				*yii/elasticsearch/ActiveQuery::$aggregations*
+ See |yii/elasticsearch/Query::$aggregations|
+
+$stats					*yii/elasticsearch/ActiveQuery::$stats*
+ See |yii/elasticsearch/Query::$stats|
+
+$suggest				*yii/elasticsearch/ActiveQuery::$suggest*
+ See |yii/elasticsearch/Query::$suggest|
 
 $multiple				*yii/elasticsearch/ActiveQuery::$multiple*
  See |yii/db/ActiveRelationTrait::$multiple|
@@ -416,44 +422,24 @@ the query results in nothing.
  See |yii/elasticsearch/Query::exists|
 
 
-*yii/elasticsearch/ActiveQuery::addFacet*			public
- See |yii/elasticsearch/Query::addFacet|
+*yii/elasticsearch/ActiveQuery::stats*			public
+ See |yii/elasticsearch/Query::stats|
 
 
-*yii/elasticsearch/ActiveQuery::addTermFacet*		public
- See |yii/elasticsearch/Query::addTermFacet|
+*yii/elasticsearch/ActiveQuery::highlight*		public
+ See |yii/elasticsearch/Query::highlight|
 
 
-*yii/elasticsearch/ActiveQuery::addRangeFacet*		public
- See |yii/elasticsearch/Query::addRangeFacet|
+*yii/elasticsearch/ActiveQuery::addAggregation*		public
+ See |yii/elasticsearch/Query::addAggregation|
 
 
-*yii/elasticsearch/ActiveQuery::addHistogramFacet*	public
- See |yii/elasticsearch/Query::addHistogramFacet|
+*yii/elasticsearch/ActiveQuery::addAgg*			public
+ See |yii/elasticsearch/Query::addAgg|
 
 
-*yii/elasticsearch/ActiveQuery::addDateHistogramFacet*	public
- See |yii/elasticsearch/Query::addDateHistogramFacet|
-
-
-*yii/elasticsearch/ActiveQuery::addFilterFacet*		public
- See |yii/elasticsearch/Query::addFilterFacet|
-
-
-*yii/elasticsearch/ActiveQuery::addQueryFacet*		public
- See |yii/elasticsearch/Query::addQueryFacet|
-
-
-*yii/elasticsearch/ActiveQuery::addStatisticalFacet*	public
- See |yii/elasticsearch/Query::addStatisticalFacet|
-
-
-*yii/elasticsearch/ActiveQuery::addTermsStatsFacet*	public
- See |yii/elasticsearch/Query::addTermsStatsFacet|
-
-
-*yii/elasticsearch/ActiveQuery::addGeoDistanceFacet*	public
- See |yii/elasticsearch/Query::addGeoDistanceFacet|
+*yii/elasticsearch/ActiveQuery::addSuggester*		public
+ See |yii/elasticsearch/Query::addSuggester|
 
 
 *yii/elasticsearch/ActiveQuery::query*			public
@@ -470,10 +456,6 @@ the query results in nothing.
 
 *yii/elasticsearch/ActiveQuery::fields*			public
  See |yii/elasticsearch/Query::fields|
-
-
-*yii/elasticsearch/ActiveQuery::highlight*		public
- See |yii/elasticsearch/Query::highlight|
 
 
 *yii/elasticsearch/ActiveQuery::source*			public

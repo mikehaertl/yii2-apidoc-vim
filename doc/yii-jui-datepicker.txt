@@ -5,7 +5,7 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- For example:
+ For example to use the datepicker with a 'yii\base\Model|model':
 
    echo Sortable::widget([
        'items' => [
@@ -45,9 +45,6 @@ $autoIdPrefix				*yii/jui/DatePicker::$autoIdPrefix*
 $stack					*yii/jui/DatePicker::$stack*
  See |yii/base/Widget::$stack|
 
-$theme					*yii/jui/DatePicker::$theme*
- See |yii/jui/Widget::$theme|
-
 $options				*yii/jui/DatePicker::$options*
  See |yii/jui/Widget::$options|
 
@@ -64,13 +61,18 @@ $model					*yii/jui/DatePicker::$model*
  See |yii/jui/InputWidget::$model|
 
 $attribute				*yii/jui/DatePicker::$attribute*
- See |yii/jui/InputWidget::$attribute|
+ (string) The model attribute that this widget is associated with. The value
+ of the attribute will be converted using
+ '\yii\i18n\Formatter::asDate()|'Yii::$app->formatter->asDate()'' with the
+ 'dateFormat' if it is not null.
 
 $name					*yii/jui/DatePicker::$name*
  See |yii/jui/InputWidget::$name|
 
 $value					*yii/jui/DatePicker::$value*
- See |yii/jui/InputWidget::$value|
+ (string) The input value. This value will be converted using
+ '\yii\i18n\Formatter::asDate()|'Yii::$app->formatter->asDate()'' with the
+ 'dateFormat' if it is not null.
 
 $language				*yii/jui/DatePicker::$language*
  (string) The locale ID (eg 'fr', 'de') for the language to be used by the
@@ -84,6 +86,30 @@ $inline					*yii/jui/DatePicker::$inline*
 $containerOptions			*yii/jui/DatePicker::$containerOptions*
  (array) The HTML attributes for the container tag. This is only used when
  'inline' is true.
+
+$dateFormat				*yii/jui/DatePicker::$dateFormat*
+ (string) The format string to be used for formatting the date value. This
+ option will be used to populate the 'clientOptions|clientOption'
+ 'dateFormat'. The value can be one of "short", "medium", "long", or "full",
+ which represents a preset format of different lengths.
+
+ It can also be a custom format as specified in the [ICU
+ manual](http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax).
+ Alternatively this can be a string prefixed with 'php:' representing a format
+ that can be recognized by the PHP
+ [date()](http://php.net/manual/de/function.date.php)-function.
+
+ For example:
+
+   echo DatePicker::widget([
+       'model' => $model,
+       'attribute' => 'from_date',
+       //'language' => 'ru',
+       //'dateFormat' => 'yyyy-MM-dd',
+   ]);
+
+ If not set the default value will be taken from
+ 'Yii::$app->formatter->dateFormat'.
 
 $behaviors				*yii/jui/DatePicker::$behaviors*
  (\yii\base\Behavior[]) List of behaviors attached to this component
@@ -255,10 +281,6 @@ METHOD DETAILS
 
 *yii/jui/DatePicker::getViewPath*				public
  See |yii/base/Widget::getViewPath|
-
-
-*yii/jui/DatePicker::registerAssets*			protected
- See |yii/jui/Widget::registerAssets|
 
 
 *yii/jui/DatePicker::registerClientOptions*		protected

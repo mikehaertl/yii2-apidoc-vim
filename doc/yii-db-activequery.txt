@@ -62,7 +62,7 @@ DESCRIPTION
  columns of different tables; and the multiplicity of the relation is
  indicated by 'multiple'.
 
- If a relation involves a pivot table, it may be specified by 'via()' or
+ If a relation involves a junction table, it may be specified by 'via()' or
  'viaTable()' method. These methods may only be called in a relational
  context. Same is true for 'inverseOf()', which marks a relation as inverse of
  another relation and 'onCondition()' which adds a condition that is to be
@@ -341,11 +341,12 @@ METHOD DETAILS
     command. If null, the DB connection returned by 'modelClass' will be used.
 
 
-*yii/db/ActiveQuery::prepareBuild*			public
+*yii/db/ActiveQuery::prepare*				public
 >
- prepareBuild($builder)
+ prepare($builder)
 <
-(void)
+(\yii\db\Query) A prepared query instance which will be used by 'QueryBuilder'
+to build the SQL
 
  This method is called by 'QueryBuilder' when it starts to build SQL from a
  query object. You may override this method to do some final preparation work
@@ -372,9 +373,9 @@ nothing, an empty array will be returned.
     command. If null, the DB connection returned by 'modelClass' will be used.
 
 
-*yii/db/ActiveQuery::prepareResult*			public
+*yii/db/ActiveQuery::populate*				public
 >
- prepareResult($rows)
+ populate($rows)
 <
 (array) The converted query result
 
@@ -491,6 +492,10 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  See |yii/db/Query::addParams|
 
 
+*yii/db/ActiveQuery::create*				public
+ See |yii/db/Query::create|
+
+
 *yii/db/ActiveQuery::via*					public
  See |yii/db/ActiveRelationTrait::via|
 
@@ -517,16 +522,6 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
 *yii/db/ActiveQuery::findWith*				public
  See |yii/db/ActiveQueryTrait::findWith|
-
-
-*yii/db/ActiveQuery::createCommandInternal*		protected
->
- createCommandInternal($db)
-<
-(\yii\db\Command) The created DB command instance.
-
-    [$db] (\yii\db\Connection|null) The DB connection used to create the DB
-    command. If null, the DB connection returned by 'modelClass' will be used.
 
 
 *yii/db/ActiveQuery::joinWith*				public
@@ -645,7 +640,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 <
 (static) 
 
- Use this method to specify a pivot table when declaring a relation in the
+ Use this method to specify a junction table when declaring a relation in the
  'ActiveRecord' class:
 
    public function getItems()
@@ -655,13 +650,13 @@ ActiveRecord object. Null will be returned if the query results in nothing.
    }
 
 
-    [$tableName] (string) The name of the pivot table.
-    [$link] (array) The link between the pivot table and the table associated
-    with 'primaryModel'. The keys of the array represent the columns in the
-    pivot table, and the values represent the columns in the 'primaryModel'
-    table.
+    [$tableName] (string) The name of the junction table.
+    [$link] (array) The link between the junction table and the table
+    associated with 'primaryModel'. The keys of the array represent the
+    columns in the junction table, and the values represent the columns in the
+    'primaryModel' table.
     [$callable] (callable) A PHP callback for customizing the relation
-    associated with the pivot table. Its signature should be
+    associated with the junction table. Its signature should be
     'function($query)', where '$query' is the query to be customized.
 
 

@@ -10,7 +10,7 @@ DESCRIPTION
  'Yii::$app->assetManager'.
 
  You can modify its configuration by adding an array to your application
- config under 'components' as it is shown in the following example:
+ config under 'components' as shown in the following example:
 
    // stop executing this action and refresh the current page
    return $this->refresh();
@@ -22,19 +22,26 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $bundles				*yii/web/AssetManager::$bundles*
- (array) List of available asset bundles. The keys are the class names
- (**without leading backslash**) of the asset bundles, and the values are
- either the configuration arrays for creating the 'AssetBundle' objects or the
- corresponding asset bundle instances. For example, the following code
- disables the bootstrap css file used by Bootstrap widgets (because you want
- to use your own styles):
+ (array|boolean) List of asset bundle configurations. This property is
+ provided to customize asset bundles. When a bundle is being loaded by
+ 'getBundle()', if it has a corresponding configuration specified here, the
+ configuration will be applied to the bundle.
+
+ The array keys are the asset bundle names, which typically are asset bundle
+ class names without leading backslash. The array values are the corresponding
+ configurations. If a value is false, it means the corresponding asset bundle
+ is disabled and 'getBundle()' should return null.
+
+ If this this property is false, it means the whole asset bundle feature is
+ disabled and 'getBundle()' will always return null.
+
+ The following example shows how to disable the bootstrap css file used by
+ Bootstrap widgets (because you want to use your own styles):
 
    'assetManager' => [
        'bundles' => [
            // you can override AssetBundle configs here
        ],
-       //'linkAssets' => true,
-       // ...
    ]
 
 
@@ -44,6 +51,34 @@ $basePath				*yii/web/AssetManager::$basePath*
 
 $baseUrl				*yii/web/AssetManager::$baseUrl*
  ()
+
+$assetMap				*yii/web/AssetManager::$assetMap*
+ (array) Mapping from source asset files (keys) to target asset files
+ (values).
+
+ This property is provided to support fixing incorrect asset file paths in
+ some asset bundles. When an asset bundle is registered with a view, each
+ relative asset file in its 'AssetBundle::css|css' and 'AssetBundle::js|js'
+ arrays will be examined against this map. If any of the keys is found to be
+ the last part of an asset file (which is prefixed with
+ 'AssetBundle::sourcePath' if available), the corresponding value will replace
+ the asset and be registered with the view. For example, an asset file
+ 'my/path/to/jquery.js' matches a key 'jquery.js'.
+
+ Note that the target asset files should be either absolute URLs or paths
+ relative to 'baseUrl' and 'basePath'.
+
+ In the following example, any assets ending with 'jquery.min.js' will be
+ replaced with 'jquery/dist/jquery.js' which is relative to 'baseUrl' and
+ 'basePath'.
+
+   [
+       'yii\bootstrap\BootstrapAsset' => [
+           'css' => [],
+       ],
+   ]
+
+
 
 $linkAssets				*yii/web/AssetManager::$linkAssets*
  (boolean) Whether to use symbolic link to publish asset files. Defaults to
@@ -61,9 +96,7 @@ $linkAssets				*yii/web/AssetManager::$linkAssets*
  following configuration directive should be added for the Web folder:
 
    [
-       'yii\bootstrap\BootstrapAsset' => [
-           'css' => [],
-       ],
+       'jquery.min.js' => 'jquery/dist/jquery.js',
    ]
 
 
@@ -235,6 +268,63 @@ METHOD DETAILS
     call 'AssetBundle::publish()' to publish the asset files.
 
 
+*yii/web/AssetManager::loadBundle*			protected
+>
+ loadBundle($name, $config='[]', $publish='true')
+<
+(void)
+
+    [$name] () 
+    [$config] () 
+    [$publish] () 
+
+
+*yii/web/AssetManager::loadDummyBundle*			protected
+>
+ loadDummyBundle($name)
+<
+(void)
+
+    [$name] () 
+
+
+*yii/web/AssetManager::getAssetUrl*			public
+>
+ getAssetUrl($bundle, $asset)
+<
+(string) The actual URL for the specified asset.
+
+ The actual URL is obtained by prepending either 'baseUrl' or
+ 'AssetManager::baseUrl' to the given asset path.
+    [$bundle] (\yii\web\AssetBundle) The asset bundle which the asset file
+    belongs to
+    [$asset] (string) The asset path. This should be one of the assets listed
+    in 'js' or 'css'.
+
+
+*yii/web/AssetManager::getAssetPath*			public
+>
+ getAssetPath($bundle, $asset)
+<
+(string|boolean) The actual file path, or false if the asset is specified as
+an absolute URL
+
+    [$bundle] (\yii\web\AssetBundle) The asset bundle which the asset file
+    belongs to
+    [$asset] (string) The asset path. This should be one of the assets listed
+    in 'js' or 'css'.
+
+
+*yii/web/AssetManager::resolveAsset*			protected
+>
+ resolveAsset($bundle, $asset)
+<
+(string|boolean) 
+
+    [$bundle] (\yii\web\AssetBundle) 
+    [$asset] (string) 
+
+
 *yii/web/AssetManager::getConverter*			public
 >
  getConverter()
@@ -286,6 +376,37 @@ published as.
  phase, before system goes live. See more in the following discussion:
  http://code.google.com/p/yii/issues/detail?id=2579
     [$path] (string) The asset (file or directory) to be published
+    [$options] (array) The options to be applied when publishing a directory.
+    The following options are supported:
+
+
+      - beforeCopy: callback, a PHP callback that is called before copying
+      each sub-directory or file.   This overrides 'beforeCopy' if set. 
+      - afterCopy: callback, a PHP callback that is called after a
+      sub-directory or file is successfully copied.   This overrides
+    'afterCopy' if set. 
+      - forceCopy: boolean, whether the directory being published should
+      be copied even if   it is found in the target directory. This option is
+    used only when publishing a directory.   This overrides 'forceCopy' if
+    set.
+
+
+*yii/web/AssetManager::publishFile*			protected
+>
+ publishFile($src)
+<
+(array) The path and the URL that the asset is published as.
+
+    [$src] (string) The asset file to be published
+
+
+*yii/web/AssetManager::publishDirectory*			protected
+>
+ publishDirectory($src, $options)
+<
+(array) The path directory and the URL that the asset is published as.
+
+    [$src] (string) The asset directory to be published
     [$options] (array) The options to be applied when publishing a directory.
     The following options are supported:
 

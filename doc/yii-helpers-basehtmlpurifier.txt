@@ -21,10 +21,49 @@ METHOD DETAILS
 >
  process($content, $config='null')
 <
-(string) 
+(string) The purified HTML content.
 
-    [$content] (string) 
-    [$config] (array|null) 
+    [$content] (string) The HTML content to purify
+    [$config] (array|\Closure|null) The config to use for HtmlPurifier. If not
+    specified or 'null' the default config will be used. You can use an array
+    or an anonymous function to provide configuration options:
+
+
+      - An array will be passed to the 'HTMLPurifier_Config::create()'
+      method. 
+      - An anonymous function will be called after the config was created.  
+    The signature should be: 'function($config)' where '$config' will be an  
+    instance of 'HTMLPurifier_Config'.
+
+      Here is a usage example of such a function:
+
+      $array = [
+          ['id' => '123', 'name' => 'aaa', 'class' => 'x'],
+          ['id' => '124', 'name' => 'bbb', 'class' => 'x'],
+          ['id' => '345', 'name' => 'ccc', 'class' => 'y'],
+      );
+
+      $result = ArrayHelper::map($array, 'id', 'name');
+      // the result is:
+      // [
+      //     '123' => 'aaa',
+      //     '124' => 'bbb',
+      //     '345' => 'ccc',
+      // ]
+
+      $result = ArrayHelper::map($array, 'id', 'name', 'class');
+      // the result is:
+      // [
+      //     'x' => [
+      //         '123' => 'aaa',
+      //         '124' => 'bbb',
+      //     ],
+      //     'y' => [
+      //         '345' => 'ccc',
+      //     ],
+      // ]
+
+
 
 
 

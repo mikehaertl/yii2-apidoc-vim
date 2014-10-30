@@ -12,7 +12,7 @@ DESCRIPTION
 
  Connection works together with 'Command', 'DataReader' and 'Transaction' to
  provide data access to various DBMS in a common set of APIs. They are a thin
- wrapper of the 'PDO PHP extension'(http://www.php.net/manual/en/ref.pdo.php).
+ wrapper of the 'PDO PHP extension'(php.net/manual/en/book.pdo.php).
 
  Connection supports database replication and read-write splitting. In
  particular, a Connection component can be configured with multiple 'masters'
@@ -264,10 +264,6 @@ $behaviors				*yii/db/Connection::$behaviors*
 $isActive				*yii/db/Connection::$isActive*
  (boolean) Whether the DB connection is established
 
-$queryCacheInfo				*yii/db/Connection::$queryCacheInfo*
- (array) The current query cache information, or null if query cache is not
- enabled.
-
 $transaction				*yii/db/Connection::$transaction*
  (\yii\db\Transaction) The currently active transaction. Null if no active
  transaction.
@@ -470,12 +466,16 @@ METHOD DETAILS
 
 *yii/db/Connection::getQueryCacheInfo*			public
 >
- getQueryCacheInfo()
+ getQueryCacheInfo($duration, $dependency)
 <
 (array) The current query cache information, or null if query cache is not
 enabled.
 
  This method is used internally by 'Command'.
+    [$duration] (integer) The preferred caching duration. If null, it will be
+    ignored.
+    [$dependency] (\yii\caching\Dependency) The preferred caching dependency.
+    If null, it will be ignored.
 
 
 *yii/db/Connection::open*					public

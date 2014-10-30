@@ -65,7 +65,7 @@ DESCRIPTION
  columns of different tables; and the multiplicity of the relation is
  indicated by 'multiple'.
 
- If a relation involves a pivot table, it may be specified by 'via()'. This
+ If a relation involves a junction table, it may be specified by 'via()'. This
  methods may only be called in a relational context. Same is true for
  'inverseOf()', which marks a relation as inverse of another relation.
 
@@ -89,31 +89,40 @@ $indexBy				*yii/sphinx/ActiveQuery::$indexBy*
  See |yii/db/QueryTrait::$indexBy|
 
 $select					*yii/sphinx/ActiveQuery::$select*
- See |yii/sphinx/Query::$select|
+ See |yii/db/Query::$select|
 
 $selectOption				*yii/sphinx/ActiveQuery::$selectOption*
- See |yii/sphinx/Query::$selectOption|
+ See |yii/db/Query::$selectOption|
 
 $distinct				*yii/sphinx/ActiveQuery::$distinct*
- See |yii/sphinx/Query::$distinct|
+ See |yii/db/Query::$distinct|
 
 $from					*yii/sphinx/ActiveQuery::$from*
- See |yii/sphinx/Query::$from|
+ See |yii/db/Query::$from|
+
+$groupBy				*yii/sphinx/ActiveQuery::$groupBy*
+ See |yii/db/Query::$groupBy|
+
+$join					*yii/sphinx/ActiveQuery::$join*
+ See |yii/db/Query::$join|
+
+$having					*yii/sphinx/ActiveQuery::$having*
+ See |yii/db/Query::$having|
+
+$union					*yii/sphinx/ActiveQuery::$union*
+ See |yii/db/Query::$union|
+
+$params					*yii/sphinx/ActiveQuery::$params*
+ See |yii/db/Query::$params|
 
 $match					*yii/sphinx/ActiveQuery::$match*
  See |yii/sphinx/Query::$match|
-
-$groupBy				*yii/sphinx/ActiveQuery::$groupBy*
- See |yii/sphinx/Query::$groupBy|
 
 $within					*yii/sphinx/ActiveQuery::$within*
  See |yii/sphinx/Query::$within|
 
 $options				*yii/sphinx/ActiveQuery::$options*
  See |yii/sphinx/Query::$options|
-
-$params					*yii/sphinx/ActiveQuery::$params*
- See |yii/sphinx/Query::$params|
 
 $snippetCallback			*yii/sphinx/ActiveQuery::$snippetCallback*
  See |yii/sphinx/Query::$snippetCallback|
@@ -331,6 +340,155 @@ METHOD DETAILS
  See |yii/db/QueryTrait::offset|
 
 
+*yii/sphinx/ActiveQuery::createCommand*			public
+>
+ createCommand($db='null')
+<
+(\yii\sphinx\Command) The created DB command instance.
+
+    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
+    command. If null, the DB connection returned by 'modelClass' will be used.
+
+
+*yii/sphinx/ActiveQuery::prepare*				public
+ See |yii/db/Query::prepare|
+
+
+*yii/sphinx/ActiveQuery::batch*				public
+ See |yii/db/Query::batch|
+
+
+*yii/sphinx/ActiveQuery::each*				public
+ See |yii/db/Query::each|
+
+
+*yii/sphinx/ActiveQuery::all*				public
+>
+ all($db='null')
+<
+(array) The query results. If the query results in nothing, an empty array
+will be returned.
+
+    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
+    command. If null, the DB connection returned by 'modelClass' will be used.
+
+
+*yii/sphinx/ActiveQuery::populate*			public
+ See |yii/db/Query::populate|
+
+
+*yii/sphinx/ActiveQuery::one*				public
+>
+ one($db='null')
+<
+(\yii\sphinx\ActiveRecord|array|null) A single row of query result. Depending
+on the setting of 'asArray', the query result may be either an array or an
+ActiveRecord object. Null will be returned if the query results in nothing.
+
+    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
+    command. If null, the DB connection returned by 'modelClass' will be used.
+
+
+*yii/sphinx/ActiveQuery::scalar*				public
+ See |yii/db/Query::scalar|
+
+
+*yii/sphinx/ActiveQuery::column*				public
+ See |yii/db/Query::column|
+
+
+*yii/sphinx/ActiveQuery::count*				public
+ See |yii/db/Query::count|
+
+
+*yii/sphinx/ActiveQuery::sum*				public
+ See |yii/db/Query::sum|
+
+
+*yii/sphinx/ActiveQuery::average*				public
+ See |yii/db/Query::average|
+
+
+*yii/sphinx/ActiveQuery::min*				public
+ See |yii/db/Query::min|
+
+
+*yii/sphinx/ActiveQuery::max*				public
+ See |yii/db/Query::max|
+
+
+*yii/sphinx/ActiveQuery::exists*				public
+ See |yii/db/Query::exists|
+
+
+*yii/sphinx/ActiveQuery::select*				public
+ See |yii/db/Query::select|
+
+
+*yii/sphinx/ActiveQuery::addSelect*			public
+ See |yii/db/Query::addSelect|
+
+
+*yii/sphinx/ActiveQuery::distinct*			public
+ See |yii/db/Query::distinct|
+
+
+*yii/sphinx/ActiveQuery::from*				public
+ See |yii/db/Query::from|
+
+
+*yii/sphinx/ActiveQuery::join*				public
+ See |yii/db/Query::join|
+
+
+*yii/sphinx/ActiveQuery::innerJoin*			public
+ See |yii/db/Query::innerJoin|
+
+
+*yii/sphinx/ActiveQuery::leftJoin*			public
+ See |yii/db/Query::leftJoin|
+
+
+*yii/sphinx/ActiveQuery::rightJoin*			public
+ See |yii/db/Query::rightJoin|
+
+
+*yii/sphinx/ActiveQuery::groupBy*				public
+ See |yii/db/Query::groupBy|
+
+
+*yii/sphinx/ActiveQuery::addGroupBy*			public
+ See |yii/db/Query::addGroupBy|
+
+
+*yii/sphinx/ActiveQuery::having*				public
+ See |yii/db/Query::having|
+
+
+*yii/sphinx/ActiveQuery::andHaving*			public
+ See |yii/db/Query::andHaving|
+
+
+*yii/sphinx/ActiveQuery::orHaving*			public
+ See |yii/db/Query::orHaving|
+
+
+*yii/sphinx/ActiveQuery::union*				public
+ See |yii/db/Query::union|
+
+
+*yii/sphinx/ActiveQuery::params*				public
+ See |yii/db/Query::params|
+
+
+*yii/sphinx/ActiveQuery::addParams*			public
+ See |yii/db/Query::addParams|
+
+
+*yii/sphinx/ActiveQuery::create*				public
+ See |yii/db/Query::create|
+
+
 *yii/sphinx/ActiveQuery::setConnection*			public
  See |yii/sphinx/Query::setConnection|
 
@@ -347,101 +505,8 @@ METHOD DETAILS
 
 
 
-*yii/sphinx/ActiveQuery::createCommand*			public
->
- createCommand($db='null')
-<
-(\yii\sphinx\Command) The created DB command instance.
-
-    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
-    command. If null, the DB connection returned by 'modelClass' will be used.
-
-
-*yii/sphinx/ActiveQuery::all*				public
->
- all($db='null')
-<
-(array) The query results. If the query results in nothing, an empty array
-will be returned.
-
-    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
-    command. If null, the DB connection returned by 'modelClass' will be used.
-
-
-*yii/sphinx/ActiveQuery::one*				public
->
- one($db='null')
-<
-(\yii\sphinx\ActiveRecord|array|null) A single row of query result. Depending
-on the setting of 'asArray', the query result may be either an array or an
-ActiveRecord object. Null will be returned if the query results in nothing.
-
-    [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
-    command. If null, the DB connection returned by 'modelClass' will be used.
-
-
-*yii/sphinx/ActiveQuery::scalar*				public
- See |yii/sphinx/Query::scalar|
-
-
-*yii/sphinx/ActiveQuery::column*				public
- See |yii/sphinx/Query::column|
-
-
-*yii/sphinx/ActiveQuery::count*				public
- See |yii/sphinx/Query::count|
-
-
-*yii/sphinx/ActiveQuery::sum*				public
- See |yii/sphinx/Query::sum|
-
-
-*yii/sphinx/ActiveQuery::average*				public
- See |yii/sphinx/Query::average|
-
-
-*yii/sphinx/ActiveQuery::min*				public
- See |yii/sphinx/Query::min|
-
-
-*yii/sphinx/ActiveQuery::max*				public
- See |yii/sphinx/Query::max|
-
-
-*yii/sphinx/ActiveQuery::exists*				public
- See |yii/sphinx/Query::exists|
-
-
-*yii/sphinx/ActiveQuery::select*				public
- See |yii/sphinx/Query::select|
-
-
-*yii/sphinx/ActiveQuery::distinct*			public
- See |yii/sphinx/Query::distinct|
-
-
-*yii/sphinx/ActiveQuery::from*				public
- See |yii/sphinx/Query::from|
-
-
 *yii/sphinx/ActiveQuery::match*				public
  See |yii/sphinx/Query::match|
-
-
-*yii/sphinx/ActiveQuery::groupBy*				public
- See |yii/sphinx/Query::groupBy|
-
-
-*yii/sphinx/ActiveQuery::addGroupBy*			public
- See |yii/sphinx/Query::addGroupBy|
-
-
-*yii/sphinx/ActiveQuery::params*				public
- See |yii/sphinx/Query::params|
-
-
-*yii/sphinx/ActiveQuery::addParams*			public
- See |yii/sphinx/Query::addParams|
 
 
 *yii/sphinx/ActiveQuery::options*				public

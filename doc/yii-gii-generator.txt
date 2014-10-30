@@ -68,21 +68,17 @@ $errors					*yii/gii/Generator::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   // a button group with items configuration
-   echo ButtonGroup::widget([
-       'buttons' => [
-           ['label' => 'A'],
-           ['label' => 'B'],
-       ]
-   ]);
+   use yii\bootstrap\NavBar;
+   use yii\widgets\Menu;
 
-   // button group with an item as a string
-   echo ButtonGroup::widget([
-       'buttons' => [
-           Button::widget(['label' => 'A']),
-           ['label' => 'B'],
-       ]
+   NavBar::begin(['brandLabel' => 'NavBar Test']);
+   echo Nav::widget([
+       'items' => [
+           ['label' => 'Home', 'url' => ['/site/index']],
+           ['label' => 'About', 'url' => ['/site/about']],
+       ],
    ]);
+   NavBar::end();
 
 
 
@@ -251,17 +247,14 @@ METHOD DETAILS
 
  Each rule is an array with the following structure:
 
-   use yii\bootstrap\NavBar;
-   use yii\widgets\Menu;
-
-   NavBar::begin(['brandLabel' => 'NavBar Test']);
-   echo Nav::widget([
-       'items' => [
-           ['label' => 'Home', 'url' => ['/site/index']],
-           ['label' => 'About', 'url' => ['/site/about']],
+   return [
+       'action1' => 'app\components\Action1',
+       'action2' => [
+           'class' => 'app\components\Action2',
+           'property1' => 'value1',
+           'property2' => 'value2',
        ],
-   ]);
-   NavBar::end();
+   ];
 
  where
 
@@ -601,7 +594,7 @@ successfully.
 >
  save($files, $answers, $results)
 <
-(boolean) Whether there is any error while saving the code files.
+(boolean) Whether files are successfully saved without any error.
 
     [$files] (\yii\gii\CodeFile[]) The code files to be saved
     [$answers] (array) 

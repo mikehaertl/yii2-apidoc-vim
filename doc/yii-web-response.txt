@@ -114,6 +114,9 @@ $statusCode				*yii/web/Response::$statusCode*
 $headers				*yii/web/Response::$headers*
  (\yii\web\HeaderCollection) The header collection
 
+$downloadHeaders			*yii/web/Response::$downloadHeaders*
+ (string) The attachment file name
+
 $cookies				*yii/web/Response::$cookies*
  (\yii\web\CookieCollection) The cookie collection.
 
@@ -332,7 +335,7 @@ METHOD DETAILS
 
 *yii/web/Response::sendFile*				public
 >
- sendFile($filePath, $attachmentName='null', $mimeType='null')
+ sendFile($filePath, $attachmentName='null', $options='[]')
 <
 (static) The response object itself
 
@@ -342,13 +345,20 @@ METHOD DETAILS
     [$filePath] (string) The path of the file to be sent.
     [$attachmentName] (string) The file name shown to the user. If null, it
     will be determined from '$filePath'.
-    [$mimeType] (string) The MIME type of the content. If null, it will be
-    guessed based on '$filePath'
+    [$options] (array) Additional options for sending the file. The following
+    options are supported:
+
+     
+      - 'mimeType': the MIME type of the content. If not set, it will be
+      guessed based on '$filePath'  
+      - 'inline': boolean, whether the browser should open the file within
+      the browser window. Defaults to false,     meaning a download dialog
+    will pop up.
 
 
 *yii/web/Response::sendContentAsFile*			public
 >
- sendContentAsFile($content, $attachmentName, $mimeType=''application/octet-stream'')
+ sendContentAsFile($content, $attachmentName, $options='[]')
 <
 (static) The response object itself
 
@@ -358,12 +368,20 @@ METHOD DETAILS
     [$content] (string) The content to be sent. The existing 'content' will be
     discarded.
     [$attachmentName] (string) The file name shown to the user.
-    [$mimeType] (string) The MIME type of the content.
+    [$options] (array) Additional options for sending the file. The following
+    options are supported:
+
+     
+      - 'mimeType': the MIME type of the content. Defaults to
+      'application/octet-stream'.  
+      - 'inline': boolean, whether the browser should open the file within
+      the browser window. Defaults to false,     meaning a download dialog
+    will pop up.
 
 
 *yii/web/Response::sendStreamAsFile*			public
 >
- sendStreamAsFile($handle, $attachmentName, $mimeType=''application/octet-stream'')
+ sendStreamAsFile($handle, $attachmentName, $options='[]')
 <
 (static) The response object itself
 
@@ -372,7 +390,30 @@ METHOD DETAILS
  done after you return from a controller action.
     [$handle] (resource) The handle of the stream to be sent.
     [$attachmentName] (string) The file name shown to the user.
-    [$mimeType] (string) The MIME type of the stream content.
+    [$options] (array) Additional options for sending the file. The following
+    options are supported:
+
+     
+      - 'mimeType': the MIME type of the content. Defaults to
+      'application/octet-stream'.  
+      - 'inline': boolean, whether the browser should open the file within
+      the browser window. Defaults to false,     meaning a download dialog
+    will pop up.
+
+
+*yii/web/Response::setDownloadHeaders*			public
+>
+ setDownloadHeaders($attachmentName, $mimeType='null', $inline='false', $contentLength=null)
+<
+(static) The response object itself
+
+    [$attachmentName] (string) The attachment file name
+    [$mimeType] (string) The MIME type for the response. If null,
+    'Content-Type' header will NOT be set.
+    [$inline] (boolean) Whether the browser should open the file within the
+    browser window. Defaults to false, meaning a download dialog will pop up.
+    [$contentLength] (integer) The byte length of the file being downloaded.
+    If null, 'Content-Length' header will NOT be set.
 
 
 *yii/web/Response::getHttpRange*				protected
@@ -388,7 +429,7 @@ invalid.
 
 *yii/web/Response::xSendFile*				public
 >
- xSendFile($filePath, $attachmentName='null', $mimeType='null', $xHeader=''X-Sendfile'')
+ xSendFile($filePath, $attachmentName='null', $options='[]')
 <
 (static) The response object itself
 
@@ -456,9 +497,17 @@ invalid.
     [$filePath] (string) File name with full path
     [$attachmentName] (string) File name shown to the user. If null, it will
     be determined from '$filePath'.
-    [$mimeType] (string) The MIME type of the file. If null, it will be
-    determined based on '$filePath'.
-    [$xHeader] (string) The name of the x-sendfile header.
+    [$options] (array) Additional options for sending the file. The following
+    options are supported:
+
+     
+      - 'mimeType': the MIME type of the content. If not set, it will be
+      guessed based on '$filePath'  
+      - 'inline': boolean, whether the browser should open the file within
+      the browser window. Defaults to false,     meaning a download dialog
+    will pop up.  
+      - xHeader: string, the name of the x-sendfile header. Defaults to
+      "X-Sendfile".
 
 
 *yii/web/Response::redirect*				public

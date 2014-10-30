@@ -239,7 +239,7 @@ METHOD DETAILS
 
 *yii/web/User::getIdentity*				public
 >
- getIdentity()
+ getIdentity($autoRenew='true')
 <
 (\yii\web\IdentityInterface|null) The identity object associated with the
 currently logged-in user. 'null' is returned if the user is not logged in (not
@@ -248,6 +248,9 @@ authenticated).
  When 'enableSession' is true, this method may attempt to read the user's
  authentication data stored in session and reconstruct the corresponding
  identity object, if it has not done so before.
+    [$autoRenew] (boolean) Whether to automatically renew authentication
+    status if it has not been done so before. This is only useful when
+    'enableSession' is true.
 
 
 *yii/web/User::setIdentity*				public
@@ -388,7 +391,7 @@ user is a guest.
 
 *yii/web/User::loginRequired*				public
 >
- loginRequired()
+ loginRequired($checkAjax='true')
 <
 (\yii\web\Response) The redirection response if 'loginUrl' is set
 
@@ -401,6 +404,9 @@ user is a guest.
 
  Note that when 'loginUrl' is set, calling this method will NOT terminate the
  application execution.
+    [$checkAjax] (boolean) Whether to check if the request is an AJAX request.
+    When this is true and the request is an AJAX request, the current URL (for
+    AJAX request) will NOT be set as the return URL.
 
 
 *yii/web/User::beforeLogin*				protected
