@@ -8,9 +8,17 @@ DESCRIPTION
  To use SluggableBehavior, insert the following code to your ActiveRecord
  class:
 
-   function ($event)
+   use yii\behaviors\SluggableBehavior;
+
+   public function behaviors()
    {
-       // return value will be assigned to the attribute
+       return [
+           [
+               'class' => SluggableBehavior::className(),
+               'attribute' => 'title',
+               // 'slugAttribute' => 'slug',
+           ],
+       ];
    }
 
  By default, SluggableBehavior will fill the 'slug' attribute with a value
@@ -18,10 +26,15 @@ DESCRIPTION
  validated. If your attribute name is different, you may configure the
  'slugAttribute' property like the following:
 
-   [
-       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
-       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
-   ]
+   public function behaviors()
+   {
+       return [
+           [
+               'class' => SluggableBehavior::className(),
+               'slugAttribute' => 'alias',
+           ],
+       ];
+   }
 
 
 
@@ -41,17 +54,9 @@ $value					*yii/behaviors/SluggableBehavior::$value*
  the function will be used as a slug. The signature of the function should be
  as follows,
 
-   use yii\behaviors\SluggableBehavior;
-
-   public function behaviors()
+   function ($event)
    {
-       return [
-           [
-               'class' => SluggableBehavior::className(),
-               'attribute' => 'title',
-               // 'slugAttribute' => 'slug',
-           ],
-       ];
+       // return slug
    }
 
 
@@ -79,14 +84,9 @@ $uniqueSlugGenerator			*yii/behaviors/SluggableBehavior::$uniqueSlugGenerator*
  enabled and generated slug is not unique. This should be a PHP callable with
  following signature:
 
-   public function behaviors()
+   function ($baseSlug, $iteration, $model)
    {
-       return [
-           [
-               'class' => SluggableBehavior::className(),
-               'slugAttribute' => 'alias',
-           ],
-       ];
+       // return uniqueSlug
    }
 
  If not set unique slug will be generated adding incrementing suffix to the

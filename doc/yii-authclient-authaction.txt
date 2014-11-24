@@ -9,7 +9,24 @@ DESCRIPTION
 
  Usage:
 
-   ['namePerson/friendly', 'contact/email']
+   class SiteController extends Controller
+   {
+       public function actions()
+       {
+           return [
+               'auth' => [
+                   'class' => 'yii\authclient\AuthAction',
+                   'successCallback' => [$this, 'successCallback'],
+               ],
+           ]
+       }
+
+       public function successCallback($client)
+       {
+           $attributes = $client->getUserAttributes();
+           // user login or signup comes here
+       }
+   }
 
  Usually authentication via external services is performed inside the popup
  window. This action handles the redirection and closing of popup window
@@ -39,7 +56,11 @@ $successCallback			*yii/authclient/AuthAction::$successCallback*
  authentication. This callback should accept 'ClientInterface' instance as an
  argument. For example:
 
-   ['namePerson/first', 'namePerson/last']
+   public function onAuthSuccess($client)
+   {
+       $attributes = $client->getUserAttributes();
+       // user login or signup comes here
+   }
 
  If this callback returns 'Response' instance, it will be used as action
  response, otherwise redirection to 'successUrl' will be performed.

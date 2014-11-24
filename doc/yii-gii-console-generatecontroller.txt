@@ -224,21 +224,14 @@ METHOD DETAILS
  array values the corresponding action class names or action configuration
  arrays. For example,
 
-   // a button group with items configuration
-   echo ButtonGroup::widget([
-       'buttons' => [
-           ['label' => 'A'],
-           ['label' => 'B'],
-       ]
-   ]);
-
-   // button group with an item as a string
-   echo ButtonGroup::widget([
-       'buttons' => [
-           Button::widget(['label' => 'A']),
-           ['label' => 'B'],
-       ]
-   ]);
+   return [
+       'action1' => 'app\components\Action1',
+       'action2' => [
+           'class' => 'app\components\Action2',
+           'property1' => 'value1',
+           'property2' => 'value2',
+       ],
+   ];
 
  '\Yii::createObject()' will be used later to create the requested action
  using the configuration provided here.

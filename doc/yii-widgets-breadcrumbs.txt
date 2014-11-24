@@ -12,15 +12,20 @@ DESCRIPTION
  To use Breadcrumbs, you need to configure its 'links' property, which
  specifies the links to be displayed. For example,
 
-   $provider = new ActiveDataProvider([
-       'query' => Post::find(),
-       'pagination' => [
-           'pageSize' => 20,
+   // $this is the view object currently being used
+   echo Breadcrumbs::widget([
+       'itemTemplate' => "<li><i>{link}</i></li>\n", // template for all links
+       'links' => [
+           [
+               'label' => 'Post Category',
+               'url' => ['post-category/view', 'id' => 10],
+               'template' => '<li><b>{link}</b></li>\n', // template for this
+ link only
+           ],
+           ['label' => 'Sample Post', 'url' => ['post/edit', 'id' => 1]],
+           'Edit',
        ],
    ]);
-
-   // get the posts in the current page
-   $posts = $provider->getModels();
 
  Because breadcrumbs usually appears in nearly every page of a website, you
  may consider placing it in a layout view. You can use a view parameter (e.g.
@@ -28,16 +33,11 @@ DESCRIPTION
  the layout view, you assign this view parameter to the 'links' property like
  the following:
 
-   $query = new Query;
-   $provider = new ActiveDataProvider([
-       'query' => $query->from('post'),
-       'pagination' => [
-           'pageSize' => 20,
-       ],
+   // $this is the view object currently being used
+   echo Breadcrumbs::widget([
+       'links' => isset($this->params['breadcrumbs']) ?
+ $this->params['breadcrumbs'] : [],
    ]);
-
-   // get the posts in the current page
-   $posts = $provider->getModels();
 
 
 
@@ -74,20 +74,13 @@ $links					*yii/widgets/Breadcrumbs::$links*
  empty, the widget will not render anything. Each array element represents a
  single link in the breadcrumbs with the following structure:
 
-   // $this is the view object currently being used
-   echo Breadcrumbs::widget([
-       'itemTemplate' => "<li><i>{link}</i></li>\n", // template for all links
-       'links' => [
-           [
-               'label' => 'Post Category',
-               'url' => ['post-category/view', 'id' => 10],
-               'template' => '<li><b>{link}</b></li>\n', // template for this
- link only
-           ],
-           ['label' => 'Sample Post', 'url' => ['post/edit', 'id' => 1]],
-           'Edit',
-       ],
-   ]);
+   [
+       'label' => 'label of the link',  // required
+       'url' => 'url of the link',      // optional, will be processed by
+ Url::to()
+       'template' => 'own template of the item', // optional, if not set
+ $this->itemTemplate will be used
+   ]
 
  If a link is active, you only need to specify its "label", and instead of
  writing '['label' => $label]', you should simply use '$label'.

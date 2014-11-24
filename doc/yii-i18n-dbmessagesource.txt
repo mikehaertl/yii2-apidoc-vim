@@ -7,9 +7,20 @@ DESCRIPTION
 
  The database must contain the following two tables:
 
-   [
-       NumberFormatter::NEGATIVE_PREFIX => 'MINUS',
-   ]
+   CREATE TABLE source_message (
+       id INTEGER PRIMARY KEY AUTO_INCREMENT,
+       category VARCHAR(32),
+       message TEXT
+   );
+
+   CREATE TABLE message (
+       id INTEGER,
+       language VARCHAR(16),
+       translation TEXT,
+       PRIMARY KEY (id, language),
+       CONSTRAINT fk_message_source_message FOREIGN KEY (id)
+           REFERENCES source_message (id) ON DELETE CASCADE ON UPDATE RESTRICT
+   );
 
  The 'source_message' table stores the messages to be translated, and the
  'message' table stores the translated messages. The name of these two tables

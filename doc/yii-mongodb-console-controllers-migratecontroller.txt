@@ -18,22 +18,24 @@ DESCRIPTION
  In order to enable this command you should adjust the configuration of your
  console application:
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   return [
+       // ...
+       'controllerMap' => [
+           'mongodb-migrate' =>
+ 'yii\mongodb\console\controllers\MigrateController'
+       ],
+   ];
 
  Below are some common usages of this command:
 
-   'session' => [
-       'class' => 'yii\mongodb\Session',
-       // 'db' => 'mymongodb',
-       // 'sessionCollection' => 'my_session',
-   ]
+   # creates a new migration named 'create_user_collection'
+   yii mongodb-migrate/create create_user_collection
+
+   # applies ALL new migrations
+   yii mongodb-migrate
+
+   # reverts the last applied migration
+   yii mongodb-migrate/down
 
 
 

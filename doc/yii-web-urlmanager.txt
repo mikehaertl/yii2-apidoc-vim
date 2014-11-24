@@ -12,9 +12,12 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as it is shown in the following example:
 
-   [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
+   'urlManager' => [
+       'enablePrettyUrl' => true,
+       'rules' => [
+           // your rules go here
+       ],
+       // ...
    ]
 
 
@@ -62,13 +65,17 @@ $rules					*yii/web/UrlManager::$rules*
 
  Here is an example configuration for RESTful CRUD controller:
 
-   'urlManager' => [
-       'enablePrettyUrl' => true,
-       'rules' => [
-           // your rules go here
-       ],
-       // ...
-   ]
+   php
+   [
+       'dashboard' => 'site/index',
+
+       'POST <controller:\w+>s' => '<controller>/create',
+       '<controller:\w+>s' => '<controller>/index',
+
+       'PUT <controller:\w+>/<id:\d+>'    => '<controller>/update',
+       'DELETE <controller:\w+>/<id:\d+>' => '<controller>/delete',
+       '<controller:\w+>/<id:\d+>'        => '<controller>/view',
+   ];
 
  Note that if you modify this property after the UrlManager object is created,
  make sure you populate the array with rule objects instead of rule
@@ -275,23 +282,14 @@ cannot be successfully parsed.
  an array if you want to specify additional query parameters for the URL being
  created. The array format must be:
 
-   php
-   [
-       'dashboard' => 'site/index',
-
-       'POST <controller:\w+>s' => '<controller>/create',
-       '<controller:\w+>s' => '<controller>/index',
-
-       'PUT <controller:\w+>/<id:\d+>'    => '<controller>/update',
-       'DELETE <controller:\w+>/<id:\d+>' => '<controller>/delete',
-       '<controller:\w+>/<id:\d+>'        => '<controller>/view',
-   ];
+   // generates: /index.php?r=site/index&param1=value1&param2=value2
+   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
 
  If you want to create a URL with an anchor, you can use the array format with
  a '#' parameter. For example,
 
-   // generates: /index.php?r=site/index&param1=value1&param2=value2
-   ['site/index', 'param1' => 'value1', 'param2' => 'value2']
+   // generates: /index.php?r=site/index&param1=value1#name
+   ['site/index', 'param1' => 'value1', '#' => 'name']
 
  The URL created is a relative one. Use 'createAbsoluteUrl()' to create an
  absolute URL.

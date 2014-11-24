@@ -9,24 +9,17 @@ DESCRIPTION
  treated as the content of the navbar. You may use widgets such as 'Nav' or
  '\yii\widgets\Menu' to build up such content. For example,
 
+   use yii\bootstrap\NavBar;
+   use yii\widgets\Menu;
+
+   NavBar::begin(['brandLabel' => 'NavBar Test']);
    echo Nav::widget([
        'items' => [
-           [
-               'label' => 'Home',
-               'url' => ['site/index'],
-               'linkOptions' => [...],
-           ],
-           [
-               'label' => 'Dropdown',
-               'items' => [
-                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
-                    '<li class="divider"></li>',
-                    '<li class="dropdown-header">Dropdown Header</li>',
-                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
-               ],
-           ],
+           ['label' => 'Home', 'url' => ['/site/index']],
+           ['label' => 'About', 'url' => ['/site/about']],
        ],
    ]);
+   NavBar::end();
 
 
 

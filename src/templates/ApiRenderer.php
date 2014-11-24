@@ -239,6 +239,10 @@ class ApiRenderer extends BaseApiRenderer implements ViewContextInterface
     {
         // TODO: All this needs to be improved!
 
+        // Reset captured code and list blocks to be safe
+        $this->_codeBlocks = [];
+        $this->_listItems = [];
+
         // Cut out and store code and list blocks, replace with placeholder
         $content=preg_replace_callback(self::CODE_PATTERN,[$this,'captureCodeBlocks'],$content);
         $content=preg_replace_callback(self::LISTITEM_PATTERN,[$this,'captureListItems'],$content);

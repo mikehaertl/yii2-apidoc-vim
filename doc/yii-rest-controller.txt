@@ -139,12 +139,10 @@ METHOD DETAILS
  either a string specifying the behavior class or an array of the following
  structure:
 
-   'view' => [
-       'theme' => 'app\themes\MyTheme',
-       'renderers' => [
-           // you may add Smarty or Twig renderer here
-       ]
-       // ...
+   'behaviorName' => [
+       'class' => 'BehaviorClass',
+       'property1' => 'value1',
+       'property2' => 'value2',
    ]
 
  Note that a behavior class must extend from 'Behavior'. Behavior names can be
@@ -236,11 +234,12 @@ METHOD DETAILS
 
  If you override this method, your code should look like the following:
 
-   'behaviorName' => [
-       'class' => 'BehaviorClass',
-       'property1' => 'value1',
-       'property2' => 'value2',
-   ]
+   public function afterAction($action, $result)
+   {
+       $result = parent::afterAction($action, $result);
+       // your custom code here
+       return $result;
+   }
 
 
     [$action] (\yii\base\Action) The action just executed.

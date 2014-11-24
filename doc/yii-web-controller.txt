@@ -204,13 +204,15 @@ METHOD DETAILS
 
  If you override this method, your code should look like the following:
 
-   $cookie = $request->cookies['name']
-   if ($cookie !== null) {
-       $value = $cookie->value;
+   public function beforeAction($action)
+   {
+       if (parent::beforeAction($action)) {
+           // your custom code here
+           return true;  // or false if needed
+       } else {
+           return false;
+       }
    }
-
-   // alternatively
-   $value = $request->cookies->getValue('name');
 
 
     [$action] (\yii\base\Action) The action to be executed.
@@ -286,15 +288,8 @@ METHOD DETAILS
 
  You can use it in an action by returning the 'Response' directly:
 
-   public function beforeAction($action)
-   {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
-           return false;
-       }
-   }
+   // stop executing this action and redirect to login page
+   return $this->redirect(['login']);
 
 
     [$url] (string|array) The URL to be redirected to. This can be in one of
@@ -322,8 +317,8 @@ METHOD DETAILS
 
  You can use this method in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to login page
-   return $this->redirect(['login']);
+   // stop executing this action and redirect to home page
+   return $this->goHome();
 
 
 
@@ -336,8 +331,8 @@ METHOD DETAILS
 
  You can use this method in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to home page
-   return $this->goHome();
+   // stop executing this action and redirect to last visited page
+   return $this->goBack();
 
  For this function to work you have to 'User::setReturnUrl()|set the return
  URL' in appropriate places before.
@@ -357,8 +352,8 @@ METHOD DETAILS
 
  You can use it in an action by returning the 'Response' directly:
 
-   // stop executing this action and redirect to last visited page
-   return $this->goBack();
+   // stop executing this action and refresh the current page
+   return $this->refresh();
 
 
     [$anchor] (string) The anchor that should be appended to the redirection

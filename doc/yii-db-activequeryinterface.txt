@@ -38,10 +38,12 @@ METHOD DETAILS
     function) that returns the index value based on the given row or model
     data. The signature of the callable should be:
 
-      $customer = new Customer;
-      $customer->name = $name;
-      $customer->email = $email;
-      $customer->insert();
+      // $model is an AR instance when `asArray` is false,
+      // or an array of column values when `asArray` is true.
+      function ($model)
+      {
+          // return the index value corresponding to $model
+      }
 
 
 
@@ -64,10 +66,18 @@ METHOD DETAILS
 
  The followings are some usage examples:
 
-   $customer = Customer::findOne($id);
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->update();
+   // find customers together with their orders and country
+   Customer::find()->with('orders', 'country')->all();
+   // find customers together with their orders and the orders' shipping
+ address
+   Customer::find()->with('orders.address')->all();
+   // find customers together with their country and orders of status 1
+   Customer::find()->with([
+       'orders' => function ($query) {
+           $query->andWhere('status = 1');
+       },
+       'country',
+   ])->all();
 
 
 

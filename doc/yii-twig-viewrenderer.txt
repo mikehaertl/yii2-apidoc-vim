@@ -42,14 +42,11 @@ $lexerOptions				*yii/twig/ViewRenderer::$lexerOptions*
 
  Example: Smarty-like syntax:
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   [
+       'tag_comment'  => ['{*', '*}'],
+       'tag_block'    => ['{', '}'],
+       'tag_variable' => ['{$', '}']
+   ]
 
 
 
@@ -58,10 +55,11 @@ $uses					*yii/twig/ViewRenderer::$uses*
 
  Example:
 
-   $customer = new Customer;
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->insert();
+   [
+       'yii\bootstrap',
+       'app\assets',
+       \yii\bootstrap\NavBar::className(),
+   ]
 
 
 

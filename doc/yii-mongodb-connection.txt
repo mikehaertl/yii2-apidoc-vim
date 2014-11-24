@@ -14,22 +14,17 @@ DESCRIPTION
  The following example shows how to create a Connection instance and establish
  the DB connection:
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   $connection = new \yii\mongodb\Connection([
+       'dsn' => $dsn,
+   ]);
+   $connection->open();
 
  After the Mongo connection is established, one can access Mongo databases and
  collections:
 
-   $customer = new Customer;
-   $customer->name = $name;
-   $customer->email = $email;
-   $customer->insert();
+   $database = $connection->getDatabase('my_mongo_db');
+   $collection = $database->getCollection('customer');
+   $collection->insert(['name' => 'John Smith', 'status' => 1]);
 
  You can work with several different databases at the same server using this
  class. However, while it is unlikely your application will actually need it,
@@ -37,17 +32,23 @@ DESCRIPTION
  a shortcut method 'getCollection()' to retrieve a particular collection
  instance:
 
-   $connection = new \yii\mongodb\Connection([
-       'dsn' => $dsn,
-   ]);
-   $connection->open();
+   // get collection 'customer' from default database:
+   $collection = $connection->getCollection('customer');
+   // get collection 'customer' from database 'mydatabase':
+   $collection = $connection->getCollection(['mydatabase', 'customer']);
 
  Connection is often used as an application component and configured in the
  application configuration like the following:
 
-   $database = $connection->getDatabase('my_mongo_db');
-   $collection = $database->getCollection('customer');
-   $collection->insert(['name' => 'John Smith', 'status' => 1]);
+   [
+        'components' => [
+            'mongodb' => [
+                'class' => '\yii\mongodb\Connection',
+                'dsn' =>
+ 'mongodb://developer:password@localhost:27017/mydatabase',
+            ],
+        ],
+   ]
 
 
 
@@ -67,10 +68,12 @@ $dsn					*yii/mongodb/Connection::$dsn*
 $options				*yii/mongodb/Connection::$options*
  (array) Connection options. for example:
 
-   // get collection 'customer' from default database:
-   $collection = $connection->getCollection('customer');
-   // get collection 'customer' from database 'mydatabase':
-   $collection = $connection->getCollection(['mydatabase', 'customer']);
+   [
+       'socketTimeoutMS' => 1000, // how long a send or receive on a socket
+ can take before timing out
+       'journal' => true // block write operations until the journal be
+ flushed the to disk
+   ]
 
 
 

@@ -11,31 +11,27 @@ DESCRIPTION
 
  Example:
 
-   'components' => [
-       'authClientCollection' => [
-           'class' => 'yii\authclient\Collection',
-           'clients' => [
-               'twitter' => [
-                   'class' => 'yii\authclient\clients\Twitter',
-                   'consumerKey' => 'twitter_consumer_key',
-                   'consumerSecret' => 'twitter_consumer_secret',
-               ],
-           ],
-       ]
-       ...
-   ]
+   php
+   <?= yii\authclient\widgets\AuthChoice::widget([
+       'baseAuthUrl' => ['site/auth']
+   ]); ?>
 
  You can customize the widget appearance by using 'begin()' and 'end()' syntax
  along with using method 'clientLink()' or 'createClientUrl()'. For example:
 
-   use yii\authclient\OAuth2;
-
-   $oauthClient = new OAuth2();
-   $url = $oauthClient->buildAuthUrl(); // Build authorization URL
-   Yii::$app->getResponse()->redirect($url); // Redirect to authorization URL.
-   // After user returns at our site:
-   $code = $_GET['code'];
-   $accessToken = $oauthClient->fetchAccessToken($code); // Get access token
+   php
+   <?php
+   use yii\authclient\widgets\AuthChoice;
+   ?>
+   <?php $authAuthChoice = AuthChoice::begin([
+       'baseAuthUrl' => ['site/auth']
+   ]); ?>
+   <ul>
+   <?php foreach ($authAuthChoice->getClients() as $client): ?>
+       <li><?= $authAuthChoice->clientLink($client) ?></li>
+   <?php endforeach; ?>
+   </ul>
+   <?php AuthChoice::end(); ?>
 
  This widget supports following keys for 'ClientInterface::getViewOptions()'
  result:  

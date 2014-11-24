@@ -15,7 +15,11 @@ DESCRIPTION
  The following example shows how you can configure the application to use
  DbCache:
 
-   function ($mailer, $message)
+   'cache' => [
+       'class' => 'yii\caching\DbCache',
+       // 'db' => 'mydb',
+       // 'cacheTable' => 'my_cache',
+   ]
 
 
 
@@ -39,11 +43,11 @@ $cacheTable				*yii/caching/DbCache::$cacheTable*
  (string) Name of the DB table to store cache content. The table should be
  pre-created as follows:
 
-   'cache' => [
-       'class' => 'yii\caching\DbCache',
-       // 'db' => 'mydb',
-       // 'cacheTable' => 'my_cache',
-   ]
+   CREATE TABLE cache (
+       id char(128) NOT NULL PRIMARY KEY,
+       expire int(11),
+       data BLOB
+   );
 
  where 'BLOB' refers to the BLOB-type of your preferred DBMS. Below are the
  BLOB type that can be used for some popular DBMS:

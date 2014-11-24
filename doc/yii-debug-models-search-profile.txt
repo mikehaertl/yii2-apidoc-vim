@@ -29,8 +29,13 @@ $errors					*yii/debug/models/search/Profile::$errors*
  result is a two-dimensional array, like the following:
 
    [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
    ]
 
 
@@ -182,15 +187,12 @@ METHOD DETAILS
 
  Each rule is an array with the following structure:
 
-   public function beforeAction($action)
-   {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
-           return false;
-       }
-   }
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       ...other parameters...
+   ]
 
  where
 
@@ -211,15 +213,8 @@ METHOD DETAILS
  model class method (called *inline validator*) that has the following
  signature:
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
 
  In the above '$attribute' refers to currently validated attribute name while
  '$params' contains an array of validator configuration options such as 'max'
@@ -233,11 +228,21 @@ METHOD DETAILS
  Below are some examples:
 
    [
-       ['attribute1', 'attribute2'],
-       'validator type',
-       'on' => ['scenario1', 'scenario2'],
-       ...other parameters...
-   ]
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
 
  Note, in order to inherit rules defined in the parent class, a child class
  needs to merge the parent rules with child rules using functions such as

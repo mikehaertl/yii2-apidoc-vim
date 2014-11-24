@@ -12,8 +12,11 @@ DESCRIPTION
  You can modify its configuration by adding an array to your application
  config under 'components' as shown in the following example:
 
-   // stop executing this action and refresh the current page
-   return $this->refresh();
+   'assetManager' => [
+       'bundles' => [
+           // you can override AssetBundle configs here
+       ],
+   ]
 
 
 
@@ -38,9 +41,9 @@ $bundles				*yii/web/AssetManager::$bundles*
  The following example shows how to disable the bootstrap css file used by
  Bootstrap widgets (because you want to use your own styles):
 
-   'assetManager' => [
-       'bundles' => [
-           // you can override AssetBundle configs here
+   [
+       'yii\bootstrap\BootstrapAsset' => [
+           'css' => [],
        ],
    ]
 
@@ -73,9 +76,7 @@ $assetMap				*yii/web/AssetManager::$assetMap*
  'basePath'.
 
    [
-       'yii\bootstrap\BootstrapAsset' => [
-           'css' => [],
-       ],
+       'jquery.min.js' => 'jquery/dist/jquery.js',
    ]
 
 
@@ -95,9 +96,7 @@ $linkAssets				*yii/web/AssetManager::$linkAssets*
  assets are accessible to Web users. For example, for Apache Web server, the
  following configuration directive should be added for the Web folder:
 
-   [
-       'jquery.min.js' => 'jquery/dist/jquery.js',
-   ]
+   Options FollowSymLinks
 
 
 

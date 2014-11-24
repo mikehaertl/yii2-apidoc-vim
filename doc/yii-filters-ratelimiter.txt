@@ -8,12 +8,14 @@ DESCRIPTION
  You may use RateLimiter by attaching it as a behavior to a controller or
  module, like the following,
 
-   $requirements = array(
-       array(
-           'name' => 'Upload max file size',
-           'condition' => 'eval:$this->checkUploadMaxFileSize("5M")',
-       ),
-   );
+   public function behaviors()
+   {
+       return [
+           'rateLimiter' => [
+               'class' => \yii\filters\RateLimiter::className(),
+           ],
+       ];
+   }
 
  When the user has exceeded his rate limit, RateLimiter will throw a
  'TooManyRequestsHttpException' exception.

@@ -27,18 +27,17 @@ METHOD DETAILS
  The return value of this method must be an array of fixture configurations.
  For example,
 
-   // find customers together with their orders and country
-   Customer::find()->with('orders', 'country')->all();
-   // find customers together with their orders and the orders' shipping
- address
-   Customer::find()->with('orders.address')->all();
-   // find customers together with their country and orders of status 1
-   Customer::find()->with([
-       'orders' => function ($query) {
-           $query->andWhere('status = 1');
-       },
-       'country',
-   ])->all();
+   [
+       // anonymous fixture
+       PostFixture::className(),
+       // "users" fixture
+       'users' => UserFixture::className(),
+       // "cache" fixture with configuration
+       'cache' => [
+            'class' => CacheFixture::className(),
+            'host' => 'xxx',
+       ],
+   ]
 
  Note that the actual fixtures used for a test case will include both
  'globalFixtures()' and 'fixtures()'.

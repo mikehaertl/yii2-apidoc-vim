@@ -12,13 +12,40 @@ DESCRIPTION
  You may use CORS filter by attaching it as a behavior to a controller or
  module, like the following,
 
-   function ($rule, $action)
+   public function behaviors()
+   {
+       return [
+           'corsFilter' => [
+               'class' => \yii\filters\Cors::className(),
+           ],
+       ];
+   }
 
  The CORS filter can be specialized to restrict parameters, like this, [MDN
  CORS
  Information](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
 
-   function ($rule, $action)
+   public function behaviors()
+   {
+       return [
+           'corsFilter' => [
+               'class' => \yii\filters\Cors::className(),
+               'cors' => [
+                   // restrict access to
+                   'Origin' => ['http://www.myserver.com',
+ 'https://www.myserver.com'],
+                   'Access-Control-Request-Method' => ['POST', 'PUT'],
+                   // Allow only POST and PUT methods
+                   'Access-Control-Request-Headers' => ['X-Wsse'],
+                   // Allow only headers 'X-Wsse'
+                   'Access-Control-Allow-Credentials' => true,
+                   // Allow OPTIONS caching
+                   'Access-Control-Max-Age' => 3600,
+               ],
+
+           ],
+       ];
+   }
 
 
 

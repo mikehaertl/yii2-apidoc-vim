@@ -8,9 +8,13 @@ DESCRIPTION
  To use TimestampBehavior, insert the following code to your ActiveRecord
  class:
 
-   function ($event)
+   use yii\behaviors\TimestampBehavior;
+
+   public function behaviors()
    {
-       // return slug
+       return [
+           TimestampBehavior::className(),
+       ];
    }
 
  By default, TimestampBehavior will fill the 'created_at' and 'updated_at'
@@ -22,23 +26,25 @@ DESCRIPTION
  calculating the timestamp, you may configure the 'createdAtAttribute',
  'updatedAtAttribute' and 'value' properties like the following:
 
-   function ($baseSlug, $iteration, $model)
+   use yii\db\Expression;
+
+   public function behaviors()
    {
-       // return uniqueSlug
+       return [
+           [
+               'class' => TimestampBehavior::className(),
+               'createdAtAttribute' => 'create_time',
+               'updatedAtAttribute' => 'update_time',
+               'value' => new Expression('NOW()'),
+           ],
+       ];
    }
 
  TimestampBehavior also provides a method named 'touch()' that allows you to
  assign the current timestamp to the specified attribute(s) and save them to
  the database. For example,
 
-   use yii\behaviors\TimestampBehavior;
-
-   public function behaviors()
-   {
-       return [
-           TimestampBehavior::className(),
-       ];
-   }
+   $this->timestamp->touch('creation_time');
 
 
 
@@ -162,19 +168,7 @@ METHOD DETAILS
 
 
 
-   use yii\db\Expression;
-
-   public function behaviors()
-   {
-       return [
-           [
-               'class' => TimestampBehavior::className(),
-               'createdAtAttribute' => 'create_time',
-               'updatedAtAttribute' => 'update_time',
-               'value' => new Expression('NOW()'),
-           ],
-       ];
-   }
+   $model->touch('lastVisit');
 
 
     [$attribute] (string) The name of the attribute to update.

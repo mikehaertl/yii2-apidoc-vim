@@ -18,8 +18,14 @@ DESCRIPTION
 
  For example,
 
-   'MM/dd/yyyy' // date in ICU format
-   'php:m/d/Y' // the same date in PHP format
+   $query = new Query;
+   $query->fields('id, name')
+       ->from('myindex', 'users')
+       ->limit(10);
+   // build and execute the query
+   $command = $query->createCommand();
+   $rows = $command->search(); // this way you get the raw output of
+ elasticsearch.
 
  You would normally call '$query->search()' instead of creating a command as
  this method adds the 'indexBy()' feature and also removes some
@@ -73,7 +79,19 @@ $fields					*yii/elasticsearch/Query::$fields*
  For each field you may also add an array representing a [script field].
  Example:
 
-   $customers = Customer::find()->with('orders')->asArray()->all();
+   $query->fields = [
+       'id',
+       'name',
+       'value_times_two' => [
+           'script' => "doc['my_field_name'].value * 2",
+       ],
+       'value_times_factor' => [
+           'script' => "doc['my_field_name'].value * factor",
+           'params' => [
+               'factor' => 2.0
+           ],
+       ],
+   ]
 
  > Note: Field values are [always returned as arrays] even if they only have
  one value.

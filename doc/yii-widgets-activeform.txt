@@ -32,16 +32,9 @@ $method					*yii/widgets/ActiveForm::$method*
  current request url and each submit will add new parameters instead of
  replacing existing ones. You may set 'action' explicitly to avoid this:
 
-   echo DetailView::widget([
-       'model' => $model,
-       'attributes' => [
-           'title',             // title attribute (in plain text)
-           'description:html',  // description attribute in HTML
-           [                    // the owner name of the model
-               'label' => 'Owner',
-               'value' => $model->owner->name,
-           ],
-       ],
+   $form = ActiveForm::begin([
+       'method' => 'get',
+       'action' => ['controller/action'],
    ]);
 
 
@@ -59,7 +52,7 @@ $fieldConfig				*yii/widgets/ActiveForm::$fieldConfig*
  function returning a configuration array. If the latter, the signature should
  be as follows,
 
-   function ($attribute, $index, $widget)
+   function ($model, $attribute)
 
  The value of this property will be merged recursively with the '$options'
  parameter passed to 'field()'.
@@ -398,15 +391,18 @@ METHOD DETAILS
  For example, you may use the following code in a controller action to respond
  to an AJAX validation request:
 
-   $form = ActiveForm::begin([
-       'method' => 'get',
-       'action' => ['controller/action'],
-   ]);
+   $model = new Post;
+   $model->load($_POST);
+   if (Yii::$app->request->isAjax) {
+       Yii::$app->response->format = Response::FORMAT_JSON;
+       return ActiveForm::validate($model);
+   }
+   // ... respond to non-AJAX request ...
 
  To validate multiple models, simply pass each model as a parameter to this
  method, like the following:
 
-   function ($model, $attribute)
+   ActiveForm::validate($model1, $model2, ...);
 
 
     [$model] (\yii\base\Model) The model to be validated
@@ -430,11 +426,10 @@ METHOD DETAILS
  For example, you may use the following code in a controller action to respond
  to an AJAX validation request:
 
-   $model = new Post;
-   $model->load($_POST);
+   // ... load $models ...
    if (Yii::$app->request->isAjax) {
        Yii::$app->response->format = Response::FORMAT_JSON;
-       return ActiveForm::validate($model);
+       return ActiveForm::validateMultiple($models);
    }
    // ... respond to non-AJAX request ...
 

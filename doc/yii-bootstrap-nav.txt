@@ -7,14 +7,24 @@ DESCRIPTION
 
  For example:
 
-   [
-       // required, the amount of progress as a percentage.
-       'percent' => 30,
-       // optional, the label to be displayed on the bar
-       'label' => '30%',
-       // optional, array, additional HTML attributes for the bar tag
-       'options' => [],
-   ]
+   echo Nav::widget([
+       'items' => [
+           [
+               'label' => 'Home',
+               'url' => ['site/index'],
+               'linkOptions' => [...],
+           ],
+           [
+               'label' => 'Dropdown',
+               'items' => [
+                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
+                    '<li class="divider"></li>',
+                    '<li class="dropdown-header">Dropdown Header</li>',
+                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+               ],
+           ],
+       ],
+   ]);
 
  Note: Multilevel dropdowns beyond Level 1 are not supported in Bootstrap 3.
 

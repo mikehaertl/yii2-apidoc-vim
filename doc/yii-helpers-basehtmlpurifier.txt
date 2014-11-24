@@ -37,31 +37,11 @@ METHOD DETAILS
 
       Here is a usage example of such a function:
 
-      $array = [
-          ['id' => '123', 'name' => 'aaa', 'class' => 'x'],
-          ['id' => '124', 'name' => 'bbb', 'class' => 'x'],
-          ['id' => '345', 'name' => 'ccc', 'class' => 'y'],
-      );
-
-      $result = ArrayHelper::map($array, 'id', 'name');
-      // the result is:
-      // [
-      //     '123' => 'aaa',
-      //     '124' => 'bbb',
-      //     '345' => 'ccc',
-      // ]
-
-      $result = ArrayHelper::map($array, 'id', 'name', 'class');
-      // the result is:
-      // [
-      //     'x' => [
-      //         '123' => 'aaa',
-      //         '124' => 'bbb',
-      //     ],
-      //     'y' => [
-      //         '345' => 'ccc',
-      //     ],
-      // ]
+        // Allow the HTML5 data attribute `data-type` on `img` elements.
+        $content = HtmlPurifier::process($content, function($config) {
+          $config->getHTMLDefinition(true)
+                 ->addAttribute('img', 'data-type', 'Text');
+        });
 
 
 

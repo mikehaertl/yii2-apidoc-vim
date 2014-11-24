@@ -11,33 +11,13 @@ DESCRIPTION
  Messages are sent by a '\yii\mail\MailerInterface|mailer', like the
  following,
 
-   class User extends ActiveRecord implements IdentityInterface
-   {
-       public static function findIdentity($id)
-       {
-           return static::findOne($id);
-       }
-
-       public static function findIdentityByAccessToken($token, $type = null)
-       {
-           return static::findOne(['access_token' => $token]);
-       }
-
-       public function getId()
-       {
-           return $this->id;
-       }
-
-       public function getAuthKey()
-       {
-           return $this->authKey;
-       }
-
-       public function validateAuthKey($authKey)
-       {
-           return $this->authKey === $authKey;
-       }
-   }
+   Yii::$app->mailer->compose()
+       ->setFrom('from@domain.com')
+       ->setTo($form->email)
+       ->setSubject($form->subject)
+       ->setTextBody('Plain text content')
+       ->setHtmlBody('<b>HTML content</b>')
+       ->send();
 
 
 

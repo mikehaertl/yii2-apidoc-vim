@@ -8,9 +8,23 @@ DESCRIPTION
  You may configure the email to be sent by setting the 'message' property,
  through which you can set the target email addresses, subject, etc.:
 
-   ['error', 'warning']
-   // which is equivalent to:
-   Logger::LEVEL_ERROR | Logger::LEVEL_WARNING
+   'components' => [
+       'log' => [
+            'targets' => [
+                [
+                    'class' => 'yii\log\EmailTarget',
+                    'mailer' =>'mailer',
+                    'levels' => ['error', 'warning'],
+                    'message' => [
+                        'from' => ['log@example.com'],
+                        'to' => ['developer1@example.com',
+ 'developer2@example.com'],
+                        'subject' => 'Log message',
+                    ],
+                ],
+            ],
+       ],
+   ],
 
  In the above 'mailer' is ID of the component that sends email and should be
  already configured.

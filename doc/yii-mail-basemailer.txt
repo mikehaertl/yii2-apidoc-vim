@@ -41,10 +41,11 @@ $messageConfig				*yii/mail/BaseMailer::$messageConfig*
 
  For example:
 
-   function foo($attribute, $params)
-   {
-       return "javascript";
-   }
+   [
+       'charset' => 'UTF-8',
+       'from' => 'noreply@mydomain.com',
+       'bcc' => 'developer@mydomain.com',
+   ]
 
 
 
@@ -69,11 +70,7 @@ $fileTransportCallback			*yii/mail/BaseMailer::$fileTransportCallback*
 
  The signature of the callback is:
 
-   [
-       'charset' => 'UTF-8',
-       'from' => 'noreply@mydomain.com',
-       'bcc' => 'developer@mydomain.com',
-   ]
+   function ($mailer, $message)
 
 
 

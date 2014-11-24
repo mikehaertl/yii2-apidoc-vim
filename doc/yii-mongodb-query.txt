@@ -17,14 +17,13 @@ DESCRIPTION
 
  For example,
 
-   # creates a new migration named 'create_user_collection'
-   yii mongodb-migrate/create create_user_collection
-
-   # applies ALL new migrations
-   yii mongodb-migrate
-
-   # reverts the last applied migration
-   yii mongodb-migrate/down
+   $query = new Query;
+   // compose the query
+   $query->select(['name', 'status'])
+       ->from('customer')
+       ->limit(10);
+   // execute the query
+   $rows = $query->all();
 
 
 

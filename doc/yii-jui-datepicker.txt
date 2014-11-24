@@ -7,28 +7,21 @@ DESCRIPTION
 
  For example to use the datepicker with a 'yii\base\Model|model':
 
-   echo Sortable::widget([
-       'items' => [
-           'Item 1',
-           ['content' => 'Item2'],
-           [
-               'content' => 'Item3',
-               'options' => ['tag' => 'li'],
-           ],
-       ],
-       'options' => ['tag' => 'ul'],
-       'itemOptions' => ['tag' => 'li'],
-       'clientOptions' => ['cursor' => 'move'],
+   echo DatePicker::widget([
+       'model' => $model,
+       'attribute' => 'from_date',
+       //'language' => 'ru',
+       //'dateFormat' => 'yyyy-MM-dd',
    ]);
 
  The following example will use the name property instead:
 
-   [
-       'content' => 'item content',
-       // the HTML attributes of the item container tag. This will overwrite
- "itemOptions".
-       'options' => [],
-   ]
+   echo DatePicker::widget([
+       'name'  => 'from_date',
+       'value'  => $value,
+       //'language' => 'ru',
+       //'dateFormat' => 'yyyy-MM-dd',
+   ]);
 
 
 
@@ -101,12 +94,8 @@ $dateFormat				*yii/jui/DatePicker::$dateFormat*
 
  For example:
 
-   echo DatePicker::widget([
-       'model' => $model,
-       'attribute' => 'from_date',
-       //'language' => 'ru',
-       //'dateFormat' => 'yyyy-MM-dd',
-   ]);
+   'MM/dd/yyyy' // date in ICU format
+   'php:m/d/Y' // the same date in PHP format
 
  If not set the default value will be taken from
  'Yii::$app->formatter->dateFormat'.

@@ -7,20 +7,23 @@ DESCRIPTION
 
  For example:
 
-   Droppable::begin([
-       'clientOptions' => ['accept' => '.special'],
+   echo ProgressBar::widget([
+       'clientOptions' => [
+           'value' => 75,
+       ],
    ]);
-
-   echo 'Droppable body here...';
-
-   Droppable::end();
 
  The following example will show the content enclosed between the 'begin()'
  and 'end()' calls within the widget container:
 
-   'clientEvents' => [
-       'change' => 'function () { alert('event "change" occured.'); }'
-   ],
+   php
+   ProgressBar::begin([
+       'clientOptions' => ['value' => 75],
+   ]);
+
+   echo '<div class="progress-label">Loading...</div>';
+
+   ProgressBar::end();
 
 
 

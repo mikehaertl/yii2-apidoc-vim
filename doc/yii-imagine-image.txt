@@ -7,16 +7,11 @@ DESCRIPTION
 
  Example of use:
 
-   use yii\authclient\OAuth1;
-
-   $oauthClient = new OAuth1();
-   $requestToken = $oauthClient->fetchRequestToken(); // Get request token
-   $url = $oauthClient->buildAuthUrl($requestToken); // Get authorization URL
-   return Yii::$app->getResponse()->redirect($url); // Redirect to
- authorization URL
-   // After user returns at our site:
-   $accessToken = $oauthClient->fetchAccessToken($requestToken); // Upgrade to
- access token
+   php
+   // generate a thumbnail image
+   Image::thumbnail('@webroot/img/test-image.jpg', 120, 120)
+       ->save(Yii::getAlias('@runtime/thumb-test-image.jpg'), ['quality' =>
+ 50]);
 
 
 

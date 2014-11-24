@@ -8,42 +8,15 @@ DESCRIPTION
  The following example will show the content enclosed between the 'begin()'
  and 'end()' calls within the modal window:
 
-   // default with label
-   echo Progress::widget([
-       'percent' => 60,
-       'label' => 'test',
+   php
+   Modal::begin([
+       'header' => '<h2>Hello world</h2>',
+       'toggleButton' => ['label' => 'click me'],
    ]);
 
-   // styled
-   echo Progress::widget([
-       'percent' => 65,
-       'barOptions' => ['class' => 'progress-bar-danger']
-   ]);
+   echo 'Say hello...';
 
-   // striped
-   echo Progress::widget([
-       'percent' => 70,
-       'barOptions' => ['class' => 'progress-bar-warning'],
-       'options' => ['class' => 'progress-striped']
-   ]);
-
-   // striped animated
-   echo Progress::widget([
-       'percent' => 70,
-       'barOptions' => ['class' => 'progress-bar-success'],
-       'options' => ['class' => 'active progress-striped']
-   ]);
-
-   // stacked bars
-   echo Progress::widget([
-       'bars' => [
-           ['percent' => 30, 'options' => ['class' => 'progress-bar-danger']],
-           ['percent' => 30, 'label' => 'test', 'options' => ['class' =>
- 'progress-bar-success']],
-           ['percent' => 35, 'options' => ['class' =>
- 'progress-bar-warning']],
-       ]
-   ]);
+   Modal::end();
 
 
 

@@ -59,8 +59,11 @@ $targets				*yii/console/controllers/AssetController::$targets*
  can specify the name of the output compressed file using 'css' and 'js' keys:
  For example:
 
-   # flushes caches specified by their id: "first", "second", "third"
-   yii cache/flush first second third
+   'app\config\AllAsset' => [
+       'js' => 'js/all-{hash}.js',
+       'css' => 'css/all-{hash}.css',
+       'depends' => [ ... ],
+   ]
 
  File names can contain placeholder "{hash}", which will be filled by the hash
  of the resulting file.

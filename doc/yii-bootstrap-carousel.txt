@@ -7,19 +7,23 @@ DESCRIPTION
 
  For example:
 
-   $form = ActiveForm::begin([
-       'layout' => 'horizontal',
-       'fieldConfig' => [
-           'template' =>
- "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-           'horizontalCssClasses' => [
-               'label' => 'col-sm-4',
-               'offset' => 'col-sm-offset-4',
-               'wrapper' => 'col-sm-8',
-               'error' => '',
-               'hint' => '',
+   echo Carousel::widget([
+       'items' => [
+           // the item contains only the image
+           '<img
+ src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"/>',
+           // equivalent to the above
+           ['content' => '<img
+ src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg"/>'],
+           // the item contains both the image and the caption
+           [
+               'content' => '<img
+ src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg"/>',
+               'caption' => '<h4>This is title</h4><p>This is the caption
+ text</p>',
+               'options' => [...],
            ],
-       ],
+       ]
    ]);
 
 
@@ -59,24 +63,15 @@ $items					*yii/bootstrap/Carousel::$items*
  (array) List of slides in the carousel. Each array element represents a
  single slide with the following structure:
 
-   echo Collapse::widget([
-       'items' => [
-           // equivalent to the above
-           [
-               'label' => 'Collapsible Group Item #1',
-               'content' => 'Anim pariatur cliche...',
-               // open its content by default
-               'contentOptions' => ['class' => 'in']
-           ],
-           // another group item
-           [
-               'label' => 'Collapsible Group Item #1',
-               'content' => 'Anim pariatur cliche...',
-               'contentOptions' => [...],
-               'options' => [...],
-           ],
-       ]
-   ]);
+   [
+       // required, slide content (HTML), such as an image tag
+       'content' => '<img
+ src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"/>',
+       // optional, the caption (HTML) of the slide
+       'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
+       // optional the HTML attributes of the slide container
+       'options' => [],
+   ]
 
 
 

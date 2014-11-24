@@ -25,8 +25,7 @@ DESCRIPTION
 
  To run the console application, enter the following on the command line:
 
-   $this->stderr('This will be red and underlined.', Console::FG_RED,
- Console::UNDERLINE);
+   yii <route> [--param1=value1 --param2 ...]
 
  where '<route>' refers to a controller route in the form of
  'ModuleID/ControllerID/ActionID' (e.g. 'sitemap/create'), and 'param1',
@@ -38,7 +37,7 @@ DESCRIPTION
  A 'help' command is provided by default, which lists available commands and
  shows their usage. To use this command, simply type:
 
-   yii <route> [--param1=value1 --param2 ...]
+   yii help
 
 
 
@@ -139,7 +138,10 @@ $aliases				*yii/console/Application::$aliases*
  (must start with '@') and the array values are the corresponding paths or
  aliases. For example,
 
-   yii help
+   [
+       '@models' => '@app/models', // an existing alias
+       '@backend' => __DIR__ . '/../backend',  // a directory
+   ]
 
 
 

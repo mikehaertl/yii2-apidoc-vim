@@ -8,21 +8,20 @@ DESCRIPTION
  To add a CheckboxColumn to the 'GridView', add it to the
  'GridView::columns|columns' configuration as follows:
 
-   function ($model, $key, $index, $grid)
+   'columns' => [
+       // ...
+       [
+           'class' => 'yii\grid\CheckboxColumn',
+           // you may configure additional properties here
+       ],
+   ]
 
  Users may click on the checkboxes to select rows of the grid. The selected
  rows may be obtained by calling the following JavaScript code:
 
-   [
-       ['class' => SerialColumn::className()],
-       [
-           'class' => DataColumn::className(),
-           'attribute' => 'name',
-           'format' => 'text',
-           'label' => 'Name',
-       ],
-       ['class' => CheckboxColumn::className()],
-   ]
+   var keys = $('#grid').yiiGridView('getSelectedRows');
+   // keys is an array consisting of the keys associated with the selected
+ rows
 
 
 

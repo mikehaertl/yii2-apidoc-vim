@@ -9,8 +9,21 @@ DESCRIPTION
  prefix for the URL rules. For example, the following code creates a rule for
  the 'admin' module:
 
-   'errorHandler' => [
-       'errorAction' => 'site/error',
+   new GroupUrlRule([
+       'prefix' => 'admin',
+       'rules' => [
+           'login' => 'user/login',
+           'logout' => 'user/logout',
+           'dashboard' => 'default/dashboard',
+       ],
+   ]);
+
+   // the above rule is equivalent to the following three rules:
+
+   [
+       'admin/login' => 'admin/user/login',
+       'admin/logout' => 'admin/user/logout',
+       'admin/dashboard' => 'admin/default/dashboard',
    ]
 
  The above example assumes the prefix for patterns and routes are the same.

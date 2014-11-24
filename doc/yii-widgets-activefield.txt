@@ -237,11 +237,9 @@ METHOD DETAILS
     will be called to generate the content. The signature of the callable
     should be:
 
-      // $this is the view object currently being used
-      echo Breadcrumbs::widget([
-          'links' => isset($this->params['breadcrumbs']) ?
-    $this->params['breadcrumbs'] : [],
-      ]);
+      function ($field) {
+          return $html;
+      }
 
 
 
@@ -493,12 +491,9 @@ METHOD DETAILS
     extra attributes for the corresponding option tags. For example,
 
       [
-          'label' => 'label of the link',  // required
-          'url' => 'url of the link',      // optional, will be processed by
-    Url::to()
-          'template' => 'own template of the item', // optional, if not set
-    $this->itemTemplate will be used
-      ]
+          'value1' => ['disabled' => true],
+          'value2' => ['label' => 'value 2'],
+      ];
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -536,9 +531,10 @@ METHOD DETAILS
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
 
-      function ($field) {
-          return $html;
-      }
+      [
+          'value1' => ['disabled' => true],
+          'value2' => ['label' => 'value 2'],
+      ];
 
 
       - groups: array, the attributes for the optgroup tags. The structure
@@ -579,10 +575,7 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      [
-          'value1' => ['disabled' => true],
-          'value2' => ['label' => 'value 2'],
-      ];
+      function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the checkbox in the whole list;
     $label is the label for the checkbox; and $name, $value and $checked
@@ -614,10 +607,7 @@ METHOD DETAILS
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
 
-      [
-          'value1' => ['disabled' => true],
-          'value2' => ['label' => 'value 2'],
-      ];
+      function ($index, $label, $name, $checked, $value)
 
     where $index is the zero-based index of the radio button in the whole
     list; $label is the label for the radio button; and $name, $value and
@@ -640,7 +630,10 @@ METHOD DETAILS
  For example to use the 'MaskedInput' widget to get some date input, you can
  use the following code, assuming that '$form' is your 'ActiveForm' instance:
 
-   function ($index, $label, $name, $checked, $value)
+   $form->field($model, 'date')->widget(\yii\widgets\MaskedInput::className(),
+ [
+       'mask' => '99/99/9999',
+   ]);
 
 
     [$class] (string) The widget class name

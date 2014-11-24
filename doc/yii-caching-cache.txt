@@ -29,21 +29,18 @@ DESCRIPTION
 
  A typical usage pattern of cache is like the following:
 
-   CREATE TABLE cache (
-       id char(128) NOT NULL PRIMARY KEY,
-       expire int(11),
-       data BLOB
-   );
-
- Because Cache implements the ArrayAccess interface, it can be used like an
- array. For example,
-
    $key = 'demo';
    $data = $cache->get($key);
    if ($data === false) {
        // ...generate $data here...
        $cache->set($key, $data, $duration, $dependency);
    }
+
+ Because Cache implements the ArrayAccess interface, it can be used like an
+ array. For example,
+
+   $cache['foo'] = 'some data';
+   echo $cache['foo'];
 
  Derived classes should implement the following methods which do the actual
  cache storage operations:

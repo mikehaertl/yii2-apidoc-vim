@@ -14,26 +14,15 @@ DESCRIPTION
 
  For example:
 
-   [
-       // built-in "required" validator
-       [['username', 'password'], 'required'],
-       // built-in "string" validator customized with "min" and "max"
- properties
-       ['username', 'string', 'min' => 3, 'max' => 12],
-       // built-in "compare" validator that is used in "register" scenario
- only
-       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
- 'register'],
-       // an inline validator defined via the "authenticate()" method in the
- model class
-       ['password', 'authenticate', 'on' => 'login'],
-       // a validator of class "DateRangeValidator"
-       ['dateRange', 'DateRangeValidator'],
-   ];
+   $record = new ImageFile();
+   $record->file = '/path/to/some/file.jpg';
+   $record->save();
 
  You can also specify file content via 'newFileContent' attribute:
 
-   $images = ImageFile::find()->with('tags')->asArray()->all();
+   $record = new ImageFile();
+   $record->newFileContent = 'New file content';
+   $record->save();
 
  Note: 'newFileContent' always takes precedence over 'file'.
 
@@ -57,9 +46,15 @@ $errors					*yii/mongodb/file/ActiveRecord::$errors*
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
 
-   $record = new ImageFile();
-   $record->file = '/path/to/some/file.jpg';
-   $record->save();
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
 
 
 
@@ -249,9 +244,13 @@ METHOD DETAILS
  attributes. Note: all attributes defined in base Active Record class should
  be always present in returned array. For example:
 
-   $record = new ImageFile();
-   $record->newFileContent = 'New file content';
-   $record->save();
+   public function attributes()
+   {
+       return array_merge(
+           parent::attributes(),
+           ['tags', 'status']
+       );
+   }
 
 
 
@@ -592,27 +591,27 @@ METHOD DETAILS
  'one()' or 'all()' is called to return populated ActiveRecord instances. For
  example,
 
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
  This method is also called by 'BaseActiveRecord::hasOne()' and
  'BaseActiveRecord::hasMany()' to create a relational query.
 
  You may override this method to return a customized query. For example,
 
-   public function attributes()
+   class Customer extends ActiveRecord
    {
-       return array_merge(
-           parent::attributes(),
-           ['tags', 'status']
-       );
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
    }
 
  The following code shows how to apply a default condition for all queries:

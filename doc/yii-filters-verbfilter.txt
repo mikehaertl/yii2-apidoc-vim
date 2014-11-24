@@ -12,24 +12,21 @@ DESCRIPTION
  class. For example, the following declarations will define a typical set of
  allowed request methods for REST CRUD actions.
 
-   // in application configuration
-   use yii\web\Response;
-
-   return [
-       'bootstrap' => [
-           [
-               'class' => 'yii\filters\ContentNegotiator',
-               'formats' => [
-                   'application/json' => Response::FORMAT_JSON,
-                   'application/xml' => Response::FORMAT_XML,
-               ],
-               'languages' => [
-                   'en',
-                   'de',
+   public function behaviors()
+   {
+       return [
+           'verbs' => [
+               'class' => \yii\filters\VerbFilter::className(),
+               'actions' => [
+                   'index'  => ['get'],
+                   'view'   => ['get'],
+                   'create' => ['get', 'post'],
+                   'update' => ['get', 'put', 'post'],
+                   'delete' => ['post', 'delete'],
                ],
            ],
-       ],
-   ];
+       ];
+   }
 
 
 
@@ -52,26 +49,12 @@ $actions				*yii/filters/VerbFilter::$actions*
 
  For example,
 
-   use yii\web\Response;
-
-   public function behaviors()
-   {
-       return [
-           [
-               'class' => 'yii\filters\ContentNegotiator',
-               'only' => ['view', 'index'],  // in a controller
-               // if in a module, use the following IDs for user actions
-               // 'only' => ['user/view', 'user/index']
-               'formats' => [
-                   'application/json' => Response::FORMAT_JSON,
-               ],
-               'languages' => [
-                   'en',
-                   'de',
-               ],
-           ],
-       ];
-   }
+   [
+     'create' => ['get', 'post'],
+     'update' => ['get', 'put', 'post'],
+     'delete' => ['post', 'delete'],
+     '*' => ['get'],
+   ]
 
 
 

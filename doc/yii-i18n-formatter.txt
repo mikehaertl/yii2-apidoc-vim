@@ -67,10 +67,8 @@ $dateFormat				*yii/i18n/Formatter::$dateFormat*
 
  For example:
 
-   [
-       'core' => 'core.php',
-       'ext' => 'extensions.php',
-   ]
+   'MM/dd/yyyy' // date in ICU format
+   'php:m/d/Y' // the same date in PHP format
 
 
 
@@ -87,8 +85,8 @@ $timeFormat				*yii/i18n/Formatter::$timeFormat*
 
  For example:
 
-   'MM/dd/yyyy' // date in ICU format
-   'php:m/d/Y' // the same date in PHP format
+   'HH:mm:ss' // time in ICU format
+   'php:H:i:s' // the same time in PHP format
 
 
 
@@ -106,8 +104,8 @@ $datetimeFormat				*yii/i18n/Formatter::$datetimeFormat*
 
  For example:
 
-   'HH:mm:ss' // time in ICU format
-   'php:H:i:s' // the same time in PHP format
+   'MM/dd/yyyy HH:mm:ss' // date and time in ICU format
+   'php:m/d/Y H:i:s' // the same date and time in PHP format
 
 
 
@@ -138,8 +136,10 @@ $numberFormatterOptions			*yii/i18n/Formatter::$numberFormatterOptions*
  For example to adjust the maximum and minimum value of fraction digits you
  can configure this property like the following:
 
-   'MM/dd/yyyy HH:mm:ss' // date and time in ICU format
-   'php:m/d/Y H:i:s' // the same date and time in PHP format
+   [
+       NumberFormatter::MIN_FRACTION_DIGITS => 0,
+       NumberFormatter::MAX_FRACTION_DIGITS => 2,
+   ]
 
 
 
@@ -158,8 +158,7 @@ $numberFormatterTextOptions		*yii/i18n/Formatter::$numberFormatterTextOptions*
  this property like the following:
 
    [
-       NumberFormatter::MIN_FRACTION_DIGITS => 0,
-       NumberFormatter::MAX_FRACTION_DIGITS => 2,
+       NumberFormatter::NEGATIVE_PREFIX => 'MINUS',
    ]
 
 

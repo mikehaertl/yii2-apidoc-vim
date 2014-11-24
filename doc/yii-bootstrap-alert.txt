@@ -7,20 +7,25 @@ DESCRIPTION
 
  For example,
 
-   $command = $connection->createCommand("SELECT * FROM idx_article WHERE
- MATCH('programming')");
-   $articles = $command->queryAll();
-   $command = $connection->createCommand('UPDATE idx_article SET status=2
- WHERE id=1');
-   $command->execute();
+   echo Alert::widget([
+       'options' => [
+           'class' => 'alert-info',
+       ],
+       'body' => 'Say hello...',
+   ]);
 
  The following example will show the content enclosed between the 'begin()'
  and 'end()' calls within the alert box:
 
-   echo Button::widget([
-       'label' => 'Action',
-       'options' => ['class' => 'btn-lg'],
+   Alert::begin([
+       'options' => [
+           'class' => 'alert-warning',
+       ],
    ]);
+
+   echo 'Say hello...';
+
+   Alert::end();
 
 
 

@@ -31,7 +31,10 @@ $findModel				*yii/rest/Action::$findModel*
  corresponding to the specified primary key value. If not set, 'findModel()'
  will be used instead. The signature of the callable should be:
 
-   function ($action) {
+   function ($id, $action) {
+       // $id is the primary key value. If composite primary key, the key
+ values
+       // will be separated by comma.
        // $action is the action object currently running
    }
 
@@ -44,11 +47,9 @@ $checkAccess				*yii/rest/Action::$checkAccess*
  not set, the access check will not be performed. The signature of the
  callable should be as follows,
 
-   function ($id, $action) {
-       // $id is the primary key value. If composite primary key, the key
- values
-       // will be separated by comma.
-       // $action is the action object currently running
+   function ($action, $model = null) {
+       // $model is the requested model instance.
+       // If null, it means no specific model (e.g. IndexAction)
    }
 
 

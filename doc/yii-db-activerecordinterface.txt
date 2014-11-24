@@ -112,31 +112,28 @@ this model
  'one()' or 'all()' is called to return populated ActiveRecord instances. For
  example,
 
-   return [
-       'email',
-       'firstName' => 'first_name',
-       'lastName' => 'last_name',
-       'fullName' => function () {
-           return $this->first_name . ' ' . $this->last_name;
-       },
-   ];
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
 
  This method is also called by 'BaseActiveRecord::hasOne()' and
  'BaseActiveRecord::hasMany()' to create a relational query.
 
  You may override this method to return a customized query. For example,
 
-   return [
-       // ...
-       'bootstrap' => [
-           "path\\to\\MyBootstrapClass1",
-           [
-               'class' => "path\\to\\MyBootstrapClass2",
-               'prop1' => 'value1',
-               'prop2' => 'value2',
-           ],
-       ],
-   ];
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
 
  The following code shows how to apply a default condition for all queries:
 
@@ -170,14 +167,17 @@ matches.
  Note that this method will automatically call the 'one()' method and return
  an 'ActiveRecordInterface|ActiveRecord' instance. For example,
 
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
+   // find a single customer whose primary key value is 10
+   $customer = Customer::findOne(10);
 
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the first customer whose age is 30 and whose status is 1
+   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
 
 
     [$condition] (mixed) Primary key value or a set of column values
@@ -208,14 +208,23 @@ matches.
  Note that this method will automatically call the 'all()' method and return
  an array of 'ActiveRecordInterface|ActiveRecord' instances. For example,
 
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
+   // find the customers whose primary key value is 10
+   $customers = Customer::findAll(10);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => 10])->all();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findAll([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+   // find customers whose age is 30 and whose status is 1
+   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
     [$condition] (mixed) Primary key value or a set of column values
@@ -230,17 +239,7 @@ matches.
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   // find a single customer whose primary key value is 10
-   $customer = Customer::findOne(10);
-
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['id' => 10])->one();
-
-   // find the first customer whose age is 30 and whose status is 1
-   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
+   Customer::updateAll(['status' => 1], ['status' => '2']);
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved for
@@ -261,23 +260,7 @@ matches.
 
  For example, to delete all customers whose status is 3:
 
-   // find the customers whose primary key value is 10
-   $customers = Customer::findAll(10);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => 10])->all();
-
-   // find the customers whose primary key value is 10, 11 or 12.
-   $customers = Customer::findAll([10, 11, 12]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
-
-   // find customers whose age is 30 and whose status is 1
-   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
+   Customer::deleteAll([status = 3]);
 
 
     [$condition] (array) The condition that matches the records that should
@@ -296,7 +279,10 @@ matches.
 
  For example, to save a customer record:
 
-   Customer::updateAll(['status' => 1], ['status' => '2']);
+   $customer = new Customer; // or $customer = Customer::findOne($id);
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->save();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -316,7 +302,10 @@ successfully.
 
  Usage example:
 
-   Customer::deleteAll([status = 3]);
+   $customer = new Customer;
+   $customer->name = $name;
+   $customer->email = $email;
+   $customer->insert();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the
@@ -337,10 +326,10 @@ successful.
 
  Usage example:
 
-   $customer = new Customer; // or $customer = Customer::findOne($id);
+   $customer = Customer::findOne($id);
    $customer->name = $name;
    $customer->email = $email;
-   $customer->save();
+   $customer->update();
 
 
     [$runValidation] (boolean) Whether to perform validation before saving the

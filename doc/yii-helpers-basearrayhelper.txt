@@ -28,32 +28,28 @@ METHOD DETAILS
     that need to put into the resulting arrays. The properties specified for
     each class is an array of the following format:
 
-      // /index?r=site/index
-      echo Url::to(['site/index']);
-
-      // /index?r=site/index&src=ref1#name
-      echo Url::to(['site/index', 'src' => 'ref1', '#' => 'name']);
-
-      // the currently requested URL
-      echo Url::to();
-
-      // /images/logo.gif
-      echo Url::to('@web/images/logo.gif');
-
-      // images/logo.gif
-      echo Url::to('images/logo.gif');
-
-      // http://www.example.com/images/logo.gif
-      echo Url::to('@web/images/logo.gif', true);
-
-      // https://www.example.com/images/logo.gif
-      echo Url::to('@web/images/logo.gif', 'https');
+      [
+          'app\models\Post' => [
+              'id',
+              'title',
+              // the key name in array result => property name
+              'createTime' => 'created_at',
+              // the key name in array result => anonymous function
+              'length' => function ($post) {
+                  return strlen($post->content);
+              },
+          ],
+      ]
 
     The result of 'ArrayHelper::toArray($post, $properties)' could be like the
     following:
 
-      $this->registerLinkTag(['rel' => 'canonical', 'href' =>
-    Url::canonical()]);
+      [
+          'id' => 123,
+          'title' => 'test',
+          'createTime' => '2013-01-01 12:00AM',
+          'length' => 301,
+      ]
 
 
     [$recursive] (boolean) Whether to recursively converts properties which
@@ -95,18 +91,17 @@ METHOD DETAILS
 
  Below are some usage examples,
 
-   [
-       'app\models\Post' => [
-           'id',
-           'title',
-           // the key name in array result => property name
-           'createTime' => 'created_at',
-           // the key name in array result => anonymous function
-           'length' => function ($post) {
-               return strlen($post->content);
-           },
-       ],
-   ]
+   // working with array
+   $username = \yii\helpers\ArrayHelper::getValue($_POST, 'username');
+   // working with object
+   $username = \yii\helpers\ArrayHelper::getValue($user, 'username');
+   // working with anonymous function
+   $fullName = \yii\helpers\ArrayHelper::getValue($user, function ($user,
+ $defaultValue) {
+       return $user->firstName . ' ' . $user->lastName;
+   });
+   // using dot format to retrieve the property of embedded object
+   $street = \yii\helpers\ArrayHelper::getValue($users, 'address.street');
 
 
     [$array] (array|object) Array or object to extract value from
@@ -125,12 +120,11 @@ METHOD DETAILS
 
  Usage examples,
 
-   [
-       'id' => 123,
-       'title' => 'test',
-       'createTime' => '2013-01-01 12:00AM',
-       'length' => 301,
-   ]
+   // $array = ['type' => 'A', 'options' => [1, 2]];
+   // working with array
+   $type = \yii\helpers\ArrayHelper::remove($array, 'type');
+   // $array content
+   // $array = ['options' => [1, 2]];
 
 
     [$array] (array) The array to extract value from
@@ -155,17 +149,21 @@ METHOD DETAILS
 
  For example,
 
-   // working with array
-   $username = \yii\helpers\ArrayHelper::getValue($_POST, 'username');
-   // working with object
-   $username = \yii\helpers\ArrayHelper::getValue($user, 'username');
-   // working with anonymous function
-   $fullName = \yii\helpers\ArrayHelper::getValue($user, function ($user,
- $defaultValue) {
-       return $user->firstName . ' ' . $user->lastName;
+   $array = [
+       ['id' => '123', 'data' => 'abc'],
+       ['id' => '345', 'data' => 'def'],
+   ];
+   $result = ArrayHelper::index($array, 'id');
+   // the result is:
+   // [
+   //     '123' => ['id' => '123', 'data' => 'abc'],
+   //     '345' => ['id' => '345', 'data' => 'def'],
+   // ]
+
+   // using anonymous function
+   $result = ArrayHelper::index($array, function ($element) {
+       return $element['id'];
    });
-   // using dot format to retrieve the property of embedded object
-   $street = \yii\helpers\ArrayHelper::getValue($users, 'address.street');
 
 
     [$array] (array) The array that needs to be indexed
@@ -183,11 +181,17 @@ METHOD DETAILS
 
  For example,
 
-   // $array = ['type' => 'A', 'options' => [1, 2]];
-   // working with array
-   $type = \yii\helpers\ArrayHelper::remove($array, 'type');
-   // $array content
-   // $array = ['options' => [1, 2]];
+   $array = [
+       ['id' => '123', 'data' => 'abc'],
+       ['id' => '345', 'data' => 'def'],
+   ];
+   $result = ArrayHelper::getColumn($array, 'id');
+   // the result is: ['123', '345']
+
+   // using anonymous function
+   $result = ArrayHelper::getColumn($array, function ($element) {
+       return $element['id'];
+   });
 
 
     [$array] (array) 
@@ -209,20 +213,30 @@ METHOD DETAILS
  For example,
 
    $array = [
-       ['id' => '123', 'data' => 'abc'],
-       ['id' => '345', 'data' => 'def'],
-   ];
-   $result = ArrayHelper::index($array, 'id');
+       ['id' => '123', 'name' => 'aaa', 'class' => 'x'],
+       ['id' => '124', 'name' => 'bbb', 'class' => 'x'],
+       ['id' => '345', 'name' => 'ccc', 'class' => 'y'],
+   );
+
+   $result = ArrayHelper::map($array, 'id', 'name');
    // the result is:
    // [
-   //     '123' => ['id' => '123', 'data' => 'abc'],
-   //     '345' => ['id' => '345', 'data' => 'def'],
+   //     '123' => 'aaa',
+   //     '124' => 'bbb',
+   //     '345' => 'ccc',
    // ]
 
-   // using anonymous function
-   $result = ArrayHelper::index($array, function ($element) {
-       return $element['id'];
-   });
+   $result = ArrayHelper::map($array, 'id', 'name', 'class');
+   // the result is:
+   // [
+   //     'x' => [
+   //         '123' => 'aaa',
+   //         '124' => 'bbb',
+   //     ],
+   //     'y' => [
+   //         '345' => 'ccc',
+   //     ],
+   // ]
 
 
     [$array] (array) 

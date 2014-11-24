@@ -12,11 +12,24 @@ DESCRIPTION
 
 
 
-   'app\config\AllAsset' => [
-       'js' => 'js/all-{hash}.js',
-       'css' => 'css/all-{hash}.css',
-       'depends' => [ ... ],
-   ]
+   #load fixtures from UsersFixture class with default namespace
+ "tests\unit\fixtures"
+   yii fixture/load User
+
+   #also a short version of this command (generate action is default)
+   yii fixture User
+
+   #load all fixtures
+   yii fixture "*"
+
+   #load all fixtures except User
+   yii fixture "*" -User
+
+   #append fixtures to already loaded
+   yii fixture User --append
+
+   #load fixtures with different namespace.
+   yii fixture/load User --namespace=alias\my\custom\namespace\goes\here
 
  The 'unload' sub-command can be used similarly to unload fixtures.
 
@@ -377,36 +390,6 @@ METHOD DETAILS
 
  For example,
 
-   #load fixtures from UsersFixture class with default namespace
- "tests\unit\fixtures"
-   yii fixture/load User
-
-   #also a short version of this command (generate action is default)
-   yii fixture User
-
-   #load all fixtures
-   yii fixture "*"
-
-   #load all fixtures except User
-   yii fixture "*" -User
-
-   #append fixtures to already loaded
-   yii fixture User --append
-
-   #load fixtures with different namespace.
-   yii fixture/load User --namespace=alias\my\custom\namespace\goes\here
-
-
-
-
-*yii/console/controllers/FixtureController::actionUnload*	public
->
- actionUnload()
-<
-(void)
-
- For example,
-
    # load the fixture data specified by User and UserProfile.
    # any existing fixture data will be removed first
    yii fixture/load User UserProfile
@@ -420,6 +403,26 @@ METHOD DETAILS
 
    # load all fixtures except User and UserProfile
    yii fixture/load "*" -User -UserProfile
+
+
+
+
+*yii/console/controllers/FixtureController::actionUnload*	public
+>
+ actionUnload()
+<
+(void)
+
+ For example,
+
+   # unload the fixture data specified by User and UserProfile.
+   yii fixture/unload User UserProfile
+
+   # unload all fixtures found under 'tests\unit\fixtures'
+   yii fixture/unload "*"
+
+   # unload all fixtures except User and UserProfile
+   yii fixture/unload "*" -User -UserProfile
 
 
 

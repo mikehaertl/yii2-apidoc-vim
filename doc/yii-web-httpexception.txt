@@ -27,14 +27,10 @@ DESCRIPTION
  Throwing an HttpException like in the following example will result in the
  404 page to be displayed.
 
-   # creates a new migration named 'create_user_table'
-   yii migrate/create create_user_table
-
-   # applies ALL new migrations
-   yii migrate
-
-   # reverts the last applied migration
-   yii migrate/down
+   if ($item === null) { // item does not exist
+       throw new \yii\web\HttpException(404, 'The requested Item could not be
+ found.');
+   }
 
 
 
