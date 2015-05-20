@@ -39,32 +39,32 @@ $template				*yii/apidoc/components/BaseController::$template*
 $exclude				*yii/apidoc/components/BaseController::$exclude*
  (string|array) Files to exclude.
 
+$pageTitle				*yii/apidoc/components/BaseController::$pageTitle*
+ (string) Page title
+
 $behaviors				*yii/apidoc/components/BaseController::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $modules				*yii/apidoc/components/BaseController::$modules*
- (\yii\base\Module[]) All ancestor modules that this controller is located
- within.
+ See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/apidoc/components/BaseController::$uniqueId*
- (string) The controller ID that is prefixed with the module ID (if any).
+ See |yii/base/Controller::$uniqueId|
 
 $route					*yii/apidoc/components/BaseController::$route*
- (string) The route (module ID, controller ID and action ID) of the current
- request.
+ See |yii/base/Controller::$route|
 
 $view					*yii/apidoc/components/BaseController::$view*
- (\yii\base\View|\yii\web\View) The view object that can be used to render
- views or view files.
+ See |yii/base/Controller::$view|
 
 $viewPath				*yii/apidoc/components/BaseController::$viewPath*
- (string) The view path that may be prefixed to a relative view name.
+ See |yii/base/ViewContextInterface::$viewPath|
 
 $helpSummary				*yii/apidoc/components/BaseController::$helpSummary*
- (string)
+ See |yii/console/Controller::$helpSummary|
 
 $help					*yii/apidoc/components/BaseController::$help*
- (string)
+ See |yii/console/Controller::$help|
 
 
 
@@ -215,6 +215,10 @@ METHOD DETAILS
  See |yii/base/Controller::render|
 
 
+*yii/apidoc/components/BaseController::renderContent*	public
+ See |yii/base/Controller::renderContent|
+
+
 *yii/apidoc/components/BaseController::renderPartial*	public
  See |yii/base/Controller::renderPartial|
 
@@ -324,37 +328,37 @@ METHOD DETAILS
 >
  normalizeTargetDir($target)
 <
-(void)
+(boolean|string) 
 
-    [$target] () 
+    [$target] (string) 
 
 
 *yii/apidoc/components/BaseController::searchFiles*	protected
 >
  searchFiles($sourceDirs)
 <
-(void)
+(array|boolean) List of files to process or false on failure
 
-    [$sourceDirs] () 
+    [$sourceDirs] (array) 
 
 
 *yii/apidoc/components/BaseController::findFiles*		protected
 >
  findFiles($dir, $except='[]')
 <
-(void)
+(array) Files found.
 
-    [$dir] () 
-    [$except] () 
+    [$dir] (string) Directory to search files in.
+    [$except] (array) List of names to exclude from search.
 
 
 *yii/apidoc/components/BaseController::loadContext*	protected
 >
  loadContext($location)
 <
-(void)
+(\yii\apidoc\models\Context) 
 
-    [$location] () 
+    [$location] (string) 
 
 
 *yii/apidoc/components/BaseController::storeContext*	protected
@@ -363,8 +367,8 @@ METHOD DETAILS
 <
 (void)
 
-    [$context] () 
-    [$location] () 
+    [$context] (\yii\apidoc\models\Context) 
+    [$location] (string) 
 
 
 *yii/apidoc/components/BaseController::updateContext*	protected

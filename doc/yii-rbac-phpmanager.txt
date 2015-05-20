@@ -54,15 +54,13 @@ $rules					*yii/rbac/PhpManager::$rules*
  (\yii\rbac\Rule[])
 
 $behaviors				*yii/rbac/PhpManager::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $roles					*yii/rbac/PhpManager::$roles*
- (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
- names.
+ See |yii/rbac/BaseManager::$roles|
 
 $permissions				*yii/rbac/PhpManager::$permissions*
- (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
- by the permission names.
+ See |yii/rbac/BaseManager::$permissions|
 
 
 
@@ -201,7 +199,7 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully added to the system
 
-    [$item] (\yii\rbac\Item) 
+    [$item] (\yii\rbac\Item) The item to add
 
 
 *yii/rbac/PhpManager::addRule*				protected
@@ -210,7 +208,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully added to the system
 
-    [$rule] (\yii\rbac\Rule) 
+    [$rule] (\yii\rbac\Rule) The rule to add
 
 
 *yii/rbac/PhpManager::removeItem*				public
@@ -219,7 +217,7 @@ returned if no such item.
 <
 (boolean) Whether the role or permission is successfully removed
 
-    [$item] (\yii\rbac\Item) 
+    [$item] (\yii\rbac\Item) The item to remove
 
 
 *yii/rbac/PhpManager::removeRule*				protected
@@ -228,7 +226,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully removed
 
-    [$rule] (\yii\rbac\Rule) 
+    [$rule] (\yii\rbac\Rule) The rule to remove
 
 
 *yii/rbac/PhpManager::updateItem*				protected
@@ -237,8 +235,8 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully updated
 
-    [$name] (string) The old name of the auth item
-    [$item] (\yii\rbac\Item) 
+    [$name] (string) The name of the item being updated
+    [$item] (\yii\rbac\Item) The updated item
 
 
 *yii/rbac/PhpManager::updateRule*				public
@@ -247,8 +245,8 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully updated
 
-    [$name] (string) The old name of the rule
-    [$rule] (\yii\rbac\Rule) 
+    [$name] (string) The name of the rule being updated
+    [$rule] (\yii\rbac\Rule) The updated rule
 
 
 *yii/rbac/PhpManager::createRole*				public
@@ -342,7 +340,7 @@ indexed by the permission names.
 >
  getRule($name)
 <
-(\yii\rbac\Rule) The rule object, or null if the specified name does not
+(null|\yii\rbac\Rule) The rule object, or null if the specified name does not
 correspond to a rule.
 
     [$name] (string) The rule name
@@ -441,8 +439,8 @@ correspond to a rule.
 >
  getAssignment($roleName, $userId)
 <
-(\yii\rbac\Assignment) The assignment information. Null is returned if the
-role is not assigned to the user.
+(null|\yii\rbac\Assignment) The assignment information. Null is returned if
+the role is not assigned to the user.
 
     [$roleName] (string) The role name
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')

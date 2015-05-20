@@ -77,11 +77,10 @@ $jsFiles				*yii/web/View::$jsFiles*
  (array) The registered JS files.
 
 $behaviors				*yii/web/View::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $viewFile				*yii/web/View::$viewFile*
- (string|boolean) The view file currently being rendered. False if no view
- file is being rendered.
+ See |yii/base/View::$viewFile|
 
 $assetManager				*yii/web/View::$assetManager*
  (\yii\web\AssetManager) The asset manager. Defaults to the "assetManager"
@@ -357,7 +356,8 @@ application component.
 (\yii\web\AssetBundle) The registered asset bundle instance
 
  All dependent asset bundles will be registered.
-    [$name] (string) The name of the asset bundle.
+    [$name] (string) The class name of the asset bundle (without the leading
+    backslash)
     [$position] (integer|null) If set, this forces a minimum position for
     javascript files. This will adjust depending assets javascript file
     position or fail if requirement can not be met. If this is null, asset
@@ -371,6 +371,15 @@ application component.
 <
 (void)
 
+ For example, a description meta tag can be added like the following:
+
+   $view->registerMetaTag([
+       'name' => 'description',
+       'content' => 'This website is about funny raccoons.'
+   ]);
+
+ will result in the meta tag '<meta name="description" content="This website
+ is about funny raccoons.">'.
     [$options] (array) The HTML attributes for the meta tag.
     [$key] (string) The key that identifies the meta tag. If two meta tags are
     registered with the same key, the latter will overwrite the former. If
@@ -383,6 +392,18 @@ application component.
 <
 (void)
 
+ For example, a link tag for a custom
+ [favicon](http://www.w3.org/2005/10/howto-favicon) can be added like the
+ following:
+
+   $view->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' =>
+ '/myicon.png']);
+
+ which will result in the following HTML: '<link rel="icon" type="image/png"
+ href="/myicon.png">'.
+
+ **Note:** To register link tags for CSS stylesheets, use 'registerCssFile()'
+ instead, which has more options for this kind of link tag.
     [$options] (array) The HTML attributes for the link tag.
     [$key] (string) The key that identifies the link tag. If two link tags are
     registered with the same key, the latter will overwrite the former. If
@@ -395,8 +416,8 @@ application component.
 <
 (void)
 
-    [$css] (string) The CSS code block to be registered
-    [$options] (array) The HTML attributes for the style tag.
+    [$css] (string) The content of the CSS code block to be registered
+    [$options] (array) The HTML attributes for the '<style>'-tag.
     [$key] (string) The key that identifies the CSS code block. If null, it
     will use $css as the key. If two CSS code blocks are registered with the
     same key, the latter will overwrite the former.

@@ -2,6 +2,19 @@
 *yii/validators/DateValidator*   >> |yii/validators/Validator|
 ==============================
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It can also parse internationalized dates in a specific 'locale' like e.g.
+ '12 мая 2014' when 'format' is configured to use a time pattern in ICU
+ format.
+
+ It is further possible to limit the date within a certain range using 'min'
+ and 'max'.
+
+ Additional to validating the date it can also export the parsed timestamp as
+ a machine readable format which can be configured using 'timestampAttribute'.
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -57,8 +70,21 @@ $format					*yii/validators/DateValidator::$format*
 
    'MM/dd/yyyy' // date in ICU format
    'php:m/d/Y' // the same date in PHP format
+   'MM/dd/yyyy HH:mm' // not only dates but also times can be validated
 
-
+ **Note:** the underlying date parsers being used vary dependent on the
+ format. If you use the ICU format and the [PHP intl
+ extension](http://php.net/manual/en/book.intl.php) is installed, the
+ [IntlDateFormatter](http://php.net/manual/en/intldateformatter.parse.php) is
+ used to parse the input value. In all other cases the PHP
+ [DateTime](http://php.net/manual/en/datetime.createfromformat.php) class is
+ used. The IntlDateFormatter has the advantage that it can parse international
+ dates like '12. Mai 2015' or '12 мая 2014', while the PHP parser is
+ limited to English only. The PHP parser however is more strict about the
+ input format as it will not accept '12.05.05' for the format 'php:d.m.Y', but
+ the IntlDateFormatter will accept it for the format 'dd-MM-yyyy'. If you need
+ to use the IntlDateFormatter you can avoid this problem by specifying a
+ 'min|minimum date'.
 
 $locale					*yii/validators/DateValidator::$locale*
  (string) The locale ID that is used to localize the date parsing. This is
@@ -80,8 +106,55 @@ $timestampAttribute			*yii/validators/DateValidator::$timestampAttribute*
  property is not null and the validation is successful, the named attribute
  will receive the parsing result.
 
+ This can be the same attribute as the one being validated. If this is the
+ case, the original value will be overwritten with the timestamp value after
+ successful validation.
+
+$timestampAttributeFormat		*yii/validators/DateValidator::$timestampAttributeFormat*
+ (string) The format to use when populating the 'timestampAttribute'. The
+ format can be specified in the same way as for 'format'.
+
+ If not set, 'timestampAttribute' will receive a UNIX timestamp. If
+ 'timestampAttribute' is not set, this property will be ignored.
+
+$timestampAttributeTimeZone		*yii/validators/DateValidator::$timestampAttributeTimeZone*
+ (string) The timezone to use when populating the 'timestampAttribute'.
+ Defaults to 'UTC'.
+
+ This can be any value that may be passed to
+ [date_default_timezone_set()](http://www.php.net/manual/en/function.date-default-timezone-set.php)
+ e.g. 'UTC', 'Europe/Berlin' or 'America/Chicago'. Refer to the [php
+ manual](http://www.php.net/manual/en/timezones.php) for available timezones.
+
+ If 'timestampAttributeFormat' is not set, this property will be ignored.
+
+$max					*yii/validators/DateValidator::$max*
+ (integer|string) Upper limit of the date. Defaults to null, meaning no upper
+ limit. This can be a unix timestamp or a string representing a date time
+ value. If this property is a string, 'format' will be used to parse it.
+
+$min					*yii/validators/DateValidator::$min*
+ (integer|string) Lower limit of the date. Defaults to null, meaning no lower
+ limit. This can be a unix timestamp or a string representing a date time
+ value. If this property is a string, 'format' will be used to parse it.
+
+$tooBig					*yii/validators/DateValidator::$tooBig*
+ (string) User-defined error message used when the value is bigger than 'max'.
+
+$tooSmall				*yii/validators/DateValidator::$tooSmall*
+ (string) User-defined error message used when the value is smaller than
+ 'min'.
+
+$maxString				*yii/validators/DateValidator::$maxString*
+ (string) User friendly value of upper limit to display in the error message.
+ If this property is null, the value of 'max' will be used (before parsing).
+
+$minString				*yii/validators/DateValidator::$minString*
+ (string) User friendly value of lower limit to display in the error message.
+ If this property is null, the value of 'min' will be used (before parsing).
+
 $behaviors				*yii/validators/DateValidator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -204,13 +277,13 @@ METHOD DETAILS
 
 *yii/validators/DateValidator::validateAttribute*		public
 >
- validateAttribute($object, $attribute)
+ validateAttribute($model, $attribute)
 <
 (void)
 
  Child classes must implement this method to provide the actual validation
  logic.
-    [$object] (\yii\base\Model) The data object to be validated
+    [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
@@ -250,9 +323,9 @@ error message. Null should be returned if the data is valid.
 >
  parseDateValue($value)
 <
-(void)
+(integer|false) A UNIX timestamp or 'false' on failure.
 
-    [$value] () 
+    [$value] (string) String representing date
 
 
 

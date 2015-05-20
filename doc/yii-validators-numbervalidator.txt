@@ -74,7 +74,7 @@ $numberPattern				*yii/validators/NumberValidator::$numberPattern*
  -1.23e-10).
 
 $behaviors				*yii/validators/NumberValidator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -197,13 +197,13 @@ METHOD DETAILS
 
 *yii/validators/NumberValidator::validateAttribute*	public
 >
- validateAttribute($object, $attribute)
+ validateAttribute($model, $attribute)
 <
 (void)
 
  Child classes must implement this method to provide the actual validation
  logic.
-    [$object] (\yii\base\Model) The data object to be validated
+    [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
@@ -225,7 +225,7 @@ error message. Null should be returned if the data is valid.
 
 *yii/validators/NumberValidator::clientValidateAttribute*	public
 >
- clientValidateAttribute($object, $attribute, $view)
+ clientValidateAttribute($model, $attribute, $view)
 <
 (string) The client-side validation script. Null if the validator does not
 support client-side validation.
@@ -243,7 +243,7 @@ support client-side validation.
    for the attribute. 
    - 'deferred': an array used to hold deferred objects for
    asynchronous validation
-    [$object] (\yii\base\Model) The data object being validated
+    [$model] (\yii\base\Model) The data model being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.

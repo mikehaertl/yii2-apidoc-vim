@@ -64,10 +64,10 @@ $filter					*yii/validators/FilterValidator::$filter*
 
 $skipOnArray				*yii/validators/FilterValidator::$skipOnArray*
  (boolean) Whether the filter should be skipped if an array input is given. If
- false and an array input is given, the filter will not be applied.
+ true and an array input is given, the filter will not be applied.
 
 $behaviors				*yii/validators/FilterValidator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -190,13 +190,13 @@ METHOD DETAILS
 
 *yii/validators/FilterValidator::validateAttribute*	public
 >
- validateAttribute($object, $attribute)
+ validateAttribute($model, $attribute)
 <
 (void)
 
  Child classes must implement this method to provide the actual validation
  logic.
-    [$object] (\yii\base\Model) The data object to be validated
+    [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
@@ -209,7 +209,29 @@ METHOD DETAILS
 
 
 *yii/validators/FilterValidator::clientValidateAttribute*	public
- See |yii/validators/Validator::clientValidateAttribute|
+>
+ clientValidateAttribute($model, $attribute, $view)
+<
+(string) The client-side validation script. Null if the validator does not
+support client-side validation.
+
+ You may override this method to return the JavaScript validation code if the
+ validator can support client-side validation.
+
+ The following JavaScript variables are predefined and can be used in the
+ validation code:
+
+
+   - 'attribute': the name of the attribute being validated. 
+   - 'value': the value being validated. 
+   - 'messages': an array used to hold the validation error messages
+   for the attribute. 
+   - 'deferred': an array used to hold deferred objects for
+   asynchronous validation
+    [$model] (\yii\base\Model) The data model being validated
+    [$attribute] (string) The name of the attribute to be validated.
+    [$view] (\yii\web\View) The view object that is going to be used to render
+    views or view files containing a model form with this validator applied.
 
 
 *yii/validators/FilterValidator::isActive*		public

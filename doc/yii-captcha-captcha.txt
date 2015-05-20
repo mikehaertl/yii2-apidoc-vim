@@ -19,6 +19,30 @@ DESCRIPTION
  You may use '\yii\captcha\CaptchaValidator' to validate the user input
  matches the current CAPTCHA verification code.
 
+ The following example shows how to use this widget with a model attribute:
+
+   echo Captcha::widget([
+       'model' => $model,
+       'attribute' => 'captcha',
+   ]);
+
+ The following example will use the name property instead:
+
+   echo Captcha::widget([
+       'name' => 'captcha',
+   ]);
+
+ You can also use this widget in an 'yii\widgets\ActiveForm|ActiveForm' using
+ the 'yii\widgets\ActiveField::widget()|widget()' method, for example like
+ this:
+
+   <?= $form->field($model,
+ 'captcha')->widget(\yii\widgets\Captcha::classname(), [
+       // configure additional widget properties here
+   ]) ?>
+
+
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -61,17 +85,16 @@ $template				*yii/captcha/Captcha::$template*
  image tag, while '{input}' will be replaced with the text input tag.
 
 $behaviors				*yii/captcha/Captcha::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/captcha/Captcha::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/captcha/Captcha::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/captcha/Captcha::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 

@@ -81,7 +81,23 @@ METHOD DETAILS
 
 
 *yii/db/oci/QueryBuilder::batchInsert*			public
- See |yii/db/QueryBuilder::batchInsert|
+>
+ batchInsert($table, $columns, $rows)
+<
+(string) The batch INSERT SQL statement
+
+ For example,
+
+   $sql = $queryBuilder->batchInsert('user', ['name', 'age'], [
+       ['Tom', 30],
+       ['Jane', 20],
+       ['Linda', 25],
+   ]);
+
+ Note that the values in each row must match the corresponding column names.
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column names
+    [$rows] (array) The rows to be batch inserted into the table
 
 
 *yii/db/oci/QueryBuilder::update*				public
@@ -154,7 +170,27 @@ METHOD DETAILS
 
 
 *yii/db/oci/QueryBuilder::addForeignKey*			public
- See |yii/db/QueryBuilder::addForeignKey|
+>
+ addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
+<
+(string) The SQL statement for adding a foreign key constraint to an existing
+table.
+
+ The method will properly quote the table and column names.
+    [$name] (string) The name of the foreign key constraint.
+    [$table] (string) The table that the foreign key constraint will be added
+    to.
+    [$columns] (string|array) The name of the column to that the constraint
+    will be added on. If there are multiple columns, separate them with commas
+    or use an array to represent them.
+    [$refTable] (string) The table that the foreign key references to.
+    [$refColumns] (string|array) The name of the column that the foreign key
+    references to. If there are multiple columns, separate them with commas or
+    use an array to represent them.
+    [$delete] (string) The ON DELETE option. Most DBMS support these options:
+    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+    [$update] (string) The ON UPDATE option. Most DBMS support these options:
+    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
 
 
 *yii/db/oci/QueryBuilder::dropForeignKey*			public
@@ -284,6 +320,10 @@ METHOD DETAILS
 
 *yii/db/oci/QueryBuilder::buildInCondition*		public
  See |yii/db/QueryBuilder::buildInCondition|
+
+
+*yii/db/oci/QueryBuilder::buildSubqueryInCondition*	protected
+ See |yii/db/QueryBuilder::buildSubqueryInCondition|
 
 
 *yii/db/oci/QueryBuilder::buildCompositeInCondition*	protected

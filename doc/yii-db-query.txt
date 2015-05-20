@@ -108,7 +108,7 @@ $params					*yii/db/Query::$params*
  example, '[':name' => 'Dan', ':age' => 31]'.
 
 $behaviors				*yii/db/Query::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -248,10 +248,10 @@ METHOD DETAILS
    2)'. 
    - '['id' => [1, 2, 3], 'status' => 2]' generates '(id IN (1, 2, 3))
    AND (status = 2)'. 
-   - '['status' => null] generates 'status IS NULL'.
+   - '['status' => null]' generates 'status IS NULL'.
 
  A condition in operator format generates the SQL expression according to the
- specified operator, which can be one of the followings:
+ specified operator, which can be one of the following:
 
 
    - **and**: the operands should be concatenated together using 'AND'.
@@ -263,11 +263,12 @@ METHOD DETAILS
 
 
    - **or**: similar to the 'and' operator except that the operands are
-   concatenated using 'OR'.
+   concatenated using 'OR'. For example,   '['or', ['type' => [7, 8, 9', ['id'
+ => [1, 2, 3'' will generate '(type IN (7, 8, 9) OR (id IN (1, 2, 3)))'.
 
 
-   - **not**: this will take only one operator and build the negation
-   of it by prefixing the query string with 'NOT'.   For example '['not',
+   - **not**: this will take only one operand and build the negation of
+   it by prefixing the query string with 'NOT'.   For example '['not',
  ['attribute' => null'' will result in the condition 'NOT (attribute IS
  NULL)'.
 
@@ -547,10 +548,13 @@ the query results in nothing.
 >
  count($q=''*'', $db='null')
 <
-(integer) Number of records
+(integer|string) Number of records. The result may be a string depending on
+the underlying database engine and to support integer values higher than a
+32bit PHP integer can handle.
 
     [$q] (string) The COUNT expression. Defaults to '*'. Make sure you
-    properly quote column names in the expression.
+    properly [quote](guide:db-dao#quoting-table-and-column-names) column names
+    in the expression.
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given (or null), the 'db'
     application component will be used.
@@ -560,10 +564,11 @@ the query results in nothing.
 >
  sum($q, $db='null')
 <
-(mixed) The sum of the specified column values
+(mixed) The sum of the specified column values.
 
-    [$q] (string) The column name or expression. Make sure you properly quote
-    column names in the expression.
+    [$q] (string) The column name or expression. Make sure you properly
+    [quote](guide:db-dao#quoting-table-and-column-names) column names in the
+    expression.
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -575,8 +580,9 @@ the query results in nothing.
 <
 (mixed) The average of the specified column values.
 
-    [$q] (string) The column name or expression. Make sure you properly quote
-    column names in the expression.
+    [$q] (string) The column name or expression. Make sure you properly
+    [quote](guide:db-dao#quoting-table-and-column-names) column names in the
+    expression.
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -588,8 +594,9 @@ the query results in nothing.
 <
 (mixed) The minimum of the specified column values.
 
-    [$q] (string) The column name or expression. Make sure you properly quote
-    column names in the expression.
+    [$q] (string) The column name or expression. Make sure you properly
+    [quote](guide:db-dao#quoting-table-and-column-names) column names in the
+    expression.
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -601,8 +608,9 @@ the query results in nothing.
 <
 (mixed) The maximum of the specified column values.
 
-    [$q] (string) The column name or expression. Make sure you properly quote
-    column names in the expression.
+    [$q] (string) The column name or expression. Make sure you properly
+    [quote](guide:db-dao#quoting-table-and-column-names) column names in the
+    expression.
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -617,6 +625,17 @@ the query results in nothing.
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
+
+
+*yii/db/Query::queryScalar*				protected
+>
+ queryScalar($selectExpression, $db)
+<
+(bool|string) 
+
+ Restores the value of select to make this query reusable.
+    [$selectExpression] (string|\yii\db\Expression) 
+    [$db] (\yii\db\Connection|null) 
 
 
 *yii/db/Query::select*					public
@@ -639,6 +658,10 @@ the query results in nothing.
     When the columns are specified as an array, you may also use array keys as
     the column aliases (if a column does not need alias, do not use a string
     key).
+
+    Starting from version 2.0.1, you may also select sub-queries as columns by
+    specifying each such column as a 'Query' instance representing the
+    sub-query.
     [$option] (string) Additional option that should be appended to the
     'SELECT' keyword. For example, in MySQL, the option 'SQL_CALC_FOUND_ROWS'
     can be used.
@@ -649,6 +672,13 @@ the query results in nothing.
  addSelect($columns)
 <
 (static) The query object itself
+
+ Note, that if 'select' has not been specified before, you should include '*'
+ explicitly if you want to select all remaining columns too:
+
+   $query->addSelect(["*", "CONCAT(first_name, ' ', last_name) AS
+ full_name"])->one();
+
 
     [$columns] (string|array) The columns to add to the select.
 

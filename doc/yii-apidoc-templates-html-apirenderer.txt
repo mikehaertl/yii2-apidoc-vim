@@ -12,8 +12,14 @@ SUBCLASSES
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+$guidePrefix				*yii/apidoc/templates/html/ApiRenderer::$guidePrefix*
+ See |yii/apidoc/renderers/BaseRenderer::$guidePrefix|
+
 $apiUrl					*yii/apidoc/templates/html/ApiRenderer::$apiUrl*
  See |yii/apidoc/renderers/BaseRenderer::$apiUrl|
+
+$pageTitle				*yii/apidoc/templates/html/ApiRenderer::$pageTitle*
+ See |yii/apidoc/renderers/BaseRenderer::$pageTitle|
 
 $apiContext				*yii/apidoc/templates/html/ApiRenderer::$apiContext*
  See |yii/apidoc/renderers/BaseRenderer::$apiContext|
@@ -23,9 +29,6 @@ $controller				*yii/apidoc/templates/html/ApiRenderer::$controller*
 
 $guideUrl				*yii/apidoc/templates/html/ApiRenderer::$guideUrl*
  See |yii/apidoc/renderers/BaseRenderer::$guideUrl|
-
-$pageTitle				*yii/apidoc/templates/html/ApiRenderer::$pageTitle*
- (string) String to use as the title of the generated page.
 
 $layout					*yii/apidoc/templates/html/ApiRenderer::$layout*
  (string) Path or alias of the layout file to use.
@@ -38,7 +41,7 @@ $indexView				*yii/apidoc/templates/html/ApiRenderer::$indexView*
  (string) Path or alias of the view file to use for rendering the index page.
 
 $behaviors				*yii/apidoc/templates/html/ApiRenderer::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $view					*yii/apidoc/templates/html/ApiRenderer::$view*
  (\yii\web\View) The view instance
@@ -178,7 +181,7 @@ METHOD DETAILS
 >
  generateApiUrl($typeName)
 <
-(void)
+(mixed) 
 
     [$typeName] () 
 
@@ -210,10 +213,11 @@ METHOD DETAILS
 >
  renderWithLayout($viewFile, $params)
 <
-(void)
+(string) 
 
-    [$viewFile] () 
-    [$params] () 
+    [$viewFile] (string) The view name
+    [$params] (array) The parameters (name-value pairs) that will be extracted
+    and made available in the view file.
 
 
 *yii/apidoc/templates/html/ApiRenderer::renderInheritance*public
@@ -274,9 +278,9 @@ METHOD DETAILS
 >
  generateFileName($typeName)
 <
-(void)
+(string) 
 
-    [$typeName] () 
+    [$typeName] (string) 
 
 
 *yii/apidoc/templates/html/ApiRenderer::getViewPath*	public
@@ -289,11 +293,12 @@ METHOD DETAILS
 
 *yii/apidoc/templates/html/ApiRenderer::getSourceUrl*	public
 >
- getSourceUrl($type)
+ getSourceUrl($type, $line='null')
 <
 (void)
 
     [$type] () 
+    [$line] () 
 
 
 

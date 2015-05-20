@@ -90,14 +90,16 @@ is an object.
 
    // returns Yii::$app->db
    $db = Instance::ensure('db', Connection::className());
-   // or
-   $instance = Instance::of('db');
-   $db = Instance::ensure($instance, Connection::className());
+   // returns an instance of Connection using the given configuration
+   $db = Instance::ensure(['dsn' => 'sqlite:path/to/my.db'],
+ Connection::className());
 
 
-    [$reference] (object|string|static) An object or a reference to the
+    [$reference] (object|string|array|static) An object or a reference to the
     desired object. You may specify a reference in terms of a component ID or
-    an Instance object.
+    an Instance object. Starting from version 2.0.2, you may also pass in a
+    configuration array for creating the object. If the "class" value is not
+    specified in the configuration array, it will use the value of '$type'.
     [$type] (string) The class/interface name to be checked. If null, type
     check will not be performed.
     [$container] (\yii\di\ServiceLocator|\yii\di\Container) The container.

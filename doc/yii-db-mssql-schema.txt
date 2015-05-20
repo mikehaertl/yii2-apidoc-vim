@@ -20,25 +20,22 @@ $typeMap				*yii/db/mssql/Schema::$typeMap*
  (values)
 
 $tableSchemas				*yii/db/mssql/Schema::$tableSchemas*
- (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
- array element is an instance of 'TableSchema' or its child class.
+ See |yii/db/Schema::$tableSchemas|
+
+$schemaNames				*yii/db/mssql/Schema::$schemaNames*
+ See |yii/db/Schema::$schemaNames|
 
 $tableNames				*yii/db/mssql/Schema::$tableNames*
- (string[]) All table names in the database.
+ See |yii/db/Schema::$tableNames|
 
 $queryBuilder				*yii/db/mssql/Schema::$queryBuilder*
- (\yii\db\QueryBuilder) The query builder for this connection.
+ See |yii/db/Schema::$queryBuilder|
 
 $lastInsertID				*yii/db/mssql/Schema::$lastInsertID*
- (string) The row ID of the last row inserted, or the last value retrieved
- from the sequence object
+ See |yii/db/Schema::$lastInsertID|
 
 $transactionIsolationLevel		*yii/db/mssql/Schema::$transactionIsolationLevel*
- (string) The transaction isolation level to use for this transaction. This
- can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
- 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
- string containing DBMS specific syntax to be used after 'SET TRANSACTION
- ISOLATION LEVEL'.
+ See |yii/db/Schema::$transactionIsolationLevel|
 
 
 
@@ -123,6 +120,10 @@ table does not exist.
  See |yii/db/Schema::getTableSchemas|
 
 
+*yii/db/mssql/Schema::getSchemaNames*			public
+ See |yii/db/Schema::getSchemaNames|
+
+
 *yii/db/mssql/Schema::getTableNames*			public
  See |yii/db/Schema::getTableNames|
 
@@ -147,6 +148,10 @@ table does not exist.
 
 
 
+*yii/db/mssql/Schema::findSchemaNames*			protected
+ See |yii/db/Schema::findSchemaNames|
+
+
 *yii/db/mssql/Schema::findTableNames*			protected
 >
  findTableNames($schema='''')
@@ -158,7 +163,20 @@ table does not exist.
 
 
 *yii/db/mssql/Schema::findUniqueIndexes*			public
- See |yii/db/Schema::findUniqueIndexes|
+>
+ findUniqueIndexes($table)
+<
+(array) All unique indexes for the given table.
+
+ Each array element is of the following structure:
+
+   [
+    'IndexName1' => ['col1' [, ...]],
+    'IndexName2' => ['col2' [, ...]],
+   ]
+
+
+    [$table] (\yii\db\mssql\TableSchema) The table metadata
 
 
 *yii/db/mssql/Schema::getLastInsertID*			public
@@ -198,6 +216,10 @@ table does not exist.
 
 *yii/db/mssql/Schema::setTransactionIsolationLevel*	public
  See |yii/db/Schema::setTransactionIsolationLevel|
+
+
+*yii/db/mssql/Schema::insert*				public
+ See |yii/db/Schema::insert|
 
 
 *yii/db/mssql/Schema::quoteValue*				public
@@ -274,6 +296,16 @@ table does not exist.
 (boolean) Whether the table exists in the database
 
     [$table] (\yii\db\mssql\TableSchema) The table metadata
+
+
+*yii/db/mssql/Schema::findTableConstraints*		protected
+>
+ findTableConstraints($table, $type)
+<
+(array) Each entry contains index_name and field_name
+
+    [$table] (\yii\db\mssql\TableSchema) 
+    [$type] (string) Either PRIMARY KEY or UNIQUE
 
 
 *yii/db/mssql/Schema::findPrimaryKeys*			protected

@@ -96,6 +96,9 @@ METHOD DETAILS
    ]);
 
  Note that the values in each row must match the corresponding column names.
+
+ The method will properly escape the column names, and quote the values to be
+ inserted.
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch inserted into the table
@@ -167,7 +170,8 @@ METHOD DETAILS
     invoked to convert abstract column type (if any) into the physical one.
     Anything that is not recognized as abstract type will be kept in the
     generated SQL. For example, 'string' will be turned into 'varchar(255)',
-    while 'string not null' will become 'varchar(255) not null'.
+    while 'string not null' will become 'varchar(255) not null'. You can also
+    use PostgreSQL-specific syntax such as 'SET NOT NULL'.
 
 
 *yii/db/pgsql/QueryBuilder::addForeignKey*		public
@@ -298,6 +302,10 @@ METHOD DETAILS
 
 *yii/db/pgsql/QueryBuilder::buildInCondition*		public
  See |yii/db/QueryBuilder::buildInCondition|
+
+
+*yii/db/pgsql/QueryBuilder::buildSubqueryInCondition*	protected
+ See |yii/db/QueryBuilder::buildSubqueryInCondition|
 
 
 *yii/db/pgsql/QueryBuilder::buildCompositeInCondition*	protected

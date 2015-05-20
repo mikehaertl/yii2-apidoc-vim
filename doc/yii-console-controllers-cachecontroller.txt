@@ -17,57 +17,11 @@ DESCRIPTION
 
      yii cache/flush-all
 
-
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$id					*yii/console/controllers/CacheController::$id*
- See |yii/base/Controller::$id|
-
-$module					*yii/console/controllers/CacheController::$module*
- See |yii/base/Controller::$module|
-
-$defaultAction				*yii/console/controllers/CacheController::$defaultAction*
- See |yii/base/Controller::$defaultAction|
-
-$layout					*yii/console/controllers/CacheController::$layout*
- See |yii/base/Controller::$layout|
-
-$action					*yii/console/controllers/CacheController::$action*
- See |yii/base/Controller::$action|
-
-$interactive				*yii/console/controllers/CacheController::$interactive*
- See |yii/console/Controller::$interactive|
-
-$color					*yii/console/controllers/CacheController::$color*
- See |yii/console/Controller::$color|
-
-$behaviors				*yii/console/controllers/CacheController::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
-
-$modules				*yii/console/controllers/CacheController::$modules*
- (\yii\base\Module[]) All ancestor modules that this controller is located
- within.
-
-$uniqueId				*yii/console/controllers/CacheController::$uniqueId*
- (string) The controller ID that is prefixed with the module ID (if any).
-
-$route					*yii/console/controllers/CacheController::$route*
- (string) The route (module ID, controller ID and action ID) of the current
- request.
-
-$view					*yii/console/controllers/CacheController::$view*
- (\yii\base\View|\yii\web\View) The view object that can be used to render
- views or view files.
-
-$viewPath				*yii/console/controllers/CacheController::$viewPath*
- (string) The directory containing the view files for this controller.
-
-$helpSummary				*yii/console/controllers/CacheController::$helpSummary*
- (string)
-
-$help					*yii/console/controllers/CacheController::$help*
- (string)
+ Note that the command uses cache components defined in your console
+ application configuration file. If components configured are different from
+ web application, web application cache won't be cleared. In order to fix it
+ please duplicate web application cache components in console config. You can
+ use any component names.
 
 
 
@@ -218,6 +172,10 @@ METHOD DETAILS
  See |yii/base/Controller::render|
 
 
+*yii/console/controllers/CacheController::renderContent*	public
+ See |yii/base/Controller::renderContent|
+
+
 *yii/console/controllers/CacheController::renderPartial*	public
  See |yii/base/Controller::renderPartial|
 
@@ -342,6 +300,21 @@ METHOD DETAILS
 <
 (void)
 
+
+
+*yii/console/controllers/CacheController::actionFlushSchema*public
+>
+ actionFlushSchema($db=''db'')
+<
+(int) Exit code
+
+
+
+   # clears cache schema specified by component id: "db"
+   yii cache/flush-schema db
+
+
+    [$db] (string) Id connection component
 
 
 

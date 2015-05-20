@@ -41,6 +41,12 @@ $logFile				*yii/log/FileTarget::$logFile*
  "@runtime/logs/app.log" file. The directory containing the log files will be
  automatically created if not existing.
 
+$enableRotation				*yii/log/FileTarget::$enableRotation*
+ (bool) Whether log files should be rotated when they reach a certain
+ 'maxFileSize|maximum size'. Log rotation is enabled by default. This property
+ allows you to disable it, when you have configured an external tools for log
+ rotation on your server.
+
 $maxFileSize				*yii/log/FileTarget::$maxFileSize*
  (integer) Maximum log file size, in kilo-bytes. Defaults to 10240, meaning
  10MB.
@@ -74,11 +80,10 @@ $rotateByCopy				*yii/log/FileTarget::$rotateByCopy*
  problem.
 
 $behaviors				*yii/log/FileTarget::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $levels					*yii/log/FileTarget::$levels*
- (integer) The message levels that this target is interested in. This is a
- bitmap of level values. Defaults to 0, meaning  all available levels.
+ See |yii/log/Target::$levels|
 
 
 

@@ -35,7 +35,7 @@ $bundles				*yii/web/AssetManager::$bundles*
  configurations. If a value is false, it means the corresponding asset bundle
  is disabled and 'getBundle()' should return null.
 
- If this this property is false, it means the whole asset bundle feature is
+ If this property is false, it means the whole asset bundle feature is
  disabled and 'getBundle()' will always return null.
 
  The following example shows how to disable the bootstrap css file used by
@@ -50,10 +50,11 @@ $bundles				*yii/web/AssetManager::$bundles*
 
 
 $basePath				*yii/web/AssetManager::$basePath*
- ()
+ (string) The root directory storing the published asset files.
 
 $baseUrl				*yii/web/AssetManager::$baseUrl*
- ()
+ (string) The base URL through which the published asset files can be
+ accessed.
 
 $assetMap				*yii/web/AssetManager::$assetMap*
  (array) Mapping from source asset files (keys) to target asset files
@@ -137,8 +138,16 @@ $forceCopy				*yii/web/AssetManager::$forceCopy*
  to make sure the published directory is always up-to-date. Do not set this to
  true on production servers as it will significantly degrade the performance.
 
+$appendTimestamp			*yii/web/AssetManager::$appendTimestamp*
+ (boolean) Whether to append a timestamp to the URL of every published asset.
+ When this is true, the URL of a published asset may look like
+ '/path/to/asset?v=timestamp', where 'timestamp' is the last modification time
+ of the published asset file. You normally would want to set this property to
+ true when you have enabled HTTP caching for assets, because it allows you to
+ bust caching when the assets are updated.
+
 $behaviors				*yii/web/AssetManager::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $converter				*yii/web/AssetManager::$converter*
  (\yii\web\AssetConverterInterface) The asset converter.
@@ -261,7 +270,8 @@ METHOD DETAILS
  This method will first look for the bundle in 'bundles'. If not found, it
  will treat '$name' as the class of the asset bundle and create a new instance
  of it.
-    [$name] (string) The class name of the asset bundle
+    [$name] (string) The class name of the asset bundle (without the leading
+    backslash)
     [$publish] (boolean) Whether to publish the asset files in the asset
     bundle before it is returned. If you set this false, you must manually
     call 'AssetBundle::publish()' to publish the asset files.
@@ -271,20 +281,20 @@ METHOD DETAILS
 >
  loadBundle($name, $config='[]', $publish='true')
 <
-(void)
+(\yii\web\AssetBundle) 
 
-    [$name] () 
-    [$config] () 
-    [$publish] () 
+    [$name] (string) Bundle name
+    [$config] (array) Bundle object configuration
+    [$publish] (boolean) If bundle should be published
 
 
 *yii/web/AssetManager::loadDummyBundle*			protected
 >
  loadDummyBundle($name)
 <
-(void)
+(\yii\web\AssetBundle) 
 
-    [$name] () 
+    [$name] (string) 
 
 
 *yii/web/AssetManager::getAssetUrl*			public

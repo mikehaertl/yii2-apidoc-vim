@@ -45,31 +45,28 @@ $color					*yii/console/controllers/MessageController::$color*
  See |yii/console/Controller::$color|
 
 $behaviors				*yii/console/controllers/MessageController::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $modules				*yii/console/controllers/MessageController::$modules*
- (\yii\base\Module[]) All ancestor modules that this controller is located
- within.
+ See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/console/controllers/MessageController::$uniqueId*
- (string) The controller ID that is prefixed with the module ID (if any).
+ See |yii/base/Controller::$uniqueId|
 
 $route					*yii/console/controllers/MessageController::$route*
- (string) The route (module ID, controller ID and action ID) of the current
- request.
+ See |yii/base/Controller::$route|
 
 $view					*yii/console/controllers/MessageController::$view*
- (\yii\base\View|\yii\web\View) The view object that can be used to render
- views or view files.
+ See |yii/base/Controller::$view|
 
 $viewPath				*yii/console/controllers/MessageController::$viewPath*
- (string) The directory containing the view files for this controller.
+ See |yii/base/Controller::$viewPath|
 
 $helpSummary				*yii/console/controllers/MessageController::$helpSummary*
- (string)
+ See |yii/console/Controller::$helpSummary|
 
 $help					*yii/console/controllers/MessageController::$help*
- (string)
+ See |yii/console/Controller::$help|
 
 
 
@@ -220,6 +217,10 @@ METHOD DETAILS
  See |yii/base/Controller::render|
 
 
+*yii/console/controllers/MessageController::renderContent*public
+ See |yii/base/Controller::renderContent|
+
+
 *yii/console/controllers/MessageController::renderPartial*public
  See |yii/base/Controller::renderPartial|
 
@@ -320,7 +321,7 @@ METHOD DETAILS
 >
  actionConfig($filePath)
 <
-(void)
+(integer) CLI exit code
 
  The generated configuration file contains detailed instructions on how to
  customize it to fit for your needs. After customization, you may use this
@@ -357,12 +358,33 @@ METHOD DETAILS
 
 *yii/console/controllers/MessageController::extractMessages*protected
 >
- extractMessages($fileName, $translator)
+ extractMessages($fileName, $translator, $ignoreCategories='[]')
 <
 (array) 
 
     [$fileName] (string) Name of the file to extract messages from
     [$translator] (string) Name of the function used to translate messages
+    [$ignoreCategories] (array) Message categories to ignore. This parameter
+    is available since version 2.0.4.
+
+
+*yii/console/controllers/MessageController::tokensEqual*	protected
+>
+ tokensEqual($a, $b)
+<
+(boolean) 
+
+    [$a] (array|string) 
+    [$b] (array|string) 
+
+
+*yii/console/controllers/MessageController::getLine*	protected
+>
+ getLine($tokens)
+<
+(int|string) 
+
+    [$tokens] (array) 
 
 
 *yii/console/controllers/MessageController::saveMessagesToPHP*protected

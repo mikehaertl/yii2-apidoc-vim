@@ -18,59 +18,41 @@ $enableI18N				*yii/gii/generators/controller/Generator::$enableI18N*
 $messageCategory			*yii/gii/generators/controller/Generator::$messageCategory*
  See |yii/gii/Generator::$messageCategory|
 
-$controller				*yii/gii/generators/controller/Generator::$controller*
- (string) The controller ID
+$controllerClass			*yii/gii/generators/controller/Generator::$controllerClass*
+ (string) The controller class name
+
+$viewPath				*yii/gii/generators/controller/Generator::$viewPath*
+ (string) The controller's view path
 
 $baseClass				*yii/gii/generators/controller/Generator::$baseClass*
  (string) The base class of the controller
-
-$ns					*yii/gii/generators/controller/Generator::$ns*
- (string) The namespace of the controller class
 
 $actions				*yii/gii/generators/controller/Generator::$actions*
  (string) List of action IDs separated by commas or spaces
 
 $behaviors				*yii/gii/generators/controller/Generator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $validators				*yii/gii/generators/controller/Generator::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
+ See |yii/base/Model::$validators|
 
 $activeValidators			*yii/gii/generators/controller/Generator::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
+ See |yii/base/Model::$activeValidators|
 
 $errors					*yii/gii/generators/controller/Generator::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
+ See |yii/base/Model::$errors|
 
 $firstErrors				*yii/gii/generators/controller/Generator::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
+ See |yii/base/Model::$firstErrors|
 
 $attributes				*yii/gii/generators/controller/Generator::$attributes*
- (array) Attribute values (name => value).
+ See |yii/base/Model::$attributes|
 
 $scenario				*yii/gii/generators/controller/Generator::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+ See |yii/base/Model::$scenario|
 
 $iterator				*yii/gii/generators/controller/Generator::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
+ See |yii/base/Model::$iterator|
 
 $name					*yii/gii/generators/controller/Generator::$name*
  (string) Name of the code generator
@@ -79,25 +61,22 @@ $description				*yii/gii/generators/controller/Generator::$description*
  (string) The detailed description of the generator.
 
 $stickyDataFile				*yii/gii/generators/controller/Generator::$stickyDataFile*
- (string) The file path that stores the sticky attribute values.
+ See |yii/gii/Generator::$stickyDataFile|
 
 $templatePath				*yii/gii/generators/controller/Generator::$templatePath*
- (string) The root path of the template files that are currently being used.
+ See |yii/gii/Generator::$templatePath|
 
 $actionIDs				*yii/gii/generators/controller/Generator::$actionIDs*
  (array) An array of action IDs entered by the user
 
-$controllerClass			*yii/gii/generators/controller/Generator::$controllerClass*
- (string) The controller class name without the namespace part.
-
-$controllerID				*yii/gii/generators/controller/Generator::$controllerID*
- (string) The controller ID (without the module ID prefix)
-
-$module					*yii/gii/generators/controller/Generator::$module*
- (\yii\base\Module) The module that the new controller belongs to
-
 $controllerFile				*yii/gii/generators/controller/Generator::$controllerFile*
  (string) The controller class file path
+
+$controllerID				*yii/gii/generators/controller/Generator::$controllerID*
+ (string) The controller ID
+
+$controllerNamespace			*yii/gii/generators/controller/Generator::$controllerNamespace*
+ (string) The namespace of the controller class
 
 
 
@@ -113,13 +92,7 @@ METHOD DETAILS
 
 
 *yii/gii/generators/controller/Generator::init*		public
->
- init()
-<
-(void)
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
+ See |yii/gii/Generator::init|
 
 
 *yii/gii/generators/controller/Generator::__get*		public
@@ -330,6 +303,10 @@ METHOD DETAILS
  'array_merge()'.
 
 
+*yii/gii/generators/controller/Generator::attributeHints*	public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/gii/generators/controller/Generator::validate*	public
  See |yii/base/Model::validate|
 
@@ -370,6 +347,10 @@ METHOD DETAILS
  See |yii/base/Model::getAttributeLabel|
 
 
+*yii/gii/generators/controller/Generator::getAttributeHint*public
+ See |yii/base/Model::getAttributeHint|
+
+
 *yii/gii/generators/controller/Generator::hasErrors*	public
  See |yii/base/Model::hasErrors|
 
@@ -388,6 +369,10 @@ METHOD DETAILS
 
 *yii/gii/generators/controller/Generator::addError*	public
  See |yii/base/Model::addError|
+
+
+*yii/gii/generators/controller/Generator::addErrors*	public
+ See |yii/base/Model::addErrors|
 
 
 *yii/gii/generators/controller/Generator::clearErrors*	public
@@ -595,11 +580,11 @@ successfully.
 
 
 
-*yii/gii/generators/controller/Generator::getControllerClass*public
+*yii/gii/generators/controller/Generator::getControllerFile*public
 >
- getControllerClass()
+ getControllerFile()
 <
-(string) The controller class name without the namespace part.
+(string) The controller class file path
 
 
 
@@ -607,23 +592,7 @@ successfully.
 >
  getControllerID()
 <
-(string) The controller ID (without the module ID prefix)
-
-
-
-*yii/gii/generators/controller/Generator::getModule*	public
->
- getModule()
-<
-(\yii\base\Module) The module that the new controller belongs to
-
-
-
-*yii/gii/generators/controller/Generator::getControllerFile*public
->
- getControllerFile()
-<
-(string) The controller class file path
+(string) The controller ID
 
 
 
@@ -634,6 +603,14 @@ successfully.
 (string) The action view file path
 
     [$action] (string) The action ID
+
+
+*yii/gii/generators/controller/Generator::getControllerNamespace*public
+>
+ getControllerNamespace()
+<
+(string) The namespace of the controller class
+
 
 
 

@@ -281,7 +281,7 @@ METHOD DETAILS
 >
  ansiStrlen($string)
 <
-(int) The length of the string not counting ANSI format characters
+(integer) The length of the string not counting ANSI format characters
 
     [$string] (string) The string to measure
 
@@ -380,6 +380,26 @@ determine size.
     is running but may not get up to date values on every terminal.
 
 
+*yii/helpers/BaseConsole::wrapText*			public
+>
+ wrapText($text, $indent=0, $refresh='false')
+<
+(string) The wrapped text.
+
+ If screen size could not be detected, or the indentation is greater than the
+ screen size, the text will not be wrapped.
+
+ The first line will **not** be indented, so 'Console::wrapText("Lorem ipsum
+ dolor sit amet.", 4)' will result in the following output, given the screen
+ width is 16 characters:
+
+ ''' Lorem ipsum     dolor sit     amet. '''
+    [$text] (string) The text to be wrapped
+    [$indent] (integer) Number of spaces to use for indentation.
+    [$refresh] (boolean) Whether to force refresh of screen size. This will be
+    passed to 'getScreenSize()'.
+
+
 *yii/helpers/BaseConsole::stdin*				public
 >
  stdin($raw='false')
@@ -460,7 +480,7 @@ determine size.
 <
 (boolean) Whether user confirmed
 
-    [$message] (string) To echo out before waiting for user input
+    [$message] (string) To print out before waiting for user input
     [$default] (boolean) This value is returned if no selection is made.
 
 

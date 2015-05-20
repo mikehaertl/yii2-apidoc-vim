@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Extracts docs from Yii 2 and main extensions an updates the according files
+# in the docs/ directory.
+
+for dir in ./vendor/yiisoft/*/
+do
+    echo "Extracting docs from $dir"
+    ./apidocvim api --interactive=0 $dir ./doc
+    echo
+done

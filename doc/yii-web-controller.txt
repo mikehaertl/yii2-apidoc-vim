@@ -38,25 +38,22 @@ $actionParams				*yii/web/Controller::$actionParams*
  (array) The parameters bound to the current action.
 
 $behaviors				*yii/web/Controller::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $modules				*yii/web/Controller::$modules*
- (\yii\base\Module[]) All ancestor modules that this controller is located
- within.
+ See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/web/Controller::$uniqueId*
- (string) The controller ID that is prefixed with the module ID (if any).
+ See |yii/base/Controller::$uniqueId|
 
 $route					*yii/web/Controller::$route*
- (string) The route (module ID, controller ID and action ID) of the current
- request.
+ See |yii/base/Controller::$route|
 
 $view					*yii/web/Controller::$view*
- (\yii\base\View|\yii\web\View) The view object that can be used to render
- views or view files.
+ See |yii/base/Controller::$view|
 
 $viewPath				*yii/web/Controller::$viewPath*
- (string) The directory containing the view files for this controller.
+ See |yii/base/Controller::$viewPath|
 
 
 
@@ -202,16 +199,21 @@ METHOD DETAILS
  The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
  the method will determine whether the action should continue to run.
 
+ In case the action should not run, the request should be handled inside of
+ the 'beforeAction' code by either providing the necessary output or
+ redirecting the request. Otherwise the response will be empty.
+
  If you override this method, your code should look like the following:
 
    public function beforeAction($action)
    {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
+       if (!parent::beforeAction($action)) {
            return false;
        }
+
+       // your custom code here
+
+       return true; // or false to not run the action
    }
 
 
@@ -236,6 +238,10 @@ METHOD DETAILS
 
 *yii/web/Controller::render*				public
  See |yii/base/Controller::render|
+
+
+*yii/web/Controller::renderContent*			public
+ See |yii/base/Controller::renderContent|
 
 
 *yii/web/Controller::renderPartial*			public

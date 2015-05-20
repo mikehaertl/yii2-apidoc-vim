@@ -23,6 +23,12 @@ $attributeOrder				*yii/helpers/BaseHtml::$attributeOrder*
  (array) The preferred order of attributes in a tag. This mainly affects the
  order of the attributes that are rendered by 'renderTagAttributes()'.
 
+$dataAttributes				*yii/helpers/BaseHtml::$dataAttributes*
+ (array) List of tag attributes that should be specially handled when their
+ values are of array type. In particular, if the value of the 'data' attribute
+ is '['name' => 'xyz', 'age' => 13]', two attributes will be generated instead
+ of one: 'data-name="xyz" data-age="13"'.
+
 
 
 METHOD DETAILS
@@ -107,9 +113,8 @@ METHOD DETAILS
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
     be HTML-encoded using 'encode()'. If a value is null, the corresponding
-    attribute will not be rendered. If the options does not contain "type", a
-    "type" attribute with value "text/css" will be used. See
-    'renderTagAttributes()' for details on how attributes are being rendered.
+    attribute will not be rendered. See 'renderTagAttributes()' for details on
+    how attributes are being rendered.
 
 
 *yii/helpers/BaseHtml::script*				public
@@ -122,9 +127,8 @@ METHOD DETAILS
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
     be HTML-encoded using 'encode()'. If a value is null, the corresponding
-    attribute will not be rendered. If the options does not contain "type", a
-    "type" attribute with value "text/javascript" will be rendered. See
-    'renderTagAttributes()' for details on how attributes are being rendered.
+    attribute will not be rendered. See 'renderTagAttributes()' for details on
+    how attributes are being rendered.
 
 
 *yii/helpers/BaseHtml::cssFile*				public
@@ -140,9 +144,11 @@ METHOD DETAILS
 
 
       - condition: specifies the conditional comments for IE, e.g., 'lt IE
-      9'. When this is specified,   the generated 'script' tag will be
-    enclosed within the conditional comments. This is mainly useful   for
-    supporting old versions of IE browsers.
+      9'. When this is specified,   the generated 'link' tag will be enclosed
+    within the conditional comments. This is mainly useful   for supporting
+    old versions of IE browsers. 
+      - noscript: if set to true, 'link' tag will be wrapped into
+      '<noscript>' tags.
 
     The rest of the options will be rendered as the attributes of the
     resulting link tag. The values will be HTML-encoded using 'encode()'. If a
@@ -397,7 +403,7 @@ METHOD DETAILS
 >
  textInput($name, $value='null', $options='[]')
 <
-(string) The generated button tag
+(string) The generated text input tag
 
     [$name] (string) The name attribute.
     [$value] (string) The value attribute. If it is null, the value attribute
@@ -413,7 +419,7 @@ METHOD DETAILS
 >
  hiddenInput($name, $value='null', $options='[]')
 <
-(string) The generated button tag
+(string) The generated hidden input tag
 
     [$name] (string) The name attribute.
     [$value] (string) The value attribute. If it is null, the value attribute
@@ -429,7 +435,7 @@ METHOD DETAILS
 >
  passwordInput($name, $value='null', $options='[]')
 <
-(string) The generated button tag
+(string) The generated password input tag
 
     [$name] (string) The name attribute.
     [$value] (string) The value attribute. If it is null, the value attribute
@@ -445,7 +451,7 @@ METHOD DETAILS
 >
  fileInput($name, $value='null', $options='[]')
 <
-(string) The generated button tag
+(string) The generated file input tag
 
  To use a file input field, you should set the enclosing form's "enctype"
  attribute to be "multipart/form-data". After the form is submitted, the
@@ -577,7 +583,9 @@ METHOD DETAILS
       of this is similar to that of 'options',   except that the array keys
     represent the optgroup labels specified in $items. 
       - encodeSpaces: bool, whether to encode spaces in option prompt and
-      option value with '&nbsp;' character.   Defaults to 'false'.
+      option value with '&nbsp;' character.   Defaults to false. 
+      - encode: bool, whether to encode option prompt and option value
+      characters.   Defaults to 'true'. This option is available since 2.0.3.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -626,7 +634,9 @@ METHOD DETAILS
     generated so that if no option is selected in multiple   mode, we can
     still obtain the posted unselect value. 
       - encodeSpaces: bool, whether to encode spaces in option prompt and
-      option value with '&nbsp;' character.   Defaults to 'false'.
+      option value with '&nbsp;' character.   Defaults to false. 
+      - encode: bool, whether to encode option prompt and option value
+      characters.   Defaults to 'true'. This option is available since 2.0.3.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -658,8 +668,8 @@ METHOD DETAILS
       - encode: boolean, whether to HTML-encode the checkbox labels.
       Defaults to true.   This option is ignored if 'item' option is set. 
       - separator: string, the HTML code that separates items. 
-      - itemOptions: array, the options for generating the radio button
-      tag using 'checkbox()'. 
+      - itemOptions: array, the options for generating the checkbox tag
+      using 'checkbox()'. 
       - item: callable, a callback that can be used to customize the
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
@@ -688,10 +698,11 @@ METHOD DETAILS
     [$items] (array) The data item used to generate the radio buttons. The
     array keys are the radio button values, while the array values are the
     corresponding labels.
-    [$options] (array) Options (name => config) for the radio button list. The
-    following options are supported:
+    [$options] (array) Options (name => config) for the radio button list
+    container tag. The following options are specially handled:
 
 
+      - tag: string, the tag name of the container element. 
       - unselect: string, the value that should be submitted when none of
       the radio buttons is selected.   By setting this option, a hidden input
     will be generated. 
@@ -802,6 +813,34 @@ is empty.
     rendered.
 
 
+*yii/helpers/BaseHtml::activeHint*			public
+>
+ activeHint($model, $attribute, $options='[]')
+<
+(string) The generated hint tag
+
+ The hint text is the hint associated with the attribute, obtained via
+ 'Model::getAttributeHint()'. If no hint content can be obtained, method will
+ return an empty string.
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    'getAttributeName()' for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using 'encode()'. If a value is null, the corresponding
+    attribute will not be rendered. The following options are specially
+    handled:
+
+
+      - hint: this specifies the hint to be displayed. Note that this will
+      NOT be 'encode()|encoded'.   If this is not set,
+    'Model::getAttributeHint()' will be called to get the hint for display  
+    (without encoding).
+
+    See 'renderTagAttributes()' for details on how attributes are being
+    rendered.
+
+
 *yii/helpers/BaseHtml::errorSummary*			public
 >
  errorSummary($models, $options='[]')
@@ -819,7 +858,8 @@ is empty.
       - header: string, the header HTML for the error summary. If not set,
       a default prompt string will be used. 
       - footer: string, the footer HTML for the error summary. 
-      - encode: boolean, if set to false then value won't be encoded.
+      - encode: boolean, if set to false then the error messages won't be
+      encoded.
 
     The rest of the options will be rendered as the attributes of the
     container tag. The values will be HTML-encoded using 'encode()'. If a
@@ -845,7 +885,8 @@ is empty.
 
 
       - tag: this specifies the tag name. If not set, "div" will be used. 
-      - encode: boolean, if set to false then value won't be encoded.
+      - encode: boolean, if set to false then the error message won't be
+      encoded.
 
     See 'renderTagAttributes()' for details on how attributes are being
     rendered.
@@ -883,7 +924,14 @@ is empty.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
     be HTML-encoded using 'encode()'. See 'renderTagAttributes()' for details
-    on how attributes are being rendered.
+    on how attributes are being rendered. The following special options are
+    recognized:
+
+
+      - maxlength: integer|boolean, when 'maxlength' is set true and the
+      model attribute is validated   by a string validator, the 'maxlength'
+    option will take the value of '\yii\validators\StringValidator::max'.  
+    This is available since version 2.0.3.
 
 
 *yii/helpers/BaseHtml::activeHiddenInput*			public
@@ -972,7 +1020,8 @@ is empty.
       the radio button. If not set,   it will take the default value '0'. This
     method will render a hidden input so that if the radio button   is not
     checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. 
+    submitted to the server   via the hidden input. If you do not want any
+    hidden input, you should explicitly set this option as null. 
       - label: string, a label displayed next to the radio button.  It
       will NOT be HTML-encoded. Therefore you can pass   in HTML code such as
     an image tag. If this is is coming from end users, you should 'encode()'
@@ -985,10 +1034,8 @@ is empty.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
-    value is null, the corresponding attribute will not be rendered.
-
-    See 'renderTagAttributes()' for details on how attributes are being
-    rendered.
+    value is null, the corresponding attribute will not be rendered. See
+    'renderTagAttributes()' for details on how attributes are being rendered.
 
 
 *yii/helpers/BaseHtml::activeCheckbox*			public
@@ -1010,7 +1057,8 @@ is empty.
       the radio button. If not set,   it will take the default value '0'. This
     method will render a hidden input so that if the radio button   is not
     checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. 
+    submitted to the server   via the hidden input. If you do not want any
+    hidden input, you should explicitly set this option as null. 
       - label: string, a label displayed next to the checkbox.  It will
       NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
     image tag. If this is is coming from end users, you should 'encode()' it
@@ -1067,7 +1115,9 @@ is empty.
       of this is similar to that of 'options',   except that the array keys
     represent the optgroup labels specified in $items. 
       - encodeSpaces: bool, whether to encode spaces in option prompt and
-      option value with '&nbsp;' character.   Defaults to 'false'.
+      option value with '&nbsp;' character.   Defaults to false. 
+      - encode: bool, whether to encode option prompt and option value
+      characters.   Defaults to 'true'. This option is available since 2.0.3.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -1118,7 +1168,9 @@ is empty.
     generated so that if no option is selected in multiple   mode, we can
     still obtain the posted unselect value. 
       - encodeSpaces: bool, whether to encode spaces in option prompt and
-      option value with '&nbsp;' character.   Defaults to 'false'.
+      option value with '&nbsp;' character.   Defaults to false. 
+      - encode: bool, whether to encode option prompt and option value
+      characters.   Defaults to 'true'. This option is available since 2.0.3.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'encode()'. If a
@@ -1142,15 +1194,20 @@ is empty.
     keys are the checkbox values, and the array values are the corresponding
     labels. Note that the labels will NOT be HTML-encoded, while the values
     will.
-    [$options] (array) Options (name => config) for the checkbox list. The
-    following options are specially handled:
+    [$options] (array) Options (name => config) for the checkbox list
+    container tag. The following options are specially handled:
 
 
+      - tag: string, the tag name of the container element. 
       - unselect: string, the value that should be submitted when none of
       the checkboxes is selected.   You may set this option to be null to
     prevent default value submission.   If this option is not set, an empty
     string will be submitted. 
+      - encode: boolean, whether to HTML-encode the checkbox labels.
+      Defaults to true.   This option is ignored if 'item' option is set. 
       - separator: string, the HTML code that separates items. 
+      - itemOptions: array, the options for generating the checkbox tag
+      using 'checkbox()'. 
       - item: callable, a callback that can be used to customize the
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:
@@ -1181,15 +1238,20 @@ is empty.
     array keys are the radio values, and the array values are the
     corresponding labels. Note that the labels will NOT be HTML-encoded, while
     the values will.
-    [$options] (array) Options (name => config) for the radio button list. The
-    following options are specially handled:
+    [$options] (array) Options (name => config) for the radio button list
+    container tag. The following options are specially handled:
 
 
+      - tag: string, the tag name of the container element. 
       - unselect: string, the value that should be submitted when none of
       the radio buttons is selected.   You may set this option to be null to
     prevent default value submission.   If this option is not set, an empty
     string will be submitted. 
+      - encode: boolean, whether to HTML-encode the checkbox labels.
+      Defaults to true.   This option is ignored if 'item' option is set. 
       - separator: string, the HTML code that separates items. 
+      - itemOptions: array, the options for generating the radio button
+      tag using 'radio()'. 
       - item: callable, a callback that can be used to customize the
       generation of the HTML code   corresponding to a single item in $items.
     The signature of this callback must be:

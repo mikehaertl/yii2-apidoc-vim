@@ -6,7 +6,6 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/console/controllers/MigrateController|
-|yii/mongodb/console/controllers/MigrateController|
 
 
 PROPERTY DETAILS
@@ -42,31 +41,28 @@ $templateFile				*yii/console/controllers/BaseMigrateController::$templateFile*
  a path alias (e.g. "@app/migrations/template.php") or a file path.
 
 $behaviors				*yii/console/controllers/BaseMigrateController::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $modules				*yii/console/controllers/BaseMigrateController::$modules*
- (\yii\base\Module[]) All ancestor modules that this controller is located
- within.
+ See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/console/controllers/BaseMigrateController::$uniqueId*
- (string) The controller ID that is prefixed with the module ID (if any).
+ See |yii/base/Controller::$uniqueId|
 
 $route					*yii/console/controllers/BaseMigrateController::$route*
- (string) The route (module ID, controller ID and action ID) of the current
- request.
+ See |yii/base/Controller::$route|
 
 $view					*yii/console/controllers/BaseMigrateController::$view*
- (\yii\base\View|\yii\web\View) The view object that can be used to render
- views or view files.
+ See |yii/base/Controller::$view|
 
 $viewPath				*yii/console/controllers/BaseMigrateController::$viewPath*
- (string) The view path that may be prefixed to a relative view name.
+ See |yii/base/ViewContextInterface::$viewPath|
 
 $helpSummary				*yii/console/controllers/BaseMigrateController::$helpSummary*
- (string)
+ See |yii/console/Controller::$helpSummary|
 
 $help					*yii/console/controllers/BaseMigrateController::$help*
- (string)
+ See |yii/console/Controller::$help|
 
 
 
@@ -220,6 +216,10 @@ METHOD DETAILS
 
 *yii/console/controllers/BaseMigrateController::render*	public
  See |yii/base/Controller::render|
+
+
+*yii/console/controllers/BaseMigrateController::renderContent*public
+ See |yii/base/Controller::renderContent|
 
 
 *yii/console/controllers/BaseMigrateController::renderPartial*public
@@ -412,7 +412,7 @@ mean abnormal.
 >
  actionMark($version)
 <
-(void)
+(integer) CLI exit code
 
  No actual migration will be performed.
 
@@ -458,7 +458,7 @@ mean abnormal.
 
 
     [$limit] (integer) The maximum number of new migrations to be displayed.
-    If it is 0, all available new migrations will be displayed.
+    If it is 'all', all available new migrations will be displayed.
 
 
 *yii/console/controllers/BaseMigrateController::actionCreate*public
@@ -518,7 +518,7 @@ mean abnormal.
 >
  migrateToVersion($version)
 <
-(void)
+(integer) CLI exit code
 
     [$version] (string) Name in the full format.
 

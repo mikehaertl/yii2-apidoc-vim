@@ -13,28 +13,27 @@ $defaultSchema				*yii/db/oci/Schema::$defaultSchema*
  See |yii/db/Schema::$defaultSchema|
 
 $exceptionMap				*yii/db/oci/Schema::$exceptionMap*
- See |yii/db/Schema::$exceptionMap|
+ (array) Map of DB errors and corresponding exceptions If left part is found
+ in DB error message exception class from the right part is used.
 
 $tableSchemas				*yii/db/oci/Schema::$tableSchemas*
- (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
- array element is an instance of 'TableSchema' or its child class.
+ See |yii/db/Schema::$tableSchemas|
+
+$schemaNames				*yii/db/oci/Schema::$schemaNames*
+ See |yii/db/Schema::$schemaNames|
 
 $tableNames				*yii/db/oci/Schema::$tableNames*
- (string[]) All table names in the database.
+ See |yii/db/Schema::$tableNames|
 
 $queryBuilder				*yii/db/oci/Schema::$queryBuilder*
- (\yii\db\QueryBuilder) The query builder for this connection.
+ See |yii/db/Schema::$queryBuilder|
 
 $lastInsertID				*yii/db/oci/Schema::$lastInsertID*
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
 $transactionIsolationLevel		*yii/db/oci/Schema::$transactionIsolationLevel*
- (string) The transaction isolation level to use for this transaction. This
- can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
- 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
- string containing DBMS specific syntax to be used after 'SET TRANSACTION
- ISOLATION LEVEL'.
+ See |yii/db/Schema::$transactionIsolationLevel|
 
 
 
@@ -125,6 +124,10 @@ not exist.
  See |yii/db/Schema::getTableSchemas|
 
 
+*yii/db/oci/Schema::getSchemaNames*			public
+ See |yii/db/Schema::getSchemaNames|
+
+
 *yii/db/oci/Schema::getTableNames*			public
  See |yii/db/Schema::getTableNames|
 
@@ -151,6 +154,16 @@ not exist.
  query builder.
 
 
+*yii/db/oci/Schema::findSchemaNames*			protected
+>
+ findSchemaNames()
+<
+(array) All schema names in the database, except system schemas
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
 *yii/db/oci/Schema::findTableNames*			protected
 >
  findTableNames($schema='''')
@@ -164,7 +177,20 @@ not exist.
 
 
 *yii/db/oci/Schema::findUniqueIndexes*			public
- See |yii/db/Schema::findUniqueIndexes|
+>
+ findUniqueIndexes($table)
+<
+(array) All unique indexes for the given table.
+
+ Each array element is of the following structure:
+
+   [
+    'IndexName1' => ['col1' [, ...]],
+    'IndexName2' => ['col2' [, ...]],
+   ]
+
+
+    [$table] (\yii\db\TableSchema) The table metadata
 
 
 *yii/db/oci/Schema::getLastInsertID*			public
@@ -201,6 +227,17 @@ the sequence object
 
 *yii/db/oci/Schema::setTransactionIsolationLevel*		public
  See |yii/db/Schema::setTransactionIsolationLevel|
+
+
+*yii/db/oci/Schema::insert*				public
+>
+ insert($table, $columns)
+<
+(array) Primary key values or false if the command fails
+
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column data (name => value) to be inserted into the
+    table.
 
 
 *yii/db/oci/Schema::quoteValue*				public
@@ -267,11 +304,11 @@ the sequence object
 
 *yii/db/oci/Schema::getTableSequenceName*			protected
 >
- getTableSequenceName($tablename)
+ getTableSequenceName($tableName)
 <
 (string) Whether the sequence exists
 
-    [$tablename] () 
+    [$tableName] () 
 
 
 *yii/db/oci/Schema::createColumn*				protected
@@ -294,22 +331,34 @@ the sequence object
 
 *yii/db/oci/Schema::extractColumnType*			protected
 >
- extractColumnType($column, $dbType)
+ extractColumnType($column, $dbType, $precision, $scale, $length)
 <
 (void)
 
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) DB type
+    [$precision] (string) Total number of digits. This parameter is available
+    since version 2.0.4.
+    [$scale] (string) Number of digits on the right of the decimal separator.
+    This parameter is available since version 2.0.4.
+    [$length] (string) Length for character types. This parameter is available
+    since version 2.0.4.
 
 
 *yii/db/oci/Schema::extractColumnSize*			protected
 >
- extractColumnSize($column, $dbType)
+ extractColumnSize($column, $dbType, $precision, $scale, $length)
 <
 (void)
 
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) The column's DB type
+    [$precision] (string) Total number of digits. This parameter is available
+    since version 2.0.4.
+    [$scale] (string) Number of digits on the right of the decimal separator.
+    This parameter is available since version 2.0.4.
+    [$length] (string) Length for character types. This parameter is available
+    since version 2.0.4.
 
 
 

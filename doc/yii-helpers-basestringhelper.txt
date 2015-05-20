@@ -73,7 +73,7 @@ METHOD DETAILS
 
 *yii/helpers/BaseStringHelper::truncate*			public
 >
- truncate($string, $length, $suffix=''...'', $encoding='null')
+ truncate($string, $length, $suffix=''...'', $encoding='null', $asHtml='false')
 <
 (string) The truncated string.
 
@@ -83,11 +83,14 @@ METHOD DETAILS
     [$suffix] (string) String to append to the end of truncated string.
     [$encoding] (string) The charset to use, defaults to charset currently
     used by application.
+    [$asHtml] (boolean) Whether to treat the string being truncated as HTML
+    and preserve proper HTML tags. This parameter is available since version
+    2.0.1.
 
 
 *yii/helpers/BaseStringHelper::truncateWords*		public
 >
- truncateWords($string, $count, $suffix=''...'')
+ truncateWords($string, $count, $suffix=''...'', $asHtml='false')
 <
 (string) The truncated string.
 
@@ -95,6 +98,21 @@ METHOD DETAILS
     [$count] (integer) How many words from original string to include into
     truncated string.
     [$suffix] (string) String to append to the end of truncated string.
+    [$asHtml] (boolean) Whether to treat the string being truncated as HTML
+    and preserve proper HTML tags. This parameter is available since version
+    2.0.1.
+
+
+*yii/helpers/BaseStringHelper::truncateHtml*		protected
+>
+ truncateHtml($string, $count, $suffix, $encoding='false')
+<
+(string) 
+
+    [$string] (string) The string to truncate
+    [$count] (integer) 
+    [$suffix] (string) String to append to the end of the truncated string.
+    [$encoding] (string|boolean) 
 
 
 *yii/helpers/BaseStringHelper::startsWith*		public
@@ -120,6 +138,24 @@ otherwise
     [$string] (string) 
     [$with] (string) 
     [$caseSensitive] (boolean) Case sensitive search. Default is true.
+
+
+*yii/helpers/BaseStringHelper::explode*			public
+>
+ explode($string, $delimiter='','', $trim='true', $skipEmpty='false')
+<
+(array) 
+
+    [$string] (string) String to be exploded.
+    [$delimiter] (string) Delimiter. Default is ','.
+    [$trim] (mixed) Whether to trim each element. Can be:   
+      - boolean - to trim normally;   
+      - string - custom characters to trim. Will be passed as a second
+      argument to 'trim()' function.   
+      - callable - will be called for each value instead of trim. Takes
+      the only argument - value.
+    [$skipEmpty] (boolean) Whether to skip empty strings between delimiters.
+    Default is false.
 
 
 

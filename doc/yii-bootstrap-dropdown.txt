@@ -2,6 +2,26 @@
 *yii/bootstrap/Dropdown*   >> |yii/bootstrap/Widget|
 ========================
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For example,
+
+   <div class="dropdown">
+       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Label <b
+ class="caret"></b></a>
+       <?php
+           echo Dropdown::widget([
+               'items' => [
+                   ['label' => 'DropdownA', 'url' => '/'],
+                   ['label' => 'DropdownB', 'url' => '#'],
+               ],
+           ]);
+       ?>
+   </div>
+
+
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -31,7 +51,9 @@ $items					*yii/bootstrap/Dropdown::$items*
 
 
    - label: string, required, the label of the item link 
-   - url: string, optional, the url of the item link. Defaults to "#". 
+   - url: string|array, optional, the url of the item link. This will
+   be processed by 'Url::to()'.   If not set, the item will be treated as a
+ menu header when the item has no sub-menu. 
    - visible: boolean, optional, whether this menu item is visible.
    Defaults to true. 
    - linkOptions: array, optional, the HTML attributes of the item
@@ -46,21 +68,17 @@ $items					*yii/bootstrap/Dropdown::$items*
 $encodeLabels				*yii/bootstrap/Dropdown::$encodeLabels*
  (boolean) Whether the labels for header items should be HTML-encoded.
 
-$_containerOptions			*yii/bootstrap/Dropdown::$_containerOptions*
- (array) The HTML attributes for the widget container tag.
-
 $behaviors				*yii/bootstrap/Dropdown::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/bootstrap/Dropdown::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/bootstrap/Dropdown::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/bootstrap/Dropdown::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 
@@ -225,13 +243,18 @@ METHOD DETAILS
  See |yii/bootstrap/Widget::registerPlugin|
 
 
+*yii/bootstrap/Dropdown::registerClientEvents*		protected
+ See |yii/bootstrap/Widget::registerClientEvents|
+
+
 *yii/bootstrap/Dropdown::renderItems*			protected
 >
- renderItems($items)
+ renderItems($items, $options='[]')
 <
 (string) The rendering result.
 
     [$items] (array) The menu items to be rendered
+    [$options] (array) The container HTML attributes
 
 
 

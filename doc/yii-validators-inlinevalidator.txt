@@ -53,14 +53,16 @@ $whenClient				*yii/validators/InlineValidator::$whenClient*
 $method					*yii/validators/InlineValidator::$method*
  (string|\Closure) An anonymous function or the name of a model class method
  that will be called to perform the actual validation. The signature of the
- method should be like the following:
+ method should be like the following, where '$attribute' is the name of the
+ attribute to be validated, and '$params' contains the value of 'params' that
+ you specify when declaring the inline validation rule:
 
    function foo($attribute, $params)
 
 
 
 $params					*yii/validators/InlineValidator::$params*
- (array) Additional parameters that are passed to the validation method
+ (mixed) Additional parameters that are passed to the validation method
 
 $clientValidate				*yii/validators/InlineValidator::$clientValidate*
  (string|\Closure) An anonymous function or the name of a model class method
@@ -78,7 +80,7 @@ $clientValidate				*yii/validators/InlineValidator::$clientValidate*
  client validation code.
 
 $behaviors				*yii/validators/InlineValidator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -195,13 +197,13 @@ METHOD DETAILS
 
 *yii/validators/InlineValidator::validateAttribute*	public
 >
- validateAttribute($object, $attribute)
+ validateAttribute($model, $attribute)
 <
 (void)
 
  Child classes must implement this method to provide the actual validation
  logic.
-    [$object] (\yii\base\Model) The data object to be validated
+    [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
@@ -215,7 +217,7 @@ METHOD DETAILS
 
 *yii/validators/InlineValidator::clientValidateAttribute*	public
 >
- clientValidateAttribute($object, $attribute, $view)
+ clientValidateAttribute($model, $attribute, $view)
 <
 (string) The client-side validation script. Null if the validator does not
 support client-side validation.
@@ -233,7 +235,7 @@ support client-side validation.
    for the attribute. 
    - 'deferred': an array used to hold deferred objects for
    asynchronous validation
-    [$object] (\yii\base\Model) The data object being validated
+    [$model] (\yii\base\Model) The data model being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.

@@ -29,33 +29,24 @@ have to type e.g. `yii\\base\\Controller`. Autocomplete wouldn't work very well 
 
 ## How to create the doc files
 
-To create the doc files, it's recommended to start with an empty directory and create
-the following `composer.json` file there:
+Start in an empty directory and install the `yii2-apidoc-vim` package via composer:
 
 ```
-{
-    "minimum-stability": "dev",
-    "require": {
-        "mikehaertl/yii2-apidoc-vim": "*",
-        "yiisoft/yii2": "2.0.0",
-        "cebe/markdown": "dev-master as 0.9.0",
-        "cebe/markdown-latex": "*",
-        "phpdocumentor/reflection": "*"
-    },
-    "require-dev": {
-        "yiisoft/yii2-dev": "2.0.0"
-    }
-}
-```
-
-Then run `composer update` to install all the required packages. After this is done, the
-doc can be created with:
+composer require mikehaertl\yii2-apidoc-vim dev-master
 
 ```
-./vendor/bin/apidocvim api vendor/yiisoft/yii2-dev/framework vendor/mikehaertl/yii2-apidoc-vim/doc
-./vendor/bin/apidocvim api vendor/yiisoft/yii2-dev/extensions vendor/mikehaertl/yii2-apidoc-vim/doc
+
+Now you can run the `apidocvim` command to extract the docs in Vim format from any
+source files:
+
 ```
+./apidocvim api path/to/some/source/code /path/to/output/dir
+```
+
+You can also use the `update-all` command to automatically extract the doc files from
+the currenty yii2 packages installed in `vendor/`.
 
 ## How to customize the created doc files
 
-You can modify the view files and adjust the render methods in `src/templates/ApiRenderer.php`.
+You can modify the view files in `src/templates/views` and adjust the render methods in
+`src/templates/ApiRenderer.php`.

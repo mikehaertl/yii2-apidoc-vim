@@ -34,6 +34,12 @@ $allowedIPs				*yii/debug/Module::$allowedIPs*
  default value is '['127.0.0.1', '::1']', which means the module can only be
  accessed by localhost.
 
+$allowedHosts				*yii/debug/Module::$allowedHosts*
+ (array) The list of hosts that are allowed to access this module. Each array
+ element is a hostname that will be resolved to an IP address that is compared
+  with the IP address of the user. A use case is to use a dynamic DNS (DDNS)
+ to allow access. The default value is '[]'.
+
 $logTarget				*yii/debug/Module::$logTarget*
  (\yii\debug\LogTarget)
 
@@ -59,42 +65,31 @@ $enableDebugLogs			*yii/debug/Module::$enableDebugLogs*
  the debug logs if you want to investigate how the debug module itself works.
 
 $behaviors				*yii/debug/Module::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $components				*yii/debug/Module::$components*
- (array) The list of the component definitions or the loaded component
- instances (ID => definition or instance).
+ See |yii/di/ServiceLocator::$components|
 
 $uniqueId				*yii/debug/Module::$uniqueId*
- (string) The unique ID of the module.
+ See |yii/base/Module::$uniqueId|
 
 $basePath				*yii/debug/Module::$basePath*
- (string) The root directory of the module.
+ See |yii/base/Module::$basePath|
 
 $controllerPath				*yii/debug/Module::$controllerPath*
- (string) The directory that contains the controller classes.
+ See |yii/base/Module::$controllerPath|
 
 $viewPath				*yii/debug/Module::$viewPath*
- (string) The root directory of view files. Defaults to "'basePath'/views".
+ See |yii/base/Module::$viewPath|
 
 $layoutPath				*yii/debug/Module::$layoutPath*
- (string) The root directory of layout files. Defaults to
- "'viewPath'/layouts".
+ See |yii/base/Module::$layoutPath|
 
 $aliases				*yii/debug/Module::$aliases*
- (array) List of path aliases to be defined. The array keys are alias names
- (must start with '@') and the array values are the corresponding paths or
- aliases. For example,
-
-   [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
-   ]
-
-
+ See |yii/base/Module::$aliases|
 
 $modules				*yii/debug/Module::$modules*
- (array) The modules (indexed by their IDs)
+ See |yii/base/Module::$modules|
 
 
 
@@ -320,16 +315,21 @@ METHOD DETAILS
  The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
  the method will determine whether the action should continue to run.
 
+ In case the action should not run, the request should be handled inside of
+ the 'beforeAction' code by either providing the necessary output or
+ redirecting the request. Otherwise the response will be empty.
+
  If you override this method, your code should look like the following:
 
    public function beforeAction($action)
    {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
+       if (!parent::beforeAction($action)) {
            return false;
        }
+
+       // your custom code here
+
+       return true; // or false to not run the action
    }
 
 

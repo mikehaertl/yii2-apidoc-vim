@@ -21,10 +21,10 @@ $messageCategory			*yii/gii/generators/crud/Generator::$messageCategory*
 $modelClass				*yii/gii/generators/crud/Generator::$modelClass*
  ()
 
-$moduleID				*yii/gii/generators/crud/Generator::$moduleID*
+$controllerClass			*yii/gii/generators/crud/Generator::$controllerClass*
  ()
 
-$controllerClass			*yii/gii/generators/crud/Generator::$controllerClass*
+$viewPath				*yii/gii/generators/crud/Generator::$viewPath*
  ()
 
 $baseControllerClass			*yii/gii/generators/crud/Generator::$baseControllerClass*
@@ -37,46 +37,28 @@ $searchModelClass			*yii/gii/generators/crud/Generator::$searchModelClass*
  ()
 
 $behaviors				*yii/gii/generators/crud/Generator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $validators				*yii/gii/generators/crud/Generator::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
+ See |yii/base/Model::$validators|
 
 $activeValidators			*yii/gii/generators/crud/Generator::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
+ See |yii/base/Model::$activeValidators|
 
 $errors					*yii/gii/generators/crud/Generator::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
+ See |yii/base/Model::$errors|
 
 $firstErrors				*yii/gii/generators/crud/Generator::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
+ See |yii/base/Model::$firstErrors|
 
 $attributes				*yii/gii/generators/crud/Generator::$attributes*
- (array) Attribute values (name => value).
+ See |yii/base/Model::$attributes|
 
 $scenario				*yii/gii/generators/crud/Generator::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+ See |yii/base/Model::$scenario|
 
 $iterator				*yii/gii/generators/crud/Generator::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
+ See |yii/base/Model::$iterator|
 
 $name					*yii/gii/generators/crud/Generator::$name*
  (string) Name of the code generator
@@ -85,16 +67,13 @@ $description				*yii/gii/generators/crud/Generator::$description*
  (string) The detailed description of the generator.
 
 $stickyDataFile				*yii/gii/generators/crud/Generator::$stickyDataFile*
- (string) The file path that stores the sticky attribute values.
+ See |yii/gii/Generator::$stickyDataFile|
 
 $templatePath				*yii/gii/generators/crud/Generator::$templatePath*
- (string) The root path of the template files that are currently being used.
+ See |yii/gii/Generator::$templatePath|
 
 $controllerID				*yii/gii/generators/crud/Generator::$controllerID*
  (string) The controller ID (without the module ID prefix)
-
-$viewPath				*yii/gii/generators/crud/Generator::$viewPath*
- (string) The action view file path
 
 $nameAttribute				*yii/gii/generators/crud/Generator::$nameAttribute*
  ()
@@ -333,6 +312,10 @@ METHOD DETAILS
  'array_merge()'.
 
 
+*yii/gii/generators/crud/Generator::attributeHints*	public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/gii/generators/crud/Generator::validate*		public
  See |yii/base/Model::validate|
 
@@ -373,6 +356,10 @@ METHOD DETAILS
  See |yii/base/Model::getAttributeLabel|
 
 
+*yii/gii/generators/crud/Generator::getAttributeHint*	public
+ See |yii/base/Model::getAttributeHint|
+
+
 *yii/gii/generators/crud/Generator::hasErrors*		public
  See |yii/base/Model::hasErrors|
 
@@ -391,6 +378,10 @@ METHOD DETAILS
 
 *yii/gii/generators/crud/Generator::addError*		public
  See |yii/base/Model::addError|
+
+
+*yii/gii/generators/crud/Generator::addErrors*		public
+ See |yii/base/Model::addErrors|
 
 
 *yii/gii/generators/crud/Generator::clearErrors*		public
@@ -592,14 +583,6 @@ paths relative to 'templatePath'.
 
 
 
-*yii/gii/generators/crud/Generator::validateModuleID*	public
->
- validateModuleID()
-<
-(void)
-
-
-
 *yii/gii/generators/crud/Generator::getControllerID*	public
 >
  getControllerID()
@@ -612,7 +595,7 @@ paths relative to 'templatePath'.
 >
  getViewPath()
 <
-(string) The action view file path
+(string) The controller view path
 
 
 

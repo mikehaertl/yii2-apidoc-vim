@@ -42,6 +42,21 @@ $generateLabelsFromComments		*yii/gii/generators/model/Generator::$generateLabel
 $useTablePrefix				*yii/gii/generators/model/Generator::$useTablePrefix*
  ()
 
+$useSchemaName				*yii/gii/generators/model/Generator::$useSchemaName*
+ ()
+
+$generateQuery				*yii/gii/generators/model/Generator::$generateQuery*
+ ()
+
+$queryNs				*yii/gii/generators/model/Generator::$queryNs*
+ ()
+
+$queryClass				*yii/gii/generators/model/Generator::$queryClass*
+ ()
+
+$queryBaseClass				*yii/gii/generators/model/Generator::$queryBaseClass*
+ ()
+
 $tableNames				*yii/gii/generators/model/Generator::$tableNames*
  ()
 
@@ -49,46 +64,28 @@ $classNames				*yii/gii/generators/model/Generator::$classNames*
  ()
 
 $behaviors				*yii/gii/generators/model/Generator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $validators				*yii/gii/generators/model/Generator::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
+ See |yii/base/Model::$validators|
 
 $activeValidators			*yii/gii/generators/model/Generator::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
+ See |yii/base/Model::$activeValidators|
 
 $errors					*yii/gii/generators/model/Generator::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
+ See |yii/base/Model::$errors|
 
 $firstErrors				*yii/gii/generators/model/Generator::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
+ See |yii/base/Model::$firstErrors|
 
 $attributes				*yii/gii/generators/model/Generator::$attributes*
- (array) Attribute values (name => value).
+ See |yii/base/Model::$attributes|
 
 $scenario				*yii/gii/generators/model/Generator::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+ See |yii/base/Model::$scenario|
 
 $iterator				*yii/gii/generators/model/Generator::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
+ See |yii/base/Model::$iterator|
 
 $name					*yii/gii/generators/model/Generator::$name*
  (string) Name of the code generator
@@ -97,10 +94,10 @@ $description				*yii/gii/generators/model/Generator::$description*
  (string) The detailed description of the generator.
 
 $stickyDataFile				*yii/gii/generators/model/Generator::$stickyDataFile*
- (string) The file path that stores the sticky attribute values.
+ See |yii/gii/Generator::$stickyDataFile|
 
 $templatePath				*yii/gii/generators/model/Generator::$templatePath*
- (string) The root path of the template files that are currently being used.
+ See |yii/gii/Generator::$templatePath|
 
 
 
@@ -327,6 +324,10 @@ METHOD DETAILS
  'array_merge()'.
 
 
+*yii/gii/generators/model/Generator::attributeHints*	public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/gii/generators/model/Generator::validate*		public
  See |yii/base/Model::validate|
 
@@ -367,6 +368,10 @@ METHOD DETAILS
  See |yii/base/Model::getAttributeLabel|
 
 
+*yii/gii/generators/model/Generator::getAttributeHint*	public
+ See |yii/base/Model::getAttributeHint|
+
+
 *yii/gii/generators/model/Generator::hasErrors*		public
  See |yii/base/Model::hasErrors|
 
@@ -385,6 +390,10 @@ METHOD DETAILS
 
 *yii/gii/generators/model/Generator::addError*		public
  See |yii/base/Model::addError|
+
+
+*yii/gii/generators/model/Generator::addErrors*		public
+ See |yii/base/Model::addErrors|
 
 
 *yii/gii/generators/model/Generator::clearErrors*		public
@@ -634,13 +643,11 @@ is a junction table, or false if the table is not a junction table.
 
 *yii/gii/generators/model/Generator::generateRelationName*protected
 >
- generateRelationName($relations, $className, $table, $key, $multiple)
+ generateRelationName($relations, $table, $key, $multiple)
 <
 (string) The relation name
 
     [$relations] (array) The relations being generated currently.
-    [$className] (string) The class name that will contain the relation
-    declarations
     [$table] (\yii\db\TableSchema) The table schema
     [$key] (string) A base name that the relation name may be generated from
     [$multiple] (boolean) Whether this is a has-many relation
@@ -698,11 +705,22 @@ is a junction table, or false if the table is not a junction table.
 
 *yii/gii/generators/model/Generator::generateClassName*	protected
 >
- generateClassName($tableName)
+ generateClassName($tableName, $useSchemaName='null')
 <
 (string) The generated class name
 
     [$tableName] (string) The table name (which may contain schema prefix)
+    [$useSchemaName] (boolean) Should schema name be included in the class
+    name, if present
+
+
+*yii/gii/generators/model/Generator::generateQueryClassName*protected
+>
+ generateQueryClassName($modelClassName)
+<
+(string) Generated class name
+
+    [$modelClassName] (string) Model class name
 
 
 *yii/gii/generators/model/Generator::getDbConnection*	protected

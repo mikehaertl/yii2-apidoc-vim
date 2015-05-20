@@ -68,6 +68,37 @@ $targets				*yii/console/controllers/AssetController::$targets*
  File names can contain placeholder "{hash}", which will be filled by the hash
  of the resulting file.
 
+ You may specify several target bundles in order to compress different groups
+ of assets. In this case you should use 'depends' key to specify, which
+ bundles should be covered with particular target bundle. You may leave
+ 'depends' to be empty for single bundle, which will compress all remaining
+ bundles in this case. For example:
+
+   'allShared' => [
+       'js' => 'js/all-shared-{hash}.js',
+       'css' => 'css/all-shared-{hash}.css',
+       'depends' => [
+           // Include all assets shared between 'backend' and 'frontend'
+           'yii\web\YiiAsset',
+           'app\assets\SharedAsset',
+       ],
+   ],
+   'allBackEnd' => [
+       'js' => 'js/all-{hash}.js',
+       'css' => 'css/all-{hash}.css',
+       'depends' => [
+           // Include only 'backend' assets:
+           'app\assets\AdminAsset'
+       ],
+   ],
+   'allFrontEnd' => [
+       'js' => 'js/all-{hash}.js',
+       'css' => 'css/all-{hash}.css',
+       'depends' => [], // Include all remaining assets
+   ],
+
+
+
 $jsCompressor				*yii/console/controllers/AssetController::$jsCompressor*
  (string|callable) JavaScript file compressor. If a string, it is treated as
  shell command template, which should contain placeholders {from} 
@@ -85,31 +116,28 @@ $cssCompressor				*yii/console/controllers/AssetController::$cssCompressor*
  Default value relies on usage of "YUI Compressor"
 
 $behaviors				*yii/console/controllers/AssetController::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $modules				*yii/console/controllers/AssetController::$modules*
- (\yii\base\Module[]) All ancestor modules that this controller is located
- within.
+ See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/console/controllers/AssetController::$uniqueId*
- (string) The controller ID that is prefixed with the module ID (if any).
+ See |yii/base/Controller::$uniqueId|
 
 $route					*yii/console/controllers/AssetController::$route*
- (string) The route (module ID, controller ID and action ID) of the current
- request.
+ See |yii/base/Controller::$route|
 
 $view					*yii/console/controllers/AssetController::$view*
- (\yii\base\View|\yii\web\View) The view object that can be used to render
- views or view files.
+ See |yii/base/Controller::$view|
 
 $viewPath				*yii/console/controllers/AssetController::$viewPath*
- (string) The directory containing the view files for this controller.
+ See |yii/base/Controller::$viewPath|
 
 $helpSummary				*yii/console/controllers/AssetController::$helpSummary*
- (string)
+ See |yii/console/Controller::$helpSummary|
 
 $help					*yii/console/controllers/AssetController::$help*
- (string)
+ See |yii/console/Controller::$help|
 
 $assetManager				*yii/console/controllers/AssetController::$assetManager*
  (\yii\web\AssetManager) Asset manager instance.
@@ -261,6 +289,10 @@ METHOD DETAILS
 
 *yii/console/controllers/AssetController::render*		public
  See |yii/base/Controller::render|
+
+
+*yii/console/controllers/AssetController::renderContent*	public
+ See |yii/base/Controller::renderContent|
 
 
 *yii/console/controllers/AssetController::renderPartial*	public
@@ -525,7 +557,7 @@ METHOD DETAILS
 >
  actionTemplate($configFile)
 <
-(void)
+(integer) CLI exit code
 
     [$configFile] (string) Output file name.
 

@@ -17,6 +17,15 @@ DESCRIPTION
        'mask' => '999-999-9999',
    ]);
 
+ You can also use this widget in an 'yii\widgets\ActiveForm|ActiveForm' using
+ the 'yii\widgets\ActiveField::widget()|widget()' method, for example like
+ this:
+
+   <?= $form->field($model,
+ 'from_date')->widget(\yii\widgets\MaskedInput::className(), [
+       'mask' => '999-999-9999',
+   ]) ?>
+
  The masked text field is implemented based on the [jQuery input masked
  plugin](https://github.com/RobinHerbots/jquery.inputmask).
 
@@ -96,17 +105,16 @@ $_hashVar				*yii/widgets/MaskedInput::$_hashVar*
  (string) The hashed variable to store the pluginOptions
 
 $behaviors				*yii/widgets/MaskedInput::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/widgets/MaskedInput::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/widgets/MaskedInput::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/widgets/MaskedInput::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 
@@ -276,9 +284,8 @@ METHOD DETAILS
 (void)
 
 
-   - 'data-plugin-options' will store the hashed variable storing the
-   plugin options. 
-   - 'data-plugin-name' the name of the plugin
+   - 'data-plugin-inputmask' will store the hashed variable storing the
+   plugin options.
     [$view] (\yii\web\View) The view instance
 
 

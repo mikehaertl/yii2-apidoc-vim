@@ -19,7 +19,7 @@ METHOD DETAILS
 
 *yii/helpers/BaseJson::encode*				public
 >
- encode($value, $options=0)
+ encode($value, $options=320)
 <
 (string) The encoding result
 
@@ -28,7 +28,20 @@ METHOD DETAILS
  represented in terms of a 'JsExpression' object.
     [$value] (mixed) The data to be encoded
     [$options] (integer) The encoding options. For more details please refer
-    to <http://www.php.net/manual/en/function.json-encode.php>.
+    to <http://www.php.net/manual/en/function.json-encode.php>. Default is
+    'JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE'.
+
+
+*yii/helpers/BaseJson::htmlEncode*			public
+>
+ htmlEncode($value)
+<
+(string) The encoding result
+
+ The method enhances 'json_encode()' by supporting JavaScript expressions. In
+ particular, the method will not encode a JavaScript expression that is
+ represented in terms of a 'JsExpression' object.
+    [$value] (mixed) The data to be encoded
 
 
 *yii/helpers/BaseJson::decode*				public

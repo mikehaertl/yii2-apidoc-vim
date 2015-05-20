@@ -19,7 +19,11 @@ DESCRIPTION
  extension](http://php.net/manual/en/book.intl.php) has to be installed. Most
  of the methods however work also if the PHP intl extension is not installed
  by providing a fallback implementation. Without intl month and day names are
- in English only.
+ in English only. Note that even if the intl extension is installed,
+ formatting date and time values for years >=2038 or <=1901 on 32bit systems
+ will fall back to the PHP implementation because intl uses a 32bit UNIX
+ timestamp internally. On a 64bit system the intl formatter is used in all
+ cases if installed.
 
 
 PROPERTY DETAILS
@@ -43,16 +47,29 @@ $locale					*yii/i18n/Formatter::$locale*
  not set, '\yii\base\Application::language' will be used.
 
 $timeZone				*yii/i18n/Formatter::$timeZone*
- (string) The timezone to use for formatting time and date values. This can be
- any value that may be passed to
+ (string) The time zone to use for formatting time and date values.
+
+ This can be any value that may be passed to
  [date_default_timezone_set()](http://www.php.net/manual/en/function.date-default-timezone-set.php)
  e.g. 'UTC', 'Europe/Berlin' or 'America/Chicago'. Refer to the [php
- manual](http://www.php.net/manual/en/timezones.php) for available timezones.
+ manual](http://www.php.net/manual/en/timezones.php) for available time zones.
  If this property is not set, '\yii\base\Application::timeZone' will be used.
 
- Note that the input timezone is assumed to be UTC always if no timezone is
- included in the input date value. Make sure to store datetime values in UTC
- in your database.
+ Note that the default time zone for input data is assumed to be UTC by
+ default if no time zone is included in the input date value. If you store
+ your data in a different time zone in the database, you have to adjust
+ 'defaultTimeZone' accordingly.
+
+$defaultTimeZone			*yii/i18n/Formatter::$defaultTimeZone*
+ (string) The time zone that is assumed for input values if they do not
+ include a time zone explicitly.
+
+ The value must be a valid time zone identifier, e.g. 'UTC', 'Europe/Berlin'
+ or 'America/Chicago'. Please refer to the [php
+ manual](http://www.php.net/manual/en/timezones.php) for available time zones.
+
+ It defaults to 'UTC' so you only have to adjust this value if you store
+ datetime values in another time zone in your database.
 
 $dateFormat				*yii/i18n/Formatter::$dateFormat*
  (string) The default format string to be used to format a 'asDate()|date'.
@@ -91,7 +108,7 @@ $timeFormat				*yii/i18n/Formatter::$timeFormat*
 
 
 $datetimeFormat				*yii/i18n/Formatter::$datetimeFormat*
- (string) The default format string to be used to format a 'asDateTime()|date
+ (string) The default format string to be used to format a 'asDatetime()|date
  and time'. This can be "short", "medium", "long", or "full", which represents
  a preset format of different lengths.
 
@@ -163,6 +180,27 @@ $numberFormatterTextOptions		*yii/i18n/Formatter::$numberFormatterTextOptions*
 
 
 
+$numberFormatterSymbols			*yii/i18n/Formatter::$numberFormatterSymbols*
+ (array) A list of name value pairs that are passed to the intl
+ [Numberformatter::setSymbol()](http://php.net/manual/en/numberformatter.setsymbol.php)
+ method of all the number formatter objects created by
+ 'createNumberFormatter()'. This property takes only effect if the [PHP intl
+ extension](http://php.net/manual/en/book.intl.php) is installed.
+
+ Please refer to the [PHP
+ manual](http://php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatsymbol)
+ for the possible options.
+
+ For example to choose a custom currency symbol, e.g.
+ [U+20BD](http://unicode-table.com/de/20BD/) instead of 'руб.' for Russian
+ Ruble:
+
+   [
+       NumberFormatter::CURRENCY_SYMBOL => '₽',
+   ]
+
+
+
 $currencyCode				*yii/i18n/Formatter::$currencyCode*
  (string) The 3-letter ISO 4217 currency code indicating the default currency
  to use for 'asCurrency'. If not set, the currency code corresponding to
@@ -175,7 +213,7 @@ $sizeFormatBase				*yii/i18n/Formatter::$sizeFormatBase*
  kilobyte), used by 'asSize' and 'asShortSize'. Defaults to 1024.
 
 $behaviors				*yii/i18n/Formatter::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -324,7 +362,7 @@ METHOD DETAILS
 <
 (string) The formatted result.
 
-    [$value] (mixed) The value to be formatted.
+    [$value] (string) The value to be formatted.
 
 
 *yii/i18n/Formatter::asNtext*				public
@@ -333,7 +371,7 @@ METHOD DETAILS
 <
 (string) The formatted result.
 
-    [$value] (mixed) The value to be formatted.
+    [$value] (string) The value to be formatted.
 
 
 *yii/i18n/Formatter::asParagraphs*			public
@@ -344,7 +382,7 @@ METHOD DETAILS
 
  Each text paragraph is enclosed within a '<p>' tag. One or multiple
  consecutive empty lines divide two paragraphs.
-    [$value] (mixed) The value to be formatted.
+    [$value] (string) The value to be formatted.
 
 
 *yii/i18n/Formatter::asHtml*				public
@@ -355,7 +393,7 @@ METHOD DETAILS
 
  The value will be purified using 'HtmlPurifier' to avoid XSS attacks. Use
  'asRaw()' if you do not want any purification of the value.
-    [$value] (mixed) The value to be formatted.
+    [$value] (string) The value to be formatted.
     [$config] (array|null) The configuration for the HTMLPurifier class.
 
 
@@ -365,7 +403,7 @@ METHOD DETAILS
 <
 (string) The formatted result.
 
-    [$value] (mixed) The value to be formatted.
+    [$value] (string) The value to be formatted.
     [$options] (array) The tag options in terms of name-value pairs. See
     'Html::mailto()'.
 
@@ -414,7 +452,8 @@ METHOD DETAILS
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in UTC unless a timezone is explicitly given. 
+    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
+    given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object
     [$format] (string) The format used to convert the value into a date
@@ -443,7 +482,8 @@ METHOD DETAILS
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in UTC unless a timezone is explicitly given. 
+    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
+    given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object
     [$format] (string) The format used to convert the value into a date
@@ -472,7 +512,8 @@ METHOD DETAILS
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in UTC unless a timezone is explicitly given. 
+    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
+    given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object
     [$format] (string) The format used to convert the value into a date
@@ -490,9 +531,12 @@ METHOD DETAILS
 
 *yii/i18n/Formatter::normalizeDatetimeValue*		protected
 >
- normalizeDatetimeValue($value)
+ normalizeDatetimeValue($value, $checkTimeInfo='false')
 <
-(\DateTime) The normalized datetime value
+(\DateTime|array) The normalized datetime value. Since version 2.0.1 this may
+also return an array if '$checkTimeInfo' is true. The first element of the
+array is the normalized timestamp and the second is a boolean indicating
+whether the timestamp has time information or it is just a date value.
 
     [$value] (integer|string|\DateTime) The datetime value to be normalized.
     The following types of value are supported:
@@ -501,9 +545,16 @@ METHOD DETAILS
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in UTC unless a timezone is explicitly given. 
+    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
+    given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object
+    [$checkTimeInfo] (boolean) Whether to also check if the date/time value
+    has some time information attached. Defaults to 'false'. If 'true', the
+    method will then return an array with the first element being the
+    normalized timestamp and the second a boolean indicating whether the
+    timestamp has time information or it is just a date value. This parameter
+    is available since version 2.0.1.
 
 
 *yii/i18n/Formatter::asTimestamp*				public
@@ -519,7 +570,8 @@ METHOD DETAILS
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in UTC unless a timezone is explicitly given. 
+    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
+    given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object
 
@@ -541,7 +593,8 @@ METHOD DETAILS
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in UTC unless a timezone is explicitly given. 
+    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
+    given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object 
       - a PHP DateInterval object (a positive time interval will refer to
@@ -618,8 +671,8 @@ METHOD DETAILS
 <
 (string) The formatted result.
 
- This function does not requires the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) to be installed to work
+ This function does not require the [PHP intl
+ extension](http://php.net/manual/en/book.intl.php) to be installed to work,
  but it is highly recommended to install it to get good formatting results.
     [$value] (mixed) The value to be formatted.
     [$currency] (string) The 3-letter ISO 4217 currency code indicating the
@@ -692,9 +745,17 @@ METHOD DETAILS
 >
  normalizeNumericValue($value)
 <
-(float) 
+(float|integer) The normalized number value
 
-    [$value] () 
+
+   - everything [empty](http://php.net/manual/de/function.empty.php)
+   will result in '0' 
+   - a [numeric](http://php.net/manual/de/function.is-numeric.php)
+   string will be casted to float 
+   - everything else will be returned if it is
+   [numeric](http://php.net/manual/de/function.is-numeric.php),   otherwise an
+ exception is thrown.
+    [$value] (mixed) The input value
 
 
 *yii/i18n/Formatter::createNumberFormatter*		protected
@@ -703,7 +764,7 @@ METHOD DETAILS
 <
 (\NumberFormatter) The created formatter instance
 
- You may overide this method to create a number formatter based on patterns.
+ You may override this method to create a number formatter based on patterns.
     [$style] (integer) The type of the number formatter. Values:
     NumberFormatter::DECIMAL, ::CURRENCY, ::PERCENT, ::SCIENTIFIC, ::SPELLOUT,
     ::ORDINAL          ::DURATION, ::PATTERN_RULEBASED, ::DEFAULT_STYLE,

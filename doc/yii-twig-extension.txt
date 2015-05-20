@@ -49,20 +49,32 @@ METHOD DETAILS
 >
  registerAsset($context, $asset)
 <
+(mixed) 
+
+ ''' {{ use('yii/web/JqueryAsset') }} {{ register_jquery_asset() }} '''
+    [$context] (array) Context information
+    [$asset] (string) Asset name
+
+
+*yii/twig/Extension::registerAssetBundle*			public
+>
+ registerAssetBundle($context, $bundle)
+<
 (void)
 
-    [$context] () 
-    [$asset] () 
+ ''' {{ register_asset_bundle('yii/web/JqueryAsset') }} '''
+    [$context] (array) Context information
+    [$bundle] (string) Asset bundle class fully qualified name
 
 
 *yii/twig/Extension::beginWidget*				public
 >
  beginWidget($widget, $config='[]')
 <
-(void)
+(mixed) 
 
-    [$widget] () 
-    [$config] () 
+    [$widget] (string) Widget name
+    [$config] (array) Widget config
 
 
 *yii/twig/Extension::endWidget*				public
@@ -71,17 +83,17 @@ METHOD DETAILS
 <
 (void)
 
-    [$widget] () 
+    [$widget] (string) Widget name
 
 
 *yii/twig/Extension::widget*				public
 >
  widget($widget, $config='[]')
 <
-(void)
+(mixed) 
 
-    [$widget] () 
-    [$config] () 
+    [$widget] (string) Widget name
+    [$config] (array) Widget config
 
 
 *yii/twig/Extension::viewHelper*				public
@@ -98,31 +110,31 @@ METHOD DETAILS
 >
  resolveAndCall($className, $method, $arguments='null')
 <
-(void)
+(mixed) 
 
-    [$className] () 
-    [$method] () 
-    [$arguments] () 
+    [$className] (string) Class name
+    [$method] (string) Method name
+    [$arguments] (array) 
 
 
 *yii/twig/Extension::call*				public
 >
  call($className, $method, $arguments='null')
 <
-(void)
+(mixed) 
 
-    [$className] () 
-    [$method] () 
-    [$arguments] () 
+    [$className] (string) Class name
+    [$method] (string) Method name
+    [$arguments] (array) 
 
 
 *yii/twig/Extension::resolveClassName*			public
 >
  resolveClassName($className)
 <
-(void)
+(string) 
 
-    [$className] () 
+    [$className] (string) Class name
 
 
 *yii/twig/Extension::addUses*				public
@@ -131,27 +143,27 @@ METHOD DETAILS
 <
 (void)
 
-    [$args] () 
+    [$args] (array) Namespaces and classes to use in the template
 
 
 *yii/twig/Extension::path*				public
 >
  path($path, $args='[]')
 <
-(void)
+(string) The generated relative URL
 
-    [$path] () 
-    [$args] () 
+    [$path] (string) The parameter to be used to generate a valid URL
+    [$args] (array) Arguments
 
 
 *yii/twig/Extension::url*					public
 >
  url($path, $args='[]')
 <
-(void)
+(string) The generated absolute URL
 
-    [$path] () 
-    [$args] () 
+    [$path] (string) The parameter to be used to generate a valid URL
+    [$args] (array) Arguments
 
 
 *yii/twig/Extension::setProperty*				public
@@ -160,9 +172,9 @@ METHOD DETAILS
 <
 (void)
 
-    [$object] () 
-    [$property] () 
-    [$value] () 
+    [$object] (\stdClass) 
+    [$property] (string) 
+    [$value] (\yii\twig\mixes) 
 
 
 *yii/twig/Extension::getName*				public

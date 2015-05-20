@@ -121,8 +121,32 @@ $snippetCallback			*yii/sphinx/Query::$snippetCallback*
 $snippetOptions				*yii/sphinx/Query::$snippetOptions*
  (array) Query options for the call snippet.
 
+$facets					*yii/sphinx/Query::$facets*
+ (array) Facet search specifications. For example:
+
+   php
+   [
+       'group_id',
+       'brand_id' => [
+           'order' => ['COUNT(*)' => SORT_ASC],
+       ],
+       'price' => [
+           'select' => 'INTERVAL(price,200,400,600,800) AS price_seg',
+           'order' => ['FACET()' => SORT_ASC],
+       ],
+   ]
+
+ You need to use 'search()' method in order to fetch facet results.
+
+$showMeta				*yii/sphinx/Query::$showMeta*
+ (boolean|string|\yii\db\Expression) Whether to automatically perform 'SHOW
+ META' query against main one. You may set this value to be string or
+ 'Expression' instance, in this case its value will be used as 'LIKE'
+ condition for 'SHOW META' statement. You need to use 'search()' method in
+ order to fetch 'meta' results.
+
 $behaviors				*yii/sphinx/Query::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $connection				*yii/sphinx/Query::$connection*
  (\yii\sphinx\Connection) Sphinx connection instance
@@ -370,6 +394,17 @@ False is returned if the query results in nothing.
  See |yii/db/Query::exists|
 
 
+*yii/sphinx/Query::queryScalar*				protected
+>
+ queryScalar($selectExpression, $db)
+<
+(bool|string) 
+
+ Restores the value of select to make this query reusable.
+    [$selectExpression] (string|\yii\db\Expression) 
+    [$db] (\yii\db\Connection|null) 
+
+
 *yii/sphinx/Query::select*				public
  See |yii/db/Query::select|
 
@@ -547,6 +582,16 @@ False is returned if the query results in nothing.
 
 
 
+*yii/sphinx/Query::search*				public
+>
+ search($db='null')
+<
+(array) The query results.
+
+    [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
+    SQL statement.
+
+
 *yii/sphinx/Query::match*					public
 >
  match($query)
@@ -610,6 +655,34 @@ False is returned if the query results in nothing.
     Query::SORT_DESC]'). The method will automatically quote the column names
     unless a column contains some parenthesis (which means the column contains
     a DB expression).
+
+
+*yii/sphinx/Query::facets*				public
+>
+ facets($facets)
+<
+(static) The query object itself
+
+    [$facets] (array) Facet specifications.
+
+
+*yii/sphinx/Query::addFacets*				public
+>
+ addFacets($facets)
+<
+(static) The query object itself
+
+    [$facets] (array) Facet specifications.
+
+
+*yii/sphinx/Query::showMeta*				public
+>
+ showMeta($showMeta)
+<
+(static) The query object itself
+
+    [$showMeta] (boolean|string|\yii\db\Expression) Whether to automatically
+    perform 'SHOW META'
 
 
 *yii/sphinx/Query::snippetCallback*			public

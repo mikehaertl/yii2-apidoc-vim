@@ -13,69 +13,46 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/sphinx/ActiveRecord::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $validators				*yii/sphinx/ActiveRecord::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
+ See |yii/base/Model::$validators|
 
 $activeValidators			*yii/sphinx/ActiveRecord::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
+ See |yii/base/Model::$activeValidators|
 
 $errors					*yii/sphinx/ActiveRecord::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
+ See |yii/base/Model::$errors|
 
 $firstErrors				*yii/sphinx/ActiveRecord::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
+ See |yii/base/Model::$firstErrors|
 
 $attributes				*yii/sphinx/ActiveRecord::$attributes*
- (array) Attribute values (name => value).
+ See |yii/base/Model::$attributes|
 
 $scenario				*yii/sphinx/ActiveRecord::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+ See |yii/base/Model::$scenario|
 
 $iterator				*yii/sphinx/ActiveRecord::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
+ See |yii/base/Model::$iterator|
 
 $relatedRecords				*yii/sphinx/ActiveRecord::$relatedRecords*
- (array) An array of related records indexed by relation names.
+ See |yii/db/BaseActiveRecord::$relatedRecords|
 
 $oldAttributes				*yii/sphinx/ActiveRecord::$oldAttributes*
- (array) The old attribute values (name-value pairs)
+ See |yii/db/BaseActiveRecord::$oldAttributes|
 
 $dirtyAttributes			*yii/sphinx/ActiveRecord::$dirtyAttributes*
- (array) The changed attribute values (name-value pairs)
+ See |yii/db/BaseActiveRecord::$dirtyAttributes|
 
 $isNewRecord				*yii/sphinx/ActiveRecord::$isNewRecord*
- (boolean) Whether the record is new and should be inserted when calling
- 'save()'.
+ See |yii/db/ActiveRecordInterface::$isNewRecord|
 
 $primaryKey				*yii/sphinx/ActiveRecord::$primaryKey*
- (mixed) The primary key value. An array (attribute name => attribute value)
- is returned if the primary key is composite or '$asArray' is true. A string
- is returned otherwise (null will be returned if the key value is null).
+ See |yii/db/ActiveRecordInterface::$primaryKey|
 
 $oldPrimaryKey				*yii/sphinx/ActiveRecord::$oldPrimaryKey*
- (mixed) The old primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is true. A string is
- returned otherwise (null will be returned if the key value is null).
+ See |yii/db/ActiveRecordInterface::$oldPrimaryKey|
 
 $snippet				*yii/sphinx/ActiveRecord::$snippet*
  (string)
@@ -230,6 +207,10 @@ METHOD DETAILS
  See |yii/base/Model::attributeLabels|
 
 
+*yii/sphinx/ActiveRecord::attributeHints*			public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/sphinx/ActiveRecord::validate*			public
  See |yii/base/Model::validate|
 
@@ -270,6 +251,10 @@ METHOD DETAILS
  See |yii/db/BaseActiveRecord::getAttributeLabel|
 
 
+*yii/sphinx/ActiveRecord::getAttributeHint*		public
+ See |yii/db/BaseActiveRecord::getAttributeHint|
+
+
 *yii/sphinx/ActiveRecord::hasErrors*			public
  See |yii/base/Model::hasErrors|
 
@@ -288,6 +273,10 @@ METHOD DETAILS
 
 *yii/sphinx/ActiveRecord::addError*			public
  See |yii/base/Model::addError|
+
+
+*yii/sphinx/ActiveRecord::addErrors*			public
+ See |yii/base/Model::addErrors|
 
 
 *yii/sphinx/ActiveRecord::clearErrors*			public
@@ -674,10 +663,9 @@ index.
 <
 (\yii\sphinx\ActiveQuery) The newly created 'ActiveQuery' instance.
 
- The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
- customized by calling methods defined in 'ActiveQueryInterface' before
- 'one()' or 'all()' is called to return populated ActiveRecord instances. For
- example,
+ The returned 'ActiveQueryInterface' instance can be further customized by
+ calling methods defined in 'ActiveQueryInterface' before 'one()' or 'all()'
+ is called to return populated ActiveRecord instances. For example,
 
    // find the customer whose ID is 1
    $customer = Customer::find()->where(['id' => 1])->one();

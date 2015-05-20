@@ -31,9 +31,12 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/Migration::$db*
- (\yii\db\Connection|string) The DB connection object or the application
- component ID of the DB connection that this migration should work with. Note
- that when a Migration object is created by the 'migrate' command, this
+ (\yii\db\Connection|array|string) The DB connection object or the application
+ component ID of the DB connection that this migration should work with.
+ Starting from version 2.0.2, this can also be a configuration array for
+ creating the object.
+
+ Note that when a Migration object is created by the 'migrate' command, this
  property will be overwritten by the command. If you do not want to use the DB
  connection provided by the command, you may override the 'init()' method like
  the following:
@@ -47,7 +50,7 @@ $db					*yii/db/Migration::$db*
 
 
 $behaviors				*yii/db/Migration::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -423,11 +426,11 @@ proceed further. All other return values mean the migration succeeds.
     [$name] (string) The name of the foreign key constraint.
     [$table] (string) The table that the foreign key constraint will be added
     to.
-    [$columns] (string) The name of the column to that the constraint will be
-    added on. If there are multiple columns, separate them with commas or use
-    an array.
+    [$columns] (string|array) The name of the column to that the constraint
+    will be added on. If there are multiple columns, separate them with commas
+    or use an array.
     [$refTable] (string) The table that the foreign key references to.
-    [$refColumns] (string) The name of the column that the foreign key
+    [$refColumns] (string|array) The name of the column that the foreign key
     references to. If there are multiple columns, separate them with commas or
     use an array.
     [$delete] (string) The ON DELETE option. Most DBMS support these options:

@@ -54,7 +54,7 @@ DESCRIPTION
 
    use yii\bootstrap\ActiveForm;
 
-   $form = ActiveForm::begin(['layout' => 'horizontal'])
+   $form = ActiveForm::begin(['layout' => 'horizontal']);
 
    // Form field without label
    echo $form->field($model, 'demo', [
@@ -74,18 +74,18 @@ DESCRIPTION
    ]);
 
    // With 'default' layout you would use 'template' to size a specific field:
-   // echo $form->field($model, 'demo', [
-   //     'template' => '{label} <div class="row"><div
+   echo $form->field($model, 'demo', [
+       'template' => '{label} <div class="row"><div
  class="col-sm-4">{input}{error}{hint}</div></div>'
-   // ]);
+   ]);
 
-    // Input group
-    echo $form->field($model, 'demo', [
-        'inputTemplate' => '<div class="input-group"><span
+   // Input group
+   echo $form->field($model, 'demo', [
+       'inputTemplate' => '<div class="input-group"><span
  class="input-group-addon">@</span>{input}</div>',
-    ]);
+   ]);
 
-    ActiveForm::end();
+   ActiveForm::end();
 
 
 
@@ -145,7 +145,7 @@ $parts					*yii/bootstrap/ActiveField::$parts*
  See |yii/widgets/ActiveField::$parts|
 
 $inline					*yii/bootstrap/ActiveField::$inline*
- (bool) Whether to render 'checkboxList()' and 'radioList()' inline.
+ (boolean) Whether to render 'checkboxList()' and 'radioList()' inline.
 
 $inputTemplate				*yii/bootstrap/ActiveField::$inputTemplate*
  (string|null) Optional template to render the '{input}' placeholder content
@@ -182,14 +182,14 @@ $inlineRadioListTemplate		*yii/bootstrap/ActiveField::$inlineRadioListTemplate*
  (string) The template for inline radioLists
 
 $enableError				*yii/bootstrap/ActiveField::$enableError*
- (bool) Whether to render the error. Default is 'true' except for layout
+ (boolean) Whether to render the error. Default is 'true' except for layout
  'inline'.
 
 $enableLabel				*yii/bootstrap/ActiveField::$enableLabel*
- (bool) Whether to render the label. Default is 'true'.
+ (boolean) Whether to render the label. Default is 'true'.
 
 $behaviors				*yii/bootstrap/ActiveField::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -412,18 +412,23 @@ METHOD DETAILS
       the radio button. If not set,   it will take the default value '0'. This
     method will render a hidden input so that if the radio button   is not
     checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. 
-      - label: string, a label displayed next to the radio button.  It
-      will NOT be HTML-encoded. Therefore you can pass   in HTML code such as
-    an image tag. If this is is coming from end users, you should
-    'Html::encode()' it to prevent XSS attacks.   When this option is
-    specified, the radio button will be enclosed by a label tag. 
+    submitted to the server   via the hidden input. If you do not want any
+    hidden input, you should explicitly set this option as null. 
+      - label: string, a label displayed next to the radio button. It will
+      NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
+    image tag. If this is coming from end users, you should
+    'Html::encode()|encode' it to prevent XSS attacks.   When this option is
+    specified, the radio button will be enclosed by a label tag. If you do not
+    want any label, you should   explicitly set this option as null. 
       - labelOptions: array, the HTML attributes for the label tag. This
       is only used when the "label" option is specified.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
     a value is null, the corresponding attribute will not be rendered.
+
+    If you set a custom 'id' for the input element, you may need to adjust the
+    '$selectors' accordingly.
     [$enclosedByLabel] (boolean) Whether to enclose the radio within the
     label. If true, the method will still use 'template' to layout the
     checkbox and the error message except that the radio is enclosed by the
@@ -446,18 +451,23 @@ METHOD DETAILS
       the radio button. If not set,   it will take the default value '0'. This
     method will render a hidden input so that if the radio button   is not
     checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. 
-      - label: string, a label displayed next to the checkbox.  It will
-      NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
-    image tag. If this is is coming from end users, you should
-    'Html::encode()' it to prevent XSS attacks.   When this option is
-    specified, the checkbox will be enclosed by a label tag. 
+    submitted to the server   via the hidden input. If you do not want any
+    hidden input, you should explicitly set this option as null. 
+      - label: string, a label displayed next to the checkbox. It will NOT
+      be HTML-encoded. Therefore you can pass   in HTML code such as an image
+    tag. If this is coming from end users, you should 'Html::encode()|encode'
+    it to prevent XSS attacks.   When this option is specified, the checkbox
+    will be enclosed by a label tag. If you do not want any label, you should 
+     explicitly set this option as null. 
       - labelOptions: array, the HTML attributes for the label tag. This
       is only used when the "label" option is specified.
 
     The rest of the options will be rendered as the attributes of the
     resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
     a value is null, the corresponding attribute will not be rendered.
+
+    If you set a custom 'id' for the input element, you may need to adjust the
+    '$selectors' accordingly.
     [$enclosedByLabel] (boolean) Whether to enclose the checkbox within the
     label. If true, the method will still use 'template' to layout the
     checkbox and the error message except that the checkbox is enclosed by the
@@ -483,25 +493,10 @@ METHOD DETAILS
  is taken from the value of the model attribute.
     [$items] (array) The data item used to generate the checkboxes. The array
     values are the labels, while the array keys are the corresponding checkbox
-    values. Note that the labels will NOT be HTML-encoded, while the values
-    will.
-    [$options] (array) Options (name => config) for the checkbox list. The
-    following options are specially handled:
-
-
-      - unselect: string, the value that should be submitted when none of
-      the checkboxes is selected.   By setting this option, a hidden input
-    will be generated. 
-      - separator: string, the HTML code that separates items. 
-      - item: callable, a callback that can be used to customize the
-      generation of the HTML code   corresponding to a single item in $items.
-    The signature of this callback must be:
-
-      function ($index, $label, $name, $checked, $value)
-
-    where $index is the zero-based index of the checkbox in the whole list;
-    $label is the label for the checkbox; and $name, $value and $checked
-    represent the name, value and the checked status of the checkbox input.
+    values.
+    [$options] (array) Options (name => config) for the checkbox list. For the
+    list of available options please refer to the '$options' parameter of
+    '\yii\helpers\Html::activeCheckboxList()'.
 
 
 *yii/bootstrap/ActiveField::radioList*			public
@@ -515,26 +510,10 @@ METHOD DETAILS
  of the model attribute.
     [$items] (array) The data item used to generate the radio buttons. The
     array values are the labels, while the array keys are the corresponding
-    radio values. Note that the labels will NOT be HTML-encoded, while the
-    values will.
-    [$options] (array) Options (name => config) for the radio button list. The
-    following options are specially handled:
-
-
-      - unselect: string, the value that should be submitted when none of
-      the radio buttons is selected.   By setting this option, a hidden input
-    will be generated. 
-      - separator: string, the HTML code that separates items. 
-      - item: callable, a callback that can be used to customize the
-      generation of the HTML code   corresponding to a single item in $items.
-    The signature of this callback must be:
-
-      function ($index, $label, $name, $checked, $value)
-
-    where $index is the zero-based index of the radio button in the whole
-    list; $label is the label for the radio button; and $name, $value and
-    $checked represent the name, value and the checked status of the radio
-    button input.
+    radio values.
+    [$options] (array) Options (name => config) for the radio button list. For
+    the list of available options please refer to the '$options' parameter of
+    '\yii\helpers\Html::activeRadioList()'.
 
 
 *yii/bootstrap/ActiveField::widget*			public
@@ -556,7 +535,7 @@ METHOD DETAILS
 (static) The field object itself Make sure you call this method before
 'checkboxList()' or 'radioList()' to have any effect.
 
-    [$value] (bool) Whether to render a inline list
+    [$value] (boolean) Whether to render a inline list
 
 
 *yii/bootstrap/ActiveField::createLayoutConfig*		protected

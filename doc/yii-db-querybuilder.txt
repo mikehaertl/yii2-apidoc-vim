@@ -151,6 +151,9 @@ element). The parameters returned include those provided in '$params'.
    ]);
 
  Note that the values in each row must match the corresponding column names.
+
+ The method will properly escape the column names, and quote the values to be
+ inserted.
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch inserted into the table
@@ -683,6 +686,18 @@ table.
     the generated expression will be a 'false' value if operator is 'IN' and
     empty if operator is 'NOT IN'.
     [$params] (array) The binding parameters to be populated
+
+
+*yii/db/QueryBuilder::buildSubqueryInCondition*		protected
+>
+ buildSubqueryInCondition($operator, $columns, $values, $params)
+<
+(string) SQL
+
+    [$operator] (string) 
+    [$columns] (array) 
+    [$values] (\yii\db\Query) 
+    [$params] (array) 
 
 
 *yii/db/QueryBuilder::buildCompositeInCondition*		protected

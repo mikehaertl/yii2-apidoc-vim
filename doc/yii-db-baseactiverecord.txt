@@ -7,10 +7,8 @@ SUBCLASSES
 
 |yii/db/ActiveRecord|
 |yii/sphinx/ActiveRecord|
-|yii/redis/ActiveRecord|
 |yii/elasticsearch/ActiveRecord|
-|yii/mongodb/file/ActiveRecord|
-|yii/mongodb/ActiveRecord|
+|yii/redis/ActiveRecord|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -22,46 +20,28 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/db/BaseActiveRecord::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $validators				*yii/db/BaseActiveRecord::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
+ See |yii/base/Model::$validators|
 
 $activeValidators			*yii/db/BaseActiveRecord::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
+ See |yii/base/Model::$activeValidators|
 
 $errors					*yii/db/BaseActiveRecord::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
+ See |yii/base/Model::$errors|
 
 $firstErrors				*yii/db/BaseActiveRecord::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
+ See |yii/base/Model::$firstErrors|
 
 $attributes				*yii/db/BaseActiveRecord::$attributes*
- (array) Attribute values (name => value).
+ See |yii/base/Model::$attributes|
 
 $scenario				*yii/db/BaseActiveRecord::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+ See |yii/base/Model::$scenario|
 
 $iterator				*yii/db/BaseActiveRecord::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
+ See |yii/base/Model::$iterator|
 
 $relatedRecords				*yii/db/BaseActiveRecord::$relatedRecords*
  (array) An array of related records indexed by relation names.
@@ -262,8 +242,8 @@ METHOD DETAILS
        'email',
        'firstName' => 'first_name',
        'lastName' => 'last_name',
-       'fullName' => function () {
-           return $this->first_name . ' ' . $this->last_name;
+       'fullName' => function ($model) {
+           return $model->first_name . ' ' . $model->last_name;
        },
    ];
 
@@ -322,6 +302,10 @@ to 'fields()' on the format of the return value.
  See |yii/base/Model::attributeLabels|
 
 
+*yii/db/BaseActiveRecord::attributeHints*			public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/db/BaseActiveRecord::validate*			public
  See |yii/base/Model::validate|
 
@@ -369,6 +353,17 @@ to 'fields()' on the format of the return value.
     [$attribute] (string) The attribute name
 
 
+*yii/db/BaseActiveRecord::getAttributeHint*		public
+>
+ getAttributeHint($attribute)
+<
+(string) The attribute hint
+
+ If the attribute looks like 'relatedModel.attribute', then the attribute will
+ be received from the related model.
+    [$attribute] (string) The attribute name
+
+
 *yii/db/BaseActiveRecord::hasErrors*			public
  See |yii/base/Model::hasErrors|
 
@@ -387,6 +382,10 @@ to 'fields()' on the format of the return value.
 
 *yii/db/BaseActiveRecord::addError*			public
  See |yii/base/Model::addError|
+
+
+*yii/db/BaseActiveRecord::addErrors*			public
+ See |yii/base/Model::addErrors|
 
 
 *yii/db/BaseActiveRecord::clearErrors*			public
@@ -474,19 +473,23 @@ to 'fields()' on the format of the return value.
 >
  findOne($condition)
 <
-(static) ActiveRecord instance matching the condition, or 'null' if nothing
-matches.
+(static|null) ActiveRecord instance matching the condition, or 'null' if
+nothing matches.
 
  The method accepts:
 
   
    - a scalar value (integer or string): query by a single primary key
    value and return the    corresponding record (or null if not found).  
-   - an array of name-value pairs: query by a set of attribute values
-   and return a single record    matching all of them (or null if not found).
+   - a non-associative array: query by a list of primary key values and
+   return the    first record (or null if not found).  
+   - an associative array of name-value pairs: query by a set of
+   attribute values and return a single record    matching all of them (or
+ null if not found). Note that '['id' => 1, 2]' is treated as a
+ non-associative array.
 
- Note that this method will automatically call the 'one()' method and return
- an 'ActiveRecordInterface|ActiveRecord' instance. For example,
+ That this method will automatically call the 'one()' method and return an
+ 'ActiveRecordInterface|ActiveRecord' instance. For example,
 
    // find a single customer whose primary key value is 10
    $customer = Customer::findOne(10);
@@ -517,17 +520,18 @@ matches.
    - a scalar value (integer or string): query by a single primary key
    value and return an array containing the    corresponding record (or an
  empty array if not found).  
-   - an array of scalar values (integer or string): query by a list of
-   primary key values and return the    corresponding records (or an empty
- array if none was found).    Note that an empty condition will result in an
- empty result as it will be interpreted as a search for    primary keys and
- not an empty 'WHERE' condition.  
-   - an array of name-value pairs: query by a set of attribute values
-   and return an array of records    matching all of them (or an empty array
- if none was found).
+   - a non-associative array: query by a list of primary key values and
+   return the    corresponding records (or an empty array if none was found). 
+   Note that an empty condition will result in an empty result as it will be
+ interpreted as a search for    primary keys and not an empty 'WHERE'
+ condition.  
+   - an associative array of name-value pairs: query by a set of
+   attribute values and return an array of records    matching all of them (or
+ an empty array if none was found). Note that '['id' => 1, 2]' is treated as  
+  a non-associative array.
 
- Note that this method will automatically call the 'all()' method and return
- an array of 'ActiveRecordInterface|ActiveRecord' instances. For example,
+ This method will automatically call the 'all()' method and return an array of
+ 'ActiveRecordInterface|ActiveRecord' instances. For example,
 
    // find the customers whose primary key value is 10
    $customers = Customer::findAll(10);
@@ -553,15 +557,14 @@ matches.
 
 *yii/db/BaseActiveRecord::findByCondition*		protected
 >
- findByCondition($condition, $one)
+ findByCondition($condition)
 <
-(static|static[]) 
+(\yii\db\ActiveQueryInterface) The newly created
+'ActiveQueryInterface|ActiveQuery' instance.
 
  This method is internally called by 'findOne()' and 'findAll()'.
     [$condition] (mixed) Please refer to 'findOne()' for the explanation of
     this parameter
-    [$one] (boolean) Whether this method is called by 'findOne()' or
-    'findAll()'
 
 
 *yii/db/BaseActiveRecord::updateAll*			public
@@ -641,11 +644,13 @@ is returned (default implemented), optimistic locking will not be supported.
 
  1. Create a column to store the version number of each row. The column type
  should be 'BIGINT DEFAULT 0'.    Override this method to return the name of
- this column. 2. In the Web form that collects the user input, add a hidden
- field that stores    the lock version of the recording being updated. 3. In
- the controller action that does the data updating, try to catch the
- 'StaleObjectException'    and implement necessary business logic (e.g.
- merging the changes, prompting stated data)    to resolve the conflict.
+ this column. 2. Add a 'required' validation rule for the version column to
+ ensure the version value is submitted. 3. In the Web form that collects the
+ user input, add a hidden field that stores    the lock version of the
+ recording being updated. 4. In the controller action that does the data
+ updating, try to catch the 'StaleObjectException'    and implement necessary
+ business logic (e.g. merging the changes, prompting stated data)    to
+ resolve the conflict.
 
 
 *yii/db/BaseActiveRecord::hasOne*				public
@@ -826,11 +831,14 @@ does not exist.
 
 *yii/db/BaseActiveRecord::isAttributeChanged*		public
 >
- isAttributeChanged($name)
+ isAttributeChanged($name, $identical='true')
 <
-(boolean) Whether the attribute has been changed
+(bool) Whether the attribute has been changed
 
-    [$name] (string) The name of the attribute
+    [$name] (string) The name of the attribute.
+    [$identical] (bool) Whether the comparison of new and old value is made
+    for identical values using '===', defaults to 'true'. Otherwise '==' is
+    used for comparison. This parameter is available since version 2.0.4.
 
 
 *yii/db/BaseActiveRecord::getDirtyAttributes*		public
@@ -970,7 +978,7 @@ does not exist.
 >
  delete()
 <
-(integer|boolean) The number of rows deleted, or false if the deletion is
+(integer|false) The number of rows deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 

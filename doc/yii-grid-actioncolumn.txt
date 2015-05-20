@@ -11,7 +11,7 @@ DESCRIPTION
    'columns' => [
        // ...
        [
-           'class' => 'yii\grid\ActionColumn',
+           'class' => ActionColumn::className(),
            // you may configure additional properties here
        ],
    ]
@@ -68,6 +68,12 @@ $template				*yii/grid/ActionColumn::$template*
  the callback 'buttons['view']'. If a callback cannot be found, the token will
  be replaced with an empty string.
 
+ As an example, to only have the view, and update button you can add the
+ ActionColumn to your GridView columns as follows:
+
+ ''' ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
+ '''
+
 $buttons				*yii/grid/ActionColumn::$buttons*
  (array) Button rendering callbacks. The array keys are the button names
  (without curly brackets), and the values are the corresponding button
@@ -87,7 +93,8 @@ $buttons				*yii/grid/ActionColumn::$buttons*
 
    [
        'update' => function ($url, $model, $key) {
-           return $model->status == 'editable' ? Html::a('Update', $url) : '';
+           return $model->status === 'editable' ? Html::a('Update', $url) :
+ '';
        };
    ],
 
@@ -98,6 +105,10 @@ $urlCreator				*yii/grid/ActionColumn::$urlCreator*
  information. The signature of the callback should be the same as that of
  'createUrl()'. If this property is not set, button URLs will be created using
  'createUrl()'.
+
+$buttonOptions				*yii/grid/ActionColumn::$buttonOptions*
+ (array) Html options to be applied to the 'initDefaultButtons()|default
+ buttons'.
 
 
 

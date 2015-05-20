@@ -65,7 +65,7 @@ $queryCacheDependency			*yii/db/Command::$queryCacheDependency*
  query result for this command
 
 $behaviors				*yii/db/Command::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $sql					*yii/db/Command::$sql*
  (string) The SQL statement to be executed
@@ -411,7 +411,13 @@ query results in nothing.
        ['Linda', 25],
    ])->execute();
 
+ The method will properly escape the column names, and quote the values to be
+ inserted.
+
  Note that the values in each row must match the corresponding column names.
+
+ Also note that the created command is not executed until 'execute()' is
+ called.
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch inserted into the table
@@ -606,10 +612,11 @@ query results in nothing.
     [$name] (string) The name of the foreign key constraint.
     [$table] (string) The table that the foreign key constraint will be added
     to.
-    [$columns] (string) The name of the column to that the constraint will be
-    added on. If there are multiple columns, separate them with commas.
+    [$columns] (string|array) The name of the column to that the constraint
+    will be added on. If there are multiple columns, separate them with
+    commas.
     [$refTable] (string) The table that the foreign key references to.
-    [$refColumns] (string) The name of the column that the foreign key
+    [$refColumns] (string|array) The name of the column that the foreign key
     references to. If there are multiple columns, separate them with commas.
     [$delete] (string) The ON DELETE option. Most DBMS support these options:
     RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
@@ -692,6 +699,19 @@ query results in nothing.
 
  This method should only be used for executing non-query SQL statement, such
  as 'INSERT', 'DELETE', 'UPDATE' SQLs. No result set will be returned.
+
+
+*yii/db/Command::queryInternal*				protected
+>
+ queryInternal($method, $fetchMode=null)
+<
+(mixed) The method execution result
+
+    [$method] (string) Method of PDOStatement to be called
+    [$fetchMode] (integer) The result fetch mode. Please refer to [PHP
+    manual](http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php)
+    for valid fetch modes. If this parameter is null, the value set in
+    'fetchMode' will be used.
 
 
 

@@ -129,6 +129,12 @@ $snippetCallback			*yii/sphinx/ActiveQuery::$snippetCallback*
 $snippetOptions				*yii/sphinx/ActiveQuery::$snippetOptions*
  See |yii/sphinx/Query::$snippetOptions|
 
+$facets					*yii/sphinx/ActiveQuery::$facets*
+ See |yii/sphinx/Query::$facets|
+
+$showMeta				*yii/sphinx/ActiveQuery::$showMeta*
+ See |yii/sphinx/Query::$showMeta|
+
 $multiple				*yii/sphinx/ActiveQuery::$multiple*
  See |yii/db/ActiveRelationTrait::$multiple|
 
@@ -158,10 +164,10 @@ $sql					*yii/sphinx/ActiveQuery::$sql*
  set by 'ActiveRecord::findBySql()'.
 
 $behaviors				*yii/sphinx/ActiveQuery::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $connection				*yii/sphinx/ActiveQuery::$connection*
- (\yii\sphinx\Connection) Sphinx connection instance
+ See |yii/sphinx/Query::$connection|
 
 
 
@@ -373,7 +379,14 @@ will be returned.
 
 
 *yii/sphinx/ActiveQuery::populate*			public
- See |yii/db/Query::populate|
+>
+ populate($rows)
+<
+(array) The converted query result
+
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
+    [$rows] (array) The raw query result from database
 
 
 *yii/sphinx/ActiveQuery::one*				public
@@ -418,6 +431,10 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
 *yii/sphinx/ActiveQuery::exists*				public
  See |yii/db/Query::exists|
+
+
+*yii/sphinx/ActiveQuery::queryScalar*			protected
+ See |yii/db/Query::queryScalar|
 
 
 *yii/sphinx/ActiveQuery::select*				public
@@ -504,6 +521,10 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
 
 
+*yii/sphinx/ActiveQuery::search*				public
+ See |yii/sphinx/Query::search|
+
+
 *yii/sphinx/ActiveQuery::match*				public
  See |yii/sphinx/Query::match|
 
@@ -522,6 +543,18 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
 *yii/sphinx/ActiveQuery::addWithin*			public
  See |yii/sphinx/Query::addWithin|
+
+
+*yii/sphinx/ActiveQuery::facets*				public
+ See |yii/sphinx/Query::facets|
+
+
+*yii/sphinx/ActiveQuery::addFacets*			public
+ See |yii/sphinx/Query::addFacets|
+
+
+*yii/sphinx/ActiveQuery::showMeta*			public
+ See |yii/sphinx/Query::showMeta|
 
 
 *yii/sphinx/ActiveQuery::snippetCallback*			public

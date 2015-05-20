@@ -20,7 +20,6 @@ SUBCLASSES
 |yii/gii/console/GenerateController|
 |yii/debug/controllers/DefaultController|
 |yii/faker/FixtureController|
-|yii/mongodb/console/controllers/MigrateController|
 |yii/apidoc/components/BaseController|
 |yii/apidoc/commands/ApiController|
 |yii/apidoc/commands/GuideController|
@@ -50,7 +49,7 @@ $action					*yii/base/Controller::$action*
  will be set by 'run()' when it is called by 'Application' to run an action.
 
 $behaviors				*yii/base/Controller::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $modules				*yii/base/Controller::$modules*
  (\yii\base\Module[]) All ancestor modules that this controller is located
@@ -271,16 +270,21 @@ resolve into any action.
  The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
  the method will determine whether the action should continue to run.
 
+ In case the action should not run, the request should be handled inside of
+ the 'beforeAction' code by either providing the necessary output or
+ redirecting the request. Otherwise the response will be empty.
+
  If you override this method, your code should look like the following:
 
    public function beforeAction($action)
    {
-       if (parent::beforeAction($action)) {
-           // your custom code here
-           return true;  // or false if needed
-       } else {
+       if (!parent::beforeAction($action)) {
            return false;
        }
+
+       // your custom code here
+
+       return true; // or false to not run the action
    }
 
 
@@ -390,6 +394,17 @@ request.
     [$params] (array) The parameters (name-value pairs) that should be made
     available in the view. These parameters will not be available in the
     layout.
+
+
+*yii/base/Controller::renderContent*			public
+>
+ renderContent($content)
+<
+(string) The rendering result of the layout with the given static string as
+the '$content' variable. If the layout is disabled, the string will be
+returned back.
+
+    [$content] (string) The static string being rendered
 
 
 *yii/base/Controller::renderPartial*			public

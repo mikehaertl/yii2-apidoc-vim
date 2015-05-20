@@ -21,6 +21,10 @@ DESCRIPTION
                'options' => ['id' => 'myveryownID'],
            ],
            [
+               'label' => 'Example',
+               'url' => 'http://www.example.com',
+           ],
+           [
                'label' => 'Dropdown',
                'items' => [
                     [
@@ -74,6 +78,9 @@ $items					*yii/bootstrap/Tabs::$items*
    - linkOptions: array, optional, the HTML attributes of the tab
    header link tags. 
    - content: string, optional, the content (HTML) of the tab pane. 
+   - url: string, optional, an external URL. When this is specified,
+   clicking on this tab will bring   the browser to this URL. This option is
+ available since version 2.0.4. 
    - options: array, optional, the HTML attributes of the tab pane
    container. 
    - active: boolean, optional, whether the item tab header and pane
@@ -109,18 +116,22 @@ $encodeLabels				*yii/bootstrap/Tabs::$encodeLabels*
 $navType				*yii/bootstrap/Tabs::$navType*
  (string) Specifies the Bootstrap tab styling.
 
+$renderTabContent			*yii/bootstrap/Tabs::$renderTabContent*
+ (boolean) Whether to render the 'tab-content' container and its content. You
+ may set this property to be false so that you can manually render
+ 'tab-content' yourself in case your tab contents are complex.
+
 $behaviors				*yii/bootstrap/Tabs::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/bootstrap/Tabs::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/bootstrap/Tabs::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/bootstrap/Tabs::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 
@@ -283,6 +294,10 @@ METHOD DETAILS
  See |yii/bootstrap/Widget::registerPlugin|
 
 
+*yii/bootstrap/Tabs::registerClientEvents*		protected
+ See |yii/bootstrap/Widget::registerClientEvents|
+
+
 *yii/bootstrap/Tabs::renderItems*				protected
 >
  renderItems()
@@ -301,10 +316,11 @@ METHOD DETAILS
 
 *yii/bootstrap/Tabs::renderDropdown*			protected
 >
- renderDropdown($items, $panes)
+ renderDropdown($itemNumber, $items, $panes)
 <
 (boolean) Whether any of the dropdown items is 'active' or not.
 
+    [$itemNumber] (string) Number of the item
     [$items] (array) The dropdown items configuration.
     [$panes] (array) The panes reference array.
 

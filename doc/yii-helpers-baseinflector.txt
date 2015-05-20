@@ -214,5 +214,35 @@ METHOD DETAILS
     [$number] (integer) The number to get its ordinal value
 
 
+*yii/helpers/BaseInflector::sentence*			public
+>
+ sentence($words, $twoWordsConnector='' and '', $lastWordConnector='null', $connector='', '')
+<
+(string) The generated sentence
+
+ Special treatment is done for the last few words. For example,
+
+   $words = ['Spain', 'France'];
+   echo Inflector::sentence($words);
+   // output: Spain and France
+
+   $words = ['Spain', 'France', 'Italy'];
+   echo Inflector::sentence($words);
+   // output: Spain, France and Italy
+
+   $words = ['Spain', 'France', 'Italy'];
+   echo Inflector::sentence($words, ' & ');
+   // output: Spain, France & Italy
+
+
+    [$words] (array) The words to be converted into an string
+    [$twoWordsConnector] (string) The string connecting words when there are
+    only two
+    [$lastWordConnector] (string) The string connecting the last two words. If
+    this is null, it will take the value of '$twoWordsConnector'.
+    [$connector] (string) The string connecting words other than those
+    connected by $lastWordConnector and $twoWordsConnector
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

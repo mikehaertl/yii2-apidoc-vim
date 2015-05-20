@@ -109,6 +109,7 @@ SUBCLASSES
 |yii/validators/FilterValidator|
 |yii/validators/UniqueValidator|
 |yii/validators/InlineValidator|
+|yii/validators/EachValidator|
 |yii/validators/SafeValidator|
 |yii/validators/UrlValidator|
 |yii/validators/ImageValidator|
@@ -154,12 +155,6 @@ SUBCLASSES
 |yii/widgets/LinkPager|
 |yii/filters/AccessRule|
 |yii/grid/GridView|
-|yii/sphinx/Command|
-|yii/sphinx/gii/model/Generator|
-|yii/sphinx/ActiveQuery|
-|yii/sphinx/Query|
-|yii/sphinx/ActiveRecord|
-|yii/sphinx/Connection|
 |yii/bootstrap/Button|
 |yii/bootstrap/Alert|
 |yii/bootstrap/ActiveField|
@@ -175,6 +170,16 @@ SUBCLASSES
 |yii/bootstrap/Nav|
 |yii/bootstrap/ButtonGroup|
 |yii/bootstrap/NavBar|
+|yii/swiftmailer/Mailer|
+|yii/twig/ViewRenderer|
+|yii/sphinx/Command|
+|yii/sphinx/gii/model/Generator|
+|yii/sphinx/ActiveQuery|
+|yii/sphinx/ActiveFixture|
+|yii/sphinx/Query|
+|yii/sphinx/ActiveRecord|
+|yii/sphinx/Connection|
+|yii/sphinx/ActiveDataProvider|
 |yii/gii/components/ActiveField|
 |yii/gii/controllers/DefaultController|
 |yii/gii/console/GenerateAction|
@@ -209,15 +214,37 @@ SUBCLASSES
 |yii/debug/panels/ProfilingPanel|
 |yii/debug/panels/RequestPanel|
 |yii/debug/panels/LogPanel|
-|yii/redis/Session|
-|yii/redis/ActiveQuery|
-|yii/redis/Cache|
-|yii/redis/ActiveRecord|
-|yii/redis/Connection|
-|yii/twig/ViewRenderer|
-|yii/smarty/ViewRenderer|
-|yii/swiftmailer/Mailer|
+|yii/authclient/BaseClient|
+|yii/authclient/OpenId|
+|yii/authclient/BaseOAuth|
+|yii/authclient/AuthAction|
+|yii/authclient/clients/GoogleHybrid|
+|yii/authclient/clients/Facebook|
+|yii/authclient/clients/YandexOAuth|
+|yii/authclient/clients/LinkedIn|
+|yii/authclient/clients/VKontakte|
+|yii/authclient/clients/GoogleOpenId|
+|yii/authclient/clients/GoogleOAuth|
+|yii/authclient/clients/Live|
+|yii/authclient/clients/GitHub|
+|yii/authclient/clients/YandexOpenId|
+|yii/authclient/clients/Twitter|
+|yii/authclient/OAuth2|
+|yii/authclient/widgets/GooglePlusButton|
+|yii/authclient/widgets/AuthChoiceItem|
+|yii/authclient/widgets/AuthChoice|
+|yii/authclient/Collection|
+|yii/authclient/OAuth1|
 |yii/faker/FixtureController|
+|yii/codeception/BasePage|
+|yii/elasticsearch/Command|
+|yii/elasticsearch/ActiveQuery|
+|yii/elasticsearch/ActiveFixture|
+|yii/elasticsearch/Query|
+|yii/elasticsearch/DebugAction|
+|yii/elasticsearch/ActiveRecord|
+|yii/elasticsearch/Connection|
+|yii/elasticsearch/DebugPanel|
 |yii/jui/Droppable|
 |yii/jui/Widget|
 |yii/jui/InputWidget|
@@ -235,28 +262,12 @@ SUBCLASSES
 |yii/jui/Sortable|
 |yii/jui/Slider|
 |yii/jui/DatePicker|
-|yii/elasticsearch/Command|
-|yii/elasticsearch/ActiveQuery|
-|yii/elasticsearch/Query|
-|yii/elasticsearch/DebugAction|
-|yii/elasticsearch/ActiveRecord|
-|yii/elasticsearch/Connection|
-|yii/elasticsearch/DebugPanel|
-|yii/codeception/BasePage|
-|yii/mongodb/gii/model/Generator|
-|yii/mongodb/Migration|
-|yii/mongodb/file/ActiveQuery|
-|yii/mongodb/file/Query|
-|yii/mongodb/file/ActiveRecord|
-|yii/mongodb/Session|
-|yii/mongodb/console/controllers/MigrateController|
-|yii/mongodb/ActiveQuery|
-|yii/mongodb/ActiveFixture|
-|yii/mongodb/Query|
-|yii/mongodb/Cache|
-|yii/mongodb/ActiveRecord|
-|yii/mongodb/log/MongoDbTarget|
-|yii/mongodb/Connection|
+|yii/smarty/ViewRenderer|
+|yii/redis/Session|
+|yii/redis/ActiveQuery|
+|yii/redis/Cache|
+|yii/redis/ActiveRecord|
+|yii/redis/Connection|
 |yii/apidoc/components/BaseController|
 |yii/apidoc/commands/ApiController|
 |yii/apidoc/commands/GuideController|
@@ -271,24 +282,6 @@ SUBCLASSES
 |yii/apidoc/renderers/BaseRenderer|
 |yii/apidoc/renderers/ApiRenderer|
 |yii/apidoc/renderers/GuideRenderer|
-|yii/authclient/BaseClient|
-|yii/authclient/OpenId|
-|yii/authclient/BaseOAuth|
-|yii/authclient/AuthAction|
-|yii/authclient/clients/Facebook|
-|yii/authclient/clients/YandexOAuth|
-|yii/authclient/clients/LinkedIn|
-|yii/authclient/clients/VKontakte|
-|yii/authclient/clients/GoogleOpenId|
-|yii/authclient/clients/GoogleOAuth|
-|yii/authclient/clients/Live|
-|yii/authclient/clients/GitHub|
-|yii/authclient/clients/YandexOpenId|
-|yii/authclient/clients/Twitter|
-|yii/authclient/OAuth2|
-|yii/authclient/widgets/AuthChoice|
-|yii/authclient/Collection|
-|yii/authclient/OAuth1|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -437,15 +430,14 @@ METHOD DETAILS
 >
  __isset($name)
 <
-(boolean) Whether the named property is null
+(boolean) Whether the named property is set
 
  This method will check in the following order and act accordingly:
 
   
-   - a property defined by a setter: return whether the property value
-   is null  
-   - a property of a behavior: return whether the property value is
-   null
+   - a property defined by a setter: return whether the property is set  
+   - a property of a behavior: return whether the property is set  
+   - return 'false' for non existing properties
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing 'isset($component->property)'.
@@ -618,7 +610,7 @@ METHOD DETAILS
 <
 (void)
 
- The event handler must be a valid PHP callback. The followings are some
+ The event handler must be a valid PHP callback. The following are some
  examples:
 
    function ($event) { ... }         // anonymous function

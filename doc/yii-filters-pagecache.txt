@@ -53,8 +53,11 @@ $varyByRoute				*yii/filters/PageCache::$varyByRoute*
  Defaults to true.
 
 $cache					*yii/filters/PageCache::$cache*
- (string) The application component ID of the '\yii\caching\Cache|cache'
- object.
+ (\yii\caching\Cache|array|string) The cache object or the application
+ component ID of the cache object. After the PageCache object is created, if
+ you want to change this property, you should only assign it with a cache
+ object. Starting from version 2.0.2, this can also be a configuration array
+ for creating the object.
 
 $duration				*yii/filters/PageCache::$duration*
  (integer) Number of seconds that the data can remain valid in cache. Use 0 to
@@ -88,13 +91,25 @@ $variations				*yii/filters/PageCache::$variations*
 
 
 $enabled				*yii/filters/PageCache::$enabled*
- (boolean) Whether to enable the fragment cache. You may use this property to
- turn on and off the fragment cache according to specific setting (e.g. enable
- fragment cache only for GET requests).
+ (boolean) Whether to enable the page cache. You may use this property to turn
+ on and off the page cache according to specific setting (e.g. enable page
+ cache only for GET requests).
 
 $view					*yii/filters/PageCache::$view*
  (\yii\base\View) The view component to use for caching. If not set, the
  default application view component '\yii\web\Application::view' will be used.
+
+$cacheCookies				*yii/filters/PageCache::$cacheCookies*
+ (boolean|array) A boolean value indicating whether to cache all cookies, or
+ an array of cookie names indicating which cookies can be cached. Be very
+ careful with caching cookies, because it may leak sensitive or private data
+ stored in cookies to unwanted users.
+
+$cacheHeaders				*yii/filters/PageCache::$cacheHeaders*
+ (boolean|array) A boolean value indicating whether to cache all HTTP headers,
+ or an array of HTTP header names (case-insensitive) indicating which HTTP
+ headers can be cached. Note if your HTTP headers contain sensitive
+ information, you should white-list which headers can be cached.
 
 
 
@@ -185,18 +200,37 @@ METHOD DETAILS
 
 
 *yii/filters/PageCache::afterAction*			public
->
- afterAction($action, $result)
-<
-(mixed) The processed action result.
-
- You may override this method to do some postprocessing for the action.
-    [$action] (\yii\base\Action) The action just executed.
-    [$result] (mixed) The action execution result
+ See |yii/base/ActionFilter::afterAction|
 
 
 *yii/filters/PageCache::isActive*				protected
  See |yii/base/ActionFilter::isActive|
+
+
+*yii/filters/PageCache::restoreResponse*			protected
+>
+ restoreResponse($response, $data)
+<
+(void)
+
+    [$response] (\yii\web\Response) The response to be restored
+    [$data] (array) The response property data
+
+
+*yii/filters/PageCache::cacheResponse*			public
+>
+ cacheResponse()
+<
+(void)
+
+
+
+*yii/filters/PageCache::calculateCacheKey*		protected
+>
+ calculateCacheKey()
+<
+(array) The key used to cache response properties.
+
 
 
 

@@ -20,25 +20,22 @@ $typeMap				*yii/db/pgsql/Schema::$typeMap*
  (values)
 
 $tableSchemas				*yii/db/pgsql/Schema::$tableSchemas*
- (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
- array element is an instance of 'TableSchema' or its child class.
+ See |yii/db/Schema::$tableSchemas|
+
+$schemaNames				*yii/db/pgsql/Schema::$schemaNames*
+ See |yii/db/Schema::$schemaNames|
 
 $tableNames				*yii/db/pgsql/Schema::$tableNames*
- (string[]) All table names in the database.
+ See |yii/db/Schema::$tableNames|
 
 $queryBuilder				*yii/db/pgsql/Schema::$queryBuilder*
- (\yii\db\QueryBuilder) The query builder for this connection.
+ See |yii/db/Schema::$queryBuilder|
 
 $lastInsertID				*yii/db/pgsql/Schema::$lastInsertID*
- (string) The row ID of the last row inserted, or the last value retrieved
- from the sequence object
+ See |yii/db/Schema::$lastInsertID|
 
 $transactionIsolationLevel		*yii/db/pgsql/Schema::$transactionIsolationLevel*
- (string) The transaction isolation level to use for this transaction. This
- can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
- 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
- string containing DBMS specific syntax to be used after 'SET TRANSACTION
- ISOLATION LEVEL'.
+ See |yii/db/Schema::$transactionIsolationLevel|
 
 
 
@@ -123,6 +120,10 @@ does not exist.
  See |yii/db/Schema::getTableSchemas|
 
 
+*yii/db/pgsql/Schema::getSchemaNames*			public
+ See |yii/db/Schema::getSchemaNames|
+
+
 *yii/db/pgsql/Schema::getTableNames*			public
  See |yii/db/Schema::getTableNames|
 
@@ -145,6 +146,16 @@ does not exist.
 <
 (\yii\db\pgsql\QueryBuilder) Query builder instance
 
+
+
+*yii/db/pgsql/Schema::findSchemaNames*			protected
+>
+ findSchemaNames()
+<
+(array) All schema names in the database, except system schemas
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
 
 
 *yii/db/pgsql/Schema::findTableNames*			protected
@@ -196,6 +207,17 @@ does not exist.
 
 *yii/db/pgsql/Schema::setTransactionIsolationLevel*	public
  See |yii/db/Schema::setTransactionIsolationLevel|
+
+
+*yii/db/pgsql/Schema::insert*				public
+>
+ insert($table, $columns)
+<
+(array) Primary key values or false if the command fails
+
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column data (name => value) to be inserted into the
+    table.
 
 
 *yii/db/pgsql/Schema::quoteValue*				public
@@ -263,7 +285,7 @@ does not exist.
 >
  getUniqueIndexInformation($table)
 <
-(array) With index names, columns and if it is an expression tree
+(array) With index and column names
 
     [$table] (\yii\db\TableSchema) The table metadata
 

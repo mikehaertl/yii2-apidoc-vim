@@ -13,8 +13,9 @@ DESCRIPTION
  If you don't want to use migration and need SQL instead, files for all
  databases are in migrations directory.
 
- You may change the names of the three tables used to store the authorization
- data by setting 'itemTable', 'itemChildTable' and 'assignmentTable'.
+ You may change the names of the tables used to store the authorization and
+ rule data by setting 'itemTable', 'itemChildTable', 'assignmentTable' and
+ 'ruleTable'.
 
 
 PROPERTY DETAILS
@@ -24,10 +25,11 @@ $defaultRoles				*yii/rbac/DbManager::$defaultRoles*
  See |yii/rbac/BaseManager::$defaultRoles|
 
 $db					*yii/rbac/DbManager::$db*
- (\yii\db\Connection|string) The DB connection object or the application
+ (\yii\db\Connection|array|string) The DB connection object or the application
  component ID of the DB connection. After the DbManager object is created, if
  you want to change this property, you should only assign it with a DB
- connection object.
+ connection object. Starting from version 2.0.2, this can also be a
+ configuration array for creating the object.
 
 $itemTable				*yii/rbac/DbManager::$itemTable*
  (string) The name of the table storing authorization items. Defaults to
@@ -44,19 +46,48 @@ $assignmentTable			*yii/rbac/DbManager::$assignmentTable*
 $ruleTable				*yii/rbac/DbManager::$ruleTable*
  (string) The name of the table storing rules. Defaults to "auth_rule".
 
-$behaviors				*yii/rbac/DbManager::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+$cache					*yii/rbac/DbManager::$cache*
+ (\yii\caching\Cache|array|string) The cache used to improve RBAC performance.
+ This can be one of the following:
 
-$roles					*yii/rbac/DbManager::$roles*
- (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
- names.
 
-$permissions				*yii/rbac/DbManager::$permissions*
- (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
- by the permission names.
+   - an application component ID (e.g. 'cache') 
+   - a configuration array 
+   - a 'yii\caching\Cache' object
+
+ When this is not set, it means caching is not enabled.
+
+ Note that by enabling RBAC cache, all auth items, rules and auth item
+ parent-child relationships will be cached and loaded into memory. This will
+ improve the performance of RBAC permission check. However, it does require
+ extra memory and as a result may not be appropriate if your RBAC system
+ contains too many auth items. You should seek other RBAC implementations
+ (e.g. RBAC based on Redis storage) in this case.
+
+ Also note that if you modify RBAC items, rules or parent-child relationships
+ from outside of this component, you have to manually call 'invalidateCache()'
+ to ensure data consistency.
+
+$cacheKey				*yii/rbac/DbManager::$cacheKey*
+ (string) The key used to store RBAC data in cache
+
+$items					*yii/rbac/DbManager::$items*
+ (\yii\rbac\Item[]) All auth items (name => Item)
 
 $rules					*yii/rbac/DbManager::$rules*
- (\yii\rbac\Rule[]) The rules indexed by the rule names
+ (\yii\rbac\Rule[]) All auth rules (name => Rule)
+
+$parents				*yii/rbac/DbManager::$parents*
+ (array) Auth item parent-child relationships (childName => list of parents)
+
+$behaviors				*yii/rbac/DbManager::$behaviors*
+ See |yii/base/Component::$behaviors|
+
+$roles					*yii/rbac/DbManager::$roles*
+ See |yii/rbac/BaseManager::$roles|
+
+$permissions				*yii/rbac/DbManager::$permissions*
+ See |yii/rbac/BaseManager::$permissions|
 
 
 
@@ -195,7 +226,7 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully added to the system
 
-    [$item] (\yii\rbac\Item) 
+    [$item] (\yii\rbac\Item) The item to add
 
 
 *yii/rbac/DbManager::addRule*				protected
@@ -204,7 +235,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully added to the system
 
-    [$rule] (\yii\rbac\Rule) 
+    [$rule] (\yii\rbac\Rule) The rule to add
 
 
 *yii/rbac/DbManager::removeItem*				protected
@@ -213,7 +244,7 @@ returned if no such item.
 <
 (boolean) Whether the role or permission is successfully removed
 
-    [$item] (\yii\rbac\Item) 
+    [$item] (\yii\rbac\Item) The item to remove
 
 
 *yii/rbac/DbManager::removeRule*				protected
@@ -222,7 +253,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully removed
 
-    [$rule] (\yii\rbac\Rule) 
+    [$rule] (\yii\rbac\Rule) The rule to remove
 
 
 *yii/rbac/DbManager::updateItem*				protected
@@ -231,8 +262,8 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully updated
 
-    [$name] (string) The old name of the auth item
-    [$item] (\yii\rbac\Item) 
+    [$name] (string) The name of the item being updated
+    [$item] (\yii\rbac\Item) The updated item
 
 
 *yii/rbac/DbManager::updateRule*				protected
@@ -241,8 +272,8 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully updated
 
-    [$name] (string) The old name of the rule
-    [$rule] (\yii\rbac\Rule) 
+    [$name] (string) The name of the rule being updated
+    [$rule] (\yii\rbac\Rule) The updated rule
 
 
 *yii/rbac/DbManager::createRole*				public
@@ -336,7 +367,7 @@ indexed by the permission names.
 >
  getRule($name)
 <
-(\yii\rbac\Rule) The rule object, or null if the specified name does not
+(null|\yii\rbac\Rule) The rule object, or null if the specified name does not
 correspond to a rule.
 
     [$name] (string) The rule name
@@ -435,8 +466,8 @@ correspond to a rule.
 >
  getAssignment($roleName, $userId)
 <
-(\yii\rbac\Assignment) The assignment information. Null is returned if the
-role is not assigned to the user.
+(null|\yii\rbac\Assignment) The assignment information. Null is returned if
+the role is not assigned to the user.
 
     [$roleName] (string) The role name
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -493,6 +524,24 @@ will be returned if there is no role assigned to the user.
 <
 (void)
 
+
+
+*yii/rbac/DbManager::checkAccessFromCache*		protected
+>
+ checkAccessFromCache($user, $itemName, $params, $assignments)
+<
+(boolean) Whether the operations can be performed by the user.
+
+ This method is internally called by 'checkAccess()' when 'cache' is enabled.
+    [$user] (string|integer) The user ID. This should can be either an integer
+    or a string representing the unique identifier of a user. See
+    '\yii\web\User::id'.
+    [$itemName] (string) The name of the operation that need access check
+    [$params] (array) Name-value pairs that would be passed to rules
+    associated with the tasks and roles assigned to the user. A param with
+    name 'user' is added to this array, which holds the value of '$userId'.
+    [$assignments] (\yii\rbac\Assignment[]) The assignments to the specified
+    user
 
 
 *yii/rbac/DbManager::checkAccessRecursive*		protected
@@ -570,6 +619,22 @@ corresponding array value is a list of child item names.
 
     [$type] (integer) The auth item type (either Item::TYPE_PERMISSION or
     Item::TYPE_ROLE)
+
+
+*yii/rbac/DbManager::invalidateCache*			public
+>
+ invalidateCache()
+<
+(void)
+
+
+
+*yii/rbac/DbManager::loadFromCache*			public
+>
+ loadFromCache()
+<
+(void)
+
 
 
 

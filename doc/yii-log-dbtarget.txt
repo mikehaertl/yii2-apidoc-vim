@@ -5,9 +5,16 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- By default, DbTarget stores the log messages in a DB table named 'log'. This
- table must be pre-created. The table name can be changed by setting the
- 'logTable' property.
+ The database connection is specified by 'db'. Database schema could be
+ initialized by applying migration:
+
+ ''' yii migrate --migrationPath=@yii/log/migrations/ '''
+
+ If you don't want to use migration and need SQL instead, files for all
+ databases are in migrations directory.
+
+ You may change the name of the table used to store the data by setting
+ 'logTable'.
 
 
 PROPERTY DETAILS
@@ -35,42 +42,20 @@ $messages				*yii/log/DbTarget::$messages*
  See |yii/log/Target::$messages|
 
 $db					*yii/log/DbTarget::$db*
- (\yii\db\Connection|string) The DB connection object or the application
+ (\yii\db\Connection|array|string) The DB connection object or the application
  component ID of the DB connection. After the DbTarget object is created, if
  you want to change this property, you should only assign it with a DB
- connection object.
+ connection object. Starting from version 2.0.2, this can also be a
+ configuration array for creating the object.
 
 $logTable				*yii/log/DbTarget::$logTable*
- (string) Name of the DB table to store cache content. The table should be
- pre-created as follows:
-
-   CREATE TABLE log (
-       id       BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-       level    INTEGER,
-       category VARCHAR(255),
-       log_time INTEGER,
-       prefix   TEXT,
-       message  TEXT,
-       INDEX idx_log_level (level),
-       INDEX idx_log_category (category)
-   )
-
- Note that the 'id' column must be created as an auto-incremental column. The
- above SQL uses the MySQL syntax. If you are using other DBMS, you need to
- adjust it accordingly. For example, in PostgreSQL, it should be 'id SERIAL
- PRIMARY KEY'.
-
- The indexes declared above are not required. They are mainly used to improve
- the performance of some queries about message levels and categories.
- Depending on your actual needs, you may want to create additional indexes
- (e.g. index on 'log_time').
+ (string) Name of the DB table to store cache content. Defaults to "log".
 
 $behaviors				*yii/log/DbTarget::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $levels					*yii/log/DbTarget::$levels*
- (integer) The message levels that this target is interested in. This is a
- bitmap of level values. Defaults to 0, meaning  all available levels.
+ See |yii/log/Target::$levels|
 
 
 

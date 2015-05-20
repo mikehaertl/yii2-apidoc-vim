@@ -76,11 +76,10 @@ $parsers				*yii/web/Request::$parsers*
  array key. This one will be used as a fallback in case no other types match.
 
 $behaviors				*yii/web/Request::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $isConsoleRequest			*yii/web/Request::$isConsoleRequest*
- (boolean) The value indicating whether the current request is made via
- console
+ See |yii/base/Request::$isConsoleRequest|
 
 $scriptFile				*yii/web/Request::$scriptFile*
  (string) The entry script file path
@@ -505,6 +504,8 @@ value returned is turned into upper case.
 <
 (mixed) The parameter value
 
+ If the parameter does not exist, the second parameter passed to this method
+ will be returned.
     [$name] (string) The parameter name
     [$defaultValue] (mixed) The default parameter value if the parameter does
     not exist.
@@ -557,10 +558,9 @@ value returned is turned into upper case.
 <
 (mixed) The GET parameter value
 
- If the GET parameter does not exist, the second parameter to this method will
- be returned.
-    [$name] (string) The GET parameter name. If not specified, whole $_GET is
-    returned.
+ If the GET parameter does not exist, the second parameter passed to this
+ method will be returned.
+    [$name] (string) The GET parameter name.
     [$defaultValue] (mixed) The default parameter value if the GET parameter
     does not exist.
 
@@ -1022,25 +1022,32 @@ no such header is sent.
 
 *yii/web/Request::createCsrfCookie*			protected
 >
- createCsrfCookie()
+ createCsrfCookie($token)
 <
 (\yii\web\Cookie) The generated cookie
 
  Initial values specified in 'csrfCookie' will be applied to the generated
  cookie.
+    [$token] (string) The CSRF token
 
 
 *yii/web/Request::validateCsrfToken*			public
 >
- validateCsrfToken()
+ validateCsrfToken($token='null')
 <
 (boolean) Whether CSRF token is valid. If 'enableCsrfValidation' is false,
 this method will return true.
 
- The method will compare the CSRF token obtained from a cookie and from a POST
- field. If they are different, a CSRF attack is detected and a 400 HTTP
- exception will be raised. This method is called in
+ This method will validate the user-provided CSRF token by comparing it with
+ the one stored in cookie or session. This method is mainly called in
  'Controller::beforeAction()'.
+
+ Note that the method will NOT perform CSRF validation if
+ 'enableCsrfValidation' is false or the HTTP method is among GET, HEAD or
+ OPTIONS.
+    [$token] (string) The user-provided CSRF token to be validated. If null,
+    the token will be retrieved from the 'csrfParam' POST field or HTTP
+    header. This parameter is available since version 2.0.4.
 
 
 

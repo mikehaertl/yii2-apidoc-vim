@@ -19,7 +19,7 @@ DESCRIPTION
            [
                'label' => 'Post Category',
                'url' => ['post-category/view', 'id' => 10],
-               'template' => '<li><b>{link}</b></li>\n', // template for this
+               'template' => "<li><b>{link}</b></li>\n", // template for this
  link only
            ],
            ['label' => 'Sample Post', 'url' => ['post/edit', 'id' => 1]],
@@ -83,7 +83,28 @@ $links					*yii/widgets/Breadcrumbs::$links*
    ]
 
  If a link is active, you only need to specify its "label", and instead of
- writing '['label' => $label]', you should simply use '$label'.
+ writing '['label' => $label]', you may simply use '$label'.
+
+ Since version 2.0.1, any additional array elements for each link will be
+ treated as the HTML attributes for the hyperlink tag. For example, the
+ following link specification will generate a hyperlink with CSS class
+ 'external':
+
+   [
+       'label' => 'demo',
+       'url' => 'http://example.com',
+       'class' => 'external',
+   ]
+
+ Since version 2.0.3 each individual link can override global 'encodeLabels'
+ param like the following:
+
+   [
+       'label' => '<strong>Hello!</strong>',
+       'encode' => false,
+   ]
+
+
 
 $itemTemplate				*yii/widgets/Breadcrumbs::$itemTemplate*
  (string) The template used to render each inactive item in the breadcrumbs.
@@ -96,17 +117,16 @@ $activeItemTemplate			*yii/widgets/Breadcrumbs::$activeItemTemplate*
  item.
 
 $behaviors				*yii/widgets/Breadcrumbs::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/widgets/Breadcrumbs::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/widgets/Breadcrumbs::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/widgets/Breadcrumbs::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 

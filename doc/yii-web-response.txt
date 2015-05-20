@@ -39,8 +39,8 @@ $format					*yii/web/Response::$format*
    - 'FORMAT_RAW': the data will be treated as the response content
    without any conversion.   No extra HTTP header will be added. 
    - 'FORMAT_HTML': the data will be treated as the response content
-   without any conversion.   The "Content-Type" header will set as "text/html"
- if it is not set previously. 
+   without any conversion.   The "Content-Type" header will set as
+ "text/html". 
    - 'FORMAT_JSON': the data will be converted into JSON format, and
    the "Content-Type"   header will be set as "application/json". 
    - 'FORMAT_JSONP': the data will be converted into JSONP format, and
@@ -57,13 +57,13 @@ $format					*yii/web/Response::$format*
 $acceptMimeType				*yii/web/Response::$acceptMimeType*
  (string) The MIME type (e.g. 'application/json') from the request ACCEPT
  header chosen for this response. This property is mainly set by
- [\yii\filters\ContentNegotiator'.
+ '\yii\filters\ContentNegotiator'.
 
 $acceptParams				*yii/web/Response::$acceptParams*
  (array) The parameters (e.g. '['q' => 1, 'version' => '1.0']') associated
  with the 'acceptMimeType|chosen MIME type'. This is a list of name-value
  pairs associated with 'acceptMimeType' from the ACCEPT HTTP header. This
- property is mainly set by [\yii\filters\ContentNegotiator'.
+ property is mainly set by '\yii\filters\ContentNegotiator'.
 
 $formatters				*yii/web/Response::$formatters*
  (array) The formatters for converting data into the response content of the
@@ -106,7 +106,7 @@ $httpStatuses				*yii/web/Response::$httpStatuses*
  (array) List of HTTP status codes and the corresponding texts
 
 $behaviors				*yii/web/Response::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $statusCode				*yii/web/Response::$statusCode*
  (integer) The HTTP status code to send with the response.
@@ -398,7 +398,11 @@ METHOD DETAILS
       'application/octet-stream'.  
       - 'inline': boolean, whether the browser should open the file within
       the browser window. Defaults to false,     meaning a download dialog
-    will pop up.
+    will pop up.  
+      - 'fileSize': the size of the content to stream this is usefull when
+      size of the content is known     and the content is not seekable.
+    Defaults to content size using 'ftell()'.     This option is available
+    since version 2.0.4.
 
 
 *yii/web/Response::setDownloadHeaders*			public
@@ -508,7 +512,7 @@ invalid.
 
 *yii/web/Response::redirect*				public
 >
- redirect($url, $statusCode=302)
+ redirect($url, $statusCode=302, $checkAjax='true')
 <
 (static) The response object itself
 
@@ -556,6 +560,12 @@ invalid.
     [$statusCode] (integer) The HTTP status code. Defaults to 302. See
     <http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html> for details about
     HTTP status code
+    [$checkAjax] (boolean) Whether to specially handle AJAX (and PJAX)
+    requests. Defaults to true, meaning if the current request is an AJAX or
+    PJAX request, then calling this method will cause the browser to redirect
+    to the given URL. If this is false, a 'Location' header will be sent,
+    which when received as an AJAX/PJAX response, may NOT cause browser
+    redirection.
 
 
 *yii/web/Response::refresh*				public

@@ -84,17 +84,22 @@ $items					*yii/widgets/Menu::$items*
  associated with this menu item,   and the token '{label}' will be replaced by
  the label of the menu item.   If this option is not set, 'linkTemplate' or
  'labelTemplate' will be used instead. 
+   - submenuTemplate: string, optional, the template used to render the
+   list of sub-menus.   The token '{items}' will be replaced with the rendered
+ sub-menu items.   If this option is not set, 'submenuTemplate' will be used
+ instead. 
    - options: array, optional, the HTML attributes for the menu
    container tag.
 
 $itemOptions				*yii/widgets/Menu::$itemOptions*
- (array) List of HTML attributes for the menu container tag. This will be
- overwritten by the "options" set in individual 'items'. The following special
- options are recognized:
+ (array) List of HTML attributes shared by all menu 'items'. If any individual
+ menu item specifies its 'options', it will be merged with this property
+ before being used to generate the HTML attributes for the menu item tag. The
+ following special options are recognized:
 
 
    - tag: string, defaults to "li", the tag name of the item container
-   tags.
+   tags. Set to false to disable container tag.
 
 $linkTemplate				*yii/widgets/Menu::$linkTemplate*
  (string) The template used to render the body of a menu which is a link. In
@@ -111,7 +116,7 @@ $labelTemplate				*yii/widgets/Menu::$labelTemplate*
 
 $submenuTemplate			*yii/widgets/Menu::$submenuTemplate*
  (string) The template used to render a list of sub-menus. In this template,
- the token '{items}' will be replaced with the renderer sub-menu items.
+ the token '{items}' will be replaced with the rendered sub-menu items.
 
 $encodeLabels				*yii/widgets/Menu::$encodeLabels*
  (boolean) Whether the labels for menu items should be HTML-encoded.
@@ -138,7 +143,7 @@ $options				*yii/widgets/Menu::$options*
 
 
    - tag: string, defaults to "ul", the tag name of the item container
-   tags.
+   tags. Set to false to disable container tag.
 
 $firstItemCssClass			*yii/widgets/Menu::$firstItemCssClass*
  (string) The CSS class that will be assigned to the first item in the main
@@ -159,17 +164,16 @@ $params					*yii/widgets/Menu::$params*
  not set, it will use '$_GET'.
 
 $behaviors				*yii/widgets/Menu::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/widgets/Menu::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/widgets/Menu::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/widgets/Menu::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 

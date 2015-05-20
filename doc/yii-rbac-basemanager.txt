@@ -17,7 +17,7 @@ $defaultRoles				*yii/rbac/BaseManager::$defaultRoles*
  without calling 'assign()'.
 
 $behaviors				*yii/rbac/BaseManager::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $roles					*yii/rbac/BaseManager::$roles*
  (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
@@ -28,7 +28,7 @@ $permissions				*yii/rbac/BaseManager::$permissions*
  by the permission names.
 
 $rules					*yii/rbac/BaseManager::$rules*
- (\yii\rbac\Rule[]) The rules indexed by the rule names
+ See |yii/rbac/ManagerInterface::$rules|
 
 
 
@@ -161,7 +161,7 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully added to the system
 
-    [$item] (\yii\rbac\Item) 
+    [$item] (\yii\rbac\Item) The item to add
 
 
 *yii/rbac/BaseManager::addRule*				protected
@@ -170,7 +170,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully added to the system
 
-    [$rule] (\yii\rbac\Rule) 
+    [$rule] (\yii\rbac\Rule) The rule to add
 
 
 *yii/rbac/BaseManager::removeItem*			protected
@@ -179,7 +179,7 @@ returned if no such item.
 <
 (boolean) Whether the role or permission is successfully removed
 
-    [$item] (\yii\rbac\Item) 
+    [$item] (\yii\rbac\Item) The item to remove
 
 
 *yii/rbac/BaseManager::removeRule*			protected
@@ -188,7 +188,7 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully removed
 
-    [$rule] (\yii\rbac\Rule) 
+    [$rule] (\yii\rbac\Rule) The rule to remove
 
 
 *yii/rbac/BaseManager::updateItem*			protected
@@ -197,8 +197,8 @@ returned if no such item.
 <
 (boolean) Whether the auth item is successfully updated
 
-    [$name] (string) The old name of the auth item
-    [$item] (\yii\rbac\Item) 
+    [$name] (string) The name of the item being updated
+    [$item] (\yii\rbac\Item) The updated item
 
 
 *yii/rbac/BaseManager::updateRule*			protected
@@ -207,8 +207,8 @@ returned if no such item.
 <
 (boolean) Whether the rule is successfully updated
 
-    [$name] (string) The old name of the rule
-    [$rule] (\yii\rbac\Rule) 
+    [$name] (string) The name of the rule being updated
+    [$rule] (\yii\rbac\Rule) The updated rule
 
 
 *yii/rbac/BaseManager::createRole*			public
@@ -266,7 +266,7 @@ system
 >
  getRole($name)
 <
-(\yii\rbac\Role) The role corresponding to the specified name. Null is
+(null|\yii\rbac\Role) The role corresponding to the specified name. Null is
 returned if no such role.
 
     [$name] (string) The role name.
@@ -276,8 +276,8 @@ returned if no such role.
 >
  getPermission($name)
 <
-(\yii\rbac\Permission) The permission corresponding to the specified name.
-Null is returned if no such permission.
+(null|\yii\rbac\Permission) The permission corresponding to the specified
+name. Null is returned if no such permission.
 
     [$name] (string) The permission name.
 

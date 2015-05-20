@@ -28,7 +28,7 @@ DESCRIPTION
    ]); ?>
    <ul>
    <?php foreach ($authAuthChoice->getClients() as $client): ?>
-       <li><?= $authAuthChoice->clientLink($client) ?></li>
+       <li><?php $authAuthChoice->clientLink($client) ?></li>
    <?php endforeach; ?>
    </ul>
    <?php AuthChoice::end(); ?>
@@ -36,7 +36,10 @@ DESCRIPTION
  This widget supports following keys for 'ClientInterface::getViewOptions()'
  result:  
    - popupWidth - integer width of the popup window in pixels.  
-   - popupHeight - integer height of the popup window in pixels.
+   - popupHeight - integer height of the popup window in pixels.  
+   - widget - configuration for the widget, which should be used to
+   render a client link;    such widget should be a subclass of
+ 'AuthChoiceItem'.
 
 
 PROPERTY DETAILS
@@ -72,17 +75,16 @@ $autoRender				*yii/authclient/widgets/AuthChoice::$autoRender*
  'createClientUrl()'
 
 $behaviors				*yii/authclient/widgets/AuthChoice::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/authclient/widgets/AuthChoice::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/authclient/widgets/AuthChoice::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/authclient/widgets/AuthChoice::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 $clients				*yii/authclient/widgets/AuthChoice::$clients*
  (\yii\authclient\ClientInterface[]) Auth providers

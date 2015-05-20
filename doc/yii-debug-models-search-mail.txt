@@ -37,46 +37,28 @@ $file					*yii/debug/models/search/Mail::$file*
  (string) File attribute input search value
 
 $behaviors				*yii/debug/models/search/Mail::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $validators				*yii/debug/models/search/Mail::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
+ See |yii/base/Model::$validators|
 
 $activeValidators			*yii/debug/models/search/Mail::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
+ See |yii/base/Model::$activeValidators|
 
 $errors					*yii/debug/models/search/Mail::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
+ See |yii/base/Model::$errors|
 
 $firstErrors				*yii/debug/models/search/Mail::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
+ See |yii/base/Model::$firstErrors|
 
 $attributes				*yii/debug/models/search/Mail::$attributes*
- (array) Attribute values (name => value).
+ See |yii/base/Model::$attributes|
 
 $scenario				*yii/debug/models/search/Mail::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+ See |yii/base/Model::$scenario|
 
 $iterator				*yii/debug/models/search/Mail::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
+ See |yii/base/Model::$iterator|
 
 
 
@@ -203,8 +185,74 @@ METHOD DETAILS
 >
  rules()
 <
-(void)
+(array) Validation rules
 
+ Validation rules are used by 'validate()' to check if attribute values are
+ valid. Child classes may override this method to declare different validation
+ rules.
+
+ Each rule is an array with the following structure:
+
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       ...other parameters...
+   ]
+
+ where
+
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array when the
+   validation    rule can be applied. If this option is not set, the rule will
+ apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
+
+ A validator can be either an object of a class extending 'Validator', or a
+ model class method (called *inline validator*) that has the following
+ signature:
+
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
+
+ In the above '$attribute' refers to currently validated attribute name while
+ '$params' contains an array of validator configuration options such as 'max'
+ in case of 'string' validator. Currently validate attribute value can be
+ accessed as '$this->[$attribute]'.
+
+ Yii also provides a set of 'Validator::builtInValidators|built-in
+ validators'. They each has an alias name which can be used when specifying a
+ validation rule.
+
+ Below are some examples:
+
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
+
+ Note, in order to inherit rules defined in the parent class, a child class
+ needs to merge the parent rules with child rules using functions such as
+ 'array_merge()'.
 
 
 *yii/debug/models/search/Mail::scenarios*			public
@@ -235,6 +283,10 @@ METHOD DETAILS
  Note, in order to inherit labels defined in the parent class, a child class
  needs to merge the parent labels with child labels using functions such as
  'array_merge()'.
+
+
+*yii/debug/models/search/Mail::attributeHints*		public
+ See |yii/base/Model::attributeHints|
 
 
 *yii/debug/models/search/Mail::validate*			public
@@ -277,6 +329,10 @@ METHOD DETAILS
  See |yii/base/Model::getAttributeLabel|
 
 
+*yii/debug/models/search/Mail::getAttributeHint*		public
+ See |yii/base/Model::getAttributeHint|
+
+
 *yii/debug/models/search/Mail::hasErrors*			public
  See |yii/base/Model::hasErrors|
 
@@ -295,6 +351,10 @@ METHOD DETAILS
 
 *yii/debug/models/search/Mail::addError*			public
  See |yii/base/Model::addError|
+
+
+*yii/debug/models/search/Mail::addErrors*			public
+ See |yii/base/Model::addErrors|
 
 
 *yii/debug/models/search/Mail::clearErrors*		public

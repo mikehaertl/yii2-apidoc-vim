@@ -43,52 +43,6 @@ DESCRIPTION
  'defineAttribute()'.
 
 
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/base/DynamicModel::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
-
-$validators				*yii/base/DynamicModel::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
-
-$activeValidators			*yii/base/DynamicModel::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
-
-$errors					*yii/base/DynamicModel::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
-
-$firstErrors				*yii/base/DynamicModel::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
-
-$attributes				*yii/base/DynamicModel::$attributes*
- (array) Attribute values (name => value).
-
-$scenario				*yii/base/DynamicModel::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
-
-$iterator				*yii/base/DynamicModel::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
-
-
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -155,15 +109,14 @@ METHOD DETAILS
 >
  __isset($name)
 <
-(boolean) Whether the named property is null
+(boolean) Whether the named property is set
 
  This method will check in the following order and act accordingly:
 
   
-   - a property defined by a setter: return whether the property value
-   is null  
-   - a property of a behavior: return whether the property value is
-   null
+   - a property defined by a setter: return whether the property is set  
+   - a property of a behavior: return whether the property is set  
+   - return 'false' for non existing properties
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing 'isset($component->property)'.
@@ -301,6 +254,10 @@ METHOD DETAILS
  See |yii/base/Model::attributeLabels|
 
 
+*yii/base/DynamicModel::attributeHints*			public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/base/DynamicModel::validate*				public
  See |yii/base/Model::validate|
 
@@ -341,6 +298,10 @@ METHOD DETAILS
  See |yii/base/Model::getAttributeLabel|
 
 
+*yii/base/DynamicModel::getAttributeHint*			public
+ See |yii/base/Model::getAttributeHint|
+
+
 *yii/base/DynamicModel::hasErrors*			public
  See |yii/base/Model::hasErrors|
 
@@ -359,6 +320,10 @@ METHOD DETAILS
 
 *yii/base/DynamicModel::addError*				public
  See |yii/base/Model::addError|
+
+
+*yii/base/DynamicModel::addErrors*			public
+ See |yii/base/Model::addErrors|
 
 
 *yii/base/DynamicModel::clearErrors*			public

@@ -25,75 +25,6 @@ DESCRIPTION
 
 
 
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/redis/ActiveRecord::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
-
-$validators				*yii/redis/ActiveRecord::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
-
-$activeValidators			*yii/redis/ActiveRecord::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
-
-$errors					*yii/redis/ActiveRecord::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
-
-$firstErrors				*yii/redis/ActiveRecord::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
-
-$attributes				*yii/redis/ActiveRecord::$attributes*
- (array) Attribute values (name => value).
-
-$scenario				*yii/redis/ActiveRecord::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
-
-$iterator				*yii/redis/ActiveRecord::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
-
-$relatedRecords				*yii/redis/ActiveRecord::$relatedRecords*
- (array) An array of related records indexed by relation names.
-
-$oldAttributes				*yii/redis/ActiveRecord::$oldAttributes*
- (array) The old attribute values (name-value pairs)
-
-$dirtyAttributes			*yii/redis/ActiveRecord::$dirtyAttributes*
- (array) The changed attribute values (name-value pairs)
-
-$isNewRecord				*yii/redis/ActiveRecord::$isNewRecord*
- (boolean) Whether the record is new and should be inserted when calling
- 'save()'.
-
-$primaryKey				*yii/redis/ActiveRecord::$primaryKey*
- (mixed) The primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is true. A string is
- returned otherwise (null will be returned if the key value is null).
-
-$oldPrimaryKey				*yii/redis/ActiveRecord::$oldPrimaryKey*
- (mixed) The old primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is true. A string is
- returned otherwise (null will be returned if the key value is null).
-
-
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -240,6 +171,10 @@ METHOD DETAILS
  See |yii/base/Model::attributeLabels|
 
 
+*yii/redis/ActiveRecord::attributeHints*			public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/redis/ActiveRecord::validate*			public
  See |yii/base/Model::validate|
 
@@ -280,6 +215,10 @@ METHOD DETAILS
  See |yii/db/BaseActiveRecord::getAttributeLabel|
 
 
+*yii/redis/ActiveRecord::getAttributeHint*		public
+ See |yii/db/BaseActiveRecord::getAttributeHint|
+
+
 *yii/redis/ActiveRecord::hasErrors*			public
  See |yii/base/Model::hasErrors|
 
@@ -298,6 +237,10 @@ METHOD DETAILS
 
 *yii/redis/ActiveRecord::addError*			public
  See |yii/base/Model::addError|
+
+
+*yii/redis/ActiveRecord::addErrors*			public
+ See |yii/base/Model::addErrors|
 
 
 *yii/redis/ActiveRecord::clearErrors*			public
@@ -614,10 +557,9 @@ METHOD DETAILS
 <
 (\yii\redis\ActiveQuery) The newly created 'ActiveQuery' instance.
 
- The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
- customized by calling methods defined in 'ActiveQueryInterface' before
- 'one()' or 'all()' is called to return populated ActiveRecord instances. For
- example,
+ The returned 'ActiveQueryInterface' instance can be further customized by
+ calling methods defined in 'ActiveQueryInterface' before 'one()' or 'all()'
+ is called to return populated ActiveRecord instances. For example,
 
    // find the customer whose ID is 1
    $customer = Customer::find()->where(['id' => 1])->one();

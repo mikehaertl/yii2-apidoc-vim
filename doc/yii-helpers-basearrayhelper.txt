@@ -87,7 +87,8 @@ METHOD DETAILS
  (if '$array' is an object). If '$array['x']' or '$array->x' is neither an
  array nor an object, the default value will be returned. Note that if the
  array already has an element 'x.y.z', then its value will be returned instead
- of going through the sub-arrays.
+ of going through the sub-arrays. So it is better to be done specifying an
+ array of key names like '['x', 'y', 'z']'.
 
  Below are some usage examples,
 
@@ -102,12 +103,16 @@ METHOD DETAILS
    });
    // using dot format to retrieve the property of embedded object
    $street = \yii\helpers\ArrayHelper::getValue($users, 'address.street');
+   // using an array of keys to retrieve the value
+   $value = \yii\helpers\ArrayHelper::getValue($versions, ['1.0', 'date']);
 
 
     [$array] (array|object) Array or object to extract value from
-    [$key] (string|\Closure) Key name of the array element, or property name
-    of the object, or an anonymous function returning the value. The anonymous
-    function signature should be: 'function($array, $defaultValue)'.
+    [$key] (string|\Closure|array) Key name of the array element, an array of
+    keys or property name of the object, or an anonymous function returning
+    the value. The anonymous function signature should be: 'function($array,
+    $defaultValue)'. The possibility to pass an array of keys is available
+    since version 2.0.4.
     [$default] (mixed) The default value to be returned if the specified array
     key does not exist. Not used when getting value from an object.
 
@@ -216,7 +221,7 @@ METHOD DETAILS
        ['id' => '123', 'name' => 'aaa', 'class' => 'x'],
        ['id' => '124', 'name' => 'bbb', 'class' => 'x'],
        ['id' => '345', 'name' => 'ccc', 'class' => 'y'],
-   );
+   ];
 
    $result = ArrayHelper::map($array, 'id', 'name');
    // the result is:
@@ -289,8 +294,8 @@ METHOD DETAILS
 <
 (array) The encoded data
 
- Both the array keys and values will be encoded. If a value is an array, this
- method will also encode it recursively.
+ Only array values will be encoded by default. If a value is an array, this
+ method will also encode it recursively. Only string values will be encoded.
     [$data] (array) Data to be encoded
     [$valuesOnly] (boolean) Whether to encode array values only. If false,
     both the array keys and array values will be encoded.
@@ -304,8 +309,8 @@ METHOD DETAILS
 <
 (array) The decoded data
 
- Both the array keys and values will be decoded. If a value is an array, this
- method will also decode it recursively.
+ Only array values will be decoded by default. If a value is an array, this
+ method will also decode it recursively. Only string values will be decoded.
     [$data] (array) Data to be decoded
     [$valuesOnly] (boolean) Whether to decode array values only. If false,
     both the array keys and array values will be decoded.

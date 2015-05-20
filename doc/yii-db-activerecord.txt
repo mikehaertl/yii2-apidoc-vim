@@ -45,7 +45,7 @@ DESCRIPTION
  * Using the 'new' operator to create a new, empty object * Using a method to
  fetch an existing record (or records) from the database
 
- Here is a short teaser how working with an ActiveRecord looks like:
+ Below is an example showing some typical usage of ActiveRecord:
 
    $user = new User();
    $user->name = 'Qiang';
@@ -59,75 +59,6 @@ DESCRIPTION
 
  For more details and usage information on ActiveRecord, see the [guide
  article on ActiveRecord](guide:db-active-record).
-
-
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/db/ActiveRecord::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
-
-$validators				*yii/db/ActiveRecord::$validators*
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
-
-$activeValidators			*yii/db/ActiveRecord::$activeValidators*
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
-
-$errors					*yii/db/ActiveRecord::$errors*
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
-
-$firstErrors				*yii/db/ActiveRecord::$firstErrors*
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
-
-$attributes				*yii/db/ActiveRecord::$attributes*
- (array) Attribute values (name => value).
-
-$scenario				*yii/db/ActiveRecord::$scenario*
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
-
-$iterator				*yii/db/ActiveRecord::$iterator*
- (\ArrayIterator) An iterator for traversing the items in the list.
-
-$relatedRecords				*yii/db/ActiveRecord::$relatedRecords*
- (array) An array of related records indexed by relation names.
-
-$oldAttributes				*yii/db/ActiveRecord::$oldAttributes*
- (array) The old attribute values (name-value pairs)
-
-$dirtyAttributes			*yii/db/ActiveRecord::$dirtyAttributes*
- (array) The changed attribute values (name-value pairs)
-
-$isNewRecord				*yii/db/ActiveRecord::$isNewRecord*
- (boolean) Whether the record is new and should be inserted when calling
- 'save()'.
-
-$primaryKey				*yii/db/ActiveRecord::$primaryKey*
- (mixed) The primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is true. A string is
- returned otherwise (null will be returned if the key value is null).
-
-$oldPrimaryKey				*yii/db/ActiveRecord::$oldPrimaryKey*
- (mixed) The old primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is true. A string is
- returned otherwise (null will be returned if the key value is null).
 
 
 
@@ -276,6 +207,10 @@ METHOD DETAILS
  See |yii/base/Model::attributeLabels|
 
 
+*yii/db/ActiveRecord::attributeHints*			public
+ See |yii/base/Model::attributeHints|
+
+
 *yii/db/ActiveRecord::validate*				public
  See |yii/base/Model::validate|
 
@@ -316,6 +251,10 @@ METHOD DETAILS
  See |yii/base/Model::getAttributeLabel|
 
 
+*yii/db/ActiveRecord::getAttributeHint*			public
+ See |yii/base/Model::getAttributeHint|
+
+
 *yii/db/ActiveRecord::hasErrors*				public
  See |yii/base/Model::hasErrors|
 
@@ -334,6 +273,10 @@ METHOD DETAILS
 
 *yii/db/ActiveRecord::addError*				public
  See |yii/base/Model::addError|
+
+
+*yii/db/ActiveRecord::addErrors*				public
+ See |yii/base/Model::addErrors|
 
 
 *yii/db/ActiveRecord::clearErrors*			public
@@ -414,15 +357,14 @@ METHOD DETAILS
 
 *yii/db/ActiveRecord::findByCondition*			protected
 >
- findByCondition($condition, $one)
+ findByCondition($condition)
 <
-(static|static[]) 
+(\yii\db\ActiveQueryInterface) The newly created
+'ActiveQueryInterface|ActiveQuery' instance.
 
  This method is internally called by 'findOne()' and 'findAll()'.
     [$condition] (mixed) Please refer to 'findOne()' for the explanation of
     this parameter
-    [$one] (boolean) Whether this method is called by 'findOne()' or
-    'findAll()'
 
 
 *yii/db/ActiveRecord::updateAll*				public
@@ -620,7 +562,7 @@ METHOD DETAILS
 >
  delete()
 <
-(integer|boolean) The number of rows deleted, or false if the deletion is
+(integer|false) The number of rows deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -751,10 +693,9 @@ database table.
 <
 (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance.
 
- The returned 'ActiveQueryInterface|ActiveQuery' instance can be further
- customized by calling methods defined in 'ActiveQueryInterface' before
- 'one()' or 'all()' is called to return populated ActiveRecord instances. For
- example,
+ The returned 'ActiveQueryInterface' instance can be further customized by
+ calling methods defined in 'ActiveQueryInterface' before 'one()' or 'all()'
+ is called to return populated ActiveRecord instances. For example,
 
    // find the customer whose ID is 1
    $customer = Customer::find()->where(['id' => 1])->one();
@@ -849,9 +790,18 @@ successfully.
 >
  loadDefaultValues($skipIfSet='true')
 <
-(static) Model instance
+(static) The model instance itself.
 
-    [$skipIfSet] (boolean) If existing value should be preserved
+ You may call this method to load default values after creating a new
+ instance:
+
+   // class Customer extends \yii\db\ActiveRecord
+   $customer = new Customer();
+   $customer->loadDefaultValues();
+
+
+    [$skipIfSet] (boolean) Whether existing value should be preserved. This
+    will only set defaults for attributes that are 'null'.
 
 
 *yii/db/ActiveRecord::findBySql*				public
@@ -940,7 +890,7 @@ operations.
 >
  deleteInternal()
 <
-(integer|boolean) The number of rows deleted, or false if the deletion is
+(integer|false) The number of rows deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 

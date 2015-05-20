@@ -23,6 +23,18 @@ DESCRIPTION
                'contentOptions' => [...],
                'options' => [...],
            ],
+           // if you want to swap out .panel-body with .list-group, you may
+ use the following
+           [
+               'label' => 'Collapsible Group Item #1',
+               'content' => [
+                   'Anim pariatur cliche...',
+                   'Anim pariatur cliche...'
+               ],
+               'contentOptions' => [...],
+               'options' => [...],
+               'footer' => 'Footer' // the footer label in list-group
+           ],
        ]
    ]);
 
@@ -59,28 +71,25 @@ $items					*yii/bootstrap/Collapse::$items*
    - encode: boolean, optional, whether this label should be
    HTML-encoded. This param will override   global '$this->encodeLabels'
  param. 
-   - content: string, required, the content (HTML) of the group 
+   - content: array|string, required, the content (HTML) of the group 
    - options: array, optional, the HTML attributes of the group 
    - contentOptions: optional, the HTML attributes of the group's
    content
-
- '''
 
 $encodeLabels				*yii/bootstrap/Collapse::$encodeLabels*
  (boolean) Whether the labels for header items should be HTML-encoded.
 
 $behaviors				*yii/bootstrap/Collapse::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/bootstrap/Collapse::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/bootstrap/Collapse::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/bootstrap/Collapse::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 
@@ -241,6 +250,10 @@ METHOD DETAILS
 
 *yii/bootstrap/Collapse::registerPlugin*			protected
  See |yii/bootstrap/Widget::registerPlugin|
+
+
+*yii/bootstrap/Collapse::registerClientEvents*		protected
+ See |yii/bootstrap/Widget::registerClientEvents|
 
 
 *yii/bootstrap/Collapse::renderItems*			public

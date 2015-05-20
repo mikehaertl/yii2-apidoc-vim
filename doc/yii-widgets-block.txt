@@ -2,6 +2,29 @@
 *yii/widgets/Block*   >> |yii/base/Widget|
 ===================
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ for later use.
+
+ '\yii\base\View' component contains two methods
+ '\yii\base\View::beginBlock()' and '\yii\base\View::endBlock()'. The general
+ idea is that you're defining block default in a view or layout:
+
+   <?php $this->beginBlock('messages', true) ?>
+   Nothing.
+   <?php $this->endBlock() ?>
+
+ And then overriding default in sub-views:
+
+   <?php $this->beginBlock('username') ?>
+   Umm... hello?
+   <?php $this->endBlock() ?>
+
+ Second parameter defines if block content should be outputted which is
+ desired when rendering its content but isn't desired when redefining it in
+ subviews.
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -20,17 +43,16 @@ $renderInPlace				*yii/widgets/Block::$renderInPlace*
  meaning the captured block content will not be displayed.
 
 $behaviors				*yii/widgets/Block::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/widgets/Block::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/widgets/Block::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/widgets/Block::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 

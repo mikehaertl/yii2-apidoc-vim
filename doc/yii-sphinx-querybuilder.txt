@@ -20,6 +20,10 @@ $separator				*yii/sphinx/QueryBuilder::$separator*
  Defaults to an empty space. This is mainly used by 'build()' when generating
  a SQL statement.
 
+$querySeparator				*yii/sphinx/QueryBuilder::$querySeparator*
+ (string) Separator between different SQL queries. This is mainly used by
+ 'build()' when generating a SQL statement.
+
 $conditionBuilders			*yii/sphinx/QueryBuilder::$conditionBuilders*
  (array) Map of query condition to builder methods. These methods are used by
  'buildCondition' to build SQL conditions from array syntax.
@@ -518,6 +522,20 @@ element). The parameters returned include those provided in '$params'.
     [$params] (array) The binding parameters to be populated
 
 
+*yii/sphinx/QueryBuilder::buildSimpleCondition*		public
+>
+ buildSimpleCondition($indexes, $operator, $operands, $params)
+<
+(string) The generated SQL expression
+
+    [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
+    query
+    [$operator] (string) The operator to use. Anything could be used e.g. '>',
+    '<=', etc.
+    [$operands] (array) Contains two column names.
+    [$params] (array) The binding parameters to be populated
+
+
 *yii/sphinx/QueryBuilder::buildWithin*			public
 >
  buildWithin($columns)
@@ -537,6 +555,27 @@ element). The parameters returned include those provided in '$params'.
     [$params] (array) The binding parameters to be populated
 
 
+*yii/sphinx/QueryBuilder::buildFacets*			protected
+>
+ buildFacets($facets, $params)
+<
+(string) The FACET clause build from 'query'
+
+    [$facets] (array) Facet specifications
+    [$params] (array) The binding parameters to be populated
+
+
+*yii/sphinx/QueryBuilder::buildShowMeta*			protected
+>
+ buildShowMeta($showMeta, $params)
+<
+(string) SHOW META query, if it does not required 
+  - empty string.
+
+    [$showMeta] (boolean|string|\yii\db\Expression) Show meta specification.
+    [$params] (array) The binding parameters to be populated
+
+
 *yii/sphinx/QueryBuilder::composeColumnValue*		protected
 >
  composeColumnValue($indexes, $columnName, $value, $params)
@@ -547,18 +586,6 @@ element). The parameters returned include those provided in '$params'.
     query
     [$columnName] (string) Name of the column
     [$value] (mixed) Raw column value
-    [$params] (array) The binding parameters to be populated
-
-
-*yii/sphinx/QueryBuilder::buildSimpleCondition*		public
->
- buildSimpleCondition($operator, $operands, $params)
-<
-(string) The generated SQL expression
-
-    [$operator] (string) The operator to use. Anything could be used e.g. '>',
-    '<=', etc.
-    [$operands] (array) Contains two column names.
     [$params] (array) The binding parameters to be populated
 
 

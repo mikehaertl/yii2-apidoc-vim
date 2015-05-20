@@ -12,6 +12,7 @@ DESCRIPTION
        'buttons' => [
            ['label' => 'A'],
            ['label' => 'B'],
+           ['label' => 'C', 'visible' => false],
        ]
    ]);
 
@@ -23,7 +24,8 @@ DESCRIPTION
        ]
    ]);
 
-
+ Pressing on the button should be handled via JavaScript. See the following
+ for details:
 
 
 PROPERTY DETAILS
@@ -53,23 +55,24 @@ $buttons				*yii/bootstrap/ButtonGroup::$buttons*
 
 
    - label: string, required, the button label. 
-   - options: array, optional, the HTML attributes of the button.
+   - options: array, optional, the HTML attributes of the button. 
+   - visible: boolean, optional, whether this button is visible.
+   Defaults to true.
 
 $encodeLabels				*yii/bootstrap/ButtonGroup::$encodeLabels*
  (boolean) Whether to HTML-encode the button labels.
 
 $behaviors				*yii/bootstrap/ButtonGroup::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/bootstrap/ButtonGroup::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/bootstrap/ButtonGroup::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/bootstrap/ButtonGroup::$viewPath*
- (string) The directory containing the view files for this widget.
+ See |yii/base/Widget::$viewPath|
 
 
 
@@ -232,6 +235,10 @@ METHOD DETAILS
 
 *yii/bootstrap/ButtonGroup::registerPlugin*		protected
  See |yii/bootstrap/Widget::registerPlugin|
+
+
+*yii/bootstrap/ButtonGroup::registerClientEvents*		protected
+ See |yii/bootstrap/Widget::registerClientEvents|
 
 
 *yii/bootstrap/ButtonGroup::renderButtons*		protected

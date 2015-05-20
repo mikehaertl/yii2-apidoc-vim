@@ -8,6 +8,9 @@ DESCRIPTION
  By default it assumes there is a redis server running on localhost at port
  6379 and uses the database number 0.
 
+ It is possible to connect to a redis server using 'hostname' and 'port' or
+ using a 'unixSocket'.
+
  It also supports [the AUTH command](http://redis.io/commands/auth) of redis.
  When the server needs authentication, you can set the 'password' property to
  authenticate with the server after connect.
@@ -21,11 +24,18 @@ PROPERTY DETAILS
 
 $hostname				*yii/redis/Connection::$hostname*
  (string) The hostname or ip address to use for connecting to the redis
- server. Defaults to 'localhost'.
+ server. Defaults to 'localhost'. If 'unixSocket' is specified, hostname and
+ port will be ignored.
 
 $port					*yii/redis/Connection::$port*
  (integer) The port to use for connecting to the redis server. Default port is
- 6379.
+ 6379. If 'unixSocket' is specified, hostname and port will be ignored.
+
+$unixSocket				*yii/redis/Connection::$unixSocket*
+ (string) The unix socket path (e.g. '/var/run/redis/redis.sock') to use for
+ connecting to the redis server. This can be used instead of 'hostname' and
+ 'port' to connect to the server using a unix socket. If a unix socket path is
+ specified, 'hostname' and 'port' will be ignored.
 
 $password				*yii/redis/Connection::$password*
  (string) The password for establishing DB connection. Defaults to null
@@ -47,7 +57,7 @@ $redisCommands				*yii/redis/Connection::$redisCommands*
  (array) List of available redis commands http://redis.io/commands
 
 $behaviors				*yii/redis/Connection::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $isActive				*yii/redis/Connection::$isActive*
  (boolean) Whether the DB connection is established
@@ -237,7 +247,10 @@ METHOD DETAILS
 return different data types:
 
 
-  - 'true' for commands that return "status reply". 
+  - 'true' for commands that return "status reply" with the message
+  ''OK'' or ''PONG''. 
+  - 'string' for commands that return "status reply" that does not
+  have the message 'OK' (since version 2.0.1). 
   - 'string' for commands that return "integer reply"   as the value is in the
 range of a signed 64 bit integer. 
   - 'string' or 'null' for commands that return "bulk reply". 

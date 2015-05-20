@@ -15,12 +15,42 @@ DESCRIPTION
    - Password validation: 'generatePasswordHash()' and
    'validatePassword()'
 
- > Note: this class requires 'mcrypt' PHP extension. For the highest security
- level PHP version >= 5.5.0 is recommended.
+ > Note: this class requires 'OpenSSL' PHP extension for random key/string
+ generation on Windows and for encryption/decryption on all platforms. For the
+ highest security level PHP version >= 5.5.0 is recommended.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
+
+$cipher					*yii/base/Security::$cipher*
+ (string) The cipher to use for encryption and decryption.
+
+$allowedCiphers				*yii/base/Security::$allowedCiphers*
+ (array[]) Look-up table of block sizes and key sizes for each supported
+ OpenSSL cipher.
+
+ In each element, the key is one of the ciphers supported by OpenSSL (@see
+ openssl_get_cipher_methods()). The value is an array of two integers, the
+ first is the cipher's block size in bytes and the second is the key size in
+ bytes.
+
+ > Warning: All OpenSSL ciphers that we recommend are in the default value,
+ i.e. AES in CBC mode.
+
+ > Note: Yii's encryption protocol uses the same size for cipher key, HMAC
+ signature key and key derivation salt.
+
+$kdfHash				*yii/base/Security::$kdfHash*
+ (string) Hash algorithm for key derivation. Recommend sha256, sha384 or
+ sha512.
+
+$macHash				*yii/base/Security::$macHash*
+ (string) Hash algorithm for message authentication. Recommend sha256, sha384
+ or sha512.
+
+$authKeyInfo				*yii/base/Security::$authKeyInfo*
+ (string) HKDF info value for derivation of message authentication key.
 
 $derivationIterations			*yii/base/Security::$derivationIterations*
  (integer) Derivation iterations count. Set as high as possible to hinder
@@ -35,7 +65,7 @@ $passwordHashStrategy			*yii/base/Security::$passwordHashStrategy*
    - 'crypt' - use PHP 'crypt()' function.
 
 $behaviors				*yii/base/Security::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -155,7 +185,7 @@ METHOD DETAILS
  '$derivationIterations', which should be set as high as possible. The
  encrypted data includes a keyed message authentication code (MAC) so there is
  no need to hash input or output data. > Note: Avoid encrypting with passwords
- wherever possible. Nothing can protect against poor-quality or compromosed
+ wherever possible. Nothing can protect against poor-quality or compromised
  passwords.
     [$data] (string) The data to encrypt
     [$password] (string) The password to use for encryption
@@ -201,22 +231,6 @@ METHOD DETAILS
     see 'hkdf()'
 
 
-*yii/base/Security::getCryptModule*			protected
->
- getCryptModule()
-<
-(resource) The mcrypt module handle.
-
-
-
-*yii/base/Security::__destruct*				public
->
- __destruct()
-<
-(void)
-
-
-
 *yii/base/Security::encrypt*				protected
 >
  encrypt($data, $passwordBased, $secret, $info)
@@ -224,7 +238,7 @@ METHOD DETAILS
 (string) The encrypted data
 
     [$data] (string) Data to be encrypted
-    [$passwordBased] (bool) Set true to use password-based key derivation
+    [$passwordBased] (boolean) Set true to use password-based key derivation
     [$secret] (string) The encryption password or key
     [$info] (string) Context/application specific information, e.g. a user ID
     See [RFC 5869 Section
@@ -238,27 +252,9 @@ METHOD DETAILS
 (bool|string) The decrypted data or false on authentication failure
 
     [$data] (string) Encrypted data to be decrypted.
-    [$passwordBased] (bool) Set true to use password-based key derivation
+    [$passwordBased] (boolean) Set true to use password-based key derivation
     [$secret] (string) The decryption password or key
     [$info] (string) Context/application specific information, @see encrypt()
-
-
-*yii/base/Security::addPadding*				protected
->
- addPadding($data)
-<
-(string) The padded data
-
-    [$data] (string) The data to pad
-
-
-*yii/base/Security::stripPadding*				protected
->
- stripPadding($data)
-<
-(string) The trimmed data
-
-    [$data] (string) The data to trim
 
 
 *yii/base/Security::hkdf*					public
@@ -277,8 +273,8 @@ METHOD DETAILS
     [$info] (string) Optional info to bind the derived key material to
     application- and context-specific information, e.g. a user ID or API
     version, see [RFC 5869](https://tools.ietf.org/html/rfc5869)
-    [$length] (int) Length of the output key in bytes. If 0, the output key is
-    the length of the hash algorithm output.
+    [$length] (integer) Length of the output key in bytes. If 0, the output
+    key is the length of the hash algorithm output.
 
 
 *yii/base/Security::pbkdf2*				public
@@ -294,10 +290,10 @@ METHOD DETAILS
     'SHA-256'
     [$password] (string) The source password
     [$salt] (string) The random salt
-    [$iterations] (int) The number of iterations of the hash algorithm. Set as
-    high as possible to hinder dictionary password attacks.
-    [$length] (int) Length of the output key in bytes. If 0, the output key is
-    the length of the hash algorithm output.
+    [$iterations] (integer) The number of iterations of the hash algorithm.
+    Set as high as possible to hinder dictionary password attacks.
+    [$length] (integer) Length of the output key in bytes. If 0, the output
+    key is the length of the hash algorithm output.
 
 
 *yii/base/Security::hashData*				public
@@ -386,8 +382,8 @@ the output length might increase in future versions of PHP
     [$cost] (integer) Cost parameter used by the Blowfish hash algorithm. The
     higher the value of cost, the longer it takes to generate the hash and to
     verify a password against it. Higher cost therefore slows down a
-    brute-force attack. For best protection against brute for attacks, set it
-    to the highest value that is tolerable on production servers. The time
+    brute-force attack. For best protection against brute-force attacks, set
+    it to the highest value that is tolerable on production servers. The time
     taken to compute the hash doubles for every increment by one of $cost.
 
 

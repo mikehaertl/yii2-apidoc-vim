@@ -25,9 +25,6 @@ DESCRIPTION
    #load all fixtures except User
    yii fixture "*" -User
 
-   #append fixtures to already loaded
-   yii fixture User --append
-
    #load fixtures with different namespace.
    yii fixture/load User --namespace=alias\my\custom\namespace\goes\here
 
@@ -61,44 +58,37 @@ $color					*yii/console/controllers/FixtureController::$color*
 $namespace				*yii/console/controllers/FixtureController::$namespace*
  (string) Default namespace to search fixtures in
 
-$append					*yii/console/controllers/FixtureController::$append*
- (bool) Whether to append new fixture data to the existing ones. Defaults to
- false, meaning if there is any existing fixture data, it will be removed.
-
 $globalFixtures				*yii/console/controllers/FixtureController::$globalFixtures*
  (array) Global fixtures that should be applied when loading and unloading. By
  default it is set to 'InitDbFixture' that disables and enables integrity
  check, so your data can be safely loaded.
 
 $behaviors				*yii/console/controllers/FixtureController::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $modules				*yii/console/controllers/FixtureController::$modules*
- (\yii\base\Module[]) All ancestor modules that this controller is located
- within.
+ See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/console/controllers/FixtureController::$uniqueId*
- (string) The controller ID that is prefixed with the module ID (if any).
+ See |yii/base/Controller::$uniqueId|
 
 $route					*yii/console/controllers/FixtureController::$route*
- (string) The route (module ID, controller ID and action ID) of the current
- request.
+ See |yii/base/Controller::$route|
 
 $view					*yii/console/controllers/FixtureController::$view*
- (\yii\base\View|\yii\web\View) The view object that can be used to render
- views or view files.
+ See |yii/base/Controller::$view|
 
 $viewPath				*yii/console/controllers/FixtureController::$viewPath*
- (string) The directory containing the view files for this controller.
+ See |yii/base/Controller::$viewPath|
 
 $helpSummary				*yii/console/controllers/FixtureController::$helpSummary*
- (string)
+ See |yii/console/Controller::$helpSummary|
 
 $help					*yii/console/controllers/FixtureController::$help*
- (string)
+ See |yii/console/Controller::$help|
 
 $fixtures				*yii/console/controllers/FixtureController::$fixtures*
- (\yii\test\Fixture[]) The loaded fixtures for the current test case
+ See |yii/test/FixtureTrait::$fixtures|
 
 
 
@@ -249,6 +239,10 @@ METHOD DETAILS
  See |yii/base/Controller::render|
 
 
+*yii/console/controllers/FixtureController::renderContent*public
+ See |yii/base/Controller::renderContent|
+
+
 *yii/console/controllers/FixtureController::renderPartial*public
  See |yii/base/Controller::renderPartial|
 
@@ -394,10 +388,6 @@ METHOD DETAILS
    # any existing fixture data will be removed first
    yii fixture/load User UserProfile
 
-   # load the fixture data specified by User and UserProfile.
-   # the new fixture data will be appended to the existing one
-   yii fixture/load --append User UserProfile
-
    # load all available fixtures found under 'tests\unit\fixtures'
    yii fixture/load "*"
 
@@ -433,8 +423,8 @@ METHOD DETAILS
 <
 (void)
 
-    [$foundFixtures] () 
-    [$except] () 
+    [$foundFixtures] (array) Array of found fixtures
+    [$except] (array) Array of names of fixtures that should not be loaded
 
 
 *yii/console/controllers/FixtureController::notifyNothingToUnload*public
@@ -443,8 +433,8 @@ METHOD DETAILS
 <
 (void)
 
-    [$foundFixtures] () 
-    [$except] () 
+    [$foundFixtures] (array) Array of found fixtures
+    [$except] (array) Array of names of fixtures that should not be loaded
 
 
 *yii/console/controllers/FixtureController::needToApplyAll*public

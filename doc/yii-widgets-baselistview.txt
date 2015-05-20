@@ -8,6 +8,11 @@ SUBCLASSES
 |yii/widgets/ListView|
 |yii/grid/GridView|
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It provides features like sorting, paging and also filtering the data.
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -33,12 +38,17 @@ $dataProvider				*yii/widgets/BaseListView::$dataProvider*
 $pager					*yii/widgets/BaseListView::$pager*
  (array) The configuration for the pager widget. By default, 'LinkPager' will
  be used to render the pager. You can use a different widget class by
- configuring the "class" element.
+ configuring the "class" element. Note that the widget must support the
+ 'pagination' property which will be populated with the
+ '\yii\data\BaseDataProvider::pagination|pagination' value of the
+ 'dataProvider'.
 
 $sorter					*yii/widgets/BaseListView::$sorter*
  (array) The configuration for the sorter widget. By default, 'LinkSorter'
  will be used to render the sorter. You can use a different widget class by
- configuring the "class" element.
+ configuring the "class" element. Note that the widget must support the 'sort'
+ property which will be populated with the
+ '\yii\data\BaseDataProvider::sort|sort' value of the 'dataProvider'.
 
 $summary				*yii/widgets/BaseListView::$summary*
  (string) The HTML content to be displayed as the summary of the list view. If
@@ -83,17 +93,16 @@ $layout					*yii/widgets/BaseListView::$layout*
    - '{pager}': the pager. See 'renderPager()'.
 
 $behaviors				*yii/widgets/BaseListView::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $id					*yii/widgets/BaseListView::$id*
- (string) ID of the widget.
+ See |yii/base/Widget::$id|
 
 $view					*yii/widgets/BaseListView::$view*
- (\yii\web\View) The view object that can be used to render views or view
- files.
+ See |yii/base/Widget::$view|
 
 $viewPath				*yii/widgets/BaseListView::$viewPath*
- (string) The view path that may be prefixed to a relative view name.
+ See |yii/base/ViewContextInterface::$viewPath|
 
 
 

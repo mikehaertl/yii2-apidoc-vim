@@ -153,7 +153,7 @@ $joinWith				*yii/db/ActiveQuery::$joinWith*
  (array) A list of relations that this query should be joined with
 
 $behaviors				*yii/db/ActiveQuery::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -170,7 +170,7 @@ METHOD DETAILS
 <
 (void)
 
-    [$modelClass] (array) The model class associated with this query
+    [$modelClass] (string) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
     object
 
@@ -428,6 +428,10 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  See |yii/db/Query::exists|
 
 
+*yii/db/ActiveQuery::queryScalar*				protected
+ See |yii/db/Query::queryScalar|
+
+
 *yii/db/ActiveQuery::select*				public
  See |yii/db/Query::select|
 
@@ -544,10 +548,10 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  This method differs from 'with()' in that it will build up and execute a JOIN
  SQL statement for the primary table. And when '$eagerLoading' is true, it
  will call 'with()' in addition with the specified relations.
-    [$with] (array) The relations to be joined. Each array element represents
-    a single relation. The array keys are relation names, and the array values
-    are the corresponding anonymous functions that can be used to modify the
-    relation queries on-the-fly. If a relation query does not need
+    [$with] (string|array) The relations to be joined. Each array element
+    represents a single relation. The array keys are relation names, and the
+    array values are the corresponding anonymous functions that can be used to
+    modify the relation queries on-the-fly. If a relation query does not need
     modification, you may use the relation name as the array value.
     Sub-relations can also be specified (see 'with()'). For example,
 
@@ -580,7 +584,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
  This is a shortcut method to 'joinWith()' with the join type set as "INNER
  JOIN". Please refer to 'joinWith()' for detailed usage of this method.
-    [$with] (array) The relations to be joined with
+    [$with] (string|array) The relations to be joined with
     [$eagerLoading] (boolean|array) Whether to eager loading the relations
 
 

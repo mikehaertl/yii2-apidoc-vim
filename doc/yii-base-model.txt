@@ -23,11 +23,8 @@ SUBCLASSES
 |yii/debug/models/search/Log|
 |yii/debug/models/search/Db|
 |yii/debug/models/search/Mail|
-|yii/redis/ActiveRecord|
 |yii/elasticsearch/ActiveRecord|
-|yii/mongodb/gii/model/Generator|
-|yii/mongodb/file/ActiveRecord|
-|yii/mongodb/ActiveRecord|
+|yii/redis/ActiveRecord|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -57,7 +54,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/base/Model::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $validators				*yii/base/Model::$validators*
  (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
@@ -237,8 +234,8 @@ METHOD DETAILS
        'email',
        'firstName' => 'first_name',
        'lastName' => 'last_name',
-       'fullName' => function () {
-           return $this->first_name . ' ' . $this->last_name;
+       'fullName' => function ($model) {
+           return $model->first_name . ' ' . $model->last_name;
        },
    ];
 
@@ -355,7 +352,7 @@ METHOD DETAILS
  By default, an active attribute is considered safe and can be massively
  assigned. If an attribute should NOT be massively assigned (thus considered
  unsafe), please prefix the attribute with an exclamation character (e.g.
- '!rank').
+ ''!rank'').
 
  The default implementation of this method will return all scenarios found in
  the 'rules()' declaration. A special scenario named 'SCENARIO_DEFAULT' will
@@ -406,6 +403,25 @@ METHOD DETAILS
 
  Note, in order to inherit labels defined in the parent class, a child class
  needs to merge the parent labels with child labels using functions such as
+ 'array_merge()'.
+
+
+*yii/base/Model::attributeHints*				public
+>
+ attributeHints()
+<
+(array) Attribute hints (name => hint)
+
+ Attribute hints are mainly used for display purpose. For example, given an
+ attribute 'isPublic', we can declare a hint 'Whether the post should be
+ visible for not logged in users', which provides user-friendly description of
+ the attribute meaning and can be displayed to end users.
+
+ Unlike label hint will not be generated, if its explicit declaration is
+ omitted.
+
+ Note, in order to inherit hints defined in the parent class, a child class
+ needs to merge the parent hints with child hints using functions such as
  'array_merge()'.
 
 
@@ -546,6 +562,15 @@ model.
     [$attribute] (string) The attribute name
 
 
+*yii/base/Model::getAttributeHint*			public
+>
+ getAttributeHint($attribute)
+<
+(string) The attribute hint
+
+    [$attribute] (string) The attribute name
+
+
 *yii/base/Model::hasErrors*				public
 >
  hasErrors($attribute='null')
@@ -607,6 +632,18 @@ returned if there is no error.
 
     [$attribute] (string) Attribute name
     [$error] (string) New error message
+
+
+*yii/base/Model::addErrors*				public
+>
+ addErrors($items)
+<
+(void)
+
+    [$items] (array) A list of errors. The array keys must be attribute names.
+    The array values should be error messages. If an attribute has multiple
+    errors, these errors must be given in terms of an array. You may use the
+    result of 'getErrors()' as the value for this parameter.
 
 
 *yii/base/Model::clearErrors*				public
@@ -724,9 +761,9 @@ returned if there is no error.
 
 *yii/base/Model::loadMultiple*				public
 >
- loadMultiple($models, $data)
+ loadMultiple($models, $data, $formName='null')
 <
-(boolean) Whether the model is successfully populated with some data.
+(boolean) Whether at least one of the models is successfully populated.
 
  This method is mainly used to collect tabular data input. The data to be
  loaded for each model is '$data[formName][index]', where 'formName' refers to
@@ -738,6 +775,9 @@ returned if there is no error.
     have the same class.
     [$data] (array) The data array. This is usually '$_POST' or '$_GET', but
     can also be any valid array supplied by end user.
+    [$formName] (string) The form name to be used for loading the data into
+    the models. If not set, it will use the 'formName()' value of the first
+    model in '$models'. This parameter is available since version 2.0.1.
 
 
 *yii/base/Model::validateMultiple*			public

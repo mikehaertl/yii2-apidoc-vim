@@ -132,7 +132,7 @@ $wrongMimeType				*yii/validators/FileValidator::$wrongMimeType*
    - {mimeTypes}: the value of 'mimeTypes'
 
 $behaviors				*yii/validators/FileValidator::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+ See |yii/base/Component::$behaviors|
 
 $sizeLimit				*yii/validators/FileValidator::$sizeLimit*
  (integer) The size limit for uploaded files.
@@ -258,13 +258,13 @@ METHOD DETAILS
 
 *yii/validators/FileValidator::validateAttribute*		public
 >
- validateAttribute($object, $attribute)
+ validateAttribute($model, $attribute)
 <
 (void)
 
  Child classes must implement this method to provide the actual validation
  logic.
-    [$object] (\yii\base\Model) The data object to be validated
+    [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
@@ -286,7 +286,7 @@ error message. Null should be returned if the data is valid.
 
 *yii/validators/FileValidator::clientValidateAttribute*	public
 >
- clientValidateAttribute($object, $attribute, $view)
+ clientValidateAttribute($model, $attribute, $view)
 <
 (string) The client-side validation script. Null if the validator does not
 support client-side validation.
@@ -304,7 +304,7 @@ support client-side validation.
    for the attribute. 
    - 'deferred': an array used to hold deferred objects for
    asynchronous validation
-    [$object] (\yii\base\Model) The data object being validated
+    [$model] (\yii\base\Model) The data model being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
@@ -324,9 +324,9 @@ support client-side validation.
 <
 (boolean) Whether the value is empty
 
- A value is considered empty if it is null, an empty array, or the trimmed
- result is an empty string. Note that this method is different from PHP
- empty(). It will return false when the value is 0.
+ A value is considered empty if it is null, an empty array, or an empty
+ string. Note that this method is different from PHP empty(). It will return
+ false when the value is 0.
     [$value] (mixed) The value to be checked
     [$trim] () 
 
@@ -356,11 +356,11 @@ support client-side validation.
 
 *yii/validators/FileValidator::getClientOptions*		protected
 >
- getClientOptions($object, $attribute)
+ getClientOptions($model, $attribute)
 <
 (array) The client side validation options
 
-    [$object] (\yii\base\Model) The model being validated
+    [$model] (\yii\base\Model) The model being validated
     [$attribute] (string) The attribute name being validated
 
 
