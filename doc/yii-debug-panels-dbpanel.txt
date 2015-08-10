@@ -26,6 +26,10 @@ $criticalQueryThreshold			*yii/debug/panels/DbPanel::$criticalQueryThreshold*
  critical number of DB queries. If the number of queries exceeds this number,
  the execution is considered taking critical number of DB queries.
 
+$db					*yii/debug/panels/DbPanel::$db*
+ (string) The name of the database component to use for executing (explain)
+ queries
+
 $behaviors				*yii/debug/panels/DbPanel::$behaviors*
  See |yii/base/Component::$behaviors|
 
@@ -64,7 +68,13 @@ METHOD DETAILS
 
 
 *yii/debug/panels/DbPanel::init*				public
- See |yii/base/Object::init|
+>
+ init()
+<
+(void)
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
 
 
 *yii/debug/panels/DbPanel::__get*				public
@@ -204,7 +214,7 @@ METHOD DETAILS
 
 
 
-*yii/debug/panels/DbPanel::calculateTimings*		protected
+*yii/debug/panels/DbPanel::calculateTimings*		public
 >
  calculateTimings()
 <
@@ -262,6 +272,31 @@ time]
  getTypes()
 <
 (array) 
+
+
+
+*yii/debug/panels/DbPanel::hasExplain*			protected
+>
+ hasExplain()
+<
+(boolean) Whether the DB component has support for EXPLAIN queries
+
+
+
+*yii/debug/panels/DbPanel::canBeExplained*		public
+>
+ canBeExplained($type)
+<
+(boolean) 
+
+    [$type] (string) Query type
+
+
+*yii/debug/panels/DbPanel::getDb*				public
+>
+ getDb()
+<
+(\yii\db\Connection) 
 
 
 
