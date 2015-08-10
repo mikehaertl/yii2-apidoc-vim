@@ -276,7 +276,7 @@ matches.
 >
  save($runValidation='true', $attributeNames='null')
 <
-(boolean) Whether the saving succeeds
+(boolean) Whether the saving succeeded (i.e. no validation errors occurred).
 
  This method will call 'insert()' when 'getIsNewRecord()|isNewRecord' is true,
  or 'update()' when 'getIsNewRecord()|isNewRecord' is false.
@@ -289,10 +289,11 @@ matches.
    $customer->save();
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
-    record. If the validation fails, the record will not be saved to database.
-    'false' will be returned in this case.
-    [$attributeNames] (array) List of attributes that need to be saved.
+    [$runValidation] (boolean) Whether to perform validation (calling
+    'validate()') before saving the record. Defaults to 'true'. If the
+    validation fails, the record will not be saved to the database and this
+    method will return 'false'.
+    [$attributeNames] (array) List of attribute names that need to be saved.
     Defaults to null, meaning all attributes that are loaded from DB will be
     saved.
 
@@ -312,9 +313,10 @@ successfully.
    $customer->insert();
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
-    record. If the validation fails, the record will not be inserted into the
-    database.
+    [$runValidation] (boolean) Whether to perform validation (calling
+    'validate()') before saving the record. Defaults to 'true'. If the
+    validation fails, the record will not be saved to the database and this
+    method will return 'false'.
     [$attributes] (array) List of attributes that need to be saved. Defaults
     to null, meaning all attributes that are loaded from DB will be saved.
 
@@ -336,9 +338,10 @@ successful.
    $customer->update();
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
-    record. If the validation fails, the record will not be inserted into the
-    database.
+    [$runValidation] (boolean) Whether to perform validation (calling
+    'validate()') before saving the record. Defaults to 'true'. If the
+    validation fails, the record will not be saved to the database and this
+    method will return 'false'.
     [$attributeNames] (array) List of attributes that need to be saved.
     Defaults to null, meaning all attributes that are loaded from DB will be
     saved.

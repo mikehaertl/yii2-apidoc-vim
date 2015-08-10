@@ -72,7 +72,7 @@ METHOD DETAILS
 (void)
 
  This method will set 'db' to be the 'db' application component, if it is
- null.
+ 'null'.
 
 
 *yii/db/Migration::__get*					public
@@ -161,6 +161,82 @@ METHOD DETAILS
 
 *yii/db/Migration::ensureBehaviors*			public
  See |yii/base/Component::ensureBehaviors|
+
+
+*yii/db/Migration::getDb*					protected
+>
+ getDb()
+<
+(void)
+
+
+
+*yii/db/Migration::primaryKey*				public
+ See |yii/db/SchemaBuilderTrait::primaryKey|
+
+
+*yii/db/Migration::bigPrimaryKey*				public
+ See |yii/db/SchemaBuilderTrait::bigPrimaryKey|
+
+
+*yii/db/Migration::string*				public
+ See |yii/db/SchemaBuilderTrait::string|
+
+
+*yii/db/Migration::text*					public
+ See |yii/db/SchemaBuilderTrait::text|
+
+
+*yii/db/Migration::smallInteger*				public
+ See |yii/db/SchemaBuilderTrait::smallInteger|
+
+
+*yii/db/Migration::integer*				public
+ See |yii/db/SchemaBuilderTrait::integer|
+
+
+*yii/db/Migration::bigInteger*				public
+ See |yii/db/SchemaBuilderTrait::bigInteger|
+
+
+*yii/db/Migration::float*					public
+ See |yii/db/SchemaBuilderTrait::float|
+
+
+*yii/db/Migration::double*				public
+ See |yii/db/SchemaBuilderTrait::double|
+
+
+*yii/db/Migration::decimal*				public
+ See |yii/db/SchemaBuilderTrait::decimal|
+
+
+*yii/db/Migration::dateTime*				public
+ See |yii/db/SchemaBuilderTrait::dateTime|
+
+
+*yii/db/Migration::timestamp*				public
+ See |yii/db/SchemaBuilderTrait::timestamp|
+
+
+*yii/db/Migration::time*					public
+ See |yii/db/SchemaBuilderTrait::time|
+
+
+*yii/db/Migration::date*					public
+ See |yii/db/SchemaBuilderTrait::date|
+
+
+*yii/db/Migration::binary*				public
+ See |yii/db/SchemaBuilderTrait::binary|
+
+
+*yii/db/Migration::boolean*				public
+ See |yii/db/SchemaBuilderTrait::boolean|
+
+
+*yii/db/Migration::money*					public
+ See |yii/db/SchemaBuilderTrait::money|
 
 
 *yii/db/Migration::up*					public
@@ -463,7 +539,9 @@ proceed further. All other return values mean the migration succeeds.
     table name will be properly quoted by the method.
     [$columns] (string|array) The column(s) that should be included in the
     index. If there are multiple columns, please separate them by commas or
-    use an array. The column names will be properly quoted by the method.
+    use an array. Each column name will be properly quoted by the method.
+    Quoting will be skipped for column names that include a left parenthesis
+    "(".
     [$unique] (boolean) Whether to add UNIQUE constraint on the created index.
 
 

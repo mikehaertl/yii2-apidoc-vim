@@ -1,0 +1,240 @@
+
+*yii/db/SchemaBuilderTrait*  
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ These can be used in database migrations to define database schema types
+ using a PHP interface. This is useful to define a schema in a DBMS
+ independent way so that the application may run on different DBMS the same
+ way.
+
+ For example you may use the following code inside your migration files:
+
+   $this->createTable('example_table', [
+     'id' => $this->primaryKey(),
+     'name' => $this->string(64)->notNull(),
+     'type' => $this->integer()->notNull()->defaultValue(10),
+     'description' => $this->text(),
+     'rule_name' => $this->string(64),
+     'data' => $this->text(),
+     'created_at' => $this->datetime()->notNull(),
+     'updated_at' => $this->datetime(),
+   ]);
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+*yii/db/SchemaBuilderTrait::getDb*			protected
+>
+ getDb()
+<
+(\yii\db\Connection) The database connection to be used for schema building.
+
+
+
+*yii/db/SchemaBuilderTrait::primaryKey*			public
+>
+ primaryKey($length=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$length] (integer) Column size or precision definition. This parameter
+    will be ignored if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::bigPrimaryKey*		public
+>
+ bigPrimaryKey($length=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$length] (integer) Column size or precision definition. This parameter
+    will be ignored if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::string*			public
+>
+ string($length=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$length] (integer) Column size definition i.e. the maximum string length.
+    This parameter will be ignored if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::text*				public
+>
+ text()
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+
+
+*yii/db/SchemaBuilderTrait::smallInteger*			public
+>
+ smallInteger($length=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$length] (integer) Column size or precision definition. This parameter
+    will be ignored if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::integer*			public
+>
+ integer($length=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$length] (integer) Column size or precision definition. This parameter
+    will be ignored if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::bigInteger*			public
+>
+ bigInteger($length=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$length] (integer) Column size or precision definition. This parameter
+    will be ignored if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::float*			public
+>
+ float($precision=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$precision] (integer) Column value precision. First parameter passed to
+    the column type, e.g. FLOAT(precision). This parameter will be ignored if
+    not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::double*			public
+>
+ double($precision=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$precision] (integer) Column value precision. First parameter passed to
+    the column type, e.g. DOUBLE(precision). This parameter will be ignored if
+    not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::decimal*			public
+>
+ decimal($precision=null, $scale=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$precision] (integer) Column value precision, which is usually the total
+    number of digits. First parameter passed to the column type, e.g.
+    DECIMAL(precision, scale). This parameter will be ignored if not supported
+    by the DBMS.
+    [$scale] (integer) Column value scale, which is usually the number of
+    digits after the decimal point. Second parameter passed to the column
+    type, e.g. DECIMAL(precision, scale). This parameter will be ignored if
+    not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::dateTime*			public
+>
+ dateTime($precision=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$precision] (integer) Column value precision. First parameter passed to
+    the column type, e.g. DATETIME(precision). This parameter will be ignored
+    if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::timestamp*			public
+>
+ timestamp($precision=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$precision] (integer) Column value precision. First parameter passed to
+    the column type, e.g. TIMESTAMP(precision). This parameter will be ignored
+    if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::time*				public
+>
+ time($precision=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$precision] (integer) Column value precision. First parameter passed to
+    the column type, e.g. TIME(precision). This parameter will be ignored if
+    not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::date*				public
+>
+ date()
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+
+
+*yii/db/SchemaBuilderTrait::binary*			public
+>
+ binary($length=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$length] (integer) Column size or precision definition. This parameter
+    will be ignored if not supported by the DBMS.
+
+
+*yii/db/SchemaBuilderTrait::boolean*			public
+>
+ boolean()
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+
+
+*yii/db/SchemaBuilderTrait::money*			public
+>
+ money($precision=null, $scale=null)
+<
+(\yii\db\ColumnSchemaBuilder) The column instance which can be further
+customized.
+
+    [$precision] (integer) Column value precision, which is usually the total
+    number of digits. First parameter passed to the column type, e.g.
+    DECIMAL(precision, scale). This parameter will be ignored if not supported
+    by the DBMS.
+    [$scale] (integer) Column value scale, which is usually the number of
+    digits after the decimal point. Second parameter passed to the column
+    type, e.g. DECIMAL(precision, scale). This parameter will be ignored if
+    not supported by the DBMS.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

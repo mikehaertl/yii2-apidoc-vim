@@ -429,7 +429,14 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
 
 *yii/db/ActiveQuery::queryScalar*				protected
- See |yii/db/Query::queryScalar|
+>
+ queryScalar($selectExpression, $db)
+<
+(bool|string) 
+
+ Restores the value of select to make this query reusable.
+    [$selectExpression] (string|\yii\db\Expression) 
+    [$db] (\yii\db\Connection|null) 
 
 
 *yii/db/ActiveQuery::select*				public
@@ -532,7 +539,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 >
  joinWith($with, $eagerLoading='true', $joinType='\'LEFTJOIN\'')
 <
-(static) The query object itself
+($this) The query object itself
 
  This method allows you to reuse existing relation definitions to perform JOIN
  queries. Based on the definition of the specified relation(s), the method
@@ -580,7 +587,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 >
  innerJoinWith($with, $eagerLoading='true')
 <
-(static) The query object itself
+($this) The query object itself
 
  This is a shortcut method to 'joinWith()' with the join type set as "INNER
  JOIN". Please refer to 'joinWith()' for detailed usage of this method.
@@ -592,7 +599,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 >
  onCondition($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The condition will be used in the ON part when 'ActiveQuery::joinWith()' is
  called. Otherwise, the condition will be used in the WHERE part of a query.
@@ -616,7 +623,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 >
  andOnCondition($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -629,7 +636,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 >
  orOnCondition($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -642,7 +649,7 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 >
  viaTable($tableName, $link, $callable='null')
 <
-(static) 
+($this) The query object itself
 
  Use this method to specify a junction table when declaring a relation in the
  'ActiveRecord' class:

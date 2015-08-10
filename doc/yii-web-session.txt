@@ -8,6 +8,7 @@ SUBCLASSES
 |yii/web/CacheSession|
 |yii/web/DbSession|
 |yii/redis/Session|
+|yii/web/MultiFieldSession|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -546,7 +547,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 <
 (\yii\web\SessionIterator) An iterator for traversing the session variables.
 
- This method is required by the interface IteratorAggregate.
+ This method is required by the interface '\IteratorAggregate'.
 
 
 *yii/web/Session::getCount*				public
@@ -563,7 +564,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 <
 (integer) Number of items in the session.
 
- This method is required by Countable interface.
+ This method is required by '\Countable' interface.
 
 
 *yii/web/Session::get*					public
@@ -648,7 +649,7 @@ does not exist.
  You may use this method to display all the flash messages in a view file:
 
    <?php
-   foreach(Yii::$app->session->getAllFlashes() as $key => $message) {
+   foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
        echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
    } ?>
 

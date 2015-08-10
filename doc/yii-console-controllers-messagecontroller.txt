@@ -344,7 +344,7 @@ METHOD DETAILS
 
 *yii/console/controllers/MessageController::saveMessagesToDb*protected
 >
- saveMessagesToDb($messages, $db, $sourceMessageTable, $messageTable, $removeUnused, $languages)
+ saveMessagesToDb($messages, $db, $sourceMessageTable, $messageTable, $removeUnused, $languages, $markUnused)
 <
 (void)
 
@@ -354,6 +354,7 @@ METHOD DETAILS
     [$messageTable] (string) 
     [$removeUnused] (boolean) 
     [$languages] (array) 
+    [$markUnused] (boolean) 
 
 
 *yii/console/controllers/MessageController::extractMessages*protected
@@ -389,7 +390,7 @@ METHOD DETAILS
 
 *yii/console/controllers/MessageController::saveMessagesToPHP*protected
 >
- saveMessagesToPHP($messages, $dirName, $overwrite, $removeUnused, $sort)
+ saveMessagesToPHP($messages, $dirName, $overwrite, $removeUnused, $sort, $markUnused)
 <
 (void)
 
@@ -399,11 +400,12 @@ METHOD DETAILS
     backup
     [$removeUnused] (boolean) If obsolete translations should be removed
     [$sort] (boolean) If translations should be sorted
+    [$markUnused] (boolean) If obsolete translations should be marked
 
 
 *yii/console/controllers/MessageController::saveMessagesCategoryToPHP*protected
 >
- saveMessagesCategoryToPHP($messages, $fileName, $overwrite, $removeUnused, $sort, $category)
+ saveMessagesCategoryToPHP($messages, $fileName, $overwrite, $removeUnused, $sort, $category, $markUnused)
 <
 (void)
 
@@ -414,11 +416,12 @@ METHOD DETAILS
     [$removeUnused] (boolean) If obsolete translations should be removed
     [$sort] (boolean) If translations should be sorted
     [$category] (string) Message category
+    [$markUnused] (boolean) If obsolete translations should be marked
 
 
 *yii/console/controllers/MessageController::saveMessagesToPO*protected
 >
- saveMessagesToPO($messages, $dirName, $overwrite, $removeUnused, $sort, $catalog)
+ saveMessagesToPO($messages, $dirName, $overwrite, $removeUnused, $sort, $catalog, $markUnused)
 <
 (void)
 
@@ -428,6 +431,18 @@ METHOD DETAILS
     backup
     [$removeUnused] (boolean) If obsolete translations should be removed
     [$sort] (boolean) If translations should be sorted
+    [$catalog] (string) Message catalog
+    [$markUnused] (boolean) If obsolete translations should be marked
+
+
+*yii/console/controllers/MessageController::saveMessagesToPOT*protected
+>
+ saveMessagesToPOT($messages, $dirName, $catalog)
+<
+(void)
+
+    [$messages] (array) 
+    [$dirName] (string) Name of the directory to write to
     [$catalog] (string) Message catalog
 
 

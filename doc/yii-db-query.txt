@@ -223,7 +223,7 @@ METHOD DETAILS
 >
  where($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The method requires a '$condition' parameter, and optionally a '$params'
  parameter specifying the values to be bound to the query.
@@ -352,7 +352,7 @@ METHOD DETAILS
 >
  andWhere($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -365,7 +365,7 @@ METHOD DETAILS
 >
  orWhere($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -443,11 +443,11 @@ to build the SQL
  batch($batchSize=100, $db='null')
 <
 (\yii\db\BatchQueryResult) The batch query result. It implements the
-'Iterator' interface and can be traversed to retrieve the data in batches.
+'\Iterator' interface and can be traversed to retrieve the data in batches.
 
  A batch query supports fetching data in batches, which can keep the memory
  usage under a limit. This method will return a 'BatchQueryResult' object
- which implements the 'Iterator' interface and can be traversed to retrieve
+ which implements the '\Iterator' interface and can be traversed to retrieve
  the data in batches.
 
  For example,
@@ -468,7 +468,7 @@ to build the SQL
  each($batchSize=100, $db='null')
 <
 (\yii\db\BatchQueryResult) The batch query result. It implements the
-'Iterator' interface and can be traversed to retrieve the data in batches.
+'\Iterator' interface and can be traversed to retrieve the data in batches.
 
  This method is similar to 'batch()' except that in each iteration of the
  result, only one row of data is returned. For example,
@@ -642,7 +642,7 @@ the underlying database engine and to support integer values higher than a
 >
  select($columns, $option='null')
 <
-(static) The query object itself
+($this) The query object itself
 
     [$columns] (string|array) The columns to be selected. Columns can be
     specified in either a string (e.g. "id, name") or an array (e.g. ['id',
@@ -671,7 +671,7 @@ the underlying database engine and to support integer values higher than a
 >
  addSelect($columns)
 <
-(static) The query object itself
+($this) The query object itself
 
  Note, that if 'select' has not been specified before, you should include '*'
  explicitly if you want to select all remaining columns too:
@@ -687,7 +687,7 @@ the underlying database engine and to support integer values higher than a
 >
  distinct($value='true')
 <
-(static) The query object itself
+($this) The query object itself
 
     [$value] (boolean) Whether to SELECT DISTINCT or not.
 
@@ -696,7 +696,7 @@ the underlying database engine and to support integer values higher than a
 >
  from($tables)
 <
-(static) The query object itself
+($this) The query object itself
 
     [$tables] (string|array) The table(s) to be selected from. This can be
     either a string (e.g. ''user'') or an array (e.g. '['user', 'profile']')
@@ -812,7 +812,7 @@ the underlying database engine and to support integer values higher than a
 >
  groupBy($columns)
 <
-(static) The query object itself
+($this) The query object itself
 
     [$columns] (string|array) The columns to be grouped by. Columns can be
     specified in either a string (e.g. "id, name") or an array (e.g. ['id',
@@ -825,7 +825,7 @@ the underlying database engine and to support integer values higher than a
 >
  addGroupBy($columns)
 <
-(static) The query object itself
+($this) The query object itself
 
     [$columns] (string|array) Additional columns to be grouped by. Columns can
     be specified in either a string (e.g. "id, name") or an array (e.g. ['id',
@@ -838,7 +838,7 @@ the underlying database engine and to support integer values higher than a
 >
  having($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
     [$condition] (string|array) The conditions to be put after HAVING. Please
     refer to 'where()' on how to specify this parameter.
@@ -849,7 +849,7 @@ the underlying database engine and to support integer values higher than a
 >
  andHaving($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -862,7 +862,7 @@ the underlying database engine and to support integer values higher than a
 >
  orHaving($condition, $params='[]')
 <
-(static) The query object itself
+($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -875,7 +875,7 @@ the underlying database engine and to support integer values higher than a
 >
  union($sql, $all='false')
 <
-(static) The query object itself
+($this) The query object itself
 
     [$sql] (string|\yii\db\Query) The SQL statement to be appended using UNION
     [$all] (boolean) TRUE if using UNION ALL and FALSE if using UNION
@@ -885,7 +885,7 @@ the underlying database engine and to support integer values higher than a
 >
  params($params)
 <
-(static) The query object itself
+($this) The query object itself
 
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
@@ -895,7 +895,7 @@ the underlying database engine and to support integer values higher than a
 >
  addParams($params)
 <
-(static) The query object itself
+($this) The query object itself
 
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.

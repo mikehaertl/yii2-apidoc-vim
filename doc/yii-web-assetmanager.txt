@@ -69,8 +69,8 @@ $assetMap				*yii/web/AssetManager::$assetMap*
  the asset and be registered with the view. For example, an asset file
  'my/path/to/jquery.js' matches a key 'jquery.js'.
 
- Note that the target asset files should be either absolute URLs or paths
- relative to 'baseUrl' and 'basePath'.
+ Note that the target asset files should be absolute URLs, domain relative
+ URLs (starting from '/') or paths relative to 'baseUrl' and 'basePath'.
 
  In the following example, any assets ending with 'jquery.min.js' will be
  replaced with 'jquery/dist/jquery.js' which is relative to 'baseUrl' and
@@ -78,6 +78,12 @@ $assetMap				*yii/web/AssetManager::$assetMap*
 
    [
        'jquery.min.js' => 'jquery/dist/jquery.js',
+   ]
+
+ You may also use aliases while specifying map value, for example:
+
+   [
+       'jquery.min.js' => '@web/js/jquery/jquery.js',
    ]
 
 
@@ -145,6 +151,29 @@ $appendTimestamp			*yii/web/AssetManager::$appendTimestamp*
  of the published asset file. You normally would want to set this property to
  true when you have enabled HTTP caching for assets, because it allows you to
  bust caching when the assets are updated.
+
+$hashCallback				*yii/web/AssetManager::$hashCallback*
+ (callable) A callback that will be called to produce hash for asset directory
+ generation. The signature of the callback should be as follows:
+
+ ''' function ($path) '''
+
+ where '$path' is the asset path. Note that the '$path' can be either
+ directory where the asset files reside or a single file. For a CSS file that
+ uses relative path in 'url()', the hash implementation should use the
+ directory path of the file instead of the file path to include the relative
+ asset files in the copying.
+
+ If this is not set, the asset manager will use the default CRC32 and
+ filemtime in the 'hash' method.
+
+ Example of an implementation using MD4 hash:
+
+   function ($path) {
+       return hash('md4', $path);
+   }
+
+
 
 $behaviors				*yii/web/AssetManager::$behaviors*
  See |yii/base/Component::$behaviors|
@@ -389,6 +418,12 @@ published as.
     The following options are supported:
 
 
+      - only: array, list of patterns that the file paths should match if
+      they want to be copied. 
+      - except: array, list of patterns that the files or directories
+      should match if they want to be excluded from being copied. 
+      - caseSensitive: boolean, whether patterns specified at "only" or
+      "except" should be case sensitive. Defaults to true. 
       - beforeCopy: callback, a PHP callback that is called before copying
       each sub-directory or file.   This overrides 'beforeCopy' if set. 
       - afterCopy: callback, a PHP callback that is called after a
@@ -420,6 +455,12 @@ published as.
     The following options are supported:
 
 
+      - only: array, list of patterns that the file paths should match if
+      they want to be copied. 
+      - except: array, list of patterns that the files or directories
+      should match if they want to be excluded from being copied. 
+      - caseSensitive: boolean, whether patterns specified at "only" or
+      "except" should be case sensitive. Defaults to true. 
       - beforeCopy: callback, a PHP callback that is called before copying
       each sub-directory or file.   This overrides 'beforeCopy' if set. 
       - afterCopy: callback, a PHP callback that is called after a

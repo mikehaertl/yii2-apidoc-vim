@@ -216,7 +216,7 @@ METHOD DETAILS
  returning the corresponding field value. The signature of the callable should
  be:
 
-   function ($field, $model) {
+   function ($model, $field) {
        // return field value
    }
 
@@ -283,13 +283,13 @@ METHOD DETAILS
 
   
    - attribute list: required, specifies the attributes array to be
-   validated, for single attribute you can pass string;  
+   validated, for single attribute you can pass a string;  
    - validator type: required, specifies the validator to be used. It
    can be a built-in validator name,    a method name of the model class, an
  anonymous function, or a validator class name.  
-   - on: optional, specifies the 'scenario|scenarios' array when the
-   validation    rule can be applied. If this option is not set, the rule will
- apply to all scenarios.  
+   - on: optional, specifies the 'scenario|scenarios' array in which
+   the validation    rule can be applied. If this option is not set, the rule
+ will apply to all scenarios.  
    - additional name-value pairs can be specified to initialize the
    corresponding validator properties.    Please refer to individual validator
  class API for possible properties.
@@ -301,13 +301,15 @@ METHOD DETAILS
    // $params refers to validation parameters given in the rule
    function validatorName($attribute, $params)
 
- In the above '$attribute' refers to currently validated attribute name while
- '$params' contains an array of validator configuration options such as 'max'
- in case of 'string' validator. Currently validate attribute value can be
- accessed as '$this->[$attribute]'.
+ In the above '$attribute' refers to the attribute currently being validated
+ while '$params' contains an array of validator configuration options such as
+ 'max' in case of 'string' validator. The value of the attribute currently
+ being validated can be accessed as '$this->$attribute'. Note the '$' before
+ 'attribute'; this is taking the value of the variable '$attribute' and using
+ it as the name of the property to access.
 
  Yii also provides a set of 'Validator::builtInValidators|built-in
- validators'. They each has an alias name which can be used when specifying a
+ validators'. Each one has an alias name which can be used when specifying a
  validation rule.
 
  Below are some examples:
@@ -747,14 +749,17 @@ returned if there is no error.
 >
  load($data, $formName='null')
 <
-(boolean) Whether the model is successfully populated with some data.
+(boolean) Whether '$data' contained some data to populate the models
+attributes. This only means that there was some data provided. It does not
+necessarily mean that any field was populated, which may be the case if none
+of the provided fields is safe in the current 'scenario'.
 
  The data to be loaded is '$data[formName]', where 'formName' refers to the
  value of 'formName()'. If 'formName()' is empty, the whole '$data' array will
  be used to populate the model. The data being populated is subject to the
  safety check by 'setAttributes()'.
     [$data] (array) The data array. This is usually '$_POST' or '$_GET', but
-    can also be any valid array supplied by end user.
+    can also be any valid array supplied by the end user.
     [$formName] (string) The form name to be used for loading the data into
     the model. If not set, 'formName()' will be used.
 
@@ -801,7 +806,7 @@ multiple models have validation error.
 <
 (\ArrayIterator) An iterator for traversing the items in the list.
 
- This method is required by the interface IteratorAggregate.
+ This method is required by the interface '\IteratorAggregate'.
 
 
 *yii/base/Model::offsetExists*				public
@@ -810,7 +815,7 @@ multiple models have validation error.
 <
 (boolean) 
 
- This method is required by the SPL interface 'ArrayAccess'. It is implicitly
+ This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'isset($model[$offset])'.
     [$offset] (mixed) The offset to check on
 
@@ -821,7 +826,7 @@ multiple models have validation error.
 <
 (mixed) The element at the offset, null if no element is found at the offset
 
- This method is required by the SPL interface 'ArrayAccess'. It is implicitly
+ This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$value = $model[$offset];'.
     [$offset] (mixed) The offset to retrieve element.
 
@@ -832,7 +837,7 @@ multiple models have validation error.
 <
 (void)
 
- This method is required by the SPL interface 'ArrayAccess'. It is implicitly
+ This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$model[$offset] = $item;'.
     [$offset] (integer) The offset to set element
     [$item] (mixed) The element value
@@ -844,7 +849,7 @@ multiple models have validation error.
 <
 (void)
 
- This method is required by the SPL interface 'ArrayAccess'. It is implicitly
+ This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'unset($model[$offset])'.
     [$offset] (mixed) The offset to unset element
 

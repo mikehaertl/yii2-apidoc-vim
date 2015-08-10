@@ -309,6 +309,10 @@ METHOD DETAILS
 <
 (string) The generated submit button tag
 
+ Be careful when naming form elements such as submit buttons. According to the
+ [jQuery documentation](https://api.jquery.com/submit/) there are some
+ reserved names that can cause conflicts, e.g. 'submit', 'length', or
+ 'method'.
     [$content] (string) The content enclosed within the button tag. It will
     NOT be HTML-encoded. Therefore you can pass in HTML code such as an image
     tag. If this is is coming from end users, you should consider 'encode()'
@@ -376,6 +380,10 @@ METHOD DETAILS
 <
 (string) The generated button tag
 
+ Be careful when naming form elements such as submit buttons. According to the
+ [jQuery documentation](https://api.jquery.com/submit/) there are some
+ reserved names that can cause conflicts, e.g. 'submit', 'length', or
+ 'method'.
     [$label] (string) The value attribute. If it is null, the value attribute
     will not be generated.
     [$options] (array) The tag options in terms of name-value pairs. These
@@ -965,7 +973,14 @@ is empty.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
     be HTML-encoded using 'encode()'. See 'renderTagAttributes()' for details
-    on how attributes are being rendered.
+    on how attributes are being rendered. The following special options are
+    recognized:
+
+
+      - maxlength: integer|boolean, when 'maxlength' is set true and the
+      model attribute is validated   by a string validator, the 'maxlength'
+    option will take the value of '\yii\validators\StringValidator::max'.  
+    This option is available since version 2.0.6.
 
 
 *yii/helpers/BaseHtml::activeFileInput*			public
@@ -998,7 +1013,14 @@ is empty.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
     be HTML-encoded using 'encode()'. See 'renderTagAttributes()' for details
-    on how attributes are being rendered.
+    on how attributes are being rendered. The following special options are
+    recognized:
+
+
+      - maxlength: integer|boolean, when 'maxlength' is set true and the
+      model attribute is validated   by a string validator, the 'maxlength'
+    option will take the value of '\yii\validators\StringValidator::max'.  
+    This option is available since version 2.0.6.
 
 
 *yii/helpers/BaseHtml::activeRadio*			public
@@ -1344,9 +1366,19 @@ will be returned.
 <
 (void)
 
- If the CSS class is already in the options, it will not be added again.
+ If the CSS class is already in the options, it will not be added again. If
+ class specification at given options is an array, and some class placed there
+ with the named (string) key, overriding of such key will have no effect. For
+ example:
+
+   php
+   $options = ['class' => ['persistent' => 'initial']];
+   Html::addCssClass($options, ['persistent' => 'override']);
+   var_dump($options['class']); // outputs: array('persistent' => 'initial');
+
+
     [$options] (array) The options to be modified.
-    [$class] (string) The CSS class to be added
+    [$class] (string|array) The CSS class(es) to be added
 
 
 *yii/helpers/BaseHtml::removeCssClass*			public
@@ -1356,7 +1388,7 @@ will be returned.
 (void)
 
     [$options] (array) The options to be modified.
-    [$class] (string) The CSS class to be removed
+    [$class] (string|array) The CSS class(es) to be removed
 
 
 *yii/helpers/BaseHtml::addCssStyle*			public
@@ -1502,6 +1534,15 @@ returned.
     [$model] (\yii\base\Model) The model object
     [$attribute] (string) The attribute name or expression. See
     'getAttributeName()' for explanation of attribute expression.
+
+
+*yii/helpers/BaseHtml::escapeJsRegularExpression*		public
+>
+ escapeJsRegularExpression($regexp)
+<
+(string) The escaped result.
+
+    [$regexp] (string) The regular expression to be escaped.
 
 
 

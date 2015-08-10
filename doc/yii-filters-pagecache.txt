@@ -73,9 +73,15 @@ $dependency				*yii/filters/PageCache::$dependency*
        'sql' => 'SELECT MAX(updated_at) FROM post',
    ]
 
- would make the output cache depends on the last modified time of all posts.
- If any post has its modification time changed, the cached content would be
+ would make the output cache depend on the last modified time of all posts. If
+ any post has its modification time changed, the cached content would be
  invalidated.
+
+ If 'cacheCookies' or 'cacheHeaders' is enabled, then
+ '\yii\caching\Dependency::reusable' should be enabled as well to save
+ performance. This is because the cookies and headers are currently stored
+ separately from the actual page content, causing the dependency to be
+ evaluated twice.
 
 $variations				*yii/filters/PageCache::$variations*
  (array) List of factors that would cause the variation of the content being

@@ -64,6 +64,10 @@ $passwordHashStrategy			*yii/base/Security::$passwordHashStrategy*
  PHP version >= 5.5.0 
    - 'crypt' - use PHP 'crypt()' function.
 
+$passwordHashCost			*yii/base/Security::$passwordHashCost*
+ (integer) Default cost used for password hashing. Allowed value is between 4
+ and 31.
+
 $behaviors				*yii/base/Security::$behaviors*
  See |yii/base/Component::$behaviors|
 
@@ -353,7 +357,7 @@ tampered.
 
 *yii/base/Security::generatePasswordHash*			public
 >
- generatePasswordHash($password, $cost=13)
+ generatePasswordHash($password, $cost=null)
 <
 (string) The password hash string. When 'passwordHashStrategy' is set to
 'crypt', the output is always 60 ASCII characters, when set to 'password_hash'

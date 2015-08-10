@@ -1,5 +1,5 @@
 
-*yii/web/DbSession*   >> |yii/web/Session|
+*yii/web/DbSession*   >> |yii/web/MultiFieldSession|
 ===================
 
 DESCRIPTION
@@ -18,7 +18,8 @@ DESCRIPTION
        // 'sessionTable' => 'my_session',
    ]
 
-
+ DbSession extends 'MultiFieldSession', thus it allows saving extra fields
+ into the 'sessionTable'. Refer to 'MultiFieldSession' for more details.
 
 
 PROPERTY DETAILS
@@ -29,6 +30,12 @@ $flashParam				*yii/web/DbSession::$flashParam*
 
 $handler				*yii/web/DbSession::$handler*
  See |yii/web/Session::$handler|
+
+$readCallback				*yii/web/DbSession::$readCallback*
+ See |yii/web/MultiFieldSession::$readCallback|
+
+$writeCallback				*yii/web/DbSession::$writeCallback*
+ See |yii/web/MultiFieldSession::$writeCallback|
 
 $db					*yii/web/DbSession::$db*
  (\yii\db\Connection|array|string) The DB connection object or the application
@@ -68,7 +75,7 @@ $behaviors				*yii/web/DbSession::$behaviors*
  See |yii/base/Component::$behaviors|
 
 $useCustomStorage			*yii/web/DbSession::$useCustomStorage*
- (boolean) Whether to use custom storage.
+ See |yii/web/Session::$useCustomStorage|
 
 $isActive				*yii/web/DbSession::$isActive*
  See |yii/web/Session::$isActive|
@@ -224,12 +231,7 @@ METHOD DETAILS
 
 
 *yii/web/DbSession::getUseCustomStorage*			public
->
- getUseCustomStorage()
-<
-(boolean) Whether to use custom storage.
-
- This method overrides the parent implementation and always returns true.
+ See |yii/web/Session::getUseCustomStorage|
 
 
 *yii/web/DbSession::open*					public
@@ -463,6 +465,14 @@ METHOD DETAILS
 
 *yii/web/DbSession::offsetUnset*				public
  See |yii/web/Session::offsetUnset|
+
+
+*yii/web/DbSession::composeFields*			protected
+ See |yii/web/MultiFieldSession::composeFields|
+
+
+*yii/web/DbSession::extractData*				protected
+ See |yii/web/MultiFieldSession::extractData|
 
 
 
