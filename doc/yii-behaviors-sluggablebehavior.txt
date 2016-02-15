@@ -184,5 +184,56 @@ METHOD DETAILS
     updating.
 
 
+*yii/behaviors/SluggableBehavior::isNewSlugNeeded*	protected
+>
+ isNewSlugNeeded()
+<
+(boolean) 
+
+ You may override it to customize checking.
+
+
+*yii/behaviors/SluggableBehavior::generateSlug*		protected
+>
+ generateSlug($slugParts)
+<
+(string) The conversion result.
+
+ You may override it to customize slug generation. The default implementation
+ calls '\yii\helpers\Inflector::slug()' on the input strings concatenated by
+ dashes ('-').
+    [$slugParts] (array) An array of strings that should be concatenated and
+    converted to generate the slug value.
+
+
+*yii/behaviors/SluggableBehavior::makeUnique*		protected
+>
+ makeUnique($slug)
+<
+(string) Unique slug
+
+ Calls 'generateUniqueSlug' until generated slug is unique and returns it.
+    [$slug] (string) Basic slug value
+
+
+*yii/behaviors/SluggableBehavior::validateSlug*		protected
+>
+ validateSlug($slug)
+<
+(boolean) Whether slug is unique.
+
+    [$slug] (string) Slug value
+
+
+*yii/behaviors/SluggableBehavior::generateUniqueSlug*	protected
+>
+ generateUniqueSlug($baseSlug, $iteration)
+<
+(string) New slug value
+
+    [$baseSlug] (string) Base slug value
+    [$iteration] (integer) Iteration number
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

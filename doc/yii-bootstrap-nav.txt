@@ -23,6 +23,11 @@ DESCRIPTION
                     ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
                ],
            ],
+           [
+               'label' => 'Login',
+               'url' => ['site/login'],
+               'visible' => Yii::$app->user->isGuest
+           ],
        ],
        'options' => ['class' =>'nav-pills'], // set this to nav-tab to get
  tab-styled navigation
@@ -68,6 +73,8 @@ $items					*yii/bootstrap/Nav::$items*
    container (LI). 
    - active: boolean, optional, whether the item should be on active
    state or not. 
+   - dropDownOptions: array, optional, the HTML options that will
+   passed to the 'Dropdown' widget. 
    - items: array|string, optional, the configuration array for
    creating a 'Dropdown' widget,   or a string representing the dropdown menu.
  Note that Bootstrap does not support sub-dropdown menus.

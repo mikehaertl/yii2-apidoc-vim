@@ -190,14 +190,21 @@ METHOD DETAILS
 <
 ($this) The query object itself
 
-    [$columns] (string|array) The columns (and the directions) to be ordered
-    by. Columns can be specified in either a string (e.g. '"id ASC, name
-    DESC"') or an array (e.g. '['id' => SORT_ASC, 'name' => SORT_DESC]'). The
-    method will automatically quote the column names unless a column contains
-    some parenthesis (which means the column contains a DB expression). Note
-    that if your order-by is an expression containing commas, you should
+    [$columns] (string|array|\yii\db\Expression) The columns (and the
+    directions) to be ordered by. Columns can be specified in either a string
+    (e.g. '"id ASC, name DESC"') or an array (e.g. '['id' => SORT_ASC, 'name'
+    => SORT_DESC]').
+
+    The method will automatically quote the column names unless a column
+    contains some parenthesis (which means the column contains a DB
+    expression).
+
+    Note that if your order-by is an expression containing commas, you should
     always use an array to represent the order-by information. Otherwise, the
     method will not be able to correctly determine the order-by columns.
+
+    Since version 2.0.7, an 'Expression' object can be passed to specify the
+    ORDER BY part explicitly in plain SQL.
 
 
 *yii/db/QueryTrait::addOrderBy*				public
@@ -206,11 +213,21 @@ METHOD DETAILS
 <
 ($this) The query object itself
 
-    [$columns] (string|array) The columns (and the directions) to be ordered
-    by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
-    or an array (e.g. '['id' => SORT_ASC, 'name' => SORT_DESC]'). The method
-    will automatically quote the column names unless a column contains some
-    parenthesis (which means the column contains a DB expression).
+    [$columns] (string|array|\yii\db\Expression) The columns (and the
+    directions) to be ordered by. Columns can be specified in either a string
+    (e.g. "id ASC, name DESC") or an array (e.g. '['id' => SORT_ASC, 'name' =>
+    SORT_DESC]').
+
+    The method will automatically quote the column names unless a column
+    contains some parenthesis (which means the column contains a DB
+    expression).
+
+    Note that if your order-by is an expression containing commas, you should
+    always use an array to represent the order-by information. Otherwise, the
+    method will not be able to correctly determine the order-by columns.
+
+    Since version 2.0.7, an 'Expression' object can be passed to specify the
+    ORDER BY part explicitly in plain SQL.
 
 
 *yii/db/QueryTrait::normalizeOrderBy*			protected
@@ -219,7 +236,8 @@ METHOD DETAILS
 <
 (array) 
 
-    [$columns] (array|string) 
+    [$columns] (array|string|\yii\db\Expression) The columns value to
+    normalize. See 'orderBy' and 'addOrderBy'.
 
 
 *yii/db/QueryTrait::limit*				public

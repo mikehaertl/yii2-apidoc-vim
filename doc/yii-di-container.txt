@@ -406,5 +406,45 @@ or ID => definition or instance).
     dependencies
 
 
+*yii/di/Container::invoke*				public
+>
+ invoke($callback, $params='[]')
+<
+(mixed) The callback return value.
+
+ This methods allows invoking a callback and let type hinted parameter names
+ to be resolved as objects of the Container. It additionally allow calling
+ function using named parameters.
+
+ For example, the following callback may be invoked using the Container to
+ resolve the formatter dependency:
+
+   $formatString = function($string, \yii\i18n\Formatter $formatter) {
+      // ...
+   }
+   Yii::$container->invoke($formatString, ['string' => 'Hello World!']);
+
+ This will pass the string ''Hello World!'' as the first param, and a
+ formatter instance created by the DI container as the second param to the
+ callable.
+    [$callback] (callable) Callable to be invoked.
+    [$params] (array) The array of parameters for the function. This can be
+    either a list of parameters, or an associative array representing named
+    function parameters.
+
+
+*yii/di/Container::resolveCallableDependencies*		public
+>
+ resolveCallableDependencies($callback, $params='[]')
+<
+(array) The resolved dependencies.
+
+ This method can be used to implement similar functionality as provided by
+ 'invoke()' in other components.
+    [$callback] (callable) Callable to be invoked.
+    [$params] (array) The array of parameters for the function, can be either
+    numeric or associative.
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

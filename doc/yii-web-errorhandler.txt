@@ -53,6 +53,12 @@ $callStackItemView			*yii/web/ErrorHandler::$callStackItemView*
 $previousExceptionView			*yii/web/ErrorHandler::$previousExceptionView*
  (string) The path of the view file for rendering previous exceptions.
 
+$displayVars				*yii/web/ErrorHandler::$displayVars*
+ (array) List of the PHP predefined variables that should be displayed on the
+ error page. Note that a variable must be accessible via '$GLOBALS'. Otherwise
+ it won't be displayed. Defaults to '['_GET', '_POST', '_FILES', '_COOKIE',
+ '_SESSION']'.
+
 $behaviors				*yii/web/ErrorHandler::$behaviors*
  See |yii/base/Component::$behaviors|
 
@@ -289,6 +295,7 @@ there are none.
 <
 (string) The rendering result
 
+ List of global variables is defined in 'displayVars'.
 
 
 *yii/web/ErrorHandler::isCoreFile*			public

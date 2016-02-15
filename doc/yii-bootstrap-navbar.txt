@@ -18,6 +18,7 @@ DESCRIPTION
            ['label' => 'Home', 'url' => ['/site/index']],
            ['label' => 'About', 'url' => ['/site/about']],
        ],
+       'options' => ['class' => 'navbar-nav'],
    ]);
    NavBar::end();
 
@@ -57,11 +58,14 @@ $containerOptions			*yii/bootstrap/NavBar::$containerOptions*
    - tag: string, defaults to "div", the name of the container tag.
 
 $brandLabel				*yii/bootstrap/NavBar::$brandLabel*
- (string|boolean) The text of the brand of false if it's not used. Note that
+ (string|boolean) The text of the brand or false if it's not used. Note that
  this is not HTML-encoded.
 
 $brandUrl				*yii/bootstrap/NavBar::$brandUrl*
- ()
+ (array|string|boolean) The URL for the brand's hyperlink tag. This parameter
+ will be processed by 'Url::to()' and will be used for the "href" attribute of
+ the brand link. Default value is false that means
+ '\yii\web\Application::homeUrl' will be used.
 
 $brandOptions				*yii/bootstrap/NavBar::$brandOptions*
  (array) The HTML attributes of the brand link.

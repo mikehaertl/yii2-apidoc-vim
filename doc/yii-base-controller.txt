@@ -23,6 +23,7 @@ SUBCLASSES
 |yii/apidoc/components/BaseController|
 |yii/apidoc/commands/ApiController|
 |yii/apidoc/commands/GuideController|
+|yii/console/controllers/ServeController|
 
 
 PROPERTY DETAILS
@@ -278,11 +279,16 @@ resolve into any action.
 
    public function beforeAction($action)
    {
+       // your custom code here, if you want the code to run before action
+ filters,
+       // wich are triggered on the [[EVENT_BEFORE_ACTION]] event, e.g.
+ PageCache or AccessControl
+
        if (!parent::beforeAction($action)) {
            return false;
        }
 
-       // your custom code here
+       // other custom code here
 
        return true; // or false to not run the action
    }
@@ -462,6 +468,15 @@ views or view files.
 
  The default implementation returns the directory named as controller 'id'
  under the 'module''s 'viewPath' directory.
+
+
+*yii/base/Controller::setViewPath*			public
+>
+ setViewPath($path)
+<
+(void)
+
+    [$path] (string) The root directory of view files.
 
 
 *yii/base/Controller::findLayoutFile*			public

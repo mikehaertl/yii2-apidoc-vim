@@ -60,6 +60,13 @@ $mode					*yii/web/UrlRule::$mode*
 $encodeParams				*yii/web/UrlRule::$encodeParams*
  (boolean) A value indicating if parameters should be url encoded.
 
+$placeholders				*yii/web/UrlRule::$placeholders*
+ (array) List of placeholders for matching parameters names. Used in
+ 'parseRequest()', 'createUrl()'. On the rule initialization, the 'pattern'
+ parameters names will be replaced with placeholders. This array contains
+ relations between the original parameters names and their placeholders. The
+ array keys are the placeholders and the values are the original names.
+
 
 
 METHOD DETAILS
@@ -148,6 +155,18 @@ creating this URL.
 <
 (array) Parameter keys and regexp rules.
 
+
+
+*yii/web/UrlRule::substitutePlaceholderNames*		protected
+>
+ substitutePlaceholderNames($matches)
+<
+(array) Input array with replaced placeholder keys
+
+ When found 
+   - replaces this placeholder key with a appropriate name of matching
+   parameter. Used in 'parseRequest()', 'createUrl()'.
+    [$matches] (array) Result of 'preg_match()' call
 
 
 

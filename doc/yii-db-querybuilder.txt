@@ -15,8 +15,10 @@ SUBCLASSES
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- QueryBuilder can also be used to build SQL statements such as INSERT, UPDATE,
- DELETE, CREATE TABLE, from a 'Query' object.
+ SQL statements are created from 'Query' objects using the 'build()'-method.
+
+ QueryBuilder is also used by 'Command' to build SQL statements such as
+ INSERT, UPDATE, DELETE, CREATE TABLE.
 
 
 PROPERTY DETAILS
@@ -124,8 +126,8 @@ element). The parameters returned include those provided in '$params'.
  For example,
 
    $sql = $queryBuilder->insert('user', [
-    'name' => 'Sam',
-    'age' => 30,
+       'name' => 'Sam',
+       'age' => 30,
    ], $params);
 
  The method will properly escape the table and column names.
@@ -624,8 +626,9 @@ table.
 <
 (string) The generated SQL expression
 
-    [$condition] (string|array) The condition specification. Please refer to
-    'Query::where()' on how to specify a condition.
+    [$condition] (string|array|\yii\db\Expression) The condition
+    specification. Please refer to 'Query::where()' on how to specify a
+    condition.
     [$params] (array) The binding parameters to be populated
 
 

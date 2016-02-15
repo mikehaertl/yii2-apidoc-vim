@@ -308,8 +308,8 @@ returned if no such item.
 >
  getRolesByUser($userId)
 <
-(\yii\rbac\Role[]) All roles directly or indirectly assigned to the user. The
-array is indexed by the role names.
+(\yii\rbac\Role[]) All roles directly assigned to the user. The array is
+indexed by the role names.
 
  Note that child roles that are not assigned directly to the user will not be
  returned.
@@ -358,7 +358,7 @@ correspond to a rule.
 >
  addChild($parent, $child)
 <
-(void)
+(boolean) Whether the child successfully added
 
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
@@ -456,6 +456,15 @@ will be returned if there is no role assigned to the user.
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
+*yii/rbac/PhpManager::getUserIdsByRole*			public
+>
+ getUserIdsByRole($roleName)
+<
+(array) Array of user ID strings
+
+    [$roleName] (string) 
+
+
 *yii/rbac/PhpManager::removeAll*				public
 >
  removeAll()
@@ -536,6 +545,26 @@ will be returned if there is no role assigned to the user.
 
     [$name] (string) The name of the item whose children are to be looked for.
     [$result] (array) The children and grand children (in array keys)
+
+
+*yii/rbac/PhpManager::getDirectPermissionsByUser*		protected
+>
+ getDirectPermissionsByUser($userId)
+<
+(\yii\rbac\Permission[]) All direct permissions that the user has. The array
+is indexed by the permission names.
+
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/PhpManager::getInheritedPermissionsByUser*	protected
+>
+ getInheritedPermissionsByUser($userId)
+<
+(\yii\rbac\Permission[]) All inherited permissions that the user has. The
+array is indexed by the permission names.
+
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/PhpManager::removeAllItems*			protected

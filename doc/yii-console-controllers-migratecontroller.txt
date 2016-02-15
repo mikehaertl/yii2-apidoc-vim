@@ -18,23 +18,17 @@ DESCRIPTION
  command is executed, if it does not exist. You may also manually create it as
  follows:
 
-   CREATE TABLE migration (
-       version varchar(180) PRIMARY KEY,
-       apply_time integer
-   )
+ '''sql CREATE TABLE migration (     version varchar(180) PRIMARY KEY,    
+ apply_time integer ) '''
 
  Below are some common usages of this command:
 
-   # creates a new migration named 'create_user_table'
-   yii migrate/create create_user_table
+ ''' # creates a new migration named 'create_user_table' yii migrate/create
+ create_user_table
 
-   # applies ALL new migrations
-   yii migrate
+ # applies ALL new migrations yii migrate
 
-   # reverts the last applied migration
-   yii migrate/down
-
-
+ # reverts the last applied migration yii migrate/down '''
 
 
 PROPERTY DETAILS
@@ -67,6 +61,12 @@ $migrationPath				*yii/console/controllers/MigrateController::$migrationPath*
 $templateFile				*yii/console/controllers/MigrateController::$templateFile*
  ()
 
+$generatorTemplateFiles			*yii/console/controllers/MigrateController::$generatorTemplateFiles*
+ ()
+
+$fields					*yii/console/controllers/MigrateController::$fields*
+ See |yii/console/controllers/BaseMigrateController::$fields|
+
 $migrationTable				*yii/console/controllers/MigrateController::$migrationTable*
  (string) The name of the table for keeping applied migration information.
 
@@ -93,6 +93,12 @@ $view					*yii/console/controllers/MigrateController::$view*
 
 $viewPath				*yii/console/controllers/MigrateController::$viewPath*
  See |yii/base/ViewContextInterface::$viewPath|
+
+$passedOptions				*yii/console/controllers/MigrateController::$passedOptions*
+ See |yii/console/Controller::$passedOptions|
+
+$passedOptionValues			*yii/console/controllers/MigrateController::$passedOptionValues*
+ See |yii/console/Controller::$passedOptionValues|
 
 $helpSummary				*yii/console/controllers/MigrateController::$helpSummary*
  See |yii/console/Controller::$helpSummary|
@@ -278,6 +284,10 @@ METHOD DETAILS
  See |yii/base/ViewContextInterface::getViewPath|
 
 
+*yii/console/controllers/MigrateController::setViewPath*	public
+ See |yii/base/Controller::setViewPath|
+
+
 *yii/console/controllers/MigrateController::findLayoutFile*public
  See |yii/base/Controller::findLayoutFile|
 
@@ -321,6 +331,18 @@ METHOD DETAILS
  Note that the values setting via options are not available until
  'beforeAction()' is being called.
     [$actionID] (string) The action id of the current request
+
+
+*yii/console/controllers/MigrateController::getOptionValues*public
+ See |yii/console/Controller::getOptionValues|
+
+
+*yii/console/controllers/MigrateController::getPassedOptions*public
+ See |yii/console/Controller::getPassedOptions|
+
+
+*yii/console/controllers/MigrateController::getPassedOptionValues*public
+ See |yii/console/Controller::getPassedOptionValues|
 
 
 *yii/console/controllers/MigrateController::getHelpSummary*public
@@ -422,6 +444,14 @@ METHOD DETAILS
 
 *yii/console/controllers/MigrateController::getNewMigrations*protected
  See |yii/console/controllers/BaseMigrateController::getNewMigrations|
+
+
+*yii/console/controllers/MigrateController::parseFields*	protected
+ See |yii/console/controllers/BaseMigrateController::parseFields|
+
+
+*yii/console/controllers/MigrateController::addDefaultPrimaryKey*protected
+ See |yii/console/controllers/BaseMigrateController::addDefaultPrimaryKey|
 
 
 *yii/console/controllers/MigrateController::getMigrationHistory*protected

@@ -80,7 +80,7 @@ $dateFormat				*yii/i18n/Formatter::$dateFormat*
  manual](http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax).
  Alternatively this can be a string prefixed with 'php:' representing a format
  that can be recognized by the PHP
- [date()](http://php.net/manual/de/function.date.php)-function.
+ [date()](http://php.net/manual/en/function.date.php)-function.
 
  For example:
 
@@ -98,7 +98,7 @@ $timeFormat				*yii/i18n/Formatter::$timeFormat*
  manual](http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax).
  Alternatively this can be a string prefixed with 'php:' representing a format
  that can be recognized by the PHP
- [date()](http://php.net/manual/de/function.date.php)-function.
+ [date()](http://php.net/manual/en/function.date.php)-function.
 
  For example:
 
@@ -117,7 +117,7 @@ $datetimeFormat				*yii/i18n/Formatter::$datetimeFormat*
 
  Alternatively this can be a string prefixed with 'php:' representing a format
  that can be recognized by the PHP
- [date()](http://php.net/manual/de/function.date.php)-function.
+ [date()](http://php.net/manual/en/function.date.php)-function.
 
  For example:
 
@@ -125,6 +125,37 @@ $datetimeFormat				*yii/i18n/Formatter::$datetimeFormat*
    'php:m/d/Y H:i:s' // the same date and time in PHP format
 
 
+
+$calendar				*yii/i18n/Formatter::$calendar*
+ (\IntlCalendar|int|null) The calendar to be used for date formatting. The
+ value of this property will be directly passed to the [constructor of the
+ 'IntlDateFormatter'
+ class](http://php.net/manual/en/intldateformatter.create.php).
+
+ Defaults to 'null', which means the Gregorian calendar will be used. You may
+ also explicitly pass the constant '\IntlDateFormatter::GREGORIAN' for
+ Gregorian calendar.
+
+ To use an alternative calendar like for example the [Jalali
+ calendar](https://en.wikipedia.org/wiki/Jalali_calendar), set this property
+ to '\IntlDateFormatter::TRADITIONAL'. The calendar must then be specified in
+ the 'locale', for example for the persian calendar the configuration for the
+ formatter would be:
+
+   'formatter' => [
+       'locale' => 'fa_IR@calendar=persian',
+       'calendar' => \IntlDateFormatter::TRADITIONAL,
+   ],
+
+ Available calendar names can be found in the [ICU
+ manual](http://userguide.icu-project.org/datetime/calendar).
+
+ Since PHP 5.5 you may also use an instance of the '\IntlCalendar' class.
+ Check the [PHP manual](http://php.net/manual/en/intldateformatter.create.php)
+ for more details.
+
+ If the [PHP intl extension](http://php.net/manual/en/book.intl.php) is not
+ available, setting this property will have no effect.
 
 $decimalSeparator			*yii/i18n/Formatter::$decimalSeparator*
  (string) The character displayed as the decimal point when formatting a
@@ -192,7 +223,7 @@ $numberFormatterSymbols			*yii/i18n/Formatter::$numberFormatterSymbols*
  for the possible options.
 
  For example to choose a custom currency symbol, e.g.
- [U+20BD](http://unicode-table.com/de/20BD/) instead of 'руб.' for Russian
+ [U+20BD](http://unicode-table.com/en/20BD/) instead of 'руб.' for Russian
  Ruble:
 
    [
@@ -466,7 +497,7 @@ METHOD DETAILS
 
     Alternatively this can be a string prefixed with 'php:' representing a
     format that can be recognized by the PHP
-    [date()](http://php.net/manual/de/function.date.php)-function.
+    [date()](http://php.net/manual/en/function.date.php)-function.
 
 
 *yii/i18n/Formatter::asTime*				public
@@ -496,7 +527,7 @@ METHOD DETAILS
 
     Alternatively this can be a string prefixed with 'php:' representing a
     format that can be recognized by the PHP
-    [date()](http://php.net/manual/de/function.date.php)-function.
+    [date()](http://php.net/manual/en/function.date.php)-function.
 
 
 *yii/i18n/Formatter::asDatetime*				public
@@ -526,7 +557,7 @@ METHOD DETAILS
 
     Alternatively this can be a string prefixed with 'php:' representing a
     format that can be recognized by the PHP
-    [date()](http://php.net/manual/de/function.date.php)-function.
+    [date()](http://php.net/manual/en/function.date.php)-function.
 
 
 *yii/i18n/Formatter::normalizeDatetimeValue*		protected
@@ -602,6 +633,32 @@ whether the timestamp has time information or it is just a date value.
     [$referenceTime] (integer|string|\DateTime) If specified the value is used
     as a reference time instead of 'now' when '$value' is not a 'DateInterval'
     object.
+
+
+*yii/i18n/Formatter::asDuration*				public
+>
+ asDuration($value, $implodeString='', '', $negativeSign=''-'')
+<
+(string) The formatted duration.
+
+    [$value] (\DateInterval|string|integer) The value to be formatted.
+    Acceptable formats:  
+      - [DateInterval
+      object](http://php.net/manual/ru/class.dateinterval.php)  
+      - integer - number of seconds. For example: value '131' represents
+      '2 minutes, 11 seconds'  
+      - ISO8601 duration format. For example, all of these values
+      represent '1 day, 2 hours, 30 minutes' duration:   
+    '2015-01-01T13:00:00Z/2015-01-02T13:30:00Z' 
+      - between two datetime values    '2015-01-01T13:00:00Z/P1D2H30M' 
+      - time interval after datetime value    'P1D2H30M/2015-01-02T13:30:00Z' 
+      - time interval before datetime value    'P1D2H30M' 
+      - simply a date interval    'P-1D2H30M' 
+      - a negative date interval ('-1 day, 2 hours, 30 minutes')
+    [$implodeString] (string) Will be used to concatenate duration parts.
+    Defaults to ', '.
+    [$negativeSign] (string) Will be prefixed to the formatted duration, when
+    it is negative. Defaults to '-'.
 
 
 *yii/i18n/Formatter::asInteger*				public
@@ -716,7 +773,7 @@ whether the timestamp has time information or it is just a date value.
  If 'sizeFormatBase' is 1024, [binary
  prefixes](http://en.wikipedia.org/wiki/Binary_prefix) (e.g. kibibyte/KiB,
  mebibyte/MiB, ...) are used in the formatting result.
-    [$value] (integer) Value in bytes to be formatted.
+    [$value] (string|integer|float) Value in bytes to be formatted.
     [$decimals] (integer) The number of digits after the decimal point.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
@@ -733,7 +790,7 @@ whether the timestamp has time information or it is just a date value.
  If 'sizeFormatBase' is 1024, [binary
  prefixes](http://en.wikipedia.org/wiki/Binary_prefix) (e.g. kibibyte/KiB,
  mebibyte/MiB, ...) are used in the formatting result.
-    [$value] (integer) Value in bytes to be formatted.
+    [$value] (string|integer|float) Value in bytes to be formatted.
     [$decimals] (integer) The number of digits after the decimal point.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
@@ -748,12 +805,12 @@ whether the timestamp has time information or it is just a date value.
 (float|integer) The normalized number value
 
 
-   - everything [empty](http://php.net/manual/de/function.empty.php)
+   - everything [empty](http://php.net/manual/en/function.empty.php)
    will result in '0' 
-   - a [numeric](http://php.net/manual/de/function.is-numeric.php)
+   - a [numeric](http://php.net/manual/en/function.is-numeric.php)
    string will be casted to float 
    - everything else will be returned if it is
-   [numeric](http://php.net/manual/de/function.is-numeric.php),   otherwise an
+   [numeric](http://php.net/manual/en/function.is-numeric.php),   otherwise an
  exception is thrown.
     [$value] (mixed) The input value
 

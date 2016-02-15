@@ -47,7 +47,16 @@ $whenClient				*yii/validators/RangeValidator::$whenClient*
  See |yii/validators/Validator::$whenClient|
 
 $range					*yii/validators/RangeValidator::$range*
- (array) List of valid values that the attribute value should be among
+ (array|\Traversable|\Closure) A list of valid values that the attribute value
+ should be among or an anonymous function that returns such a list. The
+ signature of the anonymous function should be as follows,
+
+   function($model, $attribute) {
+       // compute range
+       return $range;
+   }
+
+
 
 $strict					*yii/validators/RangeValidator::$strict*
  (boolean) Whether the comparison is strict (both type and value must be the
@@ -184,7 +193,15 @@ METHOD DETAILS
 
 
 *yii/validators/RangeValidator::validateAttribute*	public
- See |yii/validators/Validator::validateAttribute|
+>
+ validateAttribute($model, $attribute)
+<
+(void)
+
+ Child classes must implement this method to provide the actual validation
+ logic.
+    [$model] (\yii\base\Model) The data model to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/RangeValidator::validate*			public
@@ -217,12 +234,28 @@ support client-side validation.
  validation code:
 
 
-   - 'attribute': the name of the attribute being validated. 
+   - 'attribute': an object describing the the attribute being
+   validated. 
    - 'value': the value being validated. 
    - 'messages': an array used to hold the validation error messages
    for the attribute. 
    - 'deferred': an array used to hold deferred objects for
-   asynchronous validation
+   asynchronous validation 
+   - '$form': a jQuery object containing the form element
+
+ The 'attribute' object contains the following properties: 
+   - 'id': a unique ID identifying the attribute (e.g.
+   "loginform-username") in the form 
+   - 'name': attribute name or expression (e.g. "[0]content" for
+   tabular input) 
+   - 'container': the jQuery selector of the container of the input
+   field 
+   - 'input': the jQuery selector of the input field under the context
+   of the form 
+   - 'error': the jQuery selector of the error tag under the context of
+   the container 
+   - 'status': status of the input field, 0: empty, not entered before,
+   1: validated, 2: pending validation, 3: validating
     [$model] (\yii\base\Model) The data model being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render

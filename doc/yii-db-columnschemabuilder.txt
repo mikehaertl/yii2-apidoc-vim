@@ -6,6 +6,8 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/db/oci/ColumnSchemaBuilder|
+|yii/db/mssql/ColumnSchemaBuilder|
+|yii/db/pgsql/ColumnSchemaBuilder|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -38,6 +40,10 @@ $check					*yii/db/ColumnSchemaBuilder::$check*
 
 $default				*yii/db/ColumnSchemaBuilder::$default*
  (mixed) Default value of the column.
+
+$isUnsigned				*yii/db/ColumnSchemaBuilder::$isUnsigned*
+ (boolean) Whether the column values should be unsigned. If this is 'true', an
+ 'UNSIGNED' keyword will be added.
 
 
 
@@ -135,6 +141,23 @@ METHOD DETAILS
     [$default] (mixed) The default value.
 
 
+*yii/db/ColumnSchemaBuilder::unsigned*			public
+>
+ unsigned()
+<
+($this) 
+
+
+
+*yii/db/ColumnSchemaBuilder::defaultExpression*		public
+>
+ defaultExpression($default)
+<
+($this) 
+
+    [$default] (string) The default value expression.
+
+
 *yii/db/ColumnSchemaBuilder::__toString*			public
 >
  __toString()
@@ -182,6 +205,14 @@ an empty string.
  buildCheckString()
 <
 (string) A string containing the CHECK constraint.
+
+
+
+*yii/db/ColumnSchemaBuilder::buildUnsignedString*		protected
+>
+ buildUnsignedString()
+<
+(string) A string containing UNSIGNED keyword.
 
 
 

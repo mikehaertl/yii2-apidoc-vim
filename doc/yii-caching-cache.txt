@@ -242,6 +242,20 @@ expired, the corresponding array value will be false.
     [$keys] (string[]) List of string keys identifying the cached values
 
 
+*yii/caching/Cache::multiGet*				public
+>
+ multiGet($keys)
+<
+(array) List of cached values corresponding to the specified keys. The array
+is returned in terms of (key, value) pairs. If a value is not cached or
+expired, the corresponding array value will be false.
+
+ Some caches (such as memcache, apc) allow retrieving multiple cached values
+ at the same time, which may improve the performance. In case a cache does not
+ support this feature natively, this method will try to simulate it.
+    [$keys] (string[]) List of string keys identifying the cached values
+
+
 *yii/caching/Cache::set*					public
 >
  set($key, $value, $duration=0, $dependency='null')
@@ -279,9 +293,43 @@ expired, the corresponding array value will be false.
     'serializer' is false.
 
 
+*yii/caching/Cache::multiSet*				public
+>
+ multiSet($items, $duration=0, $dependency='null')
+<
+(boolean) Whether the items are successfully stored into cache
+
+ If the cache already contains such a key, the existing value and expiration
+ time will be replaced with the new ones, respectively.
+    [$items] (array) The items to be cached, as key-value pairs.
+    [$duration] (integer) Default number of seconds in which the cached values
+    will expire. 0 means never expire.
+    [$dependency] (\yii\caching\Dependency) Dependency of the cached items. If
+    the dependency changes, the corresponding values in the cache will be
+    invalidated when it is fetched via 'get()'. This parameter is ignored if
+    'serializer' is false.
+
+
 *yii/caching/Cache::madd*					public
 >
  madd($items, $duration=0, $dependency='null')
+<
+(boolean) Whether the items are successfully stored into cache
+
+ If the cache already contains such a key, the existing value and expiration
+ time will be preserved.
+    [$items] (array) The items to be cached, as key-value pairs.
+    [$duration] (integer) Default number of seconds in which the cached values
+    will expire. 0 means never expire.
+    [$dependency] (\yii\caching\Dependency) Dependency of the cached items. If
+    the dependency changes, the corresponding values in the cache will be
+    invalidated when it is fetched via 'get()'. This parameter is ignored if
+    'serializer' is false.
+
+
+*yii/caching/Cache::multiAdd*				public
+>
+ multiAdd($items, $duration=0, $dependency='null')
 <
 (boolean) Whether the items are successfully stored into cache
 

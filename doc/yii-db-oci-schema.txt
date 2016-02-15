@@ -102,8 +102,8 @@ METHOD DETAILS
 >
  loadTableSchema($name)
 <
-(\yii\db\TableSchema) DBMS-dependent table metadata, null if the table does
-not exist.
+(null|\yii\db\TableSchema) DBMS-dependent table metadata, null if the table
+does not exist.
 
     [$name] (string) Table name
 
@@ -202,8 +202,8 @@ not exist.
  Each array element is of the following structure:
 
    [
-    'IndexName1' => ['col1' [, ...]],
-    'IndexName2' => ['col2' [, ...]],
+       'IndexName1' => ['col1' [, ...]],
+       'IndexName2' => ['col2' [, ...]],
    ]
 
 
@@ -323,9 +323,9 @@ the sequence object
 >
  getTableSequenceName($tableName)
 <
-(string) Whether the sequence exists
+(string|null) Whether the sequence exists
 
-    [$tableName] () 
+    [$tableName] (string) 
 
 
 *yii/db/oci/Schema::createColumn*				protected

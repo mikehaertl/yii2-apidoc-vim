@@ -17,6 +17,7 @@ SUBCLASSES
 |yii/apidoc/components/BaseController|
 |yii/apidoc/commands/ApiController|
 |yii/apidoc/commands/GuideController|
+|yii/console/controllers/ServeController|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ DESCRIPTION
  route which identifies a controller action. The 'yii' program is used when
  calling a console command, like the following:
 
-   yii <route> [--param1=value1 --param2 ...]
+ ''' yii <route> [--param1=value1 --param2 ...] '''
 
  where '<route>' is a route to a controller action and the params will be
  populated as properties of a command. See 'options()' for details.
@@ -74,6 +75,12 @@ $view					*yii/console/Controller::$view*
 
 $viewPath				*yii/console/Controller::$viewPath*
  See |yii/base/Controller::$viewPath|
+
+$passedOptions				*yii/console/Controller::$passedOptions*
+ (array) The names of the options passed during execution
+
+$passedOptionValues			*yii/console/Controller::$passedOptionValues*
+ (array) The properties corresponding to the passed options
 
 $helpSummary				*yii/console/Controller::$helpSummary*
  (string)
@@ -273,6 +280,10 @@ mean abnormal.
  See |yii/base/Controller::getViewPath|
 
 
+*yii/console/Controller::setViewPath*			public
+ See |yii/base/Controller::setViewPath|
+
+
 *yii/console/Controller::findLayoutFile*			public
  See |yii/base/Controller::findLayoutFile|
 
@@ -299,10 +310,8 @@ mean abnormal.
 
  Example:
 
-   echo $this->ansiFormat('This will be red and underlined.', Console::FG_RED,
- Console::UNDERLINE);
-
-
+ ''' echo $this->ansiFormat('This will be red and underlined.',
+ Console::FG_RED, Console::UNDERLINE); '''
     [$string] (string) The string to be formatted
 
 
@@ -317,10 +326,8 @@ mean abnormal.
 
  Example:
 
-   $this->stdout('This will be red and underlined.', Console::FG_RED,
- Console::UNDERLINE);
-
-
+ ''' $this->stdout('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE); '''
     [$string] (string) The string to print
 
 
@@ -335,10 +342,8 @@ mean abnormal.
 
  Example:
 
-   $this->stderr('This will be red and underlined.', Console::FG_RED,
- Console::UNDERLINE);
-
-
+ ''' $this->stderr('This will be red and underlined.', Console::FG_RED,
+ Console::UNDERLINE); '''
     [$string] (string) The string to print
 
 
@@ -392,6 +397,31 @@ mean abnormal.
  Note that the values setting via options are not available until
  'beforeAction()' is being called.
     [$actionID] (string) The action id of the current request
+
+
+*yii/console/Controller::getOptionValues*			public
+>
+ getOptionValues($actionID)
+<
+(array) Properties corresponding to the options for the action
+
+    [$actionID] (string) The action id of the current request
+
+
+*yii/console/Controller::getPassedOptions*		public
+>
+ getPassedOptions()
+<
+(array) The names of the options passed during execution
+
+
+
+*yii/console/Controller::getPassedOptionValues*		public
+>
+ getPassedOptionValues()
+<
+(array) The properties corresponding to the passed options
+
 
 
 *yii/console/Controller::getHelpSummary*			public

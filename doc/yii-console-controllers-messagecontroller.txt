@@ -44,6 +44,76 @@ $interactive				*yii/console/controllers/MessageController::$interactive*
 $color					*yii/console/controllers/MessageController::$color*
  See |yii/console/Controller::$color|
 
+$sourcePath				*yii/console/controllers/MessageController::$sourcePath*
+ (string) Required, root directory of all source files.
+
+$messagePath				*yii/console/controllers/MessageController::$messagePath*
+ (string) Required, root directory containing message translations.
+
+$languages				*yii/console/controllers/MessageController::$languages*
+ (array) Required, list of language codes that the extracted messages should
+ be translated to. For example, ['zh-CN', 'de'].
+
+$translator				*yii/console/controllers/MessageController::$translator*
+ (string) The name of the function for translating messages. Defaults to
+ 'Yii::t'. This is used as a mark to find the messages to be translated. You
+ may use a string for single function name or an array for multiple function
+ names.
+
+$sort					*yii/console/controllers/MessageController::$sort*
+ (boolean) Whether to sort messages by keys when merging new messages with the
+ existing ones. Defaults to false, which means the new (untranslated) messages
+ will be separated from the old (translated) ones.
+
+$overwrite				*yii/console/controllers/MessageController::$overwrite*
+ (boolean) Whether the message file should be overwritten with the merged
+ messages
+
+$removeUnused				*yii/console/controllers/MessageController::$removeUnused*
+ (boolean) Whether to remove messages that no longer appear in the source
+ code. Defaults to false, which means these messages will NOT be removed.
+
+$markUnused				*yii/console/controllers/MessageController::$markUnused*
+ (boolean) Whether to mark messages that no longer appear in the source code.
+ Defaults to true, which means each of these messages will be enclosed with a
+ pair of '@@' marks.
+
+$except					*yii/console/controllers/MessageController::$except*
+ (array) List of patterns that specify which files/directories should NOT be
+ processed. If empty or not set, all files/directories will be processed. A
+ path matches a pattern if it contains the pattern string at its end. For
+ example, '/a/b' will match all files and directories ending with '/a/b'; the
+ '*.svn' will match all files and directories whose name ends with '.svn'. and
+ the '.svn' will match all files and directories named exactly '.svn'. Note,
+ the '/' characters in a pattern matches both '/' and '\'. See
+ helpers/FileHelper::findFiles() description for more details on pattern
+ matching rules.
+
+$only					*yii/console/controllers/MessageController::$only*
+ (array) List of patterns that specify which files (not directories) should be
+ processed. If empty or not set, all files will be processed. Please refer to
+ "except" for details about the patterns. If a file/directory matches both a
+ pattern in "only" and "except", it will NOT be processed.
+
+$format					*yii/console/controllers/MessageController::$format*
+ (string) Generated file format. Can be "php", "db" or "po".
+
+$db					*yii/console/controllers/MessageController::$db*
+ (string) Connection component ID for "db" format.
+
+$sourceMessageTable			*yii/console/controllers/MessageController::$sourceMessageTable*
+ (string) Custom name for source message table for "db" format.
+
+$messageTable				*yii/console/controllers/MessageController::$messageTable*
+ (string) Custom name for translation message table for "db" format.
+
+$catalog				*yii/console/controllers/MessageController::$catalog*
+ (string) Name of the file that will be used for translations for "po" format.
+
+$ignoreCategories			*yii/console/controllers/MessageController::$ignoreCategories*
+ (array) Message categories to ignore. For example, 'yii', 'app*',
+ 'widgets/menu', etc.
+
 $behaviors				*yii/console/controllers/MessageController::$behaviors*
  See |yii/base/Component::$behaviors|
 
@@ -61,6 +131,12 @@ $view					*yii/console/controllers/MessageController::$view*
 
 $viewPath				*yii/console/controllers/MessageController::$viewPath*
  See |yii/base/Controller::$viewPath|
+
+$passedOptions				*yii/console/controllers/MessageController::$passedOptions*
+ See |yii/console/Controller::$passedOptions|
+
+$passedOptionValues			*yii/console/controllers/MessageController::$passedOptionValues*
+ See |yii/console/Controller::$passedOptionValues|
 
 $helpSummary				*yii/console/controllers/MessageController::$helpSummary*
  See |yii/console/Controller::$helpSummary|
@@ -241,6 +317,10 @@ METHOD DETAILS
  See |yii/base/Controller::getViewPath|
 
 
+*yii/console/controllers/MessageController::setViewPath*	public
+ See |yii/base/Controller::setViewPath|
+
+
 *yii/console/controllers/MessageController::findLayoutFile*public
  See |yii/base/Controller::findLayoutFile|
 
@@ -274,7 +354,28 @@ METHOD DETAILS
 
 
 *yii/console/controllers/MessageController::options*	public
- See |yii/console/Controller::options|
+>
+ options($actionID)
+<
+(array) The names of the options valid for the action
+
+ Child classes may override this method to specify possible options.
+
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+    [$actionID] (string) The action id of the current request
+
+
+*yii/console/controllers/MessageController::getOptionValues*public
+ See |yii/console/Controller::getOptionValues|
+
+
+*yii/console/controllers/MessageController::getPassedOptions*public
+ See |yii/console/Controller::getPassedOptions|
+
+
+*yii/console/controllers/MessageController::getPassedOptionValues*public
+ See |yii/console/Controller::getPassedOptionValues|
 
 
 *yii/console/controllers/MessageController::getHelpSummary*public
@@ -323,7 +424,19 @@ METHOD DETAILS
 <
 (integer) CLI exit code
 
- The generated configuration file contains detailed instructions on how to
+ The generated configuration file contains parameters required for source code
+ messages extraction. You may use this configuration file with the "extract"
+ command.
+    [$filePath] (string) Output file name or alias.
+
+
+*yii/console/controllers/MessageController::actionConfigTemplate*public
+>
+ actionConfigTemplate($filePath)
+<
+(integer) CLI exit code
+
+ The created configuration file contains detailed instructions on how to
  customize it to fit for your needs. After customization, you may use this
  configuration file with the "extract" command.
     [$filePath] (string) Output file name or alias.
@@ -331,7 +444,7 @@ METHOD DETAILS
 
 *yii/console/controllers/MessageController::actionExtract*public
 >
- actionExtract($configFile)
+ actionExtract($configFile='null')
 <
 (void)
 
@@ -367,6 +480,23 @@ METHOD DETAILS
     [$translator] (string) Name of the function used to translate messages
     [$ignoreCategories] (array) Message categories to ignore. This parameter
     is available since version 2.0.4.
+
+
+*yii/console/controllers/MessageController::isCategoryIgnored*protected
+>
+ isCategoryIgnored($category, $ignoreCategories)
+<
+(boolean) 
+
+ Examples:
+
+
+   - 'myapp' - will be ignored only 'myapp' category; 
+   - 'myapp*' - will be ignored by all categories beginning with
+   'myapp' ('myapp', 'myapplication', 'myapprove', 'myapp/widgets',
+   'myapp.widgets', etc).
+    [$category] (string) Category that is checked
+    [$ignoreCategories] (array) Message categories to ignore.
 
 
 *yii/console/controllers/MessageController::tokensEqual*	protected

@@ -347,5 +347,34 @@ METHOD DETAILS
     sequence in order for the array to be treated as indexed.
 
 
+*yii/helpers/BaseArrayHelper::isIn*			public
+>
+ isIn($needle, $haystack, $strict='false')
+<
+(boolean) 'true' if '$needle' was found in '$haystack', 'false' otherwise.
+
+ This method does the same as the PHP function
+ [in_array()](http://php.net/manual/en/function.in-array.php) but it does not
+ only work for arrays but also objects that implement the '\Traversable'
+ interface.
+    [$needle] (mixed) The value to look for.
+    [$haystack] (array|\Traversable) The set of values to search.
+    [$strict] (boolean) Whether to enable strict ('===') comparison.
+
+
+*yii/helpers/BaseArrayHelper::isSubset*			public
+>
+ isSubset($needles, $haystack, $strict='false')
+<
+(boolean) 'true' if '$needles' is a subset of '$haystack', 'false' otherwise.
+
+ This method will return 'true', if all elements of '$needles' are contained
+ in '$haystack'. If at least one element is missing, 'false' will be returned.
+    [$needles] (array|\Traversable) The values that must **all** be in
+    '$haystack'.
+    [$haystack] (array|\Traversable) The set of value to search.
+    [$strict] (boolean) Whether to enable strict ('===') comparison.
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

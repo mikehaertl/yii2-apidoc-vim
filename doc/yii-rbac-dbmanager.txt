@@ -335,8 +335,8 @@ returned if no such item.
 >
  getRolesByUser($userId)
 <
-(\yii\rbac\Role[]) All roles directly or indirectly assigned to the user. The
-array is indexed by the role names.
+(\yii\rbac\Role[]) All roles directly assigned to the user. The array is
+indexed by the role names.
 
  Note that child roles that are not assigned directly to the user will not be
  returned.
@@ -385,7 +385,7 @@ correspond to a rule.
 >
  addChild($parent, $child)
 <
-(void)
+(boolean) Whether the child successfully added
 
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
@@ -481,6 +481,16 @@ the role is not assigned to the user.
 will be returned if there is no role assigned to the user.
 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/DbManager::getUserIdsByRole*			public
+>
+ getUserIdsByRole($roleName)
+<
+(\yii\rbac\Assignment[]) The assignments. An empty array will be returned if
+role is not assigned to any user.
+
+    [$roleName] (string) 
 
 
 *yii/rbac/DbManager::removeAll*				public
@@ -579,6 +589,26 @@ will be returned if there is no role assigned to the user.
 (\yii\rbac\Item) The populated auth item instance (either Role or Permission)
 
     [$row] (array) The data from the auth item table
+
+
+*yii/rbac/DbManager::getDirectPermissionsByUser*		protected
+>
+ getDirectPermissionsByUser($userId)
+<
+(\yii\rbac\Permission[]) All direct permissions that the user has. The array
+is indexed by the permission names.
+
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+
+
+*yii/rbac/DbManager::getInheritedPermissionsByUser*	protected
+>
+ getInheritedPermissionsByUser($userId)
+<
+(\yii\rbac\Permission[]) All inherited permissions that the user has. The
+array is indexed by the permission names.
+
+    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getChildrenList*			protected

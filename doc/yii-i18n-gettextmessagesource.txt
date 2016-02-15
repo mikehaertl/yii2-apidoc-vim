@@ -154,7 +154,11 @@ METHOD DETAILS
 are translated messages.
 
  If translation for specific locale code such as 'en-US' isn't found it tries
- more generic 'en'.
+ more generic 'en'. When both are present, the 'en-US' messages will be merged
+ over 'en'. See 'loadFallbackMessages' for details. If the $language is less
+ specific than 'sourceLanguage', the method will try to load the messages for
+ 'sourceLanguage'. For example: 'sourceLanguage' is 'en-GB', $language is
+ 'en'. The method will load the messages for 'en' and merge them over 'en-GB'.
     [$category] (string) The message category
     [$language] (string) The target language
 
@@ -165,6 +169,24 @@ are translated messages.
 
 *yii/i18n/GettextMessageSource::translateMessage*		protected
  See |yii/i18n/MessageSource::translateMessage|
+
+
+*yii/i18n/GettextMessageSource::loadFallbackMessages*	protected
+>
+ loadFallbackMessages($category, $fallbackLanguage, $messages, $originalMessageFile)
+<
+(array) The loaded messages. The keys are original messages, and the values
+are the translated messages.
+
+ Method tries to load the $category messages for the $fallbackLanguage and
+ adds them to the $messages array.
+    [$category] (string) The message category
+    [$fallbackLanguage] (string) The target fallback language
+    [$messages] (array) The array of previously loaded translation messages.
+    The keys are original messages, and the values are the translated
+    messages.
+    [$originalMessageFile] (string) The path to the file with messages. Used
+    to log an error message in case when no translations were found.
 
 
 *yii/i18n/GettextMessageSource::getMessageFilePath*	protected

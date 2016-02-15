@@ -40,6 +40,8 @@ DESCRIPTION
 
    - 'with()': list of relations that this query should be performed
    with. 
+   - 'joinWith()': reuse a relation query definition to add a join to a
+   query. 
    - 'indexBy()': the name of the column by which the query result
    should be indexed. 
    - 'asArray()': whether to return each record as an array.
@@ -345,8 +347,8 @@ METHOD DETAILS
 >
  prepare($builder)
 <
-(\yii\db\Query) A prepared query instance which will be used by 'QueryBuilder'
-to build the SQL
+($this) A prepared query instance which will be used by 'QueryBuilder' to
+build the SQL
 
  This method is called by 'QueryBuilder' when it starts to build SQL from a
  query object. You may override this method to do some final preparation work
@@ -545,9 +547,9 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  queries. Based on the definition of the specified relation(s), the method
  will append one or multiple JOIN statements to the current query.
 
- If the '$eagerLoading' parameter is true, the method will also eager loading
- the specified relations, which is equivalent to calling 'with()' using the
- specified relations.
+ If the '$eagerLoading' parameter is true, the method will also perform eager
+ loading for the specified relations, which is equivalent to calling 'with()'
+ using the specified relations.
 
  Note that because a JOIN query will be performed, you are responsible to
  disambiguate column names.
@@ -555,28 +557,44 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  This method differs from 'with()' in that it will build up and execute a JOIN
  SQL statement for the primary table. And when '$eagerLoading' is true, it
  will call 'with()' in addition with the specified relations.
-    [$with] (string|array) The relations to be joined. Each array element
-    represents a single relation. The array keys are relation names, and the
-    array values are the corresponding anonymous functions that can be used to
-    modify the relation queries on-the-fly. If a relation query does not need
-    modification, you may use the relation name as the array value.
-    Sub-relations can also be specified (see 'with()'). For example,
+    [$with] (string|array) The relations to be joined. This can either be a
+    string, representing a relation name or an array with the following
+    semantics:
+
+
+      - Each array element represents a single relation. 
+      - You may specify the relation name as the array key and provide an
+      anonymous functions that   can be used to modify the relation queries
+    on-the-fly as the array value. 
+      - If a relation query does not need modification, you may use the
+      relation name as the array value.
+
+    The relation name may optionally contain an alias for the relation table
+    (e.g. 'books b').
+
+    Sub-relations can also be specified, see 'with()' for the syntax.
+
+    In the following you find some examples:
 
       // find all orders that contain books, and eager loading "books"
       Order::find()->joinWith('books', true, 'INNER JOIN')->all();
       // find all orders, eager loading "books", and sort the orders and books
     by the book names.
       Order::find()->joinWith([
-          'books' => function ($query) {
+          'books' => function (\yii\db\ActiveQuery $query) {
               $query->orderBy('item.name');
           }
       ])->all();
+      // find all orders that contain books of the category 'Science fiction',
+    using the alias "b" for the books table
+      Order::find()->joinWith(['books b'], true, 'INNER
+    JOIN')->where(['b.category' => 'Science fiction'])->all();
 
-
+    The alias syntax is available since version 2.0.7.
     [$eagerLoading] (boolean|array) Whether to eager load the relations
     specified in '$with'. When this is a boolean, it applies to all relations
     specified in '$with'. Use an array to explicitly list which relations in
-    '$with' need to be eagerly loaded.
+    '$with' need to be eagerly loaded. Defaults to 'true'.
     [$joinType] (string|array) The join type of the relations specified in
     '$with'. When this is a string, it applies to all relations specified in
     '$with'. Use an array in the format of 'relationName => joinType' to
@@ -591,8 +609,8 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
  This is a shortcut method to 'joinWith()' with the join type set as "INNER
  JOIN". Please refer to 'joinWith()' for detailed usage of this method.
-    [$with] (string|array) The relations to be joined with
-    [$eagerLoading] (boolean|array) Whether to eager loading the relations
+    [$with] (string|array) The relations to be joined with.
+    [$eagerLoading] (boolean|array) Whether to eager loading the relations.
 
 
 *yii/db/ActiveQuery::onCondition*				public
@@ -609,11 +627,14 @@ ActiveRecord object. Null will be returned if the query results in nothing.
 
    public function getActiveUsers()
    {
-       return $this->hasMany(User::className(), ['id' =>
- 'user_id'])->onCondition(['active' => true]);
+       return $this->hasMany(User::className(), ['id' => 'user_id'])
+                   ->onCondition(['active' => true]);
    }
 
-
+ Note that this condition is applied in case of a join as well as when
+ fetching the related records. Thus only fields of the related table can be
+ used in the condition. Trying to access fields of the primary record will
+ cause an error in a non-join-query.
     [$condition] (string|array) The ON condition. Please refer to
     'Query::where()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
@@ -669,6 +690,18 @@ ActiveRecord object. Null will be returned if the query results in nothing.
     [$callable] (callable) A PHP callback for customizing the relation
     associated with the junction table. Its signature should be
     'function($query)', where '$query' is the query to be customized.
+
+
+*yii/db/ActiveQuery::alias*				public
+>
+ alias($alias)
+<
+($this) The query object itself
+
+ This method will adjust 'from' so that an already defined alias will be
+ overwritten. If none was defined, 'from' will be populated with the given
+ alias.
+    [$alias] (string) The table alias.
 
 
 

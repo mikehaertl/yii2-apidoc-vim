@@ -65,16 +65,15 @@ $rules					*yii/web/UrlManager::$rules*
 
  Here is an example configuration for RESTful CRUD controller:
 
-   php
    [
        'dashboard' => 'site/index',
 
-       'POST <controller:\w+>s' => '<controller>/create',
-       '<controller:\w+>s' => '<controller>/index',
+       'POST <controller:[\w-]+>s' => '<controller>/create',
+       '<controller:[\w-]+>s' => '<controller>/index',
 
-       'PUT <controller:\w+>/<id:\d+>'    => '<controller>/update',
-       'DELETE <controller:\w+>/<id:\d+>' => '<controller>/delete',
-       '<controller:\w+>/<id:\d+>'        => '<controller>/view',
+       'PUT <controller:[\w-]+>/<id:\d+>'    => '<controller>/update',
+       'DELETE <controller:[\w-]+>/<id:\d+>' => '<controller>/delete',
+       '<controller:[\w-]+>/<id:\d+>'        => '<controller>/view',
    ];
 
  Note that if you modify this property after the UrlManager object is created,

@@ -153,7 +153,16 @@ table does not exist.
 
 
 *yii/db/mssql/Schema::createColumnSchemaBuilder*		public
- See |yii/db/Schema::createColumnSchemaBuilder|
+>
+ createColumnSchemaBuilder($type, $length='null')
+<
+(\yii\db\ColumnSchemaBuilder) Column schema builder instance
+
+ This method may be overridden by child classes to create a DBMS-specific
+ column schema builder.
+    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
+    [$length] (integer|string|array) Length or precision of the column. See
+    'ColumnSchemaBuilder::$length'.
 
 
 *yii/db/mssql/Schema::findSchemaNames*			protected
@@ -179,8 +188,8 @@ table does not exist.
  Each array element is of the following structure:
 
    [
-    'IndexName1' => ['col1' [, ...]],
-    'IndexName2' => ['col2' [, ...]],
+       'IndexName1' => ['col1' [, ...]],
+       'IndexName2' => ['col2' [, ...]],
    ]
 
 

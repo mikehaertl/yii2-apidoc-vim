@@ -14,9 +14,11 @@ DESCRIPTION
  The SQL statement it represents can be set via the 'sql' property.
 
  To execute a non-query SQL (such as INSERT, DELETE, UPDATE), call
- 'execute()'. To execute a SQL statement that returns result data set (such as
- SELECT), use 'queryAll()', 'queryOne()', 'queryColumn()', 'queryScalar()', or
- 'query()'. For example,
+ 'execute()'. To execute a SQL statement that returns a result data set (such
+ as SELECT), use 'queryAll()', 'queryOne()', 'queryColumn()', 'queryScalar()',
+ or 'query()'.
+
+ For example,
 
    $users = $connection->createCommand('SELECT * FROM user')->queryAll();
 
@@ -27,14 +29,18 @@ DESCRIPTION
  to prepare a SQL statement.
 
  Command also supports building SQL statements by providing methods such as
- 'insert()', 'update()', etc. For example,
+ 'insert()', 'update()', etc. For example, the following code will create and
+ execute an INSERT SQL statement:
 
    $connection->createCommand()->insert('user', [
        'name' => 'Sam',
        'age' => 30,
    ])->execute();
 
- To build SELECT SQL statements, please use 'QueryBuilder' instead.
+ To build SELECT SQL statements, please use 'Query' instead.
+
+ For more details and usage information on Command, see the [guide article on
+ Database Access Objects](guide:db-dao).
 
 
 PROPERTY DETAILS
@@ -343,8 +349,8 @@ nothing.
 >
  queryOne($fetchMode=null)
 <
-(array|boolean) The first row (in terms of an array) of the query result.
-False is returned if the query results in nothing.
+(array|false) The first row (in terms of an array) of the query result. False
+is returned if the query results in nothing.
 
  This method is best used when only the first row of result is needed for a
  query.
@@ -358,7 +364,7 @@ False is returned if the query results in nothing.
 >
  queryScalar()
 <
-(string|null|boolean) The value of the first column in the first row of the
+(string|null|false) The value of the first column in the first row of the
 query result. False is returned if there is no value.
 
  This method is best used when only a single value is needed for a query.

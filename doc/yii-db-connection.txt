@@ -104,6 +104,10 @@ $dsn					*yii/db/Connection::$dsn*
  manual](http://www.php.net/manual/en/function.PDO-construct.php) on the
  format of the DSN string.
 
+ For [SQLite](http://php.net/manual/en/ref.pdo-sqlite.connection.php) you may
+ use a path alias for specifying the database path, e.g.
+ 'sqlite:@app/data/db.sql'.
+
 $username				*yii/db/Connection::$username*
  (string) The username for establishing DB connection. Defaults to 'null'
  meaning no username to use.
@@ -191,8 +195,13 @@ $schemaMap				*yii/db/Connection::$schemaMap*
  Yii.
 
 $pdoClass				*yii/db/Connection::$pdoClass*
- (string) Custom PDO wrapper class. If not set, it will use "PDO" or
- "yii\db\mssql\PDO" when MSSQL is used.
+ (string) Custom PDO wrapper class. If not set, it will use 'PDO' or
+ 'yii\db\mssql\PDO' when MSSQL is used.
+
+$commandClass				*yii/db/Connection::$commandClass*
+ (string) The class used to create new database 'Command' objects. If you want
+ to extend the 'Command' class, you may configure this property to use your
+ extended version of the class.
 
 $enableSavepoint			*yii/db/Connection::$enableSavepoint*
  (boolean) Whether to enable
@@ -732,6 +741,14 @@ available
     [$pool] (array) The list of connection configurations in the server pool
     [$sharedConfig] (array) The configuration common to those given in
     '$pool'.
+
+
+*yii/db/Connection::__sleep*				public
+>
+ __sleep()
+<
+(array) 
+
 
 
 

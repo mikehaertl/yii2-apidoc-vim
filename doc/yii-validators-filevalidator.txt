@@ -77,9 +77,13 @@ $maxSize				*yii/validators/FileValidator::$maxSize*
  'upload_max_filesize' INI setting and the 'MAX_FILE_SIZE' hidden field value.
 
 $maxFiles				*yii/validators/FileValidator::$maxFiles*
- (integer) The maximum file count the given attribute can hold. It defaults to
- 1, meaning single file upload. By defining a higher number, multiple uploads
- become possible.
+ (integer) The maximum file count the given attribute can hold. Defaults to 1,
+ meaning single file upload. By defining a higher number, multiple uploads
+ become possible. Setting it to '0' means there is no limit on the number of
+ files that can be uploaded simultaneously.
+
+ > Note: The maximum number of files allowed to be uploaded simultaneously is
+ also limited with PHP directive 'max_file_uploads', which defaults to 20.
 
 $uploadRequired				*yii/validators/FileValidator::$uploadRequired*
  (string) The error message used when no file is uploaded. Note that this is
@@ -93,7 +97,9 @@ $tooBig					*yii/validators/FileValidator::$tooBig*
 
    - {attribute}: the attribute name 
    - {file}: the uploaded file name 
-   - {limit}: the maximum size allowed (see 'getSizeLimit()')
+   - {limit}: the maximum size allowed (see 'getSizeLimit()') 
+   - {formattedLimit}: the maximum size formatted   with
+ '\yii\i18n\Formatter::asShortSize()|Formatter::asShortSize()'
 
 $tooSmall				*yii/validators/FileValidator::$tooSmall*
  (string) The error message used when the uploaded file is too small. You may
@@ -102,7 +108,9 @@ $tooSmall				*yii/validators/FileValidator::$tooSmall*
 
    - {attribute}: the attribute name 
    - {file}: the uploaded file name 
-   - {limit}: the value of 'minSize'
+   - {limit}: the value of 'minSize' 
+   - {formattedLimit}: the value of 'minSize' formatted   with
+ '\yii\i18n\Formatter::asShortSize()|Formatter::asShortSize()]
 
 $tooMany				*yii/validators/FileValidator::$tooMany*
  (string) The error message used if the count of multiple uploads exceeds
@@ -298,12 +306,28 @@ support client-side validation.
  validation code:
 
 
-   - 'attribute': the name of the attribute being validated. 
+   - 'attribute': an object describing the the attribute being
+   validated. 
    - 'value': the value being validated. 
    - 'messages': an array used to hold the validation error messages
    for the attribute. 
    - 'deferred': an array used to hold deferred objects for
-   asynchronous validation
+   asynchronous validation 
+   - '$form': a jQuery object containing the form element
+
+ The 'attribute' object contains the following properties: 
+   - 'id': a unique ID identifying the attribute (e.g.
+   "loginform-username") in the form 
+   - 'name': attribute name or expression (e.g. "[0]content" for
+   tabular input) 
+   - 'container': the jQuery selector of the container of the input
+   field 
+   - 'input': the jQuery selector of the input field under the context
+   of the form 
+   - 'error': the jQuery selector of the error tag under the context of
+   the container 
+   - 'status': status of the input field, 0: empty, not entered before,
+   1: validated, 2: pending validation, 3: validating
     [$model] (\yii\base\Model) The data model being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render

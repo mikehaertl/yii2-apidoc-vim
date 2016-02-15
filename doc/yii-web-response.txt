@@ -536,14 +536,9 @@ invalid.
  as described above. Otherwise, you should write the following JavaScript code
  to handle the redirection:
 
-   $document.ajaxComplete(function (event, xhr, settings) {
-       var url = xhr.getResponseHeader('X-Redirect');
-       if (url) {
-           window.location = url;
-       }
-   });
-
-
+ '''javascript $document.ajaxComplete(function (event, xhr, settings) {    
+ var url = xhr.getResponseHeader('X-Redirect');     if (url) {        
+ window.location = url;     } }); '''
     [$url] (string|array) The URL to be redirected to. This can be in one of
     the following formats:
 
@@ -565,7 +560,8 @@ invalid.
     PJAX request, then calling this method will cause the browser to redirect
     to the given URL. If this is false, a 'Location' header will be sent,
     which when received as an AJAX/PJAX response, may NOT cause browser
-    redirection.
+    redirection. Takes effect only when request header
+    'X-Ie-Redirect-Compatibility' is absent.
 
 
 *yii/web/Response::refresh*				public

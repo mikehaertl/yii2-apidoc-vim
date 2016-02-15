@@ -6,10 +6,30 @@ DESCRIPTION
 ------------------------------------------------------------------------------
 
  To use this application component, the [APC PHP
- extension](http://www.php.net/apc) must be loaded. In order to enable APC for
- CLI you should add "apc.enable_cli = 1" to your php.ini.
+ extension](http://www.php.net/apc) must be loaded. Alternatively [APCu PHP
+ extension](http://www.php.net/apcu) could be used via setting 'useApcu' to
+ 'true'. In order to enable APC or APCu for CLI you should add "apc.enable_cli
+ = 1" to your php.ini.
 
  See 'Cache' for common cache operations that ApcCache supports.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$keyPrefix				*yii/caching/ApcCache::$keyPrefix*
+ See |yii/caching/Cache::$keyPrefix|
+
+$serializer				*yii/caching/ApcCache::$serializer*
+ See |yii/caching/Cache::$serializer|
+
+$useApcu				*yii/caching/ApcCache::$useApcu*
+ (boolean) Whether to use apcu or apc as the underlying caching extension. If
+ true, [apcu](http://pecl.php.net/package/apcu) will be used. If false,
+ [apc](http://pecl.php.net/package/apc) will be used. Defaults to false.
+
+$behaviors				*yii/caching/ApcCache::$behaviors*
+ See |yii/base/Component::$behaviors|
 
 
 
@@ -25,7 +45,12 @@ METHOD DETAILS
 
 
 *yii/caching/ApcCache::init*				public
- See |yii/base/Object::init|
+>
+ init()
+<
+(void)
+
+ It checks if extension required is loaded.
 
 
 *yii/caching/ApcCache::__get*				public
@@ -144,6 +169,10 @@ cache or expired.
  See |yii/caching/Cache::mget|
 
 
+*yii/caching/ApcCache::multiGet*				public
+ See |yii/caching/Cache::multiGet|
+
+
 *yii/caching/ApcCache::set*				public
  See |yii/caching/Cache::set|
 
@@ -152,8 +181,16 @@ cache or expired.
  See |yii/caching/Cache::mset|
 
 
+*yii/caching/ApcCache::multiSet*				public
+ See |yii/caching/Cache::multiSet|
+
+
 *yii/caching/ApcCache::madd*				public
  See |yii/caching/Cache::madd|
+
+
+*yii/caching/ApcCache::multiAdd*				public
+ See |yii/caching/Cache::multiAdd|
 
 
 *yii/caching/ApcCache::add*				public

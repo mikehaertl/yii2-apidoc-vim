@@ -35,6 +35,12 @@ $response				*yii/filters/auth/AuthMethod::$response*
  (\yii\web\Response) The response to be sent. If not set, the 'response'
  application component will be used.
 
+$optional				*yii/filters/auth/AuthMethod::$optional*
+ (array) List of action IDs that this filter will be applied to, but auth
+ failure will not lead to error. It may be used for actions, that are allowed
+ for public, but return some additional data for authenticated users. Defaults
+ to empty, meaning authentication is not optional for any action.
+
 
 
 METHOD DETAILS
@@ -121,6 +127,10 @@ METHOD DETAILS
  See |yii/base/ActionFilter::afterAction|
 
 
+*yii/filters/auth/AuthMethod::getActionId*		protected
+ See |yii/base/ActionFilter::getActionId|
+
+
 *yii/filters/auth/AuthMethod::isActive*			protected
  See |yii/base/ActionFilter::isActive|
 
@@ -144,6 +154,15 @@ METHOD DETAILS
  The implementation should normally throw UnauthorizedHttpException to
  indicate authentication failure.
     [$response] (\yii\web\Response) 
+
+
+*yii/filters/auth/AuthMethod::isOptional*			protected
+>
+ isOptional($action)
+<
+(boolean) 
+
+    [$action] (\yii\base\Action) 
 
 
 *yii/filters/auth/AuthMethod::authenticate*		public

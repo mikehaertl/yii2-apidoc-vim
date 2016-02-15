@@ -239,7 +239,7 @@ METHOD DETAILS
 >
  batchInsert($index, $columns, $rows)
 <
-(static) The command object itself
+($this) The command object itself
 
  For example,
 
@@ -259,7 +259,7 @@ METHOD DETAILS
 >
  update($index, $columns, $condition='\'\'', $params='[]', $options='[]')
 <
-(static) The command object itself
+($this) The command object itself
 
  For example,
 
@@ -529,11 +529,11 @@ METHOD DETAILS
 >
  replace($index, $columns)
 <
-(static) The command object itself
+($this) The command object itself
 
  For example,
 
-   $connection->createCommand()->insert('idx_user', [
+   $connection->createCommand()->replace('idx_user', [
        'name' => 'Sam',
        'age' => 30,
    ])->execute();
@@ -551,11 +551,11 @@ METHOD DETAILS
 >
  batchReplace($index, $columns, $rows)
 <
-(static) The command object itself
+($this) The command object itself
 
  For example,
 
-   $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
+   $connection->createCommand()->batchReplace('idx_user', ['name', 'age'], [
        ['Tom', 30],
        ['Jane', 20],
        ['Linda', 25],
@@ -571,7 +571,7 @@ METHOD DETAILS
 >
  truncateIndex($index)
 <
-(static) The command object itself
+($this) The command object itself
 
     [$index] (string) The index to be truncated. The name will be properly
     quoted by the method.
@@ -581,7 +581,7 @@ METHOD DETAILS
 >
  callSnippets($index, $source, $match, $options='[]')
 <
-(static) The command object itself
+($this) The command object itself
 
     [$index] (string) Name of the index, from which to take the text
     processing settings.
@@ -595,7 +595,7 @@ METHOD DETAILS
 >
  callKeywords($index, $text, $fetchStatistic='false')
 <
-(static) The command object itself
+($this) The command object itself
 
     [$index] (string) The name of the index from which to take the text
     processing settings

@@ -103,9 +103,7 @@ $linkAssets				*yii/web/AssetManager::$linkAssets*
  assets are accessible to Web users. For example, for Apache Web server, the
  following configuration directive should be added for the Web folder:
 
-   Options FollowSymLinks
-
-
+ '''apache Options FollowSymLinks '''
 
 $fileMode				*yii/web/AssetManager::$fileMode*
  (integer) The permission to be set for newly published asset files. This
@@ -476,8 +474,8 @@ published as.
 >
  getPublishedPath($path)
 <
-(string) The published file path. False if the file or directory does not
-exist
+(string|false) String the published file path. False if the file or directory
+does not exist
 
  This method does not perform any publishing. It merely tells you if the file
  or directory is published, where it will go.
@@ -488,8 +486,8 @@ exist
 >
  getPublishedUrl($path)
 <
-(string) The published URL for the file or directory. False if the file or
-directory does not exist.
+(string|false) String the published URL for the file or directory. False if
+the file or directory does not exist.
 
  This method does not perform any publishing. It merely tells you if the file
  path is published, what the URL will be to access it.

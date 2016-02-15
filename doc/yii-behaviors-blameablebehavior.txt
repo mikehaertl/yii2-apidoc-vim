@@ -48,16 +48,7 @@ $attributes				*yii/behaviors/BlameableBehavior::$attributes*
  See |yii/behaviors/AttributeBehavior::$attributes|
 
 $value					*yii/behaviors/BlameableBehavior::$value*
- (callable) The value that will be assigned to the attributes. This should be
- a valid PHP callable whose return value will be assigned to the current
- attribute(s). The signature of the callable should be:
-
-   function ($event) {
-       // return value will be assigned to the attribute(s)
-   }
-
- If this property is not set, the value of 'Yii::$app->user->id' will be
- assigned to the attribute(s).
+ ()
 
 $createdByAttribute			*yii/behaviors/BlameableBehavior::$createdByAttribute*
  (string) The attribute that will receive current user ID value Set this
@@ -146,11 +137,12 @@ METHOD DETAILS
 >
  getValue($event)
 <
-(mixed) The value of the user.
+(mixed) The attribute value
 
- The return result of this method will be assigned to the current
- attribute(s).
-    [$event] (\yii\base\Event) 
+ This method is called by 'evaluateAttributes()'. Its return value will be
+ assigned to the attributes corresponding to the triggering event.
+    [$event] (\yii\base\Event) The event that triggers the current attribute
+    updating.
 
 
 

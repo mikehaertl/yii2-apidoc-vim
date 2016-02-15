@@ -284,6 +284,8 @@ SUBCLASSES
 |yii/apidoc/renderers/GuideRenderer|
 |yii/debug/actions/db/ExplainAction|
 |yii/web/MultiFieldSession|
+|yii/console/controllers/ServeController|
+|yii/validators/IpValidator|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -615,14 +617,14 @@ METHOD DETAILS
  The event handler must be a valid PHP callback. The following are some
  examples:
 
-   function ($event) { ... }         // anonymous function
-   [$object, 'handleClick']          // $object->handleClick()
-   ['Page', 'handleClick']           // Page::handleClick()
-   'handleClick'                     // global function handleClick()
+ ''' function ($event) { ... }         // anonymous function [$object,
+ 'handleClick']          // $object->handleClick() ['Page', 'handleClick']    
+       // Page::handleClick() 'handleClick'                     // global
+ function handleClick() '''
 
  The event handler must be defined with the following signature,
 
-   function ($event)
+ ''' function ($event) '''
 
  where '$event' is an 'Event' object which includes parameters associated with
  the event.
@@ -665,8 +667,8 @@ METHOD DETAILS
 >
  getBehavior($name)
 <
-(\yii\base\Behavior) The behavior object, or null if the behavior does not
-exist
+(null|\yii\base\Behavior) The behavior object, or null if the behavior does
+not exist
 
     [$name] (string) The behavior name
 
@@ -715,7 +717,7 @@ exist
 >
  detachBehavior($name)
 <
-(\yii\base\Behavior) The detached behavior. Null if the behavior does not
+(null|\yii\base\Behavior) The detached behavior. Null if the behavior does not
 exist.
 
  The behavior's 'Behavior::detach()' method will be invoked.

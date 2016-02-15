@@ -5,27 +5,21 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- The database must contain the following two tables:
-
-   CREATE TABLE source_message (
-       id INTEGER PRIMARY KEY AUTO_INCREMENT,
-       category VARCHAR(32),
-       message TEXT
-   );
-
-   CREATE TABLE message (
-       id INTEGER,
-       language VARCHAR(16),
-       translation TEXT,
-       PRIMARY KEY (id, language),
-       CONSTRAINT fk_message_source_message FOREIGN KEY (id)
-           REFERENCES source_message (id) ON DELETE CASCADE ON UPDATE RESTRICT
-   );
+ The database must contain the following two tables: source_message and
+ message.
 
  The 'source_message' table stores the messages to be translated, and the
  'message' table stores the translated messages. The name of these two tables
  can be customized by setting 'sourceMessageTable' and 'messageTable',
  respectively.
+
+ The database connection is specified by 'db'. Database schema could be
+ initialized by applying migration:
+
+ ''' yii migrate --migrationPath=@yii/i18n/migrations/ '''
+
+ If you don't want to use migration and need SQL instead, files for all
+ databases are in migrations directory.
 
 
 PROPERTY DETAILS
@@ -39,17 +33,23 @@ $sourceLanguage				*yii/i18n/DbMessageSource::$sourceLanguage*
 
 $db					*yii/i18n/DbMessageSource::$db*
  (\yii\db\Connection|array|string) The DB connection object or the application
- component ID of the DB connection. After the DbMessageSource object is
- created, if you want to change this property, you should only assign it with
- a DB connection object. Starting from version 2.0.2, this can also be a
- configuration array for creating the object.
+ component ID of the DB connection.
+
+ After the DbMessageSource object is created, if you want to change this
+ property, you should only assign it with a DB connection object.
+
+ Starting from version 2.0.2, this can also be a configuration array for
+ creating the object.
 
 $cache					*yii/i18n/DbMessageSource::$cache*
  (\yii\caching\Cache|array|string) The cache object or the application
  component ID of the cache object. The messages data will be cached using this
- cache object. Note, this property has meaning only in case 'cachingDuration'
- set to non-zero value. After the DbMessageSource object is created, if you
- want to change this property, you should only assign it with a cache object.
+ cache object. Note, that to enable caching you have to set 'enableCaching' to
+ 'true', otherwise setting this property has no effect.
+
+ After the DbMessageSource object is created, if you want to change this
+ property, you should only assign it with a cache object.
+
  Starting from version 2.0.2, this can also be a configuration array for
  creating the object.
 
@@ -211,6 +211,18 @@ are translated messages.
  database.
     [$category] (string) The message category.
     [$language] (string) The target language.
+
+
+*yii/i18n/DbMessageSource::createFallbackQuery*		protected
+>
+ createFallbackQuery($category, $language, $fallbackLanguage)
+<
+(\yii\db\Query) 
+
+ Normally is called from 'loadMessagesFromDb'.
+    [$category] (string) The message category
+    [$language] (string) The originally requested language
+    [$fallbackLanguage] (string) The target fallback language
 
 
 

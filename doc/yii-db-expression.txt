@@ -10,7 +10,12 @@ DESCRIPTION
  or quoting. For example,
 
    $expression = new Expression('NOW()');
-   $sql = 'SELECT ' . $expression;  // SELECT NOW()
+   $now = (new \yii\db\Query)->select($expression)->scalar();  // SELECT
+ NOW();
+   echo $now; // prints the current date
+
+ Expression objects are mainly created for passing raw SQL expressions to
+ methods of 'Query', 'ActiveQuery', and related classes.
 
  An expression can also be bound with parameters specified via 'params'.
 

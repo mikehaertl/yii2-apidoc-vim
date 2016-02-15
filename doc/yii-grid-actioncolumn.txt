@@ -41,7 +41,7 @@ $options				*yii/grid/ActionColumn::$options*
  See |yii/grid/Column::$options|
 
 $headerOptions				*yii/grid/ActionColumn::$headerOptions*
- See |yii/grid/Column::$headerOptions|
+ ()
 
 $contentOptions				*yii/grid/ActionColumn::$contentOptions*
  See |yii/grid/Column::$contentOptions|
@@ -71,8 +71,9 @@ $template				*yii/grid/ActionColumn::$template*
  As an example, to only have the view, and update button you can add the
  ActionColumn to your GridView columns as follows:
 
- ''' ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
- '''
+   ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
+
+
 
 $buttons				*yii/grid/ActionColumn::$buttons*
  (array) Button rendering callbacks. The array keys are the button names
@@ -96,6 +97,24 @@ $buttons				*yii/grid/ActionColumn::$buttons*
            return $model->status === 'editable' ? Html::a('Update', $url) :
  '';
        },
+   ],
+
+
+
+$visibleButtons				*yii/grid/ActionColumn::$visibleButtons*
+ (array) Visibility conditions for each button. The array keys are the button
+ names (without curly brackets), and the values are the boolean true/false or
+ the anonymous function. When the button name is not specified in this array
+ it will be shown by default. The callbacks must use the following signature:
+
+   function ($model, $key, $index) {
+       return $model->status === 'editable';
+   }
+
+ Or you can pass a boolean value:
+
+   [
+       'update' => \Yii::$app->user->can('update'),
    ],
 
 
