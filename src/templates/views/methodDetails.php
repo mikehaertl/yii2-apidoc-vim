@@ -3,24 +3,38 @@
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
-<?php foreach($type->methods as $method): ?>
 
-<?= $this->context->renderTitleTag(
-	$this->context->createTag($type->name,$method->name,'*'),
-	$method->visibility,
-	65,
-	8,
-	'*'
-).($method->definedBy != $type->name ? "\n" : "\n>\n"); ?>
-<?php if($method->definedBy != $type->name): ?>
- See |<?php echo $this->context->convertNamespace($method->definedBy).'::'.$method->name ?>|
-<?php else: ?>
- <?= $this->context->renderMethodSignature($method)."\n<\n"; ?>
-<?= $this->context->renderMethodReturnValue($method)."\n"; ?>
-<?= empty($method->description) ? '':$this->context->renderDescription($method->description,1)."\n"; ?>
-<?php foreach($method->params as $param): ?>
-<?= $this->context->renderMethodParam($param,4)."\n" ?>
-<?php endforeach; ?>
-<?php endif; ?>
+<?php
 
-<?php endforeach; ?>
+foreach($type->methods as $method) {
+    echo "\n";
+    echo $this->context->renderTitleTag(
+        $this->context->createTag($type->name,$method->name,'*'),
+        $method->visibility,
+        65,
+        8,
+        '*'
+    ). "\n";
+
+    if($method->definedBy != $type->name) {
+        echo "\n";
+        echo ' See |'.$this->context->convertNamespace($method->definedBy).'::'.$method->name."|\n";
+    } else {
+        echo ">\n";
+        echo ' '.$this->context->renderMethodSignature($method)."\n";
+        echo "<\n";
+        echo 'return '. $this->context->renderMethodReturnValue($method)."\n";
+        if (!empty($method->description)) {
+            echo $this->context->renderDescription($method->description,1)."\n";
+            if ($method->params) {
+                echo "\n";
+            }
+        }
+        if ($method->params) {
+            foreach($method->params as $param) {
+                echo $this->context->renderMethodParam($param,4)."\n";
+            }
+        }
+    }
+    echo "\n";
+}

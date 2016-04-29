@@ -47,7 +47,9 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/DynamicModel::className*			public
+
  See |yii/base/Object::className|
 
 
@@ -55,7 +57,7 @@ METHOD DETAILS
 >
  __construct($attributes='[]', $config='[]')
 <
-(void)
+return (void)
 
     [$attributes] (array) The dynamic attributes (name-value pairs, or names)
     being defined
@@ -63,6 +65,7 @@ METHOD DETAILS
 
 
 *yii/base/DynamicModel::init*				public
+
  See |yii/base/Object::init|
 
 
@@ -70,7 +73,9 @@ METHOD DETAILS
 >
  __get($name)
 <
-(mixed) The property value or the value of a behavior's property
+return (mixed) The property value or the value of a behavior's property
+
+
 
  This method will check in the following order and act accordingly:
 
@@ -80,6 +85,9 @@ METHOD DETAILS
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing '$value = $component->property;'.
+
+
+
     [$name] (string) The property name
 
 
@@ -87,7 +95,9 @@ METHOD DETAILS
 >
  __set($name, $value)
 <
-(void)
+return (void)
+
+
 
  This method will check in the following order and act accordingly:
 
@@ -101,6 +111,9 @@ METHOD DETAILS
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing '$component->property = $value;'.
+
+
+
     [$name] (string) The property name or the event name
     [$value] (mixed) The property value
 
@@ -109,7 +122,9 @@ METHOD DETAILS
 >
  __isset($name)
 <
-(boolean) Whether the named property is set
+return (boolean) Whether the named property is set
+
+
 
  This method will check in the following order and act accordingly:
 
@@ -120,6 +135,9 @@ METHOD DETAILS
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing 'isset($component->property)'.
+
+
+
     [$name] (string) The property name or the event name
 
 
@@ -127,7 +145,9 @@ METHOD DETAILS
 >
  __unset($name)
 <
-(void)
+return (void)
+
+
 
  This method will check in the following order and act accordingly:
 
@@ -137,106 +157,134 @@ METHOD DETAILS
 
  Do not call this method directly as it is a PHP magic method that will be
  implicitly called when executing 'unset($component->property)'.
+
+
+
     [$name] (string) The property name
 
 
 *yii/base/DynamicModel::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/base/DynamicModel::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/base/DynamicModel::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/base/DynamicModel::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/base/DynamicModel::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/base/DynamicModel::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/base/DynamicModel::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/base/DynamicModel::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/base/DynamicModel::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/base/DynamicModel::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/base/DynamicModel::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/base/DynamicModel::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/base/DynamicModel::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/base/DynamicModel::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/base/DynamicModel::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/base/DynamicModel::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/base/DynamicModel::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/base/DynamicModel::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/base/DynamicModel::fields*				public
+
  See |yii/base/ArrayableTrait::fields|
 
 
 *yii/base/DynamicModel::extraFields*			public
+
  See |yii/base/ArrayableTrait::extraFields|
 
 
 *yii/base/DynamicModel::toArray*				public
+
  See |yii/base/ArrayableTrait::toArray|
 
 
 *yii/base/DynamicModel::resolveFields*			protected
+
  See |yii/base/ArrayableTrait::resolveFields|
 
 
 *yii/base/DynamicModel::rules*				public
+
  See |yii/base/Model::rules|
 
 
 *yii/base/DynamicModel::scenarios*			public
+
  See |yii/base/Model::scenarios|
 
 
 *yii/base/DynamicModel::formName*				public
+
  See |yii/base/Model::formName|
 
 
@@ -244,153 +292,193 @@ METHOD DETAILS
 >
  attributes()
 <
-(array) List of attribute names.
+return (array) List of attribute names.
+
+
 
  By default, this method returns all public non-static properties of the
  class. You may override this method to change the default behavior.
 
 
+
+
 *yii/base/DynamicModel::attributeLabels*			public
+
  See |yii/base/Model::attributeLabels|
 
 
 *yii/base/DynamicModel::attributeHints*			public
+
  See |yii/base/Model::attributeHints|
 
 
 *yii/base/DynamicModel::validate*				public
+
  See |yii/base/Model::validate|
 
 
 *yii/base/DynamicModel::beforeValidate*			public
+
  See |yii/base/Model::beforeValidate|
 
 
 *yii/base/DynamicModel::afterValidate*			public
+
  See |yii/base/Model::afterValidate|
 
 
 *yii/base/DynamicModel::getValidators*			public
+
  See |yii/base/Model::getValidators|
 
 
 *yii/base/DynamicModel::getActiveValidators*		public
+
  See |yii/base/Model::getActiveValidators|
 
 
 *yii/base/DynamicModel::createValidators*			public
+
  See |yii/base/Model::createValidators|
 
 
 *yii/base/DynamicModel::isAttributeRequired*		public
+
  See |yii/base/Model::isAttributeRequired|
 
 
 *yii/base/DynamicModel::isAttributeSafe*			public
+
  See |yii/base/Model::isAttributeSafe|
 
 
 *yii/base/DynamicModel::isAttributeActive*		public
+
  See |yii/base/Model::isAttributeActive|
 
 
 *yii/base/DynamicModel::getAttributeLabel*		public
+
  See |yii/base/Model::getAttributeLabel|
 
 
 *yii/base/DynamicModel::getAttributeHint*			public
+
  See |yii/base/Model::getAttributeHint|
 
 
 *yii/base/DynamicModel::hasErrors*			public
+
  See |yii/base/Model::hasErrors|
 
 
 *yii/base/DynamicModel::getErrors*			public
+
  See |yii/base/Model::getErrors|
 
 
 *yii/base/DynamicModel::getFirstErrors*			public
+
  See |yii/base/Model::getFirstErrors|
 
 
 *yii/base/DynamicModel::getFirstError*			public
+
  See |yii/base/Model::getFirstError|
 
 
 *yii/base/DynamicModel::addError*				public
+
  See |yii/base/Model::addError|
 
 
 *yii/base/DynamicModel::addErrors*			public
+
  See |yii/base/Model::addErrors|
 
 
 *yii/base/DynamicModel::clearErrors*			public
+
  See |yii/base/Model::clearErrors|
 
 
 *yii/base/DynamicModel::generateAttributeLabel*		public
+
  See |yii/base/Model::generateAttributeLabel|
 
 
 *yii/base/DynamicModel::getAttributes*			public
+
  See |yii/base/Model::getAttributes|
 
 
 *yii/base/DynamicModel::setAttributes*			public
+
  See |yii/base/Model::setAttributes|
 
 
 *yii/base/DynamicModel::onUnsafeAttribute*		public
+
  See |yii/base/Model::onUnsafeAttribute|
 
 
 *yii/base/DynamicModel::getScenario*			public
+
  See |yii/base/Model::getScenario|
 
 
 *yii/base/DynamicModel::setScenario*			public
+
  See |yii/base/Model::setScenario|
 
 
 *yii/base/DynamicModel::safeAttributes*			public
+
  See |yii/base/Model::safeAttributes|
 
 
 *yii/base/DynamicModel::activeAttributes*			public
+
  See |yii/base/Model::activeAttributes|
 
 
 *yii/base/DynamicModel::load*				public
+
  See |yii/base/Model::load|
 
 
 *yii/base/DynamicModel::loadMultiple*			public
+
  See |yii/base/Model::loadMultiple|
 
 
 *yii/base/DynamicModel::validateMultiple*			public
+
  See |yii/base/Model::validateMultiple|
 
 
 *yii/base/DynamicModel::getIterator*			public
+
  See |yii/base/Model::getIterator|
 
 
 *yii/base/DynamicModel::offsetExists*			public
+
  See |yii/base/Model::offsetExists|
 
 
 *yii/base/DynamicModel::offsetGet*			public
+
  See |yii/base/Model::offsetGet|
 
 
 *yii/base/DynamicModel::offsetSet*			public
+
  See |yii/base/Model::offsetSet|
 
 
 *yii/base/DynamicModel::offsetUnset*			public
+
  See |yii/base/Model::offsetUnset|
 
 
@@ -398,7 +486,7 @@ METHOD DETAILS
 >
  defineAttribute($name, $value='null')
 <
-(void)
+return (void)
 
     [$name] (string) The attribute name
     [$value] (mixed) The attribute value
@@ -408,7 +496,7 @@ METHOD DETAILS
 >
  undefineAttribute($name)
 <
-(void)
+return (void)
 
     [$name] (string) The attribute name
 
@@ -417,10 +505,11 @@ METHOD DETAILS
 >
  addRule($attributes, $validator, $options='[]')
 <
-($this) The model itself
+return ($this) The model itself
 
  You can also directly manipulate 'validators' to add or remove validation
  rules. This method provides a shortcut.
+
     [$attributes] (string|array) The attribute(s) to be validated by the rule
     [$validator] (mixed) The validator for the rule.This can be a built-in
     validator name, a method name of the model class, an anonymous function,
@@ -433,11 +522,12 @@ METHOD DETAILS
 >
  validateData($data, $rules='[]')
 <
-(static) The model instance that contains the data being validated
+return (static) The model instance that contains the data being validated
 
  This method will create a DynamicModel instance, populate it with the data to
  be validated, create the specified validation rules, and then validate the
  data using these rules.
+
     [$data] (array) The data (name-value pairs) to be validated
     [$rules] (array) The validation rules. Please refer to 'Model::rules()' on
     the format of this parameter.

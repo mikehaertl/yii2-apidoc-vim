@@ -16,11 +16,12 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/QueryInterface::all*				public
 >
  all($db='null')
 <
-(array) The query results. If the query results in nothing, an empty array
+return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
     [$db] (\yii\db\Connection) The database connection used to execute the
@@ -32,7 +33,7 @@ will be returned.
 >
  one($db='null')
 <
-(array|boolean) The first row (in terms of an array) of the query result.
+return (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
 
     [$db] (\yii\db\Connection) The database connection used to execute the
@@ -44,7 +45,7 @@ False is returned if the query results in nothing.
 >
  count($q=''*'', $db='null')
 <
-(integer) Number of records.
+return (integer) Number of records.
 
     [$q] (string) The COUNT expression. Defaults to '*'.
     [$db] (\yii\db\Connection) The database connection used to execute the
@@ -56,7 +57,7 @@ False is returned if the query results in nothing.
 >
  exists($db='null')
 <
-(boolean) Whether the query result contains any row of data.
+return (boolean) Whether the query result contains any row of data.
 
     [$db] (\yii\db\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
@@ -67,7 +68,7 @@ False is returned if the query results in nothing.
 >
  indexBy($column)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$column] (string|callable) The name of the column by which the query
     results should be indexed by. This can also be a callable (e.g. anonymous
@@ -86,7 +87,7 @@ False is returned if the query results in nothing.
 >
  where($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The '$condition' specified as an array can be in one of the following two
  formats:
@@ -121,7 +122,7 @@ False is returned if the query results in nothing.
 
    - **or**: similar to the 'and' operator except that the operands are
    concatenated using 'OR'. For example,   '['or', ['type' => [7, 8, 9', ['id'
- => [1, 2, 3'' will generate '(type IN (7, 8, 9) OR (id IN (1, 2, 3)))'.
+ => [1, 2, 3']' will generate '(type IN (7, 8, 9) OR (id IN (1, 2, 3)))'.
 
 
    - **not**: this will take only one operand and build the negation of
@@ -200,6 +201,7 @@ False is returned if the query results in nothing.
    - Additionally you can specify arbitrary operators as follows: A
    condition of '['>=', 'id', 10]' will result in the   following SQL
  expression: 'id >= 10'.
+
     [$condition] (string|array) The conditions that should be put in the WHERE
     part.
 
@@ -208,10 +210,11 @@ False is returned if the query results in nothing.
 >
  andWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
+
     [$condition] (string|array) The new WHERE condition. Please refer to
     'where()' on how to specify this parameter.
 
@@ -220,10 +223,11 @@ False is returned if the query results in nothing.
 >
  orWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
+
     [$condition] (string|array) The new WHERE condition. Please refer to
     'where()' on how to specify this parameter.
 
@@ -232,7 +236,7 @@ False is returned if the query results in nothing.
 >
  filterWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$condition] (array) The conditions that should be put in the WHERE part.
     Please refer to 'where()' on how to specify this parameter.
@@ -242,10 +246,11 @@ False is returned if the query results in nothing.
 >
  andFilterWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
+
     [$condition] (array) The new WHERE condition. Please refer to 'where()' on
     how to specify this parameter.
 
@@ -254,10 +259,11 @@ False is returned if the query results in nothing.
 >
  orFilterWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
+
     [$condition] (array) The new WHERE condition. Please refer to 'where()' on
     how to specify this parameter.
 
@@ -266,7 +272,7 @@ False is returned if the query results in nothing.
 >
  orderBy($columns)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$columns] (string|array) The columns (and the directions) to be ordered
     by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
@@ -279,7 +285,7 @@ False is returned if the query results in nothing.
 >
  addOrderBy($columns)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$columns] (string|array) The columns (and the directions) to be ordered
     by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
@@ -292,7 +298,7 @@ False is returned if the query results in nothing.
 >
  limit($limit)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$limit] (integer) The limit. Use null or negative value to disable limit.
 
@@ -301,7 +307,7 @@ False is returned if the query results in nothing.
 >
  offset($offset)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$offset] (integer) The offset. Use null or negative value to disable
     offset.

@@ -17,14 +17,16 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/helpers/BaseStringHelper::byteLength*		public
 >
  byteLength($string)
 <
-(integer) The number of bytes in the given string.
+return (integer) The number of bytes in the given string.
 
  This method ensures the string is treated as a byte array by using
  'mb_strlen()'.
+
     [$string] (string) The string being measured for length
 
 
@@ -32,10 +34,11 @@ METHOD DETAILS
 >
  byteSubstr($string, $start, $length=null)
 <
-(string) The extracted part of string, or FALSE on failure or an empty string.
+return (string) The extracted part of string, or FALSE on failure or an empty string.
 
  This method ensures the string is treated as a byte array by using
  'mb_substr()'.
+
     [$string] (string) The input string. Must be one character or longer.
     [$start] (integer) The starting position
     [$length] (integer) The desired portion length. If not specified or
@@ -47,7 +50,7 @@ METHOD DETAILS
 >
  basename($path, $suffix='''')
 <
-(string) The trailing name component of the given path.
+return (string) The trailing name component of the given path.
 
  This method is similar to the php function 'basename()' except that it will
  treat both \ and / as directory separators, independent of the operating
@@ -55,6 +58,7 @@ METHOD DETAILS
  working with real file paths, php's 'basename()' should work fine for you.
  Note: this method is not aware of the actual filesystem, or path components
  such as "..".
+
     [$path] (string) A path string.
     [$suffix] (string) If the name component ends in suffix this will also be
     cut off.
@@ -64,10 +68,11 @@ METHOD DETAILS
 >
  dirname($path)
 <
-(string) The parent directory's path.
+return (string) The parent directory's path.
 
  This method is similar to 'dirname()' except that it will treat both \ and /
  as directory separators, independent of the operating system.
+
     [$path] (string) A path string.
 
 
@@ -75,7 +80,7 @@ METHOD DETAILS
 >
  truncate($string, $length, $suffix=''...'', $encoding='null', $asHtml='false')
 <
-(string) The truncated string.
+return (string) The truncated string.
 
     [$string] (string) The string to truncate.
     [$length] (integer) How many characters from original string to include
@@ -92,7 +97,7 @@ METHOD DETAILS
 >
  truncateWords($string, $count, $suffix=''...'', $asHtml='false')
 <
-(string) The truncated string.
+return (string) The truncated string.
 
     [$string] (string) The string to truncate.
     [$count] (integer) How many words from original string to include into
@@ -107,7 +112,7 @@ METHOD DETAILS
 >
  truncateHtml($string, $count, $suffix, $encoding='false')
 <
-(string) 
+return (string) 
 
     [$string] (string) The string to truncate
     [$count] (integer) 
@@ -119,10 +124,11 @@ METHOD DETAILS
 >
  startsWith($string, $with, $caseSensitive='true')
 <
-(boolean) Returns true if first input starts with second input, false
+return (boolean) Returns true if first input starts with second input, false
 otherwise
 
  Binary and multibyte safe.
+
     [$string] (string) Input string
     [$with] (string) Part to search
     [$caseSensitive] (boolean) Case sensitive search. Default is true.
@@ -132,9 +138,10 @@ otherwise
 >
  endsWith($string, $with, $caseSensitive='true')
 <
-(boolean) Returns true if first input ends with second input, false otherwise
+return (boolean) Returns true if first input ends with second input, false otherwise
 
  Binary and multibyte safe.
+
     [$string] (string) 
     [$with] (string) 
     [$caseSensitive] (boolean) Case sensitive search. Default is true.
@@ -144,7 +151,7 @@ otherwise
 >
  explode($string, $delimiter='','', $trim='true', $skipEmpty='false')
 <
-(array) 
+return (array) 
 
     [$string] (string) String to be exploded.
     [$delimiter] (string) Delimiter. Default is ','.
@@ -156,6 +163,15 @@ otherwise
       the only argument - value.
     [$skipEmpty] (boolean) Whether to skip empty strings between delimiters.
     Default is false.
+
+
+*yii/helpers/BaseStringHelper::countWords*		public
+>
+ countWords($string)
+<
+return (integer) 
+
+    [$string] (string) 
 
 
 

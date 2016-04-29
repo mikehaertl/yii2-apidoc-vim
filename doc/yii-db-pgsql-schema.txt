@@ -7,34 +7,44 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/pgsql/Schema::$db*
+
  See |yii/db/Schema::$db|
 
 $defaultSchema				*yii/db/pgsql/Schema::$defaultSchema*
+
  (string) The default schema used for the current session.
 
 $exceptionMap				*yii/db/pgsql/Schema::$exceptionMap*
+
  See |yii/db/Schema::$exceptionMap|
 
 $typeMap				*yii/db/pgsql/Schema::$typeMap*
+
  (array) Mapping from physical column types (keys) to abstract column types
  (values)
 
 $tableSchemas				*yii/db/pgsql/Schema::$tableSchemas*
+
  See |yii/db/Schema::$tableSchemas|
 
 $schemaNames				*yii/db/pgsql/Schema::$schemaNames*
+
  See |yii/db/Schema::$schemaNames|
 
 $tableNames				*yii/db/pgsql/Schema::$tableNames*
+
  See |yii/db/Schema::$tableNames|
 
 $queryBuilder				*yii/db/pgsql/Schema::$queryBuilder*
+
  See |yii/db/Schema::$queryBuilder|
 
 $lastInsertID				*yii/db/pgsql/Schema::$lastInsertID*
+
  See |yii/db/Schema::$lastInsertID|
 
 $transactionIsolationLevel		*yii/db/pgsql/Schema::$transactionIsolationLevel*
+
  See |yii/db/Schema::$transactionIsolationLevel|
 
 
@@ -42,55 +52,69 @@ $transactionIsolationLevel		*yii/db/pgsql/Schema::$transactionIsolationLevel*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/pgsql/Schema::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/db/pgsql/Schema::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/db/pgsql/Schema::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/db/pgsql/Schema::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/pgsql/Schema::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/pgsql/Schema::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/pgsql/Schema::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/pgsql/Schema::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/pgsql/Schema::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/pgsql/Schema::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/pgsql/Schema::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/pgsql/Schema::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/db/pgsql/Schema::createColumnSchema*			protected
+
  See |yii/db/Schema::createColumnSchema|
 
 
@@ -98,49 +122,59 @@ METHOD DETAILS
 >
  loadTableSchema($name)
 <
-(\yii\db\TableSchema|null) Driver dependent table metadata. Null if the table
+return (\yii\db\TableSchema|null) Driver dependent table metadata. Null if the table
 does not exist.
 
     [$name] (string) Table name
 
 
 *yii/db/pgsql/Schema::getTableSchema*			public
+
  See |yii/db/Schema::getTableSchema|
 
 
 *yii/db/pgsql/Schema::getCacheKey*			protected
+
  See |yii/db/Schema::getCacheKey|
 
 
 *yii/db/pgsql/Schema::getCacheTag*			protected
+
  See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/pgsql/Schema::getTableSchemas*			public
+
  See |yii/db/Schema::getTableSchemas|
 
 
 *yii/db/pgsql/Schema::getSchemaNames*			public
+
  See |yii/db/Schema::getSchemaNames|
 
 
 *yii/db/pgsql/Schema::getTableNames*			public
+
  See |yii/db/Schema::getTableNames|
 
 
 *yii/db/pgsql/Schema::getQueryBuilder*			public
+
  See |yii/db/Schema::getQueryBuilder|
 
 
 *yii/db/pgsql/Schema::getPdoType*				public
+
  See |yii/db/Schema::getPdoType|
 
 
 *yii/db/pgsql/Schema::refresh*				public
+
  See |yii/db/Schema::refresh|
 
 
 *yii/db/pgsql/Schema::refreshTableSchema*			public
+
  See |yii/db/Schema::refreshTableSchema|
 
 
@@ -148,28 +182,20 @@ does not exist.
 >
  createQueryBuilder()
 <
-(\yii\db\pgsql\QueryBuilder) Query builder instance
+return (\yii\db\pgsql\QueryBuilder) Query builder instance
 
 
 
 *yii/db/pgsql/Schema::createColumnSchemaBuilder*		public
->
- createColumnSchemaBuilder($type, $length='null')
-<
-(\yii\db\ColumnSchemaBuilder) Column schema builder instance
 
- This method may be overridden by child classes to create a DBMS-specific
- column schema builder.
-    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
-    [$length] (integer|string|array) Length or precision of the column. See
-    'ColumnSchemaBuilder::$length'.
+ See |yii/db/Schema::createColumnSchemaBuilder|
 
 
 *yii/db/pgsql/Schema::findSchemaNames*			protected
 >
  findSchemaNames()
 <
-(array) All schema names in the database, except system schemas
+return (array) All schema names in the database, except system schemas
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception.
@@ -179,7 +205,7 @@ does not exist.
 >
  findTableNames($schema='''')
 <
-(array) All table names in the database. The names have NO schema name prefix.
+return (array) All table names in the database. The names have NO schema name prefix.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -189,7 +215,7 @@ does not exist.
 >
  findUniqueIndexes($table)
 <
-(array) All unique indexes for the given table.
+return (array) All unique indexes for the given table.
 
  Each array element is of the following structure:
 
@@ -199,30 +225,37 @@ does not exist.
    ]
 
 
+
     [$table] (\yii\db\TableSchema) The table metadata
 
 
 *yii/db/pgsql/Schema::getLastInsertID*			public
+
  See |yii/db/Schema::getLastInsertID|
 
 
 *yii/db/pgsql/Schema::supportsSavepoint*			public
+
  See |yii/db/Schema::supportsSavepoint|
 
 
 *yii/db/pgsql/Schema::createSavepoint*			public
+
  See |yii/db/Schema::createSavepoint|
 
 
 *yii/db/pgsql/Schema::releaseSavepoint*			public
+
  See |yii/db/Schema::releaseSavepoint|
 
 
 *yii/db/pgsql/Schema::rollBackSavepoint*			public
+
  See |yii/db/Schema::rollBackSavepoint|
 
 
 *yii/db/pgsql/Schema::setTransactionIsolationLevel*	public
+
  See |yii/db/Schema::setTransactionIsolationLevel|
 
 
@@ -230,7 +263,13 @@ does not exist.
 >
  insert($table, $columns)
 <
-(array) Primary key values or false if the command fails
+return (array) Primary key values or false if the command fails
+
+
+
+
+
+
 
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
@@ -238,14 +277,17 @@ does not exist.
 
 
 *yii/db/pgsql/Schema::quoteValue*				public
+
  See |yii/db/Schema::quoteValue|
 
 
 *yii/db/pgsql/Schema::quoteTableName*			public
+
  See |yii/db/Schema::quoteTableName|
 
 
 *yii/db/pgsql/Schema::quoteColumnName*			public
+
  See |yii/db/Schema::quoteColumnName|
 
 
@@ -253,29 +295,35 @@ does not exist.
 >
  quoteSimpleTableName($name)
 <
-(string) The properly quoted table name
+return (string) The properly quoted table name
 
  A simple table name has no schema prefix.
+
     [$name] (string) Table name
 
 
 *yii/db/pgsql/Schema::quoteSimpleColumnName*		public
+
  See |yii/db/Schema::quoteSimpleColumnName|
 
 
 *yii/db/pgsql/Schema::getRawTableName*			public
+
  See |yii/db/Schema::getRawTableName|
 
 
 *yii/db/pgsql/Schema::getColumnPhpType*			protected
+
  See |yii/db/Schema::getColumnPhpType|
 
 
 *yii/db/pgsql/Schema::convertException*			public
+
  See |yii/db/Schema::convertException|
 
 
 *yii/db/pgsql/Schema::isReadQuery*			public
+
  See |yii/db/Schema::isReadQuery|
 
 
@@ -283,7 +331,7 @@ does not exist.
 >
  resolveTableNames($table, $name)
 <
-(void)
+return (void)
 
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
@@ -293,7 +341,7 @@ does not exist.
 >
  findConstraints($table)
 <
-(void)
+return (void)
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -302,7 +350,7 @@ does not exist.
 >
  getUniqueIndexInformation($table)
 <
-(array) With index and column names
+return (array) With index and column names
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -311,7 +359,7 @@ does not exist.
 >
  findColumns($table)
 <
-(boolean) Whether the table exists in the database
+return (boolean) Whether the table exists in the database
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -320,7 +368,7 @@ does not exist.
 >
  loadColumnSchema($info)
 <
-(\yii\db\ColumnSchema) The column schema object
+return (\yii\db\ColumnSchema) The column schema object
 
     [$info] (array) Column information
 

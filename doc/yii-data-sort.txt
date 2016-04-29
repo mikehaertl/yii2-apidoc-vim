@@ -58,11 +58,13 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $enableMultiSort			*yii/data/Sort::$enableMultiSort*
+
  (boolean) Whether the sorting can be applied to multiple attributes
  simultaneously. Defaults to false, which means each time the data can only be
  sorted by one attribute.
 
 $attributes				*yii/data/Sort::$attributes*
+
  (array) List of attributes that are allowed to be sorted. Its syntax can be
  described using the following example:
 
@@ -108,10 +110,12 @@ $attributes				*yii/data/Sort::$attributes*
  elements: 'asc' and 'desc'.
 
 $sortParam				*yii/data/Sort::$sortParam*
+
  (string) The name of the parameter that specifies which attributes to be
  sorted in which direction. Defaults to 'sort'.
 
 $defaultOrder				*yii/data/Sort::$defaultOrder*
+
  (array) The order that should be used when the current request does not
  specify any order. The array keys are attribute names and the array values
  are the corresponding sort directions. For example,
@@ -124,14 +128,17 @@ $defaultOrder				*yii/data/Sort::$defaultOrder*
 
 
 $route					*yii/data/Sort::$route*
+
  (string) The route of the controller action for displaying the sorted
  contents. If not set, it means using the currently requested route.
 
 $separator				*yii/data/Sort::$separator*
+
  (string) The character used to separate different attributes that need to be
  sorted by.
 
 $params					*yii/data/Sort::$params*
+
  (array) Parameters (name => value) that should be used to obtain the current
  sort directions and to create new sort URLs. If not set, $_GET will be used
  instead.
@@ -144,14 +151,17 @@ $params					*yii/data/Sort::$params*
  will be used.
 
 $urlManager				*yii/data/Sort::$urlManager*
+
  (\yii\web\UrlManager) The URL manager used for creating sort URLs. If not
  set, the "urlManager" application component will be used.
 
 $orders					*yii/data/Sort::$orders*
+
  (array) The columns (keys) and their corresponding sort directions (values).
  This can be passed to '\yii\db\Query::orderBy()' to construct a DB query.
 
 $attributeOrders			*yii/data/Sort::$attributeOrders*
+
  (array) Sort directions indexed by attribute names. Sort direction can be
  either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
 
@@ -160,11 +170,14 @@ $attributeOrders			*yii/data/Sort::$attributeOrders*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/data/Sort::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/data/Sort::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -172,43 +185,52 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/data/Sort::__get*					public
+
  See |yii/base/Object::__get|
 
 
 *yii/data/Sort::__set*					public
+
  See |yii/base/Object::__set|
 
 
 *yii/data/Sort::__isset*					public
+
  See |yii/base/Object::__isset|
 
 
 *yii/data/Sort::__unset*					public
+
  See |yii/base/Object::__unset|
 
 
 *yii/data/Sort::__call*					public
+
  See |yii/base/Object::__call|
 
 
 *yii/data/Sort::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/data/Sort::canGetProperty*				public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/data/Sort::canSetProperty*				public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/data/Sort::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -216,7 +238,7 @@ METHOD DETAILS
 >
  getOrders($recalculate='false')
 <
-(array) The columns (keys) and their corresponding sort directions (values).
+return (array) The columns (keys) and their corresponding sort directions (values).
 This can be passed to '\yii\db\Query::orderBy()' to construct a DB query.
 
     [$recalculate] (boolean) Whether to recalculate the sort directions
@@ -226,7 +248,7 @@ This can be passed to '\yii\db\Query::orderBy()' to construct a DB query.
 >
  getAttributeOrders($recalculate='false')
 <
-(array) Sort directions indexed by attribute names. Sort direction can be
+return (array) Sort directions indexed by attribute names. Sort direction can be
 either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
 
     [$recalculate] (boolean) Whether to recalculate the sort directions
@@ -236,7 +258,7 @@ either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
 >
  getAttributeOrder($attribute)
 <
-(boolean|null) Sort direction of the attribute. Can be either 'SORT_ASC' for
+return (boolean|null) Sort direction of the attribute. Can be either 'SORT_ASC' for
 ascending order or 'SORT_DESC' for descending order. Null is returned if the
 attribute is invalid or does not need to be sorted.
 
@@ -247,10 +269,11 @@ attribute is invalid or does not need to be sorted.
 >
  link($attribute, $options='[]')
 <
-(string) The generated hyperlink
+return (string) The generated hyperlink
 
  Based on the sort direction, the CSS class of the generated hyperlink will be
  appended with "asc" or "desc".
+
     [$attribute] (string) The attribute name by which the data should be
     sorted by.
     [$options] (array) Additional HTML attributes for the hyperlink tag. There
@@ -264,12 +287,13 @@ attribute is invalid or does not need to be sorted.
 >
  createUrl($attribute, $absolute='false')
 <
-(string) The URL for sorting. False if the attribute is invalid.
+return (string) The URL for sorting. False if the attribute is invalid.
 
  This method will consider the current sorting status given by
  'attributeOrders'. For example, if the current page already sorts the data by
  the specified attribute in ascending order, then the URL created will lead to
  a page that sorts the data by the specified attribute in descending order.
+
     [$attribute] (string) The attribute name
     [$absolute] (boolean) Whether to create an absolute URL. Defaults to
     'false'.
@@ -279,10 +303,11 @@ attribute is invalid or does not need to be sorted.
 >
  createSortParam($attribute)
 <
-(string) The value of the sort variable
+return (string) The value of the sort variable
 
  The newly created sort variable can be used to create a URL that will lead to
  sorting by the specified attribute.
+
     [$attribute] (string) The attribute name
 
 
@@ -290,7 +315,7 @@ attribute is invalid or does not need to be sorted.
 >
  hasAttribute($name)
 <
-(boolean) Whether the sort definition supports sorting by the named attribute.
+return (boolean) Whether the sort definition supports sorting by the named attribute.
 
     [$name] (string) The attribute name
 

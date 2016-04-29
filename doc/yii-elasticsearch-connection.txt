@@ -7,45 +7,73 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $autodetectCluster			*yii/elasticsearch/Connection::$autodetectCluster*
+
  (boolean) Whether to autodetect available cluster nodes on 'open()'
 
 $nodes					*yii/elasticsearch/Connection::$nodes*
- (array) Cluster nodes This is populated with the result of a cluster nodes
- request when 'autodetectCluster' is true.
+
+ (array) The elasticsearch cluster nodes to connect to.
+
+ This is populated with the result of a cluster nodes request when
+ 'autodetectCluster' is true.
+
+ Additional special options:
+
+  
+   - 'auth': overrides 'auth' property. For example:###CODE###
 
 $activeNode				*yii/elasticsearch/Connection::$activeNode*
- (array) The active node. key of 'nodes'. Will be randomly selected on
- 'open()'.
+
+ (string) The active node. Key of one of the 'nodes'. Will be randomly
+ selected on 'open()'.
 
 $auth					*yii/elasticsearch/Connection::$auth*
- ()
+
+ (array) Authentication data used to connect to the ElasticSearch node.
+
+ Array elements:
+
+  
+   - 'username': the username for authentication.  
+   - 'password': the password for authentication.
+
+ Array either MUST contain both username and password on not contain any
+ authentication credentials.
 
 $connectionTimeout			*yii/elasticsearch/Connection::$connectionTimeout*
+
  (float) Timeout to use for connecting to an elasticsearch node. This value
  will be used to configure the curl 'CURLOPT_CONNECTTIMEOUT' option. If not
  set, no explicit timeout will be set for curl.
 
 $dataTimeout				*yii/elasticsearch/Connection::$dataTimeout*
+
  (float) Timeout to use when reading the response from an elasticsearch node.
  This value will be used to configure the curl 'CURLOPT_TIMEOUT' option. If
  not set, no explicit timeout will be set for curl.
 
 $behaviors				*yii/elasticsearch/Connection::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $isActive				*yii/elasticsearch/Connection::$isActive*
+
  (boolean) Whether the DB connection is established
 
 $driverName				*yii/elasticsearch/Connection::$driverName*
+
  (string) Name of the DB driver
 
 $queryBuilder				*yii/elasticsearch/Connection::$queryBuilder*
+
  (\yii\elasticsearch\QueryBuilder)
 
 $nodeInfo				*yii/elasticsearch/Connection::$nodeInfo*
+
  ()
 
 $clusterState				*yii/elasticsearch/Connection::$clusterState*
+
  ()
 
 
@@ -53,11 +81,14 @@ $clusterState				*yii/elasticsearch/Connection::$clusterState*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/elasticsearch/Connection::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/elasticsearch/Connection::__construct*		public
+
  See |yii/base/Object::__construct|
 
 
@@ -65,95 +96,117 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/elasticsearch/Connection::__get*			public
+
  See |yii/base/Component::__get|
 
 
 *yii/elasticsearch/Connection::__set*			public
+
  See |yii/base/Component::__set|
 
 
 *yii/elasticsearch/Connection::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/elasticsearch/Connection::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/elasticsearch/Connection::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/elasticsearch/Connection::hasProperty*		public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/elasticsearch/Connection::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/elasticsearch/Connection::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/elasticsearch/Connection::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/elasticsearch/Connection::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/elasticsearch/Connection::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/elasticsearch/Connection::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/elasticsearch/Connection::on*			public
+
  See |yii/base/Component::on|
 
 
 *yii/elasticsearch/Connection::off*			public
+
  See |yii/base/Component::off|
 
 
 *yii/elasticsearch/Connection::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/elasticsearch/Connection::getBehavior*		public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/elasticsearch/Connection::getBehaviors*		public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/elasticsearch/Connection::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/elasticsearch/Connection::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/elasticsearch/Connection::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/elasticsearch/Connection::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/elasticsearch/Connection::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -161,7 +214,7 @@ METHOD DETAILS
 >
  __sleep()
 <
-(array) 
+return (array) 
 
 
 
@@ -169,7 +222,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-(boolean) Whether the DB connection is established
+return (boolean) Whether the DB connection is established
 
 
 
@@ -177,16 +230,24 @@ METHOD DETAILS
 >
  open()
 <
-(void)
+return (void)
 
  It does nothing if a DB connection has already been established.
+
+
+*yii/elasticsearch/Connection::populateNodes*		protected
+>
+ populateNodes()
+<
+return (void)
+
 
 
 *yii/elasticsearch/Connection::selectActiveNode*		protected
 >
  selectActiveNode()
 <
-(void)
+return (void)
 
 
 
@@ -194,7 +255,7 @@ METHOD DETAILS
 >
  close()
 <
-(void)
+return (void)
 
  It does nothing if the connection is already closed.
 
@@ -203,7 +264,7 @@ METHOD DETAILS
 >
  initConnection()
 <
-(void)
+return (void)
 
  This method is invoked right after the DB connection is established. The
  default implementation triggers an 'EVENT_AFTER_OPEN' event.
@@ -213,7 +274,7 @@ METHOD DETAILS
 >
  getDriverName()
 <
-(string) Name of the DB driver
+return (string) Name of the DB driver
 
 
 
@@ -221,7 +282,7 @@ METHOD DETAILS
 >
  createCommand($config='[]')
 <
-(\yii\elasticsearch\Command) The DB command
+return (\yii\elasticsearch\Command) The DB command
 
     [$config] (array) The configuration for the Command class
 
@@ -230,7 +291,7 @@ METHOD DETAILS
 >
  getQueryBuilder()
 <
-(\yii\elasticsearch\QueryBuilder) 
+return (\yii\elasticsearch\QueryBuilder) 
 
 
 
@@ -238,9 +299,9 @@ METHOD DETAILS
 >
  get($url, $options='[]', $body='null', $raw='false')
 <
-(mixed) Response
+return (mixed) Response
 
-    [$url] (string) URL
+    [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
     [$raw] (boolean) If response body contains JSON and should be decoded
@@ -250,9 +311,9 @@ METHOD DETAILS
 >
  head($url, $options='[]', $body='null')
 <
-(mixed) Response
+return (mixed) Response
 
-    [$url] (string) URL
+    [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
 
@@ -261,9 +322,9 @@ METHOD DETAILS
 >
  post($url, $options='[]', $body='null', $raw='false')
 <
-(mixed) Response
+return (mixed) Response
 
-    [$url] (string) URL
+    [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
     [$raw] (boolean) If response body contains JSON and should be decoded
@@ -273,9 +334,9 @@ METHOD DETAILS
 >
  put($url, $options='[]', $body='null', $raw='false')
 <
-(mixed) Response
+return (mixed) Response
 
-    [$url] (string) URL
+    [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
     [$raw] (boolean) If response body contains JSON and should be decoded
@@ -285,9 +346,9 @@ METHOD DETAILS
 >
  delete($url, $options='[]', $body='null', $raw='false')
 <
-(mixed) Response
+return (mixed) Response
 
-    [$url] (string) URL
+    [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
     [$raw] (boolean) If response body contains JSON and should be decoded
@@ -297,7 +358,7 @@ METHOD DETAILS
 >
  httpRequest($method, $url, $requestBody='null', $raw='false')
 <
-(mixed) Response
+return (mixed) If request failed
 
     [$method] (string) Method name
     [$url] (string) URL
@@ -309,7 +370,7 @@ METHOD DETAILS
 >
  decodeErrorBody($body)
 <
-(mixed) 
+return (mixed) 
 
     [$body] () 
 
@@ -318,7 +379,7 @@ METHOD DETAILS
 >
  getNodeInfo()
 <
-(void)
+return (void)
 
 
 
@@ -326,7 +387,7 @@ METHOD DETAILS
 >
  getClusterState()
 <
-(void)
+return (void)
 
 
 

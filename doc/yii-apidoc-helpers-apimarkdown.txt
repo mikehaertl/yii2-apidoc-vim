@@ -7,9 +7,19 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $renderer				*yii/apidoc/helpers/ApiMarkdown::$renderer*
+
  (\yii\apidoc\renderers\BaseRenderer)
 
+$blockTranslations			*yii/apidoc/helpers/ApiMarkdown::$blockTranslations*
+
+ (array) Translation for guide block types
+
 $renderingContext			*yii/apidoc/helpers/ApiMarkdown::$renderingContext*
+
+ ()
+
+$headings				*yii/apidoc/helpers/ApiMarkdown::$headings*
+
  ()
 
 
@@ -17,23 +27,80 @@ $renderingContext			*yii/apidoc/helpers/ApiMarkdown::$renderingContext*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/apidoc/helpers/ApiMarkdown::parseApiLinks*		protected
+
  See |yii/apidoc/helpers/ApiMarkdownTrait::parseApiLinks|
 
 
 *yii/apidoc/helpers/ApiMarkdown::renderApiLink*		protected
+
  See |yii/apidoc/helpers/ApiMarkdownTrait::renderApiLink|
 
 
 *yii/apidoc/helpers/ApiMarkdown::renderBrokenApiLink*	protected
+
  See |yii/apidoc/helpers/ApiMarkdownTrait::renderBrokenApiLink|
+
+
+*yii/apidoc/helpers/ApiMarkdown::consumeQuote*		protected
+
+ See |yii/apidoc/helpers/ApiMarkdownTrait::consumeQuote|
+
+
+*yii/apidoc/helpers/ApiMarkdown::translateBlockType*	protected
+>
+ translateBlockType($type)
+<
+return (void)
+
+    [$type] () 
+
+
+*yii/apidoc/helpers/ApiMarkdown::renderQuote*		protected
+
+ See |yii/apidoc/helpers/ApiMarkdownTrait::renderQuote|
+
+
+*yii/apidoc/helpers/ApiMarkdown::getHeadings*		public
+>
+ getHeadings()
+<
+return (array) The headlines of this document
+
+
+
+*yii/apidoc/helpers/ApiMarkdown::prepare*			protected
+>
+ prepare()
+<
+return (void)
+
+
+
+*yii/apidoc/helpers/ApiMarkdown::parse*			public
+>
+ parse($text)
+<
+return (void)
+
+    [$text] () 
+
+
+*yii/apidoc/helpers/ApiMarkdown::applyToc*		protected
+>
+ applyToc($content)
+<
+return (void)
+
+    [$content] () 
 
 
 *yii/apidoc/helpers/ApiMarkdown::renderCode*		protected
 >
  renderCode($block)
 <
-(void)
+return (void)
 
     [$block] () 
 
@@ -42,7 +109,7 @@ METHOD DETAILS
 >
  highlight($code, $language)
 <
-(string) HTML of highlighted code
+return (string) HTML of highlighted code
 
     [$code] (string) Code to highlight
     [$language] (string) Language of the code to highlight
@@ -52,7 +119,7 @@ METHOD DETAILS
 >
  renderHeadline($block)
 <
-(void)
+return (void)
 
     [$block] () 
 
@@ -61,7 +128,7 @@ METHOD DETAILS
 >
  renderLink($block)
 <
-(void)
+return (void)
 
     [$block] () 
 
@@ -70,7 +137,7 @@ METHOD DETAILS
 >
  process($content, $context='null', $paragraph='false')
 <
-(string) 
+return (string) 
 
     [$content] (string) 
     [$context] (\yii\apidoc\models\TypeDoc) 

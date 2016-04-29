@@ -23,44 +23,60 @@ DESCRIPTION
  > Note: This validator will not work with inline validation rules in case of
  usage outside the model scope,   e.g. via 'validate()' method.
 
+ > Note: EachValidator is meant to be used only in basic cases, you should
+ consider usage of tabular input,   using several models for the more complex
+ case.
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $builtInValidators			*yii/validators/EachValidator::$builtInValidators*
+
  See |yii/validators/Validator::$builtInValidators|
 
 $attributes				*yii/validators/EachValidator::$attributes*
+
  See |yii/validators/Validator::$attributes|
 
 $message				*yii/validators/EachValidator::$message*
+
  See |yii/validators/Validator::$message|
 
 $on					*yii/validators/EachValidator::$on*
+
  See |yii/validators/Validator::$on|
 
 $except					*yii/validators/EachValidator::$except*
+
  See |yii/validators/Validator::$except|
 
 $skipOnError				*yii/validators/EachValidator::$skipOnError*
+
  See |yii/validators/Validator::$skipOnError|
 
 $skipOnEmpty				*yii/validators/EachValidator::$skipOnEmpty*
+
  See |yii/validators/Validator::$skipOnEmpty|
 
 $enableClientValidation			*yii/validators/EachValidator::$enableClientValidation*
+
  See |yii/validators/Validator::$enableClientValidation|
 
 $isEmpty				*yii/validators/EachValidator::$isEmpty*
+
  See |yii/validators/Validator::$isEmpty|
 
 $when					*yii/validators/EachValidator::$when*
+
  See |yii/validators/Validator::$when|
 
 $whenClient				*yii/validators/EachValidator::$whenClient*
+
  See |yii/validators/Validator::$whenClient|
 
 $rule					*yii/validators/EachValidator::$rule*
+
  (array|\yii\validators\Validator) Definition of the validation rule, which
  should be used on array values. It should be specified in the same format as
  at 'yii\base\Model::rules()', except it should not contain attribute list as
@@ -72,12 +88,14 @@ $rule					*yii/validators/EachValidator::$rule*
  Please refer to 'yii\base\Model::rules()' for more details.
 
 $allowMessageFromRule			*yii/validators/EachValidator::$allowMessageFromRule*
+
  (boolean) Whether to use error message composed by validator declared via
  'rule' if its validation fails. If enabled, error message specified for this
  validator itself will appear only if attribute value is not an array. If
  disabled, own error message value will be used always.
 
 $behaviors				*yii/validators/EachValidator::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -85,11 +103,14 @@ $behaviors				*yii/validators/EachValidator::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/validators/EachValidator::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/validators/EachValidator::__construct*		public
+
  See |yii/base/Object::__construct|
 
 
@@ -97,105 +118,133 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/validators/EachValidator::__get*			public
+
  See |yii/base/Component::__get|
 
 
 *yii/validators/EachValidator::__set*			public
+
  See |yii/base/Component::__set|
 
 
 *yii/validators/EachValidator::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/validators/EachValidator::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/validators/EachValidator::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/validators/EachValidator::hasProperty*		public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/validators/EachValidator::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/validators/EachValidator::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/validators/EachValidator::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/validators/EachValidator::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/validators/EachValidator::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/validators/EachValidator::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/validators/EachValidator::on*			public
+
  See |yii/base/Component::on|
 
 
 *yii/validators/EachValidator::off*			public
+
  See |yii/base/Component::off|
 
 
 *yii/validators/EachValidator::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/validators/EachValidator::getBehavior*		public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/validators/EachValidator::getBehaviors*		public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/validators/EachValidator::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/validators/EachValidator::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/validators/EachValidator::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/validators/EachValidator::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/validators/EachValidator::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/validators/EachValidator::createValidator*		public
+
  See |yii/validators/Validator::createValidator|
 
 
 *yii/validators/EachValidator::validateAttributes*	public
+
  See |yii/validators/Validator::validateAttributes|
 
 
@@ -203,15 +252,21 @@ METHOD DETAILS
 >
  validateAttribute($model, $attribute)
 <
-(void)
+return (void)
+
+
 
  Child classes must implement this method to provide the actual validation
  logic.
+
+
+
     [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/EachValidator::validate*			public
+
  See |yii/validators/Validator::validate|
 
 
@@ -219,27 +274,36 @@ METHOD DETAILS
 >
  validateValue($value)
 <
-(array|null) The error message and the parameters to be inserted into the
+return (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
+
+
 
  A validator class can implement this method to support data validation out of
  the context of a data model.
+
+
+
     [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/EachValidator::clientValidateAttribute*	public
+
  See |yii/validators/Validator::clientValidateAttribute|
 
 
 *yii/validators/EachValidator::isActive*			public
+
  See |yii/validators/Validator::isActive|
 
 
 *yii/validators/EachValidator::addError*			public
+
  See |yii/validators/Validator::addError|
 
 
 *yii/validators/EachValidator::isEmpty*			public
+
  See |yii/validators/Validator::isEmpty|
 
 

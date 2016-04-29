@@ -22,14 +22,15 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/mail/MailerInterface::compose*			public
 >
  compose($view='null', $params='[]')
 <
-(\yii\mail\MessageInterface) Message instance.
+return (\yii\mail\MessageInterface) Message instance.
 
-    [$view] (string|array) The view to be used for rendering the message body.
-    This can be:
+    [$view] (string|array|null) The view to be used for rendering the message
+    body. This can be:
 
 
       - a string, which represents the view name or path alias for
@@ -49,7 +50,7 @@ METHOD DETAILS
 >
  send($message)
 <
-(boolean) Whether the message has been sent successfully
+return (boolean) Whether the message has been sent successfully
 
     [$message] (\yii\mail\MessageInterface) Email message instance to be sent
 
@@ -58,10 +59,11 @@ METHOD DETAILS
 >
  sendMultiple($messages)
 <
-(integer) Number of messages that are successfully sent.
+return (integer) Number of messages that are successfully sent.
 
  This method may be implemented by some mailers which support more efficient
  way of sending multiple messages in the same batch.
+
     [$messages] (array) List of email messages, which should be sent.
 
 

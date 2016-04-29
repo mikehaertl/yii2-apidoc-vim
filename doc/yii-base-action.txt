@@ -5,21 +5,21 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/captcha/CaptchaAction|
-|yii/base/InlineAction|
-|yii/web/ErrorAction|
 |yii/web/ViewAction|
-|yii/rest/ViewAction|
+|yii/web/ErrorAction|
+|yii/base/InlineAction|
+|yii/rest/DeleteAction|
 |yii/rest/OptionsAction|
 |yii/rest/IndexAction|
-|yii/rest/Action|
-|yii/rest/UpdateAction|
+|yii/rest/ViewAction|
 |yii/rest/CreateAction|
-|yii/rest/DeleteAction|
-|yii/gii/console/GenerateAction|
+|yii/rest/UpdateAction|
+|yii/rest/Action|
+|yii/captcha/CaptchaAction|
 |yii/authclient/AuthAction|
-|yii/elasticsearch/DebugAction|
 |yii/debug/actions/db/ExplainAction|
+|yii/elasticsearch/DebugAction|
+|yii/gii/console/GenerateAction|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -43,16 +43,20 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $id					*yii/base/Action::$id*
+
  (string) ID of the action
 
 $controller				*yii/base/Action::$controller*
+
  (\yii\base\Controller|\yii\web\Controller) The controller that owns this
  action
 
 $behaviors				*yii/base/Action::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $uniqueId				*yii/base/Action::$uniqueId*
+
  (string) The unique ID of this action among the whole application.
 
 
@@ -60,7 +64,9 @@ $uniqueId				*yii/base/Action::$uniqueId*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/Action::className*				public
+
  See |yii/base/Object::className|
 
 
@@ -68,7 +74,7 @@ METHOD DETAILS
 >
  __construct($id, $controller, $config='[]')
 <
-(void)
+return (void)
 
     [$id] (string) The ID of this action
     [$controller] (\yii\base\Controller) The controller that owns this action
@@ -77,94 +83,117 @@ METHOD DETAILS
 
 
 *yii/base/Action::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/base/Action::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/base/Action::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/base/Action::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/base/Action::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/base/Action::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/base/Action::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/base/Action::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/base/Action::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/base/Action::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/base/Action::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/base/Action::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/base/Action::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/base/Action::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/base/Action::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/base/Action::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/base/Action::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/base/Action::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/base/Action::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/base/Action::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/base/Action::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/base/Action::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/base/Action::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -172,7 +201,7 @@ METHOD DETAILS
 >
  getUniqueId()
 <
-(string) The unique ID of this action among the whole application.
+return (string) The unique ID of this action among the whole application.
 
 
 
@@ -180,9 +209,10 @@ METHOD DETAILS
 >
  runWithParams($params)
 <
-(mixed) The result of the action
+return (mixed) The result of the action
 
  This method is mainly invoked by the controller.
+
     [$params] (array) The parameters to be bound to the action's run() method.
 
 
@@ -190,7 +220,7 @@ METHOD DETAILS
 >
  beforeRun()
 <
-(boolean) Whether to run the action.
+return (boolean) Whether to run the action.
 
  You may override this method to do preparation work for the action run. If
  the method returns false, it will cancel the action.
@@ -200,7 +230,7 @@ METHOD DETAILS
 >
  afterRun()
 <
-(void)
+return (void)
 
  You may override this method to do post-processing work for the action run.
 

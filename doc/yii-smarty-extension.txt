@@ -7,9 +7,11 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $viewRenderer				*yii/smarty/Extension::$viewRenderer*
+
  (\yii\smarty\ViewRenderer)
 
 $smarty					*yii/smarty/Extension::$smarty*
+
  (\Smarty)
 
 
@@ -17,11 +19,12 @@ $smarty					*yii/smarty/Extension::$smarty*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/smarty/Extension::__construct*			public
 >
  __construct($viewRenderer, $smarty)
 <
-(void)
+return (void)
 
     [$viewRenderer] (\yii\smarty\ViewRenderer) 
     [$smarty] (\Smarty) 
@@ -31,13 +34,14 @@ METHOD DETAILS
 >
  functionPath($params, $template)
 <
-(string) 
+return (string) 
 
  Usage is the following:
 
  {path route='blog/view' alias=$post.alias user=$user.id}
 
  where route is Yii route and the rest of parameters are passed as is.
+
     [$params] (array) 
     [$template] (\Smarty_Internal_Template) 
 
@@ -46,13 +50,14 @@ METHOD DETAILS
 >
  functionUrl($params, $template)
 <
-(string) 
+return (string) 
 
  Usage is the following:
 
  {url route='blog/view' alias=$post.alias user=$user.id}
 
  where route is Yii route and the rest of parameters are passed as is.
+
     [$params] (array) 
     [$template] (\Smarty_Internal_Template) 
 
@@ -61,13 +66,14 @@ METHOD DETAILS
 >
  compilerUse($params, $template)
 <
-(string) 
+return (string) 
 
  {use class="app\assets\AppAsset"} {use class="yii\helpers\Html"} {use
  class='yii\widgets\ActiveForm' type='block'} {use
  class='@app\widgets\MyWidget' as='my_widget' type='function'}
 
  Supported attributes: class, as, type. Type defaults to 'static'.
+
     [$params] () 
     [$template] (\Smarty_Internal_Template) 
 
@@ -76,7 +82,7 @@ METHOD DETAILS
 >
  modifierVoid($arg)
 <
-(string) 
+return (string) 
 
     [$arg] (mixed) 
 
@@ -85,11 +91,12 @@ METHOD DETAILS
 >
  functionSet($params, $template)
 <
-(string) 
+return (string) 
 
  {set title="My Page"} {set theme="frontend"} {set layout="main.tpl"}
 
  Supported attributes: title, theme, layout
+
     [$params] () 
     [$template] (\Smarty_Internal_Template) 
 
@@ -98,12 +105,13 @@ METHOD DETAILS
 >
  functionMeta($params, $template)
 <
-(string) 
+return (string) 
 
  {meta keywords="Yii,PHP,Smarty,framework"}
 
  Supported attributes: any; all attributes are passed as parameter array to
  Yii's registerMetaTag function.
+
     [$params] () 
     [$template] (\Smarty_Internal_Template) 
 
@@ -112,11 +120,12 @@ METHOD DETAILS
 >
  blockTitle($params, $content, $template, $repeat)
 <
-(string) 
+return (string) 
 
  {title} Web Site Login {/title}
 
  Supported attributes: none.
+
     [$params] () 
     [$content] () 
     [$template] (\Smarty_Internal_Template) 
@@ -127,12 +136,13 @@ METHOD DETAILS
 >
  blockDescription($params, $content, $template, $repeat)
 <
-(string) 
+return (string) 
 
  {description}     The text between the opening and closing tags is added as  
    meta description tag to the page output. {/description}
 
  Supported attributes: none.
+
     [$params] () 
     [$content] () 
     [$template] (\Smarty_Internal_Template) 
@@ -143,7 +153,7 @@ METHOD DETAILS
 >
  functionRegisterJsFile($params, $template)
 <
-(string) 
+return (string) 
 
  {registerJsFile url='http://maps.google.com/maps/api/js?sensor=false'
  position='POS_END'}
@@ -151,6 +161,7 @@ METHOD DETAILS
  Supported attributes: url, key, depends, position and valid HTML attributes
  for the script tag. Refer to Yii documentation for details. The position
  attribute is passed as text without the class prefix. Default is 'POS_END'.
+
     [$params] () 
     [$template] (\Smarty_Internal_Template) 
 
@@ -159,7 +170,7 @@ METHOD DETAILS
 >
  blockJavaScript($params, $content, $template, $repeat)
 <
-(string) 
+return (string) 
 
  {registerJs key='show' position='POS_LOAD'}    
  $("span.show").replaceWith('<div class="show">'); {/registerJs}
@@ -167,6 +178,7 @@ METHOD DETAILS
  Supported attributes: key, position. Refer to Yii documentation for details.
  The position attribute is passed as text without the class prefix. Default is
  'POS_READY'.
+
     [$params] () 
     [$content] () 
     [$template] (\Smarty_Internal_Template) 
@@ -177,12 +189,13 @@ METHOD DETAILS
 >
  functionRegisterCssFile($params, $template)
 <
-(string) 
+return (string) 
 
  {registerCssFile url='@assets/css/normalizer.css'}
 
  Supported attributes: url, key, depends and valid HTML attributes for the
  link tag. Refer to Yii documentation for details.
+
     [$params] () 
     [$template] (\Smarty_Internal_Template) 
 
@@ -191,13 +204,14 @@ METHOD DETAILS
 >
  blockCss($params, $content, $template, $repeat)
 <
-(string) 
+return (string) 
 
  {registerCss} div.header {     background-color: #3366bd;     color: white; }
  {/registerCss}
 
  Supported attributes: key and valid HTML attributes for the style tag. Refer
  to Yii documentation for details.
+
     [$params] () 
     [$content] () 
     [$template] (\Smarty_Internal_Template) 
@@ -208,7 +222,7 @@ METHOD DETAILS
 >
  getViewConstVal($string, $default)
 <
-(mixed) 
+return (mixed) 
 
     [$string] (string) Constant identifier name
     [$default] (integer) Default value

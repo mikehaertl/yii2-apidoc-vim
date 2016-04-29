@@ -99,6 +99,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $dsn					*yii/db/Connection::$dsn*
+
  (string) The Data Source Name, or DSN, contains the information required to
  connect to the database. Please refer to the [PHP
  manual](http://www.php.net/manual/en/function.PDO-construct.php) on the
@@ -109,50 +110,60 @@ $dsn					*yii/db/Connection::$dsn*
  'sqlite:@app/data/db.sql'.
 
 $username				*yii/db/Connection::$username*
+
  (string) The username for establishing DB connection. Defaults to 'null'
  meaning no username to use.
 
 $password				*yii/db/Connection::$password*
+
  (string) The password for establishing DB connection. Defaults to 'null'
  meaning no password to use.
 
 $attributes				*yii/db/Connection::$attributes*
+
  (array) PDO attributes (name => value) that should be set when calling
  'open()' to establish a DB connection. Please refer to the [PHP
  manual](http://www.php.net/manual/en/function.PDO-setAttribute.php) for
  details about available attributes.
 
 $pdo					*yii/db/Connection::$pdo*
+
  (\PDO) The PHP PDO instance associated with this DB connection. This property
  is mainly managed by 'open()' and 'close()' methods. When a DB connection is
  active, this property will represent a PDO instance; otherwise, it will be
  null.
 
 $enableSchemaCache			*yii/db/Connection::$enableSchemaCache*
+
  (boolean) Whether to enable schema caching. Note that in order to enable
  truly schema caching, a valid cache component as specified by 'schemaCache'
  must be enabled and 'enableSchemaCache' must be set true.
 
 $schemaCacheDuration			*yii/db/Connection::$schemaCacheDuration*
+
  (integer) Number of seconds that table metadata can remain valid in cache.
  Use 0 to indicate that the cached data will never expire.
 
 $schemaCacheExclude			*yii/db/Connection::$schemaCacheExclude*
+
  (array) List of tables whose metadata should NOT be cached. Defaults to empty
  array. The table names may contain schema prefix, if any. Do not quote the
  table names.
 
 $schemaCache				*yii/db/Connection::$schemaCache*
+
  (\yii\caching\Cache|string) The cache object or the ID of the cache
  application component that is used to cache the table metadata.
 
 $enableQueryCache			*yii/db/Connection::$enableQueryCache*
+
  (boolean) Whether to enable query caching. Note that in order to enable query
  caching, a valid cache component as specified by 'queryCache' must be enabled
  and 'enableQueryCache' must be set true. Also, only the results of the
  queries enclosed within 'cache()' will be cached.
 
 $queryCacheDuration			*yii/db/Connection::$queryCacheDuration*
+
  (integer) The default number of seconds that query results can remain valid
  in cache. Use 0 to indicate that the cached data will never expire. Defaults
  to 3600, meaning 3600 seconds, or one hour. Use 0 to indicate that the cached
@@ -160,10 +171,12 @@ $queryCacheDuration			*yii/db/Connection::$queryCacheDuration*
  'cache()' is called without a cache duration.
 
 $queryCache				*yii/db/Connection::$queryCache*
+
  (\yii\caching\Cache|string) The cache object or the ID of the cache
  application component that is used for query caching.
 
 $charset				*yii/db/Connection::$charset*
+
  (string) The charset used for database connection. The property is only used
  for MySQL, PostgreSQL and CUBRID databases. Defaults to null, meaning using
  default charset as specified by the database.
@@ -172,6 +185,7 @@ $charset				*yii/db/Connection::$charset*
  charset via DSN like 'mysql:dbname=mydatabase;host=127.0.0.1;charset=GBK;'.
 
 $emulatePrepare				*yii/db/Connection::$emulatePrepare*
+
  (boolean) Whether to turn on prepare emulation. Defaults to false, meaning
  PDO will use the native prepare support if available. For some databases
  (such as MySQL), this may need to be set true so that PDO can emulate the
@@ -179,11 +193,13 @@ $emulatePrepare				*yii/db/Connection::$emulatePrepare*
  is null, which means the PDO ATTR_EMULATE_PREPARES value will not be changed.
 
 $tablePrefix				*yii/db/Connection::$tablePrefix*
+
  (string) The common prefix or suffix for table names. If a table name is
  given as '{{%TableName}}', then the percentage character '%' will be replaced
  with this property value. For example, '{{%post}}' becomes '{{tbl_post}}'.
 
 $schemaMap				*yii/db/Connection::$schemaMap*
+
  (array) Mapping between PDO driver names and 'Schema' classes. The keys of
  the array are PDO driver names while the values the corresponding schema
  class name or configuration. Please refer to 'Yii::createObject()' for
@@ -195,42 +211,50 @@ $schemaMap				*yii/db/Connection::$schemaMap*
  Yii.
 
 $pdoClass				*yii/db/Connection::$pdoClass*
+
  (string) Custom PDO wrapper class. If not set, it will use 'PDO' or
  'yii\db\mssql\PDO' when MSSQL is used.
 
 $commandClass				*yii/db/Connection::$commandClass*
+
  (string) The class used to create new database 'Command' objects. If you want
  to extend the 'Command' class, you may configure this property to use your
  extended version of the class.
 
 $enableSavepoint			*yii/db/Connection::$enableSavepoint*
+
  (boolean) Whether to enable
  [savepoint](http://en.wikipedia.org/wiki/Savepoint). Note that if the
  underlying DBMS does not support savepoint, setting this property to be true
  will have no effect.
 
 $serverStatusCache			*yii/db/Connection::$serverStatusCache*
+
  (\yii\caching\Cache|string) The cache object or the ID of the cache
  application component that is used to store the health status of the DB
  servers specified in 'masters' and 'slaves'. This is used only when
  read/write splitting is enabled or 'masters' is not empty.
 
 $serverRetryInterval			*yii/db/Connection::$serverRetryInterval*
+
  (integer) The retry interval in seconds for dead servers listed in 'masters'
  and 'slaves'. This is used together with 'serverStatusCache'.
 
 $enableSlaves				*yii/db/Connection::$enableSlaves*
+
  (boolean) Whether to enable read/write splitting by using 'slaves' to read
  data. Note that if 'slaves' is empty, read/write splitting will NOT be
  enabled no matter what value this property takes.
 
 $slaves					*yii/db/Connection::$slaves*
+
  (array) List of slave connection configurations. Each configuration is used
  to create a slave DB connection. When 'enableSlaves' is true, one of these
  configurations will be chosen and used to create a DB connection for
  performing read queries only.
 
 $slaveConfig				*yii/db/Connection::$slaveConfig*
+
  (array) The configuration that should be merged with every slave
  configuration listed in 'slaves'. For example,
 
@@ -246,6 +270,7 @@ $slaveConfig				*yii/db/Connection::$slaveConfig*
 
 
 $masters				*yii/db/Connection::$masters*
+
  (array) List of master connection configurations. Each configuration is used
  to create a master DB connection. When 'open()' is called, one of these
  configurations will be chosen and used to create a DB connection which will
@@ -253,6 +278,7 @@ $masters				*yii/db/Connection::$masters*
  connection setting (e.g. "dsn", "username") of this object will be ignored.
 
 $masterConfig				*yii/db/Connection::$masterConfig*
+
  (array) The configuration that should be merged with every master
  configuration listed in 'masters'. For example,
 
@@ -268,38 +294,48 @@ $masterConfig				*yii/db/Connection::$masterConfig*
 
 
 $behaviors				*yii/db/Connection::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $isActive				*yii/db/Connection::$isActive*
+
  (boolean) Whether the DB connection is established
 
 $transaction				*yii/db/Connection::$transaction*
+
  (\yii\db\Transaction) The currently active transaction. Null if no active
  transaction.
 
 $schema					*yii/db/Connection::$schema*
+
  (\yii\db\Schema) The schema information for the database opened by this
  connection.
 
 $queryBuilder				*yii/db/Connection::$queryBuilder*
+
  (\yii\db\QueryBuilder) The query builder for the current DB connection.
 
 $lastInsertID				*yii/db/Connection::$lastInsertID*
+
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
 $driverName				*yii/db/Connection::$driverName*
+
  (string) Name of the DB driver
 
 $slavePdo				*yii/db/Connection::$slavePdo*
+
  (\PDO) The PDO instance for the currently active slave connection. Null is
  returned if no slave connection is available and '$fallbackToMaster' is
  false.
 
 $masterPdo				*yii/db/Connection::$masterPdo*
+
  (\PDO) The PDO instance for the currently active master connection.
 
 $slave					*yii/db/Connection::$slave*
+
  (\yii\db\Connection) The currently active slave connection. Null is returned
  if there is slave available and '$fallbackToMaster' is false.
 
@@ -308,103 +344,129 @@ $slave					*yii/db/Connection::$slave*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/Connection::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/db/Connection::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/db/Connection::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/db/Connection::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/db/Connection::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/db/Connection::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/db/Connection::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/db/Connection::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/db/Connection::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/db/Connection::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/db/Connection::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/db/Connection::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/db/Connection::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/db/Connection::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/db/Connection::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/db/Connection::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/db/Connection::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/db/Connection::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/db/Connection::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/db/Connection::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/db/Connection::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/db/Connection::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/db/Connection::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/db/Connection::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/db/Connection::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -412,7 +474,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-(boolean) Whether the DB connection is established
+return (boolean) Whether the DB connection is established
 
 
 
@@ -420,7 +482,7 @@ METHOD DETAILS
 >
  cache($callable, $duration=null, $dependency='null')
 <
-(mixed) The return result of the callable
+return (mixed) The return result of the callable
 
  When query caching is enabled ('enableQueryCache' is true and 'queryCache'
  refers to a valid cache), queries performed within the callable will be
@@ -436,6 +498,7 @@ METHOD DETAILS
 
  Note that query cache is only meaningful for queries that return results. For
  queries performed with 'Command::execute()', query cache will not be used.
+
     [$callable] (callable) A PHP callable that contains DB queries which will
     make use of query cache. The signature of the callable is 'function
     (Connection $db)'.
@@ -451,7 +514,7 @@ METHOD DETAILS
 >
  noCache($callable)
 <
-(mixed) The return result of the callable
+return (mixed) The return result of the callable
 
  Queries performed within the callable will not use query cache at all. For
  example,
@@ -468,6 +531,7 @@ METHOD DETAILS
    });
 
 
+
     [$callable] (callable) A PHP callable that contains DB queries which
     should not use query cache. The signature of the callable is 'function
     (Connection $db)'.
@@ -477,10 +541,11 @@ METHOD DETAILS
 >
  getQueryCacheInfo($duration, $dependency)
 <
-(array) The current query cache information, or null if query cache is not
+return (array) The current query cache information, or null if query cache is not
 enabled.
 
  This method is used internally by 'Command'.
+
     [$duration] (integer) The preferred caching duration. If null, it will be
     ignored.
     [$dependency] (\yii\caching\Dependency) The preferred caching dependency.
@@ -491,7 +556,7 @@ enabled.
 >
  open()
 <
-(void)
+return (void)
 
  It does nothing if a DB connection has already been established.
 
@@ -500,7 +565,7 @@ enabled.
 >
  close()
 <
-(void)
+return (void)
 
  It does nothing if the connection is already closed.
 
@@ -509,7 +574,7 @@ enabled.
 >
  createPdoInstance()
 <
-(\PDO) The pdo instance
+return (\PDO) The pdo instance
 
  This method is called by 'open' to establish a DB connection. The default
  implementation will create a PHP PDO instance. You may override this method
@@ -520,7 +585,7 @@ enabled.
 >
  initConnection()
 <
-(void)
+return (void)
 
  This method is invoked right after the DB connection is established. The
  default implementation turns on 'PDO::ATTR_EMULATE_PREPARES' if
@@ -532,7 +597,7 @@ enabled.
 >
  createCommand($sql='null', $params='[]')
 <
-(\yii\db\Command) The DB command
+return (\yii\db\Command) The DB command
 
     [$sql] (string) The SQL statement to be executed
     [$params] (array) The parameters to be bound to the SQL statement
@@ -542,7 +607,7 @@ enabled.
 >
  getTransaction()
 <
-(\yii\db\Transaction) The currently active transaction. Null if no active
+return (\yii\db\Transaction) The currently active transaction. Null if no active
 transaction.
 
 
@@ -551,7 +616,7 @@ transaction.
 >
  beginTransaction($isolationLevel='null')
 <
-(\yii\db\Transaction) The transaction initiated
+return (\yii\db\Transaction) The transaction initiated
 
     [$isolationLevel] (string|null) The isolation level to use for this
     transaction. See 'Transaction::begin()' for details.
@@ -561,7 +626,7 @@ transaction.
 >
  transaction($callback, $isolationLevel='null')
 <
-(mixed) Result of callback function
+return (mixed) Result of callback function
 
     [$callback] (callable) A valid PHP callback that performs the job. Accepts
     connection instance as parameter.
@@ -573,7 +638,7 @@ transaction.
 >
  getSchema()
 <
-(\yii\db\Schema) The schema information for the database opened by this
+return (\yii\db\Schema) The schema information for the database opened by this
 connection.
 
 
@@ -582,7 +647,7 @@ connection.
 >
  getQueryBuilder()
 <
-(\yii\db\QueryBuilder) The query builder for the current DB connection.
+return (\yii\db\QueryBuilder) The query builder for the current DB connection.
 
 
 
@@ -590,7 +655,7 @@ connection.
 >
  getTableSchema($name, $refresh='false')
 <
-(\yii\db\TableSchema) Table schema information. Null if the named table does
+return (\yii\db\TableSchema) Table schema information. Null if the named table does
 not exist.
 
     [$name] (string) Table name.
@@ -602,7 +667,7 @@ not exist.
 >
  getLastInsertID($sequenceName='''')
 <
-(string) The row ID of the last row inserted, or the last value retrieved from
+return (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
     [$sequenceName] (string) Name of the sequence object (required by some
@@ -613,10 +678,11 @@ the sequence object
 >
  quoteValue($value)
 <
-(string) The properly quoted string
+return (string) The properly quoted string
 
  Note that if the parameter is not a string, it will be returned without
  change.
+
     [$value] (string) String to be quoted
 
 
@@ -624,11 +690,12 @@ the sequence object
 >
  quoteTableName($name)
 <
-(string) The properly quoted table name
+return (string) The properly quoted table name
 
  If the table name contains schema prefix, the prefix will also be properly
  quoted. If the table name is already quoted or contains special characters
  including '(', ''' and '{{', then this method will do nothing.
+
     [$name] (string) Table name
 
 
@@ -636,11 +703,12 @@ the sequence object
 >
  quoteColumnName($name)
 <
-(string) The properly quoted column name
+return (string) The properly quoted column name
 
  If the column name contains prefix, the prefix will also be properly quoted.
  If the column name is already quoted or contains special characters including
  '(', ''' and '{{', then this method will do nothing.
+
     [$name] (string) Column name
 
 
@@ -648,12 +716,13 @@ the sequence object
 >
  quoteSql($sql)
 <
-(string) The quoted SQL
+return (string) The quoted SQL
 
  Tokens enclosed within double curly brackets are treated as table names,
  while tokens enclosed within double square brackets are column names. They
  will be quoted accordingly. Also, the percentage character "%" at the
  beginning or ending of a table name will be replaced with 'tablePrefix'.
+
     [$sql] (string) The SQL to be quoted
 
 
@@ -661,7 +730,7 @@ the sequence object
 >
  getDriverName()
 <
-(string) Name of the DB driver
+return (string) Name of the DB driver
 
 
 
@@ -669,7 +738,7 @@ the sequence object
 >
  setDriverName($driverName)
 <
-(void)
+return (void)
 
     [$driverName] (string) Name of the DB driver
 
@@ -678,11 +747,12 @@ the sequence object
 >
  getSlavePdo($fallbackToMaster='true')
 <
-(\PDO) The PDO instance for the currently active slave connection. Null is
+return (\PDO) The PDO instance for the currently active slave connection. Null is
 returned if no slave connection is available and '$fallbackToMaster' is false.
 
  When 'enableSlaves' is true, one of the slaves will be used for read queries,
  and its PDO instance will be returned by this method.
+
     [$fallbackToMaster] (boolean) Whether to return a master PDO in case none
     of the slave connections is available.
 
@@ -691,7 +761,7 @@ returned if no slave connection is available and '$fallbackToMaster' is false.
 >
  getMasterPdo()
 <
-(\PDO) The PDO instance for the currently active master connection.
+return (\PDO) The PDO instance for the currently active master connection.
 
  This method will open the master DB connection and then return 'pdo'.
 
@@ -700,11 +770,12 @@ returned if no slave connection is available and '$fallbackToMaster' is false.
 >
  getSlave($fallbackToMaster='true')
 <
-(\yii\db\Connection) The currently active slave connection. Null is returned
+return (\yii\db\Connection) The currently active slave connection. Null is returned
 if there is slave available and '$fallbackToMaster' is false.
 
  If this method is called the first time, it will try to open a slave
  connection when 'enableSlaves' is true.
+
     [$fallbackToMaster] (boolean) Whether to return a master connection in
     case there is no slave connection available.
 
@@ -713,7 +784,7 @@ if there is slave available and '$fallbackToMaster' is false.
 >
  useMaster($callback)
 <
-(mixed) The return value of the callback
+return (mixed) The return value of the callback
 
  This method is provided so that you can temporarily force using the master
  connection to perform DB operations even if they are read queries. For
@@ -722,6 +793,7 @@ if there is slave available and '$fallbackToMaster' is false.
    $result = $db->useMaster(function ($db) {
        return $db->createCommand('SELECT * FROM user LIMIT 1')->queryOne();
    });
+
 
 
     [$callback] (callable) A PHP callable to be executed by this method. Its
@@ -733,11 +805,12 @@ if there is slave available and '$fallbackToMaster' is false.
 >
  openFromPool($pool, $sharedConfig)
 <
-(\yii\db\Connection) The opened DB connection, or null if no server is
+return (\yii\db\Connection) The opened DB connection, or null if no server is
 available
 
  This method implements the load balancing among the given list of the
  servers.
+
     [$pool] (array) The list of connection configurations in the server pool
     [$sharedConfig] (array) The configuration common to those given in
     '$pool'.
@@ -747,7 +820,7 @@ available
 >
  __sleep()
 <
-(array) 
+return (array) 
 
 
 

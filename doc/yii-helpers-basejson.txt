@@ -17,6 +17,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $jsonErrorMessages			*yii/helpers/BaseJson::$jsonErrorMessages*
+
  (array)
 
 
@@ -24,15 +25,17 @@ $jsonErrorMessages			*yii/helpers/BaseJson::$jsonErrorMessages*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/helpers/BaseJson::encode*				public
 >
  encode($value, $options=320)
 <
-(string) The encoding result.
+return (string) The encoding result.
 
  The method enhances 'json_encode()' by supporting JavaScript expressions. In
  particular, the method will not encode a JavaScript expression that is
  represented in terms of a 'JsExpression' object.
+
     [$value] (mixed) The data to be encoded.
     [$options] (integer) The encoding options. For more details please refer
     to <http://www.php.net/manual/en/function.json-encode.php>. Default is
@@ -43,11 +46,12 @@ METHOD DETAILS
 >
  htmlEncode($value)
 <
-(string) The encoding result
+return (string) The encoding result
 
  The method enhances 'json_encode()' by supporting JavaScript expressions. In
  particular, the method will not encode a JavaScript expression that is
  represented in terms of a 'JsExpression' object.
+
     [$value] (mixed) The data to be encoded
 
 
@@ -55,7 +59,7 @@ METHOD DETAILS
 >
  decode($json, $asArray='true')
 <
-(mixed) The PHP data
+return (mixed) The PHP data
 
     [$json] (string) The JSON string to be decoded
     [$asArray] (boolean) Whether to return objects in terms of associative
@@ -66,7 +70,7 @@ METHOD DETAILS
 >
  handleJsonError($lastError)
 <
-(void)
+return (void)
 
     [$lastError] (integer) Error code from
     [json_last_error()](http://php.net/manual/en/function.json-last-error.php).
@@ -76,7 +80,7 @@ METHOD DETAILS
 >
  processData($data, $expressions, $expPrefix)
 <
-(mixed) The processed data
+return (mixed) The processed data
 
     [$data] (mixed) The data to be processed
     [$expressions] (array) Collection of JavaScript expressions

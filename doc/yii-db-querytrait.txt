@@ -12,18 +12,22 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $where					*yii/db/QueryTrait::$where*
+
  (string|array) Query condition. This refers to the WHERE clause in a SQL
  statement. For example, '['age' => 31, 'team' => 1]'.
 
 $limit					*yii/db/QueryTrait::$limit*
+
  (integer) Maximum number of records to be returned. If not set or less than
  0, it means no limit.
 
 $offset					*yii/db/QueryTrait::$offset*
+
  (integer) Zero-based offset from where the records are to be returned. If not
  set or less than 0, it means starting from the beginning.
 
 $orderBy				*yii/db/QueryTrait::$orderBy*
+
  (array) How to sort the query results. This is used to construct the ORDER BY
  clause in a SQL statement. The array keys are the columns to be sorted by,
  and the array values are the corresponding sort directions which can be
@@ -34,6 +38,7 @@ $orderBy				*yii/db/QueryTrait::$orderBy*
  expressions will be converted into strings without any change.
 
 $indexBy				*yii/db/QueryTrait::$indexBy*
+
  (string|callable) The name of the column by which the query results should be
  indexed by. This can also be a callable (e.g. anonymous function) that
  returns the index value based on the given row data. For more details, see
@@ -44,11 +49,12 @@ $indexBy				*yii/db/QueryTrait::$indexBy*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/QueryTrait::indexBy*				public
 >
  indexBy($column)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$column] (string|callable) The name of the column by which the query
     results should be indexed by. This can also be a callable (e.g. anonymous
@@ -67,9 +73,10 @@ METHOD DETAILS
 >
  where($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  See 'QueryInterface::where()' for detailed documentation.
+
     [$condition] (string|array) The conditions that should be put in the WHERE
     part.
 
@@ -78,10 +85,11 @@ METHOD DETAILS
 >
  andWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
+
     [$condition] (string|array) The new WHERE condition. Please refer to
     'where()' on how to specify this parameter.
 
@@ -90,10 +98,11 @@ METHOD DETAILS
 >
  orWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
+
     [$condition] (string|array) The new WHERE condition. Please refer to
     'where()' on how to specify this parameter.
 
@@ -102,7 +111,7 @@ METHOD DETAILS
 >
  filterWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  This method is similar to 'where()'. The main difference is that this method
  will remove 'isEmpty()|empty query operands'. As a result, this method is
@@ -120,6 +129,7 @@ METHOD DETAILS
 
  Note that unlike 'where()', you cannot pass binding parameters to this
  method.
+
     [$condition] (array) The conditions that should be put in the WHERE part.
     See 'where()' on how to specify this parameter.
 
@@ -128,7 +138,7 @@ METHOD DETAILS
 >
  andFilterWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -137,6 +147,7 @@ METHOD DETAILS
  method will remove 'isEmpty()|empty query operands'. As a result, this method
  is best suited for building query conditions based on filter values entered
  by users.
+
     [$condition] (array) The new WHERE condition. Please refer to 'where()' on
     how to specify this parameter.
 
@@ -145,7 +156,7 @@ METHOD DETAILS
 >
  orFilterWhere($condition)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -154,6 +165,7 @@ METHOD DETAILS
  method will remove 'isEmpty()|empty query operands'. As a result, this method
  is best suited for building query conditions based on filter values entered
  by users.
+
     [$condition] (array) The new WHERE condition. Please refer to 'where()' on
     how to specify this parameter.
 
@@ -162,7 +174,7 @@ METHOD DETAILS
 >
  filterCondition($condition)
 <
-(array) The condition with 'isEmpty()|empty operands' removed.
+return (array) The condition with 'isEmpty()|empty operands' removed.
 
     [$condition] (array) The original condition
 
@@ -171,7 +183,7 @@ METHOD DETAILS
 >
  isEmpty($value)
 <
-(boolean) If the value is empty
+return (boolean) If the value is empty
 
  The value is considered "empty", if one of the following conditions is
  satisfied:
@@ -181,6 +193,7 @@ METHOD DETAILS
    - an empty string (''''), 
    - a string containing only whitespace characters, 
    - or an empty array.
+
     [$value] (mixed) 
 
 
@@ -188,7 +201,7 @@ METHOD DETAILS
 >
  orderBy($columns)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$columns] (string|array|\yii\db\Expression) The columns (and the
     directions) to be ordered by. Columns can be specified in either a string
@@ -211,7 +224,7 @@ METHOD DETAILS
 >
  addOrderBy($columns)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$columns] (string|array|\yii\db\Expression) The columns (and the
     directions) to be ordered by. Columns can be specified in either a string
@@ -234,7 +247,7 @@ METHOD DETAILS
 >
  normalizeOrderBy($columns)
 <
-(array) 
+return (array) 
 
     [$columns] (array|string|\yii\db\Expression) The columns value to
     normalize. See 'orderBy' and 'addOrderBy'.
@@ -244,7 +257,7 @@ METHOD DETAILS
 >
  limit($limit)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$limit] (integer) The limit. Use null or negative value to disable limit.
 
@@ -253,7 +266,7 @@ METHOD DETAILS
 >
  offset($offset)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$offset] (integer) The offset. Use null or negative value to disable
     offset.

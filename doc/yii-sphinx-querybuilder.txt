@@ -13,18 +13,22 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/sphinx/QueryBuilder::$db*
+
  (\yii\sphinx\Connection) The Sphinx connection.
 
 $separator				*yii/sphinx/QueryBuilder::$separator*
+
  (string) The separator between different fragments of a SQL statement.
  Defaults to an empty space. This is mainly used by 'build()' when generating
  a SQL statement.
 
 $querySeparator				*yii/sphinx/QueryBuilder::$querySeparator*
+
  (string) Separator between different SQL queries. This is mainly used by
  'build()' when generating a SQL statement.
 
 $conditionBuilders			*yii/sphinx/QueryBuilder::$conditionBuilders*
+
  (array) Map of query condition to builder methods. These methods are used by
  'buildCondition' to build SQL conditions from array syntax.
 
@@ -33,7 +37,9 @@ $conditionBuilders			*yii/sphinx/QueryBuilder::$conditionBuilders*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/sphinx/QueryBuilder::className*			public
+
  See |yii/base/Object::className|
 
 
@@ -41,7 +47,7 @@ METHOD DETAILS
 >
  __construct($connection, $config='[]')
 <
-(void)
+return (void)
 
     [$connection] (\yii\sphinx\Connection) The Sphinx connection.
     [$config] (array) Name-value pairs that will be used to initialize the
@@ -49,42 +55,52 @@ METHOD DETAILS
 
 
 *yii/sphinx/QueryBuilder::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/sphinx/QueryBuilder::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/sphinx/QueryBuilder::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/sphinx/QueryBuilder::__isset*			public
+
  See |yii/base/Object::__isset|
 
 
 *yii/sphinx/QueryBuilder::__unset*			public
+
  See |yii/base/Object::__unset|
 
 
 *yii/sphinx/QueryBuilder::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/sphinx/QueryBuilder::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/sphinx/QueryBuilder::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/sphinx/QueryBuilder::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/sphinx/QueryBuilder::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -92,7 +108,7 @@ METHOD DETAILS
 >
  build($query, $params='[]')
 <
-(array) The generated SQL statement (the first array element) and the
+return (array) The generated SQL statement (the first array element) and the
 corresponding parameters to be bound to the SQL statement (the second array
 element). The parameters returned include those provided in '$params'.
 
@@ -107,7 +123,7 @@ element). The parameters returned include those provided in '$params'.
 >
  insert($index, $columns, $params)
 <
-(string) The INSERT SQL
+return (string) The INSERT SQL
 
  For example,
 
@@ -118,6 +134,7 @@ element). The parameters returned include those provided in '$params'.
    ], $params);
 
  The method will properly escape the index and column names.
+
     [$index] (string) The index that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
     index.
@@ -129,7 +146,7 @@ element). The parameters returned include those provided in '$params'.
 >
  replace($index, $columns, $params)
 <
-(string) The INSERT SQL
+return (string) The INSERT SQL
 
  For example,
 
@@ -140,6 +157,7 @@ element). The parameters returned include those provided in '$params'.
    ], $params);
 
  The method will properly escape the index and column names.
+
     [$index] (string) The index that new rows will be replaced.
     [$columns] (array) The column data (name => value) to be replaced in the
     index.
@@ -151,7 +169,7 @@ element). The parameters returned include those provided in '$params'.
 >
  generateInsertReplace($statement, $index, $columns, $params)
 <
-(string) Generated SQL
+return (string) Generated SQL
 
     [$statement] (string) Statement ot be generated.
     [$index] (string) The affected index name.
@@ -164,7 +182,7 @@ element). The parameters returned include those provided in '$params'.
 >
  batchInsert($index, $columns, $rows, $params)
 <
-(string) The batch INSERT SQL statement
+return (string) The batch INSERT SQL statement
 
  For example,
 
@@ -175,6 +193,7 @@ element). The parameters returned include those provided in '$params'.
    ], $params);
 
  Note that the values in each row must match the corresponding column names.
+
     [$index] (string) The index that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch inserted into the index
@@ -186,7 +205,7 @@ element). The parameters returned include those provided in '$params'.
 >
  batchReplace($index, $columns, $rows, $params)
 <
-(string) The batch INSERT SQL statement
+return (string) The batch INSERT SQL statement
 
  For example,
 
@@ -197,6 +216,7 @@ element). The parameters returned include those provided in '$params'.
    ], $params);
 
  Note that the values in each row must match the corresponding column names.
+
     [$index] (string) The index that new rows will be replaced.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch replaced in the index
@@ -208,7 +228,7 @@ element). The parameters returned include those provided in '$params'.
 >
  generateBatchInsertReplace($statement, $index, $columns, $rows, $params)
 <
-(string) Generated SQL
+return (string) Generated SQL
 
     [$statement] (string) Statement ot be generated.
     [$index] (string) The affected index name.
@@ -222,7 +242,7 @@ element). The parameters returned include those provided in '$params'.
 >
  update($index, $columns, $condition, $params, $options)
 <
-(string) The UPDATE SQL
+return (string) The UPDATE SQL
 
  For example,
 
@@ -231,6 +251,7 @@ element). The parameters returned include those provided in '$params'.
  $params);
 
  The method will properly escape the index and column names.
+
     [$index] (string) The index to be updated.
     [$columns] (array) The column data (name => value) to be updated.
     [$condition] (array|string) The condition that will be put in the WHERE
@@ -244,13 +265,14 @@ element). The parameters returned include those provided in '$params'.
 >
  delete($index, $condition, $params)
 <
-(string) The DELETE SQL
+return (string) The DELETE SQL
 
  For example,
 
    $sql = $queryBuilder->delete('idx_user', 'status = 0');
 
  The method will properly escape the index and column names.
+
     [$index] (string) The index where the data will be deleted from.
     [$condition] (array|string) The condition that will be put in the WHERE
     part. Please refer to 'Query::where()' on how to specify condition.
@@ -262,7 +284,7 @@ element). The parameters returned include those provided in '$params'.
 >
  truncateIndex($index)
 <
-(string) The SQL statement for truncating an index.
+return (string) The SQL statement for truncating an index.
 
     [$index] (string) The index to be truncated. The name will be properly
     quoted by the method.
@@ -272,7 +294,7 @@ element). The parameters returned include those provided in '$params'.
 >
  callSnippets($index, $source, $match, $options, $params)
 <
-(string) The SQL statement for call snippets.
+return (string) The SQL statement for call snippets.
 
     [$index] (string) Name of the index, from which to take the text
     processing settings.
@@ -288,7 +310,7 @@ element). The parameters returned include those provided in '$params'.
 >
  callKeywords($index, $text, $fetchStatistic, $params)
 <
-(string) The SQL statement for call keywords.
+return (string) The SQL statement for call keywords.
 
     [$index] (string) The name of the index from which to take the text
     processing settings
@@ -303,7 +325,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildSelect($columns, $params, $distinct='false', $selectOption='null')
 <
-(string) The SELECT clause built from 'query'.
+return (string) The SELECT clause built from 'query'.
 
     [$columns] (array) 
     [$params] (array) The binding parameters to be populated
@@ -315,7 +337,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildFrom($indexes, $params)
 <
-(string) The FROM clause built from 'query'.
+return (string) The FROM clause built from 'query'.
 
     [$indexes] (array) 
     [$params] (array) The binding parameters to be populated
@@ -325,7 +347,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildWhere($indexes, $condition, $params, $match='null')
 <
-(string) The WHERE clause built from 'query'.
+return (string) The WHERE clause built from 'query'.
 
     [$indexes] (string[]) List of index names, which affected by query
     [$condition] (string|array) 
@@ -337,7 +359,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildGroupBy($columns)
 <
-(string) The GROUP BY clause
+return (string) The GROUP BY clause
 
     [$columns] (array) 
 
@@ -346,7 +368,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildHaving($indexes, $condition, $params)
 <
-(string) The HAVING clause built from 'Query::$having'.
+return (string) The HAVING clause built from 'Query::$having'.
 
     [$indexes] (string[]) List of index names, which affected by query
     [$condition] (string|array) 
@@ -357,7 +379,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildOrderByAndLimit($sql, $orderBy, $limit, $offset)
 <
-(string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
+return (string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
 
     [$sql] (string) The existing SQL (without ORDER BY/LIMIT/OFFSET)
     [$orderBy] (array) The order by columns. See 'Query::orderBy' for more
@@ -371,7 +393,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildOrderBy($columns)
 <
-(string) The ORDER BY clause built from 'query'.
+return (string) The ORDER BY clause built from 'query'.
 
     [$columns] (array) 
 
@@ -380,7 +402,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildLimit($limit, $offset)
 <
-(string) The LIMIT and OFFSET clauses built from 'query'.
+return (string) The LIMIT and OFFSET clauses built from 'query'.
 
     [$limit] (integer) 
     [$offset] (integer) 
@@ -390,9 +412,10 @@ element). The parameters returned include those provided in '$params'.
 >
  buildColumns($columns)
 <
-(string) The processing result
+return (string) The processing result
 
  It will join all columns into a string with comma as separators.
+
     [$columns] (string|array) The columns to be processed
 
 
@@ -400,7 +423,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildCondition($indexes, $condition, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -413,7 +436,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildHashCondition($indexes, $condition, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -425,7 +448,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildAndCondition($indexes, $operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -438,7 +461,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildNotCondition($indexes, $operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -451,7 +474,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildBetweenCondition($indexes, $operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -465,7 +488,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildInCondition($indexes, $operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -482,7 +505,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildCompositeInCondition($indexes, $operator, $columns, $values, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -496,7 +519,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildLikeCondition($indexes, $operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -526,7 +549,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildSimpleCondition($indexes, $operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -540,7 +563,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildWithin($columns)
 <
-(string) The ORDER BY clause built from 'query'.
+return (string) The ORDER BY clause built from 'query'.
 
     [$columns] (array) 
 
@@ -549,7 +572,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildOption($options, $params)
 <
-(string) The OPTION clause build from 'query'
+return (string) The OPTION clause build from 'query'
 
     [$options] (array) Query options in format: optionName => optionValue
     [$params] (array) The binding parameters to be populated
@@ -559,7 +582,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildFacets($facets, $params)
 <
-(string) The FACET clause build from 'query'
+return (string) The FACET clause build from 'query'
 
     [$facets] (array) Facet specifications
     [$params] (array) The binding parameters to be populated
@@ -569,7 +592,7 @@ element). The parameters returned include those provided in '$params'.
 >
  buildShowMeta($showMeta, $params)
 <
-(string) SHOW META query, if it does not required 
+return (string) SHOW META query, if it does not required 
   - empty string.
 
     [$showMeta] (boolean|string|\yii\db\Expression) Show meta specification.
@@ -580,7 +603,7 @@ element). The parameters returned include those provided in '$params'.
 >
  composeColumnValue($indexes, $columnName, $value, $params)
 <
-(string) SQL expression, which represents column value
+return (string) SQL expression, which represents column value
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query

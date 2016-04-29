@@ -6,74 +6,95 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/apidoc/models/TraitDoc|
-|yii/apidoc/models/ClassDoc|
 |yii/apidoc/models/InterfaceDoc|
+|yii/apidoc/models/ClassDoc|
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $phpDocContext				*yii/apidoc/models/TypeDoc::$phpDocContext*
+
  See |yii/apidoc/models/BaseDoc::$phpDocContext|
 
 $name					*yii/apidoc/models/TypeDoc::$name*
+
  See |yii/apidoc/models/BaseDoc::$name|
 
 $sourceFile				*yii/apidoc/models/TypeDoc::$sourceFile*
+
  See |yii/apidoc/models/BaseDoc::$sourceFile|
 
 $startLine				*yii/apidoc/models/TypeDoc::$startLine*
+
  See |yii/apidoc/models/BaseDoc::$startLine|
 
 $endLine				*yii/apidoc/models/TypeDoc::$endLine*
+
  See |yii/apidoc/models/BaseDoc::$endLine|
 
 $shortDescription			*yii/apidoc/models/TypeDoc::$shortDescription*
+
  See |yii/apidoc/models/BaseDoc::$shortDescription|
 
 $description				*yii/apidoc/models/TypeDoc::$description*
+
  See |yii/apidoc/models/BaseDoc::$description|
 
 $since					*yii/apidoc/models/TypeDoc::$since*
+
  See |yii/apidoc/models/BaseDoc::$since|
 
 $deprecatedSince			*yii/apidoc/models/TypeDoc::$deprecatedSince*
+
  See |yii/apidoc/models/BaseDoc::$deprecatedSince|
 
 $deprecatedReason			*yii/apidoc/models/TypeDoc::$deprecatedReason*
+
  See |yii/apidoc/models/BaseDoc::$deprecatedReason|
 
 $tags					*yii/apidoc/models/TypeDoc::$tags*
+
  See |yii/apidoc/models/BaseDoc::$tags|
 
 $authors				*yii/apidoc/models/TypeDoc::$authors*
+
  ()
 
 $methods				*yii/apidoc/models/TypeDoc::$methods*
+
  (\yii\apidoc\models\MethodDoc[])
 
 $properties				*yii/apidoc/models/TypeDoc::$properties*
+
  (\yii\apidoc\models\PropertyDoc[])
 
 $namespace				*yii/apidoc/models/TypeDoc::$namespace*
+
  ()
 
 $nativeMethods				*yii/apidoc/models/TypeDoc::$nativeMethods*
+
  (\yii\apidoc\models\MethodDoc[])
 
 $publicMethods				*yii/apidoc/models/TypeDoc::$publicMethods*
+
  (\yii\apidoc\models\MethodDoc[])
 
 $protectedMethods			*yii/apidoc/models/TypeDoc::$protectedMethods*
+
  (\yii\apidoc\models\MethodDoc[])
 
 $nativeProperties			*yii/apidoc/models/TypeDoc::$nativeProperties*
+
  (\yii\apidoc\models\PropertyDoc[])
 
 $publicProperties			*yii/apidoc/models/TypeDoc::$publicProperties*
+
  (\yii\apidoc\models\PropertyDoc[])
 
 $protectedProperties			*yii/apidoc/models/TypeDoc::$protectedProperties*
+
  (\yii\apidoc\models\PropertyDoc[])
 
 
@@ -81,7 +102,9 @@ $protectedProperties			*yii/apidoc/models/TypeDoc::$protectedProperties*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/apidoc/models/TypeDoc::className*			public
+
  See |yii/base/Object::className|
 
 
@@ -89,7 +112,7 @@ METHOD DETAILS
 >
  __construct($reflector='null', $context='null', $config='[]')
 <
-(void)
+return (void)
 
     [$reflector] (\phpDocumentor\Reflection\InterfaceReflector) 
     [$context] (\yii\apidoc\models\Context) 
@@ -97,54 +120,72 @@ METHOD DETAILS
 
 
 *yii/apidoc/models/TypeDoc::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/apidoc/models/TypeDoc::__get*			public
+
  See |yii/base/Object::__get|
 
 
 *yii/apidoc/models/TypeDoc::__set*			public
+
  See |yii/base/Object::__set|
 
 
 *yii/apidoc/models/TypeDoc::__isset*			public
+
  See |yii/base/Object::__isset|
 
 
 *yii/apidoc/models/TypeDoc::__unset*			public
+
  See |yii/base/Object::__unset|
 
 
 *yii/apidoc/models/TypeDoc::__call*			public
+
  See |yii/base/Object::__call|
 
 
 *yii/apidoc/models/TypeDoc::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/apidoc/models/TypeDoc::canGetProperty*		public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/apidoc/models/TypeDoc::canSetProperty*		public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/apidoc/models/TypeDoc::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/apidoc/models/TypeDoc::hasTag*			public
+
  See |yii/apidoc/models/BaseDoc::hasTag|
 
 
 *yii/apidoc/models/TypeDoc::removeTag*			public
+
  See |yii/apidoc/models/BaseDoc::removeTag|
 
 
+*yii/apidoc/models/TypeDoc::getFirstTag*			public
+
+ See |yii/apidoc/models/BaseDoc::getFirstTag|
+
+
 *yii/apidoc/models/TypeDoc::extractFirstSentence*		public
+
  See |yii/apidoc/models/BaseDoc::extractFirstSentence|
 
 
@@ -152,7 +193,7 @@ METHOD DETAILS
 >
  findSubject($subjectName)
 <
-(null|\yii\apidoc\models\MethodDoc|\yii\apidoc\models\PropertyDoc) 
+return (null|\yii\apidoc\models\MethodDoc|\yii\apidoc\models\PropertyDoc) 
 
  If there is a property with the same as a method, the method will be returned
  if the name is not stated explicitly by prefixing with '$'.
@@ -165,6 +206,7 @@ METHOD DETAILS
    - '$subjectName = 'attributes()'' finds a method or nothing. 
    - '$subjectName = 'attributes'' finds the method if it exists, if
    not it will find the property.
+
     [$subjectName] () 
 
 
@@ -172,7 +214,7 @@ METHOD DETAILS
 >
  getNativeMethods()
 <
-(\yii\apidoc\models\MethodDoc[]) 
+return (\yii\apidoc\models\MethodDoc[]) 
 
 
 
@@ -180,7 +222,7 @@ METHOD DETAILS
 >
  getPublicMethods()
 <
-(\yii\apidoc\models\MethodDoc[]) 
+return (\yii\apidoc\models\MethodDoc[]) 
 
 
 
@@ -188,7 +230,7 @@ METHOD DETAILS
 >
  getProtectedMethods()
 <
-(\yii\apidoc\models\MethodDoc[]) 
+return (\yii\apidoc\models\MethodDoc[]) 
 
 
 
@@ -196,7 +238,7 @@ METHOD DETAILS
 >
  getNativeProperties()
 <
-(\yii\apidoc\models\PropertyDoc[]) 
+return (\yii\apidoc\models\PropertyDoc[]) 
 
 
 
@@ -204,7 +246,7 @@ METHOD DETAILS
 >
  getPublicProperties()
 <
-(\yii\apidoc\models\PropertyDoc[]) 
+return (\yii\apidoc\models\PropertyDoc[]) 
 
 
 
@@ -212,7 +254,7 @@ METHOD DETAILS
 >
  getProtectedProperties()
 <
-(\yii\apidoc\models\PropertyDoc[]) 
+return (\yii\apidoc\models\PropertyDoc[]) 
 
 
 

@@ -23,46 +23,68 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $id					*yii/rest/Controller::$id*
+
  See |yii/base/Controller::$id|
 
 $module					*yii/rest/Controller::$module*
+
  See |yii/base/Controller::$module|
 
 $defaultAction				*yii/rest/Controller::$defaultAction*
+
  See |yii/base/Controller::$defaultAction|
 
 $layout					*yii/rest/Controller::$layout*
+
  See |yii/base/Controller::$layout|
 
 $action					*yii/rest/Controller::$action*
+
  See |yii/base/Controller::$action|
 
 $enableCsrfValidation			*yii/rest/Controller::$enableCsrfValidation*
- ()
+
+ (boolean) Whether to enable CSRF validation for the actions in this
+ controller. CSRF validation is enabled only when both this property and
+ '\yii\web\Request::enableCsrfValidation' are true.
+
+ Whether to enable CSRF validation for the actions in this controller. CSRF
+ validation is enabled only when both this property and
+ '\yii\web\Request::enableCsrfValidation' are true.
+
+
 
 $actionParams				*yii/rest/Controller::$actionParams*
+
  See |yii/web/Controller::$actionParams|
 
 $serializer				*yii/rest/Controller::$serializer*
+
  (string|array) The configuration for creating the serializer that formats the
  response data.
 
 $behaviors				*yii/rest/Controller::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $modules				*yii/rest/Controller::$modules*
+
  See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/rest/Controller::$uniqueId*
+
  See |yii/base/Controller::$uniqueId|
 
 $route					*yii/rest/Controller::$route*
+
  See |yii/base/Controller::$route|
 
 $view					*yii/rest/Controller::$view*
+
  See |yii/base/Controller::$view|
 
 $viewPath				*yii/rest/Controller::$viewPath*
+
  See |yii/base/Controller::$viewPath|
 
 
@@ -70,55 +92,69 @@ $viewPath				*yii/rest/Controller::$viewPath*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/rest/Controller::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/rest/Controller::__construct*			public
+
  See |yii/base/Controller::__construct|
 
 
 *yii/rest/Controller::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/rest/Controller::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/rest/Controller::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/rest/Controller::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/rest/Controller::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/rest/Controller::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/rest/Controller::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/rest/Controller::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/rest/Controller::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/rest/Controller::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/rest/Controller::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
@@ -126,7 +162,9 @@ METHOD DETAILS
 >
  behaviors()
 <
-(array) The behavior configurations.
+return (array) The behavior configurations.
+
+
 
  Child classes may override this method to specify the behaviors they want to
  behave as.
@@ -152,71 +190,90 @@ METHOD DETAILS
  automatically (on demand).
 
 
+
+
 *yii/rest/Controller::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/rest/Controller::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/rest/Controller::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/rest/Controller::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/rest/Controller::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/rest/Controller::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/rest/Controller::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/rest/Controller::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/rest/Controller::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/rest/Controller::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/rest/Controller::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/rest/Controller::actions*				public
+
  See |yii/base/Controller::actions|
 
 
 *yii/rest/Controller::runAction*				public
+
  See |yii/base/Controller::runAction|
 
 
 *yii/rest/Controller::run*				public
+
  See |yii/base/Controller::run|
 
 
 *yii/rest/Controller::bindActionParams*			public
+
  See |yii/web/Controller::bindActionParams|
 
 
 *yii/rest/Controller::createAction*			public
+
  See |yii/base/Controller::createAction|
 
 
 *yii/rest/Controller::beforeAction*			public
+
  See |yii/web/Controller::beforeAction|
 
 
@@ -224,7 +281,9 @@ METHOD DETAILS
 >
  afterAction($action, $result)
 <
-(mixed) The processed action result.
+return (mixed) The processed action result.
+
+
 
  The method will trigger the 'EVENT_AFTER_ACTION' event. The return value of
  the method will be used as the action return value.
@@ -239,75 +298,93 @@ METHOD DETAILS
    }
 
 
+
     [$action] (\yii\base\Action) The action just executed.
     [$result] (mixed) The action return result.
 
 
 *yii/rest/Controller::getModules*				public
+
  See |yii/base/Controller::getModules|
 
 
 *yii/rest/Controller::getUniqueId*			public
+
  See |yii/base/Controller::getUniqueId|
 
 
 *yii/rest/Controller::getRoute*				public
+
  See |yii/base/Controller::getRoute|
 
 
 *yii/rest/Controller::render*				public
+
  See |yii/base/Controller::render|
 
 
 *yii/rest/Controller::renderContent*			public
+
  See |yii/base/Controller::renderContent|
 
 
 *yii/rest/Controller::renderPartial*			public
+
  See |yii/base/Controller::renderPartial|
 
 
 *yii/rest/Controller::renderFile*				public
+
  See |yii/base/Controller::renderFile|
 
 
 *yii/rest/Controller::getView*				public
+
  See |yii/base/Controller::getView|
 
 
 *yii/rest/Controller::setView*				public
+
  See |yii/base/Controller::setView|
 
 
 *yii/rest/Controller::getViewPath*			public
+
  See |yii/base/Controller::getViewPath|
 
 
 *yii/rest/Controller::setViewPath*			public
+
  See |yii/base/Controller::setViewPath|
 
 
 *yii/rest/Controller::findLayoutFile*			public
+
  See |yii/base/Controller::findLayoutFile|
 
 
 *yii/rest/Controller::renderAjax*				public
+
  See |yii/web/Controller::renderAjax|
 
 
 *yii/rest/Controller::redirect*				public
+
  See |yii/web/Controller::redirect|
 
 
 *yii/rest/Controller::goHome*				public
+
  See |yii/web/Controller::goHome|
 
 
 *yii/rest/Controller::goBack*				public
+
  See |yii/web/Controller::goBack|
 
 
 *yii/rest/Controller::refresh*				public
+
  See |yii/web/Controller::refresh|
 
 
@@ -315,7 +392,7 @@ METHOD DETAILS
 >
  verbs()
 <
-(array) The allowed HTTP verbs.
+return (array) The allowed HTTP verbs.
 
  Please refer to 'VerbFilter::actions' on how to declare the allowed verbs.
 
@@ -324,11 +401,12 @@ METHOD DETAILS
 >
  serializeData($data)
 <
-(mixed) The serialized data.
+return (mixed) The serialized data.
 
  The default implementation will create a serializer based on the
  configuration given by 'serializer'. It then uses the serializer to serialize
  the given data.
+
     [$data] (mixed) The data to be serialized
 
 

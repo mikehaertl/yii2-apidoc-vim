@@ -5,11 +5,11 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/caching/FileDependency|
-|yii/caching/TagDependency|
-|yii/caching/ChainedDependency|
 |yii/caching/ExpressionDependency|
+|yii/caching/FileDependency|
 |yii/caching/DbDependency|
+|yii/caching/ChainedDependency|
+|yii/caching/TagDependency|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -22,10 +22,12 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $data					*yii/caching/Dependency::$data*
+
  (mixed) The dependency data that is saved in cache and later is compared with
  the latest dependency data.
 
 $reusable				*yii/caching/Dependency::$reusable*
+
  (boolean) Whether this dependency is reusable or not. True value means that
  dependent data for this cache dependency will be generated only once per
  request. This allows you to use the same cache dependency for multiple
@@ -37,51 +39,64 @@ $reusable				*yii/caching/Dependency::$reusable*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/caching/Dependency::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/caching/Dependency::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/caching/Dependency::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/caching/Dependency::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/caching/Dependency::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/caching/Dependency::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/caching/Dependency::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/caching/Dependency::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/caching/Dependency::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/caching/Dependency::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/caching/Dependency::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/caching/Dependency::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -89,9 +104,10 @@ METHOD DETAILS
 >
  evaluateDependency($cache)
 <
-(void)
+return (void)
 
  This method is invoked by cache before writing data into it.
+
     [$cache] (\yii\caching\Cache) The cache component that is currently
     evaluating this dependency
 
@@ -100,7 +116,7 @@ METHOD DETAILS
 >
  getHasChanged($cache)
 <
-(boolean) Whether the dependency has changed.
+return (boolean) Whether the dependency has changed.
 
     [$cache] (\yii\caching\Cache) The cache component that is currently
     evaluating this dependency
@@ -110,7 +126,7 @@ METHOD DETAILS
 >
  resetReusableData()
 <
-(void)
+return (void)
 
 
 
@@ -118,7 +134,7 @@ METHOD DETAILS
 >
  generateReusableHash()
 <
-(string) A unique hash value for this cache dependency.
+return (string) A unique hash value for this cache dependency.
 
 
 
@@ -126,10 +142,11 @@ METHOD DETAILS
 >
  generateDependencyData($cache)
 <
-(mixed) The data needed to determine if dependency has been changed.
+return (mixed) The data needed to determine if dependency has been changed.
 
  Derived classes should override this method to generate the actual dependency
  data.
+
     [$cache] (\yii\caching\Cache) The cache component that is currently
     evaluating this dependency
 

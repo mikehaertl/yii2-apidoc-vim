@@ -18,11 +18,12 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/test/FixtureTrait::fixtures*				public
 >
  fixtures()
 <
-(array) The fixtures needed by the current test case
+return (array) The fixtures needed by the current test case
 
  The return value of this method must be an array of fixture configurations.
  For example,
@@ -47,7 +48,7 @@ METHOD DETAILS
 >
  globalFixtures()
 <
-(array) The fixtures shared and required by different test cases.
+return (array) The fixtures shared and required by different test cases.
 
  The return value should be similar to that of 'fixtures()'. You should
  usually override this method in a base class.
@@ -57,9 +58,10 @@ METHOD DETAILS
 >
  loadFixtures($fixtures='null')
 <
-(void)
+return (void)
 
  This method will call 'Fixture::load()' for every fixture object.
+
     [$fixtures] (\yii\test\Fixture[]) The fixtures to be loaded. If this
     parameter is not specified, the return value of 'getFixtures()' will be
     used.
@@ -69,9 +71,10 @@ METHOD DETAILS
 >
  unloadFixtures($fixtures='null')
 <
-(void)
+return (void)
 
  This method will call 'Fixture::unload()' for every fixture object.
+
     [$fixtures] (\yii\test\Fixture[]) The fixtures to be loaded. If this
     parameter is not specified, the return value of 'getFixtures()' will be
     used.
@@ -81,7 +84,7 @@ METHOD DETAILS
 >
  getFixtures()
 <
-(\yii\test\Fixture[]) The loaded fixtures for the current test case
+return (\yii\test\Fixture[]) The loaded fixtures for the current test case
 
 
 
@@ -89,7 +92,7 @@ METHOD DETAILS
 >
  getFixture($name)
 <
-(\yii\test\Fixture) The fixture object, or null if the named fixture does not
+return (\yii\test\Fixture) The fixture object, or null if the named fixture does not
 exist.
 
     [$name] (string) The fixture name. This can be either the fixture alias
@@ -100,9 +103,10 @@ exist.
 >
  createFixtures($fixtures)
 <
-(\yii\test\Fixture[]) The created fixture instances
+return (\yii\test\Fixture[]) The created fixture instances
 
  All dependent fixtures will also be created.
+
     [$fixtures] (array) The fixtures to be created. You may provide fixture
     names or fixture configurations. If this parameter is not provided, the
     fixtures specified in 'globalFixtures()' and 'fixtures()' will be created.

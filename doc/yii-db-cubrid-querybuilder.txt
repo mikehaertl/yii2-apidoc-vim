@@ -7,16 +7,20 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/cubrid/QueryBuilder::$db*
+
  See |yii/db/QueryBuilder::$db|
 
 $separator				*yii/db/cubrid/QueryBuilder::$separator*
+
  See |yii/db/QueryBuilder::$separator|
 
 $typeMap				*yii/db/cubrid/QueryBuilder::$typeMap*
+
  (array) Mapping from abstract column types (keys) to physical column types
  (values).
 
 $conditionBuilders			*yii/db/cubrid/QueryBuilder::$conditionBuilders*
+
  See |yii/db/QueryBuilder::$conditionBuilders|
 
 
@@ -24,127 +28,159 @@ $conditionBuilders			*yii/db/cubrid/QueryBuilder::$conditionBuilders*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/cubrid/QueryBuilder::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/db/cubrid/QueryBuilder::__construct*			public
- See |yii/db/QueryBuilder::__construct|
+
+ See |yii/base/Object::__construct|
 
 
 *yii/db/cubrid/QueryBuilder::init*			public
+
  See |yii/base/Object::init|
 
 
 *yii/db/cubrid/QueryBuilder::__get*			public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/cubrid/QueryBuilder::__set*			public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/cubrid/QueryBuilder::__isset*			public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/cubrid/QueryBuilder::__unset*			public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/cubrid/QueryBuilder::__call*			public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/cubrid/QueryBuilder::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/cubrid/QueryBuilder::canGetProperty*		public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/cubrid/QueryBuilder::canSetProperty*		public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/cubrid/QueryBuilder::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/db/cubrid/QueryBuilder::build*			public
+
  See |yii/db/QueryBuilder::build|
 
 
 *yii/db/cubrid/QueryBuilder::insert*			public
+
  See |yii/db/QueryBuilder::insert|
 
 
 *yii/db/cubrid/QueryBuilder::batchInsert*			public
+
  See |yii/db/QueryBuilder::batchInsert|
 
 
 *yii/db/cubrid/QueryBuilder::update*			public
+
  See |yii/db/QueryBuilder::update|
 
 
 *yii/db/cubrid/QueryBuilder::delete*			public
+
  See |yii/db/QueryBuilder::delete|
 
 
 *yii/db/cubrid/QueryBuilder::createTable*			public
+
  See |yii/db/QueryBuilder::createTable|
 
 
 *yii/db/cubrid/QueryBuilder::renameTable*			public
+
  See |yii/db/QueryBuilder::renameTable|
 
 
 *yii/db/cubrid/QueryBuilder::dropTable*			public
+
  See |yii/db/QueryBuilder::dropTable|
 
 
 *yii/db/cubrid/QueryBuilder::addPrimaryKey*		public
+
  See |yii/db/QueryBuilder::addPrimaryKey|
 
 
 *yii/db/cubrid/QueryBuilder::dropPrimaryKey*		public
+
  See |yii/db/QueryBuilder::dropPrimaryKey|
 
 
 *yii/db/cubrid/QueryBuilder::truncateTable*		public
+
  See |yii/db/QueryBuilder::truncateTable|
 
 
 *yii/db/cubrid/QueryBuilder::addColumn*			public
+
  See |yii/db/QueryBuilder::addColumn|
 
 
 *yii/db/cubrid/QueryBuilder::dropColumn*			public
+
  See |yii/db/QueryBuilder::dropColumn|
 
 
 *yii/db/cubrid/QueryBuilder::renameColumn*		public
+
  See |yii/db/QueryBuilder::renameColumn|
 
 
 *yii/db/cubrid/QueryBuilder::alterColumn*			public
+
  See |yii/db/QueryBuilder::alterColumn|
 
 
 *yii/db/cubrid/QueryBuilder::addForeignKey*		public
+
  See |yii/db/QueryBuilder::addForeignKey|
 
 
 *yii/db/cubrid/QueryBuilder::dropForeignKey*		public
+
  See |yii/db/QueryBuilder::dropForeignKey|
 
 
 *yii/db/cubrid/QueryBuilder::createIndex*			public
+
  See |yii/db/QueryBuilder::createIndex|
 
 
 *yii/db/cubrid/QueryBuilder::dropIndex*			public
+
  See |yii/db/QueryBuilder::dropIndex|
 
 
@@ -152,10 +188,11 @@ METHOD DETAILS
 >
  resetSequence($tableName, $value='null')
 <
-(string) The SQL statement for resetting sequence
+return (string) The SQL statement for resetting sequence
 
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
+
     [$tableName] (string) The name of the table whose primary key sequence
     will be reset
     [$value] (mixed) The value for the primary key of the next new row
@@ -164,42 +201,124 @@ METHOD DETAILS
 
 
 *yii/db/cubrid/QueryBuilder::checkIntegrity*		public
+
  See |yii/db/QueryBuilder::checkIntegrity|
 
 
+*yii/db/cubrid/QueryBuilder::addCommentOnColumn*		public
+>
+ addCommentOnColumn($table, $column, $comment)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$column] (string) The name of the column to be commented. The column name
+    will be properly quoted by the method.
+    [$comment] (string) The text of the comment to be added. The comment will
+    be properly quoted by the method.
+
+
+*yii/db/cubrid/QueryBuilder::addCommentOnTable*		public
+>
+ addCommentOnTable($table, $comment)
+<
+return (string) The SQL statement for adding comment on table
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$comment] (string) The text of the comment to be added. The comment will
+    be properly quoted by the method.
+
+
+*yii/db/cubrid/QueryBuilder::dropCommentFromColumn*	public
+>
+ dropCommentFromColumn($table, $column)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$column] (string) The name of the column to be commented. The column name
+    will be properly quoted by the method.
+
+
+*yii/db/cubrid/QueryBuilder::dropCommentFromTable*	public
+>
+ dropCommentFromTable($table)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+
+
 *yii/db/cubrid/QueryBuilder::getColumnType*		public
+
  See |yii/db/QueryBuilder::getColumnType|
 
 
 *yii/db/cubrid/QueryBuilder::buildSelect*			public
+
  See |yii/db/QueryBuilder::buildSelect|
 
 
 *yii/db/cubrid/QueryBuilder::buildFrom*			public
+
  See |yii/db/QueryBuilder::buildFrom|
 
 
 *yii/db/cubrid/QueryBuilder::buildJoin*			public
+
  See |yii/db/QueryBuilder::buildJoin|
 
 
 *yii/db/cubrid/QueryBuilder::buildWhere*			public
+
  See |yii/db/QueryBuilder::buildWhere|
 
 
 *yii/db/cubrid/QueryBuilder::buildGroupBy*		public
+
  See |yii/db/QueryBuilder::buildGroupBy|
 
 
 *yii/db/cubrid/QueryBuilder::buildHaving*			public
+
  See |yii/db/QueryBuilder::buildHaving|
 
 
 *yii/db/cubrid/QueryBuilder::buildOrderByAndLimit*	public
+
  See |yii/db/QueryBuilder::buildOrderByAndLimit|
 
 
 *yii/db/cubrid/QueryBuilder::buildOrderBy*		public
+
  See |yii/db/QueryBuilder::buildOrderBy|
 
 
@@ -207,70 +326,106 @@ METHOD DETAILS
 >
  buildLimit($limit, $offset)
 <
-(string) The LIMIT and OFFSET clauses
+return (string) The LIMIT and OFFSET clauses
+
+
+
+
+
+
 
     [$limit] (integer) 
     [$offset] (integer) 
 
 
 *yii/db/cubrid/QueryBuilder::hasLimit*			protected
+
  See |yii/db/QueryBuilder::hasLimit|
 
 
 *yii/db/cubrid/QueryBuilder::hasOffset*			protected
+
  See |yii/db/QueryBuilder::hasOffset|
 
 
 *yii/db/cubrid/QueryBuilder::buildUnion*			public
+
  See |yii/db/QueryBuilder::buildUnion|
 
 
 *yii/db/cubrid/QueryBuilder::buildColumns*		public
+
  See |yii/db/QueryBuilder::buildColumns|
 
 
 *yii/db/cubrid/QueryBuilder::buildCondition*		public
+
  See |yii/db/QueryBuilder::buildCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildHashCondition*		public
+
  See |yii/db/QueryBuilder::buildHashCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildAndCondition*		public
+
  See |yii/db/QueryBuilder::buildAndCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildNotCondition*		public
+
  See |yii/db/QueryBuilder::buildNotCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildBetweenCondition*	public
+
  See |yii/db/QueryBuilder::buildBetweenCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildInCondition*		public
+
  See |yii/db/QueryBuilder::buildInCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildSubqueryInCondition*	protected
+
  See |yii/db/QueryBuilder::buildSubqueryInCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildCompositeInCondition*	protected
+
  See |yii/db/QueryBuilder::buildCompositeInCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildLikeCondition*		public
+
  See |yii/db/QueryBuilder::buildLikeCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildExistsCondition*	public
+
  See |yii/db/QueryBuilder::buildExistsCondition|
 
 
 *yii/db/cubrid/QueryBuilder::buildSimpleCondition*	public
+
  See |yii/db/QueryBuilder::buildSimpleCondition|
+
+
+*yii/db/cubrid/QueryBuilder::selectExists*		public
+>
+ selectExists($rawSql)
+<
+return (string) The SELECT EXISTS() SQL statement.
+
+
+
+
+
+
+
+    [$rawSql] (string) The subquery in a raw form to select from.
 
 
 

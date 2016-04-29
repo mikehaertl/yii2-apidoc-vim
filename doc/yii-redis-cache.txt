@@ -53,12 +53,15 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $keyPrefix				*yii/redis/Cache::$keyPrefix*
+
  See |yii/caching/Cache::$keyPrefix|
 
 $serializer				*yii/redis/Cache::$serializer*
+
  See |yii/caching/Cache::$serializer|
 
 $redis					*yii/redis/Cache::$redis*
+
  (\yii\redis\Connection|string|array) The Redis 'Connection' object or the
  application component ID of the Redis 'Connection'. This can also be an array
  that is used to create a redis 'Connection' instance in case you do not want
@@ -67,6 +70,7 @@ $redis					*yii/redis/Cache::$redis*
  assign it with a Redis 'Connection' object.
 
 $behaviors				*yii/redis/Cache::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -74,11 +78,14 @@ $behaviors				*yii/redis/Cache::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/redis/Cache::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/redis/Cache::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -86,105 +93,129 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method will initialize the 'redis' property to make sure it refers to a
  valid redis connection.
 
 
 *yii/redis/Cache::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/redis/Cache::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/redis/Cache::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/redis/Cache::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/redis/Cache::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/redis/Cache::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/redis/Cache::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/redis/Cache::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/redis/Cache::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/redis/Cache::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/redis/Cache::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/redis/Cache::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/redis/Cache::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/redis/Cache::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/redis/Cache::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/redis/Cache::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/redis/Cache::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/redis/Cache::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/redis/Cache::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/redis/Cache::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/redis/Cache::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/redis/Cache::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/redis/Cache::buildKey*				public
+
  See |yii/caching/Cache::buildKey|
 
 
 *yii/redis/Cache::get*					public
+
  See |yii/caching/Cache::get|
 
 
@@ -192,55 +223,66 @@ METHOD DETAILS
 >
  exists($key)
 <
-(boolean) True if a value exists in cache, false if the value is not in the
+return (boolean) True if a value exists in cache, false if the value is not in the
 cache or expired.
 
  This can be faster than getting the value from the cache if the data is big.
  Note that this method does not check whether the dependency associated with
  the cached data, if there is any, has changed. So a call to 'get' may return
  false while exists returns true.
+
     [$key] (mixed) A key identifying the cached value. This can be a simple
     string or a complex data structure consisting of factors representing the
     key.
 
 
 *yii/redis/Cache::mget*					public
+
  See |yii/caching/Cache::mget|
 
 
 *yii/redis/Cache::multiGet*				public
+
  See |yii/caching/Cache::multiGet|
 
 
 *yii/redis/Cache::set*					public
+
  See |yii/caching/Cache::set|
 
 
 *yii/redis/Cache::mset*					public
+
  See |yii/caching/Cache::mset|
 
 
 *yii/redis/Cache::multiSet*				public
+
  See |yii/caching/Cache::multiSet|
 
 
 *yii/redis/Cache::madd*					public
+
  See |yii/caching/Cache::madd|
 
 
 *yii/redis/Cache::multiAdd*				public
+
  See |yii/caching/Cache::multiAdd|
 
 
 *yii/redis/Cache::add*					public
+
  See |yii/caching/Cache::add|
 
 
 *yii/redis/Cache::delete*					public
+
  See |yii/caching/Cache::delete|
 
 
 *yii/redis/Cache::flush*					public
+
  See |yii/caching/Cache::flush|
 
 
@@ -248,11 +290,16 @@ cache or expired.
 >
  getValue($key)
 <
-(string|boolean) The value stored in cache, false if the value is not in the
+return (string|boolean) The value stored in cache, false if the value is not in the
 cache or expired.
+
+
 
  This method should be implemented by child classes to retrieve the data from
  specific cache storage.
+
+
+
     [$key] (string) A unique key identifying the cached value
 
 
@@ -260,10 +307,15 @@ cache or expired.
 >
  setValue($key, $value, $expire)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
+
+
 
  This method should be implemented by child classes to store the data in
  specific cache storage.
+
+
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$expire] () 
@@ -273,10 +325,15 @@ cache or expired.
 >
  addValue($key, $value, $expire)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
+
+
 
  This method should be implemented by child classes to store the data in
  specific cache storage.
+
+
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$expire] () 
@@ -286,7 +343,13 @@ cache or expired.
 >
  deleteValue($key)
 <
-(boolean) If no error happens during deletion
+return (boolean) If no error happens during deletion
+
+
+
+
+
+
 
     [$key] (string) The key of the value to be deleted
 
@@ -295,20 +358,29 @@ cache or expired.
 >
  flushValues()
 <
-(boolean) Whether the flush operation was successful.
+return (boolean) Whether the flush operation was successful.
+
+
 
  Child classes may implement this method to realize the flush operation.
+
+
 
 
 *yii/redis/Cache::getValues*				protected
 >
  getValues($keys)
 <
-(array) A list of cached values indexed by the keys
+return (array) A list of cached values indexed by the keys
+
+
 
  The default implementation calls 'getValue()' multiple times to retrieve the
  cached values one by one. If the underlying cache storage supports multiget,
  this method should be overridden to exploit that feature.
+
+
+
     [$keys] (array) A list of keys identifying the cached values
 
 
@@ -316,33 +388,43 @@ cache or expired.
 >
  setValues($data, $expire)
 <
-(array) Array of failed keys
+return (array) Array of failed keys
+
+
 
  The default implementation calls 'setValue()' multiple times store values one
  by one. If the underlying cache storage supports multi-set, this method
  should be overridden to exploit that feature.
+
+
+
     [$data] (array) Array where key corresponds to cache key while value is
     the value stored
     [$expire] () 
 
 
 *yii/redis/Cache::addValues*				protected
+
  See |yii/caching/Cache::addValues|
 
 
 *yii/redis/Cache::offsetExists*				public
+
  See |yii/caching/Cache::offsetExists|
 
 
 *yii/redis/Cache::offsetGet*				public
+
  See |yii/caching/Cache::offsetGet|
 
 
 *yii/redis/Cache::offsetSet*				public
+
  See |yii/caching/Cache::offsetSet|
 
 
 *yii/redis/Cache::offsetUnset*				public
+
  See |yii/caching/Cache::offsetUnset|
 
 

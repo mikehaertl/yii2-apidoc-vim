@@ -25,6 +25,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $bundles				*yii/web/AssetManager::$bundles*
+
  (array|boolean) List of asset bundle configurations. This property is
  provided to customize asset bundles. When a bundle is being loaded by
  'getBundle()', if it has a corresponding configuration specified here, the
@@ -50,13 +51,16 @@ $bundles				*yii/web/AssetManager::$bundles*
 
 
 $basePath				*yii/web/AssetManager::$basePath*
+
  (string) The root directory storing the published asset files.
 
 $baseUrl				*yii/web/AssetManager::$baseUrl*
+
  (string) The base URL through which the published asset files can be
  accessed.
 
 $assetMap				*yii/web/AssetManager::$assetMap*
+
  (array) Mapping from source asset files (keys) to target asset files
  (values).
 
@@ -89,6 +93,7 @@ $assetMap				*yii/web/AssetManager::$assetMap*
 
 
 $linkAssets				*yii/web/AssetManager::$linkAssets*
+
  (boolean) Whether to use symbolic link to publish asset files. Defaults to
  false, meaning asset files are copied to 'basePath'. Using symbolic links has
  the benefit that the published assets will always be consistent with the
@@ -106,17 +111,20 @@ $linkAssets				*yii/web/AssetManager::$linkAssets*
  '''apache Options FollowSymLinks '''
 
 $fileMode				*yii/web/AssetManager::$fileMode*
+
  (integer) The permission to be set for newly published asset files. This
  value will be used by PHP chmod() function. No umask will be applied. If not
  set, the permission will be determined by the current environment.
 
 $dirMode				*yii/web/AssetManager::$dirMode*
+
  (integer) The permission to be set for newly generated asset directories.
  This value will be used by PHP chmod() function. No umask will be applied.
  Defaults to 0775, meaning the directory is read-writable by owner and group,
  but read-only for other users.
 
 $beforeCopy				*yii/web/AssetManager::$beforeCopy*
+
  (callback) A PHP callback that is called before copying each sub-directory or
  file. This option is used only when publishing a directory. If the callback
  returns false, the copy operation for the sub-directory or file will be
@@ -130,12 +138,14 @@ $beforeCopy				*yii/web/AssetManager::$beforeCopy*
  '\yii\helpers\FileHelper::copyDirectory()'.
 
 $afterCopy				*yii/web/AssetManager::$afterCopy*
+
  (callback) A PHP callback that is called after a sub-directory or file is
  successfully copied. This option is used only when publishing a directory.
  The signature of the callback is the same as for 'beforeCopy'. This is passed
  as a parameter 'afterCopy' to '\yii\helpers\FileHelper::copyDirectory()'.
 
 $forceCopy				*yii/web/AssetManager::$forceCopy*
+
  (boolean) Whether the directory being published should be copied even if it
  is found in the target directory. This option is used only when publishing a
  directory. You may want to set this to be 'true' during the development stage
@@ -143,6 +153,7 @@ $forceCopy				*yii/web/AssetManager::$forceCopy*
  true on production servers as it will significantly degrade the performance.
 
 $appendTimestamp			*yii/web/AssetManager::$appendTimestamp*
+
  (boolean) Whether to append a timestamp to the URL of every published asset.
  When this is true, the URL of a published asset may look like
  '/path/to/asset?v=timestamp', where 'timestamp' is the last modification time
@@ -151,6 +162,7 @@ $appendTimestamp			*yii/web/AssetManager::$appendTimestamp*
  bust caching when the assets are updated.
 
 $hashCallback				*yii/web/AssetManager::$hashCallback*
+
  (callable) A callback that will be called to produce hash for asset directory
  generation. The signature of the callback should be as follows:
 
@@ -174,9 +186,11 @@ $hashCallback				*yii/web/AssetManager::$hashCallback*
 
 
 $behaviors				*yii/web/AssetManager::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $converter				*yii/web/AssetManager::$converter*
+
  (\yii\web\AssetConverterInterface) The asset converter.
 
 
@@ -184,11 +198,14 @@ $converter				*yii/web/AssetManager::$converter*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/web/AssetManager::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/web/AssetManager::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -196,95 +213,117 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/web/AssetManager::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/web/AssetManager::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/web/AssetManager::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/web/AssetManager::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/web/AssetManager::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/web/AssetManager::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/web/AssetManager::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/web/AssetManager::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/web/AssetManager::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/web/AssetManager::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/web/AssetManager::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/web/AssetManager::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/web/AssetManager::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/web/AssetManager::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/web/AssetManager::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/web/AssetManager::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/web/AssetManager::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/web/AssetManager::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/web/AssetManager::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/web/AssetManager::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/web/AssetManager::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/web/AssetManager::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -292,11 +331,12 @@ METHOD DETAILS
 >
  getBundle($name, $publish='true')
 <
-(\yii\web\AssetBundle) The asset bundle instance
+return (\yii\web\AssetBundle) The asset bundle instance
 
  This method will first look for the bundle in 'bundles'. If not found, it
  will treat '$name' as the class of the asset bundle and create a new instance
  of it.
+
     [$name] (string) The class name of the asset bundle (without the leading
     backslash)
     [$publish] (boolean) Whether to publish the asset files in the asset
@@ -308,7 +348,7 @@ METHOD DETAILS
 >
  loadBundle($name, $config='[]', $publish='true')
 <
-(\yii\web\AssetBundle) 
+return (\yii\web\AssetBundle) 
 
     [$name] (string) Bundle name
     [$config] (array) Bundle object configuration
@@ -319,7 +359,7 @@ METHOD DETAILS
 >
  loadDummyBundle($name)
 <
-(\yii\web\AssetBundle) 
+return (\yii\web\AssetBundle) 
 
     [$name] (string) 
 
@@ -328,10 +368,11 @@ METHOD DETAILS
 >
  getAssetUrl($bundle, $asset)
 <
-(string) The actual URL for the specified asset.
+return (string) The actual URL for the specified asset.
 
  The actual URL is obtained by prepending either 'baseUrl' or
  'AssetManager::baseUrl' to the given asset path.
+
     [$bundle] (\yii\web\AssetBundle) The asset bundle which the asset file
     belongs to
     [$asset] (string) The asset path. This should be one of the assets listed
@@ -342,7 +383,7 @@ METHOD DETAILS
 >
  getAssetPath($bundle, $asset)
 <
-(string|boolean) The actual file path, or false if the asset is specified as
+return (string|boolean) The actual file path, or false if the asset is specified as
 an absolute URL
 
     [$bundle] (\yii\web\AssetBundle) The asset bundle which the asset file
@@ -355,7 +396,7 @@ an absolute URL
 >
  resolveAsset($bundle, $asset)
 <
-(string|boolean) 
+return (string|boolean) 
 
     [$bundle] (\yii\web\AssetBundle) 
     [$asset] (string) 
@@ -365,7 +406,7 @@ an absolute URL
 >
  getConverter()
 <
-(\yii\web\AssetConverterInterface) The asset converter.
+return (\yii\web\AssetConverterInterface) The asset converter.
 
 
 
@@ -373,7 +414,7 @@ an absolute URL
 >
  setConverter($value)
 <
-(void)
+return (void)
 
     [$value] (array|\yii\web\AssetConverterInterface) The asset converter.
     This can be either an object implementing the 'AssetConverterInterface',
@@ -385,7 +426,7 @@ an absolute URL
 >
  publish($path, $options='[]')
 <
-(array) The path (directory or file path) and the URL that the asset is
+return (array) The path (directory or file path) and the URL that the asset is
 published as.
 
  This method will copy the specified file or directory to 'basePath' so that
@@ -411,6 +452,7 @@ published as.
  trigger a 'publish()' call, and doing that in the application deployment
  phase, before system goes live. See more in the following discussion:
  http://code.google.com/p/yii/issues/detail?id=2579
+
     [$path] (string) The asset (file or directory) to be published
     [$options] (array) The options to be applied when publishing a directory.
     The following options are supported:
@@ -437,7 +479,7 @@ published as.
 >
  publishFile($src)
 <
-(array) The path and the URL that the asset is published as.
+return (array) The path and the URL that the asset is published as.
 
     [$src] (string) The asset file to be published
 
@@ -446,7 +488,7 @@ published as.
 >
  publishDirectory($src, $options)
 <
-(array) The path directory and the URL that the asset is published as.
+return (array) The path directory and the URL that the asset is published as.
 
     [$src] (string) The asset directory to be published
     [$options] (array) The options to be applied when publishing a directory.
@@ -474,11 +516,12 @@ published as.
 >
  getPublishedPath($path)
 <
-(string|false) String the published file path. False if the file or directory
+return (string|false) String the published file path. False if the file or directory
 does not exist
 
  This method does not perform any publishing. It merely tells you if the file
  or directory is published, where it will go.
+
     [$path] (string) Directory or file path being published
 
 
@@ -486,11 +529,12 @@ does not exist
 >
  getPublishedUrl($path)
 <
-(string|false) String the published URL for the file or directory. False if
+return (string|false) String the published URL for the file or directory. False if
 the file or directory does not exist.
 
  This method does not perform any publishing. It merely tells you if the file
  path is published, what the URL will be to access it.
+
     [$path] (string) Directory or file path being published
 
 
@@ -498,7 +542,7 @@ the file or directory does not exist.
 >
  hash($path)
 <
-(string) Hashed string.
+return (string) Hashed string.
 
     [$path] (string) String to be hashed.
 

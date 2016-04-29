@@ -54,21 +54,27 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $where					*yii/elasticsearch/Query::$where*
+
  See |yii/db/QueryTrait::$where|
 
 $limit					*yii/elasticsearch/Query::$limit*
+
  See |yii/db/QueryTrait::$limit|
 
 $offset					*yii/elasticsearch/Query::$offset*
+
  See |yii/db/QueryTrait::$offset|
 
 $orderBy				*yii/elasticsearch/Query::$orderBy*
+
  See |yii/db/QueryTrait::$orderBy|
 
 $indexBy				*yii/elasticsearch/Query::$indexBy*
+
  See |yii/db/QueryTrait::$indexBy|
 
 $fields					*yii/elasticsearch/Query::$fields*
+
  (array) The fields being retrieved from the documents. For example, '['id',
  'name']'. If not set, this option will not be applied to the query and no
  fields will be returned. In this case the '_source' field will be returned by
@@ -97,11 +103,12 @@ $fields					*yii/elasticsearch/Query::$fields*
  one value.
 
  [always returned as arrays]:
- http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/_return_values.html#_return_values
+ http://www.elastic.co/guide/en/elasticsearch/reference/1.x/_return_values.html#_return_values
  [script field]:
- http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-script-fields.html
+ http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
 
 $source					*yii/elasticsearch/Query::$source*
+
  (array) This option controls how the '_source' field is returned from the
  documents. For example, '['id', 'name']' means that only the 'id' and 'name'
  field should be returned from '_source'. If not set, it means retrieving the
@@ -110,45 +117,64 @@ $source					*yii/elasticsearch/Query::$source*
  primaryKey of a record will be available in the result.
 
 $index					*yii/elasticsearch/Query::$index*
+
  (string|array) The index to retrieve data from. This can be a string
  representing a single index or a an array of multiple indexes. If this is not
  set, indexes are being queried.
 
 $type					*yii/elasticsearch/Query::$type*
+
  (string|array) The type to retrieve data from. This can be a string
  representing a single type or a an array of multiple types. If this is not
  set, all types are being queried.
 
 $timeout				*yii/elasticsearch/Query::$timeout*
+
  (integer) A search timeout, bounding the search request to be executed within
  the specified time value and bail with the hits accumulated up to that point
  when expired. Defaults to no timeout.
 
 $query					*yii/elasticsearch/Query::$query*
+
  (array|string) The query part of this search query. This is an array or json
  string that follows the format of the elasticsearch [Query
- DSL](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html).
+ DSL](http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).
 
 $filter					*yii/elasticsearch/Query::$filter*
+
  (array|string) The filter part of this search query. This is an array or json
  string that follows the format of the elasticsearch [Query
- DSL](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html).
+ DSL](http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).
 
 $highlight				*yii/elasticsearch/Query::$highlight*
+
  (array) The highlight part of this search query. This is an array that allows
  to highlight search results on one or more fields.
 
 $aggregations				*yii/elasticsearch/Query::$aggregations*
+
  (array) List of aggregations to add to this query.
 
 $stats					*yii/elasticsearch/Query::$stats*
+
  (array) The 'stats' part of the query. An array of groups to maintain a
  statistics aggregation for.
 
 $suggest				*yii/elasticsearch/Query::$suggest*
+
  (array) List of suggesters to add to this query.
 
+$minScore				*yii/elasticsearch/Query::$minScore*
+
+ (float) Exclude documents which have a _score less than the minimum specified
+ in min_score
+
+$options				*yii/elasticsearch/Query::$options*
+
+ (array) List of options that will passed to commands created by this query.
+
 $behaviors				*yii/elasticsearch/Query::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -156,11 +182,14 @@ $behaviors				*yii/elasticsearch/Query::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/elasticsearch/Query::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/elasticsearch/Query::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -168,153 +197,193 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/elasticsearch/Query::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/elasticsearch/Query::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/elasticsearch/Query::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/elasticsearch/Query::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/elasticsearch/Query::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/elasticsearch/Query::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/elasticsearch/Query::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/elasticsearch/Query::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/elasticsearch/Query::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/elasticsearch/Query::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/elasticsearch/Query::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/elasticsearch/Query::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/elasticsearch/Query::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/elasticsearch/Query::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/elasticsearch/Query::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/elasticsearch/Query::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/elasticsearch/Query::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/elasticsearch/Query::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/elasticsearch/Query::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/elasticsearch/Query::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/elasticsearch/Query::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/elasticsearch/Query::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/elasticsearch/Query::indexBy*			public
+
  See |yii/db/QueryTrait::indexBy|
 
 
 *yii/elasticsearch/Query::where*				public
+
  See |yii/db/QueryTrait::where|
 
 
 *yii/elasticsearch/Query::andWhere*			public
+
  See |yii/db/QueryTrait::andWhere|
 
 
 *yii/elasticsearch/Query::orWhere*			public
+
  See |yii/db/QueryTrait::orWhere|
 
 
 *yii/elasticsearch/Query::filterWhere*			public
+
  See |yii/db/QueryTrait::filterWhere|
 
 
 *yii/elasticsearch/Query::andFilterWhere*			public
+
  See |yii/db/QueryTrait::andFilterWhere|
 
 
 *yii/elasticsearch/Query::orFilterWhere*			public
+
  See |yii/db/QueryTrait::orFilterWhere|
 
 
 *yii/elasticsearch/Query::filterCondition*		protected
+
  See |yii/db/QueryTrait::filterCondition|
 
 
 *yii/elasticsearch/Query::isEmpty*			protected
+
  See |yii/db/QueryTrait::isEmpty|
 
 
 *yii/elasticsearch/Query::orderBy*			public
+
  See |yii/db/QueryTrait::orderBy|
 
 
 *yii/elasticsearch/Query::addOrderBy*			public
+
  See |yii/db/QueryTrait::addOrderBy|
 
 
 *yii/elasticsearch/Query::normalizeOrderBy*		protected
+
  See |yii/db/QueryTrait::normalizeOrderBy|
 
 
 *yii/elasticsearch/Query::limit*				public
+
  See |yii/db/QueryTrait::limit|
 
 
 *yii/elasticsearch/Query::offset*				public
+
  See |yii/db/QueryTrait::offset|
 
 
@@ -322,7 +391,7 @@ METHOD DETAILS
 >
  createCommand($db='null')
 <
-(\yii\elasticsearch\Command) The created DB command instance.
+return (\yii\elasticsearch\Command) The created DB command instance.
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -333,7 +402,7 @@ METHOD DETAILS
 >
  all($db='null')
 <
-(array) The query results. If the query results in nothing, an empty array
+return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
@@ -341,11 +410,23 @@ will be returned.
     application component will be used.
 
 
+*yii/elasticsearch/Query::populate*			public
+>
+ populate($rows)
+<
+return (array) The converted query result
+
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
+
+    [$rows] (array) The raw query result from database
+
+
 *yii/elasticsearch/Query::one*				public
 >
  one($db='null')
 <
-(array|boolean) The first row (in terms of an array) of the query result.
+return (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
@@ -357,7 +438,7 @@ False is returned if the query results in nothing.
 >
  search($db='null', $options='[]')
 <
-(array) The query results.
+return (array) The query results.
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -368,20 +449,21 @@ False is returned if the query results in nothing.
      
       -
      
-    [routing](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search.html#search-routing)
+    [routing](http://www.elastic.co/guide/en/elasticsearch/reference/current/search.html#search-routing)
      
       -
      
-    [search_type](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-search-type.html)
+    [search_type](http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-search-type.html)
 
 
 *yii/elasticsearch/Query::delete*				public
 >
  delete($db='null', $options='[]')
 <
-(array) The query results.
+return (array) The query results.
 
  Everything except query and filter will be ignored.
+
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -392,12 +474,13 @@ False is returned if the query results in nothing.
 >
  scalar($field, $db='null')
 <
-(string) The value of the specified attribute in the first record of the query
+return (string) The value of the specified attribute in the first record of the query
 result. Null is returned if the query result is empty or the field does not
 exist.
 
  The value returned will be the specified field in the first document of the
  query results.
+
     [$field] (string) Name of the attribute to select
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -408,7 +491,7 @@ exist.
 >
  column($field, $db='null')
 <
-(array) The first column of the query result. An empty array is returned if
+return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
     [$field] (string) The field to query over
@@ -421,7 +504,7 @@ the query results in nothing.
 >
  count($q=''*'', $db='null')
 <
-(integer) Number of records
+return (integer) Number of records
 
     [$q] (string) The COUNT expression. This parameter is ignored by this
     implementation.
@@ -434,7 +517,7 @@ the query results in nothing.
 >
  exists($db='null')
 <
-(boolean) Whether the query result contains any row of data.
+return (boolean) Whether the query result contains any row of data.
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -445,7 +528,7 @@ the query results in nothing.
 >
  stats($groups)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$groups] (array) An array of groups to maintain a statistics aggregation
     for.
@@ -455,7 +538,7 @@ the query results in nothing.
 >
  highlight($highlight)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$highlight] (array) Array of parameters to highlight results.
 
@@ -464,7 +547,7 @@ the query results in nothing.
 >
  addAggregation($name, $type, $options)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$name] (string) The name of the aggregation
     [$type] (string) The aggregation type. e.g. 'terms', 'range',
@@ -477,9 +560,10 @@ the query results in nothing.
 >
  addAgg($name, $type, $options)
 <
-(static) The query object itself
+return ($this) The query object itself
 
  This is an alias for 'addAggregation'.
+
     [$name] (string) The name of the aggregation
     [$type] (string) The aggregation type. e.g. 'terms', 'range',
     'histogram'...
@@ -491,7 +575,7 @@ the query results in nothing.
 >
  addSuggester($name, $definition)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$name] (string) The name of the suggester
     [$definition] (string|array) The configuration options for this suggester.
@@ -502,16 +586,70 @@ the query results in nothing.
 >
  query($query)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$query] (string) 
+
+
+*yii/elasticsearch/Query::batch*				public
+>
+ batch($scrollWindow=''1m'', $db='null')
+<
+return (\yii\elasticsearch\BatchQueryResult) The batch query result. It implements
+the '\Iterator' interface and can be traversed to retrieve the data in
+batches.
+
+ A batch query supports fetching data in batches, which can keep the memory
+ usage under a limit. This method will return a 'BatchQueryResult' object
+ which implements the '\Iterator' interface and can be traversed to retrieve
+ the data in batches.
+
+ For example,
+
+   $query = (new Query)->from('user');
+   foreach ($query->batch() as $rows) {
+       // $rows is an array of 10 or fewer rows from user table
+   }
+
+ Batch size is determined by the 'limit' setting (note that in scan mode batch
+ limit is per shard).
+
+    [$scrollWindow] (string) How long Elasticsearch should keep the search
+    context alive, in [time
+    units](https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units)
+    [$db] (\yii\elasticsearch\Connection) The database connection. If not set,
+    the 'elasticsearch' application component will be used.
+
+
+*yii/elasticsearch/Query::each*				public
+>
+ each($scrollWindow=''1m'', $db='null')
+<
+return (\yii\elasticsearch\BatchQueryResult) The batch query result. It implements
+the '\Iterator' interface and can be traversed to retrieve the data in
+batches.
+
+ This method is similar to 'batch()' except that in each iteration of the
+ result, only one row of data is returned. For example,
+
+   $query = (new Query)->from('user');
+   foreach ($query->each() as $row) {
+   }
+
+
+
+    [$scrollWindow] (string) How long Elasticsearch should keep the search
+    context alive, in [time
+    units](https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#time-units)
+    [$db] (\yii\elasticsearch\Connection) The database connection. If not set,
+    the 'elasticsearch' application component will be used.
 
 
 *yii/elasticsearch/Query::filter*				public
 >
  filter($filter)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$filter] (string) 
 
@@ -520,7 +658,7 @@ the query results in nothing.
 >
  from($index, $type='null')
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$index] (string|array) The index to retrieve data from. This can be a
     string representing a single index or a an array of multiple indexes. If
@@ -534,7 +672,7 @@ the query results in nothing.
 >
  fields($fields)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$fields] (array) The fields to be selected.
 
@@ -543,7 +681,7 @@ the query results in nothing.
 >
  source($source)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$source] (array) The source patterns to be selected.
 
@@ -552,11 +690,39 @@ the query results in nothing.
 >
  timeout($timeout)
 <
-(static) The query object itself
+return ($this) The query object itself
 
     [$timeout] (integer) A search timeout, bounding the search request to be
     executed within the specified time value and bail with the hits
     accumulated up to that point when expired. Defaults to no timeout.
+
+
+*yii/elasticsearch/Query::minScore*			public
+>
+ minScore($minScore)
+<
+return (static) The query object itself
+
+    [$minScore] (float) Exclude documents which have a '_score' less than the
+    minimum specified minScore
+
+
+*yii/elasticsearch/Query::options*			public
+>
+ options($options)
+<
+return ($this) The query object itself
+
+    [$options] (array) The options to be set.
+
+
+*yii/elasticsearch/Query::addOptions*			public
+>
+ addOptions($options)
+<
+return ($this) The query object itself
+
+    [$options] (array) The options to be added.
 
 
 

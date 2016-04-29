@@ -40,24 +40,31 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $counter				*yii/bootstrap/Nav::$counter*
+
  See |yii/base/Widget::$counter|
 
 $autoIdPrefix				*yii/bootstrap/Nav::$autoIdPrefix*
+
  See |yii/base/Widget::$autoIdPrefix|
 
 $stack					*yii/bootstrap/Nav::$stack*
+
  See |yii/base/Widget::$stack|
 
-$options				*yii/bootstrap/Nav::$options*
- See |yii/bootstrap/Widget::$options|
-
 $clientOptions				*yii/bootstrap/Nav::$clientOptions*
- See |yii/bootstrap/Widget::$clientOptions|
+
+ See |yii/bootstrap/BootstrapWidgetTrait::$clientOptions|
 
 $clientEvents				*yii/bootstrap/Nav::$clientEvents*
- See |yii/bootstrap/Widget::$clientEvents|
+
+ See |yii/bootstrap/BootstrapWidgetTrait::$clientEvents|
+
+$options				*yii/bootstrap/Nav::$options*
+
+ See |yii/bootstrap/Widget::$options|
 
 $items					*yii/bootstrap/Nav::$items*
+
  (array) List of items in the nav widget. Each array element represents a
  single menu item which can be either a string or an array with the following
  structure:
@@ -77,31 +84,39 @@ $items					*yii/bootstrap/Nav::$items*
    passed to the 'Dropdown' widget. 
    - items: array|string, optional, the configuration array for
    creating a 'Dropdown' widget,   or a string representing the dropdown menu.
- Note that Bootstrap does not support sub-dropdown menus.
+ Note that Bootstrap does not support sub-dropdown menus. 
+   - encode: boolean, optional, whether the label will be HTML-encoded.
+   If set, supersedes the $encodeLabels option for only this item.
 
  If a menu item is a string, it will be rendered directly without HTML
  encoding.
 
 $encodeLabels				*yii/bootstrap/Nav::$encodeLabels*
+
  (boolean) Whether the nav items labels should be HTML-encoded.
 
 $activateItems				*yii/bootstrap/Nav::$activateItems*
+
  (boolean) Whether to automatically activate items according to whether their
  route setting matches the currently requested route.
 
 $activateParents			*yii/bootstrap/Nav::$activateParents*
+
  (boolean) Whether to activate parent menu items when one of the corresponding
  child menu items is active.
 
 $route					*yii/bootstrap/Nav::$route*
+
  (string) The route used to determine if a menu item is active or not. If not
  set, it will use the route of the current request.
 
 $params					*yii/bootstrap/Nav::$params*
+
  (array) The parameters used to determine if a menu item is active or not. If
  not set, it will use '$_GET'.
 
 $dropDownCaret				*yii/bootstrap/Nav::$dropDownCaret*
+
  (string) This property allows you to customize the HTML which is used to
  generate the drop down caret symbol, which is displayed next to the button
  text to indicate the drop down functionality. Defaults to 'null' which means
@@ -109,15 +124,19 @@ $dropDownCaret				*yii/bootstrap/Nav::$dropDownCaret*
  to be an empty string.
 
 $behaviors				*yii/bootstrap/Nav::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $id					*yii/bootstrap/Nav::$id*
+
  See |yii/base/Widget::$id|
 
 $view					*yii/bootstrap/Nav::$view*
- See |yii/base/Widget::$view|
+
+ See |yii/bootstrap/BootstrapWidgetTrait::$view|
 
 $viewPath				*yii/bootstrap/Nav::$viewPath*
+
  See |yii/base/Widget::$viewPath|
 
 
@@ -125,11 +144,14 @@ $viewPath				*yii/bootstrap/Nav::$viewPath*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/bootstrap/Nav::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/bootstrap/Nav::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -137,123 +159,152 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/bootstrap/Nav::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/bootstrap/Nav::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/bootstrap/Nav::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/bootstrap/Nav::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/bootstrap/Nav::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/bootstrap/Nav::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/bootstrap/Nav::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/bootstrap/Nav::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/bootstrap/Nav::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/bootstrap/Nav::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/bootstrap/Nav::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/bootstrap/Nav::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/bootstrap/Nav::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/bootstrap/Nav::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/bootstrap/Nav::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/bootstrap/Nav::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/bootstrap/Nav::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/bootstrap/Nav::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/bootstrap/Nav::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/bootstrap/Nav::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/bootstrap/Nav::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/bootstrap/Nav::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/bootstrap/Nav::begin*				public
+
  See |yii/base/Widget::begin|
 
 
 *yii/bootstrap/Nav::end*					public
+
  See |yii/base/Widget::end|
 
 
 *yii/bootstrap/Nav::widget*				public
+
  See |yii/base/Widget::widget|
 
 
 *yii/bootstrap/Nav::getId*				public
+
  See |yii/base/Widget::getId|
 
 
 *yii/bootstrap/Nav::setId*				public
+
  See |yii/base/Widget::setId|
 
 
 *yii/bootstrap/Nav::getView*				public
- See |yii/base/Widget::getView|
+
+ See |yii/bootstrap/BootstrapWidgetTrait::getView|
 
 
 *yii/bootstrap/Nav::setView*				public
+
  See |yii/base/Widget::setView|
 
 
@@ -261,35 +312,40 @@ METHOD DETAILS
 >
  run()
 <
-(void)
+return (void)
 
 
 
 *yii/bootstrap/Nav::render*				public
+
  See |yii/base/Widget::render|
 
 
 *yii/bootstrap/Nav::renderFile*				public
+
  See |yii/base/Widget::renderFile|
 
 
 *yii/bootstrap/Nav::getViewPath*				public
+
  See |yii/base/Widget::getViewPath|
 
 
 *yii/bootstrap/Nav::registerPlugin*			protected
- See |yii/bootstrap/Widget::registerPlugin|
+
+ See |yii/bootstrap/BootstrapWidgetTrait::registerPlugin|
 
 
 *yii/bootstrap/Nav::registerClientEvents*			protected
- See |yii/bootstrap/Widget::registerClientEvents|
+
+ See |yii/bootstrap/BootstrapWidgetTrait::registerClientEvents|
 
 
 *yii/bootstrap/Nav::renderItems*				public
 >
  renderItems()
 <
-(void)
+return (void)
 
 
 
@@ -297,7 +353,7 @@ METHOD DETAILS
 >
  renderItem($item)
 <
-(string) The rendering result.
+return (string) The rendering result.
 
     [$item] (string|array) The item to render.
 
@@ -306,9 +362,10 @@ METHOD DETAILS
 >
  renderDropdown($items, $parentItem)
 <
-(string) The rendering result.
+return (string) The rendering result.
 
  This method is called to create sub-menus.
+
     [$items] (array) The given items. Please refer to 'Dropdown::items' for
     the array structure.
     [$parentItem] (array) The parent item information. Please refer to 'items'
@@ -319,7 +376,7 @@ METHOD DETAILS
 >
  isChildActive($items, $active)
 <
-(array) @see items
+return (array) @see items
 
     [$items] (array) @see items
     [$active] (boolean) Should the parent be active too
@@ -329,7 +386,7 @@ METHOD DETAILS
 >
  isItemActive($item)
 <
-(boolean) Whether the menu item is active
+return (boolean) Whether the menu item is active
 
  This is done by checking if 'route' and 'params' match that specified in the
  'url' option of the menu item. When the 'url' option of a menu item is
@@ -337,6 +394,7 @@ METHOD DETAILS
  the item and the rest of the elements are the associated parameters. Only
  when its route and parameters match 'route' and 'params', respectively, will
  a menu item be considered active.
+
     [$item] (array) The menu item to be checked
 
 

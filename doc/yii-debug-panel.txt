@@ -5,13 +5,13 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/debug/panels/MailPanel|
+|yii/debug/panels/ProfilingPanel|
+|yii/debug/panels/LogPanel|
+|yii/debug/panels/AssetPanel|
+|yii/debug/panels/RequestPanel|
 |yii/debug/panels/DbPanel|
 |yii/debug/panels/ConfigPanel|
-|yii/debug/panels/AssetPanel|
-|yii/debug/panels/ProfilingPanel|
-|yii/debug/panels/RequestPanel|
-|yii/debug/panels/LogPanel|
+|yii/debug/panels/MailPanel|
 |yii/elasticsearch/DebugPanel|
 
 
@@ -19,36 +19,46 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $id					*yii/debug/Panel::$id*
+
  (string) Panel unique identifier. It is set automatically by the container
  module.
 
 $tag					*yii/debug/Panel::$tag*
+
  (string) Request data set identifier.
 
 $module					*yii/debug/Panel::$module*
+
  (\yii\debug\Module)
 
 $data					*yii/debug/Panel::$data*
+
  (mixed) Data associated with panel
 
 $actions				*yii/debug/Panel::$actions*
+
  (array) Array of actions to add to the debug modules default controller. This
  array will be merged with all other panels actions property. See
  '\yii\base\Controller::actions()' for the format.
 
 $behaviors				*yii/debug/Panel::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $name					*yii/debug/Panel::$name*
+
  (string) Name of the panel
 
 $summary				*yii/debug/Panel::$summary*
+
  (string) Content that is displayed at debug toolbar
 
 $detail					*yii/debug/Panel::$detail*
+
  (string) Content that is displayed in debugger detail view
 
 $url					*yii/debug/Panel::$url*
+
  (string) URL pointing to panel detail view
 
 
@@ -56,103 +66,129 @@ $url					*yii/debug/Panel::$url*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/debug/Panel::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/debug/Panel::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/debug/Panel::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/debug/Panel::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/debug/Panel::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/debug/Panel::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/debug/Panel::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/debug/Panel::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/debug/Panel::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/debug/Panel::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/debug/Panel::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/debug/Panel::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/debug/Panel::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/debug/Panel::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/debug/Panel::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/debug/Panel::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/debug/Panel::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/debug/Panel::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/debug/Panel::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/debug/Panel::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/debug/Panel::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/debug/Panel::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/debug/Panel::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/debug/Panel::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/debug/Panel::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -160,7 +196,7 @@ METHOD DETAILS
 >
  getName()
 <
-(string) Name of the panel
+return (string) Name of the panel
 
 
 
@@ -168,7 +204,7 @@ METHOD DETAILS
 >
  getSummary()
 <
-(string) Content that is displayed at debug toolbar
+return (string) Content that is displayed at debug toolbar
 
 
 
@@ -176,7 +212,7 @@ METHOD DETAILS
 >
  getDetail()
 <
-(string) Content that is displayed in debugger detail view
+return (string) Content that is displayed in debugger detail view
 
 
 
@@ -184,7 +220,7 @@ METHOD DETAILS
 >
  save()
 <
-(mixed) Data to be saved
+return (mixed) Data to be saved
 
  This method is called on every page where debugger is enabled.
 
@@ -193,7 +229,7 @@ METHOD DETAILS
 >
  load($data)
 <
-(void)
+return (void)
 
     [$data] (mixed) 
 
@@ -202,7 +238,7 @@ METHOD DETAILS
 >
  getUrl()
 <
-(string) URL pointing to panel detail view
+return (string) URL pointing to panel detail view
 
 
 

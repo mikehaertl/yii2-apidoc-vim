@@ -13,11 +13,12 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/ArrayableTrait::fields*				public
 >
  fields()
 <
-(array) The list of field names or field definitions.
+return (array) The list of field names or field definitions.
 
  A field is a named element in the returned array by 'toArray()'.
 
@@ -65,7 +66,7 @@ METHOD DETAILS
 >
  extraFields()
 <
-(array) The list of expandable field names or field definitions. Please refer
+return (array) The list of expandable field names or field definitions. Please refer
 to 'fields()' on the format of the return value.
 
  This method is similar to 'fields()' except that the list of fields returned
@@ -83,7 +84,7 @@ to 'fields()' on the format of the return value.
 >
  toArray($fields='[]', $expand='[]', $recursive='true')
 <
-(array) The array representation of the object
+return (array) The array representation of the object
 
  This method will first identify which fields to be included in the resulting
  array by calling 'resolveFields()'. It will then turn the model into an array
@@ -93,6 +94,7 @@ to 'fields()' on the format of the return value.
  If the model implements the 'Linkable' interface, the resulting array will
  also have a '_link' element which refers to a list of links as specified by
  the interface.
+
     [$fields] (array) The fields being requested. If empty, all fields as
     specified by 'fields()' will be returned.
     [$expand] (array) The additional fields being requested for exporting.
@@ -105,12 +107,13 @@ to 'fields()' on the format of the return value.
 >
  resolveFields($fields, $expand)
 <
-(array) The list of fields to be exported. The array keys are the field names,
+return (array) The list of fields to be exported. The array keys are the field names,
 and the array values are the corresponding object property names or PHP
 callables returning the field values.
 
  This method will check the requested fields against those declared in
  'fields()' and 'extraFields()' to determine which fields can be returned.
+
     [$fields] (array) The fields being requested for exporting
     [$expand] (array) The additional fields being requested for exporting
 

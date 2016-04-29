@@ -5,15 +5,15 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/authclient/clients/GoogleOAuth|
+|yii/authclient/clients/VKontakte|
+|yii/authclient/clients/GitHub|
+|yii/authclient/clients/Live|
 |yii/authclient/clients/GoogleHybrid|
-|yii/authclient/clients/Facebook|
+|yii/authclient/clients/Twitter|
 |yii/authclient/clients/YandexOAuth|
 |yii/authclient/clients/LinkedIn|
-|yii/authclient/clients/VKontakte|
-|yii/authclient/clients/GoogleOAuth|
-|yii/authclient/clients/Live|
-|yii/authclient/clients/GitHub|
-|yii/authclient/clients/Twitter|
+|yii/authclient/clients/Facebook|
 |yii/authclient/OAuth2|
 |yii/authclient/OAuth1|
 
@@ -22,48 +22,63 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $version				*yii/authclient/BaseOAuth::$version*
+
  (string) Protocol version.
 
 $apiBaseUrl				*yii/authclient/BaseOAuth::$apiBaseUrl*
+
  (string) API base URL.
 
 $authUrl				*yii/authclient/BaseOAuth::$authUrl*
+
  (string) Authorize URL.
 
 $scope					*yii/authclient/BaseOAuth::$scope*
+
  (string) Auth request scope.
 
 $behaviors				*yii/authclient/BaseOAuth::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $id					*yii/authclient/BaseOAuth::$id*
+
  See |yii/authclient/ClientInterface::$id|
 
 $name					*yii/authclient/BaseOAuth::$name*
+
  See |yii/authclient/ClientInterface::$name|
 
 $title					*yii/authclient/BaseOAuth::$title*
+
  See |yii/authclient/ClientInterface::$title|
 
 $userAttributes				*yii/authclient/BaseOAuth::$userAttributes*
+
  See |yii/authclient/BaseClient::$userAttributes|
 
 $normalizeUserAttributeMap		*yii/authclient/BaseOAuth::$normalizeUserAttributeMap*
+
  See |yii/authclient/BaseClient::$normalizeUserAttributeMap|
 
 $viewOptions				*yii/authclient/BaseOAuth::$viewOptions*
+
  See |yii/authclient/BaseClient::$viewOptions|
 
 $returnUrl				*yii/authclient/BaseOAuth::$returnUrl*
+
  (string) Return URL
 
 $curlOptions				*yii/authclient/BaseOAuth::$curlOptions*
+
  (array) CURL options.
 
 $accessToken				*yii/authclient/BaseOAuth::$accessToken*
+
  (array|\yii\authclient\OAuthToken)
 
 $signatureMethod			*yii/authclient/BaseOAuth::$signatureMethod*
+
  (array|\yii\authclient\signature\BaseMethod) Signature method instance or its
  array configuration.
 
@@ -72,175 +87,219 @@ $signatureMethod			*yii/authclient/BaseOAuth::$signatureMethod*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/authclient/BaseOAuth::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/authclient/BaseOAuth::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/authclient/BaseOAuth::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/authclient/BaseOAuth::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/authclient/BaseOAuth::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/authclient/BaseOAuth::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/authclient/BaseOAuth::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/authclient/BaseOAuth::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/authclient/BaseOAuth::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/authclient/BaseOAuth::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/authclient/BaseOAuth::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/authclient/BaseOAuth::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/authclient/BaseOAuth::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/authclient/BaseOAuth::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/authclient/BaseOAuth::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/authclient/BaseOAuth::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/authclient/BaseOAuth::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/authclient/BaseOAuth::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/authclient/BaseOAuth::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/authclient/BaseOAuth::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/authclient/BaseOAuth::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/authclient/BaseOAuth::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/authclient/BaseOAuth::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/authclient/BaseOAuth::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/authclient/BaseOAuth::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/authclient/BaseOAuth::setId*				public
+
  See |yii/authclient/ClientInterface::setId|
 
 
 *yii/authclient/BaseOAuth::getId*				public
+
  See |yii/authclient/ClientInterface::getId|
 
 
 *yii/authclient/BaseOAuth::setName*			public
+
  See |yii/authclient/ClientInterface::setName|
 
 
 *yii/authclient/BaseOAuth::getName*			public
+
  See |yii/authclient/ClientInterface::getName|
 
 
 *yii/authclient/BaseOAuth::setTitle*			public
+
  See |yii/authclient/ClientInterface::setTitle|
 
 
 *yii/authclient/BaseOAuth::getTitle*			public
+
  See |yii/authclient/ClientInterface::getTitle|
 
 
 *yii/authclient/BaseOAuth::setUserAttributes*		public
+
  See |yii/authclient/BaseClient::setUserAttributes|
 
 
 *yii/authclient/BaseOAuth::getUserAttributes*		public
+
  See |yii/authclient/ClientInterface::getUserAttributes|
 
 
 *yii/authclient/BaseOAuth::setNormalizeUserAttributeMap*	public
+
  See |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
 
 
 *yii/authclient/BaseOAuth::getNormalizeUserAttributeMap*	public
+
  See |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
 
 
 *yii/authclient/BaseOAuth::setViewOptions*		public
+
  See |yii/authclient/BaseClient::setViewOptions|
 
 
 *yii/authclient/BaseOAuth::getViewOptions*		public
+
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
 *yii/authclient/BaseOAuth::defaultName*			protected
+
  See |yii/authclient/BaseClient::defaultName|
 
 
 *yii/authclient/BaseOAuth::defaultTitle*			protected
+
  See |yii/authclient/BaseClient::defaultTitle|
 
 
 *yii/authclient/BaseOAuth::initUserAttributes*		protected
+
  See |yii/authclient/BaseClient::initUserAttributes|
 
 
 *yii/authclient/BaseOAuth::defaultNormalizeUserAttributeMap*protected
+
  See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
 
 
 *yii/authclient/BaseOAuth::defaultViewOptions*		protected
+
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
 *yii/authclient/BaseOAuth::normalizeUserAttributes*	protected
+
  See |yii/authclient/BaseClient::normalizeUserAttributes|
 
 
@@ -248,7 +307,7 @@ METHOD DETAILS
 >
  setReturnUrl($returnUrl)
 <
-(void)
+return (void)
 
     [$returnUrl] (string) Return URL
 
@@ -257,7 +316,7 @@ METHOD DETAILS
 >
  getReturnUrl()
 <
-(string) Return URL.
+return (string) Return URL.
 
 
 
@@ -265,7 +324,7 @@ METHOD DETAILS
 >
  setCurlOptions($curlOptions)
 <
-(void)
+return (void)
 
     [$curlOptions] (array) CURL options.
 
@@ -274,7 +333,7 @@ METHOD DETAILS
 >
  getCurlOptions()
 <
-(array) CURL options.
+return (array) CURL options.
 
 
 
@@ -282,7 +341,7 @@ METHOD DETAILS
 >
  setAccessToken($token)
 <
-(void)
+return (void)
 
     [$token] (array|\yii\authclient\OAuthToken) 
 
@@ -291,7 +350,7 @@ METHOD DETAILS
 >
  getAccessToken()
 <
-(\yii\authclient\OAuthToken) Auth token instance.
+return (\yii\authclient\OAuthToken) Auth token instance.
 
 
 
@@ -299,7 +358,7 @@ METHOD DETAILS
 >
  setSignatureMethod($signatureMethod)
 <
-(void)
+return (void)
 
     [$signatureMethod] (array|\yii\authclient\signature\BaseMethod) Signature
     method instance or its array configuration.
@@ -309,7 +368,7 @@ METHOD DETAILS
 >
  getSignatureMethod()
 <
-(\yii\authclient\signature\BaseMethod) Signature method instance.
+return (\yii\authclient\signature\BaseMethod) Signature method instance.
 
 
 
@@ -317,7 +376,7 @@ METHOD DETAILS
 >
  defaultReturnUrl()
 <
-(string) Return URL.
+return (string) Return URL.
 
 
 
@@ -325,7 +384,7 @@ METHOD DETAILS
 >
  sendRequest($method, $url, $params='[]', $headers='[]')
 <
-(array) Response.
+return (array) Response.
 
     [$method] (string) Request type.
     [$url] (string) Request URL.
@@ -337,10 +396,11 @@ METHOD DETAILS
 >
  mergeCurlOptions($options1, $options2)
 <
-(array) Merged options (the original options are not changed.)
+return (array) Merged options (the original options are not changed.)
 
  If each options array has an element with the same key value, the latter will
  overwrite the former.
+
     [$options1] (array) Options to be merged to.
     [$options2] (array) Options to be merged from. You can specify additional
     arrays via third argument, fourth argument etc.
@@ -350,7 +410,7 @@ METHOD DETAILS
 >
  defaultCurlOptions()
 <
-(array) CURL options.
+return (array) CURL options.
 
 
 
@@ -358,7 +418,7 @@ METHOD DETAILS
 >
  processResponse($rawResponse, $contentType='self::CONTENT_TYPE_AUTO')
 <
-(array) Actual response.
+return (array) Actual response.
 
     [$rawResponse] (string) Raw response.
     [$contentType] (string) Response content type.
@@ -368,7 +428,7 @@ METHOD DETAILS
 >
  convertXmlToArray($xml)
 <
-(array) XML array representation.
+return (array) XML array representation.
 
     [$xml] (string|\SimpleXMLElement) Xml to process.
 
@@ -377,7 +437,7 @@ METHOD DETAILS
 >
  determineContentTypeByHeaders($headers)
 <
-(string) Content type.
+return (string) Content type.
 
     [$headers] (array) Request headers.
 
@@ -386,7 +446,7 @@ METHOD DETAILS
 >
  determineContentTypeByRaw($rawContent)
 <
-(string) Response type.
+return (string) Response type.
 
     [$rawContent] (string) Raw response content.
 
@@ -395,7 +455,7 @@ METHOD DETAILS
 >
  createSignatureMethod($signatureMethodConfig)
 <
-(\yii\authclient\signature\BaseMethod) Signature method instance.
+return (\yii\authclient\signature\BaseMethod) Signature method instance.
 
     [$signatureMethodConfig] (array) Signature method configuration.
 
@@ -404,7 +464,7 @@ METHOD DETAILS
 >
  createToken($tokenConfig='[]')
 <
-(\yii\authclient\OAuthToken) Token instance.
+return (\yii\authclient\OAuthToken) Token instance.
 
     [$tokenConfig] (array) Token configuration.
 
@@ -413,7 +473,7 @@ METHOD DETAILS
 >
  composeUrl($url, $params='[]')
 <
-(string) Composed URL.
+return (string) Composed URL.
 
     [$url] (string) Base URL.
     [$params] (array) GET params.
@@ -423,7 +483,7 @@ METHOD DETAILS
 >
  saveAccessToken($token)
 <
-($this) The object itself.
+return ($this) The object itself.
 
     [$token] (\yii\authclient\OAuthToken) Auth token
 
@@ -432,7 +492,7 @@ METHOD DETAILS
 >
  restoreAccessToken()
 <
-(\yii\authclient\OAuthToken) Auth token.
+return (\yii\authclient\OAuthToken) Auth token.
 
 
 
@@ -440,7 +500,7 @@ METHOD DETAILS
 >
  setState($key, $value)
 <
-($this) The object itself
+return ($this) The object itself
 
     [$key] (string) State key.
     [$value] (mixed) State value
@@ -450,7 +510,7 @@ METHOD DETAILS
 >
  getState($key)
 <
-(mixed) State value.
+return (mixed) State value.
 
     [$key] (string) State key.
 
@@ -459,7 +519,7 @@ METHOD DETAILS
 >
  removeState($key)
 <
-(boolean) Success.
+return (boolean) Success.
 
     [$key] (string) State key.
 
@@ -468,7 +528,7 @@ METHOD DETAILS
 >
  getStateKeyPrefix()
 <
-(string) Session key prefix.
+return (string) Session key prefix.
 
 
 
@@ -476,7 +536,7 @@ METHOD DETAILS
 >
  api($apiSubUrl, $method=''GET'', $params='[]', $headers='[]')
 <
-(array) API response
+return (array) API response
 
     [$apiSubUrl] (string) API sub URL, which will be append to 'apiBaseUrl',
     or absolute API URL.
@@ -489,7 +549,7 @@ METHOD DETAILS
 >
  composeRequestCurlOptions($method, $url, $params)
 <
-(array) CUrl options.
+return (array) CUrl options.
 
     [$method] (string) Request type.
     [$url] (string) Request URL.
@@ -500,7 +560,7 @@ METHOD DETAILS
 >
  refreshAccessToken($token)
 <
-(\yii\authclient\OAuthToken) New auth token.
+return (\yii\authclient\OAuthToken) New auth token.
 
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
@@ -509,7 +569,7 @@ METHOD DETAILS
 >
  apiInternal($accessToken, $url, $method, $params, $headers)
 <
-(array) API response.
+return (array) API response.
 
     [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
     [$url] (string) Absolute API URL.

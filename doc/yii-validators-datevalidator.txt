@@ -20,39 +20,71 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $builtInValidators			*yii/validators/DateValidator::$builtInValidators*
+
  See |yii/validators/Validator::$builtInValidators|
 
 $attributes				*yii/validators/DateValidator::$attributes*
+
  See |yii/validators/Validator::$attributes|
 
 $message				*yii/validators/DateValidator::$message*
+
  See |yii/validators/Validator::$message|
 
 $on					*yii/validators/DateValidator::$on*
+
  See |yii/validators/Validator::$on|
 
 $except					*yii/validators/DateValidator::$except*
+
  See |yii/validators/Validator::$except|
 
 $skipOnError				*yii/validators/DateValidator::$skipOnError*
+
  See |yii/validators/Validator::$skipOnError|
 
 $skipOnEmpty				*yii/validators/DateValidator::$skipOnEmpty*
+
  See |yii/validators/Validator::$skipOnEmpty|
 
 $enableClientValidation			*yii/validators/DateValidator::$enableClientValidation*
+
  See |yii/validators/Validator::$enableClientValidation|
 
 $isEmpty				*yii/validators/DateValidator::$isEmpty*
+
  See |yii/validators/Validator::$isEmpty|
 
 $when					*yii/validators/DateValidator::$when*
+
  See |yii/validators/Validator::$when|
 
 $whenClient				*yii/validators/DateValidator::$whenClient*
+
  See |yii/validators/Validator::$whenClient|
 
+$type					*yii/validators/DateValidator::$type*
+
+ (string) The type of the validator. Indicates, whether a date, time or
+ datetime value should be validated. This property influences the default
+ value of 'format' and also sets the correct behavior when 'format' is one of
+ the intl short formats, 'short', 'medium', 'long', or 'full'.
+
+ This is only effective when the [PHP intl
+ extension](http://php.net/manual/en/book.intl.php) is installed.
+
+ This property can be set to the following values:
+
+
+   - 'TYPE_DATE' - (default) for validating date values only, that
+   means only values that do not include a time range are valid. 
+   - 'TYPE_DATETIME' - for validating datetime values, that contain a
+   date part as well as a time part. 
+   - 'TYPE_TIME' - for validating time values, that contain no date
+   information.
+
 $format					*yii/validators/DateValidator::$format*
+
  (string) The date format that the value being validated should follow. This
  can be a date time pattern as described in the [ICU
  manual](http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax).
@@ -64,7 +96,16 @@ $format					*yii/validators/DateValidator::$format*
 
  If this property is not set, the default value will be obtained from
  'Yii::$app->formatter->dateFormat', see '\yii\i18n\Formatter::dateFormat' for
- details.
+ details. Since version 2.0.8 the default value will be determined from
+ different formats of the formatter class, dependent on the value of 'type':
+
+
+   - if type is 'TYPE_DATE', the default value will be taken from
+   '\yii\i18n\Formatter::dateFormat', 
+   - if type is 'TYPE_DATETIME', it will be taken from
+   '\yii\i18n\Formatter::datetimeFormat', 
+   - and if type is 'TYPE_TIME', it will be
+   '\yii\i18n\Formatter::timeFormat'.
 
  Here are some example values:
 
@@ -87,6 +128,7 @@ $format					*yii/validators/DateValidator::$format*
  'min|minimum date'.
 
 $locale					*yii/validators/DateValidator::$locale*
+
  (string) The locale ID that is used to localize the date parsing. This is
  only effective when the [PHP intl
  extension](http://php.net/manual/en/book.intl.php) is installed. If not set,
@@ -94,6 +136,7 @@ $locale					*yii/validators/DateValidator::$locale*
  See also '\yii\i18n\Formatter::locale'.
 
 $timeZone				*yii/validators/DateValidator::$timeZone*
+
  (string) The timezone to use for parsing date and time values. This can be
  any value that may be passed to
  [date_default_timezone_set()](http://www.php.net/manual/en/function.date-default-timezone-set.php)
@@ -102,6 +145,7 @@ $timeZone				*yii/validators/DateValidator::$timeZone*
  If this property is not set, '\yii\base\Application::timeZone' will be used.
 
 $timestampAttribute			*yii/validators/DateValidator::$timestampAttribute*
+
  (string) The name of the attribute to receive the parsing result. When this
  property is not null and the validation is successful, the named attribute
  will receive the parsing result.
@@ -111,6 +155,7 @@ $timestampAttribute			*yii/validators/DateValidator::$timestampAttribute*
  successful validation.
 
 $timestampAttributeFormat		*yii/validators/DateValidator::$timestampAttributeFormat*
+
  (string) The format to use when populating the 'timestampAttribute'. The
  format can be specified in the same way as for 'format'.
 
@@ -118,6 +163,7 @@ $timestampAttributeFormat		*yii/validators/DateValidator::$timestampAttributeFor
  'timestampAttribute' is not set, this property will be ignored.
 
 $timestampAttributeTimeZone		*yii/validators/DateValidator::$timestampAttributeTimeZone*
+
  (string) The timezone to use when populating the 'timestampAttribute'.
  Defaults to 'UTC'.
 
@@ -129,31 +175,38 @@ $timestampAttributeTimeZone		*yii/validators/DateValidator::$timestampAttributeT
  If 'timestampAttributeFormat' is not set, this property will be ignored.
 
 $max					*yii/validators/DateValidator::$max*
+
  (integer|string) Upper limit of the date. Defaults to null, meaning no upper
  limit. This can be a unix timestamp or a string representing a date time
  value. If this property is a string, 'format' will be used to parse it.
 
 $min					*yii/validators/DateValidator::$min*
+
  (integer|string) Lower limit of the date. Defaults to null, meaning no lower
  limit. This can be a unix timestamp or a string representing a date time
  value. If this property is a string, 'format' will be used to parse it.
 
 $tooBig					*yii/validators/DateValidator::$tooBig*
+
  (string) User-defined error message used when the value is bigger than 'max'.
 
 $tooSmall				*yii/validators/DateValidator::$tooSmall*
+
  (string) User-defined error message used when the value is smaller than
  'min'.
 
 $maxString				*yii/validators/DateValidator::$maxString*
+
  (string) User friendly value of upper limit to display in the error message.
  If this property is null, the value of 'max' will be used (before parsing).
 
 $minString				*yii/validators/DateValidator::$minString*
+
  (string) User friendly value of lower limit to display in the error message.
  If this property is null, the value of 'min' will be used (before parsing).
 
 $behaviors				*yii/validators/DateValidator::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -161,11 +214,14 @@ $behaviors				*yii/validators/DateValidator::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/validators/DateValidator::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/validators/DateValidator::__construct*		public
+
  See |yii/base/Object::__construct|
 
 
@@ -173,105 +229,133 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/validators/DateValidator::__get*			public
+
  See |yii/base/Component::__get|
 
 
 *yii/validators/DateValidator::__set*			public
+
  See |yii/base/Component::__set|
 
 
 *yii/validators/DateValidator::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/validators/DateValidator::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/validators/DateValidator::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/validators/DateValidator::hasProperty*		public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/validators/DateValidator::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/validators/DateValidator::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/validators/DateValidator::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/validators/DateValidator::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/validators/DateValidator::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/validators/DateValidator::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/validators/DateValidator::on*			public
+
  See |yii/base/Component::on|
 
 
 *yii/validators/DateValidator::off*			public
+
  See |yii/base/Component::off|
 
 
 *yii/validators/DateValidator::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/validators/DateValidator::getBehavior*		public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/validators/DateValidator::getBehaviors*		public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/validators/DateValidator::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/validators/DateValidator::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/validators/DateValidator::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/validators/DateValidator::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/validators/DateValidator::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/validators/DateValidator::createValidator*		public
+
  See |yii/validators/Validator::createValidator|
 
 
 *yii/validators/DateValidator::validateAttributes*	public
+
  See |yii/validators/Validator::validateAttributes|
 
 
@@ -279,15 +363,21 @@ METHOD DETAILS
 >
  validateAttribute($model, $attribute)
 <
-(void)
+return (void)
+
+
 
  Child classes must implement this method to provide the actual validation
  logic.
+
+
+
     [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/DateValidator::validate*			public
+
  See |yii/validators/Validator::validate|
 
 
@@ -295,27 +385,36 @@ METHOD DETAILS
 >
  validateValue($value)
 <
-(array|null) The error message and the parameters to be inserted into the
+return (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
+
+
 
  A validator class can implement this method to support data validation out of
  the context of a data model.
+
+
+
     [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/DateValidator::clientValidateAttribute*	public
+
  See |yii/validators/Validator::clientValidateAttribute|
 
 
 *yii/validators/DateValidator::isActive*			public
+
  See |yii/validators/Validator::isActive|
 
 
 *yii/validators/DateValidator::addError*			public
+
  See |yii/validators/Validator::addError|
 
 
 *yii/validators/DateValidator::isEmpty*			public
+
  See |yii/validators/Validator::isEmpty|
 
 
@@ -323,7 +422,7 @@ error message. Null should be returned if the data is valid.
 >
  parseDateValue($value)
 <
-(integer|false) A UNIX timestamp or 'false' on failure.
+return (integer|false) A UNIX timestamp or 'false' on failure.
 
     [$value] (string) String representing date
 

@@ -42,43 +42,54 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $where					*yii/db/Query::$where*
+
  See |yii/db/QueryTrait::$where|
 
 $limit					*yii/db/Query::$limit*
+
  See |yii/db/QueryTrait::$limit|
 
 $offset					*yii/db/Query::$offset*
+
  See |yii/db/QueryTrait::$offset|
 
 $orderBy				*yii/db/Query::$orderBy*
+
  See |yii/db/QueryTrait::$orderBy|
 
 $indexBy				*yii/db/Query::$indexBy*
+
  See |yii/db/QueryTrait::$indexBy|
 
 $select					*yii/db/Query::$select*
+
  (array) The columns being selected. For example, '['id', 'name']'. This is
  used to construct the SELECT clause in a SQL statement. If not set, it means
  selecting all columns.
 
 $selectOption				*yii/db/Query::$selectOption*
+
  (string) Additional option that should be appended to the 'SELECT' keyword.
  For example, in MySQL, the option 'SQL_CALC_FOUND_ROWS' can be used.
 
 $distinct				*yii/db/Query::$distinct*
+
  (boolean) Whether to select distinct rows of data only. If this is set true,
  the SELECT clause would be changed to SELECT DISTINCT.
 
 $from					*yii/db/Query::$from*
+
  (array) The table(s) to be selected from. For example, '['user', 'post']'.
  This is used to construct the FROM clause in a SQL statement.
 
 $groupBy				*yii/db/Query::$groupBy*
+
  (array) How to group the query results. For example, '['company',
  'department']'. This is used to construct the GROUP BY clause in a SQL
  statement.
 
 $join					*yii/db/Query::$join*
+
  (array) How to join with other tables. Each array element represents the
  specification of one join which has the following structure:
 
@@ -94,11 +105,13 @@ $join					*yii/db/Query::$join*
 
 
 $having					*yii/db/Query::$having*
+
  (string|array) The condition to be applied in the GROUP BY clause. It can be
  either a string or an array. Please refer to 'where()' on how to specify the
  condition.
 
 $union					*yii/db/Query::$union*
+
  (array) This is used to construct the UNION clause(s) in a SQL statement.
  Each array element is an array of the following structure:
 
@@ -107,10 +120,12 @@ $union					*yii/db/Query::$union*
    - 'all': boolean, whether it should be 'UNION ALL' or 'UNION'
 
 $params					*yii/db/Query::$params*
+
  (array) List of query parameter values indexed by parameter placeholders. For
  example, '[':name' => 'Dan', ':age' => 31]'.
 
 $behaviors				*yii/db/Query::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -118,107 +133,134 @@ $behaviors				*yii/db/Query::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/Query::className*					public
+
  See |yii/base/Object::className|
 
 
 *yii/db/Query::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/db/Query::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/db/Query::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/db/Query::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/db/Query::__isset*					public
+
  See |yii/base/Component::__isset|
 
 
 *yii/db/Query::__unset*					public
+
  See |yii/base/Component::__unset|
 
 
 *yii/db/Query::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/db/Query::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/db/Query::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/db/Query::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/db/Query::hasMethod*					public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/db/Query::__clone*					public
+
  See |yii/base/Component::__clone|
 
 
 *yii/db/Query::behaviors*					public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/db/Query::hasEventHandlers*				public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/db/Query::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/db/Query::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/db/Query::trigger*					public
+
  See |yii/base/Component::trigger|
 
 
 *yii/db/Query::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/db/Query::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/db/Query::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/db/Query::attachBehaviors*				public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/db/Query::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/db/Query::detachBehaviors*				public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/db/Query::ensureBehaviors*				public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/db/Query::indexBy*					public
+
  See |yii/db/QueryTrait::indexBy|
 
 
@@ -226,7 +268,7 @@ METHOD DETAILS
 >
  where($condition, $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The method requires a '$condition' parameter, and optionally a '$params'
  parameter specifying the values to be bound to the query.
@@ -267,7 +309,7 @@ METHOD DETAILS
 
    - **or**: similar to the 'and' operator except that the operands are
    concatenated using 'OR'. For example,   '['or', ['type' => [7, 8, 9', ['id'
- => [1, 2, 3'' will generate '(type IN (7, 8, 9) OR (id IN (1, 2, 3)))'.
+ => [1, 2, 3']' will generate '(type IN (7, 8, 9) OR (id IN (1, 2, 3)))'.
 
 
    - **not**: this will take only one operand and build the negation of
@@ -346,6 +388,9 @@ METHOD DETAILS
    - Additionally you can specify arbitrary operators as follows: A
    condition of '['>=', 'id', 10]' will result in the   following SQL
  expression: 'id >= 10'.
+
+
+
     [$condition] (string|array|\yii\db\Expression) The conditions that should
     be put in the WHERE part.
     [$params] (array) The parameters (name => value) to be bound to the query.
@@ -355,10 +400,11 @@ METHOD DETAILS
 >
  andWhere($condition, $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
+
     [$condition] (string|array|\yii\db\Expression) The new WHERE condition.
     Please refer to 'where()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
@@ -368,52 +414,63 @@ METHOD DETAILS
 >
  orWhere($condition, $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
+
     [$condition] (string|array|\yii\db\Expression) The new WHERE condition.
     Please refer to 'where()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
 
 
 *yii/db/Query::filterWhere*				public
+
  See |yii/db/QueryTrait::filterWhere|
 
 
 *yii/db/Query::andFilterWhere*				public
+
  See |yii/db/QueryTrait::andFilterWhere|
 
 
 *yii/db/Query::orFilterWhere*				public
+
  See |yii/db/QueryTrait::orFilterWhere|
 
 
 *yii/db/Query::filterCondition*				protected
+
  See |yii/db/QueryTrait::filterCondition|
 
 
 *yii/db/Query::isEmpty*					protected
+
  See |yii/db/QueryTrait::isEmpty|
 
 
 *yii/db/Query::orderBy*					public
+
  See |yii/db/QueryTrait::orderBy|
 
 
 *yii/db/Query::addOrderBy*				public
+
  See |yii/db/QueryTrait::addOrderBy|
 
 
 *yii/db/Query::normalizeOrderBy*				protected
+
  See |yii/db/QueryTrait::normalizeOrderBy|
 
 
 *yii/db/Query::limit*					public
+
  See |yii/db/QueryTrait::limit|
 
 
 *yii/db/Query::offset*					public
+
  See |yii/db/QueryTrait::offset|
 
 
@@ -421,7 +478,7 @@ METHOD DETAILS
 >
  createCommand($db='null')
 <
-(\yii\db\Command) The created DB command instance.
+return (\yii\db\Command) The created DB command instance.
 
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
@@ -432,12 +489,13 @@ METHOD DETAILS
 >
  prepare($builder)
 <
-($this) A prepared query instance which will be used by 'QueryBuilder' to
+return ($this) A prepared query instance which will be used by 'QueryBuilder' to
 build the SQL
 
  This method is called by 'QueryBuilder' when it starts to build SQL from a
  query object. You may override this method to do some final preparation work
  when converting a query into a SQL statement.
+
     [$builder] (\yii\db\QueryBuilder) 
 
 
@@ -445,7 +503,7 @@ build the SQL
 >
  batch($batchSize=100, $db='null')
 <
-(\yii\db\BatchQueryResult) The batch query result. It implements the
+return (\yii\db\BatchQueryResult) The batch query result. It implements the
 '\Iterator' interface and can be traversed to retrieve the data in batches.
 
  A batch query supports fetching data in batches, which can keep the memory
@@ -461,6 +519,7 @@ build the SQL
    }
 
 
+
     [$batchSize] (integer) The number of records to be fetched in each batch.
     [$db] (\yii\db\Connection) The database connection. If not set, the "db"
     application component will be used.
@@ -470,7 +529,7 @@ build the SQL
 >
  each($batchSize=100, $db='null')
 <
-(\yii\db\BatchQueryResult) The batch query result. It implements the
+return (\yii\db\BatchQueryResult) The batch query result. It implements the
 '\Iterator' interface and can be traversed to retrieve the data in batches.
 
  This method is similar to 'batch()' except that in each iteration of the
@@ -479,6 +538,7 @@ build the SQL
    $query = (new Query)->from('user');
    foreach ($query->each() as $row) {
    }
+
 
 
     [$batchSize] (integer) The number of records to be fetched in each batch.
@@ -490,7 +550,7 @@ build the SQL
 >
  all($db='null')
 <
-(array) The query results. If the query results in nothing, an empty array
+return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
     [$db] (\yii\db\Connection) The database connection used to generate the
@@ -502,10 +562,11 @@ will be returned.
 >
  populate($rows)
 <
-(array) The converted query result
+return (array) The converted query result
 
  This method is internally used to convert the data fetched from database into
  the format as required by this query.
+
     [$rows] (array) The raw query result from database
 
 
@@ -513,7 +574,7 @@ will be returned.
 >
  one($db='null')
 <
-(array|boolean) The first row (in terms of an array) of the query result.
+return (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
 
     [$db] (\yii\db\Connection) The database connection used to generate the
@@ -525,11 +586,12 @@ False is returned if the query results in nothing.
 >
  scalar($db='null')
 <
-(string|boolean) The value of the first column in the first row of the query
+return (string|boolean) The value of the first column in the first row of the query
 result. False is returned if the query result is empty.
 
  The value returned will be the first column in the first row of the query
  results.
+
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -539,7 +601,7 @@ result. False is returned if the query result is empty.
 >
  column($db='null')
 <
-(array) The first column of the query result. An empty array is returned if
+return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
     [$db] (\yii\db\Connection) The database connection used to generate the
@@ -551,7 +613,7 @@ the query results in nothing.
 >
  count($q=''*'', $db='null')
 <
-(integer|string) Number of records. The result may be a string depending on
+return (integer|string) Number of records. The result may be a string depending on
 the underlying database engine and to support integer values higher than a
 32bit PHP integer can handle.
 
@@ -567,7 +629,7 @@ the underlying database engine and to support integer values higher than a
 >
  sum($q, $db='null')
 <
-(mixed) The sum of the specified column values.
+return (mixed) The sum of the specified column values.
 
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
@@ -581,7 +643,7 @@ the underlying database engine and to support integer values higher than a
 >
  average($q, $db='null')
 <
-(mixed) The average of the specified column values.
+return (mixed) The average of the specified column values.
 
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
@@ -595,7 +657,7 @@ the underlying database engine and to support integer values higher than a
 >
  min($q, $db='null')
 <
-(mixed) The minimum of the specified column values.
+return (mixed) The minimum of the specified column values.
 
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
@@ -609,7 +671,7 @@ the underlying database engine and to support integer values higher than a
 >
  max($q, $db='null')
 <
-(mixed) The maximum of the specified column values.
+return (mixed) The maximum of the specified column values.
 
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
@@ -623,7 +685,7 @@ the underlying database engine and to support integer values higher than a
 >
  exists($db='null')
 <
-(boolean) Whether the query result contains any row of data.
+return (boolean) Whether the query result contains any row of data.
 
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
@@ -634,9 +696,10 @@ the underlying database engine and to support integer values higher than a
 >
  queryScalar($selectExpression, $db)
 <
-(bool|string) 
+return (boolean|string) 
 
  Restores the value of select to make this query reusable.
+
     [$selectExpression] (string|\yii\db\Expression) 
     [$db] (\yii\db\Connection|null) 
 
@@ -645,7 +708,7 @@ the underlying database engine and to support integer values higher than a
 >
  select($columns, $option='null')
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$columns] (string|array|\yii\db\Expression) The columns to be selected.
     Columns can be specified in either a string (e.g. "id, name") or an array
@@ -675,13 +738,14 @@ the underlying database engine and to support integer values higher than a
 >
  addSelect($columns)
 <
-($this) The query object itself
+return ($this) The query object itself
 
  Note, that if 'select' has not been specified before, you should include '*'
  explicitly if you want to select all remaining columns too:
 
    $query->addSelect(["*", "CONCAT(first_name, ' ', last_name) AS
  full_name"])->one();
+
 
 
     [$columns] (string|array|\yii\db\Expression) The columns to add to the
@@ -693,7 +757,7 @@ the underlying database engine and to support integer values higher than a
 >
  distinct($value='true')
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$value] (boolean) Whether to SELECT DISTINCT or not.
 
@@ -702,7 +766,7 @@ the underlying database engine and to support integer values higher than a
 >
  from($tables)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$tables] (string|array) The table(s) to be selected from. This can be
     either a string (e.g. ''user'') or an array (e.g. '['user', 'profile']')
@@ -738,13 +802,47 @@ the underlying database engine and to support integer values higher than a
 
 
 
+*yii/db/Query::andFilterCompare*				public
+>
+ andFilterCompare($name, $value, $defaultOperator=''='')
+<
+return ($this) The query object itself
+
+ It adds an additional WHERE condition for the given field and determines the
+ comparison operator based on the first few characters of the given value. The
+ condition is added in the same way as in 'andFilterWhere' so 'isEmpty()|empty
+ values' are ignored. The new condition and the existing one will be joined
+ using the 'AND' operator.
+
+ The comparison operator is intelligently determined based on the first few
+ characters in the given value. In particular, it recognizes the following
+ operators if they appear as the leading characters in the given value:
+
+
+   - '<': the column must be less than the given value. 
+   - '>': the column must be greater than the given value. 
+   - '<=': the column must be less than or equal to the given value. 
+   - '>=': the column must be greater than or equal to the given value. 
+   - '<>': the column must not be the same as the given value. 
+   - '=': the column must be equal to the given value. 
+   - If none of the above operators is detected, the '$defaultOperator'
+   will be used.
+
+    [$name] (string) The column name.
+    [$value] (string) The column value optionally prepended with the
+    comparison operator.
+    [$defaultOperator] (string) The operator to use, when no operator is given
+    in '$value'. Defaults to '=', performing an exact match.
+
+
 *yii/db/Query::join*					public
 >
  join($type, $table, $on='\'\'', $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The first parameter specifies what type of join it is.
+
     [$type] (string) The type of join, such as INNER JOIN, LEFT JOIN.
     [$table] (string|array) The table to be joined.
 
@@ -767,7 +865,7 @@ the underlying database engine and to support integer values higher than a
 >
  innerJoin($table, $on='\'\'', $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$table] (string|array) The table to be joined.
 
@@ -790,7 +888,7 @@ the underlying database engine and to support integer values higher than a
 >
  leftJoin($table, $on='\'\'', $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$table] (string|array) The table to be joined.
 
@@ -813,7 +911,7 @@ the underlying database engine and to support integer values higher than a
 >
  rightJoin($table, $on='\'\'', $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$table] (string|array) The table to be joined.
 
@@ -836,7 +934,7 @@ the underlying database engine and to support integer values higher than a
 >
  groupBy($columns)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$columns] (string|array|\yii\db\Expression) The columns to be grouped by.
     Columns can be specified in either a string (e.g. "id, name") or an array
@@ -856,7 +954,7 @@ the underlying database engine and to support integer values higher than a
 >
  addGroupBy($columns)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$columns] (string|array) Additional columns to be grouped by. Columns can
     be specified in either a string (e.g. "id, name") or an array (e.g. ['id',
@@ -876,7 +974,7 @@ the underlying database engine and to support integer values higher than a
 >
  having($condition, $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$condition] (string|array|\yii\db\Expression) The conditions to be put
     after HAVING. Please refer to 'where()' on how to specify this parameter.
@@ -887,10 +985,11 @@ the underlying database engine and to support integer values higher than a
 >
  andHaving($condition, $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
+
     [$condition] (string|array|\yii\db\Expression) The new HAVING condition.
     Please refer to 'where()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
@@ -900,10 +999,11 @@ the underlying database engine and to support integer values higher than a
 >
  orHaving($condition, $params='[]')
 <
-($this) The query object itself
+return ($this) The query object itself
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
+
     [$condition] (string|array|\yii\db\Expression) The new HAVING condition.
     Please refer to 'where()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
@@ -913,7 +1013,7 @@ the underlying database engine and to support integer values higher than a
 >
  union($sql, $all='false')
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$sql] (string|\yii\db\Query) The SQL statement to be appended using UNION
     [$all] (boolean) TRUE if using UNION ALL and FALSE if using UNION
@@ -923,7 +1023,7 @@ the underlying database engine and to support integer values higher than a
 >
  params($params)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
@@ -933,7 +1033,7 @@ the underlying database engine and to support integer values higher than a
 >
  addParams($params)
 <
-($this) The query object itself
+return ($this) The query object itself
 
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
@@ -943,9 +1043,10 @@ the underlying database engine and to support integer values higher than a
 >
  create($from)
 <
-(\yii\db\Query) The new Query object
+return (\yii\db\Query) The new Query object
 
  The properties being copies are the ones to be used by query builders.
+
     [$from] (\yii\db\Query) The source query object
 
 

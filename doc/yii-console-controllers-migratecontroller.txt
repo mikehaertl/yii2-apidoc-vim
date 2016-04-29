@@ -35,75 +35,126 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $id					*yii/console/controllers/MigrateController::$id*
+
  See |yii/base/Controller::$id|
 
 $module					*yii/console/controllers/MigrateController::$module*
+
  See |yii/base/Controller::$module|
 
 $defaultAction				*yii/console/controllers/MigrateController::$defaultAction*
+
  See |yii/console/controllers/BaseMigrateController::$defaultAction|
 
 $layout					*yii/console/controllers/MigrateController::$layout*
+
  See |yii/base/Controller::$layout|
 
 $action					*yii/console/controllers/MigrateController::$action*
+
  See |yii/base/Controller::$action|
 
 $interactive				*yii/console/controllers/MigrateController::$interactive*
+
  See |yii/console/Controller::$interactive|
 
 $color					*yii/console/controllers/MigrateController::$color*
+
  See |yii/console/Controller::$color|
 
 $migrationPath				*yii/console/controllers/MigrateController::$migrationPath*
+
  See |yii/console/controllers/BaseMigrateController::$migrationPath|
 
 $templateFile				*yii/console/controllers/MigrateController::$templateFile*
- ()
 
-$generatorTemplateFiles			*yii/console/controllers/MigrateController::$generatorTemplateFiles*
- ()
+ (string) The template file for generating new migrations. This can be either
+ a path alias (e.g. "@app/migrations/template.php") or a file path.
 
-$fields					*yii/console/controllers/MigrateController::$fields*
- See |yii/console/controllers/BaseMigrateController::$fields|
+ The template file for generating new migrations. This can be either a path
+ alias (e.g. "@app/migrations/template.php") or a file path.
+
+
 
 $migrationTable				*yii/console/controllers/MigrateController::$migrationTable*
+
  (string) The name of the table for keeping applied migration information.
 
+$generatorTemplateFiles			*yii/console/controllers/MigrateController::$generatorTemplateFiles*
+
+ (array) A set of template paths for generating migration code automatically.
+
+ The key is the template type, the value is a path or the alias. Supported
+ types are: 
+   - 'create_table': table creating template 
+   - 'drop_table': table dropping template 
+   - 'add_column': adding new column template 
+   - 'drop_column': dropping column template 
+   - 'create_junction': create junction template
+
+$useTablePrefix				*yii/console/controllers/MigrateController::$useTablePrefix*
+
+ (boolean) Indicates whether the table names generated should consider the
+ 'tablePrefix' setting of the DB connection. For example, if the table name is
+ 'post' the generator wil return '{{%post}}'.
+
+$fields					*yii/console/controllers/MigrateController::$fields*
+
+ (array) Column definition strings used for creating migration code.
+
+ The format of each definition is 'COLUMN_NAME:COLUMN_TYPE:COLUMN_DECORATOR'.
+ Delimiter is ','. For example, '--fields="name:string(12):notNull:unique"'
+ produces a string column of size 12 which is not null and unique values.
+
+ Note: primary key is added automatically and is named id by default. If you
+ want to use another name you may specify it explicitly like
+ '--fields="id_key:primaryKey,name:string(12):notNull:unique"'
+
 $db					*yii/console/controllers/MigrateController::$db*
+
  (\yii\db\Connection|array|string) The DB connection object or the application
  component ID of the DB connection to use when applying migrations. Starting
  from version 2.0.3, this can also be a configuration array for creating the
  object.
 
 $behaviors				*yii/console/controllers/MigrateController::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $modules				*yii/console/controllers/MigrateController::$modules*
+
  See |yii/base/Controller::$modules|
 
 $uniqueId				*yii/console/controllers/MigrateController::$uniqueId*
+
  See |yii/base/Controller::$uniqueId|
 
 $route					*yii/console/controllers/MigrateController::$route*
+
  See |yii/base/Controller::$route|
 
 $view					*yii/console/controllers/MigrateController::$view*
+
  See |yii/base/Controller::$view|
 
 $viewPath				*yii/console/controllers/MigrateController::$viewPath*
+
  See |yii/base/ViewContextInterface::$viewPath|
 
 $passedOptions				*yii/console/controllers/MigrateController::$passedOptions*
+
  See |yii/console/Controller::$passedOptions|
 
 $passedOptionValues			*yii/console/controllers/MigrateController::$passedOptionValues*
+
  See |yii/console/Controller::$passedOptionValues|
 
 $helpSummary				*yii/console/controllers/MigrateController::$helpSummary*
+
  See |yii/console/Controller::$helpSummary|
 
 $help					*yii/console/controllers/MigrateController::$help*
+
  See |yii/console/Controller::$help|
 
 
@@ -111,123 +162,154 @@ $help					*yii/console/controllers/MigrateController::$help*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/console/controllers/MigrateController::className*	public
+
  See |yii/base/Object::className|
 
 
 *yii/console/controllers/MigrateController::__construct*	public
+
  See |yii/base/Controller::__construct|
 
 
 *yii/console/controllers/MigrateController::init*		public
+
  See |yii/base/Object::init|
 
 
 *yii/console/controllers/MigrateController::__get*	public
+
  See |yii/base/Component::__get|
 
 
 *yii/console/controllers/MigrateController::__set*	public
+
  See |yii/base/Component::__set|
 
 
 *yii/console/controllers/MigrateController::__isset*	public
+
  See |yii/base/Component::__isset|
 
 
 *yii/console/controllers/MigrateController::__unset*	public
+
  See |yii/base/Component::__unset|
 
 
 *yii/console/controllers/MigrateController::__call*	public
+
  See |yii/base/Component::__call|
 
 
 *yii/console/controllers/MigrateController::hasProperty*	public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/console/controllers/MigrateController::canGetProperty*public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/console/controllers/MigrateController::canSetProperty*public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/console/controllers/MigrateController::hasMethod*	public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/console/controllers/MigrateController::__clone*	public
+
  See |yii/base/Component::__clone|
 
 
 *yii/console/controllers/MigrateController::behaviors*	public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/console/controllers/MigrateController::hasEventHandlers*public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/console/controllers/MigrateController::on*		public
+
  See |yii/base/Component::on|
 
 
 *yii/console/controllers/MigrateController::off*		public
+
  See |yii/base/Component::off|
 
 
 *yii/console/controllers/MigrateController::trigger*	public
+
  See |yii/base/Component::trigger|
 
 
 *yii/console/controllers/MigrateController::getBehavior*	public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/console/controllers/MigrateController::getBehaviors*	public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/console/controllers/MigrateController::attachBehavior*public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/console/controllers/MigrateController::attachBehaviors*public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/console/controllers/MigrateController::detachBehavior*public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/console/controllers/MigrateController::detachBehaviors*public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/console/controllers/MigrateController::ensureBehaviors*public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/console/controllers/MigrateController::actions*	public
+
  See |yii/base/Controller::actions|
 
 
 *yii/console/controllers/MigrateController::runAction*	public
+
  See |yii/console/Controller::runAction|
 
 
 *yii/console/controllers/MigrateController::run*		public
+
  See |yii/base/Controller::run|
 
 
 *yii/console/controllers/MigrateController::bindActionParams*public
+
  See |yii/console/Controller::bindActionParams|
 
 
 *yii/console/controllers/MigrateController::createAction*	public
+
  See |yii/base/Controller::createAction|
 
 
@@ -235,88 +317,108 @@ METHOD DETAILS
 >
  beforeAction($action)
 <
-(boolean) Whether the action should continue to be executed.
+return (boolean) Whether the action should continue to be executed.
 
     [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/console/controllers/MigrateController::afterAction*	public
+
  See |yii/base/Controller::afterAction|
 
 
 *yii/console/controllers/MigrateController::getModules*	public
+
  See |yii/base/Controller::getModules|
 
 
 *yii/console/controllers/MigrateController::getUniqueId*	public
+
  See |yii/base/Controller::getUniqueId|
 
 
 *yii/console/controllers/MigrateController::getRoute*	public
+
  See |yii/base/Controller::getRoute|
 
 
 *yii/console/controllers/MigrateController::render*	public
+
  See |yii/base/Controller::render|
 
 
 *yii/console/controllers/MigrateController::renderContent*public
+
  See |yii/base/Controller::renderContent|
 
 
 *yii/console/controllers/MigrateController::renderPartial*public
+
  See |yii/base/Controller::renderPartial|
 
 
 *yii/console/controllers/MigrateController::renderFile*	public
+
  See |yii/base/Controller::renderFile|
 
 
 *yii/console/controllers/MigrateController::getView*	public
+
  See |yii/base/Controller::getView|
 
 
 *yii/console/controllers/MigrateController::setView*	public
+
  See |yii/base/Controller::setView|
 
 
 *yii/console/controllers/MigrateController::getViewPath*	public
+
  See |yii/base/ViewContextInterface::getViewPath|
 
 
 *yii/console/controllers/MigrateController::setViewPath*	public
+
  See |yii/base/Controller::setViewPath|
 
 
 *yii/console/controllers/MigrateController::findLayoutFile*public
+
  See |yii/base/Controller::findLayoutFile|
 
 
 *yii/console/controllers/MigrateController::isColorEnabled*public
+
  See |yii/console/Controller::isColorEnabled|
 
 
 *yii/console/controllers/MigrateController::ansiFormat*	public
+
  See |yii/console/Controller::ansiFormat|
 
 
 *yii/console/controllers/MigrateController::stdout*	public
+
  See |yii/console/Controller::stdout|
 
 
 *yii/console/controllers/MigrateController::stderr*	public
+
  See |yii/console/Controller::stderr|
 
 
 *yii/console/controllers/MigrateController::prompt*	public
+
  See |yii/console/Controller::prompt|
 
 
 *yii/console/controllers/MigrateController::confirm*	public
+
  See |yii/console/Controller::confirm|
 
 
 *yii/console/controllers/MigrateController::select*	public
+
  See |yii/console/Controller::select|
 
 
@@ -324,104 +426,146 @@ METHOD DETAILS
 >
  options($actionID)
 <
-(array) The names of the options valid for the action
+return (array) The names of the options valid for the action
+
+
 
  Child classes may override this method to specify possible options.
 
  Note that the values setting via options are not available until
  'beforeAction()' is being called.
+
+
+
     [$actionID] (string) The action id of the current request
 
 
+*yii/console/controllers/MigrateController::optionAliases*public
+>
+ optionAliases()
+<
+return (array) The options alias names valid for the action where the keys is alias
+name for option and value is option name.
+
+
+
+ Child classes may override this method to specify alias options.
+
+
+
+
 *yii/console/controllers/MigrateController::getOptionValues*public
+
  See |yii/console/Controller::getOptionValues|
 
 
 *yii/console/controllers/MigrateController::getPassedOptions*public
+
  See |yii/console/Controller::getPassedOptions|
 
 
 *yii/console/controllers/MigrateController::getPassedOptionValues*public
+
  See |yii/console/Controller::getPassedOptionValues|
 
 
 *yii/console/controllers/MigrateController::getHelpSummary*public
+
  See |yii/console/Controller::getHelpSummary|
 
 
 *yii/console/controllers/MigrateController::getHelp*	public
+
  See |yii/console/Controller::getHelp|
 
 
 *yii/console/controllers/MigrateController::getActionHelpSummary*public
+
  See |yii/console/Controller::getActionHelpSummary|
 
 
 *yii/console/controllers/MigrateController::getActionHelp*public
+
  See |yii/console/Controller::getActionHelp|
 
 
 *yii/console/controllers/MigrateController::getActionArgsHelp*public
+
  See |yii/console/Controller::getActionArgsHelp|
 
 
 *yii/console/controllers/MigrateController::getActionOptionsHelp*public
+
  See |yii/console/Controller::getActionOptionsHelp|
 
 
 *yii/console/controllers/MigrateController::getActionMethodReflection*protected
+
  See |yii/console/Controller::getActionMethodReflection|
 
 
 *yii/console/controllers/MigrateController::parseDocCommentTags*protected
+
  See |yii/console/Controller::parseDocCommentTags|
 
 
 *yii/console/controllers/MigrateController::parseDocCommentSummary*protected
+
  See |yii/console/Controller::parseDocCommentSummary|
 
 
 *yii/console/controllers/MigrateController::parseDocCommentDetail*protected
+
  See |yii/console/Controller::parseDocCommentDetail|
 
 
 *yii/console/controllers/MigrateController::actionUp*	public
+
  See |yii/console/controllers/BaseMigrateController::actionUp|
 
 
 *yii/console/controllers/MigrateController::actionDown*	public
+
  See |yii/console/controllers/BaseMigrateController::actionDown|
 
 
 *yii/console/controllers/MigrateController::actionRedo*	public
+
  See |yii/console/controllers/BaseMigrateController::actionRedo|
 
 
 *yii/console/controllers/MigrateController::actionTo*	public
+
  See |yii/console/controllers/BaseMigrateController::actionTo|
 
 
 *yii/console/controllers/MigrateController::actionMark*	public
+
  See |yii/console/controllers/BaseMigrateController::actionMark|
 
 
 *yii/console/controllers/MigrateController::actionHistory*public
+
  See |yii/console/controllers/BaseMigrateController::actionHistory|
 
 
 *yii/console/controllers/MigrateController::actionNew*	public
+
  See |yii/console/controllers/BaseMigrateController::actionNew|
 
 
 *yii/console/controllers/MigrateController::actionCreate*	public
+
  See |yii/console/controllers/BaseMigrateController::actionCreate|
 
 
 *yii/console/controllers/MigrateController::migrateUp*	protected
+
  See |yii/console/controllers/BaseMigrateController::migrateUp|
 
 
 *yii/console/controllers/MigrateController::migrateDown*	protected
+
  See |yii/console/controllers/BaseMigrateController::migrateDown|
 
 
@@ -429,36 +573,58 @@ METHOD DETAILS
 >
  createMigration($class)
 <
-(\yii\db\Migration) The migration instance
+return (\yii\db\Migration) The migration instance
 
     [$class] (string) The migration class name
 
 
 *yii/console/controllers/MigrateController::migrateToTime*protected
+
  See |yii/console/controllers/BaseMigrateController::migrateToTime|
 
 
 *yii/console/controllers/MigrateController::migrateToVersion*protected
+
  See |yii/console/controllers/BaseMigrateController::migrateToVersion|
 
 
 *yii/console/controllers/MigrateController::getNewMigrations*protected
+
  See |yii/console/controllers/BaseMigrateController::getNewMigrations|
 
 
-*yii/console/controllers/MigrateController::parseFields*	protected
- See |yii/console/controllers/BaseMigrateController::parseFields|
+*yii/console/controllers/MigrateController::generateMigrationSourceCode*protected
+>
+ generateMigrationSourceCode($params)
+<
+return (string) Generated PHP code.
 
 
-*yii/console/controllers/MigrateController::addDefaultPrimaryKey*protected
- See |yii/console/controllers/BaseMigrateController::addDefaultPrimaryKey|
+
+ Child class may override this method, adding extra logic or variation to the
+ process.
+
+
+
+    [$params] (array) Generation parameters, usually following parameters are
+    present:
+
+     
+      - name: string migration base name  
+      - className: string migration class name
 
 
 *yii/console/controllers/MigrateController::getMigrationHistory*protected
 >
  getMigrationHistory($limit)
 <
-(array) The migration history
+return (array) The migration history
+
+
+
+
+
+
 
     [$limit] (integer) The maximum number of records in the history to be
     returned. 'null' for "no limit".
@@ -468,7 +634,13 @@ METHOD DETAILS
 >
  addMigrationHistory($version)
 <
-(void)
+return (void)
+
+
+
+
+
+
 
     [$version] (string) Migration version name.
 
@@ -477,7 +649,13 @@ METHOD DETAILS
 >
  removeMigrationHistory($version)
 <
-(void)
+return (void)
+
+
+
+
+
+
 
     [$version] (string) Migration version name.
 
@@ -486,8 +664,38 @@ METHOD DETAILS
 >
  createMigrationHistoryTable()
 <
-(void)
+return (void)
 
+
+
+*yii/console/controllers/MigrateController::generateTableName*protected
+>
+ generateTableName($tableName)
+<
+return (string) 
+
+    [$tableName] (string) The table name to generate.
+
+
+*yii/console/controllers/MigrateController::parseFields*	protected
+>
+ parseFields()
+<
+return (array) Parse result with following fields:
+
+
+  - fields: array, parsed fields 
+  - foreignKeys: array, detected foreign keys
+
+
+
+*yii/console/controllers/MigrateController::addDefaultPrimaryKey*protected
+>
+ addDefaultPrimaryKey($fields)
+<
+return (void)
+
+    [$fields] (array) Parsed fields
 
 
 

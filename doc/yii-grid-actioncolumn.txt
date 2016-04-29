@@ -23,36 +23,51 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $grid					*yii/grid/ActionColumn::$grid*
+
  See |yii/grid/Column::$grid|
 
 $header					*yii/grid/ActionColumn::$header*
+
  See |yii/grid/Column::$header|
 
 $footer					*yii/grid/ActionColumn::$footer*
+
  See |yii/grid/Column::$footer|
 
 $content				*yii/grid/ActionColumn::$content*
+
  See |yii/grid/Column::$content|
 
 $visible				*yii/grid/ActionColumn::$visible*
+
  See |yii/grid/Column::$visible|
 
 $options				*yii/grid/ActionColumn::$options*
+
  See |yii/grid/Column::$options|
 
 $headerOptions				*yii/grid/ActionColumn::$headerOptions*
- ()
+
+ (array) The HTML attributes for the header cell tag.
+
+ The HTML attributes for the header cell tag.
+
+
 
 $contentOptions				*yii/grid/ActionColumn::$contentOptions*
+
  See |yii/grid/Column::$contentOptions|
 
 $footerOptions				*yii/grid/ActionColumn::$footerOptions*
+
  See |yii/grid/Column::$footerOptions|
 
 $filterOptions				*yii/grid/ActionColumn::$filterOptions*
+
  See |yii/grid/Column::$filterOptions|
 
 $controller				*yii/grid/ActionColumn::$controller*
+
  (string) The ID of the controller that should handle the actions specified
  here. If not set, it will use the currently active controller. This property
  is mainly used by 'urlCreator' to create URLs for different actions. The
@@ -60,6 +75,7 @@ $controller				*yii/grid/ActionColumn::$controller*
  of the action.
 
 $template				*yii/grid/ActionColumn::$template*
+
  (string) The template used for composing each cell in the action column.
  Tokens enclosed within curly brackets are treated as controller action IDs
  (also called *button names* in the context of action column). They will be
@@ -76,6 +92,7 @@ $template				*yii/grid/ActionColumn::$template*
 
 
 $buttons				*yii/grid/ActionColumn::$buttons*
+
  (array) Button rendering callbacks. The array keys are the button names
  (without curly brackets), and the values are the corresponding button
  rendering callbacks. The callbacks should use the following signature:
@@ -102,6 +119,7 @@ $buttons				*yii/grid/ActionColumn::$buttons*
 
 
 $visibleButtons				*yii/grid/ActionColumn::$visibleButtons*
+
  (array) Visibility conditions for each button. The array keys are the button
  names (without curly brackets), and the values are the boolean true/false or
  the anonymous function. When the button name is not specified in this array
@@ -120,12 +138,14 @@ $visibleButtons				*yii/grid/ActionColumn::$visibleButtons*
 
 
 $urlCreator				*yii/grid/ActionColumn::$urlCreator*
+
  (callable) A callback that creates a button URL using the specified model
  information. The signature of the callback should be the same as that of
  'createUrl()'. If this property is not set, button URLs will be created using
  'createUrl()'.
 
 $buttonOptions				*yii/grid/ActionColumn::$buttonOptions*
+
  (array) Html options to be applied to the 'initDefaultButtons()|default
  buttons'.
 
@@ -134,11 +154,14 @@ $buttonOptions				*yii/grid/ActionColumn::$buttonOptions*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/grid/ActionColumn::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/grid/ActionColumn::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -146,69 +169,93 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/grid/ActionColumn::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/grid/ActionColumn::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/grid/ActionColumn::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/grid/ActionColumn::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/grid/ActionColumn::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/grid/ActionColumn::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/grid/ActionColumn::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/grid/ActionColumn::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/grid/ActionColumn::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/grid/ActionColumn::renderHeaderCell*			public
+
  See |yii/grid/Column::renderHeaderCell|
 
 
 *yii/grid/ActionColumn::renderFooterCell*			public
+
  See |yii/grid/Column::renderFooterCell|
 
 
 *yii/grid/ActionColumn::renderDataCell*			public
+
  See |yii/grid/Column::renderDataCell|
 
 
 *yii/grid/ActionColumn::renderFilterCell*			public
+
  See |yii/grid/Column::renderFilterCell|
 
 
 *yii/grid/ActionColumn::renderHeaderCellContent*		protected
+
  See |yii/grid/Column::renderHeaderCellContent|
 
 
+*yii/grid/ActionColumn::getHeaderCellLabel*		protected
+
+ See |yii/grid/Column::getHeaderCellLabel|
+
+
 *yii/grid/ActionColumn::renderFooterCellContent*		protected
+
  See |yii/grid/Column::renderFooterCellContent|
 
 
@@ -216,7 +263,13 @@ METHOD DETAILS
 >
  renderDataCellContent($model, $key, $index)
 <
-(string) The rendering result
+return (string) The rendering result
+
+
+
+
+
+
 
     [$model] (mixed) The data model
     [$key] (mixed) The key associated with the data model
@@ -225,6 +278,7 @@ METHOD DETAILS
 
 
 *yii/grid/ActionColumn::renderFilterCellContent*		protected
+
  See |yii/grid/Column::renderFilterCellContent|
 
 
@@ -232,7 +286,7 @@ METHOD DETAILS
 >
  initDefaultButtons()
 <
-(void)
+return (void)
 
 
 
@@ -240,9 +294,10 @@ METHOD DETAILS
 >
  createUrl($action, $model, $key, $index)
 <
-(string) The created URL
+return (string) The created URL
 
  This method is called for each button and each row.
+
     [$action] (string) The button name (or action ID)
     [$model] (\yii\db\ActiveRecord) The data model
     [$key] (mixed) The key associated with the data model

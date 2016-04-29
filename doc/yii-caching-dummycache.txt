@@ -15,155 +15,194 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/caching/DummyCache::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/caching/DummyCache::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/caching/DummyCache::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/caching/DummyCache::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/caching/DummyCache::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/caching/DummyCache::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/caching/DummyCache::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/caching/DummyCache::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/caching/DummyCache::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/caching/DummyCache::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/caching/DummyCache::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/caching/DummyCache::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/caching/DummyCache::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/caching/DummyCache::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/caching/DummyCache::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/caching/DummyCache::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/caching/DummyCache::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/caching/DummyCache::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/caching/DummyCache::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/caching/DummyCache::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/caching/DummyCache::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/caching/DummyCache::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/caching/DummyCache::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/caching/DummyCache::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/caching/DummyCache::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/caching/DummyCache::buildKey*			public
+
  See |yii/caching/Cache::buildKey|
 
 
 *yii/caching/DummyCache::get*				public
+
  See |yii/caching/Cache::get|
 
 
 *yii/caching/DummyCache::exists*				public
+
  See |yii/caching/Cache::exists|
 
 
 *yii/caching/DummyCache::mget*				public
+
  See |yii/caching/Cache::mget|
 
 
 *yii/caching/DummyCache::multiGet*			public
+
  See |yii/caching/Cache::multiGet|
 
 
 *yii/caching/DummyCache::set*				public
+
  See |yii/caching/Cache::set|
 
 
 *yii/caching/DummyCache::mset*				public
+
  See |yii/caching/Cache::mset|
 
 
 *yii/caching/DummyCache::multiSet*			public
+
  See |yii/caching/Cache::multiSet|
 
 
 *yii/caching/DummyCache::madd*				public
+
  See |yii/caching/Cache::madd|
 
 
 *yii/caching/DummyCache::multiAdd*			public
+
  See |yii/caching/Cache::multiAdd|
 
 
 *yii/caching/DummyCache::add*				public
+
  See |yii/caching/Cache::add|
 
 
 *yii/caching/DummyCache::delete*				public
+
  See |yii/caching/Cache::delete|
 
 
 *yii/caching/DummyCache::flush*				public
+
  See |yii/caching/Cache::flush|
 
 
@@ -171,10 +210,11 @@ METHOD DETAILS
 >
  getValue($key)
 <
-(string|boolean) The value stored in cache, false if the value is not in the
+return (string|boolean) The value stored in cache, false if the value is not in the
 cache or expired.
 
  This is the implementation of the method declared in the parent class.
+
     [$key] (string) A unique key identifying the cached value
 
 
@@ -182,9 +222,10 @@ cache or expired.
 >
  setValue($key, $value, $duration)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$duration] (integer) The number of seconds in which the cached value will
@@ -195,9 +236,10 @@ cache or expired.
 >
  addValue($key, $value, $duration)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$duration] (integer) The number of seconds in which the cached value will
@@ -208,7 +250,7 @@ cache or expired.
 >
  deleteValue($key)
 <
-(boolean) If no error happens during deletion
+return (boolean) If no error happens during deletion
 
     [$key] (string) The key of the value to be deleted
 
@@ -217,36 +259,43 @@ cache or expired.
 >
  flushValues()
 <
-(boolean) Whether the flush operation was successful.
+return (boolean) Whether the flush operation was successful.
 
  This is the implementation of the method declared in the parent class.
 
 
 *yii/caching/DummyCache::getValues*			protected
+
  See |yii/caching/Cache::getValues|
 
 
 *yii/caching/DummyCache::setValues*			protected
+
  See |yii/caching/Cache::setValues|
 
 
 *yii/caching/DummyCache::addValues*			protected
+
  See |yii/caching/Cache::addValues|
 
 
 *yii/caching/DummyCache::offsetExists*			public
+
  See |yii/caching/Cache::offsetExists|
 
 
 *yii/caching/DummyCache::offsetGet*			public
+
  See |yii/caching/Cache::offsetGet|
 
 
 *yii/caching/DummyCache::offsetSet*			public
+
  See |yii/caching/Cache::offsetSet|
 
 
 *yii/caching/DummyCache::offsetUnset*			public
+
  See |yii/caching/Cache::offsetUnset|
 
 

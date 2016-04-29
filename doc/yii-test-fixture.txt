@@ -5,13 +5,13 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/test/DbFixture|
 |yii/test/InitDbFixture|
 |yii/test/ActiveFixture|
-|yii/test/ArrayFixture|
 |yii/test/BaseActiveFixture|
-|yii/sphinx/ActiveFixture|
+|yii/test/DbFixture|
+|yii/test/ArrayFixture|
 |yii/elasticsearch/ActiveFixture|
+|yii/sphinx/ActiveFixture|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -35,10 +35,12 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $depends				*yii/test/Fixture::$depends*
+
  (array) The fixtures that this fixture depends on. This must be a list of the
  dependent fixture class names.
 
 $behaviors				*yii/test/Fixture::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -46,103 +48,129 @@ $behaviors				*yii/test/Fixture::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/test/Fixture::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/test/Fixture::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/test/Fixture::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/test/Fixture::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/test/Fixture::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/test/Fixture::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/test/Fixture::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/test/Fixture::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/test/Fixture::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/test/Fixture::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/test/Fixture::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/test/Fixture::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/test/Fixture::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/test/Fixture::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/test/Fixture::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/test/Fixture::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/test/Fixture::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/test/Fixture::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/test/Fixture::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/test/Fixture::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/test/Fixture::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/test/Fixture::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/test/Fixture::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/test/Fixture::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/test/Fixture::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -150,7 +178,7 @@ METHOD DETAILS
 >
  load()
 <
-(void)
+return (void)
 
  This method is called before performing every test method. You should
  override this method with concrete implementation about how to set up the
@@ -161,7 +189,7 @@ METHOD DETAILS
 >
  beforeLoad()
 <
-(void)
+return (void)
 
 
 
@@ -169,7 +197,7 @@ METHOD DETAILS
 >
  afterLoad()
 <
-(void)
+return (void)
 
 
 
@@ -177,7 +205,7 @@ METHOD DETAILS
 >
  unload()
 <
-(void)
+return (void)
 
  This method is called after every test method finishes. You may override this
  method to perform necessary cleanup work for the fixture.
@@ -187,7 +215,7 @@ METHOD DETAILS
 >
  beforeUnload()
 <
-(void)
+return (void)
 
 
 
@@ -195,7 +223,7 @@ METHOD DETAILS
 >
  afterUnload()
 <
-(void)
+return (void)
 
 
 

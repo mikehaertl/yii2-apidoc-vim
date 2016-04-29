@@ -13,21 +13,26 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $defaultRoles				*yii/rbac/BaseManager::$defaultRoles*
+
  (array) A list of role names that are assigned to every user automatically
  without calling 'assign()'.
 
 $behaviors				*yii/rbac/BaseManager::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $roles					*yii/rbac/BaseManager::$roles*
+
  (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
  names.
 
 $permissions				*yii/rbac/BaseManager::$permissions*
+
  (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
  by the permission names.
 
 $rules					*yii/rbac/BaseManager::$rules*
+
  See |yii/rbac/ManagerInterface::$rules|
 
 
@@ -35,103 +40,129 @@ $rules					*yii/rbac/BaseManager::$rules*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/rbac/BaseManager::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/rbac/BaseManager::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/rbac/BaseManager::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/rbac/BaseManager::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/rbac/BaseManager::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/rbac/BaseManager::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/rbac/BaseManager::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/rbac/BaseManager::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/rbac/BaseManager::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/rbac/BaseManager::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/rbac/BaseManager::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/rbac/BaseManager::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/rbac/BaseManager::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/rbac/BaseManager::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/rbac/BaseManager::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/rbac/BaseManager::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/rbac/BaseManager::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/rbac/BaseManager::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/rbac/BaseManager::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/rbac/BaseManager::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/rbac/BaseManager::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/rbac/BaseManager::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/rbac/BaseManager::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/rbac/BaseManager::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/rbac/BaseManager::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -139,7 +170,7 @@ METHOD DETAILS
 >
  getItem($name)
 <
-(\yii\rbac\Item) The auth item corresponding to the specified name. Null is
+return (\yii\rbac\Item) The auth item corresponding to the specified name. Null is
 returned if no such item.
 
     [$name] (string) The auth item name.
@@ -149,7 +180,7 @@ returned if no such item.
 >
  getItems($type)
 <
-(\yii\rbac\Item[]) The auth items of the specified type.
+return (\yii\rbac\Item[]) The auth items of the specified type.
 
     [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
     'Item::TYPE_PERMISSION'
@@ -159,7 +190,7 @@ returned if no such item.
 >
  addItem($item)
 <
-(boolean) Whether the auth item is successfully added to the system
+return (boolean) Whether the auth item is successfully added to the system
 
     [$item] (\yii\rbac\Item) The item to add
 
@@ -168,7 +199,7 @@ returned if no such item.
 >
  addRule($rule)
 <
-(boolean) Whether the rule is successfully added to the system
+return (boolean) Whether the rule is successfully added to the system
 
     [$rule] (\yii\rbac\Rule) The rule to add
 
@@ -177,7 +208,7 @@ returned if no such item.
 >
  removeItem($item)
 <
-(boolean) Whether the role or permission is successfully removed
+return (boolean) Whether the role or permission is successfully removed
 
     [$item] (\yii\rbac\Item) The item to remove
 
@@ -186,7 +217,7 @@ returned if no such item.
 >
  removeRule($rule)
 <
-(boolean) Whether the rule is successfully removed
+return (boolean) Whether the rule is successfully removed
 
     [$rule] (\yii\rbac\Rule) The rule to remove
 
@@ -195,7 +226,7 @@ returned if no such item.
 >
  updateItem($name, $item)
 <
-(boolean) Whether the auth item is successfully updated
+return (boolean) Whether the auth item is successfully updated
 
     [$name] (string) The name of the item being updated
     [$item] (\yii\rbac\Item) The updated item
@@ -205,7 +236,7 @@ returned if no such item.
 >
  updateRule($name, $rule)
 <
-(boolean) Whether the rule is successfully updated
+return (boolean) Whether the rule is successfully updated
 
     [$name] (string) The name of the rule being updated
     [$rule] (\yii\rbac\Rule) The updated rule
@@ -215,10 +246,15 @@ returned if no such item.
 >
  createRole($name)
 <
-(\yii\rbac\Role) The new Role object
+return (\yii\rbac\Role) The new Role object
+
+
 
  Note that the newly created role is not added to the RBAC system yet. You
  must fill in the needed data and call 'add()' to add it to the system.
+
+
+
     [$name] (string) The role name
 
 
@@ -226,10 +262,15 @@ returned if no such item.
 >
  createPermission($name)
 <
-(\yii\rbac\Permission) The new Permission object
+return (\yii\rbac\Permission) The new Permission object
+
+
 
  Note that the newly created permission is not added to the RBAC system yet.
  You must fill in the needed data and call 'add()' to add it to the system.
+
+
+
     [$name] (string) The permission name
 
 
@@ -237,8 +278,14 @@ returned if no such item.
 >
  add($object)
 <
-(boolean) Whether the role, permission or rule is successfully added to the
+return (boolean) Whether the role, permission or rule is successfully added to the
 system
+
+
+
+
+
+
 
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
@@ -247,7 +294,13 @@ system
 >
  remove($object)
 <
-(boolean) Whether the role, permission or rule is successfully removed
+return (boolean) Whether the role, permission or rule is successfully removed
+
+
+
+
+
+
 
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
@@ -256,7 +309,13 @@ system
 >
  update($name, $object)
 <
-(boolean) Whether the update is successful
+return (boolean) Whether the update is successful
+
+
+
+
+
+
 
     [$name] (string) The old name of the role, permission or rule
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
@@ -266,8 +325,14 @@ system
 >
  getRole($name)
 <
-(null|\yii\rbac\Role) The role corresponding to the specified name. Null is
+return (null|\yii\rbac\Role) The role corresponding to the specified name. Null is
 returned if no such role.
+
+
+
+
+
+
 
     [$name] (string) The role name.
 
@@ -276,8 +341,14 @@ returned if no such role.
 >
  getPermission($name)
 <
-(null|\yii\rbac\Permission) The permission corresponding to the specified
+return (null|\yii\rbac\Permission) The permission corresponding to the specified
 name. Null is returned if no such permission.
+
+
+
+
+
+
 
     [$name] (string) The permission name.
 
@@ -286,8 +357,13 @@ name. Null is returned if no such permission.
 >
  getRoles()
 <
-(\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+return (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
 names.
+
+
+
+
+
 
 
 
@@ -295,8 +371,13 @@ names.
 >
  getPermissions()
 <
-(\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+return (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
 by the permission names.
+
+
+
+
+
 
 
 
@@ -304,11 +385,12 @@ by the permission names.
 >
  executeRule($user, $item, $params)
 <
-(boolean) The return value of 'Rule::execute()'. If the auth item does not
+return (boolean) The return value of 'Rule::execute()'. If the auth item does not
 specify a rule, true will be returned.
 
  If the item does not specify a rule, this method will return true. Otherwise,
  it will return the value of 'Rule::execute()'.
+
     [$user] (string|integer) The user ID. This should be either an integer or
     a string representing the unique identifier of a user. See
     '\yii\web\User::id'.
@@ -318,90 +400,117 @@ specify a rule, true will be returned.
 
 
 *yii/rbac/BaseManager::checkAccess*			public
+
  See |yii/rbac/ManagerInterface::checkAccess|
 
 
 *yii/rbac/BaseManager::getRolesByUser*			public
+
  See |yii/rbac/ManagerInterface::getRolesByUser|
 
 
 *yii/rbac/BaseManager::getPermissionsByRole*		public
+
  See |yii/rbac/ManagerInterface::getPermissionsByRole|
 
 
 *yii/rbac/BaseManager::getPermissionsByUser*		public
+
  See |yii/rbac/ManagerInterface::getPermissionsByUser|
 
 
 *yii/rbac/BaseManager::getRule*				public
+
  See |yii/rbac/ManagerInterface::getRule|
 
 
 *yii/rbac/BaseManager::getRules*				public
+
  See |yii/rbac/ManagerInterface::getRules|
 
 
+*yii/rbac/BaseManager::canAddChild*			public
+
+ See |yii/rbac/ManagerInterface::canAddChild|
+
+
 *yii/rbac/BaseManager::addChild*				public
+
  See |yii/rbac/ManagerInterface::addChild|
 
 
 *yii/rbac/BaseManager::removeChild*			public
+
  See |yii/rbac/ManagerInterface::removeChild|
 
 
 *yii/rbac/BaseManager::removeChildren*			public
+
  See |yii/rbac/ManagerInterface::removeChildren|
 
 
 *yii/rbac/BaseManager::hasChild*				public
+
  See |yii/rbac/ManagerInterface::hasChild|
 
 
 *yii/rbac/BaseManager::getChildren*			public
+
  See |yii/rbac/ManagerInterface::getChildren|
 
 
 *yii/rbac/BaseManager::assign*				public
+
  See |yii/rbac/ManagerInterface::assign|
 
 
 *yii/rbac/BaseManager::revoke*				public
+
  See |yii/rbac/ManagerInterface::revoke|
 
 
 *yii/rbac/BaseManager::revokeAll*				public
+
  See |yii/rbac/ManagerInterface::revokeAll|
 
 
 *yii/rbac/BaseManager::getAssignment*			public
+
  See |yii/rbac/ManagerInterface::getAssignment|
 
 
 *yii/rbac/BaseManager::getAssignments*			public
+
  See |yii/rbac/ManagerInterface::getAssignments|
 
 
 *yii/rbac/BaseManager::getUserIdsByRole*			public
+
  See |yii/rbac/ManagerInterface::getUserIdsByRole|
 
 
 *yii/rbac/BaseManager::removeAll*				public
+
  See |yii/rbac/ManagerInterface::removeAll|
 
 
 *yii/rbac/BaseManager::removeAllPermissions*		public
+
  See |yii/rbac/ManagerInterface::removeAllPermissions|
 
 
 *yii/rbac/BaseManager::removeAllRoles*			public
+
  See |yii/rbac/ManagerInterface::removeAllRoles|
 
 
 *yii/rbac/BaseManager::removeAllRules*			public
+
  See |yii/rbac/ManagerInterface::removeAllRules|
 
 
 *yii/rbac/BaseManager::removeAllAssignments*		public
+
  See |yii/rbac/ManagerInterface::removeAllAssignments|
 
 

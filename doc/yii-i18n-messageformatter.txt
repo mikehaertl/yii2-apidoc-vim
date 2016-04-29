@@ -38,12 +38,15 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/i18n/MessageFormatter::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $errorCode				*yii/i18n/MessageFormatter::$errorCode*
+
  (string) Code of the last error.
 
 $errorMessage				*yii/i18n/MessageFormatter::$errorMessage*
+
  (string) Description of the last error.
 
 
@@ -51,103 +54,129 @@ $errorMessage				*yii/i18n/MessageFormatter::$errorMessage*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/i18n/MessageFormatter::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/i18n/MessageFormatter::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/i18n/MessageFormatter::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/i18n/MessageFormatter::__get*			public
+
  See |yii/base/Component::__get|
 
 
 *yii/i18n/MessageFormatter::__set*			public
+
  See |yii/base/Component::__set|
 
 
 *yii/i18n/MessageFormatter::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/i18n/MessageFormatter::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/i18n/MessageFormatter::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/i18n/MessageFormatter::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/i18n/MessageFormatter::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/i18n/MessageFormatter::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/i18n/MessageFormatter::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/i18n/MessageFormatter::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/i18n/MessageFormatter::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/i18n/MessageFormatter::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/i18n/MessageFormatter::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/i18n/MessageFormatter::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/i18n/MessageFormatter::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/i18n/MessageFormatter::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/i18n/MessageFormatter::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/i18n/MessageFormatter::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/i18n/MessageFormatter::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/i18n/MessageFormatter::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/i18n/MessageFormatter::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/i18n/MessageFormatter::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -155,7 +184,7 @@ METHOD DETAILS
 >
  getErrorCode()
 <
-(string) Code of the last error.
+return (string) Code of the last error.
 
 
 
@@ -163,7 +192,7 @@ METHOD DETAILS
 >
  getErrorMessage()
 <
-(string) Description of the last error.
+return (string) Description of the last error.
 
 
 
@@ -171,12 +200,13 @@ METHOD DETAILS
 >
  format($pattern, $params, $language)
 <
-(string|boolean) The formatted pattern string or 'FALSE' if an error occurred
+return (string|boolean) The formatted pattern string or 'FALSE' if an error occurred
 
  It uses the PHP intl extension's
  [MessageFormatter](http://www.php.net/manual/en/class.messageformatter.php)
  and works around some issues. If PHP intl is not installed a fallback will be
  used that supports a subset of the ICU message format.
+
     [$pattern] (string) The pattern string to insert parameters into.
     [$params] (array) The array of name value pairs to insert into the format
     string.
@@ -188,12 +218,13 @@ METHOD DETAILS
 >
  parse($pattern, $message, $language)
 <
-(array|boolean) An array containing items extracted, or 'FALSE' on error.
+return (array|boolean) An array containing items extracted, or 'FALSE' on error.
 
  It uses the PHP intl extension's
  [MessageFormatter::parse()](http://www.php.net/manual/en/messageformatter.parsemessage.php)
  and adds support for named arguments. Usage of this method requires PHP intl
  extension to be installed.
+
     [$pattern] (string) The pattern to use for parsing the message.
     [$message] (string) The message to parse, conforming to the pattern.
     [$language] (string) The locale to use for formatting locale-dependent
@@ -204,7 +235,7 @@ METHOD DETAILS
 >
  fallbackFormat($pattern, $args, $locale)
 <
-(string|boolean) The formatted pattern string or 'FALSE' if an error occurred
+return (string|boolean) The formatted pattern string or 'FALSE' if an error occurred
 
     [$pattern] (string) The pattern string to insert things into.
     [$args] (array) The array of values to insert into the format string

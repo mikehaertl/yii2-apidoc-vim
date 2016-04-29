@@ -45,14 +45,16 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *YiiRequirementChecker::check*				public
 >
  check($requirements)
 <
-($this) Self instance.
+return ($this) Self instance.
 
  This method can be invoked several times checking different requirement sets.
  Use 'getResult()' or 'render()' to get the results.
+
     [$requirements] (array|string) Requirements to be checked. If an array, it
     is treated as the set of requirements; If a string, it is treated as the
     path of the file, which contains the requirements;
@@ -62,7 +64,7 @@ METHOD DETAILS
 >
  checkYii()
 <
-(\YiiRequirementChecker) Self instance.
+return (\YiiRequirementChecker) Self instance.
 
 
 
@@ -70,7 +72,7 @@ METHOD DETAILS
 >
  getResult()
 <
-(array|null) Check results in format:
+return (array|null) Check results in format:
 
   array(
       'summary' => array(
@@ -96,7 +98,7 @@ METHOD DETAILS
 >
  render()
 <
-(void)
+return (void)
 
  The output will vary depending is a script running from web or from console.
 
@@ -105,7 +107,7 @@ METHOD DETAILS
 >
  checkPhpExtensionVersion($extensionName, $version, $compare=''>='')
 <
-(boolean) If PHP extension version matches.
+return (boolean) If PHP extension version matches.
 
     [$extensionName] (string) PHP extension name.
     [$version] (string) Required PHP extension version.
@@ -116,7 +118,7 @@ METHOD DETAILS
 >
  checkPhpIniOn($name)
 <
-(boolean) Option is on.
+return (boolean) Option is on.
 
     [$name] (string) Configuration option name.
 
@@ -125,7 +127,7 @@ METHOD DETAILS
 >
  checkPhpIniOff($name)
 <
-(boolean) Option is off.
+return (boolean) Option is off.
 
     [$name] (string) Configuration option name.
 
@@ -134,7 +136,7 @@ METHOD DETAILS
 >
  compareByteSize($a, $b, $compare=''>='')
 <
-(boolean) Comparison result.
+return (boolean) Comparison result.
 
     [$a] (string) First value.
     [$b] (string) Second value.
@@ -145,9 +147,10 @@ METHOD DETAILS
 >
  getByteSize($verboseSize)
 <
-(integer) Actual size in bytes.
+return (integer) Actual size in bytes.
 
  For example: '5K' => 5*1024
+
     [$verboseSize] (string) Verbose size representation.
 
 
@@ -155,7 +158,7 @@ METHOD DETAILS
 >
  checkUploadMaxFileSize($min='null', $max='null')
 <
-(boolean) Success.
+return (boolean) Success.
 
     [$min] (string|null) Verbose file size minimum required value, pass null
     to skip minimum check.
@@ -167,10 +170,11 @@ METHOD DETAILS
 >
  renderViewFile($_viewFile_, $_data_='null', $_return_='false')
 <
-(string) The rendering result. Null if the rendering result is not required.
+return (string) The rendering result. Null if the rendering result is not required.
 
  This method includes the view file as a PHP script and captures the display
  result if required.
+
     [$_viewFile_] (string) View file
     [$_data_] (array) Data to be extracted and made available to the view file
     [$_return_] (boolean) Whether the rendering result should be returned as a
@@ -181,7 +185,7 @@ METHOD DETAILS
 >
  normalizeRequirement($requirement, $requirementKey=0)
 <
-(array) Normalized requirement.
+return (array) Normalized requirement.
 
     [$requirement] (array) Raw requirement.
     [$requirementKey] (integer) Requirement key in the list.
@@ -191,9 +195,10 @@ METHOD DETAILS
 >
  usageError($message)
 <
-(void)
+return (void)
 
  This method will then terminate the execution of the current application.
+
     [$message] (string) The error message
 
 
@@ -201,7 +206,7 @@ METHOD DETAILS
 >
  evaluateExpression($expression)
 <
-(mixed) The expression result.
+return (mixed) The expression result.
 
     [$expression] (string) A PHP expression to be evaluated.
 
@@ -210,7 +215,7 @@ METHOD DETAILS
 >
  getServerInfo()
 <
-(string) Server information.
+return (string) Server information.
 
 
 
@@ -218,7 +223,7 @@ METHOD DETAILS
 >
  getNowDate()
 <
-(string) Now date.
+return (string) Now date.
 
 
 

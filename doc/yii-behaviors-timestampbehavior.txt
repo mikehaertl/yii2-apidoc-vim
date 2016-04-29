@@ -22,6 +22,9 @@ DESCRIPTION
  inserted; it will fill the 'updated_at' attribute with the timestamp when the
  AR object is being updated. The timestamp value is obtained by 'time()'.
 
+ For the above implementation to work with MySQL database, please declare the
+ columns('created_at', 'updated_at') as int(11) for being UNIX timestamp.
+
  If your attribute names are different or you want to use a different way of
  calculating the timestamp, you may configure the 'createdAtAttribute',
  'updatedAtAttribute' and 'value' properties like the following:
@@ -40,10 +43,11 @@ DESCRIPTION
        ];
    }
 
- In case you use an 'Expression' object as in the example above, the attribute
- will not hold the timestamp value, but the Expression object itself after the
- record has been saved. If you need the value from DB afterwards you should
- call the '\yii\db\ActiveRecord::refresh()|refresh()' method of the record.
+ In case you use an '\yii\db\Expression' object as in the example above, the
+ attribute will not hold the timestamp value, but the Expression object itself
+ after the record has been saved. If you need the value from DB afterwards you
+ should call the '\yii\db\ActiveRecord::refresh()|refresh()' method of the
+ record.
 
  TimestampBehavior also provides a method named 'touch()' that allows you to
  assign the current timestamp to the specified attribute(s) and save them to
@@ -58,19 +62,53 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $owner					*yii/behaviors/TimestampBehavior::$owner*
+
  See |yii/base/Behavior::$owner|
 
 $attributes				*yii/behaviors/TimestampBehavior::$attributes*
+
  See |yii/behaviors/AttributeBehavior::$attributes|
 
 $value					*yii/behaviors/TimestampBehavior::$value*
- ()
+
+ (mixed) The value that will be assigned to the current attributes. This can
+ be an anonymous function, callable in array format (e.g. '[$this,
+ 'methodName']'), an 'Expression' object representing a DB expression (e.g.
+ 'new Expression('NOW()')'), scalar, string or an arbitrary value. If the
+ former, the return value of the function will be assigned to the attributes.
+ The signature of the function should be as follows,
+
+   function ($event)
+   {
+       // return value will be assigned to the attribute
+   }
+
+ The value that will be assigned to the current attributes. This can be an
+ anonymous function, callable in array format (e.g. '[$this, 'methodName']'),
+ an 'Expression' object representing a DB expression (e.g. 'new
+ Expression('NOW()')'), scalar, string or an arbitrary value. If the former,
+ the return value of the function will be assigned to the attributes. The
+ signature of the function should be as follows,
+
+   function ($event)
+   {
+       // return value will be assigned to the attribute
+   }
+
+ In case, when the value is 'null', the result of the PHP function
+ [time()](http://php.net/manual/en/function.time.php) will be used as value.
+
+$skipUpdateOnClean			*yii/behaviors/TimestampBehavior::$skipUpdateOnClean*
+
+ See |yii/behaviors/AttributeBehavior::$skipUpdateOnClean|
 
 $createdAtAttribute			*yii/behaviors/TimestampBehavior::$createdAtAttribute*
+
  (string) The attribute that will receive timestamp value Set this property to
  false if you do not want to record the creation time.
 
 $updatedAtAttribute			*yii/behaviors/TimestampBehavior::$updatedAtAttribute*
+
  (string) The attribute that will receive timestamp value. Set this property
  to false if you do not want to record the update time.
 
@@ -79,11 +117,14 @@ $updatedAtAttribute			*yii/behaviors/TimestampBehavior::$updatedAtAttribute*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/behaviors/TimestampBehavior::className*		public
+
  See |yii/base/Object::className|
 
 
 *yii/behaviors/TimestampBehavior::__construct*		public
+
  See |yii/base/Object::__construct|
 
 
@@ -91,61 +132,78 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/behaviors/TimestampBehavior::__get*			public
+
  See |yii/base/Object::__get|
 
 
 *yii/behaviors/TimestampBehavior::__set*			public
+
  See |yii/base/Object::__set|
 
 
 *yii/behaviors/TimestampBehavior::__isset*		public
+
  See |yii/base/Object::__isset|
 
 
 *yii/behaviors/TimestampBehavior::__unset*		public
+
  See |yii/base/Object::__unset|
 
 
 *yii/behaviors/TimestampBehavior::__call*			public
+
  See |yii/base/Object::__call|
 
 
 *yii/behaviors/TimestampBehavior::hasProperty*		public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/behaviors/TimestampBehavior::canGetProperty*		public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/behaviors/TimestampBehavior::canSetProperty*		public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/behaviors/TimestampBehavior::hasMethod*		public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/behaviors/TimestampBehavior::events*			public
+
  See |yii/behaviors/AttributeBehavior::events|
 
 
 *yii/behaviors/TimestampBehavior::attach*			public
+
  See |yii/base/Behavior::attach|
 
 
 *yii/behaviors/TimestampBehavior::detach*			public
+
  See |yii/base/Behavior::detach|
 
 
 *yii/behaviors/TimestampBehavior::evaluateAttributes*	public
+
  See |yii/behaviors/AttributeBehavior::evaluateAttributes|
 
 
@@ -153,10 +211,16 @@ METHOD DETAILS
 >
  getValue($event)
 <
-(mixed) The attribute value
+return (mixed) The attribute value
+
+
 
  This method is called by 'evaluateAttributes()'. Its return value will be
  assigned to the attributes corresponding to the triggering event.
+
+ In case, when the 'value' is 'null', the result of the PHP function
+ [time()](http://php.net/manual/en/function.time.php) will be used as value.
+
     [$event] (\yii\base\Event) The event that triggers the current attribute
     updating.
 
@@ -165,11 +229,12 @@ METHOD DETAILS
 >
  touch($attribute)
 <
-(void)
+return (void)
 
 
 
    $model->touch('lastVisit');
+
 
 
     [$attribute] (string) The name of the attribute to update.

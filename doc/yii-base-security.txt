@@ -24,9 +24,11 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $cipher					*yii/base/Security::$cipher*
+
  (string) The cipher to use for encryption and decryption.
 
 $allowedCiphers				*yii/base/Security::$allowedCiphers*
+
  (array[]) Look-up table of block sizes and key sizes for each supported
  OpenSSL cipher.
 
@@ -42,21 +44,26 @@ $allowedCiphers				*yii/base/Security::$allowedCiphers*
  signature key and key derivation salt.
 
 $kdfHash				*yii/base/Security::$kdfHash*
+
  (string) Hash algorithm for key derivation. Recommend sha256, sha384 or
  sha512.
 
 $macHash				*yii/base/Security::$macHash*
+
  (string) Hash algorithm for message authentication. Recommend sha256, sha384
  or sha512.
 
 $authKeyInfo				*yii/base/Security::$authKeyInfo*
+
  (string) HKDF info value for derivation of message authentication key.
 
 $derivationIterations			*yii/base/Security::$derivationIterations*
+
  (integer) Derivation iterations count. Set as high as possible to hinder
  dictionary password attacks.
 
 $passwordHashStrategy			*yii/base/Security::$passwordHashStrategy*
+
  (string) Strategy, which should be used to generate password hash. Available
  strategies: 
    - 'password_hash' - use of PHP 'password_hash()' function with
@@ -65,10 +72,12 @@ $passwordHashStrategy			*yii/base/Security::$passwordHashStrategy*
    - 'crypt' - use PHP 'crypt()' function.
 
 $passwordHashCost			*yii/base/Security::$passwordHashCost*
+
  (integer) Default cost used for password hashing. Allowed value is between 4
  and 31.
 
 $behaviors				*yii/base/Security::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -76,103 +85,129 @@ $behaviors				*yii/base/Security::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/Security::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/base/Security::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/base/Security::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/base/Security::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/base/Security::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/base/Security::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/base/Security::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/base/Security::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/base/Security::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/base/Security::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/base/Security::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/base/Security::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/base/Security::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/base/Security::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/base/Security::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/base/Security::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/base/Security::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/base/Security::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/base/Security::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/base/Security::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/base/Security::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/base/Security::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/base/Security::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/base/Security::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/base/Security::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -180,7 +215,7 @@ METHOD DETAILS
 >
  encryptByPassword($data, $password)
 <
-(string) The encrypted data
+return (string) The encrypted data
 
  Derives keys for encryption and authentication from the password using PBKDF2
  and a random salt, which is deliberately slow to protect against dictionary
@@ -191,6 +226,7 @@ METHOD DETAILS
  no need to hash input or output data. > Note: Avoid encrypting with passwords
  wherever possible. Nothing can protect against poor-quality or compromised
  passwords.
+
     [$data] (string) The data to encrypt
     [$password] (string) The password to use for encryption
 
@@ -199,7 +235,7 @@ METHOD DETAILS
 >
  encryptByKey($data, $inputKey, $info='null')
 <
-(string) The encrypted data
+return (string) The encrypted data
 
  Derives keys for encryption and authentication from the input key using HKDF
  and a random salt, which is very fast relative to 'encryptByPassword()'. The
@@ -207,6 +243,7 @@ METHOD DETAILS
    - use 'generateRandomKey()' to generate keys. The encrypted data includes a
  keyed message authentication code (MAC) so there is no need to hash input or
  output data.
+
     [$data] (string) The data to encrypt
     [$inputKey] (string) The input to use for encryption and authentication
     [$info] (string) Optional context and application specific information,
@@ -217,7 +254,7 @@ METHOD DETAILS
 >
  decryptByPassword($data, $password)
 <
-(bool|string) The decrypted data or false on authentication failure
+return (boolean|string) The decrypted data or false on authentication failure
 
     [$data] (string) The encrypted data to decrypt
     [$password] (string) The password to use for decryption
@@ -227,7 +264,7 @@ METHOD DETAILS
 >
  decryptByKey($data, $inputKey, $info='null')
 <
-(bool|string) The decrypted data or false on authentication failure
+return (boolean|string) The decrypted data or false on authentication failure
 
     [$data] (string) The encrypted data to decrypt
     [$inputKey] (string) The input to use for encryption and authentication
@@ -239,7 +276,7 @@ METHOD DETAILS
 >
  encrypt($data, $passwordBased, $secret, $info)
 <
-(string) The encrypted data
+return (string) The encrypted data
 
     [$data] (string) Data to be encrypted
     [$passwordBased] (boolean) Set true to use password-based key derivation
@@ -253,7 +290,7 @@ METHOD DETAILS
 >
  decrypt($data, $passwordBased, $secret, $info)
 <
-(bool|string) The decrypted data or false on authentication failure
+return (boolean|string) The decrypted data or false on authentication failure
 
     [$data] (string) Encrypted data to be decrypted.
     [$passwordBased] (boolean) Set true to use password-based key derivation
@@ -265,11 +302,12 @@ METHOD DETAILS
 >
  hkdf($algo, $inputKey, $salt='null', $info='null', $length=0)
 <
-(string) The derived key
+return (string) The derived key
 
  Implements HKDF specified in [RFC 5869](https://tools.ietf.org/html/rfc5869).
  Recommend use one of the SHA-2 hash algorithms: sha224, sha256, sha384 or
  sha512.
+
     [$algo] (string) A hash algorithm supported by 'hash_hmac()', e.g.
     'SHA-256'
     [$inputKey] (string) The source key
@@ -285,11 +323,12 @@ METHOD DETAILS
 >
  pbkdf2($algo, $password, $salt, $iterations, $length=0)
 <
-(string) The derived key
+return (string) The derived key
 
  Implements HKDF2 specified in [RFC
  2898](http://tools.ietf.org/html/rfc2898#section-5.2) Recommend use one of
  the SHA-2 hash algorithms: sha224, sha256, sha384 or sha512.
+
     [$algo] (string) A hash algorithm supported by 'hash_hmac()', e.g.
     'SHA-256'
     [$password] (string) The source password
@@ -304,10 +343,11 @@ METHOD DETAILS
 >
  hashData($data, $key, $rawHash='false')
 <
-(string) The data prefixed with the keyed hash
+return (string) The data prefixed with the keyed hash
 
  There is no need to hash inputs or outputs of 'encryptByKey()' or
  'encryptByPassword()' as those methods perform the task.
+
     [$data] (string) The data to be protected
     [$key] (string) The secret key to be used for generating hash. Should be a
     secure cryptographic key.
@@ -319,7 +359,7 @@ METHOD DETAILS
 >
  validateData($data, $key, $rawHash='false')
 <
-(string) The real data with the hash stripped off. False if the data is
+return (string) The real data with the hash stripped off. False if the data is
 tampered.
 
     [$data] (string) The data to be validated. The data must be previously
@@ -338,9 +378,10 @@ tampered.
 >
  generateRandomKey($length=32)
 <
-(string) The generated random bytes
+return (string) The generated random bytes
 
  Note that output may not be ASCII.
+
     [$length] (integer) The number of bytes to generate
 
 
@@ -348,10 +389,11 @@ tampered.
 >
  generateRandomString($length=32)
 <
-(string) The generated random key
+return (string) The generated random key
 
  The string generated matches [A-Za-z0-9_-]+ and is transparent to
  URL-encoding.
+
     [$length] (integer) The length of the key in characters
 
 
@@ -359,7 +401,7 @@ tampered.
 >
  generatePasswordHash($password, $cost=null)
 <
-(string) The password hash string. When 'passwordHashStrategy' is set to
+return (string) The password hash string. When 'passwordHashStrategy' is set to
 'crypt', the output is always 60 ASCII characters, when set to 'password_hash'
 the output length might increase in future versions of PHP
 (http://php.net/manual/en/function.password-hash.php)
@@ -382,6 +424,7 @@ the output length might increase in future versions of PHP
    }
 
 
+
     [$password] (string) The password to be hashed.
     [$cost] (integer) Cost parameter used by the Blowfish hash algorithm. The
     higher the value of cost, the longer it takes to generate the hash and to
@@ -395,7 +438,7 @@ the output length might increase in future versions of PHP
 >
  validatePassword($password, $hash)
 <
-(boolean) Whether the password is correct.
+return (boolean) Whether the password is correct.
 
     [$password] (string) The password to verify.
     [$hash] (string) The hash to verify the password against.
@@ -405,12 +448,13 @@ the output length might increase in future versions of PHP
 >
  generateSalt($cost=13)
 <
-(string) The random salt value.
+return (string) The random salt value.
 
  The PHP [crypt()](http://php.net/manual/en/function.crypt.php) built-in
  function requires, for the Blowfish hash algorithm, a salt string in a
  specific format: "$2a$", "$2x$" or "$2y$", a two digit cost parameter, "$",
  and 22 characters from the alphabet "./0-9A-Za-z".
+
     [$cost] (integer) The cost parameter
 
 
@@ -418,7 +462,7 @@ the output length might increase in future versions of PHP
 >
  compareString($expected, $actual)
 <
-(boolean) Whether strings are equal.
+return (boolean) Whether strings are equal.
 
     [$expected] (string) String to compare.
     [$actual] (string) User-supplied string.

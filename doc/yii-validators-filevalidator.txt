@@ -17,39 +17,51 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $builtInValidators			*yii/validators/FileValidator::$builtInValidators*
+
  See |yii/validators/Validator::$builtInValidators|
 
 $attributes				*yii/validators/FileValidator::$attributes*
+
  See |yii/validators/Validator::$attributes|
 
 $message				*yii/validators/FileValidator::$message*
+
  (string) The error message used when a file is not uploaded correctly.
 
 $on					*yii/validators/FileValidator::$on*
+
  See |yii/validators/Validator::$on|
 
 $except					*yii/validators/FileValidator::$except*
+
  See |yii/validators/Validator::$except|
 
 $skipOnError				*yii/validators/FileValidator::$skipOnError*
+
  See |yii/validators/Validator::$skipOnError|
 
 $skipOnEmpty				*yii/validators/FileValidator::$skipOnEmpty*
+
  See |yii/validators/Validator::$skipOnEmpty|
 
 $enableClientValidation			*yii/validators/FileValidator::$enableClientValidation*
+
  See |yii/validators/Validator::$enableClientValidation|
 
 $isEmpty				*yii/validators/FileValidator::$isEmpty*
+
  See |yii/validators/Validator::$isEmpty|
 
 $when					*yii/validators/FileValidator::$when*
+
  See |yii/validators/Validator::$when|
 
 $whenClient				*yii/validators/FileValidator::$whenClient*
+
  See |yii/validators/Validator::$whenClient|
 
 $extensions				*yii/validators/FileValidator::$extensions*
+
  (array|string) A list of file name extensions that are allowed to be
  uploaded. This can be either an array or a string consisting of file
  extension names separated by space or comma (e.g. "gif, jpg"). Extension
@@ -57,26 +69,35 @@ $extensions				*yii/validators/FileValidator::$extensions*
  extensions are allowed.
 
 $checkExtensionByMimeType		*yii/validators/FileValidator::$checkExtensionByMimeType*
+
  (boolean) Whether to check file type (extension) with mime-type. If extension
  produced by file mime-type check differs from uploaded file extension, the
  file will be considered as invalid.
 
 $mimeTypes				*yii/validators/FileValidator::$mimeTypes*
+
  (array|string) A list of file MIME types that are allowed to be uploaded.
  This can be either an array or a string consisting of file MIME types
- separated by space or comma (e.g. "text/plain, image/png"). Mime type names
- are case-insensitive. Defaults to null, meaning all MIME types are allowed.
+ separated by space or comma (e.g. "text/plain, image/png"). The mask with the
+ special character '*' can be used to match groups of mime types. For example
+ 'image/*' will pass all mime types, that begin with 'image/' (e.g.
+ 'image/jpeg', 'image/png'). Mime type names are case-insensitive. Defaults to
+ null, meaning all MIME types are allowed.
 
 $minSize				*yii/validators/FileValidator::$minSize*
+
  (integer) The minimum number of bytes required for the uploaded file.
  Defaults to null, meaning no limit.
 
 $maxSize				*yii/validators/FileValidator::$maxSize*
+
  (integer) The maximum number of bytes required for the uploaded file.
  Defaults to null, meaning no limit. Note, the size limit is also affected by
- 'upload_max_filesize' INI setting and the 'MAX_FILE_SIZE' hidden field value.
+ 'upload_max_filesize' and 'post_max_size' INI setting and the 'MAX_FILE_SIZE'
+ hidden field value. See 'getSizeLimit()' for details.
 
 $maxFiles				*yii/validators/FileValidator::$maxFiles*
+
  (integer) The maximum file count the given attribute can hold. Defaults to 1,
  meaning single file upload. By defining a higher number, multiple uploads
  become possible. Setting it to '0' means there is no limit on the number of
@@ -86,11 +107,13 @@ $maxFiles				*yii/validators/FileValidator::$maxFiles*
  also limited with PHP directive 'max_file_uploads', which defaults to 20.
 
 $uploadRequired				*yii/validators/FileValidator::$uploadRequired*
+
  (string) The error message used when no file is uploaded. Note that this is
  the text of the validation error message. To make uploading files required,
  you have to set 'skipOnEmpty' to 'false'.
 
 $tooBig					*yii/validators/FileValidator::$tooBig*
+
  (string) The error message used when the uploaded file is too large. You may
  use the following tokens in the message:
 
@@ -102,6 +125,7 @@ $tooBig					*yii/validators/FileValidator::$tooBig*
  '\yii\i18n\Formatter::asShortSize()|Formatter::asShortSize()'
 
 $tooSmall				*yii/validators/FileValidator::$tooSmall*
+
  (string) The error message used when the uploaded file is too small. You may
  use the following tokens in the message:
 
@@ -113,6 +137,7 @@ $tooSmall				*yii/validators/FileValidator::$tooSmall*
  '\yii\i18n\Formatter::asShortSize()|Formatter::asShortSize()]
 
 $tooMany				*yii/validators/FileValidator::$tooMany*
+
  (string) The error message used if the count of multiple uploads exceeds
  limit. You may use the following tokens in the message:
 
@@ -121,6 +146,7 @@ $tooMany				*yii/validators/FileValidator::$tooMany*
    - {limit}: the value of 'maxFiles'
 
 $wrongExtension				*yii/validators/FileValidator::$wrongExtension*
+
  (string) The error message used when the uploaded file has an extension name
  that is not listed in 'extensions'. You may use the following tokens in the
  message:
@@ -131,8 +157,10 @@ $wrongExtension				*yii/validators/FileValidator::$wrongExtension*
    - {extensions}: the list of the allowed extensions.
 
 $wrongMimeType				*yii/validators/FileValidator::$wrongMimeType*
+
  (string) The error message used when the file has an mime type that is not
- listed in 'mimeTypes'. You may use the following tokens in the message:
+ allowed by 'mimeTypes' property. You may use the following tokens in the
+ message:
 
 
    - {attribute}: the attribute name 
@@ -140,9 +168,11 @@ $wrongMimeType				*yii/validators/FileValidator::$wrongMimeType*
    - {mimeTypes}: the value of 'mimeTypes'
 
 $behaviors				*yii/validators/FileValidator::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $sizeLimit				*yii/validators/FileValidator::$sizeLimit*
+
  (integer) The size limit for uploaded files.
 
 
@@ -150,11 +180,14 @@ $sizeLimit				*yii/validators/FileValidator::$sizeLimit*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/validators/FileValidator::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/validators/FileValidator::__construct*		public
+
  See |yii/base/Object::__construct|
 
 
@@ -162,105 +195,133 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/validators/FileValidator::__get*			public
+
  See |yii/base/Component::__get|
 
 
 *yii/validators/FileValidator::__set*			public
+
  See |yii/base/Component::__set|
 
 
 *yii/validators/FileValidator::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/validators/FileValidator::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/validators/FileValidator::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/validators/FileValidator::hasProperty*		public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/validators/FileValidator::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/validators/FileValidator::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/validators/FileValidator::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/validators/FileValidator::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/validators/FileValidator::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/validators/FileValidator::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/validators/FileValidator::on*			public
+
  See |yii/base/Component::on|
 
 
 *yii/validators/FileValidator::off*			public
+
  See |yii/base/Component::off|
 
 
 *yii/validators/FileValidator::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/validators/FileValidator::getBehavior*		public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/validators/FileValidator::getBehaviors*		public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/validators/FileValidator::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/validators/FileValidator::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/validators/FileValidator::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/validators/FileValidator::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/validators/FileValidator::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/validators/FileValidator::createValidator*		public
+
  See |yii/validators/Validator::createValidator|
 
 
 *yii/validators/FileValidator::validateAttributes*	public
+
  See |yii/validators/Validator::validateAttributes|
 
 
@@ -268,15 +329,21 @@ METHOD DETAILS
 >
  validateAttribute($model, $attribute)
 <
-(void)
+return (void)
+
+
 
  Child classes must implement this method to provide the actual validation
  logic.
+
+
+
     [$model] (\yii\base\Model) The data model to be validated
     [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/FileValidator::validate*			public
+
  See |yii/validators/Validator::validate|
 
 
@@ -284,11 +351,16 @@ METHOD DETAILS
 >
  validateValue($file)
 <
-(array|null) The error message and the parameters to be inserted into the
+return (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
+
+
 
  A validator class can implement this method to support data validation out of
  the context of a data model.
+
+
+
     [$file] () 
 
 
@@ -296,8 +368,10 @@ error message. Null should be returned if the data is valid.
 >
  clientValidateAttribute($model, $attribute, $view)
 <
-(string) The client-side validation script. Null if the validator does not
+return (string) The client-side validation script. Null if the validator does not
 support client-side validation.
+
+
 
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
@@ -328,6 +402,9 @@ support client-side validation.
    the container 
    - 'status': status of the input field, 0: empty, not entered before,
    1: validated, 2: pending validation, 3: validating
+
+
+
     [$model] (\yii\base\Model) The data model being validated
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
@@ -335,10 +412,12 @@ support client-side validation.
 
 
 *yii/validators/FileValidator::isActive*			public
+
  See |yii/validators/Validator::isActive|
 
 
 *yii/validators/FileValidator::addError*			public
+
  See |yii/validators/Validator::addError|
 
 
@@ -346,11 +425,16 @@ support client-side validation.
 >
  isEmpty($value, $trim='false')
 <
-(boolean) Whether the value is empty
+return (boolean) Whether the value is empty
+
+
 
  A value is considered empty if it is null, an empty array, or an empty
  string. Note that this method is different from PHP empty(). It will return
  false when the value is 0.
+
+
+
     [$value] (mixed) The value to be checked
     [$trim] () 
 
@@ -359,7 +443,7 @@ support client-side validation.
 >
  getSizeLimit()
 <
-(integer) The size limit for uploaded files.
+return (integer) The size limit for uploaded files.
 
  This is determined based on four factors:
 
@@ -374,7 +458,7 @@ support client-side validation.
 >
  validateExtension($file)
 <
-(boolean) 
+return (boolean) 
 
     [$file] (\yii\web\UploadedFile) 
 
@@ -383,10 +467,19 @@ support client-side validation.
 >
  getClientOptions($model, $attribute)
 <
-(array) The client side validation options
+return (array) The client side validation options
 
     [$model] (\yii\base\Model) The model being validated
     [$attribute] (string) The attribute name being validated
+
+
+*yii/validators/FileValidator::validateMimeType*		protected
+>
+ validateMimeType($file)
+<
+return (boolean) Whether the $file mimeType is allowed
+
+    [$file] (\yii\web\UploadedFile) 
 
 
 

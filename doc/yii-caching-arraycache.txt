@@ -8,119 +8,147 @@ DESCRIPTION
  See 'Cache' for common cache operations that ArrayCache supports.
 
  Unlike the 'Cache', ArrayCache allows the expire parameter of 'set', 'add',
- 'mset' and 'madd' to be a floating point number, so you may specify the time
- in milliseconds (e.g. 0.1 will be 100 milliseconds).
+ 'multiSet' and 'multiAdd' to be a floating point number, so you may specify
+ the time in milliseconds (e.g. 0.1 will be 100 milliseconds).
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/caching/ArrayCache::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/caching/ArrayCache::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/caching/ArrayCache::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/caching/ArrayCache::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/caching/ArrayCache::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/caching/ArrayCache::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/caching/ArrayCache::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/caching/ArrayCache::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/caching/ArrayCache::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/caching/ArrayCache::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/caching/ArrayCache::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/caching/ArrayCache::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/caching/ArrayCache::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/caching/ArrayCache::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/caching/ArrayCache::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/caching/ArrayCache::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/caching/ArrayCache::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/caching/ArrayCache::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/caching/ArrayCache::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/caching/ArrayCache::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/caching/ArrayCache::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/caching/ArrayCache::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/caching/ArrayCache::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/caching/ArrayCache::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/caching/ArrayCache::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/caching/ArrayCache::buildKey*			public
+
  See |yii/caching/Cache::buildKey|
 
 
 *yii/caching/ArrayCache::get*				public
+
  See |yii/caching/Cache::get|
 
 
@@ -128,8 +156,10 @@ METHOD DETAILS
 >
  exists($key)
 <
-(boolean) True if a value exists in cache, false if the value is not in the
+return (boolean) True if a value exists in cache, false if the value is not in the
 cache or expired.
+
+
 
  This can be faster than getting the value from the cache if the data is big.
  In case a cache does not support this feature natively, this method will try
@@ -137,48 +167,61 @@ cache or expired.
  this method does not check whether the dependency associated with the cached
  data, if there is any, has changed. So a call to 'get' may return false while
  exists returns true.
+
+
+
     [$key] (mixed) A key identifying the cached value. This can be a simple
     string or a complex data structure consisting of factors representing the
     key.
 
 
 *yii/caching/ArrayCache::mget*				public
+
  See |yii/caching/Cache::mget|
 
 
 *yii/caching/ArrayCache::multiGet*			public
+
  See |yii/caching/Cache::multiGet|
 
 
 *yii/caching/ArrayCache::set*				public
+
  See |yii/caching/Cache::set|
 
 
 *yii/caching/ArrayCache::mset*				public
+
  See |yii/caching/Cache::mset|
 
 
 *yii/caching/ArrayCache::multiSet*			public
+
  See |yii/caching/Cache::multiSet|
 
 
 *yii/caching/ArrayCache::madd*				public
+
  See |yii/caching/Cache::madd|
 
 
 *yii/caching/ArrayCache::multiAdd*			public
+
  See |yii/caching/Cache::multiAdd|
 
 
 *yii/caching/ArrayCache::add*				public
+
  See |yii/caching/Cache::add|
 
 
 *yii/caching/ArrayCache::delete*				public
+
  See |yii/caching/Cache::delete|
 
 
 *yii/caching/ArrayCache::flush*				public
+
  See |yii/caching/Cache::flush|
 
 
@@ -186,11 +229,16 @@ cache or expired.
 >
  getValue($key)
 <
-(string|boolean) The value stored in cache, false if the value is not in the
+return (string|boolean) The value stored in cache, false if the value is not in the
 cache or expired.
+
+
 
  This method should be implemented by child classes to retrieve the data from
  specific cache storage.
+
+
+
     [$key] (string) A unique key identifying the cached value
 
 
@@ -198,10 +246,15 @@ cache or expired.
 >
  setValue($key, $value, $duration)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
+
+
 
  This method should be implemented by child classes to store the data in
  specific cache storage.
+
+
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$duration] (integer) The number of seconds in which the cached value will
@@ -212,10 +265,15 @@ cache or expired.
 >
  addValue($key, $value, $duration)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
+
+
 
  This method should be implemented by child classes to store the data in
  specific cache storage.
+
+
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$duration] (integer) The number of seconds in which the cached value will
@@ -226,7 +284,13 @@ cache or expired.
 >
  deleteValue($key)
 <
-(boolean) If no error happens during deletion
+return (boolean) If no error happens during deletion
+
+
+
+
+
+
 
     [$key] (string) The key of the value to be deleted
 
@@ -235,36 +299,47 @@ cache or expired.
 >
  flushValues()
 <
-(boolean) Whether the flush operation was successful.
+return (boolean) Whether the flush operation was successful.
+
+
 
  Child classes may implement this method to realize the flush operation.
 
 
+
+
 *yii/caching/ArrayCache::getValues*			protected
+
  See |yii/caching/Cache::getValues|
 
 
 *yii/caching/ArrayCache::setValues*			protected
+
  See |yii/caching/Cache::setValues|
 
 
 *yii/caching/ArrayCache::addValues*			protected
+
  See |yii/caching/Cache::addValues|
 
 
 *yii/caching/ArrayCache::offsetExists*			public
+
  See |yii/caching/Cache::offsetExists|
 
 
 *yii/caching/ArrayCache::offsetGet*			public
+
  See |yii/caching/Cache::offsetGet|
 
 
 *yii/caching/ArrayCache::offsetSet*			public
+
  See |yii/caching/Cache::offsetSet|
 
 
 *yii/caching/ArrayCache::offsetUnset*			public
+
  See |yii/caching/Cache::offsetUnset|
 
 

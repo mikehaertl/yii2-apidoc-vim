@@ -5,11 +5,11 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/web/Application|
 |yii/base/Application|
 |yii/console/Application|
-|yii/web/Application|
-|yii/gii/Module|
 |yii/debug/Module|
+|yii/gii/Module|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -27,23 +27,28 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $params					*yii/base/Module::$params*
+
  (array) Custom module parameters (name => value).
 
 $id					*yii/base/Module::$id*
+
  (string) An ID that uniquely identifies this module among other modules which
  have the same 'module|parent'.
 
 $module					*yii/base/Module::$module*
+
  (\yii\base\Module) The parent module of this module. Null if this module does
  not have a parent.
 
 $layout					*yii/base/Module::$layout*
+
  (string|boolean) The layout that should be applied for views within this
  module. This refers to a view name relative to 'layoutPath'. If this is not
  set, it means the layout value of the 'module|parent module' will be taken.
  If this is false, layout will be disabled within this module.
 
 $controllerMap				*yii/base/Module::$controllerMap*
+
  (array) Mapping from controller ID to controller configurations. Each
  name-value pair specifies the configuration of a single controller. A
  controller configuration can be either a string or an array. If the former,
@@ -64,6 +69,7 @@ $controllerMap				*yii/base/Module::$controllerMap*
 
 
 $controllerNamespace			*yii/base/Module::$controllerNamespace*
+
  (string) The namespace that controller classes are in. This namespace will be
  used to load controller classes by prepending it to the controller class
  name.
@@ -76,34 +82,43 @@ $controllerNamespace			*yii/base/Module::$controllerNamespace*
  learn more about defining namespaces and how classes are loaded.
 
 $defaultRoute				*yii/base/Module::$defaultRoute*
+
  (string) The default route of this module. Defaults to 'default'. The route
  may consist of child module ID, controller ID, and/or action ID. For example,
  'help', 'post/create', 'admin/post/create'. If action ID is not given, it
  will take the default value as specified in 'Controller::defaultAction'.
 
 $behaviors				*yii/base/Module::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $components				*yii/base/Module::$components*
+
  See |yii/di/ServiceLocator::$components|
 
 $uniqueId				*yii/base/Module::$uniqueId*
+
  (string) The unique ID of the module.
 
 $basePath				*yii/base/Module::$basePath*
+
  (string) The root directory of the module.
 
 $controllerPath				*yii/base/Module::$controllerPath*
+
  (string) The directory that contains the controller classes.
 
 $viewPath				*yii/base/Module::$viewPath*
+
  (string) The root directory of view files. Defaults to "'basePath'/views".
 
 $layoutPath				*yii/base/Module::$layoutPath*
+
  (string) The root directory of layout files. Defaults to
  "'viewPath'/layouts".
 
 $aliases				*yii/base/Module::$aliases*
+
  (array) List of path aliases to be defined. The array keys are alias names
  (must start with '@') and the array values are the corresponding paths or
  aliases. For example,
@@ -116,6 +131,7 @@ $aliases				*yii/base/Module::$aliases*
 
 
 $modules				*yii/base/Module::$modules*
+
  (array) The modules (indexed by their IDs)
 
 
@@ -123,7 +139,9 @@ $modules				*yii/base/Module::$modules*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/Module::className*				public
+
  See |yii/base/Object::className|
 
 
@@ -131,7 +149,7 @@ METHOD DETAILS
 >
  __construct($id, $parent='null', $config='[]')
 <
-(void)
+return (void)
 
     [$id] (string) The ID of this module
     [$parent] (\yii\base\Module) The parent module (if any)
@@ -143,7 +161,7 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method is called after the module is created and initialized with
  property values given in configuration. The default implementation will
@@ -154,114 +172,142 @@ METHOD DETAILS
 
 
 *yii/base/Module::__get*					public
+
  See |yii/di/ServiceLocator::__get|
 
 
 *yii/base/Module::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/base/Module::__isset*				public
+
  See |yii/di/ServiceLocator::__isset|
 
 
 *yii/base/Module::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/base/Module::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/base/Module::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/base/Module::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/base/Module::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/base/Module::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/base/Module::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/base/Module::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/base/Module::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/base/Module::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/base/Module::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/base/Module::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/base/Module::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/base/Module::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/base/Module::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/base/Module::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/base/Module::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/base/Module::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/base/Module::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/base/Module::has*					public
+
  See |yii/di/ServiceLocator::has|
 
 
 *yii/base/Module::get*					public
+
  See |yii/di/ServiceLocator::get|
 
 
 *yii/base/Module::set*					public
+
  See |yii/di/ServiceLocator::set|
 
 
 *yii/base/Module::clear*					public
+
  See |yii/di/ServiceLocator::clear|
 
 
 *yii/base/Module::getComponents*				public
+
  See |yii/di/ServiceLocator::getComponents|
 
 
 *yii/base/Module::setComponents*				public
+
  See |yii/di/ServiceLocator::setComponents|
 
 
@@ -269,7 +315,7 @@ METHOD DETAILS
 >
  getInstance()
 <
-(static|null) The currently requested instance of this module class, or null
+return (static|null) The currently requested instance of this module class, or null
 if the module class is not requested.
 
  If the module class is not currently requested, null will be returned. This
@@ -281,7 +327,7 @@ if the module class is not requested.
 >
  setInstance($instance)
 <
-(void)
+return (void)
 
     [$instance] (\yii\base\Module|null) The currently requested instance of
     this module class. If it is null, the instance of the calling class will
@@ -292,7 +338,7 @@ if the module class is not requested.
 >
  getUniqueId()
 <
-(string) The unique ID of the module.
+return (string) The unique ID of the module.
 
  Note that if the module is an application, an empty string will be returned.
 
@@ -301,7 +347,7 @@ if the module class is not requested.
 >
  getBasePath()
 <
-(string) The root directory of the module.
+return (string) The root directory of the module.
 
  It defaults to the directory containing the module class file.
 
@@ -310,9 +356,10 @@ if the module class is not requested.
 >
  setBasePath($path)
 <
-(void)
+return (void)
 
  This method can only be invoked at the beginning of the constructor.
+
     [$path] (string) The root directory of the module. This can be either a
     directory name or a path alias.
 
@@ -321,7 +368,7 @@ if the module class is not requested.
 >
  getControllerPath()
 <
-(string) The directory that contains the controller classes.
+return (string) The directory that contains the controller classes.
 
  Note that in order for this method to return a value, you must define an
  alias for the root namespace of 'controllerNamespace'.
@@ -331,7 +378,7 @@ if the module class is not requested.
 >
  getViewPath()
 <
-(string) The root directory of view files. Defaults to "'basePath'/views".
+return (string) The root directory of view files. Defaults to "'basePath'/views".
 
 
 
@@ -339,7 +386,7 @@ if the module class is not requested.
 >
  setViewPath($path)
 <
-(void)
+return (void)
 
     [$path] (string) The root directory of view files.
 
@@ -348,7 +395,7 @@ if the module class is not requested.
 >
  getLayoutPath()
 <
-(string) The root directory of layout files. Defaults to "'viewPath'/layouts".
+return (string) The root directory of layout files. Defaults to "'viewPath'/layouts".
 
 
 
@@ -356,7 +403,7 @@ if the module class is not requested.
 >
  setLayoutPath($path)
 <
-(void)
+return (void)
 
     [$path] (string) The root directory or path alias of layout files.
 
@@ -365,10 +412,11 @@ if the module class is not requested.
 >
  setAliases($aliases)
 <
-(void)
+return (void)
 
  This method calls 'Yii::setAlias()' to register the path aliases. This method
  is provided so that you can define path aliases when configuring a module.
+
     [$aliases] (array) List of path aliases to be defined. The array keys are
     alias names (must start with '@') and the array values are the
     corresponding paths or aliases. For example,
@@ -385,11 +433,12 @@ if the module class is not requested.
 >
  hasModule($id)
 <
-(boolean) Whether the named module exists. Both loaded and unloaded modules
+return (boolean) Whether the named module exists. Both loaded and unloaded modules
 are considered.
 
  This method supports checking the existence of both child and grand child
  modules.
+
     [$id] (string) Module ID. For grand child modules, use ID path relative to
     this module (e.g. 'admin/content').
 
@@ -398,10 +447,11 @@ are considered.
 >
  getModule($id, $load='true')
 <
-(\yii\base\Module|null) The module instance, null if the module does not
+return (\yii\base\Module|null) The module instance, null if the module does not
 exist.
 
  This method supports retrieving both child modules and grand child modules.
+
     [$id] (string) Module ID (case-sensitive). To retrieve grand child
     modules, use ID path relative to this module (e.g. 'admin/content').
     [$load] (boolean) Whether to load the module if it is not yet loaded.
@@ -411,7 +461,7 @@ exist.
 >
  setModule($id, $module)
 <
-(void)
+return (void)
 
     [$id] (string) Module ID
     [$module] (\yii\base\Module|array|null) The sub-module to be added to this
@@ -428,7 +478,7 @@ exist.
 >
  getModules($loadedOnly='false')
 <
-(array) The modules (indexed by their IDs)
+return (array) The modules (indexed by their IDs)
 
     [$loadedOnly] (boolean) Whether to return the loaded sub-modules only. If
     this is set false, then all sub-modules registered in this module will be
@@ -440,7 +490,7 @@ exist.
 >
  setModules($modules)
 <
-(void)
+return (void)
 
  Each sub-module should be specified as a name-value pair, where name refers
  to the ID of the module and value the module or a configuration array that
@@ -461,6 +511,7 @@ exist.
    ]
 
 
+
     [$modules] (array) Modules (id => module configuration or instances)
 
 
@@ -468,12 +519,13 @@ exist.
 >
  runAction($route, $params='[]')
 <
-(mixed) The result of the action.
+return (mixed) The result of the action.
 
  This method parses the specified route and creates the corresponding child
  module(s), controller and action instances. It then calls
  'Controller::runAction()' to run the action with the given parameters. If the
  route is empty, the method will use 'defaultRoute'.
+
     [$route] (string) The route that specifies the action.
     [$params] (array) The parameters to be passed to the action
 
@@ -482,7 +534,7 @@ exist.
 >
  createController($route)
 <
-(array|boolean) If the controller is created successfully, it will be returned
+return (array|boolean) If the controller is created successfully, it will be returned
 together with the requested action ID. Otherwise false will be returned.
 
  The route should be relative to this module. The method implements the
@@ -500,6 +552,7 @@ together with the requested action ID. Otherwise false will be returned.
  If any of the above steps resolves into a controller, it is returned together
  with the rest part of the route which will be treated as the action ID.
  Otherwise, false will be returned.
+
     [$route] (string) The route consisting of module, controller and action
     IDs.
 
@@ -508,13 +561,14 @@ together with the requested action ID. Otherwise false will be returned.
 >
  createControllerByID($id)
 <
-(\yii\base\Controller) The newly created controller instance, or null if the
+return (\yii\base\Controller) The newly created controller instance, or null if the
 controller ID is invalid.
 
  The controller ID is relative to this module. The controller class should be
  namespaced under 'controllerNamespace'.
 
  Note that this method does not check 'modules' or 'controllerMap'.
+
     [$id] (string) The controller ID
 
 
@@ -522,7 +576,7 @@ controller ID is invalid.
 >
  beforeAction($action)
 <
-(boolean) Whether the action should continue to be executed.
+return (boolean) Whether the action should continue to be executed.
 
  The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
  the method will determine whether the action should continue to run.
@@ -545,6 +599,7 @@ controller ID is invalid.
    }
 
 
+
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -552,7 +607,7 @@ controller ID is invalid.
 >
  afterAction($action, $result)
 <
-(mixed) The processed action result.
+return (mixed) The processed action result.
 
  The method will trigger the 'EVENT_AFTER_ACTION' event. The return value of
  the method will be used as the action return value.
@@ -565,6 +620,7 @@ controller ID is invalid.
        // your custom code here
        return $result;
    }
+
 
 
     [$action] (\yii\base\Action) The action just executed.

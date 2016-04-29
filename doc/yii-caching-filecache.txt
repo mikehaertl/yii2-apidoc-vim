@@ -17,6 +17,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $keyPrefix				*yii/caching/FileCache::$keyPrefix*
+
  (string) A string prefixed to every cache key. This is needed when you store
  cache data under the same 'cachePath' for different applications to avoid
  conflict.
@@ -24,17 +25,21 @@ $keyPrefix				*yii/caching/FileCache::$keyPrefix*
  To ensure interoperability, only alphanumeric characters should be used.
 
 $serializer				*yii/caching/FileCache::$serializer*
+
  See |yii/caching/Cache::$serializer|
 
 $cachePath				*yii/caching/FileCache::$cachePath*
+
  (string) The directory to store cache files. You may use path alias here. If
  not set, it will use the "cache" subdirectory under the application runtime
  path.
 
 $cacheFileSuffix			*yii/caching/FileCache::$cacheFileSuffix*
+
  (string) Cache file suffix. Defaults to '.bin'.
 
 $directoryLevel				*yii/caching/FileCache::$directoryLevel*
+
  (integer) The level of sub-directories to store cache files. Defaults to 1.
  If the system has huge number of cache files (e.g. one million), you may use
  a bigger value (usually no bigger than 3). Using sub-directories is mainly to
@@ -42,23 +47,27 @@ $directoryLevel				*yii/caching/FileCache::$directoryLevel*
  too many files.
 
 $gcProbability				*yii/caching/FileCache::$gcProbability*
+
  (integer) The probability (parts per million) that garbage collection (GC)
  should be performed when storing a piece of data in the cache. Defaults to
  10, meaning 0.001% chance. This number should be between 0 and 1000000. A
  value 0 means no GC will be performed at all.
 
 $fileMode				*yii/caching/FileCache::$fileMode*
+
  (integer) The permission to be set for newly created cache files. This value
  will be used by PHP chmod() function. No umask will be applied. If not set,
  the permission will be determined by the current environment.
 
 $dirMode				*yii/caching/FileCache::$dirMode*
+
  (integer) The permission to be set for newly created directories. This value
  will be used by PHP chmod() function. No umask will be applied. Defaults to
  0775, meaning the directory is read-writable by owner and group, but
  read-only for other users.
 
 $behaviors				*yii/caching/FileCache::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -66,11 +75,14 @@ $behaviors				*yii/caching/FileCache::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/caching/FileCache::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/caching/FileCache::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -78,103 +90,127 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/caching/FileCache::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/caching/FileCache::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/caching/FileCache::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/caching/FileCache::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/caching/FileCache::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/caching/FileCache::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/caching/FileCache::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/caching/FileCache::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/caching/FileCache::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/caching/FileCache::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/caching/FileCache::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/caching/FileCache::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/caching/FileCache::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/caching/FileCache::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/caching/FileCache::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/caching/FileCache::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/caching/FileCache::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/caching/FileCache::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/caching/FileCache::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/caching/FileCache::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/caching/FileCache::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/caching/FileCache::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/caching/FileCache::buildKey*				public
+
  See |yii/caching/Cache::buildKey|
 
 
 *yii/caching/FileCache::get*				public
+
  See |yii/caching/Cache::get|
 
 
@@ -182,55 +218,66 @@ METHOD DETAILS
 >
  exists($key)
 <
-(boolean) True if a value exists in cache, false if the value is not in the
+return (boolean) True if a value exists in cache, false if the value is not in the
 cache or expired.
 
  This can be faster than getting the value from the cache if the data is big.
  Note that this method does not check whether the dependency associated with
  the cached data, if there is any, has changed. So a call to 'get' may return
  false while exists returns true.
+
     [$key] (mixed) A key identifying the cached value. This can be a simple
     string or a complex data structure consisting of factors representing the
     key.
 
 
 *yii/caching/FileCache::mget*				public
+
  See |yii/caching/Cache::mget|
 
 
 *yii/caching/FileCache::multiGet*				public
+
  See |yii/caching/Cache::multiGet|
 
 
 *yii/caching/FileCache::set*				public
+
  See |yii/caching/Cache::set|
 
 
 *yii/caching/FileCache::mset*				public
+
  See |yii/caching/Cache::mset|
 
 
 *yii/caching/FileCache::multiSet*				public
+
  See |yii/caching/Cache::multiSet|
 
 
 *yii/caching/FileCache::madd*				public
+
  See |yii/caching/Cache::madd|
 
 
 *yii/caching/FileCache::multiAdd*				public
+
  See |yii/caching/Cache::multiAdd|
 
 
 *yii/caching/FileCache::add*				public
+
  See |yii/caching/Cache::add|
 
 
 *yii/caching/FileCache::delete*				public
+
  See |yii/caching/Cache::delete|
 
 
 *yii/caching/FileCache::flush*				public
+
  See |yii/caching/Cache::flush|
 
 
@@ -238,10 +285,11 @@ cache or expired.
 >
  getValue($key)
 <
-(string|boolean) The value stored in cache, false if the value is not in the
+return (string|boolean) The value stored in cache, false if the value is not in the
 cache or expired.
 
  This is the implementation of the method declared in the parent class.
+
     [$key] (string) A unique key identifying the cached value
 
 
@@ -249,9 +297,10 @@ cache or expired.
 >
  setValue($key, $value, $duration)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$duration] (integer) The number of seconds in which the cached value will
@@ -262,9 +311,10 @@ cache or expired.
 >
  addValue($key, $value, $duration)
 <
-(boolean) True if the value is successfully stored into cache, false otherwise
+return (boolean) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
+
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
     [$duration] (integer) The number of seconds in which the cached value will
@@ -275,7 +325,7 @@ cache or expired.
 >
  deleteValue($key)
 <
-(boolean) If no error happens during deletion
+return (boolean) If no error happens during deletion
 
     [$key] (string) The key of the value to be deleted
 
@@ -284,36 +334,43 @@ cache or expired.
 >
  flushValues()
 <
-(boolean) Whether the flush operation was successful.
+return (boolean) Whether the flush operation was successful.
 
  This is the implementation of the method declared in the parent class.
 
 
 *yii/caching/FileCache::getValues*			protected
+
  See |yii/caching/Cache::getValues|
 
 
 *yii/caching/FileCache::setValues*			protected
+
  See |yii/caching/Cache::setValues|
 
 
 *yii/caching/FileCache::addValues*			protected
+
  See |yii/caching/Cache::addValues|
 
 
 *yii/caching/FileCache::offsetExists*			public
+
  See |yii/caching/Cache::offsetExists|
 
 
 *yii/caching/FileCache::offsetGet*			public
+
  See |yii/caching/Cache::offsetGet|
 
 
 *yii/caching/FileCache::offsetSet*			public
+
  See |yii/caching/Cache::offsetSet|
 
 
 *yii/caching/FileCache::offsetUnset*			public
+
  See |yii/caching/Cache::offsetUnset|
 
 
@@ -321,7 +378,7 @@ cache or expired.
 >
  getCacheFile($key)
 <
-(string) The cache file path
+return (string) The cache file path
 
     [$key] (string) Cache key
 
@@ -330,7 +387,7 @@ cache or expired.
 >
  gc($force='false', $expiredOnly='true')
 <
-(void)
+return (void)
 
     [$force] (boolean) Whether to enforce the garbage collection regardless of
     'gcProbability'. Defaults to false, meaning the actual deletion happens
@@ -343,9 +400,10 @@ cache or expired.
 >
  gcRecursive($path, $expiredOnly)
 <
-(void)
+return (void)
 
  This method is mainly used by 'gc()'.
+
     [$path] (string) The directory under which expired cache files are
     removed.
     [$expiredOnly] (boolean) Whether to only remove expired cache files. If

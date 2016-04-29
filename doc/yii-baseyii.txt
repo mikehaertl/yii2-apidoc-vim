@@ -18,18 +18,22 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $classMap				*yii/BaseYii::$classMap*
+
  (array) Class map used by the Yii autoloading mechanism. The array keys are
  the class names (without leading backslashes), and the array values are the
  corresponding class file paths (or path aliases). This property mainly
  affects how 'autoload()' works.
 
 $app					*yii/BaseYii::$app*
+
  (\yii\console\Application|\yii\web\Application) The application instance
 
 $aliases				*yii/BaseYii::$aliases*
+
  (array) Registered path aliases
 
 $container				*yii/BaseYii::$container*
+
  (\yii\di\Container) The dependency injection (DI) container used by
  'createObject()'. You may use 'Container::set()' to set up the needed
  dependencies of classes and their initial property values.
@@ -39,11 +43,12 @@ $container				*yii/BaseYii::$container*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/BaseYii::getVersion*					public
 >
  getVersion()
 <
-(string) The version of Yii framework
+return (string) The version of Yii framework
 
 
 
@@ -51,7 +56,7 @@ METHOD DETAILS
 >
  getAlias($alias, $throwException='true')
 <
-(string|boolean) The path corresponding to the alias, false if the root alias
+return (string|boolean) The path corresponding to the alias, false if the root alias
 is not previously registered.
 
  The translation is done according to the following procedure:
@@ -76,6 +81,7 @@ is not previously registered.
  character.
 
  Note, this method does not check if the returned path exists or not.
+
     [$alias] (string) The alias to be translated.
     [$throwException] (boolean) Whether to throw an exception if the given
     alias is invalid. If this is false and an invalid alias is given, false
@@ -86,11 +92,12 @@ is not previously registered.
 >
  getRootAlias($alias)
 <
-(string|boolean) The root alias, or false if no root alias is found
+return (string|boolean) The root alias, or false if no root alias is found
 
  A root alias is an alias that has been registered via 'setAlias()'
  previously. If a given alias matches multiple root aliases, the longest one
  will be returned.
+
     [$alias] (string) The alias
 
 
@@ -98,7 +105,7 @@ is not previously registered.
 >
  setAlias($alias, $path)
 <
-(void)
+return (void)
 
  A path alias is a short name representing a long path (a file path, a URL,
  etc.) For example, we use '@yii' as the alias of the path to the Yii
@@ -111,6 +118,7 @@ is not previously registered.
  does is to associate the alias with the path.
 
  Any trailing '/' and '\' characters in the given path will be trimmed.
+
     [$alias] (string) The alias name (e.g. "@yii"). It must start with a '@'
     character. It may contain the forward slash '/' which serves as boundary
     character when performing alias translation by 'getAlias()'.
@@ -129,7 +137,7 @@ is not previously registered.
 >
  autoload($className)
 <
-(void)
+return (void)
 
  This method is invoked automatically when PHP sees an unknown class. The
  method will attempt to include the class file according to the following
@@ -150,6 +158,7 @@ is not previously registered.
  framework directory.
 
  Also the [guide section on autoloading](guide:concept-autoloading).
+
     [$className] (string) The fully qualified class name without a leading
     backslash "\"
 
@@ -158,7 +167,7 @@ is not previously registered.
 >
  createObject($type, $params='[]')
 <
-(object) The created object
+return (object) The created object
 
  You may view this method as an enhanced version of the 'new' operator. The
  method supports creating an object based on a class name, a configuration
@@ -184,6 +193,7 @@ is not previously registered.
  Using '\yii\di\Container|dependency injection container', this method can
  also identify dependent objects, instantiate them and inject them into the
  newly created object.
+
     [$type] (string|array|callable) The object type. This can be specified in
     one of the following forms:
 
@@ -202,7 +212,7 @@ is not previously registered.
 >
  getLogger()
 <
-(\yii\log\Logger) Message logger
+return (\yii\log\Logger) Message logger
 
 
 
@@ -210,7 +220,7 @@ is not previously registered.
 >
  setLogger($logger)
 <
-(void)
+return (void)
 
     [$logger] (\yii\log\Logger) The logger object.
 
@@ -219,10 +229,11 @@ is not previously registered.
 >
  trace($message, $category=''application'')
 <
-(void)
+return (void)
 
  Trace messages are logged mainly for development purpose to see the execution
  work flow of some code.
+
     [$message] (string) The message to be logged.
     [$category] (string) The category of the message.
 
@@ -231,10 +242,11 @@ is not previously registered.
 >
  error($message, $category=''application'')
 <
-(void)
+return (void)
 
  An error message is typically logged when an unrecoverable error occurs
  during the execution of an application.
+
     [$message] (string) The message to be logged.
     [$category] (string) The category of the message.
 
@@ -243,10 +255,11 @@ is not previously registered.
 >
  warning($message, $category=''application'')
 <
-(void)
+return (void)
 
  A warning message is typically logged when an error occurs while the
  execution can still continue.
+
     [$message] (string) The message to be logged.
     [$category] (string) The category of the message.
 
@@ -255,10 +268,11 @@ is not previously registered.
 >
  info($message, $category=''application'')
 <
-(void)
+return (void)
 
  An informative message is typically logged by an application to keep record
  of something important (e.g. an administrator logs in).
+
     [$message] (string) The message to be logged.
     [$category] (string) The category of the message.
 
@@ -267,12 +281,13 @@ is not previously registered.
 >
  beginProfile($token, $category=''application'')
 <
-(void)
+return (void)
 
  This has to be matched with a call to 'endProfile' with the same category
  name. The begin
    - and end- calls must also be properly nested. For
    example,###CODE###
+
     [$token] (string) Token for the code block
     [$category] (string) The category of this log message
 
@@ -281,10 +296,11 @@ is not previously registered.
 >
  endProfile($token, $category=''application'')
 <
-(void)
+return (void)
 
  This has to be matched with a previous call to 'beginProfile' with the same
  category name.
+
     [$token] (string) Token for the code block
     [$category] (string) The category of this log message
 
@@ -293,7 +309,7 @@ is not previously registered.
 >
  powered()
 <
-(string) An HTML hyperlink that can be displayed on your Web page showing
+return (string) An HTML hyperlink that can be displayed on your Web page showing
 "Powered by Yii Framework" information
 
 
@@ -302,7 +318,7 @@ is not previously registered.
 >
  t($category, $message, $params='[]', $language='null')
 <
-(string) The translated message.
+return (string) The translated message.
 
  This is a shortcut method of '\yii\i18n\I18N::translate()'.
 
@@ -320,6 +336,7 @@ is not previously registered.
  Further formatting of message parameters is supported using the [PHP intl
  extensions](http://www.php.net/manual/en/intro.intl.php) message formatter.
  See '\yii\i18n\I18N::translate()' for more details.
+
     [$category] (string) The message category.
     [$message] (string) The message to be translated.
     [$params] (array) The parameters that will be used to replace the
@@ -333,7 +350,7 @@ is not previously registered.
 >
  configure($object, $properties)
 <
-(object) The object itself
+return (object) The object itself
 
     [$object] (object) The object to be configured
     [$properties] (array) The property initial values given in terms of
@@ -344,12 +361,13 @@ is not previously registered.
 >
  getObjectVars($object)
 <
-(array) The public member variables of the object
+return (array) The public member variables of the object
 
  This method is provided such that we can get the public member variables of
  an object. It is different from "get_object_vars()" because the latter will
  return private and protected variables if it is called within the object
  itself.
+
     [$object] (object) The object to be handled
 
 

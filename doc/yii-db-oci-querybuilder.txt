@@ -7,16 +7,20 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/oci/QueryBuilder::$db*
+
  See |yii/db/QueryBuilder::$db|
 
 $separator				*yii/db/oci/QueryBuilder::$separator*
+
  See |yii/db/QueryBuilder::$separator|
 
 $typeMap				*yii/db/oci/QueryBuilder::$typeMap*
+
  (array) Mapping from abstract column types (keys) to physical column types
  (values).
 
 $conditionBuilders			*yii/db/oci/QueryBuilder::$conditionBuilders*
+
  See |yii/db/QueryBuilder::$conditionBuilders|
 
 
@@ -24,55 +28,69 @@ $conditionBuilders			*yii/db/oci/QueryBuilder::$conditionBuilders*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/oci/QueryBuilder::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/db/oci/QueryBuilder::__construct*			public
- See |yii/db/QueryBuilder::__construct|
+
+ See |yii/base/Object::__construct|
 
 
 *yii/db/oci/QueryBuilder::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/db/oci/QueryBuilder::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/oci/QueryBuilder::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/oci/QueryBuilder::__isset*			public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/oci/QueryBuilder::__unset*			public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/oci/QueryBuilder::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/oci/QueryBuilder::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/oci/QueryBuilder::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/oci/QueryBuilder::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/oci/QueryBuilder::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/db/oci/QueryBuilder::build*				public
+
  See |yii/db/QueryBuilder::build|
 
 
@@ -80,7 +98,9 @@ METHOD DETAILS
 >
  insert($table, $columns, $params)
 <
-(string) The INSERT SQL
+return (string) The INSERT SQL
+
+
 
  For example,
 
@@ -90,6 +110,9 @@ METHOD DETAILS
    ], $params);
 
  The method will properly escape the table and column names.
+
+
+
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
     table.
@@ -101,7 +124,7 @@ METHOD DETAILS
 >
  batchInsert($table, $columns, $rows)
 <
-(string) The batch INSERT SQL statement
+return (string) The batch INSERT SQL statement
 
  For example,
 
@@ -112,20 +135,24 @@ METHOD DETAILS
    ]);
 
  Note that the values in each row must match the corresponding column names.
+
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch inserted into the table
 
 
 *yii/db/oci/QueryBuilder::update*				public
+
  See |yii/db/QueryBuilder::update|
 
 
 *yii/db/oci/QueryBuilder::delete*				public
+
  See |yii/db/QueryBuilder::delete|
 
 
 *yii/db/oci/QueryBuilder::createTable*			public
+
  See |yii/db/QueryBuilder::createTable|
 
 
@@ -133,7 +160,7 @@ METHOD DETAILS
 >
  renameTable($table, $newName)
 <
-(string) The SQL statement for renaming a DB table.
+return (string) The SQL statement for renaming a DB table.
 
     [$table] (string) The table to be renamed. The name will be properly
     quoted by the method.
@@ -142,30 +169,37 @@ METHOD DETAILS
 
 
 *yii/db/oci/QueryBuilder::dropTable*			public
+
  See |yii/db/QueryBuilder::dropTable|
 
 
 *yii/db/oci/QueryBuilder::addPrimaryKey*			public
+
  See |yii/db/QueryBuilder::addPrimaryKey|
 
 
 *yii/db/oci/QueryBuilder::dropPrimaryKey*			public
+
  See |yii/db/QueryBuilder::dropPrimaryKey|
 
 
 *yii/db/oci/QueryBuilder::truncateTable*			public
+
  See |yii/db/QueryBuilder::truncateTable|
 
 
 *yii/db/oci/QueryBuilder::addColumn*			public
+
  See |yii/db/QueryBuilder::addColumn|
 
 
 *yii/db/oci/QueryBuilder::dropColumn*			public
+
  See |yii/db/QueryBuilder::dropColumn|
 
 
 *yii/db/oci/QueryBuilder::renameColumn*			public
+
  See |yii/db/QueryBuilder::renameColumn|
 
 
@@ -173,7 +207,7 @@ METHOD DETAILS
 >
  alterColumn($table, $column, $type)
 <
-(string) The SQL statement for changing the definition of a column.
+return (string) The SQL statement for changing the definition of a column.
 
     [$table] (string) The table whose column is to be changed. The table name
     will be properly quoted by the method.
@@ -190,10 +224,15 @@ METHOD DETAILS
 >
  addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
 <
-(string) The SQL statement for adding a foreign key constraint to an existing
+return (string) The SQL statement for adding a foreign key constraint to an existing
 table.
 
+
+
  The method will properly quote the table and column names.
+
+
+
     [$name] (string) The name of the foreign key constraint.
     [$table] (string) The table that the foreign key constraint will be added
     to.
@@ -211,10 +250,12 @@ table.
 
 
 *yii/db/oci/QueryBuilder::dropForeignKey*			public
+
  See |yii/db/QueryBuilder::dropForeignKey|
 
 
 *yii/db/oci/QueryBuilder::createIndex*			public
+
  See |yii/db/QueryBuilder::createIndex|
 
 
@@ -222,7 +263,7 @@ table.
 >
  dropIndex($name, $table)
 <
-(string) The SQL statement for dropping an index.
+return (string) The SQL statement for dropping an index.
 
     [$name] (string) The name of the index to be dropped. The name will be
     properly quoted by the method.
@@ -234,10 +275,15 @@ table.
 >
  resetSequence($table, $value='null')
 <
-(string) The SQL statement for resetting sequence
+return (string) The SQL statement for resetting sequence
+
+
 
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
+
+
+
     [$table] (string) The name of the table whose primary key sequence will be
     reset
     [$value] (array|string) The value for the primary key of the next new row
@@ -246,34 +292,86 @@ table.
 
 
 *yii/db/oci/QueryBuilder::checkIntegrity*			public
+
  See |yii/db/QueryBuilder::checkIntegrity|
 
 
+*yii/db/oci/QueryBuilder::addCommentOnColumn*		public
+
+ See |yii/db/QueryBuilder::addCommentOnColumn|
+
+
+*yii/db/oci/QueryBuilder::addCommentOnTable*		public
+
+ See |yii/db/QueryBuilder::addCommentOnTable|
+
+
+*yii/db/oci/QueryBuilder::dropCommentFromColumn*		public
+>
+ dropCommentFromColumn($table, $column)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$column] (string) The name of the column to be commented. The column name
+    will be properly quoted by the method.
+
+
+*yii/db/oci/QueryBuilder::dropCommentFromTable*		public
+>
+ dropCommentFromTable($table)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+
+
 *yii/db/oci/QueryBuilder::getColumnType*			public
+
  See |yii/db/QueryBuilder::getColumnType|
 
 
 *yii/db/oci/QueryBuilder::buildSelect*			public
+
  See |yii/db/QueryBuilder::buildSelect|
 
 
 *yii/db/oci/QueryBuilder::buildFrom*			public
+
  See |yii/db/QueryBuilder::buildFrom|
 
 
 *yii/db/oci/QueryBuilder::buildJoin*			public
+
  See |yii/db/QueryBuilder::buildJoin|
 
 
 *yii/db/oci/QueryBuilder::buildWhere*			public
+
  See |yii/db/QueryBuilder::buildWhere|
 
 
 *yii/db/oci/QueryBuilder::buildGroupBy*			public
+
  See |yii/db/QueryBuilder::buildGroupBy|
 
 
 *yii/db/oci/QueryBuilder::buildHaving*			public
+
  See |yii/db/QueryBuilder::buildHaving|
 
 
@@ -281,7 +379,13 @@ table.
 >
  buildOrderByAndLimit($sql, $orderBy, $limit, $offset)
 <
-(string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
+return (string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
+
+
+
+
+
+
 
     [$sql] (string) The existing SQL (without ORDER BY/LIMIT/OFFSET)
     [$orderBy] (array) The order by columns. See 'Query::orderBy' for more
@@ -292,71 +396,103 @@ table.
 
 
 *yii/db/oci/QueryBuilder::buildOrderBy*			public
+
  See |yii/db/QueryBuilder::buildOrderBy|
 
 
 *yii/db/oci/QueryBuilder::buildLimit*			public
+
  See |yii/db/QueryBuilder::buildLimit|
 
 
 *yii/db/oci/QueryBuilder::hasLimit*			protected
+
  See |yii/db/QueryBuilder::hasLimit|
 
 
 *yii/db/oci/QueryBuilder::hasOffset*			protected
+
  See |yii/db/QueryBuilder::hasOffset|
 
 
 *yii/db/oci/QueryBuilder::buildUnion*			public
+
  See |yii/db/QueryBuilder::buildUnion|
 
 
 *yii/db/oci/QueryBuilder::buildColumns*			public
+
  See |yii/db/QueryBuilder::buildColumns|
 
 
 *yii/db/oci/QueryBuilder::buildCondition*			public
+
  See |yii/db/QueryBuilder::buildCondition|
 
 
 *yii/db/oci/QueryBuilder::buildHashCondition*		public
+
  See |yii/db/QueryBuilder::buildHashCondition|
 
 
 *yii/db/oci/QueryBuilder::buildAndCondition*		public
+
  See |yii/db/QueryBuilder::buildAndCondition|
 
 
 *yii/db/oci/QueryBuilder::buildNotCondition*		public
+
  See |yii/db/QueryBuilder::buildNotCondition|
 
 
 *yii/db/oci/QueryBuilder::buildBetweenCondition*		public
+
  See |yii/db/QueryBuilder::buildBetweenCondition|
 
 
 *yii/db/oci/QueryBuilder::buildInCondition*		public
+
  See |yii/db/QueryBuilder::buildInCondition|
 
 
 *yii/db/oci/QueryBuilder::buildSubqueryInCondition*	protected
+
  See |yii/db/QueryBuilder::buildSubqueryInCondition|
 
 
 *yii/db/oci/QueryBuilder::buildCompositeInCondition*	protected
+
  See |yii/db/QueryBuilder::buildCompositeInCondition|
 
 
 *yii/db/oci/QueryBuilder::buildLikeCondition*		public
+
  See |yii/db/QueryBuilder::buildLikeCondition|
 
 
 *yii/db/oci/QueryBuilder::buildExistsCondition*		public
+
  See |yii/db/QueryBuilder::buildExistsCondition|
 
 
 *yii/db/oci/QueryBuilder::buildSimpleCondition*		public
+
  See |yii/db/QueryBuilder::buildSimpleCondition|
+
+
+*yii/db/oci/QueryBuilder::selectExists*			public
+>
+ selectExists($rawSql)
+<
+return (string) The SELECT EXISTS() SQL statement.
+
+
+
+
+
+
+
+    [$rawSql] (string) The subquery in a raw form to select from.
 
 
 

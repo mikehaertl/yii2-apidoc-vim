@@ -5,10 +5,10 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/web/CacheSession|
 |yii/web/DbSession|
-|yii/redis/Session|
+|yii/web/CacheSession|
 |yii/web/MultiFieldSession|
+|yii/redis/Session|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -45,64 +45,82 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $flashParam				*yii/web/Session::$flashParam*
+
  (string) The name of the session variable that stores the flash message data.
 
 $handler				*yii/web/Session::$handler*
+
  (\SessionHandlerInterface|array) An object implementing the
  SessionHandlerInterface or a configuration array. If set, will be used to
  provide persistency instead of build-in methods.
 
 $behaviors				*yii/web/Session::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $useCustomStorage			*yii/web/Session::$useCustomStorage*
+
  (boolean) Whether to use custom storage.
 
 $isActive				*yii/web/Session::$isActive*
+
  (boolean) Whether the session has started
 
 $hasSessionId				*yii/web/Session::$hasSessionId*
+
  (boolean) Whether the current request has sent the session ID.
 
 $id					*yii/web/Session::$id*
+
  (string) The current session ID
 
 $name					*yii/web/Session::$name*
+
  (string) The current session name
 
 $savePath				*yii/web/Session::$savePath*
+
  (string) The current session save path, defaults to '/tmp'.
 
 $cookieParams				*yii/web/Session::$cookieParams*
+
  (array) The session cookie parameters.
 
 $useCookies				*yii/web/Session::$useCookies*
+
  (boolean|null) The value indicating whether cookies should be used to store
  session IDs.
 
 $gCProbability				*yii/web/Session::$gCProbability*
+
  (float) The probability (percentage) that the GC (garbage collection) process
  is started on every session initialization, defaults to 1 meaning 1% chance.
 
 $useTransparentSessionID		*yii/web/Session::$useTransparentSessionID*
+
  (boolean) Whether transparent sid support is enabled or not, defaults to
  false.
 
 $timeout				*yii/web/Session::$timeout*
+
  (integer) The number of seconds after which data will be seen as 'garbage'
  and cleaned up. The default value is 1440 seconds (or the value of
  "session.gc_maxlifetime" set in php.ini).
 
 $iterator				*yii/web/Session::$iterator*
+
  (\yii\web\SessionIterator) An iterator for traversing the session variables.
 
 $count					*yii/web/Session::$count*
+
  (integer) The number of session variables
 
 $allFlashes				*yii/web/Session::$allFlashes*
+
  (array) Flash messages (key => message or key => [message1, message2]).
 
 $flash					*yii/web/Session::$flash*
+
  (string) The key identifying the flash message. Note that flash messages and
  normal session variables share the same name space. If you have a normal
  session variable using the same name, its value will be overwritten by this
@@ -113,11 +131,14 @@ $flash					*yii/web/Session::$flash*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/web/Session::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/web/Session::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -125,97 +146,119 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method is required by IApplicationComponent and is invoked by
  application.
 
 
 *yii/web/Session::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/web/Session::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/web/Session::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/web/Session::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/web/Session::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/web/Session::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/web/Session::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/web/Session::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/web/Session::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/web/Session::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/web/Session::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/web/Session::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/web/Session::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/web/Session::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/web/Session::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/web/Session::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/web/Session::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/web/Session::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/web/Session::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/web/Session::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/web/Session::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/web/Session::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -223,7 +266,7 @@ METHOD DETAILS
 >
  getUseCustomStorage()
 <
-(boolean) Whether to use custom storage.
+return (boolean) Whether to use custom storage.
 
  This method should be overridden to return true by child classes that
  implement custom session storage. To implement custom session storage,
@@ -235,7 +278,7 @@ METHOD DETAILS
 >
  open()
 <
-(void)
+return (void)
 
 
 
@@ -243,7 +286,7 @@ METHOD DETAILS
 >
  registerSessionHandler()
 <
-(void)
+return (void)
 
 
 
@@ -251,7 +294,7 @@ METHOD DETAILS
 >
  close()
 <
-(void)
+return (void)
 
 
 
@@ -259,7 +302,7 @@ METHOD DETAILS
 >
  destroy()
 <
-(void)
+return (void)
 
 
 
@@ -267,7 +310,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-(boolean) Whether the session has started
+return (boolean) Whether the session has started
 
 
 
@@ -275,7 +318,7 @@ METHOD DETAILS
 >
  getHasSessionId()
 <
-(boolean) Whether the current request has sent the session ID.
+return (boolean) Whether the current request has sent the session ID.
 
  The default implementation will check cookie and $_GET using the session
  name. If you send session ID via other ways, you may need to override this
@@ -287,10 +330,11 @@ METHOD DETAILS
 >
  setHasSessionId($value)
 <
-(void)
+return (void)
 
  This method is provided so that you can override the default way of
  determining whether the session ID is sent.
+
     [$value] (boolean) Whether the current request has sent the session ID.
 
 
@@ -298,7 +342,7 @@ METHOD DETAILS
 >
  getId()
 <
-(string) The current session ID
+return (string) The current session ID
 
  This is a wrapper for [PHP
  session_id()](http://php.net/manual/en/function.session-id.php).
@@ -308,10 +352,11 @@ METHOD DETAILS
 >
  setId($value)
 <
-(void)
+return (void)
 
  This is a wrapper for [PHP
  session_id()](http://php.net/manual/en/function.session-id.php).
+
     [$value] (string) The session ID for the current session
 
 
@@ -319,9 +364,10 @@ METHOD DETAILS
 >
  regenerateID($deleteOldSession='false')
 <
-(void)
+return (void)
 
  Please refer to <http://php.net/session_regenerate_id> for more details.
+
     [$deleteOldSession] (boolean) Whether to delete the old associated session
     file or not.
 
@@ -330,7 +376,7 @@ METHOD DETAILS
 >
  getName()
 <
-(string) The current session name
+return (string) The current session name
 
  This is a wrapper for [PHP
  session_name()](http://php.net/manual/en/function.session-name.php).
@@ -340,10 +386,11 @@ METHOD DETAILS
 >
  setName($value)
 <
-(void)
+return (void)
 
  This is a wrapper for [PHP
  session_name()](http://php.net/manual/en/function.session-name.php).
+
     [$value] (string) The session name for the current session, must be an
     alphanumeric string. It defaults to "PHPSESSID".
 
@@ -352,7 +399,7 @@ METHOD DETAILS
 >
  getSavePath()
 <
-(string) The current session save path, defaults to '/tmp'.
+return (string) The current session save path, defaults to '/tmp'.
 
  This is a wrapper for [PHP
  session_save_path()](http://php.net/manual/en/function.session-save-path.php).
@@ -362,10 +409,11 @@ METHOD DETAILS
 >
  setSavePath($value)
 <
-(void)
+return (void)
 
  This is a wrapper for [PHP
  session_save_path()](http://php.net/manual/en/function.session-save-path.php).
+
     [$value] (string) The current session save path. This can be either a
     directory name or a path alias.
 
@@ -374,7 +422,7 @@ METHOD DETAILS
 >
  getCookieParams()
 <
-(array) The session cookie parameters.
+return (array) The session cookie parameters.
 
 
 
@@ -382,10 +430,11 @@ METHOD DETAILS
 >
  setCookieParams($value)
 <
-(void)
+return (void)
 
  The cookie parameters passed to this method will be merged with the result of
  'session_get_cookie_params()'.
+
     [$value] (array) Cookie parameters, valid keys include: 'lifetime',
     'path', 'domain', 'secure' and 'httponly'.
 
@@ -394,7 +443,7 @@ METHOD DETAILS
 >
  getUseCookies()
 <
-(boolean|null) The value indicating whether cookies should be used to store
+return (boolean|null) The value indicating whether cookies should be used to store
 session IDs.
 
 
@@ -403,7 +452,7 @@ session IDs.
 >
  setUseCookies($value)
 <
-(void)
+return (void)
 
  Three states are possible:
 
@@ -412,6 +461,7 @@ session IDs.
    - false: cookies will not be used to store session IDs. 
    - null: if possible, cookies will be used to store session IDs; if
    not, other mechanisms will be used (e.g. GET parameter)
+
     [$value] (boolean|null) The value indicating whether cookies should be
     used to store session IDs.
 
@@ -420,7 +470,7 @@ session IDs.
 >
  getGCProbability()
 <
-(float) The probability (percentage) that the GC (garbage collection) process
+return (float) The probability (percentage) that the GC (garbage collection) process
 is started on every session initialization, defaults to 1 meaning 1% chance.
 
 
@@ -429,7 +479,7 @@ is started on every session initialization, defaults to 1 meaning 1% chance.
 >
  setGCProbability($value)
 <
-(void)
+return (void)
 
     [$value] (float) The probability (percentage) that the GC (garbage
     collection) process is started on every session initialization.
@@ -439,7 +489,7 @@ is started on every session initialization, defaults to 1 meaning 1% chance.
 >
  getUseTransparentSessionID()
 <
-(boolean) Whether transparent sid support is enabled or not, defaults to
+return (boolean) Whether transparent sid support is enabled or not, defaults to
 false.
 
 
@@ -448,7 +498,7 @@ false.
 >
  setUseTransparentSessionID($value)
 <
-(void)
+return (void)
 
     [$value] (boolean) Whether transparent sid support is enabled or not.
 
@@ -457,7 +507,7 @@ false.
 >
  getTimeout()
 <
-(integer) The number of seconds after which data will be seen as 'garbage' and
+return (integer) The number of seconds after which data will be seen as 'garbage' and
 cleaned up. The default value is 1440 seconds (or the value of
 "session.gc_maxlifetime" set in php.ini).
 
@@ -467,7 +517,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  setTimeout($value)
 <
-(void)
+return (void)
 
     [$value] (integer) The number of seconds after which data will be seen as
     'garbage' and cleaned up
@@ -477,10 +527,11 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  openSession($savePath, $sessionName)
 <
-(boolean) Whether session is opened successfully
+return (boolean) Whether session is opened successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
+
     [$savePath] (string) Session save path
     [$sessionName] (string) Session name
 
@@ -489,7 +540,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  closeSession()
 <
-(boolean) Whether session is closed successfully
+return (boolean) Whether session is closed successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
@@ -499,10 +550,11 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  readSession($id)
 <
-(string) The session data
+return (string) The session data
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
+
     [$id] (string) Session ID
 
 
@@ -510,10 +562,11 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  writeSession($id, $data)
 <
-(boolean) Whether session write is successful
+return (boolean) Whether session write is successful
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
+
     [$id] (string) Session ID
     [$data] (string) Session data
 
@@ -522,10 +575,11 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  destroySession($id)
 <
-(boolean) Whether session is destroyed successfully
+return (boolean) Whether session is destroyed successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
+
     [$id] (string) Session ID
 
 
@@ -533,10 +587,11 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  gcSession($maxLifetime)
 <
-(boolean) Whether session is GCed successfully
+return (boolean) Whether session is GCed successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
+
     [$maxLifetime] (integer) The number of seconds after which data will be
     seen as 'garbage' and cleaned up.
 
@@ -545,7 +600,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  getIterator()
 <
-(\yii\web\SessionIterator) An iterator for traversing the session variables.
+return (\yii\web\SessionIterator) An iterator for traversing the session variables.
 
  This method is required by the interface '\IteratorAggregate'.
 
@@ -554,7 +609,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  getCount()
 <
-(integer) The number of session variables
+return (integer) The number of session variables
 
 
 
@@ -562,7 +617,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  count()
 <
-(integer) Number of items in the session.
+return (integer) Number of items in the session.
 
  This method is required by '\Countable' interface.
 
@@ -571,10 +626,11 @@ cleaned up. The default value is 1440 seconds (or the value of
 >
  get($key, $defaultValue='null')
 <
-(mixed) The session variable value, or $defaultValue if the session variable
+return (mixed) The session variable value, or $defaultValue if the session variable
 does not exist.
 
  If the session variable does not exist, the '$defaultValue' will be returned.
+
     [$key] (string) The session variable name
     [$defaultValue] (mixed) The default value to be returned when the session
     variable does not exist.
@@ -584,9 +640,10 @@ does not exist.
 >
  set($key, $value)
 <
-(void)
+return (void)
 
  If the specified name already exists, the old value will be overwritten.
+
     [$key] (string) Session variable name
     [$value] (mixed) Session variable value
 
@@ -595,7 +652,7 @@ does not exist.
 >
  remove($key)
 <
-(mixed) The removed value, null if no such session variable.
+return (mixed) The removed value, null if no such session variable.
 
     [$key] (string) The name of the session variable to be removed
 
@@ -604,7 +661,7 @@ does not exist.
 >
  removeAll()
 <
-(void)
+return (void)
 
 
 
@@ -612,7 +669,7 @@ does not exist.
 >
  has($key)
 <
-(boolean) Whether there is the named session variable
+return (boolean) Whether there is the named session variable
 
     [$key] (mixed) Session variable name
 
@@ -621,7 +678,7 @@ does not exist.
 >
  updateFlashCounters()
 <
-(void)
+return (void)
 
  This method should only be called once in 'init()'.
 
@@ -630,7 +687,7 @@ does not exist.
 >
  getFlash($key, $defaultValue='null', $delete='false')
 <
-(mixed) The flash message or an array of messages if addFlash was used
+return (mixed) The flash message or an array of messages if addFlash was used
 
     [$key] (string) The key identifying the flash message
     [$defaultValue] (mixed) Value to be returned if the flash message does not
@@ -644,7 +701,7 @@ does not exist.
 >
  getAllFlashes($delete='false')
 <
-(array) Flash messages (key => message or key => [message1, message2]).
+return (array) Flash messages (key => message or key => [message1, message2]).
 
  You may use this method to display all the flash messages in a view file:
 
@@ -661,6 +718,7 @@ does not exist.
  have to adjust the above code.
 
  [bootstrap alert]: http://getbootstrap.com/components/#alerts
+
     [$delete] (boolean) Whether to delete the flash messages right after this
     method is called. If false, the flash messages will be automatically
     deleted in the next request.
@@ -670,12 +728,13 @@ does not exist.
 >
  setFlash($key, $value='true', $removeAfterAccess='true')
 <
-(void)
+return (void)
 
  A flash message will be automatically deleted after it is accessed in a
  request and the deletion will happen in the next request. If there is already
  an existing flash message with the same key, it will be overwritten by the
  new one.
+
     [$key] (string) The key identifying the flash message. Note that flash
     messages and normal session variables share the same name space. If you
     have a normal session variable using the same name, its value will be
@@ -692,10 +751,11 @@ does not exist.
 >
  addFlash($key, $value='true', $removeAfterAccess='true')
 <
-(void)
+return (void)
 
  If there are existing flash messages with the same key, the new one will be
  appended to the existing message array.
+
     [$key] (string) The key identifying the flash message.
     [$value] (mixed) Flash message
     [$removeAfterAccess] (boolean) Whether the flash message should be
@@ -709,7 +769,7 @@ does not exist.
 >
  removeFlash($key)
 <
-(mixed) The removed flash message. Null if the flash message does not exist.
+return (mixed) The removed flash message. Null if the flash message does not exist.
 
     [$key] (string) The key identifying the flash message. Note that flash
     messages and normal session variables share the same name space.  If you
@@ -721,7 +781,7 @@ does not exist.
 >
  removeAllFlashes()
 <
-(void)
+return (void)
 
  Note that flash messages and normal session variables share the same name
  space. If you have a normal session variable using the same name, it will be
@@ -732,7 +792,7 @@ does not exist.
 >
  hasFlash($key)
 <
-(boolean) Whether any flash messages exist under specified key
+return (boolean) Whether any flash messages exist under specified key
 
     [$key] (string) Key identifying the flash message type
 
@@ -741,7 +801,7 @@ does not exist.
 >
  offsetExists($offset)
 <
-(boolean) 
+return (boolean) 
 
     [$offset] (mixed) The offset to check on
 
@@ -750,7 +810,7 @@ does not exist.
 >
  offsetGet($offset)
 <
-(mixed) The element at the offset, null if no element is found at the offset
+return (mixed) The element at the offset, null if no element is found at the offset
 
     [$offset] (integer) The offset to retrieve element.
 
@@ -759,7 +819,7 @@ does not exist.
 >
  offsetSet($offset, $item)
 <
-(void)
+return (void)
 
     [$offset] (integer) The offset to set element
     [$item] (mixed) The element value
@@ -769,7 +829,7 @@ does not exist.
 >
  offsetUnset($offset)
 <
-(void)
+return (void)
 
     [$offset] (mixed) The offset to unset element
 

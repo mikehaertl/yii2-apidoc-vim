@@ -7,37 +7,47 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/cubrid/Schema::$db*
+
  See |yii/db/Schema::$db|
 
 $defaultSchema				*yii/db/cubrid/Schema::$defaultSchema*
+
  See |yii/db/Schema::$defaultSchema|
 
 $exceptionMap				*yii/db/cubrid/Schema::$exceptionMap*
+
  (array) Map of DB errors and corresponding exceptions If left part is found
  in DB error message exception class from the right part is used.
 
 $typeMap				*yii/db/cubrid/Schema::$typeMap*
+
  (array) Mapping from physical column types (keys) to abstract column types
  (values) Please refer to [CUBRID
  manual](http://www.cubrid.org/manual/91/en/sql/datatype.html) for details on
  data types.
 
 $tableSchemas				*yii/db/cubrid/Schema::$tableSchemas*
+
  See |yii/db/Schema::$tableSchemas|
 
 $schemaNames				*yii/db/cubrid/Schema::$schemaNames*
+
  See |yii/db/Schema::$schemaNames|
 
 $tableNames				*yii/db/cubrid/Schema::$tableNames*
+
  See |yii/db/Schema::$tableNames|
 
 $queryBuilder				*yii/db/cubrid/Schema::$queryBuilder*
+
  See |yii/db/Schema::$queryBuilder|
 
 $lastInsertID				*yii/db/cubrid/Schema::$lastInsertID*
+
  See |yii/db/Schema::$lastInsertID|
 
 $transactionIsolationLevel		*yii/db/cubrid/Schema::$transactionIsolationLevel*
+
  (string) The transaction isolation level to use for this transaction. This
  can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
  'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
@@ -49,55 +59,69 @@ $transactionIsolationLevel		*yii/db/cubrid/Schema::$transactionIsolationLevel*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/cubrid/Schema::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/db/cubrid/Schema::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/db/cubrid/Schema::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/db/cubrid/Schema::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/cubrid/Schema::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/cubrid/Schema::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/cubrid/Schema::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/cubrid/Schema::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/cubrid/Schema::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/cubrid/Schema::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/cubrid/Schema::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/cubrid/Schema::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/db/cubrid/Schema::createColumnSchema*		protected
+
  See |yii/db/Schema::createColumnSchema|
 
 
@@ -105,37 +129,44 @@ METHOD DETAILS
 >
  loadTableSchema($name)
 <
-(\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
+return (\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
 not exist.
 
     [$name] (string) Table name
 
 
 *yii/db/cubrid/Schema::getTableSchema*			public
+
  See |yii/db/Schema::getTableSchema|
 
 
 *yii/db/cubrid/Schema::getCacheKey*			protected
+
  See |yii/db/Schema::getCacheKey|
 
 
 *yii/db/cubrid/Schema::getCacheTag*			protected
+
  See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/cubrid/Schema::getTableSchemas*			public
+
  See |yii/db/Schema::getTableSchemas|
 
 
 *yii/db/cubrid/Schema::getSchemaNames*			public
+
  See |yii/db/Schema::getSchemaNames|
 
 
 *yii/db/cubrid/Schema::getTableNames*			public
+
  See |yii/db/Schema::getTableNames|
 
 
 *yii/db/cubrid/Schema::getQueryBuilder*			public
+
  See |yii/db/Schema::getQueryBuilder|
 
 
@@ -143,16 +174,18 @@ not exist.
 >
  getPdoType($data)
 <
-(integer) The PDO type
+return (integer) The PDO type
 
     [$data] (mixed) The data whose PDO type is to be determined
 
 
 *yii/db/cubrid/Schema::refresh*				public
+
  See |yii/db/Schema::refresh|
 
 
 *yii/db/cubrid/Schema::refreshTableSchema*		public
+
  See |yii/db/Schema::refreshTableSchema|
 
 
@@ -160,15 +193,30 @@ not exist.
 >
  createQueryBuilder()
 <
-(\yii\db\cubrid\QueryBuilder) Query builder instance
+return (\yii\db\cubrid\QueryBuilder) Query builder instance
 
 
 
 *yii/db/cubrid/Schema::createColumnSchemaBuilder*		public
- See |yii/db/Schema::createColumnSchemaBuilder|
+>
+ createColumnSchemaBuilder($type, $length='null')
+<
+return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+
+
+
+ This method may be overridden by child classes to create a DBMS-specific
+ column schema builder.
+
+
+
+    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
+    [$length] (integer|string|array) Length or precision of the column. See
+    'ColumnSchemaBuilder::$length'.
 
 
 *yii/db/cubrid/Schema::findSchemaNames*			protected
+
  See |yii/db/Schema::findSchemaNames|
 
 
@@ -176,25 +224,29 @@ not exist.
 >
  findTableNames($schema='''')
 <
-(array) All table names in the database. The names have NO schema name prefix.
+return (array) All table names in the database. The names have NO schema name prefix.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
 
 
 *yii/db/cubrid/Schema::findUniqueIndexes*			public
+
  See |yii/db/Schema::findUniqueIndexes|
 
 
 *yii/db/cubrid/Schema::getLastInsertID*			public
+
  See |yii/db/Schema::getLastInsertID|
 
 
 *yii/db/cubrid/Schema::supportsSavepoint*			public
+
  See |yii/db/Schema::supportsSavepoint|
 
 
 *yii/db/cubrid/Schema::createSavepoint*			public
+
  See |yii/db/Schema::createSavepoint|
 
 
@@ -202,12 +254,19 @@ not exist.
 >
  releaseSavepoint($name)
 <
-(void)
+return (void)
+
+
+
+
+
+
 
     [$name] (string) The savepoint name
 
 
 *yii/db/cubrid/Schema::rollBackSavepoint*			public
+
  See |yii/db/Schema::rollBackSavepoint|
 
 
@@ -215,7 +274,13 @@ not exist.
 >
  setTransactionIsolationLevel($level)
 <
-(void)
+return (void)
+
+
+
+
+
+
 
     [$level] (string) The transaction isolation level to use for this
     transaction. This can be one of 'Transaction::READ_UNCOMMITTED',
@@ -225,18 +290,22 @@ not exist.
 
 
 *yii/db/cubrid/Schema::insert*				public
+
  See |yii/db/Schema::insert|
 
 
 *yii/db/cubrid/Schema::quoteValue*			public
+
  See |yii/db/Schema::quoteValue|
 
 
 *yii/db/cubrid/Schema::quoteTableName*			public
+
  See |yii/db/Schema::quoteTableName|
 
 
 *yii/db/cubrid/Schema::quoteColumnName*			public
+
  See |yii/db/Schema::quoteColumnName|
 
 
@@ -244,9 +313,10 @@ not exist.
 >
  quoteSimpleTableName($name)
 <
-(string) The properly quoted table name
+return (string) The properly quoted table name
 
  A simple table name has no schema prefix.
+
     [$name] (string) Table name
 
 
@@ -254,25 +324,30 @@ not exist.
 >
  quoteSimpleColumnName($name)
 <
-(string) The properly quoted column name
+return (string) The properly quoted column name
 
  A simple column name has no prefix.
+
     [$name] (string) Column name
 
 
 *yii/db/cubrid/Schema::getRawTableName*			public
+
  See |yii/db/Schema::getRawTableName|
 
 
 *yii/db/cubrid/Schema::getColumnPhpType*			protected
+
  See |yii/db/Schema::getColumnPhpType|
 
 
 *yii/db/cubrid/Schema::convertException*			public
+
  See |yii/db/Schema::convertException|
 
 
 *yii/db/cubrid/Schema::isReadQuery*			public
+
  See |yii/db/Schema::isReadQuery|
 
 
@@ -280,7 +355,7 @@ not exist.
 >
  loadColumnSchema($info)
 <
-(\yii\db\ColumnSchema) The column schema object
+return (\yii\db\ColumnSchema) The column schema object
 
     [$info] (array) Column information
 

@@ -7,11 +7,12 @@
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/ActiveRecordInterface::primaryKey*		public
 >
  primaryKey()
 <
-(string[]) The primary key name(s) for this AR class.
+return (string[]) The primary key name(s) for this AR class.
 
  Note that an array should be returned even when the record only has a single
  primary key.
@@ -23,7 +24,7 @@ METHOD DETAILS
 >
  attributes()
 <
-(array) List of attribute names.
+return (array) List of attribute names.
 
 
 
@@ -31,11 +32,12 @@ METHOD DETAILS
 >
  getAttribute($name)
 <
-(mixed) The attribute value. Null if the attribute is not set or does not
+return (mixed) The attribute value. Null if the attribute is not set or does not
 exist.
 
  If this record is the result of a query and the attribute is not loaded, null
  will be returned.
+
     [$name] (string) The attribute name
 
 
@@ -43,7 +45,7 @@ exist.
 >
  setAttribute($name, $value)
 <
-(void)
+return (void)
 
     [$name] (string) The attribute name.
     [$value] (mixed) The attribute value.
@@ -53,7 +55,7 @@ exist.
 >
  hasAttribute($name)
 <
-(boolean) Whether the record has an attribute with the specified name.
+return (boolean) Whether the record has an attribute with the specified name.
 
     [$name] (string) The name of the attribute
 
@@ -62,7 +64,7 @@ exist.
 >
  getPrimaryKey($asArray='false')
 <
-(mixed) The primary key value. An array (attribute name => attribute value) is
+return (mixed) The primary key value. An array (attribute name => attribute value) is
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
 
@@ -76,7 +78,7 @@ returned otherwise (null will be returned if the key value is null).
 >
  getOldPrimaryKey($asArray='false')
 <
-(mixed) The old primary key value. An array (column name => column value) is
+return (mixed) The old primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
 
@@ -84,6 +86,7 @@ returned otherwise (null will be returned if the key value is null).
  executing a find method (e.g. find(), findOne()). The value remains unchanged
  even if the primary key attribute is manually assigned with a different
  value.
+
     [$asArray] (boolean) Whether to return the primary key value as an array.
     If true, the return value will be an array with column name as key and
     column value as value. If this is false (default), a scalar value will be
@@ -94,7 +97,7 @@ returned otherwise (null will be returned if the key value is null).
 >
  isPrimaryKey($keys)
 <
-(boolean) Whether the given set of attributes represents the primary key for
+return (boolean) Whether the given set of attributes represents the primary key for
 this model
 
     [$keys] (array) The set of attributes to check
@@ -104,7 +107,7 @@ this model
 >
  find()
 <
-(\yii\db\ActiveQueryInterface) The newly created 'ActiveQueryInterface'
+return (\yii\db\ActiveQueryInterface) The newly created 'ActiveQueryInterface'
 instance.
 
  The returned 'ActiveQueryInterface' instance can be further customized by
@@ -152,7 +155,7 @@ instance.
 >
  findOne($condition)
 <
-(static|null) ActiveRecord instance matching the condition, or null if nothing
+return (static|null) ActiveRecord instance matching the condition, or null if nothing
 matches.
 
  The method accepts:
@@ -183,6 +186,7 @@ matches.
    $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
 
 
+
     [$condition] (mixed) Primary key value or a set of column values
 
 
@@ -190,7 +194,7 @@ matches.
 >
  findAll($condition)
 <
-(array) An array of ActiveRecord instance, or an empty array if nothing
+return (array) An array of ActiveRecord instance, or an empty array if nothing
 matches.
 
  The method accepts:
@@ -231,6 +235,7 @@ matches.
    $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
+
     [$condition] (mixed) Primary key value or a set of column values
 
 
@@ -238,12 +243,13 @@ matches.
 >
  updateAll($attributes, $condition='null')
 <
-(integer) The number of rows updated
+return (integer) The number of rows updated
 
  For example, to change the status to be 1 for all customers whose status is
  2:
 
    Customer::updateAll(['status' => 1], ['status' => '2']);
+
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved for
@@ -257,7 +263,7 @@ matches.
 >
  deleteAll($condition='null')
 <
-(integer) The number of rows deleted
+return (integer) The number of rows deleted
 
  WARNING: If you do not specify any condition, this method will delete ALL
  rows in the table.
@@ -265,6 +271,7 @@ matches.
  For example, to delete all customers whose status is 3:
 
    Customer::deleteAll([status = 3]);
+
 
 
     [$condition] (array) The condition that matches the records that should
@@ -276,7 +283,7 @@ matches.
 >
  save($runValidation='true', $attributeNames='null')
 <
-(boolean) Whether the saving succeeded (i.e. no validation errors occurred).
+return (boolean) Whether the saving succeeded (i.e. no validation errors occurred).
 
  This method will call 'insert()' when 'getIsNewRecord()|isNewRecord' is true,
  or 'update()' when 'getIsNewRecord()|isNewRecord' is false.
@@ -287,6 +294,7 @@ matches.
    $customer->name = $name;
    $customer->email = $email;
    $customer->save();
+
 
 
     [$runValidation] (boolean) Whether to perform validation (calling
@@ -302,7 +310,7 @@ matches.
 >
  insert($runValidation='true', $attributes='null')
 <
-(boolean) Whether the attributes are valid and the record is inserted
+return (boolean) Whether the attributes are valid and the record is inserted
 successfully.
 
  Usage example:
@@ -311,6 +319,7 @@ successfully.
    $customer->name = $name;
    $customer->email = $email;
    $customer->insert();
+
 
 
     [$runValidation] (boolean) Whether to perform validation (calling
@@ -325,7 +334,7 @@ successfully.
 >
  update($runValidation='true', $attributeNames='null')
 <
-(integer|boolean) The number of rows affected, or false if validation fails or
+return (integer|boolean) The number of rows affected, or false if validation fails or
 updating process is stopped for other reasons. Note that it is possible that
 the number of rows affected is 0, even though the update execution is
 successful.
@@ -336,6 +345,7 @@ successful.
    $customer->name = $name;
    $customer->email = $email;
    $customer->update();
+
 
 
     [$runValidation] (boolean) Whether to perform validation (calling
@@ -351,7 +361,7 @@ successful.
 >
  delete()
 <
-(integer|boolean) The number of rows deleted, or false if the deletion is
+return (integer|boolean) The number of rows deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible that the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -361,7 +371,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  getIsNewRecord()
 <
-(boolean) Whether the record is new and should be inserted when calling
+return (boolean) Whether the record is new and should be inserted when calling
 'save()'.
 
 
@@ -370,10 +380,11 @@ deleted is 0, even though the deletion execution is successful.
 >
  equals($record)
 <
-(boolean) Whether the two active records refer to the same row in the same
+return (boolean) Whether the two active records refer to the same row in the same
 database table.
 
  Two 'getIsNewRecord()|new' records are considered to be not equal.
+
     [$record] (static) Record to compare to
 
 
@@ -381,22 +392,36 @@ database table.
 >
  getRelation($name, $throwException='true')
 <
-(\yii\db\ActiveQueryInterface) The relational query object
+return (\yii\db\ActiveQueryInterface) The relational query object
 
  A relation is defined by a getter method which returns an object implementing
  the 'ActiveQueryInterface' (normally this would be a relational 'ActiveQuery'
  object). It can be declared in either the ActiveRecord class itself or one of
  its behaviors.
+
     [$name] (string) The relation name
     [$throwException] (boolean) Whether to throw exception if the relation
     does not exist.
+
+
+*yii/db/ActiveRecordInterface::populateRelation*		public
+>
+ populateRelation($name, $records)
+<
+return (void)
+
+ Note that this method does not check if the relation exists or not.
+
+    [$name] (string) The relation name (case-sensitive)
+    [$records] (\yii\db\ActiveRecordInterface|array|null) The related records
+    to be populated into the relation.
 
 
 *yii/db/ActiveRecordInterface::link*			public
 >
  link($name, $model, $extraColumns='[]')
 <
-(void)
+return (void)
 
  The relationship is established by setting the foreign key value(s) in one
  record to be the corresponding primary key value(s) in the other record. The
@@ -408,6 +433,7 @@ database table.
  records.
 
  This method requires that the primary key value is not null.
+
     [$name] (string) The case sensitive name of the relationship.
     [$model] (static) The record to be linked with the current one.
     [$extraColumns] (array) Additional column values to be saved into the
@@ -420,11 +446,12 @@ database table.
 >
  unlink($name, $model, $delete='false')
 <
-(void)
+return (void)
 
  The record with the foreign key of the relationship will be deleted if
  '$delete' is true. Otherwise, the foreign key will be set null and the record
  will be saved without validation.
+
     [$name] (string) The case sensitive name of the relationship.
     [$model] (static) The model to be unlinked from the current one.
     [$delete] (boolean) Whether to delete the model that contains the foreign
@@ -436,7 +463,7 @@ database table.
 >
  getDb()
 <
-(mixed) The database connection used by this AR class.
+return (mixed) The database connection used by this AR class.
 
 
 

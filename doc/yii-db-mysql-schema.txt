@@ -7,34 +7,44 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/mysql/Schema::$db*
+
  See |yii/db/Schema::$db|
 
 $defaultSchema				*yii/db/mysql/Schema::$defaultSchema*
+
  See |yii/db/Schema::$defaultSchema|
 
 $exceptionMap				*yii/db/mysql/Schema::$exceptionMap*
+
  See |yii/db/Schema::$exceptionMap|
 
 $typeMap				*yii/db/mysql/Schema::$typeMap*
+
  (array) Mapping from physical column types (keys) to abstract column types
  (values)
 
 $tableSchemas				*yii/db/mysql/Schema::$tableSchemas*
+
  See |yii/db/Schema::$tableSchemas|
 
 $schemaNames				*yii/db/mysql/Schema::$schemaNames*
+
  See |yii/db/Schema::$schemaNames|
 
 $tableNames				*yii/db/mysql/Schema::$tableNames*
+
  See |yii/db/Schema::$tableNames|
 
 $queryBuilder				*yii/db/mysql/Schema::$queryBuilder*
+
  See |yii/db/Schema::$queryBuilder|
 
 $lastInsertID				*yii/db/mysql/Schema::$lastInsertID*
+
  See |yii/db/Schema::$lastInsertID|
 
 $transactionIsolationLevel		*yii/db/mysql/Schema::$transactionIsolationLevel*
+
  See |yii/db/Schema::$transactionIsolationLevel|
 
 
@@ -42,55 +52,69 @@ $transactionIsolationLevel		*yii/db/mysql/Schema::$transactionIsolationLevel*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/mysql/Schema::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/db/mysql/Schema::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/db/mysql/Schema::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/db/mysql/Schema::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/mysql/Schema::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/mysql/Schema::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/mysql/Schema::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/mysql/Schema::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/mysql/Schema::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/mysql/Schema::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/mysql/Schema::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/mysql/Schema::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/db/mysql/Schema::createColumnSchema*			protected
+
  See |yii/db/Schema::createColumnSchema|
 
 
@@ -98,49 +122,59 @@ METHOD DETAILS
 >
  loadTableSchema($name)
 <
-(\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
+return (\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
 not exist.
 
     [$name] (string) Table name
 
 
 *yii/db/mysql/Schema::getTableSchema*			public
+
  See |yii/db/Schema::getTableSchema|
 
 
 *yii/db/mysql/Schema::getCacheKey*			protected
+
  See |yii/db/Schema::getCacheKey|
 
 
 *yii/db/mysql/Schema::getCacheTag*			protected
+
  See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/mysql/Schema::getTableSchemas*			public
+
  See |yii/db/Schema::getTableSchemas|
 
 
 *yii/db/mysql/Schema::getSchemaNames*			public
+
  See |yii/db/Schema::getSchemaNames|
 
 
 *yii/db/mysql/Schema::getTableNames*			public
+
  See |yii/db/Schema::getTableNames|
 
 
 *yii/db/mysql/Schema::getQueryBuilder*			public
+
  See |yii/db/Schema::getQueryBuilder|
 
 
 *yii/db/mysql/Schema::getPdoType*				public
+
  See |yii/db/Schema::getPdoType|
 
 
 *yii/db/mysql/Schema::refresh*				public
+
  See |yii/db/Schema::refresh|
 
 
 *yii/db/mysql/Schema::refreshTableSchema*			public
+
  See |yii/db/Schema::refreshTableSchema|
 
 
@@ -148,15 +182,30 @@ not exist.
 >
  createQueryBuilder()
 <
-(\yii\db\mysql\QueryBuilder) Query builder instance
+return (\yii\db\mysql\QueryBuilder) Query builder instance
 
 
 
 *yii/db/mysql/Schema::createColumnSchemaBuilder*		public
- See |yii/db/Schema::createColumnSchemaBuilder|
+>
+ createColumnSchemaBuilder($type, $length='null')
+<
+return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+
+
+
+ This method may be overridden by child classes to create a DBMS-specific
+ column schema builder.
+
+
+
+    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
+    [$length] (integer|string|array) Length or precision of the column. See
+    'ColumnSchemaBuilder::$length'.
 
 
 *yii/db/mysql/Schema::findSchemaNames*			protected
+
  See |yii/db/Schema::findSchemaNames|
 
 
@@ -164,7 +213,7 @@ not exist.
 >
  findTableNames($schema='''')
 <
-(array) All table names in the database. The names have NO schema name prefix.
+return (array) All table names in the database. The names have NO schema name prefix.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -174,7 +223,7 @@ not exist.
 >
  findUniqueIndexes($table)
 <
-(array) All unique indexes for the given table.
+return (array) All unique indexes for the given table.
 
  Each array element is of the following structure:
 
@@ -184,46 +233,57 @@ not exist.
    ]
 
 
+
     [$table] (\yii\db\TableSchema) The table metadata
 
 
 *yii/db/mysql/Schema::getLastInsertID*			public
+
  See |yii/db/Schema::getLastInsertID|
 
 
 *yii/db/mysql/Schema::supportsSavepoint*			public
+
  See |yii/db/Schema::supportsSavepoint|
 
 
 *yii/db/mysql/Schema::createSavepoint*			public
+
  See |yii/db/Schema::createSavepoint|
 
 
 *yii/db/mysql/Schema::releaseSavepoint*			public
+
  See |yii/db/Schema::releaseSavepoint|
 
 
 *yii/db/mysql/Schema::rollBackSavepoint*			public
+
  See |yii/db/Schema::rollBackSavepoint|
 
 
 *yii/db/mysql/Schema::setTransactionIsolationLevel*	public
+
  See |yii/db/Schema::setTransactionIsolationLevel|
 
 
 *yii/db/mysql/Schema::insert*				public
+
  See |yii/db/Schema::insert|
 
 
 *yii/db/mysql/Schema::quoteValue*				public
+
  See |yii/db/Schema::quoteValue|
 
 
 *yii/db/mysql/Schema::quoteTableName*			public
+
  See |yii/db/Schema::quoteTableName|
 
 
 *yii/db/mysql/Schema::quoteColumnName*			public
+
  See |yii/db/Schema::quoteColumnName|
 
 
@@ -231,9 +291,10 @@ not exist.
 >
  quoteSimpleTableName($name)
 <
-(string) The properly quoted table name
+return (string) The properly quoted table name
 
  A simple table name has no schema prefix.
+
     [$name] (string) Table name
 
 
@@ -241,25 +302,30 @@ not exist.
 >
  quoteSimpleColumnName($name)
 <
-(string) The properly quoted column name
+return (string) The properly quoted column name
 
  A simple column name has no prefix.
+
     [$name] (string) Column name
 
 
 *yii/db/mysql/Schema::getRawTableName*			public
+
  See |yii/db/Schema::getRawTableName|
 
 
 *yii/db/mysql/Schema::getColumnPhpType*			protected
+
  See |yii/db/Schema::getColumnPhpType|
 
 
 *yii/db/mysql/Schema::convertException*			public
+
  See |yii/db/Schema::convertException|
 
 
 *yii/db/mysql/Schema::isReadQuery*			public
+
  See |yii/db/Schema::isReadQuery|
 
 
@@ -267,7 +333,7 @@ not exist.
 >
  resolveTableNames($table, $name)
 <
-(void)
+return (void)
 
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
@@ -277,7 +343,7 @@ not exist.
 >
  loadColumnSchema($info)
 <
-(\yii\db\ColumnSchema) The column schema object
+return (\yii\db\ColumnSchema) The column schema object
 
     [$info] (array) Column information
 
@@ -286,7 +352,7 @@ not exist.
 >
  findColumns($table)
 <
-(boolean) Whether the table exists in the database
+return (boolean) Whether the table exists in the database
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -295,7 +361,7 @@ not exist.
 >
  getCreateTableSql($table)
 <
-(string) $sql the result of 'SHOW CREATE TABLE'
+return (string) $sql the result of 'SHOW CREATE TABLE'
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -304,7 +370,7 @@ not exist.
 >
  findConstraints($table)
 <
-(void)
+return (void)
 
     [$table] (\yii\db\TableSchema) The table metadata
 

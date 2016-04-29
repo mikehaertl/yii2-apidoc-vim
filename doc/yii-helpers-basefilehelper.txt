@@ -17,6 +17,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $mimeMagicFile				*yii/helpers/BaseFileHelper::$mimeMagicFile*
+
  (string) The path (or alias) of a PHP file containing MIME type information.
 
 
@@ -24,11 +25,12 @@ $mimeMagicFile				*yii/helpers/BaseFileHelper::$mimeMagicFile*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/helpers/BaseFileHelper::normalizePath*		public
 >
  normalizePath($path, $ds='DIRECTORY_SEPARATOR')
 <
-(string) The normalized file/directory path
+return (string) The normalized file/directory path
 
  The normalization does the following work:
 
@@ -41,6 +43,7 @@ METHOD DETAILS
    "/a///b/c" becomes "/a/b/c") 
    - Remove ".." and "." based on their meanings (e.g. "/a/./b/../c"
    becomes "/a/c")
+
     [$path] (string) The file/directory path to be normalized
     [$ds] (string) The directory separator to be used in the normalized
     result. Defaults to 'DIRECTORY_SEPARATOR'.
@@ -50,7 +53,7 @@ METHOD DETAILS
 >
  localize($file, $language='null', $sourceLanguage='null')
 <
-(string) The matching localized file, or the original file if the localized
+return (string) The matching localized file, or the original file if the localized
 version is not found. If the target and the source language codes are the
 same, the original file will be returned.
 
@@ -64,6 +67,7 @@ same, the original file will be returned.
 
  If the target and the source language codes are the same, the original file
  will be returned.
+
     [$file] (string) The original file
     [$language] (string) The target language that the file should be localized
     to. If not set, the value of '\yii\base\Application::language' will be
@@ -77,13 +81,14 @@ same, the original file will be returned.
 >
  getMimeType($file, $magicFile='null', $checkExtension='true')
 <
-(string) The MIME type (e.g. 'text/plain'). Null is returned if the MIME type
+return (string) The MIME type (e.g. 'text/plain'). Null is returned if the MIME type
 cannot be determined.
 
  This method will first try to determine the MIME type based on
  [finfo_open](http://php.net/manual/en/function.finfo-open.php). If the
  'fileinfo' extension is not installed, it will fall back to
  'getMimeTypeByExtension()' when '$checkExtension' is true.
+
     [$file] (string) The file name.
     [$magicFile] (string) Name of the optional magic database file (or alias),
     usually something like '/path/to/magic.mime'. This will be passed as the
@@ -100,10 +105,11 @@ cannot be determined.
 >
  getMimeTypeByExtension($file, $magicFile='null')
 <
-(string) The MIME type. Null is returned if the MIME type cannot be
+return (string) The MIME type. Null is returned if the MIME type cannot be
 determined.
 
  This method will use a local map between extension names and MIME types.
+
     [$file] (string) The file name.
     [$magicFile] (string) The path (or alias) of the file that contains all
     available MIME type information. If this is not set, the file specified by
@@ -114,9 +120,10 @@ determined.
 >
  getExtensionsByMimeType($mimeType, $magicFile='null')
 <
-(array) The extensions corresponding to the specified MIME type
+return (array) The extensions corresponding to the specified MIME type
 
  This method will use a local map between extension names and MIME types.
+
     [$mimeType] (string) File MIME type.
     [$magicFile] (string) The path (or alias) of the file that contains all
     available MIME type information. If this is not set, the file specified by
@@ -127,7 +134,7 @@ determined.
 >
  loadMimeTypes($magicFile)
 <
-(array) The mapping from file extensions to MIME types
+return (array) The mapping from file extensions to MIME types
 
     [$magicFile] (string) The path (or alias) of the file that contains all
     available MIME type information. If this is not set, the file specified by
@@ -138,9 +145,10 @@ determined.
 >
  copyDirectory($src, $dst, $options='[]')
 <
-(void)
+return (void)
 
  The files and sub-directories will also be copied over.
+
     [$src] (string) The source directory
     [$dst] (string) The destination directory
     [$options] (array) Options for directory copy. Valid options are:
@@ -196,7 +204,7 @@ determined.
 >
  removeDirectory($dir, $options='[]')
 <
-(void)
+return (void)
 
     [$dir] (string) The directory to be deleted recursively.
     [$options] (array) Options for directory remove. Valid options are:
@@ -212,7 +220,7 @@ determined.
 >
  findFiles($dir, $options='[]')
 <
-(array) Files found under the directory. The file list is sorted.
+return (array) Files found under the directory. The file list is sorted.
 
     [$dir] (string) The directory under which the files will be looked for.
     [$options] (array) Options for file searching. Valid options are:
@@ -264,7 +272,7 @@ determined.
 >
  filterPath($path, $options)
 <
-(boolean) Whether the file or directory satisfies the filtering options.
+return (boolean) Whether the file or directory satisfies the filtering options.
 
     [$path] (string) The path of the file or directory to be checked
     [$options] (array) The filtering options. See 'findFiles()' for
@@ -275,11 +283,12 @@ determined.
 >
  createDirectory($path, $mode=509, $recursive='true')
 <
-(boolean) Whether the directory is created successfully
+return (boolean) Whether the directory is created successfully
 
  This method is similar to the PHP 'mkdir()' function except that it uses
  'chmod()' to set the permission of the created directory in order to avoid
  the impact of the 'umask' setting.
+
     [$path] (string) Path of the directory to be created.
     [$mode] (integer) The permission to be set for the created directory.
     [$recursive] (boolean) Whether to create parent directories if they do not

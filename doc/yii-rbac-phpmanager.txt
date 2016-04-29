@@ -21,45 +21,56 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $defaultRoles				*yii/rbac/PhpManager::$defaultRoles*
+
  See |yii/rbac/BaseManager::$defaultRoles|
 
 $itemFile				*yii/rbac/PhpManager::$itemFile*
+
  (string) The path of the PHP script that contains the authorization items.
  This can be either a file path or a path alias to the file. Make sure this
  file is writable by the Web server process if the authorization needs to be
  changed online.
 
 $assignmentFile				*yii/rbac/PhpManager::$assignmentFile*
+
  (string) The path of the PHP script that contains the authorization
  assignments. This can be either a file path or a path alias to the file. Make
  sure this file is writable by the Web server process if the authorization
  needs to be changed online.
 
 $ruleFile				*yii/rbac/PhpManager::$ruleFile*
+
  (string) The path of the PHP script that contains the authorization rules.
  This can be either a file path or a path alias to the file. Make sure this
  file is writable by the Web server process if the authorization needs to be
  changed online.
 
 $items					*yii/rbac/PhpManager::$items*
+
  (\yii\rbac\Item[])
 
 $children				*yii/rbac/PhpManager::$children*
+
  (array)
 
 $assignments				*yii/rbac/PhpManager::$assignments*
+
  (array)
 
 $rules					*yii/rbac/PhpManager::$rules*
+
  (\yii\rbac\Rule[])
 
 $behaviors				*yii/rbac/PhpManager::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $roles					*yii/rbac/PhpManager::$roles*
+
  See |yii/rbac/BaseManager::$roles|
 
 $permissions				*yii/rbac/PhpManager::$permissions*
+
  See |yii/rbac/BaseManager::$permissions|
 
 
@@ -67,11 +78,14 @@ $permissions				*yii/rbac/PhpManager::$permissions*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/rbac/PhpManager::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/rbac/PhpManager::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -79,97 +93,119 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method overrides parent implementation by loading the authorization data
  from PHP script.
 
 
 *yii/rbac/PhpManager::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/rbac/PhpManager::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/rbac/PhpManager::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/rbac/PhpManager::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/rbac/PhpManager::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/rbac/PhpManager::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/rbac/PhpManager::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/rbac/PhpManager::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/rbac/PhpManager::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/rbac/PhpManager::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/rbac/PhpManager::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/rbac/PhpManager::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/rbac/PhpManager::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/rbac/PhpManager::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/rbac/PhpManager::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/rbac/PhpManager::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/rbac/PhpManager::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/rbac/PhpManager::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/rbac/PhpManager::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/rbac/PhpManager::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/rbac/PhpManager::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/rbac/PhpManager::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -177,8 +213,14 @@ METHOD DETAILS
 >
  getItem($name)
 <
-(\yii\rbac\Item) The auth item corresponding to the specified name. Null is
+return (\yii\rbac\Item) The auth item corresponding to the specified name. Null is
 returned if no such item.
+
+
+
+
+
+
 
     [$name] (string) The auth item name.
 
@@ -187,7 +229,13 @@ returned if no such item.
 >
  getItems($type)
 <
-(\yii\rbac\Item[]) The auth items of the specified type.
+return (\yii\rbac\Item[]) The auth items of the specified type.
+
+
+
+
+
+
 
     [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
     'Item::TYPE_PERMISSION'
@@ -197,7 +245,13 @@ returned if no such item.
 >
  addItem($item)
 <
-(boolean) Whether the auth item is successfully added to the system
+return (boolean) Whether the auth item is successfully added to the system
+
+
+
+
+
+
 
     [$item] (\yii\rbac\Item) The item to add
 
@@ -206,7 +260,13 @@ returned if no such item.
 >
  addRule($rule)
 <
-(boolean) Whether the rule is successfully added to the system
+return (boolean) Whether the rule is successfully added to the system
+
+
+
+
+
+
 
     [$rule] (\yii\rbac\Rule) The rule to add
 
@@ -215,7 +275,13 @@ returned if no such item.
 >
  removeItem($item)
 <
-(boolean) Whether the role or permission is successfully removed
+return (boolean) Whether the role or permission is successfully removed
+
+
+
+
+
+
 
     [$item] (\yii\rbac\Item) The item to remove
 
@@ -224,7 +290,13 @@ returned if no such item.
 >
  removeRule($rule)
 <
-(boolean) Whether the rule is successfully removed
+return (boolean) Whether the rule is successfully removed
+
+
+
+
+
+
 
     [$rule] (\yii\rbac\Rule) The rule to remove
 
@@ -233,7 +305,13 @@ returned if no such item.
 >
  updateItem($name, $item)
 <
-(boolean) Whether the auth item is successfully updated
+return (boolean) Whether the auth item is successfully updated
+
+
+
+
+
+
 
     [$name] (string) The name of the item being updated
     [$item] (\yii\rbac\Item) The updated item
@@ -243,49 +321,65 @@ returned if no such item.
 >
  updateRule($name, $rule)
 <
-(boolean) Whether the rule is successfully updated
+return (boolean) Whether the rule is successfully updated
+
+
+
+
+
+
 
     [$name] (string) The name of the rule being updated
     [$rule] (\yii\rbac\Rule) The updated rule
 
 
 *yii/rbac/PhpManager::createRole*				public
+
  See |yii/rbac/BaseManager::createRole|
 
 
 *yii/rbac/PhpManager::createPermission*			public
+
  See |yii/rbac/BaseManager::createPermission|
 
 
 *yii/rbac/PhpManager::add*				public
+
  See |yii/rbac/BaseManager::add|
 
 
 *yii/rbac/PhpManager::remove*				public
+
  See |yii/rbac/BaseManager::remove|
 
 
 *yii/rbac/PhpManager::update*				public
+
  See |yii/rbac/BaseManager::update|
 
 
 *yii/rbac/PhpManager::getRole*				public
+
  See |yii/rbac/BaseManager::getRole|
 
 
 *yii/rbac/PhpManager::getPermission*			public
+
  See |yii/rbac/BaseManager::getPermission|
 
 
 *yii/rbac/PhpManager::getRoles*				public
+
  See |yii/rbac/BaseManager::getRoles|
 
 
 *yii/rbac/PhpManager::getPermissions*			public
+
  See |yii/rbac/BaseManager::getPermissions|
 
 
 *yii/rbac/PhpManager::executeRule*			protected
+
  See |yii/rbac/BaseManager::executeRule|
 
 
@@ -293,7 +387,13 @@ returned if no such item.
 >
  checkAccess($userId, $permissionName, $params='[]')
 <
-(boolean) Whether the user has the specified permission.
+return (boolean) Whether the user has the specified permission.
+
+
+
+
+
+
 
     [$userId] (string|integer) The user ID. This should be either an integer
     or a string representing the unique identifier of a user. See
@@ -308,11 +408,16 @@ returned if no such item.
 >
  getRolesByUser($userId)
 <
-(\yii\rbac\Role[]) All roles directly assigned to the user. The array is
+return (\yii\rbac\Role[]) All roles directly assigned to the user. The array is
 indexed by the role names.
+
+
 
  Note that child roles that are not assigned directly to the user will not be
  returned.
+
+
+
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
@@ -320,8 +425,14 @@ indexed by the role names.
 >
  getPermissionsByRole($roleName)
 <
-(\yii\rbac\Permission[]) All permissions that the role represents. The array
+return (\yii\rbac\Permission[]) All permissions that the role represents. The array
 is indexed by the permission names.
+
+
+
+
+
+
 
     [$roleName] (string) The role name
 
@@ -330,8 +441,14 @@ is indexed by the permission names.
 >
  getPermissionsByUser($userId)
 <
-(\yii\rbac\Permission[]) All permissions that the user has. The array is
+return (\yii\rbac\Permission[]) All permissions that the user has. The array is
 indexed by the permission names.
+
+
+
+
+
+
 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
@@ -340,8 +457,14 @@ indexed by the permission names.
 >
  getRule($name)
 <
-(null|\yii\rbac\Rule) The rule object, or null if the specified name does not
+return (null|\yii\rbac\Rule) The rule object, or null if the specified name does not
 correspond to a rule.
+
+
+
+
+
+
 
     [$name] (string) The rule name
 
@@ -350,15 +473,42 @@ correspond to a rule.
 >
  getRules()
 <
-(\yii\rbac\Rule[]) The rules indexed by the rule names
+return (\yii\rbac\Rule[]) The rules indexed by the rule names
 
+
+
+
+
+
+
+
+*yii/rbac/PhpManager::canAddChild*			public
+>
+ canAddChild($parent, $child)
+<
+return (boolean) Possibility of adding
+
+
+
+
+
+
+
+    [$parent] (\yii\rbac\Item) The parent item
+    [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
 
 
 *yii/rbac/PhpManager::addChild*				public
 >
  addChild($parent, $child)
 <
-(boolean) Whether the child successfully added
+return (boolean) Whether the child successfully added
+
+
+
+
+
+
 
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
@@ -368,10 +518,15 @@ correspond to a rule.
 >
  removeChild($parent, $child)
 <
-(boolean) Whether the removal is successful
+return (boolean) Whether the removal is successful
+
+
 
  Note, the child item is not deleted. Only the parent-child relationship is
  removed.
+
+
+
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
 
@@ -380,10 +535,15 @@ correspond to a rule.
 >
  removeChildren($parent)
 <
-(boolean) Whether the removal is successful
+return (boolean) Whether the removal is successful
+
+
 
  Note, the children items are not deleted. Only the parent-child relationships
  are removed.
+
+
+
     [$parent] (\yii\rbac\Item) 
 
 
@@ -391,7 +551,13 @@ correspond to a rule.
 >
  hasChild($parent, $child)
 <
-(boolean) Whether '$child' is already a child of '$parent'
+return (boolean) Whether '$child' is already a child of '$parent'
+
+
+
+
+
+
 
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
@@ -401,7 +567,13 @@ correspond to a rule.
 >
  getChildren($name)
 <
-(\yii\rbac\Item[]) The child permissions and/or roles
+return (\yii\rbac\Item[]) The child permissions and/or roles
+
+
+
+
+
+
 
     [$name] (string) The parent name
 
@@ -410,7 +582,13 @@ correspond to a rule.
 >
  assign($role, $userId)
 <
-(\yii\rbac\Assignment) The role assignment information.
+return (\yii\rbac\Assignment) The role assignment information.
+
+
+
+
+
+
 
     [$role] (\yii\rbac\Role) 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -420,7 +598,13 @@ correspond to a rule.
 >
  revoke($role, $userId)
 <
-(boolean) Whether the revoking is successful
+return (boolean) Whether the revoking is successful
+
+
+
+
+
+
 
     [$role] (\yii\rbac\Role) 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -430,7 +614,13 @@ correspond to a rule.
 >
  revokeAll($userId)
 <
-(boolean) Whether the revoking is successful
+return (boolean) Whether the revoking is successful
+
+
+
+
+
+
 
     [$userId] (mixed) The user ID (see '\yii\web\User::id')
 
@@ -439,8 +629,14 @@ correspond to a rule.
 >
  getAssignment($roleName, $userId)
 <
-(null|\yii\rbac\Assignment) The assignment information. Null is returned if
+return (null|\yii\rbac\Assignment) The assignment information. Null is returned if
 the role is not assigned to the user.
+
+
+
+
+
+
 
     [$roleName] (string) The role name
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -450,8 +646,14 @@ the role is not assigned to the user.
 >
  getAssignments($userId)
 <
-(\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
+return (\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
 will be returned if there is no role assigned to the user.
+
+
+
+
+
+
 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
@@ -460,7 +662,13 @@ will be returned if there is no role assigned to the user.
 >
  getUserIdsByRole($roleName)
 <
-(array) Array of user ID strings
+return (array) Array of user ID strings
+
+
+
+
+
+
 
     [$roleName] (string) 
 
@@ -469,7 +677,12 @@ will be returned if there is no role assigned to the user.
 >
  removeAll()
 <
-(void)
+return (void)
+
+
+
+
+
 
 
 
@@ -477,34 +690,51 @@ will be returned if there is no role assigned to the user.
 >
  removeAllPermissions()
 <
-(void)
+return (void)
+
+
 
  All parent child relations will be adjusted accordingly.
+
+
 
 
 *yii/rbac/PhpManager::removeAllRoles*			public
 >
  removeAllRoles()
 <
-(void)
+return (void)
+
+
 
  All parent child relations will be adjusted accordingly.
+
+
 
 
 *yii/rbac/PhpManager::removeAllRules*			public
 >
  removeAllRules()
 <
-(void)
+return (void)
+
+
 
  All roles and permissions which have rules will be adjusted accordingly.
+
+
 
 
 *yii/rbac/PhpManager::removeAllAssignments*		public
 >
  removeAllAssignments()
 <
-(void)
+return (void)
+
+
+
+
+
 
 
 
@@ -512,9 +742,10 @@ will be returned if there is no role assigned to the user.
 >
  checkAccessRecursive($user, $itemName, $params, $assignments)
 <
-(boolean) Whether the operations can be performed by the user.
+return (boolean) Whether the operations can be performed by the user.
 
  This method is internally called by 'checkAccess()'.
+
     [$user] (string|integer) The user ID. This should can be either an integer
     or a string representing the unique identifier of a user. See
     '\yii\web\User::id'.
@@ -530,7 +761,7 @@ will be returned if there is no role assigned to the user.
 >
  detectLoop($parent, $child)
 <
-(boolean) Whether a loop exists
+return (boolean) Whether a loop exists
 
     [$parent] (\yii\rbac\Item) Parent item
     [$child] (\yii\rbac\Item) The child item that is to be added to the
@@ -541,7 +772,7 @@ will be returned if there is no role assigned to the user.
 >
  getChildrenRecursive($name, $result)
 <
-(void)
+return (void)
 
     [$name] (string) The name of the item whose children are to be looked for.
     [$result] (array) The children and grand children (in array keys)
@@ -551,7 +782,7 @@ will be returned if there is no role assigned to the user.
 >
  getDirectPermissionsByUser($userId)
 <
-(\yii\rbac\Permission[]) All direct permissions that the user has. The array
+return (\yii\rbac\Permission[]) All direct permissions that the user has. The array
 is indexed by the permission names.
 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -561,7 +792,7 @@ is indexed by the permission names.
 >
  getInheritedPermissionsByUser($userId)
 <
-(\yii\rbac\Permission[]) All inherited permissions that the user has. The
+return (\yii\rbac\Permission[]) All inherited permissions that the user has. The
 array is indexed by the permission names.
 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -571,7 +802,7 @@ array is indexed by the permission names.
 >
  removeAllItems($type)
 <
-(void)
+return (void)
 
     [$type] (integer) The auth item type (either Item::TYPE_PERMISSION or
     Item::TYPE_ROLE)
@@ -581,7 +812,7 @@ array is indexed by the permission names.
 >
  load()
 <
-(void)
+return (void)
 
 
 
@@ -589,7 +820,7 @@ array is indexed by the permission names.
 >
  save()
 <
-(void)
+return (void)
 
 
 
@@ -597,7 +828,7 @@ array is indexed by the permission names.
 >
  loadFromFile($file)
 <
-(array) The authorization data
+return (array) The authorization data
 
     [$file] (string) The file path.
 
@@ -606,7 +837,7 @@ array is indexed by the permission names.
 >
  saveToFile($data, $file)
 <
-(void)
+return (void)
 
     [$data] (array) The authorization data
     [$file] (string) The file path.
@@ -616,7 +847,7 @@ array is indexed by the permission names.
 >
  saveItems()
 <
-(void)
+return (void)
 
 
 
@@ -624,7 +855,7 @@ array is indexed by the permission names.
 >
  saveAssignments()
 <
-(void)
+return (void)
 
 
 
@@ -632,7 +863,7 @@ array is indexed by the permission names.
 >
  saveRules()
 <
-(void)
+return (void)
 
 
 

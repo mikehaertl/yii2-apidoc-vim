@@ -27,13 +27,15 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $enablePrettyUrl			*yii/web/UrlManager::$enablePrettyUrl*
+
  (boolean) Whether to enable pretty URLs. Instead of putting all parameters in
  the query string part of a URL, pretty URLs allow using path info to
  represent some of the parameters and can thus produce more user-friendly
  URLs, such as "/news/Yii-is-released", instead of
- "/index.php?r=news/view&id=100".
+ "/index.php?r=news%2Fview&id=100".
 
 $enableStrictParsing			*yii/web/UrlManager::$enableStrictParsing*
+
  (boolean) Whether to enable strict parsing. If strict parsing is enabled, the
  incoming requested URL must match at least one of the 'rules' in order to be
  treated as a valid request. Otherwise, the path info part of the request will
@@ -41,6 +43,7 @@ $enableStrictParsing			*yii/web/UrlManager::$enableStrictParsing*
  'enablePrettyUrl' is true.
 
 $rules					*yii/web/UrlManager::$rules*
+
  (array) The rules for creating and parsing URLs when 'enablePrettyUrl' is
  true. This property is used only if 'enablePrettyUrl' is true. Each element
  in the array is the configuration array for creating a single URL rule. The
@@ -81,19 +84,23 @@ $rules					*yii/web/UrlManager::$rules*
  configurations.
 
 $suffix					*yii/web/UrlManager::$suffix*
+
  (string) The URL suffix used when in 'path' format. For example, ".html" can
  be used so that the URL looks like pointing to a static HTML page. This
  property is used only if 'enablePrettyUrl' is true.
 
 $showScriptName				*yii/web/UrlManager::$showScriptName*
+
  (boolean) Whether to show entry script name in the constructed URL. Defaults
  to true. This property is used only if 'enablePrettyUrl' is true.
 
 $routeParam				*yii/web/UrlManager::$routeParam*
+
  (string) The GET parameter name for route. This property is used only if
  'enablePrettyUrl' is false.
 
 $cache					*yii/web/UrlManager::$cache*
+
  (\yii\caching\Cache|string) The cache object or the application component ID
  of the cache object. Compiled URL rules will be cached through this cache
  object, if it is available.
@@ -103,22 +110,31 @@ $cache					*yii/web/UrlManager::$cache*
  you do not want to cache the URL rules.
 
 $ruleConfig				*yii/web/UrlManager::$ruleConfig*
+
  (array) The default configuration of URL rules. Individual rule
  configurations specified via 'rules' will take precedence when the same
  property of the rule is configured.
 
+$cacheKey				*yii/web/UrlManager::$cacheKey*
+
+ (string) The cache key for cached rules
+
 $behaviors				*yii/web/UrlManager::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $baseUrl				*yii/web/UrlManager::$baseUrl*
+
  (string) The base URL that is used by 'createUrl()' to prepend to created
  URLs.
 
 $scriptUrl				*yii/web/UrlManager::$scriptUrl*
+
  (string) The entry script URL that is used by 'createUrl()' to prepend to
  created URLs.
 
 $hostInfo				*yii/web/UrlManager::$hostInfo*
+
  (string) The host info (e.g. "http://www.example.com") that is used by
  'createAbsoluteUrl()' to prepend to created URLs.
 
@@ -127,11 +143,14 @@ $hostInfo				*yii/web/UrlManager::$hostInfo*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/web/UrlManager::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/web/UrlManager::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -139,95 +158,117 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/web/UrlManager::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/web/UrlManager::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/web/UrlManager::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/web/UrlManager::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/web/UrlManager::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/web/UrlManager::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/web/UrlManager::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/web/UrlManager::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/web/UrlManager::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/web/UrlManager::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/web/UrlManager::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/web/UrlManager::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/web/UrlManager::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/web/UrlManager::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/web/UrlManager::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/web/UrlManager::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/web/UrlManager::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/web/UrlManager::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/web/UrlManager::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/web/UrlManager::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/web/UrlManager::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/web/UrlManager::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -235,12 +276,13 @@ METHOD DETAILS
 >
  addRules($rules, $append='true')
 <
-(void)
+return (void)
 
  This method will call 'buildRules()' to parse the given rule declarations and
  then append or insert them to the existing 'rules'.
 
  Note that if 'enablePrettyUrl' is false, this method will do nothing.
+
     [$rules] (array) The new rules to be added. Each array element represents
     a single rule declaration. Please refer to 'rules' for the acceptable rule
     format.
@@ -252,7 +294,7 @@ METHOD DETAILS
 >
  buildRules($rules)
 <
-(\yii\web\UrlRuleInterface[]) The rule objects built from the given rule
+return (\yii\web\UrlRuleInterface[]) The rule objects built from the given rule
 declarations
 
     [$rules] (array) The rule declarations. Each array element represents a
@@ -264,7 +306,7 @@ declarations
 >
  parseRequest($request)
 <
-(array|boolean) The route and the associated parameters. The latter is always
+return (array|boolean) The route and the associated parameters. The latter is always
 empty if 'enablePrettyUrl' is false. False is returned if the current request
 cannot be successfully parsed.
 
@@ -275,19 +317,19 @@ cannot be successfully parsed.
 >
  createUrl($params)
 <
-(string) The created URL
+return (string) The created URL
 
  You may specify the route as a string, e.g., 'site/index'. You may also use
  an array if you want to specify additional query parameters for the URL being
  created. The array format must be:
 
-   // generates: /index.php?r=site/index&param1=value1&param2=value2
+   // generates: /index.php?r=site%2Findex&param1=value1&param2=value2
    ['site/index', 'param1' => 'value1', 'param2' => 'value2']
 
  If you want to create a URL with an anchor, you can use the array format with
  a '#' parameter. For example,
 
-   // generates: /index.php?r=site/index&param1=value1#name
+   // generates: /index.php?r=site%2Findex&param1=value1#name
    ['site/index', 'param1' => 'value1', '#' => 'name']
 
  The URL created is a relative one. Use 'createAbsoluteUrl()' to create an
@@ -295,21 +337,44 @@ cannot be successfully parsed.
 
  Note that unlike '\yii\helpers\Url::toRoute()', this method always treats the
  given route as an absolute route.
+
     [$params] (string|array) Use a string to represent a route (e.g.
     'site/index'), or an array to represent a route with query parameters
     (e.g. '['site/index', 'param1' => 'value1']').
+
+
+*yii/web/UrlManager::getUrlFromCache*			protected
+>
+ getUrlFromCache($cacheKey, $route, $params)
+<
+return (boolean|string) The created URL
+
+    [$cacheKey] (string) Generated cache key to store data.
+    [$route] (string) The route (e.g. 'site/index').
+    [$params] (array) Rule params.
+
+
+*yii/web/UrlManager::setRuleToCache*			protected
+>
+ setRuleToCache($cacheKey, $rule)
+<
+return (void)
+
+    [$cacheKey] () 
+    [$rule] (\yii\web\UrlRuleInterface) 
 
 
 *yii/web/UrlManager::createAbsoluteUrl*			public
 >
  createAbsoluteUrl($params, $scheme='null')
 <
-(string) The created URL
+return (string) The created URL
 
  This method prepends the URL created by 'createUrl()' with the 'hostInfo'.
 
  Note that unlike '\yii\helpers\Url::toRoute()', this method always treats the
  given route as an absolute route.
+
     [$params] (string|array) Use a string to represent a route (e.g.
     'site/index'), or an array to represent a route with query parameters
     (e.g. '['site/index', 'param1' => 'value1']').
@@ -321,7 +386,7 @@ cannot be successfully parsed.
 >
  getBaseUrl()
 <
-(string) The base URL that is used by 'createUrl()' to prepend to created
+return (string) The base URL that is used by 'createUrl()' to prepend to created
 URLs.
 
  It defaults to 'Request::baseUrl'. This is mainly used when 'enablePrettyUrl'
@@ -332,10 +397,11 @@ URLs.
 >
  setBaseUrl($value)
 <
-(void)
+return (void)
 
  This is mainly used when 'enablePrettyUrl' is true and 'showScriptName' is
  false.
+
     [$value] (string) The base URL that is used by 'createUrl()' to prepend to
     created URLs.
 
@@ -344,7 +410,7 @@ URLs.
 >
  getScriptUrl()
 <
-(string) The entry script URL that is used by 'createUrl()' to prepend to
+return (string) The entry script URL that is used by 'createUrl()' to prepend to
 created URLs.
 
  It defaults to 'Request::scriptUrl'. This is mainly used when
@@ -355,10 +421,11 @@ created URLs.
 >
  setScriptUrl($value)
 <
-(void)
+return (void)
 
  This is mainly used when 'enablePrettyUrl' is false or 'showScriptName' is
  true.
+
     [$value] (string) The entry script URL that is used by 'createUrl()' to
     prepend to created URLs.
 
@@ -367,7 +434,7 @@ created URLs.
 >
  getHostInfo()
 <
-(string) The host info (e.g. "http://www.example.com") that is used by
+return (string) The host info (e.g. "http://www.example.com") that is used by
 'createAbsoluteUrl()' to prepend to created URLs.
 
 
@@ -376,7 +443,7 @@ created URLs.
 >
  setHostInfo($value)
 <
-(void)
+return (void)
 
     [$value] (string) The host info (e.g. "http://www.example.com") that is
     used by 'createAbsoluteUrl()' to prepend to created URLs.

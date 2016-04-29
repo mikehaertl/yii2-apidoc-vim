@@ -5,23 +5,23 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/base/ActionFilter|
-|yii/behaviors/AttributeBehavior|
-|yii/behaviors/SluggableBehavior|
-|yii/behaviors/TimestampBehavior|
-|yii/behaviors/BlameableBehavior|
-|yii/filters/RateLimiter|
-|yii/filters/Cors|
-|yii/filters/auth/HttpBearerAuth|
-|yii/filters/auth/AuthMethod|
-|yii/filters/auth/CompositeAuth|
-|yii/filters/auth/QueryParamAuth|
-|yii/filters/auth/HttpBasicAuth|
-|yii/filters/AccessControl|
-|yii/filters/HttpCache|
-|yii/filters/PageCache|
 |yii/filters/ContentNegotiator|
+|yii/filters/HttpCache|
+|yii/filters/auth/HttpBearerAuth|
+|yii/filters/auth/CompositeAuth|
+|yii/filters/auth/HttpBasicAuth|
+|yii/filters/auth/QueryParamAuth|
+|yii/filters/auth/AuthMethod|
+|yii/filters/PageCache|
+|yii/filters/RateLimiter|
+|yii/filters/AccessControl|
+|yii/filters/Cors|
 |yii/filters/VerbFilter|
+|yii/base/ActionFilter|
+|yii/behaviors/SluggableBehavior|
+|yii/behaviors/AttributeBehavior|
+|yii/behaviors/BlameableBehavior|
+|yii/behaviors/TimestampBehavior|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -37,6 +37,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $owner					*yii/base/Behavior::$owner*
+
  (\yii\base\Component) The owner of this behavior
 
 
@@ -44,51 +45,64 @@ $owner					*yii/base/Behavior::$owner*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/Behavior::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/base/Behavior::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/base/Behavior::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/base/Behavior::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/base/Behavior::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/base/Behavior::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/base/Behavior::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/base/Behavior::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/base/Behavior::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/base/Behavior::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/base/Behavior::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/base/Behavior::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -96,7 +110,7 @@ METHOD DETAILS
 >
  events()
 <
-(array) Events (array keys) and the corresponding event handler methods (array
+return (array) Events (array keys) and the corresponding event handler methods (array
 values).
 
  Child classes may override this method to declare what PHP callbacks should
@@ -129,11 +143,12 @@ values).
 >
  attach($owner)
 <
-(void)
+return (void)
 
  The default implementation will set the 'owner' property and attach event
  handlers as declared in 'events'. Make sure you call the parent
  implementation if you override this method.
+
     [$owner] (\yii\base\Component) The component that this behavior is to be
     attached to.
 
@@ -142,7 +157,7 @@ values).
 >
  detach()
 <
-(void)
+return (void)
 
  The default implementation will unset the 'owner' property and detach event
  handlers declared in 'events'. Make sure you call the parent implementation

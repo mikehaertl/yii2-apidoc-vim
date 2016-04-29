@@ -5,12 +5,12 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/db/cubrid/Schema|
+|yii/db/mysql/Schema|
 |yii/db/sqlite/Schema|
 |yii/db/mssql/Schema|
-|yii/db/mysql/Schema|
-|yii/db/pgsql/Schema|
 |yii/db/oci/Schema|
-|yii/db/cubrid/Schema|
+|yii/db/pgsql/Schema|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -22,33 +22,42 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/Schema::$db*
+
  (\yii\db\Connection) The database connection
 
 $defaultSchema				*yii/db/Schema::$defaultSchema*
+
  (string) The default schema name used for the current session.
 
 $exceptionMap				*yii/db/Schema::$exceptionMap*
+
  (array) Map of DB errors and corresponding exceptions If left part is found
  in DB error message exception class from the right part is used.
 
 $tableSchemas				*yii/db/Schema::$tableSchemas*
+
  (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
  array element is an instance of 'TableSchema' or its child class.
 
 $schemaNames				*yii/db/Schema::$schemaNames*
+
  (string[]) All schema names in the database, except system schemas.
 
 $tableNames				*yii/db/Schema::$tableNames*
+
  (string[]) All table names in the database.
 
 $queryBuilder				*yii/db/Schema::$queryBuilder*
+
  (\yii\db\QueryBuilder) The query builder for this connection.
 
 $lastInsertID				*yii/db/Schema::$lastInsertID*
+
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
 $transactionIsolationLevel		*yii/db/Schema::$transactionIsolationLevel*
+
  (string) The transaction isolation level to use for this transaction. This
  can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
  'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
@@ -60,51 +69,64 @@ $transactionIsolationLevel		*yii/db/Schema::$transactionIsolationLevel*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/Schema::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/db/Schema::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/db/Schema::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/db/Schema::__get*					public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/Schema::__set*					public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/Schema::__isset*					public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/Schema::__unset*					public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/Schema::__call*					public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/Schema::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/Schema::canGetProperty*				public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/Schema::canSetProperty*				public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/Schema::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -112,7 +134,7 @@ METHOD DETAILS
 >
  createColumnSchema()
 <
-(\yii\db\ColumnSchema) 
+return (\yii\db\ColumnSchema) 
 
 
 
@@ -120,7 +142,7 @@ METHOD DETAILS
 >
  loadTableSchema($name)
 <
-(null|\yii\db\TableSchema) DBMS-dependent table metadata, null if the table
+return (null|\yii\db\TableSchema) DBMS-dependent table metadata, null if the table
 does not exist.
 
     [$name] (string) Table name
@@ -130,7 +152,7 @@ does not exist.
 >
  getTableSchema($name, $refresh='false')
 <
-(null|\yii\db\TableSchema) Table metadata. Null if the named table does not
+return (null|\yii\db\TableSchema) Table metadata. Null if the named table does not
 exist.
 
     [$name] (string) Table name. The table name may contain schema name if
@@ -143,7 +165,7 @@ exist.
 >
  getCacheKey($name)
 <
-(mixed) The cache key
+return (mixed) The cache key
 
     [$name] (string) The table name
 
@@ -152,7 +174,7 @@ exist.
 >
  getCacheTag()
 <
-(string) The cache tag name
+return (string) The cache tag name
 
  This allows 'refresh()' to invalidate all cached table schemas.
 
@@ -161,7 +183,7 @@ exist.
 >
  getTableSchemas($schema='''', $refresh='false')
 <
-(\yii\db\TableSchema[]) The metadata for all tables in the database. Each
+return (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
 array element is an instance of 'TableSchema' or its child class.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
@@ -174,7 +196,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  getSchemaNames($refresh='false')
 <
-(string[]) All schema names in the database, except system schemas.
+return (string[]) All schema names in the database, except system schemas.
 
     [$refresh] (boolean) Whether to fetch the latest available schema names.
     If this is false, schema names fetched previously (if available) will be
@@ -185,7 +207,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  getTableNames($schema='''', $refresh='false')
 <
-(string[]) All table names in the database.
+return (string[]) All table names in the database.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name. If not empty, the returned
@@ -199,7 +221,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  getQueryBuilder()
 <
-(\yii\db\QueryBuilder) The query builder for this connection.
+return (\yii\db\QueryBuilder) The query builder for this connection.
 
 
 
@@ -207,7 +229,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  getPdoType($data)
 <
-(integer) The PDO type
+return (integer) The PDO type
 
     [$data] (mixed) The data whose PDO type is to be determined
 
@@ -216,7 +238,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  refresh()
 <
-(void)
+return (void)
 
  This method cleans up all cached table schemas so that they can be re-created
  later to reflect the database schema change.
@@ -226,10 +248,11 @@ array element is an instance of 'TableSchema' or its child class.
 >
  refreshTableSchema($name)
 <
-(void)
+return (void)
 
  This method cleans up cached table schema so that it can be re-created later
  to reflect the database schema change.
+
     [$name] (string) Table name.
 
 
@@ -237,7 +260,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  createQueryBuilder()
 <
-(\yii\db\QueryBuilder) Query builder instance
+return (\yii\db\QueryBuilder) Query builder instance
 
  This method may be overridden by child classes to create a DBMS-specific
  query builder.
@@ -247,10 +270,11 @@ array element is an instance of 'TableSchema' or its child class.
 >
  createColumnSchemaBuilder($type, $length='null')
 <
-(\yii\db\ColumnSchemaBuilder) Column schema builder instance
+return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
 
  This method may be overridden by child classes to create a DBMS-specific
  column schema builder.
+
     [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
     [$length] (integer|string|array) Length or precision of the column. See
     'ColumnSchemaBuilder::$length'.
@@ -260,7 +284,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  findSchemaNames()
 <
-(array) All schema names in the database, except system schemas
+return (array) All schema names in the database, except system schemas
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception.
@@ -270,10 +294,11 @@ array element is an instance of 'TableSchema' or its child class.
 >
  findTableNames($schema='''')
 <
-(array) All table names in the database. The names have NO schema name prefix.
+return (array) All table names in the database. The names have NO schema name prefix.
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception.
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
 
@@ -282,7 +307,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  findUniqueIndexes($table)
 <
-(array) All unique indexes for the given table.
+return (array) All unique indexes for the given table.
 
  Each array element is of the following structure:
 
@@ -293,6 +318,7 @@ array element is an instance of 'TableSchema' or its child class.
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception
+
     [$table] (\yii\db\TableSchema) The table metadata
 
 
@@ -300,7 +326,7 @@ array element is an instance of 'TableSchema' or its child class.
 >
  getLastInsertID($sequenceName='''')
 <
-(string) The row ID of the last row inserted, or the last value retrieved from
+return (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
     [$sequenceName] (string) Name of the sequence object (required by some
@@ -311,7 +337,7 @@ the sequence object
 >
  supportsSavepoint()
 <
-(boolean) Whether this DBMS supports
+return (boolean) Whether this DBMS supports
 [savepoint](http://en.wikipedia.org/wiki/Savepoint).
 
 
@@ -320,7 +346,7 @@ the sequence object
 >
  createSavepoint($name)
 <
-(void)
+return (void)
 
     [$name] (string) The savepoint name
 
@@ -329,7 +355,7 @@ the sequence object
 >
  releaseSavepoint($name)
 <
-(void)
+return (void)
 
     [$name] (string) The savepoint name
 
@@ -338,7 +364,7 @@ the sequence object
 >
  rollBackSavepoint($name)
 <
-(void)
+return (void)
 
     [$name] (string) The savepoint name
 
@@ -347,7 +373,7 @@ the sequence object
 >
  setTransactionIsolationLevel($level)
 <
-(void)
+return (void)
 
     [$level] (string) The transaction isolation level to use for this
     transaction. This can be one of 'Transaction::READ_UNCOMMITTED',
@@ -360,7 +386,7 @@ the sequence object
 >
  insert($table, $columns)
 <
-(array) Primary key values or false if the command fails
+return (array) Primary key values or false if the command fails
 
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
@@ -371,10 +397,11 @@ the sequence object
 >
  quoteValue($str)
 <
-(string) The properly quoted string
+return (string) The properly quoted string
 
  Note that if the parameter is not a string, it will be returned without
  change.
+
     [$str] (string) String to be quoted
 
 
@@ -382,11 +409,12 @@ the sequence object
 >
  quoteTableName($name)
 <
-(string) The properly quoted table name
+return (string) The properly quoted table name
 
  If the table name contains schema prefix, the prefix will also be properly
  quoted. If the table name is already quoted or contains '(' or '{{', then
  this method will do nothing.
+
     [$name] (string) Table name
 
 
@@ -394,11 +422,12 @@ the sequence object
 >
  quoteColumnName($name)
 <
-(string) The properly quoted column name
+return (string) The properly quoted column name
 
  If the column name contains prefix, the prefix will also be properly quoted.
  If the column name is already quoted or contains '(', ''' or '{{', then this
  method will do nothing.
+
     [$name] (string) Column name
 
 
@@ -406,10 +435,11 @@ the sequence object
 >
  quoteSimpleTableName($name)
 <
-(string) The properly quoted table name
+return (string) The properly quoted table name
 
  A simple table name should contain the table name only without any schema
  prefix. If the table name is already quoted, this method will do nothing.
+
     [$name] (string) Table name
 
 
@@ -417,11 +447,12 @@ the sequence object
 >
  quoteSimpleColumnName($name)
 <
-(string) The properly quoted column name
+return (string) The properly quoted column name
 
  A simple column name should contain the column name only without any prefix.
  If the column name is already quoted or is the asterisk character '*', this
  method will do nothing.
+
     [$name] (string) Column name
 
 
@@ -429,10 +460,11 @@ the sequence object
 >
  getRawTableName($name)
 <
-(string) The real name of the given table name
+return (string) The real name of the given table name
 
  This method will strip off curly brackets from the given table name and
  replace the percentage character '%' with 'Connection::tablePrefix'.
+
     [$name] (string) The table name to be converted
 
 
@@ -440,7 +472,7 @@ the sequence object
 >
  getColumnPhpType($column)
 <
-(string) PHP type name
+return (string) PHP type name
 
     [$column] (\yii\db\ColumnSchema) The column schema information
 
@@ -449,7 +481,7 @@ the sequence object
 >
  convertException($e, $rawSql)
 <
-(\yii\db\Exception) 
+return (\yii\db\Exception) 
 
     [$e] (\Exception) 
     [$rawSql] (string) SQL that produced exception
@@ -459,7 +491,7 @@ the sequence object
 >
  isReadQuery($sql)
 <
-(boolean) Whether a SQL statement is for read purpose.
+return (boolean) Whether a SQL statement is for read purpose.
 
     [$sql] (string) The SQL statement
 

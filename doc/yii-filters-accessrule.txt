@@ -7,19 +7,23 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $allow					*yii/filters/AccessRule::$allow*
+
  (boolean) Whether this is an 'allow' rule or 'deny' rule.
 
 $actions				*yii/filters/AccessRule::$actions*
+
  (array) List of action IDs that this rule applies to. The comparison is
  case-sensitive. If not set or empty, it means this rule applies to all
  actions.
 
 $controllers				*yii/filters/AccessRule::$controllers*
+
  (array) List of the controller IDs that this rule applies to. Each controller
  ID is prefixed with the module ID (if any). The comparison is case-sensitive.
  If not set or empty, it means this rule applies to all controllers.
 
 $roles					*yii/filters/AccessRule::$roles*
+
  (array) List of roles that this rule applies to. Two special roles are
  recognized, and they are checked via 'User::isGuest':
 
@@ -35,6 +39,7 @@ $roles					*yii/filters/AccessRule::$roles*
  roles.
 
 $ips					*yii/filters/AccessRule::$ips*
+
  (array) List of user IP addresses that this rule applies to. An IP address
  can contain the wildcard '*' at the end so that it matches IP addresses with
  the same prefix. For example, '192.168.*' matches all IP addresses in the
@@ -42,11 +47,13 @@ $ips					*yii/filters/AccessRule::$ips*
  addresses.
 
 $verbs					*yii/filters/AccessRule::$verbs*
+
  (array) List of request methods (e.g. 'GET', 'POST') that this rule applies
  to. The request methods must be specified in uppercase. If not set or empty,
  it means this rule applies to all request methods.
 
 $matchCallback				*yii/filters/AccessRule::$matchCallback*
+
  (callable) A callback that will be called to determine if the rule should be
  applied. The signature of the callback should be as follows:
 
@@ -57,6 +64,7 @@ $matchCallback				*yii/filters/AccessRule::$matchCallback*
  rule should be applied.
 
 $denyCallback				*yii/filters/AccessRule::$denyCallback*
+
  (callable) A callback that will be called if this rule determines the access
  to the current action should be denied. If not set, the behavior will be
  determined by 'AccessControl'.
@@ -69,6 +77,7 @@ $denyCallback				*yii/filters/AccessRule::$denyCallback*
  object.
 
 $behaviors				*yii/filters/AccessRule::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -76,103 +85,129 @@ $behaviors				*yii/filters/AccessRule::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/filters/AccessRule::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/filters/AccessRule::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/filters/AccessRule::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/filters/AccessRule::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/filters/AccessRule::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/filters/AccessRule::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/filters/AccessRule::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/filters/AccessRule::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/filters/AccessRule::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/filters/AccessRule::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/filters/AccessRule::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/filters/AccessRule::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/filters/AccessRule::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/filters/AccessRule::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/filters/AccessRule::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/filters/AccessRule::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/filters/AccessRule::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/filters/AccessRule::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/filters/AccessRule::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/filters/AccessRule::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/filters/AccessRule::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/filters/AccessRule::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/filters/AccessRule::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/filters/AccessRule::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/filters/AccessRule::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -180,7 +215,7 @@ METHOD DETAILS
 >
  allows($action, $user, $request)
 <
-(boolean|null) True if the user is allowed, false if the user is denied, null
+return (boolean|null) True if the user is allowed, false if the user is denied, null
 if the rule does not apply to the user
 
     [$action] (\yii\base\Action) The action to be performed
@@ -192,7 +227,7 @@ if the rule does not apply to the user
 >
  matchAction($action)
 <
-(boolean) Whether the rule applies to the action
+return (boolean) Whether the rule applies to the action
 
     [$action] (\yii\base\Action) The action
 
@@ -201,7 +236,7 @@ if the rule does not apply to the user
 >
  matchController($controller)
 <
-(boolean) Whether the rule applies to the controller
+return (boolean) Whether the rule applies to the controller
 
     [$controller] (\yii\base\Controller) The controller
 
@@ -210,7 +245,7 @@ if the rule does not apply to the user
 >
  matchRole($user)
 <
-(boolean) Whether the rule applies to the role
+return (boolean) Whether the rule applies to the role
 
     [$user] (\yii\web\User) The user object
 
@@ -219,7 +254,7 @@ if the rule does not apply to the user
 >
  matchIP($ip)
 <
-(boolean) Whether the rule applies to the IP address
+return (boolean) Whether the rule applies to the IP address
 
     [$ip] (string) The IP address
 
@@ -228,7 +263,7 @@ if the rule does not apply to the user
 >
  matchVerb($verb)
 <
-(boolean) Whether the rule applies to the request
+return (boolean) Whether the rule applies to the request
 
     [$verb] (string) The request method
 
@@ -237,7 +272,7 @@ if the rule does not apply to the user
 >
  matchCustom($action)
 <
-(boolean) Whether the rule should be applied
+return (boolean) Whether the rule should be applied
 
     [$action] (\yii\base\Action) The action to be performed
 

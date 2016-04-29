@@ -37,15 +37,19 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $fetchMode				*yii/db/DataReader::$fetchMode*
+
  (integer) Fetch mode
 
 $isClosed				*yii/db/DataReader::$isClosed*
+
  (boolean) Whether the reader is closed or not.
 
 $rowCount				*yii/db/DataReader::$rowCount*
+
  (integer) Number of rows contained in the result.
 
 $columnCount				*yii/db/DataReader::$columnCount*
+
  (integer) The number of columns in the result set.
 
 
@@ -53,7 +57,9 @@ $columnCount				*yii/db/DataReader::$columnCount*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/DataReader::className*				public
+
  See |yii/base/Object::className|
 
 
@@ -61,7 +67,7 @@ METHOD DETAILS
 >
  __construct($command, $config='[]')
 <
-(void)
+return (void)
 
     [$command] (\yii\db\Command) The command generating the query result
     [$config] (array) Name-value pairs that will be used to initialize the
@@ -69,42 +75,52 @@ METHOD DETAILS
 
 
 *yii/db/DataReader::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/db/DataReader::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/DataReader::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/DataReader::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/DataReader::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/DataReader::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/DataReader::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/DataReader::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/DataReader::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/DataReader::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -112,10 +128,11 @@ METHOD DETAILS
 >
  bindColumn($column, $value, $dataType=null)
 <
-(void)
+return (void)
 
  When rows of data are being fetched, the corresponding column value will be
  set in the variable. Note, the fetch mode must include PDO::FETCH_BOUND.
+
     [$column] (integer|string) Number of the column (1-indexed) or name of the
     column in the result set. If using the column name, be aware that the name
     should match the case of the column, as returned by the driver.
@@ -128,7 +145,7 @@ METHOD DETAILS
 >
  setFetchMode($mode)
 <
-(void)
+return (void)
 
     [$mode] (integer) Fetch mode
 
@@ -137,7 +154,7 @@ METHOD DETAILS
 >
  read()
 <
-(array) The current row, false if no more row available
+return (array) The current row, false if no more row available
 
 
 
@@ -145,7 +162,7 @@ METHOD DETAILS
 >
  readColumn($columnIndex)
 <
-(mixed) The column of the current row, false if no more rows available
+return (mixed) The column of the current row, false if no more rows available
 
     [$columnIndex] (integer) Zero-based column index
 
@@ -154,7 +171,7 @@ METHOD DETAILS
 >
  readObject($className, $fields)
 <
-(mixed) The populated object, false if no more row of data available
+return (mixed) The populated object, false if no more row of data available
 
     [$className] (string) Class name of the object to be created and populated
     [$fields] (array) Elements of this array are passed to the constructor
@@ -164,7 +181,7 @@ METHOD DETAILS
 >
  readAll()
 <
-(array) The result set (each array element represents a row of data). An empty
+return (array) The result set (each array element represents a row of data). An empty
 array will be returned if the result contains no row.
 
 
@@ -173,7 +190,7 @@ array will be returned if the result contains no row.
 >
  nextResult()
 <
-(boolean) Returns true on success or false on failure.
+return (boolean) Returns true on success or false on failure.
 
  This method is only useful when there are multiple result sets returned by
  the query. Not all DBMS support this feature.
@@ -183,7 +200,7 @@ array will be returned if the result contains no row.
 >
  close()
 <
-(void)
+return (void)
 
  This frees up the resources allocated for executing this SQL statement. Read
  attempts after this method call are unpredictable.
@@ -193,7 +210,7 @@ array will be returned if the result contains no row.
 >
  getIsClosed()
 <
-(boolean) Whether the reader is closed or not.
+return (boolean) Whether the reader is closed or not.
 
 
 
@@ -201,7 +218,7 @@ array will be returned if the result contains no row.
 >
  getRowCount()
 <
-(integer) Number of rows contained in the result.
+return (integer) Number of rows contained in the result.
 
  Note, most DBMS may not give a meaningful count. In this case, use "SELECT
  COUNT(*) FROM tableName" to obtain the number of rows.
@@ -211,7 +228,7 @@ array will be returned if the result contains no row.
 >
  count()
 <
-(integer) Number of rows contained in the result.
+return (integer) Number of rows contained in the result.
 
  This method is required by the Countable interface. Note, most DBMS may not
  give a meaningful count. In this case, use "SELECT COUNT(*) FROM tableName"
@@ -222,7 +239,7 @@ array will be returned if the result contains no row.
 >
  getColumnCount()
 <
-(integer) The number of columns in the result set.
+return (integer) The number of columns in the result set.
 
  Note, even there's no row in the reader, this still gives correct column
  number.
@@ -232,7 +249,7 @@ array will be returned if the result contains no row.
 >
  rewind()
 <
-(void)
+return (void)
 
  This method is required by the interface '\Iterator'.
 
@@ -241,7 +258,7 @@ array will be returned if the result contains no row.
 >
  key()
 <
-(integer) The index of the current row.
+return (integer) The index of the current row.
 
  This method is required by the interface '\Iterator'.
 
@@ -250,7 +267,7 @@ array will be returned if the result contains no row.
 >
  current()
 <
-(mixed) The current row.
+return (mixed) The current row.
 
  This method is required by the interface '\Iterator'.
 
@@ -259,7 +276,7 @@ array will be returned if the result contains no row.
 >
  next()
 <
-(void)
+return (void)
 
  This method is required by the interface '\Iterator'.
 
@@ -268,7 +285,7 @@ array will be returned if the result contains no row.
 >
  valid()
 <
-(boolean) Whether there is a row of data at current position.
+return (boolean) Whether there is a row of data at current position.
 
  This method is required by the interface '\Iterator'.
 

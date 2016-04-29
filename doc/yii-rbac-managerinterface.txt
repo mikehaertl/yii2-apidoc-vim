@@ -7,11 +7,12 @@
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/rbac/ManagerInterface::checkAccess*			public
 >
  checkAccess($userId, $permissionName, $params='[]')
 <
-(boolean) Whether the user has the specified permission.
+return (boolean) Whether the user has the specified permission.
 
     [$userId] (string|integer) The user ID. This should be either an integer
     or a string representing the unique identifier of a user. See
@@ -26,10 +27,11 @@ METHOD DETAILS
 >
  createRole($name)
 <
-(\yii\rbac\Role) The new Role object
+return (\yii\rbac\Role) The new Role object
 
  Note that the newly created role is not added to the RBAC system yet. You
  must fill in the needed data and call 'add()' to add it to the system.
+
     [$name] (string) The role name
 
 
@@ -37,10 +39,11 @@ METHOD DETAILS
 >
  createPermission($name)
 <
-(\yii\rbac\Permission) The new Permission object
+return (\yii\rbac\Permission) The new Permission object
 
  Note that the newly created permission is not added to the RBAC system yet.
  You must fill in the needed data and call 'add()' to add it to the system.
+
     [$name] (string) The permission name
 
 
@@ -48,7 +51,7 @@ METHOD DETAILS
 >
  add($object)
 <
-(boolean) Whether the role, permission or rule is successfully added to the
+return (boolean) Whether the role, permission or rule is successfully added to the
 system
 
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
@@ -58,7 +61,7 @@ system
 >
  remove($object)
 <
-(boolean) Whether the role, permission or rule is successfully removed
+return (boolean) Whether the role, permission or rule is successfully removed
 
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
@@ -67,7 +70,7 @@ system
 >
  update($name, $object)
 <
-(boolean) Whether the update is successful
+return (boolean) Whether the update is successful
 
     [$name] (string) The old name of the role, permission or rule
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
@@ -77,7 +80,7 @@ system
 >
  getRole($name)
 <
-(null|\yii\rbac\Role) The role corresponding to the specified name. Null is
+return (null|\yii\rbac\Role) The role corresponding to the specified name. Null is
 returned if no such role.
 
     [$name] (string) The role name.
@@ -87,7 +90,7 @@ returned if no such role.
 >
  getRoles()
 <
-(\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+return (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
 names.
 
 
@@ -96,11 +99,12 @@ names.
 >
  getRolesByUser($userId)
 <
-(\yii\rbac\Role[]) All roles directly assigned to the user. The array is
+return (\yii\rbac\Role[]) All roles directly assigned to the user. The array is
 indexed by the role names.
 
  Note that child roles that are not assigned directly to the user will not be
  returned.
+
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
 
 
@@ -108,7 +112,7 @@ indexed by the role names.
 >
  getPermission($name)
 <
-(null|\yii\rbac\Permission) The permission corresponding to the specified
+return (null|\yii\rbac\Permission) The permission corresponding to the specified
 name. Null is returned if no such permission.
 
     [$name] (string) The permission name.
@@ -118,7 +122,7 @@ name. Null is returned if no such permission.
 >
  getPermissions()
 <
-(\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+return (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
 by the permission names.
 
 
@@ -127,7 +131,7 @@ by the permission names.
 >
  getPermissionsByRole($roleName)
 <
-(\yii\rbac\Permission[]) All permissions that the role represents. The array
+return (\yii\rbac\Permission[]) All permissions that the role represents. The array
 is indexed by the permission names.
 
     [$roleName] (string) The role name
@@ -137,7 +141,7 @@ is indexed by the permission names.
 >
  getPermissionsByUser($userId)
 <
-(\yii\rbac\Permission[]) All permissions that the user has. The array is
+return (\yii\rbac\Permission[]) All permissions that the user has. The array is
 indexed by the permission names.
 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -147,7 +151,7 @@ indexed by the permission names.
 >
  getRule($name)
 <
-(null|\yii\rbac\Rule) The rule object, or null if the specified name does not
+return (null|\yii\rbac\Rule) The rule object, or null if the specified name does not
 correspond to a rule.
 
     [$name] (string) The rule name
@@ -157,15 +161,25 @@ correspond to a rule.
 >
  getRules()
 <
-(\yii\rbac\Rule[]) The rules indexed by the rule names
+return (\yii\rbac\Rule[]) The rules indexed by the rule names
 
+
+
+*yii/rbac/ManagerInterface::canAddChild*			public
+>
+ canAddChild($parent, $child)
+<
+return (boolean) Possibility of adding
+
+    [$parent] (\yii\rbac\Item) The parent item
+    [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
 
 
 *yii/rbac/ManagerInterface::addChild*			public
 >
  addChild($parent, $child)
 <
-(boolean) Whether the child successfully added
+return (boolean) Whether the child successfully added
 
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
@@ -175,10 +189,11 @@ correspond to a rule.
 >
  removeChild($parent, $child)
 <
-(boolean) Whether the removal is successful
+return (boolean) Whether the removal is successful
 
  Note, the child item is not deleted. Only the parent-child relationship is
  removed.
+
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
 
@@ -187,10 +202,11 @@ correspond to a rule.
 >
  removeChildren($parent)
 <
-(boolean) Whether the removal is successful
+return (boolean) Whether the removal is successful
 
  Note, the children items are not deleted. Only the parent-child relationships
  are removed.
+
     [$parent] (\yii\rbac\Item) 
 
 
@@ -198,7 +214,7 @@ correspond to a rule.
 >
  hasChild($parent, $child)
 <
-(boolean) Whether '$child' is already a child of '$parent'
+return (boolean) Whether '$child' is already a child of '$parent'
 
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
@@ -208,7 +224,7 @@ correspond to a rule.
 >
  getChildren($name)
 <
-(\yii\rbac\Item[]) The child permissions and/or roles
+return (\yii\rbac\Item[]) The child permissions and/or roles
 
     [$name] (string) The parent name
 
@@ -217,7 +233,7 @@ correspond to a rule.
 >
  assign($role, $userId)
 <
-(\yii\rbac\Assignment) The role assignment information.
+return (\yii\rbac\Assignment) The role assignment information.
 
     [$role] (\yii\rbac\Role) 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -227,7 +243,7 @@ correspond to a rule.
 >
  revoke($role, $userId)
 <
-(boolean) Whether the revoking is successful
+return (boolean) Whether the revoking is successful
 
     [$role] (\yii\rbac\Role) 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -237,7 +253,7 @@ correspond to a rule.
 >
  revokeAll($userId)
 <
-(boolean) Whether the revoking is successful
+return (boolean) Whether the revoking is successful
 
     [$userId] (mixed) The user ID (see '\yii\web\User::id')
 
@@ -246,7 +262,7 @@ correspond to a rule.
 >
  getAssignment($roleName, $userId)
 <
-(null|\yii\rbac\Assignment) The assignment information. Null is returned if
+return (null|\yii\rbac\Assignment) The assignment information. Null is returned if
 the role is not assigned to the user.
 
     [$roleName] (string) The role name
@@ -257,7 +273,7 @@ the role is not assigned to the user.
 >
  getAssignments($userId)
 <
-(\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
+return (\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
 will be returned if there is no role assigned to the user.
 
     [$userId] (string|integer) The user ID (see '\yii\web\User::id')
@@ -267,7 +283,7 @@ will be returned if there is no role assigned to the user.
 >
  getUserIdsByRole($roleName)
 <
-(array) Array of user ID strings
+return (array) Array of user ID strings
 
     [$roleName] (string) 
 
@@ -276,7 +292,7 @@ will be returned if there is no role assigned to the user.
 >
  removeAll()
 <
-(void)
+return (void)
 
 
 
@@ -284,7 +300,7 @@ will be returned if there is no role assigned to the user.
 >
  removeAllPermissions()
 <
-(void)
+return (void)
 
  All parent child relations will be adjusted accordingly.
 
@@ -293,7 +309,7 @@ will be returned if there is no role assigned to the user.
 >
  removeAllRoles()
 <
-(void)
+return (void)
 
  All parent child relations will be adjusted accordingly.
 
@@ -302,7 +318,7 @@ will be returned if there is no role assigned to the user.
 >
  removeAllRules()
 <
-(void)
+return (void)
 
  All roles and permissions which have rules will be adjusted accordingly.
 
@@ -311,7 +327,7 @@ will be returned if there is no role assigned to the user.
 >
  removeAllAssignments()
 <
-(void)
+return (void)
 
 
 

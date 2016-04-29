@@ -6,25 +6,25 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/base/DynamicModel|
-|yii/db/ActiveRecord|
 |yii/db/BaseActiveRecord|
-|yii/sphinx/gii/model/Generator|
-|yii/sphinx/ActiveRecord|
-|yii/gii/Generator|
-|yii/gii/generators/crud/Generator|
-|yii/gii/generators/form/Generator|
-|yii/gii/generators/model/Generator|
-|yii/gii/generators/controller/Generator|
-|yii/gii/generators/module/Generator|
-|yii/gii/generators/extension/Generator|
-|yii/debug/models/search/Profile|
+|yii/db/ActiveRecord|
+|yii/debug/models/search/Mail|
 |yii/debug/models/search/Debug|
-|yii/debug/models/search/Base|
 |yii/debug/models/search/Log|
 |yii/debug/models/search/Db|
-|yii/debug/models/search/Mail|
+|yii/debug/models/search/Profile|
+|yii/debug/models/search/Base|
 |yii/elasticsearch/ActiveRecord|
+|yii/gii/generators/form/Generator|
+|yii/gii/generators/module/Generator|
+|yii/gii/generators/model/Generator|
+|yii/gii/generators/crud/Generator|
+|yii/gii/generators/extension/Generator|
+|yii/gii/generators/controller/Generator|
+|yii/gii/Generator|
 |yii/redis/ActiveRecord|
+|yii/sphinx/gii/model/Generator|
+|yii/sphinx/ActiveRecord|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -54,17 +54,21 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/base/Model::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $validators				*yii/base/Model::$validators*
+
  (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
  model.
 
 $activeValidators			*yii/base/Model::$activeValidators*
+
  (\yii\validators\Validator[]) The validators applicable to the current
  'scenario'.
 
 $errors					*yii/base/Model::$errors*
+
  (array) Errors for all attributes or the specified attribute. Empty array is
  returned if no error. Note that when returning errors for all attributes, the
  result is a two-dimensional array, like the following:
@@ -82,17 +86,21 @@ $errors					*yii/base/Model::$errors*
 
 
 $firstErrors				*yii/base/Model::$firstErrors*
+
  (array) The first errors. The array keys are the attribute names, and the
  array values are the corresponding error messages. An empty array will be
  returned if there is no error.
 
 $attributes				*yii/base/Model::$attributes*
+
  (array) Attribute values (name => value).
 
 $scenario				*yii/base/Model::$scenario*
+
  (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
 
 $iterator				*yii/base/Model::$iterator*
+
  (\ArrayIterator) An iterator for traversing the items in the list.
 
 
@@ -100,103 +108,129 @@ $iterator				*yii/base/Model::$iterator*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/Model::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/base/Model::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/base/Model::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/base/Model::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/base/Model::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/base/Model::__isset*					public
+
  See |yii/base/Component::__isset|
 
 
 *yii/base/Model::__unset*					public
+
  See |yii/base/Component::__unset|
 
 
 *yii/base/Model::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/base/Model::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/base/Model::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/base/Model::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/base/Model::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/base/Model::__clone*					public
+
  See |yii/base/Component::__clone|
 
 
 *yii/base/Model::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/base/Model::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/base/Model::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/base/Model::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/base/Model::trigger*					public
+
  See |yii/base/Component::trigger|
 
 
 *yii/base/Model::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/base/Model::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/base/Model::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/base/Model::attachBehaviors*				public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/base/Model::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/base/Model::detachBehaviors*				public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/base/Model::ensureBehaviors*				public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -204,7 +238,7 @@ METHOD DETAILS
 >
  fields()
 <
-(array) The list of field names or field definitions.
+return (array) The list of field names or field definitions.
 
  A field is a named element in the returned array by 'toArray()'.
 
@@ -249,14 +283,17 @@ METHOD DETAILS
 
 
 *yii/base/Model::extraFields*				public
+
  See |yii/base/ArrayableTrait::extraFields|
 
 
 *yii/base/Model::toArray*					public
+
  See |yii/base/ArrayableTrait::toArray|
 
 
 *yii/base/Model::resolveFields*				protected
+
  See |yii/base/ArrayableTrait::resolveFields|
 
 
@@ -264,7 +301,7 @@ METHOD DETAILS
 >
  rules()
 <
-(array) Validation rules
+return (array) Validation rules
 
  Validation rules are used by 'validate()' to check if attribute values are
  valid. Child classes may override this method to declare different validation
@@ -340,7 +377,7 @@ METHOD DETAILS
 >
  scenarios()
 <
-(array) A list of scenarios and the corresponding active attributes.
+return (array) A list of scenarios and the corresponding active attributes.
 
  An active attribute is one that is subject to validation in the current
  scenario. The returned array should be in the following format:
@@ -367,7 +404,7 @@ METHOD DETAILS
 >
  formName()
 <
-(string) The form name of this model class.
+return (string) The form name of this model class.
 
  The form name is mainly used by '\yii\widgets\ActiveForm' to determine how to
  name the input fields for the attributes in a model. If the form name is "A"
@@ -388,7 +425,7 @@ METHOD DETAILS
 >
  attributes()
 <
-(array) List of attribute names.
+return (array) List of attribute names.
 
  By default, this method returns all public non-static properties of the
  class. You may override this method to change the default behavior.
@@ -398,7 +435,7 @@ METHOD DETAILS
 >
  attributeLabels()
 <
-(array) Attribute labels (name => label)
+return (array) Attribute labels (name => label)
 
  Attribute labels are mainly used for display purpose. For example, given an
  attribute 'firstName', we can declare a label 'First Name' which is more
@@ -416,7 +453,7 @@ METHOD DETAILS
 >
  attributeHints()
 <
-(array) Attribute hints (name => hint)
+return (array) Attribute hints (name => hint)
 
  Attribute hints are mainly used for display purpose. For example, given an
  attribute 'isPublic', we can declare a hint 'Whether the post should be
@@ -435,7 +472,7 @@ METHOD DETAILS
 >
  validate($attributeNames='null', $clearErrors='true')
 <
-(boolean) Whether the validation is successful without any error.
+return (boolean) Whether the validation is successful without any error.
 
  This method executes the validation rules applicable to the current
  'scenario'. The following criteria are used to determine whether a rule is
@@ -453,6 +490,7 @@ METHOD DETAILS
 
  Errors found during the validation can be retrieved via 'getErrors()',
  'getFirstErrors()' and 'getFirstError()'.
+
     [$attributeNames] (array) List of attribute names that should be
     validated. If this parameter is empty, it means any attribute listed in
     the applicable validation rules should be validated.
@@ -464,7 +502,7 @@ METHOD DETAILS
 >
  beforeValidate()
 <
-(boolean) Whether the validation should be executed. Defaults to true. If
+return (boolean) Whether the validation should be executed. Defaults to true. If
 false is returned, the validation will stop and the model is considered
 invalid.
 
@@ -477,7 +515,7 @@ invalid.
 >
  afterValidate()
 <
-(void)
+return (void)
 
  The default implementation raises an 'afterValidate' event. You may override
  this method to do postprocessing after validation. Make sure the parent
@@ -488,7 +526,7 @@ invalid.
 >
  getValidators()
 <
-(\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
+return (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
 model.
 
  This method differs from 'getActiveValidators()' in that the latter only
@@ -506,7 +544,7 @@ model.
 >
  getActiveValidators($attribute='null')
 <
-(\yii\validators\Validator[]) The validators applicable to the current
+return (\yii\validators\Validator[]) The validators applicable to the current
 'scenario'.
 
     [$attribute] (string) The name of the attribute whose applicable
@@ -518,7 +556,7 @@ model.
 >
  createValidators()
 <
-(\ArrayObject) Validators
+return (\ArrayObject) Validators
 
  Unlike 'getValidators()', each time this method is called, a new list of
  validators will be returned.
@@ -528,7 +566,7 @@ model.
 >
  isAttributeRequired($attribute)
 <
-(boolean) Whether the attribute is required
+return (boolean) Whether the attribute is required
 
  This is determined by checking if the attribute is associated with a
  '\yii\validators\RequiredValidator|required' validation rule in the current
@@ -538,6 +576,7 @@ model.
  '\yii\validators\RequiredValidator::$when|$when' this method will return
  'false' regardless of the 'when' condition because it may be called be before
  the model is loaded with data.
+
     [$attribute] (string) Attribute name
 
 
@@ -545,7 +584,7 @@ model.
 >
  isAttributeSafe($attribute)
 <
-(boolean) Whether the attribute is safe for massive assignments
+return (boolean) Whether the attribute is safe for massive assignments
 
     [$attribute] (string) Attribute name
 
@@ -554,7 +593,7 @@ model.
 >
  isAttributeActive($attribute)
 <
-(boolean) Whether the attribute is active in the current scenario
+return (boolean) Whether the attribute is active in the current scenario
 
     [$attribute] (string) Attribute name
 
@@ -563,7 +602,7 @@ model.
 >
  getAttributeLabel($attribute)
 <
-(string) The attribute label
+return (string) The attribute label
 
     [$attribute] (string) The attribute name
 
@@ -572,7 +611,7 @@ model.
 >
  getAttributeHint($attribute)
 <
-(string) The attribute hint
+return (string) The attribute hint
 
     [$attribute] (string) The attribute name
 
@@ -581,7 +620,7 @@ model.
 >
  hasErrors($attribute='null')
 <
-(boolean) Whether there is any error.
+return (boolean) Whether there is any error.
 
     [$attribute] (string|null) Attribute name. Use null to check all
     attributes.
@@ -591,7 +630,7 @@ model.
 >
  getErrors($attribute='null')
 <
-(array) Errors for all attributes or the specified attribute. Empty array is
+return (array) Errors for all attributes or the specified attribute. Empty array is
 returned if no error. Note that when returning errors for all attributes, the
 result is a two-dimensional array, like the following:
 
@@ -615,7 +654,7 @@ result is a two-dimensional array, like the following:
 >
  getFirstErrors()
 <
-(array) The first errors. The array keys are the attribute names, and the
+return (array) The first errors. The array keys are the attribute names, and the
 array values are the corresponding error messages. An empty array will be
 returned if there is no error.
 
@@ -625,7 +664,7 @@ returned if there is no error.
 >
  getFirstError($attribute)
 <
-(string) The error message. Null is returned if no error.
+return (string) The error message. Null is returned if no error.
 
     [$attribute] (string) Attribute name.
 
@@ -634,7 +673,7 @@ returned if there is no error.
 >
  addError($attribute, $error='''')
 <
-(void)
+return (void)
 
     [$attribute] (string) Attribute name
     [$error] (string) New error message
@@ -644,7 +683,7 @@ returned if there is no error.
 >
  addErrors($items)
 <
-(void)
+return (void)
 
     [$items] (array) A list of errors. The array keys must be attribute names.
     The array values should be error messages. If an attribute has multiple
@@ -656,7 +695,7 @@ returned if there is no error.
 >
  clearErrors($attribute='null')
 <
-(void)
+return (void)
 
     [$attribute] (string) Attribute name. Use null to remove errors for all
     attribute.
@@ -666,11 +705,12 @@ returned if there is no error.
 >
  generateAttributeLabel($name)
 <
-(string) The attribute label
+return (string) The attribute label
 
  This is done by replacing underscores, dashes and dots with blanks and
  changing the first letter of each word to upper case. For example,
  'department_name' or 'DepartmentName' will generate 'Department Name'.
+
     [$name] (string) The column name
 
 
@@ -678,7 +718,7 @@ returned if there is no error.
 >
  getAttributes($names='null', $except='[]')
 <
-(array) Attribute values (name => value).
+return (array) Attribute values (name => value).
 
     [$names] (array) List of attributes whose value needs to be returned.
     Defaults to null, meaning all attributes listed in 'attributes()' will be
@@ -691,7 +731,7 @@ returned if there is no error.
 >
  setAttributes($values, $safeOnly='true')
 <
-(void)
+return (void)
 
     [$values] (array) Attribute values (name => value) to be assigned to the
     model.
@@ -704,10 +744,11 @@ returned if there is no error.
 >
  onUnsafeAttribute($name, $value)
 <
-(void)
+return (void)
 
  The default implementation will log a warning message if YII_DEBUG is on. It
  does nothing otherwise.
+
     [$name] (string) The unsafe attribute name
     [$value] (mixed) The attribute value
 
@@ -716,7 +757,7 @@ returned if there is no error.
 >
  getScenario()
 <
-(string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+return (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
 
  Scenario affects how validation is performed and which attributes can be
  massively assigned.
@@ -726,10 +767,11 @@ returned if there is no error.
 >
  setScenario($value)
 <
-(void)
+return (void)
 
  Note that this method does not check if the scenario exists or not. The
  method 'validate()' will perform this check.
+
     [$value] (string) The scenario that this model is in.
 
 
@@ -737,7 +779,7 @@ returned if there is no error.
 >
  safeAttributes()
 <
-(string[]) Safe attribute names
+return (string[]) Safe attribute names
 
 
 
@@ -745,7 +787,7 @@ returned if there is no error.
 >
  activeAttributes()
 <
-(string[]) Safe attribute names
+return (string[]) Safe attribute names
 
 
 
@@ -753,7 +795,7 @@ returned if there is no error.
 >
  load($data, $formName='null')
 <
-(boolean) Whether 'load()' found the expected form in '$data'.
+return (boolean) Whether 'load()' found the expected form in '$data'.
 
  This method provides a convenient shortcut for:
 
@@ -777,6 +819,7 @@ returned if there is no error.
 
  Note, that the data being populated is subject to the safety check by
  'setAttributes()'.
+
     [$data] (array) The data array to load, typically '$_POST' or '$_GET'.
     [$formName] (string) The form name to use to load the data into the model.
     If not set, 'formName()' is used.
@@ -786,7 +829,7 @@ returned if there is no error.
 >
  loadMultiple($models, $data, $formName='null')
 <
-(boolean) Whether at least one of the models is successfully populated.
+return (boolean) Whether at least one of the models is successfully populated.
 
  This method is mainly used to collect tabular data input. The data to be
  loaded for each model is '$data[formName][index]', where 'formName' refers to
@@ -794,6 +837,7 @@ returned if there is no error.
  '$models' array. If 'formName()' is empty, '$data[index]' will be used to
  populate each model. The data being populated to each model is subject to the
  safety check by 'setAttributes()'.
+
     [$models] (array) The models to be populated. Note that all models should
     have the same class.
     [$data] (array) The data array. This is usually '$_POST' or '$_GET', but
@@ -807,11 +851,12 @@ returned if there is no error.
 >
  validateMultiple($models, $attributeNames='null')
 <
-(boolean) Whether all models are valid. False will be returned if one or
+return (boolean) Whether all models are valid. False will be returned if one or
 multiple models have validation error.
 
  This method will validate every model. The models being validated may be of
  the same or different types.
+
     [$models] (array) The models to be validated
     [$attributeNames] (array) List of attribute names that should be
     validated. If this parameter is empty, it means any attribute listed in
@@ -822,7 +867,7 @@ multiple models have validation error.
 >
  getIterator()
 <
-(\ArrayIterator) An iterator for traversing the items in the list.
+return (\ArrayIterator) An iterator for traversing the items in the list.
 
  This method is required by the interface '\IteratorAggregate'.
 
@@ -831,10 +876,11 @@ multiple models have validation error.
 >
  offsetExists($offset)
 <
-(boolean) 
+return (boolean) 
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'isset($model[$offset])'.
+
     [$offset] (mixed) The offset to check on
 
 
@@ -842,10 +888,11 @@ multiple models have validation error.
 >
  offsetGet($offset)
 <
-(mixed) The element at the offset, null if no element is found at the offset
+return (mixed) The element at the offset, null if no element is found at the offset
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$value = $model[$offset];'.
+
     [$offset] (mixed) The offset to retrieve element.
 
 
@@ -853,10 +900,11 @@ multiple models have validation error.
 >
  offsetSet($offset, $item)
 <
-(void)
+return (void)
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$model[$offset] = $item;'.
+
     [$offset] (integer) The offset to set element
     [$item] (mixed) The element value
 
@@ -865,10 +913,11 @@ multiple models have validation error.
 >
  offsetUnset($offset)
 <
-(void)
+return (void)
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'unset($model[$offset])'.
+
     [$offset] (mixed) The offset to unset element
 
 

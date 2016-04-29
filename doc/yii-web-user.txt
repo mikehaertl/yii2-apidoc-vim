@@ -46,18 +46,22 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $identityClass				*yii/web/User::$identityClass*
+
  (string) The class name of the 'identity' object.
 
 $enableAutoLogin			*yii/web/User::$enableAutoLogin*
+
  (boolean) Whether to enable cookie-based login. Defaults to false. Note that
  this property will be ignored if 'enableSession' is false.
 
 $enableSession				*yii/web/User::$enableSession*
+
  (boolean) Whether to use session to persist authentication status across
  multiple requests. You set this property to be false if your application is
  stateless, which is often the case for RESTful APIs.
 
 $loginUrl				*yii/web/User::$loginUrl*
+
  (string|array) The URL for login when 'loginRequired()' is called. If an
  array is given, 'UrlManager::createUrl()' will be called to create the
  corresponding URL. The first element of the array should be the route to the
@@ -70,10 +74,12 @@ $loginUrl				*yii/web/User::$loginUrl*
  'loginRequired()' is called.
 
 $identityCookie				*yii/web/User::$identityCookie*
+
  (array) The configuration of the identity cookie. This property is used only
  when 'enableAutoLogin' is true.
 
 $authTimeout				*yii/web/User::$authTimeout*
+
  (integer) The number of seconds in which the user will be logged out
  automatically if he remains inactive. If this property is not set, the user
  will be logged out after the current session expires (c.f.
@@ -81,11 +87,13 @@ $authTimeout				*yii/web/User::$authTimeout*
  true.
 
 $absoluteAuthTimeout			*yii/web/User::$absoluteAuthTimeout*
+
  (integer) The number of seconds in which the user will be logged out
  automatically regardless of activity. Note that this will not work if
  'enableAutoLogin' is true.
 
 $autoRenewCookie			*yii/web/User::$autoRenewCookie*
+
  (boolean) Whether to automatically renew the identity cookie each time a page
  is requested. This property is effective only when 'enableAutoLogin' is true.
  When this is false, the identity cookie will expire after the specified
@@ -94,36 +102,50 @@ $autoRenewCookie			*yii/web/User::$autoRenewCookie*
  visits the site the last time.
 
 $idParam				*yii/web/User::$idParam*
+
  (string) The session variable name used to store the value of 'id'.
 
 $authTimeoutParam			*yii/web/User::$authTimeoutParam*
+
  (string) The session variable name used to store the value of expiration
  timestamp of the authenticated state. This is used when 'authTimeout' is set.
 
 $absoluteAuthTimeoutParam		*yii/web/User::$absoluteAuthTimeoutParam*
+
  (string) The session variable name used to store the value of absolute
  expiration timestamp of the authenticated state. This is used when
  'absoluteAuthTimeout' is set.
 
 $returnUrlParam				*yii/web/User::$returnUrlParam*
+
  (string) The session variable name used to store the value of 'returnUrl'.
 
+$acceptableRedirectTypes		*yii/web/User::$acceptableRedirectTypes*
+
+ (array) MIME types for which this component should redirect to the
+ 'loginUrl'.
+
 $behaviors				*yii/web/User::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $identity				*yii/web/User::$identity*
+
  (\yii\web\IdentityInterface|null) The identity object associated with the
  currently logged-in user. 'null' is returned if the user is not logged in
  (not authenticated).
 
 $isGuest				*yii/web/User::$isGuest*
+
  (boolean) Whether the current user is a guest.
 
 $id					*yii/web/User::$id*
+
  (string|integer) The unique identifier for the user. If null, it means the
  user is a guest.
 
 $returnUrl				*yii/web/User::$returnUrl*
+
  (string) The URL that the user should be redirected to after login.
 
 
@@ -131,11 +153,14 @@ $returnUrl				*yii/web/User::$returnUrl*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/web/User::className*					public
+
  See |yii/base/Object::className|
 
 
 *yii/web/User::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -143,95 +168,117 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/web/User::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/web/User::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/web/User::__isset*					public
+
  See |yii/base/Component::__isset|
 
 
 *yii/web/User::__unset*					public
+
  See |yii/base/Component::__unset|
 
 
 *yii/web/User::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/web/User::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/web/User::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/web/User::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/web/User::hasMethod*					public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/web/User::__clone*					public
+
  See |yii/base/Component::__clone|
 
 
 *yii/web/User::behaviors*					public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/web/User::hasEventHandlers*				public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/web/User::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/web/User::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/web/User::trigger*					public
+
  See |yii/base/Component::trigger|
 
 
 *yii/web/User::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/web/User::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/web/User::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/web/User::attachBehaviors*				public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/web/User::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/web/User::detachBehaviors*				public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/web/User::ensureBehaviors*				public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -239,13 +286,14 @@ METHOD DETAILS
 >
  getIdentity($autoRenew='true')
 <
-(\yii\web\IdentityInterface|null) The identity object associated with the
+return (\yii\web\IdentityInterface|null) The identity object associated with the
 currently logged-in user. 'null' is returned if the user is not logged in (not
 authenticated).
 
  When 'enableSession' is true, this method may attempt to read the user's
  authentication data stored in session and reconstruct the corresponding
  identity object, if it has not done so before.
+
     [$autoRenew] (boolean) Whether to automatically renew authentication
     status if it has not been done so before. This is only useful when
     'enableSession' is true.
@@ -255,10 +303,11 @@ authenticated).
 >
  setIdentity($identity)
 <
-(void)
+return (void)
 
  Note that this method does not deal with session or cookie. You should
  usually use 'switchIdentity()' to change the identity of the current user.
+
     [$identity] (\yii\web\IdentityInterface|null) The identity object
     associated with the currently logged user. If null, it means the current
     user will be a guest without any associated identity.
@@ -268,7 +317,7 @@ authenticated).
 >
  login($identity, $duration=0)
 <
-(boolean) Whether the user is logged in
+return (boolean) Whether the user is logged in
 
  After logging in a user, you may obtain the user's identity information from
  the 'identity' property. If 'enableSession' is true, you may even get the
@@ -288,6 +337,7 @@ authenticated).
 
  Note that if 'enableSession' is false, the '$duration' parameter will be
  ignored as it is meaningless in this case.
+
     [$identity] (\yii\web\IdentityInterface) The user identity (which should
     already be authenticated)
     [$duration] (integer) Number of seconds that the user can remain in
@@ -301,7 +351,7 @@ authenticated).
 >
  loginByAccessToken($token, $type='null')
 <
-(\yii\web\IdentityInterface|null) The identity associated with the given
+return (\yii\web\IdentityInterface|null) The identity associated with the given
 access token. Null is returned if the access token is invalid or 'login()' is
 unsuccessful.
 
@@ -310,6 +360,7 @@ unsuccessful.
  token. If successful, it will call 'login()' to log in the authenticated
  user. If authentication fails or 'login()' is unsuccessful, it will return
  null.
+
     [$token] (string) The access token
     [$type] (mixed) The type of the token. The value of this parameter depends
     on the implementation. For example, '\yii\filters\auth\HttpBearerAuth'
@@ -320,7 +371,7 @@ unsuccessful.
 >
  loginByCookie()
 <
-(void)
+return (void)
 
  This method attempts to log in a user using the ID and authKey information
  provided by the 'identityCookie|identity cookie'.
@@ -330,10 +381,11 @@ unsuccessful.
 >
  logout($destroySession='true')
 <
-(boolean) Whether the user is logged out
+return (boolean) Whether the user is logged out
 
  This will remove authentication-related session data. If '$destroySession' is
  true, all session data will be removed.
+
     [$destroySession] (boolean) Whether to destroy the whole session. Defaults
     to true. This parameter is ignored if 'enableSession' is false.
 
@@ -342,7 +394,7 @@ unsuccessful.
 >
  getIsGuest()
 <
-(boolean) Whether the current user is a guest.
+return (boolean) Whether the current user is a guest.
 
 
 
@@ -350,7 +402,7 @@ unsuccessful.
 >
  getId()
 <
-(string|integer) The unique identifier for the user. If null, it means the
+return (string|integer) The unique identifier for the user. If null, it means the
 user is a guest.
 
 
@@ -359,11 +411,12 @@ user is a guest.
 >
  getReturnUrl($defaultUrl='null')
 <
-(string) The URL that the user should be redirected to after login.
+return (string) The URL that the user should be redirected to after login.
 
  This method reads the return URL from the session. It is usually used by the
  login action which may call this method to redirect the browser to where it
  goes after successful authentication.
+
     [$defaultUrl] (string|array) The default return URL in case it was not set
     previously. If this is null and the return URL was not set previously,
     'Application::homeUrl' will be redirected to. Please refer to
@@ -374,7 +427,7 @@ user is a guest.
 >
  setReturnUrl($url)
 <
-(void)
+return (void)
 
     [$url] (string|array) The URL that the user should be redirected to after
     login. If an array is given, 'UrlManager::createUrl()' will be called to
@@ -389,9 +442,9 @@ user is a guest.
 
 *yii/web/User::loginRequired*				public
 >
- loginRequired($checkAjax='true')
+ loginRequired($checkAjax='true', $checkAcceptHeader='true')
 <
-(\yii\web\Response) The redirection response if 'loginUrl' is set
+return (\yii\web\Response) The redirection response if 'loginUrl' is set
 
  Before the redirection, the current URL (if it's not an AJAX url) will be
  kept as 'returnUrl' so that the user browser may be redirected back to the
@@ -402,20 +455,27 @@ user is a guest.
 
  Note that when 'loginUrl' is set, calling this method will NOT terminate the
  application execution.
+
     [$checkAjax] (boolean) Whether to check if the request is an AJAX request.
     When this is true and the request is an AJAX request, the current URL (for
     AJAX request) will NOT be set as the return URL.
+    [$checkAcceptHeader] (boolean) Whether to check if the request accepts
+    HTML responses. Defaults to 'true'. When this is true and the request does
+    not accept HTML responses the current URL will not be SET as the return
+    URL. Also instead of redirecting the user an ForbiddenHttpException is
+    thrown. This parameter is available since version 2.0.8.
 
 
 *yii/web/User::beforeLogin*				protected
 >
  beforeLogin($identity, $cookieBased, $duration)
 <
-(boolean) Whether the user should continue to be logged in
+return (boolean) Whether the user should continue to be logged in
 
  The default implementation will trigger the 'EVENT_BEFORE_LOGIN' event. If
  you override this method, make sure you call the parent implementation so
  that the event is triggered.
+
     [$identity] (\yii\web\IdentityInterface) The user identity information
     [$cookieBased] (boolean) Whether the login is cookie-based
     [$duration] (integer) Number of seconds that the user can remain in
@@ -427,11 +487,12 @@ user is a guest.
 >
  afterLogin($identity, $cookieBased, $duration)
 <
-(void)
+return (void)
 
  The default implementation will trigger the 'EVENT_AFTER_LOGIN' event. If you
  override this method, make sure you call the parent implementation so that
  the event is triggered.
+
     [$identity] (\yii\web\IdentityInterface) The user identity information
     [$cookieBased] (boolean) Whether the login is cookie-based
     [$duration] (integer) Number of seconds that the user can remain in
@@ -443,11 +504,12 @@ user is a guest.
 >
  beforeLogout($identity)
 <
-(boolean) Whether the user should continue to be logged out
+return (boolean) Whether the user should continue to be logged out
 
  The default implementation will trigger the 'EVENT_BEFORE_LOGOUT' event. If
  you override this method, make sure you call the parent implementation so
  that the event is triggered.
+
     [$identity] (\yii\web\IdentityInterface) The user identity information
 
 
@@ -455,11 +517,12 @@ user is a guest.
 >
  afterLogout($identity)
 <
-(void)
+return (void)
 
  The default implementation will trigger the 'EVENT_AFTER_LOGOUT' event. If
  you override this method, make sure you call the parent implementation so
  that the event is triggered.
+
     [$identity] (\yii\web\IdentityInterface) The user identity information
 
 
@@ -467,7 +530,7 @@ user is a guest.
 >
  renewIdentityCookie()
 <
-(void)
+return (void)
 
  This method will set the expiration time of the identity cookie to be the
  current time plus the originally specified cookie duration.
@@ -477,11 +540,12 @@ user is a guest.
 >
  sendIdentityCookie($identity, $duration)
 <
-(void)
+return (void)
 
  This method is used when 'enableAutoLogin' is true. It saves 'id',
  'IdentityInterface::getAuthKey()|auth key', and the duration of cookie-based
  login information in the cookie.
+
     [$identity] (\yii\web\IdentityInterface) 
     [$duration] (integer) Number of seconds that the user can remain in
     logged-in status.
@@ -491,7 +555,7 @@ user is a guest.
 >
  switchIdentity($identity, $duration=0)
 <
-(void)
+return (void)
 
  When 'enableSession' is true, this method may use session and/or cookie to
  store the user identity information, according to the value of '$duration'.
@@ -500,6 +564,7 @@ user is a guest.
  This method is mainly called by 'login()', 'logout()' and 'loginByCookie()'
  when the current user needs to be associated with the corresponding identity
  information.
+
     [$identity] (\yii\web\IdentityInterface|null) The identity information to
     be associated with the current user. If null, it means switching the
     current user to be a guest.
@@ -512,7 +577,7 @@ user is a guest.
 >
  renewAuthStatus()
 <
-(void)
+return (void)
 
  This method will try to determine the user identity using the 'idParam'
  session variable.
@@ -527,11 +592,12 @@ user is a guest.
 >
  can($permissionName, $params='[]', $allowCaching='true')
 <
-(boolean) Whether the user can perform the operation as specified by the given
+return (boolean) Whether the user can perform the operation as specified by the given
 permission.
 
  Note that you must configure "authManager" application component in order to
  use this method. Otherwise it will always return false.
+
     [$permissionName] (string) The name of the permission (e.g. "edit post")
     that needs access check.
     [$params] (array) Name-value pairs that would be passed to the rules
@@ -546,11 +612,22 @@ permission.
     request and only works when '$params = []'.
 
 
+*yii/web/User::checkRedirectAcceptable*			protected
+>
+ checkRedirectAcceptable()
+<
+return (boolean) Whether this request may be redirected to the login page.
+
+ The login page is assumed to serve 'text/html' or 'application/xhtml+xml' by
+ default. You can change acceptable content types by modifying
+ 'acceptableRedirectTypes' property.
+
+
 *yii/web/User::getAuthManager*				protected
 >
  getAuthManager()
 <
-(\yii\rbac\ManagerInterface) 
+return (\yii\rbac\ManagerInterface) 
 
  By default this is the 'authManager' application component. You may override
  this method to return a different auth manager instance if needed.

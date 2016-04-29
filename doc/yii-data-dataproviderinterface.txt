@@ -13,17 +13,19 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/data/DataProviderInterface::prepare*			public
 >
  prepare($forcePrepare='false')
 <
-(void)
+return (void)
 
  This method will prepare the data models and keys that can be retrieved via
  'getModels()' and 'getKeys()'.
 
  This method will be implicitly called by 'getModels()' and 'getKeys()' if it
  has not been called before.
+
     [$forcePrepare] (boolean) Whether to force data preparation even if it has
     been done before.
 
@@ -32,7 +34,7 @@ METHOD DETAILS
 >
  getCount()
 <
-(integer) The number of data models in the current page.
+return (integer) The number of data models in the current page.
 
  This is equivalent to 'count($provider->getModels())'. When
  'getPagination|pagination' is false, this is the same as
@@ -43,7 +45,7 @@ METHOD DETAILS
 >
  getTotalCount()
 <
-(integer) Total number of possible data models.
+return (integer) Total number of possible data models.
 
  When 'getPagination|pagination' is false, this is the same as
  'getCount|count'.
@@ -53,7 +55,7 @@ METHOD DETAILS
 >
  getModels()
 <
-(array) The list of data models in the current page.
+return (array) The list of data models in the current page.
 
 
 
@@ -61,7 +63,7 @@ METHOD DETAILS
 >
  getKeys()
 <
-(array) The list of key values corresponding to 'getModels|models'. Each data
+return (array) The list of key values corresponding to 'getModels|models'. Each data
 model in 'getModels|models' is uniquely identified by the corresponding key
 value in this array.
 
@@ -71,7 +73,7 @@ value in this array.
 >
  getSort()
 <
-(\yii\data\Sort) The sorting object. If this is false, it means the sorting is
+return (\yii\data\Sort) The sorting object. If this is false, it means the sorting is
 disabled.
 
 
@@ -80,7 +82,7 @@ disabled.
 >
  getPagination()
 <
-(\yii\data\Pagination) The pagination object. If this is false, it means the
+return (\yii\data\Pagination) The pagination object. If this is false, it means the
 pagination is disabled.
 
 

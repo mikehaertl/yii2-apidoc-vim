@@ -7,11 +7,12 @@
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/filters/RateLimitInterface::getRateLimit*		public
 >
  getRateLimit($request, $action)
 <
-(array) An array of two elements. The first element is the maximum number of
+return (array) An array of two elements. The first element is the maximum number of
 allowed requests, and the second element is the size of the window in seconds.
 
     [$request] (\yii\web\Request) The current request
@@ -22,7 +23,7 @@ allowed requests, and the second element is the size of the window in seconds.
 >
  loadAllowance($request, $action)
 <
-(array) An array of two elements. The first element is the number of allowed
+return (array) An array of two elements. The first element is the number of allowed
 requests, and the second element is the corresponding UNIX timestamp.
 
     [$request] (\yii\web\Request) The current request
@@ -33,7 +34,7 @@ requests, and the second element is the corresponding UNIX timestamp.
 >
  saveAllowance($request, $action, $allowance, $timestamp)
 <
-(void)
+return (void)
 
     [$request] (\yii\web\Request) The current request
     [$action] (\yii\base\Action) The action to be executed

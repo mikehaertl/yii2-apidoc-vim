@@ -7,32 +7,41 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/oci/Schema::$db*
+
  See |yii/db/Schema::$db|
 
 $defaultSchema				*yii/db/oci/Schema::$defaultSchema*
+
  See |yii/db/Schema::$defaultSchema|
 
 $exceptionMap				*yii/db/oci/Schema::$exceptionMap*
+
  (array) Map of DB errors and corresponding exceptions If left part is found
  in DB error message exception class from the right part is used.
 
 $tableSchemas				*yii/db/oci/Schema::$tableSchemas*
+
  See |yii/db/Schema::$tableSchemas|
 
 $schemaNames				*yii/db/oci/Schema::$schemaNames*
+
  See |yii/db/Schema::$schemaNames|
 
 $tableNames				*yii/db/oci/Schema::$tableNames*
+
  See |yii/db/Schema::$tableNames|
 
 $queryBuilder				*yii/db/oci/Schema::$queryBuilder*
+
  See |yii/db/Schema::$queryBuilder|
 
 $lastInsertID				*yii/db/oci/Schema::$lastInsertID*
+
  (string) The row ID of the last row inserted, or the last value retrieved
  from the sequence object
 
 $transactionIsolationLevel		*yii/db/oci/Schema::$transactionIsolationLevel*
+
  See |yii/db/Schema::$transactionIsolationLevel|
 
 
@@ -40,11 +49,14 @@ $transactionIsolationLevel		*yii/db/oci/Schema::$transactionIsolationLevel*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/oci/Schema::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/db/oci/Schema::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -52,49 +64,63 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/db/oci/Schema::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/oci/Schema::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/oci/Schema::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/oci/Schema::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/oci/Schema::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/oci/Schema::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/oci/Schema::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/oci/Schema::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/oci/Schema::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/db/oci/Schema::createColumnSchema*			protected
+
  See |yii/db/Schema::createColumnSchema|
 
 
@@ -102,49 +128,65 @@ METHOD DETAILS
 >
  loadTableSchema($name)
 <
-(null|\yii\db\TableSchema) DBMS-dependent table metadata, null if the table
+return (null|\yii\db\TableSchema) DBMS-dependent table metadata, null if the table
 does not exist.
+
+
+
+
+
+
 
     [$name] (string) Table name
 
 
 *yii/db/oci/Schema::getTableSchema*			public
+
  See |yii/db/Schema::getTableSchema|
 
 
 *yii/db/oci/Schema::getCacheKey*				protected
+
  See |yii/db/Schema::getCacheKey|
 
 
 *yii/db/oci/Schema::getCacheTag*				protected
+
  See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/oci/Schema::getTableSchemas*			public
+
  See |yii/db/Schema::getTableSchemas|
 
 
 *yii/db/oci/Schema::getSchemaNames*			public
+
  See |yii/db/Schema::getSchemaNames|
 
 
 *yii/db/oci/Schema::getTableNames*			public
+
  See |yii/db/Schema::getTableNames|
 
 
 *yii/db/oci/Schema::getQueryBuilder*			public
+
  See |yii/db/Schema::getQueryBuilder|
 
 
 *yii/db/oci/Schema::getPdoType*				public
+
  See |yii/db/Schema::getPdoType|
 
 
 *yii/db/oci/Schema::refresh*				public
+
  See |yii/db/Schema::refresh|
 
 
 *yii/db/oci/Schema::refreshTableSchema*			public
+
  See |yii/db/Schema::refreshTableSchema|
 
 
@@ -152,20 +194,29 @@ does not exist.
 >
  createQueryBuilder()
 <
-(\yii\db\QueryBuilder) Query builder instance
+return (\yii\db\QueryBuilder) Query builder instance
+
+
 
  This method may be overridden by child classes to create a DBMS-specific
  query builder.
+
+
 
 
 *yii/db/oci/Schema::createColumnSchemaBuilder*		public
 >
  createColumnSchemaBuilder($type, $length='null')
 <
-(\yii\db\ColumnSchemaBuilder) Column schema builder instance
+return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+
+
 
  This method may be overridden by child classes to create a DBMS-specific
  column schema builder.
+
+
+
     [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
     [$length] (integer|string|array) Length or precision of the column. See
     'ColumnSchemaBuilder::$length'.
@@ -175,20 +226,29 @@ does not exist.
 >
  findSchemaNames()
 <
-(array) All schema names in the database, except system schemas
+return (array) All schema names in the database, except system schemas
+
+
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception.
+
+
 
 
 *yii/db/oci/Schema::findTableNames*			protected
 >
  findTableNames($schema='''')
 <
-(array) All table names in the database. The names have NO schema name prefix.
+return (array) All table names in the database. The names have NO schema name prefix.
+
+
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception.
+
+
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
 
@@ -197,7 +257,7 @@ does not exist.
 >
  findUniqueIndexes($table)
 <
-(array) All unique indexes for the given table.
+return (array) All unique indexes for the given table.
 
  Each array element is of the following structure:
 
@@ -207,6 +267,7 @@ does not exist.
    ]
 
 
+
     [$table] (\yii\db\TableSchema) The table metadata
 
 
@@ -214,7 +275,7 @@ does not exist.
 >
  getLastInsertID($sequenceName='''')
 <
-(string) The row ID of the last row inserted, or the last value retrieved from
+return (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
     [$sequenceName] (string) Name of the sequence object (required by some
@@ -222,10 +283,12 @@ the sequence object
 
 
 *yii/db/oci/Schema::supportsSavepoint*			public
+
  See |yii/db/Schema::supportsSavepoint|
 
 
 *yii/db/oci/Schema::createSavepoint*			public
+
  See |yii/db/Schema::createSavepoint|
 
 
@@ -233,16 +296,24 @@ the sequence object
 >
  releaseSavepoint($name)
 <
-(void)
+return (void)
+
+
+
+
+
+
 
     [$name] (string) The savepoint name
 
 
 *yii/db/oci/Schema::rollBackSavepoint*			public
+
  See |yii/db/Schema::rollBackSavepoint|
 
 
 *yii/db/oci/Schema::setTransactionIsolationLevel*		public
+
  See |yii/db/Schema::setTransactionIsolationLevel|
 
 
@@ -250,7 +321,13 @@ the sequence object
 >
  insert($table, $columns)
 <
-(array) Primary key values or false if the command fails
+return (array) Primary key values or false if the command fails
+
+
+
+
+
+
 
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
@@ -258,14 +335,17 @@ the sequence object
 
 
 *yii/db/oci/Schema::quoteValue*				public
+
  See |yii/db/Schema::quoteValue|
 
 
 *yii/db/oci/Schema::quoteTableName*			public
+
  See |yii/db/Schema::quoteTableName|
 
 
 *yii/db/oci/Schema::quoteColumnName*			public
+
  See |yii/db/Schema::quoteColumnName|
 
 
@@ -273,30 +353,40 @@ the sequence object
 >
  quoteSimpleTableName($name)
 <
-(string) The properly quoted table name
+return (string) The properly quoted table name
+
+
 
  A simple table name should contain the table name only without any schema
  prefix. If the table name is already quoted, this method will do nothing.
+
+
+
     [$name] (string) Table name
 
 
 *yii/db/oci/Schema::quoteSimpleColumnName*		public
+
  See |yii/db/Schema::quoteSimpleColumnName|
 
 
 *yii/db/oci/Schema::getRawTableName*			public
+
  See |yii/db/Schema::getRawTableName|
 
 
 *yii/db/oci/Schema::getColumnPhpType*			protected
+
  See |yii/db/Schema::getColumnPhpType|
 
 
 *yii/db/oci/Schema::convertException*			public
+
  See |yii/db/Schema::convertException|
 
 
 *yii/db/oci/Schema::isReadQuery*				public
+
  See |yii/db/Schema::isReadQuery|
 
 
@@ -304,7 +394,7 @@ the sequence object
 >
  resolveTableNames($table, $name)
 <
-(void)
+return (void)
 
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
@@ -314,7 +404,7 @@ the sequence object
 >
  findColumns($table)
 <
-(boolean) Whether the table exists
+return (boolean) Whether the table exists
 
     [$table] (\yii\db\TableSchema) The table schema
 
@@ -323,7 +413,7 @@ the sequence object
 >
  getTableSequenceName($tableName)
 <
-(string|null) Whether the sequence exists
+return (string|null) Whether the sequence exists
 
     [$tableName] (string) 
 
@@ -332,7 +422,7 @@ the sequence object
 >
  createColumn($column)
 <
-(\yii\db\ColumnSchema) 
+return (\yii\db\ColumnSchema) 
 
     [$column] (array) 
 
@@ -341,7 +431,7 @@ the sequence object
 >
  findConstraints($table)
 <
-(void)
+return (void)
 
     [$table] (\yii\db\TableSchema) 
 
@@ -350,7 +440,7 @@ the sequence object
 >
  extractColumnType($column, $dbType, $precision, $scale, $length)
 <
-(void)
+return (void)
 
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) DB type
@@ -366,7 +456,7 @@ the sequence object
 >
  extractColumnSize($column, $dbType, $precision, $scale, $length)
 <
-(void)
+return (void)
 
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) The column's DB type

@@ -44,11 +44,12 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/web/IdentityInterface::findIdentity*			public
 >
  findIdentity($id)
 <
-(\yii\web\IdentityInterface) The identity object that matches the given ID.
+return (\yii\web\IdentityInterface) The identity object that matches the given ID.
 Null should be returned if such an identity cannot be found or the identity is
 not in an active state (disabled, deleted, etc.)
 
@@ -59,7 +60,7 @@ not in an active state (disabled, deleted, etc.)
 >
  findIdentityByAccessToken($token, $type='null')
 <
-(\yii\web\IdentityInterface) The identity object that matches the given token.
+return (\yii\web\IdentityInterface) The identity object that matches the given token.
 Null should be returned if such an identity cannot be found or the identity is
 not in an active state (disabled, deleted, etc.)
 
@@ -73,7 +74,7 @@ not in an active state (disabled, deleted, etc.)
 >
  getId()
 <
-(string|integer) An ID that uniquely identifies a user identity.
+return (string|integer) An ID that uniquely identifies a user identity.
 
 
 
@@ -81,7 +82,7 @@ not in an active state (disabled, deleted, etc.)
 >
  getAuthKey()
 <
-(string) A key that is used to check the validity of a given identity ID.
+return (string) A key that is used to check the validity of a given identity ID.
 
  The key should be unique for each individual user, and should be persistent
  so that it can be used to check the validity of the user identity.
@@ -96,9 +97,10 @@ not in an active state (disabled, deleted, etc.)
 >
  validateAuthKey($authKey)
 <
-(boolean) Whether the given auth key is valid.
+return (boolean) Whether the given auth key is valid.
 
  This is required if 'User::enableAutoLogin' is enabled.
+
     [$authKey] (string) The given auth key
 
 

@@ -6,9 +6,9 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/db/ActiveRecord|
-|yii/sphinx/ActiveRecord|
 |yii/elasticsearch/ActiveRecord|
 |yii/redis/ActiveRecord|
+|yii/sphinx/ActiveRecord|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -20,48 +20,62 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/db/BaseActiveRecord::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $validators				*yii/db/BaseActiveRecord::$validators*
+
  See |yii/base/Model::$validators|
 
 $activeValidators			*yii/db/BaseActiveRecord::$activeValidators*
+
  See |yii/base/Model::$activeValidators|
 
 $errors					*yii/db/BaseActiveRecord::$errors*
+
  See |yii/base/Model::$errors|
 
 $firstErrors				*yii/db/BaseActiveRecord::$firstErrors*
+
  See |yii/base/Model::$firstErrors|
 
 $attributes				*yii/db/BaseActiveRecord::$attributes*
+
  See |yii/base/Model::$attributes|
 
 $scenario				*yii/db/BaseActiveRecord::$scenario*
+
  See |yii/base/Model::$scenario|
 
 $iterator				*yii/db/BaseActiveRecord::$iterator*
+
  See |yii/base/Model::$iterator|
 
 $relatedRecords				*yii/db/BaseActiveRecord::$relatedRecords*
+
  (array) An array of related records indexed by relation names.
 
 $oldAttributes				*yii/db/BaseActiveRecord::$oldAttributes*
+
  (array) The old attribute values (name-value pairs)
 
 $dirtyAttributes			*yii/db/BaseActiveRecord::$dirtyAttributes*
+
  (array) The changed attribute values (name-value pairs)
 
 $isNewRecord				*yii/db/BaseActiveRecord::$isNewRecord*
+
  (boolean) Whether the record is new and should be inserted when calling
  'save()'.
 
 $primaryKey				*yii/db/BaseActiveRecord::$primaryKey*
+
  (mixed) The primary key value. An array (column name => column value) is
  returned if the primary key is composite or '$asArray' is true. A string is
  returned otherwise (null will be returned if the key value is null).
 
 $oldPrimaryKey				*yii/db/BaseActiveRecord::$oldPrimaryKey*
+
  (mixed) The old primary key value. An array (column name => column value) is
  returned if the primary key is composite or '$asArray' is true. A string is
  returned otherwise (null will be returned if the key value is null).
@@ -71,11 +85,14 @@ $oldPrimaryKey				*yii/db/BaseActiveRecord::$oldPrimaryKey*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/BaseActiveRecord::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/db/BaseActiveRecord::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -83,7 +100,7 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event. If you override this
@@ -95,10 +112,11 @@ METHOD DETAILS
 >
  __get($name)
 <
-(mixed) Property value
+return (mixed) Property value
 
  This method is overridden so that attributes and related objects can be
  accessed like properties.
+
     [$name] (string) Property name
 
 
@@ -106,10 +124,11 @@ METHOD DETAILS
 >
  __set($name, $value)
 <
-(void)
+return (void)
 
  This method is overridden so that AR attributes can be accessed like
  properties.
+
     [$name] (string) Property name
     [$value] (mixed) Property value
 
@@ -118,10 +137,11 @@ METHOD DETAILS
 >
  __isset($name)
 <
-(boolean) Whether the property value is null
+return (boolean) Whether the property value is null
 
  This method overrides the parent implementation by checking if the named
  attribute is null or not.
+
     [$name] (string) The property name or the event name
 
 
@@ -129,82 +149,101 @@ METHOD DETAILS
 >
  __unset($name)
 <
-(void)
+return (void)
 
  This method overrides the parent implementation by clearing the specified
  attribute value.
+
     [$name] (string) The property name or the event name
 
 
 *yii/db/BaseActiveRecord::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/db/BaseActiveRecord::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/db/BaseActiveRecord::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/db/BaseActiveRecord::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/db/BaseActiveRecord::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/db/BaseActiveRecord::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/db/BaseActiveRecord::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/db/BaseActiveRecord::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/db/BaseActiveRecord::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/db/BaseActiveRecord::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/db/BaseActiveRecord::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/db/BaseActiveRecord::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/db/BaseActiveRecord::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/db/BaseActiveRecord::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/db/BaseActiveRecord::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/db/BaseActiveRecord::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/db/BaseActiveRecord::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/db/BaseActiveRecord::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -212,7 +251,9 @@ METHOD DETAILS
 >
  fields()
 <
-(array) The list of field names or field definitions.
+return (array) The list of field names or field definitions.
+
+
 
  A field is a named element in the returned array by 'toArray()'.
 
@@ -255,13 +296,18 @@ METHOD DETAILS
  The default implementation of this method returns 'attributes()' indexed by
  the same attribute names.
 
+ The default implementation returns the names of the columns whose values have
+ been populated into this record.
+
 
 *yii/db/BaseActiveRecord::extraFields*			public
 >
  extraFields()
 <
-(array) The list of expandable field names or field definitions. Please refer
+return (array) The list of expandable field names or field definitions. Please refer
 to 'fields()' on the format of the return value.
+
+
 
  This method is similar to 'fields()' except that the list of fields returned
  by this method are not returned by default by 'toArray()'. Only when field
@@ -273,72 +319,92 @@ to 'fields()' on the format of the return value.
  You may override this method to return a list of expandable fields based on
  some context information (e.g. the current application user).
 
+ The default implementation returns the names of the relations that have been
+ populated into this record.
+
 
 *yii/db/BaseActiveRecord::toArray*			public
+
  See |yii/base/ArrayableTrait::toArray|
 
 
 *yii/db/BaseActiveRecord::resolveFields*			protected
+
  See |yii/base/ArrayableTrait::resolveFields|
 
 
 *yii/db/BaseActiveRecord::rules*				public
+
  See |yii/base/Model::rules|
 
 
 *yii/db/BaseActiveRecord::scenarios*			public
+
  See |yii/base/Model::scenarios|
 
 
 *yii/db/BaseActiveRecord::formName*			public
+
  See |yii/base/Model::formName|
 
 
 *yii/db/BaseActiveRecord::attributes*			public
+
  See |yii/db/ActiveRecordInterface::attributes|
 
 
 *yii/db/BaseActiveRecord::attributeLabels*		public
+
  See |yii/base/Model::attributeLabels|
 
 
 *yii/db/BaseActiveRecord::attributeHints*			public
+
  See |yii/base/Model::attributeHints|
 
 
 *yii/db/BaseActiveRecord::validate*			public
+
  See |yii/base/Model::validate|
 
 
 *yii/db/BaseActiveRecord::beforeValidate*			public
+
  See |yii/base/Model::beforeValidate|
 
 
 *yii/db/BaseActiveRecord::afterValidate*			public
+
  See |yii/base/Model::afterValidate|
 
 
 *yii/db/BaseActiveRecord::getValidators*			public
+
  See |yii/base/Model::getValidators|
 
 
 *yii/db/BaseActiveRecord::getActiveValidators*		public
+
  See |yii/base/Model::getActiveValidators|
 
 
 *yii/db/BaseActiveRecord::createValidators*		public
+
  See |yii/base/Model::createValidators|
 
 
 *yii/db/BaseActiveRecord::isAttributeRequired*		public
+
  See |yii/base/Model::isAttributeRequired|
 
 
 *yii/db/BaseActiveRecord::isAttributeSafe*		public
+
  See |yii/base/Model::isAttributeSafe|
 
 
 *yii/db/BaseActiveRecord::isAttributeActive*		public
+
  See |yii/base/Model::isAttributeActive|
 
 
@@ -346,10 +412,11 @@ to 'fields()' on the format of the return value.
 >
  getAttributeLabel($attribute)
 <
-(string) The attribute label
+return (string) The attribute label
 
  If the attribute looks like 'relatedModel.attribute', then the attribute will
  be received from the related model.
+
     [$attribute] (string) The attribute name
 
 
@@ -357,86 +424,106 @@ to 'fields()' on the format of the return value.
 >
  getAttributeHint($attribute)
 <
-(string) The attribute hint
+return (string) The attribute hint
 
  If the attribute looks like 'relatedModel.attribute', then the attribute will
  be received from the related model.
+
     [$attribute] (string) The attribute name
 
 
 *yii/db/BaseActiveRecord::hasErrors*			public
+
  See |yii/base/Model::hasErrors|
 
 
 *yii/db/BaseActiveRecord::getErrors*			public
+
  See |yii/base/Model::getErrors|
 
 
 *yii/db/BaseActiveRecord::getFirstErrors*			public
+
  See |yii/base/Model::getFirstErrors|
 
 
 *yii/db/BaseActiveRecord::getFirstError*			public
+
  See |yii/base/Model::getFirstError|
 
 
 *yii/db/BaseActiveRecord::addError*			public
+
  See |yii/base/Model::addError|
 
 
 *yii/db/BaseActiveRecord::addErrors*			public
+
  See |yii/base/Model::addErrors|
 
 
 *yii/db/BaseActiveRecord::clearErrors*			public
+
  See |yii/base/Model::clearErrors|
 
 
 *yii/db/BaseActiveRecord::generateAttributeLabel*		public
+
  See |yii/base/Model::generateAttributeLabel|
 
 
 *yii/db/BaseActiveRecord::getAttributes*			public
+
  See |yii/base/Model::getAttributes|
 
 
 *yii/db/BaseActiveRecord::setAttributes*			public
+
  See |yii/base/Model::setAttributes|
 
 
 *yii/db/BaseActiveRecord::onUnsafeAttribute*		public
+
  See |yii/base/Model::onUnsafeAttribute|
 
 
 *yii/db/BaseActiveRecord::getScenario*			public
+
  See |yii/base/Model::getScenario|
 
 
 *yii/db/BaseActiveRecord::setScenario*			public
+
  See |yii/base/Model::setScenario|
 
 
 *yii/db/BaseActiveRecord::safeAttributes*			public
+
  See |yii/base/Model::safeAttributes|
 
 
 *yii/db/BaseActiveRecord::activeAttributes*		public
+
  See |yii/base/Model::activeAttributes|
 
 
 *yii/db/BaseActiveRecord::load*				public
+
  See |yii/base/Model::load|
 
 
 *yii/db/BaseActiveRecord::loadMultiple*			public
+
  See |yii/base/Model::loadMultiple|
 
 
 *yii/db/BaseActiveRecord::validateMultiple*		public
+
  See |yii/base/Model::validateMultiple|
 
 
 *yii/db/BaseActiveRecord::getIterator*			public
+
  See |yii/base/Model::getIterator|
 
 
@@ -444,17 +531,20 @@ to 'fields()' on the format of the return value.
 >
  offsetExists($offset)
 <
-(boolean) Whether there is an element at the specified offset.
+return (boolean) Whether there is an element at the specified offset.
 
  This method is required by the interface '\ArrayAccess'.
+
     [$offset] (mixed) The offset to check on
 
 
 *yii/db/BaseActiveRecord::offsetGet*			public
+
  See |yii/base/Model::offsetGet|
 
 
 *yii/db/BaseActiveRecord::offsetSet*			public
+
  See |yii/base/Model::offsetSet|
 
 
@@ -462,10 +552,11 @@ to 'fields()' on the format of the return value.
 >
  offsetUnset($offset)
 <
-(void)
+return (void)
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'unset($model[$offset])'.
+
     [$offset] (mixed) The offset to unset element
 
 
@@ -473,8 +564,10 @@ to 'fields()' on the format of the return value.
 >
  findOne($condition)
 <
-(static|null) ActiveRecord instance matching the condition, or 'null' if
+return (static|null) ActiveRecord instance matching the condition, or 'null' if
 nothing matches.
+
+
 
  The method accepts:
 
@@ -504,6 +597,7 @@ nothing matches.
    $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
 
 
+
     [$condition] (mixed) Primary key value or a set of column values
 
 
@@ -511,8 +605,10 @@ nothing matches.
 >
  findAll($condition)
 <
-(static[]) An array of ActiveRecord instances, or an empty array if nothing
+return (static[]) An array of ActiveRecord instances, or an empty array if nothing
 matches.
+
+
 
  The method accepts:
 
@@ -552,6 +648,7 @@ matches.
    $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
+
     [$condition] (mixed) Primary key value or a set of column values
 
 
@@ -559,10 +656,11 @@ matches.
 >
  findByCondition($condition)
 <
-(\yii\db\ActiveQueryInterface) The newly created
+return (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
  This method is internally called by 'findOne()' and 'findAll()'.
+
     [$condition] (mixed) Please refer to 'findOne()' for the explanation of
     this parameter
 
@@ -571,12 +669,13 @@ matches.
 >
  updateAll($attributes, $condition='\'\'')
 <
-(integer) The number of rows updated
+return (integer) The number of rows updated
 
  For example, to change the status to be 1 for all customers whose status is
  2:
 
    Customer::updateAll(['status' => 1], 'status = 2');
+
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
@@ -590,11 +689,12 @@ matches.
 >
  updateAllCounters($counters, $condition='\'\'')
 <
-(integer) The number of rows updated
+return (integer) The number of rows updated
 
  For example, to increment all customers' age by 1,
 
    Customer::updateAllCounters(['age' => 1]);
+
 
 
     [$counters] (array) The counters to be updated (attribute name =>
@@ -609,7 +709,7 @@ matches.
 >
  deleteAll($condition='\'\'', $params='[]')
 <
-(integer) The number of rows deleted
+return (integer) The number of rows deleted
 
  WARNING: If you do not specify any condition, this method will delete ALL
  rows in the table.
@@ -617,6 +717,7 @@ matches.
  For example, to delete all customers whose status is 3:
 
    Customer::deleteAll('status = 3');
+
 
 
     [$condition] (string|array) The conditions that will be put in the WHERE
@@ -629,7 +730,7 @@ matches.
 >
  optimisticLock()
 <
-(string) The column name that stores the lock version of a table row. If null
+return (string) The column name that stores the lock version of a table row. If null
 is returned (default implemented), optimistic locking will not be supported.
 
  Optimistic locking allows multiple users to access the same record for edits
@@ -657,7 +758,7 @@ is returned (default implemented), optimistic locking will not be supported.
 >
  hasOne($class, $link)
 <
-(\yii\db\ActiveQueryInterface) The relational query object.
+return (\yii\db\ActiveQueryInterface) The relational query object.
 
  The declaration is returned in terms of a relational 'ActiveQuery' instance
  through which the related record can be queried and retrieved back.
@@ -678,6 +779,7 @@ is returned (default implemented), optimistic locking will not be supported.
  refers to an attribute name in the current AR class.
 
  Call methods declared in 'ActiveQuery' to further customize the relation.
+
     [$class] (string) The class name of the related record
     [$link] (array) The primary-foreign key constraint. The keys of the array
     refer to the attributes of the record associated with the '$class' model,
@@ -689,7 +791,7 @@ is returned (default implemented), optimistic locking will not be supported.
 >
  hasMany($class, $link)
 <
-(\yii\db\ActiveQueryInterface) The relational query object.
+return (\yii\db\ActiveQueryInterface) The relational query object.
 
  The declaration is returned in terms of a relational 'ActiveQuery' instance
  through which the related record can be queried and retrieved back.
@@ -710,6 +812,7 @@ is returned (default implemented), optimistic locking will not be supported.
  refers to an attribute name in the current AR class.
 
  Call methods declared in 'ActiveQuery' to further customize the relation.
+
     [$class] (string) The class name of the related record
     [$link] (array) The primary-foreign key constraint. The keys of the array
     refer to the attributes of the record associated with the '$class' model,
@@ -721,9 +824,10 @@ is returned (default implemented), optimistic locking will not be supported.
 >
  populateRelation($name, $records)
 <
-(void)
+return (void)
 
  Note that this method does not check if the relation exists or not.
+
     [$name] (string) The relation name (case-sensitive)
     [$records] (\yii\db\ActiveRecordInterface|array|null) The related records
     to be populated into the relation.
@@ -733,7 +837,7 @@ is returned (default implemented), optimistic locking will not be supported.
 >
  isRelationPopulated($name)
 <
-(boolean) Whether relation has been populated with records.
+return (boolean) Whether relation has been populated with records.
 
     [$name] (string) The relation name (case-sensitive)
 
@@ -742,7 +846,7 @@ is returned (default implemented), optimistic locking will not be supported.
 >
  getRelatedRecords()
 <
-(array) An array of related records indexed by relation names.
+return (array) An array of related records indexed by relation names.
 
 
 
@@ -750,7 +854,7 @@ is returned (default implemented), optimistic locking will not be supported.
 >
  hasAttribute($name)
 <
-(boolean) Whether the model has an attribute with the specified name.
+return (boolean) Whether the model has an attribute with the specified name.
 
     [$name] (string) The name of the attribute
 
@@ -759,11 +863,12 @@ is returned (default implemented), optimistic locking will not be supported.
 >
  getAttribute($name)
 <
-(mixed) The attribute value. Null if the attribute is not set or does not
+return (mixed) The attribute value. Null if the attribute is not set or does not
 exist.
 
  If this record is the result of a query and the attribute is not loaded, null
  will be returned.
+
     [$name] (string) The attribute name
 
 
@@ -771,7 +876,7 @@ exist.
 >
  setAttribute($name, $value)
 <
-(void)
+return (void)
 
     [$name] (string) The attribute name
     [$value] (mixed) The attribute value.
@@ -781,7 +886,7 @@ exist.
 >
  getOldAttributes()
 <
-(array) The old attribute values (name-value pairs)
+return (array) The old attribute values (name-value pairs)
 
 
 
@@ -789,9 +894,10 @@ exist.
 >
  setOldAttributes($values)
 <
-(void)
+return (void)
 
  All existing old attribute values will be discarded.
+
     [$values] (array|null) Old attribute values to be set. If set to 'null'
     this record is considered to be 'isNewRecord|new'.
 
@@ -800,11 +906,12 @@ exist.
 >
  getOldAttribute($name)
 <
-(mixed) The old attribute value. Null if the attribute is not loaded before or
+return (mixed) The old attribute value. Null if the attribute is not loaded before or
 does not exist.
 
  If this record is the result of a query and the attribute is not loaded, null
  will be returned.
+
     [$name] (string) The attribute name
 
 
@@ -812,7 +919,7 @@ does not exist.
 >
  setOldAttribute($name, $value)
 <
-(void)
+return (void)
 
     [$name] (string) The attribute name
     [$value] (mixed) The old attribute value.
@@ -822,10 +929,11 @@ does not exist.
 >
  markAttributeDirty($name)
 <
-(void)
+return (void)
 
  This method may be called to force updating a record when calling 'update()',
  even if there is no change being made to the record.
+
     [$name] (string) The attribute name
 
 
@@ -833,7 +941,7 @@ does not exist.
 >
  isAttributeChanged($name, $identical='true')
 <
-(boolean) Whether the attribute has been changed
+return (boolean) Whether the attribute has been changed
 
     [$name] (string) The name of the attribute.
     [$identical] (boolean) Whether the comparison of new and old value is made
@@ -845,10 +953,11 @@ does not exist.
 >
  getDirtyAttributes($names='null')
 <
-(array) The changed attribute values (name-value pairs)
+return (array) The changed attribute values (name-value pairs)
 
  The comparison of new and old values is made for identical values using
  '==='.
+
     [$names] (string[]|null) The names of the attributes whose values may be
     returned if they are changed recently. If null, 'attributes()' will be
     used.
@@ -858,7 +967,7 @@ does not exist.
 >
  save($runValidation='true', $attributeNames='null')
 <
-(boolean) Whether the saving succeeded (i.e. no validation errors occurred).
+return (boolean) Whether the saving succeeded (i.e. no validation errors occurred).
 
  This method will call 'insert()' when 'isNewRecord' is true, or 'update()'
  when 'isNewRecord' is false.
@@ -869,6 +978,7 @@ does not exist.
    $customer->name = $name;
    $customer->email = $email;
    $customer->save();
+
 
 
     [$runValidation] (boolean) Whether to perform validation (calling
@@ -884,7 +994,7 @@ does not exist.
 >
  update($runValidation='true', $attributeNames='null')
 <
-(integer|boolean) The number of rows affected, or false if validation fails or
+return (integer|boolean) The number of rows affected, or false if validation fails or
 'beforeSave()' stops the updating process.
 
  This method performs the following steps in order:
@@ -922,6 +1032,7 @@ does not exist.
    }
 
 
+
     [$runValidation] (boolean) Whether to perform validation (calling
     'validate()') before saving the record. Defaults to 'true'. If the
     validation fails, the record will not be saved to the database and this
@@ -935,7 +1046,7 @@ does not exist.
 >
  updateAttributes($attributes)
 <
-(integer) The number of rows affected.
+return (integer) The number of rows affected.
 
  This method is a shortcut to 'update()' when data validation is not needed
  and only a small set attributes need to be updated.
@@ -947,6 +1058,7 @@ does not exist.
 
  Note that this method will **not** perform data validation and will **not**
  trigger events.
+
     [$attributes] (array) The attributes (names or name-value pairs) to be
     updated
 
@@ -955,7 +1067,7 @@ does not exist.
 >
  updateInternal($attributes='null')
 <
-(integer) Number of rows updated
+return (integer) Number of rows updated
 
     [$attributes] (array) Attributes to update
 
@@ -964,7 +1076,7 @@ does not exist.
 >
  updateCounters($counters)
 <
-(boolean) Whether the saving is successful
+return (boolean) Whether the saving is successful
 
  Note that this method differs from 'updateAllCounters()' in that it only
  saves counters for the current AR object.
@@ -973,6 +1085,7 @@ does not exist.
 
    $post = Post::findOne($id);
    $post->updateCounters(['view_count' => 1]);
+
 
 
     [$counters] (array) The counters to be updated (attribute name =>
@@ -984,7 +1097,7 @@ does not exist.
 >
  delete()
 <
-(integer|false) The number of rows deleted, or false if the deletion is
+return (integer|false) The number of rows deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -1002,7 +1115,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  getIsNewRecord()
 <
-(boolean) Whether the record is new and should be inserted when calling
+return (boolean) Whether the record is new and should be inserted when calling
 'save()'.
 
 
@@ -1011,7 +1124,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  setIsNewRecord($value)
 <
-(void)
+return (void)
 
     [$value] (boolean) Whether the record is new and should be inserted when
     calling 'save()'.
@@ -1021,7 +1134,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  afterFind()
 <
-(void)
+return (void)
 
  The default implementation will trigger an 'EVENT_AFTER_FIND' event. When
  overriding this method, make sure you call the parent implementation to
@@ -1032,7 +1145,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  beforeSave($insert)
 <
-(boolean) Whether the insertion or updating should continue. If false, the
+return (boolean) Whether the insertion or updating should continue. If false, the
 insertion or updating will be cancelled.
 
  The default implementation will trigger an 'EVENT_BEFORE_INSERT' event when
@@ -1051,6 +1164,7 @@ insertion or updating will be cancelled.
    }
 
 
+
     [$insert] (boolean) Whether this method called while inserting a record.
     If false, it means the method is called while updating a record.
 
@@ -1059,12 +1173,13 @@ insertion or updating will be cancelled.
 >
  afterSave($insert, $changedAttributes)
 <
-(void)
+return (void)
 
  The default implementation will trigger an 'EVENT_AFTER_INSERT' event when
  '$insert' is true, or an 'EVENT_AFTER_UPDATE' event if '$insert' is false.
  The event class used is 'AfterSaveEvent'. When overriding this method, make
  sure you call the parent implementation so that the event is triggered.
+
     [$insert] (boolean) Whether this method called while inserting a record.
     If false, it means the method is called while updating a record.
     [$changedAttributes] (array) The old values of attributes that had changed
@@ -1079,7 +1194,7 @@ insertion or updating will be cancelled.
 >
  beforeDelete()
 <
-(boolean) Whether the record should be deleted. Defaults to true.
+return (boolean) Whether the record should be deleted. Defaults to true.
 
  The default implementation raises the 'EVENT_BEFORE_DELETE' event. When
  overriding this method, make sure you call the parent implementation like the
@@ -1102,7 +1217,7 @@ insertion or updating will be cancelled.
 >
  afterDelete()
 <
-(void)
+return (void)
 
  The default implementation raises the 'EVENT_AFTER_DELETE' event. You may
  override this method to do postprocessing after the record is deleted. Make
@@ -1113,22 +1228,36 @@ insertion or updating will be cancelled.
 >
  refresh()
 <
-(boolean) Whether the row still exists in the database. If true, the latest
+return (boolean) Whether the row still exists in the database. If true, the latest
 data will be populated to this active record. Otherwise, this record will
 remain unchanged.
 
+ If the refresh is successful, an 'EVENT_AFTER_REFRESH' event will be
+ triggered. This event is available since version 2.0.8.
+
+
+*yii/db/BaseActiveRecord::afterRefresh*			public
+>
+ afterRefresh()
+<
+return (void)
+
+ The default implementation will trigger an 'EVENT_AFTER_REFRESH' event. When
+ overriding this method, make sure you call the parent implementation to
+ ensure the event is triggered.
 
 
 *yii/db/BaseActiveRecord::equals*				public
 >
  equals($record)
 <
-(boolean) Whether the two active records refer to the same row in the same
+return (boolean) Whether the two active records refer to the same row in the same
 database table.
 
  The comparison is made by comparing the table names and the primary key
  values of the two active records. If one of the records 'isNewRecord|is new'
  they are also considered not equal.
+
     [$record] (\yii\db\ActiveRecordInterface) Record to compare to
 
 
@@ -1136,7 +1265,7 @@ database table.
 >
  getPrimaryKey($asArray='false')
 <
-(mixed) The primary key value. An array (column name => column value) is
+return (mixed) The primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
 
@@ -1150,7 +1279,7 @@ returned otherwise (null will be returned if the key value is null).
 >
  getOldPrimaryKey($asArray='false')
 <
-(mixed) The old primary key value. An array (column name => column value) is
+return (mixed) The old primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise (null will be returned if the key value is null).
 
@@ -1158,6 +1287,7 @@ returned otherwise (null will be returned if the key value is null).
  executing a find method (e.g. find(), findOne()). The value remains unchanged
  even if the primary key attribute is manually assigned with a different
  value.
+
     [$asArray] (boolean) Whether to return the primary key value as an array.
     If true, the return value will be an array with column name as key and
     column value as value. If this is false (default), a scalar value will be
@@ -1168,7 +1298,7 @@ returned otherwise (null will be returned if the key value is null).
 >
  populateRecord($record, $row)
 <
-(void)
+return (void)
 
  This is an internal method meant to be called to create active record objects
  after fetching data from the database. It is mainly used by 'ActiveQuery' to
@@ -1176,6 +1306,7 @@ returned otherwise (null will be returned if the key value is null).
 
  When calling this method manually you should call 'afterFind()' on the
  created record to trigger the 'EVENT_AFTER_FIND|afterFind Event'.
+
     [$record] (\yii\db\BaseActiveRecord) The record to be populated. In most
     cases this will be an instance created by 'instantiate()' beforehand.
     [$row] (array) Attribute values (name => value)
@@ -1185,7 +1316,7 @@ returned otherwise (null will be returned if the key value is null).
 >
  instantiate($row)
 <
-(static) The newly created active record
+return (static) The newly created active record
 
  This method is called together with 'populateRecord()' by 'ActiveQuery'. It
  is not meant to be used for creating new records directly.
@@ -1194,6 +1325,7 @@ returned otherwise (null will be returned if the key value is null).
  data to be populated into the record. For example, by creating a record based
  on the value of a column, you may implement the so-called single-table
  inheritance mapping.
+
     [$row] (array) Row data to be populated into the record.
 
 
@@ -1201,13 +1333,14 @@ returned otherwise (null will be returned if the key value is null).
 >
  getRelation($name, $throwException='true')
 <
-(\yii\db\ActiveQueryInterface|\yii\db\ActiveQuery) The relational query
+return (\yii\db\ActiveQueryInterface|\yii\db\ActiveQuery) The relational query
 object. If the relation does not exist and '$throwException' is false, null
 will be returned.
 
  A relation is defined by a getter method which returns an
  'ActiveQueryInterface' object. It can be declared in either the Active Record
  class itself or one of its behaviors.
+
     [$name] (string) The relation name
     [$throwException] (boolean) Whether to throw exception if the relation
     does not exist.
@@ -1217,7 +1350,7 @@ will be returned.
 >
  link($name, $model, $extraColumns='[]')
 <
-(void)
+return (void)
 
  The relationship is established by setting the foreign key value(s) in one
  model to be the corresponding primary key value(s) in the other model. The
@@ -1229,6 +1362,7 @@ will be returned.
  models.
 
  Note that this method requires that the primary key value is not null.
+
     [$name] (string) The case sensitive name of the relationship.
     [$model] (\yii\db\ActiveRecordInterface) The model to be linked with the
     current one.
@@ -1242,11 +1376,12 @@ will be returned.
 >
  unlink($name, $model, $delete='false')
 <
-(void)
+return (void)
 
  The model with the foreign key of the relationship will be deleted if
  '$delete' is true. Otherwise, the foreign key will be set null and the model
  will be saved without validation.
+
     [$name] (string) The case sensitive name of the relationship.
     [$model] (\yii\db\ActiveRecordInterface) The model to be unlinked from the
     current one. You have to make sure that the model is really related with
@@ -1260,7 +1395,7 @@ will be returned.
 >
  unlinkAll($name, $delete='false')
 <
-(void)
+return (void)
 
  The model with the foreign key of the relationship will be deleted if
  '$delete' is true. Otherwise, the foreign key will be set null and the model
@@ -1268,6 +1403,7 @@ will be returned.
 
  Note that to destroy the relationship without removing records make sure your
  keys can be set to null
+
     [$name] (string) The case sensitive name of the relationship.
     [$delete] (boolean) Whether to delete the model that contains the foreign
     key.
@@ -1277,25 +1413,29 @@ will be returned.
 >
  isPrimaryKey($keys)
 <
-(boolean) Whether the given set of attributes represents the primary key for
+return (boolean) Whether the given set of attributes represents the primary key for
 this model
 
     [$keys] (array) The set of attributes to check
 
 
 *yii/db/BaseActiveRecord::primaryKey*			public
+
  See |yii/db/ActiveRecordInterface::primaryKey|
 
 
 *yii/db/BaseActiveRecord::find*				public
+
  See |yii/db/ActiveRecordInterface::find|
 
 
 *yii/db/BaseActiveRecord::insert*				public
+
  See |yii/db/ActiveRecordInterface::insert|
 
 
 *yii/db/BaseActiveRecord::getDb*				public
+
  See |yii/db/ActiveRecordInterface::getDb|
 
 

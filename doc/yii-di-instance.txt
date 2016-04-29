@@ -45,6 +45,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $id					*yii/di/Instance::$id*
+
  (string) The component ID, class name, interface name or alias name
 
 
@@ -52,11 +53,12 @@ $id					*yii/di/Instance::$id*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/di/Instance::__construct*				protected
 >
  __construct($id)
 <
-(void)
+return (void)
 
     [$id] (string) The component ID
 
@@ -65,7 +67,7 @@ METHOD DETAILS
 >
  of($id)
 <
-(\yii\di\Instance) The new Instance object.
+return (\yii\di\Instance) The new Instance object.
 
     [$id] (string) The component ID
 
@@ -74,7 +76,7 @@ METHOD DETAILS
 >
  ensure($reference, $type='null', $container='null')
 <
-(object) The object referenced by the Instance, or '$reference' itself if it
+return (object) The object referenced by the Instance, or '$reference' itself if it
 is an object.
 
  The reference may be specified as a string or an Instance object. If the
@@ -95,6 +97,7 @@ is an object.
  Connection::className());
 
 
+
     [$reference] (object|string|array|static) An object or a reference to the
     desired object. You may specify a reference in terms of a component ID or
     an Instance object. Starting from version 2.0.2, you may also pass in a
@@ -110,7 +113,7 @@ is an object.
 >
  get($container='null')
 <
-(object) The actual object referenced by this Instance object.
+return (object) The actual object referenced by this Instance object.
 
     [$container] (\yii\di\ServiceLocator|\yii\di\Container) The container used
     to locate the referenced object. If null, the method will first try

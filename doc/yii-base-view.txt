@@ -17,13 +17,16 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $context				*yii/base/View::$context*
+
  (\yii\base\ViewContextInterface) The context under which the 'renderFile()'
  method is being invoked.
 
 $params					*yii/base/View::$params*
+
  (mixed) Custom parameters that are shared among view templates.
 
 $renderers				*yii/base/View::$renderers*
+
  (array) A list of available renderers indexed by their corresponding
  supported file extensions. Each renderer may be a view renderer object or the
  configuration for creating the renderer object. For example, the following
@@ -38,33 +41,40 @@ $renderers				*yii/base/View::$renderers*
  treated as a normal PHP and rendered via 'renderPhpFile()'.
 
 $defaultExtension			*yii/base/View::$defaultExtension*
+
  (string) The default view file extension. This will be appended to view file
  names if they don't have file extensions.
 
 $theme					*yii/base/View::$theme*
+
  (\yii\base\Theme|array|string) The theme object or the configuration for
  creating the theme object. If not set, it means theming is not enabled.
 
 $blocks					*yii/base/View::$blocks*
+
  (array) A list of named output blocks. The keys are the block names and the
  values are the corresponding block content. You can call 'beginBlock()' and
  'endBlock()' to capture small fragments of a view. They can be later accessed
  somewhere else through this property.
 
 $cacheStack				*yii/base/View::$cacheStack*
+
  (array) A list of currently active fragment cache widgets. This property is
  used internally to implement the content caching feature. Do not modify it
  directly.
 
 $dynamicPlaceholders			*yii/base/View::$dynamicPlaceholders*
+
  (array) A list of placeholders for embedding dynamic contents. This property
  is used internally to implement the content caching feature. Do not modify it
  directly.
 
 $behaviors				*yii/base/View::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $viewFile				*yii/base/View::$viewFile*
+
  (string|boolean) The view file currently being rendered. False if no view
  file is being rendered.
 
@@ -73,11 +83,14 @@ $viewFile				*yii/base/View::$viewFile*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/base/View::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/base/View::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -85,95 +98,117 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
 
 
 *yii/base/View::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/base/View::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/base/View::__isset*					public
+
  See |yii/base/Component::__isset|
 
 
 *yii/base/View::__unset*					public
+
  See |yii/base/Component::__unset|
 
 
 *yii/base/View::__call*					public
+
  See |yii/base/Component::__call|
 
 
 *yii/base/View::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/base/View::canGetProperty*				public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/base/View::canSetProperty*				public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/base/View::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/base/View::__clone*					public
+
  See |yii/base/Component::__clone|
 
 
 *yii/base/View::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/base/View::hasEventHandlers*				public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/base/View::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/base/View::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/base/View::trigger*					public
+
  See |yii/base/Component::trigger|
 
 
 *yii/base/View::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/base/View::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/base/View::attachBehavior*				public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/base/View::attachBehaviors*				public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/base/View::detachBehavior*				public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/base/View::detachBehaviors*				public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/base/View::ensureBehaviors*				public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -181,7 +216,7 @@ METHOD DETAILS
 >
  render($view, $params='[]', $context='null')
 <
-(string) The rendering result
+return (string) The rendering result
 
  The view to be rendered can be specified in one of the following formats:
 
@@ -200,6 +235,7 @@ METHOD DETAILS
  '$context' is not given, it will be looked for under the directory containing
  the view currently   being rendered (i.e., this happens when rendering a view
  within another view).
+
     [$view] (string) The view name.
     [$params] (array) The parameters (name-value pairs) that will be extracted
     and made available in the view file.
@@ -213,7 +249,7 @@ METHOD DETAILS
 >
  findViewFile($view, $context='null')
 <
-(string) The view file path. Note that the file may not exist.
+return (string) The view file path. Note that the file may not exist.
 
     [$view] (string) The view name or the path alias of the view file. Please
     refer to 'render()' on how to specify this parameter.
@@ -227,7 +263,7 @@ METHOD DETAILS
 >
  renderFile($viewFile, $params='[]', $context='null')
 <
-(string) The rendering result
+return (string) The rendering result
 
  If 'theme' is enabled (not null), it will try to render the themed version of
  the view file as long as it is available.
@@ -237,6 +273,7 @@ METHOD DETAILS
  If 'renderers|renderer' is enabled (not null), the method will use it to
  render the view file. Otherwise, it will simply include the view file as a
  normal PHP file, capture its output and return it as a string.
+
     [$viewFile] (string) The view file. This can be either an absolute file
     path or an alias of it.
     [$params] (array) The parameters (name-value pairs) that will be extracted
@@ -249,7 +286,7 @@ METHOD DETAILS
 >
  getViewFile()
 <
-(string|boolean) The view file currently being rendered. False if no view file
+return (string|boolean) The view file currently being rendered. False if no view file
 is being rendered.
 
 
@@ -258,10 +295,11 @@ is being rendered.
 >
  beforeRender($viewFile, $params)
 <
-(boolean) Whether to continue rendering the view file.
+return (boolean) Whether to continue rendering the view file.
 
  The default implementation will trigger the 'EVENT_BEFORE_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
+
     [$viewFile] (string) The view file to be rendered.
     [$params] (array) The parameter array passed to the 'render()' method.
 
@@ -270,10 +308,11 @@ is being rendered.
 >
  afterRender($viewFile, $params, $output)
 <
-(void)
+return (void)
 
  The default implementation will trigger the 'EVENT_AFTER_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
+
     [$viewFile] (string) The view file being rendered.
     [$params] (array) The parameter array passed to the 'render()' method.
     [$output] (string) The rendering result of the view file. Updates to this
@@ -284,7 +323,7 @@ is being rendered.
 >
  renderPhpFile($_file_, $_params_='[]')
 <
-(string) The rendering result
+return (string) The rendering result
 
  This method treats the view file as a PHP script and includes the file. It
  extracts the given parameters and makes them available in the view file. The
@@ -292,6 +331,7 @@ is being rendered.
  string.
 
  This method should mainly be called by view renderer or 'renderFile()'.
+
     [$_file_] (string) The view file.
     [$_params_] (array) The parameters (name-value pairs) that will be
     extracted and made available in the view file.
@@ -301,13 +341,14 @@ is being rendered.
 >
  renderDynamic($statements)
 <
-(string) The placeholder of the dynamic content, or the dynamic content if
+return (string) The placeholder of the dynamic content, or the dynamic content if
 there is no active content cache currently.
 
  This method is mainly used together with content caching (fragment caching
  and page caching) when some portions of the content (called *dynamic
  content*) should not be cached. The dynamic content must be returned by some
  PHP statements.
+
     [$statements] (string) The PHP statements for generating the dynamic
     content.
 
@@ -316,9 +357,10 @@ there is no active content cache currently.
 >
  addDynamicPlaceholder($placeholder, $statements)
 <
-(void)
+return (void)
 
  This method is internally used.
+
     [$placeholder] (string) The placeholder name
     [$statements] (string) The PHP statements for generating the dynamic
     content
@@ -328,9 +370,10 @@ there is no active content cache currently.
 >
  evaluateDynamicContent($statements)
 <
-(mixed) The return value of the PHP statements.
+return (mixed) The return value of the PHP statements.
 
  This method is mainly used internally to implement dynamic content feature.
+
     [$statements] (string) The PHP statements to be evaluated.
 
 
@@ -338,9 +381,10 @@ there is no active content cache currently.
 >
  beginBlock($id, $renderInPlace='false')
 <
-(\yii\widgets\Block) The Block widget instance
+return (\yii\widgets\Block) The Block widget instance
 
  This method is a shortcut to beginning 'Block'
+
     [$id] (string) The block ID.
     [$renderInPlace] (boolean) Whether to render the block content in place.
     Defaults to false, meaning the captured block will not be displayed.
@@ -350,7 +394,7 @@ there is no active content cache currently.
 >
  endBlock()
 <
-(void)
+return (void)
 
 
 
@@ -358,7 +402,7 @@ there is no active content cache currently.
 >
  beginContent($viewFile, $params='[]')
 <
-(\yii\widgets\ContentDecorator) The ContentDecorator widget instance
+return (\yii\widgets\ContentDecorator) The ContentDecorator widget instance
 
  This method can be used to implement nested layout. For example, a layout can
  be embedded in another layout file specified as '@app/views/layouts/base.php'
@@ -367,6 +411,7 @@ there is no active content cache currently.
    <?php $this->beginContent('@app/views/layouts/base.php'); ?>
    //...layout content here...
    <?php $this->endContent(); ?>
+
 
 
     [$viewFile] (string) The view file that will be used to decorate the
@@ -380,7 +425,7 @@ there is no active content cache currently.
 >
  endContent()
 <
-(void)
+return (void)
 
 
 
@@ -388,7 +433,7 @@ there is no active content cache currently.
 >
  beginCache($id, $properties='[]')
 <
-(boolean) Whether you should generate the content for caching. False if the
+return (boolean) Whether you should generate the content for caching. False if the
 cached version is available.
 
  This method will display cached content if it is available. If not, it will
@@ -401,6 +446,7 @@ cached version is available.
    }
 
 
+
     [$id] (string) A unique ID identifying the fragment to be cached.
     [$properties] (array) Initial property values for 'FragmentCache'
 
@@ -409,7 +455,7 @@ cached version is available.
 >
  endCache()
 <
-(void)
+return (void)
 
 
 
@@ -417,7 +463,7 @@ cached version is available.
 >
  beginPage()
 <
-(void)
+return (void)
 
 
 
@@ -425,7 +471,7 @@ cached version is available.
 >
  endPage()
 <
-(void)
+return (void)
 
 
 

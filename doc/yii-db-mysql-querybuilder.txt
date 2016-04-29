@@ -7,16 +7,20 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/mysql/QueryBuilder::$db*
+
  See |yii/db/QueryBuilder::$db|
 
 $separator				*yii/db/mysql/QueryBuilder::$separator*
+
  See |yii/db/QueryBuilder::$separator|
 
 $typeMap				*yii/db/mysql/QueryBuilder::$typeMap*
+
  (array) Mapping from abstract column types (keys) to physical column types
  (values).
 
 $conditionBuilders			*yii/db/mysql/QueryBuilder::$conditionBuilders*
+
  See |yii/db/QueryBuilder::$conditionBuilders|
 
 
@@ -24,55 +28,69 @@ $conditionBuilders			*yii/db/mysql/QueryBuilder::$conditionBuilders*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/mysql/QueryBuilder::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/db/mysql/QueryBuilder::__construct*			public
- See |yii/db/QueryBuilder::__construct|
+
+ See |yii/base/Object::__construct|
 
 
 *yii/db/mysql/QueryBuilder::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/db/mysql/QueryBuilder::__get*			public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/mysql/QueryBuilder::__set*			public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/mysql/QueryBuilder::__isset*			public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/mysql/QueryBuilder::__unset*			public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/mysql/QueryBuilder::__call*			public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/mysql/QueryBuilder::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/mysql/QueryBuilder::canGetProperty*		public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/mysql/QueryBuilder::canSetProperty*		public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/mysql/QueryBuilder::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
 *yii/db/mysql/QueryBuilder::build*			public
+
  See |yii/db/QueryBuilder::build|
 
 
@@ -80,7 +98,9 @@ METHOD DETAILS
 >
  insert($table, $columns, $params)
 <
-(string) The INSERT SQL
+return (string) The INSERT SQL
+
+
 
  For example,
 
@@ -90,6 +110,9 @@ METHOD DETAILS
    ], $params);
 
  The method will properly escape the table and column names.
+
+
+
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
     table.
@@ -98,30 +121,37 @@ METHOD DETAILS
 
 
 *yii/db/mysql/QueryBuilder::batchInsert*			public
+
  See |yii/db/QueryBuilder::batchInsert|
 
 
 *yii/db/mysql/QueryBuilder::update*			public
+
  See |yii/db/QueryBuilder::update|
 
 
 *yii/db/mysql/QueryBuilder::delete*			public
+
  See |yii/db/QueryBuilder::delete|
 
 
 *yii/db/mysql/QueryBuilder::createTable*			public
+
  See |yii/db/QueryBuilder::createTable|
 
 
 *yii/db/mysql/QueryBuilder::renameTable*			public
+
  See |yii/db/QueryBuilder::renameTable|
 
 
 *yii/db/mysql/QueryBuilder::dropTable*			public
+
  See |yii/db/QueryBuilder::dropTable|
 
 
 *yii/db/mysql/QueryBuilder::addPrimaryKey*		public
+
  See |yii/db/QueryBuilder::addPrimaryKey|
 
 
@@ -129,7 +159,7 @@ METHOD DETAILS
 >
  dropPrimaryKey($name, $table)
 <
-(string) The SQL statement for removing a primary key constraint from an
+return (string) The SQL statement for removing a primary key constraint from an
 existing table.
 
     [$name] (string) The name of the primary key constraint to be removed.
@@ -138,14 +168,17 @@ existing table.
 
 
 *yii/db/mysql/QueryBuilder::truncateTable*		public
+
  See |yii/db/QueryBuilder::truncateTable|
 
 
 *yii/db/mysql/QueryBuilder::addColumn*			public
+
  See |yii/db/QueryBuilder::addColumn|
 
 
 *yii/db/mysql/QueryBuilder::dropColumn*			public
+
  See |yii/db/QueryBuilder::dropColumn|
 
 
@@ -153,7 +186,7 @@ existing table.
 >
  renameColumn($table, $oldName, $newName)
 <
-(string) The SQL statement for renaming a DB column.
+return (string) The SQL statement for renaming a DB column.
 
     [$table] (string) The table whose column is to be renamed. The name will
     be properly quoted by the method.
@@ -164,10 +197,12 @@ existing table.
 
 
 *yii/db/mysql/QueryBuilder::alterColumn*			public
+
  See |yii/db/QueryBuilder::alterColumn|
 
 
 *yii/db/mysql/QueryBuilder::addForeignKey*		public
+
  See |yii/db/QueryBuilder::addForeignKey|
 
 
@@ -175,7 +210,7 @@ existing table.
 >
  dropForeignKey($name, $table)
 <
-(string) The SQL statement for dropping a foreign key constraint.
+return (string) The SQL statement for dropping a foreign key constraint.
 
     [$name] (string) The name of the foreign key constraint to be dropped. The
     name will be properly quoted by the method.
@@ -187,7 +222,13 @@ existing table.
 >
  createIndex($name, $table, $columns, $unique='false')
 <
-(string) The SQL statement for creating a new index.
+return (string) The SQL statement for creating a new index.
+
+
+
+
+
+
 
     [$name] (string) The name of the index. The name will be properly quoted
     by the method.
@@ -201,6 +242,7 @@ existing table.
 
 
 *yii/db/mysql/QueryBuilder::dropIndex*			public
+
  See |yii/db/QueryBuilder::dropIndex|
 
 
@@ -208,10 +250,11 @@ existing table.
 >
  resetSequence($tableName, $value='null')
 <
-(string) The SQL statement for resetting sequence
+return (string) The SQL statement for resetting sequence
 
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
+
     [$tableName] (string) The name of the table whose primary key sequence
     will be reset
     [$value] (mixed) The value for the primary key of the next new row
@@ -223,46 +266,127 @@ existing table.
 >
  checkIntegrity($check='true', $schema='''', $table='''')
 <
-(string) The SQL statement for checking integrity
+return (string) The SQL statement for checking integrity
 
     [$check] (boolean) Whether to turn on or off the integrity check.
     [$schema] (string) The schema of the tables. Meaningless for MySQL.
     [$table] (string) The table name. Meaningless for MySQL.
 
 
+*yii/db/mysql/QueryBuilder::addCommentOnColumn*		public
+>
+ addCommentOnColumn($table, $column, $comment)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$column] (string) The name of the column to be commented. The column name
+    will be properly quoted by the method.
+    [$comment] (string) The text of the comment to be added. The comment will
+    be properly quoted by the method.
+
+
+*yii/db/mysql/QueryBuilder::addCommentOnTable*		public
+>
+ addCommentOnTable($table, $comment)
+<
+return (string) The SQL statement for adding comment on table
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$comment] (string) The text of the comment to be added. The comment will
+    be properly quoted by the method.
+
+
+*yii/db/mysql/QueryBuilder::dropCommentFromColumn*	public
+>
+ dropCommentFromColumn($table, $column)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$column] (string) The name of the column to be commented. The column name
+    will be properly quoted by the method.
+
+
+*yii/db/mysql/QueryBuilder::dropCommentFromTable*		public
+>
+ dropCommentFromTable($table)
+<
+return (string) The SQL statement for adding comment on column
+
+
+
+
+
+
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+
+
 *yii/db/mysql/QueryBuilder::getColumnType*		public
+
  See |yii/db/QueryBuilder::getColumnType|
 
 
 *yii/db/mysql/QueryBuilder::buildSelect*			public
+
  See |yii/db/QueryBuilder::buildSelect|
 
 
 *yii/db/mysql/QueryBuilder::buildFrom*			public
+
  See |yii/db/QueryBuilder::buildFrom|
 
 
 *yii/db/mysql/QueryBuilder::buildJoin*			public
+
  See |yii/db/QueryBuilder::buildJoin|
 
 
 *yii/db/mysql/QueryBuilder::buildWhere*			public
+
  See |yii/db/QueryBuilder::buildWhere|
 
 
 *yii/db/mysql/QueryBuilder::buildGroupBy*			public
+
  See |yii/db/QueryBuilder::buildGroupBy|
 
 
 *yii/db/mysql/QueryBuilder::buildHaving*			public
+
  See |yii/db/QueryBuilder::buildHaving|
 
 
 *yii/db/mysql/QueryBuilder::buildOrderByAndLimit*		public
+
  See |yii/db/QueryBuilder::buildOrderByAndLimit|
 
 
 *yii/db/mysql/QueryBuilder::buildOrderBy*			public
+
  See |yii/db/QueryBuilder::buildOrderBy|
 
 
@@ -270,70 +394,96 @@ existing table.
 >
  buildLimit($limit, $offset)
 <
-(string) The LIMIT and OFFSET clauses
+return (string) The LIMIT and OFFSET clauses
+
+
+
+
+
+
 
     [$limit] (integer) 
     [$offset] (integer) 
 
 
 *yii/db/mysql/QueryBuilder::hasLimit*			protected
+
  See |yii/db/QueryBuilder::hasLimit|
 
 
 *yii/db/mysql/QueryBuilder::hasOffset*			protected
+
  See |yii/db/QueryBuilder::hasOffset|
 
 
 *yii/db/mysql/QueryBuilder::buildUnion*			public
+
  See |yii/db/QueryBuilder::buildUnion|
 
 
 *yii/db/mysql/QueryBuilder::buildColumns*			public
+
  See |yii/db/QueryBuilder::buildColumns|
 
 
 *yii/db/mysql/QueryBuilder::buildCondition*		public
+
  See |yii/db/QueryBuilder::buildCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildHashCondition*		public
+
  See |yii/db/QueryBuilder::buildHashCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildAndCondition*		public
+
  See |yii/db/QueryBuilder::buildAndCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildNotCondition*		public
+
  See |yii/db/QueryBuilder::buildNotCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildBetweenCondition*	public
+
  See |yii/db/QueryBuilder::buildBetweenCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildInCondition*		public
+
  See |yii/db/QueryBuilder::buildInCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildSubqueryInCondition*	protected
+
  See |yii/db/QueryBuilder::buildSubqueryInCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildCompositeInCondition*	protected
+
  See |yii/db/QueryBuilder::buildCompositeInCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildLikeCondition*		public
+
  See |yii/db/QueryBuilder::buildLikeCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildExistsCondition*		public
+
  See |yii/db/QueryBuilder::buildExistsCondition|
 
 
 *yii/db/mysql/QueryBuilder::buildSimpleCondition*		public
+
  See |yii/db/QueryBuilder::buildSimpleCondition|
+
+
+*yii/db/mysql/QueryBuilder::selectExists*			public
+
+ See |yii/db/QueryBuilder::selectExists|
 
 
 

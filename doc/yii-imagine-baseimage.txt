@@ -17,6 +17,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $driver					*yii/imagine/BaseImage::$driver*
+
  (array|string) The driver to use. This can be either a single driver name or
  an array of driver names. If the latter, the first available driver will be
  used.
@@ -26,11 +27,12 @@ $driver					*yii/imagine/BaseImage::$driver*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/imagine/BaseImage::getImagine*			public
 >
  getImagine()
 <
-(\Imagine\Image\ImagineInterface) The 'Imagine' object
+return (\Imagine\Image\ImagineInterface) The 'Imagine' object
 
 
 
@@ -38,7 +40,7 @@ METHOD DETAILS
 >
  setImagine($imagine)
 <
-(void)
+return (void)
 
     [$imagine] (\Imagine\Image\ImagineInterface) The 'Imagine' object.
 
@@ -47,7 +49,7 @@ METHOD DETAILS
 >
  createImagine()
 <
-(\Imagine\Image\ImagineInterface) The new 'Imagine' object
+return (\Imagine\Image\ImagineInterface) The new 'Imagine' object
 
 
 
@@ -55,7 +57,7 @@ METHOD DETAILS
 >
  crop($filename, $width, $height, $start='[0,0]')
 <
-(\Imagine\Image\ImageInterface) 
+return (\Imagine\Image\ImageInterface) 
 
  For example,
 
@@ -63,6 +65,7 @@ METHOD DETAILS
 
    $point = new \Imagine\Image\Point(5, 5);
    $obj->crop('path\to\image.jpg', 200, 200, $point);
+
 
 
     [$filename] (string) The image file path or path alias.
@@ -76,7 +79,7 @@ METHOD DETAILS
 >
  thumbnail($filename, $width, $height, $mode='\Imagine\Image\ManipulatorInterface::THUMBNAIL_OUTBOUND')
 <
-(\Imagine\Image\ImageInterface) 
+return (\Imagine\Image\ImageInterface) 
 
     [$filename] (string) The image file path or path alias.
     [$width] (integer) The width in pixels to create the thumbnail
@@ -88,7 +91,7 @@ METHOD DETAILS
 >
  watermark($filename, $watermarkFilename, $start='[0,0]')
 <
-(\Imagine\Image\ImageInterface) 
+return (\Imagine\Image\ImageInterface) 
 
     [$filename] (string) The image file path or path alias.
     [$watermarkFilename] (string) The file path or path alias of the watermark
@@ -101,7 +104,7 @@ METHOD DETAILS
 >
  text($filename, $text, $fontFile, $start='[0,0]', $fontOptions='[]')
 <
-(\Imagine\Image\ImageInterface) 
+return (\Imagine\Image\ImageInterface) 
 
     [$filename] (string) The image file path or path alias.
     [$text] (string) The text to write to the image
@@ -121,7 +124,7 @@ METHOD DETAILS
 >
  frame($filename, $margin=20, $color=''666'', $alpha=100)
 <
-(\Imagine\Image\ImageInterface) 
+return (\Imagine\Image\ImageInterface) 
 
     [$filename] (string) The full path to the image file
     [$margin] (integer) The frame size to add around the image

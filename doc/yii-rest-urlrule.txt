@@ -52,16 +52,20 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $rules					*yii/rest/UrlRule::$rules*
+
  See |yii/web/CompositeUrlRule::$rules|
 
 $prefix					*yii/rest/UrlRule::$prefix*
+
  (string) The common prefix string shared by all patterns.
 
 $suffix					*yii/rest/UrlRule::$suffix*
+
  (string) The suffix that will be assigned to '\yii\web\UrlRule::suffix' for
  every generated rule.
 
 $controller				*yii/rest/UrlRule::$controller*
+
  (string|array) The controller ID (e.g. 'user', 'post-comment') that the rules
  in this composite rule are dealing with. It should be prefixed with the
  module ID if the controller is within a module (e.g. 'admin/user').
@@ -77,23 +81,28 @@ $controller				*yii/rest/UrlRule::$controller*
  controller. For example, '['user', 'post']'.
 
 $only					*yii/rest/UrlRule::$only*
+
  (array) List of acceptable actions. If not empty, only the actions within
  this array will have the corresponding URL rules created.
 
 $except					*yii/rest/UrlRule::$except*
+
  (array) List of actions that should be excluded. Any action found in this
  array will NOT have its URL rules created.
 
 $extraPatterns				*yii/rest/UrlRule::$extraPatterns*
+
  (array) Patterns for supporting extra actions in addition to those listed in
  'patterns'. The keys are the patterns and the values are the corresponding
  action IDs. These extra patterns will take precedence over 'patterns'.
 
 $tokens					*yii/rest/UrlRule::$tokens*
+
  (array) List of tokens that should be replaced for each pattern. The keys are
  the token names, and the values are the corresponding replacements.
 
 $patterns				*yii/rest/UrlRule::$patterns*
+
  (array) List of possible patterns and the corresponding actions for creating
  the URL rules. The keys are the patterns and the values are the corresponding
  actions. The format of patterns is 'Verbs Pattern', where 'Verbs' stands for
@@ -103,10 +112,12 @@ $patterns				*yii/rest/UrlRule::$patterns*
  'tokens'.
 
 $ruleConfig				*yii/rest/UrlRule::$ruleConfig*
+
  (array) The default configuration for creating each URL rule contained by
  this rule.
 
 $pluralize				*yii/rest/UrlRule::$pluralize*
+
  (boolean) Whether to automatically pluralize the URL names for controllers.
  If true, a controller ID will appear in plural form in URLs. For example,
  'user' controller will appear as 'users' in URLs.
@@ -116,11 +127,14 @@ $pluralize				*yii/rest/UrlRule::$pluralize*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/rest/UrlRule::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/rest/UrlRule::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
@@ -128,45 +142,58 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/rest/UrlRule::__get*					public
+
  See |yii/base/Object::__get|
 
 
 *yii/rest/UrlRule::__set*					public
+
  See |yii/base/Object::__set|
 
 
 *yii/rest/UrlRule::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/rest/UrlRule::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/rest/UrlRule::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/rest/UrlRule::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/rest/UrlRule::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/rest/UrlRule::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/rest/UrlRule::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -174,7 +201,12 @@ METHOD DETAILS
 >
  createRules()
 <
-(\yii\web\UrlRuleInterface[]) The URL rules
+return (\yii\web\UrlRuleInterface[]) The URL rules
+
+
+
+
+
 
 
 
@@ -182,9 +214,15 @@ METHOD DETAILS
 >
  parseRequest($manager, $request)
 <
-(array|boolean) The parsing result. The route and the parameters are returned
+return (array|boolean) The parsing result. The route and the parameters are returned
 as an array. If false, it means this rule cannot be used to parse this path
 info.
+
+
+
+
+
+
 
     [$manager] (\yii\web\UrlManager) The URL manager
     [$request] (\yii\web\Request) The request component
@@ -194,8 +232,14 @@ info.
 >
  createUrl($manager, $route, $params)
 <
-(string|boolean) The created URL, or false if this rule cannot be used for
+return (string|boolean) The created URL, or false if this rule cannot be used for
 creating this URL.
+
+
+
+
+
+
 
     [$manager] (\yii\web\UrlManager) The URL manager
     [$route] (string) The route. It should not have slashes at the beginning
@@ -207,7 +251,7 @@ creating this URL.
 >
  createRule($pattern, $prefix, $action)
 <
-(\yii\web\UrlRuleInterface) 
+return (\yii\web\UrlRuleInterface) 
 
     [$pattern] (string) 
     [$prefix] (string) 

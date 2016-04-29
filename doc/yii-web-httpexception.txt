@@ -5,18 +5,18 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/web/UnsupportedMediaTypeHttpException|
-|yii/web/GoneHttpException|
-|yii/web/ConflictHttpException|
-|yii/web/ServerErrorHttpException|
+|yii/web/MethodNotAllowedHttpException|
 |yii/web/BadRequestHttpException|
+|yii/web/NotAcceptableHttpException|
+|yii/web/TooManyRequestsHttpException|
+|yii/web/UnprocessableEntityHttpException|
+|yii/web/UnsupportedMediaTypeHttpException|
+|yii/web/ServerErrorHttpException|
+|yii/web/ForbiddenHttpException|
 |yii/web/NotFoundHttpException|
 |yii/web/UnauthorizedHttpException|
-|yii/web/TooManyRequestsHttpException|
-|yii/web/MethodNotAllowedHttpException|
-|yii/web/ForbiddenHttpException|
-|yii/web/NotAcceptableHttpException|
-|yii/web/UnprocessableEntityHttpException|
+|yii/web/GoneHttpException|
+|yii/web/ConflictHttpException|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -40,6 +40,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $statusCode				*yii/web/HttpException::$statusCode*
+
  (integer) HTTP status code, such as 403, 404, 500, etc.
 
 
@@ -47,11 +48,12 @@ $statusCode				*yii/web/HttpException::$statusCode*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/web/HttpException::getName*				public
 >
  getName()
 <
-(string) The user-friendly name of this exception
+return (string) The user-friendly name of this exception
 
 
 
@@ -59,7 +61,7 @@ METHOD DETAILS
 >
  __construct($status, $message='null', $code=0, $previous='null')
 <
-(void)
+return (void)
 
     [$status] (integer) HTTP status code, such as 404, 500, etc.
     [$message] (string) Error message

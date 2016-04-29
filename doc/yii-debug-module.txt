@@ -7,27 +7,56 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $params					*yii/debug/Module::$params*
+
  See |yii/base/Module::$params|
 
 $id					*yii/debug/Module::$id*
+
  See |yii/base/Module::$id|
 
 $module					*yii/debug/Module::$module*
+
  See |yii/base/Module::$module|
 
 $layout					*yii/debug/Module::$layout*
+
  See |yii/base/Module::$layout|
 
 $controllerMap				*yii/debug/Module::$controllerMap*
+
  See |yii/base/Module::$controllerMap|
 
 $controllerNamespace			*yii/debug/Module::$controllerNamespace*
- ()
+
+ (string) The namespace that controller classes are in. This namespace will be
+ used to load controller classes by prepending it to the controller class
+ name.
+
+ If not set, it will use the 'controllers' sub-namespace under the namespace
+ of this module. For example, if the namespace of this module is "foo\bar",
+ then the default controller namespace would be "foo\bar\controllers".
+
+ See also the [guide section on autoloading](guide:concept-autoloading) to
+ learn more about defining namespaces and how classes are loaded.
+
+ The namespace that controller classes are in. This namespace will be used to
+ load controller classes by prepending it to the controller class name.
+
+ If not set, it will use the 'controllers' sub-namespace under the namespace
+ of this module. For example, if the namespace of this module is "foo\bar",
+ then the default controller namespace would be "foo\bar\controllers".
+
+ See also the [guide section on autoloading](guide:concept-autoloading) to
+ learn more about defining namespaces and how classes are loaded.
+
+
 
 $defaultRoute				*yii/debug/Module::$defaultRoute*
+
  See |yii/base/Module::$defaultRoute|
 
 $allowedIPs				*yii/debug/Module::$allowedIPs*
+
  (array) The list of IPs that are allowed to access this module. Each array
  element represents a single IP filter which can be either an IP address or an
  address with wildcard (e.g. 192.168.0.*) to represent a network segment. The
@@ -35,60 +64,88 @@ $allowedIPs				*yii/debug/Module::$allowedIPs*
  accessed by localhost.
 
 $allowedHosts				*yii/debug/Module::$allowedHosts*
+
  (array) The list of hosts that are allowed to access this module. Each array
  element is a hostname that will be resolved to an IP address that is compared
  with the IP address of the user. A use case is to use a dynamic DNS (DDNS) to
  allow access. The default value is '[]'.
 
 $logTarget				*yii/debug/Module::$logTarget*
+
  (\yii\debug\LogTarget)
 
 $panels					*yii/debug/Module::$panels*
- (array) List of debug panels. The array keys are the panel IDs, and values
- are the corresponding panel class names or configuration arrays. This will be
- merged with 'corePanels()'. You may reconfigure a core panel via this
- property by using the same panel ID. You may also disable a core panel by
- setting it to be false in this property.
+
+ (array|\yii\debug\Panel[]) List of debug panels. The array keys are the panel
+ IDs, and values are the corresponding panel class names or configuration
+ arrays. This will be merged with 'corePanels()'. You may reconfigure a core
+ panel via this property by using the same panel ID. You may also disable a
+ core panel by setting it to be false in this property.
 
 $dataPath				*yii/debug/Module::$dataPath*
+
  (string) The directory storing the debugger data files. This can be specified
  using a path alias.
 
+$fileMode				*yii/debug/Module::$fileMode*
+
+ (integer) The permission to be set for newly created debugger data files.
+ This value will be used by PHP 'chmod()' function. No umask will be applied.
+ If not set, the permission will be determined by the current environment.
+
+$dirMode				*yii/debug/Module::$dirMode*
+
+ (integer) The permission to be set for newly created directories. This value
+ will be used by PHP 'chmod()' function. No umask will be applied. Defaults to
+ 0775, meaning the directory is read-writable by owner and group, but
+ read-only for other users.
+
 $historySize				*yii/debug/Module::$historySize*
+
  (integer) The maximum number of debug data files to keep. If there are more
  files generated, the oldest ones will be removed.
 
 $enableDebugLogs			*yii/debug/Module::$enableDebugLogs*
+
  (boolean) Whether to enable message logging for the requests about debug
  module actions. You normally do not want to keep these logs because they may
  distract you from the logs about your applications. You may want to enable
  the debug logs if you want to investigate how the debug module itself works.
 
 $behaviors				*yii/debug/Module::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $components				*yii/debug/Module::$components*
+
  See |yii/di/ServiceLocator::$components|
 
 $uniqueId				*yii/debug/Module::$uniqueId*
+
  See |yii/base/Module::$uniqueId|
 
 $basePath				*yii/debug/Module::$basePath*
+
  See |yii/base/Module::$basePath|
 
 $controllerPath				*yii/debug/Module::$controllerPath*
+
  See |yii/base/Module::$controllerPath|
 
 $viewPath				*yii/debug/Module::$viewPath*
+
  See |yii/base/Module::$viewPath|
 
 $layoutPath				*yii/debug/Module::$layoutPath*
+
  See |yii/base/Module::$layoutPath|
 
 $aliases				*yii/debug/Module::$aliases*
+
  See |yii/base/Module::$aliases|
 
 $modules				*yii/debug/Module::$modules*
+
  See |yii/base/Module::$modules|
 
 
@@ -96,11 +153,14 @@ $modules				*yii/debug/Module::$modules*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/debug/Module::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/debug/Module::__construct*				public
+
  See |yii/base/Module::__construct|
 
 
@@ -108,7 +168,9 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is called after the module is created and initialized with
  property values given in configuration. The default implementation will
@@ -118,191 +180,240 @@ METHOD DETAILS
  implementation.
 
 
+
+
 *yii/debug/Module::__get*					public
+
  See |yii/di/ServiceLocator::__get|
 
 
 *yii/debug/Module::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/debug/Module::__isset*				public
+
  See |yii/di/ServiceLocator::__isset|
 
 
 *yii/debug/Module::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/debug/Module::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/debug/Module::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/debug/Module::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/debug/Module::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/debug/Module::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/debug/Module::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/debug/Module::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/debug/Module::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/debug/Module::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/debug/Module::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/debug/Module::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/debug/Module::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/debug/Module::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/debug/Module::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/debug/Module::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/debug/Module::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/debug/Module::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/debug/Module::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/debug/Module::has*					public
+
  See |yii/di/ServiceLocator::has|
 
 
 *yii/debug/Module::get*					public
+
  See |yii/di/ServiceLocator::get|
 
 
 *yii/debug/Module::set*					public
+
  See |yii/di/ServiceLocator::set|
 
 
 *yii/debug/Module::clear*					public
+
  See |yii/di/ServiceLocator::clear|
 
 
 *yii/debug/Module::getComponents*				public
+
  See |yii/di/ServiceLocator::getComponents|
 
 
 *yii/debug/Module::setComponents*				public
+
  See |yii/di/ServiceLocator::setComponents|
 
 
 *yii/debug/Module::getInstance*				public
+
  See |yii/base/Module::getInstance|
 
 
 *yii/debug/Module::setInstance*				public
+
  See |yii/base/Module::setInstance|
 
 
 *yii/debug/Module::getUniqueId*				public
+
  See |yii/base/Module::getUniqueId|
 
 
 *yii/debug/Module::getBasePath*				public
+
  See |yii/base/Module::getBasePath|
 
 
 *yii/debug/Module::setBasePath*				public
+
  See |yii/base/Module::setBasePath|
 
 
 *yii/debug/Module::getControllerPath*			public
+
  See |yii/base/Module::getControllerPath|
 
 
 *yii/debug/Module::getViewPath*				public
+
  See |yii/base/Module::getViewPath|
 
 
 *yii/debug/Module::setViewPath*				public
+
  See |yii/base/Module::setViewPath|
 
 
 *yii/debug/Module::getLayoutPath*				public
+
  See |yii/base/Module::getLayoutPath|
 
 
 *yii/debug/Module::setLayoutPath*				public
+
  See |yii/base/Module::setLayoutPath|
 
 
 *yii/debug/Module::setAliases*				public
+
  See |yii/base/Module::setAliases|
 
 
 *yii/debug/Module::hasModule*				public
+
  See |yii/base/Module::hasModule|
 
 
 *yii/debug/Module::getModule*				public
+
  See |yii/base/Module::getModule|
 
 
 *yii/debug/Module::setModule*				public
+
  See |yii/base/Module::setModule|
 
 
 *yii/debug/Module::getModules*				public
+
  See |yii/base/Module::getModules|
 
 
 *yii/debug/Module::setModules*				public
+
  See |yii/base/Module::setModules|
 
 
 *yii/debug/Module::runAction*				public
+
  See |yii/base/Module::runAction|
 
 
 *yii/debug/Module::createController*			public
+
  See |yii/base/Module::createController|
 
 
 *yii/debug/Module::createControllerByID*			public
+
  See |yii/base/Module::createControllerByID|
 
 
@@ -310,7 +421,9 @@ METHOD DETAILS
 >
  beforeAction($action)
 <
-(boolean) Whether the action should continue to be executed.
+return (boolean) Whether the action should continue to be executed.
+
+
 
  The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
  the method will determine whether the action should continue to run.
@@ -333,10 +446,12 @@ METHOD DETAILS
    }
 
 
+
     [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/debug/Module::afterAction*				public
+
  See |yii/base/Module::afterAction|
 
 
@@ -344,7 +459,7 @@ METHOD DETAILS
 >
  getYiiLogo()
 <
-(string) Base64 representation of the image
+return (string) Base64 representation of the image
 
 
 
@@ -352,7 +467,7 @@ METHOD DETAILS
 >
  initPanels()
 <
-(void)
+return (void)
 
 
 
@@ -360,7 +475,13 @@ METHOD DETAILS
 >
  bootstrap($app)
 <
-(void)
+return (void)
+
+
+
+
+
+
 
     [$app] (\yii\base\Application) The application currently running
 
@@ -369,7 +490,7 @@ METHOD DETAILS
 >
  resetGlobalSettings()
 <
-(void)
+return (void)
 
 
 
@@ -377,7 +498,7 @@ METHOD DETAILS
 >
  renderToolbar($event)
 <
-(void)
+return (void)
 
     [$event] (\yii\base\Event) 
 
@@ -386,7 +507,7 @@ METHOD DETAILS
 >
  checkAccess()
 <
-(boolean) If access is granted
+return (boolean) If access is granted
 
 
 
@@ -394,7 +515,7 @@ METHOD DETAILS
 >
  corePanels()
 <
-(array) Default set of panels
+return (array) Default set of panels
 
 
 

@@ -79,7 +79,9 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/elasticsearch/ActiveQuery::className*		public
+
  See |yii/base/Object::className|
 
 
@@ -87,7 +89,7 @@ METHOD DETAILS
 >
  __construct($modelClass, $config='[]')
 <
-(void)
+return (void)
 
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
@@ -98,7 +100,7 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event. If you override this
@@ -107,146 +109,182 @@ METHOD DETAILS
 
 
 *yii/elasticsearch/ActiveQuery::__get*			public
+
  See |yii/base/Component::__get|
 
 
 *yii/elasticsearch/ActiveQuery::__set*			public
+
  See |yii/base/Component::__set|
 
 
 *yii/elasticsearch/ActiveQuery::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/elasticsearch/ActiveQuery::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/elasticsearch/ActiveQuery::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/elasticsearch/ActiveQuery::hasProperty*		public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/elasticsearch/ActiveQuery::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/elasticsearch/ActiveQuery::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/elasticsearch/ActiveQuery::hasMethod*		public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/elasticsearch/ActiveQuery::__clone*			public
+
  See |yii/db/ActiveRelationTrait::__clone|
 
 
 *yii/elasticsearch/ActiveQuery::behaviors*		public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/elasticsearch/ActiveQuery::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/elasticsearch/ActiveQuery::on*			public
+
  See |yii/base/Component::on|
 
 
 *yii/elasticsearch/ActiveQuery::off*			public
+
  See |yii/base/Component::off|
 
 
 *yii/elasticsearch/ActiveQuery::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/elasticsearch/ActiveQuery::getBehavior*		public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/elasticsearch/ActiveQuery::getBehaviors*		public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/elasticsearch/ActiveQuery::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/elasticsearch/ActiveQuery::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/elasticsearch/ActiveQuery::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/elasticsearch/ActiveQuery::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/elasticsearch/ActiveQuery::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/elasticsearch/ActiveQuery::indexBy*			public
+
  See |yii/db/QueryTrait::indexBy|
 
 
 *yii/elasticsearch/ActiveQuery::where*			public
+
  See |yii/db/QueryTrait::where|
 
 
 *yii/elasticsearch/ActiveQuery::andWhere*			public
+
  See |yii/db/QueryTrait::andWhere|
 
 
 *yii/elasticsearch/ActiveQuery::orWhere*			public
+
  See |yii/db/QueryTrait::orWhere|
 
 
 *yii/elasticsearch/ActiveQuery::filterWhere*		public
+
  See |yii/db/QueryTrait::filterWhere|
 
 
 *yii/elasticsearch/ActiveQuery::andFilterWhere*		public
+
  See |yii/db/QueryTrait::andFilterWhere|
 
 
 *yii/elasticsearch/ActiveQuery::orFilterWhere*		public
+
  See |yii/db/QueryTrait::orFilterWhere|
 
 
 *yii/elasticsearch/ActiveQuery::filterCondition*		protected
+
  See |yii/db/QueryTrait::filterCondition|
 
 
 *yii/elasticsearch/ActiveQuery::isEmpty*			protected
+
  See |yii/db/QueryTrait::isEmpty|
 
 
 *yii/elasticsearch/ActiveQuery::orderBy*			public
+
  See |yii/db/QueryTrait::orderBy|
 
 
 *yii/elasticsearch/ActiveQuery::addOrderBy*		public
+
  See |yii/db/QueryTrait::addOrderBy|
 
 
 *yii/elasticsearch/ActiveQuery::normalizeOrderBy*		protected
+
  See |yii/db/QueryTrait::normalizeOrderBy|
 
 
 *yii/elasticsearch/ActiveQuery::limit*			public
+
  See |yii/db/QueryTrait::limit|
 
 
 *yii/elasticsearch/ActiveQuery::offset*			public
+
  See |yii/db/QueryTrait::offset|
 
 
@@ -254,7 +292,7 @@ METHOD DETAILS
 >
  createCommand($db='null')
 <
-(\yii\elasticsearch\Command) The created DB command instance.
+return (\yii\elasticsearch\Command) The created DB command instance.
 
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
     DB command. If null, the DB connection returned by 'modelClass' will be
@@ -265,7 +303,7 @@ METHOD DETAILS
 >
  all($db='null')
 <
-(array) The query results. If the query results in nothing, an empty array
+return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
@@ -273,11 +311,27 @@ will be returned.
     used.
 
 
+*yii/elasticsearch/ActiveQuery::populate*			public
+>
+ populate($rows)
+<
+return (array) The converted query result
+
+
+
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
+
+
+
+    [$rows] (array) The raw query result from database
+
+
 *yii/elasticsearch/ActiveQuery::one*			public
 >
  one($db='null')
 <
-(\yii\elasticsearch\ActiveRecord|array|null) A single row of query result.
+return (\yii\elasticsearch\ActiveRecord|array|null) A single row of query result.
 Depending on the setting of 'asArray', the query result may be either an array
 or an ActiveRecord object. Null will be returned if the query results in
 nothing.
@@ -291,7 +345,13 @@ nothing.
 >
  search($db='null', $options='[]')
 <
-(array) The query results.
+return (array) The query results.
+
+
+
+
+
+
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -302,18 +362,20 @@ nothing.
      
       -
      
-    [routing](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search.html#search-routing)
+    [routing](http://www.elastic.co/guide/en/elasticsearch/reference/current/search.html#search-routing)
      
       -
      
-    [search_type](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-search-type.html)
+    [search_type](http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-search-type.html)
 
 
 *yii/elasticsearch/ActiveQuery::delete*			public
+
  See |yii/elasticsearch/Query::delete|
 
 
 *yii/elasticsearch/ActiveQuery::scalar*			public
+
  See |yii/elasticsearch/Query::scalar|
 
 
@@ -321,8 +383,14 @@ nothing.
 >
  column($field, $db='null')
 <
-(array) The first column of the query result. An empty array is returned if
+return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
+
+
+
+
+
+
 
     [$field] (string) The field to query over
     [$db] (\yii\elasticsearch\Connection) The database connection used to
@@ -331,82 +399,127 @@ the query results in nothing.
 
 
 *yii/elasticsearch/ActiveQuery::count*			public
+
  See |yii/elasticsearch/Query::count|
 
 
 *yii/elasticsearch/ActiveQuery::exists*			public
+
  See |yii/elasticsearch/Query::exists|
 
 
 *yii/elasticsearch/ActiveQuery::stats*			public
+
  See |yii/elasticsearch/Query::stats|
 
 
 *yii/elasticsearch/ActiveQuery::highlight*		public
+
  See |yii/elasticsearch/Query::highlight|
 
 
 *yii/elasticsearch/ActiveQuery::addAggregation*		public
+
  See |yii/elasticsearch/Query::addAggregation|
 
 
 *yii/elasticsearch/ActiveQuery::addAgg*			public
+
  See |yii/elasticsearch/Query::addAgg|
 
 
 *yii/elasticsearch/ActiveQuery::addSuggester*		public
+
  See |yii/elasticsearch/Query::addSuggester|
 
 
 *yii/elasticsearch/ActiveQuery::query*			public
+
  See |yii/elasticsearch/Query::query|
 
 
+*yii/elasticsearch/ActiveQuery::batch*			public
+
+ See |yii/elasticsearch/Query::batch|
+
+
+*yii/elasticsearch/ActiveQuery::each*			public
+
+ See |yii/elasticsearch/Query::each|
+
+
 *yii/elasticsearch/ActiveQuery::filter*			public
+
  See |yii/elasticsearch/Query::filter|
 
 
 *yii/elasticsearch/ActiveQuery::from*			public
+
  See |yii/elasticsearch/Query::from|
 
 
 *yii/elasticsearch/ActiveQuery::fields*			public
+
  See |yii/elasticsearch/Query::fields|
 
 
 *yii/elasticsearch/ActiveQuery::source*			public
+
  See |yii/elasticsearch/Query::source|
 
 
 *yii/elasticsearch/ActiveQuery::timeout*			public
+
  See |yii/elasticsearch/Query::timeout|
 
 
+*yii/elasticsearch/ActiveQuery::minScore*			public
+
+ See |yii/elasticsearch/Query::minScore|
+
+
+*yii/elasticsearch/ActiveQuery::options*			public
+
+ See |yii/elasticsearch/Query::options|
+
+
+*yii/elasticsearch/ActiveQuery::addOptions*		public
+
+ See |yii/elasticsearch/Query::addOptions|
+
+
 *yii/elasticsearch/ActiveQuery::via*			public
+
  See |yii/db/ActiveRelationTrait::via|
 
 
 *yii/elasticsearch/ActiveQuery::inverseOf*		public
+
  See |yii/db/ActiveRelationTrait::inverseOf|
 
 
 *yii/elasticsearch/ActiveQuery::findFor*			public
+
  See |yii/db/ActiveRelationTrait::findFor|
 
 
 *yii/elasticsearch/ActiveQuery::populateRelation*		public
+
  See |yii/db/ActiveRelationTrait::populateRelation|
 
 
 *yii/elasticsearch/ActiveQuery::asArray*			public
+
  See |yii/db/ActiveQueryTrait::asArray|
 
 
 *yii/elasticsearch/ActiveQuery::with*			public
+
  See |yii/db/ActiveQueryTrait::with|
 
 
 *yii/elasticsearch/ActiveQuery::findWith*			public
+
  See |yii/db/ActiveQueryTrait::findWith|
 
 

@@ -15,32 +15,40 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $name					*yii/web/UploadedFile::$name*
+
  (string) The original name of the file being uploaded
 
 $tempName				*yii/web/UploadedFile::$tempName*
+
  (string) The path of the uploaded file on the server. Note, this is a
  temporary file which will be automatically deleted by PHP after the current
  request is processed.
 
 $type					*yii/web/UploadedFile::$type*
+
  (string) The MIME-type of the uploaded file (such as "image/gif"). Since this
  MIME type is not checked on the server side, do not take this value for
  granted. Instead, use '\yii\helpers\FileHelper::getMimeType()' to determine
  the exact MIME type.
 
 $size					*yii/web/UploadedFile::$size*
+
  (integer) The actual size of the uploaded file in bytes
 
 $error					*yii/web/UploadedFile::$error*
+
  (integer) An error code describing the status of this file uploading.
 
 $baseName				*yii/web/UploadedFile::$baseName*
+
  (string) Original file base name
 
 $extension				*yii/web/UploadedFile::$extension*
+
  (string) File extension
 
 $hasError				*yii/web/UploadedFile::$hasError*
+
  (boolean) Whether there is an error with the uploaded file. Check 'error' for
  detailed error code information.
 
@@ -49,51 +57,64 @@ $hasError				*yii/web/UploadedFile::$hasError*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/web/UploadedFile::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/web/UploadedFile::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/web/UploadedFile::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/web/UploadedFile::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/web/UploadedFile::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/web/UploadedFile::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/web/UploadedFile::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/web/UploadedFile::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/web/UploadedFile::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/web/UploadedFile::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/web/UploadedFile::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/web/UploadedFile::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -101,7 +122,7 @@ METHOD DETAILS
 >
  __toString()
 <
-(string) The string representation of the object
+return (string) The string representation of the object
 
  This is PHP magic method that returns string representation of an object. The
  implementation here returns the uploaded file's name.
@@ -111,10 +132,11 @@ METHOD DETAILS
 >
  getInstance($model, $attribute)
 <
-(\yii\web\UploadedFile) The instance of the uploaded file. Null is returned if
-no file is uploaded for the specified model attribute.
+return (null|\yii\web\UploadedFile) The instance of the uploaded file. Null is
+returned if no file is uploaded for the specified model attribute.
 
  The file should be uploaded using '\yii\widgets\ActiveField::fileInput()'.
+
     [$model] (\yii\base\Model) The data model
     [$attribute] (string) The attribute name. The attribute name may contain
     array indexes. For example, '[1]file' for tabular file uploading; and
@@ -125,7 +147,7 @@ no file is uploaded for the specified model attribute.
 >
  getInstances($model, $attribute)
 <
-(\yii\web\UploadedFile[]) Array of UploadedFile objects. Empty array is
+return (\yii\web\UploadedFile[]) Array of UploadedFile objects. Empty array is
 returned if no available file was found for the given attribute.
 
     [$model] (\yii\base\Model) The data model
@@ -137,11 +159,12 @@ returned if no available file was found for the given attribute.
 >
  getInstanceByName($name)
 <
-(\yii\web\UploadedFile) The instance of the uploaded file. Null is returned if
-no file is uploaded for the specified name.
+return (null|\yii\web\UploadedFile) The instance of the uploaded file. Null is
+returned if no file is uploaded for the specified name.
 
  The name can be a plain string or a string like an array element (e.g.
  'Post[imageFile]', or 'Post[0][imageFile]').
+
     [$name] (string) The name of the file input field.
 
 
@@ -149,13 +172,14 @@ no file is uploaded for the specified name.
 >
  getInstancesByName($name)
 <
-(\yii\web\UploadedFile[]) The array of UploadedFile objects. Empty array is
+return (\yii\web\UploadedFile[]) The array of UploadedFile objects. Empty array is
 returned if no adequate upload was found. Please note that this array will
 contain all files from all sub-arrays regardless how deeply nested they are.
 
  This is mainly used when multiple files were uploaded and saved as
  'files[0]', 'files[1]', 'files[n]'..., and you can retrieve them all by
  passing 'files' as the name.
+
     [$name] (string) The name of the array of files
 
 
@@ -163,7 +187,7 @@ contain all files from all sub-arrays regardless how deeply nested they are.
 >
  reset()
 <
-(void)
+return (void)
 
  This method is mainly used by test scripts to set up a fixture.
 
@@ -172,10 +196,11 @@ contain all files from all sub-arrays regardless how deeply nested they are.
 >
  saveAs($file, $deleteTempFile='true')
 <
-(boolean) True whether the file is saved successfully
+return (boolean) True whether the file is saved successfully
 
  Note that this method uses php's move_uploaded_file() method. If the target
  file '$file' already exists, it will be overwritten.
+
     [$file] (string) The file path used to save the uploaded file
     [$deleteTempFile] (boolean) Whether to delete the temporary file after
     saving. If true, you will not be able to save the uploaded file again in
@@ -186,7 +211,7 @@ contain all files from all sub-arrays regardless how deeply nested they are.
 >
  getBaseName()
 <
-(string) Original file base name
+return (string) Original file base name
 
 
 
@@ -194,7 +219,7 @@ contain all files from all sub-arrays regardless how deeply nested they are.
 >
  getExtension()
 <
-(string) File extension
+return (string) File extension
 
 
 
@@ -202,7 +227,7 @@ contain all files from all sub-arrays regardless how deeply nested they are.
 >
  getHasError()
 <
-(boolean) Whether there is an error with the uploaded file. Check 'error' for
+return (boolean) Whether there is an error with the uploaded file. Check 'error' for
 detailed error code information.
 
 

@@ -86,12 +86,15 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/di/Container::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $singleton				*yii/di/Container::$singleton*
+
  (string) Class name, interface name or alias name
 
 $definitions				*yii/di/Container::$definitions*
+
  (array) The list of the object definitions or the loaded shared objects (type
  or ID => definition or instance).
 
@@ -100,103 +103,129 @@ $definitions				*yii/di/Container::$definitions*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/di/Container::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/di/Container::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/di/Container::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/di/Container::__get*					public
+
  See |yii/base/Component::__get|
 
 
 *yii/di/Container::__set*					public
+
  See |yii/base/Component::__set|
 
 
 *yii/di/Container::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/di/Container::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/di/Container::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/di/Container::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/di/Container::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/di/Container::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/di/Container::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/di/Container::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/di/Container::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/di/Container::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/di/Container::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/di/Container::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/di/Container::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/di/Container::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/di/Container::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/di/Container::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/di/Container::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/di/Container::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/di/Container::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/di/Container::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -204,7 +233,7 @@ METHOD DETAILS
 >
  get($class, $params='[]', $config='[]')
 <
-(object) An instance of the requested class.
+return (object) An instance of the requested class.
 
  You may provide constructor parameters ('$params') and object configurations
  ('$config') that will be used during the creation of the instance.
@@ -217,6 +246,7 @@ METHOD DETAILS
  'setSingleton()', the same instance of the class will be returned each time
  this method is called. In this case, the constructor parameters and object
  configurations will be used only if the class is instantiated the first time.
+
     [$class] (string) The class name or an alias name (e.g. 'foo') that was
     previously registered via 'set()' or 'setSingleton()'.
     [$params] (array) A list of constructor parameter values. The parameters
@@ -232,7 +262,7 @@ METHOD DETAILS
 >
  set($class, $definition='[]', $params='[]')
 <
-($this) The container itself
+return ($this) The container itself
 
  For example,
 
@@ -276,6 +306,7 @@ METHOD DETAILS
  If a class definition with the same name already exists, it will be
  overwritten with the new one. You may use 'has()' to check if a class
  definition already exists.
+
     [$class] (string) Class name, interface name or alias name
     [$definition] (mixed) The definition associated with '$class'. It can be
     one of the following:
@@ -301,11 +332,12 @@ METHOD DETAILS
 >
  setSingleton($class, $definition='[]', $params='[]')
 <
-($this) The container itself
+return ($this) The container itself
 
  This method is similar to 'set()' except that classes registered via this
  method will only have one instance. Each time 'get()' is called, the same
  instance of the specified class will be returned.
+
     [$class] (string) Class name, interface name or alias name
     [$definition] (mixed) The definition associated with '$class'. See 'set()'
     for more details.
@@ -317,7 +349,7 @@ METHOD DETAILS
 >
  has($class)
 <
-(boolean) Whether the container has the definition of the specified name..
+return (boolean) Whether the container has the definition of the specified name..
 
     [$class] (string) Class name, interface name or alias name
 
@@ -326,7 +358,7 @@ METHOD DETAILS
 >
  hasSingleton($class, $checkInstance='false')
 <
-(boolean) Whether the given name corresponds to a registered singleton. If
+return (boolean) Whether the given name corresponds to a registered singleton. If
 '$checkInstance' is true, the method should return a value indicating whether
 the singleton has been instantiated.
 
@@ -339,7 +371,7 @@ the singleton has been instantiated.
 >
  clear($class)
 <
-(void)
+return (void)
 
     [$class] (string) Class name, interface name or alias name
 
@@ -348,7 +380,7 @@ the singleton has been instantiated.
 >
  normalizeDefinition($class, $definition)
 <
-(array) The normalized class definition
+return (array) The normalized class definition
 
     [$class] (string) Class name
     [$definition] (string|array|callable) The class definition
@@ -358,7 +390,7 @@ the singleton has been instantiated.
 >
  getDefinitions()
 <
-(array) The list of the object definitions or the loaded shared objects (type
+return (array) The list of the object definitions or the loaded shared objects (type
 or ID => definition or instance).
 
 
@@ -367,10 +399,11 @@ or ID => definition or instance).
 >
  build($class, $params, $config)
 <
-(object) The newly created instance of the specified class
+return (object) The newly created instance of the specified class
 
  This method will resolve dependencies of the specified class, instantiate
  them, and inject them into the new instance of the specified class.
+
     [$class] (string) The class name
     [$params] (array) Constructor parameters
     [$config] (array) Configurations to be applied to the new instance
@@ -380,7 +413,7 @@ or ID => definition or instance).
 >
  mergeParams($class, $params)
 <
-(array) The merged parameters
+return (array) The merged parameters
 
     [$class] (string) Class name, interface name or alias name
     [$params] (array) The constructor parameters
@@ -390,7 +423,7 @@ or ID => definition or instance).
 >
  getDependencies($class)
 <
-(array) The dependencies of the specified class.
+return (array) The dependencies of the specified class.
 
     [$class] (string) Class name, interface name or alias name
 
@@ -399,7 +432,7 @@ or ID => definition or instance).
 >
  resolveDependencies($dependencies, $reflection='null')
 <
-(array) The resolved dependencies
+return (array) The resolved dependencies
 
     [$dependencies] (array) The dependencies
     [$reflection] (\ReflectionClass) The class reflection associated with the
@@ -410,7 +443,7 @@ or ID => definition or instance).
 >
  invoke($callback, $params='[]')
 <
-(mixed) The callback return value.
+return (mixed) The callback return value.
 
  This methods allows invoking a callback and let type hinted parameter names
  to be resolved as objects of the Container. It additionally allow calling
@@ -427,6 +460,7 @@ or ID => definition or instance).
  This will pass the string ''Hello World!'' as the first param, and a
  formatter instance created by the DI container as the second param to the
  callable.
+
     [$callback] (callable) Callable to be invoked.
     [$params] (array) The array of parameters for the function. This can be
     either a list of parameters, or an associative array representing named
@@ -437,10 +471,11 @@ or ID => definition or instance).
 >
  resolveCallableDependencies($callback, $params='[]')
 <
-(array) The resolved dependencies.
+return (array) The resolved dependencies.
 
  This method can be used to implement similar functionality as provided by
  'invoke()' in other components.
+
     [$callback] (callable) Callable to be invoked.
     [$params] (array) The array of parameters for the function, can be either
     numeric or associative.

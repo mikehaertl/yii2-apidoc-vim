@@ -17,11 +17,12 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/helpers/BaseArrayHelper::toArray*			public
 >
  toArray($object, $properties='[]', $recursive='true')
 <
-(array) The array representation of the object
+return (array) The array representation of the object
 
     [$object] (object|array|string) The object to be converted into an array
     [$properties] (array) A mapping from object class names to the properties
@@ -60,13 +61,14 @@ METHOD DETAILS
 >
  merge($a, $b)
 <
-(array) The merged array (the original arrays are not changed.)
+return (array) The merged array (the original arrays are not changed.)
 
  If each array has an element with the same string key value, the latter will
  overwrite the former (different from array_merge_recursive). Recursive
  merging will be conducted if both arrays have an element of array type and
  are having the same key. For integer-keyed elements, the elements from the
  latter array will be appended to the former array.
+
     [$a] (array) Array to be merged to
     [$b] (array) Array to be merged from. You can specify additional arrays
     via third argument, fourth argument etc.
@@ -76,7 +78,7 @@ METHOD DETAILS
 >
  getValue($array, $key, $default='null')
 <
-(mixed) The value of the element if found, default value otherwise
+return (mixed) The value of the element if found, default value otherwise
 
  If the key does not exist in the array or object, the default value will be
  returned instead.
@@ -107,6 +109,7 @@ METHOD DETAILS
    $value = \yii\helpers\ArrayHelper::getValue($versions, ['1.0', 'date']);
 
 
+
     [$array] (array|object) Array or object to extract value from
     [$key] (string|\Closure|array) Key name of the array element, an array of
     keys or property name of the object, or an anonymous function returning
@@ -121,7 +124,7 @@ METHOD DETAILS
 >
  remove($array, $key, $default='null')
 <
-(mixed|null) The value of the element if found, default value otherwise
+return (mixed|null) The value of the element if found, default value otherwise
 
  Usage examples,
 
@@ -132,6 +135,7 @@ METHOD DETAILS
    // $array = ['options' => [1, 2]];
 
 
+
     [$array] (array) The array to extract value from
     [$key] (string) Key name of the array element
     [$default] (mixed) The default value to be returned if the specified key
@@ -140,47 +144,112 @@ METHOD DETAILS
 
 *yii/helpers/BaseArrayHelper::index*			public
 >
- index($array, $key)
+ index($array, $key, $groups='[]')
 <
-(array) The indexed array
+return (array) The indexed and/or grouped array
 
- The input array should be multidimensional or an array of objects.
+ The input should be either multidimensional array or an array of objects.
 
- The key can be a key name of the sub-array, a property name of object, or an
- anonymous function which returns the key value given an array element.
+ The $key can be either a key name of the sub-array, a property name of
+ object, or an anonymous function that must return the value that will be used
+ as a key.
 
- If a key value is null, the corresponding array element will be discarded and
- not put in the result.
+ $groups is an array of keys, that will be used to group the input array into
+ one or more sub-arrays based on keys specified.
 
- For example,
+ If the '$key' is specified as 'null' or a value of an element corresponding
+ to the key is 'null' in addition to '$groups' not specified then the element
+ is discarded.
+
+ For example:
 
    $array = [
-       ['id' => '123', 'data' => 'abc'],
-       ['id' => '345', 'data' => 'def'],
+       ['id' => '123', 'data' => 'abc', 'device' => 'laptop'],
+       ['id' => '345', 'data' => 'def', 'device' => 'tablet'],
+       ['id' => '345', 'data' => 'hgi', 'device' => 'smartphone'],
    ];
    $result = ArrayHelper::index($array, 'id');
-   // the result is:
-   // [
-   //     '123' => ['id' => '123', 'data' => 'abc'],
-   //     '345' => ['id' => '345', 'data' => 'def'],
-   // ]
 
-   // using anonymous function
+ The result will be an associative array, where the key is the value of 'id'
+ attribute
+
+   [
+       '123' => ['id' => '123', 'data' => 'abc', 'device' => 'laptop'],
+       '345' => ['id' => '345', 'data' => 'hgi', 'device' => 'smartphone']
+       // The second element of an original array is overwritten by the last
+ element because of the same id
+   ]
+
+ An anonymous function can be used in the grouping array as well.
+
    $result = ArrayHelper::index($array, function ($element) {
        return $element['id'];
    });
 
+ Passing 'id' as a third argument will group '$array' by 'id':
 
-    [$array] (array) The array that needs to be indexed
-    [$key] (string|\Closure) The column name or anonymous function whose
+   $result = ArrayHelper::index($array, null, 'id');
+
+ The result will be a multidimensional array grouped by 'id' on the first
+ level, by 'device' on the second level and indexed by 'data' on the third
+ level:
+
+   [
+       '123' => [
+           ['id' => '123', 'data' => 'abc', 'device' => 'laptop']
+       ],
+       '345' => [ // all elements with this index are present in the result
+ array
+           ['id' => '345', 'data' => 'def', 'device' => 'tablet'],
+           ['id' => '345', 'data' => 'hgi', 'device' => 'smartphone'],
+       ]
+   ]
+
+ The anonymous function can be used in the array of grouping keys as well:
+
+   $result = ArrayHelper::index($array, 'data', [function ($element) {
+       return $element['id'];
+   }, 'device']);
+
+ The result will be a multidimensional array grouped by 'id' on the first
+ level, by the 'device' on the second one and indexed by the 'data' on the
+ third level:
+
+   [
+       '123' => [
+           'laptop' => [
+               'abc' => ['id' => '123', 'data' => 'abc', 'device' => 'laptop']
+           ]
+       ],
+       '345' => [
+           'tablet' => [
+               'def' => ['id' => '345', 'data' => 'def', 'device' => 'tablet']
+           ],
+           'smartphone' => [
+               'hgi' => ['id' => '345', 'data' => 'hgi', 'device' =>
+ 'smartphone']
+           ]
+       ]
+   ]
+
+
+
+    [$array] (array) The array that needs to be indexed or grouped
+    [$key] (string|\Closure|null) The column name or anonymous function which
     result will be used to index the array
+    [$groups] (string|string[]|\Closure[]|null) The array of keys, that will
+    be used to group the input array by one or more keys. If the $key
+    attribute or its value for the particular element is null and $groups is
+    not defined, the array element will be discarded. Otherwise, if $groups is
+    specified, array element will be added to the result array without any
+    key. This parameter is available since version 2.0.8.
 
 
 *yii/helpers/BaseArrayHelper::getColumn*			public
 >
  getColumn($array, $name, $keepKeys='true')
 <
-(array) The list of column values
+return (array) The list of column values
 
  The input array should be multidimensional or an array of objects.
 
@@ -199,6 +268,7 @@ METHOD DETAILS
    });
 
 
+
     [$array] (array) 
     [$name] (string|\Closure) 
     [$keepKeys] (boolean) Whether to maintain the array keys. If false, the
@@ -209,7 +279,7 @@ METHOD DETAILS
 >
  map($array, $from, $to, $group='null')
 <
-(array) 
+return (array) 
 
  The '$from' and '$to' parameters specify the key names or property names to
  set up the map. Optionally, one can further group the map according to a
@@ -244,6 +314,7 @@ METHOD DETAILS
    // ]
 
 
+
     [$array] (array) 
     [$from] (string|\Closure) 
     [$to] (string|\Closure) 
@@ -254,10 +325,11 @@ METHOD DETAILS
 >
  keyExists($key, $array, $caseSensitive='true')
 <
-(boolean) Whether the array contains the specified key
+return (boolean) Whether the array contains the specified key
 
  This method enhances the 'array_key_exists()' function by supporting
  case-insensitive key comparison.
+
     [$key] (string) The key to check
     [$array] (array) The array with keys to check
     [$caseSensitive] (boolean) Whether the key comparison should be
@@ -268,7 +340,7 @@ METHOD DETAILS
 >
  multisort($array, $key, $direction='SORT_ASC', $sortFlag='SORT_REGULAR')
 <
-(void)
+return (void)
 
     [$array] (array) The array to be sorted. The array will be modified after
     calling this method.
@@ -292,10 +364,11 @@ METHOD DETAILS
 >
  htmlEncode($data, $valuesOnly='true', $charset='null')
 <
-(array) The encoded data
+return (array) The encoded data
 
  Only array values will be encoded by default. If a value is an array, this
  method will also encode it recursively. Only string values will be encoded.
+
     [$data] (array) Data to be encoded
     [$valuesOnly] (boolean) Whether to encode array values only. If false,
     both the array keys and array values will be encoded.
@@ -307,10 +380,11 @@ METHOD DETAILS
 >
  htmlDecode($data, $valuesOnly='true')
 <
-(array) The decoded data
+return (array) The decoded data
 
  Only array values will be decoded by default. If a value is an array, this
  method will also decode it recursively. Only string values will be decoded.
+
     [$data] (array) Data to be decoded
     [$valuesOnly] (boolean) Whether to decode array values only. If false,
     both the array keys and array values will be decoded.
@@ -320,13 +394,14 @@ METHOD DETAILS
 >
  isAssociative($array, $allStrings='true')
 <
-(boolean) Whether the array is associative
+return (boolean) Whether the array is associative
 
  An array is associative if all its keys are strings. If '$allStrings' is
  false, then an array will be treated as associative if at least one of its
  keys is a string.
 
  Note that an empty array will NOT be considered associative.
+
     [$array] (array) The array being checked
     [$allStrings] (boolean) Whether the array keys must be all strings in
     order for the array to be treated as associative.
@@ -336,12 +411,13 @@ METHOD DETAILS
 >
  isIndexed($array, $consecutive='false')
 <
-(boolean) Whether the array is associative
+return (boolean) Whether the array is associative
 
  An array is indexed if all its keys are integers. If '$consecutive' is true,
  then the array keys must be a consecutive sequence starting from 0.
 
  Note that an empty array will be considered indexed.
+
     [$array] (array) The array being checked
     [$consecutive] (boolean) Whether the array keys must be a consecutive
     sequence in order for the array to be treated as indexed.
@@ -351,25 +427,39 @@ METHOD DETAILS
 >
  isIn($needle, $haystack, $strict='false')
 <
-(boolean) 'true' if '$needle' was found in '$haystack', 'false' otherwise.
+return (boolean) 'true' if '$needle' was found in '$haystack', 'false' otherwise.
 
  This method does the same as the PHP function
- [in_array()](http://php.net/manual/en/function.in-array.php) but it does not
- only work for arrays but also objects that implement the '\Traversable'
- interface.
+ [in_array()](http://php.net/manual/en/function.in-array.php) but additionally
+ works for objects that implement the '\Traversable' interface.
+
     [$needle] (mixed) The value to look for.
     [$haystack] (array|\Traversable) The set of values to search.
     [$strict] (boolean) Whether to enable strict ('===') comparison.
+
+
+*yii/helpers/BaseArrayHelper::isTraversable*		public
+>
+ isTraversable($var)
+<
+return (boolean) Whether $var is array-like
+
+ This method does the same as the PHP function
+ [is_array()](http://php.net/manual/en/function.is-array.php) but additionally
+ works on objects that implement the '\Traversable' interface.
+
+    [$var] (mixed) The variable being evaluated.
 
 
 *yii/helpers/BaseArrayHelper::isSubset*			public
 >
  isSubset($needles, $haystack, $strict='false')
 <
-(boolean) 'true' if '$needles' is a subset of '$haystack', 'false' otherwise.
+return (boolean) 'true' if '$needles' is a subset of '$haystack', 'false' otherwise.
 
  This method will return 'true', if all elements of '$needles' are contained
  in '$haystack'. If at least one element is missing, 'false' will be returned.
+
     [$needles] (array|\Traversable) The values that must **all** be in
     '$haystack'.
     [$haystack] (array|\Traversable) The set of value to search.

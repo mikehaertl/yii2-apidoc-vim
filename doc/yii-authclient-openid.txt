@@ -5,8 +5,8 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/authclient/clients/GoogleOpenId|
 |yii/authclient/clients/YandexOpenId|
+|yii/authclient/clients/GoogleOpenId|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -37,10 +37,12 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $authUrl				*yii/authclient/OpenId::$authUrl*
+
  (string) Authentication base URL, which should be used to compose actual
  authentication URL by 'buildAuthUrl()' method.
 
 $requiredAttributes			*yii/authclient/OpenId::$requiredAttributes*
+
  (array) List of attributes, which always should be returned from server.
  Attribute names should be always specified in AX format. For example:
 
@@ -49,6 +51,7 @@ $requiredAttributes			*yii/authclient/OpenId::$requiredAttributes*
 
 
 $optionalAttributes			*yii/authclient/OpenId::$optionalAttributes*
+
  (array) List of attributes, which could be returned from server. Attribute
  names should be always specified in AX format. For example:
 
@@ -57,52 +60,67 @@ $optionalAttributes			*yii/authclient/OpenId::$optionalAttributes*
 
 
 $verifyPeer				*yii/authclient/OpenId::$verifyPeer*
+
  (boolean) Whether to verify the peer's certificate.
 
 $capath					*yii/authclient/OpenId::$capath*
+
  (string) Directory that holds multiple CA certificates. This value will take
  effect only if 'verifyPeer' is set.
 
 $cainfo					*yii/authclient/OpenId::$cainfo*
+
  (string) The name of a file holding one or more certificates to verify the
  peer with. This value will take effect only if 'verifyPeer' is set.
 
 $data					*yii/authclient/OpenId::$data*
+
  (array) Data, which should be used to retrieve the OpenID response. If not
  set combination of GET and POST will be used.
 
 $axToSregMap				*yii/authclient/OpenId::$axToSregMap*
+
  (array) Map of matches between AX and SREG attribute names in format:
  axAttributeName => sregAttributeName
 
 $behaviors				*yii/authclient/OpenId::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $id					*yii/authclient/OpenId::$id*
+
  See |yii/authclient/BaseClient::$id|
 
 $name					*yii/authclient/OpenId::$name*
+
  See |yii/authclient/BaseClient::$name|
 
 $title					*yii/authclient/OpenId::$title*
+
  See |yii/authclient/BaseClient::$title|
 
 $userAttributes				*yii/authclient/OpenId::$userAttributes*
+
  See |yii/authclient/BaseClient::$userAttributes|
 
 $normalizeUserAttributeMap		*yii/authclient/OpenId::$normalizeUserAttributeMap*
+
  See |yii/authclient/BaseClient::$normalizeUserAttributeMap|
 
 $viewOptions				*yii/authclient/OpenId::$viewOptions*
+
  See |yii/authclient/BaseClient::$viewOptions|
 
 $claimedId				*yii/authclient/OpenId::$claimedId*
+
  (string) Claimed identifier (identity).
 
 $returnUrl				*yii/authclient/OpenId::$returnUrl*
+
  (string) Authentication return URL.
 
 $trustRoot				*yii/authclient/OpenId::$trustRoot*
+
  (string) Client trust root (realm).
 
 
@@ -110,11 +128,14 @@ $trustRoot				*yii/authclient/OpenId::$trustRoot*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/authclient/OpenId::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/authclient/OpenId::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -122,153 +143,193 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/authclient/OpenId::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/authclient/OpenId::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/authclient/OpenId::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/authclient/OpenId::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/authclient/OpenId::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/authclient/OpenId::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/authclient/OpenId::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/authclient/OpenId::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/authclient/OpenId::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/authclient/OpenId::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/authclient/OpenId::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/authclient/OpenId::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/authclient/OpenId::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/authclient/OpenId::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/authclient/OpenId::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/authclient/OpenId::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/authclient/OpenId::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/authclient/OpenId::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/authclient/OpenId::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/authclient/OpenId::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/authclient/OpenId::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/authclient/OpenId::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/authclient/OpenId::setId*				public
+
  See |yii/authclient/BaseClient::setId|
 
 
 *yii/authclient/OpenId::getId*				public
+
  See |yii/authclient/BaseClient::getId|
 
 
 *yii/authclient/OpenId::setName*				public
+
  See |yii/authclient/BaseClient::setName|
 
 
 *yii/authclient/OpenId::getName*				public
+
  See |yii/authclient/BaseClient::getName|
 
 
 *yii/authclient/OpenId::setTitle*				public
+
  See |yii/authclient/BaseClient::setTitle|
 
 
 *yii/authclient/OpenId::getTitle*				public
+
  See |yii/authclient/BaseClient::getTitle|
 
 
 *yii/authclient/OpenId::setUserAttributes*		public
+
  See |yii/authclient/BaseClient::setUserAttributes|
 
 
 *yii/authclient/OpenId::getUserAttributes*		public
+
  See |yii/authclient/BaseClient::getUserAttributes|
 
 
 *yii/authclient/OpenId::setNormalizeUserAttributeMap*	public
+
  See |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
 
 
 *yii/authclient/OpenId::getNormalizeUserAttributeMap*	public
+
  See |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
 
 
 *yii/authclient/OpenId::setViewOptions*			public
+
  See |yii/authclient/BaseClient::setViewOptions|
 
 
 *yii/authclient/OpenId::getViewOptions*			public
+
  See |yii/authclient/BaseClient::getViewOptions|
 
 
 *yii/authclient/OpenId::defaultName*			protected
+
  See |yii/authclient/BaseClient::defaultName|
 
 
 *yii/authclient/OpenId::defaultTitle*			protected
+
  See |yii/authclient/BaseClient::defaultTitle|
 
 
@@ -276,19 +337,27 @@ METHOD DETAILS
 >
  initUserAttributes()
 <
-(array) Auth user attributes.
+return (array) Auth user attributes.
+
+
+
+
+
 
 
 
 *yii/authclient/OpenId::defaultNormalizeUserAttributeMap*	protected
+
  See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
 
 
 *yii/authclient/OpenId::defaultViewOptions*		protected
+
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
 *yii/authclient/OpenId::normalizeUserAttributes*		protected
+
  See |yii/authclient/BaseClient::normalizeUserAttributes|
 
 
@@ -296,7 +365,7 @@ METHOD DETAILS
 >
  setClaimedId($claimedId)
 <
-(void)
+return (void)
 
     [$claimedId] (string) Claimed identifier (identity).
 
@@ -305,7 +374,7 @@ METHOD DETAILS
 >
  getClaimedId()
 <
-(string) Claimed identifier (identity).
+return (string) Claimed identifier (identity).
 
 
 
@@ -313,7 +382,7 @@ METHOD DETAILS
 >
  setReturnUrl($returnUrl)
 <
-(void)
+return (void)
 
     [$returnUrl] (string) Authentication return URL.
 
@@ -322,7 +391,7 @@ METHOD DETAILS
 >
  getReturnUrl()
 <
-(string) Authentication return URL.
+return (string) Authentication return URL.
 
 
 
@@ -330,7 +399,7 @@ METHOD DETAILS
 >
  setTrustRoot($value)
 <
-(void)
+return (void)
 
     [$value] (string) Client trust root (realm).
 
@@ -339,7 +408,7 @@ METHOD DETAILS
 >
  getTrustRoot()
 <
-(string) Client trust root (realm).
+return (string) Client trust root (realm).
 
 
 
@@ -347,7 +416,7 @@ METHOD DETAILS
 >
  defaultReturnUrl()
 <
-(string) Default authentication return URL.
+return (string) Default authentication return URL.
 
 
 
@@ -355,7 +424,7 @@ METHOD DETAILS
 >
  hostExists($url)
 <
-(boolean) True, if the server exists; false otherwise
+return (boolean) True, if the server exists; false otherwise
 
     [$url] (string) URL to check
 
@@ -364,7 +433,7 @@ METHOD DETAILS
 >
  sendRequest($url, $method=''GET'', $params='[]')
 <
-(array|string) Response.
+return (array|string) Response.
 
     [$url] (string) Request URL.
     [$method] (string) Request method.
@@ -375,7 +444,7 @@ METHOD DETAILS
 >
  buildUrl($baseUrl, $additionalUrl)
 <
-(string) Composed URL.
+return (string) Composed URL.
 
     [$baseUrl] (string) Base URL.
     [$additionalUrl] (string|array) Additional URL string or information
@@ -386,7 +455,7 @@ METHOD DETAILS
 >
  extractHtmlTagValue($content, $tag, $matchAttributeName, $matchAttributeValue, $valueAttributeName)
 <
-(string|boolean) Searched value, "false" on failure.
+return (string|boolean) Searched value, "false" on failure.
 
     [$content] (string) HTML content to be be parsed.
     [$tag] (string) Name of the source tag.
@@ -401,7 +470,7 @@ METHOD DETAILS
 >
  discover($url)
 <
-(array) OpenID provider info, following keys will be available: 
+return (array) OpenID provider info, following keys will be available: 
   - 'url' - string OP Endpoint (i.e. OpenID provider address). 
   - 'version' - integer OpenID protocol version used by provider. 
   - 'identity' - string identity value. 
@@ -417,7 +486,7 @@ METHOD DETAILS
 >
  buildSregParams()
 <
-(array) SREG parameters.
+return (array) SREG parameters.
 
 
 
@@ -425,7 +494,7 @@ METHOD DETAILS
 >
  buildAxParams()
 <
-(array) AX parameters.
+return (array) AX parameters.
 
 
 
@@ -433,7 +502,7 @@ METHOD DETAILS
 >
  buildAuthUrlV1($serverInfo)
 <
-(string) Authentication URL.
+return (string) Authentication URL.
 
     [$serverInfo] (array) OpenID server info.
 
@@ -442,7 +511,7 @@ METHOD DETAILS
 >
  buildAuthUrlV2($serverInfo)
 <
-(string) Authentication URL.
+return (string) Authentication URL.
 
     [$serverInfo] (array) OpenID server info.
 
@@ -451,7 +520,7 @@ METHOD DETAILS
 >
  buildAuthUrl($identifierSelect='null')
 <
-(string) The authentication URL.
+return (string) The authentication URL.
 
     [$identifierSelect] (boolean) Whether to request OP to select identity for
     an user in OpenID 2, does not affect OpenID 1.
@@ -461,7 +530,7 @@ METHOD DETAILS
 >
  validate($validateRequiredAttributes='true')
 <
-(boolean) Whether the verification was successful.
+return (boolean) Whether the verification was successful.
 
     [$validateRequiredAttributes] (boolean) Whether to validate required
     attributes.
@@ -471,7 +540,7 @@ METHOD DETAILS
 >
  validateRequiredAttributes()
 <
-(boolean) Whether all required attributes are present.
+return (boolean) Whether all required attributes are present.
 
 
 
@@ -479,7 +548,7 @@ METHOD DETAILS
 >
  fetchAxAttributes()
 <
-(array) Array of attributes.
+return (array) Array of attributes.
 
 
 
@@ -487,7 +556,7 @@ METHOD DETAILS
 >
  fetchSregAttributes()
 <
-(array) Array of attributes with keys being the AX schema names, e.g.
+return (array) Array of attributes with keys being the AX schema names, e.g.
 'contact/email'
 
 
@@ -496,7 +565,7 @@ METHOD DETAILS
 >
  fetchAttributes()
 <
-(array) Array of attributes with keys being the AX schema names, e.g.
+return (array) Array of attributes with keys being the AX schema names, e.g.
 'contact/email'
 
  Note that it does not guarantee that any of the required/optional parameters
@@ -509,7 +578,7 @@ METHOD DETAILS
 >
  compareUrl($expectedUrl, $actualUrl)
 <
-(boolean) Whether URLs are equal.
+return (boolean) Whether URLs are equal.
 
     [$expectedUrl] (string) Expected URL.
     [$actualUrl] (string) Actual URL.

@@ -47,22 +47,27 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $targets				*yii/log/Dispatcher::$targets*
+
  (array|\yii\log\Target[]) The log targets. Each array element represents a
  single 'Target|log target' instance or the configuration for creating the log
  target instance.
 
 $behaviors				*yii/log/Dispatcher::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $logger					*yii/log/Dispatcher::$logger*
+
  (\yii\log\Logger) The logger.
 
 $traceLevel				*yii/log/Dispatcher::$traceLevel*
+
  (integer) How many application call stacks should be logged together with
  each message. This method returns the value of 'Logger::traceLevel'. Defaults
  to 0.
 
 $flushInterval				*yii/log/Dispatcher::$flushInterval*
+
  (integer) How many messages should be logged before they are sent to targets.
  This method returns the value of 'Logger::flushInterval'.
 
@@ -71,7 +76,9 @@ $flushInterval				*yii/log/Dispatcher::$flushInterval*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/log/Dispatcher::className*				public
+
  See |yii/base/Object::className|
 
 
@@ -79,7 +86,9 @@ METHOD DETAILS
 >
  __construct($config='[]')
 <
-(void)
+return (void)
+
+
 
  The default implementation does two things:
 
@@ -93,6 +102,9 @@ METHOD DETAILS
    - the last parameter of the constructor is a configuration array,
    like '$config' here. 
    - call the parent implementation at the end of the constructor.
+
+
+
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties
 
@@ -101,97 +113,123 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/log/Dispatcher::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/log/Dispatcher::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/log/Dispatcher::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/log/Dispatcher::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/log/Dispatcher::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/log/Dispatcher::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/log/Dispatcher::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/log/Dispatcher::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/log/Dispatcher::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/log/Dispatcher::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/log/Dispatcher::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/log/Dispatcher::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/log/Dispatcher::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/log/Dispatcher::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/log/Dispatcher::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/log/Dispatcher::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/log/Dispatcher::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/log/Dispatcher::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/log/Dispatcher::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/log/Dispatcher::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/log/Dispatcher::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/log/Dispatcher::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -199,7 +237,7 @@ METHOD DETAILS
 >
  getLogger()
 <
-(\yii\log\Logger) The logger.
+return (\yii\log\Logger) The logger.
 
  If not set, '\Yii::getLogger()' will be used.
 
@@ -208,16 +246,18 @@ METHOD DETAILS
 >
  setLogger($value)
 <
-(void)
+return (void)
 
-    [$value] (\yii\log\Logger) The logger.
+    [$value] (\yii\log\Logger|string|array) The logger to be used. This can
+    either be a logger instance or a configuration that will be used to create
+    one using 'Yii::createObject()'.
 
 
 *yii/log/Dispatcher::getTraceLevel*			public
 >
  getTraceLevel()
 <
-(integer) How many application call stacks should be logged together with each
+return (integer) How many application call stacks should be logged together with each
 message. This method returns the value of 'Logger::traceLevel'. Defaults to 0.
 
 
@@ -226,7 +266,7 @@ message. This method returns the value of 'Logger::traceLevel'. Defaults to 0.
 >
  setTraceLevel($value)
 <
-(void)
+return (void)
 
     [$value] (integer) How many application call stacks should be logged
     together with each message. This method will set the value of
@@ -239,7 +279,7 @@ message. This method returns the value of 'Logger::traceLevel'. Defaults to 0.
 >
  getFlushInterval()
 <
-(integer) How many messages should be logged before they are sent to targets.
+return (integer) How many messages should be logged before they are sent to targets.
 This method returns the value of 'Logger::flushInterval'.
 
 
@@ -248,7 +288,7 @@ This method returns the value of 'Logger::flushInterval'.
 >
  setFlushInterval($value)
 <
-(void)
+return (void)
 
     [$value] (integer) How many messages should be logged before they are sent
     to targets. This method will set the value of 'Logger::flushInterval'.
@@ -264,7 +304,7 @@ This method returns the value of 'Logger::flushInterval'.
 >
  dispatch($messages, $final)
 <
-(void)
+return (void)
 
     [$messages] (array) The logged messages
     [$final] (boolean) Whether this method is called at the end of the current

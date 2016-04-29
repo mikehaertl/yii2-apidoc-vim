@@ -23,49 +23,70 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $hostname				*yii/redis/Connection::$hostname*
+
  (string) The hostname or ip address to use for connecting to the redis
  server. Defaults to 'localhost'. If 'unixSocket' is specified, hostname and
  port will be ignored.
 
 $port					*yii/redis/Connection::$port*
+
  (integer) The port to use for connecting to the redis server. Default port is
  6379. If 'unixSocket' is specified, hostname and port will be ignored.
 
 $unixSocket				*yii/redis/Connection::$unixSocket*
+
  (string) The unix socket path (e.g. '/var/run/redis/redis.sock') to use for
  connecting to the redis server. This can be used instead of 'hostname' and
  'port' to connect to the server using a unix socket. If a unix socket path is
  specified, 'hostname' and 'port' will be ignored.
 
 $password				*yii/redis/Connection::$password*
+
  (string) The password for establishing DB connection. Defaults to null
  meaning no AUTH command is send. See http://redis.io/commands/auth
 
 $database				*yii/redis/Connection::$database*
+
  (integer) The redis database to use. This is an integer value starting from
  0. Defaults to 0.
 
 $connectionTimeout			*yii/redis/Connection::$connectionTimeout*
+
  (float) Timeout to use for connection to redis. If not set the timeout set in
  php.ini will be used: ini_get("default_socket_timeout")
 
 $dataTimeout				*yii/redis/Connection::$dataTimeout*
+
  (float) Timeout to use for redis socket when reading and writing data. If not
  set the php default value will be used.
 
+$socketClientFlags			*yii/redis/Connection::$socketClientFlags*
+
+ (integer) Bitmask field which may be set to any combination of connection
+ flags passed to
+ [stream_socket_client()](http://php.net/manual/en/function.stream-socket-client.php).
+ Currently the select of connection flags is limited to
+ 'STREAM_CLIENT_CONNECT' (default), 'STREAM_CLIENT_ASYNC_CONNECT' and
+ 'STREAM_CLIENT_PERSISTENT'.
+
 $redisCommands				*yii/redis/Connection::$redisCommands*
+
  (array) List of available redis commands http://redis.io/commands
 
 $behaviors				*yii/redis/Connection::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $isActive				*yii/redis/Connection::$isActive*
+
  (boolean) Whether the DB connection is established
 
 $driverName				*yii/redis/Connection::$driverName*
+
  (string) Name of the DB driver
 
 $luaScriptBuilder			*yii/redis/Connection::$luaScriptBuilder*
+
  (\yii\redis\LuaScriptBuilder)
 
 
@@ -73,31 +94,39 @@ $luaScriptBuilder			*yii/redis/Connection::$luaScriptBuilder*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/redis/Connection::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/redis/Connection::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/redis/Connection::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/redis/Connection::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/redis/Connection::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/redis/Connection::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/redis/Connection::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
@@ -105,77 +134,100 @@ METHOD DETAILS
 >
  __call($name, $params)
 <
-(mixed) 
+return (mixed) 
 
-    [$name] (string) 
-    [$params] (array) 
+
+
+   $redis->hmset(['test_collection', 'key1', 'val1', 'key2', 'val2'])
+
+
+
+    [$name] (string) Name of the missing method to execute
+    [$params] (array) Method call arguments
 
 
 *yii/redis/Connection::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/redis/Connection::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/redis/Connection::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/redis/Connection::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/redis/Connection::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/redis/Connection::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/redis/Connection::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/redis/Connection::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/redis/Connection::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/redis/Connection::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/redis/Connection::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/redis/Connection::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/redis/Connection::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/redis/Connection::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/redis/Connection::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/redis/Connection::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/redis/Connection::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -183,7 +235,7 @@ METHOD DETAILS
 >
  __sleep()
 <
-(array) 
+return (array) 
 
 
 
@@ -191,7 +243,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-(boolean) Whether the DB connection is established
+return (boolean) Whether the DB connection is established
 
 
 
@@ -199,7 +251,7 @@ METHOD DETAILS
 >
  open()
 <
-(void)
+return (void)
 
  It does nothing if a DB connection has already been established.
 
@@ -208,7 +260,7 @@ METHOD DETAILS
 >
  close()
 <
-(void)
+return (void)
 
  It does nothing if the connection is already closed.
 
@@ -217,7 +269,7 @@ METHOD DETAILS
 >
  initConnection()
 <
-(void)
+return (void)
 
  This method is invoked right after the DB connection is established. The
  default implementation triggers an 'EVENT_AFTER_OPEN' event.
@@ -227,7 +279,7 @@ METHOD DETAILS
 >
  getDriverName()
 <
-(string) Name of the DB driver
+return (string) Name of the DB driver
 
 
 
@@ -235,7 +287,7 @@ METHOD DETAILS
 >
  getLuaScriptBuilder()
 <
-(\yii\redis\LuaScriptBuilder) 
+return (\yii\redis\LuaScriptBuilder) 
 
 
 
@@ -243,7 +295,7 @@ METHOD DETAILS
 >
  executeCommand($name, $params='[]')
 <
-(array|bool|null|string) Dependent on the executed command this method will
+return (array|boolean|null|string) Dependent on the executed command this method will
 return different data types:
 
 
@@ -261,6 +313,7 @@ on the mentioned reply types.
 
  For a list of available commands and their parameters see
  http://redis.io/commands.
+
     [$name] (string) The name of the command
     [$params] (array) List of parameters for the command
 

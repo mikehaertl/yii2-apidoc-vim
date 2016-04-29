@@ -18,37 +18,44 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $fieldsParam				*yii/rest/Serializer::$fieldsParam*
+
  (string) The name of the query parameter containing the information about
  which fields should be returned for a 'Model' object. If the parameter is not
  provided or empty, the default set of fields as defined by 'Model::fields()'
  will be returned.
 
 $expandParam				*yii/rest/Serializer::$expandParam*
+
  (string) The name of the query parameter containing the information about
  which fields should be returned in addition to those listed in 'fieldsParam'
  for a resource object.
 
 $totalCountHeader			*yii/rest/Serializer::$totalCountHeader*
+
  (string) The name of the HTTP header containing the information about total
  number of data items. This is used when serving a resource collection with
  pagination.
 
 $pageCountHeader			*yii/rest/Serializer::$pageCountHeader*
+
  (string) The name of the HTTP header containing the information about total
  number of pages of data. This is used when serving a resource collection with
  pagination.
 
 $currentPageHeader			*yii/rest/Serializer::$currentPageHeader*
+
  (string) The name of the HTTP header containing the information about the
  current page number (1-based). This is used when serving a resource
  collection with pagination.
 
 $perPageHeader				*yii/rest/Serializer::$perPageHeader*
+
  (string) The name of the HTTP header containing the information about the
  number of data items in each page. This is used when serving a resource
  collection with pagination.
 
 $collectionEnvelope			*yii/rest/Serializer::$collectionEnvelope*
+
  (string) The name of the envelope (e.g. 'items') for returning the resource
  objects in a collection. This is used when serving a resource collection.
  When this is set and pagination is enabled, the serializer will return a
@@ -75,22 +82,27 @@ $collectionEnvelope			*yii/rest/Serializer::$collectionEnvelope*
  '_meta' can be accessed from the response HTTP headers.
 
 $linksEnvelope				*yii/rest/Serializer::$linksEnvelope*
+
  (string) The name of the envelope (e.g. '_links') for returning the links
  objects. It takes effect only, if 'collectionEnvelope' is set.
 
 $metaEnvelope				*yii/rest/Serializer::$metaEnvelope*
+
  (string) The name of the envelope (e.g. '_meta') for returning the pagination
  object. It takes effect only, if 'collectionEnvelope' is set.
 
 $request				*yii/rest/Serializer::$request*
+
  (\yii\web\Request) The current request. If not set, the 'request' application
  component will be used.
 
 $response				*yii/rest/Serializer::$response*
+
  (\yii\web\Response) The response to be sent. If not set, the 'response'
  application component will be used.
 
 $behaviors				*yii/rest/Serializer::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -98,11 +110,14 @@ $behaviors				*yii/rest/Serializer::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/rest/Serializer::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/rest/Serializer::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -110,97 +125,123 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
+
+
 
  This method is invoked at the end of the constructor after the object is
  initialized with the given configuration.
 
 
+
+
 *yii/rest/Serializer::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/rest/Serializer::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/rest/Serializer::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/rest/Serializer::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/rest/Serializer::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/rest/Serializer::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/rest/Serializer::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/rest/Serializer::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/rest/Serializer::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/rest/Serializer::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/rest/Serializer::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/rest/Serializer::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/rest/Serializer::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/rest/Serializer::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/rest/Serializer::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/rest/Serializer::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/rest/Serializer::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/rest/Serializer::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/rest/Serializer::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/rest/Serializer::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/rest/Serializer::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/rest/Serializer::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -208,13 +249,14 @@ METHOD DETAILS
 >
  serialize($data)
 <
-(mixed) The converted data.
+return (mixed) The converted data.
 
  This method mainly converts the objects of recognized types into array
  representation. It will not do conversion for unknown object types or
  non-object data. The default implementation will handle 'Model' and
  'DataProviderInterface'. You may override this method to support more object
  types.
+
     [$data] (mixed) The data to be serialized.
 
 
@@ -222,7 +264,7 @@ METHOD DETAILS
 >
  getRequestedFields()
 <
-(array) The names of the requested fields. The first element is an array
+return (array) The names of the requested fields. The first element is an array
 representing the list of default fields requested, while the second element is
 an array of the extra fields requested in addition to the default fields.
 
@@ -232,7 +274,7 @@ an array of the extra fields requested in addition to the default fields.
 >
  serializeDataProvider($dataProvider)
 <
-(array) The array representation of the data provider.
+return (array) The array representation of the data provider.
 
     [$dataProvider] (\yii\data\DataProviderInterface) 
 
@@ -241,7 +283,7 @@ an array of the extra fields requested in addition to the default fields.
 >
  serializePagination($pagination)
 <
-(array) The array representation of the pagination
+return (array) The array representation of the pagination
 
     [$pagination] (\yii\data\Pagination) 
 
@@ -250,7 +292,7 @@ an array of the extra fields requested in addition to the default fields.
 >
  addPaginationHeaders($pagination)
 <
-(void)
+return (void)
 
     [$pagination] (\yii\data\Pagination) 
 
@@ -259,7 +301,7 @@ an array of the extra fields requested in addition to the default fields.
 >
  serializeModel($model)
 <
-(array) The array representation of the model
+return (array) The array representation of the model
 
     [$model] (\yii\base\Arrayable) 
 
@@ -268,7 +310,7 @@ an array of the extra fields requested in addition to the default fields.
 >
  serializeModelErrors($model)
 <
-(array) The array representation of the errors
+return (array) The array representation of the errors
 
     [$model] (\yii\base\Model) 
 
@@ -277,7 +319,7 @@ an array of the extra fields requested in addition to the default fields.
 >
  serializeModels($models)
 <
-(array) The array representation of the models
+return (array) The array representation of the models
 
     [$models] (array) 
 

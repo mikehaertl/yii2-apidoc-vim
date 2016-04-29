@@ -28,69 +28,89 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/Transaction::$db*
+
  (\yii\db\Connection) The database connection that this transaction is
  associated with.
 
 $isActive				*yii/db/Transaction::$isActive*
+
  (boolean) Whether this transaction is active. Only an active transaction can
  'commit()' or 'rollBack()'.
 
 $isolationLevel				*yii/db/Transaction::$isolationLevel*
+
  (string) The transaction isolation level to use for this transaction. This
  can be one of 'READ_UNCOMMITTED', 'READ_COMMITTED', 'REPEATABLE_READ' and
  'SERIALIZABLE' but also a string containing DBMS specific syntax to be used
  after 'SET TRANSACTION ISOLATION LEVEL'.
+
+$level					*yii/db/Transaction::$level*
+
+ (integer) The current nesting level of the transaction.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/Transaction::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/db/Transaction::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/db/Transaction::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/db/Transaction::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/Transaction::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/Transaction::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/Transaction::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/Transaction::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/Transaction::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/Transaction::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/Transaction::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/Transaction::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -98,7 +118,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-(boolean) Whether this transaction is active. Only an active transaction can
+return (boolean) Whether this transaction is active. Only an active transaction can
 'commit()' or 'rollBack()'.
 
 
@@ -107,7 +127,7 @@ METHOD DETAILS
 >
  begin($isolationLevel='null')
 <
-(void)
+return (void)
 
     [$isolationLevel] (string|null) The [isolation level][] to use for this
     transaction. This can be one of 'READ_UNCOMMITTED', 'READ_COMMITTED',
@@ -135,7 +155,7 @@ METHOD DETAILS
 >
  commit()
 <
-(void)
+return (void)
 
 
 
@@ -143,7 +163,7 @@ METHOD DETAILS
 >
  rollBack()
 <
-(void)
+return (void)
 
 
 
@@ -151,15 +171,24 @@ METHOD DETAILS
 >
  setIsolationLevel($level)
 <
-(void)
+return (void)
 
  This method can be used to set the isolation level while the transaction is
  already active. However this is not supported by all DBMS so you might rather
  specify the isolation level directly when calling 'begin()'.
+
     [$level] (string) The transaction isolation level to use for this
     transaction. This can be one of 'READ_UNCOMMITTED', 'READ_COMMITTED',
     'REPEATABLE_READ' and 'SERIALIZABLE' but also a string containing DBMS
     specific syntax to be used after 'SET TRANSACTION ISOLATION LEVEL'.
+
+
+*yii/db/Transaction::getLevel*				public
+>
+ getLevel()
+<
+return (integer) The current nesting level of the transaction.
+
 
 
 

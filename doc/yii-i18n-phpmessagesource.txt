@@ -22,16 +22,20 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $forceTranslation			*yii/i18n/PhpMessageSource::$forceTranslation*
+
  See |yii/i18n/MessageSource::$forceTranslation|
 
 $sourceLanguage				*yii/i18n/PhpMessageSource::$sourceLanguage*
+
  See |yii/i18n/MessageSource::$sourceLanguage|
 
 $basePath				*yii/i18n/PhpMessageSource::$basePath*
+
  (string) The base path for all translated messages. Defaults to
  '@app/messages'.
 
 $fileMap				*yii/i18n/PhpMessageSource::$fileMap*
+
  (array) Mapping between message categories and the corresponding message file
  paths. The file paths are relative to 'basePath'. For example,
 
@@ -43,6 +47,7 @@ $fileMap				*yii/i18n/PhpMessageSource::$fileMap*
 
 
 $behaviors				*yii/i18n/PhpMessageSource::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 
@@ -50,103 +55,129 @@ $behaviors				*yii/i18n/PhpMessageSource::$behaviors*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/i18n/PhpMessageSource::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/i18n/PhpMessageSource::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/i18n/PhpMessageSource::init*				public
+
  See |yii/i18n/MessageSource::init|
 
 
 *yii/i18n/PhpMessageSource::__get*			public
+
  See |yii/base/Component::__get|
 
 
 *yii/i18n/PhpMessageSource::__set*			public
+
  See |yii/base/Component::__set|
 
 
 *yii/i18n/PhpMessageSource::__isset*			public
+
  See |yii/base/Component::__isset|
 
 
 *yii/i18n/PhpMessageSource::__unset*			public
+
  See |yii/base/Component::__unset|
 
 
 *yii/i18n/PhpMessageSource::__call*			public
+
  See |yii/base/Component::__call|
 
 
 *yii/i18n/PhpMessageSource::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/i18n/PhpMessageSource::canGetProperty*		public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/i18n/PhpMessageSource::canSetProperty*		public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/i18n/PhpMessageSource::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/i18n/PhpMessageSource::__clone*			public
+
  See |yii/base/Component::__clone|
 
 
 *yii/i18n/PhpMessageSource::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/i18n/PhpMessageSource::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/i18n/PhpMessageSource::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/i18n/PhpMessageSource::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/i18n/PhpMessageSource::trigger*			public
+
  See |yii/base/Component::trigger|
 
 
 *yii/i18n/PhpMessageSource::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/i18n/PhpMessageSource::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/i18n/PhpMessageSource::attachBehavior*		public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/i18n/PhpMessageSource::attachBehaviors*		public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/i18n/PhpMessageSource::detachBehavior*		public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/i18n/PhpMessageSource::detachBehaviors*		public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/i18n/PhpMessageSource::ensureBehaviors*		public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -154,7 +185,7 @@ METHOD DETAILS
 >
  loadMessages($category, $language)
 <
-(array) The loaded messages. The keys are original messages, and the values
+return (array) The loaded messages. The keys are original messages, and the values
 are the translated messages.
 
  If translation for specific locale code such as 'en-US' isn't found it tries
@@ -163,15 +194,18 @@ are the translated messages.
  specific than 'sourceLanguage', the method will try to load the messages for
  'sourceLanguage'. For example: 'sourceLanguage' is 'en-GB', $language is
  'en'. The method will load the messages for 'en' and merge them over 'en-GB'.
+
     [$category] (string) The message category
     [$language] (string) The target language
 
 
 *yii/i18n/PhpMessageSource::translate*			public
+
  See |yii/i18n/MessageSource::translate|
 
 
 *yii/i18n/PhpMessageSource::translateMessage*		protected
+
  See |yii/i18n/MessageSource::translateMessage|
 
 
@@ -179,11 +213,12 @@ are the translated messages.
 >
  loadFallbackMessages($category, $fallbackLanguage, $messages, $originalMessageFile)
 <
-(array) The loaded messages. The keys are original messages, and the values
+return (array) The loaded messages. The keys are original messages, and the values
 are the translated messages.
 
  Method tries to load the $category messages for the $fallbackLanguage and
  adds them to the $messages array.
+
     [$category] (string) The message category
     [$fallbackLanguage] (string) The target fallback language
     [$messages] (array) The array of previously loaded translation messages.
@@ -197,7 +232,7 @@ are the translated messages.
 >
  getMessageFilePath($category, $language)
 <
-(string) Path to message file
+return (string) Path to message file
 
     [$category] (string) The message category
     [$language] (string) The target language
@@ -207,7 +242,7 @@ are the translated messages.
 >
  loadMessagesFromFile($messageFile)
 <
-(array|null) Array of messages or null if file not found
+return (array|null) Array of messages or null if file not found
 
     [$messageFile] (string) Path to message file
 

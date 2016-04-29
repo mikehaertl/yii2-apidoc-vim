@@ -7,23 +7,29 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/sphinx/Schema::$db*
+
  (\yii\sphinx\Connection) The Sphinx connection
 
 $typeMap				*yii/sphinx/Schema::$typeMap*
+
  (array) Mapping from physical column types (keys) to abstract column types
  (values)
 
 $indexSchemas				*yii/sphinx/Schema::$indexSchemas*
+
  (\yii\sphinx\IndexSchema[]) The metadata for all indexes in the Sphinx. Each
  array element is an instance of 'IndexSchema' or its child class.
 
 $indexNames				*yii/sphinx/Schema::$indexNames*
+
  (string[]) All index names in the Sphinx.
 
 $indexTypes				*yii/sphinx/Schema::$indexTypes*
+
  (array) All index types in the Sphinx in format: index name => index type.
 
 $queryBuilder				*yii/sphinx/Schema::$queryBuilder*
+
  (\yii\sphinx\QueryBuilder) The query builder for this connection.
 
 
@@ -31,51 +37,64 @@ $queryBuilder				*yii/sphinx/Schema::$queryBuilder*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/sphinx/Schema::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/sphinx/Schema::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/sphinx/Schema::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/sphinx/Schema::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/sphinx/Schema::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/sphinx/Schema::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/sphinx/Schema::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/sphinx/Schema::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/sphinx/Schema::hasProperty*				public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/sphinx/Schema::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/sphinx/Schema::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/sphinx/Schema::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -83,7 +102,7 @@ METHOD DETAILS
 >
  loadIndexSchema($name)
 <
-(\yii\sphinx\IndexSchema) Driver dependent index metadata. Null if the index
+return (\yii\sphinx\IndexSchema) Driver dependent index metadata. Null if the index
 does not exist.
 
     [$name] (string) Index name
@@ -93,7 +112,7 @@ does not exist.
 >
  resolveIndexNames($index, $name)
 <
-(void)
+return (void)
 
     [$index] (\yii\sphinx\IndexSchema) The index metadata object
     [$name] (string) The index name
@@ -103,7 +122,7 @@ does not exist.
 >
  resolveIndexType($index)
 <
-(void)
+return (void)
 
     [$index] (\yii\sphinx\IndexSchema) The index metadata object
 
@@ -112,7 +131,7 @@ does not exist.
 >
  getIndexSchema($name, $refresh='false')
 <
-(\yii\sphinx\IndexSchema) Index metadata. Null if the named index does not
+return (\yii\sphinx\IndexSchema) Index metadata. Null if the named index does not
 exist.
 
     [$name] (string) Index name. The index name may contain schema name if
@@ -125,7 +144,7 @@ exist.
 >
  getCacheKey($name)
 <
-(mixed) The cache key
+return (mixed) The cache key
 
     [$name] (string) The index name
 
@@ -134,7 +153,7 @@ exist.
 >
  getCacheTag()
 <
-(string) The cache tag name
+return (string) The cache tag name
 
  This allows 'refresh()' to invalidate all cached index schemas.
 
@@ -143,7 +162,7 @@ exist.
 >
  getIndexSchemas($refresh='false')
 <
-(\yii\sphinx\IndexSchema[]) The metadata for all indexes in the Sphinx. Each
+return (\yii\sphinx\IndexSchema[]) The metadata for all indexes in the Sphinx. Each
 array element is an instance of 'IndexSchema' or its child class.
 
     [$refresh] (boolean) Whether to fetch the latest available index schemas.
@@ -154,7 +173,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  getIndexNames($refresh='false')
 <
-(string[]) All index names in the Sphinx.
+return (string[]) All index names in the Sphinx.
 
     [$refresh] (boolean) Whether to fetch the latest available index names. If
     this is false, index names fetched previously (if available) will be
@@ -165,7 +184,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  getIndexTypes($refresh='false')
 <
-(array) All index types in the Sphinx in format: index name => index type.
+return (array) All index types in the Sphinx in format: index name => index type.
 
     [$refresh] (boolean) Whether to fetch the latest available index types. If
     this is false, index types fetched previously (if available) will be
@@ -176,7 +195,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  initIndexesInfo()
 <
-(void)
+return (void)
 
 
 
@@ -184,7 +203,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  findIndexes()
 <
-(array) All index names in the Sphinx.
+return (array) All index names in the Sphinx.
 
 
 
@@ -192,7 +211,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  getQueryBuilder()
 <
-(\yii\sphinx\QueryBuilder) The query builder for this connection.
+return (\yii\sphinx\QueryBuilder) The query builder for this connection.
 
 
 
@@ -200,7 +219,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  getPdoType($data)
 <
-(integer) The PDO type
+return (integer) The PDO type
 
     [$data] (mixed) The data whose PDO type is to be determined
 
@@ -209,7 +228,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  refresh()
 <
-(void)
+return (void)
 
  This method cleans up all cached index schemas so that they can be re-created
  later to reflect the Sphinx schema change.
@@ -219,7 +238,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  createQueryBuilder()
 <
-(\yii\sphinx\QueryBuilder) Query builder instance
+return (\yii\sphinx\QueryBuilder) Query builder instance
 
 
 
@@ -227,10 +246,11 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  quoteValue($str)
 <
-(string) The properly quoted string
+return (string) The properly quoted string
 
  Note that if the parameter is not a string, it will be returned without
  change.
+
     [$str] (string) String to be quoted
 
 
@@ -238,11 +258,12 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  quoteIndexName($name)
 <
-(string) The properly quoted index name
+return (string) The properly quoted index name
 
  If the index name contains schema prefix, the prefix will also be properly
  quoted. If the index name is already quoted or contains '(' or '{{', then
  this method will do nothing.
+
     [$name] (string) Index name
 
 
@@ -250,11 +271,12 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  quoteColumnName($name)
 <
-(string) The properly quoted column name
+return (string) The properly quoted column name
 
  If the column name contains prefix, the prefix will also be properly quoted.
  If the column name is already quoted or contains '(', ''' or '{{', then this
  method will do nothing.
+
     [$name] (string) Column name
 
 
@@ -262,9 +284,10 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  quoteSimpleIndexName($name)
 <
-(string) The properly quoted index name
+return (string) The properly quoted index name
 
  A simple index name has no schema prefix.
+
     [$name] (string) Index name
 
 
@@ -272,9 +295,10 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  quoteSimpleColumnName($name)
 <
-(string) The properly quoted column name
+return (string) The properly quoted column name
 
  A simple column name has no prefix.
+
     [$name] (string) Column name
 
 
@@ -282,10 +306,11 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  getRawIndexName($name)
 <
-(string) The real name of the given index name
+return (string) The real name of the given index name
 
  This method will strip off curly brackets from the given index name and
  replace the percentage character '%' with 'Connection::indexPrefix'.
+
     [$name] (string) The index name to be converted
 
 
@@ -293,7 +318,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  getColumnPhpType($column)
 <
-(string) PHP type name
+return (string) PHP type name
 
     [$column] (\yii\sphinx\ColumnSchema) The column schema information
 
@@ -302,7 +327,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  findColumns($index)
 <
-(boolean) Whether the index exists in the database
+return (boolean) Whether the index exists in the database
 
     [$index] (\yii\sphinx\IndexSchema) The index metadata
 
@@ -311,7 +336,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  loadColumnSchema($info)
 <
-(\yii\sphinx\ColumnSchema) The column schema object
+return (\yii\sphinx\ColumnSchema) The column schema object
 
     [$info] (array) Column information
 
@@ -320,7 +345,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  convertException($e, $rawSql)
 <
-(\yii\db\Exception) 
+return (\yii\db\Exception) 
 
     [$e] (\Exception) 
     [$rawSql] (string) SQL that produced exception
@@ -330,7 +355,7 @@ array element is an instance of 'IndexSchema' or its child class.
 >
  isReadQuery($sql)
 <
-(boolean) Whether a SQL statement is for read purpose.
+return (boolean) Whether a SQL statement is for read purpose.
 
     [$sql] (string) The SQL statement
 

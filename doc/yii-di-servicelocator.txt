@@ -5,12 +5,12 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/base/Application|
-|yii/base/Module|
-|yii/console/Application|
 |yii/web/Application|
-|yii/gii/Module|
+|yii/base/Module|
+|yii/base/Application|
+|yii/console/Application|
 |yii/debug/Module|
+|yii/gii/Module|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -46,9 +46,11 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $behaviors				*yii/di/ServiceLocator::$behaviors*
+
  See |yii/base/Component::$behaviors|
 
 $components				*yii/di/ServiceLocator::$components*
+
  (array) The list of the component definitions or the loaded component
  instances (ID => definition or instance).
 
@@ -57,15 +59,19 @@ $components				*yii/di/ServiceLocator::$components*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/di/ServiceLocator::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/di/ServiceLocator::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/di/ServiceLocator::init*				public
+
  See |yii/base/Object::init|
 
 
@@ -73,14 +79,16 @@ METHOD DETAILS
 >
  __get($name)
 <
-(mixed) The named property value
+return (mixed) The named property value
 
  This method is overridden to support accessing components like reading
  properties.
+
     [$name] (string) Component or property name
 
 
 *yii/di/ServiceLocator::__set*				public
+
  See |yii/base/Component::__set|
 
 
@@ -88,86 +96,106 @@ METHOD DETAILS
 >
  __isset($name)
 <
-(boolean) Whether the property value is null
+return (boolean) Whether the property value is null
 
  This method overrides the parent implementation by checking if the named
  component is loaded.
+
     [$name] (string) The property name or the event name
 
 
 *yii/di/ServiceLocator::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/di/ServiceLocator::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/di/ServiceLocator::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/di/ServiceLocator::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/di/ServiceLocator::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/di/ServiceLocator::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/di/ServiceLocator::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/di/ServiceLocator::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/di/ServiceLocator::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/di/ServiceLocator::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/di/ServiceLocator::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/di/ServiceLocator::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/di/ServiceLocator::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/di/ServiceLocator::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/di/ServiceLocator::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/di/ServiceLocator::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/di/ServiceLocator::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/di/ServiceLocator::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/di/ServiceLocator::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -175,7 +203,7 @@ METHOD DETAILS
 >
  has($id, $checkInstance='false')
 <
-(boolean) Whether the locator has the specified component definition or has
+return (boolean) Whether the locator has the specified component definition or has
 instantiated the component.
 
  This method may return different results depending on the value of
@@ -187,6 +215,7 @@ instantiated the component.
  definition. 
    - If '$checkInstance' is true, the method will return a value
    indicating whether the locator has   instantiated the specified component.
+
     [$id] (string) Component ID (e.g. 'db').
     [$checkInstance] (boolean) Whether the method should check if the
     component is shared and instantiated.
@@ -196,7 +225,7 @@ instantiated the component.
 >
  get($id, $throwException='true')
 <
-(object|null) The component of the specified ID. If '$throwException' is false
+return (object|null) The component of the specified ID. If '$throwException' is false
 and '$id' is not registered before, null will be returned.
 
     [$id] (string) Component ID (e.g. 'db').
@@ -208,7 +237,7 @@ and '$id' is not registered before, null will be returned.
 >
  set($id, $definition)
 <
-(void)
+return (void)
 
  For example,
 
@@ -234,6 +263,7 @@ and '$id' is not registered before, null will be returned.
 
  If a component definition with the same ID already exists, it will be
  overwritten.
+
     [$id] (string) Component ID (e.g. 'db').
     [$definition] (mixed) The component definition to be registered with this
     locator. It can be one of the following:
@@ -255,7 +285,7 @@ and '$id' is not registered before, null will be returned.
 >
  clear($id)
 <
-(void)
+return (void)
 
     [$id] (string) The component ID
 
@@ -264,7 +294,7 @@ and '$id' is not registered before, null will be returned.
 >
  getComponents($returnDefinitions='true')
 <
-(array) The list of the component definitions or the loaded component
+return (array) The list of the component definitions or the loaded component
 instances (ID => definition or instance).
 
     [$returnDefinitions] (boolean) Whether to return component definitions
@@ -275,7 +305,7 @@ instances (ID => definition or instance).
 >
  setComponents($components)
 <
-(void)
+return (void)
 
  This is the bulk version of 'set()'. The parameter should be an array whose
  keys are component IDs and values the corresponding component definitions.
@@ -298,6 +328,7 @@ instances (ID => definition or instance).
            'db' => 'db',
        ],
    ]
+
 
 
     [$components] (array) Component definitions or instances

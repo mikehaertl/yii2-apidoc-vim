@@ -5,12 +5,12 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/db/cubrid/QueryBuilder|
+|yii/db/mysql/QueryBuilder|
 |yii/db/sqlite/QueryBuilder|
 |yii/db/mssql/QueryBuilder|
-|yii/db/mysql/QueryBuilder|
-|yii/db/pgsql/QueryBuilder|
 |yii/db/oci/QueryBuilder|
-|yii/db/cubrid/QueryBuilder|
+|yii/db/pgsql/QueryBuilder|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -25,20 +25,24 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/db/QueryBuilder::$db*
+
  (\yii\db\Connection) The database connection.
 
 $separator				*yii/db/QueryBuilder::$separator*
+
  (string) The separator between different fragments of a SQL statement.
  Defaults to an empty space. This is mainly used by 'build()' when generating
  a SQL statement.
 
 $typeMap				*yii/db/QueryBuilder::$typeMap*
+
  (array) The abstract column types mapped to physical column types. This is
  mainly used to support creating/modifying tables using DB-independent data
  type specifications. Child classes should override this property to declare
  supported type mappings.
 
 $conditionBuilders			*yii/db/QueryBuilder::$conditionBuilders*
+
  (array) Map of query condition to builder methods. These methods are used by
  'buildCondition' to build SQL conditions from array syntax.
 
@@ -47,7 +51,9 @@ $conditionBuilders			*yii/db/QueryBuilder::$conditionBuilders*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/QueryBuilder::className*				public
+
  See |yii/base/Object::className|
 
 
@@ -55,7 +61,7 @@ METHOD DETAILS
 >
  __construct($connection, $config='[]')
 <
-(void)
+return (void)
 
     [$connection] (\yii\db\Connection) The database connection.
     [$config] (array) Name-value pairs that will be used to initialize the
@@ -63,42 +69,52 @@ METHOD DETAILS
 
 
 *yii/db/QueryBuilder::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/db/QueryBuilder::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/QueryBuilder::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/QueryBuilder::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/QueryBuilder::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/QueryBuilder::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/QueryBuilder::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/QueryBuilder::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/QueryBuilder::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/QueryBuilder::hasMethod*				public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -106,7 +122,7 @@ METHOD DETAILS
 >
  build($query, $params='[]')
 <
-(array) The generated SQL statement (the first array element) and the
+return (array) The generated SQL statement (the first array element) and the
 corresponding parameters to be bound to the SQL statement (the second array
 element). The parameters returned include those provided in '$params'.
 
@@ -121,7 +137,7 @@ element). The parameters returned include those provided in '$params'.
 >
  insert($table, $columns, $params)
 <
-(string) The INSERT SQL
+return (string) The INSERT SQL
 
  For example,
 
@@ -131,6 +147,7 @@ element). The parameters returned include those provided in '$params'.
    ], $params);
 
  The method will properly escape the table and column names.
+
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
     table.
@@ -142,7 +159,7 @@ element). The parameters returned include those provided in '$params'.
 >
  batchInsert($table, $columns, $rows)
 <
-(string) The batch INSERT SQL statement
+return (string) The batch INSERT SQL statement
 
  For example,
 
@@ -156,6 +173,7 @@ element). The parameters returned include those provided in '$params'.
 
  The method will properly escape the column names, and quote the values to be
  inserted.
+
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch inserted into the table
@@ -165,7 +183,7 @@ element). The parameters returned include those provided in '$params'.
 >
  update($table, $columns, $condition, $params)
 <
-(string) The UPDATE SQL
+return (string) The UPDATE SQL
 
  For example,
 
@@ -173,6 +191,7 @@ element). The parameters returned include those provided in '$params'.
    $sql = $queryBuilder->update('user', ['status' => 1], 'age > 30', $params);
 
  The method will properly escape the table and column names.
+
     [$table] (string) The table to be updated.
     [$columns] (array) The column data (name => value) to be updated.
     [$condition] (array|string) The condition that will be put in the WHERE
@@ -185,13 +204,14 @@ element). The parameters returned include those provided in '$params'.
 >
  delete($table, $condition, $params)
 <
-(string) The DELETE SQL
+return (string) The DELETE SQL
 
  For example,
 
    $sql = $queryBuilder->delete('user', 'status = 0');
 
  The method will properly escape the table and column names.
+
     [$table] (string) The table where the data will be deleted from.
     [$condition] (array|string) The condition that will be put in the WHERE
     part. Please refer to 'Query::where()' on how to specify condition.
@@ -203,7 +223,7 @@ element). The parameters returned include those provided in '$params'.
 >
  createTable($table, $columns, $options='null')
 <
-(string) The SQL statement for creating a new DB table.
+return (string) The SQL statement for creating a new DB table.
 
  The columns in the new  table should be specified as name-definition pairs
  (e.g. 'name' => 'string'), where name stands for a column name which will be
@@ -223,6 +243,7 @@ element). The parameters returned include those provided in '$params'.
    ]);
 
 
+
     [$table] (string) The name of the table to be created. The name will be
     properly quoted by the method.
     [$columns] (array) The columns (name => definition) in the new table.
@@ -234,7 +255,7 @@ element). The parameters returned include those provided in '$params'.
 >
  renameTable($oldName, $newName)
 <
-(string) The SQL statement for renaming a DB table.
+return (string) The SQL statement for renaming a DB table.
 
     [$oldName] (string) The table to be renamed. The name will be properly
     quoted by the method.
@@ -246,7 +267,7 @@ element). The parameters returned include those provided in '$params'.
 >
  dropTable($table)
 <
-(string) The SQL statement for dropping a DB table.
+return (string) The SQL statement for dropping a DB table.
 
     [$table] (string) The table to be dropped. The name will be properly
     quoted by the method.
@@ -256,7 +277,7 @@ element). The parameters returned include those provided in '$params'.
 >
  addPrimaryKey($name, $table, $columns)
 <
-(string) The SQL statement for adding a primary key constraint to an existing
+return (string) The SQL statement for adding a primary key constraint to an existing
 table.
 
     [$name] (string) The name of the primary key constraint.
@@ -270,7 +291,7 @@ table.
 >
  dropPrimaryKey($name, $table)
 <
-(string) The SQL statement for removing a primary key constraint from an
+return (string) The SQL statement for removing a primary key constraint from an
 existing table.
 
     [$name] (string) The name of the primary key constraint to be removed.
@@ -282,7 +303,7 @@ existing table.
 >
  truncateTable($table)
 <
-(string) The SQL statement for truncating a DB table.
+return (string) The SQL statement for truncating a DB table.
 
     [$table] (string) The table to be truncated. The name will be properly
     quoted by the method.
@@ -292,7 +313,7 @@ existing table.
 >
  addColumn($table, $column, $type)
 <
-(string) The SQL statement for adding a new column.
+return (string) The SQL statement for adding a new column.
 
     [$table] (string) The table that the new column will be added to. The
     table name will be properly quoted by the method.
@@ -309,7 +330,7 @@ existing table.
 >
  dropColumn($table, $column)
 <
-(string) The SQL statement for dropping a DB column.
+return (string) The SQL statement for dropping a DB column.
 
     [$table] (string) The table whose column is to be dropped. The name will
     be properly quoted by the method.
@@ -321,7 +342,7 @@ existing table.
 >
  renameColumn($table, $oldName, $newName)
 <
-(string) The SQL statement for renaming a DB column.
+return (string) The SQL statement for renaming a DB column.
 
     [$table] (string) The table whose column is to be renamed. The name will
     be properly quoted by the method.
@@ -335,7 +356,7 @@ existing table.
 >
  alterColumn($table, $column, $type)
 <
-(string) The SQL statement for changing the definition of a column.
+return (string) The SQL statement for changing the definition of a column.
 
     [$table] (string) The table whose column is to be changed. The table name
     will be properly quoted by the method.
@@ -352,10 +373,11 @@ existing table.
 >
  addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
 <
-(string) The SQL statement for adding a foreign key constraint to an existing
+return (string) The SQL statement for adding a foreign key constraint to an existing
 table.
 
  The method will properly quote the table and column names.
+
     [$name] (string) The name of the foreign key constraint.
     [$table] (string) The table that the foreign key constraint will be added
     to.
@@ -376,7 +398,7 @@ table.
 >
  dropForeignKey($name, $table)
 <
-(string) The SQL statement for dropping a foreign key constraint.
+return (string) The SQL statement for dropping a foreign key constraint.
 
     [$name] (string) The name of the foreign key constraint to be dropped. The
     name will be properly quoted by the method.
@@ -388,7 +410,7 @@ table.
 >
  createIndex($name, $table, $columns, $unique='false')
 <
-(string) The SQL statement for creating a new index.
+return (string) The SQL statement for creating a new index.
 
     [$name] (string) The name of the index. The name will be properly quoted
     by the method.
@@ -405,7 +427,7 @@ table.
 >
  dropIndex($name, $table)
 <
-(string) The SQL statement for dropping an index.
+return (string) The SQL statement for dropping an index.
 
     [$name] (string) The name of the index to be dropped. The name will be
     properly quoted by the method.
@@ -417,10 +439,11 @@ table.
 >
  resetSequence($table, $value='null')
 <
-(string) The SQL statement for resetting sequence
+return (string) The SQL statement for resetting sequence
 
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
+
     [$table] (string) The name of the table whose primary key sequence will be
     reset
     [$value] (array|string) The value for the primary key of the next new row
@@ -432,7 +455,7 @@ table.
 >
  checkIntegrity($check='true', $schema='''', $table='''')
 <
-(string) The SQL statement for checking integrity
+return (string) The SQL statement for checking integrity
 
     [$check] (boolean) Whether to turn on or off the integrity check.
     [$schema] (string) The schema of the tables. Defaults to empty string,
@@ -441,11 +464,59 @@ table.
     no table will be changed.
 
 
+*yii/db/QueryBuilder::addCommentOnColumn*			public
+>
+ addCommentOnColumn($table, $column, $comment)
+<
+return (string) The SQL statement for adding comment on column
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$column] (string) The name of the column to be commented. The column name
+    will be properly quoted by the method.
+    [$comment] (string) The text of the comment to be added. The comment will
+    be properly quoted by the method.
+
+
+*yii/db/QueryBuilder::addCommentOnTable*			public
+>
+ addCommentOnTable($table, $comment)
+<
+return (string) The SQL statement for adding comment on table
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$comment] (string) The text of the comment to be added. The comment will
+    be properly quoted by the method.
+
+
+*yii/db/QueryBuilder::dropCommentFromColumn*		public
+>
+ dropCommentFromColumn($table, $column)
+<
+return (string) The SQL statement for adding comment on column
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+    [$column] (string) The name of the column to be commented. The column name
+    will be properly quoted by the method.
+
+
+*yii/db/QueryBuilder::dropCommentFromTable*		public
+>
+ dropCommentFromTable($table)
+<
+return (string) The SQL statement for adding comment on column
+
+    [$table] (string) The table whose column is to be commented. The table
+    name will be properly quoted by the method.
+
+
 *yii/db/QueryBuilder::getColumnType*			public
 >
  getColumnType($type)
 <
-(string) Physical column type.
+return (string) Physical column type.
 
  The conversion is done using the type map specified in 'typeMap'. The
  following abstract column types are supported (using MySQL as an example to
@@ -456,6 +527,10 @@ table.
    "int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY" 
    - 'bigpk': an auto-incremental primary key type, will be converted
    into "bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY" 
+   - 'unsignedpk': an unsigned auto-incremental primary key type, will
+   be converted into "int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY
+   KEY" 
+   - 'char': char type, will be converted into "char(1)" 
    - 'string': string type, will be converted into "varchar(255)" 
    - 'text': a long string type, will be converted into "text" 
    - 'smallint': a small integer type, will be converted into
@@ -485,6 +560,7 @@ table.
 
  If a type cannot be found in 'typeMap', it will be returned without any
  change.
+
     [$type] (string|\yii\db\ColumnSchemaBuilder) Abstract column type
 
 
@@ -492,7 +568,7 @@ table.
 >
  buildSelect($columns, $params, $distinct='false', $selectOption='null')
 <
-(string) The SELECT clause built from 'Query::$select'.
+return (string) The SELECT clause built from 'Query::$select'.
 
     [$columns] (array) 
     [$params] (array) The binding parameters to be populated
@@ -504,7 +580,7 @@ table.
 >
  buildFrom($tables, $params)
 <
-(string) The FROM clause built from 'Query::$from'.
+return (string) The FROM clause built from 'Query::$from'.
 
     [$tables] (array) 
     [$params] (array) The binding parameters to be populated
@@ -514,7 +590,7 @@ table.
 >
  buildJoin($joins, $params)
 <
-(string) The JOIN clause built from 'Query::$join'.
+return (string) The JOIN clause built from 'Query::$join'.
 
     [$joins] (array) 
     [$params] (array) The binding parameters to be populated
@@ -524,7 +600,7 @@ table.
 >
  buildWhere($condition, $params)
 <
-(string) The WHERE clause built from 'Query::$where'.
+return (string) The WHERE clause built from 'Query::$where'.
 
     [$condition] (string|array) 
     [$params] (array) The binding parameters to be populated
@@ -534,7 +610,7 @@ table.
 >
  buildGroupBy($columns)
 <
-(string) The GROUP BY clause
+return (string) The GROUP BY clause
 
     [$columns] (array) 
 
@@ -543,7 +619,7 @@ table.
 >
  buildHaving($condition, $params)
 <
-(string) The HAVING clause built from 'Query::$having'.
+return (string) The HAVING clause built from 'Query::$having'.
 
     [$condition] (string|array) 
     [$params] (array) The binding parameters to be populated
@@ -553,7 +629,7 @@ table.
 >
  buildOrderByAndLimit($sql, $orderBy, $limit, $offset)
 <
-(string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
+return (string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
 
     [$sql] (string) The existing SQL (without ORDER BY/LIMIT/OFFSET)
     [$orderBy] (array) The order by columns. See 'Query::orderBy' for more
@@ -567,7 +643,7 @@ table.
 >
  buildOrderBy($columns)
 <
-(string) The ORDER BY clause built from 'Query::$orderBy'.
+return (string) The ORDER BY clause built from 'Query::$orderBy'.
 
     [$columns] (array) 
 
@@ -576,7 +652,7 @@ table.
 >
  buildLimit($limit, $offset)
 <
-(string) The LIMIT and OFFSET clauses
+return (string) The LIMIT and OFFSET clauses
 
     [$limit] (integer) 
     [$offset] (integer) 
@@ -586,7 +662,7 @@ table.
 >
  hasLimit($limit)
 <
-(boolean) Whether the limit is effective
+return (boolean) Whether the limit is effective
 
     [$limit] (mixed) The given limit
 
@@ -595,7 +671,7 @@ table.
 >
  hasOffset($offset)
 <
-(boolean) Whether the offset is effective
+return (boolean) Whether the offset is effective
 
     [$offset] (mixed) The given offset
 
@@ -604,7 +680,7 @@ table.
 >
  buildUnion($unions, $params)
 <
-(string) The UNION clause built from 'Query::$union'.
+return (string) The UNION clause built from 'Query::$union'.
 
     [$unions] (array) 
     [$params] (array) The binding parameters to be populated
@@ -614,9 +690,10 @@ table.
 >
  buildColumns($columns)
 <
-(string) The processing result
+return (string) The processing result
 
  It will join all columns into a string with comma as separators.
+
     [$columns] (string|array) The columns to be processed
 
 
@@ -624,7 +701,7 @@ table.
 >
  buildCondition($condition, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$condition] (string|array|\yii\db\Expression) The condition
     specification. Please refer to 'Query::where()' on how to specify a
@@ -636,7 +713,7 @@ table.
 >
  buildHashCondition($condition, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$condition] (array) The condition specification.
     [$params] (array) The binding parameters to be populated
@@ -646,7 +723,7 @@ table.
 >
  buildAndCondition($operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The SQL expressions to connect.
@@ -657,7 +734,7 @@ table.
 >
  buildNotCondition($operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The SQL expressions to connect.
@@ -668,7 +745,7 @@ table.
 >
  buildBetweenCondition($operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$operator] (string) The operator to use (e.g. 'BETWEEN' or 'NOT BETWEEN')
     [$operands] (array) The first operand is the column name. The second and
@@ -680,7 +757,7 @@ table.
 >
  buildInCondition($operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$operator] (string) The operator to use (e.g. 'IN' or 'NOT IN')
     [$operands] (array) The first operand is the column name. If it is an
@@ -695,7 +772,7 @@ table.
 >
  buildSubqueryInCondition($operator, $columns, $values, $params)
 <
-(string) SQL
+return (string) SQL
 
     [$operator] (string) 
     [$columns] (array) 
@@ -707,10 +784,10 @@ table.
 >
  buildCompositeInCondition($operator, $columns, $values, $params)
 <
-(string) SQL
+return (string) SQL
 
     [$operator] (string) 
-    [$columns] (array) 
+    [$columns] (array|\Traversable) 
     [$values] (array) 
     [$params] (array) 
 
@@ -719,7 +796,7 @@ table.
 >
  buildLikeCondition($operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$operator] (string) The operator to use (e.g. 'LIKE', 'NOT LIKE', 'OR
     LIKE' or 'OR NOT LIKE')
@@ -747,7 +824,7 @@ table.
 >
  buildExistsCondition($operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$operator] (string) The operator to use (e.g. 'EXISTS' or 'NOT EXISTS')
     [$operands] (array) Contains only one element which is a 'Query' object
@@ -759,12 +836,21 @@ table.
 >
  buildSimpleCondition($operator, $operands, $params)
 <
-(string) The generated SQL expression
+return (string) The generated SQL expression
 
     [$operator] (string) The operator to use. Anything could be used e.g. '>',
     '<=', etc.
     [$operands] (array) Contains two column names.
     [$params] (array) The binding parameters to be populated
+
+
+*yii/db/QueryBuilder::selectExists*			public
+>
+ selectExists($rawSql)
+<
+return (string) The SELECT EXISTS() SQL statement.
+
+    [$rawSql] (string) The subquery in a raw form to select from.
 
 
 

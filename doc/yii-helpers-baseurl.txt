@@ -13,15 +13,24 @@ DESCRIPTION
  Do not use BaseUrl. Use 'Url' instead.
 
 
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$urlManager				*yii/helpers/BaseUrl::$urlManager*
+
+ (\yii\web\UrlManager) URL manager to use for creating URLs
+
+
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
 
 *yii/helpers/BaseUrl::toRoute*				public
 >
  toRoute($route, $scheme='false')
 <
-(string) The generated URL
+return (string) The generated URL
 
  This method will use '\yii\web\UrlManager' to create a URL.
 
@@ -59,21 +68,22 @@ METHOD DETAILS
 
  Below are some examples of using this method:
 
-   // /index.php?r=site/index
+   // /index.php?r=site%2Findex
    echo Url::toRoute('site/index');
 
-   // /index.php?r=site/index&src=ref1#name
+   // /index.php?r=site%2Findex&src=ref1#name
    echo Url::toRoute(['site/index', 'src' => 'ref1', '#' => 'name']);
 
-   // http://www.example.com/index.php?r=site/index
+   // http://www.example.com/index.php?r=site%2Findex
    echo Url::toRoute('site/index', true);
 
-   // https://www.example.com/index.php?r=site/index
+   // https://www.example.com/index.php?r=site%2Findex
    echo Url::toRoute('site/index', 'https');
 
-   // /index.php?r=post/index     assume the alias "@posts" is defined as
+   // /index.php?r=post%2Findex     assume the alias "@posts" is defined as
  "post/index"
    echo Url::toRoute('@posts');
+
 
 
     [$route] (string|array) Use a string to represent a route (e.g. 'index',
@@ -93,7 +103,7 @@ METHOD DETAILS
 >
  normalizeRoute($route)
 <
-(string) Normalized route suitable for UrlManager
+return (string) Normalized route suitable for UrlManager
 
  A relative route is a route without a leading slash, such as "view",
  "post/view".
@@ -111,6 +121,7 @@ METHOD DETAILS
  Starting from version 2.0.2, a route can also be specified as an alias. In
  this case, the alias will be converted into the actual route first before
  conducting the above transformation steps.
+
     [$route] (string) The route. This can be either an absolute route or a
     relative route.
 
@@ -119,7 +130,7 @@ METHOD DETAILS
 >
  to($url='\'\'', $scheme='false')
 <
-(string) The generated URL
+return (string) The generated URL
 
  This method is very similar to 'toRoute()'. The only difference is that this
  method requires a route to be specified as an array only. If a string is
@@ -141,13 +152,13 @@ METHOD DETAILS
 
  Below are some examples of using this method:
 
-   // /index.php?r=site/index
+   // /index.php?r=site%2Findex
    echo Url::to(['site/index']);
 
-   // /index.php?r=site/index&src=ref1#name
+   // /index.php?r=site%2Findex&src=ref1#name
    echo Url::to(['site/index', 'src' => 'ref1', '#' => 'name']);
 
-   // /index.php?r=post/index     assume the alias "@posts" is defined as
+   // /index.php?r=post%2Findex     assume the alias "@posts" is defined as
  "/post/index"
    echo Url::to(['@posts']);
 
@@ -167,6 +178,7 @@ METHOD DETAILS
    echo Url::to('@web/images/logo.gif', 'https');
 
 
+
     [$url] (array|string) The parameter to be used to generate a valid URL
     [$scheme] (boolean|string) The URI scheme to use in the generated URL:
 
@@ -182,7 +194,7 @@ METHOD DETAILS
 >
  base($scheme='false')
 <
-(string) 
+return (string) 
 
     [$scheme] (boolean|string) The URI scheme to use in the returned base URL:
 
@@ -198,7 +210,7 @@ METHOD DETAILS
 >
  remember($url='\'\'', $name='null')
 <
-(void)
+return (void)
 
     [$url] (string|array) The URL to remember. Please refer to 'to()' for
     acceptable formats. If this parameter is not specified, the currently
@@ -212,7 +224,7 @@ METHOD DETAILS
 >
  previous($name='null')
 <
-(string) The URL previously remembered. Null is returned if no URL was
+return (string) The URL previously remembered. Null is returned if no URL was
 remembered with the given name.
 
     [$name] (string) The named associated with the URL that was remembered
@@ -223,7 +235,7 @@ remembered with the given name.
 >
  canonical()
 <
-(string) The canonical URL of the currently requested page
+return (string) The canonical URL of the currently requested page
 
  The canonical URL is constructed using the current controller's
  '\yii\web\Controller::route' and '\yii\web\Controller::actionParams'. You may
@@ -239,7 +251,7 @@ remembered with the given name.
 >
  home($scheme='false')
 <
-(string) Home URL
+return (string) Home URL
 
     [$scheme] (boolean|string) The URI scheme to use for the returned URL:
 
@@ -255,9 +267,10 @@ remembered with the given name.
 >
  isRelative($url)
 <
-(boolean) Whether the URL is relative
+return (boolean) Whether the URL is relative
 
  A relative URL does not have host info part.
+
     [$url] (string) The URL to be checked
 
 
@@ -265,7 +278,7 @@ remembered with the given name.
 >
  current($params='[]', $scheme='false')
 <
-(string) The generated URL
+return (string) The generated URL
 
  You may modify or remove some of the GET parameters, or add additional query
  parameters through the '$params' parameter. In particular, if you specify a
@@ -276,14 +289,15 @@ remembered with the given name.
    // assume $_GET = ['id' => 123, 'src' => 'google'], current route is
  "post/view"
 
-   // /index.php?r=post/view&id=123&src=google
+   // /index.php?r=post%2Fview&id=123&src=google
    echo Url::current();
 
-   // /index.php?r=post/view&id=123
+   // /index.php?r=post%2Fview&id=123
    echo Url::current(['src' => null]);
 
-   // /index.php?r=post/view&id=100&src=google
+   // /index.php?r=post%2Fview&id=100&src=google
    echo Url::current(['id' => 100]);
+
 
 
     [$params] (array) An associative array of parameters that will be merged
@@ -297,6 +311,14 @@ remembered with the given name.
       that in '\yii\web\UrlManager::hostInfo'. 
       - string: generating an absolute URL with the specified scheme
       (either 'http' or 'https').
+
+
+*yii/helpers/BaseUrl::getUrlManager*			protected
+>
+ getUrlManager()
+<
+return (\yii\web\UrlManager) URL manager used to create URLs
+
 
 
 

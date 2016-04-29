@@ -5,9 +5,10 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
+|yii/db/cubrid/ColumnSchemaBuilder|
+|yii/db/mysql/ColumnSchemaBuilder|
+|yii/db/sqlite/ColumnSchemaBuilder|
 |yii/db/oci/ColumnSchemaBuilder|
-|yii/db/mssql/ColumnSchemaBuilder|
-|yii/db/pgsql/ColumnSchemaBuilder|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -19,91 +20,133 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $type					*yii/db/ColumnSchemaBuilder::$type*
+
  (string) The column type definition such as INTEGER, VARCHAR, DATETIME, etc.
 
 $length					*yii/db/ColumnSchemaBuilder::$length*
+
  (integer|string|array) Column size or precision definition. This is what goes
  into the parenthesis after the column type. This can be either a string, an
  integer or an array. If it is an array, the array values will be joined into
  a string separated by comma.
 
 $isNotNull				*yii/db/ColumnSchemaBuilder::$isNotNull*
+
  (boolean) Whether the column is not nullable. If this is 'true', a 'NOT NULL'
  constraint will be added.
 
 $isUnique				*yii/db/ColumnSchemaBuilder::$isUnique*
+
  (boolean) Whether the column values should be unique. If this is 'true', a
  'UNIQUE' constraint will be added.
 
 $check					*yii/db/ColumnSchemaBuilder::$check*
+
  (string) The 'CHECK' constraint for the column.
 
 $default				*yii/db/ColumnSchemaBuilder::$default*
+
  (mixed) Default value of the column.
 
 $isUnsigned				*yii/db/ColumnSchemaBuilder::$isUnsigned*
+
  (boolean) Whether the column values should be unsigned. If this is 'true', an
  'UNSIGNED' keyword will be added.
+
+$after					*yii/db/ColumnSchemaBuilder::$after*
+
+ (string) The column after which this column will be added.
+
+$isFirst				*yii/db/ColumnSchemaBuilder::$isFirst*
+
+ (boolean) Whether this column is to be inserted at the beginning of the
+ table.
+
+$categoryMap				*yii/db/ColumnSchemaBuilder::$categoryMap*
+
+ (array) Mapping of abstract column types (keys) to type categories (values).
+
+$db					*yii/db/ColumnSchemaBuilder::$db*
+
+ (\yii\db\Connection) The current database connection. It is used mainly to
+ escape strings safely when building the final column schema string.
+
+$comment				*yii/db/ColumnSchemaBuilder::$comment*
+
+ (string) Comment value of the column.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/db/ColumnSchemaBuilder::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/db/ColumnSchemaBuilder::__construct*			public
 >
- __construct($type, $length='null', $config='[]')
+ __construct($type, $length='null', $db='null', $config='[]')
 <
-(void)
+return (void)
 
     [$type] (string) Type of the column. See '$type'.
     [$length] (integer|string|array) Length or precision of the column. See
     '$length'.
+    [$db] (\yii\db\Connection) The current database connection. See '$db'.
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties
 
 
 *yii/db/ColumnSchemaBuilder::init*			public
+
  See |yii/base/Object::init|
 
 
 *yii/db/ColumnSchemaBuilder::__get*			public
+
  See |yii/base/Object::__get|
 
 
 *yii/db/ColumnSchemaBuilder::__set*			public
+
  See |yii/base/Object::__set|
 
 
 *yii/db/ColumnSchemaBuilder::__isset*			public
+
  See |yii/base/Object::__isset|
 
 
 *yii/db/ColumnSchemaBuilder::__unset*			public
+
  See |yii/base/Object::__unset|
 
 
 *yii/db/ColumnSchemaBuilder::__call*			public
+
  See |yii/base/Object::__call|
 
 
 *yii/db/ColumnSchemaBuilder::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/db/ColumnSchemaBuilder::canGetProperty*		public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/db/ColumnSchemaBuilder::canSetProperty*		public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/db/ColumnSchemaBuilder::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
 
 
@@ -111,7 +154,7 @@ METHOD DETAILS
 >
  notNull()
 <
-($this) 
+return ($this) 
 
 
 
@@ -119,7 +162,7 @@ METHOD DETAILS
 >
  unique()
 <
-($this) 
+return ($this) 
 
 
 
@@ -127,7 +170,7 @@ METHOD DETAILS
 >
  check($check)
 <
-($this) 
+return ($this) 
 
     [$check] (string) The SQL of the 'CHECK' constraint to be added.
 
@@ -136,24 +179,53 @@ METHOD DETAILS
 >
  defaultValue($default)
 <
-($this) 
+return ($this) 
 
     [$default] (mixed) The default value.
+
+
+*yii/db/ColumnSchemaBuilder::comment*			public
+>
+ comment($comment)
+<
+return ($this) 
+
+    [$comment] (string) The comment
 
 
 *yii/db/ColumnSchemaBuilder::unsigned*			public
 >
  unsigned()
 <
-($this) 
+return ($this) 
 
+
+
+*yii/db/ColumnSchemaBuilder::after*			public
+>
+ after($after)
+<
+return ($this) 
+
+ Note: MySQL, Oracle and Cubrid support only.
+
+    [$after] (string) The column after which $this column will be added.
+
+
+*yii/db/ColumnSchemaBuilder::first*			public
+>
+ first()
+<
+return ($this) 
+
+ Note: MySQL, Oracle and Cubrid support only.
 
 
 *yii/db/ColumnSchemaBuilder::defaultExpression*		public
 >
  defaultExpression($default)
 <
-($this) 
+return ($this) 
 
     [$default] (string) The default value expression.
 
@@ -162,7 +234,7 @@ METHOD DETAILS
 >
  __toString()
 <
-(string) 
+return (string) 
 
 
 
@@ -170,7 +242,7 @@ METHOD DETAILS
 >
  buildLengthString()
 <
-(string) 
+return (string) 
 
 
 
@@ -178,7 +250,7 @@ METHOD DETAILS
 >
  buildNotNullString()
 <
-(string) Returns 'NOT NULL' if 'isNotNull' is true, otherwise it returns an
+return (string) Returns 'NOT NULL' if 'isNotNull' is true, otherwise it returns an
 empty string.
 
 
@@ -187,7 +259,7 @@ empty string.
 >
  buildUniqueString()
 <
-(string) Returns string 'UNIQUE' if 'isUnique' is true, otherwise it returns
+return (string) Returns string 'UNIQUE' if 'isUnique' is true, otherwise it returns
 an empty string.
 
 
@@ -196,7 +268,7 @@ an empty string.
 >
  buildDefaultString()
 <
-(string) String with default value of column.
+return (string) String with default value of column.
 
 
 
@@ -204,7 +276,7 @@ an empty string.
 >
  buildCheckString()
 <
-(string) A string containing the CHECK constraint.
+return (string) A string containing the CHECK constraint.
 
 
 
@@ -212,8 +284,49 @@ an empty string.
 >
  buildUnsignedString()
 <
-(string) A string containing UNSIGNED keyword.
+return (string) A string containing UNSIGNED keyword.
 
+
+
+*yii/db/ColumnSchemaBuilder::buildAfterString*		protected
+>
+ buildAfterString()
+<
+return (string) A string containing the AFTER constraint.
+
+
+
+*yii/db/ColumnSchemaBuilder::buildFirstString*		protected
+>
+ buildFirstString()
+<
+return (string) A string containing the FIRST constraint.
+
+
+
+*yii/db/ColumnSchemaBuilder::getTypeCategory*		protected
+>
+ getTypeCategory()
+<
+return (string) A string containing the column type category name.
+
+
+
+*yii/db/ColumnSchemaBuilder::buildCommentString*		protected
+>
+ buildCommentString()
+<
+return (string) A string containing the COMMENT keyword and the comment itself
+
+
+
+*yii/db/ColumnSchemaBuilder::buildCompleteString*		protected
+>
+ buildCompleteString($format)
+<
+return (string) A string containing the complete column definition.
+
+    [$format] (string) The format of the definition.
 
 
 
