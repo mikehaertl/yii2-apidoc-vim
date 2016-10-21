@@ -67,7 +67,10 @@ return (array) The merged array (the original arrays are not changed.)
  overwrite the former (different from array_merge_recursive). Recursive
  merging will be conducted if both arrays have an element of array type and
  are having the same key. For integer-keyed elements, the elements from the
- latter array will be appended to the former array.
+ latter array will be appended to the former array. You can use
+ 'UnsetArrayValue' object to unset value from previous array or
+ 'ReplaceArrayValue' to force replace former value instead of recursive
+ merging.
 
     [$a] (array) Array to be merged to
     [$b] (array) Array to be merged from. You can specify additional arrays
@@ -496,8 +499,13 @@ return (array) Filtered array
    //     'B' => ['C' => 1],
    // ]
 
- $result = \yii\helpers\ArrayHelper::filter($array, ['B', '!B.C']); // $result
- will be: // [ //     'B' => ['D' => 2], // ] '''
+   $result = \yii\helpers\ArrayHelper::filter($array, ['B', '!B.C']);
+   // $result will be:
+   // [
+   //     'B' => ['D' => 2],
+   // ]
+
+
 
     [$array] (array) Source array
     [$filters] (array) Rules that define array keys which should be left or

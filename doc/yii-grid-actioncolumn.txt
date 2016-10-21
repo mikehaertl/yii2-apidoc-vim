@@ -141,8 +141,15 @@ $urlCreator				*yii/grid/ActionColumn::$urlCreator*
 
  (callable) A callback that creates a button URL using the specified model
  information. The signature of the callback should be the same as that of
- 'createUrl()'. If this property is not set, button URLs will be created using
- 'createUrl()'.
+ 'createUrl()' Since 2.0.10 it can accept additional parameter, which refers
+ to the column instance itself:
+
+   function (string $action, mixed $model, mixed $key, integer $index,
+ ActionColumn $this) {
+       //return string;
+   }
+
+ If this property is not set, button URLs will be created using 'createUrl()'.
 
 $buttonOptions				*yii/grid/ActionColumn::$buttonOptions*
 

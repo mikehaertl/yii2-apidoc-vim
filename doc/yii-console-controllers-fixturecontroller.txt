@@ -57,6 +57,10 @@ $color					*yii/console/controllers/FixtureController::$color*
 
  See |yii/console/Controller::$color|
 
+$help					*yii/console/controllers/FixtureController::$help*
+
+ See |yii/console/Controller::$help|
+
 $namespace				*yii/console/controllers/FixtureController::$namespace*
 
  (string) Default namespace to search fixtures in
@@ -102,10 +106,6 @@ $passedOptionValues			*yii/console/controllers/FixtureController::$passedOptionV
 $helpSummary				*yii/console/controllers/FixtureController::$helpSummary*
 
  See |yii/console/Controller::$helpSummary|
-
-$help					*yii/console/controllers/FixtureController::$help*
-
- See |yii/console/Controller::$help|
 
 $fixtures				*yii/console/controllers/FixtureController::$fixtures*
 
@@ -508,7 +508,7 @@ name for option and value is option name.
 >
  actionLoad($fixturesInput='[]')
 <
-return (void)
+return (int) Return code
 
  For example,
 
@@ -521,14 +521,14 @@ return (void)
  # load all fixtures except User and UserProfile yii fixture/load "*, -User,
  -UserProfile" '''
 
-    [$fixturesInput] () 
+    [$fixturesInput] (array) 
 
 
 *yii/console/controllers/FixtureController::actionUnload*	public
 >
  actionUnload($fixturesInput='[]')
 <
-return (void)
+return (int) Return code
 
  For example,
 
@@ -541,7 +541,7 @@ return (void)
  # unload all fixtures except User and UserProfile yii fixture/unload "*,
  -User, -UserProfile" '''
 
-    [$fixturesInput] () 
+    [$fixturesInput] (array) 
 
 
 *yii/console/controllers/FixtureController::notifyNothingToLoad*public

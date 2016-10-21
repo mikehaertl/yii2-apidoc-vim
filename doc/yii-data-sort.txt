@@ -11,7 +11,7 @@ DESCRIPTION
 
  A typical usage example is as follows,
 
-   function actionIndex()
+   public function actionIndex()
    {
        $sort = new Sort([
            'attributes' => [
@@ -47,10 +47,10 @@ DESCRIPTION
        // display $model here
    }
 
- In the above, we declare two 'attributes' that support sorting: name and age.
- We pass the sort information to the Article query so that the query results
- are sorted by the orders specified by the Sort object. In the view, we show
- two hyperlinks that can lead to pages with the data sorted by the
+ In the above, we declare two 'attributes' that support sorting: 'name' and
+ 'age'. We pass the sort information to the Article query so that the query
+ results are sorted by the orders specified by the Sort object. In the view,
+ we show two hyperlinks that can lead to pages with the data sorted by the
  corresponding attributes.
 
 
@@ -60,8 +60,8 @@ PROPERTY DETAILS
 $enableMultiSort			*yii/data/Sort::$enableMultiSort*
 
  (boolean) Whether the sorting can be applied to multiple attributes
- simultaneously. Defaults to false, which means each time the data can only be
- sorted by one attribute.
+ simultaneously. Defaults to 'false', which means each time the data can only
+ be sorted by one attribute.
 
 $attributes				*yii/data/Sort::$attributes*
 
@@ -78,7 +78,7 @@ $attributes				*yii/data/Sort::$attributes*
        ],
    ]
 
- In the above, two attributes are declared: "age" and "name". The "age"
+ In the above, two attributes are declared: 'age' and 'name'. The 'age'
  attribute is a simple attribute which is equivalent to the following:
 
    'age' => [
@@ -88,19 +88,19 @@ $attributes				*yii/data/Sort::$attributes*
        'label' => Inflector::camel2words('age'),
    ]
 
- The "name" attribute is a composite attribute:
+ The 'name' attribute is a composite attribute:
 
 
-   - The "name" key represents the attribute name which will appear in
+   - The 'name' key represents the attribute name which will appear in
    the URLs leading   to sort actions. 
-   - The "asc" and "desc" elements specify how to sort by the attribute
+   - The 'asc' and 'desc' elements specify how to sort by the attribute
    in ascending   and descending orders, respectively. Their values represent
  the actual columns and   the directions by which the data should be sorted
  by. 
-   - The "default" element specifies by which direction the attribute
+   - The 'default' element specifies by which direction the attribute
    should be sorted   if it is not currently sorted (the default value is
  ascending order). 
-   - The "label" element specifies what label should be used when
+   - The 'label' element specifies what label should be used when
    calling 'link()' to create   a sort link. If not set,
  'Inflector::camel2words()' will be called to get a label.   Note that it will
  not be HTML-encoded.
@@ -140,7 +140,7 @@ $separator				*yii/data/Sort::$separator*
 $params					*yii/data/Sort::$params*
 
  (array) Parameters (name => value) that should be used to obtain the current
- sort directions and to create new sort URLs. If not set, $_GET will be used
+ sort directions and to create new sort URLs. If not set, '$_GET' will be used
  instead.
 
  In order to add hash to all links use 'array_merge($_GET, ['#' =>
@@ -153,7 +153,7 @@ $params					*yii/data/Sort::$params*
 $urlManager				*yii/data/Sort::$urlManager*
 
  (\yii\web\UrlManager) The URL manager used for creating sort URLs. If not
- set, the "urlManager" application component will be used.
+ set, the 'urlManager' application component will be used.
 
 $orders					*yii/data/Sort::$orders*
 
@@ -252,6 +252,20 @@ return (array) Sort directions indexed by attribute names. Sort direction can be
 either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
 
     [$recalculate] (boolean) Whether to recalculate the sort directions
+
+
+*yii/data/Sort::setAttributeOrders*			public
+>
+ setAttributeOrders($attributeOrders, $validate='true')
+<
+return (void)
+
+    [$attributeOrders] (array|null) Sort directions indexed by attribute
+    names. Sort direction can be either 'SORT_ASC' for ascending order or
+    'SORT_DESC' for descending order.
+    [$validate] (boolean) Whether to validate given attribute orders against
+    'attributes' and 'enableMultiSort'. If validation is enabled incorrect
+    entries will be removed.
 
 
 *yii/data/Sort::getAttributeOrder*			public

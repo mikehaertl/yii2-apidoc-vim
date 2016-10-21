@@ -24,8 +24,17 @@ METHOD DETAILS
 
 
 *yii/db/ActiveQueryInterface::one*			public
+>
+ one($db='null')
+<
+return (\yii\db\ActiveRecordInterface|array|null) A single row of query result.
+Depending on the setting of 'asArray', the query result may be either an array
+or an ActiveRecord object. 'null' will be returned if the query results in
+nothing.
 
- See |yii/db/QueryInterface::one|
+    [$db] (\yii\db\Connection) The DB connection used to create the DB
+    command. If 'null', the DB connection returned by 'modelClass' will be
+    used.
 
 
 *yii/db/ActiveQueryInterface::count*			public

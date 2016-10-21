@@ -57,31 +57,37 @@ $attributes				*yii/widgets/DetailView::$attributes*
  (array) A list of attributes to be displayed in the detail view. Each array
  element represents the specification for displaying one particular attribute.
 
- An attribute can be specified as a string in the format of "attribute",
- "attribute:format" or "attribute:format:label", where "attribute" refers to
- the attribute name, and "format" represents the format of the attribute. The
- "format" is passed to the 'Formatter::format()' method to format an attribute
+ An attribute can be specified as a string in the format of 'attribute',
+ 'attribute:format' or 'attribute:format:label', where 'attribute' refers to
+ the attribute name, and 'format' represents the format of the attribute. The
+ 'format' is passed to the 'Formatter::format()' method to format an attribute
  value into a displayable text. Please refer to 'Formatter' for the supported
- types. Both "format" and "label" are optional. They will take default values
+ types. Both 'format' and 'label' are optional. They will take default values
  if absent.
 
  An attribute can also be specified in terms of an array with the following
  elements:
 
 
-   - attribute: the attribute name. This is required if either "label"
-   or "value" is not specified. 
-   - label: the label associated with the attribute. If this is not
+   - 'attribute': the attribute name. This is required if either
+   'label' or 'value' is not specified. 
+   - 'label': the label associated with the attribute. If this is not
    specified, it will be generated from the attribute name. 
-   - value: the value to be displayed. If this is not specified, it
+   - 'value': the value to be displayed. If this is not specified, it
    will be retrieved from 'model' using the attribute name   by calling
  'ArrayHelper::getValue()'. Note that this value will be formatted into a
- displayable text   according to the "format" option. 
-   - format: the type of the value that determines how the value would
-   be formatted into a displayable text.   Please refer to 'Formatter' for
- supported types. 
-   - visible: whether the attribute is visible. If set to 'false', the
-   attribute will NOT be displayed.
+ displayable text   according to the 'format' option. 
+   - 'format': the type of the value that determines how the value
+   would be formatted into a displayable text.   Please refer to 'Formatter'
+ for supported types. 
+   - 'visible': whether the attribute is visible. If set to 'false',
+   the attribute will NOT be displayed. 
+   - 'contentOptions': the HTML attributes to customize value tag. For
+   example: '['class' => 'bg-red']'.   Please refer to
+ '\yii\helpers\BaseHtml::renderTagAttributes()' for the supported syntax. 
+   - 'captionOptions': the HTML attributes to customize label tag. For
+   example: '['class' => 'bg-red']'.   Please refer to
+ '\yii\helpers\BaseHtml::renderTagAttributes()' for the supported syntax.
 
 $template				*yii/widgets/DetailView::$template*
 
@@ -96,10 +102,14 @@ $template				*yii/widgets/DetailView::$template*
  rendered, '$index' is the zero-based index of the attribute in the
  'attributes' array, and '$widget' refers to this widget instance.
 
+ Since Version 2.0.10, the tokens '{captionOptions}' and '{contentOptions}'
+ are available, which will represent HTML attributes of HTML container
+ elements for the label and value.
+
 $options				*yii/widgets/DetailView::$options*
 
- (array) The HTML attributes for the container tag of this widget. The "tag"
- option specifies what container tag should be used. It defaults to "table" if
+ (array) The HTML attributes for the container tag of this widget. The 'tag'
+ option specifies what container tag should be used. It defaults to 'table' if
  not set.
 
 $formatter				*yii/widgets/DetailView::$formatter*
@@ -107,7 +117,7 @@ $formatter				*yii/widgets/DetailView::$formatter*
  (array|\yii\i18n\Formatter) The formatter used to format model attribute
  values into displayable texts. This can be either an instance of 'Formatter'
  or an configuration array for creating the 'Formatter' instance. If this
- property is not set, the "formatter" application component will be used.
+ property is not set, the 'formatter' application component will be used.
 
 $behaviors				*yii/widgets/DetailView::$behaviors*
 

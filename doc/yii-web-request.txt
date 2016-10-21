@@ -158,9 +158,13 @@ $queryParams				*yii/web/Request::$queryParams*
 
 $hostInfo				*yii/web/Request::$hostInfo*
 
- (string) Schema and hostname part (with port number if needed) of the request
- URL (e.g. 'http://www.yiiframework.com'), null if can't be obtained from
- '$_SERVER' and wasn't set.
+ (string|null) Schema and hostname part (with port number if needed) of the
+ request URL (e.g. 'http://www.yiiframework.com'), null if can't be obtained
+ from '$_SERVER' and wasn't set.
+
+$hostName				*yii/web/Request::$hostName*
+
+ (string|null) Hostname part of the request URL (e.g. 'www.yiiframework.com')
 
 $baseUrl				*yii/web/Request::$baseUrl*
 
@@ -654,9 +658,9 @@ return (mixed) The GET parameter value
 >
  getHostInfo()
 <
-return (string) Schema and hostname part (with port number if needed) of the request
-URL (e.g. 'http://www.yiiframework.com'), null if can't be obtained from
-'$_SERVER' and wasn't set.
+return (string|null) Schema and hostname part (with port number if needed) of the
+request URL (e.g. 'http://www.yiiframework.com'), null if can't be obtained
+from '$_SERVER' and wasn't set.
 
  The returned URL does not have an ending slash. By default this is determined
  based on the user request information. You may explicitly specify it by
@@ -672,8 +676,17 @@ return (void)
  This setter is provided in case the schema and hostname cannot be determined
  on certain Web servers.
 
-    [$value] (string) The schema and host part of the application URL. The
-    trailing slashes will be removed.
+    [$value] (string|null) The schema and host part of the application URL.
+    The trailing slashes will be removed.
+
+
+*yii/web/Request::getHostName*				public
+>
+ getHostName()
+<
+return (string|null) Hostname part of the request URL (e.g. 'www.yiiframework.com')
+
+ Value is calculated from current 'getHostInfo()|hostInfo' property.
 
 
 *yii/web/Request::getBaseUrl*				public

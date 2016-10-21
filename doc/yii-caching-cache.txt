@@ -69,8 +69,8 @@ $keyPrefix				*yii/caching/Cache::$keyPrefix*
 
 $serializer				*yii/caching/Cache::$serializer*
 
- (array|boolean) The functions used to serialize and unserialize cached data.
- Defaults to null, meaning using the default PHP 'serialize()' and
+ (null|array|false) The functions used to serialize and unserialize cached
+ data. Defaults to null, meaning using the default PHP 'serialize()' and
  'unserialize()' functions. If you want to use some more efficient serializer
  (e.g. [igbinary](http://pecl.php.net/package/igbinary)), you may configure
  this property with a two-element array. The first element specifies the
@@ -78,7 +78,9 @@ $serializer				*yii/caching/Cache::$serializer*
  property is set false, data will be directly sent to and retrieved from the
  underlying cache component without any serialization or deserialization. You
  should not turn off serialization if you are using 'Dependency|cache
- dependency', because it relies on data serialization.
+ dependency', because it relies on data serialization. Also, some
+ implementations of the cache can not correctly save and retrieve data
+ different from a string type.
 
 $behaviors				*yii/caching/Cache::$behaviors*
 
@@ -428,8 +430,9 @@ return (boolean) Whether the flush operation was successful.
 >
  getValue($key)
 <
-return (string|boolean) The value stored in cache, false if the value is not in the
-cache or expired.
+return (mixed|false) The value stored in cache, false if the value is not in the
+cache or expired. Most often value is a string. If you have disabled
+'serializer', it could be something else.
 
  This method should be implemented by child classes to retrieve the data from
  specific cache storage.
@@ -447,7 +450,8 @@ return (boolean) True if the value is successfully stored into cache, false othe
  specific cache storage.
 
     [$key] (string) The key identifying the value to be cached
-    [$value] (string) The value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
     [$duration] (integer) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
@@ -462,7 +466,8 @@ return (boolean) True if the value is successfully stored into cache, false othe
  specific cache storage.
 
     [$key] (string) The key identifying the value to be cached
-    [$value] (string) The value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
     [$duration] (integer) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
@@ -525,7 +530,7 @@ return (array) Array of failed keys
  should be overridden to exploit that feature.
 
     [$data] (array) Array where key corresponds to cache key while value is
-    the value stored
+    the value stored.
     [$duration] (integer) The number of seconds in which the cached values
     will expire. 0 means never expire.
 

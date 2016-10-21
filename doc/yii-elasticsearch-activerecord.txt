@@ -81,13 +81,13 @@ $isNewRecord				*yii/elasticsearch/ActiveRecord::$isNewRecord*
 $primaryKey				*yii/elasticsearch/ActiveRecord::$primaryKey*
 
  (mixed) The primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is true. A string is
+ returned if the primary key is composite or '$asArray' is 'true'. A string is
  returned otherwise (null will be returned if the key value is null).
 
 $oldPrimaryKey				*yii/elasticsearch/ActiveRecord::$oldPrimaryKey*
 
  (mixed) The old primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is true. A string is
+ returned if the primary key is composite or '$asArray' is 'true'. A string is
  returned otherwise (null will be returned if the key value is null).
 
 $score					*yii/elasticsearch/ActiveRecord::$score*
@@ -153,12 +153,12 @@ METHOD DETAILS
 
 *yii/elasticsearch/ActiveRecord::canGetProperty*		public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/db/BaseActiveRecord::canGetProperty|
 
 
 *yii/elasticsearch/ActiveRecord::canSetProperty*		public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/db/BaseActiveRecord::canSetProperty|
 
 
 *yii/elasticsearch/ActiveRecord::hasMethod*		public
@@ -467,8 +467,8 @@ return (string[]) List of attribute names.
 >
  findOne($condition)
 <
-return (static|null) ActiveRecord instance matching the condition, or 'null' if
-nothing matches.
+return (static) ActiveRecord instance matching the condition, or 'null' if nothing
+matches.
 
 
 
@@ -476,12 +476,12 @@ nothing matches.
 
   
    - a scalar value (integer or string): query by a single primary key
-   value and return the    corresponding record (or null if not found).  
+   value and return the    corresponding record (or 'null' if not found).  
    - a non-associative array: query by a list of primary key values and
-   return the    first record (or null if not found).  
+   return the    first record (or 'null' if not found).  
    - an associative array of name-value pairs: query by a set of
    attribute values and return a single record    matching all of them (or
- null if not found). Note that '['id' => 1, 2]' is treated as a
+ 'null' if not found). Note that '['id' => 1, 2]' is treated as a
  non-associative array.
 
  That this method will automatically call the 'one()' method and return an
@@ -722,9 +722,9 @@ return (integer|boolean) The number of rows affected, or false if validation fai
 
  This method performs the following steps in order:
 
- 1. call 'beforeValidate()' when '$runValidation' is true. If
+ 1. call 'beforeValidate()' when '$runValidation' is 'true'. If
  'beforeValidate()'    returns 'false', the rest of the steps will be skipped;
- 2. call 'afterValidate()' when '$runValidation' is true. If validation   
+ 2. call 'afterValidate()' when '$runValidation' is 'true'. If validation   
  failed, the rest of the steps will be skipped; 3. call 'beforeSave()'. If
  'beforeSave()' returns 'false',    the rest of the steps will be skipped; 4.
  save the record into database. If this fails, it will skip the rest of the
@@ -833,7 +833,7 @@ deleted is 0, even though the deletion execution is successful.
 
  This method performs the following steps in order:
 
- 1. call 'beforeDelete()'. If the method returns false, it will skip the   
+ 1. call 'beforeDelete()'. If the method returns 'false', it will skip the   
  rest of the steps; 2. delete the record from the database; 3. call
  'afterDelete()'.
 
@@ -931,7 +931,7 @@ deleted is 0, even though the deletion execution is successful.
  getPrimaryKey($asArray='false')
 <
 return (mixed) The primary key value. An array (column name => column value) is
-returned if the primary key is composite or '$asArray' is true. A string is
+returned if the primary key is composite or '$asArray' is 'true'. A string is
 returned otherwise (null will be returned if the key value is null).
 
 
@@ -941,7 +941,7 @@ returned otherwise (null will be returned if the key value is null).
 
 
     [$asArray] (boolean) Whether to return the primary key value as an array.
-    If true, the return value will be an array with column names as keys and
+    If 'true', the return value will be an array with column names as keys and
     column values as values. Note that for composite primary keys, an array
     will always be returned regardless of this parameter value.
 
@@ -951,7 +951,7 @@ returned otherwise (null will be returned if the key value is null).
  getOldPrimaryKey($asArray='false')
 <
 return (mixed) The old primary key value. An array (column name => column value) is
-returned if the primary key is composite or '$asArray' is true. A string is
+returned if the primary key is composite or '$asArray' is 'true'. A string is
 returned otherwise (null will be returned if the key value is null).
 
 
@@ -964,9 +964,9 @@ returned otherwise (null will be returned if the key value is null).
 
 
     [$asArray] (boolean) Whether to return the primary key value as an array.
-    If true, the return value will be an array with column name as key and
-    column value as value. If this is false (default), a scalar value will be
-    returned for non-composite primary key.
+    If 'true', the return value will be an array with column name as key and
+    column value as value. If this is 'false' (default), a scalar value will
+    be returned for non-composite primary key.
 
 
 *yii/elasticsearch/ActiveRecord::populateRecord*		public

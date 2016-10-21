@@ -106,9 +106,9 @@ $join					*yii/db/Query::$join*
 
 $having					*yii/db/Query::$having*
 
- (string|array) The condition to be applied in the GROUP BY clause. It can be
- either a string or an array. Please refer to 'where()' on how to specify the
- condition.
+ (string|array|\yii\db\Expression) The condition to be applied in the GROUP BY
+ clause. It can be either a string or an array. Please refer to 'where()' on
+ how to specify the condition.
 
 $union					*yii/db/Query::$union*
 
@@ -515,7 +515,7 @@ return (\yii\db\BatchQueryResult) The batch query result. It implements the
 
    $query = (new Query)->from('user');
    foreach ($query->batch() as $rows) {
-       // $rows is an array of 10 or fewer rows from user table
+       // $rows is an array of 100 or fewer rows from user table
    }
 
 

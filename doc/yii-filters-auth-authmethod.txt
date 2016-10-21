@@ -46,7 +46,8 @@ $optional				*yii/filters/auth/AuthMethod::$optional*
  (array) List of action IDs that this filter will be applied to, but auth
  failure will not lead to error. It may be used for actions, that are allowed
  for public, but return some additional data for authenticated users. Defaults
- to empty, meaning authentication is not optional for any action.
+ to empty, meaning authentication is not optional for any action. Since
+ version 2.0.10 action IDs can be specified as wildcards, e.g. 'site/*'.
 
 
 
@@ -204,9 +205,9 @@ return (void)
 >
  isOptional($action)
 <
-return (boolean) 
+return (boolean) Whether authentication is optional or not.
 
-    [$action] (\yii\base\Action) 
+    [$action] (\yii\base\Action) Action to be checked.
 
 
 *yii/filters/auth/AuthMethod::authenticate*		public

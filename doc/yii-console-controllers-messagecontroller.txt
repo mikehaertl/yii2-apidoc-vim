@@ -51,6 +51,10 @@ $color					*yii/console/controllers/MessageController::$color*
 
  See |yii/console/Controller::$color|
 
+$help					*yii/console/controllers/MessageController::$help*
+
+ See |yii/console/Controller::$help|
+
 $sourcePath				*yii/console/controllers/MessageController::$sourcePath*
 
  (string) Required, root directory of all source files.
@@ -96,21 +100,18 @@ $markUnused				*yii/console/controllers/MessageController::$markUnused*
 $except					*yii/console/controllers/MessageController::$except*
 
  (array) List of patterns that specify which files/directories should NOT be
- processed. If empty or not set, all files/directories will be processed. A
- path matches a pattern if it contains the pattern string at its end. For
- example, '/a/b' will match all files and directories ending with '/a/b'; the
- '*.svn' will match all files and directories whose name ends with '.svn'. and
- the '.svn' will match all files and directories named exactly '.svn'. Note,
- the '/' characters in a pattern matches both '/' and '\'. See
- helpers/FileHelper::findFiles() description for more details on pattern
- matching rules.
+ processed. If empty or not set, all files/directories will be processed. See
+ helpers/FileHelper::findFiles() description for pattern matching rules. If a
+ file/directory matches both a pattern in "only" and "except", it will NOT be
+ processed.
 
 $only					*yii/console/controllers/MessageController::$only*
 
  (array) List of patterns that specify which files (not directories) should be
- processed. If empty or not set, all files will be processed. Please refer to
- "except" for details about the patterns. If a file/directory matches both a
- pattern in "only" and "except", it will NOT be processed.
+ processed. If empty or not set, all files will be processed. See
+ helpers/FileHelper::findFiles() description for pattern matching rules. If a
+ file/directory matches both a pattern in "only" and "except", it will NOT be
+ processed.
 
 $format					*yii/console/controllers/MessageController::$format*
 
@@ -172,10 +173,6 @@ $passedOptionValues			*yii/console/controllers/MessageController::$passedOptionV
 $helpSummary				*yii/console/controllers/MessageController::$helpSummary*
 
  See |yii/console/Controller::$helpSummary|
-
-$help					*yii/console/controllers/MessageController::$help*
-
- See |yii/console/Controller::$help|
 
 
 
@@ -658,7 +655,7 @@ return (void)
 >
  saveMessagesCategoryToPHP($messages, $fileName, $overwrite, $removeUnused, $sort, $category, $markUnused)
 <
-return (void)
+return (int) Exit code
 
     [$messages] (array) 
     [$fileName] (string) Name of the file to write to

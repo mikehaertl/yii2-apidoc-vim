@@ -1,0 +1,341 @@
+
+*yii/behaviors/AttributeTypecastBehavior*   >> |yii/base/Behavior|
+=========================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This behavior is very useful in case of usage of ActiveRecord for the
+ schema-less databases like MongoDB or Redis. It may also come in handy for
+ regular '\yii\db\ActiveRecord' or even '\yii\base\Model', allowing to
+ maintain strict attribute types after model validation.
+
+ This behavior should be attached to '\yii\base\Model' or
+ '\yii\db\BaseActiveRecord' descendant.
+
+ You should specify exact attribute types via 'attributeTypes'.
+
+ For example:
+
+   use yii\behaviors\AttributeTypecastBehavior;
+
+   class Item extends \yii\db\ActiveRecord
+   {
+       public function behaviors()
+       {
+           return [
+               'typecast' => [
+                   'class' => AttributeTypecastBehavior::className(),
+                   'attributeTypes' => [
+                       'amount' => AttributeTypecastBehavior::TYPE_INTEGER,
+                       'price' => AttributeTypecastBehavior::TYPE_FLOAT,
+                       'is_active' => AttributeTypecastBehavior::TYPE_BOOLEAN,
+                   ],
+                   'typecastAfterValidate' => true,
+                   'typecastBeforeSave' => false,
+                   'typecastAfterFind' => false,
+               ],
+           ];
+       }
+
+       // ...
+   }
+
+ Tip: you may left 'attributeTypes' blank 
+   - in this case its value will be detected automatically based on owner
+ validation rules. Following example will automatically create same
+ 'attributeTypes' value as it was configured at the above one:
+
+   use yii\behaviors\AttributeTypecastBehavior;
+
+   class Item extends \yii\db\ActiveRecord
+   {
+
+       public function rules()
+       {
+           return [
+               ['amount', 'integer'],
+               ['price', 'number'],
+               ['is_active', 'boolean'],
+           ];
+       }
+
+       public function behaviors()
+       {
+           return [
+               'typecast' => [
+                   'class' => AttributeTypecastBehavior::className(),
+                   // 'attributeTypes' will be composed automatically
+ according to `rules()`
+               ],
+           ];
+       }
+
+       // ...
+   }
+
+ This behavior allows automatic attribute typecasting at following cases:
+
+
+   - after successful model validation 
+   - before model save (insert or update) 
+   - after model find (found by query or refreshed)
+
+ You may control automatic typecasting for particular case using fields
+ 'typecastAfterValidate', 'typecastBeforeSave' and 'typecastAfterFind'. By
+ default typecasting will be performed only after model validation.
+
+ Note: you can manually trigger attribute typecasting anytime invoking
+ 'typecastAttributes()' method:
+
+   $model = new Item();
+   $model->price = '38.5';
+   $model->is_active = 1;
+   $model->typecastAttributes();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$owner					*yii/behaviors/AttributeTypecastBehavior::$owner*
+
+ (\yii\base\Model|\yii\db\BaseActiveRecord) The owner of this behavior.
+
+$attributeTypes				*yii/behaviors/AttributeTypecastBehavior::$attributeTypes*
+
+ (array) Attribute typecast map in format: attributeName => type. Type can be
+ set via PHP callable, which accept raw value as an argument and should return
+ typecast result. For example:
+
+   [
+       'amount' => 'integer',
+       'price' => 'float',
+       'is_active' => 'boolean',
+       'date' => function ($value) {
+           return ($value instanceof \DateTime) ? $value->getTimestamp():
+ (int)$value;
+       },
+   ]
+
+ If not set, attribute type map will be composed automatically from the owner
+ validation rules.
+
+$skipOnNull				*yii/behaviors/AttributeTypecastBehavior::$skipOnNull*
+
+ (boolean) Whether to skip typecasting of 'null' values. If enabled attribute
+ value which equals to 'null' will not be type-casted (e.g. 'null' remains
+ 'null'), otherwise it will be converted according to the type configured at
+ 'attributeTypes'.
+
+$typecastAfterValidate			*yii/behaviors/AttributeTypecastBehavior::$typecastAfterValidate*
+
+ (boolean) Whether to perform typecasting after owner model validation. Note
+ that typecasting will be performed only if validation was successful, e.g.
+ owner model has no errors. Note that changing this option value will have no
+ effect after this behavior has been attached to the model.
+
+$typecastBeforeSave			*yii/behaviors/AttributeTypecastBehavior::$typecastBeforeSave*
+
+ (boolean) Whether to perform typecasting before saving owner model (insert or
+ update). This option may be disabled in order to achieve better performance.
+ For example, in case of '\yii\db\ActiveRecord' usage, typecasting before save
+ will grant no benefit an thus can be disabled. Note that changing this option
+ value will have no effect after this behavior has been attached to the model.
+
+$typecastAfterFind			*yii/behaviors/AttributeTypecastBehavior::$typecastAfterFind*
+
+ (boolean) Whether to perform typecasting after retrieving owner model data
+ from the database (after find or refresh). This option may be disabled in
+ order to achieve better performance. For example, in case of
+ '\yii\db\ActiveRecord' usage, typecasting after find will grant no benefit in
+ most cases an thus can be disabled. Note that changing this option value will
+ have no effect after this behavior has been attached to the model.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/behaviors/AttributeTypecastBehavior::className*	public
+
+ See |yii/base/Object::className|
+
+
+*yii/behaviors/AttributeTypecastBehavior::__construct*	public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/behaviors/AttributeTypecastBehavior::init*		public
+>
+ init()
+<
+return (void)
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+
+
+*yii/behaviors/AttributeTypecastBehavior::__get*		public
+
+ See |yii/base/Object::__get|
+
+
+*yii/behaviors/AttributeTypecastBehavior::__set*		public
+
+ See |yii/base/Object::__set|
+
+
+*yii/behaviors/AttributeTypecastBehavior::__isset*	public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/behaviors/AttributeTypecastBehavior::__unset*	public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/behaviors/AttributeTypecastBehavior::__call*		public
+
+ See |yii/base/Object::__call|
+
+
+*yii/behaviors/AttributeTypecastBehavior::hasProperty*	public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/behaviors/AttributeTypecastBehavior::canGetProperty*	public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/behaviors/AttributeTypecastBehavior::canSetProperty*	public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/behaviors/AttributeTypecastBehavior::hasMethod*	public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/behaviors/AttributeTypecastBehavior::events*		public
+>
+ events()
+<
+return (array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+
+
+ Child classes may override this method to declare what PHP callbacks should
+ be attached to the events of the 'owner' component.
+
+ The callbacks will be attached to the 'owner''s events when the behavior is
+ attached to the owner; and they will be detached from the events when the
+ behavior is detached from the component.
+
+ The callbacks can be any of the following:
+
+
+   - method in this behavior: ''handleClick'', equivalent to '[$this,
+   'handleClick']' 
+   - object method: '[$object, 'handleClick']' 
+   - static method: '['Page', 'handleClick']' 
+   - anonymous function: 'function ($event) { ... }'
+
+ The following is an example:
+
+   [
+       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+   ]
+
+
+
+
+*yii/behaviors/AttributeTypecastBehavior::attach*		public
+
+ See |yii/base/Behavior::attach|
+
+
+*yii/behaviors/AttributeTypecastBehavior::detach*		public
+
+ See |yii/base/Behavior::detach|
+
+
+*yii/behaviors/AttributeTypecastBehavior::clearAutoDetectedAttributeTypes*public
+>
+ clearAutoDetectedAttributeTypes()
+<
+return (void)
+
+
+
+*yii/behaviors/AttributeTypecastBehavior::typecastAttributes*public
+>
+ typecastAttributes($attributeNames='null')
+<
+return (void)
+
+    [$attributeNames] (array) List of attribute names that should be
+    type-casted. If this parameter is empty, it means any attribute listed in
+    the 'attributeTypes' should be type-casted.
+
+
+*yii/behaviors/AttributeTypecastBehavior::typecastValue*	protected
+>
+ typecastValue($value, $type)
+<
+return (mixed) Typecast result.
+
+    [$value] (mixed) Value to be type-casted.
+    [$type] (string|callable) Type name or typecast callable.
+
+
+*yii/behaviors/AttributeTypecastBehavior::detectAttributeTypes*protected
+>
+ detectAttributeTypes()
+<
+return (array) Attribute type map.
+
+
+
+*yii/behaviors/AttributeTypecastBehavior::afterValidate*	public
+>
+ afterValidate($event)
+<
+return (void)
+
+    [$event] (\yii\base\Event) Event instance.
+
+
+*yii/behaviors/AttributeTypecastBehavior::beforeSave*	public
+>
+ beforeSave($event)
+<
+return (void)
+
+    [$event] (\yii\base\Event) Event instance.
+
+
+*yii/behaviors/AttributeTypecastBehavior::afterFind*	public
+>
+ afterFind($event)
+<
+return (void)
+
+    [$event] (\yii\base\Event) Event instance.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -32,11 +32,11 @@ return (array) List of attribute names.
 >
  getAttribute($name)
 <
-return (mixed) The attribute value. Null if the attribute is not set or does not
+return (mixed) The attribute value. 'null' if the attribute is not set or does not
 exist.
 
- If this record is the result of a query and the attribute is not loaded, null
- will be returned.
+ If this record is the result of a query and the attribute is not loaded,
+ 'null' will be returned.
 
     [$name] (string) The attribute name
 
@@ -66,7 +66,7 @@ return (boolean) Whether the record has an attribute with the specified name.
 <
 return (mixed) The primary key value. An array (attribute name => attribute value) is
 returned if the primary key is composite or '$asArray' is true. A string is
-returned otherwise (null will be returned if the key value is null).
+returned otherwise ('null' will be returned if the key value is 'null').
 
     [$asArray] (boolean) Whether to return the primary key value as an array.
     If true, the return value will be an array with attribute names as keys
@@ -80,7 +80,7 @@ returned otherwise (null will be returned if the key value is null).
 <
 return (mixed) The old primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is true. A string is
-returned otherwise (null will be returned if the key value is null).
+returned otherwise ('null' will be returned if the key value is 'null').
 
  This refers to the primary key value that is populated into the record after
  executing a find method (e.g. find(), findOne()). The value remains unchanged
@@ -89,8 +89,8 @@ returned otherwise (null will be returned if the key value is null).
 
     [$asArray] (boolean) Whether to return the primary key value as an array.
     If true, the return value will be an array with column name as key and
-    column value as value. If this is false (default), a scalar value will be
-    returned for non-composite primary key.
+    column value as value. If this is 'false' (default), a scalar value will
+    be returned for non-composite primary key.
 
 
 *yii/db/ActiveRecordInterface::isPrimaryKey*		public
@@ -155,19 +155,19 @@ instance.
 >
  findOne($condition)
 <
-return (static|null) ActiveRecord instance matching the condition, or null if nothing
+return (static) ActiveRecord instance matching the condition, or 'null' if nothing
 matches.
 
  The method accepts:
 
   
    - a scalar value (integer or string): query by a single primary key
-   value and return the    corresponding record (or null if not found).  
+   value and return the    corresponding record (or 'null' if not found).  
    - a non-associative array: query by a list of primary key values and
-   return the    first record (or null if not found).  
+   return the    first record (or 'null' if not found).  
    - an associative array of name-value pairs: query by a set of
    attribute values and return a single record    matching all of them (or
- null if not found). Note that '['id' => 1, 2]' is treated as a
+ 'null' if not found). Note that '['id' => 1, 2]' is treated as a
  non-associative array.
 
  That this method will automatically call the 'one()' method and return an
@@ -298,11 +298,11 @@ return (boolean) Whether the saving succeeded (i.e. no validation errors occurre
 
 
     [$runValidation] (boolean) Whether to perform validation (calling
-    'validate()') before saving the record. Defaults to 'true'. If the
-    validation fails, the record will not be saved to the database and this
-    method will return 'false'.
+    'Model::validate()|validate()') before saving the record. Defaults to
+    'true'. If the validation fails, the record will not be saved to the
+    database and this method will return 'false'.
     [$attributeNames] (array) List of attribute names that need to be saved.
-    Defaults to null, meaning all attributes that are loaded from DB will be
+    Defaults to 'null', meaning all attributes that are loaded from DB will be
     saved.
 
 
@@ -323,20 +323,20 @@ successfully.
 
 
     [$runValidation] (boolean) Whether to perform validation (calling
-    'validate()') before saving the record. Defaults to 'true'. If the
-    validation fails, the record will not be saved to the database and this
-    method will return 'false'.
+    'Model::validate()|validate()') before saving the record. Defaults to
+    'true'. If the validation fails, the record will not be saved to the
+    database and this method will return 'false'.
     [$attributes] (array) List of attributes that need to be saved. Defaults
-    to null, meaning all attributes that are loaded from DB will be saved.
+    to 'null', meaning all attributes that are loaded from DB will be saved.
 
 
 *yii/db/ActiveRecordInterface::update*			public
 >
  update($runValidation='true', $attributeNames='null')
 <
-return (integer|boolean) The number of rows affected, or false if validation fails or
-updating process is stopped for other reasons. Note that it is possible that
-the number of rows affected is 0, even though the update execution is
+return (integer|boolean) The number of rows affected, or 'false' if validation fails
+or updating process is stopped for other reasons. Note that it is possible
+that the number of rows affected is 0, even though the update execution is
 successful.
 
  Usage example:
@@ -349,11 +349,11 @@ successful.
 
 
     [$runValidation] (boolean) Whether to perform validation (calling
-    'validate()') before saving the record. Defaults to 'true'. If the
-    validation fails, the record will not be saved to the database and this
-    method will return 'false'.
+    'Model::validate()|validate()') before saving the record. Defaults to
+    'true'. If the validation fails, the record will not be saved to the
+    database and this method will return 'false'.
     [$attributeNames] (array) List of attributes that need to be saved.
-    Defaults to null, meaning all attributes that are loaded from DB will be
+    Defaults to 'null', meaning all attributes that are loaded from DB will be
     saved.
 
 
@@ -361,7 +361,7 @@ successful.
 >
  delete()
 <
-return (integer|boolean) The number of rows deleted, or false if the deletion is
+return (integer|boolean) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible that the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -432,14 +432,14 @@ return (void)
  into the junction table which contains the primary key values from both
  records.
 
- This method requires that the primary key value is not null.
+ This method requires that the primary key value is not 'null'.
 
     [$name] (string) The case sensitive name of the relationship.
     [$model] (static) The record to be linked with the current one.
     [$extraColumns] (array) Additional column values to be saved into the
     junction table. This parameter is only meaningful for a relationship
     involving a junction table (i.e., a relation set with
-    ''ActiveQueryInterface::via()''.)
+    'ActiveQueryInterface::via()').
 
 
 *yii/db/ActiveRecordInterface::unlink*			public
@@ -449,13 +449,13 @@ return (void)
 return (void)
 
  The record with the foreign key of the relationship will be deleted if
- '$delete' is true. Otherwise, the foreign key will be set null and the record
- will be saved without validation.
+ '$delete' is true. Otherwise, the foreign key will be set 'null' and the
+ record will be saved without validation.
 
     [$name] (string) The case sensitive name of the relationship.
     [$model] (static) The model to be unlinked from the current one.
     [$delete] (boolean) Whether to delete the model that contains the foreign
-    key. If false, the model's foreign key will be set null and saved. If
+    key. If false, the model's foreign key will be set 'null' and saved. If
     true, the model containing the foreign key will be deleted.
 
 

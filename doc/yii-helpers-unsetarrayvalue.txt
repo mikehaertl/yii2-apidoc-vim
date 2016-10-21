@@ -1,0 +1,42 @@
+
+*yii/helpers/UnsetArrayValue*  
+=============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Usage example:
+
+   $array1 = [
+       'ids' => [
+           1,
+       ],
+       'validDomains' => [
+           'example.com',
+           'www.example.com',
+       ],
+   ];
+
+   $array2 = [
+       'ids' => [
+           2,
+       ],
+       'validDomains' => new \yii\helpers\UnsetArrayValue(),
+   ];
+
+   $result = \yii\helpers\ArrayHelper::merge($array1, $array2);
+
+ The result will be
+
+   [
+       'ids' => [
+           1,
+           2,
+       ],
+   ]
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

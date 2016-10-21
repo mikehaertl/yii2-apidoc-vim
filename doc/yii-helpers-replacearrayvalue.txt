@@ -1,0 +1,71 @@
+
+*yii/helpers/ReplaceArrayValue*  
+===============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Usage example:
+
+   $array1 = [
+       'ids' => [
+           1,
+       ],
+       'validDomains' => [
+           'example.com',
+           'www.example.com',
+       ],
+   ];
+
+   $array2 = [
+       'ids' => [
+           2,
+       ],
+       'validDomains' => new \yii\helpers\ReplaceArrayValue([
+           'yiiframework.com',
+           'www.yiiframework.com',
+       ]),
+   ];
+
+   $result = \yii\helpers\ArrayHelper::merge($array1, $array2);
+
+ The result will be
+
+   [
+       'ids' => [
+           1,
+           2,
+       ],
+       'validDomains' => [
+           'yiiframework.com',
+           'www.yiiframework.com',
+       ],
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$value					*yii/helpers/ReplaceArrayValue::$value*
+
+ (mixed) Value used as replacement.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/helpers/ReplaceArrayValue::__construct*		public
+>
+ __construct($value)
+<
+return (void)
+
+    [$value] (mixed) Value used as replacement.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

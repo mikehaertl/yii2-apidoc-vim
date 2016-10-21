@@ -224,7 +224,7 @@ return (void)
 >
  previous($name='null')
 <
-return (string) The URL previously remembered. Null is returned if no URL was
+return (string|null) The URL previously remembered. Null is returned if no URL was
 remembered with the given name.
 
     [$name] (string) The named associated with the URL that was remembered
@@ -297,6 +297,17 @@ return (string) The generated URL
 
    // /index.php?r=post%2Fview&id=100&src=google
    echo Url::current(['id' => 100]);
+
+ Note that if you're replacing array parameters with '[]' at the end you
+ should specify '$params' as nested arrays. For a 'PostSearchForm' model where
+ parameter names are 'PostSearchForm[id]' and 'PostSearchForm[src]' the syntax
+ would be the following:
+
+   //
+ index.php?r=post%2Findex&PostSearchForm%5Bid%5D=100&PostSearchForm%5Bsrc%5D=google
+   echo Url::current([
+       $postSearch->formName() => ['id' => 100, 'src' => 'google'],
+   ]);
 
 
 

@@ -581,7 +581,8 @@ return (string) The generated checkbox tag
 return (string) The generated drop-down list tag
 
     [$name] (string) The input name
-    [$selection] (string) The selected value
+    [$selection] (string|array|null) The selected value(s). String for single
+    or array for multiple selection(s).
     [$items] (array) The option data items. The array keys are option values,
     and the array values are the corresponding option labels. The array can
     also be nested (i.e. some array values are arrays too). For each
@@ -628,7 +629,8 @@ return (string) The generated drop-down list tag
 return (string) The generated list box tag
 
     [$name] (string) The input name
-    [$selection] (string|array) The selected value(s)
+    [$selection] (string|array|null) The selected value(s). String for single
+    or array for multiple selection(s).
     [$items] (array) The option data items. The array keys are option values,
     and the array values are the corresponding option labels. The array can
     also be nested (i.e. some array values are arrays too). For each
@@ -682,7 +684,8 @@ return (string) The generated checkbox list
  corresponding submitted value is an array.
 
     [$name] (string) The name attribute of each checkbox.
-    [$selection] (string|array) The selected value(s).
+    [$selection] (string|array|null) The selected value(s). String for single
+    or array for multiple selection(s).
     [$items] (array) The data item used to generate the checkboxes. The array
     keys are the checkbox values, while the array values are the corresponding
     labels.
@@ -725,7 +728,8 @@ return (string) The generated radio button list
  single selection.
 
     [$name] (string) The name attribute of each radio button.
-    [$selection] (string|array) The selected value(s).
+    [$selection] (string|array|null) The selected value(s). String for single
+    or array for multiple selection(s).
     [$items] (array) The data item used to generate the radio buttons. The
     array keys are the radio button values, while the array values are the
     corresponding labels.
@@ -888,20 +892,24 @@ return (string) The generated error summary
  generated, but it will be hidden.
 
     [$models] (\yii\base\Model|\yii\base\Model[]) The model(s) whose
-    validation errors are to be displayed
+    validation errors are to be displayed.
     [$options] (array) The tag options in terms of name-value pairs. The
     following options are specially handled:
 
 
       - header: string, the header HTML for the error summary. If not set,
       a default prompt string will be used. 
-      - footer: string, the footer HTML for the error summary. 
+      - footer: string, the footer HTML for the error summary. Defaults to
+      empty string. 
       - encode: boolean, if set to false then the error messages won't be
-      encoded.
+      encoded. Defaults to 'true'. 
+      - showAllErrors: boolean, if set to true every error message for
+      each attribute will be shown otherwise   only the first error message
+    for each attribute will be shown. Defaults to 'false'.   Option is
+    available since 2.0.10.
 
     The rest of the options will be rendered as the attributes of the
-    container tag. The values will be HTML-encoded using 'encode()'. If a
-    value is null, the corresponding attribute will not be rendered.
+    container tag.
 
 
 *yii/helpers/BaseHtml::error*				public
@@ -1333,8 +1341,8 @@ return (string) The generated input list
 <
 return (string) The generated list options
 
-    [$selection] (string|array) The selected value(s). This can be either a
-    string for single selection or an array for multiple selections.
+    [$selection] (string|array|null) The selected value(s). String for single
+    or array for multiple selection(s).
     [$items] (array) The option data items. The array keys are option values,
     and the array values are the corresponding option labels. The array can
     also be nested (i.e. some array values are arrays too). For each

@@ -1,0 +1,138 @@
+
+*yii/web/UrlNormalizer*   >> |yii/base/Object|
+=======================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$collapseSlashes			*yii/web/UrlNormalizer::$collapseSlashes*
+
+ (boolean) Whether slashes should be collapsed, for example 'site///index'
+ will be converted into 'site/index'
+
+$normalizeTrailingSlash			*yii/web/UrlNormalizer::$normalizeTrailingSlash*
+
+ (boolean) Whether trailing slash should be normalized according to the suffix
+ settings of the rule
+
+$action					*yii/web/UrlNormalizer::$action*
+
+ (integer|callable|null) Action to perform during route normalization.
+ Available options are: 
+   - 'null' - no special action will be performed 
+   - '301' - the request should be redirected to the normalized URL
+   using   permanent redirection 
+   - '302' - the request should be redirected to the normalized URL
+   using   temporary redirection 
+   - '404' - 'NotFoundHttpException' will be thrown 
+   - 'callable' - custom user callback, for example:###CODE###
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/web/UrlNormalizer::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/web/UrlNormalizer::__construct*			public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/web/UrlNormalizer::init*				public
+
+ See |yii/base/Object::init|
+
+
+*yii/web/UrlNormalizer::__get*				public
+
+ See |yii/base/Object::__get|
+
+
+*yii/web/UrlNormalizer::__set*				public
+
+ See |yii/base/Object::__set|
+
+
+*yii/web/UrlNormalizer::__isset*				public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/web/UrlNormalizer::__unset*				public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/web/UrlNormalizer::__call*				public
+
+ See |yii/base/Object::__call|
+
+
+*yii/web/UrlNormalizer::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/web/UrlNormalizer::canGetProperty*			public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/web/UrlNormalizer::canSetProperty*			public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/web/UrlNormalizer::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/web/UrlNormalizer::normalizeRoute*			public
+>
+ normalizeRoute($route)
+<
+return (array) Normalized route
+
+    [$route] (array) Route for normalization
+
+
+*yii/web/UrlNormalizer::normalizePathInfo*		public
+>
+ normalizePathInfo($pathInfo, $suffix, $normalized='false')
+<
+return (string) Normalized pathInfo
+
+    [$pathInfo] (string) PathInfo for normalization
+    [$suffix] (string) Current rule suffix
+    [$normalized] (boolean) If specified, this variable will be set to 'true'
+    if $pathInfo was changed during normalization
+
+
+*yii/web/UrlNormalizer::collapseSlashes*			protected
+>
+ collapseSlashes($pathInfo)
+<
+return (string) Normalized path info.
+
+    [$pathInfo] (string) Raw path info.
+
+
+*yii/web/UrlNormalizer::normalizeTrailingSlash*		protected
+>
+ normalizeTrailingSlash($pathInfo, $suffix)
+<
+return (string) Normalized path info.
+
+    [$pathInfo] (string) Raw path info.
+    [$suffix] (string) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

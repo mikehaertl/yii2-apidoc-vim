@@ -40,10 +40,35 @@ $color					*yii/console/controllers/BaseMigrateController::$color*
 
  See |yii/console/Controller::$color|
 
+$help					*yii/console/controllers/BaseMigrateController::$help*
+
+ See |yii/console/Controller::$help|
+
 $migrationPath				*yii/console/controllers/BaseMigrateController::$migrationPath*
 
- (string) The directory storing the migration classes. This can be either a
- path alias or a directory.
+ (string) The directory containing the migration classes. This can be either a
+ path alias or a directory path.
+
+ If you have set up 'migrationNamespaces', you may set this field to 'null' in
+ order to disable usage of migrations that are not namespaced.
+
+$migrationNamespaces			*yii/console/controllers/BaseMigrateController::$migrationNamespaces*
+
+ (array) List of namespaces containing the migration classes.
+
+ Migration namespaces should be resolvable as a path alias if prefixed with
+ '@', e.g. if you specify the namespace 'app\migrations', the code
+ 'Yii::getAlias('@app/migrations')' should be able to return the file path to
+ the directory this namespace refers to.
+
+ For example:
+
+   [
+       'app\migrations',
+       'some\extension\migrations',
+   ]
+
+
 
 $templateFile				*yii/console/controllers/BaseMigrateController::$templateFile*
 
@@ -85,10 +110,6 @@ $passedOptionValues			*yii/console/controllers/BaseMigrateController::$passedOpt
 $helpSummary				*yii/console/controllers/BaseMigrateController::$helpSummary*
 
  See |yii/console/Controller::$helpSummary|
-
-$help					*yii/console/controllers/BaseMigrateController::$help*
-
- See |yii/console/Controller::$help|
 
 
 
@@ -507,11 +528,12 @@ return (void)
  This command will first revert the specified migrations, and then apply them
  again. For example,
 
- ''' yii migrate/to 101129_185401                      # using timestamp yii
- migrate/to m101129_185401_create_user_table   # using full name yii
- migrate/to 1392853618                         # using UNIX timestamp yii
- migrate/to "2014-02-15 13:00:50"              # using strtotime() parseable
- string '''
+ ''' yii migrate/to 101129_185401                          # using timestamp
+ yii migrate/to m101129_185401_create_user_table       # using full name yii
+ migrate/to 1392853618                             # using UNIX timestamp yii
+ migrate/to "2014-02-15 13:00:50"                  # using strtotime()
+ parseable string yii migrate/to app\migrations\M101129185401CreateUser #
+ using full namespace name '''
 
     [$version] (string) Either the version name or the certain time value in
     the past that the application should be migrated to. This can be either
@@ -527,8 +549,10 @@ return (integer) CLI exit code
 
  No actual migration will be performed.
 
- ''' yii migrate/mark 101129_185401                      # using timestamp yii
- migrate/mark m101129_185401_create_user_table   # using full name '''
+ ''' yii migrate/mark 101129_185401                        # using timestamp
+ yii migrate/mark m101129_185401_create_user_table     # using full name yii
+ migrate/to app\migrations\M101129185401CreateUser # using full namespace name
+ '''
 
     [$version] (string) The version at which the migration history should be
     marked. This can be either the timestamp or the full name of the
@@ -581,11 +605,21 @@ return (void)
 
  ''' yii migrate/create create_user_table '''
 
+ In order to generate a namespaced migration, you should specify a namespace
+ before the migration's name. Note that backslash ('\') is usually considered
+ a special character in the shell, so you need to escape it properly to avoid
+ shell errors or incorrect behavior. For example:
+
+ ''' yii migrate/create 'app\\migrations\\createUserTable' '''
+
+ In case 'migrationPath' is not set and no namespace is provided, the first
+ entry of 'migrationNamespaces' will be used.
+
     [$name] (string) The name of the new migration. This should only contain
-    letters, digits and/or underscores.
+    letters, digits, underscores and/or backslashes.
 
     Note: If the migration name is of a special form, for example create_xxx
-    or drop_xxx then the generated migration file will contain extra code, in
+    or drop_xxx, then the generated migration file will contain extra code, in
     this case for creating/dropping tables.
 
 

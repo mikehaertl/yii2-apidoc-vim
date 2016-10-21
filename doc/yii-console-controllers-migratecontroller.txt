@@ -30,6 +30,26 @@ DESCRIPTION
 
  # reverts the last applied migration yii migrate/down '''
 
+ Since 2.0.10 you can use namespaced migrations. In order to enable this
+ feature you should configure 'migrationNamespaces' property for the
+ controller at application configuration:
+
+   return [
+       'controllerMap' => [
+           'migrate' => [
+               'class' => 'yii\console\controllers\MigrateController',
+               'migrationNamespaces' => [
+                   'app\migrations',
+                   'some\extension\migrations',
+               ],
+               //'migrationPath' => null, // allows to disable not namespaced
+ migration completely
+           ],
+       ],
+   ];
+
+
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -62,9 +82,17 @@ $color					*yii/console/controllers/MigrateController::$color*
 
  See |yii/console/Controller::$color|
 
+$help					*yii/console/controllers/MigrateController::$help*
+
+ See |yii/console/Controller::$help|
+
 $migrationPath				*yii/console/controllers/MigrateController::$migrationPath*
 
  See |yii/console/controllers/BaseMigrateController::$migrationPath|
+
+$migrationNamespaces			*yii/console/controllers/MigrateController::$migrationNamespaces*
+
+ See |yii/console/controllers/BaseMigrateController::$migrationNamespaces|
 
 $templateFile				*yii/console/controllers/MigrateController::$templateFile*
 
@@ -152,10 +180,6 @@ $passedOptionValues			*yii/console/controllers/MigrateController::$passedOptionV
 $helpSummary				*yii/console/controllers/MigrateController::$helpSummary*
 
  See |yii/console/Controller::$helpSummary|
-
-$help					*yii/console/controllers/MigrateController::$help*
-
- See |yii/console/Controller::$help|
 
 
 

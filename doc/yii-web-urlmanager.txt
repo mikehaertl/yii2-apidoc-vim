@@ -40,15 +40,15 @@ $enableStrictParsing			*yii/web/UrlManager::$enableStrictParsing*
  incoming requested URL must match at least one of the 'rules' in order to be
  treated as a valid request. Otherwise, the path info part of the request will
  be treated as the requested route. This property is used only when
- 'enablePrettyUrl' is true.
+ 'enablePrettyUrl' is 'true'.
 
 $rules					*yii/web/UrlManager::$rules*
 
  (array) The rules for creating and parsing URLs when 'enablePrettyUrl' is
- true. This property is used only if 'enablePrettyUrl' is true. Each element
- in the array is the configuration array for creating a single URL rule. The
- configuration will be merged with 'ruleConfig' first before it is used for
- creating the rule object.
+ 'true'. This property is used only if 'enablePrettyUrl' is 'true'. Each
+ element in the array is the configuration array for creating a single URL
+ rule. The configuration will be merged with 'ruleConfig' first before it is
+ used for creating the rule object.
 
  A special shortcut format can be used if a rule only specifies
  'UrlRule::pattern|pattern' and 'UrlRule::route|route': ''pattern' =>
@@ -85,19 +85,19 @@ $rules					*yii/web/UrlManager::$rules*
 
 $suffix					*yii/web/UrlManager::$suffix*
 
- (string) The URL suffix used when in 'path' format. For example, ".html" can
- be used so that the URL looks like pointing to a static HTML page. This
- property is used only if 'enablePrettyUrl' is true.
+ (string) The URL suffix used when 'enablePrettyUrl' is 'true'. For example,
+ ".html" can be used so that the URL looks like pointing to a static HTML
+ page. This property is used only if 'enablePrettyUrl' is 'true'.
 
 $showScriptName				*yii/web/UrlManager::$showScriptName*
 
  (boolean) Whether to show entry script name in the constructed URL. Defaults
- to true. This property is used only if 'enablePrettyUrl' is true.
+ to 'true'. This property is used only if 'enablePrettyUrl' is 'true'.
 
 $routeParam				*yii/web/UrlManager::$routeParam*
 
  (string) The GET parameter name for route. This property is used only if
- 'enablePrettyUrl' is false.
+ 'enablePrettyUrl' is 'false'.
 
 $cache					*yii/web/UrlManager::$cache*
 
@@ -106,14 +106,29 @@ $cache					*yii/web/UrlManager::$cache*
  object, if it is available.
 
  After the UrlManager object is created, if you want to change this property,
- you should only assign it with a cache object. Set this property to false if
- you do not want to cache the URL rules.
+ you should only assign it with a cache object. Set this property to 'false'
+ if you do not want to cache the URL rules.
 
 $ruleConfig				*yii/web/UrlManager::$ruleConfig*
 
  (array) The default configuration of URL rules. Individual rule
  configurations specified via 'rules' will take precedence when the same
  property of the rule is configured.
+
+$normalizer				*yii/web/UrlManager::$normalizer*
+
+ (\yii\web\UrlNormalizer|array|string|false) The configuration for
+ 'UrlNormalizer' used by this UrlManager. The default value is 'false', which
+ means normalization will be skipped. If you wish to enable URL normalization,
+ you should configure this property manually. For example:
+
+   [
+       'class' => 'yii\web\UrlNormalizer',
+       'collapseSlashes' => true,
+       'normalizeTrailingSlash' => true,
+   ]
+
+
 
 $cacheKey				*yii/web/UrlManager::$cacheKey*
 
@@ -281,7 +296,7 @@ return (void)
  This method will call 'buildRules()' to parse the given rule declarations and
  then append or insert them to the existing 'rules'.
 
- Note that if 'enablePrettyUrl' is false, this method will do nothing.
+ Note that if 'enablePrettyUrl' is 'false', this method will do nothing.
 
     [$rules] (array) The new rules to be added. Each array element represents
     a single rule declaration. Please refer to 'rules' for the acceptable rule
@@ -307,8 +322,8 @@ declarations
  parseRequest($request)
 <
 return (array|boolean) The route and the associated parameters. The latter is always
-empty if 'enablePrettyUrl' is false. False is returned if the current request
-cannot be successfully parsed.
+empty if 'enablePrettyUrl' is 'false'. 'false' is returned if the current
+request cannot be successfully parsed.
 
     [$request] (\yii\web\Request) The request component
 
@@ -390,7 +405,7 @@ return (string) The base URL that is used by 'createUrl()' to prepend to created
 URLs.
 
  It defaults to 'Request::baseUrl'. This is mainly used when 'enablePrettyUrl'
- is true and 'showScriptName' is false.
+ is 'true' and 'showScriptName' is 'false'.
 
 
 *yii/web/UrlManager::setBaseUrl*				public
@@ -399,8 +414,8 @@ URLs.
 <
 return (void)
 
- This is mainly used when 'enablePrettyUrl' is true and 'showScriptName' is
- false.
+ This is mainly used when 'enablePrettyUrl' is 'true' and 'showScriptName' is
+ 'false'.
 
     [$value] (string) The base URL that is used by 'createUrl()' to prepend to
     created URLs.
@@ -414,7 +429,7 @@ return (string) The entry script URL that is used by 'createUrl()' to prepend to
 created URLs.
 
  It defaults to 'Request::scriptUrl'. This is mainly used when
- 'enablePrettyUrl' is false or 'showScriptName' is true.
+ 'enablePrettyUrl' is 'false' or 'showScriptName' is 'true'.
 
 
 *yii/web/UrlManager::setScriptUrl*			public
@@ -423,8 +438,8 @@ created URLs.
 <
 return (void)
 
- This is mainly used when 'enablePrettyUrl' is false or 'showScriptName' is
- true.
+ This is mainly used when 'enablePrettyUrl' is 'false' or 'showScriptName' is
+ 'true'.
 
     [$value] (string) The entry script URL that is used by 'createUrl()' to
     prepend to created URLs.

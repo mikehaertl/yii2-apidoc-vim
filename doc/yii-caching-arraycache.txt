@@ -229,8 +229,9 @@ cache or expired.
 >
  getValue($key)
 <
-return (string|boolean) The value stored in cache, false if the value is not in the
-cache or expired.
+return (mixed|false) The value stored in cache, false if the value is not in the
+cache or expired. Most often value is a string. If you have disabled
+'serializer', it could be something else.
 
 
 
@@ -256,7 +257,8 @@ return (boolean) True if the value is successfully stored into cache, false othe
 
 
     [$key] (string) The key identifying the value to be cached
-    [$value] (string) The value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
     [$duration] (integer) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
@@ -275,7 +277,8 @@ return (boolean) True if the value is successfully stored into cache, false othe
 
 
     [$key] (string) The key identifying the value to be cached
-    [$value] (string) The value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
     [$duration] (integer) The number of seconds in which the cached value will
     expire. 0 means never expire.
 

@@ -66,6 +66,10 @@ $color					*yii/console/Controller::$color*
  (boolean) Whether to enable ANSI color in the output. If not set, ANSI color
  will only be enabled for terminals that support it.
 
+$help					*yii/console/Controller::$help*
+
+ (boolean) Whether to display help information about current command.
+
 $behaviors				*yii/console/Controller::$behaviors*
 
  See |yii/base/Component::$behaviors|
@@ -99,10 +103,6 @@ $passedOptionValues			*yii/console/Controller::$passedOptionValues*
  (array) The properties corresponding to the passed options
 
 $helpSummary				*yii/console/Controller::$helpSummary*
-
- (string)
-
-$help					*yii/console/Controller::$help*
 
  (string)
 
@@ -431,6 +431,19 @@ return (string) The user input
       must accept two parameters:      
       - $input: the user input to validate      
       - $error: the error value passed by reference if validation failed.
+
+    An example of how to use the prompt method with a validator function.
+
+      $code = $this->prompt('Enter 4-Chars-Pin', ['required' => true,
+    'validator' => function($input, &$error) {
+          if (strlen($input) !== 4) {
+              $error = 'The Pin must be exactly 4 chars!';
+              return false;
+          }
+          return true;
+      });
+
+
 
 
 *yii/console/Controller::confirm*				public

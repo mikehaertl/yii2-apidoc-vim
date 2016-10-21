@@ -1,0 +1,181 @@
+
+*yii/web/MultipartFormDataParser*   >> |yii/base/Object|
+=================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This parser provides the fallback for the 'multipart/form-data' processing on
+ non POST requests, for example: the one with 'PUT' request method.
+
+ In order to enable this parser you should configure 'Request::parsers' in the
+ following way:
+
+   return [
+       'components' => [
+           'request' => [
+               'parsers' => [
+                   'multipart/form-data' => 'yii\web\MultipartFormDataParser'
+               ],
+           ],
+           // ...
+       ],
+       // ...
+   ];
+
+ Method 'parse()' of this parser automatically populates '$_FILES' with the
+ files parsed from raw body.
+
+ > Note: since this is a request parser, it will initialize '$_FILES' values
+ on 'Request::getBodyParams()'. Until this method is invoked, '$_FILES' array
+ will remain empty even if there are submitted files in the request body. Make
+ sure you have requested body params before any attempt to get uploaded file
+ in case you are using this parser.
+
+ Usage example:
+
+   use yii\web\UploadedFile;
+
+   $restRequestData = Yii::$app->request->getBodyParams();
+   $uploadedFile = UploadedFile::getInstancesByName('photo');
+
+   $model = new Item();
+   $model->populate($restRequestData);
+   copy($uploadedFile->tempName, '/path/to/file/storage/photo.jpg');
+
+ > Note: although this parser fully emulates regular structure of the
+ '$_FILES', related temporary files, which are available via 'tmp_name' key,
+ will not be recognized by PHP as uploaded ones. Thus functions like
+ 'is_uploaded_file()' and 'move_uploaded_file()' will fail on them. This also
+ means 'UploadedFile::saveAs()' will fail as well.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$uploadFileMaxSize			*yii/web/MultipartFormDataParser::$uploadFileMaxSize*
+
+ (integer) Upload file max size in bytes.
+
+$uploadFileMaxCount			*yii/web/MultipartFormDataParser::$uploadFileMaxCount*
+
+ (integer) Maximum upload files count.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/web/MultipartFormDataParser::className*		public
+
+ See |yii/base/Object::className|
+
+
+*yii/web/MultipartFormDataParser::__construct*		public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/web/MultipartFormDataParser::init*			public
+
+ See |yii/base/Object::init|
+
+
+*yii/web/MultipartFormDataParser::__get*			public
+
+ See |yii/base/Object::__get|
+
+
+*yii/web/MultipartFormDataParser::__set*			public
+
+ See |yii/base/Object::__set|
+
+
+*yii/web/MultipartFormDataParser::__isset*		public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/web/MultipartFormDataParser::__unset*		public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/web/MultipartFormDataParser::__call*			public
+
+ See |yii/base/Object::__call|
+
+
+*yii/web/MultipartFormDataParser::hasProperty*		public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/web/MultipartFormDataParser::canGetProperty*		public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/web/MultipartFormDataParser::canSetProperty*		public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/web/MultipartFormDataParser::hasMethod*		public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/web/MultipartFormDataParser::getUploadFileMaxSize*	public
+>
+ getUploadFileMaxSize()
+<
+return (integer) Upload file max size in bytes.
+
+
+
+*yii/web/MultipartFormDataParser::setUploadFileMaxSize*	public
+>
+ setUploadFileMaxSize($uploadFileMaxSize)
+<
+return (void)
+
+    [$uploadFileMaxSize] (integer) Upload file max size in bytes.
+
+
+*yii/web/MultipartFormDataParser::getUploadFileMaxCount*	public
+>
+ getUploadFileMaxCount()
+<
+return (integer) Maximum upload files count.
+
+
+
+*yii/web/MultipartFormDataParser::setUploadFileMaxCount*	public
+>
+ setUploadFileMaxCount($uploadFileMaxCount)
+<
+return (void)
+
+    [$uploadFileMaxCount] (integer) Maximum upload files count.
+
+
+*yii/web/MultipartFormDataParser::parse*			public
+>
+ parse($rawBody, $contentType)
+<
+return (array) Parameters parsed from the request body
+
+
+
+
+
+
+
+    [$rawBody] (string) The raw HTTP request body.
+    [$contentType] (string) The content type specified for the request body.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

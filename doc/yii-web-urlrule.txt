@@ -69,6 +69,12 @@ $encodeParams				*yii/web/UrlRule::$encodeParams*
 
  (boolean) A value indicating if parameters should be url encoded.
 
+$normalizer				*yii/web/UrlRule::$normalizer*
+
+ (\yii\web\UrlNormalizer|array|false|null) The configuration for
+ 'UrlNormalizer' used by this rule. If 'null', 'UrlManager::normalizer' will
+ be used, if 'false', normalization will be skipped for this rule.
+
 $placeholders				*yii/web/UrlRule::$placeholders*
 
  (array) List of placeholders for matching parameters names. Used in
@@ -146,12 +152,30 @@ return (void)
  See |yii/base/Object::hasMethod|
 
 
+*yii/web/UrlRule::getNormalizer*				protected
+>
+ getNormalizer($manager)
+<
+return (\yii\web\UrlNormalizer|null) 
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+
+
+*yii/web/UrlRule::hasNormalizer*				protected
+>
+ hasNormalizer($manager)
+<
+return (boolean) 
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+
+
 *yii/web/UrlRule::parseRequest*				public
 >
  parseRequest($manager, $request)
 <
 return (array|boolean) The parsing result. The route and the parameters are returned
-as an array. If false, it means this rule cannot be used to parse this path
+as an array. If 'false', it means this rule cannot be used to parse this path
 info.
 
     [$manager] (\yii\web\UrlManager) The URL manager
@@ -162,7 +186,7 @@ info.
 >
  createUrl($manager, $route, $params)
 <
-return (string|boolean) The created URL, or false if this rule cannot be used for
+return (string|boolean) The created URL, or 'false' if this rule cannot be used for
 creating this URL.
 
     [$manager] (\yii\web\UrlManager) The URL manager
