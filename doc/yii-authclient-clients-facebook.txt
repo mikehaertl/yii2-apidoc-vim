@@ -36,9 +36,13 @@ $version				*yii/authclient/clients/Facebook::$version*
 
 $apiBaseUrl				*yii/authclient/clients/Facebook::$apiBaseUrl*
 
- (string) API base URL.
+ (string) API base URL. This field will be used as
+ '\yii\httpclient\Client::baseUrl' value of 'httpClient'. Note: changing this
+ property will take no effect after 'httpClient' is instantiated.
 
- API base URL.
+ API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
+ value of 'httpClient'. Note: changing this property will take no effect after
+ 'httpClient' is instantiated.
 
 
 
@@ -58,6 +62,10 @@ $scope					*yii/authclient/clients/Facebook::$scope*
 
 
 
+$autoRefreshAccessToken			*yii/authclient/clients/Facebook::$autoRefreshAccessToken*
+
+ See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
+
 $clientId				*yii/authclient/clients/Facebook::$clientId*
 
  See |yii/authclient/OAuth2::$clientId|
@@ -73,6 +81,10 @@ $tokenUrl				*yii/authclient/clients/Facebook::$tokenUrl*
  Token request URL endpoint.
 
 
+
+$validateAuthState			*yii/authclient/clients/Facebook::$validateAuthState*
+
+ See |yii/authclient/OAuth2::$validateAuthState|
 
 $attributeNames				*yii/authclient/clients/Facebook::$attributeNames*
 
@@ -107,13 +119,21 @@ $viewOptions				*yii/authclient/clients/Facebook::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/clients/Facebook::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/clients/Facebook::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/clients/Facebook::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/clients/Facebook::$returnUrl*
 
  See |yii/authclient/BaseOAuth::$returnUrl|
-
-$curlOptions				*yii/authclient/clients/Facebook::$curlOptions*
-
- See |yii/authclient/BaseOAuth::$curlOptions|
 
 $accessToken				*yii/authclient/clients/Facebook::$accessToken*
 
@@ -314,6 +334,36 @@ METHOD DETAILS
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/clients/Facebook::getHttpClient*		public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/clients/Facebook::setHttpClient*		public
+
+ See |yii/authclient/BaseOAuth::setHttpClient|
+
+
+*yii/authclient/clients/Facebook::setRequestOptions*	public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/clients/Facebook::getRequestOptions*	public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/clients/Facebook::getStateStorage*	public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/clients/Facebook::setStateStorage*	public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/clients/Facebook::defaultName*		protected
 >
  defaultName()
@@ -372,9 +422,44 @@ return (array) List of default 'viewOptions'
 
 
 
+*yii/authclient/clients/Facebook::createHttpClient*	protected
+
+ See |yii/authclient/BaseOAuth::createHttpClient|
+
+
 *yii/authclient/clients/Facebook::normalizeUserAttributes*protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/clients/Facebook::createRequest*		public
+
+ See |yii/authclient/BaseClient::createRequest|
+
+
+*yii/authclient/clients/Facebook::defaultRequestOptions*	protected
+
+ See |yii/authclient/BaseOAuth::defaultRequestOptions|
+
+
+*yii/authclient/clients/Facebook::setState*		protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/clients/Facebook::getState*		protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/clients/Facebook::removeState*		protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/clients/Facebook::getStateKeyPrefix*	protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/clients/Facebook::setReturnUrl*		public
@@ -385,16 +470,6 @@ return (array) List of default 'viewOptions'
 *yii/authclient/clients/Facebook::getReturnUrl*		public
 
  See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/clients/Facebook::setCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::setCurlOptions|
-
-
-*yii/authclient/clients/Facebook::getCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::getCurlOptions|
 
 
 *yii/authclient/clients/Facebook::setAccessToken*		public
@@ -422,41 +497,6 @@ return (array) List of default 'viewOptions'
  See |yii/authclient/BaseOAuth::defaultReturnUrl|
 
 
-*yii/authclient/clients/Facebook::sendRequest*		protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/clients/Facebook::mergeCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::mergeCurlOptions|
-
-
-*yii/authclient/clients/Facebook::defaultCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::defaultCurlOptions|
-
-
-*yii/authclient/clients/Facebook::processResponse*	protected
-
- See |yii/authclient/BaseOAuth::processResponse|
-
-
-*yii/authclient/clients/Facebook::convertXmlToArray*	protected
-
- See |yii/authclient/BaseOAuth::convertXmlToArray|
-
-
-*yii/authclient/clients/Facebook::determineContentTypeByHeaders*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
-
-
-*yii/authclient/clients/Facebook::determineContentTypeByRaw*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
-
-
 *yii/authclient/clients/Facebook::createSignatureMethod*	protected
 
  See |yii/authclient/BaseOAuth::createSignatureMethod|
@@ -465,6 +505,11 @@ return (array) List of default 'viewOptions'
 *yii/authclient/clients/Facebook::createToken*		protected
 
  See |yii/authclient/BaseOAuth::createToken|
+
+
+*yii/authclient/clients/Facebook::sendRequest*		protected
+
+ See |yii/authclient/BaseOAuth::sendRequest|
 
 
 *yii/authclient/clients/Facebook::composeUrl*		protected
@@ -482,24 +527,14 @@ return (array) List of default 'viewOptions'
  See |yii/authclient/BaseOAuth::restoreAccessToken|
 
 
-*yii/authclient/clients/Facebook::setState*		protected
+*yii/authclient/clients/Facebook::createApiRequest*	public
 
- See |yii/authclient/BaseOAuth::setState|
-
-
-*yii/authclient/clients/Facebook::getState*		protected
-
- See |yii/authclient/BaseOAuth::getState|
+ See |yii/authclient/BaseOAuth::createApiRequest|
 
 
-*yii/authclient/clients/Facebook::removeState*		protected
+*yii/authclient/clients/Facebook::beforeApiRequestSend*	public
 
- See |yii/authclient/BaseOAuth::removeState|
-
-
-*yii/authclient/clients/Facebook::getStateKeyPrefix*	protected
-
- See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+ See |yii/authclient/BaseOAuth::beforeApiRequestSend|
 
 
 *yii/authclient/clients/Facebook::api*			public
@@ -507,19 +542,14 @@ return (array) List of default 'viewOptions'
  See |yii/authclient/BaseOAuth::api|
 
 
-*yii/authclient/clients/Facebook::composeRequestCurlOptions*protected
-
- See |yii/authclient/BaseOAuth::composeRequestCurlOptions|
-
-
 *yii/authclient/clients/Facebook::refreshAccessToken*	public
 
  See |yii/authclient/BaseOAuth::refreshAccessToken|
 
 
-*yii/authclient/clients/Facebook::apiInternal*		protected
+*yii/authclient/clients/Facebook::applyAccessTokenToRequest*public
 
- See |yii/authclient/BaseOAuth::apiInternal|
+ See |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
 
 
 *yii/authclient/clients/Facebook::buildAuthUrl*		public
@@ -530,6 +560,21 @@ return (array) List of default 'viewOptions'
 *yii/authclient/clients/Facebook::fetchAccessToken*	public
 
  See |yii/authclient/OAuth2::fetchAccessToken|
+
+
+*yii/authclient/clients/Facebook::generateAuthState*	protected
+
+ See |yii/authclient/OAuth2::generateAuthState|
+
+
+*yii/authclient/clients/Facebook::authenticateClient*	public
+
+ See |yii/authclient/OAuth2::authenticateClient|
+
+
+*yii/authclient/clients/Facebook::authenticateUser*	public
+
+ See |yii/authclient/OAuth2::authenticateUser|
 
 
 

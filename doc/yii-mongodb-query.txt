@@ -17,7 +17,7 @@ DESCRIPTION
 
  For example,
 
-   $query = new Query;
+   $query = new Query();
    // compose the query
    $query->select(['name', 'status'])
        ->from('customer')
@@ -32,35 +32,49 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $where					*yii/mongodb/Query::$where*
+
  See |yii/db/QueryTrait::$where|
 
 $limit					*yii/mongodb/Query::$limit*
+
  See |yii/db/QueryTrait::$limit|
 
 $offset					*yii/mongodb/Query::$offset*
+
  See |yii/db/QueryTrait::$offset|
 
 $orderBy				*yii/mongodb/Query::$orderBy*
+
  See |yii/db/QueryTrait::$orderBy|
 
 $indexBy				*yii/mongodb/Query::$indexBy*
+
  See |yii/db/QueryTrait::$indexBy|
 
 $select					*yii/mongodb/Query::$select*
- (array) The fields of the results to return. For example, '['name',
- 'group_id']'. The "_id" field is always returned. If not set, if means
- selecting all columns.
+
+ (array) The fields of the results to return. For example: '['name',
+ 'group_id']', '['name' => true, '_id' => false]'. Unless directly excluded,
+ the "_id" field is always returned. If not set, it means selecting all
+ columns.
 
 $from					*yii/mongodb/Query::$from*
+
  (string|array) The collection to be selected from. If string considered as
  the name of the collection inside the default database. If array 
    - first element considered as the name of the database, second 
    - as name of collection inside that database
 
+$options				*yii/mongodb/Query::$options*
+
+ (array) Cursor options in format: optionKey => optionValue
+
 $behaviors				*yii/mongodb/Query::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+
+ See |yii/base/Component::$behaviors|
 
 $collection				*yii/mongodb/Query::$collection*
+
  (\yii\mongodb\Collection) Collection instance.
 
 
@@ -68,159 +82,199 @@ $collection				*yii/mongodb/Query::$collection*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/mongodb/Query::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/mongodb/Query::__construct*				public
+
  See |yii/base/Object::__construct|
 
 
 *yii/mongodb/Query::init*					public
+
  See |yii/base/Object::init|
 
 
 *yii/mongodb/Query::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/mongodb/Query::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/mongodb/Query::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/mongodb/Query::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/mongodb/Query::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/mongodb/Query::hasProperty*				public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/mongodb/Query::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/mongodb/Query::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/mongodb/Query::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/mongodb/Query::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/mongodb/Query::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/mongodb/Query::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/mongodb/Query::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/mongodb/Query::off*					public
+
  See |yii/base/Component::off|
 
 
 *yii/mongodb/Query::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/mongodb/Query::getBehavior*				public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/mongodb/Query::getBehaviors*				public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/mongodb/Query::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/mongodb/Query::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/mongodb/Query::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/mongodb/Query::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/mongodb/Query::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/mongodb/Query::indexBy*				public
+
  See |yii/db/QueryTrait::indexBy|
 
 
 *yii/mongodb/Query::where*				public
+
  See |yii/db/QueryTrait::where|
 
 
 *yii/mongodb/Query::andWhere*				public
+
  See |yii/db/QueryTrait::andWhere|
 
 
 *yii/mongodb/Query::orWhere*				public
+
  See |yii/db/QueryTrait::orWhere|
 
 
 *yii/mongodb/Query::filterWhere*				public
+
  See |yii/db/QueryTrait::filterWhere|
 
 
 *yii/mongodb/Query::andFilterWhere*			public
+
  See |yii/db/QueryTrait::andFilterWhere|
 
 
 *yii/mongodb/Query::orFilterWhere*			public
+
  See |yii/db/QueryTrait::orFilterWhere|
 
 
 *yii/mongodb/Query::filterCondition*			protected
+
  See |yii/db/QueryTrait::filterCondition|
 
 
 *yii/mongodb/Query::isEmpty*				protected
+
  See |yii/db/QueryTrait::isEmpty|
 
 
 *yii/mongodb/Query::orderBy*				public
+
  See |yii/db/QueryTrait::orderBy|
 
 
 *yii/mongodb/Query::addOrderBy*				public
+
  See |yii/db/QueryTrait::addOrderBy|
 
 
 *yii/mongodb/Query::normalizeOrderBy*			protected
+
  See |yii/db/QueryTrait::normalizeOrderBy|
 
 
 *yii/mongodb/Query::limit*				public
+
  See |yii/db/QueryTrait::limit|
 
 
 *yii/mongodb/Query::offset*				public
+
  See |yii/db/QueryTrait::offset|
 
 
@@ -228,7 +282,7 @@ METHOD DETAILS
 >
  getCollection($db='null')
 <
-(\yii\mongodb\Collection) Collection instance.
+return (\yii\mongodb\Collection) Collection instance.
 
     [$db] (\yii\mongodb\Connection) Mongo connection.
 
@@ -237,7 +291,7 @@ METHOD DETAILS
 >
  select($fields)
 <
-(static) The query object itself.
+return ($this) The query object itself.
 
     [$fields] (array) Fields of the results to return.
 
@@ -246,16 +300,61 @@ METHOD DETAILS
 >
  from($collection)
 <
-(static) The query object itself.
+return ($this) The query object itself.
 
     [$collection] () 
 
 
-*yii/mongodb/Query::buildCursor*				protected
+*yii/mongodb/Query::options*				public
+>
+ options($options)
+<
+return ($this) The query object itself
+
+    [$options] (array) Cursor options in format: optionName => optionValue
+
+
+*yii/mongodb/Query::addOptions*				public
+>
+ addOptions($options)
+<
+return ($this) The query object itself
+
+    [$options] (array) Cursor options in format: optionName => optionValue
+
+
+*yii/mongodb/Query::andFilterCompare*			public
+>
+ andFilterCompare($name, $value, $defaultOperator=''='')
+<
+return ($this) The query object itself.
+
+ The comparison operator is intelligently determined based on the first few
+ characters in the given value and internally translated to a MongoDB
+ operator. In particular, it recognizes the following operators if they appear
+ as the leading characters in the given value: <: the column must be less than
+ the given value ($lt). >: the column must be greater than the given value
+ ($gt). <=: the column must be less than or equal to the given value ($lte).
+ >=: the column must be greater than or equal to the given value ($gte). <>:
+ the column must not be the same as the given value ($ne). Note that when
+ $partialMatch is true, this would mean the value must not be a substring of
+ the column. =: the column must be equal to the given value ($eq). none of the
+ above: use the $defaultOperator
+
+ Note that when the value is empty, no comparison expression will be added to
+ the search condition.
+
+    [$name] (string) Column name
+    [$value] (string) Column value
+    [$defaultOperator] (string) Defaults to =, performing an exact match. For
+    example: use 'LIKE' or 'REGEX' for partial cq regex matching
+
+
+*yii/mongodb/Query::buildCursor*				public
 >
  buildCursor($db='null')
 <
-(\MongoCursor) Mongo cursor instance.
+return (\MongoDB\Driver\Cursor) Mongo cursor instance.
 
     [$db] (\yii\mongodb\Connection) The database connection used to execute
     the query.
@@ -265,9 +364,10 @@ METHOD DETAILS
 >
  fetchRows($cursor, $all='true', $indexBy='null')
 <
-(array|boolean) Result.
+return (array|boolean) Result.
 
-    [$cursor] (\MongoCursor) Mongo cursor instance to fetch data from.
+    [$cursor] (\MongoDB\Driver\Cursor) Mongo cursor instance to fetch data
+    from.
     [$all] (boolean) Whether to fetch all rows or only first one.
     [$indexBy] (string|callable) The column name or PHP callback, by which the
     query results should be indexed by.
@@ -275,20 +375,67 @@ METHOD DETAILS
 
 *yii/mongodb/Query::fetchRowsInternal*			protected
 >
- fetchRowsInternal($cursor, $all, $indexBy)
+ fetchRowsInternal($cursor, $all)
 <
-(array|boolean) Result.
+return (array|boolean) Result.
 
-    [$cursor] (\MongoCursor) Mongo cursor instance to fetch data from.
+    [$cursor] (\MongoDB\Driver\Cursor) Mongo cursor instance to fetch data
+    from.
     [$all] (boolean) Whether to fetch all rows or only first one.
-    [$indexBy] (string|callable) Value to index by.
+
+
+*yii/mongodb/Query::batch*				public
+>
+ batch($batchSize=100, $db='null')
+<
+return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
+'Iterator' interface and can be traversed to retrieve the data in batches.
+
+ A batch query supports fetching data in batches, which can keep the memory
+ usage under a limit. This method will return a 'BatchQueryResult' object
+ which implements the 'Iterator' interface and can be traversed to retrieve
+ the data in batches.
+
+ For example,
+
+   $query = (new Query)->from('user');
+   foreach ($query->batch() as $rows) {
+       // $rows is an array of 10 or fewer rows from user collection
+   }
+
+
+
+    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$db] (\yii\mongodb\Connection) The MongoDB connection. If not set, the
+    "mongodb" application component will be used.
+
+
+*yii/mongodb/Query::each*					public
+>
+ each($batchSize=100, $db='null')
+<
+return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
+'Iterator' interface and can be traversed to retrieve the data in batches.
+
+ This method is similar to 'batch()' except that in each iteration of the
+ result, only one row of data is returned. For example,
+
+   $query = (new Query)->from('user');
+   foreach ($query->each() as $row) {
+   }
+
+
+
+    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$db] (\yii\mongodb\Connection) The MongoDB connection. If not set, the
+    "mongodb" application component will be used.
 
 
 *yii/mongodb/Query::all*					public
 >
  all($db='null')
 <
-(array) The query results. If the query results in nothing, an empty array
+return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -296,11 +443,23 @@ will be returned.
     will be used.
 
 
+*yii/mongodb/Query::populate*				public
+>
+ populate($rows)
+<
+return (array) The converted query result
+
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
+
+    [$rows] (array) The raw query result from database
+
+
 *yii/mongodb/Query::one*					public
 >
  one($db='null')
 <
-(array|boolean) The first row (in terms of an array) of the query result.
+return (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -308,11 +467,24 @@ False is returned if the query results in nothing.
     will be used.
 
 
+*yii/mongodb/Query::modify*				public
+>
+ modify($update, $options='[]', $db='null')
+<
+return (array|null) The original document, or the modified document when
+$options['new'] is set.
+
+    [$update] (array) Update criteria
+    [$options] (array) List of options in format: optionName => optionValue.
+    [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
+    query.
+
+
 *yii/mongodb/Query::count*				public
 >
  count($q=''*'', $db='null')
 <
-(integer) Number of records
+return (integer) Number of records
 
     [$q] (string) Kept to match 'QueryInterface', its value is ignored.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -324,7 +496,7 @@ False is returned if the query results in nothing.
 >
  exists($db='null')
 <
-(boolean) Whether the query result contains any row of data.
+return (boolean) Whether the query result contains any row of data.
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
@@ -335,7 +507,7 @@ False is returned if the query results in nothing.
 >
  sum($q, $db='null')
 <
-(integer) The sum of the specified column values
+return (integer) The sum of the specified column values
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -348,7 +520,7 @@ False is returned if the query results in nothing.
 >
  average($q, $db='null')
 <
-(integer) The average of the specified column values.
+return (integer) The average of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -361,7 +533,7 @@ False is returned if the query results in nothing.
 >
  min($q, $db='null')
 <
-(integer) The minimum of the specified column values.
+return (integer) The minimum of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -374,7 +546,7 @@ False is returned if the query results in nothing.
 >
  max($q, $db='null')
 <
-(integer) The maximum of the specified column values.
+return (integer) The maximum of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -387,7 +559,7 @@ False is returned if the query results in nothing.
 >
  aggregate($column, $operator, $db)
 <
-(integer) Aggregation result.
+return (integer) Aggregation result.
 
     [$column] (string) Column name.
     [$operator] (string) Aggregation operator.
@@ -399,7 +571,7 @@ False is returned if the query results in nothing.
 >
  distinct($q, $db='null')
 <
-(array) Array of distinct values
+return (array) Array of distinct values
 
     [$q] (string) Column to use.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the

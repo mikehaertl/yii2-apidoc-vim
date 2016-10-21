@@ -5,10 +5,10 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/db/cubrid/ColumnSchemaBuilder|
 |yii/db/mysql/ColumnSchemaBuilder|
-|yii/db/sqlite/ColumnSchemaBuilder|
 |yii/db/oci/ColumnSchemaBuilder|
+|yii/db/sqlite/ColumnSchemaBuilder|
+|yii/db/cubrid/ColumnSchemaBuilder|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -32,8 +32,9 @@ $length					*yii/db/ColumnSchemaBuilder::$length*
 
 $isNotNull				*yii/db/ColumnSchemaBuilder::$isNotNull*
 
- (boolean) Whether the column is not nullable. If this is 'true', a 'NOT NULL'
- constraint will be added.
+ (boolean|null) Whether the column is or not nullable. If this is 'true', a
+ 'NOT NULL' constraint will be added. If this is 'false', a 'NULL' constraint
+ will be added.
 
 $isUnique				*yii/db/ColumnSchemaBuilder::$isUnique*
 
@@ -47,6 +48,10 @@ $check					*yii/db/ColumnSchemaBuilder::$check*
 $default				*yii/db/ColumnSchemaBuilder::$default*
 
  (mixed) Default value of the column.
+
+$append					*yii/db/ColumnSchemaBuilder::$append*
+
+ (mixed) SQL string to be appended to column schema definition.
 
 $isUnsigned				*yii/db/ColumnSchemaBuilder::$isUnsigned*
 
@@ -158,6 +163,14 @@ return ($this)
 
 
 
+*yii/db/ColumnSchemaBuilder::null*			public
+>
+ null()
+<
+return ($this) 
+
+
+
 *yii/db/ColumnSchemaBuilder::unique*			public
 >
  unique()
@@ -230,6 +243,15 @@ return ($this)
     [$default] (string) The default value expression.
 
 
+*yii/db/ColumnSchemaBuilder::append*			public
+>
+ append($sql)
+<
+return ($this) 
+
+    [$sql] (string) The SQL string to be appended.
+
+
 *yii/db/ColumnSchemaBuilder::__toString*			public
 >
  __toString()
@@ -250,8 +272,8 @@ return (string)
 >
  buildNotNullString()
 <
-return (string) Returns 'NOT NULL' if 'isNotNull' is true, otherwise it returns an
-empty string.
+return (string) Returns 'NOT NULL' if 'isNotNull' is true, 'NULL' if 'isNotNull' is
+false or an empty string otherwise.
 
 
 
@@ -301,6 +323,14 @@ return (string) A string containing the AFTER constraint.
  buildFirstString()
 <
 return (string) A string containing the FIRST constraint.
+
+
+
+*yii/db/ColumnSchemaBuilder::buildAppendString*		protected
+>
+ buildAppendString()
+<
+return (string) Custom string to append.
 
 
 

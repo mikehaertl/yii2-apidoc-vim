@@ -16,6 +16,9 @@ DESCRIPTION
            'clients' => [
                'twitter' => [
                    'class' => 'yii\authclient\clients\Twitter',
+                   'attributeParams' => [
+                       'include_email' => 'true'
+                   ],
                    'consumerKey' => 'twitter_consumer_key',
                    'consumerSecret' => 'twitter_consumer_secret',
                ],
@@ -32,13 +35,17 @@ PROPERTY DETAILS
 
 $version				*yii/authclient/clients/Twitter::$version*
 
- See |yii/authclient/BaseOAuth::$version|
+ See |yii/authclient/OAuth1::$version|
 
 $apiBaseUrl				*yii/authclient/clients/Twitter::$apiBaseUrl*
 
- (string) API base URL.
+ (string) API base URL. This field will be used as
+ '\yii\httpclient\Client::baseUrl' value of 'httpClient'. Note: changing this
+ property will take no effect after 'httpClient' is instantiated.
 
- API base URL.
+ API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
+ value of 'httpClient'. Note: changing this property will take no effect after
+ 'httpClient' is instantiated.
 
 
 
@@ -53,6 +60,10 @@ $authUrl				*yii/authclient/clients/Twitter::$authUrl*
 $scope					*yii/authclient/clients/Twitter::$scope*
 
  See |yii/authclient/BaseOAuth::$scope|
+
+$autoRefreshAccessToken			*yii/authclient/clients/Twitter::$autoRefreshAccessToken*
+
+ See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
 
 $consumerKey				*yii/authclient/clients/Twitter::$consumerKey*
 
@@ -94,6 +105,21 @@ $accessTokenMethod			*yii/authclient/clients/Twitter::$accessTokenMethod*
 
 
 
+$authorizationHeaderMethods		*yii/authclient/clients/Twitter::$authorizationHeaderMethods*
+
+ See |yii/authclient/OAuth1::$authorizationHeaderMethods|
+
+$attributeParams			*yii/authclient/clients/Twitter::$attributeParams*
+
+ (array) List of extra parameters, which should be used, while requesting user
+ attributes from Twitter API. For example:
+
+   [
+       'include_email' => 'true'
+   ]
+
+
+
 $behaviors				*yii/authclient/clients/Twitter::$behaviors*
 
  See |yii/base/Component::$behaviors|
@@ -122,13 +148,21 @@ $viewOptions				*yii/authclient/clients/Twitter::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/clients/Twitter::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/clients/Twitter::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/clients/Twitter::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/clients/Twitter::$returnUrl*
 
  See |yii/authclient/BaseOAuth::$returnUrl|
-
-$curlOptions				*yii/authclient/clients/Twitter::$curlOptions*
-
- See |yii/authclient/BaseOAuth::$curlOptions|
 
 $accessToken				*yii/authclient/clients/Twitter::$accessToken*
 
@@ -329,6 +363,36 @@ METHOD DETAILS
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/clients/Twitter::getHttpClient*		public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/clients/Twitter::setHttpClient*		public
+
+ See |yii/authclient/BaseClient::setHttpClient|
+
+
+*yii/authclient/clients/Twitter::setRequestOptions*	public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/clients/Twitter::getRequestOptions*	public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/clients/Twitter::getStateStorage*		public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/clients/Twitter::setStateStorage*		public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/clients/Twitter::defaultName*		protected
 >
  defaultName()
@@ -378,9 +442,44 @@ return (array) Auth user attributes.
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
+*yii/authclient/clients/Twitter::createHttpClient*	protected
+
+ See |yii/authclient/BaseClient::createHttpClient|
+
+
 *yii/authclient/clients/Twitter::normalizeUserAttributes*	protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/clients/Twitter::createRequest*		public
+
+ See |yii/authclient/OAuth1::createRequest|
+
+
+*yii/authclient/clients/Twitter::defaultRequestOptions*	protected
+
+ See |yii/authclient/BaseClient::defaultRequestOptions|
+
+
+*yii/authclient/clients/Twitter::setState*		protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/clients/Twitter::getState*		protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/clients/Twitter::removeState*		protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/clients/Twitter::getStateKeyPrefix*	protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/clients/Twitter::setReturnUrl*		public
@@ -391,16 +490,6 @@ return (array) Auth user attributes.
 *yii/authclient/clients/Twitter::getReturnUrl*		public
 
  See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/clients/Twitter::setCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::setCurlOptions|
-
-
-*yii/authclient/clients/Twitter::getCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::getCurlOptions|
 
 
 *yii/authclient/clients/Twitter::setAccessToken*		public
@@ -425,42 +514,7 @@ return (array) Auth user attributes.
 
 *yii/authclient/clients/Twitter::defaultReturnUrl*	protected
 
- See |yii/authclient/BaseOAuth::defaultReturnUrl|
-
-
-*yii/authclient/clients/Twitter::sendRequest*		protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/clients/Twitter::mergeCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::mergeCurlOptions|
-
-
-*yii/authclient/clients/Twitter::defaultCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::defaultCurlOptions|
-
-
-*yii/authclient/clients/Twitter::processResponse*		protected
-
- See |yii/authclient/BaseOAuth::processResponse|
-
-
-*yii/authclient/clients/Twitter::convertXmlToArray*	protected
-
- See |yii/authclient/BaseOAuth::convertXmlToArray|
-
-
-*yii/authclient/clients/Twitter::determineContentTypeByHeaders*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
-
-
-*yii/authclient/clients/Twitter::determineContentTypeByRaw*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
+ See |yii/authclient/OAuth1::defaultReturnUrl|
 
 
 *yii/authclient/clients/Twitter::createSignatureMethod*	protected
@@ -471,6 +525,11 @@ return (array) Auth user attributes.
 *yii/authclient/clients/Twitter::createToken*		protected
 
  See |yii/authclient/BaseOAuth::createToken|
+
+
+*yii/authclient/clients/Twitter::sendRequest*		protected
+
+ See |yii/authclient/BaseOAuth::sendRequest|
 
 
 *yii/authclient/clients/Twitter::composeUrl*		protected
@@ -488,24 +547,14 @@ return (array) Auth user attributes.
  See |yii/authclient/BaseOAuth::restoreAccessToken|
 
 
-*yii/authclient/clients/Twitter::setState*		protected
+*yii/authclient/clients/Twitter::createApiRequest*	public
 
- See |yii/authclient/BaseOAuth::setState|
-
-
-*yii/authclient/clients/Twitter::getState*		protected
-
- See |yii/authclient/BaseOAuth::getState|
+ See |yii/authclient/OAuth1::createApiRequest|
 
 
-*yii/authclient/clients/Twitter::removeState*		protected
+*yii/authclient/clients/Twitter::beforeApiRequestSend*	public
 
- See |yii/authclient/BaseOAuth::removeState|
-
-
-*yii/authclient/clients/Twitter::getStateKeyPrefix*	protected
-
- See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+ See |yii/authclient/BaseOAuth::beforeApiRequestSend|
 
 
 *yii/authclient/clients/Twitter::api*			public
@@ -513,19 +562,14 @@ return (array) Auth user attributes.
  See |yii/authclient/BaseOAuth::api|
 
 
-*yii/authclient/clients/Twitter::composeRequestCurlOptions*protected
-
- See |yii/authclient/BaseOAuth::composeRequestCurlOptions|
-
-
 *yii/authclient/clients/Twitter::refreshAccessToken*	public
 
- See |yii/authclient/BaseOAuth::refreshAccessToken|
+ See |yii/authclient/OAuth1::refreshAccessToken|
 
 
-*yii/authclient/clients/Twitter::apiInternal*		protected
+*yii/authclient/clients/Twitter::applyAccessTokenToRequest*public
 
- See |yii/authclient/BaseOAuth::apiInternal|
+ See |yii/authclient/OAuth1::applyAccessTokenToRequest|
 
 
 *yii/authclient/clients/Twitter::fetchRequestToken*	public
@@ -543,9 +587,9 @@ return (array) Auth user attributes.
  See |yii/authclient/OAuth1::fetchAccessToken|
 
 
-*yii/authclient/clients/Twitter::sendSignedRequest*	protected
+*yii/authclient/clients/Twitter::beforeRequestSend*	public
 
- See |yii/authclient/OAuth1::sendSignedRequest|
+ See |yii/authclient/OAuth1::beforeRequestSend|
 
 
 *yii/authclient/clients/Twitter::generateNonce*		protected
@@ -563,7 +607,7 @@ return (array) Auth user attributes.
  See |yii/authclient/OAuth1::generateCommonRequestParams|
 
 
-*yii/authclient/clients/Twitter::signRequest*		protected
+*yii/authclient/clients/Twitter::signRequest*		public
 
  See |yii/authclient/OAuth1::signRequest|
 

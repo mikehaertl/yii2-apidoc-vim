@@ -36,9 +36,13 @@ $version				*yii/authclient/clients/Live::$version*
 
 $apiBaseUrl				*yii/authclient/clients/Live::$apiBaseUrl*
 
- (string) API base URL.
+ (string) API base URL. This field will be used as
+ '\yii\httpclient\Client::baseUrl' value of 'httpClient'. Note: changing this
+ property will take no effect after 'httpClient' is instantiated.
 
- API base URL.
+ API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
+ value of 'httpClient'. Note: changing this property will take no effect after
+ 'httpClient' is instantiated.
 
 
 
@@ -53,6 +57,10 @@ $authUrl				*yii/authclient/clients/Live::$authUrl*
 $scope					*yii/authclient/clients/Live::$scope*
 
  See |yii/authclient/BaseOAuth::$scope|
+
+$autoRefreshAccessToken			*yii/authclient/clients/Live::$autoRefreshAccessToken*
+
+ See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
 
 $clientId				*yii/authclient/clients/Live::$clientId*
 
@@ -69,6 +77,10 @@ $tokenUrl				*yii/authclient/clients/Live::$tokenUrl*
  Token request URL endpoint.
 
 
+
+$validateAuthState			*yii/authclient/clients/Live::$validateAuthState*
+
+ See |yii/authclient/OAuth2::$validateAuthState|
 
 $behaviors				*yii/authclient/clients/Live::$behaviors*
 
@@ -98,13 +110,21 @@ $viewOptions				*yii/authclient/clients/Live::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/clients/Live::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/clients/Live::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/clients/Live::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/clients/Live::$returnUrl*
 
  See |yii/authclient/BaseOAuth::$returnUrl|
-
-$curlOptions				*yii/authclient/clients/Live::$curlOptions*
-
- See |yii/authclient/BaseOAuth::$curlOptions|
 
 $accessToken				*yii/authclient/clients/Live::$accessToken*
 
@@ -314,6 +334,36 @@ return (void)
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/clients/Live::getHttpClient*		public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/clients/Live::setHttpClient*		public
+
+ See |yii/authclient/BaseOAuth::setHttpClient|
+
+
+*yii/authclient/clients/Live::setRequestOptions*		public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/clients/Live::getRequestOptions*		public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/clients/Live::getStateStorage*		public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/clients/Live::setStateStorage*		public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/clients/Live::defaultName*		protected
 >
  defaultName()
@@ -363,9 +413,44 @@ return (array) Auth user attributes.
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
+*yii/authclient/clients/Live::createHttpClient*		protected
+
+ See |yii/authclient/BaseOAuth::createHttpClient|
+
+
 *yii/authclient/clients/Live::normalizeUserAttributes*	protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/clients/Live::createRequest*		public
+
+ See |yii/authclient/BaseClient::createRequest|
+
+
+*yii/authclient/clients/Live::defaultRequestOptions*	protected
+
+ See |yii/authclient/BaseOAuth::defaultRequestOptions|
+
+
+*yii/authclient/clients/Live::setState*			protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/clients/Live::getState*			protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/clients/Live::removeState*		protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/clients/Live::getStateKeyPrefix*		protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/clients/Live::setReturnUrl*		public
@@ -376,16 +461,6 @@ return (array) Auth user attributes.
 *yii/authclient/clients/Live::getReturnUrl*		public
 
  See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/clients/Live::setCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::setCurlOptions|
-
-
-*yii/authclient/clients/Live::getCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::getCurlOptions|
 
 
 *yii/authclient/clients/Live::setAccessToken*		public
@@ -413,41 +488,6 @@ return (array) Auth user attributes.
  See |yii/authclient/BaseOAuth::defaultReturnUrl|
 
 
-*yii/authclient/clients/Live::sendRequest*		protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/clients/Live::mergeCurlOptions*		protected
-
- See |yii/authclient/BaseOAuth::mergeCurlOptions|
-
-
-*yii/authclient/clients/Live::defaultCurlOptions*		protected
-
- See |yii/authclient/BaseOAuth::defaultCurlOptions|
-
-
-*yii/authclient/clients/Live::processResponse*		protected
-
- See |yii/authclient/BaseOAuth::processResponse|
-
-
-*yii/authclient/clients/Live::convertXmlToArray*		protected
-
- See |yii/authclient/BaseOAuth::convertXmlToArray|
-
-
-*yii/authclient/clients/Live::determineContentTypeByHeaders*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
-
-
-*yii/authclient/clients/Live::determineContentTypeByRaw*	protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
-
-
 *yii/authclient/clients/Live::createSignatureMethod*	protected
 
  See |yii/authclient/BaseOAuth::createSignatureMethod|
@@ -456,6 +496,11 @@ return (array) Auth user attributes.
 *yii/authclient/clients/Live::createToken*		protected
 
  See |yii/authclient/BaseOAuth::createToken|
+
+
+*yii/authclient/clients/Live::sendRequest*		protected
+
+ See |yii/authclient/BaseOAuth::sendRequest|
 
 
 *yii/authclient/clients/Live::composeUrl*			protected
@@ -473,24 +518,14 @@ return (array) Auth user attributes.
  See |yii/authclient/BaseOAuth::restoreAccessToken|
 
 
-*yii/authclient/clients/Live::setState*			protected
+*yii/authclient/clients/Live::createApiRequest*		public
 
- See |yii/authclient/BaseOAuth::setState|
-
-
-*yii/authclient/clients/Live::getState*			protected
-
- See |yii/authclient/BaseOAuth::getState|
+ See |yii/authclient/BaseOAuth::createApiRequest|
 
 
-*yii/authclient/clients/Live::removeState*		protected
+*yii/authclient/clients/Live::beforeApiRequestSend*	public
 
- See |yii/authclient/BaseOAuth::removeState|
-
-
-*yii/authclient/clients/Live::getStateKeyPrefix*		protected
-
- See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+ See |yii/authclient/BaseOAuth::beforeApiRequestSend|
 
 
 *yii/authclient/clients/Live::api*			public
@@ -498,19 +533,14 @@ return (array) Auth user attributes.
  See |yii/authclient/BaseOAuth::api|
 
 
-*yii/authclient/clients/Live::composeRequestCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::composeRequestCurlOptions|
-
-
 *yii/authclient/clients/Live::refreshAccessToken*		public
 
  See |yii/authclient/BaseOAuth::refreshAccessToken|
 
 
-*yii/authclient/clients/Live::apiInternal*		protected
+*yii/authclient/clients/Live::applyAccessTokenToRequest*	public
 
- See |yii/authclient/BaseOAuth::apiInternal|
+ See |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
 
 
 *yii/authclient/clients/Live::buildAuthUrl*		public
@@ -521,6 +551,21 @@ return (array) Auth user attributes.
 *yii/authclient/clients/Live::fetchAccessToken*		public
 
  See |yii/authclient/OAuth2::fetchAccessToken|
+
+
+*yii/authclient/clients/Live::generateAuthState*		protected
+
+ See |yii/authclient/OAuth2::generateAuthState|
+
+
+*yii/authclient/clients/Live::authenticateClient*		public
+
+ See |yii/authclient/OAuth2::authenticateClient|
+
+
+*yii/authclient/clients/Live::authenticateUser*		public
+
+ See |yii/authclient/OAuth2::authenticateUser|
 
 
 

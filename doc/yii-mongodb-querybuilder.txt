@@ -1,0 +1,475 @@
+
+*yii/mongodb/QueryBuilder*   >> |yii/base/Object|
+==========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It is used by 'Command' for particular commands and queries composition.
+
+ MongoDB uses JSON format to specify query conditions with quite specific
+ syntax. However 'buildCondition()' method provides the ability of
+ "translating" common condition format used "yii\db\*" into MongoDB condition.
+ For example:
+
+   $condition = [
+       [
+           'OR',
+           ['AND', ['first_name' => 'John'], ['last_name' => 'Smith']],
+           ['status' => [1, 2, 3]]
+       ],
+   ];
+   print_r(Yii::$app->mongodb->getQueryBuilder()->buildCondition($condition));
+   // outputs :
+   [
+       '$or' => [
+           [
+               'first_name' => 'John',
+               'last_name' => 'John',
+           ],
+           [
+               'status' => ['$in' => [1, 2, 3]],
+           ]
+       ]
+   ]
+
+ Note: condition values for the key '_id' will be automatically cast to
+ '\MongoDB\BSON\ObjectID' instance, even if they are plain strings. However,
+ if you have other columns, containing '\MongoDB\BSON\ObjectID', you should
+ take care of possible typecast on your own.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/mongodb/QueryBuilder::$db*
+
+ (\yii\mongodb\Connection) The MongoDB connection.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/mongodb/QueryBuilder::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/QueryBuilder::__construct*			public
+>
+ __construct($connection, $config='[]')
+<
+return (void)
+
+    [$connection] (\yii\mongodb\Connection) The database connection.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii/mongodb/QueryBuilder::init*				public
+
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/QueryBuilder::__get*				public
+
+ See |yii/base/Object::__get|
+
+
+*yii/mongodb/QueryBuilder::__set*				public
+
+ See |yii/base/Object::__set|
+
+
+*yii/mongodb/QueryBuilder::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/mongodb/QueryBuilder::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/mongodb/QueryBuilder::__call*			public
+
+ See |yii/base/Object::__call|
+
+
+*yii/mongodb/QueryBuilder::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/mongodb/QueryBuilder::canGetProperty*		public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/mongodb/QueryBuilder::canSetProperty*		public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/mongodb/QueryBuilder::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/mongodb/QueryBuilder::createCollection*		public
+>
+ createCollection($collectionName, $options='[]')
+<
+return (array) Command document.
+
+ https://docs.mongodb.com/manual/reference/method/db.createCollection/
+
+    [$collectionName] (string) Collection name.
+    [$options] (array) Collection options in format: "name" => "value"
+
+
+*yii/mongodb/QueryBuilder::dropDatabase*			public
+>
+ dropDatabase()
+<
+return (array) Command document.
+
+ https://docs.mongodb.com/manual/reference/method/db.dropDatabase/
+
+
+*yii/mongodb/QueryBuilder::dropCollection*		public
+>
+ dropCollection($collectionName)
+<
+return (array) Command document.
+
+ https://docs.mongodb.com/manual/reference/method/db.collection.drop/
+
+    [$collectionName] (string) Name of the collection to be dropped.
+
+
+*yii/mongodb/QueryBuilder::createIndexes*			public
+>
+ createIndexes($databaseName, $collectionName, $indexes)
+<
+return (array) Command document.
+
+    [$databaseName] (string|null) Database name.
+    [$collectionName] (string) Collection name.
+    [$indexes] (array[]) Indexes specification. Each specification should be
+    an array in format: optionName => value The main options are:
+
+
+      - keys: array, column names with sort order, to be indexed. This
+      option is mandatory. 
+      - unique: boolean, whether to create unique index. 
+      - name: string, the name of the index, if not set it will be
+      generated automatically. 
+      - background: boolean, whether to bind index in the background. 
+      - sparse: boolean, whether index should reference only documents
+      with the specified field.
+
+    See
+    'https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/#options-for-all-index-types'
+    for the full list of options.
+
+
+*yii/mongodb/QueryBuilder::dropIndexes*			public
+>
+ dropIndexes($collectionName, $index)
+<
+return (array) Command document.
+
+    [$collectionName] (string) Collection name
+    [$index] (string) Index name or pattern, use '*' in order to drop all
+    indexes.
+
+
+*yii/mongodb/QueryBuilder::listIndexes*			public
+>
+ listIndexes($collectionName, $options='[]')
+<
+return (array) Command document.
+
+    [$collectionName] (string) Collection name
+    [$options] (array) Command options. Available options are:
+
+
+      - maxTimeMS: integer, max execution time in ms.
+
+
+*yii/mongodb/QueryBuilder::count*				public
+>
+ count($collectionName, $condition='[]', $options='[]')
+<
+return (array) Command document.
+
+    [$collectionName] (string) 
+    [$condition] (array) 
+    [$options] (array) 
+
+
+*yii/mongodb/QueryBuilder::findAndModify*			public
+>
+ findAndModify($collectionName, $condition='[]', $update='[]', $options='[]')
+<
+return (array) Command document.
+
+    [$collectionName] (string) Collection name
+    [$condition] (array) Filter condition
+    [$update] (array) Update criteria
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/QueryBuilder::distinct*			public
+>
+ distinct($collectionName, $fieldName, $condition='[]', $options='[]')
+<
+return (array) Command document.
+
+    [$collectionName] (string) Collection name.
+    [$fieldName] (string) Target field name.
+    [$condition] (array) Filter condition
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/QueryBuilder::group*				public
+>
+ group($collectionName, $keys, $initial, $reduce, $options='[]')
+<
+return (void)
+
+    [$collectionName] () 
+    [$keys] () 
+    [$initial] () 
+    [$reduce] () 
+    [$options] () 
+
+
+*yii/mongodb/QueryBuilder::mapReduce*			public
+>
+ mapReduce($collectionName, $map, $reduce, $out, $condition='[]', $options='[]')
+<
+return (array) Command document.
+
+    [$collectionName] (string) Collection name.
+    [$map] (\MongoDB\BSON\Javascript|string) Function, which emits map data
+    from collection. Argument will be automatically cast to
+    '\MongoDB\BSON\Javascript'.
+    [$reduce] (\MongoDB\BSON\Javascript|string) Function that takes two
+    arguments (the map key and the map values) and does the aggregation.
+    Argument will be automatically cast to '\MongoDB\BSON\Javascript'.
+    [$out] (string|array) Output collection name. It could be a string for
+    simple output ('outputCollection'), or an array for parametrized output
+    (['merge' => 'outputCollection']). You can pass ['inline' => true] to
+    fetch the result at once without temporary collection usage.
+    [$condition] (array) Filter condition for including a document in the
+    aggregation.
+    [$options] (array) Additional optional parameters to the mapReduce
+    command. Valid options include:
+
+     
+      - sort: array, key to sort the input documents. The sort key must be
+      in an existing index for this collection.  
+      - limit: integer, the maximum number of documents to return in the
+      collection.  
+      - finalize: \MongoDB\BSON\Javascript|string, function, which follows
+      the reduce method and modifies the output.  
+      - scope: array, specifies global variables that are accessible in
+      the map, reduce and finalize functions.  
+      - jsMode: boolean, specifies whether to convert intermediate data
+      into BSON format between the execution of the map and reduce
+      functions.  
+      - verbose: boolean, specifies whether to include the timing
+      information in the result information.
+
+
+*yii/mongodb/QueryBuilder::aggregate*			public
+>
+ aggregate($collectionName, $pipelines, $options='[]')
+<
+return (array) Command document.
+
+    [$collectionName] (string) Collection name
+    [$pipelines] (array) List of pipeline operators.
+    [$options] (array) Optional parameters.
+
+
+*yii/mongodb/QueryBuilder::explain*			public
+>
+ explain($collectionName, $query)
+<
+return (array) Command document.
+
+    [$collectionName] (string) Collection name.
+    [$query] (array) Query options.
+
+
+*yii/mongodb/QueryBuilder::listDatabases*			public
+>
+ listDatabases($condition='[]', $options='[]')
+<
+return (array) Command document.
+
+    [$condition] (array) Filter condition.
+    [$options] (array) Command options.
+
+
+*yii/mongodb/QueryBuilder::listCollections*		public
+>
+ listCollections($condition='[]', $options='[]')
+<
+return (array) Command document.
+
+    [$condition] (array) Filter condition.
+    [$options] (array) Command options.
+
+
+*yii/mongodb/QueryBuilder::buildSelectFields*		public
+>
+ buildSelectFields($fields)
+<
+return (array) Normalized select fields.
+
+    [$fields] (array|string) Raw fields.
+
+
+*yii/mongodb/QueryBuilder::buildSortFields*		public
+>
+ buildSortFields($fields)
+<
+return (array) Normalized sort fields.
+
+    [$fields] (array|string) Raw fields.
+
+
+*yii/mongodb/QueryBuilder::normalizeConditionKeyword*	protected
+>
+ normalizeConditionKeyword($key)
+<
+return (string) Actual key.
+
+    [$key] (string) Raw condition key.
+
+
+*yii/mongodb/QueryBuilder::ensureMongoId*			protected
+>
+ ensureMongoId($rawId)
+<
+return (array|\MongoDB\BSON\ObjectID) Normalized id(s).
+
+ If array given, each element of it will be processed.
+
+    [$rawId] (mixed) Raw id(s).
+
+
+*yii/mongodb/QueryBuilder::buildCondition*		public
+>
+ buildCondition($condition)
+<
+return (array) The generated Mongo condition
+
+    [$condition] (array) The condition specification. Please refer to
+    'Query::where()' on how to specify a condition.
+
+
+*yii/mongodb/QueryBuilder::buildHashCondition*		public
+>
+ buildHashCondition($condition)
+<
+return (array) The generated Mongo condition.
+
+    [$condition] (array) The condition specification.
+
+
+*yii/mongodb/QueryBuilder::buildNotCondition*		public
+>
+ buildNotCondition($operator, $operands)
+<
+return (array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use for connecting the given operands
+    [$operands] (array) The Mongo conditions to connect.
+
+
+*yii/mongodb/QueryBuilder::buildAndCondition*		public
+>
+ buildAndCondition($operator, $operands)
+<
+return (array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use for connecting the given operands
+    [$operands] (array) The Mongo conditions to connect.
+
+
+*yii/mongodb/QueryBuilder::buildOrCondition*		public
+>
+ buildOrCondition($operator, $operands)
+<
+return (array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use for connecting the given operands
+    [$operands] (array) The Mongo conditions to connect.
+
+
+*yii/mongodb/QueryBuilder::buildBetweenCondition*		public
+>
+ buildBetweenCondition($operator, $operands)
+<
+return (array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use
+    [$operands] (array) The first operand is the column name. The second and
+    third operands describe the interval that column value should be in.
+
+
+*yii/mongodb/QueryBuilder::buildInCondition*		public
+>
+ buildInCondition($operator, $operands)
+<
+return (array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use (e.g. 'IN' or 'NOT IN')
+    [$operands] (array) The first operand is the column name. If it is an
+    array a composite IN condition will be generated. The second operand is an
+    array of values that column value should be among.
+
+
+*yii/mongodb/QueryBuilder::buildRegexCondition*		public
+>
+ buildRegexCondition($operator, $operands)
+<
+return (array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use
+    [$operands] (array) The first operand is the column name. The second
+    operand is a single value that column value should be compared with.
+
+
+*yii/mongodb/QueryBuilder::buildLikeCondition*		public
+>
+ buildLikeCondition($operator, $operands)
+<
+return (array) The generated Mongo condition.
+
+    [$operator] (string) The operator to use
+    [$operands] (array) The first operand is the column name. The second
+    operand is a single value that column value should be compared with.
+
+
+*yii/mongodb/QueryBuilder::buildSimpleCondition*		public
+>
+ buildSimpleCondition($operator, $operands)
+<
+return (string) The generated Mongo condition.
+
+    [$operator] (string) The operator to use. Besides regular MongoDB
+    operators, aliases like '>', '<=', and so on, can be used here.
+    [$operands] (array) The first operand is the column name. The second
+    operand is a single value that column value should be compared with.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

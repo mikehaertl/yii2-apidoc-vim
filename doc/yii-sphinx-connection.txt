@@ -12,11 +12,7 @@ DESCRIPTION
  In order to setup Sphinx "searchd" to support MySQL protocol following
  configuration should be added:
 
-   searchd
-   {
-       listen = localhost:9306:mysql41
-       ...
-   }
+ ''' searchd {     listen = localhost:9306:mysql41     ... } '''
 
  The following example shows how to create a Connection instance and establish
  the Sphinx connection:
@@ -173,6 +169,13 @@ $masters				*yii/sphinx/Connection::$masters*
 $masterConfig				*yii/sphinx/Connection::$masterConfig*
 
  See |yii/db/Connection::$masterConfig|
+
+$enableFloatConversion			*yii/sphinx/Connection::$enableFloatConversion*
+
+ (boolean) Whether to enable conversion of the float query params into the
+ direct literal SQL insertion. This allows processing of the float values,
+ since PDO does not provide specific param type for float binding, while
+ Sphinx is unable to process float values passed as quoted strings.
 
 $behaviors				*yii/sphinx/Connection::$behaviors*
 

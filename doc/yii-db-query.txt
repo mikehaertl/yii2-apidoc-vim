@@ -586,8 +586,8 @@ False is returned if the query results in nothing.
 >
  scalar($db='null')
 <
-return (string|boolean) The value of the first column in the first row of the query
-result. False is returned if the query result is empty.
+return (string|null|false) The value of the first column in the first row of the
+query result. False is returned if the query result is empty.
 
  The value returned will be the first column in the first row of the query
  results.
@@ -858,6 +858,16 @@ return ($this) The query object itself
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
     Please refer to 'where()' on how to specify this parameter.
+
+    Note that the array format of 'where()' is designed to match columns to
+    values instead of columns to columns, so the following would **not** work
+    as expected: '['post.author_id' => 'user.id']', it would match the
+    'post.author_id' column value against the string ''user.id''. It is
+    recommended to use the string syntax here which is more suited for a join:
+
+      'post.author_id = user.id'
+
+
     [$params] (array) The parameters (name => value) to be bound to the query.
 
 
@@ -880,7 +890,7 @@ return ($this) The query object itself
     sub-query while the corresponding key represents the alias for the
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'where()' on how to specify this parameter.
+    Please refer to 'join()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
 
 
@@ -903,7 +913,7 @@ return ($this) The query object itself
     sub-query while the corresponding key represents the alias for the
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'where()' on how to specify this parameter.
+    Please refer to 'join()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query
 
 
@@ -926,7 +936,7 @@ return ($this) The query object itself
     sub-query while the corresponding key represents the alias for the
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'where()' on how to specify this parameter.
+    Please refer to 'join()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query
 
 

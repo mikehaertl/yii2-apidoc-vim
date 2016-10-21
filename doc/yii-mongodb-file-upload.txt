@@ -1,0 +1,191 @@
+
+*yii/mongodb/file/Upload*   >> |yii/base/Object|
+=========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ An 'Upload' object is usually created by calling
+ 'Collection::createUpload()'.
+
+ Note: instance of this class is 'single use' only. Do not attempt to use same
+ 'Upload' instance for multiple file upload.
+
+ Usage example:
+
+   $document = Yii::$app->mongodb->getFileCollection()->createUpload()
+       ->addContent('Part 1')
+       ->addContent('Part 2')
+       // ...
+       ->complete();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$collection				*yii/mongodb/file/Upload::$collection*
+
+ (\yii\mongodb\file\Collection) File collection to be used.
+
+$filename				*yii/mongodb/file/Upload::$filename*
+
+ (string) Filename to be used for file storage.
+
+$document				*yii/mongodb/file/Upload::$document*
+
+ (array) Additional file document contents. Common GridFS columns:
+
+
+   - metadata: array, additional data associated with the file. 
+   - aliases: array, an array of aliases. 
+   - contentType: string, content type to be stored with the file.
+
+$chunkSize				*yii/mongodb/file/Upload::$chunkSize*
+
+ (integer) Chunk size in bytes.
+
+$length					*yii/mongodb/file/Upload::$length*
+
+ (integer) Total upload length in bytes.
+
+$chunkCount				*yii/mongodb/file/Upload::$chunkCount*
+
+ (integer) File chunk counts.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/mongodb/file/Upload::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/file/Upload::__construct*			public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/file/Upload::init*				public
+>
+ init()
+<
+return (void)
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+
+
+*yii/mongodb/file/Upload::__get*				public
+
+ See |yii/base/Object::__get|
+
+
+*yii/mongodb/file/Upload::__set*				public
+
+ See |yii/base/Object::__set|
+
+
+*yii/mongodb/file/Upload::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/mongodb/file/Upload::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/mongodb/file/Upload::__call*				public
+
+ See |yii/base/Object::__call|
+
+
+*yii/mongodb/file/Upload::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/mongodb/file/Upload::canGetProperty*			public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/mongodb/file/Upload::canSetProperty*			public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/mongodb/file/Upload::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/mongodb/file/Upload::__destruct*			public
+>
+ __destruct()
+<
+return (void)
+
+ Makes sure abandoned upload is cancelled.
+
+
+*yii/mongodb/file/Upload::addContent*			public
+>
+ addContent($content)
+<
+return ($this) Self reference.
+
+ This method can invoked several times before 'complete()' is called.
+
+    [$content] (string) Binary content.
+
+
+*yii/mongodb/file/Upload::addStream*			public
+>
+ addStream($stream)
+<
+return ($this) Self reference.
+
+ This method can invoked several times before 'complete()' is called.
+
+    [$stream] (resource) Data source stream.
+
+
+*yii/mongodb/file/Upload::addFile*			public
+>
+ addFile($filename)
+<
+return ($this) Self reference.
+
+ This method can invoked several times before 'complete()' is called.
+
+    [$filename] (string) Source file name.
+
+
+*yii/mongodb/file/Upload::complete*			public
+>
+ complete()
+<
+return (array) Saved document.
+
+
+
+*yii/mongodb/file/Upload::cancel*				public
+>
+ cancel()
+<
+return (void)
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -57,6 +57,7 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $dsn					*yii/mongodb/Connection::$dsn*
+
  (string) Host:port
 
  Correct syntax is:
@@ -66,35 +67,83 @@ $dsn					*yii/mongodb/Connection::$dsn*
  mongodb://developer:password@localhost:27017/mydatabase
 
 $options				*yii/mongodb/Connection::$options*
- (array) Connection options. for example:
+
+ (array) Connection options. For example:
 
    [
        'socketTimeoutMS' => 1000, // how long a send or receive on a socket
  can take before timing out
-       'journal' => true // block write operations until the journal be
- flushed the to disk
+       'ssl' => true // initiate the connection with TLS/SSL
    ]
 
 
 
-$defaultDatabaseName			*yii/mongodb/Connection::$defaultDatabaseName*
- (string) Name of the Mongo database to use by default. If this field left
- blank, connection instance will attempt to determine it from 'options' and
- 'dsn' automatically, if needed.
+$driverOptions				*yii/mongodb/Connection::$driverOptions*
 
-$mongoClient				*yii/mongodb/Connection::$mongoClient*
- (\MongoClient) Mongo client instance.
+ (array) Options for the MongoDB driver. Any driver-specific options not
+ included in MongoDB connection string specification.
+
+$manager				*yii/mongodb/Connection::$manager*
+
+ (\MongoDB\Driver\Manager) MongoDB driver manager.
+
+$typeMap				*yii/mongodb/Connection::$typeMap*
+
+ (array) Type map to use for BSON unserialization. Note: default type map will
+ be automatically merged into this field, possibly overriding user-defined
+ values.
+
+$enableLogging				*yii/mongodb/Connection::$enableLogging*
+
+ (boolean) Whether to log command and query executions. While enabled this
+ option may reduce performance, since MongoDB commands may contain large data,
+ consuming both CPU and memory. It make sense to disable this option at
+ production environment.
+
+$enableProfiling			*yii/mongodb/Connection::$enableProfiling*
+
+ (boolean) Whether to enable profiling the commands and queries being
+ executed. This option will have no effect in case 'enableLogging' is
+ disabled.
+
+$fileStreamProtocol			*yii/mongodb/Connection::$fileStreamProtocol*
+
+ (string) Name of the protocol, which should be used for the GridFS stream
+ wrapper. Only alphanumeric values are allowed: do not use any URL special
+ characters, such as '/', '&', ':' etc.
+
+$fileStreamWrapperClass			*yii/mongodb/Connection::$fileStreamWrapperClass*
+
+ (string) Name of the class, which should serve as a stream wrapper for
+ 'fileStreamProtocol' protocol.
 
 $behaviors				*yii/mongodb/Connection::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+
+ See |yii/base/Component::$behaviors|
+
+$defaultDatabaseName			*yii/mongodb/Connection::$defaultDatabaseName*
+
+ (string) Default database name.
+
+$queryBuilder				*yii/mongodb/Connection::$queryBuilder*
+
+ (\yii\mongodb\QueryBuilder) The query builder for the this MongoDB
+ connection.
+
+$logBuilder				*yii/mongodb/Connection::$logBuilder*
+
+ (\yii\mongodb\LogBuilder) The log builder for this connection.
 
 $database				*yii/mongodb/Connection::$database*
+
  (\yii\mongodb\Database) Database instance.
 
 $fileCollection				*yii/mongodb/Connection::$fileCollection*
+
  (\yii\mongodb\file\Collection) Mongo GridFS collection instance.
 
 $isActive				*yii/mongodb/Connection::$isActive*
+
  (boolean) Whether the Mongo connection is established
 
 
@@ -102,130 +151,201 @@ $isActive				*yii/mongodb/Connection::$isActive*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/mongodb/Connection::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/mongodb/Connection::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/mongodb/Connection::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/mongodb/Connection::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/mongodb/Connection::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/mongodb/Connection::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/mongodb/Connection::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/mongodb/Connection::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/mongodb/Connection::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/mongodb/Connection::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/mongodb/Connection::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/mongodb/Connection::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/mongodb/Connection::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/mongodb/Connection::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/mongodb/Connection::hasEventHandlers*		public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/mongodb/Connection::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/mongodb/Connection::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/mongodb/Connection::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/mongodb/Connection::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/mongodb/Connection::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/mongodb/Connection::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/mongodb/Connection::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/mongodb/Connection::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/mongodb/Connection::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/mongodb/Connection::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
+
+
+*yii/mongodb/Connection::setDefaultDatabaseName*		public
+>
+ setDefaultDatabaseName($name)
+<
+return (void)
+
+    [$name] (string) Default database name.
+
+
+*yii/mongodb/Connection::getDefaultDatabaseName*		public
+>
+ getDefaultDatabaseName()
+<
+return (string) Default database name
+
+
+
+*yii/mongodb/Connection::getQueryBuilder*			public
+>
+ getQueryBuilder()
+<
+return (\yii\mongodb\QueryBuilder) The query builder for the this MongoDB connection.
+
+
+
+*yii/mongodb/Connection::setQueryBuilder*			public
+>
+ setQueryBuilder($queryBuilder)
+<
+return (void)
+
+    [$queryBuilder] (\yii\mongodb\QueryBuilder|array|string|null) The query
+    builder for this MongoDB connection.
+
+
+*yii/mongodb/Connection::getLogBuilder*			public
+>
+ getLogBuilder()
+<
+return (\yii\mongodb\LogBuilder) The log builder for this connection.
+
+
+
+*yii/mongodb/Connection::setLogBuilder*			public
+>
+ setLogBuilder($logBuilder)
+<
+return (void)
+
+    [$logBuilder] (array|string|\yii\mongodb\LogBuilder) The log builder for
+    this connection.
 
 
 *yii/mongodb/Connection::getDatabase*			public
 >
  getDatabase($name='null', $refresh='false')
 <
-(\yii\mongodb\Database) Database instance.
+return (\yii\mongodb\Database) Database instance.
 
-    [$name] (string|null) Collection name, if null default one will be used.
-    [$refresh] (boolean) Whether to reestablish the database connection even
+    [$name] (string|null) Database name, if null default one will be used.
+    [$refresh] (boolean) Whether to reestablish the database connection even,
     if it is found in the cache.
-
-
-*yii/mongodb/Connection::fetchDefaultDatabaseName*	protected
->
- fetchDefaultDatabaseName()
-<
-(string) Default database name
-
 
 
 *yii/mongodb/Connection::selectDatabase*			protected
 >
  selectDatabase($name)
 <
-(\yii\mongodb\Database) Database instance.
+return (\yii\mongodb\Database) Database instance.
 
     [$name] (string) Database name.
 
@@ -234,7 +354,7 @@ METHOD DETAILS
 >
  getCollection($name, $refresh='false')
 <
-(\yii\mongodb\Collection) Mongo collection instance.
+return (\yii\mongodb\Collection) Mongo collection instance.
 
     [$name] (string|array) Collection name. If string considered as the name
     of the collection inside the default database. If array 
@@ -248,7 +368,7 @@ METHOD DETAILS
 >
  getFileCollection($prefix='\'fs\'', $refresh='false')
 <
-(\yii\mongodb\file\Collection) Mongo GridFS collection instance.
+return (\yii\mongodb\file\Collection) Mongo GridFS collection instance.
 
     [$prefix] (string|array) Collection prefix. If string considered as the
     prefix of the GridFS collection inside the default database. If array 
@@ -263,7 +383,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-(boolean) Whether the Mongo connection is established
+return (boolean) Whether the Mongo connection is established
 
 
 
@@ -271,16 +391,16 @@ METHOD DETAILS
 >
  open()
 <
-(void)
+return (void)
 
- It does nothing if a Mongo connection has already been established.
+ It does nothing if a MongoDB connection has already been established.
 
 
 *yii/mongodb/Connection::close*				public
 >
  close()
 <
-(void)
+return (void)
 
  It does nothing if the connection is already closed.
 
@@ -289,10 +409,31 @@ METHOD DETAILS
 >
  initConnection()
 <
-(void)
+return (void)
 
  This method is invoked right after the DB connection is established. The
  default implementation triggers an 'EVENT_AFTER_OPEN' event.
+
+
+*yii/mongodb/Connection::createCommand*			public
+>
+ createCommand($document='[]', $databaseName='null')
+<
+return (\yii\mongodb\Command) Command instance.
+
+    [$document] (array) Command document contents.
+    [$databaseName] (string|null) Database name, if not set
+    'defaultDatabaseName' will be used.
+
+
+*yii/mongodb/Connection::registerFileStreamWrapper*	public
+>
+ registerFileStreamWrapper($force='false')
+<
+return (string) Registered stream protocol name.
+
+    [$force] (boolean) Whether to enforce registration even wrapper has been
+    already registered.
 
 
 

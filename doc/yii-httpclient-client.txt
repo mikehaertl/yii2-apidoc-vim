@@ -1,0 +1,399 @@
+
+*yii/httpclient/Client*   >> |yii/base/Component|
+=======================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$baseUrl				*yii/httpclient/Client::$baseUrl*
+
+ (string) Base request URL.
+
+$formatters				*yii/httpclient/Client::$formatters*
+
+ (array) The formatters for converting data into the content of the specified
+ 'format'. The array keys are the format names, and the array values are the
+ corresponding configurations for creating the formatter objects.
+
+$parsers				*yii/httpclient/Client::$parsers*
+
+ (array) The parsers for converting content of the specified 'format' into the
+ data. The array keys are the format names, and the array values are the
+ corresponding configurations for creating the parser objects.
+
+$requestConfig				*yii/httpclient/Client::$requestConfig*
+
+ (array) Request object configuration.
+
+$responseConfig				*yii/httpclient/Client::$responseConfig*
+
+ (array) Response config configuration.
+
+$contentLoggingMaxSize			*yii/httpclient/Client::$contentLoggingMaxSize*
+
+ (integer) Maximum symbols count of the request content, which should be taken
+ to compose a log and profile messages. Exceeding content will be truncated.
+
+$behaviors				*yii/httpclient/Client::$behaviors*
+
+ See |yii/base/Component::$behaviors|
+
+$transport				*yii/httpclient/Client::$transport*
+
+ (\yii\httpclient\Transport|array|string) HTTP message transport
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/httpclient/Client::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/httpclient/Client::__construct*			public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/httpclient/Client::init*				public
+
+ See |yii/base/Object::init|
+
+
+*yii/httpclient/Client::__get*				public
+
+ See |yii/base/Component::__get|
+
+
+*yii/httpclient/Client::__set*				public
+
+ See |yii/base/Component::__set|
+
+
+*yii/httpclient/Client::__isset*				public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/httpclient/Client::__unset*				public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/httpclient/Client::__call*				public
+
+ See |yii/base/Component::__call|
+
+
+*yii/httpclient/Client::hasProperty*			public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/httpclient/Client::canGetProperty*			public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/httpclient/Client::canSetProperty*			public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/httpclient/Client::hasMethod*			public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/httpclient/Client::__clone*				public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/httpclient/Client::behaviors*			public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/httpclient/Client::hasEventHandlers*			public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/httpclient/Client::on*				public
+
+ See |yii/base/Component::on|
+
+
+*yii/httpclient/Client::off*				public
+
+ See |yii/base/Component::off|
+
+
+*yii/httpclient/Client::trigger*				public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/httpclient/Client::getBehavior*			public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/httpclient/Client::getBehaviors*			public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/httpclient/Client::attachBehavior*			public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/httpclient/Client::attachBehaviors*			public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/httpclient/Client::detachBehavior*			public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/httpclient/Client::detachBehaviors*			public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/httpclient/Client::ensureBehaviors*			public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/httpclient/Client::setTransport*			public
+>
+ setTransport($transport)
+<
+return (void)
+
+
+   - an instance of 'Transport': actual transport object to be used 
+   - a string: representing the class name of the object to be created 
+   - a configuration array: the array must contain a 'class' element
+   which is treated as the object class,   and the rest of the name-value
+ pairs will be used to initialize the corresponding object properties 
+   - a PHP callable: either an anonymous function or an array
+   representing a class method ('[$class or $object, $method]').   The
+ callable should return a new instance of the object being created.
+
+    [$transport] (\yii\httpclient\Transport|array|string) HTTP message
+    transport
+
+
+*yii/httpclient/Client::getTransport*			public
+>
+ getTransport()
+<
+return (\yii\httpclient\Transport) HTTP message transport instance.
+
+
+
+*yii/httpclient/Client::getFormatter*			public
+>
+ getFormatter($format)
+<
+return (\yii\httpclient\FormatterInterface) Formatter instance.
+
+    [$format] (string) Format name.
+
+
+*yii/httpclient/Client::getParser*			public
+>
+ getParser($format)
+<
+return (\yii\httpclient\ParserInterface) Parser instance.
+
+    [$format] (string) Format name
+
+
+*yii/httpclient/Client::createRequest*			public
+>
+ createRequest()
+<
+return (\yii\httpclient\Request) Request instance.
+
+
+
+*yii/httpclient/Client::createResponse*			public
+>
+ createResponse($content='null', $headers='[]')
+<
+return (\yii\httpclient\Response) Request instance.
+
+    [$content] (string) Raw content
+    [$headers] (array) Headers list.
+
+
+*yii/httpclient/Client::send*				public
+>
+ send($request)
+<
+return (\yii\httpclient\Response) Response instance.
+
+    [$request] (\yii\httpclient\Request) Request to be sent.
+
+
+*yii/httpclient/Client::batchSend*			public
+>
+ batchSend($requests)
+<
+return (\yii\httpclient\Response[]) Responses list.
+
+ This method accepts an array of the 'Request' objects and returns an array of
+ the  'Response' objects. Keys of the response array correspond the ones from
+ request array.
+
+   $client = new Client();
+   $requests = [
+       'news' => $client->get('http://domain.com/news'),
+       'friends' => $client->get('http://domain.com/user/friends', ['userId'
+ => 12]),
+   ];
+   $responses = $client->batchSend($requests);
+   var_dump($responses['news']->isOk);
+   var_dump($responses['friends']->isOk);
+
+
+
+    [$requests] (\yii\httpclient\Request[]) Requests to perform.
+
+
+*yii/httpclient/Client::createRequestLogToken*		public
+>
+ createRequestLogToken($method, $url, $headers, $content)
+<
+return (string) Log token.
+
+ This method should be used by transports during request sending logging.
+
+    [$method] (string) Request method name.
+    [$url] (string) Request URL.
+    [$headers] (array) Request headers.
+    [$content] (string) Request content.
+
+
+*yii/httpclient/Client::get*				public
+>
+ get($url, $data='null', $headers='[]', $options='[]')
+<
+return (\yii\httpclient\Request) Request instance.
+
+    [$url] (string) Target URL.
+    [$data] (array|string) If array 
+      - request data, otherwise - request content.
+    [$headers] (array) Request headers.
+    [$options] (array) Request options.
+
+
+*yii/httpclient/Client::post*				public
+>
+ post($url, $data='null', $headers='[]', $options='[]')
+<
+return (\yii\httpclient\Request) Request instance.
+
+    [$url] (string) Target URL.
+    [$data] (array|string) If array 
+      - request data, otherwise - request content.
+    [$headers] (array) Request headers.
+    [$options] (array) Request options.
+
+
+*yii/httpclient/Client::put*				public
+>
+ put($url, $data='null', $headers='[]', $options='[]')
+<
+return (\yii\httpclient\Request) Request instance.
+
+    [$url] (string) Target URL.
+    [$data] (array|string) If array 
+      - request data, otherwise - request content.
+    [$headers] (array) Request headers.
+    [$options] (array) Request options.
+
+
+*yii/httpclient/Client::patch*				public
+>
+ patch($url, $data='null', $headers='[]', $options='[]')
+<
+return (\yii\httpclient\Request) Request instance.
+
+    [$url] (string) Target URL.
+    [$data] (array|string) If array 
+      - request data, otherwise - request content.
+    [$headers] (array) Request headers.
+    [$options] (array) Request options.
+
+
+*yii/httpclient/Client::delete*				public
+>
+ delete($url, $data='null', $headers='[]', $options='[]')
+<
+return (\yii\httpclient\Request) Request instance.
+
+    [$url] (string) Target URL.
+    [$data] (array|string) If array 
+      - request data, otherwise - request content.
+    [$headers] (array) Request headers.
+    [$options] (array) Request options.
+
+
+*yii/httpclient/Client::head*				public
+>
+ head($url, $headers='[]', $options='[]')
+<
+return (\yii\httpclient\Request) Request instance.
+
+    [$url] (string) Target URL.
+    [$headers] (array) Request headers.
+    [$options] (array) Request options.
+
+
+*yii/httpclient/Client::options*				public
+>
+ options($url, $options='[]')
+<
+return (\yii\httpclient\Request) Request instance.
+
+    [$url] (string) Target URL.
+    [$options] (array) Request options.
+
+
+*yii/httpclient/Client::beforeSend*			public
+>
+ beforeSend($request)
+<
+return (void)
+
+ The method will trigger the 'EVENT_BEFORE_SEND' event.
+
+    [$request] (\yii\httpclient\Request) Request instance.
+
+
+*yii/httpclient/Client::afterSend*			public
+>
+ afterSend($request, $response)
+<
+return (void)
+
+ The method will trigger the 'EVENT_AFTER_SEND' event.
+
+    [$request] (\yii\httpclient\Request) Request instance.
+    [$response] (\yii\httpclient\Response) Received response instance.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

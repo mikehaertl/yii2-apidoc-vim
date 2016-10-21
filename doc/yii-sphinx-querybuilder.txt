@@ -32,6 +32,10 @@ $conditionBuilders			*yii/sphinx/QueryBuilder::$conditionBuilders*
  (array) Map of query condition to builder methods. These methods are used by
  'buildCondition' to build SQL conditions from array syntax.
 
+$matchBuilder				*yii/sphinx/QueryBuilder::$matchBuilder*
+
+ (\yii\sphinx\MatchBuilder) Match builder.
+
 
 
 METHOD DETAILS
@@ -102,6 +106,14 @@ return (void)
 *yii/sphinx/QueryBuilder::hasMethod*			public
 
  See |yii/base/Object::hasMethod|
+
+
+*yii/sphinx/QueryBuilder::getMatchBuilder*		public
+>
+ getMatchBuilder()
+<
+return (\yii\sphinx\MatchBuilder) Match builder.
+
 
 
 *yii/sphinx/QueryBuilder::build*				public
@@ -343,6 +355,17 @@ return (string) The FROM clause built from 'query'.
     [$params] (array) The binding parameters to be populated
 
 
+*yii/sphinx/QueryBuilder::buildMatch*			public
+>
+ buildMatch($match, $params)
+<
+return (string) Generated MATCH expression
+
+    [$match] (string|\yii\db\Expression|\yii\sphinx\MatchExpression) Match
+    condition
+    [$params] (array) The binding parameters to be populated
+
+
 *yii/sphinx/QueryBuilder::buildWhere*			public
 >
  buildWhere($indexes, $condition, $params, $match='null')
@@ -357,11 +380,12 @@ return (string) The WHERE clause built from 'query'.
 
 *yii/sphinx/QueryBuilder::buildGroupBy*			public
 >
- buildGroupBy($columns)
+ buildGroupBy($columns, $limit)
 <
 return (string) The GROUP BY clause
 
-    [$columns] (array) 
+    [$columns] (array) Group columns
+    [$limit] (integer) Group limit
 
 
 *yii/sphinx/QueryBuilder::buildHaving*			public

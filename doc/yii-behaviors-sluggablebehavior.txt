@@ -23,8 +23,15 @@ DESCRIPTION
 
  By default, SluggableBehavior will fill the 'slug' attribute with a value
  that can be used a slug in a URL when the associated AR object is being
- validated. If your attribute name is different, you may configure the
- 'slugAttribute' property like the following:
+ validated.
+
+ Because attribute values will be set automatically by this behavior, they are
+ usually not user input and should therefore not be validated, i.e. the 'slug'
+ attribute should not appear in the '\yii\base\Model::rules()|rules()' method
+ of the model.
+
+ If your attribute name is different, you may configure the 'slugAttribute'
+ property like the following:
 
    public function behaviors()
    {
@@ -187,7 +194,7 @@ return (void)
 
 *yii/behaviors/SluggableBehavior::events*			public
 
- See |yii/base/Behavior::events|
+ See |yii/behaviors/AttributeBehavior::events|
 
 
 *yii/behaviors/SluggableBehavior::attach*			public

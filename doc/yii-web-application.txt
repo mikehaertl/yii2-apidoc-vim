@@ -20,7 +20,7 @@ $module					*yii/web/Application::$module*
 
 $layout					*yii/web/Application::$layout*
 
- See |yii/base/Module::$layout|
+ See |yii/base/Application::$layout|
 
 $controllerMap				*yii/web/Application::$controllerMap*
 
@@ -28,7 +28,7 @@ $controllerMap				*yii/web/Application::$controllerMap*
 
 $controllerNamespace			*yii/web/Application::$controllerNamespace*
 
- See |yii/base/Module::$controllerNamespace|
+ See |yii/base/Application::$controllerNamespace|
 
 $defaultRoute				*yii/web/Application::$defaultRoute*
 
@@ -113,7 +113,7 @@ $components				*yii/web/Application::$components*
 
 $uniqueId				*yii/web/Application::$uniqueId*
 
- See |yii/base/Module::$uniqueId|
+ See |yii/base/Application::$uniqueId|
 
 $basePath				*yii/web/Application::$basePath*
 
@@ -161,7 +161,7 @@ $log					*yii/web/Application::$log*
 
 $errorHandler				*yii/web/Application::$errorHandler*
 
- See |yii/base/Application::$errorHandler|
+ (\yii\web\ErrorHandler) The error handler application component.
 
 $cache					*yii/web/Application::$cache*
 
@@ -173,11 +173,11 @@ $formatter				*yii/web/Application::$formatter*
 
 $request				*yii/web/Application::$request*
 
- See |yii/base/Application::$request|
+ (\yii\web\Request) The request component.
 
 $response				*yii/web/Application::$response*
 
- See |yii/base/Application::$response|
+ (\yii\web\Response) The response component.
 
 $view					*yii/web/Application::$view*
 
@@ -232,12 +232,12 @@ METHOD DETAILS
 
 *yii/web/Application::__construct*			public
 
- See |yii/base/Module::__construct|
+ See |yii/base/Application::__construct|
 
 
 *yii/web/Application::init*				public
 
- See |yii/base/Module::init|
+ See |yii/base/Application::init|
 
 
 *yii/web/Application::__get*				public
@@ -247,7 +247,7 @@ METHOD DETAILS
 
 *yii/web/Application::__set*				public
 
- See |yii/base/Component::__set|
+ See |yii/base/Object::__set|
 
 
 *yii/web/Application::__isset*				public
@@ -257,32 +257,32 @@ METHOD DETAILS
 
 *yii/web/Application::__unset*				public
 
- See |yii/base/Component::__unset|
+ See |yii/base/Object::__unset|
 
 
 *yii/web/Application::__call*				public
 
- See |yii/base/Component::__call|
+ See |yii/base/Object::__call|
 
 
 *yii/web/Application::hasProperty*			public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/Object::hasProperty|
 
 
 *yii/web/Application::canGetProperty*			public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/Object::canGetProperty|
 
 
 *yii/web/Application::canSetProperty*			public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/Object::canSetProperty|
 
 
 *yii/web/Application::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/Object::hasMethod|
 
 
 *yii/web/Application::__clone*				public
@@ -392,7 +392,7 @@ METHOD DETAILS
 
 *yii/web/Application::getUniqueId*			public
 
- See |yii/base/Module::getUniqueId|
+ See |yii/base/Application::getUniqueId|
 
 
 *yii/web/Application::getBasePath*			public
@@ -402,7 +402,7 @@ METHOD DETAILS
 
 *yii/web/Application::setBasePath*			public
 
- See |yii/base/Module::setBasePath|
+ See |yii/base/Application::setBasePath|
 
 
 *yii/web/Application::getControllerPath*			public
@@ -565,8 +565,11 @@ return (\yii\web\Response) The resulting response
 
 
 *yii/web/Application::getErrorHandler*			public
+>
+ getErrorHandler()
+<
+return (\yii\web\ErrorHandler) The error handler application component.
 
- See |yii/base/Application::getErrorHandler|
 
 
 *yii/web/Application::getCache*				public
@@ -580,13 +583,19 @@ return (\yii\web\Response) The resulting response
 
 
 *yii/web/Application::getRequest*				public
+>
+ getRequest()
+<
+return (\yii\web\Request) The request component.
 
- See |yii/base/Application::getRequest|
 
 
 *yii/web/Application::getResponse*			public
+>
+ getResponse()
+<
+return (\yii\web\Response) The response component.
 
- See |yii/base/Application::getResponse|
 
 
 *yii/web/Application::getView*				public

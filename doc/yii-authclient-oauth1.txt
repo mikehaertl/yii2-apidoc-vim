@@ -45,6 +45,10 @@ $scope					*yii/authclient/OAuth1::$scope*
 
  See |yii/authclient/BaseOAuth::$scope|
 
+$autoRefreshAccessToken			*yii/authclient/OAuth1::$autoRefreshAccessToken*
+
+ See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
+
 $consumerKey				*yii/authclient/OAuth1::$consumerKey*
 
  (string) OAuth consumer key.
@@ -68,6 +72,13 @@ $accessTokenUrl				*yii/authclient/OAuth1::$accessTokenUrl*
 $accessTokenMethod			*yii/authclient/OAuth1::$accessTokenMethod*
 
  (string) Access token HTTP method.
+
+$authorizationHeaderMethods		*yii/authclient/OAuth1::$authorizationHeaderMethods*
+
+ (array|null) List of the request methods, which require adding
+ 'Authorization' header. By default only POST requests will have
+ 'Authorization' header. You may set this option to 'null' in order to make
+ all requests to use 'Authorization' header.
 
 $behaviors				*yii/authclient/OAuth1::$behaviors*
 
@@ -97,13 +108,21 @@ $viewOptions				*yii/authclient/OAuth1::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/OAuth1::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/OAuth1::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/OAuth1::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/OAuth1::$returnUrl*
 
  See |yii/authclient/BaseOAuth::$returnUrl|
-
-$curlOptions				*yii/authclient/OAuth1::$curlOptions*
-
- See |yii/authclient/BaseOAuth::$curlOptions|
 
 $accessToken				*yii/authclient/OAuth1::$accessToken*
 
@@ -304,6 +323,36 @@ METHOD DETAILS
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/OAuth1::getHttpClient*			public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/OAuth1::setHttpClient*			public
+
+ See |yii/authclient/BaseClient::setHttpClient|
+
+
+*yii/authclient/OAuth1::setRequestOptions*		public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/OAuth1::getRequestOptions*		public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/OAuth1::getStateStorage*			public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/OAuth1::setStateStorage*			public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/OAuth1::defaultName*			protected
 
  See |yii/authclient/BaseClient::defaultName|
@@ -329,9 +378,52 @@ METHOD DETAILS
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
+*yii/authclient/OAuth1::createHttpClient*			protected
+
+ See |yii/authclient/BaseClient::createHttpClient|
+
+
 *yii/authclient/OAuth1::normalizeUserAttributes*		protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/OAuth1::createRequest*			public
+>
+ createRequest()
+<
+return (\yii\httpclient\Request) HTTP request instance.
+
+
+
+
+
+
+
+
+*yii/authclient/OAuth1::defaultRequestOptions*		protected
+
+ See |yii/authclient/BaseClient::defaultRequestOptions|
+
+
+*yii/authclient/OAuth1::setState*				protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/OAuth1::getState*				protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/OAuth1::removeState*			protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/OAuth1::getStateKeyPrefix*		protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/OAuth1::setReturnUrl*			public
@@ -342,16 +434,6 @@ METHOD DETAILS
 *yii/authclient/OAuth1::getReturnUrl*			public
 
  See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/OAuth1::setCurlOptions*			public
-
- See |yii/authclient/BaseOAuth::setCurlOptions|
-
-
-*yii/authclient/OAuth1::getCurlOptions*			public
-
- See |yii/authclient/BaseOAuth::getCurlOptions|
 
 
 *yii/authclient/OAuth1::setAccessToken*			public
@@ -382,41 +464,6 @@ return (string) Return URL.
 
 
 
-*yii/authclient/OAuth1::sendRequest*			protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/OAuth1::mergeCurlOptions*			protected
-
- See |yii/authclient/BaseOAuth::mergeCurlOptions|
-
-
-*yii/authclient/OAuth1::defaultCurlOptions*		protected
-
- See |yii/authclient/BaseOAuth::defaultCurlOptions|
-
-
-*yii/authclient/OAuth1::processResponse*			protected
-
- See |yii/authclient/BaseOAuth::processResponse|
-
-
-*yii/authclient/OAuth1::convertXmlToArray*		protected
-
- See |yii/authclient/BaseOAuth::convertXmlToArray|
-
-
-*yii/authclient/OAuth1::determineContentTypeByHeaders*	protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
-
-
-*yii/authclient/OAuth1::determineContentTypeByRaw*	protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
-
-
 *yii/authclient/OAuth1::createSignatureMethod*		protected
 
  See |yii/authclient/BaseOAuth::createSignatureMethod|
@@ -425,6 +472,11 @@ return (string) Return URL.
 *yii/authclient/OAuth1::createToken*			protected
 
  See |yii/authclient/BaseOAuth::createToken|
+
+
+*yii/authclient/OAuth1::sendRequest*			protected
+
+ See |yii/authclient/BaseOAuth::sendRequest|
 
 
 *yii/authclient/OAuth1::composeUrl*			protected
@@ -442,40 +494,29 @@ return (string) Return URL.
  See |yii/authclient/BaseOAuth::restoreAccessToken|
 
 
-*yii/authclient/OAuth1::setState*				protected
-
- See |yii/authclient/BaseOAuth::setState|
-
-
-*yii/authclient/OAuth1::getState*				protected
-
- See |yii/authclient/BaseOAuth::getState|
+*yii/authclient/OAuth1::createApiRequest*			public
+>
+ createApiRequest()
+<
+return (\yii\httpclient\Request) HTTP request instance.
 
 
-*yii/authclient/OAuth1::removeState*			protected
 
- See |yii/authclient/BaseOAuth::removeState|
+ The created request will be automatically processed adding access token
+ parameters and signature before sending. You may use 'createRequest()' to
+ gain full control over request composition and execution.
 
 
-*yii/authclient/OAuth1::getStateKeyPrefix*		protected
 
- See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+
+*yii/authclient/OAuth1::beforeApiRequestSend*		public
+
+ See |yii/authclient/BaseOAuth::beforeApiRequestSend|
 
 
 *yii/authclient/OAuth1::api*				public
 
  See |yii/authclient/BaseOAuth::api|
-
-
-*yii/authclient/OAuth1::composeRequestCurlOptions*	protected
->
- composeRequestCurlOptions($method, $url, $params)
-<
-return (array) CUrl options.
-
-    [$method] (string) Request type.
-    [$url] (string) Request URL.
-    [$params] (array) Request params.
 
 
 *yii/authclient/OAuth1::refreshAccessToken*		public
@@ -487,11 +528,11 @@ return (\yii\authclient\OAuthToken) New auth token.
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
-*yii/authclient/OAuth1::apiInternal*			protected
+*yii/authclient/OAuth1::applyAccessTokenToRequest*	public
 >
- apiInternal($accessToken, $url, $method, $params, $headers)
+ applyAccessTokenToRequest($request, $accessToken)
 <
-return (array) API response.
+return (void)
 
 
 
@@ -499,11 +540,8 @@ return (array) API response.
 
 
 
-    [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
-    [$url] (string) Absolute API URL.
-    [$method] (string) Request method.
-    [$params] (array) Request parameters.
-    [$headers] (array) Additional request headers.
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
 
 
 *yii/authclient/OAuth1::fetchRequestToken*		public
@@ -527,25 +565,26 @@ return (string) Authorize URL
 
 *yii/authclient/OAuth1::fetchAccessToken*			public
 >
- fetchAccessToken($requestToken='null', $oauthVerifier='null', $params='[]')
+ fetchAccessToken($oauthToken='null', $requestToken='null', $oauthVerifier='null', $params='[]')
 <
 return (\yii\authclient\OAuthToken) OAuth access token.
 
+    [$oauthToken] (string) OAuth token returned with redirection back to
+    client.
     [$requestToken] (\yii\authclient\OAuthToken) OAuth request token.
     [$oauthVerifier] (string) OAuth verifier.
     [$params] (array) Additional request params.
 
 
-*yii/authclient/OAuth1::sendSignedRequest*		protected
+*yii/authclient/OAuth1::beforeRequestSend*		public
 >
- sendSignedRequest($method, $url, $params='[]', $headers='[]')
+ beforeRequestSend($event)
 <
-return (array) Response.
+return (void)
 
-    [$method] (string) Request type.
-    [$url] (string) Request URL.
-    [$params] (array) Request params.
-    [$headers] (array) Additional request headers.
+ Ensures every request has been signed up before sending.
+
+    [$event] (\yii\httpclient\RequestEvent) Event instance.
 
 
 *yii/authclient/OAuth1::generateNonce*			protected
@@ -572,15 +611,15 @@ return (array) Common request params.
 
 
 
-*yii/authclient/OAuth1::signRequest*			protected
+*yii/authclient/OAuth1::signRequest*			public
 >
- signRequest($method, $url, $params)
+ signRequest($request, $token='null')
 <
-return (array) Signed request params.
+return (void)
 
-    [$method] (string) Request method.
-    [$url] (string) Request URL.
-    [$params] (array) Request params.
+    [$request] (\yii\httpclient\Request) Request instance.
+    [$token] (\yii\authclient\OAuthToken|null) OAuth token to be used for
+    signature, if not set 'accessToken' will be used.
 
 
 *yii/authclient/OAuth1::composeSignatureBaseString*	protected
@@ -596,17 +635,19 @@ return (string) Base signature string.
 
 *yii/authclient/OAuth1::composeSignatureKey*		protected
 >
- composeSignatureKey()
+ composeSignatureKey($token='null')
 <
 return (string) Signature key.
 
+    [$token] (\yii\authclient\OAuthToken|null) OAuth token to be used for
+    signature key.
 
 
 *yii/authclient/OAuth1::composeAuthorizationHeader*	protected
 >
  composeAuthorizationHeader($params, $realm='''')
 <
-return (string) Authorization header content.
+return (array) Authorization header in format: [name => content].
 
     [$params] (array) Request params.
     [$realm] (string) Authorization realm.

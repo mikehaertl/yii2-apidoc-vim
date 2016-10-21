@@ -19,172 +19,175 @@ DESCRIPTION
    $collection = Yii::$app->mongodb->getCollection('customer');
    $collection->insert(['name' => 'John Smith', 'status' => 1]);
 
+ Collection also provides shortcut for 'Command' methods, such as 'group()',
+ 'mapReduce()' and so on.
+
  To perform "find" queries, please use 'Query' instead.
-
- Mongo uses JSON format to specify query conditions with quite specific
- syntax. However Collection class provides the ability of "translating" common
- condition format used "yii\db\*" into Mongo condition. For example:
-
-   $condition = [
-       [
-           'OR',
-           ['AND', ['first_name' => 'John'], ['last_name' => 'Smith']],
-           ['status' => [1, 2, 3]]
-       ],
-   ];
-   print_r($collection->buildCondition($condition));
-   // outputs :
-   [
-       '$or' => [
-           [
-               'first_name' => 'John',
-               'last_name' => 'John',
-           ],
-           [
-               'status' => ['$in' => [1, 2, 3]],
-           ]
-       ]
-   ]
-
- Note: condition values for the key '_id' will be automatically cast to
- '\MongoId' instance, even if they are plain strings. However, if you have
- other columns, containing '\MongoId', you should take care of possible
- typecast on your own.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-$mongoCollection			*yii/mongodb/Collection::$mongoCollection*
- (\MongoCollection) Mongo collection instance.
+$database				*yii/mongodb/Collection::$database*
+
+ (\yii\mongodb\Database) MongoDB database instance.
 
 $name					*yii/mongodb/Collection::$name*
+
  (string) Name of this collection.
 
 $fullName				*yii/mongodb/Collection::$fullName*
- (string) Full name of this collection, including database name.
 
-$lastError				*yii/mongodb/Collection::$lastError*
- (array) Last error information.
+ (string) Full name of this collection, including database name.
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/mongodb/Collection::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/mongodb/Collection::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
 *yii/mongodb/Collection::init*				public
+
  See |yii/base/Object::init|
 
 
 *yii/mongodb/Collection::__get*				public
+
  See |yii/base/Object::__get|
 
 
 *yii/mongodb/Collection::__set*				public
+
  See |yii/base/Object::__set|
 
 
 *yii/mongodb/Collection::__isset*				public
+
  See |yii/base/Object::__isset|
 
 
 *yii/mongodb/Collection::__unset*				public
+
  See |yii/base/Object::__unset|
 
 
 *yii/mongodb/Collection::__call*				public
+
  See |yii/base/Object::__call|
 
 
 *yii/mongodb/Collection::hasProperty*			public
+
  See |yii/base/Object::hasProperty|
 
 
 *yii/mongodb/Collection::canGetProperty*			public
+
  See |yii/base/Object::canGetProperty|
 
 
 *yii/mongodb/Collection::canSetProperty*			public
+
  See |yii/base/Object::canSetProperty|
 
 
 *yii/mongodb/Collection::hasMethod*			public
+
  See |yii/base/Object::hasMethod|
-
-
-*yii/mongodb/Collection::getName*				public
->
- getName()
-<
-(string) Name of this collection.
-
 
 
 *yii/mongodb/Collection::getFullName*			public
 >
  getFullName()
 <
-(string) Full name of this collection, including database name.
+return (string) Full name of this collection, including database name.
 
-
-
-*yii/mongodb/Collection::getLastError*			public
->
- getLastError()
-<
-(array) Last error information.
-
-
-
-*yii/mongodb/Collection::composeLogToken*			protected
->
- composeLogToken($command, $arguments='[]')
-<
-(string) Token.
-
-    [$command] (string) Command name
-    [$arguments] (array) Command arguments.
-
-
-*yii/mongodb/Collection::encodeLogData*			protected
->
- encodeLogData($data)
-<
-(string) Encoded data string.
-
-    [$data] (mixed) Raw data.
-
-
-*yii/mongodb/Collection::processLogData*			protected
->
- processLogData($data)
-<
-(mixed) The processed data.
-
-    [$data] (mixed) Raw data.
 
 
 *yii/mongodb/Collection::drop*				public
 >
  drop()
 <
-(boolean) Whether the operation successful.
+return (boolean) Whether the operation successful.
 
+
+
+*yii/mongodb/Collection::listIndexes*			public
+>
+ listIndexes($options='[]')
+<
+return (array) List of indexes info.
+
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Collection::createIndexes*			public
+>
+ createIndexes($indexes)
+<
+return (boolean) Whether operation was successful.
+
+ Example:
+
+   $collection = Yii::$app->mongo->getCollection('customer');
+   $collection->createIndexes([
+       [
+           'key' => ['name'],
+       ],
+       [
+           'key' => [
+               'email' => 1,
+               'address' => -1,
+           ],
+           'name' => 'my_index'
+       ],
+   ]);
+
+
+
+    [$indexes] (array[]) Indexes specification. Each specification should be
+    an array in format: optionName => value The main options are:
+
+
+      - keys: array, column names with sort order, to be indexed. This
+      option is mandatory. 
+      - unique: boolean, whether to create unique index. 
+      - name: string, the name of the index, if not set it will be
+      generated automatically. 
+      - background: boolean, whether to bind index in the background. 
+      - sparse: boolean, whether index should reference only documents
+      with the specified field.
+
+    See
+    'https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/#options-for-all-index-types'
+    for the full list of options.
+
+
+*yii/mongodb/Collection::dropIndexes*			public
+>
+ dropIndexes($indexes)
+<
+return (integer) Count of dropped indexes.
+
+    [$indexes] (string) Wildcard for name of the indexes to be dropped. You
+    can use '*' to drop all indexes.
 
 
 *yii/mongodb/Collection::createIndex*			public
 >
  createIndex($columns, $options='[]')
 <
-(boolean) Whether the operation successful.
+return (boolean) Whether the operation successful.
 
     [$columns] (array|string) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
@@ -205,7 +208,7 @@ METHOD DETAILS
 >
  dropIndex($columns)
 <
-(boolean) Whether the operation successful.
+return (boolean) Whether the operation successful.
 
     [$columns] (string|array) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
@@ -223,55 +226,48 @@ METHOD DETAILS
 
 
 
-*yii/mongodb/Collection::normalizeIndexKeys*		protected
->
- normalizeIndexKeys($columns)
-<
-(array) Normalizes index keys array.
-
-    [$columns] (array) Raw columns/keys list.
-
-
 *yii/mongodb/Collection::dropAllIndexes*			public
 >
  dropAllIndexes()
 <
-(integer) Count of dropped indexes.
+return (integer) Count of dropped indexes.
 
 
 
 *yii/mongodb/Collection::find*				public
 >
- find($condition='[]', $fields='[]')
+ find($condition='[]', $fields='[]', $options='[]')
 <
-(\MongoCursor) Cursor for the search results
+return (\MongoDB\Driver\Cursor) Cursor for the search results
 
  In order to perform "find" queries use 'Query' class.
+
     [$condition] (array) Query condition
     [$fields] (array) Fields to be selected
+    [$options] (array) Query options (available since 2.1).
 
 
 *yii/mongodb/Collection::findOne*				public
 >
- findOne($condition='[]', $fields='[]')
+ findOne($condition='[]', $fields='[]', $options='[]')
 <
-(array|null) The single document. Null is returned if the query results in
+return (array|null) The single document. Null is returned if the query results in
 nothing.
 
     [$condition] (array) Query condition
     [$fields] (array) Fields to be selected
+    [$options] (array) Query options (available since 2.1).
 
 
 *yii/mongodb/Collection::findAndModify*			public
 >
- findAndModify($condition, $update, $fields='[]', $options='[]')
+ findAndModify($condition, $update, $options='[]')
 <
-(array|null) The original document, or the modified document when
+return (array|null) The original document, or the modified document when
 $options['new'] is set.
 
     [$condition] (array) Query condition
     [$update] (array) Update criteria
-    [$fields] (array) Fields to be returned
     [$options] (array) List of options in format: optionName => optionValue.
 
 
@@ -279,7 +275,7 @@ $options['new'] is set.
 >
  insert($data, $options='[]')
 <
-(\MongoId) New record id instance.
+return (\MongoDB\BSON\ObjectID) New record ID instance.
 
     [$data] (array|object) Data to be inserted.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -289,7 +285,7 @@ $options['new'] is set.
 >
  batchInsert($rows, $options='[]')
 <
-(array) Inserted data, each row will have "_id" key assigned to it.
+return (array) Inserted data, each row will have "_id" key assigned to it.
 
     [$rows] (array) Array of arrays or objects to be inserted.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -299,12 +295,12 @@ $options['new'] is set.
 >
  update($condition, $newData, $options='[]')
 <
-(integer|boolean) Number of updated documents or whether operation was
+return (integer|boolean) Number of updated documents or whether operation was
 successful.
 
- Note: for "multiple" mode Mongo requires explicit strategy "$set" or "$inc"
- to be specified for the "newData". If no strategy is passed "$set" will be
- used.
+ Note: for "multi" mode Mongo requires explicit strategy "$set" or "$inc" to
+ be specified for the "newData". If no strategy is passed "$set" will be used.
+
     [$condition] (array) Description of the objects to update.
     [$newData] (array) The object with which to update the matching records.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -314,7 +310,7 @@ successful.
 >
  save($data, $options='[]')
 <
-(\MongoId) Updated/new record id instance.
+return (\MongoId) Updated/new record id instance.
 
     [$data] (array|object) Data to be updated/inserted.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -324,48 +320,59 @@ successful.
 >
  remove($condition='[]', $options='[]')
 <
-(integer|boolean) Number of updated documents or whether operation was
+return (integer|boolean) Number of updated documents or whether operation was
 successful.
 
     [$condition] (array) Description of records to remove.
     [$options] (array) List of options in format: optionName => optionValue.
 
 
+*yii/mongodb/Collection::count*				public
+>
+ count($condition='[]', $options='[]')
+<
+return (integer) Records count.
+
+    [$condition] (array) Query condition
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
 *yii/mongodb/Collection::distinct*			public
 >
- distinct($column, $condition='[]')
+ distinct($column, $condition='[]', $options='[]')
 <
-(array|boolean) Array of distinct values, or "false" on failure.
+return (array|boolean) Array of distinct values, or "false" on failure.
 
     [$column] (string) Column to use.
     [$condition] (array) Query parameters.
+    [$options] (array) List of options in format: optionName => optionValue.
 
 
 *yii/mongodb/Collection::aggregate*			public
 >
- aggregate($pipeline, $pipelineOperator='[]')
+ aggregate($pipelines, $options='[]')
 <
-(array) The result of the aggregation.
+return (array) The result of the aggregation.
 
-    [$pipeline] (array) List of pipeline operators, or just the first operator
-    [$pipelineOperator] (array) Additional pipeline operator. You can specify
-    additional pipelines via third argument, fourth argument etc.
+    [$pipelines] (array) List of pipeline operators.
+    [$options] (array) Optional parameters.
 
 
 *yii/mongodb/Collection::group*				public
 >
  group($keys, $initial, $reduce, $options='[]')
 <
-(array) The result of the aggregation.
+return (array) The result of the aggregation.
 
     [$keys] (mixed) Fields to group by. If an array or non-code object is
     passed, it will be the key used to group results. If instance of
-    '\MongoCode' passed, it will be treated as a function that returns the key
-    to group by.
+    '\MongoDB\BSON\Javascript' passed, it will be treated as a function that
+    returns the key to group by.
     [$initial] (array) Initial value of the aggregation counter object.
-    [$reduce] (\MongoCode|string) Function that takes two arguments (the
-    current document and the aggregation to this point) and does the
-    aggregation. Argument will be automatically cast to '\MongoCode'.
+    [$reduce] (\MongoDB\BSON\Javascript|string) Function that takes two
+    arguments (the current document and the aggregation to this point) and
+    does the aggregation. Argument will be automatically cast to
+    '\MongoDB\BSON\Javascript'.
     [$options] (array) Optional parameters to the group command. Valid options
     include:  
       - condition - criteria for including a document in the aggregation.  
@@ -377,7 +384,7 @@ successful.
 >
  mapReduce($map, $reduce, $out, $condition='[]', $options='[]')
 <
-(string|array) The map reduce output collection name or output results.
+return (string|array) The map reduce output collection name or output results.
 
  Note: this function will not return the aggregation result, instead it will
  write it inside the another Mongo collection specified by "out" parameter.
@@ -394,170 +401,35 @@ successful.
    $results = $query->from($resultCollectionName)->all();
 
 
-    [$map] (\MongoCode|string) Function, which emits map data from collection.
-    Argument will be automatically cast to '\MongoCode'.
-    [$reduce] (\MongoCode|string) Function that takes two arguments (the map
-    key and the map values) and does the aggregation. Argument will be
-    automatically cast to '\MongoCode'.
+
+    [$map] (\MongoDB\BSON\Javascript|string) Function, which emits map data
+    from collection. Argument will be automatically cast to
+    '\MongoDB\BSON\Javascript'.
+    [$reduce] (\MongoDB\BSON\Javascript|string) Function that takes two
+    arguments (the map key and the map values) and does the aggregation.
+    Argument will be automatically cast to '\MongoDB\BSON\Javascript'.
     [$out] (string|array) Output collection name. It could be a string for
     simple output ('outputCollection'), or an array for parametrized output
     (['merge' => 'outputCollection']). You can pass ['inline' => true] to
     fetch the result at once without temporary collection usage.
     [$condition] (array) Criteria for including a document in the aggregation.
     [$options] (array) Additional optional parameters to the mapReduce
-    command. Valid options include:  
-      - sort - array - key to sort the input documents. The sort key must
-      be in an existing index for this collection.  
-      - limit - the maximum number of documents to return in the
-      collection.  
-      - finalize - function, which follows the reduce method and modifies
-      the output.  
-      - scope - array - specifies global variables that are accessible in
-      the map, reduce and finalize functions.  
-      - jsMode - boolean -Specifies whether to convert intermediate data
+    command. Valid options include:
+
+
+      - sort: array, key to sort the input documents. The sort key must be
+      in an existing index for this collection. 
+      - limit: integer, the maximum number of documents to return in the
+      collection. 
+      - finalize: \MongoDB\BSON\Javascript|string, function, which follows
+      the reduce method and modifies the output. 
+      - scope: array, specifies global variables that are accessible in
+      the map, reduce and finalize functions. 
+      - jsMode: boolean, specifies whether to convert intermediate data
       into BSON format between the execution of the map and reduce
-      functions.  
-      - verbose - boolean - specifies whether to include the timing
+      functions. 
+      - verbose: boolean, specifies whether to include the timing
       information in the result information.
-
-
-*yii/mongodb/Collection::fullTextSearch*			public
->
- fullTextSearch($search, $condition='[]', $fields='[]', $options='[]')
-<
-(array) The highest scoring documents, in descending order by score.
-
-    [$search] (string) String of terms that MongoDB parses and uses to query
-    the text index.
-    [$condition] (array) Criteria for filtering a results list.
-    [$fields] (array) List of fields to be returned in result.
-    [$options] (array) Additional optional parameters to the mapReduce
-    command. Valid options include:  
-      - limit - the maximum number of documents to include in the response
-      (by default 100).  
-      - language - the language that determines the list of stop words for
-      the search    and the rules for the stemmer and tokenizer. If not
-    specified, the search uses the default    language of the index.
-
-
-*yii/mongodb/Collection::tryResultError*			protected
->
- tryResultError($result)
-<
-(void)
-
-    [$result] (mixed) Raw command execution result.
-
-
-*yii/mongodb/Collection::tryLastError*			protected
->
- tryLastError()
-<
-(void)
-
-
-
-*yii/mongodb/Collection::normalizeConditionKeyword*	protected
->
- normalizeConditionKeyword($key)
-<
-(string) Actual key.
-
-    [$key] (string) Raw condition key.
-
-
-*yii/mongodb/Collection::ensureMongoId*			protected
->
- ensureMongoId($rawId)
-<
-(array|\MongoId) Normalized id(s).
-
- If array given, each element of it will be processed.
-    [$rawId] (mixed) Raw id(s).
-
-
-*yii/mongodb/Collection::buildCondition*			public
->
- buildCondition($condition)
-<
-(array) The generated Mongo condition
-
-    [$condition] (array) The condition specification. Please refer to
-    'Query::where()' on how to specify a condition.
-
-
-*yii/mongodb/Collection::buildHashCondition*		public
->
- buildHashCondition($condition)
-<
-(array) The generated Mongo condition.
-
-    [$condition] (array) The condition specification.
-
-
-*yii/mongodb/Collection::buildAndCondition*		public
->
- buildAndCondition($operator, $operands)
-<
-(array) The generated Mongo condition.
-
-    [$operator] (string) The operator to use for connecting the given operands
-    [$operands] (array) The Mongo conditions to connect.
-
-
-*yii/mongodb/Collection::buildOrCondition*		public
->
- buildOrCondition($operator, $operands)
-<
-(array) The generated Mongo condition.
-
-    [$operator] (string) The operator to use for connecting the given operands
-    [$operands] (array) The Mongo conditions to connect.
-
-
-*yii/mongodb/Collection::buildBetweenCondition*		public
->
- buildBetweenCondition($operator, $operands)
-<
-(array) The generated Mongo condition.
-
-    [$operator] (string) The operator to use
-    [$operands] (array) The first operand is the column name. The second and
-    third operands describe the interval that column value should be in.
-
-
-*yii/mongodb/Collection::buildInCondition*		public
->
- buildInCondition($operator, $operands)
-<
-(array) The generated Mongo condition.
-
-    [$operator] (string) The operator to use (e.g. 'IN' or 'NOT IN')
-    [$operands] (array) The first operand is the column name. If it is an
-    array a composite IN condition will be generated. The second operand is an
-    array of values that column value should be among.
-
-
-*yii/mongodb/Collection::buildRegexCondition*		public
->
- buildRegexCondition($operator, $operands)
-<
-(array) The generated Mongo condition.
-
-    [$operator] (string) The operator to use
-    [$operands] (array) The first operand is the column name. The second
-    operand is a single value that column value should be compared with.
-
-
-*yii/mongodb/Collection::buildLikeCondition*		public
->
- buildLikeCondition($operator, $operands)
-<
-(array) The generated Mongo condition.
-
-    [$operator] (string) The operator to use
-    [$operands] (array) The first operand is the column name. The second
-    operand is a single value that column value should be compared with.
 
 
 

@@ -18,8 +18,7 @@ DESCRIPTION
 
  For example,
 
-   php
-   $query = new Query;
+   $query = new Query();
    $query->select('id, group_id')
        ->from('idx_item')
        ->limit(10);
@@ -122,8 +121,7 @@ $snippetCallback			*yii/sphinx/Query::$snippetCallback*
  argument and must return the array of snippet source strings in the order,
  which match one of incoming rows. For example:
 
-   php
-   $query = new Query;
+   $query = new Query();
    $query->from('idx_item')
        ->match('pencil')
        ->snippetCallback(function ($rows) {
@@ -146,7 +144,6 @@ $facets					*yii/sphinx/Query::$facets*
 
  (array) Facet search specifications. For example:
 
-   php
    [
        'group_id',
        'brand_id' => [
@@ -173,6 +170,11 @@ $showMeta				*yii/sphinx/Query::$showMeta*
  'Expression' instance, in this case its value will be used as 'LIKE'
  condition for 'SHOW META' statement. You need to use 'search()' method in
  order to fetch 'meta' results.
+
+$groupLimit				*yii/sphinx/Query::$groupLimit*
+
+ (integer) Groups limit: to return (no more than) N top matches for each
+ group. This option will take effect only if 'groupBy' is set.
 
 $behaviors				*yii/sphinx/Query::$behaviors*
 
@@ -556,6 +558,16 @@ return ($this) The query object itself
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
     Please refer to 'where()' on how to specify this parameter.
+
+    Note that the array format of 'where()' is designed to match columns to
+    values instead of columns to columns, so the following would **not** work
+    as expected: '['post.author_id' => 'user.id']', it would match the
+    'post.author_id' column value against the string ''user.id''. It is
+    recommended to use the string syntax here which is more suited for a join:
+
+      'post.author_id = user.id'
+
+
     [$params] (array) The parameters (name => value) to be bound to the query.
 
 
@@ -584,7 +596,7 @@ return ($this) The query object itself
     sub-query while the corresponding key represents the alias for the
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'where()' on how to specify this parameter.
+    Please refer to 'join()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
 
 
@@ -613,7 +625,7 @@ return ($this) The query object itself
     sub-query while the corresponding key represents the alias for the
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'where()' on how to specify this parameter.
+    Please refer to 'join()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query
 
 
@@ -642,7 +654,7 @@ return ($this) The query object itself
     sub-query while the corresponding key represents the alias for the
     sub-query.
     [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'where()' on how to specify this parameter.
+    Please refer to 'join()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query
 
 
@@ -736,12 +748,12 @@ return (array) The query results.
 >
  match($query)
 <
-return ($this) The query object itself
+return ($this) The query object itself.
 
  Note: this value will be processed by 'Connection::escapeMatchValue()', if
  you need to compose complex match condition use 'Expression':
 
-   $query = new Query;
+   $query = new Query();
    $query->from('my_index')
        ->match(new Expression(':match', ['match' => '@(content) ' .
  Yii::$app->sphinx->escapeMatchValue($matchValue)]))
@@ -749,7 +761,8 @@ return ($this) The query object itself
 
 
 
-    [$query] (string) Fulltext query text.
+    [$query] (string|\yii\db\Expression|\yii\sphinx\MatchExpression) Fulltext
+    query text.
 
 
 *yii/sphinx/Query::options*				public
@@ -796,6 +809,17 @@ return ($this) The query object itself
     Query::SORT_DESC]'). The method will automatically quote the column names
     unless a column contains some parenthesis (which means the column contains
     a DB expression).
+
+
+*yii/sphinx/Query::groupLimit*				public
+>
+ groupLimit($limit)
+<
+return ($this) The query object itself.
+
+ This option will take effect only if 'groupBy' is set.
+
+    [$limit] (integer) Group limit.
 
 
 *yii/sphinx/Query::facets*				public

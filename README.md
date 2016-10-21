@@ -27,7 +27,10 @@ namespace separator. This was neccessary because when searching for tags, Vim us
 expressions. So any backslash would indicate the start of a search pattern and you would
 have to type e.g. `yii\\base\\Controller`. Autocomplete wouldn't work very well either.
 
+
 ## How to create the doc files
+
+> **Note:** This is only required if want to build your own flavour of the help files.
 
 Start in an empty directory and install the `yii2-apidoc-vim` package via composer:
 

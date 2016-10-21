@@ -36,9 +36,13 @@ $version				*yii/authclient/clients/LinkedIn::$version*
 
 $apiBaseUrl				*yii/authclient/clients/LinkedIn::$apiBaseUrl*
 
- (string) API base URL.
+ (string) API base URL. This field will be used as
+ '\yii\httpclient\Client::baseUrl' value of 'httpClient'. Note: changing this
+ property will take no effect after 'httpClient' is instantiated.
 
- API base URL.
+ API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
+ value of 'httpClient'. Note: changing this property will take no effect after
+ 'httpClient' is instantiated.
 
 
 
@@ -53,6 +57,10 @@ $authUrl				*yii/authclient/clients/LinkedIn::$authUrl*
 $scope					*yii/authclient/clients/LinkedIn::$scope*
 
  See |yii/authclient/BaseOAuth::$scope|
+
+$autoRefreshAccessToken			*yii/authclient/clients/LinkedIn::$autoRefreshAccessToken*
+
+ See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
 
 $clientId				*yii/authclient/clients/LinkedIn::$clientId*
 
@@ -69,6 +77,10 @@ $tokenUrl				*yii/authclient/clients/LinkedIn::$tokenUrl*
  Token request URL endpoint.
 
 
+
+$validateAuthState			*yii/authclient/clients/LinkedIn::$validateAuthState*
+
+ See |yii/authclient/OAuth2::$validateAuthState|
 
 $attributeNames				*yii/authclient/clients/LinkedIn::$attributeNames*
 
@@ -103,13 +115,21 @@ $viewOptions				*yii/authclient/clients/LinkedIn::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/clients/LinkedIn::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/clients/LinkedIn::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/clients/LinkedIn::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/clients/LinkedIn::$returnUrl*
 
  See |yii/authclient/BaseOAuth::$returnUrl|
-
-$curlOptions				*yii/authclient/clients/LinkedIn::$curlOptions*
-
- See |yii/authclient/BaseOAuth::$curlOptions|
 
 $accessToken				*yii/authclient/clients/LinkedIn::$accessToken*
 
@@ -319,6 +339,36 @@ return (void)
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/clients/LinkedIn::getHttpClient*		public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/clients/LinkedIn::setHttpClient*		public
+
+ See |yii/authclient/BaseOAuth::setHttpClient|
+
+
+*yii/authclient/clients/LinkedIn::setRequestOptions*	public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/clients/LinkedIn::getRequestOptions*	public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/clients/LinkedIn::getStateStorage*	public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/clients/LinkedIn::setStateStorage*	public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/clients/LinkedIn::defaultName*		protected
 >
  defaultName()
@@ -377,9 +427,44 @@ return (array) Normalize attribute map.
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
+*yii/authclient/clients/LinkedIn::createHttpClient*	protected
+
+ See |yii/authclient/BaseOAuth::createHttpClient|
+
+
 *yii/authclient/clients/LinkedIn::normalizeUserAttributes*protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/clients/LinkedIn::createRequest*		public
+
+ See |yii/authclient/BaseClient::createRequest|
+
+
+*yii/authclient/clients/LinkedIn::defaultRequestOptions*	protected
+
+ See |yii/authclient/BaseOAuth::defaultRequestOptions|
+
+
+*yii/authclient/clients/LinkedIn::setState*		protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/clients/LinkedIn::getState*		protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/clients/LinkedIn::removeState*		protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/clients/LinkedIn::getStateKeyPrefix*	protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/clients/LinkedIn::setReturnUrl*		public
@@ -390,16 +475,6 @@ return (array) Normalize attribute map.
 *yii/authclient/clients/LinkedIn::getReturnUrl*		public
 
  See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/clients/LinkedIn::setCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::setCurlOptions|
-
-
-*yii/authclient/clients/LinkedIn::getCurlOptions*		public
-
- See |yii/authclient/BaseOAuth::getCurlOptions|
 
 
 *yii/authclient/clients/LinkedIn::setAccessToken*		public
@@ -423,51 +498,8 @@ return (array) Normalize attribute map.
 
 
 *yii/authclient/clients/LinkedIn::defaultReturnUrl*	protected
->
- defaultReturnUrl()
-<
-return (string) Return URL.
 
-
-
-
-
-
-
-
-*yii/authclient/clients/LinkedIn::sendRequest*		protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/clients/LinkedIn::mergeCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::mergeCurlOptions|
-
-
-*yii/authclient/clients/LinkedIn::defaultCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::defaultCurlOptions|
-
-
-*yii/authclient/clients/LinkedIn::processResponse*	protected
-
- See |yii/authclient/BaseOAuth::processResponse|
-
-
-*yii/authclient/clients/LinkedIn::convertXmlToArray*	protected
-
- See |yii/authclient/BaseOAuth::convertXmlToArray|
-
-
-*yii/authclient/clients/LinkedIn::determineContentTypeByHeaders*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
-
-
-*yii/authclient/clients/LinkedIn::determineContentTypeByRaw*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
+ See |yii/authclient/BaseOAuth::defaultReturnUrl|
 
 
 *yii/authclient/clients/LinkedIn::createSignatureMethod*	protected
@@ -478,6 +510,11 @@ return (string) Return URL.
 *yii/authclient/clients/LinkedIn::createToken*		protected
 
  See |yii/authclient/BaseOAuth::createToken|
+
+
+*yii/authclient/clients/LinkedIn::sendRequest*		protected
+
+ See |yii/authclient/BaseOAuth::sendRequest|
 
 
 *yii/authclient/clients/LinkedIn::composeUrl*		protected
@@ -495,24 +532,14 @@ return (string) Return URL.
  See |yii/authclient/BaseOAuth::restoreAccessToken|
 
 
-*yii/authclient/clients/LinkedIn::setState*		protected
+*yii/authclient/clients/LinkedIn::createApiRequest*	public
 
- See |yii/authclient/BaseOAuth::setState|
-
-
-*yii/authclient/clients/LinkedIn::getState*		protected
-
- See |yii/authclient/BaseOAuth::getState|
+ See |yii/authclient/BaseOAuth::createApiRequest|
 
 
-*yii/authclient/clients/LinkedIn::removeState*		protected
+*yii/authclient/clients/LinkedIn::beforeApiRequestSend*	public
 
- See |yii/authclient/BaseOAuth::removeState|
-
-
-*yii/authclient/clients/LinkedIn::getStateKeyPrefix*	protected
-
- See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+ See |yii/authclient/BaseOAuth::beforeApiRequestSend|
 
 
 *yii/authclient/clients/LinkedIn::api*			public
@@ -520,21 +547,16 @@ return (string) Return URL.
  See |yii/authclient/BaseOAuth::api|
 
 
-*yii/authclient/clients/LinkedIn::composeRequestCurlOptions*protected
-
- See |yii/authclient/BaseOAuth::composeRequestCurlOptions|
-
-
 *yii/authclient/clients/LinkedIn::refreshAccessToken*	public
 
  See |yii/authclient/BaseOAuth::refreshAccessToken|
 
 
-*yii/authclient/clients/LinkedIn::apiInternal*		protected
+*yii/authclient/clients/LinkedIn::applyAccessTokenToRequest*public
 >
- apiInternal($accessToken, $url, $method, $params, $headers)
+ applyAccessTokenToRequest($request, $accessToken)
 <
-return (array) API response.
+return (void)
 
 
 
@@ -542,50 +564,33 @@ return (array) API response.
 
 
 
-    [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
-    [$url] (string) Absolute API URL.
-    [$method] (string) Request method.
-    [$params] (array) Request parameters.
-    [$headers] (array) Additional request headers.
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
 
 
 *yii/authclient/clients/LinkedIn::buildAuthUrl*		public
->
- buildAuthUrl($params='[]')
-<
-return (string) Authorization URL.
 
-
-
-
-
-
-
-    [$params] (array) Additional auth GET params.
+ See |yii/authclient/OAuth2::buildAuthUrl|
 
 
 *yii/authclient/clients/LinkedIn::fetchAccessToken*	public
->
- fetchAccessToken($authCode, $params='[]')
-<
-return (\yii\authclient\OAuthToken) Access token.
 
-
-
-
-
-
-
-    [$authCode] (string) Authorization code, usually comes at $_GET['code'].
-    [$params] (array) Additional request params.
+ See |yii/authclient/OAuth2::fetchAccessToken|
 
 
 *yii/authclient/clients/LinkedIn::generateAuthState*	protected
->
- generateAuthState()
-<
-return (string) Auth state value.
 
+ See |yii/authclient/OAuth2::generateAuthState|
+
+
+*yii/authclient/clients/LinkedIn::authenticateClient*	public
+
+ See |yii/authclient/OAuth2::authenticateClient|
+
+
+*yii/authclient/clients/LinkedIn::authenticateUser*	public
+
+ See |yii/authclient/OAuth2::authenticateUser|
 
 
 

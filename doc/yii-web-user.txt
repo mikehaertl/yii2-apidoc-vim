@@ -86,6 +86,11 @@ $authTimeout				*yii/web/User::$authTimeout*
  'Session::timeout'). Note that this will not work if 'enableAutoLogin' is
  true.
 
+$accessChecker				*yii/web/User::$accessChecker*
+
+ (\yii\rbac\CheckAccessInterface) The acess checker to use for checking
+ access. If not set the application auth manager will be used.
+
 $absoluteAuthTimeout			*yii/web/User::$absoluteAuthTimeout*
 
  (integer) The number of seconds in which the user will be logged out
@@ -551,6 +556,26 @@ return (void)
     logged-in status.
 
 
+*yii/web/User::getIdentityAndDurationFromCookie*		protected
+>
+ getIdentityAndDurationFromCookie()
+<
+return (array|null) Returns an array of 'identity' and 'duration' if valid, otherwise
+null.
+
+ This method is used when 'enableAutoLogin' is true. This method attempts to
+ authenticate a user using the information in the identity cookie.
+
+
+*yii/web/User::removeIdentityCookie*			protected
+>
+ removeIdentityCookie()
+<
+return (void)
+
+ This method is used when 'enableAutoLogin' is true.
+
+
 *yii/web/User::switchIdentity*				public
 >
  switchIdentity($identity, $duration=0)
@@ -607,7 +632,7 @@ permission.
     operation was performed before, its result will be directly returned when
     calling this method to check the same operation. If this parameter is
     false, this method will always call
-    '\yii\rbac\ManagerInterface::checkAccess()' to obtain the up-to-date
+    '\yii\rbac\CheckAcessInterface::checkAccess()' to obtain the up-to-date
     access result. Note that this caching is effective only within the same
     request and only works when '$params = []'.
 
@@ -631,6 +656,14 @@ return (\yii\rbac\ManagerInterface)
 
  By default this is the 'authManager' application component. You may override
  this method to return a different auth manager instance if needed.
+
+
+*yii/web/User::getAccessChecker*				protected
+>
+ getAccessChecker()
+<
+return (\yii\rbac\CheckAccessInterface) 
+
 
 
 

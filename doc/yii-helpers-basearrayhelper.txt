@@ -466,5 +466,46 @@ return (boolean) 'true' if '$needles' is a subset of '$haystack', 'false' otherw
     [$strict] (boolean) Whether to enable strict ('===') comparison.
 
 
+*yii/helpers/BaseArrayHelper::filter*			public
+>
+ filter($array, $filters)
+<
+return (array) Filtered array
+
+ For example:
+
+   $array = [
+       'A' => [1, 2],
+       'B' => [
+           'C' => 1,
+           'D' => 2,
+       ],
+       'E' => 1,
+   ];
+
+   $result = \yii\helpers\ArrayHelper::filter($array, ['A']);
+   // $result will be:
+   // [
+   //     'A' => [1, 2],
+   // ]
+
+   $result = \yii\helpers\ArrayHelper::filter($array, ['A', 'B.C']);
+   // $result will be:
+   // [
+   //     'A' => [1, 2],
+   //     'B' => ['C' => 1],
+   // ]
+
+ $result = \yii\helpers\ArrayHelper::filter($array, ['B', '!B.C']); // $result
+ will be: // [ //     'B' => ['D' => 2], // ] '''
+
+    [$array] (array) Source array
+    [$filters] (array) Rules that define array keys which should be left or
+    removed from results. Each rule is: 
+      - 'var' - '$array['var']' will be left in result. 
+      - 'var.key' = only '$array['var']['key'] will be left in result. 
+      - '!var.key' = '$array['var']['key'] will be removed from result.
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

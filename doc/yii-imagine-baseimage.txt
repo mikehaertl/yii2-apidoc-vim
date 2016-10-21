@@ -22,6 +22,18 @@ $driver					*yii/imagine/BaseImage::$driver*
  an array of driver names. If the latter, the first available driver will be
  used.
 
+$thumbnailBackgroundColor		*yii/imagine/BaseImage::$thumbnailBackgroundColor*
+
+ (string) Background color to use when creating thumbnails in
+ 'ImageInterface::THUMBNAIL_INSET' mode with both width and height specified.
+ Default is white.
+
+$thumbnailBackgroundAlpha		*yii/imagine/BaseImage::$thumbnailBackgroundAlpha*
+
+ (string) Background alpha (transparency) to use when creating thumbnails in
+ 'ImageInterface::THUMBNAIL_INSET' mode with both width and height specified.
+ Default is solid.
+
 
 
 METHOD DETAILS
@@ -81,10 +93,29 @@ return (\Imagine\Image\ImageInterface)
 <
 return (\Imagine\Image\ImageInterface) 
 
+ If one of thumbnail dimensions is set to 'null', another one is calculated
+ automatically based on aspect ratio of original image. Note that calculated
+ thumbnail dimension may vary depending on the source image in this case.
+
+ If both dimensions are specified, resulting thumbnail would be exactly the
+ width and height specified. How it's achieved depends on the mode.
+
+ If 'ImageInterface::THUMBNAIL_OUTBOUND' mode is used, which is default, then
+ the thumbnail is scaled so that its smallest side equals the length of the
+ corresponding side in the original image. Any excess outside of the scaled
+ thumbnail’s area will be cropped, and the returned thumbnail will have the
+ exact width and height specified.
+
+ If thumbnail mode is 'ImageInterface::THUMBNAIL_INSET', the original image is
+ scaled down so it is fully contained within the thumbnail dimensions. The
+ rest is filled with background that could be configured via
+ 'Image::$thumbnailBackgroundColor' and 'Image::$thumbnailBackgroundAlpha'.
+
     [$filename] (string) The image file path or path alias.
     [$width] (integer) The width in pixels to create the thumbnail
     [$height] (integer) The height in pixels to create the thumbnail
-    [$mode] (string) 
+    [$mode] (string) Mode of resizing original image to use in case both width
+    and height specified
 
 
 *yii/imagine/BaseImage::watermark*			public
@@ -130,6 +161,17 @@ return (\Imagine\Image\ImageInterface)
     [$margin] (integer) The frame size to add around the image
     [$color] (string) The frame color
     [$alpha] (integer) The alpha value of the frame.
+
+
+*yii/imagine/BaseImage::getThumbnailBox*			protected
+>
+ getThumbnailBox($sourceBox, $width, $height)
+<
+return (\Imagine\Image\BoxInterface) Thumbnail box
+
+    [$sourceBox] (\Imagine\Image\BoxInterface) Original image box
+    [$width] (integer) Thumbnail width
+    [$height] (integer) Thumbnail height
 
 
 

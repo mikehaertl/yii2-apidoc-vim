@@ -1,0 +1,259 @@
+
+*yii/mongodb/file/Download*   >> |yii/base/Object|
+===========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ A 'Download' object is usually created by calling 'Collection::get()' or
+ 'Collection::createDownload()'.
+
+ Usage example:
+
+  
+ Yii::$app->mongodb->getFileCollection()->createDownload($document['_id'])->toFile('/path/to/file.dat');
+
+ You can use 'Download::substr()' to read a specific part of the file:
+
+   $filePart =
+ Yii::$app->mongodb->getFileCollection()->createDownload($document['_id'])->substr(256,
+ 1024);
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$collection				*yii/mongodb/file/Download::$collection*
+
+ (\yii\mongodb\file\Collection) File collection to be used.
+
+$document				*yii/mongodb/file/Download::$document*
+
+ (array) Document to be downloaded.
+
+$size					*yii/mongodb/file/Download::$size*
+
+ (integer) File size.
+
+$filename				*yii/mongodb/file/Download::$filename*
+
+ (string|null) File name.
+
+$chunkCursor				*yii/mongodb/file/Download::$chunkCursor*
+
+ (\MongoDB\Driver\Cursor) Chuck list cursor.
+
+$chunkIterator				*yii/mongodb/file/Download::$chunkIterator*
+
+ (\Iterator) Chuck cursor iterator.
+
+$bytes					*yii/mongodb/file/Download::$bytes*
+
+ (string) File content.
+
+$resource				*yii/mongodb/file/Download::$resource*
+
+ (resource) File stream resource.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/mongodb/file/Download::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/file/Download::__construct*			public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/file/Download::init*				public
+
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/file/Download::__get*			public
+
+ See |yii/base/Object::__get|
+
+
+*yii/mongodb/file/Download::__set*			public
+
+ See |yii/base/Object::__set|
+
+
+*yii/mongodb/file/Download::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/mongodb/file/Download::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/mongodb/file/Download::__call*			public
+
+ See |yii/base/Object::__call|
+
+
+*yii/mongodb/file/Download::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/mongodb/file/Download::canGetProperty*		public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/mongodb/file/Download::canSetProperty*		public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/mongodb/file/Download::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/mongodb/file/Download::getDocument*			public
+>
+ getDocument()
+<
+return (array) Document to be downloaded.
+
+
+
+*yii/mongodb/file/Download::setDocument*			public
+>
+ setDocument($document)
+<
+return (void)
+
+ Document can be specified by its ID, in this case its data will be fetched
+ automatically via extra query.
+
+    [$document] (array|\MongoDB\BSON\ObjectID) Document raw data or document
+    ID.
+
+
+*yii/mongodb/file/Download::getSize*			public
+>
+ getSize()
+<
+return (integer) File size.
+
+
+
+*yii/mongodb/file/Download::getFilename*			public
+>
+ getFilename()
+<
+return (string|null) File name.
+
+
+
+*yii/mongodb/file/Download::getChunkCursor*		public
+>
+ getChunkCursor($refresh='false')
+<
+return (\MongoDB\Driver\Cursor) Chuck list cursor.
+
+    [$refresh] (boolean) Whether to recreate cursor, if it is already exist.
+
+
+*yii/mongodb/file/Download::getChunkIterator*		public
+>
+ getChunkIterator($refresh='false')
+<
+return (\Iterator) Chuck cursor iterator.
+
+    [$refresh] (boolean) Whether to recreate iterator, if it is already exist.
+
+
+*yii/mongodb/file/Download::toStream*			public
+>
+ toStream($stream)
+<
+return (integer) Number of written bytes.
+
+    [$stream] (resource) Stream, which file should be saved to.
+
+
+*yii/mongodb/file/Download::toFile*			public
+>
+ toFile($filename)
+<
+return (integer) Number of written bytes.
+
+    [$filename] (string) Name of the physical file.
+
+
+*yii/mongodb/file/Download::toString*			public
+>
+ toString()
+<
+return (string) File content.
+
+
+
+*yii/mongodb/file/Download::toResource*			public
+>
+ toResource()
+<
+return (resource) Stream resource.
+
+ Note: each invocation of this method will create new file resource.
+
+
+*yii/mongodb/file/Download::substr*			public
+>
+ substr($start, $length)
+<
+return (string|false) The extracted part of file or 'false' on failure
+
+    [$start] (integer) Reading start position. If non-negative, the returned
+    string will start at the start'th position in file, counting from zero. If
+    negative, the returned string will start at the start'th character from
+    the end of file.
+    [$length] (integer) Number of bytes to read. If given and is positive, the
+    string returned will contain at most length characters beginning from
+    start (depending on the length of file). If given and is negative, then
+    that many characters will be omitted from the end of file (after the start
+    position has been calculated when a start is negative).
+
+
+*yii/mongodb/file/Download::getBytes*			public
+>
+ getBytes()
+<
+return (string) File content.
+
+
+
+*yii/mongodb/file/Download::write*			public
+>
+ write($filename)
+<
+return (integer) Number of written bytes.
+
+    [$filename] (string) Name of the physical file.
+
+
+*yii/mongodb/file/Download::getResource*			public
+>
+ getResource()
+<
+return (resource) File stream resource.
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

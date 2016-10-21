@@ -12,8 +12,10 @@ DESCRIPTION
            'class' => 'yii\authclient\Collection',
            'clients' => [
                'google' => [
-                   'class' => 'yii\authclient\clients\GoogleOpenId'
-               ],
+                   'class' => 'yii\authclient\clients\Google',
+                   'clientId' => 'google_client_id',
+                   'clientSecret' => 'google_client_secret',
+                ],
                'facebook' => [
                    'class' => 'yii\authclient\clients\Facebook',
                    'clientId' => 'facebook_client_id',
@@ -29,6 +31,13 @@ DESCRIPTION
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
+
+$httpClient				*yii/authclient/Collection::$httpClient*
+
+ (\yii\httpclient\Client|array|string) HTTP client instance or configuration
+ for the 'clients'. If set, this value will be passed as 'httpClient' config
+ option while instantiating particular client object. This option is useful
+ for adjusting HTTP client configuration for the entire list of auth clients.
 
 $behaviors				*yii/authclient/Collection::$behaviors*
 

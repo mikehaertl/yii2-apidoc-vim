@@ -23,23 +23,29 @@ PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $db					*yii/mongodb/Migration::$db*
- (\yii\mongodb\Connection|string) The MongoDB connection object or the
+
+ (\yii\mongodb\Connection|array|string) The MongoDB connection object or the
  application component ID of the MongoDB connection that this migration should
- work with.
+ work with. Starting from version 2.0.2, this can also be a configuration
+ array for creating the object.
 
 $behaviors				*yii/mongodb/Migration::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+
+ See |yii/base/Component::$behaviors|
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/mongodb/Migration::className*			public
+
  See |yii/base/Object::className|
 
 
 *yii/mongodb/Migration::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -47,97 +53,119 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method will set 'db' to be the 'db' application component, if it is
  null.
 
 
 *yii/mongodb/Migration::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/mongodb/Migration::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/mongodb/Migration::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/mongodb/Migration::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/mongodb/Migration::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/mongodb/Migration::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/mongodb/Migration::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/mongodb/Migration::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/mongodb/Migration::hasMethod*			public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/mongodb/Migration::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/mongodb/Migration::behaviors*			public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/mongodb/Migration::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/mongodb/Migration::on*				public
+
  See |yii/base/Component::on|
 
 
 *yii/mongodb/Migration::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/mongodb/Migration::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/mongodb/Migration::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/mongodb/Migration::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/mongodb/Migration::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/mongodb/Migration::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/mongodb/Migration::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/mongodb/Migration::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/mongodb/Migration::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
@@ -145,7 +173,7 @@ METHOD DETAILS
 >
  createCollection($collection, $options='[]')
 <
-(void)
+return (void)
 
     [$collection] (string|array) Name of the collection
     [$options] (array) Collection options in format: "name" => "value"
@@ -155,16 +183,36 @@ METHOD DETAILS
 >
  dropCollection($collection)
 <
-(void)
+return (void)
 
     [$collection] (string|array) Name of the collection
+
+
+*yii/mongodb/Migration::createIndexes*			public
+>
+ createIndexes($collection, $indexes)
+<
+return (void)
+
+    [$collection] (string|array) Name of the collection
+    [$indexes] (array) Indexes specifications.
+
+
+*yii/mongodb/Migration::dropIndexes*			public
+>
+ dropIndexes($collection, $indexes)
+<
+return (void)
+
+    [$collection] (string|array) Name of the collection
+    [$indexes] (string) Wildcard for name of the indexes to be dropped.
 
 
 *yii/mongodb/Migration::createIndex*			public
 >
  createIndex($collection, $columns, $options='[]')
 <
-(void)
+return (void)
 
     [$collection] (string|array) Name of the collection
     [$columns] (array|string) Column name or list of column names.
@@ -175,7 +223,7 @@ METHOD DETAILS
 >
  dropIndex($collection, $columns)
 <
-(void)
+return (void)
 
     [$collection] (string|array) Name of the collection
     [$columns] (string|array) Column name or list of column names.
@@ -185,7 +233,7 @@ METHOD DETAILS
 >
  dropAllIndexes($collection)
 <
-(void)
+return (void)
 
     [$collection] (string|array) Name of the collection.
 
@@ -194,7 +242,7 @@ METHOD DETAILS
 >
  insert($collection, $data, $options='[]')
 <
-(\MongoId) New record id instance.
+return (\MongoDB\BSON\ObjectID) New record id instance.
 
     [$collection] (array|string) Collection name.
     [$data] (array|object) Data to be inserted.
@@ -205,7 +253,7 @@ METHOD DETAILS
 >
  batchInsert($collection, $rows, $options='[]')
 <
-(array) Inserted data, each row will have "_id" key assigned to it.
+return (array) Inserted data, each row will have "_id" key assigned to it.
 
     [$collection] (array|string) Collection name.
     [$rows] (array) Array of arrays or objects to be inserted.
@@ -216,12 +264,13 @@ METHOD DETAILS
 >
  update($collection, $condition, $newData, $options='[]')
 <
-(integer|boolean) Number of updated documents or whether operation was
+return (integer|boolean) Number of updated documents or whether operation was
 successful.
 
  Note: for "multiple" mode Mongo requires explicit strategy "$set" or "$inc"
  to be specified for the "newData". If no strategy is passed "$set" will be
  used.
+
     [$collection] (array|string) Collection name.
     [$condition] (array) Description of the objects to update.
     [$newData] (array) The object with which to update the matching records.
@@ -232,7 +281,7 @@ successful.
 >
  save($collection, $data, $options='[]')
 <
-(\MongoId) Updated/new record id instance.
+return (\MongoDB\BSON\ObjectID) Updated/new record id instance.
 
     [$collection] (array|string) Collection name.
     [$data] (array|object) Data to be updated/inserted.
@@ -243,7 +292,7 @@ successful.
 >
  remove($collection, $condition='[]', $options='[]')
 <
-(integer|boolean) Number of updated documents or whether operation was
+return (integer|boolean) Number of updated documents or whether operation was
 successful.
 
     [$collection] (array|string) Collection name.
@@ -255,16 +304,47 @@ successful.
 >
  composeCollectionLogName($collection)
 <
-(string) Collection name.
+return (string) Collection name.
 
     [$collection] (array|string) Collection name.
 
 
+*yii/mongodb/Migration::log*				protected
+>
+ log($string)
+<
+return (void)
+
+ By default this method sends message to 'stdout'.
+
+    [$string] (string) Message to be logged.
+
+
+*yii/mongodb/Migration::beginProfile*			protected
+>
+ beginProfile($token)
+<
+return (void)
+
+    [$token] (string) Token for the code block.
+
+
+*yii/mongodb/Migration::endProfile*			protected
+>
+ endProfile($token)
+<
+return (void)
+
+    [$token] (string) Token for the code block.
+
+
 *yii/mongodb/Migration::up*				public
+
  See |yii/db/MigrationInterface::up|
 
 
 *yii/mongodb/Migration::down*				public
+
  See |yii/db/MigrationInterface::down|
 
 

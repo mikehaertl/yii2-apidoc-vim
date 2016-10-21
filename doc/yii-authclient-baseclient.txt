@@ -6,20 +6,18 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/authclient/OpenId|
+|yii/authclient/OAuth1|
 |yii/authclient/BaseOAuth|
-|yii/authclient/clients/YandexOpenId|
-|yii/authclient/clients/GoogleOpenId|
-|yii/authclient/clients/GoogleOAuth|
-|yii/authclient/clients/VKontakte|
+|yii/authclient/clients/Facebook|
+|yii/authclient/clients/Google|
+|yii/authclient/clients/Yandex|
+|yii/authclient/clients/LinkedIn|
 |yii/authclient/clients/GitHub|
 |yii/authclient/clients/Live|
-|yii/authclient/clients/GoogleHybrid|
 |yii/authclient/clients/Twitter|
-|yii/authclient/clients/YandexOAuth|
-|yii/authclient/clients/LinkedIn|
-|yii/authclient/clients/Facebook|
+|yii/authclient/clients/GoogleHybrid|
+|yii/authclient/clients/VKontakte|
 |yii/authclient/OAuth2|
-|yii/authclient/OAuth1|
 
 
 PROPERTY DETAILS
@@ -52,6 +50,18 @@ $normalizeUserAttributeMap		*yii/authclient/BaseClient::$normalizeUserAttributeM
 $viewOptions				*yii/authclient/BaseClient::$viewOptions*
 
  (array) View options in format: optionName => optionValue
+
+$httpClient				*yii/authclient/BaseClient::$httpClient*
+
+ (\yii\httpclient\Client) Internal HTTP client.
+
+$requestOptions				*yii/authclient/BaseClient::$requestOptions*
+
+ (array) HTTP request options.
+
+$stateStorage				*yii/authclient/BaseClient::$stateStorage*
+
+ (\yii\authclient\StateStorageInterface) Stage storage.
 
 
 
@@ -286,6 +296,58 @@ return (array) View options in format: optionName => optionValue
 
 
 
+*yii/authclient/BaseClient::getHttpClient*		public
+>
+ getHttpClient()
+<
+return (\yii\httpclient\Client) Internal HTTP client.
+
+
+
+*yii/authclient/BaseClient::setHttpClient*		public
+>
+ setHttpClient($httpClient)
+<
+return (void)
+
+    [$httpClient] (array|\yii\httpclient\Client) Internal HTTP client.
+
+
+*yii/authclient/BaseClient::setRequestOptions*		public
+>
+ setRequestOptions($options)
+<
+return (void)
+
+    [$options] (array) HTTP request options.
+
+
+*yii/authclient/BaseClient::getRequestOptions*		public
+>
+ getRequestOptions()
+<
+return (array) HTTP request options.
+
+
+
+*yii/authclient/BaseClient::getStateStorage*		public
+>
+ getStateStorage()
+<
+return (\yii\authclient\StateStorageInterface) Stage storage.
+
+
+
+*yii/authclient/BaseClient::setStateStorage*		public
+>
+ setStateStorage($stateStorage)
+<
+return (void)
+
+    [$stateStorage] (\yii\authclient\StateStorageInterface|array|string) Stage
+    storage to be used.
+
+
 *yii/authclient/BaseClient::defaultName*			protected
 >
  defaultName()
@@ -330,6 +392,15 @@ return (array) List of default 'viewOptions'
  default view options.
 
 
+*yii/authclient/BaseClient::createHttpClient*		protected
+>
+ createHttpClient($reference)
+<
+return (\yii\httpclient\Client) HTTP client instance.
+
+    [$reference] (string|array) Component name or array configuration.
+
+
 *yii/authclient/BaseClient::normalizeUserAttributes*	protected
 >
  normalizeUserAttributes($attributes)
@@ -337,6 +408,58 @@ return (array) List of default 'viewOptions'
 return (array) Normalized attributes.
 
     [$attributes] (array) Raw attributes.
+
+
+*yii/authclient/BaseClient::createRequest*		public
+>
+ createRequest()
+<
+return (\yii\httpclient\Request) HTTP request instance.
+
+
+
+*yii/authclient/BaseClient::defaultRequestOptions*	protected
+>
+ defaultRequestOptions()
+<
+return (array) HTTP request options.
+
+
+
+*yii/authclient/BaseClient::setState*			protected
+>
+ setState($key, $value)
+<
+return ($this) The object itself
+
+    [$key] (string) State key.
+    [$value] (mixed) State value
+
+
+*yii/authclient/BaseClient::getState*			protected
+>
+ getState($key)
+<
+return (mixed) State value.
+
+    [$key] (string) State key.
+
+
+*yii/authclient/BaseClient::removeState*			protected
+>
+ removeState($key)
+<
+return (boolean) Success.
+
+    [$key] (string) State key.
+
+
+*yii/authclient/BaseClient::getStateKeyPrefix*		protected
+>
+ getStateKeyPrefix()
+<
+return (string) Session key prefix.
+
 
 
 

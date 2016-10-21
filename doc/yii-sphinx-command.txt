@@ -228,8 +228,22 @@ METHOD DETAILS
 
 
 *yii/sphinx/Command::prepare*				public
+>
+ prepare($forRead='null')
+<
+return (void)
 
- See |yii/db/Command::prepare|
+
+
+ For complex SQL statement that is to be executed multiple times, this may
+ improve performance. For SQL statement with binding parameters, this method
+ is invoked automatically.
+
+
+
+    [$forRead] (boolean) Whether this method is called for a read query. If
+    null, it means the SQL statement should be used to determine whether it is
+    for read or write.
 
 
 *yii/sphinx/Command::cancel*				public
@@ -248,13 +262,47 @@ METHOD DETAILS
 
 
 *yii/sphinx/Command::bindValue*				public
+>
+ bindValue($name, $value, $dataType=null)
+<
+return ($this) The current command being executed
 
- See |yii/db/Command::bindValue|
+
+
+
+
+
+
+    [$name] (string|integer) Parameter identifier. For a prepared statement
+    using named placeholders, this will be a parameter name of the form
+    ':name'. For a prepared statement using question mark placeholders, this
+    will be the 1-indexed position of the parameter.
+    [$value] (mixed) The value to bind to the parameter
+    [$dataType] (integer) SQL data type of the parameter. If null, the type is
+    determined by the PHP type of the value.
 
 
 *yii/sphinx/Command::bindValues*				public
+>
+ bindValues($values)
+<
+return ($this) The current command being executed
 
- See |yii/db/Command::bindValues|
+
+
+ This is similar to 'bindValue()' except that it binds multiple values at a
+ time. Note that the SQL data type of each value is determined by its PHP
+ type.
+
+
+
+    [$values] (array) The values to be bound. This must be given in terms of
+    an associative array with array keys being the parameter names, and array
+    values the corresponding parameter values, e.g. '[':name' => 'John',
+    ':age' => 25]'. By default, the PDO type of each value is determined by
+    its PHP type. You may explicitly specify the PDO type by using an array:
+    '[value, type]', e.g. '[':name' => 'John', ':profile' => [$profile,
+    \PDO::PARAM_LOB''.
 
 
 *yii/sphinx/Command::query*				public

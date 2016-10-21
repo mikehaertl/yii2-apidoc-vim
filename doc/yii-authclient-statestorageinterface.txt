@@ -1,0 +1,54 @@
+
+*yii/authclient/StateStorageInterface*  
+======================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Herein 'state' means a named variable, which is persistent between different
+ requests.
+
+ Note: in order to function correctly state storage should vary depending on
+ application session, e.g. different web users should not share state with the
+ same name.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/authclient/StateStorageInterface::set*		public
+>
+ set($key, $value)
+<
+return (void)
+
+ If the specified name already exists, the old value will be overwritten.
+
+    [$key] (string) Variable name
+    [$value] (mixed) Variable value
+
+
+*yii/authclient/StateStorageInterface::get*		public
+>
+ get($key)
+<
+return (mixed) The variable value, or 'null' if the variable does not exist.
+
+ If the variable does not exist, the '$defaultValue' will be returned.
+
+    [$key] (string) The variable name
+
+
+*yii/authclient/StateStorageInterface::remove*		public
+>
+ remove($key)
+<
+return (boolean) Success.
+
+    [$key] (string) The name of the variable to be removed
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -50,6 +50,24 @@ $swiftMessage				*yii/swiftmailer/Message::$swiftMessage*
 
  (\Swift_Message) Swift message instance.
 
+$signature				*yii/swiftmailer/Message::$signature*
+
+ (array|callable|\Swift_Signer) Signature specification. See 'addSignature()'
+ for details on how it should be specified.
+
+$returnPath				*yii/swiftmailer/Message::$returnPath*
+
+ (string) The bounce email address.
+
+$priority				*yii/swiftmailer/Message::$priority*
+
+ (integer) Priority value, should be an integer in range: '1..5', where 1 is
+ the highest priority and 5 is the lowest.
+
+$readReceiptTo				*yii/swiftmailer/Message::$readReceiptTo*
+
+ (string|array) Receipt receive email address(es).
+
 
 
 METHOD DETAILS
@@ -481,11 +499,130 @@ return (void)
     [$contentType] (string) Body content type.
 
 
+*yii/swiftmailer/Message::setSignature*			public
+>
+ setSignature($signature)
+<
+return ($this) Self reference.
+
+    [$signature] (array|callable|\Swift_Signer) Signature specification. See
+    'addSignature()' for details on how it should be specified.
+
+
+*yii/swiftmailer/Message::addSignature*			public
+>
+ addSignature($signature)
+<
+return ($this) Self reference
+
+    [$signature] (array|callable|\Swift_Signer) Signature specification, this
+    can be:
+
+
+      - '\Swift_Signer' instance 
+      - callable, which returns '\Swift_Signer' instance 
+      - configuration array for the signer creation
+
+
+*yii/swiftmailer/Message::createSwiftSigner*		protected
+>
+ createSwiftSigner($signature)
+<
+return (\Swift_Signer) Signer instance
+
+    [$signature] (array) Signature configuration
+
+
 *yii/swiftmailer/Message::createSwiftMessage*		protected
 >
  createSwiftMessage()
 <
 return (\Swift_Message) Email message instance.
+
+
+
+*yii/swiftmailer/Message::addHeader*			public
+>
+ addHeader($name, $value)
+<
+return ($this) Self reference.
+
+ Several invocations of this method with the same name will add multiple
+ header values.
+
+    [$name] (string) Header name.
+    [$value] (string) Header value.
+
+
+*yii/swiftmailer/Message::setHeader*			public
+>
+ setHeader($name, $value)
+<
+return ($this) Self reference.
+
+    [$name] (string) Header name.
+    [$value] (string|array) Header value or values.
+
+
+*yii/swiftmailer/Message::getHeader*			public
+>
+ getHeader($name)
+<
+return (array) Header values list.
+
+    [$name] (string) Header name.
+
+
+*yii/swiftmailer/Message::setReturnPath*			public
+>
+ setReturnPath($address)
+<
+return ($this) Self reference.
+
+    [$address] (string) The bounce email address.
+
+
+*yii/swiftmailer/Message::getReturnPath*			public
+>
+ getReturnPath()
+<
+return (string) The bounce email address.
+
+
+
+*yii/swiftmailer/Message::setPriority*			public
+>
+ setPriority($priority)
+<
+return ($this) Self reference.
+
+    [$priority] (integer) Priority value, should be an integer in range:
+    '1..5', where 1 is the highest priority and 5 is the lowest.
+
+
+*yii/swiftmailer/Message::getPriority*			public
+>
+ getPriority()
+<
+return (integer) Priority value as integer in range: '1..5', where 1 is the highest
+priority and 5 is the lowest.
+
+
+
+*yii/swiftmailer/Message::setReadReceiptTo*		public
+>
+ setReadReceiptTo($addresses)
+<
+return ($this) Self reference.
+
+    [$addresses] (string|array) Receipt receive email address(es).
+
+
+*yii/swiftmailer/Message::getReadReceiptTo*		public
+>
+ getReadReceiptTo()
+<
+return (string) Receipt receive email addresses.
 
 
 

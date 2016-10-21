@@ -1,0 +1,547 @@
+
+*yii/mongodb/Command*   >> |yii/base/Object|
+=====================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ A command object is usually created by calling 'Connection::createCommand()'
+ or 'Database::createCommand()'. The statement it represents can be set via
+ the 'document' property.
+
+ To execute a non-query command, such as 'listIndexes', 'count', 'distinct'
+ and so on, call 'execute()'. For example:
+
+   $result = Yii::$app->mongodb->createCommand(['listIndexes' =>
+ 'some_collection'])->execute();
+
+ To execute a 'find' command, which return cursor, call 'query()'. For
+ example:
+
+   $cursor = Yii::$app->mongodb->createCommand(['projection' => ['name' =>
+ true]])->query('some_collection');
+
+ To execute batch (bulk) operations, call 'executeBatch()'. For example:
+
+   Yii::$app->mongodb->createCommand()
+       ->addInsert(['name' => 'new'])
+       ->addUpdate(['name' => 'existing'], ['name' => 'updated'])
+       ->addDelete(['name' => 'old'])
+       ->executeBatch('some_collection');
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/mongodb/Command::$db*
+
+ (\yii\mongodb\Connection) The MongoDB connection that this command is
+ associated with.
+
+$databaseName				*yii/mongodb/Command::$databaseName*
+
+ (string) Name of the database that this command is associated with.
+
+$document				*yii/mongodb/Command::$document*
+
+ (array) Command document contents.
+
+$readPreference				*yii/mongodb/Command::$readPreference*
+
+ (\MongoDB\Driver\ReadPreference) Read preference.
+
+$writeConcern				*yii/mongodb/Command::$writeConcern*
+
+ (\MongoDB\Driver\WriteConcern|null) Write concern to be used in this command.
+
+$readConcern				*yii/mongodb/Command::$readConcern*
+
+ (\MongoDB\Driver\ReadConcern|string) Read concern to be used in this command.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/mongodb/Command::className*				public
+
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/Command::__construct*			public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/Command::init*				public
+
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/Command::__get*				public
+
+ See |yii/base/Object::__get|
+
+
+*yii/mongodb/Command::__set*				public
+
+ See |yii/base/Object::__set|
+
+
+*yii/mongodb/Command::__isset*				public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/mongodb/Command::__unset*				public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/mongodb/Command::__call*				public
+
+ See |yii/base/Object::__call|
+
+
+*yii/mongodb/Command::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/mongodb/Command::canGetProperty*			public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/mongodb/Command::canSetProperty*			public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/mongodb/Command::hasMethod*				public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/mongodb/Command::getReadPreference*			public
+>
+ getReadPreference()
+<
+return (\MongoDB\Driver\ReadPreference) Read preference.
+
+
+
+*yii/mongodb/Command::setReadPreference*			public
+>
+ setReadPreference($readPreference)
+<
+return ($this) Self reference.
+
+    [$readPreference] (\MongoDB\Driver\ReadPreference|integer|string|null)
+    Read reference, it can be specified as instance of 'ReadPreference' or
+    scalar mode value, for example: 'ReadPreference::RP_PRIMARY'.
+
+
+*yii/mongodb/Command::getWriteConcern*			public
+>
+ getWriteConcern()
+<
+return (\MongoDB\Driver\WriteConcern|null) Write concern to be used in this command.
+
+
+
+*yii/mongodb/Command::setWriteConcern*			public
+>
+ setWriteConcern($writeConcern)
+<
+return ($this) Self reference
+
+    [$writeConcern] (\MongoDB\Driver\WriteConcern|integer|string|null) Write
+    concern, it can be an instance of 'WriteConcern' or its scalar mode value,
+    for example: 'majority'.
+
+
+*yii/mongodb/Command::getReadConcern*			public
+>
+ getReadConcern()
+<
+return (\MongoDB\Driver\ReadConcern|string) Read concern to be used in this command.
+
+
+
+*yii/mongodb/Command::setReadConcern*			public
+>
+ setReadConcern($readConcern)
+<
+return ($this) Self reference
+
+    [$readConcern] (\MongoDB\Driver\ReadConcern|string) Read concern, it can
+    be an instance of 'ReadConcern' or scalar level value, for example:
+    'local'.
+
+
+*yii/mongodb/Command::execute*				public
+>
+ execute()
+<
+return (\MongoDB\Driver\Cursor) Result cursor.
+
+
+
+*yii/mongodb/Command::executeBatch*			public
+>
+ executeBatch($collectionName, $options='[]')
+<
+return (array) Array of 2 elements:
+
+
+  - 'insertedIds' - contains inserted IDs. 
+  - 'result' - '\MongoDB\Driver\WriteResult' instance.
+
+    [$collectionName] (string) Collection name.
+    [$options] (array) Batch options.
+
+
+*yii/mongodb/Command::query*				public
+>
+ query($collectionName, $options='[]')
+<
+return (\MongoDB\Driver\Cursor) Result cursor.
+
+    [$collectionName] (string) Collection name
+    [$options] (array) Query options.
+
+
+*yii/mongodb/Command::dropDatabase*			public
+>
+ dropDatabase()
+<
+return (boolean) Whether operation was successful.
+
+
+
+*yii/mongodb/Command::createCollection*			public
+>
+ createCollection($collectionName, $options='[]')
+<
+return (boolean) Whether operation was successful.
+
+    [$collectionName] (string) Collection name
+    [$options] (array) Collection options in format: "name" => "value"
+
+
+*yii/mongodb/Command::dropCollection*			public
+>
+ dropCollection($collectionName)
+<
+return (boolean) Whether operation was successful.
+
+    [$collectionName] (string) Name of the collection to be dropped.
+
+
+*yii/mongodb/Command::createIndexes*			public
+>
+ createIndexes($collectionName, $indexes)
+<
+return (boolean) Whether operation was successful.
+
+    [$collectionName] (string) Collection name.
+    [$indexes] (array[]) Indexes specification. Each specification should be
+    an array in format: optionName => value The main options are:
+
+
+      - keys: array, column names with sort order, to be indexed. This
+      option is mandatory. 
+      - unique: boolean, whether to create unique index. 
+      - name: string, the name of the index, if not set it will be
+      generated automatically. 
+      - background: boolean, whether to bind index in the background. 
+      - sparse: boolean, whether index should reference only documents
+      with the specified field.
+
+    See
+    'https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/#options-for-all-index-types'
+    for the full list of options.
+
+
+*yii/mongodb/Command::dropIndexes*			public
+>
+ dropIndexes($collectionName, $indexes)
+<
+return (array) Result data.
+
+    [$collectionName] (string) Collection name.
+    [$indexes] (string) Wildcard for name of the indexes to be dropped.
+
+
+*yii/mongodb/Command::listIndexes*			public
+>
+ listIndexes($collectionName, $options='[]')
+<
+return (array) List of indexes info.
+
+    [$collectionName] (string) Collection name
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Command::count*				public
+>
+ count($collectionName, $condition='[]', $options='[]')
+<
+return (integer) Records count
+
+    [$collectionName] (string) Collection name
+    [$condition] (array) Filter condition
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Command::addInsert*				public
+>
+ addInsert($document)
+<
+return ($this) Self reference.
+
+    [$document] (array) Document to be inserted
+
+
+*yii/mongodb/Command::addUpdate*				public
+>
+ addUpdate($condition, $document, $options='[]')
+<
+return ($this) Self reference.
+
+    [$condition] (array) Filter condition
+    [$document] (array) Data to be updated
+    [$options] (array) Update options.
+
+
+*yii/mongodb/Command::addDelete*				public
+>
+ addDelete($condition, $options='[]')
+<
+return ($this) Self reference.
+
+    [$condition] (array) Filter condition.
+    [$options] (array) Delete options.
+
+
+*yii/mongodb/Command::insert*				public
+>
+ insert($collectionName, $document, $options='[]')
+<
+return (\MongoDB\BSON\ObjectID|boolean) Inserted record ID, 'false' 
+  - on failure.
+
+    [$collectionName] (string) Collection name
+    [$document] (array) Document content
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Command::batchInsert*			public
+>
+ batchInsert($collectionName, $documents, $options='[]')
+<
+return (array|false) List of inserted IDs, 'false' on failure.
+
+    [$collectionName] (string) Collection name
+    [$documents] (array[]) Documents list
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Command::update*				public
+>
+ update($collectionName, $condition, $document, $options='[]')
+<
+return (\MongoDB\Driver\WriteResult) Write result.
+
+    [$collectionName] (string) Collection name
+    [$condition] (array) Filter condition
+    [$document] (array) Data to be updated.
+    [$options] (array) Update options.
+
+
+*yii/mongodb/Command::delete*				public
+>
+ delete($collectionName, $condition, $options='[]')
+<
+return (\MongoDB\Driver\WriteResult) Write result.
+
+    [$collectionName] (string) Collection name.
+    [$condition] (array) Filter condition.
+    [$options] (array) Delete options.
+
+
+*yii/mongodb/Command::find*				public
+>
+ find($collectionName, $condition, $options='[]')
+<
+return (\MongoDB\Driver\Cursor) Result cursor.
+
+    [$collectionName] (string) Collection name
+    [$condition] (array) Filter condition
+    [$options] (array) Query options.
+
+
+*yii/mongodb/Command::findAndModify*			public
+>
+ findAndModify($collectionName, $condition='[]', $update='[]', $options='[]')
+<
+return (array|null) The original document, or the modified document when
+$options['new'] is set.
+
+    [$collectionName] () 
+    [$condition] (array) Query condition
+    [$update] (array) Update criteria
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Command::distinct*				public
+>
+ distinct($collectionName, $fieldName, $condition='[]', $options='[]')
+<
+return (array) Array of distinct values, or "false" on failure.
+
+    [$collectionName] (string) Collection name.
+    [$fieldName] (string) Field name to use.
+    [$condition] (array) Query parameters.
+    [$options] (array) List of options in format: optionName => optionValue.
+
+
+*yii/mongodb/Command::group*				public
+>
+ group($collectionName, $keys, $initial, $reduce, $options='[]')
+<
+return (array) The result of the aggregation.
+
+    [$collectionName] (string) Collection name.
+    [$keys] (mixed) Fields to group by. If an array or non-code object is
+    passed, it will be the key used to group results. If instance of
+    '\MongoDB\BSON\Javascript' passed, it will be treated as a function that
+    returns the key to group by.
+    [$initial] (array) Initial value of the aggregation counter object.
+    [$reduce] (\MongoDB\BSON\Javascript|string) Function that takes two
+    arguments (the current document and the aggregation to this point) and
+    does the aggregation. Argument will be automatically cast to
+    '\MongoDB\BSON\Javascript'.
+    [$options] (array) Optional parameters to the group command. Valid options
+    include:  
+      - condition - criteria for including a document in the aggregation.  
+      - finalize - function called once per unique key that takes the
+      final output of the reduce function.
+
+
+*yii/mongodb/Command::mapReduce*				public
+>
+ mapReduce($collectionName, $map, $reduce, $out, $condition='[]', $options='[]')
+<
+return (string|array) The map reduce output collection name or output results.
+
+    [$collectionName] (string) Collection name.
+    [$map] (\MongoDB\BSON\Javascript|string) Function, which emits map data
+    from collection. Argument will be automatically cast to
+    '\MongoDB\BSON\Javascript'.
+    [$reduce] (\MongoDB\BSON\Javascript|string) Function that takes two
+    arguments (the map key and the map values) and does the aggregation.
+    Argument will be automatically cast to '\MongoDB\BSON\Javascript'.
+    [$out] (string|array) Output collection name. It could be a string for
+    simple output ('outputCollection'), or an array for parametrized output
+    (['merge' => 'outputCollection']). You can pass ['inline' => true] to
+    fetch the result at once without temporary collection usage.
+    [$condition] (array) Filter condition for including a document in the
+    aggregation.
+    [$options] (array) Additional optional parameters to the mapReduce
+    command. Valid options include:
+
+     
+      - sort: array, key to sort the input documents. The sort key must be
+      in an existing index for this collection.  
+      - limit: integer, the maximum number of documents to return in the
+      collection.  
+      - finalize: \MongoDB\BSON\Javascript|string, function, which follows
+      the reduce method and modifies the output.  
+      - scope: array, specifies global variables that are accessible in
+      the map, reduce and finalize functions.  
+      - jsMode: boolean, specifies whether to convert intermediate data
+      into BSON format between the execution of the map and reduce
+      functions.  
+      - verbose: boolean, specifies whether to include the timing
+      information in the result information.
+
+
+*yii/mongodb/Command::aggregate*				public
+>
+ aggregate($collectionName, $pipelines, $options='[]')
+<
+return (array) Aggregation result.
+
+    [$collectionName] (string) Collection name
+    [$pipelines] (array) List of pipeline operators.
+    [$options] (array) Optional parameters.
+
+
+*yii/mongodb/Command::explain*				public
+>
+ explain($collectionName, $query)
+<
+return (array) Explanation of the query.
+
+    [$collectionName] (string) Collection name
+    [$query] (array) Query document.
+
+
+*yii/mongodb/Command::listDatabases*			public
+>
+ listDatabases($condition='[]', $options='[]')
+<
+return (array) Database information
+
+    [$condition] (array) Filter condition.
+    [$options] (array) Options list.
+
+
+*yii/mongodb/Command::listCollections*			public
+>
+ listCollections($condition='[]', $options='[]')
+<
+return (array) Collections information.
+
+    [$condition] (array) Filter condition.
+    [$options] (array) Options list.
+
+
+*yii/mongodb/Command::log*				protected
+>
+ log($namespace, $data, $category)
+<
+return (string|false) Log token, 'false' if log is not enabled.
+
+    [$namespace] (array|string) Command namespace.
+    [$data] (array) Command data.
+    [$category] (string) Log category
+
+
+*yii/mongodb/Command::beginProfile*			protected
+>
+ beginProfile($token, $category)
+<
+return (void)
+
+    [$token] (string) Token for the code block
+    [$category] (string) The category of this log message
+
+
+*yii/mongodb/Command::endProfile*				protected
+>
+ endProfile($token, $category)
+<
+return (void)
+
+    [$token] (string) Token for the code block
+    [$category] (string) The category of this log message
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

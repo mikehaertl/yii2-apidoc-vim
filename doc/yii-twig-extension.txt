@@ -63,14 +63,15 @@ return (mixed)
 
 *yii/twig/Extension::registerAssetBundle*			public
 >
- registerAssetBundle($context, $bundle)
+ registerAssetBundle($context, $bundle, $return='false')
 <
-return (void)
+return (void|\yii\web\AssetBundle) 
 
  ''' {{ register_asset_bundle('yii/web/JqueryAsset') }} '''
 
     [$context] (array) Context information
     [$bundle] (string) Asset bundle class fully qualified name
+    [$return] (boolean) Indicates if AssetBundle should be returned
 
 
 *yii/twig/Extension::beginWidget*				public
@@ -108,8 +109,8 @@ return (mixed)
 <
 return (void)
 
-    [$context] () 
-    [$name] () 
+    [$context] (array) Context information
+    [$name] (string) 
 
 
 *yii/twig/Extension::resolveAndCall*			public
@@ -180,7 +181,7 @@ return (void)
 
     [$object] (\stdClass) 
     [$property] (string) 
-    [$value] (\yii\twig\mixes) 
+    [$value] (mixed) 
 
 
 *yii/twig/Extension::getName*				public

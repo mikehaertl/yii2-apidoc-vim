@@ -102,8 +102,8 @@ METHOD DETAILS
 >
  loadIndexSchema($name)
 <
-return (\yii\sphinx\IndexSchema) Driver dependent index metadata. Null if the index
-does not exist.
+return (\yii\sphinx\IndexSchema|null) Driver dependent index metadata. 'null' 
+  - if the index does not exist.
 
     [$name] (string) Index name
 
@@ -131,8 +131,8 @@ return (void)
 >
  getIndexSchema($name, $refresh='false')
 <
-return (\yii\sphinx\IndexSchema) Index metadata. Null if the named index does not
-exist.
+return (\yii\sphinx\IndexSchema|null) Index metadata. 'null' 
+  - if the named index does not exist.
 
     [$name] (string) Index name. The index name may contain schema name if
     any. Do not quote the index name.
@@ -328,6 +328,18 @@ return (string) PHP type name
  findColumns($index)
 <
 return (boolean) Whether the index exists in the database
+
+    [$index] (\yii\sphinx\IndexSchema) The index metadata
+
+
+*yii/sphinx/Schema::applyDefaultColumns*			protected
+>
+ applyDefaultColumns($index)
+<
+return (void)
+
+ This method should be used in case there is no way to find actual columns,
+ like in some distributed indexes.
 
     [$index] (\yii\sphinx\IndexSchema) The index metadata
 

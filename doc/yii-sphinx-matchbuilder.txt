@@ -1,0 +1,228 @@
+
+*yii/sphinx/MatchBuilder*   >> |yii/base/Object|
+=========================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/sphinx/MatchBuilder::$db*
+
+ (\yii\sphinx\Connection) The Sphinx connection.
+
+$matchBuilders				*yii/sphinx/MatchBuilder::$matchBuilders*
+
+ (array) Map of MATCH keywords to builder methods. These methods are used by
+ 'buildMatch' to build MATCH expression from array syntax.
+
+$matchOperators				*yii/sphinx/MatchBuilder::$matchOperators*
+
+ (array) Map of MATCH operators. These operators are used for replacement of
+ verbose operators.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/sphinx/MatchBuilder::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/sphinx/MatchBuilder::__construct*			public
+>
+ __construct($connection, $config='[]')
+<
+return (void)
+
+    [$connection] (\yii\sphinx\Connection) The Sphinx connection.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii/sphinx/MatchBuilder::init*				public
+
+ See |yii/base/Object::init|
+
+
+*yii/sphinx/MatchBuilder::__get*				public
+
+ See |yii/base/Object::__get|
+
+
+*yii/sphinx/MatchBuilder::__set*				public
+
+ See |yii/base/Object::__set|
+
+
+*yii/sphinx/MatchBuilder::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/sphinx/MatchBuilder::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/sphinx/MatchBuilder::__call*				public
+
+ See |yii/base/Object::__call|
+
+
+*yii/sphinx/MatchBuilder::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/sphinx/MatchBuilder::canGetProperty*			public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/sphinx/MatchBuilder::canSetProperty*			public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/sphinx/MatchBuilder::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/sphinx/MatchBuilder::build*				public
+>
+ build($match)
+<
+return (string) Generated MATCH expression.
+
+    [$match] (\yii\sphinx\MatchExpression) The 'MatchExpression' object from
+    which the MATCH expression will be generated.
+
+
+*yii/sphinx/MatchBuilder::buildMatch*			public
+>
+ buildMatch($match, $params)
+<
+return (string) The MATCH expression
+
+    [$match] (string|array) MATCH specification.
+    [$params] (array) The expression parameters to be populated
+
+
+*yii/sphinx/MatchBuilder::buildHashMatch*			public
+>
+ buildHashMatch($match, $params)
+<
+return (string) The MATCH expression
+
+    [$match] (array) The match condition
+    [$params] (array) The expression parameters to be populated
+
+
+*yii/sphinx/MatchBuilder::buildAndMatch*			public
+>
+ buildAndMatch($operator, $operands, $params)
+<
+return (string) The MATCH expression
+
+    [$operator] (string) The operator which is used for connecting the given
+    operands
+    [$operands] (array) The Match expressions to connect
+    [$params] (array) The expression parameters to be populated
+
+
+*yii/sphinx/MatchBuilder::buildMultipleMatch*		public
+>
+ buildMultipleMatch($operator, $operands, $params)
+<
+return (string) The MATCH expression
+
+    [$operator] (string) The operator which is used for Create Match
+    expressions
+    [$operands] (array) The Match expressions
+    [$params] () 
+
+
+*yii/sphinx/MatchBuilder::buildZoneMatch*			public
+>
+ buildZoneMatch($operator, $operands, $params)
+<
+return (string) The MATCH expression
+
+    [$operator] (string) The operator which is used for Create Match
+    expressions
+    [$operands] (array) The Match expressions
+    [$params] () 
+
+
+*yii/sphinx/MatchBuilder::buildProximityMatch*		public
+>
+ buildProximityMatch($operator, $operands, $params)
+<
+return (string) The MATCH expression
+
+    [$operator] (string) The operator which is used for Create Match
+    expressions
+    [$operands] (array) The Match expressions
+    [$params] () 
+
+
+*yii/sphinx/MatchBuilder::buildIgnoreMatch*		public
+>
+ buildIgnoreMatch($operator, $operands, $params)
+<
+return (string) The MATCH expression
+
+    [$operator] (string) The operator which is used for Create Match
+    expressions
+    [$operands] (array) The Match expressions
+    [$params] () 
+
+
+*yii/sphinx/MatchBuilder::buildSimpleMatch*		public
+>
+ buildSimpleMatch($operator, $operands, $params)
+<
+return (string) The MATCH expression
+
+    [$operator] (string) The operator to use. Anything could be used e.g. '>',
+    '<=', etc.
+    [$operands] (array) Contains two column names.
+    [$params] (array) The expression parameters to be populated
+
+
+*yii/sphinx/MatchBuilder::buildMatchValue*		protected
+>
+ buildMatchValue($value, $params)
+<
+return (string) The MATCH expression
+
+    [$value] (string|array|\yii\db\Expression) 
+    [$params] (array) The expression parameters to be populated
+
+
+*yii/sphinx/MatchBuilder::buildMatchColumn*		protected
+>
+ buildMatchColumn($column, $ignored='false')
+<
+return (string) The column statement.
+
+    [$column] (string) Column specification.
+    [$ignored] (boolean) Whether column should be specified as 'ignored'.
+
+
+*yii/sphinx/MatchBuilder::parseParams*			protected
+>
+ parseParams($expression, $params)
+<
+return (string) Parsed expression.
+
+    [$expression] (string) The expression string which is needed to prepare.
+    [$params] (array) The binding parameters for inserting.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

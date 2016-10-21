@@ -1,0 +1,236 @@
+
+*yii/mongodb/file/StreamWrapper*   >> |yii/base/Object|
+================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Before feature can be used this wrapper should be registered via 'register()'
+ method. It is usually performed via
+ 'yii\mongodb\Connection::registerFileStreamWrapper()'.
+
+ Note: do not use this class directly 
+   - its instance will be created and maintained by PHP internally once
+ corresponding stream resource is created.
+
+ Resource path should be specified in following format:
+
+ ''' 'protocol://databaseName.fileCollectionPrefix?file_attribute=value' '''
+
+ Write example:
+
+   $resource = fopen('gridfs://mydatabase.fs?filename=new_file.txt', 'w');
+   fwrite($resource, 'some content');
+   // ...
+   fclose($resource);
+
+ Read example:
+
+   $resource = fopen('gridfs://mydatabase.fs?filename=my_file.txt', 'r');
+   $fileContent = stream_get_contents($resource);
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$context				*yii/mongodb/file/StreamWrapper::$context*
+
+ (resource) Associated stream resource context. This property is set
+ automatically by PHP once wrapper is instantiated.
+
+$contextOptions				*yii/mongodb/file/StreamWrapper::$contextOptions*
+
+ (array) Context options.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/mongodb/file/StreamWrapper::className*		public
+
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/file/StreamWrapper::__construct*		public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/file/StreamWrapper::init*			public
+
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/file/StreamWrapper::__get*			public
+
+ See |yii/base/Object::__get|
+
+
+*yii/mongodb/file/StreamWrapper::__set*			public
+
+ See |yii/base/Object::__set|
+
+
+*yii/mongodb/file/StreamWrapper::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/mongodb/file/StreamWrapper::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/mongodb/file/StreamWrapper::__call*			public
+
+ See |yii/base/Object::__call|
+
+
+*yii/mongodb/file/StreamWrapper::hasProperty*		public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/mongodb/file/StreamWrapper::canGetProperty*		public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/mongodb/file/StreamWrapper::canSetProperty*		public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/mongodb/file/StreamWrapper::hasMethod*		public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/mongodb/file/StreamWrapper::register*		public
+>
+ register($protocol=''gridfs'', $force='false')
+<
+return (void)
+
+    [$protocol] (string) Name of the protocol to be used.
+    [$force] (boolean) Whether to register wrapper, even if protocol is
+    already taken.
+
+
+*yii/mongodb/file/StreamWrapper::getContextOptions*	public
+>
+ getContextOptions()
+<
+return (array) Context options.
+
+
+
+*yii/mongodb/file/StreamWrapper::stream_close*		public
+>
+ stream_close()
+<
+return (void)
+
+ This method is called in response to 'fclose()'.
+
+
+*yii/mongodb/file/StreamWrapper::stream_eof*		public
+>
+ stream_eof()
+<
+return (boolean) 'true' if the read/write position is at the end of the stream and if
+no more data is available to be read, or 'false' otherwise.
+
+ This method is called in response to 'feof()'.
+
+
+*yii/mongodb/file/StreamWrapper::stream_open*		public
+>
+ stream_open($path, $mode, $options, $openedPath)
+<
+return (boolean) Whether operation is successful.
+
+ This method is called immediately after the wrapper is initialized (f.e. by
+ 'fopen()' and 'file_get_contents()').
+
+    [$path] (string) Specifies the URL that was passed to the original
+    function.
+    [$mode] (string) Mode used to open the file, as detailed for 'fopen()'.
+    [$options] (integer) Additional flags set by the streams API.
+    [$openedPath] (string) Real opened path.
+
+
+*yii/mongodb/file/StreamWrapper::stream_read*		public
+>
+ stream_read($count)
+<
+return (string|false) If there are less than count bytes available, return as many as
+are available. If no more data is available, return 'false'.
+
+ This method is called in response to 'fread()' and 'fgets()'.
+
+    [$count] (integer) Count of bytes of data from the current position should
+    be returned.
+
+
+*yii/mongodb/file/StreamWrapper::stream_write*		public
+>
+ stream_write($data)
+<
+return (integer) The number of bytes that were successfully stored.
+
+ This method is called in response to 'fwrite()'.
+
+    [$data] (string) String to be stored into the underlying stream.
+
+
+*yii/mongodb/file/StreamWrapper::stream_flush*		public
+>
+ stream_flush()
+<
+return (boolean) Whether cached data was successfully stored.
+
+
+
+*yii/mongodb/file/StreamWrapper::stream_stat*		public
+>
+ stream_stat()
+<
+return (array) File statistic information.
+
+ This method is called in response to 'stat()'.
+
+
+*yii/mongodb/file/StreamWrapper::stream_seek*		public
+>
+ stream_seek($offset, $whence=SEEK_SET)
+<
+return (boolean) Return true if the position was updated, false otherwise.
+
+ This method is called in response to 'fseek()'.
+
+    [$offset] (integer) The stream offset to seek to.
+    [$whence] (integer) Possible values:
+
+
+      - SEEK_SET - Set position equal to offset bytes. 
+      - SEEK_CUR - Set position to current location plus offset. 
+      - SEEK_END - Set position to end-of-file plus offset.
+
+
+*yii/mongodb/file/StreamWrapper::stream_tell*		public
+>
+ stream_tell()
+<
+return (integer) Should return the current position of the stream.
+
+ This method is called in response to 'fseek()' to determine the current
+ position.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

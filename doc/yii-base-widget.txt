@@ -6,59 +6,59 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/grid/GridView|
-|yii/widgets/Menu|
-|yii/widgets/Spaceless|
-|yii/widgets/ActiveForm|
-|yii/widgets/FragmentCache|
-|yii/widgets/Breadcrumbs|
-|yii/widgets/LinkPager|
-|yii/widgets/BaseListView|
-|yii/widgets/InputWidget|
-|yii/widgets/LinkSorter|
-|yii/widgets/ListView|
-|yii/widgets/ContentDecorator|
-|yii/widgets/DetailView|
-|yii/widgets/MaskedInput|
-|yii/widgets/Pjax|
-|yii/widgets/Block|
 |yii/captcha/Captcha|
+|yii/widgets/ActiveForm|
+|yii/widgets/Breadcrumbs|
+|yii/widgets/Spaceless|
+|yii/widgets/LinkPager|
+|yii/widgets/Pjax|
+|yii/widgets/ListView|
+|yii/widgets/InputWidget|
+|yii/widgets/Block|
+|yii/widgets/FragmentCache|
+|yii/widgets/Menu|
+|yii/widgets/ContentDecorator|
+|yii/widgets/LinkSorter|
+|yii/widgets/BaseListView|
+|yii/widgets/MaskedInput|
+|yii/widgets/DetailView|
 |yii/apidoc/templates/bootstrap/SideNavWidget|
 |yii/authclient/widgets/GooglePlusButton|
 |yii/authclient/widgets/AuthChoiceItem|
 |yii/authclient/widgets/AuthChoice|
-|yii/bootstrap/Nav|
-|yii/bootstrap/Collapse|
-|yii/bootstrap/ActiveForm|
-|yii/bootstrap/ButtonGroup|
 |yii/bootstrap/Progress|
-|yii/bootstrap/InputWidget|
 |yii/bootstrap/ToggleButtonGroup|
-|yii/bootstrap/Carousel|
-|yii/bootstrap/Widget|
-|yii/bootstrap/Modal|
+|yii/bootstrap/ActiveForm|
+|yii/bootstrap/Nav|
 |yii/bootstrap/ButtonDropdown|
-|yii/bootstrap/Button|
-|yii/bootstrap/Tabs|
+|yii/bootstrap/Carousel|
 |yii/bootstrap/Alert|
+|yii/bootstrap/Collapse|
+|yii/bootstrap/InputWidget|
+|yii/bootstrap/Tabs|
+|yii/bootstrap/Button|
 |yii/bootstrap/NavBar|
 |yii/bootstrap/Dropdown|
-|yii/jui/Menu|
-|yii/jui/Sortable|
-|yii/jui/Spinner|
-|yii/jui/Dialog|
-|yii/jui/InputWidget|
+|yii/bootstrap/Widget|
+|yii/bootstrap/Modal|
+|yii/bootstrap/ButtonGroup|
 |yii/jui/Droppable|
-|yii/jui/Accordion|
-|yii/jui/Slider|
 |yii/jui/ProgressBar|
-|yii/jui/Widget|
-|yii/jui/Draggable|
 |yii/jui/DatePicker|
+|yii/jui/AutoComplete|
+|yii/jui/InputWidget|
 |yii/jui/Tabs|
 |yii/jui/Selectable|
+|yii/jui/Menu|
+|yii/jui/Spinner|
+|yii/jui/Slider|
+|yii/jui/Dialog|
+|yii/jui/Accordion|
+|yii/jui/Draggable|
 |yii/jui/SliderInput|
-|yii/jui/AutoComplete|
+|yii/jui/Sortable|
 |yii/jui/Resizable|
+|yii/jui/Widget|
 
 
 PROPERTY DETAILS
@@ -233,7 +233,9 @@ return (static) The newly created widget instance
 
  This method creates an instance of the calling class. It will apply the
  configuration to the created instance. A matching 'end()' call should be
- called later.
+ called later. As some widgets may use output buffering, the 'end()' call
+ should be made in the same view to avoid breaking the nesting of output
+ buffers.
 
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties

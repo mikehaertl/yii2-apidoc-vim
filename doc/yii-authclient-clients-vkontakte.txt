@@ -36,9 +36,13 @@ $version				*yii/authclient/clients/VKontakte::$version*
 
 $apiBaseUrl				*yii/authclient/clients/VKontakte::$apiBaseUrl*
 
- (string) API base URL.
+ (string) API base URL. This field will be used as
+ '\yii\httpclient\Client::baseUrl' value of 'httpClient'. Note: changing this
+ property will take no effect after 'httpClient' is instantiated.
 
- API base URL.
+ API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
+ value of 'httpClient'. Note: changing this property will take no effect after
+ 'httpClient' is instantiated.
 
 
 
@@ -53,6 +57,10 @@ $authUrl				*yii/authclient/clients/VKontakte::$authUrl*
 $scope					*yii/authclient/clients/VKontakte::$scope*
 
  See |yii/authclient/BaseOAuth::$scope|
+
+$autoRefreshAccessToken			*yii/authclient/clients/VKontakte::$autoRefreshAccessToken*
+
+ See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
 
 $clientId				*yii/authclient/clients/VKontakte::$clientId*
 
@@ -69,6 +77,10 @@ $tokenUrl				*yii/authclient/clients/VKontakte::$tokenUrl*
  Token request URL endpoint.
 
 
+
+$validateAuthState			*yii/authclient/clients/VKontakte::$validateAuthState*
+
+ See |yii/authclient/OAuth2::$validateAuthState|
 
 $attributeNames				*yii/authclient/clients/VKontakte::$attributeNames*
 
@@ -103,13 +115,21 @@ $viewOptions				*yii/authclient/clients/VKontakte::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/clients/VKontakte::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/clients/VKontakte::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/clients/VKontakte::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/clients/VKontakte::$returnUrl*
 
  See |yii/authclient/BaseOAuth::$returnUrl|
-
-$curlOptions				*yii/authclient/clients/VKontakte::$curlOptions*
-
- See |yii/authclient/BaseOAuth::$curlOptions|
 
 $accessToken				*yii/authclient/clients/VKontakte::$accessToken*
 
@@ -310,6 +330,36 @@ METHOD DETAILS
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/clients/VKontakte::getHttpClient*		public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/clients/VKontakte::setHttpClient*		public
+
+ See |yii/authclient/BaseOAuth::setHttpClient|
+
+
+*yii/authclient/clients/VKontakte::setRequestOptions*	public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/clients/VKontakte::getRequestOptions*	public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/clients/VKontakte::getStateStorage*	public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/clients/VKontakte::setStateStorage*	public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/clients/VKontakte::defaultName*		protected
 >
  defaultName()
@@ -368,9 +418,44 @@ return (array) Normalize attribute map.
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
+*yii/authclient/clients/VKontakte::createHttpClient*	protected
+
+ See |yii/authclient/BaseOAuth::createHttpClient|
+
+
 *yii/authclient/clients/VKontakte::normalizeUserAttributes*protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/clients/VKontakte::createRequest*		public
+
+ See |yii/authclient/BaseClient::createRequest|
+
+
+*yii/authclient/clients/VKontakte::defaultRequestOptions*	protected
+
+ See |yii/authclient/BaseOAuth::defaultRequestOptions|
+
+
+*yii/authclient/clients/VKontakte::setState*		protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/clients/VKontakte::getState*		protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/clients/VKontakte::removeState*		protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/clients/VKontakte::getStateKeyPrefix*	protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/clients/VKontakte::setReturnUrl*		public
@@ -381,16 +466,6 @@ return (array) Normalize attribute map.
 *yii/authclient/clients/VKontakte::getReturnUrl*		public
 
  See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/clients/VKontakte::setCurlOptions*	public
-
- See |yii/authclient/BaseOAuth::setCurlOptions|
-
-
-*yii/authclient/clients/VKontakte::getCurlOptions*	public
-
- See |yii/authclient/BaseOAuth::getCurlOptions|
 
 
 *yii/authclient/clients/VKontakte::setAccessToken*	public
@@ -418,41 +493,6 @@ return (array) Normalize attribute map.
  See |yii/authclient/BaseOAuth::defaultReturnUrl|
 
 
-*yii/authclient/clients/VKontakte::sendRequest*		protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/clients/VKontakte::mergeCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::mergeCurlOptions|
-
-
-*yii/authclient/clients/VKontakte::defaultCurlOptions*	protected
-
- See |yii/authclient/BaseOAuth::defaultCurlOptions|
-
-
-*yii/authclient/clients/VKontakte::processResponse*	protected
-
- See |yii/authclient/BaseOAuth::processResponse|
-
-
-*yii/authclient/clients/VKontakte::convertXmlToArray*	protected
-
- See |yii/authclient/BaseOAuth::convertXmlToArray|
-
-
-*yii/authclient/clients/VKontakte::determineContentTypeByHeaders*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
-
-
-*yii/authclient/clients/VKontakte::determineContentTypeByRaw*protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
-
-
 *yii/authclient/clients/VKontakte::createSignatureMethod*	protected
 
  See |yii/authclient/BaseOAuth::createSignatureMethod|
@@ -461,6 +501,11 @@ return (array) Normalize attribute map.
 *yii/authclient/clients/VKontakte::createToken*		protected
 
  See |yii/authclient/BaseOAuth::createToken|
+
+
+*yii/authclient/clients/VKontakte::sendRequest*		protected
+
+ See |yii/authclient/BaseOAuth::sendRequest|
 
 
 *yii/authclient/clients/VKontakte::composeUrl*		protected
@@ -478,24 +523,14 @@ return (array) Normalize attribute map.
  See |yii/authclient/BaseOAuth::restoreAccessToken|
 
 
-*yii/authclient/clients/VKontakte::setState*		protected
+*yii/authclient/clients/VKontakte::createApiRequest*	public
 
- See |yii/authclient/BaseOAuth::setState|
-
-
-*yii/authclient/clients/VKontakte::getState*		protected
-
- See |yii/authclient/BaseOAuth::getState|
+ See |yii/authclient/BaseOAuth::createApiRequest|
 
 
-*yii/authclient/clients/VKontakte::removeState*		protected
+*yii/authclient/clients/VKontakte::beforeApiRequestSend*	public
 
- See |yii/authclient/BaseOAuth::removeState|
-
-
-*yii/authclient/clients/VKontakte::getStateKeyPrefix*	protected
-
- See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+ See |yii/authclient/BaseOAuth::beforeApiRequestSend|
 
 
 *yii/authclient/clients/VKontakte::api*			public
@@ -503,21 +538,16 @@ return (array) Normalize attribute map.
  See |yii/authclient/BaseOAuth::api|
 
 
-*yii/authclient/clients/VKontakte::composeRequestCurlOptions*protected
-
- See |yii/authclient/BaseOAuth::composeRequestCurlOptions|
-
-
 *yii/authclient/clients/VKontakte::refreshAccessToken*	public
 
  See |yii/authclient/BaseOAuth::refreshAccessToken|
 
 
-*yii/authclient/clients/VKontakte::apiInternal*		protected
+*yii/authclient/clients/VKontakte::applyAccessTokenToRequest*public
 >
- apiInternal($accessToken, $url, $method, $params, $headers)
+ applyAccessTokenToRequest($request, $accessToken)
 <
-return (array) API response.
+return (void)
 
 
 
@@ -525,11 +555,8 @@ return (array) API response.
 
 
 
-    [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
-    [$url] (string) Absolute API URL.
-    [$method] (string) Request method.
-    [$params] (array) Request parameters.
-    [$headers] (array) Additional request headers.
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
 
 
 *yii/authclient/clients/VKontakte::buildAuthUrl*		public
@@ -540,6 +567,21 @@ return (array) API response.
 *yii/authclient/clients/VKontakte::fetchAccessToken*	public
 
  See |yii/authclient/OAuth2::fetchAccessToken|
+
+
+*yii/authclient/clients/VKontakte::generateAuthState*	protected
+
+ See |yii/authclient/OAuth2::generateAuthState|
+
+
+*yii/authclient/clients/VKontakte::authenticateClient*	public
+
+ See |yii/authclient/OAuth2::authenticateClient|
+
+
+*yii/authclient/clients/VKontakte::authenticateUser*	public
+
+ See |yii/authclient/OAuth2::authenticateUser|
 
 
 

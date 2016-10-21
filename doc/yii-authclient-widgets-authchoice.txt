@@ -11,7 +11,6 @@ DESCRIPTION
 
  Example:
 
-   php
    <?= yii\authclient\widgets\AuthChoice::widget([
        'baseAuthUrl' => ['site/auth']
    ]); ?>
@@ -19,7 +18,6 @@ DESCRIPTION
  You can customize the widget appearance by using 'begin()' and 'end()' syntax
  along with using method 'clientLink()' or 'createClientUrl()'. For example:
 
-   php
    <?php
    use yii\authclient\widgets\AuthChoice;
    ?>
@@ -28,7 +26,7 @@ DESCRIPTION
    ]); ?>
    <ul>
    <?php foreach ($authAuthChoice->getClients() as $client): ?>
-       <li><?php $authAuthChoice->clientLink($client) ?></li>
+       <li><?= $authAuthChoice->clientLink($client) ?></li>
    <?php endforeach; ?>
    </ul>
    <?php AuthChoice::end(); ?>
@@ -71,6 +69,10 @@ $options				*yii/authclient/widgets/AuthChoice::$options*
 
  (array) The HTML attributes that should be rendered in the div HTML tag
  representing the container element.
+
+$clientOptions				*yii/authclient/widgets/AuthChoice::$clientOptions*
+
+ (array) Additional options to be passed to the underlying JS plugin.
 
 $popupMode				*yii/authclient/widgets/AuthChoice::$popupMode*
 
@@ -279,7 +281,7 @@ return (void)
 >
  run()
 <
-return (void)
+return (string) Rendered HTML.
 
 
 
@@ -352,7 +354,7 @@ return (array) Base auth URL configuration.
 >
  clientLink($client, $text='null', $htmlOptions='[]')
 <
-return (void)
+return (string) Generated HTML.
 
     [$client] (\yii\authclient\ClientInterface) External auth client instance.
     [$text] (string) Link text, if not set 
@@ -362,19 +364,18 @@ return (void)
 
 *yii/authclient/widgets/AuthChoice::createClientUrl*	public
 >
- createClientUrl($provider)
+ createClientUrl($client)
 <
 return (string) Auth URL.
 
-    [$provider] (\yii\authclient\ClientInterface) External auth client
-    instance.
+    [$client] (\yii\authclient\ClientInterface) External auth client instance.
 
 
 *yii/authclient/widgets/AuthChoice::renderMainContent*	protected
 >
  renderMainContent()
 <
-return (void)
+return (string) Generated HTML.
 
 
 

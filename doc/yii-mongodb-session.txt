@@ -1,5 +1,5 @@
 
-*yii/mongodb/Session*   >> |yii/web/Session|
+*yii/mongodb/Session*   >> |yii/web/MultiFieldSession|
 =====================
 
 DESCRIPTION
@@ -19,96 +19,126 @@ DESCRIPTION
        // 'sessionCollection' => 'my_session',
    ]
 
+ Session extends 'MultiFieldSession', thus it allows saving extra fields into
+ the 'sessionCollection'. Refer to 'MultiFieldSession' for more details.
 
+ Tip: you can use MongoDB [TTL
+ index](http://docs.mongodb.org/manual/tutorial/expire-data/) for the session
+ garbage collection for performance saving, in this case you should set
+ 'Session::gCProbability' to '0'.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $flashParam				*yii/mongodb/Session::$flashParam*
+
  See |yii/web/Session::$flashParam|
 
 $handler				*yii/mongodb/Session::$handler*
+
  See |yii/web/Session::$handler|
 
+$readCallback				*yii/mongodb/Session::$readCallback*
+
+ See |yii/web/MultiFieldSession::$readCallback|
+
+$writeCallback				*yii/mongodb/Session::$writeCallback*
+
+ See |yii/web/MultiFieldSession::$writeCallback|
+
 $db					*yii/mongodb/Session::$db*
- (\yii\mongodb\Connection|string) The MongoDB connection object or the
+
+ (\yii\mongodb\Connection|array|string) The MongoDB connection object or the
  application component ID of the MongoDB connection. After the Session object
  is created, if you want to change this property, you should only assign it
- with a MongoDB connection object.
+ with a MongoDB connection object. Starting from version 2.0.2, this can also
+ be a configuration array for creating the object.
 
 $sessionCollection			*yii/mongodb/Session::$sessionCollection*
+
  (string|array) The name of the MongoDB collection that stores the session
  data. Please refer to 'Connection::getCollection()' on how to specify this
  parameter. This collection is better to be pre-created with fields 'id' and
  'expire' indexed.
 
 $behaviors				*yii/mongodb/Session::$behaviors*
- (\yii\base\Behavior[]) List of behaviors attached to this component
+
+ See |yii/base/Component::$behaviors|
 
 $useCustomStorage			*yii/mongodb/Session::$useCustomStorage*
- (boolean) Whether to use custom storage.
+
+ See |yii/web/MultiFieldSession::$useCustomStorage|
 
 $isActive				*yii/mongodb/Session::$isActive*
- (boolean) Whether the session has started
+
+ See |yii/web/Session::$isActive|
 
 $hasSessionId				*yii/mongodb/Session::$hasSessionId*
- (boolean) Whether the current request has sent the session ID.
+
+ See |yii/web/Session::$hasSessionId|
 
 $id					*yii/mongodb/Session::$id*
- (string) The current session ID
+
+ See |yii/web/Session::$id|
 
 $name					*yii/mongodb/Session::$name*
- (string) The current session name
+
+ See |yii/web/Session::$name|
 
 $savePath				*yii/mongodb/Session::$savePath*
- (string) The current session save path, defaults to '/tmp'.
+
+ See |yii/web/Session::$savePath|
 
 $cookieParams				*yii/mongodb/Session::$cookieParams*
- (array) The session cookie parameters.
+
+ See |yii/web/Session::$cookieParams|
 
 $useCookies				*yii/mongodb/Session::$useCookies*
- (boolean|null) The value indicating whether cookies should be used to store
- session IDs.
+
+ See |yii/web/Session::$useCookies|
 
 $gCProbability				*yii/mongodb/Session::$gCProbability*
- (float) The probability (percentage) that the GC (garbage collection) process
- is started on every session initialization, defaults to 1 meaning 1% chance.
+
+ See |yii/web/Session::$gCProbability|
 
 $useTransparentSessionID		*yii/mongodb/Session::$useTransparentSessionID*
- (boolean) Whether transparent sid support is enabled or not, defaults to
- false.
+
+ See |yii/web/Session::$useTransparentSessionID|
 
 $timeout				*yii/mongodb/Session::$timeout*
- (integer) The number of seconds after which data will be seen as 'garbage'
- and cleaned up. The default value is 1440 seconds (or the value of
- "session.gc_maxlifetime" set in php.ini).
+
+ See |yii/web/Session::$timeout|
 
 $iterator				*yii/mongodb/Session::$iterator*
- (\yii\web\SessionIterator) An iterator for traversing the session variables.
+
+ See |yii/web/Session::$iterator|
 
 $count					*yii/mongodb/Session::$count*
- (integer) The number of session variables
+
+ See |yii/web/Session::$count|
 
 $allFlashes				*yii/mongodb/Session::$allFlashes*
- (array) Flash messages (key => message or key => [message1, message2]).
+
+ See |yii/web/Session::$allFlashes|
 
 $flash					*yii/mongodb/Session::$flash*
- (string) The key identifying the flash message. Note that flash messages and
- normal session variables share the same name space. If you have a normal
- session variable using the same name, its value will be overwritten by this
- method.
+
+ See |yii/web/Session::$flash|
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+
 *yii/mongodb/Session::className*				public
+
  See |yii/base/Object::className|
 
 
 *yii/mongodb/Session::__construct*			public
+
  See |yii/base/Object::__construct|
 
 
@@ -116,142 +146,169 @@ METHOD DETAILS
 >
  init()
 <
-(void)
+return (void)
 
  This method will initialize the 'db' property to make sure it refers to a
  valid MongoDB connection.
 
 
 *yii/mongodb/Session::__get*				public
+
  See |yii/base/Component::__get|
 
 
 *yii/mongodb/Session::__set*				public
+
  See |yii/base/Component::__set|
 
 
 *yii/mongodb/Session::__isset*				public
+
  See |yii/base/Component::__isset|
 
 
 *yii/mongodb/Session::__unset*				public
+
  See |yii/base/Component::__unset|
 
 
 *yii/mongodb/Session::__call*				public
+
  See |yii/base/Component::__call|
 
 
 *yii/mongodb/Session::hasProperty*			public
+
  See |yii/base/Component::hasProperty|
 
 
 *yii/mongodb/Session::canGetProperty*			public
+
  See |yii/base/Component::canGetProperty|
 
 
 *yii/mongodb/Session::canSetProperty*			public
+
  See |yii/base/Component::canSetProperty|
 
 
 *yii/mongodb/Session::hasMethod*				public
+
  See |yii/base/Component::hasMethod|
 
 
 *yii/mongodb/Session::__clone*				public
+
  See |yii/base/Component::__clone|
 
 
 *yii/mongodb/Session::behaviors*				public
+
  See |yii/base/Component::behaviors|
 
 
 *yii/mongodb/Session::hasEventHandlers*			public
+
  See |yii/base/Component::hasEventHandlers|
 
 
 *yii/mongodb/Session::on*					public
+
  See |yii/base/Component::on|
 
 
 *yii/mongodb/Session::off*				public
+
  See |yii/base/Component::off|
 
 
 *yii/mongodb/Session::trigger*				public
+
  See |yii/base/Component::trigger|
 
 
 *yii/mongodb/Session::getBehavior*			public
+
  See |yii/base/Component::getBehavior|
 
 
 *yii/mongodb/Session::getBehaviors*			public
+
  See |yii/base/Component::getBehaviors|
 
 
 *yii/mongodb/Session::attachBehavior*			public
+
  See |yii/base/Component::attachBehavior|
 
 
 *yii/mongodb/Session::attachBehaviors*			public
+
  See |yii/base/Component::attachBehaviors|
 
 
 *yii/mongodb/Session::detachBehavior*			public
+
  See |yii/base/Component::detachBehavior|
 
 
 *yii/mongodb/Session::detachBehaviors*			public
+
  See |yii/base/Component::detachBehaviors|
 
 
 *yii/mongodb/Session::ensureBehaviors*			public
+
  See |yii/base/Component::ensureBehaviors|
 
 
 *yii/mongodb/Session::getUseCustomStorage*		public
->
- getUseCustomStorage()
-<
-(boolean) Whether to use custom storage.
 
- This method overrides the parent implementation and always returns true.
+ See |yii/web/MultiFieldSession::getUseCustomStorage|
 
 
 *yii/mongodb/Session::open*				public
+
  See |yii/web/Session::open|
 
 
 *yii/mongodb/Session::registerSessionHandler*		protected
+
  See |yii/web/Session::registerSessionHandler|
 
 
 *yii/mongodb/Session::close*				public
+
  See |yii/web/Session::close|
 
 
 *yii/mongodb/Session::destroy*				public
+
  See |yii/web/Session::destroy|
 
 
 *yii/mongodb/Session::getIsActive*			public
+
  See |yii/web/Session::getIsActive|
 
 
 *yii/mongodb/Session::getHasSessionId*			public
+
  See |yii/web/Session::getHasSessionId|
 
 
 *yii/mongodb/Session::setHasSessionId*			public
+
  See |yii/web/Session::setHasSessionId|
 
 
 *yii/mongodb/Session::getId*				public
+
  See |yii/web/Session::getId|
 
 
 *yii/mongodb/Session::setId*				public
+
  See |yii/web/Session::setId|
 
 
@@ -259,74 +316,91 @@ METHOD DETAILS
 >
  regenerateID($deleteOldSession='false')
 <
-(void)
+return (void)
 
  Please refer to <http://php.net/session_regenerate_id> for more details.
+
     [$deleteOldSession] (boolean) Whether to delete the old associated session
     file or not.
 
 
 *yii/mongodb/Session::getName*				public
+
  See |yii/web/Session::getName|
 
 
 *yii/mongodb/Session::setName*				public
+
  See |yii/web/Session::setName|
 
 
 *yii/mongodb/Session::getSavePath*			public
+
  See |yii/web/Session::getSavePath|
 
 
 *yii/mongodb/Session::setSavePath*			public
+
  See |yii/web/Session::setSavePath|
 
 
 *yii/mongodb/Session::getCookieParams*			public
+
  See |yii/web/Session::getCookieParams|
 
 
 *yii/mongodb/Session::setCookieParams*			public
+
  See |yii/web/Session::setCookieParams|
 
 
 *yii/mongodb/Session::getUseCookies*			public
+
  See |yii/web/Session::getUseCookies|
 
 
 *yii/mongodb/Session::setUseCookies*			public
+
  See |yii/web/Session::setUseCookies|
 
 
 *yii/mongodb/Session::getGCProbability*			public
+
  See |yii/web/Session::getGCProbability|
 
 
 *yii/mongodb/Session::setGCProbability*			public
+
  See |yii/web/Session::setGCProbability|
 
 
 *yii/mongodb/Session::getUseTransparentSessionID*		public
+
  See |yii/web/Session::getUseTransparentSessionID|
 
 
 *yii/mongodb/Session::setUseTransparentSessionID*		public
+
  See |yii/web/Session::setUseTransparentSessionID|
 
 
 *yii/mongodb/Session::getTimeout*				public
+
  See |yii/web/Session::getTimeout|
 
 
 *yii/mongodb/Session::setTimeout*				public
+
  See |yii/web/Session::setTimeout|
 
 
 *yii/mongodb/Session::openSession*			public
+
  See |yii/web/Session::openSession|
 
 
 *yii/mongodb/Session::closeSession*			public
+
  See |yii/web/Session::closeSession|
 
 
@@ -334,9 +408,10 @@ METHOD DETAILS
 >
  readSession($id)
 <
-(string) The session data
+return (string) The session data
 
  Do not call this method directly.
+
     [$id] (string) Session ID
 
 
@@ -344,9 +419,10 @@ METHOD DETAILS
 >
  writeSession($id, $data)
 <
-(boolean) Whether session write is successful
+return (boolean) Whether session write is successful
 
  Do not call this method directly.
+
     [$id] (string) Session ID
     [$data] (string) Session data
 
@@ -355,9 +431,10 @@ METHOD DETAILS
 >
  destroySession($id)
 <
-(boolean) Whether session is destroyed successfully
+return (boolean) Whether session is destroyed successfully
 
  Do not call this method directly.
+
     [$id] (string) Session ID
 
 
@@ -365,91 +442,122 @@ METHOD DETAILS
 >
  gcSession($maxLifetime)
 <
-(boolean) Whether session is GCed successfully
+return (boolean) Whether session is GCed successfully
 
  Do not call this method directly.
+
     [$maxLifetime] (integer) The number of seconds after which data will be
     seen as 'garbage' and cleaned up.
 
 
 *yii/mongodb/Session::getIterator*			public
+
  See |yii/web/Session::getIterator|
 
 
 *yii/mongodb/Session::getCount*				public
+
  See |yii/web/Session::getCount|
 
 
 *yii/mongodb/Session::count*				public
+
  See |yii/web/Session::count|
 
 
 *yii/mongodb/Session::get*				public
+
  See |yii/web/Session::get|
 
 
 *yii/mongodb/Session::set*				public
+
  See |yii/web/Session::set|
 
 
 *yii/mongodb/Session::remove*				public
+
  See |yii/web/Session::remove|
 
 
 *yii/mongodb/Session::removeAll*				public
+
  See |yii/web/Session::removeAll|
 
 
 *yii/mongodb/Session::has*				public
+
  See |yii/web/Session::has|
 
 
 *yii/mongodb/Session::updateFlashCounters*		protected
+
  See |yii/web/Session::updateFlashCounters|
 
 
 *yii/mongodb/Session::getFlash*				public
+
  See |yii/web/Session::getFlash|
 
 
 *yii/mongodb/Session::getAllFlashes*			public
+
  See |yii/web/Session::getAllFlashes|
 
 
 *yii/mongodb/Session::setFlash*				public
+
  See |yii/web/Session::setFlash|
 
 
 *yii/mongodb/Session::addFlash*				public
+
  See |yii/web/Session::addFlash|
 
 
 *yii/mongodb/Session::removeFlash*			public
+
  See |yii/web/Session::removeFlash|
 
 
 *yii/mongodb/Session::removeAllFlashes*			public
+
  See |yii/web/Session::removeAllFlashes|
 
 
 *yii/mongodb/Session::hasFlash*				public
+
  See |yii/web/Session::hasFlash|
 
 
 *yii/mongodb/Session::offsetExists*			public
+
  See |yii/web/Session::offsetExists|
 
 
 *yii/mongodb/Session::offsetGet*				public
+
  See |yii/web/Session::offsetGet|
 
 
 *yii/mongodb/Session::offsetSet*				public
+
  See |yii/web/Session::offsetSet|
 
 
 *yii/mongodb/Session::offsetUnset*			public
+
  See |yii/web/Session::offsetUnset|
+
+
+*yii/mongodb/Session::composeFields*			protected
+
+ See |yii/web/MultiFieldSession::composeFields|
+
+
+*yii/mongodb/Session::extractData*			protected
+
+ See |yii/web/MultiFieldSession::extractData|
 
 
 

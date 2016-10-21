@@ -5,17 +5,17 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/authclient/clients/GoogleOAuth|
-|yii/authclient/clients/VKontakte|
+|yii/authclient/OAuth1|
+|yii/authclient/clients/Facebook|
+|yii/authclient/clients/Google|
+|yii/authclient/clients/Yandex|
+|yii/authclient/clients/LinkedIn|
 |yii/authclient/clients/GitHub|
 |yii/authclient/clients/Live|
-|yii/authclient/clients/GoogleHybrid|
 |yii/authclient/clients/Twitter|
-|yii/authclient/clients/YandexOAuth|
-|yii/authclient/clients/LinkedIn|
-|yii/authclient/clients/Facebook|
+|yii/authclient/clients/GoogleHybrid|
+|yii/authclient/clients/VKontakte|
 |yii/authclient/OAuth2|
-|yii/authclient/OAuth1|
 
 
 PROPERTY DETAILS
@@ -27,7 +27,9 @@ $version				*yii/authclient/BaseOAuth::$version*
 
 $apiBaseUrl				*yii/authclient/BaseOAuth::$apiBaseUrl*
 
- (string) API base URL.
+ (string) API base URL. This field will be used as
+ '\yii\httpclient\Client::baseUrl' value of 'httpClient'. Note: changing this
+ property will take no effect after 'httpClient' is instantiated.
 
 $authUrl				*yii/authclient/BaseOAuth::$authUrl*
 
@@ -36,6 +38,11 @@ $authUrl				*yii/authclient/BaseOAuth::$authUrl*
 $scope					*yii/authclient/BaseOAuth::$scope*
 
  (string) Auth request scope.
+
+$autoRefreshAccessToken			*yii/authclient/BaseOAuth::$autoRefreshAccessToken*
+
+ (boolean) Whether to automatically perform 'refresh access token' request on
+ expired access token.
 
 $behaviors				*yii/authclient/BaseOAuth::$behaviors*
 
@@ -65,17 +72,25 @@ $viewOptions				*yii/authclient/BaseOAuth::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/BaseOAuth::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/BaseOAuth::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/BaseOAuth::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/BaseOAuth::$returnUrl*
 
  (string) Return URL
 
-$curlOptions				*yii/authclient/BaseOAuth::$curlOptions*
-
- (array) CURL options.
-
 $accessToken				*yii/authclient/BaseOAuth::$accessToken*
 
- (array|\yii\authclient\OAuthToken)
+ (array|\yii\authclient\OAuthToken) Access token or its configuration.
 
 $signatureMethod			*yii/authclient/BaseOAuth::$signatureMethod*
 
@@ -273,6 +288,46 @@ METHOD DETAILS
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/BaseOAuth::getHttpClient*			public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/BaseOAuth::setHttpClient*			public
+>
+ setHttpClient($httpClient)
+<
+return (void)
+
+
+
+
+
+
+
+    [$httpClient] (array|\yii\httpclient\Client) Internal HTTP client.
+
+
+*yii/authclient/BaseOAuth::setRequestOptions*		public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/BaseOAuth::getRequestOptions*		public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/BaseOAuth::getStateStorage*		public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/BaseOAuth::setStateStorage*		public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/BaseOAuth::defaultName*			protected
 
  See |yii/authclient/BaseClient::defaultName|
@@ -298,9 +353,62 @@ METHOD DETAILS
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
+*yii/authclient/BaseOAuth::createHttpClient*		protected
+>
+ createHttpClient($reference)
+<
+return (\yii\httpclient\Client) HTTP client instance.
+
+
+
+
+
+
+
+    [$reference] (string|array) Component name or array configuration.
+
+
 *yii/authclient/BaseOAuth::normalizeUserAttributes*	protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/BaseOAuth::createRequest*			public
+
+ See |yii/authclient/BaseClient::createRequest|
+
+
+*yii/authclient/BaseOAuth::defaultRequestOptions*		protected
+>
+ defaultRequestOptions()
+<
+return (array) HTTP request options.
+
+
+
+
+
+
+
+
+*yii/authclient/BaseOAuth::setState*			protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/BaseOAuth::getState*			protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/BaseOAuth::removeState*			protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/BaseOAuth::getStateKeyPrefix*		protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/BaseOAuth::setReturnUrl*			public
@@ -320,30 +428,14 @@ return (string) Return URL.
 
 
 
-*yii/authclient/BaseOAuth::setCurlOptions*		public
->
- setCurlOptions($curlOptions)
-<
-return (void)
-
-    [$curlOptions] (array) CURL options.
-
-
-*yii/authclient/BaseOAuth::getCurlOptions*		public
->
- getCurlOptions()
-<
-return (array) CURL options.
-
-
-
 *yii/authclient/BaseOAuth::setAccessToken*		public
 >
  setAccessToken($token)
 <
 return (void)
 
-    [$token] (array|\yii\authclient\OAuthToken) 
+    [$token] (array|\yii\authclient\OAuthToken) Access token or its
+    configuration.
 
 
 *yii/authclient/BaseOAuth::getAccessToken*		public
@@ -380,77 +472,6 @@ return (string) Return URL.
 
 
 
-*yii/authclient/BaseOAuth::sendRequest*			protected
->
- sendRequest($method, $url, $params='[]', $headers='[]')
-<
-return (array) Response.
-
-    [$method] (string) Request type.
-    [$url] (string) Request URL.
-    [$params] (array) Request params.
-    [$headers] (array) Additional request headers.
-
-
-*yii/authclient/BaseOAuth::mergeCurlOptions*		protected
->
- mergeCurlOptions($options1, $options2)
-<
-return (array) Merged options (the original options are not changed.)
-
- If each options array has an element with the same key value, the latter will
- overwrite the former.
-
-    [$options1] (array) Options to be merged to.
-    [$options2] (array) Options to be merged from. You can specify additional
-    arrays via third argument, fourth argument etc.
-
-
-*yii/authclient/BaseOAuth::defaultCurlOptions*		protected
->
- defaultCurlOptions()
-<
-return (array) CURL options.
-
-
-
-*yii/authclient/BaseOAuth::processResponse*		protected
->
- processResponse($rawResponse, $contentType='self::CONTENT_TYPE_AUTO')
-<
-return (array) Actual response.
-
-    [$rawResponse] (string) Raw response.
-    [$contentType] (string) Response content type.
-
-
-*yii/authclient/BaseOAuth::convertXmlToArray*		protected
->
- convertXmlToArray($xml)
-<
-return (array) XML array representation.
-
-    [$xml] (string|\SimpleXMLElement) Xml to process.
-
-
-*yii/authclient/BaseOAuth::determineContentTypeByHeaders*	protected
->
- determineContentTypeByHeaders($headers)
-<
-return (string) Content type.
-
-    [$headers] (array) Request headers.
-
-
-*yii/authclient/BaseOAuth::determineContentTypeByRaw*	protected
->
- determineContentTypeByRaw($rawContent)
-<
-return (string) Response type.
-
-    [$rawContent] (string) Raw response content.
-
-
 *yii/authclient/BaseOAuth::createSignatureMethod*		protected
 >
  createSignatureMethod($signatureMethodConfig)
@@ -469,6 +490,15 @@ return (\yii\authclient\OAuthToken) Token instance.
     [$tokenConfig] (array) Token configuration.
 
 
+*yii/authclient/BaseOAuth::sendRequest*			protected
+>
+ sendRequest($request)
+<
+return (array) Response data.
+
+    [$request] (\yii\httpclient\Request) HTTP request to be sent.
+
+
 *yii/authclient/BaseOAuth::composeUrl*			protected
 >
  composeUrl($url, $params='[]')
@@ -485,7 +515,7 @@ return (string) Composed URL.
 <
 return ($this) The object itself.
 
-    [$token] (\yii\authclient\OAuthToken) Auth token
+    [$token] (\yii\authclient\OAuthToken|null) Auth token to be saved.
 
 
 *yii/authclient/BaseOAuth::restoreAccessToken*		protected
@@ -496,64 +526,42 @@ return (\yii\authclient\OAuthToken) Auth token.
 
 
 
-*yii/authclient/BaseOAuth::setState*			protected
+*yii/authclient/BaseOAuth::createApiRequest*		public
 >
- setState($key, $value)
+ createApiRequest()
 <
-return ($this) The object itself
+return (\yii\httpclient\Request) HTTP request instance.
 
-    [$key] (string) State key.
-    [$value] (mixed) State value
+ The created request will be automatically processed adding access token
+ parameters and signature before sending. You may use 'createRequest()' to
+ gain full control over request composition and execution.
 
 
-*yii/authclient/BaseOAuth::getState*			protected
+*yii/authclient/BaseOAuth::beforeApiRequestSend*		public
 >
- getState($key)
+ beforeApiRequestSend($event)
 <
-return (mixed) State value.
+return (void)
 
-    [$key] (string) State key.
+ Applies 'accessToken' to the request.
 
-
-*yii/authclient/BaseOAuth::removeState*			protected
->
- removeState($key)
-<
-return (boolean) Success.
-
-    [$key] (string) State key.
-
-
-*yii/authclient/BaseOAuth::getStateKeyPrefix*		protected
->
- getStateKeyPrefix()
-<
-return (string) Session key prefix.
-
+    [$event] (\yii\httpclient\RequestEvent) Event instance.
 
 
 *yii/authclient/BaseOAuth::api*				public
 >
- api($apiSubUrl, $method=''GET'', $params='[]', $headers='[]')
+ api($apiSubUrl, $method=''GET'', $data='[]', $headers='[]')
 <
-return (array) API response
+return (array) API response data.
+
+ You may use 'createApiRequest()' method instead, gaining more control over
+ request execution.
 
     [$apiSubUrl] (string) API sub URL, which will be append to 'apiBaseUrl',
     or absolute API URL.
     [$method] (string) Request method.
-    [$params] (array) Request parameters.
+    [$data] (array|string) Request data or content.
     [$headers] (array) Additional request headers.
-
-
-*yii/authclient/BaseOAuth::composeRequestCurlOptions*	protected
->
- composeRequestCurlOptions($method, $url, $params)
-<
-return (array) CUrl options.
-
-    [$method] (string) Request type.
-    [$url] (string) Request URL.
-    [$params] (array) Request params.
 
 
 *yii/authclient/BaseOAuth::refreshAccessToken*		public
@@ -565,17 +573,14 @@ return (\yii\authclient\OAuthToken) New auth token.
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
-*yii/authclient/BaseOAuth::apiInternal*			protected
+*yii/authclient/BaseOAuth::applyAccessTokenToRequest*	public
 >
- apiInternal($accessToken, $url, $method, $params, $headers)
+ applyAccessTokenToRequest($request, $accessToken)
 <
-return (array) API response.
+return (void)
 
-    [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
-    [$url] (string) Absolute API URL.
-    [$method] (string) Request method.
-    [$params] (array) Request parameters.
-    [$headers] (array) Additional request headers.
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
 
 
 

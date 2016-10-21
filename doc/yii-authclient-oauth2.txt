@@ -5,14 +5,14 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/authclient/clients/GoogleOAuth|
-|yii/authclient/clients/VKontakte|
+|yii/authclient/clients/Facebook|
+|yii/authclient/clients/Google|
+|yii/authclient/clients/Yandex|
+|yii/authclient/clients/LinkedIn|
 |yii/authclient/clients/GitHub|
 |yii/authclient/clients/Live|
 |yii/authclient/clients/GoogleHybrid|
-|yii/authclient/clients/YandexOAuth|
-|yii/authclient/clients/LinkedIn|
-|yii/authclient/clients/Facebook|
+|yii/authclient/clients/VKontakte|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -50,6 +50,10 @@ $scope					*yii/authclient/OAuth2::$scope*
 
  See |yii/authclient/BaseOAuth::$scope|
 
+$autoRefreshAccessToken			*yii/authclient/OAuth2::$autoRefreshAccessToken*
+
+ See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
+
 $clientId				*yii/authclient/OAuth2::$clientId*
 
  (string) OAuth client ID.
@@ -61,6 +65,15 @@ $clientSecret				*yii/authclient/OAuth2::$clientSecret*
 $tokenUrl				*yii/authclient/OAuth2::$tokenUrl*
 
  (string) Token request URL endpoint.
+
+$validateAuthState			*yii/authclient/OAuth2::$validateAuthState*
+
+ (boolean) Whether to use and validate auth 'state' parameter in
+ authentication flow. If enabled 
+   - the opaque value will be generated and applied to auth URL to
+   maintain state between the request and callback. The authorization server
+ includes this value, when redirecting the user-agent back to the client. The
+ option is used for preventing cross-site request forgery.
 
 $behaviors				*yii/authclient/OAuth2::$behaviors*
 
@@ -90,13 +103,21 @@ $viewOptions				*yii/authclient/OAuth2::$viewOptions*
 
  See |yii/authclient/BaseClient::$viewOptions|
 
+$httpClient				*yii/authclient/OAuth2::$httpClient*
+
+ See |yii/authclient/BaseClient::$httpClient|
+
+$requestOptions				*yii/authclient/OAuth2::$requestOptions*
+
+ See |yii/authclient/BaseClient::$requestOptions|
+
+$stateStorage				*yii/authclient/OAuth2::$stateStorage*
+
+ See |yii/authclient/BaseClient::$stateStorage|
+
 $returnUrl				*yii/authclient/OAuth2::$returnUrl*
 
  See |yii/authclient/BaseOAuth::$returnUrl|
-
-$curlOptions				*yii/authclient/OAuth2::$curlOptions*
-
- See |yii/authclient/BaseOAuth::$curlOptions|
 
 $accessToken				*yii/authclient/OAuth2::$accessToken*
 
@@ -297,6 +318,36 @@ METHOD DETAILS
  See |yii/authclient/ClientInterface::getViewOptions|
 
 
+*yii/authclient/OAuth2::getHttpClient*			public
+
+ See |yii/authclient/BaseClient::getHttpClient|
+
+
+*yii/authclient/OAuth2::setHttpClient*			public
+
+ See |yii/authclient/BaseOAuth::setHttpClient|
+
+
+*yii/authclient/OAuth2::setRequestOptions*		public
+
+ See |yii/authclient/BaseClient::setRequestOptions|
+
+
+*yii/authclient/OAuth2::getRequestOptions*		public
+
+ See |yii/authclient/BaseClient::getRequestOptions|
+
+
+*yii/authclient/OAuth2::getStateStorage*			public
+
+ See |yii/authclient/BaseClient::getStateStorage|
+
+
+*yii/authclient/OAuth2::setStateStorage*			public
+
+ See |yii/authclient/BaseClient::setStateStorage|
+
+
 *yii/authclient/OAuth2::defaultName*			protected
 
  See |yii/authclient/BaseClient::defaultName|
@@ -322,9 +373,44 @@ METHOD DETAILS
  See |yii/authclient/BaseClient::defaultViewOptions|
 
 
+*yii/authclient/OAuth2::createHttpClient*			protected
+
+ See |yii/authclient/BaseOAuth::createHttpClient|
+
+
 *yii/authclient/OAuth2::normalizeUserAttributes*		protected
 
  See |yii/authclient/BaseClient::normalizeUserAttributes|
+
+
+*yii/authclient/OAuth2::createRequest*			public
+
+ See |yii/authclient/BaseClient::createRequest|
+
+
+*yii/authclient/OAuth2::defaultRequestOptions*		protected
+
+ See |yii/authclient/BaseOAuth::defaultRequestOptions|
+
+
+*yii/authclient/OAuth2::setState*				protected
+
+ See |yii/authclient/BaseClient::setState|
+
+
+*yii/authclient/OAuth2::getState*				protected
+
+ See |yii/authclient/BaseClient::getState|
+
+
+*yii/authclient/OAuth2::removeState*			protected
+
+ See |yii/authclient/BaseClient::removeState|
+
+
+*yii/authclient/OAuth2::getStateKeyPrefix*		protected
+
+ See |yii/authclient/BaseClient::getStateKeyPrefix|
 
 
 *yii/authclient/OAuth2::setReturnUrl*			public
@@ -335,16 +421,6 @@ METHOD DETAILS
 *yii/authclient/OAuth2::getReturnUrl*			public
 
  See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/OAuth2::setCurlOptions*			public
-
- See |yii/authclient/BaseOAuth::setCurlOptions|
-
-
-*yii/authclient/OAuth2::getCurlOptions*			public
-
- See |yii/authclient/BaseOAuth::getCurlOptions|
 
 
 *yii/authclient/OAuth2::setAccessToken*			public
@@ -375,41 +451,6 @@ return (string) Return URL.
 
 
 
-*yii/authclient/OAuth2::sendRequest*			protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/OAuth2::mergeCurlOptions*			protected
-
- See |yii/authclient/BaseOAuth::mergeCurlOptions|
-
-
-*yii/authclient/OAuth2::defaultCurlOptions*		protected
-
- See |yii/authclient/BaseOAuth::defaultCurlOptions|
-
-
-*yii/authclient/OAuth2::processResponse*			protected
-
- See |yii/authclient/BaseOAuth::processResponse|
-
-
-*yii/authclient/OAuth2::convertXmlToArray*		protected
-
- See |yii/authclient/BaseOAuth::convertXmlToArray|
-
-
-*yii/authclient/OAuth2::determineContentTypeByHeaders*	protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByHeaders|
-
-
-*yii/authclient/OAuth2::determineContentTypeByRaw*	protected
-
- See |yii/authclient/BaseOAuth::determineContentTypeByRaw|
-
-
 *yii/authclient/OAuth2::createSignatureMethod*		protected
 
  See |yii/authclient/BaseOAuth::createSignatureMethod|
@@ -422,6 +463,11 @@ return (string) Return URL.
 return (\yii\authclient\OAuthToken) Token instance.
 
     [$tokenConfig] (array) Token configuration.
+
+
+*yii/authclient/OAuth2::sendRequest*			protected
+
+ See |yii/authclient/BaseOAuth::sendRequest|
 
 
 *yii/authclient/OAuth2::composeUrl*			protected
@@ -439,40 +485,19 @@ return (\yii\authclient\OAuthToken) Token instance.
  See |yii/authclient/BaseOAuth::restoreAccessToken|
 
 
-*yii/authclient/OAuth2::setState*				protected
+*yii/authclient/OAuth2::createApiRequest*			public
 
- See |yii/authclient/BaseOAuth::setState|
-
-
-*yii/authclient/OAuth2::getState*				protected
-
- See |yii/authclient/BaseOAuth::getState|
+ See |yii/authclient/BaseOAuth::createApiRequest|
 
 
-*yii/authclient/OAuth2::removeState*			protected
+*yii/authclient/OAuth2::beforeApiRequestSend*		public
 
- See |yii/authclient/BaseOAuth::removeState|
-
-
-*yii/authclient/OAuth2::getStateKeyPrefix*		protected
-
- See |yii/authclient/BaseOAuth::getStateKeyPrefix|
+ See |yii/authclient/BaseOAuth::beforeApiRequestSend|
 
 
 *yii/authclient/OAuth2::api*				public
 
  See |yii/authclient/BaseOAuth::api|
-
-
-*yii/authclient/OAuth2::composeRequestCurlOptions*	protected
->
- composeRequestCurlOptions($method, $url, $params)
-<
-return (array) CUrl options.
-
-    [$method] (string) Request type.
-    [$url] (string) Request URL.
-    [$params] (array) Request params.
 
 
 *yii/authclient/OAuth2::refreshAccessToken*		public
@@ -484,11 +509,11 @@ return (\yii\authclient\OAuthToken) New auth token.
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
-*yii/authclient/OAuth2::apiInternal*			protected
+*yii/authclient/OAuth2::applyAccessTokenToRequest*	public
 >
- apiInternal($accessToken, $url, $method, $params, $headers)
+ applyAccessTokenToRequest($request, $accessToken)
 <
-return (array) API response.
+return (void)
 
 
 
@@ -496,11 +521,8 @@ return (array) API response.
 
 
 
-    [$accessToken] (\yii\authclient\OAuthToken) Actual access token.
-    [$url] (string) Absolute API URL.
-    [$method] (string) Request method.
-    [$params] (array) Request parameters.
-    [$headers] (array) Additional request headers.
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
 
 
 *yii/authclient/OAuth2::buildAuthUrl*			public
@@ -519,6 +541,34 @@ return (string) Authorization URL.
 return (\yii\authclient\OAuthToken) Access token.
 
     [$authCode] (string) Authorization code, usually comes at $_GET['code'].
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/OAuth2::generateAuthState*		protected
+>
+ generateAuthState()
+<
+return (string) Auth state value.
+
+
+
+*yii/authclient/OAuth2::authenticateClient*		public
+>
+ authenticateClient($params='[]')
+<
+return (\yii\authclient\OAuthToken) Access token.
+
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/OAuth2::authenticateUser*			public
+>
+ authenticateUser($username, $password, $params='[]')
+<
+return (\yii\authclient\OAuthToken) Access token.
+
+    [$username] (string) User name.
+    [$password] (string) User password.
     [$params] (array) Additional request params.
 
 

@@ -1,0 +1,176 @@
+
+*yii/mongodb/BatchQueryResult*   >> |yii/base/Object|
+==============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ You usually do not instantiate BatchQueryResult directly. Instead, you obtain
+ it by calling 'Query::batch()' or 'Query::each()'. Because BatchQueryResult
+ implements the 'Iterator' interface, you can iterate it to obtain a batch of
+ data in each iteration. For example,
+
+   $query = (new Query())->from('user');
+   foreach ($query->batch() as $i => $users) {
+       // $users represents the rows in the $i-th batch
+   }
+   foreach ($query->each() as $user) {
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/mongodb/BatchQueryResult::$db*
+
+ (\yii\mongodb\Connection) The MongoDB connection to be used when performing
+ batch query. If null, the "mongodb" application component will be used.
+
+$query					*yii/mongodb/BatchQueryResult::$query*
+
+ (\yii\mongodb\Query) The query object associated with this batch query. Do
+ not modify this property directly unless after 'reset()' is called
+ explicitly.
+
+$batchSize				*yii/mongodb/BatchQueryResult::$batchSize*
+
+ (integer) The number of rows to be returned in each batch.
+
+$each					*yii/mongodb/BatchQueryResult::$each*
+
+ (boolean) Whether to return a single row during each iteration. If false, a
+ whole batch of rows will be returned in each iteration.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/mongodb/BatchQueryResult::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/mongodb/BatchQueryResult::__construct*		public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/mongodb/BatchQueryResult::init*			public
+
+ See |yii/base/Object::init|
+
+
+*yii/mongodb/BatchQueryResult::__get*			public
+
+ See |yii/base/Object::__get|
+
+
+*yii/mongodb/BatchQueryResult::__set*			public
+
+ See |yii/base/Object::__set|
+
+
+*yii/mongodb/BatchQueryResult::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/mongodb/BatchQueryResult::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/mongodb/BatchQueryResult::__call*			public
+
+ See |yii/base/Object::__call|
+
+
+*yii/mongodb/BatchQueryResult::hasProperty*		public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/mongodb/BatchQueryResult::canGetProperty*		public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/mongodb/BatchQueryResult::canSetProperty*		public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/mongodb/BatchQueryResult::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/mongodb/BatchQueryResult::reset*			public
+>
+ reset()
+<
+return (void)
+
+ This method will clean up the existing batch query so that a new batch query
+ can be performed.
+
+
+*yii/mongodb/BatchQueryResult::rewind*			public
+>
+ rewind()
+<
+return (void)
+
+ This method is required by the interface Iterator.
+
+
+*yii/mongodb/BatchQueryResult::next*			public
+>
+ next()
+<
+return (void)
+
+ This method is required by the interface Iterator.
+
+
+*yii/mongodb/BatchQueryResult::fetchData*			protected
+>
+ fetchData()
+<
+return (array) The data fetched
+
+
+
+*yii/mongodb/BatchQueryResult::key*			public
+>
+ key()
+<
+return (integer) The index of the current row.
+
+ This method is required by the interface Iterator.
+
+
+*yii/mongodb/BatchQueryResult::current*			public
+>
+ current()
+<
+return (mixed) The current dataset.
+
+ This method is required by the interface Iterator.
+
+
+*yii/mongodb/BatchQueryResult::valid*			public
+>
+ valid()
+<
+return (boolean) Whether there is a valid dataset at the current position.
+
+ This method is required by the interface Iterator.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
