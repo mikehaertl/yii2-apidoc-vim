@@ -59,17 +59,16 @@ $whenClient				*yii/validators/NumberValidator::$whenClient*
 
 $integerOnly				*yii/validators/NumberValidator::$integerOnly*
 
- (boolean) Whether the attribute value can only be an integer. Defaults to
- false.
+ (bool) Whether the attribute value can only be an integer. Defaults to false.
 
 $max					*yii/validators/NumberValidator::$max*
 
- (integer|float) Upper limit of the number. Defaults to null, meaning no upper
+ (int|float) Upper limit of the number. Defaults to null, meaning no upper
  limit.
 
 $min					*yii/validators/NumberValidator::$min*
 
- (integer|float) Lower limit of the number. Defaults to null, meaning no lower
+ (int|float) Lower limit of the number. Defaults to null, meaning no lower
  limit.
 
 $tooBig					*yii/validators/NumberValidator::$tooBig*
@@ -293,6 +292,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -329,6 +331,24 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/NumberValidator::getClientOptions*	public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/NumberValidator::isActive*		public

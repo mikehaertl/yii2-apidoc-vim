@@ -53,8 +53,8 @@ return (array) The array representation of the object
       ]
 
 
-    [$recursive] (boolean) Whether to recursively converts properties which
-    are objects into arrays.
+    [$recursive] (bool) Whether to recursively converts properties which are
+    objects into arrays.
 
 
 *yii/helpers/BaseArrayHelper::merge*			public
@@ -143,6 +143,27 @@ return (mixed|null) The value of the element if found, default value otherwise
     [$key] (string) Key name of the array element
     [$default] (mixed) The default value to be returned if the specified key
     does not exist
+
+
+*yii/helpers/BaseArrayHelper::removeValue*		public
+>
+ removeValue($array, $value)
+<
+return (array) The items that were removed from the array
+
+ Example,
+
+   $array = ['Bob' => 'Dylan', 'Michael' => 'Jackson', 'Mick' => 'Jagger',
+ 'Janet' => 'Jackson'];
+   $removed = \yii\helpers\ArrayHelper::removeValue($array, 'Jackson');
+   // result:
+   // $array = ['Bob' => 'Dylan', 'Mick' => 'Jagger'];
+   // $removed = ['Michael' => 'Jackson', 'Janet' => 'Jackson'];
+
+
+
+    [$array] (array) The array where to look the value from
+    [$value] (string) The value to remove from the array
 
 
 *yii/helpers/BaseArrayHelper::index*			public
@@ -274,7 +295,7 @@ return (array) The list of column values
 
     [$array] (array) 
     [$name] (string|\Closure) 
-    [$keepKeys] (boolean) Whether to maintain the array keys. If false, the
+    [$keepKeys] (bool) Whether to maintain the array keys. If false, the
     resulting array will be re-indexed with integers.
 
 
@@ -328,14 +349,14 @@ return (array)
 >
  keyExists($key, $array, $caseSensitive='true')
 <
-return (boolean) Whether the array contains the specified key
+return (bool) Whether the array contains the specified key
 
  This method enhances the 'array_key_exists()' function by supporting
  case-insensitive key comparison.
 
     [$key] (string) The key to check
     [$array] (array) The array with keys to check
-    [$caseSensitive] (boolean) Whether the key comparison should be
+    [$caseSensitive] (bool) Whether the key comparison should be
     case-sensitive
 
 
@@ -352,10 +373,10 @@ return (void)
     an anonymous function returning the values for comparison purpose. The
     anonymous function signature should be: 'function($item)'. To sort by
     multiple keys, provide an array of keys here.
-    [$direction] (integer|array) The sorting direction. It can be either
+    [$direction] (int|array) The sorting direction. It can be either
     'SORT_ASC' or 'SORT_DESC'. When sorting by multiple keys with different
     sorting directions, use an array of sorting directions.
-    [$sortFlag] (integer|array) The PHP sort flag. Valid values include
+    [$sortFlag] (int|array) The PHP sort flag. Valid values include
     'SORT_REGULAR', 'SORT_NUMERIC', 'SORT_STRING', 'SORT_LOCALE_STRING',
     'SORT_NATURAL' and 'SORT_FLAG_CASE'. Please refer to [PHP
     manual](http://php.net/manual/en/function.sort.php) for more details. When
@@ -373,8 +394,8 @@ return (array) The encoded data
  method will also encode it recursively. Only string values will be encoded.
 
     [$data] (array) Data to be encoded
-    [$valuesOnly] (boolean) Whether to encode array values only. If false,
-    both the array keys and array values will be encoded.
+    [$valuesOnly] (bool) Whether to encode array values only. If false, both
+    the array keys and array values will be encoded.
     [$charset] (string) The charset that the data is using. If not set,
     '\yii\base\Application::charset' will be used.
 
@@ -389,15 +410,15 @@ return (array) The decoded data
  method will also decode it recursively. Only string values will be decoded.
 
     [$data] (array) Data to be decoded
-    [$valuesOnly] (boolean) Whether to decode array values only. If false,
-    both the array keys and array values will be decoded.
+    [$valuesOnly] (bool) Whether to decode array values only. If false, both
+    the array keys and array values will be decoded.
 
 
 *yii/helpers/BaseArrayHelper::isAssociative*		public
 >
  isAssociative($array, $allStrings='true')
 <
-return (boolean) Whether the array is associative
+return (bool) Whether the array is associative
 
  An array is associative if all its keys are strings. If '$allStrings' is
  false, then an array will be treated as associative if at least one of its
@@ -406,15 +427,15 @@ return (boolean) Whether the array is associative
  Note that an empty array will NOT be considered associative.
 
     [$array] (array) The array being checked
-    [$allStrings] (boolean) Whether the array keys must be all strings in
-    order for the array to be treated as associative.
+    [$allStrings] (bool) Whether the array keys must be all strings in order
+    for the array to be treated as associative.
 
 
 *yii/helpers/BaseArrayHelper::isIndexed*			public
 >
  isIndexed($array, $consecutive='false')
 <
-return (boolean) Whether the array is associative
+return (bool) Whether the array is associative
 
  An array is indexed if all its keys are integers. If '$consecutive' is true,
  then the array keys must be a consecutive sequence starting from 0.
@@ -422,7 +443,7 @@ return (boolean) Whether the array is associative
  Note that an empty array will be considered indexed.
 
     [$array] (array) The array being checked
-    [$consecutive] (boolean) Whether the array keys must be a consecutive
+    [$consecutive] (bool) Whether the array keys must be a consecutive
     sequence in order for the array to be treated as indexed.
 
 
@@ -430,7 +451,7 @@ return (boolean) Whether the array is associative
 >
  isIn($needle, $haystack, $strict='false')
 <
-return (boolean) 'true' if '$needle' was found in '$haystack', 'false' otherwise.
+return (bool) 'true' if '$needle' was found in '$haystack', 'false' otherwise.
 
  This method does the same as the PHP function
  [in_array()](http://php.net/manual/en/function.in-array.php) but additionally
@@ -438,14 +459,14 @@ return (boolean) 'true' if '$needle' was found in '$haystack', 'false' otherwise
 
     [$needle] (mixed) The value to look for.
     [$haystack] (array|\Traversable) The set of values to search.
-    [$strict] (boolean) Whether to enable strict ('===') comparison.
+    [$strict] (bool) Whether to enable strict ('===') comparison.
 
 
 *yii/helpers/BaseArrayHelper::isTraversable*		public
 >
  isTraversable($var)
 <
-return (boolean) Whether $var is array-like
+return (bool) Whether $var is array-like
 
  This method does the same as the PHP function
  [is_array()](http://php.net/manual/en/function.is-array.php) but additionally
@@ -458,7 +479,7 @@ return (boolean) Whether $var is array-like
 >
  isSubset($needles, $haystack, $strict='false')
 <
-return (boolean) 'true' if '$needles' is a subset of '$haystack', 'false' otherwise.
+return (bool) 'true' if '$needles' is a subset of '$haystack', 'false' otherwise.
 
  This method will return 'true', if all elements of '$needles' are contained
  in '$haystack'. If at least one element is missing, 'false' will be returned.
@@ -466,7 +487,7 @@ return (boolean) 'true' if '$needles' is a subset of '$haystack', 'false' otherw
     [$needles] (array|\Traversable) The values that must **all** be in
     '$haystack'.
     [$haystack] (array|\Traversable) The set of value to search.
-    [$strict] (boolean) Whether to enable strict ('===') comparison.
+    [$strict] (bool) Whether to enable strict ('===') comparison.
 
 
 *yii/helpers/BaseArrayHelper::filter*			public

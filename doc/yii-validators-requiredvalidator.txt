@@ -38,8 +38,7 @@ $skipOnError				*yii/validators/RequiredValidator::$skipOnError*
 
 $skipOnEmpty				*yii/validators/RequiredValidator::$skipOnEmpty*
 
- (boolean) Whether to skip this validator if the value being validated is
- empty.
+ (bool) Whether to skip this validator if the value being validated is empty.
 
 $enableClientValidation			*yii/validators/RequiredValidator::$enableClientValidation*
 
@@ -67,12 +66,12 @@ $requiredValue				*yii/validators/RequiredValidator::$requiredValue*
 
 $strict					*yii/validators/RequiredValidator::$strict*
 
- (boolean) Whether the comparison between the attribute value and
- 'requiredValue' is strict. When this is true, both the values and types must
- match. Defaults to false, meaning only the values need to match. Note that
- when 'requiredValue' is null, if this property is true, the validator will
- check if the attribute value is null; If this property is false, the
- validator will call 'isEmpty' to check if the attribute value is empty.
+ (bool) Whether the comparison between the attribute value and 'requiredValue'
+ is strict. When this is true, both the values and types must match. Defaults
+ to false, meaning only the values need to match. Note that when
+ 'requiredValue' is null, if this property is true, the validator will check
+ if the attribute value is null; If this property is false, the validator will
+ call 'isEmpty' to check if the attribute value is empty.
 
 $behaviors				*yii/validators/RequiredValidator::$behaviors*
 
@@ -264,6 +263,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -300,6 +302,24 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/RequiredValidator::getClientOptions*	public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/RequiredValidator::isActive*		public

@@ -53,6 +53,9 @@ DESCRIPTION
  You may directly use Model to store model data, or extend it with
  customization.
 
+ For more details and usage information on Model, see the [guide article on
+ models](guide:structure-models).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -476,7 +479,7 @@ return (array) Attribute hints (name => hint)
 >
  validate($attributeNames='null', $clearErrors='true')
 <
-return (boolean) Whether the validation is successful without any error.
+return (bool) Whether the validation is successful without any error.
 
  This method executes the validation rules applicable to the current
  'scenario'. The following criteria are used to determine whether a rule is
@@ -498,7 +501,7 @@ return (boolean) Whether the validation is successful without any error.
     [$attributeNames] (array) List of attribute names that should be
     validated. If this parameter is empty, it means any attribute listed in
     the applicable validation rules should be validated.
-    [$clearErrors] (boolean) Whether to call 'clearErrors()' before performing
+    [$clearErrors] (bool) Whether to call 'clearErrors()' before performing
     validation
 
 
@@ -506,9 +509,8 @@ return (boolean) Whether the validation is successful without any error.
 >
  beforeValidate()
 <
-return (boolean) Whether the validation should be executed. Defaults to true. If
-false is returned, the validation will stop and the model is considered
-invalid.
+return (bool) Whether the validation should be executed. Defaults to true. If false
+is returned, the validation will stop and the model is considered invalid.
 
  The default implementation raises a 'beforeValidate' event. You may override
  this method to do preliminary checks before validation. Make sure the parent
@@ -570,7 +572,7 @@ return (\ArrayObject) Validators
 >
  isAttributeRequired($attribute)
 <
-return (boolean) Whether the attribute is required
+return (bool) Whether the attribute is required
 
  This is determined by checking if the attribute is associated with a
  '\yii\validators\RequiredValidator|required' validation rule in the current
@@ -588,7 +590,7 @@ return (boolean) Whether the attribute is required
 >
  isAttributeSafe($attribute)
 <
-return (boolean) Whether the attribute is safe for massive assignments
+return (bool) Whether the attribute is safe for massive assignments
 
     [$attribute] (string) Attribute name
 
@@ -597,7 +599,7 @@ return (boolean) Whether the attribute is safe for massive assignments
 >
  isAttributeActive($attribute)
 <
-return (boolean) Whether the attribute is active in the current scenario
+return (bool) Whether the attribute is active in the current scenario
 
     [$attribute] (string) Attribute name
 
@@ -624,7 +626,7 @@ return (string) The attribute hint
 >
  hasErrors($attribute='null')
 <
-return (boolean) Whether there is any error.
+return (bool) Whether there is any error.
 
     [$attribute] (string|null) Attribute name. Use null to check all
     attributes.
@@ -702,7 +704,7 @@ return (void)
 return (void)
 
     [$attribute] (string) Attribute name. Use null to remove errors for all
-    attribute.
+    attributes.
 
 
 *yii/base/Model::generateAttributeLabel*			public
@@ -739,9 +741,9 @@ return (void)
 
     [$values] (array) Attribute values (name => value) to be assigned to the
     model.
-    [$safeOnly] (boolean) Whether the assignments should only be done to the
-    safe attributes. A safe attribute is one that is associated with a
-    validation rule in the current 'scenario'.
+    [$safeOnly] (bool) Whether the assignments should only be done to the safe
+    attributes. A safe attribute is one that is associated with a validation
+    rule in the current 'scenario'.
 
 
 *yii/base/Model::onUnsafeAttribute*			public
@@ -799,7 +801,7 @@ return (string[]) Safe attribute names
 >
  load($data, $formName='null')
 <
-return (boolean) Whether 'load()' found the expected form in '$data'.
+return (bool) Whether 'load()' found the expected form in '$data'.
 
  This method provides a convenient shortcut for:
 
@@ -833,7 +835,7 @@ return (boolean) Whether 'load()' found the expected form in '$data'.
 >
  loadMultiple($models, $data, $formName='null')
 <
-return (boolean) Whether at least one of the models is successfully populated.
+return (bool) Whether at least one of the models is successfully populated.
 
  This method is mainly used to collect tabular data input. The data to be
  loaded for each model is '$data[formName][index]', where 'formName' refers to
@@ -855,8 +857,8 @@ return (boolean) Whether at least one of the models is successfully populated.
 >
  validateMultiple($models, $attributeNames='null')
 <
-return (boolean) Whether all models are valid. False will be returned if one or
-multiple models have validation error.
+return (bool) Whether all models are valid. False will be returned if one or multiple
+models have validation error.
 
  This method will validate every model. The models being validated may be of
  the same or different types.
@@ -880,7 +882,7 @@ return (\ArrayIterator) An iterator for traversing the items in the list.
 >
  offsetExists($offset)
 <
-return (boolean) Whether or not an offset exists.
+return (bool) Whether or not an offset exists.
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'isset($model[$offset])'.
@@ -909,7 +911,7 @@ return (void)
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$model[$offset] = $item;'.
 
-    [$offset] (integer) The offset to set element
+    [$offset] (int) The offset to set element
     [$item] (mixed) The element value
 
 

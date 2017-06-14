@@ -51,12 +51,12 @@ $identityClass				*yii/web/User::$identityClass*
 
 $enableAutoLogin			*yii/web/User::$enableAutoLogin*
 
- (boolean) Whether to enable cookie-based login. Defaults to 'false'. Note
- that this property will be ignored if 'enableSession' is 'false'.
+ (bool) Whether to enable cookie-based login. Defaults to 'false'. Note that
+ this property will be ignored if 'enableSession' is 'false'.
 
 $enableSession				*yii/web/User::$enableSession*
 
- (boolean) Whether to use session to persist authentication status across
+ (bool) Whether to use session to persist authentication status across
  multiple requests. You set this property to be 'false' if your application is
  stateless, which is often the case for RESTful APIs.
 
@@ -80,7 +80,7 @@ $identityCookie				*yii/web/User::$identityCookie*
 
 $authTimeout				*yii/web/User::$authTimeout*
 
- (integer) The number of seconds in which the user will be logged out
+ (int) The number of seconds in which the user will be logged out
  automatically if he remains inactive. If this property is not set, the user
  will be logged out after the current session expires (c.f.
  'Session::timeout'). Note that this will not work if 'enableAutoLogin' is
@@ -93,18 +93,18 @@ $accessChecker				*yii/web/User::$accessChecker*
 
 $absoluteAuthTimeout			*yii/web/User::$absoluteAuthTimeout*
 
- (integer) The number of seconds in which the user will be logged out
+ (int) The number of seconds in which the user will be logged out
  automatically regardless of activity. Note that this will not work if
  'enableAutoLogin' is 'true'.
 
 $autoRenewCookie			*yii/web/User::$autoRenewCookie*
 
- (boolean) Whether to automatically renew the identity cookie each time a page
- is requested. This property is effective only when 'enableAutoLogin' is
- 'true'. When this is 'false', the identity cookie will expire after the
- specified duration since the user is initially logged in. When this is
- 'true', the identity cookie will expire after the specified duration since
- the user visits the site the last time.
+ (bool) Whether to automatically renew the identity cookie each time a page is
+ requested. This property is effective only when 'enableAutoLogin' is 'true'.
+ When this is 'false', the identity cookie will expire after the specified
+ duration since the user is initially logged in. When this is 'true', the
+ identity cookie will expire after the specified duration since the user
+ visits the site the last time.
 
 $idParam				*yii/web/User::$idParam*
 
@@ -142,12 +142,12 @@ $identity				*yii/web/User::$identity*
 
 $isGuest				*yii/web/User::$isGuest*
 
- (boolean) Whether the current user is a guest.
+ (bool) Whether the current user is a guest.
 
 $id					*yii/web/User::$id*
 
- (string|integer) The unique identifier for the user. If 'null', it means the
- user is a guest.
+ (string|int) The unique identifier for the user. If 'null', it means the user
+ is a guest.
 
 $returnUrl				*yii/web/User::$returnUrl*
 
@@ -299,8 +299,8 @@ authenticated).
  authentication data stored in session and reconstruct the corresponding
  identity object, if it has not done so before.
 
-    [$autoRenew] (boolean) Whether to automatically renew authentication
-    status if it has not been done so before. This is only useful when
+    [$autoRenew] (bool) Whether to automatically renew authentication status
+    if it has not been done so before. This is only useful when
     'enableSession' is true.
 
 
@@ -322,34 +322,28 @@ return (void)
 >
  login($identity, $duration=0)
 <
-return (boolean) Whether the user is logged in
+return (bool) Whether the user is logged in
 
- After logging in a user, you may obtain the user's identity information from
- the 'identity' property. If 'enableSession' is true, you may even get the
- identity information in the next requests without calling this method again.
+ After logging in a user: 
+   - the user's identity information is obtainable from the 'identity'
+   property
 
- The login status is maintained according to the '$duration' parameter:
+ If 'enableSession' is 'true': 
+   - the identity information will be stored in session and be
+   available in the next requests 
+   - in case of '$duration == 0': as long as the session remains active
+   or till the user closes the browser 
+   - in case of '$duration > 0': as long as the session remains active
+   or as long as the cookie   remains valid by it's '$duration' in seconds
+ when 'enableAutoLogin' is set 'true'.
 
-
-   - '$duration == 0': the identity information will be stored in
-   session and will be available   via 'identity' as long as the session
- remains active. 
-   - '$duration > 0': the identity information will be stored in
-   session. If 'enableAutoLogin' is true,   it will also be stored in a cookie
- which will expire in '$duration' seconds. As long as   the cookie remains
- valid or the session is active, you may obtain the user identity information 
-  via 'identity'.
-
- Note that if 'enableSession' is false, the '$duration' parameter will be
- ignored as it is meaningless in this case.
+ If 'enableSession' is 'false': 
+   - the '$duration' parameter will be ignored
 
     [$identity] (\yii\web\IdentityInterface) The user identity (which should
     already be authenticated)
-    [$duration] (integer) Number of seconds that the user can remain in
-    logged-in status. Defaults to 0, meaning login till the user closes the
-    browser or the session is manually destroyed. If greater than 0 and
-    'enableAutoLogin' is true, cookie-based login will be supported. Note that
-    if 'enableSession' is false, this parameter will be ignored.
+    [$duration] (int) Number of seconds that the user can remain in logged-in
+    status, defaults to '0'
 
 
 *yii/web/User::loginByAccessToken*			public
@@ -386,20 +380,20 @@ return (void)
 >
  logout($destroySession='true')
 <
-return (boolean) Whether the user is logged out
+return (bool) Whether the user is logged out
 
  This will remove authentication-related session data. If '$destroySession' is
  true, all session data will be removed.
 
-    [$destroySession] (boolean) Whether to destroy the whole session. Defaults
-    to true. This parameter is ignored if 'enableSession' is false.
+    [$destroySession] (bool) Whether to destroy the whole session. Defaults to
+    true. This parameter is ignored if 'enableSession' is false.
 
 
 *yii/web/User::getIsGuest*				public
 >
  getIsGuest()
 <
-return (boolean) Whether the current user is a guest.
+return (bool) Whether the current user is a guest.
 
 
 
@@ -407,8 +401,8 @@ return (boolean) Whether the current user is a guest.
 >
  getId()
 <
-return (string|integer) The unique identifier for the user. If 'null', it means the
-user is a guest.
+return (string|int) The unique identifier for the user. If 'null', it means the user
+is a guest.
 
 
 
@@ -461,31 +455,31 @@ return (\yii\web\Response) The redirection response if 'loginUrl' is set
  Note that when 'loginUrl' is set, calling this method will NOT terminate the
  application execution.
 
-    [$checkAjax] (boolean) Whether to check if the request is an AJAX request.
+    [$checkAjax] (bool) Whether to check if the request is an AJAX request.
     When this is true and the request is an AJAX request, the current URL (for
     AJAX request) will NOT be set as the return URL.
-    [$checkAcceptHeader] (boolean) Whether to check if the request accepts
-    HTML responses. Defaults to 'true'. When this is true and the request does
-    not accept HTML responses the current URL will not be SET as the return
-    URL. Also instead of redirecting the user an ForbiddenHttpException is
-    thrown. This parameter is available since version 2.0.8.
+    [$checkAcceptHeader] (bool) Whether to check if the request accepts HTML
+    responses. Defaults to 'true'. When this is true and the request does not
+    accept HTML responses the current URL will not be SET as the return URL.
+    Also instead of redirecting the user an ForbiddenHttpException is thrown.
+    This parameter is available since version 2.0.8.
 
 
 *yii/web/User::beforeLogin*				protected
 >
  beforeLogin($identity, $cookieBased, $duration)
 <
-return (boolean) Whether the user should continue to be logged in
+return (bool) Whether the user should continue to be logged in
 
  The default implementation will trigger the 'EVENT_BEFORE_LOGIN' event. If
  you override this method, make sure you call the parent implementation so
  that the event is triggered.
 
     [$identity] (\yii\web\IdentityInterface) The user identity information
-    [$cookieBased] (boolean) Whether the login is cookie-based
-    [$duration] (integer) Number of seconds that the user can remain in
-    logged-in status. If 0, it means login till the user closes the browser or
-    the session is manually destroyed.
+    [$cookieBased] (bool) Whether the login is cookie-based
+    [$duration] (int) Number of seconds that the user can remain in logged-in
+    status. If 0, it means login till the user closes the browser or the
+    session is manually destroyed.
 
 
 *yii/web/User::afterLogin*				protected
@@ -499,17 +493,17 @@ return (void)
  the event is triggered.
 
     [$identity] (\yii\web\IdentityInterface) The user identity information
-    [$cookieBased] (boolean) Whether the login is cookie-based
-    [$duration] (integer) Number of seconds that the user can remain in
-    logged-in status. If 0, it means login till the user closes the browser or
-    the session is manually destroyed.
+    [$cookieBased] (bool) Whether the login is cookie-based
+    [$duration] (int) Number of seconds that the user can remain in logged-in
+    status. If 0, it means login till the user closes the browser or the
+    session is manually destroyed.
 
 
 *yii/web/User::beforeLogout*				protected
 >
  beforeLogout($identity)
 <
-return (boolean) Whether the user should continue to be logged out
+return (bool) Whether the user should continue to be logged out
 
  The default implementation will trigger the 'EVENT_BEFORE_LOGOUT' event. If
  you override this method, make sure you call the parent implementation so
@@ -552,8 +546,8 @@ return (void)
  login information in the cookie.
 
     [$identity] (\yii\web\IdentityInterface) 
-    [$duration] (integer) Number of seconds that the user can remain in
-    logged-in status.
+    [$duration] (int) Number of seconds that the user can remain in logged-in
+    status.
 
 
 *yii/web/User::getIdentityAndDurationFromCookie*		protected
@@ -593,9 +587,8 @@ return (void)
     [$identity] (\yii\web\IdentityInterface|null) The identity information to
     be associated with the current user. If null, it means switching the
     current user to be a guest.
-    [$duration] (integer) Number of seconds that the user can remain in
-    logged-in status. This parameter is used only when '$identity' is not
-    null.
+    [$duration] (int) Number of seconds that the user can remain in logged-in
+    status. This parameter is used only when '$identity' is not null.
 
 
 *yii/web/User::renewAuthStatus*				protected
@@ -617,7 +610,7 @@ return (void)
 >
  can($permissionName, $params='[]', $allowCaching='true')
 <
-return (boolean) Whether the user can perform the operation as specified by the given
+return (bool) Whether the user can perform the operation as specified by the given
 permission.
 
  Note that you must configure "authManager" application component in order to
@@ -627,7 +620,7 @@ permission.
     that needs access check.
     [$params] (array) Name-value pairs that would be passed to the rules
     associated with the roles and permissions assigned to the user.
-    [$allowCaching] (boolean) Whether to allow caching the result of access
+    [$allowCaching] (bool) Whether to allow caching the result of access
     check. When this parameter is true (default), if the access check of an
     operation was performed before, its result will be directly returned when
     calling this method to check the same operation. If this parameter is
@@ -641,7 +634,7 @@ permission.
 >
  checkRedirectAcceptable()
 <
-return (boolean) Whether this request may be redirected to the login page.
+return (bool) Whether this request may be redirected to the login page.
 
  The login page is assumed to serve 'text/html' or 'application/xhtml+xml' by
  default. You can change acceptable content types by modifying

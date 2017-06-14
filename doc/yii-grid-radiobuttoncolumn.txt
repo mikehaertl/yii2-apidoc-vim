@@ -1,0 +1,230 @@
+
+*yii/grid/RadioButtonColumn*   >> |yii/grid/Column|
+============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ To add a RadioButtonColumn to the 'GridView', add it to the
+ 'GridView::columns|columns' configuration as follows:
+
+   'columns' => [
+       // ...
+       [
+           'class' => 'yii\grid\RadioButtonColumn',
+           'radioOptions' => function ($model) {
+                return [
+                    'value' => $model['value'],
+                    'checked' => $model['value'] == 2
+                ];
+            }
+       ],
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$grid					*yii/grid/RadioButtonColumn::$grid*
+
+ See |yii/grid/Column::$grid|
+
+$header					*yii/grid/RadioButtonColumn::$header*
+
+ See |yii/grid/Column::$header|
+
+$footer					*yii/grid/RadioButtonColumn::$footer*
+
+ See |yii/grid/Column::$footer|
+
+$content				*yii/grid/RadioButtonColumn::$content*
+
+ See |yii/grid/Column::$content|
+
+$visible				*yii/grid/RadioButtonColumn::$visible*
+
+ See |yii/grid/Column::$visible|
+
+$options				*yii/grid/RadioButtonColumn::$options*
+
+ See |yii/grid/Column::$options|
+
+$headerOptions				*yii/grid/RadioButtonColumn::$headerOptions*
+
+ See |yii/grid/Column::$headerOptions|
+
+$contentOptions				*yii/grid/RadioButtonColumn::$contentOptions*
+
+ See |yii/grid/Column::$contentOptions|
+
+$footerOptions				*yii/grid/RadioButtonColumn::$footerOptions*
+
+ See |yii/grid/Column::$footerOptions|
+
+$filterOptions				*yii/grid/RadioButtonColumn::$filterOptions*
+
+ See |yii/grid/Column::$filterOptions|
+
+$name					*yii/grid/RadioButtonColumn::$name*
+
+ (string) The name of the input radio button input fields.
+
+$radioOptions				*yii/grid/RadioButtonColumn::$radioOptions*
+
+ (array|\Closure) The HTML attributes for the radio buttons. This can either
+ be an array of attributes or an anonymous function ('Closure') returning such
+ an array.
+
+ The signature of the function should be as follows: 'function ($model, $key,
+ $index, $column)' where '$model', '$key', and '$index' refer to the model,
+ key and index of the row currently being rendered and '$column' is a
+ reference to the 'RadioButtonColumn' object.
+
+ A function may be used to assign different attributes to different rows based
+ on the data in that row. Specifically if you want to set a different value
+ for the radio button you can use this option in the following way (in this
+ example using the 'name' attribute of the model):
+
+   'radioOptions' => function ($model, $key, $index, $column) {
+       return ['value' => $model->attribute];
+   }
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/grid/RadioButtonColumn::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/grid/RadioButtonColumn::__construct*			public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/grid/RadioButtonColumn::init*			public
+>
+ init()
+<
+return (void)
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+
+
+*yii/grid/RadioButtonColumn::__get*			public
+
+ See |yii/base/Object::__get|
+
+
+*yii/grid/RadioButtonColumn::__set*			public
+
+ See |yii/base/Object::__set|
+
+
+*yii/grid/RadioButtonColumn::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/grid/RadioButtonColumn::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/grid/RadioButtonColumn::__call*			public
+
+ See |yii/base/Object::__call|
+
+
+*yii/grid/RadioButtonColumn::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/grid/RadioButtonColumn::canGetProperty*		public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/grid/RadioButtonColumn::canSetProperty*		public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/grid/RadioButtonColumn::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/grid/RadioButtonColumn::renderHeaderCell*		public
+
+ See |yii/grid/Column::renderHeaderCell|
+
+
+*yii/grid/RadioButtonColumn::renderFooterCell*		public
+
+ See |yii/grid/Column::renderFooterCell|
+
+
+*yii/grid/RadioButtonColumn::renderDataCell*		public
+
+ See |yii/grid/Column::renderDataCell|
+
+
+*yii/grid/RadioButtonColumn::renderFilterCell*		public
+
+ See |yii/grid/Column::renderFilterCell|
+
+
+*yii/grid/RadioButtonColumn::renderHeaderCellContent*	protected
+
+ See |yii/grid/Column::renderHeaderCellContent|
+
+
+*yii/grid/RadioButtonColumn::getHeaderCellLabel*		protected
+
+ See |yii/grid/Column::getHeaderCellLabel|
+
+
+*yii/grid/RadioButtonColumn::renderFooterCellContent*	protected
+
+ See |yii/grid/Column::renderFooterCellContent|
+
+
+*yii/grid/RadioButtonColumn::renderDataCellContent*	protected
+>
+ renderDataCellContent($model, $key, $index)
+<
+return (string) The rendering result
+
+
+
+
+
+
+
+    [$model] (mixed) The data model
+    [$key] (mixed) The key associated with the data model
+    [$index] (int) The zero-based index of the data model among the models
+    array returned by 'GridView::dataProvider'.
+
+
+*yii/grid/RadioButtonColumn::renderFilterCellContent*	protected
+
+ See |yii/grid/Column::renderFilterCellContent|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

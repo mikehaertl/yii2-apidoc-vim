@@ -1,0 +1,251 @@
+
+*yii/filters/HostControl*   >> |yii/base/ActionFilter|
+=========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ This filter provides protection against ['host header'
+ attacks](https://www.acunetix.com/vulnerabilities/web/host-header-attack),
+ allowing action execution only for specified host names.
+
+ Application configuration example:
+
+   return [
+       'as hostControl' => [
+           'class' => 'yii\filters\HostControl',
+           'allowedHosts' => [
+               'example.com',
+               '*.example.com',
+           ],
+       ],
+       // ...
+   ];
+
+ Controller configuration example:
+
+   use yii\web\Controller;
+   use yii\filters\HostControl;
+
+   class SiteController extends Controller
+   {
+       public function behaviors()
+       {
+           return [
+               'hostControl' => [
+                   'class' => HostControl::className(),
+                   'allowedHosts' => [
+                       'example.com',
+                       '*.example.com',
+                   ],
+               ],
+           ];
+       }
+
+       // ...
+   }
+
+ > Note: the best way to restrict allowed host names is usage of the web
+ server 'virtual hosts' configuration. This filter should be used only if this
+ configuration is not available or compromised.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$owner					*yii/filters/HostControl::$owner*
+
+ See |yii/base/Behavior::$owner|
+
+$only					*yii/filters/HostControl::$only*
+
+ See |yii/base/ActionFilter::$only|
+
+$except					*yii/filters/HostControl::$except*
+
+ See |yii/base/ActionFilter::$except|
+
+$allowedHosts				*yii/filters/HostControl::$allowedHosts*
+
+ (array|\Closure|null) List of host names, which are allowed. Each host can be
+ specified as a wildcard pattern. For example:
+
+   [
+       'example.com',
+       '*.example.com',
+   ]
+
+ This field can be specified as a PHP callback of following signature:
+
+   function (\yii\base\Action $action) {
+       //return array of strings
+   }
+
+ where '$action' is the current '\yii\base\Action|action' object.
+
+ If this field is not set 
+   - no host name check will be performed.
+
+$denyCallback				*yii/filters/HostControl::$denyCallback*
+
+ (callable) A callback that will be called if the current host does not match
+ 'allowedHosts'. If not set, 'denyAccess()' will be called.
+
+ The signature of the callback should be as follows:
+
+   function (\yii\base\Action $action)
+
+ where '$action' is the current '\yii\base\Action|action' object.
+
+ > Note: while implementing your own host deny processing, make sure you avoid
+ usage of the current requested host name, creation of absolute URL links,
+ caching page parts and so on.
+
+$fallbackHostInfo			*yii/filters/HostControl::$fallbackHostInfo*
+
+ (string|null) Fallback host info (e.g. 'http://www.yiiframework.com') used
+ when '\yii\web\Request::$hostInfo|Request::$hostInfo' is invalid. This value
+ will replace '\yii\web\Request::$hostInfo|Request::$hostInfo' before
+ '$denyCallback' is called to make sure that an invalid host will not be used
+ for further processing. You can set it to 'null' to leave
+ '\yii\web\Request::$hostInfo|Request::$hostInfo' untouched. Default value is
+ empty string (this will result creating relative URLs instead of absolute).
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/filters/HostControl::className*			public
+
+ See |yii/base/Object::className|
+
+
+*yii/filters/HostControl::__construct*			public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/filters/HostControl::init*				public
+
+ See |yii/base/Object::init|
+
+
+*yii/filters/HostControl::__get*				public
+
+ See |yii/base/Object::__get|
+
+
+*yii/filters/HostControl::__set*				public
+
+ See |yii/base/Object::__set|
+
+
+*yii/filters/HostControl::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/filters/HostControl::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/filters/HostControl::__call*				public
+
+ See |yii/base/Object::__call|
+
+
+*yii/filters/HostControl::hasProperty*			public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/filters/HostControl::canGetProperty*			public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/filters/HostControl::canSetProperty*			public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/filters/HostControl::hasMethod*			public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/filters/HostControl::events*				public
+
+ See |yii/base/Behavior::events|
+
+
+*yii/filters/HostControl::attach*				public
+
+ See |yii/base/ActionFilter::attach|
+
+
+*yii/filters/HostControl::detach*				public
+
+ See |yii/base/ActionFilter::detach|
+
+
+*yii/filters/HostControl::beforeFilter*			public
+
+ See |yii/base/ActionFilter::beforeFilter|
+
+
+*yii/filters/HostControl::afterFilter*			public
+
+ See |yii/base/ActionFilter::afterFilter|
+
+
+*yii/filters/HostControl::beforeAction*			public
+>
+ beforeAction($action)
+<
+return (bool) Whether the action should continue to be executed.
+
+
+
+
+
+
+
+    [$action] (\yii\base\Action) The action to be executed.
+
+
+*yii/filters/HostControl::afterAction*			public
+
+ See |yii/base/ActionFilter::afterAction|
+
+
+*yii/filters/HostControl::getActionId*			protected
+
+ See |yii/base/ActionFilter::getActionId|
+
+
+*yii/filters/HostControl::isActive*			protected
+
+ See |yii/base/ActionFilter::isActive|
+
+
+*yii/filters/HostControl::denyAccess*			protected
+>
+ denyAccess($action)
+<
+return (void)
+
+ The default implementation will display 404 page right away, terminating the
+ program execution. You may override this method, creating your own deny
+ access handler. While doing so, make sure you avoid usage of the current
+ requested host name, creation of absolute URL links, caching page parts and
+ so on.
+
+    [$action] (\yii\base\Action) The action to be executed.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -18,6 +18,9 @@ DESCRIPTION
    - 'Yii::beginProfile()' 
    - 'Yii::endProfile()'
 
+ For more details and usage information on Logger, see the [guide article on
+ logging](guide:runtime-logging).
+
  When the application ends or 'flushInterval' is reached, Logger will call
  'flush()' to send logged messages to different log targets, such as
  'FileTarget|file', 'EmailTarget|email', or 'DbTarget|database', with the help
@@ -35,13 +38,15 @@ $messages				*yii/log/Logger::$messages*
  ''' [   [0] => message (mixed, can be a string or some complex data, such as
  an exception object)   [1] => level (integer)   [2] => category (string)  
  [3] => timestamp (float, obtained by microtime(true))   [4] => traces (array,
- debug backtrace, contains the application code call stacks) ] '''
+ debug backtrace, contains the application code call stacks)   [5] => memory
+ usage in bytes (int, obtained by memory_get_usage()), available since version
+ 2.0.11. ] '''
 
 $flushInterval				*yii/log/Logger::$flushInterval*
 
- (integer) How many messages should be logged before they are flushed from
- memory and sent to targets. Defaults to 1000, meaning the 'flush' method will
- be invoked once every 1000 messages logged. Set this property to be 0 if you
+ (int) How many messages should be logged before they are flushed from memory
+ and sent to targets. Defaults to 1000, meaning the 'flush' method will be
+ invoked once every 1000 messages logged. Set this property to be 0 if you
  don't want to flush messages until the application terminates. This property
  mainly affects how much memory will be taken by the logged messages. A
  smaller value means less memory, but will increase the execution time due to
@@ -49,10 +54,9 @@ $flushInterval				*yii/log/Logger::$flushInterval*
 
 $traceLevel				*yii/log/Logger::$traceLevel*
 
- (integer) How much call stack information (file name and line number) should
- be logged for each message. If it is greater than 0, at most that number of
- call stacks will be logged. Note that only application call stacks are
- counted.
+ (int) How much call stack information (file name and line number) should be
+ logged for each message. If it is greater than 0, at most that number of call
+ stacks will be logged. Note that only application call stacks are counted.
 
 $dispatcher				*yii/log/Logger::$dispatcher*
 
@@ -69,7 +73,9 @@ $elapsedTime				*yii/log/Logger::$elapsedTime*
 $profiling				*yii/log/Logger::$profiling*
 
  (array) The profiling results. Each element is an array consisting of these
- elements: 'info', 'category', 'timestamp', 'trace', 'level', 'duration'.
+ elements: 'info', 'category', 'timestamp', 'trace', 'level', 'duration',
+ 'memory', 'memoryDiff'. The 'memory' and 'memoryDiff' values are available
+ since version 2.0.11.
 
 $dbProfiling				*yii/log/Logger::$dbProfiling*
 
@@ -222,7 +228,7 @@ return (void)
     [$message] (string|array) The message to be logged. This can be a simple
     string or a more complex data structure that will be handled by a
     'Target|log target'.
-    [$level] (integer) The level of the message. This must be one of the
+    [$level] (int) The level of the message. This must be one of the
     following: 'Logger::LEVEL_ERROR', 'Logger::LEVEL_WARNING',
     'Logger::LEVEL_INFO', 'Logger::LEVEL_TRACE',
     'Logger::LEVEL_PROFILE_BEGIN', 'Logger::LEVEL_PROFILE_END'.
@@ -235,7 +241,7 @@ return (void)
 <
 return (void)
 
-    [$final] (boolean) Whether this is a final call during a request.
+    [$final] (bool) Whether this is a final call during a request.
 
 
 *yii/log/Logger::getElapsedTime*				public
@@ -254,7 +260,9 @@ return (float) The total elapsed time in seconds for current request.
  getProfiling($categories='[]', $excludeCategories='[]')
 <
 return (array) The profiling results. Each element is an array consisting of these
-elements: 'info', 'category', 'timestamp', 'trace', 'level', 'duration'.
+elements: 'info', 'category', 'timestamp', 'trace', 'level', 'duration',
+'memory', 'memoryDiff'. The 'memory' and 'memoryDiff' values are available
+since version 2.0.11.
 
  By default, all profiling results will be returned. You may provide
  '$categories' and '$excludeCategories' as parameters to retrieve the results
@@ -283,7 +291,9 @@ the second element the total time spent in SQL execution.
  calculateTimings($messages)
 <
 return (array) Timings. Each element is an array consisting of these elements:
-'info', 'category', 'timestamp', 'trace', 'level', 'duration'.
+'info', 'category', 'timestamp', 'trace', 'level', 'duration', 'memory',
+'memoryDiff'. The 'memory' and 'memoryDiff' values are available since version
+2.0.11.
 
     [$messages] (array) The log messages obtained from profiling
 
@@ -294,7 +304,7 @@ return (array) Timings. Each element is an array consisting of these elements:
 <
 return (string) The text display of the level
 
-    [$level] (integer) The message level, e.g. 'LEVEL_ERROR', 'LEVEL_WARNING'.
+    [$level] (int) The message level, e.g. 'LEVEL_ERROR', 'LEVEL_WARNING'.
 
 
 

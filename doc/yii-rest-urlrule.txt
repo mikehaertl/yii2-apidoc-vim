@@ -47,6 +47,9 @@ DESCRIPTION
  be automatically pluralized (e.g. 'user' becomes 'users' as shown in the
  above examples).
 
+ For more details and usage information on UrlRule, see the [guide article on
+ rest routing](guide:rest-routing).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -118,9 +121,9 @@ $ruleConfig				*yii/rest/UrlRule::$ruleConfig*
 
 $pluralize				*yii/rest/UrlRule::$pluralize*
 
- (boolean) Whether to automatically pluralize the URL names for controllers.
- If true, a controller ID will appear in plural form in URLs. For example,
- 'user' controller will appear as 'users' in URLs.
+ (bool) Whether to automatically pluralize the URL names for controllers. If
+ true, a controller ID will appear in plural form in URLs. For example, 'user'
+ controller will appear as 'users' in URLs.
 
 
 
@@ -214,9 +217,8 @@ return (\yii\web\UrlRuleInterface[]) The URL rules
 >
  parseRequest($manager, $request)
 <
-return (array|boolean) The parsing result. The route and the parameters are returned
-as an array. If false, it means this rule cannot be used to parse this path
-info.
+return (array|bool) The parsing result. The route and the parameters are returned as
+an array. If false, it means this rule cannot be used to parse this path info.
 
 
 
@@ -232,7 +234,7 @@ info.
 >
  createUrl($manager, $route, $params)
 <
-return (string|boolean) The created URL, or false if this rule cannot be used for
+return (string|bool) The created URL, or false if this rule cannot be used for
 creating this URL.
 
 

@@ -16,7 +16,8 @@ DESCRIPTION
        ],
    ]
 
-
+ For more details and usage information on ActionColumn, see the [guide
+ article on data widgets](guide:output-data-widgets).
 
 
 PROPERTY DETAILS
@@ -153,8 +154,8 @@ $urlCreator				*yii/grid/ActionColumn::$urlCreator*
 
 $buttonOptions				*yii/grid/ActionColumn::$buttonOptions*
 
- (array) Html options to be applied to the 'initDefaultButtons()|default
- buttons'.
+ (array) Html options to be applied to the 'initDefaultButton()|default
+ button'.
 
 
 
@@ -280,7 +281,7 @@ return (string) The rendering result
 
     [$model] (mixed) The data model
     [$key] (mixed) The key associated with the data model
-    [$index] (integer) The zero-based index of the data model among the models
+    [$index] (int) The zero-based index of the data model among the models
     array returned by 'GridView::dataProvider'.
 
 
@@ -297,6 +298,18 @@ return (void)
 
 
 
+*yii/grid/ActionColumn::initDefaultButton*		protected
+>
+ initDefaultButton($name, $iconName, $additionalOptions='[]')
+<
+return (void)
+
+    [$name] (string) Button name as it's written in template
+    [$iconName] (string) The part of Bootstrap glyphicon class that makes it
+    unique
+    [$additionalOptions] (array) Array of additional options
+
+
 *yii/grid/ActionColumn::createUrl*			public
 >
  createUrl($action, $model, $key, $index)
@@ -308,7 +321,7 @@ return (string) The created URL
     [$action] (string) The button name (or action ID)
     [$model] (\yii\db\ActiveRecord) The data model
     [$key] (mixed) The key associated with the data model
-    [$index] (integer) The current row index
+    [$index] (int) The current row index
 
 
 

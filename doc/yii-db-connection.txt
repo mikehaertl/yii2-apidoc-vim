@@ -136,14 +136,14 @@ $pdo					*yii/db/Connection::$pdo*
 
 $enableSchemaCache			*yii/db/Connection::$enableSchemaCache*
 
- (boolean) Whether to enable schema caching. Note that in order to enable
- truly schema caching, a valid cache component as specified by 'schemaCache'
- must be enabled and 'enableSchemaCache' must be set true.
+ (bool) Whether to enable schema caching. Note that in order to enable truly
+ schema caching, a valid cache component as specified by 'schemaCache' must be
+ enabled and 'enableSchemaCache' must be set true.
 
 $schemaCacheDuration			*yii/db/Connection::$schemaCacheDuration*
 
- (integer) Number of seconds that table metadata can remain valid in cache.
- Use 0 to indicate that the cached data will never expire.
+ (int) Number of seconds that table metadata can remain valid in cache. Use 0
+ to indicate that the cached data will never expire.
 
 $schemaCacheExclude			*yii/db/Connection::$schemaCacheExclude*
 
@@ -158,17 +158,17 @@ $schemaCache				*yii/db/Connection::$schemaCache*
 
 $enableQueryCache			*yii/db/Connection::$enableQueryCache*
 
- (boolean) Whether to enable query caching. Note that in order to enable query
+ (bool) Whether to enable query caching. Note that in order to enable query
  caching, a valid cache component as specified by 'queryCache' must be enabled
  and 'enableQueryCache' must be set true. Also, only the results of the
  queries enclosed within 'cache()' will be cached.
 
 $queryCacheDuration			*yii/db/Connection::$queryCacheDuration*
 
- (integer) The default number of seconds that query results can remain valid
- in cache. Defaults to 3600, meaning 3600 seconds, or one hour. Use 0 to
- indicate that the cached data will never expire. The value of this property
- will be used when 'cache()' is called without a cache duration.
+ (int) The default number of seconds that query results can remain valid in
+ cache. Defaults to 3600, meaning 3600 seconds, or one hour. Use 0 to indicate
+ that the cached data will never expire. The value of this property will be
+ used when 'cache()' is called without a cache duration.
 
 $queryCache				*yii/db/Connection::$queryCache*
 
@@ -190,11 +190,11 @@ $charset				*yii/db/Connection::$charset*
 
 $emulatePrepare				*yii/db/Connection::$emulatePrepare*
 
- (boolean) Whether to turn on prepare emulation. Defaults to false, meaning
- PDO will use the native prepare support if available. For some databases
- (such as MySQL), this may need to be set true so that PDO can emulate the
- prepare support to bypass the buggy native prepare support. The default value
- is null, which means the PDO ATTR_EMULATE_PREPARES value will not be changed.
+ (bool) Whether to turn on prepare emulation. Defaults to false, meaning PDO
+ will use the native prepare support if available. For some databases (such as
+ MySQL), this may need to be set true so that PDO can emulate the prepare
+ support to bypass the buggy native prepare support. The default value is
+ null, which means the PDO ATTR_EMULATE_PREPARES value will not be changed.
 
 $tablePrefix				*yii/db/Connection::$tablePrefix*
 
@@ -217,7 +217,7 @@ $schemaMap				*yii/db/Connection::$schemaMap*
 $pdoClass				*yii/db/Connection::$pdoClass*
 
  (string) Custom PDO wrapper class. If not set, it will use 'PDO' or
- 'yii\db\mssql\PDO' when MSSQL is used.
+ '\yii\db\mssql\PDO' when MSSQL is used.
 
 $commandClass				*yii/db/Connection::$commandClass*
 
@@ -227,10 +227,9 @@ $commandClass				*yii/db/Connection::$commandClass*
 
 $enableSavepoint			*yii/db/Connection::$enableSavepoint*
 
- (boolean) Whether to enable
- [savepoint](http://en.wikipedia.org/wiki/Savepoint). Note that if the
- underlying DBMS does not support savepoint, setting this property to be true
- will have no effect.
+ (bool) Whether to enable [savepoint](http://en.wikipedia.org/wiki/Savepoint).
+ Note that if the underlying DBMS does not support savepoint, setting this
+ property to be true will have no effect.
 
 $serverStatusCache			*yii/db/Connection::$serverStatusCache*
 
@@ -241,14 +240,14 @@ $serverStatusCache			*yii/db/Connection::$serverStatusCache*
 
 $serverRetryInterval			*yii/db/Connection::$serverRetryInterval*
 
- (integer) The retry interval in seconds for dead servers listed in 'masters'
- and 'slaves'. This is used together with 'serverStatusCache'.
+ (int) The retry interval in seconds for dead servers listed in 'masters' and
+ 'slaves'. This is used together with 'serverStatusCache'.
 
 $enableSlaves				*yii/db/Connection::$enableSlaves*
 
- (boolean) Whether to enable read/write splitting by using 'slaves' to read
- data. Note that if 'slaves' is empty, read/write splitting will NOT be
- enabled no matter what value this property takes.
+ (bool) Whether to enable read/write splitting by using 'slaves' to read data.
+ Note that if 'slaves' is empty, read/write splitting will NOT be enabled no
+ matter what value this property takes.
 
 $slaves					*yii/db/Connection::$slaves*
 
@@ -297,13 +296,17 @@ $masterConfig				*yii/db/Connection::$masterConfig*
 
 
 
+$shuffleMasters				*yii/db/Connection::$shuffleMasters*
+
+ (bool) Whether to shuffle 'masters' before getting one.
+
 $behaviors				*yii/db/Connection::$behaviors*
 
  See |yii/base/Component::$behaviors|
 
 $isActive				*yii/db/Connection::$isActive*
 
- (boolean) Whether the DB connection is established
+ (bool) Whether the DB connection is established
 
 $transaction				*yii/db/Connection::$transaction*
 
@@ -330,7 +333,7 @@ $driverName				*yii/db/Connection::$driverName*
 
 $slavePdo				*yii/db/Connection::$slavePdo*
 
- (\PDO) The PDO instance for the currently active slave connection. Null is
+ (\PDO) The PDO instance for the currently active slave connection. 'null' is
  returned if no slave connection is available and '$fallbackToMaster' is
  false.
 
@@ -340,8 +343,13 @@ $masterPdo				*yii/db/Connection::$masterPdo*
 
 $slave					*yii/db/Connection::$slave*
 
- (\yii\db\Connection) The currently active slave connection. Null is returned
- if there is slave available and '$fallbackToMaster' is false.
+ (\yii\db\Connection) The currently active slave connection. 'null' is
+ returned if there is no slave available and '$fallbackToMaster' is false.
+
+$master					*yii/db/Connection::$master*
+
+ (\yii\db\Connection) The currently active master connection. 'null' is
+ returned if there is no master available.
 
 
 
@@ -478,7 +486,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-return (boolean) Whether the DB connection is established
+return (bool) Whether the DB connection is established
 
 
 
@@ -506,7 +514,7 @@ return (mixed) The return result of the callable
     [$callable] (callable) A PHP callable that contains DB queries which will
     make use of query cache. The signature of the callable is 'function
     (Connection $db)'.
-    [$duration] (integer) The number of seconds that query results can remain
+    [$duration] (int) The number of seconds that query results can remain
     valid in the cache. If this is not set, the value of 'queryCacheDuration'
     will be used instead. Use 0 to indicate that the cached data will never
     expire.
@@ -550,7 +558,7 @@ enabled.
 
  This method is used internally by 'Command'.
 
-    [$duration] (integer) The preferred caching duration. If null, it will be
+    [$duration] (int) The preferred caching duration. If null, it will be
     ignored.
     [$dependency] (\yii\caching\Dependency) The preferred caching dependency.
     If null, it will be ignored.
@@ -663,8 +671,8 @@ return (\yii\db\TableSchema) Table schema information. Null if the named table d
 not exist.
 
     [$name] (string) Table name.
-    [$refresh] (boolean) Whether to reload the table schema even if it is
-    found in the cache.
+    [$refresh] (bool) Whether to reload the table schema even if it is found
+    in the cache.
 
 
 *yii/db/Connection::getLastInsertID*			public
@@ -751,14 +759,14 @@ return (void)
 >
  getSlavePdo($fallbackToMaster='true')
 <
-return (\PDO) The PDO instance for the currently active slave connection. Null is
+return (\PDO) The PDO instance for the currently active slave connection. 'null' is
 returned if no slave connection is available and '$fallbackToMaster' is false.
 
  When 'enableSlaves' is true, one of the slaves will be used for read queries,
  and its PDO instance will be returned by this method.
 
-    [$fallbackToMaster] (boolean) Whether to return a master PDO in case none
-    of the slave connections is available.
+    [$fallbackToMaster] (bool) Whether to return a master PDO in case none of
+    the slave connections is available.
 
 
 *yii/db/Connection::getMasterPdo*				public
@@ -774,14 +782,25 @@ return (\PDO) The PDO instance for the currently active master connection.
 >
  getSlave($fallbackToMaster='true')
 <
-return (\yii\db\Connection) The currently active slave connection. Null is returned
-if there is slave available and '$fallbackToMaster' is false.
+return (\yii\db\Connection) The currently active slave connection. 'null' is returned
+if there is no slave available and '$fallbackToMaster' is false.
 
- If this method is called the first time, it will try to open a slave
+ If this method is called for the first time, it will try to open a slave
  connection when 'enableSlaves' is true.
 
-    [$fallbackToMaster] (boolean) Whether to return a master connection in
-    case there is no slave connection available.
+    [$fallbackToMaster] (bool) Whether to return a master connection in case
+    there is no slave connection available.
+
+
+*yii/db/Connection::getMaster*				public
+>
+ getMaster()
+<
+return (\yii\db\Connection) The currently active master connection. 'null' is
+returned if there is no master available.
+
+ If this method is called for the first time, it will try to open a master
+ connection.
 
 
 *yii/db/Connection::useMaster*				public
@@ -809,11 +828,26 @@ return (mixed) The return value of the callback
 >
  openFromPool($pool, $sharedConfig)
 <
-return (\yii\db\Connection) The opened DB connection, or null if no server is
+return (\yii\db\Connection) The opened DB connection, or 'null' if no server is
 available
 
  This method implements the load balancing among the given list of the
- servers.
+ servers. Connections will be tried in random order.
+
+    [$pool] (array) The list of connection configurations in the server pool
+    [$sharedConfig] (array) The configuration common to those given in
+    '$pool'.
+
+
+*yii/db/Connection::openFromPoolSequentially*		protected
+>
+ openFromPoolSequentially($pool, $sharedConfig)
+<
+return (\yii\db\Connection) The opened DB connection, or 'null' if no server is
+available
+
+ This method implements the load balancing among the given list of the
+ servers. Connections will be tried in sequential order.
 
     [$pool] (array) The list of connection configurations in the server pool
     [$sharedConfig] (array) The configuration common to those given in

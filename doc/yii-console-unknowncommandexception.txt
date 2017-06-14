@@ -1,0 +1,62 @@
+
+*yii/console/UnknownCommandException*   >> |yii/console/Exception|
+=====================================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$command				*yii/console/UnknownCommandException::$command*
+
+ (string) The name of the command that could not be recognized.
+
+$application				*yii/console/UnknownCommandException::$application*
+
+ (\yii\console\Application)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/console/UnknownCommandException::getName*		public
+>
+ getName()
+<
+return (string) The user-friendly name of this exception
+
+
+
+*yii/console/UnknownCommandException::__construct*	public
+>
+ __construct($route, $application, $code=0, $previous='null')
+<
+return (void)
+
+    [$route] (string) The route of the command that could not be found.
+    [$application] (\yii\console\Application) The console application instance
+    involved.
+    [$code] (int) The Exception code.
+    [$previous] (\Exception) The previous exception used for the exception
+    chaining.
+
+
+*yii/console/UnknownCommandException::getSuggestedAlternatives*public
+>
+ getSuggestedAlternatives()
+<
+return (array) A list of suggested alternatives sorted by similarity.
+
+ Alternatives are searched using the following steps:
+
+
+   - suggest alternatives that begin with '$command' 
+   - find typos by calculating the Levenshtein distance between the
+   unknown command and all   available commands. The Levenshtein distance is
+ defined as the minimal number of   characters you have to replace, insert or
+ delete to transform str1 into str2.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

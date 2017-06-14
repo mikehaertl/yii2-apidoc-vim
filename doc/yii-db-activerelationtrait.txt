@@ -8,8 +8,8 @@ PROPERTY DETAILS
 
 $multiple				*yii/db/ActiveRelationTrait::$multiple*
 
- (boolean) Whether this query represents a relation to more than one record.
- This property is only used in relational context. If true, this relation will
+ (bool) Whether this query represents a relation to more than one record. This
+ property is only used in relational context. If true, this relation will
  populate all query results into AR instances using 'Query::all()|all()'. If
  false, only the first row of the results will be retrieved using
  'Query::one()|one()'.
@@ -67,15 +67,16 @@ return ($this) The relation object itself.
  Use this method to specify a pivot record/table when declaring a relation in
  the 'ActiveRecord' class:
 
-   public function getOrders()
+   class Order extends ActiveRecord
    {
-       return $this->hasOne(Order::className(), ['id' => 'order_id']);
-   }
+      public function getOrderItems() {
+          return $this->hasMany(OrderItem::className(), ['order_id' => 'id']);
+      }
 
-   public function getOrderItems()
-   {
-       return $this->hasMany(Item::className(), ['id' => 'item_id'])
-                   ->via('orders');
+      public function getItems() {
+          return $this->hasMany(Item::className(), ['id' => 'item_id'])
+                      ->via('orderItems');
+      }
    }
 
 

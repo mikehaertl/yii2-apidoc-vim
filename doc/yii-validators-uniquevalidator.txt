@@ -41,9 +41,10 @@ $attributes				*yii/validators/UniqueValidator::$attributes*
 
 $message				*yii/validators/UniqueValidator::$message*
 
- (string) The user-defined error message. When validating single attribute, it
- may contain the following placeholders which will be replaced accordingly by
- the validator:
+ (string) The user-defined error message.
+
+ When validating single attribute, it may contain the following placeholders
+ which will be replaced accordingly by the validator:
 
 
    - '{attribute}': the label of the attribute being validated 
@@ -96,13 +97,13 @@ $targetClass				*yii/validators/UniqueValidator::$targetClass*
 
 $targetAttribute			*yii/validators/UniqueValidator::$targetAttribute*
 
- (string|array) The name of the ActiveRecord attribute that should be used to
- validate the uniqueness of the current attribute value. If not set, it will
- use the name of the attribute currently being validated. You may use an array
- to validate the uniqueness of multiple columns at the same time. The array
- values are the attributes that will be used to validate the uniqueness, while
- the array keys are the attributes whose values are to be validated. If the
- key and the value are the same, you can just specify the value.
+ (string|array) The name of the '\yii\db\ActiveRecord|ActiveRecord' attribute
+ that should be used to validate the uniqueness of the current attribute
+ value. If not set, it will use the name of the attribute currently being
+ validated. You may use an array to validate the uniqueness of multiple
+ columns at the same time. The array values are the attributes that will be
+ used to validate the uniqueness, while the array keys are the attributes
+ whose values are to be validated.
 
 $filter					*yii/validators/UniqueValidator::$filter*
 
@@ -116,6 +117,10 @@ $filter					*yii/validators/UniqueValidator::$filter*
 $comboNotUnique				*yii/validators/UniqueValidator::$comboNotUnique*
 
  (string)
+
+$targetAttributeJunction		*yii/validators/UniqueValidator::$targetAttributeJunction*
+
+ (string) And|or define how target attributes are related
 
 $behaviors				*yii/validators/UniqueValidator::$behaviors*
 
@@ -301,6 +306,11 @@ return (void)
 *yii/validators/UniqueValidator::clientValidateAttribute*	public
 
  See |yii/validators/Validator::clientValidateAttribute|
+
+
+*yii/validators/UniqueValidator::getClientOptions*	public
+
+ See |yii/validators/Validator::getClientOptions|
 
 
 *yii/validators/UniqueValidator::isActive*		public

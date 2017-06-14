@@ -78,11 +78,14 @@ $items					*yii/widgets/Menu::$items*
    Defaults to true. 
    - items: array, optional, specifies the sub-menu items. Its format
    is the same as the parent items. 
-   - active: boolean, optional, whether this menu item is in active
-   state (currently selected).   If a menu item is active, its CSS class will
- be appended with 'activeCssClass'.   If this option is not set, the menu item
- will be set active automatically when the current request   is triggered by
- 'url'. For more details, please refer to 'isItemActive()'. 
+   - active: boolean or Closure, optional, whether this menu item is in
+   active state (currently selected).   When using a closure, its signature
+ should be 'function ($item, $hasActiveChild, $isItemActive, $widget)'.  
+ Closure must return 'true' if item should be marked as 'active', otherwise 
+   - 'false'.   If a menu item is active, its CSS class will be appended with
+ 'activeCssClass'.   If this option is not set, the menu item will be set
+ active automatically when the current request   is triggered by 'url'. For
+ more details, please refer to 'isItemActive()'. 
    - template: string, optional, the template used to render the
    content of this menu item.   The token '{url}' will be replaced by the URL
  associated with this menu item,   and the token '{label}' will be replaced by
@@ -129,7 +132,7 @@ $submenuTemplate			*yii/widgets/Menu::$submenuTemplate*
 
 $encodeLabels				*yii/widgets/Menu::$encodeLabels*
 
- (boolean) Whether the labels for menu items should be HTML-encoded.
+ (bool) Whether the labels for menu items should be HTML-encoded.
 
 $activeCssClass				*yii/widgets/Menu::$activeCssClass*
 
@@ -137,18 +140,18 @@ $activeCssClass				*yii/widgets/Menu::$activeCssClass*
 
 $activateItems				*yii/widgets/Menu::$activateItems*
 
- (boolean) Whether to automatically activate items according to whether their
+ (bool) Whether to automatically activate items according to whether their
  route setting matches the currently requested route.
 
 $activateParents			*yii/widgets/Menu::$activateParents*
 
- (boolean) Whether to activate parent menu items when one of the corresponding
+ (bool) Whether to activate parent menu items when one of the corresponding
  child menu items is active. The activated parent menu items will also have
  its CSS classes appended with 'activeCssClass'.
 
 $hideEmptyItems				*yii/widgets/Menu::$hideEmptyItems*
 
- (boolean) Whether to hide empty menu items. An empty menu item is one whose
+ (bool) Whether to hide empty menu items. An empty menu item is one whose
  'url' option is not set and which has no visible child menu items.
 
 $options				*yii/widgets/Menu::$options*
@@ -217,7 +220,7 @@ METHOD DETAILS
 
 *yii/widgets/Menu::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/Widget::init|
 
 
 *yii/widgets/Menu::__get*					public
@@ -388,6 +391,16 @@ return (void)
  See |yii/base/Widget::getViewPath|
 
 
+*yii/widgets/Menu::beforeRun*				public
+
+ See |yii/base/Widget::beforeRun|
+
+
+*yii/widgets/Menu::afterRun*				public
+
+ See |yii/base/Widget::afterRun|
+
+
 *yii/widgets/Menu::renderItems*				protected
 >
  renderItems($items)
@@ -416,14 +429,14 @@ return (string) The rendering result
 return (array) The normalized menu items
 
     [$items] (array) The items to be normalized.
-    [$active] (boolean) Whether there is an active child menu item.
+    [$active] (bool) Whether there is an active child menu item.
 
 
 *yii/widgets/Menu::isItemActive*				protected
 >
  isItemActive($item)
 <
-return (boolean) Whether the menu item is active
+return (bool) Whether the menu item is active
 
  This is done by checking if 'route' and 'params' match that specified in the
  'url' option of the menu item. When the 'url' option of a menu item is

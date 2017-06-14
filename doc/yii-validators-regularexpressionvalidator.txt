@@ -62,8 +62,8 @@ $pattern				*yii/validators/RegularExpressionValidator::$pattern*
 
 $not					*yii/validators/RegularExpressionValidator::$not*
 
- (boolean) Whether to invert the validation logic. Defaults to false. If set
- to true, the regular expression defined via 'pattern' should NOT match the
+ (bool) Whether to invert the validation logic. Defaults to false. If set to
+ true, the regular expression defined via 'pattern' should NOT match the
  attribute value.
 
 $behaviors				*yii/validators/RegularExpressionValidator::$behaviors*
@@ -256,6 +256,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -292,6 +295,24 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/RegularExpressionValidator::getClientOptions*public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/RegularExpressionValidator::isActive*	public

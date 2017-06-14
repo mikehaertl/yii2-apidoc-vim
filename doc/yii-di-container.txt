@@ -79,7 +79,8 @@ DESCRIPTION
    $finder = new UserFinder($db);
    $lister = new UserLister($finder);
 
-
+ For more details and usage information on Container, see the [guide article
+ on di-containers](guide:concept-di-container).
 
 
 PROPERTY DETAILS
@@ -97,6 +98,11 @@ $definitions				*yii/di/Container::$definitions*
 
  (array) The list of the object definitions or the loaded shared objects (type
  or ID => definition or instance).
+
+$singletons				*yii/di/Container::$singletons*
+
+ (array) Array of singleton definitions. See 'setDefinitions()' for allowed
+ formats of array.
 
 
 
@@ -349,7 +355,7 @@ return ($this) The container itself
 >
  has($class)
 <
-return (boolean) Whether the container has the definition of the specified name..
+return (bool) Whether the container has the definition of the specified name..
 
     [$class] (string) Class name, interface name or alias name
 
@@ -358,12 +364,12 @@ return (boolean) Whether the container has the definition of the specified name.
 >
  hasSingleton($class, $checkInstance='false')
 <
-return (boolean) Whether the given name corresponds to a registered singleton. If
+return (bool) Whether the given name corresponds to a registered singleton. If
 '$checkInstance' is true, the method should return a value indicating whether
 the singleton has been instantiated.
 
     [$class] (string) Class name, interface name or alias name
-    [$checkInstance] (boolean) Whether to check if the singleton has been
+    [$checkInstance] (bool) Whether to check if the singleton has been
     instantiated.
 
 
@@ -479,6 +485,65 @@ return (array) The resolved dependencies.
     [$callback] (callable) Callable to be invoked.
     [$params] (array) The array of parameters for the function, can be either
     numeric or associative.
+
+
+*yii/di/Container::setDefinitions*			public
+>
+ setDefinitions($definitions)
+<
+return (void)
+
+    [$definitions] (array) Array of definitions. There are two allowed formats
+    of array. The first format:  
+      - key: class name, interface name or alias name. The key will be
+      passed to the 'set()' method    as a first argument '$class'.  
+      - value: the definition associated with '$class'. Possible values
+      are described in    'set()' documentation for the '$definition'
+    parameter. Will be passed to the 'set()' method    as the second argument
+    '$definition'.
+
+    Example:
+
+      $container->setDefinitions([
+          'yii\web\Request' => 'app\components\Request',
+          'yii\web\Response' => [
+              'class' => 'app\components\Response',
+              'format' => 'json'
+          ],
+          'foo\Bar' => function () {
+              $qux = new Qux;
+              $foo = new Foo($qux);
+              return new Bar($foo);
+          }
+      ]);
+
+    The second format:  
+      - key: class name, interface name or alias name. The key will be
+      passed to the 'set()' method    as a first argument '$class'.  
+      - value: array of two elements. The first element will be passed the
+      'set()' method as the    second argument '$definition', the second one
+    — as '$params'.
+
+    Example:
+
+      $container->setDefinitions([
+          'foo\Bar' => [
+               ['class' => 'app\Bar'],
+               [Instance::of('baz')]
+           ]
+      ]);
+
+
+
+
+*yii/di/Container::setSingletons*				public
+>
+ setSingletons($singletons)
+<
+return (void)
+
+    [$singletons] (array) Array of singleton definitions. See
+    'setDefinitions()' for allowed formats of array.
 
 
 

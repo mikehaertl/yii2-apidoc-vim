@@ -17,6 +17,9 @@ DESCRIPTION
  Child classes should override its 'generateDependencyData()' for generating
  the actual dependency data.
 
+ For more details and usage information on Cache, see the [guide article on
+ caching](guide:caching-overview).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -28,7 +31,7 @@ $data					*yii/caching/Dependency::$data*
 
 $reusable				*yii/caching/Dependency::$reusable*
 
- (boolean) Whether this dependency is reusable or not. True value means that
+ (bool) Whether this dependency is reusable or not. True value means that
  dependent data for this cache dependency will be generated only once per
  request. This allows you to use the same cache dependency for multiple
  separate cache calls while generating the same page without an overhead of
@@ -116,7 +119,16 @@ return (void)
 >
  getHasChanged($cache)
 <
-return (boolean) Whether the dependency has changed.
+return (void)
+
+    [$cache] () 
+
+
+*yii/caching/Dependency::isChanged*			public
+>
+ isChanged($cache)
+<
+return (bool) Whether the dependency has changed.
 
     [$cache] (\yii\caching\Cache) The cache component that is currently
     evaluating this dependency

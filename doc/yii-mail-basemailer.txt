@@ -19,8 +19,8 @@ PROPERTY DETAILS
 
 $htmlLayout				*yii/mail/BaseMailer::$htmlLayout*
 
- (string|boolean) HTML layout view name. This is the layout used to render
- HTML mail body. The property can take the following values:
+ (string|bool) HTML layout view name. This is the layout used to render HTML
+ mail body. The property can take the following values:
 
 
    - a relative view name: a view file relative to 'viewPath', e.g.,
@@ -31,8 +31,8 @@ $htmlLayout				*yii/mail/BaseMailer::$htmlLayout*
 
 $textLayout				*yii/mail/BaseMailer::$textLayout*
 
- (string|boolean) Text layout view name. This is the layout used to render
- TEXT mail body. Please refer to 'htmlLayout' for possible values that this
+ (string|bool) Text layout view name. This is the layout used to render TEXT
+ mail body. Please refer to 'htmlLayout' for possible values that this
  property can take.
 
 $messageConfig				*yii/mail/BaseMailer::$messageConfig*
@@ -59,7 +59,7 @@ $messageClass				*yii/mail/BaseMailer::$messageClass*
 
 $useFileTransport			*yii/mail/BaseMailer::$useFileTransport*
 
- (boolean) Whether to save email messages as files under 'fileTransportPath'
+ (bool) Whether to save email messages as files under 'fileTransportPath'
  instead of sending them to the actual recipients. This is usually used during
  development for debugging purpose.
 
@@ -298,7 +298,7 @@ return (\yii\mail\MessageInterface) Message instance.
 >
  send($message)
 <
-return (boolean) Whether the message has been sent successfully
+return (bool) Whether the message has been sent successfully
 
  This method will log a message about the email being sent. If
  'useFileTransport' is true, it will save the email as a file under
@@ -313,7 +313,7 @@ return (boolean) Whether the message has been sent successfully
 >
  sendMultiple($messages)
 <
-return (integer) Number of messages that are successfully sent.
+return (int) Number of messages that are successfully sent.
 
  The default implementation simply calls 'send()' multiple times. Child
  classes may override this method to implement more efficient way of sending
@@ -333,7 +333,7 @@ return (string) The rendering result.
     [$view] (string) The view name or the path alias of the view file.
     [$params] (array) The parameters (name-value pairs) that will be extracted
     and made available in the view file.
-    [$layout] (string|boolean) Layout view name or path alias. If false, no
+    [$layout] (string|bool) Layout view name or path alias. If false, no
     layout will be applied.
 
 
@@ -341,7 +341,7 @@ return (string) The rendering result.
 >
  sendMessage($message)
 <
-return (boolean) Whether the message is sent successfully
+return (bool) Whether the message is sent successfully
 
  This method should be implemented by child classes with the actual email
  sending logic.
@@ -353,7 +353,7 @@ return (boolean) Whether the message is sent successfully
 >
  saveMessage($message)
 <
-return (boolean) Whether the message is saved successfully
+return (bool) Whether the message is saved successfully
 
     [$message] (\yii\mail\MessageInterface) 
 
@@ -389,7 +389,7 @@ return (void)
 >
  beforeSend($message)
 <
-return (boolean) Whether to continue sending an email.
+return (bool) Whether to continue sending an email.
 
  You may override this method to do last-minute preparation for the message.
  If you override this method, please make sure you call the parent
@@ -409,7 +409,7 @@ return (void)
  parent implementation first.
 
     [$message] (\yii\mail\MessageInterface) 
-    [$isSuccessful] (boolean) 
+    [$isSuccessful] (bool) 
 
 
 

@@ -18,13 +18,13 @@ $where					*yii/db/QueryTrait::$where*
 
 $limit					*yii/db/QueryTrait::$limit*
 
- (integer) Maximum number of records to be returned. If not set or less than
- 0, it means no limit.
+ (int) Maximum number of records to be returned. If not set or less than 0, it
+ means no limit.
 
 $offset					*yii/db/QueryTrait::$offset*
 
- (integer) Zero-based offset from where the records are to be returned. If not
- set or less than 0, it means starting from the beginning.
+ (int) Zero-based offset from where the records are to be returned. If not set
+ or less than 0, it means starting from the beginning.
 
 $orderBy				*yii/db/QueryTrait::$orderBy*
 
@@ -43,6 +43,11 @@ $indexBy				*yii/db/QueryTrait::$indexBy*
  indexed by. This can also be a callable (e.g. anonymous function) that
  returns the index value based on the given row data. For more details, see
  'indexBy()'. This property is only used by 'QueryInterface::all()|all()'.
+
+$emulateExecution			*yii/db/QueryTrait::$emulateExecution*
+
+ (boolean) Whether to emulate the actual query execution, returning empty or
+ false results.
 
 
 
@@ -183,7 +188,7 @@ return (array) The condition with 'isEmpty()|empty operands' removed.
 >
  isEmpty($value)
 <
-return (boolean) If the value is empty
+return (bool) If the value is empty
 
  The value is considered "empty", if one of the following conditions is
  satisfied:
@@ -259,7 +264,7 @@ return (array)
 <
 return ($this) The query object itself
 
-    [$limit] (integer) The limit. Use null or negative value to disable limit.
+    [$limit] (int) The limit. Use null or negative value to disable limit.
 
 
 *yii/db/QueryTrait::offset*				public
@@ -268,8 +273,21 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
-    [$offset] (integer) The offset. Use null or negative value to disable
-    offset.
+    [$offset] (int) The offset. Use null or negative value to disable offset.
+
+
+*yii/db/QueryTrait::emulateExecution*			public
+>
+ emulateExecution($value='true')
+<
+return ($this) The query object itself.
+
+ After this mode is enabled, methods, returning query results like 'one()',
+ 'all()', 'exists()' and so on, will return empty or false values. You should
+ use this method in case your program logic indicates query should not return
+ any results, like in case you set false where condition like '0=1'.
+
+    [$value] (bool) Whether to prevent query execution.
 
 
 

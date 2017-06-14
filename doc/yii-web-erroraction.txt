@@ -64,6 +64,11 @@ $defaultMessage				*yii/web/ErrorAction::$defaultMessage*
  (string) The message to be displayed when the exception message contains
  sensitive information. Defaults to "An internal server error occurred.".
 
+$exception				*yii/web/ErrorAction::$exception*
+
+ (\Exception) The exception object, normally is filled on 'init()' method
+ call.
+
 $behaviors				*yii/web/ErrorAction::$behaviors*
 
  See |yii/base/Component::$behaviors|
@@ -89,8 +94,11 @@ METHOD DETAILS
 
 
 *yii/web/ErrorAction::init*				public
+>
+ init()
+<
+return (void)
 
- See |yii/base/Object::init|
 
 
 *yii/web/ErrorAction::__get*				public
@@ -229,6 +237,67 @@ METHOD DETAILS
 <
 return (string) Result content
 
+
+
+*yii/web/ErrorAction::renderAjaxResponse*			protected
+>
+ renderAjaxResponse()
+<
+return (string) 
+
+ Normally used to generate a response to AJAX request.
+
+
+*yii/web/ErrorAction::renderHtmlResponse*			protected
+>
+ renderHtmlResponse()
+<
+return (string) 
+
+
+
+*yii/web/ErrorAction::getViewRenderParams*		protected
+>
+ getViewRenderParams()
+<
+return (array) 
+
+
+
+*yii/web/ErrorAction::findException*			protected
+>
+ findException()
+<
+return (\Exception) 
+
+ In case there is no exception in the component, treat as the action has been
+ invoked not from error handler, but by direct route, so '404 Not Found' error
+ will be displayed.
+
+
+*yii/web/ErrorAction::getExceptionCode*			protected
+>
+ getExceptionCode()
+<
+return (mixed) 
+
+
+
+*yii/web/ErrorAction::getExceptionName*			protected
+>
+ getExceptionName()
+<
+return (string) 
+
+
+
+*yii/web/ErrorAction::getExceptionMessage*		protected
+>
+ getExceptionMessage()
+<
+return (string) 
+
+ For other cases 'defaultMessage' will be returned.
 
 
 

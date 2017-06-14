@@ -13,6 +13,7 @@ SUBCLASSES
 |yii/db/AfterSaveEvent|
 |yii/web/UserEvent|
 |yii/httpclient/RequestEvent|
+|yii/base/WidgetEvent|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -24,6 +25,9 @@ DESCRIPTION
 
  Additionally, when attaching an event handler, extra data may be passed and
  be available via the 'data' property when the event handler is invoked.
+
+ For more details and usage information on Event, see the [guide article on
+ events](guide:concept-events).
 
 
 PROPERTY DETAILS
@@ -44,9 +48,9 @@ $sender					*yii/base/Event::$sender*
 
 $handled				*yii/base/Event::$handled*
 
- (boolean) Whether the event is handled. Defaults to 'false'. When a handler
- sets this to be 'true', the event processing will stop and ignore the rest of
- the uninvoked event handlers.
+ (bool) Whether the event is handled. Defaults to 'false'. When a handler sets
+ this to be 'true', the event processing will stop and ignore the rest of the
+ uninvoked event handlers.
 
 $data					*yii/base/Event::$data*
 
@@ -149,7 +153,7 @@ return (void)
     [$data] (mixed) The data to be passed to the event handler when the event
     is triggered. When the event handler is invoked, this data can be accessed
     via 'Event::data'.
-    [$append] (boolean) Whether to append new event handler to the end of the
+    [$append] (bool) Whether to append new event handler to the end of the
     existing handler list. If 'false', the new handler will be inserted at the
     beginning of the existing handler list.
 
@@ -158,7 +162,7 @@ return (void)
 >
  off($class, $name, $handler='null')
 <
-return (boolean) Whether a handler is found and detached.
+return (bool) Whether a handler is found and detached.
 
  This method is the opposite of 'on()'.
 
@@ -181,7 +185,7 @@ return (void)
 >
  hasHandlers($class, $name)
 <
-return (boolean) Whether there is any handler attached to the event.
+return (bool) Whether there is any handler attached to the event.
 
  Note that this method will also check all parent classes to see if there is
  any handler attached to the named event.

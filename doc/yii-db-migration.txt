@@ -26,6 +26,9 @@ DESCRIPTION
  methods will display extra information showing the method parameters and
  execution time, which may be useful when applying migrations.
 
+ For more details and usage information on Migration, see the [guide article
+ on Migration](guide:db-migrations).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -292,7 +295,7 @@ return (void)
 >
  up()
 <
-return (boolean) Return a false value to indicate the migration fails and should not
+return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
 
  Child classes may override this method to provide actual migration logic.
@@ -302,7 +305,7 @@ proceed further. All other return values mean the migration succeeds.
 >
  down()
 <
-return (boolean) Return a false value to indicate the migration fails and should not
+return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
 
  The default implementation throws an exception indicating the migration
@@ -314,7 +317,7 @@ proceed further. All other return values mean the migration succeeds.
 >
  safeUp()
 <
-return (boolean) Return a false value to indicate the migration fails and should not
+return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
 
  This method differs from 'up()' in that the DB logic implemented here will be
@@ -326,7 +329,7 @@ proceed further. All other return values mean the migration succeeds.
 >
  safeDown()
 <
-return (boolean) Return a false value to indicate the migration fails and should not
+return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
 
  This method differs from 'down()' in that the DB logic implemented here will
@@ -598,7 +601,7 @@ return (void)
     use an array. Each column name will be properly quoted by the method.
     Quoting will be skipped for column names that include a left parenthesis
     "(".
-    [$unique] (boolean) Whether to add UNIQUE constraint on the created index.
+    [$unique] (bool) Whether to add UNIQUE constraint on the created index.
 
 
 *yii/db/Migration::dropIndex*				public

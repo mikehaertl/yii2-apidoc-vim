@@ -11,6 +11,12 @@ DESCRIPTION
  'multiSet' and 'multiAdd' to be a floating point number, so you may specify
  the time in milliseconds (e.g. 0.1 will be 100 milliseconds).
 
+ For enhanced performance of ArrayCache, you can disable serialization of the
+ stored data by setting '$serializer' to 'false'.
+
+ For more details and usage information on Cache, see the [guide article on
+ caching](guide:caching-overview).
+
 
 
 METHOD DETAILS
@@ -156,8 +162,8 @@ METHOD DETAILS
 >
  exists($key)
 <
-return (boolean) True if a value exists in cache, false if the value is not in the
-cache or expired.
+return (bool) True if a value exists in cache, false if the value is not in the cache
+or expired.
 
 
 
@@ -247,7 +253,7 @@ cache or expired. Most often value is a string. If you have disabled
 >
  setValue($key, $value, $duration)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
 
 
@@ -259,7 +265,7 @@ return (boolean) True if the value is successfully stored into cache, false othe
     [$key] (string) The key identifying the value to be cached
     [$value] (mixed) The value to be cached. Most often it's a string. If you
     have disabled 'serializer', it could be something else.
-    [$duration] (integer) The number of seconds in which the cached value will
+    [$duration] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -267,7 +273,7 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  addValue($key, $value, $duration)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
 
 
@@ -279,7 +285,7 @@ return (boolean) True if the value is successfully stored into cache, false othe
     [$key] (string) The key identifying the value to be cached
     [$value] (mixed) The value to be cached. Most often it's a string. If you
     have disabled 'serializer', it could be something else.
-    [$duration] (integer) The number of seconds in which the cached value will
+    [$duration] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -287,7 +293,7 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  deleteValue($key)
 <
-return (boolean) If no error happens during deletion
+return (bool) If no error happens during deletion
 
 
 
@@ -302,7 +308,7 @@ return (boolean) If no error happens during deletion
 >
  flushValues()
 <
-return (boolean) Whether the flush operation was successful.
+return (bool) Whether the flush operation was successful.
 
 
 
@@ -344,6 +350,11 @@ return (boolean) Whether the flush operation was successful.
 *yii/caching/ArrayCache::offsetUnset*			public
 
  See |yii/caching/Cache::offsetUnset|
+
+
+*yii/caching/ArrayCache::getOrSet*			public
+
+ See |yii/caching/Cache::getOrSet|
 
 
 

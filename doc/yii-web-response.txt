@@ -20,7 +20,8 @@ DESCRIPTION
        // ...
    ]
 
-
+ For more details and usage information on Response, see the [guide article on
+ responses](guide:runtime-responses).
 
 
 PROPERTY DETAILS
@@ -111,8 +112,8 @@ $version				*yii/web/Response::$version*
 
 $isSent					*yii/web/Response::$isSent*
 
- (boolean) Whether the response has been sent. If this is true, calling
- 'send()' will do nothing.
+ (bool) Whether the response has been sent. If this is true, calling 'send()'
+ will do nothing.
 
 $httpStatuses				*yii/web/Response::$httpStatuses*
 
@@ -124,7 +125,7 @@ $behaviors				*yii/web/Response::$behaviors*
 
 $statusCode				*yii/web/Response::$statusCode*
 
- (integer) The HTTP status code to send with the response.
+ (int) The HTTP status code to send with the response.
 
 $headers				*yii/web/Response::$headers*
 
@@ -140,44 +141,44 @@ $cookies				*yii/web/Response::$cookies*
 
 $isInvalid				*yii/web/Response::$isInvalid*
 
- (boolean) Whether this response has a valid 'statusCode'.
+ (bool) Whether this response has a valid 'statusCode'.
 
 $isInformational			*yii/web/Response::$isInformational*
 
- (boolean) Whether this response is informational
+ (bool) Whether this response is informational
 
 $isSuccessful				*yii/web/Response::$isSuccessful*
 
- (boolean) Whether this response is successful
+ (bool) Whether this response is successful
 
 $isRedirection				*yii/web/Response::$isRedirection*
 
- (boolean) Whether this response is a redirection
+ (bool) Whether this response is a redirection
 
 $isClientError				*yii/web/Response::$isClientError*
 
- (boolean) Whether this response indicates a client error
+ (bool) Whether this response indicates a client error
 
 $isServerError				*yii/web/Response::$isServerError*
 
- (boolean) Whether this response indicates a server error
+ (bool) Whether this response indicates a server error
 
 $isOk					*yii/web/Response::$isOk*
 
- (boolean) Whether this response is OK
+ (bool) Whether this response is OK
 
 $isForbidden				*yii/web/Response::$isForbidden*
 
- (boolean) Whether this response indicates the current request is forbidden
+ (bool) Whether this response indicates the current request is forbidden
 
 $isNotFound				*yii/web/Response::$isNotFound*
 
- (boolean) Whether this response indicates the currently requested resource is
+ (bool) Whether this response indicates the currently requested resource is
  not found
 
 $isEmpty				*yii/web/Response::$isEmpty*
 
- (boolean) Whether this response is empty
+ (bool) Whether this response is empty
 
 
 
@@ -330,7 +331,7 @@ return (void)
 >
  getStatusCode()
 <
-return (integer) The HTTP status code to send with the response.
+return (int) The HTTP status code to send with the response.
 
 
 
@@ -342,7 +343,7 @@ return (void)
 
  This method will set the corresponding status text if '$text' is null.
 
-    [$value] (integer) The status code
+    [$value] (int) The status code
     [$text] (string) The status text. If not set, it will be set automatically
     based on the status code.
 
@@ -492,21 +493,20 @@ return ($this) The response object itself
     [$attachmentName] (string) The attachment file name
     [$mimeType] (string) The MIME type for the response. If null,
     'Content-Type' header will NOT be set.
-    [$inline] (boolean) Whether the browser should open the file within the
+    [$inline] (bool) Whether the browser should open the file within the
     browser window. Defaults to false, meaning a download dialog will pop up.
-    [$contentLength] (integer) The byte length of the file being downloaded.
-    If null, 'Content-Length' header will NOT be set.
+    [$contentLength] (int) The byte length of the file being downloaded. If
+    null, 'Content-Length' header will NOT be set.
 
 
 *yii/web/Response::getHttpRange*				protected
 >
  getHttpRange($fileSize)
 <
-return (array|boolean) The range (begin, end), or false if the range request is
-invalid.
+return (array|bool) The range (begin, end), or false if the range request is invalid.
 
-    [$fileSize] (integer) The size of the file that will be used to validate
-    the requested HTTP range.
+    [$fileSize] (int) The size of the file that will be used to validate the
+    requested HTTP range.
 
 
 *yii/web/Response::xSendFile*				public
@@ -648,7 +648,7 @@ return ($this) The response object itself
  to handle the redirection:
 
  '''javascript $document.ajaxComplete(function (event, xhr, settings) {    
- var url = xhr.getResponseHeader('X-Redirect');     if (url) {        
+ var url = xhr && xhr.getResponseHeader('X-Redirect');     if (url) {        
  window.location = url;     } }); '''
 
     [$url] (string|array) The URL to be redirected to. This can be in one of
@@ -664,16 +664,16 @@ return ($this) The response object itself
 
     Any relative URL will be converted into an absolute one by prepending it
     with the host info of the current request.
-    [$statusCode] (integer) The HTTP status code. Defaults to 302. See
+    [$statusCode] (int) The HTTP status code. Defaults to 302. See
     <http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html> for details about
     HTTP status code
-    [$checkAjax] (boolean) Whether to specially handle AJAX (and PJAX)
-    requests. Defaults to true, meaning if the current request is an AJAX or
-    PJAX request, then calling this method will cause the browser to redirect
-    to the given URL. If this is false, a 'Location' header will be sent,
-    which when received as an AJAX/PJAX response, may NOT cause browser
-    redirection. Takes effect only when request header
-    'X-Ie-Redirect-Compatibility' is absent.
+    [$checkAjax] (bool) Whether to specially handle AJAX (and PJAX) requests.
+    Defaults to true, meaning if the current request is an AJAX or PJAX
+    request, then calling this method will cause the browser to redirect to
+    the given URL. If this is false, a 'Location' header will be sent, which
+    when received as an AJAX/PJAX response, may NOT cause browser redirection.
+    Takes effect only when request header 'X-Ie-Redirect-Compatibility' is
+    absent.
 
 
 *yii/web/Response::refresh*				public
@@ -722,7 +722,7 @@ return (\yii\web\CookieCollection) The cookie collection.
 >
  getIsInvalid()
 <
-return (boolean) Whether this response has a valid 'statusCode'.
+return (bool) Whether this response has a valid 'statusCode'.
 
 
 
@@ -730,7 +730,7 @@ return (boolean) Whether this response has a valid 'statusCode'.
 >
  getIsInformational()
 <
-return (boolean) Whether this response is informational
+return (bool) Whether this response is informational
 
 
 
@@ -738,7 +738,7 @@ return (boolean) Whether this response is informational
 >
  getIsSuccessful()
 <
-return (boolean) Whether this response is successful
+return (bool) Whether this response is successful
 
 
 
@@ -746,7 +746,7 @@ return (boolean) Whether this response is successful
 >
  getIsRedirection()
 <
-return (boolean) Whether this response is a redirection
+return (bool) Whether this response is a redirection
 
 
 
@@ -754,7 +754,7 @@ return (boolean) Whether this response is a redirection
 >
  getIsClientError()
 <
-return (boolean) Whether this response indicates a client error
+return (bool) Whether this response indicates a client error
 
 
 
@@ -762,7 +762,7 @@ return (boolean) Whether this response indicates a client error
 >
  getIsServerError()
 <
-return (boolean) Whether this response indicates a server error
+return (bool) Whether this response indicates a server error
 
 
 
@@ -770,7 +770,7 @@ return (boolean) Whether this response indicates a server error
 >
  getIsOk()
 <
-return (boolean) Whether this response is OK
+return (bool) Whether this response is OK
 
 
 
@@ -778,7 +778,7 @@ return (boolean) Whether this response is OK
 >
  getIsForbidden()
 <
-return (boolean) Whether this response indicates the current request is forbidden
+return (bool) Whether this response indicates the current request is forbidden
 
 
 
@@ -786,8 +786,8 @@ return (boolean) Whether this response indicates the current request is forbidde
 >
  getIsNotFound()
 <
-return (boolean) Whether this response indicates the currently requested resource is
-not found
+return (bool) Whether this response indicates the currently requested resource is not
+found
 
 
 
@@ -795,7 +795,7 @@ not found
 >
  getIsEmpty()
 <
-return (boolean) Whether this response is empty
+return (bool) Whether this response is empty
 
 
 

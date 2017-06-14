@@ -34,6 +34,10 @@ $exceptionMap				*yii/db/Schema::$exceptionMap*
  (array) Map of DB errors and corresponding exceptions If left part is found
  in DB error message exception class from the right part is used.
 
+$columnSchemaClass			*yii/db/Schema::$columnSchemaClass*
+
+ (string) Column schema class
+
 $tableSchemas				*yii/db/Schema::$tableSchemas*
 
  (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
@@ -157,8 +161,8 @@ exist.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
-    [$refresh] (boolean) Whether to reload the table schema even if it is
-    found in the cache.
+    [$refresh] (bool) Whether to reload the table schema even if it is found
+    in the cache.
 
 
 *yii/db/Schema::getCacheKey*				protected
@@ -188,8 +192,8 @@ array element is an instance of 'TableSchema' or its child class.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
-    [$refresh] (boolean) Whether to fetch the latest available table schemas.
-    If this is false, cached data may be returned if available.
+    [$refresh] (bool) Whether to fetch the latest available table schemas. If
+    this is false, cached data may be returned if available.
 
 
 *yii/db/Schema::getSchemaNames*				public
@@ -198,8 +202,8 @@ array element is an instance of 'TableSchema' or its child class.
 <
 return (string[]) All schema names in the database, except system schemas.
 
-    [$refresh] (boolean) Whether to fetch the latest available schema names.
-    If this is false, schema names fetched previously (if available) will be
+    [$refresh] (bool) Whether to fetch the latest available schema names. If
+    this is false, schema names fetched previously (if available) will be
     returned.
 
 
@@ -212,7 +216,7 @@ return (string[]) All table names in the database.
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name. If not empty, the returned
     table names will be prefixed with the schema name.
-    [$refresh] (boolean) Whether to fetch the latest available table names. If
+    [$refresh] (bool) Whether to fetch the latest available table names. If
     this is false, table names fetched previously (if available) will be
     returned.
 
@@ -229,7 +233,7 @@ return (\yii\db\QueryBuilder) The query builder for this connection.
 >
  getPdoType($data)
 <
-return (integer) The PDO type
+return (int) The PDO type
 
     [$data] (mixed) The data whose PDO type is to be determined
 
@@ -276,7 +280,7 @@ return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
  column schema builder.
 
     [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
-    [$length] (integer|string|array) Length or precision of the column. See
+    [$length] (int|string|array) Length or precision of the column. See
     'ColumnSchemaBuilder::$length'.
 
 
@@ -337,7 +341,7 @@ the sequence object
 >
  supportsSavepoint()
 <
-return (boolean) Whether this DBMS supports
+return (bool) Whether this DBMS supports
 [savepoint](http://en.wikipedia.org/wiki/Savepoint).
 
 
@@ -491,7 +495,7 @@ return (\yii\db\Exception)
 >
  isReadQuery($sql)
 <
-return (boolean) Whether a SQL statement is for read purpose.
+return (bool) Whether a SQL statement is for read purpose.
 
     [$sql] (string) The SQL statement
 

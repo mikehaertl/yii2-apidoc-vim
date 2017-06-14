@@ -70,7 +70,7 @@ $extensions				*yii/validators/FileValidator::$extensions*
 
 $checkExtensionByMimeType		*yii/validators/FileValidator::$checkExtensionByMimeType*
 
- (boolean) Whether to check file type (extension) with mime-type. If extension
+ (bool) Whether to check file type (extension) with mime-type. If extension
  produced by file mime-type check differs from uploaded file extension, the
  file will be considered as invalid.
 
@@ -86,19 +86,19 @@ $mimeTypes				*yii/validators/FileValidator::$mimeTypes*
 
 $minSize				*yii/validators/FileValidator::$minSize*
 
- (integer) The minimum number of bytes required for the uploaded file.
- Defaults to null, meaning no limit.
+ (int) The minimum number of bytes required for the uploaded file. Defaults to
+ null, meaning no limit.
 
 $maxSize				*yii/validators/FileValidator::$maxSize*
 
- (integer) The maximum number of bytes required for the uploaded file.
- Defaults to null, meaning no limit. Note, the size limit is also affected by
+ (int) The maximum number of bytes required for the uploaded file. Defaults to
+ null, meaning no limit. Note, the size limit is also affected by
  'upload_max_filesize' and 'post_max_size' INI setting and the 'MAX_FILE_SIZE'
  hidden field value. See 'getSizeLimit()' for details.
 
 $maxFiles				*yii/validators/FileValidator::$maxFiles*
 
- (integer) The maximum file count the given attribute can hold. Defaults to 1,
+ (int) The maximum file count the given attribute can hold. Defaults to 1,
  meaning single file upload. By defining a higher number, multiple uploads
  become possible. Setting it to '0' means there is no limit on the number of
  files that can be uploaded simultaneously.
@@ -173,7 +173,7 @@ $behaviors				*yii/validators/FileValidator::$behaviors*
 
 $sizeLimit				*yii/validators/FileValidator::$sizeLimit*
 
- (integer) The size limit for uploaded files.
+ (int) The size limit for uploaded files.
 
 
 
@@ -349,7 +349,7 @@ return (void)
 
 *yii/validators/FileValidator::validateValue*		protected
 >
- validateValue($file)
+ validateValue($value)
 <
 return (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
@@ -361,7 +361,7 @@ error message. Null should be returned if the data is valid.
 
 
 
-    [$file] () 
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/FileValidator::clientValidateAttribute*	public
@@ -372,6 +372,9 @@ return (string) The client-side validation script. Null if the validator does no
 support client-side validation.
 
 
+
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
 
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
@@ -411,6 +414,24 @@ support client-side validation.
     views or view files containing a model form with this validator applied.
 
 
+*yii/validators/FileValidator::getClientOptions*		public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
+
+
 *yii/validators/FileValidator::isActive*			public
 
  See |yii/validators/Validator::isActive|
@@ -425,7 +446,7 @@ support client-side validation.
 >
  isEmpty($value, $trim='false')
 <
-return (boolean) Whether the value is empty
+return (bool) Whether the value is empty
 
 
 
@@ -436,14 +457,14 @@ return (boolean) Whether the value is empty
 
 
     [$value] (mixed) The value to be checked
-    [$trim] () 
+    [$trim] (bool) 
 
 
 *yii/validators/FileValidator::getSizeLimit*		public
 >
  getSizeLimit()
 <
-return (integer) The size limit for uploaded files.
+return (int) The size limit for uploaded files.
 
  This is determined based on four factors:
 
@@ -458,26 +479,16 @@ return (integer) The size limit for uploaded files.
 >
  validateExtension($file)
 <
-return (boolean) 
+return (bool) 
 
     [$file] (\yii\web\UploadedFile) 
-
-
-*yii/validators/FileValidator::getClientOptions*		protected
->
- getClientOptions($model, $attribute)
-<
-return (array) The client-side validation options
-
-    [$model] (\yii\base\Model) The model being validated
-    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/FileValidator::validateMimeType*		protected
 >
  validateMimeType($file)
 <
-return (boolean) Whether the $file mimeType is allowed
+return (bool) Whether the $file mimeType is allowed
 
     [$file] (\yii\web\UploadedFile) 
 

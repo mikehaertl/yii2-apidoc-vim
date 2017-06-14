@@ -57,8 +57,8 @@ $whenClient				*yii/validators/StringValidator::$whenClient*
 
 $length					*yii/validators/StringValidator::$length*
 
- (integer|array) Specifies the length limit of the value to be validated. This
- can be specified in one of the following forms:
+ (int|array) Specifies the length limit of the value to be validated. This can
+ be specified in one of the following forms:
 
 
    - an integer: the exact length that the value should be of; 
@@ -70,11 +70,11 @@ $length					*yii/validators/StringValidator::$length*
 
 $max					*yii/validators/StringValidator::$max*
 
- (integer) Maximum length. If not set, it means no maximum length limit.
+ (int) Maximum length. If not set, it means no maximum length limit.
 
 $min					*yii/validators/StringValidator::$min*
 
- (integer) Minimum length. If not set, it means no minimum length limit.
+ (int) Minimum length. If not set, it means no minimum length limit.
 
 $tooShort				*yii/validators/StringValidator::$tooShort*
 
@@ -298,6 +298,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -334,6 +337,16 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/StringValidator::getClientOptions*	public
+>
+ getClientOptions($model, $attribute)
+<
+return (void)
+
+    [$model] () 
+    [$attribute] () 
 
 
 *yii/validators/StringValidator::isActive*		public

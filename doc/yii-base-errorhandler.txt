@@ -15,21 +15,24 @@ DESCRIPTION
  '\yii\base\Application' by default. You can access that instance via
  'Yii::$app->errorHandler'.
 
+ For more details and usage information on ErrorHandler, see the [guide
+ article on handling errors](guide:runtime-handling-errors).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $discardExistingOutput			*yii/base/ErrorHandler::$discardExistingOutput*
 
- (boolean) Whether to discard any existing page output before error display.
+ (bool) Whether to discard any existing page output before error display.
  Defaults to true.
 
 $memoryReserveSize			*yii/base/ErrorHandler::$memoryReserveSize*
 
- (integer) The size of the reserved memory. A portion of memory is
- pre-allocated so that when an out-of-memory issue occurs, the error handler
- is able to handle the error with the help of this reserved memory. If you set
- this value to be 0, no memory will be reserved. Defaults to 256KB.
+ (int) The size of the reserved memory. A portion of memory is pre-allocated
+ so that when an out-of-memory issue occurs, the error handler is able to
+ handle the error with the help of this reserved memory. If you set this value
+ to be 0, no memory will be reserved. Defaults to 256KB.
 
 $exception				*yii/base/ErrorHandler::$exception*
 
@@ -197,19 +200,31 @@ return (void)
     [$exception] (\Exception) The exception that is not caught
 
 
+*yii/base/ErrorHandler::handleFallbackExceptionMessage*	protected
+>
+ handleFallbackExceptionMessage($exception, $previousException)
+<
+return (void)
+
+    [$exception] (\Exception|\Throwable) Exception that was thrown during main
+    exception processing.
+    [$previousException] (\Exception) Main exception processed in
+    'handleException()'.
+
+
 *yii/base/ErrorHandler::handleHhvmError*			public
 >
  handleHhvmError($code, $message, $file, $line, $context, $backtrace)
 <
-return (boolean) Whether the normal error handler continues.
+return (bool) Whether the normal error handler continues.
 
  This method is used as a HHVM error handler. It will store exception that
  will be used in fatal error handler
 
-    [$code] (integer) The level of the error raised.
+    [$code] (int) The level of the error raised.
     [$message] (string) The error message.
     [$file] (string) The filename that the error was raised in.
-    [$line] (integer) The line number the error was raised at.
+    [$line] (int) The line number the error was raised at.
     [$context] (mixed) 
     [$backtrace] (mixed) Trace of error
 
@@ -218,15 +233,15 @@ return (boolean) Whether the normal error handler continues.
 >
  handleError($code, $message, $file, $line)
 <
-return (boolean) Whether the normal error handler continues.
+return (bool) Whether the normal error handler continues.
 
  This method is used as a PHP error handler. It will simply raise an
  'ErrorException'.
 
-    [$code] (integer) The level of the error raised.
+    [$code] (int) The level of the error raised.
     [$message] (string) The error message.
     [$file] (string) The filename that the error was raised in.
-    [$line] (integer) The line number the error was raised at.
+    [$line] (int) The line number the error was raised at.
 
 
 *yii/base/ErrorHandler::handleFatalError*			public

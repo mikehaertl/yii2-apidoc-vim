@@ -19,6 +19,9 @@ DESCRIPTION
  generation on Windows and for encryption/decryption on all platforms. For the
  highest security level PHP version >= 5.5.0 is recommended.
 
+ For more details and usage information on Security, see the [guide article on
+ security](guide:security-overview).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -59,7 +62,7 @@ $authKeyInfo				*yii/base/Security::$authKeyInfo*
 
 $derivationIterations			*yii/base/Security::$derivationIterations*
 
- (integer) Derivation iterations count. Set as high as possible to hinder
+ (int) Derivation iterations count. Set as high as possible to hinder
  dictionary password attacks.
 
 $passwordHashStrategy			*yii/base/Security::$passwordHashStrategy*
@@ -73,8 +76,8 @@ $passwordHashStrategy			*yii/base/Security::$passwordHashStrategy*
 
 $passwordHashCost			*yii/base/Security::$passwordHashCost*
 
- (integer) Default cost used for password hashing. Allowed value is between 4
- and 31.
+ (int) Default cost used for password hashing. Allowed value is between 4 and
+ 31.
 
 $behaviors				*yii/base/Security::$behaviors*
 
@@ -254,7 +257,7 @@ return (string) The encrypted data
 >
  decryptByPassword($data, $password)
 <
-return (boolean|string) The decrypted data or false on authentication failure
+return (bool|string) The decrypted data or false on authentication failure
 
     [$data] (string) The encrypted data to decrypt
     [$password] (string) The password to use for decryption
@@ -264,7 +267,7 @@ return (boolean|string) The decrypted data or false on authentication failure
 >
  decryptByKey($data, $inputKey, $info='null')
 <
-return (boolean|string) The decrypted data or false on authentication failure
+return (bool|string) The decrypted data or false on authentication failure
 
     [$data] (string) The encrypted data to decrypt
     [$inputKey] (string) The input to use for encryption and authentication
@@ -279,7 +282,7 @@ return (boolean|string) The decrypted data or false on authentication failure
 return (string) The encrypted data
 
     [$data] (string) Data to be encrypted
-    [$passwordBased] (boolean) Set true to use password-based key derivation
+    [$passwordBased] (bool) Set true to use password-based key derivation
     [$secret] (string) The encryption password or key
     [$info] (string) Context/application specific information, e.g. a user ID
     See [RFC 5869 Section
@@ -290,10 +293,10 @@ return (string) The encrypted data
 >
  decrypt($data, $passwordBased, $secret, $info)
 <
-return (boolean|string) The decrypted data or false on authentication failure
+return (bool|string) The decrypted data or false on authentication failure
 
     [$data] (string) Encrypted data to be decrypted.
-    [$passwordBased] (boolean) Set true to use password-based key derivation
+    [$passwordBased] (bool) Set true to use password-based key derivation
     [$secret] (string) The decryption password or key
     [$info] (string) Context/application specific information, @see encrypt()
 
@@ -315,8 +318,8 @@ return (string) The derived key
     [$info] (string) Optional info to bind the derived key material to
     application- and context-specific information, e.g. a user ID or API
     version, see [RFC 5869](https://tools.ietf.org/html/rfc5869)
-    [$length] (integer) Length of the output key in bytes. If 0, the output
-    key is the length of the hash algorithm output.
+    [$length] (int) Length of the output key in bytes. If 0, the output key is
+    the length of the hash algorithm output.
 
 
 *yii/base/Security::pbkdf2*				public
@@ -333,10 +336,10 @@ return (string) The derived key
     'SHA-256'
     [$password] (string) The source password
     [$salt] (string) The random salt
-    [$iterations] (integer) The number of iterations of the hash algorithm.
-    Set as high as possible to hinder dictionary password attacks.
-    [$length] (integer) Length of the output key in bytes. If 0, the output
-    key is the length of the hash algorithm output.
+    [$iterations] (int) The number of iterations of the hash algorithm. Set as
+    high as possible to hinder dictionary password attacks.
+    [$length] (int) Length of the output key in bytes. If 0, the output key is
+    the length of the hash algorithm output.
 
 
 *yii/base/Security::hashData*				public
@@ -351,7 +354,7 @@ return (string) The data prefixed with the keyed hash
     [$data] (string) The data to be protected
     [$key] (string) The secret key to be used for generating hash. Should be a
     secure cryptographic key.
-    [$rawHash] (boolean) Whether the generated hash value is in raw binary
+    [$rawHash] (bool) Whether the generated hash value is in raw binary
     format. If false, lowercase hex digits will be generated.
 
 
@@ -368,9 +371,9 @@ tampered.
     hash for the data in 'hashData()'. function to see the supported hashing
     algorithms on your system. This must be the same as the value passed to
     'hashData()' when generating the hash for the data.
-    [$rawHash] (boolean) This should take the same value as when you generate
-    the data using 'hashData()'. It indicates whether the hash value in the
-    data is in binary format. If false, it means the hash value consists of
+    [$rawHash] (bool) This should take the same value as when you generate the
+    data using 'hashData()'. It indicates whether the hash value in the data
+    is in binary format. If false, it means the hash value consists of
     lowercase hex digits only. hex digits will be generated.
 
 
@@ -382,7 +385,7 @@ return (string) The generated random bytes
 
  Note that output may not be ASCII.
 
-    [$length] (integer) The number of bytes to generate
+    [$length] (int) The number of bytes to generate
 
 
 *yii/base/Security::generateRandomString*			public
@@ -394,7 +397,7 @@ return (string) The generated random key
  The string generated matches [A-Za-z0-9_-]+ and is transparent to
  URL-encoding.
 
-    [$length] (integer) The length of the key in characters
+    [$length] (int) The length of the key in characters
 
 
 *yii/base/Security::generatePasswordHash*			public
@@ -426,7 +429,7 @@ the output length might increase in future versions of PHP
 
 
     [$password] (string) The password to be hashed.
-    [$cost] (integer) Cost parameter used by the Blowfish hash algorithm. The
+    [$cost] (int) Cost parameter used by the Blowfish hash algorithm. The
     higher the value of cost, the longer it takes to generate the hash and to
     verify a password against it. Higher cost therefore slows down a
     brute-force attack. For best protection against brute-force attacks, set
@@ -438,7 +441,7 @@ the output length might increase in future versions of PHP
 >
  validatePassword($password, $hash)
 <
-return (boolean) Whether the password is correct.
+return (bool) Whether the password is correct.
 
     [$password] (string) The password to verify.
     [$hash] (string) The hash to verify the password against.
@@ -455,14 +458,14 @@ return (string) The random salt value.
  specific format: "$2a$", "$2x$" or "$2y$", a two digit cost parameter, "$",
  and 22 characters from the alphabet "./0-9A-Za-z".
 
-    [$cost] (integer) The cost parameter
+    [$cost] (int) The cost parameter
 
 
 *yii/base/Security::compareString*			public
 >
  compareString($expected, $actual)
 <
-return (boolean) Whether strings are equal.
+return (bool) Whether strings are equal.
 
     [$expected] (string) String to compare.
     [$actual] (string) User-supplied string.

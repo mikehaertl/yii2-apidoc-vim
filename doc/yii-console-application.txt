@@ -76,10 +76,6 @@ $name					*yii/console/Application::$name*
 
  See |yii/base/Application::$name|
 
-$version				*yii/console/Application::$version*
-
- See |yii/base/Application::$version|
-
 $charset				*yii/console/Application::$charset*
 
  See |yii/base/Application::$charset|
@@ -126,7 +122,7 @@ $loadedModules				*yii/console/Application::$loadedModules*
 
 $enableCoreCommands			*yii/console/Application::$enableCoreCommands*
 
- (boolean) Whether to enable the commands provided by the core framework.
+ (bool) Whether to enable the commands provided by the core framework.
  Defaults to true.
 
 $behaviors				*yii/console/Application::$behaviors*
@@ -156,6 +152,10 @@ $viewPath				*yii/console/Application::$viewPath*
 $layoutPath				*yii/console/Application::$layoutPath*
 
  See |yii/base/Module::$layoutPath|
+
+$version				*yii/console/Application::$version*
+
+ See |yii/base/Module::$version|
 
 $aliases				*yii/console/Application::$aliases*
 
@@ -232,6 +232,10 @@ $assetManager				*yii/console/Application::$assetManager*
 $security				*yii/console/Application::$security*
 
  See |yii/base/Application::$security|
+
+$container				*yii/console/Application::$container*
+
+ See |yii/base/Application::$container|
 
 
 
@@ -459,6 +463,21 @@ return (void)
  See |yii/base/Module::setLayoutPath|
 
 
+*yii/console/Application::getVersion*			public
+
+ See |yii/base/Module::getVersion|
+
+
+*yii/console/Application::setVersion*			public
+
+ See |yii/base/Module::setVersion|
+
+
+*yii/console/Application::defaultVersion*			protected
+
+ See |yii/base/Module::defaultVersion|
+
+
 *yii/console/Application::setAliases*			public
 
  See |yii/base/Module::setAliases|
@@ -493,9 +512,9 @@ return (void)
 >
  runAction($route, $params='[]')
 <
-return (integer|\yii\console\Response) The result of the action. This can be either
-an exit code or Response object. Exit code 0 means normal, and other values
-mean abnormal. Exit code of 'null' is treaded as '0' as well.
+return (int|\yii\console\Response) The result of the action. This can be either an
+exit code or Response object. Exit code 0 means normal, and other values mean
+abnormal. Exit code of 'null' is treaded as '0' as well.
 
  This method parses the specified route and creates the corresponding child
  module(s), controller and action instances. It then calls
@@ -687,6 +706,11 @@ return (void)
 *yii/console/Application::end*				public
 
  See |yii/base/Application::end|
+
+
+*yii/console/Application::setContainer*			public
+
+ See |yii/base/Application::setContainer|
 
 
 *yii/console/Application::loadConfig*			protected

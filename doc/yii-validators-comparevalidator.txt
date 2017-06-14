@@ -14,6 +14,10 @@ DESCRIPTION
  CompareValidator supports different comparison operators, specified via the
  'operator' property.
 
+ The default comparison function is based on string values, which means the
+ values are compared byte by byte. When comparing numbers, make sure to set
+ the '$type' to 'TYPE_NUMBER' to enable numeric comparison.
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -93,10 +97,10 @@ $type					*yii/validators/CompareValidator::$type*
  supported:
 
 
-   - string: the values are being compared as strings. No conversion
-   will be done before comparison. 
-   - number: the values are being compared as numbers. String values
-   will be converted into numbers before comparison.
+   - 'TYPE_STRING|string': the values are being compared as strings. No
+   conversion will be done before comparison. 
+   - 'TYPE_NUMBER|number': the values are being compared as numbers.
+   String values will be converted into numbers before comparison.
 
 $operator				*yii/validators/CompareValidator::$operator*
 
@@ -324,6 +328,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -362,6 +369,24 @@ support client-side validation.
     views or view files containing a model form with this validator applied.
 
 
+*yii/validators/CompareValidator::getClientOptions*	public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
+
+
 *yii/validators/CompareValidator::isActive*		public
 
  See |yii/validators/Validator::isActive|
@@ -381,7 +406,7 @@ support client-side validation.
 >
  compareValues($operator, $type, $value, $compareValue)
 <
-return (boolean) Whether the comparison using the specified operator is true.
+return (bool) Whether the comparison using the specified operator is true.
 
     [$operator] (string) The comparison operator
     [$type] (string) The type of the values being compared

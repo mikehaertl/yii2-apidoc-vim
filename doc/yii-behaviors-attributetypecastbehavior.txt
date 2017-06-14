@@ -124,21 +124,21 @@ $attributeTypes				*yii/behaviors/AttributeTypecastBehavior::$attributeTypes*
 
 $skipOnNull				*yii/behaviors/AttributeTypecastBehavior::$skipOnNull*
 
- (boolean) Whether to skip typecasting of 'null' values. If enabled attribute
+ (bool) Whether to skip typecasting of 'null' values. If enabled attribute
  value which equals to 'null' will not be type-casted (e.g. 'null' remains
  'null'), otherwise it will be converted according to the type configured at
  'attributeTypes'.
 
 $typecastAfterValidate			*yii/behaviors/AttributeTypecastBehavior::$typecastAfterValidate*
 
- (boolean) Whether to perform typecasting after owner model validation. Note
- that typecasting will be performed only if validation was successful, e.g.
- owner model has no errors. Note that changing this option value will have no
- effect after this behavior has been attached to the model.
+ (bool) Whether to perform typecasting after owner model validation. Note that
+ typecasting will be performed only if validation was successful, e.g. owner
+ model has no errors. Note that changing this option value will have no effect
+ after this behavior has been attached to the model.
 
 $typecastBeforeSave			*yii/behaviors/AttributeTypecastBehavior::$typecastBeforeSave*
 
- (boolean) Whether to perform typecasting before saving owner model (insert or
+ (bool) Whether to perform typecasting before saving owner model (insert or
  update). This option may be disabled in order to achieve better performance.
  For example, in case of '\yii\db\ActiveRecord' usage, typecasting before save
  will grant no benefit an thus can be disabled. Note that changing this option
@@ -146,12 +146,12 @@ $typecastBeforeSave			*yii/behaviors/AttributeTypecastBehavior::$typecastBeforeS
 
 $typecastAfterFind			*yii/behaviors/AttributeTypecastBehavior::$typecastAfterFind*
 
- (boolean) Whether to perform typecasting after retrieving owner model data
- from the database (after find or refresh). This option may be disabled in
- order to achieve better performance. For example, in case of
- '\yii\db\ActiveRecord' usage, typecasting after find will grant no benefit in
- most cases an thus can be disabled. Note that changing this option value will
- have no effect after this behavior has been attached to the model.
+ (bool) Whether to perform typecasting after retrieving owner model data from
+ the database (after find or refresh). This option may be disabled in order to
+ achieve better performance. For example, in case of '\yii\db\ActiveRecord'
+ usage, typecasting after find will grant no benefit in most cases an thus can
+ be disabled. Note that changing this option value will have no effect after
+ this behavior has been attached to the model.
 
 
 
@@ -170,17 +170,8 @@ METHOD DETAILS
 
 
 *yii/behaviors/AttributeTypecastBehavior::init*		public
->
- init()
-<
-return (void)
 
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ See |yii/base/Object::init|
 
 
 *yii/behaviors/AttributeTypecastBehavior::__get*		public
@@ -264,8 +255,21 @@ values).
 
 
 *yii/behaviors/AttributeTypecastBehavior::attach*		public
+>
+ attach($owner)
+<
+return (void)
 
- See |yii/base/Behavior::attach|
+
+
+ The default implementation will set the 'owner' property and attach event
+ handlers as declared in 'events'. Make sure you call the parent
+ implementation if you override this method.
+
+
+
+    [$owner] (\yii\base\Component) The component that this behavior is to be
+    attached to.
 
 
 *yii/behaviors/AttributeTypecastBehavior::detach*		public

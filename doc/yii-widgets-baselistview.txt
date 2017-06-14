@@ -13,6 +13,9 @@ DESCRIPTION
 
  It provides features like sorting, paging and also filtering the data.
 
+ For more details and usage information on BaseListView, see the [guide
+ article on data widgets](guide:output-data-widgets).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -80,7 +83,9 @@ $summaryOptions				*yii/widgets/BaseListView::$summaryOptions*
 
 $showOnEmpty				*yii/widgets/BaseListView::$showOnEmpty*
 
- (boolean) Whether to show the list view if 'dataProvider' returns no data.
+ (bool) Whether to show an empty list view if 'dataProvider' returns no data.
+ The default value is false which displays an element according to the
+ 'emptyText' and 'emptyTextOptions' properties.
 
 $emptyText				*yii/widgets/BaseListView::$emptyText*
 
@@ -313,6 +318,16 @@ return (void)
  See |yii/base/ViewContextInterface::getViewPath|
 
 
+*yii/widgets/BaseListView::beforeRun*			public
+
+ See |yii/base/Widget::beforeRun|
+
+
+*yii/widgets/BaseListView::afterRun*			public
+
+ See |yii/base/Widget::afterRun|
+
+
 *yii/widgets/BaseListView::renderItems*			public
 >
  renderItems()
@@ -325,7 +340,7 @@ return (string) The rendering result.
 >
  renderSection($name)
 <
-return (string|boolean) The rendering result of the section, or false if the named
+return (string|bool) The rendering result of the section, or false if the named
 section is not supported.
 
  If the named section is not supported, false will be returned.

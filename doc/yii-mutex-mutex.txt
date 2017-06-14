@@ -31,10 +31,10 @@ PROPERTY DETAILS
 
 $autoRelease				*yii/mutex/Mutex::$autoRelease*
 
- (boolean) Whether all locks acquired in this process (i.e. local locks) must
- be released automatically before finishing script execution. Defaults to
- true. Setting this property to true means that all locks acquired in this
- process must be released (regardless of errors or exceptions).
+ (bool) Whether all locks acquired in this process (i.e. local locks) must be
+ released automatically before finishing script execution. Defaults to true.
+ Setting this property to true means that all locks acquired in this process
+ must be released (regardless of errors or exceptions).
 
 $behaviors				*yii/mutex/Mutex::$behaviors*
 
@@ -178,19 +178,19 @@ return (void)
 >
  acquire($name, $timeout=0)
 <
-return (boolean) Lock acquiring result.
+return (bool) Lock acquiring result.
 
     [$name] (string) Of the lock to be acquired. Must be unique.
-    [$timeout] (integer) Time to wait for lock to be released. Defaults to
-    zero meaning that method will return false immediately in case lock was
-    already acquired.
+    [$timeout] (int) Time to wait for lock to be released. Defaults to zero
+    meaning that method will return false immediately in case lock was already
+    acquired.
 
 
 *yii/mutex/Mutex::release*				public
 >
  release($name)
 <
-return (boolean) Lock release result: false in case named lock was not found..
+return (bool) Lock release result: false in case named lock was not found..
 
     [$name] (string) Of the lock to be released. This lock must already exist.
 
@@ -199,17 +199,17 @@ return (boolean) Lock release result: false in case named lock was not found..
 >
  acquireLock($name, $timeout=0)
 <
-return (boolean) Acquiring result.
+return (bool) Acquiring result.
 
     [$name] (string) Of the lock to be acquired.
-    [$timeout] (integer) Time to wait for the lock to be released.
+    [$timeout] (int) Time to wait for the lock to be released.
 
 
 *yii/mutex/Mutex::releaseLock*				protected
 >
  releaseLock($name)
 <
-return (boolean) Release result.
+return (bool) Release result.
 
     [$name] (string) Of the lock to be released.
 

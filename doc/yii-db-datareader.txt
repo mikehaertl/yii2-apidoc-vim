@@ -38,19 +38,19 @@ PROPERTY DETAILS
 
 $fetchMode				*yii/db/DataReader::$fetchMode*
 
- (integer) Fetch mode
+ (int) Fetch mode
 
 $isClosed				*yii/db/DataReader::$isClosed*
 
- (boolean) Whether the reader is closed or not.
+ (bool) Whether the reader is closed or not.
 
 $rowCount				*yii/db/DataReader::$rowCount*
 
- (integer) Number of rows contained in the result.
+ (int) Number of rows contained in the result.
 
 $columnCount				*yii/db/DataReader::$columnCount*
 
- (integer) The number of columns in the result set.
+ (int) The number of columns in the result set.
 
 
 
@@ -133,12 +133,12 @@ return (void)
  When rows of data are being fetched, the corresponding column value will be
  set in the variable. Note, the fetch mode must include PDO::FETCH_BOUND.
 
-    [$column] (integer|string) Number of the column (1-indexed) or name of the
+    [$column] (int|string) Number of the column (1-indexed) or name of the
     column in the result set. If using the column name, be aware that the name
     should match the case of the column, as returned by the driver.
     [$value] (mixed) Name of the PHP variable to which the column will be
     bound.
-    [$dataType] (integer) Data type of the parameter
+    [$dataType] (int) Data type of the parameter
 
 
 *yii/db/DataReader::setFetchMode*				public
@@ -147,7 +147,7 @@ return (void)
 <
 return (void)
 
-    [$mode] (integer) Fetch mode
+    [$mode] (int) Fetch mode
 
 
 *yii/db/DataReader::read*					public
@@ -164,7 +164,7 @@ return (array) The current row, false if no more row available
 <
 return (mixed) The column of the current row, false if no more rows available
 
-    [$columnIndex] (integer) Zero-based column index
+    [$columnIndex] (int) Zero-based column index
 
 
 *yii/db/DataReader::readObject*				public
@@ -190,7 +190,7 @@ array will be returned if the result contains no row.
 >
  nextResult()
 <
-return (boolean) Returns true on success or false on failure.
+return (bool) Returns true on success or false on failure.
 
  This method is only useful when there are multiple result sets returned by
  the query. Not all DBMS support this feature.
@@ -210,7 +210,7 @@ return (void)
 >
  getIsClosed()
 <
-return (boolean) Whether the reader is closed or not.
+return (bool) Whether the reader is closed or not.
 
 
 
@@ -218,7 +218,7 @@ return (boolean) Whether the reader is closed or not.
 >
  getRowCount()
 <
-return (integer) Number of rows contained in the result.
+return (int) Number of rows contained in the result.
 
  Note, most DBMS may not give a meaningful count. In this case, use "SELECT
  COUNT(*) FROM tableName" to obtain the number of rows.
@@ -228,7 +228,7 @@ return (integer) Number of rows contained in the result.
 >
  count()
 <
-return (integer) Number of rows contained in the result.
+return (int) Number of rows contained in the result.
 
  This method is required by the Countable interface. Note, most DBMS may not
  give a meaningful count. In this case, use "SELECT COUNT(*) FROM tableName"
@@ -239,7 +239,7 @@ return (integer) Number of rows contained in the result.
 >
  getColumnCount()
 <
-return (integer) The number of columns in the result set.
+return (int) The number of columns in the result set.
 
  Note, even there's no row in the reader, this still gives correct column
  number.
@@ -258,7 +258,7 @@ return (void)
 >
  key()
 <
-return (integer) The index of the current row.
+return (int) The index of the current row.
 
  This method is required by the interface '\Iterator'.
 
@@ -285,7 +285,7 @@ return (void)
 >
  valid()
 <
-return (boolean) Whether there is a row of data at current position.
+return (bool) Whether there is a row of data at current position.
 
  This method is required by the interface '\Iterator'.
 

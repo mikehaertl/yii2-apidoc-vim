@@ -30,7 +30,7 @@ PROPERTY DETAILS
 
 $enabled				*yii/log/Target::$enabled*
 
- (boolean) Whether to enable this log target. Defaults to true.
+ (bool) Whether to enable this log target. Defaults to true.
 
 $categories				*yii/log/Target::$categories*
 
@@ -78,7 +78,7 @@ $prefix					*yii/log/Target::$prefix*
 
 $exportInterval				*yii/log/Target::$exportInterval*
 
- (integer) How many messages should be accumulated before they are exported.
+ (int) How many messages should be accumulated before they are exported.
  Defaults to 1000. Note that messages will always be exported when the
  application terminates. Set this property to be 0 if you don't want to export
  messages until the application terminates.
@@ -95,8 +95,8 @@ $behaviors				*yii/log/Target::$behaviors*
 
 $levels					*yii/log/Target::$levels*
 
- (integer) The message levels that this target is interested in. This is a
- bitmap of level values. Defaults to 0, meaning  all available levels.
+ (int) The message levels that this target is interested in. This is a bitmap
+ of level values. Defaults to 0, meaning  all available levels.
 
 
 
@@ -250,7 +250,7 @@ return (void)
 
     [$messages] (array) Log messages to be processed. See 'Logger::messages'
     for the structure of each message.
-    [$final] (boolean) Whether this method is called at the end of the current
+    [$final] (bool) Whether this method is called at the end of the current
     application
 
 
@@ -268,8 +268,8 @@ information.
 >
  getLevels()
 <
-return (integer) The message levels that this target is interested in. This is a
-bitmap of level values. Defaults to 0, meaning  all available levels.
+return (int) The message levels that this target is interested in. This is a bitmap
+of level values. Defaults to 0, meaning  all available levels.
 
 
 
@@ -293,8 +293,7 @@ return (void)
 
 
 
-    [$levels] (array|integer) Message levels that this target is interested
-    in.
+    [$levels] (array|int) Message levels that this target is interested in.
 
 
 *yii/log/Target::filterMessages*				public
@@ -305,8 +304,8 @@ return (array) The filtered messages.
 
     [$messages] (array) Messages to be filtered. The message structure follows
     that in 'Logger::messages'.
-    [$levels] (integer) The message levels to filter by. This is a bitmap of
-    level values. Value 0 means allowing all levels.
+    [$levels] (int) The message levels to filter by. This is a bitmap of level
+    values. Value 0 means allowing all levels.
     [$categories] (array) The message categories to filter by. If empty, it
     means all categories are allowed.
     [$except] (array) The message categories to exclude. If empty, it means

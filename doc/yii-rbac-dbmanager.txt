@@ -17,6 +17,9 @@ DESCRIPTION
  rule data by setting 'itemTable', 'itemChildTable', 'assignmentTable' and
  'ruleTable'.
 
+ For more details and usage information on DbManager, see the [guide article
+ on security authorization](guide:security-authorization).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -267,7 +270,7 @@ return (\yii\rbac\Item[]) The auth items of the specified type.
 
 
 
-    [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
+    [$type] (int) The auth item type (either 'Item::TYPE_ROLE' or
     'Item::TYPE_PERMISSION'
 
 
@@ -275,7 +278,7 @@ return (\yii\rbac\Item[]) The auth items of the specified type.
 >
  addItem($item)
 <
-return (boolean) Whether the auth item is successfully added to the system
+return (bool) Whether the auth item is successfully added to the system
 
 
 
@@ -290,7 +293,7 @@ return (boolean) Whether the auth item is successfully added to the system
 >
  addRule($rule)
 <
-return (boolean) Whether the rule is successfully added to the system
+return (bool) Whether the rule is successfully added to the system
 
 
 
@@ -305,7 +308,7 @@ return (boolean) Whether the rule is successfully added to the system
 >
  removeItem($item)
 <
-return (boolean) Whether the role or permission is successfully removed
+return (bool) Whether the role or permission is successfully removed
 
 
 
@@ -320,7 +323,7 @@ return (boolean) Whether the role or permission is successfully removed
 >
  removeRule($rule)
 <
-return (boolean) Whether the rule is successfully removed
+return (bool) Whether the rule is successfully removed
 
 
 
@@ -335,7 +338,7 @@ return (boolean) Whether the rule is successfully removed
 >
  updateItem($name, $item)
 <
-return (boolean) Whether the auth item is successfully updated
+return (bool) Whether the auth item is successfully updated
 
 
 
@@ -351,7 +354,7 @@ return (boolean) Whether the auth item is successfully updated
 >
  updateRule($name, $rule)
 <
-return (boolean) Whether the rule is successfully updated
+return (bool) Whether the rule is successfully updated
 
 
 
@@ -413,6 +416,11 @@ return (boolean) Whether the rule is successfully updated
  See |yii/rbac/BaseManager::executeRule|
 
 
+*yii/rbac/DbManager::hasNoAssignments*			protected
+
+ See |yii/rbac/BaseManager::hasNoAssignments|
+
+
 *yii/rbac/DbManager::getRolesByUser*			public
 >
  getRolesByUser($userId)
@@ -427,15 +435,15 @@ indexed by the role names.
 
 
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getChildRoles*			public
 >
  getChildRoles($roleName)
 <
-return (\yii\rbac\Role[]) All roles directly adding to the role. The array is indexed
-by the role names. First element is a Role item that are getting by $roleName.
+return (\yii\rbac\Role[]) Child roles. The array is indexed by the role names. First
+element is an instance of the parent Role itself.
 
 
 
@@ -443,7 +451,7 @@ by the role names. First element is a Role item that are getting by $roleName.
 
 
 
-    [$roleName] (string) Name of parent Role.
+    [$roleName] (string) Name of the role to file child roles for
 
 
 *yii/rbac/DbManager::getPermissionsByRole*		public
@@ -475,7 +483,7 @@ indexed by the permission names.
 
 
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getRule*				public
@@ -511,7 +519,7 @@ return (\yii\rbac\Rule[]) The rules indexed by the rule names
 >
  canAddChild($parent, $child)
 <
-return (boolean) Possibility of adding
+return (bool) Possibility of adding
 
 
 
@@ -527,7 +535,7 @@ return (boolean) Possibility of adding
 >
  addChild($parent, $child)
 <
-return (boolean) Whether the child successfully added
+return (bool) Whether the child successfully added
 
 
 
@@ -543,7 +551,7 @@ return (boolean) Whether the child successfully added
 >
  removeChild($parent, $child)
 <
-return (boolean) Whether the removal is successful
+return (bool) Whether the removal is successful
 
 
 
@@ -560,7 +568,7 @@ return (boolean) Whether the removal is successful
 >
  removeChildren($parent)
 <
-return (boolean) Whether the removal is successful
+return (bool) Whether the removal is successful
 
 
 
@@ -576,7 +584,7 @@ return (boolean) Whether the removal is successful
 >
  hasChild($parent, $child)
 <
-return (boolean) Whether '$child' is already a child of '$parent'
+return (bool) Whether '$child' is already a child of '$parent'
 
 
 
@@ -616,14 +624,14 @@ return (\yii\rbac\Assignment) The role assignment information.
 
 
     [$role] (\yii\rbac\Role) 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::revoke*				public
 >
  revoke($role, $userId)
 <
-return (boolean) Whether the revoking is successful
+return (bool) Whether the revoking is successful
 
 
 
@@ -632,14 +640,14 @@ return (boolean) Whether the revoking is successful
 
 
     [$role] (\yii\rbac\Role) 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::revokeAll*				public
 >
  revokeAll($userId)
 <
-return (boolean) Whether the revoking is successful
+return (bool) Whether the revoking is successful
 
 
 
@@ -664,7 +672,7 @@ the role is not assigned to the user.
 
 
     [$roleName] (string) The role name
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getAssignments*			public
@@ -680,7 +688,7 @@ will be returned if there is no role assigned to the user.
 
 
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getUserIdsByRole*			public
@@ -773,12 +781,12 @@ return (void)
 >
  checkAccessFromCache($user, $itemName, $params, $assignments)
 <
-return (boolean) Whether the operations can be performed by the user.
+return (bool) Whether the operations can be performed by the user.
 
  This method is internally called by 'checkAccess()' when 'cache' is enabled.
 
-    [$user] (string|integer) The user ID. This should can be either an integer
-    or a string representing the unique identifier of a user. See
+    [$user] (string|int) The user ID. This should can be either an integer or
+    a string representing the unique identifier of a user. See
     '\yii\web\User::id'.
     [$itemName] (string) The name of the operation that need access check
     [$params] (array) Name-value pairs that would be passed to rules
@@ -792,12 +800,12 @@ return (boolean) Whether the operations can be performed by the user.
 >
  checkAccessRecursive($user, $itemName, $params, $assignments)
 <
-return (boolean) Whether the operations can be performed by the user.
+return (bool) Whether the operations can be performed by the user.
 
  This method is internally called by 'checkAccess()'.
 
-    [$user] (string|integer) The user ID. This should can be either an integer
-    or a string representing the unique identifier of a user. See
+    [$user] (string|int) The user ID. This should can be either an integer or
+    a string representing the unique identifier of a user. See
     '\yii\web\User::id'.
     [$itemName] (string) The name of the operation that need access check
     [$params] (array) Name-value pairs that would be passed to rules
@@ -811,7 +819,7 @@ return (boolean) Whether the operations can be performed by the user.
 >
  supportsCascadeUpdate()
 <
-return (boolean) Whether the database supports cascading update and delete.
+return (bool) Whether the database supports cascading update and delete.
 
  The default implementation will return false for SQLite database and true for
  all other databases.
@@ -833,7 +841,7 @@ return (\yii\rbac\Item) The populated auth item instance (either Role or Permiss
 return (\yii\rbac\Permission[]) All direct permissions that the user has. The array
 is indexed by the permission names.
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getInheritedPermissionsByUser*	protected
@@ -843,7 +851,7 @@ is indexed by the permission names.
 return (\yii\rbac\Permission[]) All inherited permissions that the user has. The
 array is indexed by the permission names.
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/rbac/DbManager::getChildrenList*			protected
@@ -870,7 +878,7 @@ return (void)
 >
  detectLoop($parent, $child)
 <
-return (boolean) Whether a loop exists
+return (bool) Whether a loop exists
 
     [$parent] (\yii\rbac\Item) The parent item
     [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
@@ -882,7 +890,7 @@ return (boolean) Whether a loop exists
 <
 return (void)
 
-    [$type] (integer) The auth item type (either Item::TYPE_PERMISSION or
+    [$type] (int) The auth item type (either Item::TYPE_PERMISSION or
     Item::TYPE_ROLE)
 
 

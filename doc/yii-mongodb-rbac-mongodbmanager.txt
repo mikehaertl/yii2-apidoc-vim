@@ -255,7 +255,7 @@ return (\yii\rbac\Item[]) The auth items of the specified type.
 
 
 
-    [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
+    [$type] (int) The auth item type (either 'Item::TYPE_ROLE' or
     'Item::TYPE_PERMISSION'
 
 
@@ -263,7 +263,7 @@ return (\yii\rbac\Item[]) The auth items of the specified type.
 >
  addItem($item)
 <
-return (boolean) Whether the auth item is successfully added to the system
+return (bool) Whether the auth item is successfully added to the system
 
 
 
@@ -278,7 +278,7 @@ return (boolean) Whether the auth item is successfully added to the system
 >
  addRule($rule)
 <
-return (boolean) Whether the rule is successfully added to the system
+return (bool) Whether the rule is successfully added to the system
 
 
 
@@ -293,7 +293,7 @@ return (boolean) Whether the rule is successfully added to the system
 >
  removeItem($item)
 <
-return (boolean) Whether the role or permission is successfully removed
+return (bool) Whether the role or permission is successfully removed
 
 
 
@@ -308,7 +308,7 @@ return (boolean) Whether the role or permission is successfully removed
 >
  removeRule($rule)
 <
-return (boolean) Whether the rule is successfully removed
+return (bool) Whether the rule is successfully removed
 
 
 
@@ -323,7 +323,7 @@ return (boolean) Whether the rule is successfully removed
 >
  updateItem($name, $item)
 <
-return (boolean) Whether the auth item is successfully updated
+return (bool) Whether the auth item is successfully updated
 
 
 
@@ -339,7 +339,7 @@ return (boolean) Whether the auth item is successfully updated
 >
  updateRule($name, $rule)
 <
-return (boolean) Whether the rule is successfully updated
+return (bool) Whether the rule is successfully updated
 
 
 
@@ -401,6 +401,11 @@ return (boolean) Whether the rule is successfully updated
  See |yii/rbac/BaseManager::executeRule|
 
 
+*yii/mongodb/rbac/MongoDbManager::hasNoAssignments*	protected
+
+ See |yii/rbac/BaseManager::hasNoAssignments|
+
+
 *yii/mongodb/rbac/MongoDbManager::getRolesByUser*		public
 >
  getRolesByUser($userId)
@@ -415,7 +420,7 @@ indexed by the role names.
 
 
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/mongodb/rbac/MongoDbManager::getChildRoles*		public
@@ -452,7 +457,7 @@ indexed by the permission names.
 
 
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/mongodb/rbac/MongoDbManager::getRule*		public
@@ -488,7 +493,7 @@ return (\yii\rbac\Rule[]) The rules indexed by the rule names
 >
  canAddChild($parent, $child)
 <
-return (boolean) Possibility of adding
+return (bool) Possibility of adding
 
 
 
@@ -504,7 +509,7 @@ return (boolean) Possibility of adding
 >
  addChild($parent, $child)
 <
-return (boolean) Whether the child successfully added
+return (bool) Whether the child successfully added
 
 
 
@@ -520,7 +525,7 @@ return (boolean) Whether the child successfully added
 >
  removeChild($parent, $child)
 <
-return (boolean) Whether the removal is successful
+return (bool) Whether the removal is successful
 
 
 
@@ -537,7 +542,7 @@ return (boolean) Whether the removal is successful
 >
  removeChildren($parent)
 <
-return (boolean) Whether the removal is successful
+return (bool) Whether the removal is successful
 
 
 
@@ -553,7 +558,7 @@ return (boolean) Whether the removal is successful
 >
  hasChild($parent, $child)
 <
-return (boolean) Whether '$child' is already a child of '$parent'
+return (bool) Whether '$child' is already a child of '$parent'
 
 
 
@@ -593,14 +598,14 @@ return (\yii\rbac\Assignment) The role assignment information.
 
 
     [$role] (\yii\rbac\Role) 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/mongodb/rbac/MongoDbManager::revoke*			public
 >
  revoke($role, $userId)
 <
-return (boolean) Whether the revoking is successful
+return (bool) Whether the revoking is successful
 
 
 
@@ -609,14 +614,14 @@ return (boolean) Whether the revoking is successful
 
 
     [$role] (\yii\rbac\Role) 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/mongodb/rbac/MongoDbManager::revokeAll*		public
 >
  revokeAll($userId)
 <
-return (boolean) Whether the revoking is successful
+return (bool) Whether the revoking is successful
 
 
 
@@ -641,7 +646,7 @@ the role is not assigned to the user.
 
 
     [$roleName] (string) The role name
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/mongodb/rbac/MongoDbManager::getAssignments*		public
@@ -657,7 +662,7 @@ will be returned if there is no role assigned to the user.
 
 
 
-    [$userId] (string|integer) The user ID (see '\yii\web\User::id')
+    [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
 *yii/mongodb/rbac/MongoDbManager::getUserIdsByRole*	public

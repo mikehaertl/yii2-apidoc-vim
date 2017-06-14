@@ -256,7 +256,7 @@ $currencyCode				*yii/i18n/Formatter::$currencyCode*
 
 $sizeFormatBase				*yii/i18n/Formatter::$sizeFormatBase*
 
- (integer) The base at which a kilobyte is calculated (1000 or 1024 bytes per
+ (int) The base at which a kilobyte is calculated (1000 or 1024 bytes per
  kilobyte), used by 'asSize' and 'asShortSize'. Defaults to 1024.
 
 $behaviors				*yii/i18n/Formatter::$behaviors*
@@ -526,8 +526,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
-    [$value] (integer|string|\DateTime) The value to be formatted. The
-    following types of value are supported:
+    [$value] (int|string|\DateTime) The value to be formatted. The following
+    types of value are supported:
 
 
       - an integer representing a UNIX timestamp 
@@ -556,8 +556,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
-    [$value] (integer|string|\DateTime) The value to be formatted. The
-    following types of value are supported:
+    [$value] (int|string|\DateTime) The value to be formatted. The following
+    types of value are supported:
 
 
       - an integer representing a UNIX timestamp 
@@ -586,8 +586,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
-    [$value] (integer|string|\DateTime) The value to be formatted. The
-    following types of value are supported:
+    [$value] (int|string|\DateTime) The value to be formatted. The following
+    types of value are supported:
 
 
       - an integer representing a UNIX timestamp 
@@ -619,8 +619,8 @@ also return an array if '$checkTimeInfo' is true. The first element of the
 array is the normalized timestamp and the second is a boolean indicating
 whether the timestamp has time information or it is just a date value.
 
-    [$value] (integer|string|\DateTime) The datetime value to be normalized.
-    The following types of value are supported:
+    [$value] (int|string|\DateTime) The datetime value to be normalized. The
+    following types of value are supported:
 
 
       - an integer representing a UNIX timestamp 
@@ -630,12 +630,12 @@ whether the timestamp has time information or it is just a date value.
     given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object
-    [$checkTimeInfo] (boolean) Whether to also check if the date/time value
-    has some time information attached. Defaults to 'false'. If 'true', the
-    method will then return an array with the first element being the
-    normalized timestamp and the second a boolean indicating whether the
-    timestamp has time information or it is just a date value. This parameter
-    is available since version 2.0.1.
+    [$checkTimeInfo] (bool) Whether to also check if the date/time value has
+    some time information attached. Defaults to 'false'. If 'true', the method
+    will then return an array with the first element being the normalized
+    timestamp and the second a boolean indicating whether the timestamp has
+    time information or it is just a date value. This parameter is available
+    since version 2.0.1.
 
 
 *yii/i18n/Formatter::asTimestamp*				public
@@ -644,8 +644,8 @@ whether the timestamp has time information or it is just a date value.
 <
 return (string) The formatted result.
 
-    [$value] (integer|string|\DateTime) The value to be formatted. The
-    following types of value are supported:
+    [$value] (int|string|\DateTime) The value to be formatted. The following
+    types of value are supported:
 
 
       - an integer representing a UNIX timestamp 
@@ -668,8 +668,8 @@ return (string) The formatted result.
  1. Using a timestamp that is relative to 'now'. 2. Using a timestamp that is
  relative to the '$referenceTime'. 3. Using a 'DateInterval' object.
 
-    [$value] (integer|string|\DateTime|\DateInterval) The value to be
-    formatted. The following types of value are supported:
+    [$value] (int|string|\DateTime|\DateInterval) The value to be formatted.
+    The following types of value are supported:
 
 
       - an integer representing a UNIX timestamp 
@@ -681,8 +681,8 @@ return (string) The formatted result.
       object 
       - a PHP DateInterval object (a positive time interval will refer to
       the past, a negative one to the future)
-    [$referenceTime] (integer|string|\DateTime) If specified the value is used
-    as a reference time instead of 'now' when '$value' is not a 'DateInterval'
+    [$referenceTime] (int|string|\DateTime) If specified the value is used as
+    a reference time instead of 'now' when '$value' is not a 'DateInterval'
     object.
 
 
@@ -692,8 +692,8 @@ return (string) The formatted result.
 <
 return (string) The formatted duration.
 
-    [$value] (\DateInterval|string|integer) The value to be formatted.
-    Acceptable formats:  
+    [$value] (\DateInterval|string|int) The value to be formatted. Acceptable
+    formats:  
       - [DateInterval
       object](http://php.net/manual/ru/class.dateinterval.php)  
       - integer - number of seconds. For example: value '131' represents
@@ -735,10 +735,15 @@ return (string) The formatted result.
  value is rounded automatically to the defined decimal digits.
 
     [$value] (mixed) The value to be formatted.
-    [$decimals] (integer) The number of digits after the decimal point. If not
-    given the number of digits is determined from the 'locale' and if the [PHP
-    intl extension](http://php.net/manual/en/book.intl.php) is not available
-    defaults to '2'.
+    [$decimals] (int) The number of digits after the decimal point. If not
+    given, the number of digits depends in the input value and is determined
+    based on 'NumberFormatter::MIN_FRACTION_DIGITS' and
+    'NumberFormatter::MAX_FRACTION_DIGITS', which can be configured using
+    '$numberFormatterOptions'. If the [PHP intl
+    extension](http://php.net/manual/en/book.intl.php) is not available, the
+    default value is '2'. If you want consistent behavior between environments
+    where intl is available and not, you should explicitly specify a value
+    here.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.
@@ -753,7 +758,15 @@ return (string) The formatted result.
 
     [$value] (mixed) The value to be formatted. It must be a factor e.g.
     '0.75' will result in '75%'.
-    [$decimals] (integer) The number of digits after the decimal point.
+    [$decimals] (int) The number of digits after the decimal point. If not
+    given, the number of digits depends in the input value and is determined
+    based on 'NumberFormatter::MIN_FRACTION_DIGITS' and
+    'NumberFormatter::MAX_FRACTION_DIGITS', which can be configured using
+    '$numberFormatterOptions'. If the [PHP intl
+    extension](http://php.net/manual/en/book.intl.php) is not available, the
+    default value is '0'. If you want consistent behavior between environments
+    where intl is available and not, you should explicitly specify a value
+    here.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.
@@ -767,7 +780,15 @@ return (string) The formatted result.
 return (string) The formatted result.
 
     [$value] (mixed) The value to be formatted.
-    [$decimals] (integer) The number of digits after the decimal point.
+    [$decimals] (int) The number of digits after the decimal point. If not
+    given, the number of digits depends in the input value and is determined
+    based on 'NumberFormatter::MIN_FRACTION_DIGITS' and
+    'NumberFormatter::MAX_FRACTION_DIGITS', which can be configured using
+    '$numberFormatterOptions'. If the [PHP intl
+    extension](http://php.net/manual/en/book.intl.php) is not available, the
+    default value depends on your PHP configuration. If you want consistent
+    behavior between environments where intl is available and not, you should
+    explicitly specify a value here.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.
@@ -829,8 +850,8 @@ return (string) The formatted result.
  prefixes](http://en.wikipedia.org/wiki/Binary_prefix) (e.g. kibibyte/KiB,
  mebibyte/MiB, ...) are used in the formatting result.
 
-    [$value] (string|integer|float) Value in bytes to be formatted.
-    [$decimals] (integer) The number of digits after the decimal point.
+    [$value] (string|int|float) Value in bytes to be formatted.
+    [$decimals] (int) The number of digits after the decimal point.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.
@@ -847,8 +868,8 @@ return (string) The formatted result.
  prefixes](http://en.wikipedia.org/wiki/Binary_prefix) (e.g. kibibyte/KiB,
  mebibyte/MiB, ...) are used in the formatting result.
 
-    [$value] (string|integer|float) Value in bytes to be formatted.
-    [$decimals] (integer) The number of digits after the decimal point.
+    [$value] (string|int|float) Value in bytes to be formatted.
+    [$decimals] (int) The number of digits after the decimal point.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.
@@ -859,7 +880,7 @@ return (string) The formatted result.
 >
  normalizeNumericValue($value)
 <
-return (float|integer) The normalized number value
+return (float|int) The normalized number value
 
 
    - everything [empty](http://php.net/manual/en/function.empty.php)
@@ -881,10 +902,10 @@ return (\NumberFormatter) The created formatter instance
 
  You may override this method to create a number formatter based on patterns.
 
-    [$style] (integer) The type of the number formatter. Values:
+    [$style] (int) The type of the number formatter. Values:
     NumberFormatter::DECIMAL, ::CURRENCY, ::PERCENT, ::SCIENTIFIC, ::SPELLOUT,
     ::ORDINAL ::DURATION, ::PATTERN_RULEBASED, ::DEFAULT_STYLE, ::IGNORE
-    [$decimals] (integer) The number of digits after the decimal point.
+    [$decimals] (int) The number of digits after the decimal point.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.

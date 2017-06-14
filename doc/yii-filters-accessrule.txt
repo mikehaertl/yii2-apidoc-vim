@@ -8,7 +8,7 @@ PROPERTY DETAILS
 
 $allow					*yii/filters/AccessRule::$allow*
 
- (boolean) Whether this is an 'allow' rule or 'deny' rule.
+ (bool) Whether this is an 'allow' rule or 'deny' rule.
 
 $actions				*yii/filters/AccessRule::$actions*
 
@@ -18,8 +18,15 @@ $actions				*yii/filters/AccessRule::$actions*
 
 $controllers				*yii/filters/AccessRule::$controllers*
 
- (array) List of the controller IDs that this rule applies to. Each controller
- ID is prefixed with the module ID (if any). The comparison is case-sensitive.
+ (array) List of the controller IDs that this rule applies to.
+
+ The comparison uses '\yii\base\Controller::uniqueId', so each controller ID
+ is prefixed with the module ID (if any). For a 'product' controller in the
+ application, you would specify this property like '['product']' and if that
+ controller is located in a 'shop' module, this would be '['shop/product']'.
+
+ The comparison is case-sensitive.
+
  If not set or empty, it means this rule applies to all controllers.
 
 $roles					*yii/filters/AccessRule::$roles*
@@ -214,8 +221,8 @@ METHOD DETAILS
 >
  allows($action, $user, $request)
 <
-return (boolean|null) True if the user is allowed, false if the user is denied, null
-if the rule does not apply to the user
+return (bool|null) True if the user is allowed, false if the user is denied, null if
+the rule does not apply to the user
 
     [$action] (\yii\base\Action) The action to be performed
     [$user] (\yii\web\User) The user object
@@ -226,7 +233,7 @@ if the rule does not apply to the user
 >
  matchAction($action)
 <
-return (boolean) Whether the rule applies to the action
+return (bool) Whether the rule applies to the action
 
     [$action] (\yii\base\Action) The action
 
@@ -235,7 +242,7 @@ return (boolean) Whether the rule applies to the action
 >
  matchController($controller)
 <
-return (boolean) Whether the rule applies to the controller
+return (bool) Whether the rule applies to the controller
 
     [$controller] (\yii\base\Controller) The controller
 
@@ -244,7 +251,7 @@ return (boolean) Whether the rule applies to the controller
 >
  matchRole($user)
 <
-return (boolean) Whether the rule applies to the role
+return (bool) Whether the rule applies to the role
 
     [$user] (\yii\web\User) The user object
 
@@ -253,7 +260,7 @@ return (boolean) Whether the rule applies to the role
 >
  matchIP($ip)
 <
-return (boolean) Whether the rule applies to the IP address
+return (bool) Whether the rule applies to the IP address
 
     [$ip] (string) The IP address
 
@@ -262,7 +269,7 @@ return (boolean) Whether the rule applies to the IP address
 >
  matchVerb($verb)
 <
-return (boolean) Whether the rule applies to the request
+return (bool) Whether the rule applies to the request
 
     [$verb] (string) The request method.
 
@@ -271,7 +278,7 @@ return (boolean) Whether the rule applies to the request
 >
  matchCustom($action)
 <
-return (boolean) Whether the rule should be applied
+return (bool) Whether the rule should be applied
 
     [$action] (\yii\base\Action) The action to be performed
 

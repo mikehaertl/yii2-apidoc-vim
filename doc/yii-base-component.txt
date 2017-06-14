@@ -325,7 +325,8 @@ DESCRIPTION
 ------------------------------------------------------------------------------
 
  Component provides the *event* and *behavior* features, in addition to the
- *property* feature which is implemented in its parent class 'Object'.
+ *property* feature which is implemented in its parent class
+ '\yii\base\Object|Object'.
 
  Event is a way to "inject" custom code into existing code at certain places.
  For example, a comment object can trigger an "add" event when the user adds a
@@ -401,6 +402,9 @@ DESCRIPTION
  where 'as tree' stands for attaching a behavior named 'tree', and the array
  will be passed to '\Yii::createObject()' to create the behavior object.
 
+ For more details and usage information on Component, see the [guide article
+ on components](guide:concept-components).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -475,7 +479,7 @@ return (void)
 >
  __isset($name)
 <
-return (boolean) Whether the named property is set
+return (bool) Whether the named property is set
 
  This method will check in the following order and act accordingly:
 
@@ -528,7 +532,7 @@ return (mixed) The method return value
 >
  hasProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (boolean) Whether the property is defined
+return (bool) Whether the property is defined
 
  A property is defined if:
 
@@ -541,8 +545,8 @@ return (boolean) Whether the property is defined
    '$checkBehaviors' is true).
 
     [$name] (string) The property name
-    [$checkVars] (boolean) Whether to treat member variables as properties
-    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
     properties of this component
 
 
@@ -550,7 +554,7 @@ return (boolean) Whether the property is defined
 >
  canGetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (boolean) Whether the property can be read
+return (bool) Whether the property can be read
 
  A property can be read if:
 
@@ -563,8 +567,8 @@ return (boolean) Whether the property can be read
    (when '$checkBehaviors' is true).
 
     [$name] (string) The property name
-    [$checkVars] (boolean) Whether to treat member variables as properties
-    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
     properties of this component
 
 
@@ -572,7 +576,7 @@ return (boolean) Whether the property can be read
 >
  canSetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (boolean) Whether the property can be written
+return (bool) Whether the property can be written
 
  A property can be written if:
 
@@ -585,8 +589,8 @@ return (boolean) Whether the property can be written
    (when '$checkBehaviors' is true).
 
     [$name] (string) The property name
-    [$checkVars] (boolean) Whether to treat member variables as properties
-    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
     properties of this component
 
 
@@ -594,7 +598,7 @@ return (boolean) Whether the property can be written
 >
  hasMethod($name, $checkBehaviors='true')
 <
-return (boolean) Whether the property is defined
+return (bool) Whether the method is defined
 
  A method is defined if:
 
@@ -604,8 +608,8 @@ return (boolean) Whether the property is defined
    '$checkBehaviors' is true).
 
     [$name] (string) The property name
-    [$checkBehaviors] (boolean) Whether to treat behaviors' methods as methods
-    of this component
+    [$checkBehaviors] (bool) Whether to treat behaviors' methods as methods of
+    this component
 
 
 *yii/base/Component::__clone*				public
@@ -651,7 +655,7 @@ return (array) The behavior configurations.
 >
  hasEventHandlers($name)
 <
-return (boolean) Whether there is any handler attached to the event.
+return (bool) Whether there is any handler attached to the event.
 
     [$name] (string) The event name
 
@@ -682,7 +686,7 @@ return (void)
     [$data] (mixed) The data to be passed to the event handler when the event
     is triggered. When the event handler is invoked, this data can be accessed
     via 'Event::data'.
-    [$append] (boolean) Whether to append new event handler to the end of the
+    [$append] (bool) Whether to append new event handler to the end of the
     existing handler list. If false, the new handler will be inserted at the
     beginning of the existing handler list.
 
@@ -691,7 +695,7 @@ return (void)
 >
  off($name, $handler='null')
 <
-return (boolean) If a handler is found and detached
+return (bool) If a handler is found and detached
 
  This method is the opposite of 'on()'.
 

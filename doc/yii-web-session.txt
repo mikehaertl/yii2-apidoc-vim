@@ -41,6 +41,9 @@ DESCRIPTION
  are particularly useful for displaying confirmation messages. To use flash
  messages, simply call methods such as 'setFlash()', 'getFlash()'.
 
+ For more details and usage information on Session, see the [guide article on
+ sessions](guide:runtime-sessions-cookies).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -61,15 +64,15 @@ $behaviors				*yii/web/Session::$behaviors*
 
 $useCustomStorage			*yii/web/Session::$useCustomStorage*
 
- (boolean) Whether to use custom storage.
+ (bool) Whether to use custom storage.
 
 $isActive				*yii/web/Session::$isActive*
 
- (boolean) Whether the session has started
+ (bool) Whether the session has started
 
 $hasSessionId				*yii/web/Session::$hasSessionId*
 
- (boolean) Whether the current request has sent the session ID.
+ (bool) Whether the current request has sent the session ID.
 
 $id					*yii/web/Session::$id*
 
@@ -89,7 +92,7 @@ $cookieParams				*yii/web/Session::$cookieParams*
 
 $useCookies				*yii/web/Session::$useCookies*
 
- (boolean|null) The value indicating whether cookies should be used to store
+ (bool|null) The value indicating whether cookies should be used to store
  session IDs.
 
 $gCProbability				*yii/web/Session::$gCProbability*
@@ -99,13 +102,12 @@ $gCProbability				*yii/web/Session::$gCProbability*
 
 $useTransparentSessionID		*yii/web/Session::$useTransparentSessionID*
 
- (boolean) Whether transparent sid support is enabled or not, defaults to
- false.
+ (bool) Whether transparent sid support is enabled or not, defaults to false.
 
 $timeout				*yii/web/Session::$timeout*
 
- (integer) The number of seconds after which data will be seen as 'garbage'
- and cleaned up. The default value is 1440 seconds (or the value of
+ (int) The number of seconds after which data will be seen as 'garbage' and
+ cleaned up. The default value is 1440 seconds (or the value of
  "session.gc_maxlifetime" set in php.ini).
 
 $iterator				*yii/web/Session::$iterator*
@@ -114,7 +116,7 @@ $iterator				*yii/web/Session::$iterator*
 
 $count					*yii/web/Session::$count*
 
- (integer) The number of session variables
+ (int) The number of session variables
 
 $allFlashes				*yii/web/Session::$allFlashes*
 
@@ -267,7 +269,7 @@ return (void)
 >
  getUseCustomStorage()
 <
-return (boolean) Whether to use custom storage.
+return (bool) Whether to use custom storage.
 
  This method should be overridden to return true by child classes that
  implement custom session storage. To implement custom session storage,
@@ -311,7 +313,7 @@ return (void)
 >
  getIsActive()
 <
-return (boolean) Whether the session has started
+return (bool) Whether the session has started
 
 
 
@@ -319,7 +321,7 @@ return (boolean) Whether the session has started
 >
  getHasSessionId()
 <
-return (boolean) Whether the current request has sent the session ID.
+return (bool) Whether the current request has sent the session ID.
 
  The default implementation will check cookie and $_GET using the session
  name. If you send session ID via other ways, you may need to override this
@@ -336,7 +338,7 @@ return (void)
  This method is provided so that you can override the default way of
  determining whether the session ID is sent.
 
-    [$value] (boolean) Whether the current request has sent the session ID.
+    [$value] (bool) Whether the current request has sent the session ID.
 
 
 *yii/web/Session::getId*					public
@@ -369,7 +371,7 @@ return (void)
 
  Please refer to <http://php.net/session_regenerate_id> for more details.
 
-    [$deleteOldSession] (boolean) Whether to delete the old associated session
+    [$deleteOldSession] (bool) Whether to delete the old associated session
     file or not.
 
 
@@ -444,7 +446,7 @@ return (void)
 >
  getUseCookies()
 <
-return (boolean|null) The value indicating whether cookies should be used to store
+return (bool|null) The value indicating whether cookies should be used to store
 session IDs.
 
 
@@ -463,8 +465,8 @@ return (void)
    - null: if possible, cookies will be used to store session IDs; if
    not, other mechanisms will be used (e.g. GET parameter)
 
-    [$value] (boolean|null) The value indicating whether cookies should be
-    used to store session IDs.
+    [$value] (bool|null) The value indicating whether cookies should be used
+    to store session IDs.
 
 
 *yii/web/Session::getGCProbability*			public
@@ -490,8 +492,7 @@ return (void)
 >
  getUseTransparentSessionID()
 <
-return (boolean) Whether transparent sid support is enabled or not, defaults to
-false.
+return (bool) Whether transparent sid support is enabled or not, defaults to false.
 
 
 
@@ -501,14 +502,14 @@ false.
 <
 return (void)
 
-    [$value] (boolean) Whether transparent sid support is enabled or not.
+    [$value] (bool) Whether transparent sid support is enabled or not.
 
 
 *yii/web/Session::getTimeout*				public
 >
  getTimeout()
 <
-return (integer) The number of seconds after which data will be seen as 'garbage' and
+return (int) The number of seconds after which data will be seen as 'garbage' and
 cleaned up. The default value is 1440 seconds (or the value of
 "session.gc_maxlifetime" set in php.ini).
 
@@ -520,7 +521,7 @@ cleaned up. The default value is 1440 seconds (or the value of
 <
 return (void)
 
-    [$value] (integer) The number of seconds after which data will be seen as
+    [$value] (int) The number of seconds after which data will be seen as
     'garbage' and cleaned up
 
 
@@ -528,7 +529,7 @@ return (void)
 >
  openSession($savePath, $sessionName)
 <
-return (boolean) Whether session is opened successfully
+return (bool) Whether session is opened successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
@@ -541,7 +542,7 @@ return (boolean) Whether session is opened successfully
 >
  closeSession()
 <
-return (boolean) Whether session is closed successfully
+return (bool) Whether session is closed successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
@@ -563,7 +564,7 @@ return (string) The session data
 >
  writeSession($id, $data)
 <
-return (boolean) Whether session write is successful
+return (bool) Whether session write is successful
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
@@ -576,7 +577,7 @@ return (boolean) Whether session write is successful
 >
  destroySession($id)
 <
-return (boolean) Whether session is destroyed successfully
+return (bool) Whether session is destroyed successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
@@ -588,13 +589,13 @@ return (boolean) Whether session is destroyed successfully
 >
  gcSession($maxLifetime)
 <
-return (boolean) Whether session is GCed successfully
+return (bool) Whether session is GCed successfully
 
  This method should be overridden if 'useCustomStorage' returns true. Do not
  call this method directly.
 
-    [$maxLifetime] (integer) The number of seconds after which data will be
-    seen as 'garbage' and cleaned up.
+    [$maxLifetime] (int) The number of seconds after which data will be seen
+    as 'garbage' and cleaned up.
 
 
 *yii/web/Session::getIterator*				public
@@ -610,7 +611,7 @@ return (\yii\web\SessionIterator) An iterator for traversing the session variabl
 >
  getCount()
 <
-return (integer) The number of session variables
+return (int) The number of session variables
 
 
 
@@ -618,7 +619,7 @@ return (integer) The number of session variables
 >
  count()
 <
-return (integer) Number of items in the session.
+return (int) Number of items in the session.
 
  This method is required by '\Countable' interface.
 
@@ -670,7 +671,7 @@ return (void)
 >
  has($key)
 <
-return (boolean) Whether there is the named session variable
+return (bool) Whether there is the named session variable
 
     [$key] (mixed) Session variable name
 
@@ -693,7 +694,7 @@ return (mixed) The flash message or an array of messages if addFlash was used
     [$key] (string) The key identifying the flash message
     [$defaultValue] (mixed) Value to be returned if the flash message does not
     exist.
-    [$delete] (boolean) Whether to delete this flash message right after this
+    [$delete] (bool) Whether to delete this flash message right after this
     method is called. If false, the flash message will be automatically
     deleted in the next request.
 
@@ -720,7 +721,7 @@ return (array) Flash messages (key => message or key => [message1, message2]).
 
  [bootstrap alert]: http://getbootstrap.com/components/#alerts
 
-    [$delete] (boolean) Whether to delete the flash messages right after this
+    [$delete] (bool) Whether to delete the flash messages right after this
     method is called. If false, the flash messages will be automatically
     deleted in the next request.
 
@@ -741,7 +742,7 @@ return (void)
     have a normal session variable using the same name, its value will be
     overwritten by this method.
     [$value] (mixed) Flash message
-    [$removeAfterAccess] (boolean) Whether the flash message should be
+    [$removeAfterAccess] (bool) Whether the flash message should be
     automatically removed only if it is accessed. If false, the flash message
     will be automatically removed after the next request, regardless if it is
     accessed or not. If true (default value), the flash message will remain
@@ -759,7 +760,7 @@ return (void)
 
     [$key] (string) The key identifying the flash message.
     [$value] (mixed) Flash message
-    [$removeAfterAccess] (boolean) Whether the flash message should be
+    [$removeAfterAccess] (bool) Whether the flash message should be
     automatically removed only if it is accessed. If false, the flash message
     will be automatically removed after the next request, regardless if it is
     accessed or not. If true (default value), the flash message will remain
@@ -793,7 +794,7 @@ return (void)
 >
  hasFlash($key)
 <
-return (boolean) Whether any flash messages exist under specified key
+return (bool) Whether any flash messages exist under specified key
 
     [$key] (string) Key identifying the flash message type
 
@@ -802,7 +803,7 @@ return (boolean) Whether any flash messages exist under specified key
 >
  offsetExists($offset)
 <
-return (boolean) 
+return (bool) 
 
     [$offset] (mixed) The offset to check on
 
@@ -813,7 +814,7 @@ return (boolean)
 <
 return (mixed) The element at the offset, null if no element is found at the offset
 
-    [$offset] (integer) The offset to retrieve element.
+    [$offset] (int) The offset to retrieve element.
 
 
 *yii/web/Session::offsetSet*				public
@@ -822,7 +823,7 @@ return (mixed) The element at the offset, null if no element is found at the off
 <
 return (void)
 
-    [$offset] (integer) The offset to set element
+    [$offset] (int) The offset to set element
     [$item] (mixed) The element value
 
 

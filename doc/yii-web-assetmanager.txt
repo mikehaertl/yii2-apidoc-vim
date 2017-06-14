@@ -18,7 +18,8 @@ DESCRIPTION
        ],
    ]
 
-
+ For more details and usage information on AssetManager, see the [guide
+ article on assets](guide:structure-assets).
 
 
 PROPERTY DETAILS
@@ -26,10 +27,10 @@ PROPERTY DETAILS
 
 $bundles				*yii/web/AssetManager::$bundles*
 
- (array|boolean) List of asset bundle configurations. This property is
- provided to customize asset bundles. When a bundle is being loaded by
- 'getBundle()', if it has a corresponding configuration specified here, the
- configuration will be applied to the bundle.
+ (array|bool) List of asset bundle configurations. This property is provided
+ to customize asset bundles. When a bundle is being loaded by 'getBundle()',
+ if it has a corresponding configuration specified here, the configuration
+ will be applied to the bundle.
 
  The array keys are the asset bundle names, which typically are asset bundle
  class names without leading backslash. The array values are the corresponding
@@ -94,7 +95,7 @@ $assetMap				*yii/web/AssetManager::$assetMap*
 
 $linkAssets				*yii/web/AssetManager::$linkAssets*
 
- (boolean) Whether to use symbolic link to publish asset files. Defaults to
+ (bool) Whether to use symbolic link to publish asset files. Defaults to
  false, meaning asset files are copied to 'basePath'. Using symbolic links has
  the benefit that the published assets will always be consistent with the
  source assets and there is no copy operation required. This is especially
@@ -112,14 +113,14 @@ $linkAssets				*yii/web/AssetManager::$linkAssets*
 
 $fileMode				*yii/web/AssetManager::$fileMode*
 
- (integer) The permission to be set for newly published asset files. This
- value will be used by PHP chmod() function. No umask will be applied. If not
- set, the permission will be determined by the current environment.
+ (int) The permission to be set for newly published asset files. This value
+ will be used by PHP chmod() function. No umask will be applied. If not set,
+ the permission will be determined by the current environment.
 
 $dirMode				*yii/web/AssetManager::$dirMode*
 
- (integer) The permission to be set for newly generated asset directories.
- This value will be used by PHP chmod() function. No umask will be applied.
+ (int) The permission to be set for newly generated asset directories. This
+ value will be used by PHP chmod() function. No umask will be applied.
  Defaults to 0775, meaning the directory is read-writable by owner and group,
  but read-only for other users.
 
@@ -146,15 +147,15 @@ $afterCopy				*yii/web/AssetManager::$afterCopy*
 
 $forceCopy				*yii/web/AssetManager::$forceCopy*
 
- (boolean) Whether the directory being published should be copied even if it
- is found in the target directory. This option is used only when publishing a
+ (bool) Whether the directory being published should be copied even if it is
+ found in the target directory. This option is used only when publishing a
  directory. You may want to set this to be 'true' during the development stage
  to make sure the published directory is always up-to-date. Do not set this to
  true on production servers as it will significantly degrade the performance.
 
 $appendTimestamp			*yii/web/AssetManager::$appendTimestamp*
 
- (boolean) Whether to append a timestamp to the URL of every published asset.
+ (bool) Whether to append a timestamp to the URL of every published asset.
  When this is true, the URL of a published asset may look like
  '/path/to/asset?v=timestamp', where 'timestamp' is the last modification time
  of the published asset file. You normally would want to set this property to
@@ -339,9 +340,9 @@ return (\yii\web\AssetBundle) The asset bundle instance
 
     [$name] (string) The class name of the asset bundle (without the leading
     backslash)
-    [$publish] (boolean) Whether to publish the asset files in the asset
-    bundle before it is returned. If you set this false, you must manually
-    call 'AssetBundle::publish()' to publish the asset files.
+    [$publish] (bool) Whether to publish the asset files in the asset bundle
+    before it is returned. If you set this false, you must manually call
+    'AssetBundle::publish()' to publish the asset files.
 
 
 *yii/web/AssetManager::loadBundle*			protected
@@ -352,7 +353,7 @@ return (\yii\web\AssetBundle)
 
     [$name] (string) Bundle name
     [$config] (array) Bundle object configuration
-    [$publish] (boolean) If bundle should be published
+    [$publish] (bool) If bundle should be published
 
 
 *yii/web/AssetManager::loadDummyBundle*			protected
@@ -370,33 +371,33 @@ return (\yii\web\AssetBundle)
 <
 return (string) The actual URL for the specified asset.
 
- The actual URL is obtained by prepending either 'baseUrl' or
- 'AssetManager::baseUrl' to the given asset path.
+ The actual URL is obtained by prepending either 'AssetBundle::$baseUrl' or
+ 'AssetManager::$baseUrl' to the given asset path.
 
     [$bundle] (\yii\web\AssetBundle) The asset bundle which the asset file
     belongs to
     [$asset] (string) The asset path. This should be one of the assets listed
-    in 'js' or 'css'.
+    in 'AssetBundle::$js' or 'AssetBundle::$css'.
 
 
 *yii/web/AssetManager::getAssetPath*			public
 >
  getAssetPath($bundle, $asset)
 <
-return (string|boolean) The actual file path, or false if the asset is specified as
+return (string|false) The actual file path, or 'false' if the asset is specified as
 an absolute URL
 
     [$bundle] (\yii\web\AssetBundle) The asset bundle which the asset file
     belongs to
     [$asset] (string) The asset path. This should be one of the assets listed
-    in 'js' or 'css'.
+    in 'AssetBundle::$js' or 'AssetBundle::$css'.
 
 
 *yii/web/AssetManager::resolveAsset*			protected
 >
  resolveAsset($bundle, $asset)
 <
-return (string|boolean) 
+return (string|bool) 
 
     [$bundle] (\yii\web\AssetBundle) 
     [$asset] (string) 
@@ -479,7 +480,7 @@ published as.
 >
  publishFile($src)
 <
-return (array) The path and the URL that the asset is published as.
+return (string[]) The path and the URL that the asset is published as.
 
     [$src] (string) The asset file to be published
 
@@ -488,7 +489,7 @@ return (array) The path and the URL that the asset is published as.
 >
  publishDirectory($src, $options)
 <
-return (array) The path directory and the URL that the asset is published as.
+return (string[]) The path directory and the URL that the asset is published as.
 
     [$src] (string) The asset directory to be published
     [$options] (array) The options to be applied when publishing a directory.

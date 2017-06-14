@@ -9,6 +9,12 @@ SUBCLASSES
 |yii/rbac/DbManager|
 |yii/mongodb/rbac/MongoDbManager|
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For more details and usage information on DbManager, see the [guide article
+ on security authorization](guide:security-authorization).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -183,7 +189,7 @@ returned if no such item.
 <
 return (\yii\rbac\Item[]) The auth items of the specified type.
 
-    [$type] (integer) The auth item type (either 'Item::TYPE_ROLE' or
+    [$type] (int) The auth item type (either 'Item::TYPE_ROLE' or
     'Item::TYPE_PERMISSION'
 
 
@@ -191,7 +197,7 @@ return (\yii\rbac\Item[]) The auth items of the specified type.
 >
  addItem($item)
 <
-return (boolean) Whether the auth item is successfully added to the system
+return (bool) Whether the auth item is successfully added to the system
 
     [$item] (\yii\rbac\Item) The item to add
 
@@ -200,7 +206,7 @@ return (boolean) Whether the auth item is successfully added to the system
 >
  addRule($rule)
 <
-return (boolean) Whether the rule is successfully added to the system
+return (bool) Whether the rule is successfully added to the system
 
     [$rule] (\yii\rbac\Rule) The rule to add
 
@@ -209,7 +215,7 @@ return (boolean) Whether the rule is successfully added to the system
 >
  removeItem($item)
 <
-return (boolean) Whether the role or permission is successfully removed
+return (bool) Whether the role or permission is successfully removed
 
     [$item] (\yii\rbac\Item) The item to remove
 
@@ -218,7 +224,7 @@ return (boolean) Whether the role or permission is successfully removed
 >
  removeRule($rule)
 <
-return (boolean) Whether the rule is successfully removed
+return (bool) Whether the rule is successfully removed
 
     [$rule] (\yii\rbac\Rule) The rule to remove
 
@@ -227,7 +233,7 @@ return (boolean) Whether the rule is successfully removed
 >
  updateItem($name, $item)
 <
-return (boolean) Whether the auth item is successfully updated
+return (bool) Whether the auth item is successfully updated
 
     [$name] (string) The name of the item being updated
     [$item] (\yii\rbac\Item) The updated item
@@ -237,7 +243,7 @@ return (boolean) Whether the auth item is successfully updated
 >
  updateRule($name, $rule)
 <
-return (boolean) Whether the rule is successfully updated
+return (bool) Whether the rule is successfully updated
 
     [$name] (string) The name of the rule being updated
     [$rule] (\yii\rbac\Rule) The updated rule
@@ -279,7 +285,7 @@ return (\yii\rbac\Permission) The new Permission object
 >
  add($object)
 <
-return (boolean) Whether the role, permission or rule is successfully added to the
+return (bool) Whether the role, permission or rule is successfully added to the
 system
 
 
@@ -295,7 +301,7 @@ system
 >
  remove($object)
 <
-return (boolean) Whether the role, permission or rule is successfully removed
+return (bool) Whether the role, permission or rule is successfully removed
 
 
 
@@ -310,7 +316,7 @@ return (boolean) Whether the role, permission or rule is successfully removed
 >
  update($name, $object)
 <
-return (boolean) Whether the update is successful
+return (bool) Whether the update is successful
 
 
 
@@ -386,18 +392,28 @@ by the permission names.
 >
  executeRule($user, $item, $params)
 <
-return (boolean) The return value of 'Rule::execute()'. If the auth item does not
+return (bool) The return value of 'Rule::execute()'. If the auth item does not
 specify a rule, true will be returned.
 
  If the item does not specify a rule, this method will return true. Otherwise,
  it will return the value of 'Rule::execute()'.
 
-    [$user] (string|integer) The user ID. This should be either an integer or
-    a string representing the unique identifier of a user. See
+    [$user] (string|int) The user ID. This should be either an integer or a
+    string representing the unique identifier of a user. See
     '\yii\web\User::id'.
     [$item] (\yii\rbac\Item) The auth item that needs to execute its rule
     [$params] (array) Parameters passed to
     'CheckAccessInterface::checkAccess()' and will be passed to the rule
+
+
+*yii/rbac/BaseManager::hasNoAssignments*			protected
+>
+ hasNoAssignments($assignments)
+<
+return (bool) Whether array of $assignments is empty and 'defaultRoles' property is
+empty as well
+
+    [$assignments] (\yii\rbac\Assignment[]) Array of user's assignments
 
 
 *yii/rbac/BaseManager::getRolesByUser*			public

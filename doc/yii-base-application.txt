@@ -8,6 +8,12 @@ SUBCLASSES
 |yii/web/Application|
 |yii/console/Application|
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For more details and usage information on Application, see the [guide article
+ on applications](guide:structure-applications).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -26,7 +32,7 @@ $module					*yii/base/Application::$module*
 
 $layout					*yii/base/Application::$layout*
 
- (string|boolean) The layout that should be applied for views in this
+ (string|bool) The layout that should be applied for views in this
  application. Defaults to 'main'. If this is false, layout will be disabled.
 
 $controllerMap				*yii/base/Application::$controllerMap*
@@ -49,10 +55,6 @@ $defaultRoute				*yii/base/Application::$defaultRoute*
 $name					*yii/base/Application::$name*
 
  (string) The application name.
-
-$version				*yii/base/Application::$version*
-
- (string) The version of this application.
 
 $charset				*yii/base/Application::$charset*
 
@@ -130,7 +132,7 @@ $bootstrap				*yii/base/Application::$bootstrap*
 
 $state					*yii/base/Application::$state*
 
- (integer) The current application state during a request handling life cycle.
+ (int) The current application state during a request handling life cycle.
  This property is managed by the application. Do not modify this property.
 
 $loadedModules				*yii/base/Application::$loadedModules*
@@ -164,6 +166,10 @@ $viewPath				*yii/base/Application::$viewPath*
 $layoutPath				*yii/base/Application::$layoutPath*
 
  See |yii/base/Module::$layoutPath|
+
+$version				*yii/base/Application::$version*
+
+ See |yii/base/Module::$version|
 
 $aliases				*yii/base/Application::$aliases*
 
@@ -246,6 +252,10 @@ $assetManager				*yii/base/Application::$assetManager*
 $security				*yii/base/Application::$security*
 
  (\yii\base\Security) The security application component.
+
+$container				*yii/base/Application::$container*
+
+ (array) Values given in terms of name-value pairs
 
 
 
@@ -487,6 +497,21 @@ return (void)
  See |yii/base/Module::setLayoutPath|
 
 
+*yii/base/Application::getVersion*			public
+
+ See |yii/base/Module::getVersion|
+
+
+*yii/base/Application::setVersion*			public
+
+ See |yii/base/Module::setVersion|
+
+
+*yii/base/Application::defaultVersion*			protected
+
+ See |yii/base/Module::defaultVersion|
+
+
 *yii/base/Application::setAliases*			public
 
  See |yii/base/Module::setAliases|
@@ -579,7 +604,7 @@ return (void)
 >
  run()
 <
-return (integer) The exit status (0 means normal, non-zero values mean abnormal)
+return (int) The exit status (0 means normal, non-zero values mean abnormal)
 
  This is the main entrance of an application.
 
@@ -789,10 +814,19 @@ return (void)
  This method replaces the 'exit()' function by ensuring the application life
  cycle is completed before terminating the application.
 
-    [$status] (integer) The exit status (value 0 means normal exit while other
+    [$status] (int) The exit status (value 0 means normal exit while other
     values mean abnormal exit).
     [$response] (\yii\base\Response) The response to be sent. If not set, the
     default application 'response' component will be used.
+
+
+*yii/base/Application::setContainer*			public
+>
+ setContainer($config)
+<
+return (void)
+
+    [$config] (array) Values given in terms of name-value pairs
 
 
 

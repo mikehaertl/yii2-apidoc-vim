@@ -13,6 +13,9 @@ DESCRIPTION
  the default configuration, LinkPager should look good using Twitter Bootstrap
  CSS framework.
 
+ For more details and usage information on LinkPager, see the [guide article
+ on pagination](guide:output-pagination).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -70,46 +73,55 @@ $disabledPageCssClass			*yii/widgets/LinkPager::$disabledPageCssClass*
 
  (string) The CSS class for the disabled page buttons.
 
+$disabledListItemSubTagOptions		*yii/widgets/LinkPager::$disabledListItemSubTagOptions*
+
+ (array) The options for the disabled tag to be generated inside the disabled
+ list element. In order to customize the html tag, please use the tag key.
+
+   $disabledListItemSubTagOptions = ['tag' => 'div', 'class' =>
+ 'disabled-div'];
+
+
+
 $maxButtonCount				*yii/widgets/LinkPager::$maxButtonCount*
 
- (integer) Maximum number of page buttons that can be displayed. Defaults to
- 10.
+ (int) Maximum number of page buttons that can be displayed. Defaults to 10.
 
 $nextPageLabel				*yii/widgets/LinkPager::$nextPageLabel*
 
- (string|boolean) The label for the "next" page button. Note that this will
- NOT be HTML-encoded. If this property is false, the "next" page button will
- not be displayed.
+ (string|bool) The label for the "next" page button. Note that this will NOT
+ be HTML-encoded. If this property is false, the "next" page button will not
+ be displayed.
 
 $prevPageLabel				*yii/widgets/LinkPager::$prevPageLabel*
 
- (string|boolean) The text label for the previous page button. Note that this
+ (string|bool) The text label for the previous page button. Note that this
  will NOT be HTML-encoded. If this property is false, the "previous" page
  button will not be displayed.
 
 $firstPageLabel				*yii/widgets/LinkPager::$firstPageLabel*
 
- (string|boolean) The text label for the "first" page button. Note that this
- will NOT be HTML-encoded. If it's specified as true, page number will be used
- as label. Default is false that means the "first" page button will not be
+ (string|bool) The text label for the "first" page button. Note that this will
+ NOT be HTML-encoded. If it's specified as true, page number will be used as
+ label. Default is false that means the "first" page button will not be
  displayed.
 
 $lastPageLabel				*yii/widgets/LinkPager::$lastPageLabel*
 
- (string|boolean) The text label for the "last" page button. Note that this
- will NOT be HTML-encoded. If it's specified as true, page number will be used
- as label. Default is false that means the "last" page button will not be
+ (string|bool) The text label for the "last" page button. Note that this will
+ NOT be HTML-encoded. If it's specified as true, page number will be used as
+ label. Default is false that means the "last" page button will not be
  displayed.
 
 $registerLinkTags			*yii/widgets/LinkPager::$registerLinkTags*
 
- (boolean) Whether to register link tags in the HTML header for prev, next,
- first and last page. Defaults to 'false' to avoid conflicts when multiple
- pagers are used on one page.
+ (bool) Whether to register link tags in the HTML header for prev, next, first
+ and last page. Defaults to 'false' to avoid conflicts when multiple pagers
+ are used on one page.
 
 $hideOnSinglePage			*yii/widgets/LinkPager::$hideOnSinglePage*
 
- (boolean) Hide widget when only one page exist.
+ (bool) Hide widget when only one page exist.
 
 $behaviors				*yii/widgets/LinkPager::$behaviors*
 
@@ -321,6 +333,16 @@ return (void)
  See |yii/base/Widget::getViewPath|
 
 
+*yii/widgets/LinkPager::beforeRun*			public
+
+ See |yii/base/Widget::beforeRun|
+
+
+*yii/widgets/LinkPager::afterRun*				public
+
+ See |yii/base/Widget::afterRun|
+
+
 *yii/widgets/LinkPager::registerLinkTags*			protected
 >
  registerLinkTags()
@@ -347,10 +369,10 @@ return (string) The rendering result
  You may override this method to customize the generation of page buttons.
 
     [$label] (string) The text label for the button
-    [$page] (integer) The page number
+    [$page] (int) The page number
     [$class] (string) The CSS class for the page button.
-    [$disabled] (boolean) Whether this page button is disabled
-    [$active] (boolean) Whether this page button is active
+    [$disabled] (bool) Whether this page button is disabled
+    [$active] (bool) Whether this page button is active
 
 
 *yii/widgets/LinkPager::getPageRange*			protected

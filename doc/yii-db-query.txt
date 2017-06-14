@@ -61,6 +61,10 @@ $indexBy				*yii/db/Query::$indexBy*
 
  See |yii/db/QueryTrait::$indexBy|
 
+$emulateExecution			*yii/db/Query::$emulateExecution*
+
+ See |yii/db/QueryTrait::$emulateExecution|
+
 $select					*yii/db/Query::$select*
 
  (array) The columns being selected. For example, '['id', 'name']'. This is
@@ -74,8 +78,8 @@ $selectOption				*yii/db/Query::$selectOption*
 
 $distinct				*yii/db/Query::$distinct*
 
- (boolean) Whether to select distinct rows of data only. If this is set true,
- the SELECT clause would be changed to SELECT DISTINCT.
+ (bool) Whether to select distinct rows of data only. If this is set true, the
+ SELECT clause would be changed to SELECT DISTINCT.
 
 $from					*yii/db/Query::$from*
 
@@ -474,6 +478,11 @@ return ($this) The query object itself
  See |yii/db/QueryTrait::offset|
 
 
+*yii/db/Query::emulateExecution*				public
+
+ See |yii/db/QueryTrait::emulateExecution|
+
+
 *yii/db/Query::createCommand*				public
 >
  createCommand($db='null')
@@ -520,7 +529,7 @@ return (\yii\db\BatchQueryResult) The batch query result. It implements the
 
 
 
-    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$batchSize] (int) The number of records to be fetched in each batch.
     [$db] (\yii\db\Connection) The database connection. If not set, the "db"
     application component will be used.
 
@@ -541,7 +550,7 @@ return (\yii\db\BatchQueryResult) The batch query result. It implements the
 
 
 
-    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$batchSize] (int) The number of records to be fetched in each batch.
     [$db] (\yii\db\Connection) The database connection. If not set, the "db"
     application component will be used.
 
@@ -574,8 +583,8 @@ return (array) The converted query result
 >
  one($db='null')
 <
-return (array|boolean) The first row (in terms of an array) of the query result.
-False is returned if the query results in nothing.
+return (array|bool) The first row (in terms of an array) of the query result. False
+is returned if the query results in nothing.
 
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
@@ -613,9 +622,9 @@ the query results in nothing.
 >
  count($q=''*'', $db='null')
 <
-return (integer|string) Number of records. The result may be a string depending on
-the underlying database engine and to support integer values higher than a
-32bit PHP integer can handle.
+return (int|string) Number of records. The result may be a string depending on the
+underlying database engine and to support integer values higher than a 32bit
+PHP integer can handle.
 
     [$q] (string) The COUNT expression. Defaults to '*'. Make sure you
     properly [quote](guide:db-dao#quoting-table-and-column-names) column names
@@ -685,7 +694,7 @@ return (mixed) The maximum of the specified column values.
 >
  exists($db='null')
 <
-return (boolean) Whether the query result contains any row of data.
+return (bool) Whether the query result contains any row of data.
 
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
@@ -696,7 +705,7 @@ return (boolean) Whether the query result contains any row of data.
 >
  queryScalar($selectExpression, $db)
 <
-return (boolean|string) 
+return (bool|string) 
 
  Restores the value of select to make this query reusable.
 
@@ -759,7 +768,7 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
-    [$value] (boolean) Whether to SELECT DISTINCT or not.
+    [$value] (bool) Whether to SELECT DISTINCT or not.
 
 
 *yii/db/Query::from*					public
@@ -1019,6 +1028,69 @@ return ($this) The query object itself
     [$params] (array) The parameters (name => value) to be bound to the query.
 
 
+*yii/db/Query::filterHaving*				public
+>
+ filterHaving($condition)
+<
+return ($this) The query object itself
+
+ This method is similar to 'having()'. The main difference is that this method
+ will remove 'isEmpty()|empty query operands'. As a result, this method is
+ best suited for building query conditions based on filter values entered by
+ users.
+
+ The following code shows the difference between this method and 'having()':
+
+   // HAVING `age`=:age
+   $query->filterHaving(['name' => null, 'age' => 20]);
+   // HAVING `age`=:age
+   $query->having(['age' => 20]);
+   // HAVING `name` IS NULL AND `age`=:age
+   $query->having(['name' => null, 'age' => 20]);
+
+ Note that unlike 'having()', you cannot pass binding parameters to this
+ method.
+
+    [$condition] (array) The conditions that should be put in the HAVING part.
+    See 'having()' on how to specify this parameter.
+
+
+*yii/db/Query::andFilterHaving*				public
+>
+ andFilterHaving($condition)
+<
+return ($this) The query object itself
+
+ The new condition and the existing one will be joined using the 'AND'
+ operator.
+
+ This method is similar to 'andHaving()'. The main difference is that this
+ method will remove 'isEmpty()|empty query operands'. As a result, this method
+ is best suited for building query conditions based on filter values entered
+ by users.
+
+    [$condition] (array) The new HAVING condition. Please refer to 'having()'
+    on how to specify this parameter.
+
+
+*yii/db/Query::orFilterHaving*				public
+>
+ orFilterHaving($condition)
+<
+return ($this) The query object itself
+
+ The new condition and the existing one will be joined using the 'OR'
+ operator.
+
+ This method is similar to 'orHaving()'. The main difference is that this
+ method will remove 'isEmpty()|empty query operands'. As a result, this method
+ is best suited for building query conditions based on filter values entered
+ by users.
+
+    [$condition] (array) The new HAVING condition. Please refer to 'having()'
+    on how to specify this parameter.
+
+
 *yii/db/Query::union*					public
 >
  union($sql, $all='false')
@@ -1026,7 +1098,7 @@ return ($this) The query object itself
 return ($this) The query object itself
 
     [$sql] (string|\yii\db\Query) The SQL statement to be appended using UNION
-    [$all] (boolean) TRUE if using UNION ALL and FALSE if using UNION
+    [$all] (bool) TRUE if using UNION ALL and FALSE if using UNION
 
 
 *yii/db/Query::params*					public

@@ -60,13 +60,19 @@ SUBCLASSES
 |yii/jui/Resizable|
 |yii/jui/Widget|
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For more details and usage information on Widget, see the [guide article on
+ widgets](guide:structure-widgets).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $counter				*yii/base/Widget::$counter*
 
- (integer) A counter used to generate 'id' for widgets.
+ (int) A counter used to generate 'id' for widgets.
 
 $autoIdPrefix				*yii/base/Widget::$autoIdPrefix*
 
@@ -111,8 +117,13 @@ METHOD DETAILS
 
 
 *yii/base/Widget::init*					public
+>
+ init()
+<
+return (void)
 
- See |yii/base/Object::init|
+ This method is called at the end of the constructor. The default
+ implementation will trigger an 'EVENT_INIT' event.
 
 
 *yii/base/Widget::__get*					public
@@ -268,7 +279,7 @@ return (string) The rendering result of the widget.
 <
 return (string) ID of the widget.
 
-    [$autoGenerate] (boolean) Whether to generate an ID if it is not set
+    [$autoGenerate] (bool) Whether to generate an ID if it is not set
     previously
 
 
@@ -358,6 +369,55 @@ return (string) The directory containing the view files for this widget.
 
  The default implementation returns the 'views' subdirectory under the
  directory containing the widget class file.
+
+
+*yii/base/Widget::beforeRun*				public
+>
+ beforeRun()
+<
+return (bool) Whether the widget should continue to be executed.
+
+ The method will trigger the 'EVENT_BEFORE_RUN' event. The return value of the
+ method will determine whether the widget should continue to run.
+
+ When overriding this method, make sure you call the parent implementation
+ like the following:
+
+   public function beforeRun()
+   {
+       if (!parent::beforeRun()) {
+           return false;
+       }
+
+       // your custom code here
+
+       return true; // or false to not run the widget
+   }
+
+
+
+
+*yii/base/Widget::afterRun*				public
+>
+ afterRun($result)
+<
+return (mixed) The processed widget result.
+
+ The method will trigger the 'EVENT_AFTER_RUN' event. The return value of the
+ method will be used as the widget return value.
+
+ If you override this method, your code should look like the following:
+
+   public function afterRun($result)
+   {
+       $result = parent::afterRun($result);
+       // your custom code here
+       return $result;
+   }
+
+
+
+    [$result] (mixed) The widget return result.
 
 
 

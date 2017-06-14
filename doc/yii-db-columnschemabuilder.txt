@@ -25,20 +25,20 @@ $type					*yii/db/ColumnSchemaBuilder::$type*
 
 $length					*yii/db/ColumnSchemaBuilder::$length*
 
- (integer|string|array) Column size or precision definition. This is what goes
+ (int|string|array) Column size or precision definition. This is what goes
  into the parenthesis after the column type. This can be either a string, an
  integer or an array. If it is an array, the array values will be joined into
  a string separated by comma.
 
 $isNotNull				*yii/db/ColumnSchemaBuilder::$isNotNull*
 
- (boolean|null) Whether the column is or not nullable. If this is 'true', a
- 'NOT NULL' constraint will be added. If this is 'false', a 'NULL' constraint
- will be added.
+ (bool|null) Whether the column is or not nullable. If this is 'true', a 'NOT
+ NULL' constraint will be added. If this is 'false', a 'NULL' constraint will
+ be added.
 
 $isUnique				*yii/db/ColumnSchemaBuilder::$isUnique*
 
- (boolean) Whether the column values should be unique. If this is 'true', a
+ (bool) Whether the column values should be unique. If this is 'true', a
  'UNIQUE' constraint will be added.
 
 $check					*yii/db/ColumnSchemaBuilder::$check*
@@ -55,7 +55,7 @@ $append					*yii/db/ColumnSchemaBuilder::$append*
 
 $isUnsigned				*yii/db/ColumnSchemaBuilder::$isUnsigned*
 
- (boolean) Whether the column values should be unsigned. If this is 'true', an
+ (bool) Whether the column values should be unsigned. If this is 'true', an
  'UNSIGNED' keyword will be added.
 
 $after					*yii/db/ColumnSchemaBuilder::$after*
@@ -64,8 +64,7 @@ $after					*yii/db/ColumnSchemaBuilder::$after*
 
 $isFirst				*yii/db/ColumnSchemaBuilder::$isFirst*
 
- (boolean) Whether this column is to be inserted at the beginning of the
- table.
+ (bool) Whether this column is to be inserted at the beginning of the table.
 
 $categoryMap				*yii/db/ColumnSchemaBuilder::$categoryMap*
 
@@ -98,7 +97,7 @@ METHOD DETAILS
 return (void)
 
     [$type] (string) Type of the column. See '$type'.
-    [$length] (integer|string|array) Length or precision of the column. See
+    [$length] (int|string|array) Length or precision of the column. See
     '$length'.
     [$db] (\yii\db\Connection) The current database connection. See '$db'.
     [$config] (array) Name-value pairs that will be used to initialize the
@@ -248,6 +247,9 @@ return ($this)
  append($sql)
 <
 return ($this) 
+
+ Position modifiers will be appended after column definition in databases that
+ support them.
 
     [$sql] (string) The SQL string to be appended.
 

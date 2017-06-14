@@ -50,8 +50,8 @@ return (string) The encoded content
  encoding.
 
     [$content] (string) The content to be encoded
-    [$doubleEncode] (boolean) Whether to encode HTML entities in '$content'.
-    If false, HTML entities in '$content' will not be further encoded.
+    [$doubleEncode] (bool) Whether to encode HTML entities in '$content'. If
+    false, HTML entities in '$content' will not be further encoded.
 
 
 *yii/helpers/BaseHtml::decode*				public
@@ -71,7 +71,7 @@ return (string) The decoded content
 <
 return (string) The generated HTML tag
 
-    [$name] (string|boolean|null) The tag name. If $name is 'null' or 'false',
+    [$name] (string|bool|null) The tag name. If $name is 'null' or 'false',
     the corresponding content will be rendered without any tag.
     [$content] (string) The content to be enclosed between the start and end
     tags. It will not be HTML-encoded. If this is coming from end users, you
@@ -95,7 +95,7 @@ return (string) The generated HTML tag
 <
 return (string) The generated start tag
 
-    [$name] (string|boolean|null) The tag name. If $name is 'null' or 'false',
+    [$name] (string|bool|null) The tag name. If $name is 'null' or 'false',
     the corresponding content will be rendered without any tag.
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
@@ -110,7 +110,7 @@ return (string) The generated start tag
 <
 return (string) The generated end tag
 
-    [$name] (string|boolean|null) The tag name. If $name is 'null' or 'false',
+    [$name] (string|bool|null) The tag name. If $name is 'null' or 'false',
     the corresponding content will be rendered without any tag.
 
 
@@ -151,7 +151,7 @@ return (string) The generated link tag
     [$url] (array|string) The URL of the external CSS file. This parameter
     will be processed by 'Url::to()'.
     [$options] (array) The tag options in terms of name-value pairs. The
-    following option is specially handled:
+    following options are specially handled:
 
 
       - condition: specifies the conditional comments for IE, e.g., 'lt IE
@@ -515,7 +515,13 @@ return (string) The generated text area tag
     will be rendered as the attributes of the resulting tag. The values will
     be HTML-encoded using 'encode()'. If a value is null, the corresponding
     attribute will not be rendered. See 'renderTagAttributes()' for details on
-    how attributes are being rendered.
+    how attributes are being rendered. The following special options are
+    recognized:
+
+
+      - 'doubleEncode': whether to double encode HTML entities in
+      '$value'. If 'false', HTML entities in '$value' will not   be further
+    encoded. This option is available since version 2.0.11.
 
 
 *yii/helpers/BaseHtml::radio*				public
@@ -525,7 +531,7 @@ return (string) The generated text area tag
 return (string) The generated radio button tag
 
     [$name] (string) The name attribute.
-    [$checked] (boolean) Whether the radio button should be checked.
+    [$checked] (bool) Whether the radio button should be checked.
     [$options] (array) The tag options in terms of name-value pairs. See
     'booleanInput()' for details about accepted attributes.
 
@@ -537,7 +543,7 @@ return (string) The generated radio button tag
 return (string) The generated checkbox tag
 
     [$name] (string) The name attribute.
-    [$checked] (boolean) Whether the checkbox should be checked.
+    [$checked] (bool) Whether the checkbox should be checked.
     [$options] (array) The tag options in terms of name-value pairs. See
     'booleanInput()' for details about accepted attributes.
 
@@ -550,7 +556,7 @@ return (string) The generated checkbox tag
 
     [$type] (string) The input type. This can be either 'radio' or 'checkbox'.
     [$name] (string) The name attribute.
-    [$checked] (boolean) Whether the checkbox should be checked.
+    [$checked] (bool) Whether the checkbox should be checked.
     [$options] (array) The tag options in terms of name-value pairs. The
     following options are specially handled:
 
@@ -597,7 +603,14 @@ return (string) The generated drop-down list tag
     following options are specially handled:
 
 
-      - prompt: string, a prompt text to be displayed as the first option; 
+      - prompt: string, a prompt text to be displayed as the first option.
+      Since version 2.0.11 you can use an array   to override the value and to
+    set other tag attributes:
+
+        ['text' => 'Please select', 'options' => ['value' => 'none', 'class'
+    => 'prompt', 'label' => 'Select']],
+
+
       - options: array, the attributes for the select option tags. The
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
@@ -645,7 +658,14 @@ return (string) The generated list box tag
     following options are specially handled:
 
 
-      - prompt: string, a prompt text to be displayed as the first option; 
+      - prompt: string, a prompt text to be displayed as the first option.
+      Since version 2.0.11 you can use an array   to override the value and to
+    set other tag attributes:
+
+        ['text' => 'Please select', 'options' => ['value' => 'none', 'class'
+    => 'prompt', 'label' => 'Select']],
+
+
       - options: array, the attributes for the select option tags. The
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
@@ -1141,7 +1161,14 @@ return (string) The generated drop-down list tag
     following options are specially handled:
 
 
-      - prompt: string, a prompt text to be displayed as the first option; 
+      - prompt: string, a prompt text to be displayed as the first option.
+      Since version 2.0.11 you can use an array   to override the value and to
+    set other tag attributes:
+
+        ['text' => 'Please select', 'options' => ['value' => 'none', 'class'
+    => 'prompt', 'label' => 'Select']],
+
+
       - options: array, the attributes for the select option tags. The
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
@@ -1191,7 +1218,14 @@ return (string) The generated list box tag
     following options are specially handled:
 
 
-      - prompt: string, a prompt text to be displayed as the first option; 
+      - prompt: string, a prompt text to be displayed as the first option.
+      Since version 2.0.11 you can use an array   to override the value and to
+    set other tag attributes:
+
+        ['text' => 'Please select', 'options' => ['value' => 'none', 'class'
+    => 'prompt', 'label' => 'Select']],
+
+
       - options: array, the attributes for the select option tags. The
       array keys must be valid option values,   and the array values are the
     extra attributes for the corresponding option tags. For example,
@@ -1320,7 +1354,7 @@ return (string) The generated radio button list
 return (string) The generated input list
 
  This method is mainly called by 'activeListBox()', 'activeRadioList()' and
- 'activeCheckBoxList()'.
+ 'activeCheckboxList()'.
 
     [$type] (string) The input type. This can be 'listBox', 'radioList', or
     'checkBoxList'.
@@ -1436,7 +1470,7 @@ return (void)
     [$options] (array) The HTML options to be modified.
     [$style] (string|array) The new style string (e.g. ''width: 100px; height:
     200px'') or array (e.g. '['width' => '100px', 'height' => '200px']').
-    [$overwrite] (boolean) Whether to overwrite existing CSS properties if the
+    [$overwrite] (bool) Whether to overwrite existing CSS properties if the
     new style contain them too.
 
 

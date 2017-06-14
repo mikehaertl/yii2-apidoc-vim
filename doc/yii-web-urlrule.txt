@@ -47,8 +47,8 @@ $defaults				*yii/web/UrlRule::$defaults*
 $suffix					*yii/web/UrlRule::$suffix*
 
  (string) The URL suffix used for this rule. For example, ".html" can be used
- so that the URL looks like pointing to a static HTML page. If not, the value
- of 'UrlManager::suffix' will be used.
+ so that the URL looks like pointing to a static HTML page. If not set, the
+ value of 'UrlManager::suffix' will be used.
 
 $verb					*yii/web/UrlRule::$verb*
 
@@ -59,15 +59,15 @@ $verb					*yii/web/UrlRule::$verb*
 
 $mode					*yii/web/UrlRule::$mode*
 
- (integer) A value indicating if this rule should be used for both request
- parsing and URL creation, parsing only, or creation only. If not set or 0, it
- means the rule is both request parsing and URL creation. If it is
- 'PARSING_ONLY', the rule is for request parsing only. If it is
- 'CREATION_ONLY', the rule is for URL creation only.
+ (int) A value indicating if this rule should be used for both request parsing
+ and URL creation, parsing only, or creation only. If not set or 0, it means
+ the rule is both request parsing and URL creation. If it is 'PARSING_ONLY',
+ the rule is for request parsing only. If it is 'CREATION_ONLY', the rule is
+ for URL creation only.
 
 $encodeParams				*yii/web/UrlRule::$encodeParams*
 
- (boolean) A value indicating if parameters should be url encoded.
+ (bool) A value indicating if parameters should be url encoded.
 
 $normalizer				*yii/web/UrlRule::$normalizer*
 
@@ -152,6 +152,14 @@ return (void)
  See |yii/base/Object::hasMethod|
 
 
+*yii/web/UrlRule::__toString*				public
+>
+ __toString()
+<
+return (string) 
+
+
+
 *yii/web/UrlRule::getNormalizer*				protected
 >
  getNormalizer($manager)
@@ -165,7 +173,7 @@ return (\yii\web\UrlNormalizer|null)
 >
  hasNormalizer($manager)
 <
-return (boolean) 
+return (bool) 
 
     [$manager] (\yii\web\UrlManager) The URL manager
 
@@ -174,8 +182,8 @@ return (boolean)
 >
  parseRequest($manager, $request)
 <
-return (array|boolean) The parsing result. The route and the parameters are returned
-as an array. If 'false', it means this rule cannot be used to parse this path
+return (array|bool) The parsing result. The route and the parameters are returned as
+an array. If 'false', it means this rule cannot be used to parse this path
 info.
 
     [$manager] (\yii\web\UrlManager) The URL manager
@@ -186,7 +194,7 @@ info.
 >
  createUrl($manager, $route, $params)
 <
-return (string|boolean) The created URL, or 'false' if this rule cannot be used for
+return (string|bool) The created URL, or 'false' if this rule cannot be used for
 creating this URL.
 
     [$manager] (\yii\web\UrlManager) The URL manager

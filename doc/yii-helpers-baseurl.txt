@@ -89,14 +89,14 @@ return (string) The generated URL
     [$route] (string|array) Use a string to represent a route (e.g. 'index',
     'site/index'), or an array to represent a route with query parameters
     (e.g. '['site/index', 'param1' => 'value1']').
-    [$scheme] (boolean|string) The URI scheme to use in the generated URL:
+    [$scheme] (bool|string) The URI scheme to use in the generated URL:
 
 
       - 'false' (default): generating a relative URL. 
       - 'true': returning an absolute base URL whose scheme is the same as
-      that in '\yii\web\UrlManager::hostInfo'. 
+      that in '\yii\web\UrlManager::$hostInfo'. 
       - string: generating an absolute URL with the specified scheme
-      (either 'http' or 'https').
+      (either 'http', 'https' or empty string   for protocol-relative URL).
 
 
 *yii/helpers/BaseUrl::normalizeRoute*			protected
@@ -145,8 +145,8 @@ return (string) The generated URL
    - an empty string: the currently requested URL will be returned; 
    - a normal string: it will be returned as is.
 
- When '$scheme' is specified (either a string or true), an absolute URL with
- host info (obtained from '\yii\web\UrlManager::hostInfo') will be returned.
+ When '$scheme' is specified (either a string or 'true'), an absolute URL with
+ host info (obtained from '\yii\web\UrlManager::$hostInfo') will be returned.
  If '$url' is already an absolute URL, its scheme will be replaced with the
  specified one.
 
@@ -177,17 +177,34 @@ return (string) The generated URL
    // https://www.example.com/images/logo.gif
    echo Url::to('@web/images/logo.gif', 'https');
 
+   // //www.example.com/images/logo.gif
+   echo Url::to('@web/images/logo.gif', '');
+
 
 
     [$url] (array|string) The parameter to be used to generate a valid URL
-    [$scheme] (boolean|string) The URI scheme to use in the generated URL:
+    [$scheme] (bool|string) The URI scheme to use in the generated URL:
 
 
       - 'false' (default): generating a relative URL. 
       - 'true': returning an absolute base URL whose scheme is the same as
-      that in '\yii\web\UrlManager::hostInfo'. 
+      that in '\yii\web\UrlManager::$hostInfo'. 
       - string: generating an absolute URL with the specified scheme
-      (either 'http' or 'https').
+      (either 'http', 'https' or empty string   for protocol-relative URL).
+
+
+*yii/helpers/BaseUrl::ensureScheme*			public
+>
+ ensureScheme($url, $scheme)
+<
+return (string) The processed URL
+
+ If URL is relative or scheme is not string, normalization is skipped.
+
+    [$url] (string) The URL to process
+    [$scheme] (string) The URI scheme used in URL (e.g. 'http' or 'https').
+    Use empty string to create protocol-relative URL (e.g.
+    '//example.com/path')
 
 
 *yii/helpers/BaseUrl::base*				public
@@ -196,14 +213,14 @@ return (string) The generated URL
 <
 return (string) 
 
-    [$scheme] (boolean|string) The URI scheme to use in the returned base URL:
+    [$scheme] (bool|string) The URI scheme to use in the returned base URL:
 
 
       - 'false' (default): returning the base URL without host info. 
       - 'true': returning an absolute base URL whose scheme is the same as
-      that in '\yii\web\UrlManager::hostInfo'. 
+      that in '\yii\web\UrlManager::$hostInfo'. 
       - string: returning an absolute base URL with the specified scheme
-      (either 'http' or 'https').
+      (either 'http', 'https' or empty string   for protocol-relative URL).
 
 
 *yii/helpers/BaseUrl::remember*				public
@@ -253,21 +270,21 @@ return (string) The canonical URL of the currently requested page
 <
 return (string) Home URL
 
-    [$scheme] (boolean|string) The URI scheme to use for the returned URL:
+    [$scheme] (bool|string) The URI scheme to use for the returned URL:
 
 
       - 'false' (default): returning a relative URL. 
       - 'true': returning an absolute base URL whose scheme is the same as
-      that in '\yii\web\UrlManager::hostInfo'. 
+      that in '\yii\web\UrlManager::$hostInfo'. 
       - string: returning an absolute URL with the specified scheme
-      (either 'http' or 'https').
+      (either 'http', 'https' or empty string   for protocol-relative URL).
 
 
 *yii/helpers/BaseUrl::isRelative*				public
 >
  isRelative($url)
 <
-return (boolean) Whether the URL is relative
+return (bool) Whether the URL is relative
 
  A relative URL does not have host info part.
 
@@ -314,14 +331,14 @@ return (string) The generated URL
     [$params] (array) An associative array of parameters that will be merged
     with the current GET parameters. If a parameter value is null, the
     corresponding GET parameter will be removed.
-    [$scheme] (boolean|string) The URI scheme to use in the generated URL:
+    [$scheme] (bool|string) The URI scheme to use in the generated URL:
 
 
       - 'false' (default): generating a relative URL. 
       - 'true': returning an absolute base URL whose scheme is the same as
-      that in '\yii\web\UrlManager::hostInfo'. 
+      that in '\yii\web\UrlManager::$hostInfo'. 
       - string: generating an absolute URL with the specified scheme
-      (either 'http' or 'https').
+      (either 'http', 'https' or empty string   for protocol-relative URL).
 
 
 *yii/helpers/BaseUrl::getUrlManager*			protected

@@ -40,7 +40,13 @@ $identity				*yii/log/SyslogTarget::$identity*
 
 $facility				*yii/log/SyslogTarget::$facility*
 
- (integer) Syslog facility.
+ (int) Syslog facility.
+
+$options				*yii/log/SyslogTarget::$options*
+
+ (int) Openlog options. This is a bitfield passed as the '$option' parameter
+ to [openlog()](http://php.net/openlog). Defaults to 'null' which means to use
+ the default options 'LOG_ODELAY | LOG_PID'.
 
 $behaviors				*yii/log/SyslogTarget::$behaviors*
 
@@ -67,8 +73,17 @@ METHOD DETAILS
 
 
 *yii/log/SyslogTarget::init*				public
+>
+ init()
+<
+return (void)
 
- See |yii/base/Object::init|
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/log/SyslogTarget::__get*				public

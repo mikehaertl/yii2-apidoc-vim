@@ -102,17 +102,17 @@ $networks				*yii/validators/IpValidator::$networks*
 
 $ipv6					*yii/validators/IpValidator::$ipv6*
 
- (boolean) Whether the validating value can be an IPv6 address. Defaults to
+ (bool) Whether the validating value can be an IPv6 address. Defaults to
  'true'.
 
 $ipv4					*yii/validators/IpValidator::$ipv4*
 
- (boolean) Whether the validating value can be an IPv4 address. Defaults to
+ (bool) Whether the validating value can be an IPv4 address. Defaults to
  'true'.
 
 $subnet					*yii/validators/IpValidator::$subnet*
 
- (boolean) Whether the address can be an IP with CIDR subnet, like
+ (bool) Whether the address can be an IP with CIDR subnet, like
  '192.168.10.0/24'. The following values are possible:
 
 
@@ -122,21 +122,21 @@ $subnet					*yii/validators/IpValidator::$subnet*
 
 $normalize				*yii/validators/IpValidator::$normalize*
 
- (boolean) Whether to add the CIDR prefix with the smallest length (32 for
- IPv4 and 128 for IPv6) to an address without it. Works only when 'subnet' is
- not 'false'. For example:  
+ (bool) Whether to add the CIDR prefix with the smallest length (32 for IPv4
+ and 128 for IPv6) to an address without it. Works only when 'subnet' is not
+ 'false'. For example:  
    - '10.0.1.5' will normalized to '10.0.1.5/32'  
    - '2008:db0::1' will be normalized to '2008:db0::1/128'    Defaults to
  'false'.
 
 $negation				*yii/validators/IpValidator::$negation*
 
- (boolean) Whether address may have a 'NEGATION_CHAR' character at the
- beginning. Defaults to 'false'.
+ (bool) Whether address may have a 'NEGATION_CHAR' character at the beginning.
+ Defaults to 'false'.
 
 $expandIPv6				*yii/validators/IpValidator::$expandIPv6*
 
- (boolean) Whether to expand an IPv6 address to the full notation format.
+ (bool) Whether to expand an IPv6 address to the full notation format.
  Defaults to 'false'.
 
 $ipv4Pattern				*yii/validators/IpValidator::$ipv4Pattern*
@@ -438,6 +438,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -474,6 +477,24 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/IpValidator::getClientOptions*		public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/IpValidator::isActive*			public
@@ -540,7 +561,7 @@ return (array) The IPv4 or IPv6 ranges that are allowed or forbidden.
 >
  validateIPv4($value)
 <
-return (boolean) 
+return (bool) 
 
     [$value] (string) 
 
@@ -549,7 +570,7 @@ return (boolean)
 >
  validateIPv6($value)
 <
-return (boolean) 
+return (bool) 
 
     [$value] (string) 
 

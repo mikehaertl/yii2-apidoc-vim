@@ -88,10 +88,9 @@ $targetAttribute			*yii/validators/ExistValidator::$targetAttribute*
  (string|array) The name of the ActiveRecord attribute that should be used to
  validate the existence of the current attribute value. If not set, it will
  use the name of the attribute currently being validated. You may use an array
- to validate the existence of multiple columns at the same time. The array
- values are the attributes that will be used to validate the existence, while
- the array keys are the attributes whose values are to be validated. If the
- key and the value are the same, you can just specify the value.
+ to validate the existence of multiple columns at the same time. The array key
+ is the name of the attribute with the value to validate, the array value is
+ the name of the database field to search.
 
 $filter					*yii/validators/ExistValidator::$filter*
 
@@ -104,7 +103,11 @@ $filter					*yii/validators/ExistValidator::$filter*
 
 $allowArray				*yii/validators/ExistValidator::$allowArray*
 
- (boolean) Whether to allow array type attribute.
+ (bool) Whether to allow array type attribute.
+
+$targetAttributeJunction		*yii/validators/ExistValidator::$targetAttributeJunction*
+
+ (string) And|or define how target attributes are related
 
 $behaviors				*yii/validators/ExistValidator::$behaviors*
 
@@ -302,6 +305,11 @@ error message. Null should be returned if the data is valid.
 *yii/validators/ExistValidator::clientValidateAttribute*	public
 
  See |yii/validators/Validator::clientValidateAttribute|
+
+
+*yii/validators/ExistValidator::getClientOptions*		public
+
+ See |yii/validators/Validator::getClientOptions|
 
 
 *yii/validators/ExistValidator::isActive*			public

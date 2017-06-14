@@ -8,6 +8,12 @@ SUBCLASSES
 |yii/bootstrap/ActiveField|
 |yii/gii/components/ActiveField|
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For more details and usage information on ActiveField, see the [guide article
+ on forms](guide:input-forms).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -87,35 +93,35 @@ $hintOptions				*yii/widgets/ActiveField::$hintOptions*
 
 $enableClientValidation			*yii/widgets/ActiveField::$enableClientValidation*
 
- (boolean) Whether to enable client-side data validation. If not set, it will
+ (bool) Whether to enable client-side data validation. If not set, it will
  take the value of 'ActiveForm::enableClientValidation'.
 
 $enableAjaxValidation			*yii/widgets/ActiveField::$enableAjaxValidation*
 
- (boolean) Whether to enable AJAX-based data validation. If not set, it will
- take the value of 'ActiveForm::enableAjaxValidation'.
+ (bool) Whether to enable AJAX-based data validation. If not set, it will take
+ the value of 'ActiveForm::enableAjaxValidation'.
 
 $validateOnChange			*yii/widgets/ActiveField::$validateOnChange*
 
- (boolean) Whether to perform validation when the value of the input field is
+ (bool) Whether to perform validation when the value of the input field is
  changed. If not set, it will take the value of
  'ActiveForm::validateOnChange'.
 
 $validateOnBlur				*yii/widgets/ActiveField::$validateOnBlur*
 
- (boolean) Whether to perform validation when the input field loses focus. If
- not set, it will take the value of 'ActiveForm::validateOnBlur'.
+ (bool) Whether to perform validation when the input field loses focus. If not
+ set, it will take the value of 'ActiveForm::validateOnBlur'.
 
 $validateOnType				*yii/widgets/ActiveField::$validateOnType*
 
- (boolean) Whether to perform validation while the user is typing in the input
+ (bool) Whether to perform validation while the user is typing in the input
  field. If not set, it will take the value of 'ActiveForm::validateOnType'.
 
 $validationDelay			*yii/widgets/ActiveField::$validationDelay*
 
- (integer) Number of milliseconds that the validation should be delayed when
- the user types in the field and 'validateOnType' is set 'true'. If not set,
- it will take the value of 'ActiveForm::validationDelay'.
+ (int) Number of milliseconds that the validation should be delayed when the
+ user types in the field and 'validateOnType' is set 'true'. If not set, it
+ will take the value of 'ActiveForm::validationDelay'.
 
 $selectors				*yii/widgets/ActiveField::$selectors*
 
@@ -138,6 +144,11 @@ $parts					*yii/widgets/ActiveField::$parts*
  code. Valid tokens include '{input}', '{label}' and '{error}'. Note that you
  normally don't need to access this property directly as it is maintained by
  various methods of this class.
+
+$addAriaAttributes			*yii/widgets/ActiveField::$addAriaAttributes*
+
+ (bool) Adds aria HTML attributes 'aria-required' and 'aria-invalid' for
+ inputs
 
 $behaviors				*yii/widgets/ActiveField::$behaviors*
 
@@ -414,11 +425,10 @@ return ($this) The field object itself.
     The following special options are recognized:
 
 
-      - 'maxlength': integer|boolean, when 'maxlength' is set 'true' and
-      the model attribute is validated   by a string validator, the
-    'maxlength' option will take the value of
-    '\yii\validators\StringValidator::max'.   This is available since version
-    2.0.3.
+      - 'maxlength': int|bool, when 'maxlength' is set 'true' and the
+      model attribute is validated   by a string validator, the 'maxlength'
+    option will take the value of '\yii\validators\StringValidator::max'.  
+    This is available since version 2.0.3.
 
     Note that if you set a custom 'id' for the input element, you may need to
     adjust the value of 'selectors' accordingly.
@@ -529,10 +539,9 @@ return ($this) The field object itself.
 
     If you set a custom 'id' for the input element, you may need to adjust the
     '$selectors' accordingly.
-    [$enclosedByLabel] (boolean) Whether to enclose the radio within the
-    label. If 'true', the method will still use 'template' to layout the radio
-    button and the error message except that the radio is enclosed by the
-    label tag.
+    [$enclosedByLabel] (bool) Whether to enclose the radio within the label.
+    If 'true', the method will still use 'template' to layout the radio button
+    and the error message except that the radio is enclosed by the label tag.
 
 
 *yii/widgets/ActiveField::checkbox*			public
@@ -569,7 +578,7 @@ return ($this) The field object itself.
 
     If you set a custom 'id' for the input element, you may need to adjust the
     '$selectors' accordingly.
-    [$enclosedByLabel] (boolean) Whether to enclose the checkbox within the
+    [$enclosedByLabel] (bool) Whether to enclose the checkbox within the
     label. If 'true', the method will still use 'template' to layout the
     checkbox and the error message except that the checkbox is enclosed by the
     label tag.
@@ -710,12 +719,37 @@ return (array) The JS options.
 
 
 
+*yii/widgets/ActiveField::isClientValidationEnabled*	protected
+>
+ isClientValidationEnabled()
+<
+return (bool) 
+
+
+
+*yii/widgets/ActiveField::isAjaxValidationEnabled*	protected
+>
+ isAjaxValidationEnabled()
+<
+return (bool) 
+
+
+
 *yii/widgets/ActiveField::getInputId*			protected
 >
  getInputId()
 <
 return (string) The input id.
 
+
+
+*yii/widgets/ActiveField::addAriaAttributes*		protected
+>
+ addAriaAttributes($options)
+<
+return (void)
+
+    [$options] () Array input options
 
 
 

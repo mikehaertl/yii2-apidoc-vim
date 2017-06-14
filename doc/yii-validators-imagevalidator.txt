@@ -109,19 +109,19 @@ $notImage				*yii/validators/ImageValidator::$notImage*
 
 $minWidth				*yii/validators/ImageValidator::$minWidth*
 
- (integer) The minimum width in pixels. Defaults to null, meaning no limit.
+ (int) The minimum width in pixels. Defaults to null, meaning no limit.
 
 $maxWidth				*yii/validators/ImageValidator::$maxWidth*
 
- (integer) The maximum width in pixels. Defaults to null, meaning no limit.
+ (int) The maximum width in pixels. Defaults to null, meaning no limit.
 
 $minHeight				*yii/validators/ImageValidator::$minHeight*
 
- (integer) The minimum height in pixels. Defaults to null, meaning no limit.
+ (int) The minimum height in pixels. Defaults to null, meaning no limit.
 
 $maxHeight				*yii/validators/ImageValidator::$maxHeight*
 
- (integer) The maximum width in pixels. Defaults to null, meaning no limit.
+ (int) The maximum width in pixels. Defaults to null, meaning no limit.
 
 $underWidth				*yii/validators/ImageValidator::$underWidth*
 
@@ -333,7 +333,7 @@ return (void)
 
 *yii/validators/ImageValidator::validateValue*		protected
 >
- validateValue($file)
+ validateValue($value)
 <
 return (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
@@ -345,7 +345,7 @@ error message. Null should be returned if the data is valid.
 
 
 
-    [$file] () 
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/ImageValidator::clientValidateAttribute*	public
@@ -356,6 +356,9 @@ return (string) The client-side validation script. Null if the validator does no
 support client-side validation.
 
 
+
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
 
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
@@ -395,6 +398,24 @@ support client-side validation.
     views or view files containing a model form with this validator applied.
 
 
+*yii/validators/ImageValidator::getClientOptions*		public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
+
+
 *yii/validators/ImageValidator::isActive*			public
 
  See |yii/validators/Validator::isActive|
@@ -418,22 +439,6 @@ support client-side validation.
 *yii/validators/ImageValidator::validateExtension*	protected
 
  See |yii/validators/FileValidator::validateExtension|
-
-
-*yii/validators/ImageValidator::getClientOptions*		protected
->
- getClientOptions($model, $attribute)
-<
-return (array) The client-side validation options
-
-
-
-
-
-
-
-    [$model] (\yii\base\Model) The model being validated
-    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/ImageValidator::validateMimeType*		protected

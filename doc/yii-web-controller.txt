@@ -10,6 +10,12 @@ SUBCLASSES
 |yii/debug/controllers/DefaultController|
 |yii/gii/controllers/DefaultController|
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For more details and usage information on Controller, see the [guide article
+ on controllers](guide:structure-controllers).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -36,8 +42,8 @@ $action					*yii/web/Controller::$action*
 
 $enableCsrfValidation			*yii/web/Controller::$enableCsrfValidation*
 
- (boolean) Whether to enable CSRF validation for the actions in this
- controller. CSRF validation is enabled only when both this property and
+ (bool) Whether to enable CSRF validation for the actions in this controller.
+ CSRF validation is enabled only when both this property and
  '\yii\web\Request::enableCsrfValidation' are true.
 
 $actionParams				*yii/web/Controller::$actionParams*
@@ -238,7 +244,7 @@ return (array) The valid parameters that the action can run with.
 >
  beforeAction($action)
 <
-return (boolean) Whether the action should continue to run.
+return (bool) Whether the action should continue to run.
 
 
 
@@ -354,6 +360,44 @@ return (string) The rendering result.
     available in the view.
 
 
+*yii/web/Controller::asJson*				public
+>
+ asJson($data)
+<
+return (\yii\web\Response) A response that is configured to send '$data' formatted as
+JSON.
+
+ This method is a shortcut for sending data formatted as JSON. It will return
+ the 'Application::getResponse()|response' application component after
+ configuring the 'Response::$format|format' and setting the
+ 'Response::$data|data' that should be formatted. A common usage will be:
+
+   return $this->asJson($data);
+
+
+
+    [$data] (mixed) The data that should be formatted.
+
+
+*yii/web/Controller::asXml*				public
+>
+ asXml($data)
+<
+return (\yii\web\Response) A response that is configured to send '$data' formatted as
+XML.
+
+ This method is a shortcut for sending data formatted as XML. It will return
+ the 'Application::getResponse()|response' application component after
+ configuring the 'Response::$format|format' and setting the
+ 'Response::$data|data' that should be formatted. A common usage will be:
+
+   return $this->asXml($data);
+
+
+
+    [$data] (mixed) The data that should be formatted.
+
+
 *yii/web/Controller::redirect*				public
 >
  redirect($url, $statusCode=302)
@@ -381,7 +425,7 @@ return (\yii\web\Response) The current response object
 
     Any relative URL will be converted into an absolute one by prepending it
     with the host info of the current request.
-    [$statusCode] (integer) The HTTP status code. Defaults to 302. See
+    [$statusCode] (int) The HTTP status code. Defaults to 302. See
     <http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html> for details about
     HTTP status code
 

@@ -77,23 +77,23 @@ $translator				*yii/console/controllers/MessageController::$translator*
 
 $sort					*yii/console/controllers/MessageController::$sort*
 
- (boolean) Whether to sort messages by keys when merging new messages with the
+ (bool) Whether to sort messages by keys when merging new messages with the
  existing ones. Defaults to false, which means the new (untranslated) messages
  will be separated from the old (translated) ones.
 
 $overwrite				*yii/console/controllers/MessageController::$overwrite*
 
- (boolean) Whether the message file should be overwritten with the merged
+ (bool) Whether the message file should be overwritten with the merged
  messages
 
 $removeUnused				*yii/console/controllers/MessageController::$removeUnused*
 
- (boolean) Whether to remove messages that no longer appear in the source
- code. Defaults to false, which means these messages will NOT be removed.
+ (bool) Whether to remove messages that no longer appear in the source code.
+ Defaults to false, which means these messages will NOT be removed.
 
 $markUnused				*yii/console/controllers/MessageController::$markUnused*
 
- (boolean) Whether to mark messages that no longer appear in the source code.
+ (bool) Whether to mark messages that no longer appear in the source code.
  Defaults to true, which means each of these messages will be enclosed with a
  pair of '@@' marks.
 
@@ -115,7 +115,7 @@ $only					*yii/console/controllers/MessageController::$only*
 
 $format					*yii/console/controllers/MessageController::$format*
 
- (string) Generated file format. Can be "php", "db" or "po".
+ (string) Generated file format. Can be "php", "db", "po" or "pot".
 
 $db					*yii/console/controllers/MessageController::$db*
 
@@ -439,7 +439,7 @@ METHOD DETAILS
 >
  options($actionID)
 <
-return (array) The names of the options valid for the action
+return (string[]) The names of the options valid for the action
 
 
 
@@ -536,7 +536,7 @@ name for option and value is option name.
 >
  actionConfig($filePath)
 <
-return (integer) CLI exit code
+return (int) CLI exit code
 
  The generated configuration file contains parameters required for source code
  messages extraction. You may use this configuration file with the "extract"
@@ -549,7 +549,7 @@ return (integer) CLI exit code
 >
  actionConfigTemplate($filePath)
 <
-return (integer) CLI exit code
+return (int) CLI exit code
 
  The created configuration file contains detailed instructions on how to
  customize it to fit for your needs. After customization, you may use this
@@ -582,9 +582,9 @@ return (void)
     [$db] (\yii\db\Connection) 
     [$sourceMessageTable] (string) 
     [$messageTable] (string) 
-    [$removeUnused] (boolean) 
+    [$removeUnused] (bool) 
     [$languages] (array) 
-    [$markUnused] (boolean) 
+    [$markUnused] (bool) 
 
 
 *yii/console/controllers/MessageController::extractMessages*protected
@@ -603,7 +603,7 @@ return (array)
 >
  isCategoryIgnored($category, $ignoreCategories)
 <
-return (boolean) 
+return (bool) 
 
  Examples:
 
@@ -621,7 +621,7 @@ return (boolean)
 >
  tokensEqual($a, $b)
 <
-return (boolean) 
+return (bool) 
 
     [$a] (array|string) 
     [$b] (array|string) 
@@ -631,7 +631,7 @@ return (boolean)
 >
  getLine($tokens)
 <
-return (integer|string) 
+return (int|string) 
 
     [$tokens] (array) 
 
@@ -644,11 +644,10 @@ return (void)
 
     [$messages] (array) 
     [$dirName] (string) Name of the directory to write to
-    [$overwrite] (boolean) If existing file should be overwritten without
-    backup
-    [$removeUnused] (boolean) If obsolete translations should be removed
-    [$sort] (boolean) If translations should be sorted
-    [$markUnused] (boolean) If obsolete translations should be marked
+    [$overwrite] (bool) If existing file should be overwritten without backup
+    [$removeUnused] (bool) If obsolete translations should be removed
+    [$sort] (bool) If translations should be sorted
+    [$markUnused] (bool) If obsolete translations should be marked
 
 
 *yii/console/controllers/MessageController::saveMessagesCategoryToPHP*protected
@@ -659,12 +658,11 @@ return (int) Exit code
 
     [$messages] (array) 
     [$fileName] (string) Name of the file to write to
-    [$overwrite] (boolean) If existing file should be overwritten without
-    backup
-    [$removeUnused] (boolean) If obsolete translations should be removed
-    [$sort] (boolean) If translations should be sorted
+    [$overwrite] (bool) If existing file should be overwritten without backup
+    [$removeUnused] (bool) If obsolete translations should be removed
+    [$sort] (bool) If translations should be sorted
     [$category] (string) Message category
-    [$markUnused] (boolean) If obsolete translations should be marked
+    [$markUnused] (bool) If obsolete translations should be marked
 
 
 *yii/console/controllers/MessageController::saveMessagesToPO*protected
@@ -675,12 +673,11 @@ return (void)
 
     [$messages] (array) 
     [$dirName] (string) Name of the directory to write to
-    [$overwrite] (boolean) If existing file should be overwritten without
-    backup
-    [$removeUnused] (boolean) If obsolete translations should be removed
-    [$sort] (boolean) If translations should be sorted
+    [$overwrite] (bool) If existing file should be overwritten without backup
+    [$removeUnused] (bool) If obsolete translations should be removed
+    [$sort] (bool) If translations should be sorted
     [$catalog] (string) Message catalog
-    [$markUnused] (boolean) If obsolete translations should be marked
+    [$markUnused] (bool) If obsolete translations should be marked
 
 
 *yii/console/controllers/MessageController::saveMessagesToPOT*protected

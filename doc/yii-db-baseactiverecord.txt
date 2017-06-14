@@ -67,7 +67,7 @@ $dirtyAttributes			*yii/db/BaseActiveRecord::$dirtyAttributes*
 
 $isNewRecord				*yii/db/BaseActiveRecord::$isNewRecord*
 
- (boolean) Whether the record is new and should be inserted when calling
+ (bool) Whether the record is new and should be inserted when calling
  'save()'.
 
 $primaryKey				*yii/db/BaseActiveRecord::$primaryKey*
@@ -139,7 +139,7 @@ return (void)
 >
  __isset($name)
 <
-return (boolean) Whether the property value is null
+return (bool) Whether the property value is null
 
  This method overrides the parent implementation by checking if the named
  attribute is 'null' or not.
@@ -173,7 +173,7 @@ return (void)
 >
  canGetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (boolean) Whether the property can be read
+return (bool) Whether the property can be read
 
 
 
@@ -190,8 +190,8 @@ return (boolean) Whether the property can be read
 
 
     [$name] (string) The property name
-    [$checkVars] (boolean) Whether to treat member variables as properties
-    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
     properties of this component
 
 
@@ -199,7 +199,7 @@ return (boolean) Whether the property can be read
 >
  canSetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (boolean) Whether the property can be written
+return (bool) Whether the property can be written
 
 
 
@@ -216,8 +216,8 @@ return (boolean) Whether the property can be written
 
 
     [$name] (string) The property name
-    [$checkVars] (boolean) Whether to treat member variables as properties
-    [$checkBehaviors] (boolean) Whether to treat behaviors' properties as
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
     properties of this component
 
 
@@ -575,7 +575,7 @@ return (string) The attribute hint
 >
  offsetExists($offset)
 <
-return (boolean) Whether there is an element at the specified offset.
+return (bool) Whether there is an element at the specified offset.
 
  This method is required by the interface '\ArrayAccess'.
 
@@ -713,7 +713,7 @@ return (\yii\db\ActiveQueryInterface) The newly created
 >
  updateAll($attributes, $condition='\'\'')
 <
-return (integer) The number of rows updated
+return (int) The number of rows updated
 
  For example, to change the status to be 1 for all customers whose status is
  2:
@@ -733,7 +733,7 @@ return (integer) The number of rows updated
 >
  updateAllCounters($counters, $condition='\'\'')
 <
-return (integer) The number of rows updated
+return (int) The number of rows updated
 
  For example, to increment all customers' age by 1,
 
@@ -753,7 +753,7 @@ return (integer) The number of rows updated
 >
  deleteAll($condition='\'\'', $params='[]')
 <
-return (integer) The number of rows deleted
+return (int) The number of rows deleted
 
  WARNING: If you do not specify any condition, this method will delete ALL
  rows in the table.
@@ -873,7 +873,8 @@ return (void)
 
  Note that this method does not check if the relation exists or not.
 
-    [$name] (string) The relation name (case-sensitive)
+    [$name] (string) The relation name, e.g. 'orders' for a relation defined
+    via 'getOrders()' method (case-sensitive).
     [$records] (\yii\db\ActiveRecordInterface|array|null) The related records
     to be populated into the relation.
 
@@ -882,9 +883,10 @@ return (void)
 >
  isRelationPopulated($name)
 <
-return (boolean) Whether relation has been populated with records.
+return (bool) Whether relation has been populated with records.
 
-    [$name] (string) The relation name (case-sensitive)
+    [$name] (string) The relation name, e.g. 'orders' for a relation defined
+    via 'getOrders()' method (case-sensitive).
 
 
 *yii/db/BaseActiveRecord::getRelatedRecords*		public
@@ -899,7 +901,7 @@ return (array) An array of related records indexed by relation names.
 >
  hasAttribute($name)
 <
-return (boolean) Whether the model has an attribute with the specified name.
+return (bool) Whether the model has an attribute with the specified name.
 
     [$name] (string) The name of the attribute
 
@@ -986,10 +988,10 @@ return (void)
 >
  isAttributeChanged($name, $identical='true')
 <
-return (boolean) Whether the attribute has been changed
+return (bool) Whether the attribute has been changed
 
     [$name] (string) The name of the attribute.
-    [$identical] (boolean) Whether the comparison of new and old value is made
+    [$identical] (bool) Whether the comparison of new and old value is made
     for identical values using '===', defaults to 'true'. Otherwise '==' is
     used for comparison. This parameter is available since version 2.0.4.
 
@@ -1012,7 +1014,7 @@ return (array) The changed attribute values (name-value pairs)
 >
  save($runValidation='true', $attributeNames='null')
 <
-return (boolean) Whether the saving succeeded (i.e. no validation errors occurred).
+return (bool) Whether the saving succeeded (i.e. no validation errors occurred).
 
  This method will call 'insert()' when 'isNewRecord' is 'true', or 'update()'
  when 'isNewRecord' is 'false'.
@@ -1026,7 +1028,7 @@ return (boolean) Whether the saving succeeded (i.e. no validation errors occurre
 
 
 
-    [$runValidation] (boolean) Whether to perform validation (calling
+    [$runValidation] (bool) Whether to perform validation (calling
     'validate()') before saving the record. Defaults to 'true'. If the
     validation fails, the record will not be saved to the database and this
     method will return 'false'.
@@ -1039,7 +1041,7 @@ return (boolean) Whether the saving succeeded (i.e. no validation errors occurre
 >
  update($runValidation='true', $attributeNames='null')
 <
-return (integer|false) The number of rows affected, or 'false' if validation fails or
+return (int|false) The number of rows affected, or 'false' if validation fails or
 'beforeSave()' stops the updating process.
 
  This method performs the following steps in order:
@@ -1078,7 +1080,7 @@ return (integer|false) The number of rows affected, or 'false' if validation fai
 
 
 
-    [$runValidation] (boolean) Whether to perform validation (calling
+    [$runValidation] (bool) Whether to perform validation (calling
     'validate()') before saving the record. Defaults to 'true'. If the
     validation fails, the record will not be saved to the database and this
     method will return 'false'.
@@ -1091,7 +1093,7 @@ return (integer|false) The number of rows affected, or 'false' if validation fai
 >
  updateAttributes($attributes)
 <
-return (integer) The number of rows affected.
+return (int) The number of rows affected.
 
  This method is a shortcut to 'update()' when data validation is not needed
  and only a small set attributes need to be updated.
@@ -1112,8 +1114,8 @@ return (integer) The number of rows affected.
 >
  updateInternal($attributes='null')
 <
-return (integer|false) The number of rows affected, or false if 'beforeSave()' stops
-the updating process.
+return (int|false) The number of rows affected, or false if 'beforeSave()' stops the
+updating process.
 
     [$attributes] (array) Attributes to update
 
@@ -1122,7 +1124,7 @@ the updating process.
 >
  updateCounters($counters)
 <
-return (boolean) Whether the saving is successful
+return (bool) Whether the saving is successful
 
  Note that this method differs from 'updateAllCounters()' in that it only
  saves counters for the current AR object.
@@ -1143,7 +1145,7 @@ return (boolean) Whether the saving is successful
 >
  delete()
 <
-return (integer|false) The number of rows deleted, or 'false' if the deletion is
+return (int|false) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -1161,8 +1163,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  getIsNewRecord()
 <
-return (boolean) Whether the record is new and should be inserted when calling
-'save()'.
+return (bool) Whether the record is new and should be inserted when calling 'save()'.
 
 
 
@@ -1172,7 +1173,7 @@ return (boolean) Whether the record is new and should be inserted when calling
 <
 return (void)
 
-    [$value] (boolean) Whether the record is new and should be inserted when
+    [$value] (bool) Whether the record is new and should be inserted when
     calling 'save()'.
 
 
@@ -1191,7 +1192,7 @@ return (void)
 >
  beforeSave($insert)
 <
-return (boolean) Whether the insertion or updating should continue. If 'false', the
+return (bool) Whether the insertion or updating should continue. If 'false', the
 insertion or updating will be cancelled.
 
  The default implementation will trigger an 'EVENT_BEFORE_INSERT' event when
@@ -1211,8 +1212,8 @@ insertion or updating will be cancelled.
 
 
 
-    [$insert] (boolean) Whether this method called while inserting a record.
-    If 'false', it means the method is called while updating a record.
+    [$insert] (bool) Whether this method called while inserting a record. If
+    'false', it means the method is called while updating a record.
 
 
 *yii/db/BaseActiveRecord::afterSave*			public
@@ -1227,8 +1228,8 @@ return (void)
  method, make sure you call the parent implementation so that the event is
  triggered.
 
-    [$insert] (boolean) Whether this method called while inserting a record.
-    If 'false', it means the method is called while updating a record.
+    [$insert] (bool) Whether this method called while inserting a record. If
+    'false', it means the method is called while updating a record.
     [$changedAttributes] (array) The old values of attributes that had changed
     and were saved. You can use this parameter to take action based on the
     changes made for example send an email when the password had changed or
@@ -1236,12 +1237,17 @@ return (void)
     gives you the old attribute values while the active record ('$this') has
     already the new, updated values.
 
+    Note that no automatic type conversion performed by default. You may use
+    '\yii\behaviors\AttributeTypecastBehavior' to facilitate attribute
+    typecasting. See
+    http://www.yiiframework.com/doc-2.0/guide-db-active-record.html#attributes-typecasting.
+
 
 *yii/db/BaseActiveRecord::beforeDelete*			public
 >
  beforeDelete()
 <
-return (boolean) Whether the record should be deleted. Defaults to 'true'.
+return (bool) Whether the record should be deleted. Defaults to 'true'.
 
  The default implementation raises the 'EVENT_BEFORE_DELETE' event. When
  overriding this method, make sure you call the parent implementation like the
@@ -1275,7 +1281,7 @@ return (void)
 >
  refresh()
 <
-return (boolean) Whether the row still exists in the database. If 'true', the latest
+return (bool) Whether the row still exists in the database. If 'true', the latest
 data will be populated to this active record. Otherwise, this record will
 remain unchanged.
 
@@ -1298,7 +1304,7 @@ return (void)
 >
  equals($record)
 <
-return (boolean) Whether the two active records refer to the same row in the same
+return (bool) Whether the two active records refer to the same row in the same
 database table.
 
  The comparison is made by comparing the table names and the primary key
@@ -1316,8 +1322,8 @@ return (mixed) The primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is 'true'. A string is
 returned otherwise (null will be returned if the key value is null).
 
-    [$asArray] (boolean) Whether to return the primary key value as an array.
-    If 'true', the return value will be an array with column names as keys and
+    [$asArray] (bool) Whether to return the primary key value as an array. If
+    'true', the return value will be an array with column names as keys and
     column values as values. Note that for composite primary keys, an array
     will always be returned regardless of this parameter value.
 
@@ -1335,8 +1341,8 @@ returned otherwise (null will be returned if the key value is null).
  even if the primary key attribute is manually assigned with a different
  value.
 
-    [$asArray] (boolean) Whether to return the primary key value as an array.
-    If 'true', the return value will be an array with column name as key and
+    [$asArray] (bool) Whether to return the primary key value as an array. If
+    'true', the return value will be an array with column name as key and
     column value as value. If this is 'false' (default), a scalar value will
     be returned for non-composite primary key.
 
@@ -1388,9 +1394,10 @@ object. If the relation does not exist and '$throwException' is 'false',
  'ActiveQueryInterface' object. It can be declared in either the Active Record
  class itself or one of its behaviors.
 
-    [$name] (string) The relation name
-    [$throwException] (boolean) Whether to throw exception if the relation
-    does not exist.
+    [$name] (string) The relation name, e.g. 'orders' for a relation defined
+    via 'getOrders()' method (case-sensitive).
+    [$throwException] (bool) Whether to throw exception if the relation does
+    not exist.
 
 
 *yii/db/BaseActiveRecord::link*				public
@@ -1410,7 +1417,8 @@ return (void)
 
  Note that this method requires that the primary key value is not null.
 
-    [$name] (string) The case sensitive name of the relationship.
+    [$name] (string) The case sensitive name of the relationship, e.g.
+    'orders' for a relation defined via 'getOrders()' method.
     [$model] (\yii\db\ActiveRecordInterface) The model to be linked with the
     current one.
     [$extraColumns] (array) Additional column values to be saved into the
@@ -1429,11 +1437,12 @@ return (void)
  '$delete' is 'true'. Otherwise, the foreign key will be set 'null' and the
  model will be saved without validation.
 
-    [$name] (string) The case sensitive name of the relationship.
+    [$name] (string) The case sensitive name of the relationship, e.g.
+    'orders' for a relation defined via 'getOrders()' method.
     [$model] (\yii\db\ActiveRecordInterface) The model to be unlinked from the
     current one. You have to make sure that the model is really related with
     the current model as this method does not check this.
-    [$delete] (boolean) Whether to delete the model that contains the foreign
+    [$delete] (bool) Whether to delete the model that contains the foreign
     key. If 'false', the model's foreign key will be set 'null' and saved. If
     'true', the model containing the foreign key will be deleted.
 
@@ -1451,8 +1460,9 @@ return (void)
  Note that to destroy the relationship without removing records make sure your
  keys can be set to null
 
-    [$name] (string) The case sensitive name of the relationship.
-    [$delete] (boolean) Whether to delete the model that contains the foreign
+    [$name] (string) The case sensitive name of the relationship, e.g.
+    'orders' for a relation defined via 'getOrders()' method.
+    [$delete] (bool) Whether to delete the model that contains the foreign
     key.
 
 
@@ -1460,8 +1470,8 @@ return (void)
 >
  isPrimaryKey($keys)
 <
-return (boolean) Whether the given set of attributes represents the primary key for
-this model
+return (bool) Whether the given set of attributes represents the primary key for this
+model
 
     [$keys] (array) The set of attributes to check
 

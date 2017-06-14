@@ -12,6 +12,9 @@ DESCRIPTION
 
  View provides a set of methods (e.g. 'render()') for rendering purpose.
 
+ For more details and usage information on View, see the [guide article on
+ views](guide:structure-views).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -75,8 +78,8 @@ $behaviors				*yii/base/View::$behaviors*
 
 $viewFile				*yii/base/View::$viewFile*
 
- (string|boolean) The view file currently being rendered. False if no view
- file is being rendered.
+ (string|bool) The view file currently being rendered. False if no view file
+ is being rendered.
 
 
 
@@ -286,8 +289,8 @@ return (string) The rendering result
 >
  getViewFile()
 <
-return (string|boolean) The view file currently being rendered. False if no view file
-is being rendered.
+return (string|bool) The view file currently being rendered. False if no view file is
+being rendered.
 
 
 
@@ -295,7 +298,7 @@ is being rendered.
 >
  beforeRender($viewFile, $params)
 <
-return (boolean) Whether to continue rendering the view file.
+return (bool) Whether to continue rendering the view file.
 
  The default implementation will trigger the 'EVENT_BEFORE_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
@@ -386,7 +389,7 @@ return (\yii\widgets\Block) The Block widget instance
  This method is a shortcut to beginning 'Block'
 
     [$id] (string) The block ID.
-    [$renderInPlace] (boolean) Whether to render the block content in place.
+    [$renderInPlace] (bool) Whether to render the block content in place.
     Defaults to false, meaning the captured block will not be displayed.
 
 
@@ -433,7 +436,7 @@ return (void)
 >
  beginCache($id, $properties='[]')
 <
-return (boolean) Whether you should generate the content for caching. False if the
+return (bool) Whether you should generate the content for caching. False if the
 cached version is available.
 
  This method will display cached content if it is available. If not, it will

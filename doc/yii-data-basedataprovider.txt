@@ -10,6 +10,12 @@ SUBCLASSES
 |yii/data/ActiveDataProvider|
 |yii/sphinx/ActiveDataProvider|
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For more details and usage information on BaseDataProvider, see the [guide
+ article on data providers](guide:output-data-providers).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -36,11 +42,11 @@ $keys					*yii/data/BaseDataProvider::$keys*
 
 $count					*yii/data/BaseDataProvider::$count*
 
- (integer) The number of data models in the current page.
+ (int) The number of data models in the current page.
 
 $totalCount				*yii/data/BaseDataProvider::$totalCount*
 
- (integer) Total number of possible data models.
+ (int) Total number of possible data models.
 
 $pagination				*yii/data/BaseDataProvider::$pagination*
 
@@ -49,7 +55,7 @@ $pagination				*yii/data/BaseDataProvider::$pagination*
 
 $sort					*yii/data/BaseDataProvider::$sort*
 
- (\yii\data\Sort|boolean) The sorting object. If this is false, it means the
+ (\yii\data\Sort|bool) The sorting object. If this is false, it means the
  sorting is disabled.
 
 
@@ -204,7 +210,7 @@ return (array) The keys
 >
  prepareTotalCount()
 <
-return (integer) Total number of data models in this data provider.
+return (int) Total number of data models in this data provider.
 
 
 
@@ -220,7 +226,7 @@ return (void)
  This method will be implicitly called by 'getModels()' and 'getKeys()' if it
  has not been called before.
 
-    [$forcePrepare] (boolean) Whether to force data preparation even if it has
+    [$forcePrepare] (bool) Whether to force data preparation even if it has
     been done before.
 
 
@@ -263,7 +269,7 @@ return (void)
 >
  getCount()
 <
-return (integer) The number of data models in the current page.
+return (int) The number of data models in the current page.
 
 
 
@@ -271,7 +277,7 @@ return (integer) The number of data models in the current page.
 >
  getTotalCount()
 <
-return (integer) Total number of possible data models.
+return (int) Total number of possible data models.
 
  When 'pagination' is false, this returns the same value as 'count'.
  Otherwise, it will call 'prepareTotalCount()' to get the count.
@@ -283,7 +289,7 @@ return (integer) Total number of possible data models.
 <
 return (void)
 
-    [$value] (integer) The total number of data models.
+    [$value] (int) The total number of data models.
 
 
 *yii/data/BaseDataProvider::getPagination*		public
@@ -303,7 +309,7 @@ the pagination is disabled.
 <
 return (void)
 
-    [$value] (array|\yii\data\Pagination|boolean) The pagination to be used by
+    [$value] (array|\yii\data\Pagination|bool) The pagination to be used by
     this data provider. This can be one of the following:
 
 
@@ -317,7 +323,7 @@ return (void)
 >
  getSort()
 <
-return (\yii\data\Sort|boolean) The sorting object. If this is false, it means the
+return (\yii\data\Sort|bool) The sorting object. If this is false, it means the
 sorting is disabled.
 
 
@@ -328,7 +334,7 @@ sorting is disabled.
 <
 return (void)
 
-    [$value] (array|\yii\data\Sort|boolean) The sort definition to be used by
+    [$value] (array|\yii\data\Sort|bool) The sort definition to be used by
     this data provider. This can be one of the following:
 
 

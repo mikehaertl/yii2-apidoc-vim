@@ -26,7 +26,8 @@ $encoding				*yii/web/XmlResponseFormatter::$encoding*
 
 $rootTag				*yii/web/XmlResponseFormatter::$rootTag*
 
- (string) The name of the root element.
+ (string) The name of the root element. If set to false, null or is empty then
+ no root tag should be added.
 
 $itemTag				*yii/web/XmlResponseFormatter::$itemTag*
 
@@ -35,8 +36,12 @@ $itemTag				*yii/web/XmlResponseFormatter::$itemTag*
 
 $useTraversableAsArray			*yii/web/XmlResponseFormatter::$useTraversableAsArray*
 
- (boolean) Whether to interpret objects implementing the '\Traversable'
- interface as arrays. Defaults to 'true'.
+ (bool) Whether to interpret objects implementing the '\Traversable' interface
+ as arrays. Defaults to 'true'.
+
+$useObjectTags				*yii/web/XmlResponseFormatter::$useObjectTags*
+
+ (bool) If object tags should be added
 
 $behaviors				*yii/web/XmlResponseFormatter::$behaviors*
 
@@ -190,6 +195,15 @@ return (void)
 
     [$element] (\DOMElement) 
     [$data] (mixed) 
+
+
+*yii/web/XmlResponseFormatter::formatScalarValue*		protected
+>
+ formatScalarValue($value)
+<
+return (string) 
+
+    [$value] (int|string|bool) 
 
 
 

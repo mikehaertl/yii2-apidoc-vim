@@ -10,6 +10,9 @@ DESCRIPTION
  information about the file, including 'name', 'tempName', 'type', 'size' and
  'error'.
 
+ For more details and usage information on UploadedFile, see the [guide
+ article on handling uploads](guide:input-file-upload).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -33,11 +36,11 @@ $type					*yii/web/UploadedFile::$type*
 
 $size					*yii/web/UploadedFile::$size*
 
- (integer) The actual size of the uploaded file in bytes
+ (int) The actual size of the uploaded file in bytes
 
 $error					*yii/web/UploadedFile::$error*
 
- (integer) An error code describing the status of this file uploading.
+ (int) An error code describing the status of this file uploading.
 
 $baseName				*yii/web/UploadedFile::$baseName*
 
@@ -49,7 +52,7 @@ $extension				*yii/web/UploadedFile::$extension*
 
 $hasError				*yii/web/UploadedFile::$hasError*
 
- (boolean) Whether there is an error with the uploaded file. Check 'error' for
+ (bool) Whether there is an error with the uploaded file. Check 'error' for
  detailed error code information.
 
 
@@ -196,13 +199,13 @@ return (void)
 >
  saveAs($file, $deleteTempFile='true')
 <
-return (boolean) True whether the file is saved successfully
+return (bool) True whether the file is saved successfully
 
  Note that this method uses php's move_uploaded_file() method. If the target
  file '$file' already exists, it will be overwritten.
 
     [$file] (string) The file path used to save the uploaded file
-    [$deleteTempFile] (boolean) Whether to delete the temporary file after
+    [$deleteTempFile] (bool) Whether to delete the temporary file after
     saving. If true, you will not be able to save the uploaded file again in
     the current request.
 
@@ -227,7 +230,7 @@ return (string) File extension
 >
  getHasError()
 <
-return (boolean) Whether there is an error with the uploaded file. Check 'error' for
+return (bool) Whether there is an error with the uploaded file. Check 'error' for
 detailed error code information.
 
 

@@ -26,6 +26,9 @@ DESCRIPTION
  The look and feel of a grid view can be customized using the large amount of
  properties.
 
+ For more details and usage information on GridView, see the [guide article on
+ data widgets](guide:output-data-widgets).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -70,7 +73,7 @@ $summaryOptions				*yii/grid/GridView::$summaryOptions*
 
 $showOnEmpty				*yii/grid/GridView::$showOnEmpty*
 
- (boolean) Whether to show the grid view if 'dataProvider' returns no data.
+ (bool) Whether to show the grid view if 'dataProvider' returns no data.
 
 $emptyText				*yii/grid/GridView::$emptyText*
 
@@ -149,11 +152,11 @@ $afterRow				*yii/grid/GridView::$afterRow*
 
 $showHeader				*yii/grid/GridView::$showHeader*
 
- (boolean) Whether to show the header section of the grid table.
+ (bool) Whether to show the header section of the grid table.
 
 $showFooter				*yii/grid/GridView::$showFooter*
 
- (boolean) Whether to show the footer section of the grid table.
+ (bool) Whether to show the footer section of the grid table.
 
 $formatter				*yii/grid/GridView::$formatter*
 
@@ -227,7 +230,8 @@ $filterModel				*yii/grid/GridView::$filterModel*
  fill in to filter the data.
 
  Note that in order to show an input field for filtering, a column must have
- its 'DataColumn::attribute' property set or have 'DataColumn::filter' set as
+ its 'DataColumn::attribute' property set and the attribute should be active
+ in the current scenario of $filterModel or have 'DataColumn::filter' set as
  the HTML code for the input field.
 
  When this property is not set (null) the filtering feature is disabled.
@@ -481,6 +485,16 @@ return (void)
  See |yii/base/Widget::getViewPath|
 
 
+*yii/grid/GridView::beforeRun*				public
+
+ See |yii/base/Widget::beforeRun|
+
+
+*yii/grid/GridView::afterRun*				public
+
+ See |yii/base/Widget::afterRun|
+
+
 *yii/grid/GridView::renderItems*				public
 >
  renderItems()
@@ -493,7 +507,7 @@ return (void)
 >
  renderSection($name)
 <
-return (string|boolean) The rendering result of the section, or false if the named
+return (string|bool) The rendering result of the section, or false if the named
 section is not supported.
 
 
@@ -545,7 +559,7 @@ return (array) The options
 >
  renderCaption()
 <
-return (boolean|string) The rendered caption element or 'false' if no caption element
+return (bool|string) The rendered caption element or 'false' if no caption element
 should be rendered.
 
 
@@ -554,7 +568,7 @@ should be rendered.
 >
  renderColumnGroup()
 <
-return (boolean|string) The column group HTML or 'false' if no column group should be
+return (bool|string) The column group HTML or 'false' if no column group should be
 rendered.
 
 
@@ -599,7 +613,7 @@ return (string) The rendering result
 
     [$model] (mixed) The data model to be rendered
     [$key] (mixed) The key associated with the data model
-    [$index] (integer) The zero-based index of the data model among the model
+    [$index] (int) The zero-based index of the data model among the model
     array returned by 'dataProvider'.
 
 

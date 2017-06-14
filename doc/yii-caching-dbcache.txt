@@ -21,7 +21,8 @@ DESCRIPTION
        // 'cacheTable' => 'my_cache',
    ]
 
-
+ For more details and usage information on Cache, see the [guide article on
+ caching](guide:caching-overview).
 
 
 PROPERTY DETAILS
@@ -34,6 +35,10 @@ $keyPrefix				*yii/caching/DbCache::$keyPrefix*
 $serializer				*yii/caching/DbCache::$serializer*
 
  See |yii/caching/Cache::$serializer|
+
+$defaultDuration			*yii/caching/DbCache::$defaultDuration*
+
+ See |yii/caching/Cache::$defaultDuration|
 
 $db					*yii/caching/DbCache::$db*
 
@@ -67,10 +72,10 @@ $cacheTable				*yii/caching/DbCache::$cacheTable*
 
 $gcProbability				*yii/caching/DbCache::$gcProbability*
 
- (integer) The probability (parts per million) that garbage collection (GC)
- should be performed when storing a piece of data in the cache. Defaults to
- 100, meaning 0.01% chance. This number should be between 0 and 1000000. A
- value 0 meaning no GC will be performed at all.
+ (int) The probability (parts per million) that garbage collection (GC) should
+ be performed when storing a piece of data in the cache. Defaults to 100,
+ meaning 0.01% chance. This number should be between 0 and 1000000. A value 0
+ meaning no GC will be performed at all.
 
 $behaviors				*yii/caching/DbCache::$behaviors*
 
@@ -226,8 +231,8 @@ return (void)
 >
  exists($key)
 <
-return (boolean) True if a value exists in cache, false if the value is not in the
-cache or expired.
+return (bool) True if a value exists in cache, false if the value is not in the cache
+or expired.
 
  This can be faster than getting the value from the cache if the data is big.
  Note that this method does not check whether the dependency associated with
@@ -305,14 +310,14 @@ cache or expired.
 >
  setValue($key, $value, $duration)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
 
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached. Other types (if you have
     disabled 'serializer') cannot be saved.
-    [$duration] (integer) The number of seconds in which the cached value will
+    [$duration] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -320,14 +325,14 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  addValue($key, $value, $duration)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
 
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached. Other types (if you have
     disabled 'serializer') cannot be saved.
-    [$duration] (integer) The number of seconds in which the cached value will
+    [$duration] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -335,7 +340,7 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  deleteValue($key)
 <
-return (boolean) If no error happens during deletion
+return (bool) If no error happens during deletion
 
     [$key] (string) The key of the value to be deleted
 
@@ -344,7 +349,7 @@ return (boolean) If no error happens during deletion
 >
  flushValues()
 <
-return (boolean) Whether the flush operation was successful.
+return (bool) Whether the flush operation was successful.
 
  This is the implementation of the method declared in the parent class.
 
@@ -388,13 +393,18 @@ return (array) A list of cached values indexed by the keys
  See |yii/caching/Cache::offsetUnset|
 
 
+*yii/caching/DbCache::getOrSet*				public
+
+ See |yii/caching/Cache::getOrSet|
+
+
 *yii/caching/DbCache::gc*					public
 >
  gc($force='false')
 <
 return (void)
 
-    [$force] (boolean) Whether to enforce the garbage collection regardless of
+    [$force] (bool) Whether to enforce the garbage collection regardless of
     'gcProbability'. Defaults to false, meaning the actual deletion happens
     with the probability as specified by 'gcProbability'.
 

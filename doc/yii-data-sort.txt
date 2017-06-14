@@ -53,13 +53,16 @@ DESCRIPTION
  we show two hyperlinks that can lead to pages with the data sorted by the
  corresponding attributes.
 
+ For more details and usage information on Sort, see the [guide article on
+ sorting](guide:output-sorting).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $enableMultiSort			*yii/data/Sort::$enableMultiSort*
 
- (boolean) Whether the sorting can be applied to multiple attributes
+ (bool) Whether the sorting can be applied to multiple attributes
  simultaneously. Defaults to 'false', which means each time the data can only
  be sorted by one attribute.
 
@@ -241,7 +244,7 @@ return (void)
 return (array) The columns (keys) and their corresponding sort directions (values).
 This can be passed to '\yii\db\Query::orderBy()' to construct a DB query.
 
-    [$recalculate] (boolean) Whether to recalculate the sort directions
+    [$recalculate] (bool) Whether to recalculate the sort directions
 
 
 *yii/data/Sort::getAttributeOrders*			public
@@ -251,7 +254,7 @@ This can be passed to '\yii\db\Query::orderBy()' to construct a DB query.
 return (array) Sort directions indexed by attribute names. Sort direction can be
 either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
 
-    [$recalculate] (boolean) Whether to recalculate the sort directions
+    [$recalculate] (bool) Whether to recalculate the sort directions
 
 
 *yii/data/Sort::setAttributeOrders*			public
@@ -263,7 +266,7 @@ return (void)
     [$attributeOrders] (array|null) Sort directions indexed by attribute
     names. Sort direction can be either 'SORT_ASC' for ascending order or
     'SORT_DESC' for descending order.
-    [$validate] (boolean) Whether to validate given attribute orders against
+    [$validate] (bool) Whether to validate given attribute orders against
     'attributes' and 'enableMultiSort'. If validation is enabled incorrect
     entries will be removed.
 
@@ -272,7 +275,7 @@ return (void)
 >
  getAttributeOrder($attribute)
 <
-return (boolean|null) Sort direction of the attribute. Can be either 'SORT_ASC' for
+return (bool|null) Sort direction of the attribute. Can be either 'SORT_ASC' for
 ascending order or 'SORT_DESC' for descending order. Null is returned if the
 attribute is invalid or does not need to be sorted.
 
@@ -309,8 +312,7 @@ return (string) The URL for sorting. False if the attribute is invalid.
  a page that sorts the data by the specified attribute in descending order.
 
     [$attribute] (string) The attribute name
-    [$absolute] (boolean) Whether to create an absolute URL. Defaults to
-    'false'.
+    [$absolute] (bool) Whether to create an absolute URL. Defaults to 'false'.
 
 
 *yii/data/Sort::createSortParam*				public
@@ -329,7 +331,7 @@ return (string) The value of the sort variable
 >
  hasAttribute($name)
 <
-return (boolean) Whether the sort definition supports sorting by the named attribute.
+return (bool) Whether the sort definition supports sorting by the named attribute.
 
     [$name] (string) The attribute name
 

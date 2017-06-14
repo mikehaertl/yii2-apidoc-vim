@@ -56,7 +56,7 @@ $pdoStatement				*yii/db/Command::$pdoStatement*
 
 $fetchMode				*yii/db/Command::$fetchMode*
 
- (integer) The default fetch mode for this command.
+ (int) The default fetch mode for this command.
 
 $params					*yii/db/Command::$params*
 
@@ -67,8 +67,8 @@ $params					*yii/db/Command::$params*
 
 $queryCacheDuration			*yii/db/Command::$queryCacheDuration*
 
- (integer) The default number of seconds that query results can remain valid
- in cache. Use 0 to indicate that the cached data will never expire. And use a
+ (int) The default number of seconds that query results can remain valid in
+ cache. Use 0 to indicate that the cached data will never expire. And use a
  negative number to indicate query cache should not be used.
 
 $queryCacheDependency			*yii/db/Command::$queryCacheDependency*
@@ -226,8 +226,8 @@ METHOD DETAILS
 <
 return ($this) The command object itself
 
-    [$duration] (integer) The number of seconds that query result of this
-    command can remain valid in the cache. If this is not set, the value of
+    [$duration] (int) The number of seconds that query result of this command
+    can remain valid in the cache. If this is not set, the value of
     'Connection::queryCacheDuration' will be used instead. Use 0 to indicate
     that the cached data will never expire.
     [$dependency] (\yii\caching\Dependency) The cache dependency associated
@@ -284,9 +284,9 @@ return (void)
  improve performance. For SQL statement with binding parameters, this method
  is invoked automatically.
 
-    [$forRead] (boolean) Whether this method is called for a read query. If
-    null, it means the SQL statement should be used to determine whether it is
-    for read or write.
+    [$forRead] (bool) Whether this method is called for a read query. If null,
+    it means the SQL statement should be used to determine whether it is for
+    read or write.
 
 
 *yii/db/Command::cancel*					public
@@ -304,15 +304,15 @@ return (void)
 <
 return ($this) The current command being executed
 
-    [$name] (string|integer) Parameter identifier. For a prepared statement
-    using named placeholders, this will be a parameter name of the form
-    ':name'. For a prepared statement using question mark placeholders, this
-    will be the 1-indexed position of the parameter.
+    [$name] (string|int) Parameter identifier. For a prepared statement using
+    named placeholders, this will be a parameter name of the form ':name'. For
+    a prepared statement using question mark placeholders, this will be the
+    1-indexed position of the parameter.
     [$value] (mixed) The PHP variable to bind to the SQL statement parameter
     (passed by reference)
-    [$dataType] (integer) SQL data type of the parameter. If null, the type is
+    [$dataType] (int) SQL data type of the parameter. If null, the type is
     determined by the PHP type of the value.
-    [$length] (integer) Length of the data type
+    [$length] (int) Length of the data type
     [$driverOptions] (mixed) The driver-specific options
 
 
@@ -331,12 +331,12 @@ return (void)
 <
 return ($this) The current command being executed
 
-    [$name] (string|integer) Parameter identifier. For a prepared statement
-    using named placeholders, this will be a parameter name of the form
-    ':name'. For a prepared statement using question mark placeholders, this
-    will be the 1-indexed position of the parameter.
+    [$name] (string|int) Parameter identifier. For a prepared statement using
+    named placeholders, this will be a parameter name of the form ':name'. For
+    a prepared statement using question mark placeholders, this will be the
+    1-indexed position of the parameter.
     [$value] (mixed) The value to bind to the parameter
-    [$dataType] (integer) SQL data type of the parameter. If null, the type is
+    [$dataType] (int) SQL data type of the parameter. If null, the type is
     determined by the PHP type of the value.
 
 
@@ -377,7 +377,7 @@ return (array) All rows of the query result. Each array element is an array
 representing a row of data. An empty array is returned if the query results in
 nothing.
 
-    [$fetchMode] (integer) The result fetch mode. Please refer to [PHP
+    [$fetchMode] (int) The result fetch mode. Please refer to [PHP
     manual](http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php)
     for valid fetch modes. If this parameter is null, the value set in
     'fetchMode' will be used.
@@ -393,7 +393,7 @@ is returned if the query results in nothing.
  This method is best used when only the first row of result is needed for a
  query.
 
-    [$fetchMode] (integer) The result fetch mode. Please refer to [PHP
+    [$fetchMode] (int) The result fetch mode. Please refer to [PHP
     manual](http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php)
     for valid fetch modes. If this parameter is null, the value set in
     'fetchMode' will be used.
@@ -439,8 +439,10 @@ return ($this) The command object itself
  Note that the created command is not executed until 'execute()' is called.
 
     [$table] (string) The table that new rows will be inserted into.
-    [$columns] (array) The column data (name => value) to be inserted into the
-    table.
+    [$columns] (array|\yii\db\Query) The column data (name => value) to be
+    inserted into the table or instance of 'yii\db\Query|Query' to perform
+    INSERT INTO ... SELECT SQL statement. Passing of 'yii\db\Query|Query' is
+    available since version 2.0.11.
 
 
 *yii/db/Command::batchInsert*				public
@@ -701,7 +703,7 @@ return ($this) The command object itself
     [$columns] (string|array) The column(s) that should be included in the
     index. If there are multiple columns, please separate them by commas. The
     column names will be properly quoted by the method.
-    [$unique] (boolean) Whether to add UNIQUE constraint on the created index.
+    [$unique] (bool) Whether to add UNIQUE constraint on the created index.
 
 
 *yii/db/Command::dropIndex*				public
@@ -738,7 +740,7 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
-    [$check] (boolean) Whether to turn on or off the integrity check.
+    [$check] (bool) Whether to turn on or off the integrity check.
     [$schema] (string) The schema name of the tables. Defaults to empty
     string, meaning the current or default schema.
     [$table] (string) The table name.
@@ -796,7 +798,7 @@ return ($this) The command object itself
 >
  execute()
 <
-return (integer) Number of rows affected by the execution.
+return (int) Number of rows affected by the execution.
 
  This method should only be used for executing non-query SQL statement, such
  as 'INSERT', 'DELETE', 'UPDATE' SQLs. No result set will be returned.
@@ -809,7 +811,7 @@ return (integer) Number of rows affected by the execution.
 return (mixed) The method execution result
 
     [$method] (string) Method of PDOStatement to be called
-    [$fetchMode] (integer) The result fetch mode. Please refer to [PHP
+    [$fetchMode] (int) The result fetch mode. Please refer to [PHP
     manual](http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php)
     for valid fetch modes. If this parameter is null, the value set in
     'fetchMode' will be used.

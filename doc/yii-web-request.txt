@@ -13,13 +13,16 @@ DESCRIPTION
  Request is configured as an application component in '\yii\web\Application'
  by default. You can access that instance via 'Yii::$app->request'.
 
+ For more details and usage information on Request, see the [guide article on
+ requests](guide:runtime-requests).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
 $enableCsrfValidation			*yii/web/Request::$enableCsrfValidation*
 
- (boolean) Whether to enable CSRF (Cross-Site Request Forgery) validation.
+ (bool) Whether to enable CSRF (Cross-Site Request Forgery) validation.
  Defaults to true. When CSRF validation is enabled, forms submitted to an Yii
  Web application must be originated from the same application. If not, a 400
  HTTP exception will be raised.
@@ -47,15 +50,15 @@ $csrfCookie				*yii/web/Request::$csrfCookie*
 
 $enableCsrfCookie			*yii/web/Request::$enableCsrfCookie*
 
- (boolean) Whether to use cookie to persist CSRF token. If false, CSRF token
- will be stored in session under the name of 'csrfParam'. Note that while
- storing CSRF tokens in session increases security, it requires starting a
- session for every page, which will degrade your site performance.
+ (bool) Whether to use cookie to persist CSRF token. If false, CSRF token will
+ be stored in session under the name of 'csrfParam'. Note that while storing
+ CSRF tokens in session increases security, it requires starting a session for
+ every page, which will degrade your site performance.
 
 $enableCookieValidation			*yii/web/Request::$enableCookieValidation*
 
- (boolean) Whether cookies should be validated to ensure they are not
- tampered. Defaults to true.
+ (bool) Whether cookies should be validated to ensure they are not tampered.
+ Defaults to true.
 
 $cookieValidationKey			*yii/web/Request::$cookieValidationKey*
 
@@ -106,43 +109,43 @@ $method					*yii/web/Request::$method*
 
 $isGet					*yii/web/Request::$isGet*
 
- (boolean) Whether this is a GET request.
+ (bool) Whether this is a GET request.
 
 $isOptions				*yii/web/Request::$isOptions*
 
- (boolean) Whether this is a OPTIONS request.
+ (bool) Whether this is a OPTIONS request.
 
 $isHead					*yii/web/Request::$isHead*
 
- (boolean) Whether this is a HEAD request.
+ (bool) Whether this is a HEAD request.
 
 $isPost					*yii/web/Request::$isPost*
 
- (boolean) Whether this is a POST request.
+ (bool) Whether this is a POST request.
 
 $isDelete				*yii/web/Request::$isDelete*
 
- (boolean) Whether this is a DELETE request.
+ (bool) Whether this is a DELETE request.
 
 $isPut					*yii/web/Request::$isPut*
 
- (boolean) Whether this is a PUT request.
+ (bool) Whether this is a PUT request.
 
 $isPatch				*yii/web/Request::$isPatch*
 
- (boolean) Whether this is a PATCH request.
+ (bool) Whether this is a PATCH request.
 
 $isAjax					*yii/web/Request::$isAjax*
 
- (boolean) Whether this is an AJAX (XMLHttpRequest) request.
+ (bool) Whether this is an AJAX (XMLHttpRequest) request.
 
 $isPjax					*yii/web/Request::$isPjax*
 
- (boolean) Whether this is a PJAX request
+ (bool) Whether this is a PJAX request
 
 $isFlash				*yii/web/Request::$isFlash*
 
- (boolean) Whether this is an Adobe Flash or Adobe Flex request.
+ (bool) Whether this is an Adobe Flash or Adobe Flex request.
 
 $rawBody				*yii/web/Request::$rawBody*
 
@@ -194,7 +197,7 @@ $queryString				*yii/web/Request::$queryString*
 
 $isSecureConnection			*yii/web/Request::$isSecureConnection*
 
- (boolean) If the request is sent via secure channel (https)
+ (bool) If the request is sent via secure channel (https)
 
 $serverName				*yii/web/Request::$serverName*
 
@@ -202,7 +205,7 @@ $serverName				*yii/web/Request::$serverName*
 
 $serverPort				*yii/web/Request::$serverPort*
 
- (integer|null) Server port number, null if not available
+ (int|null) Server port number, null if not available
 
 $referrer				*yii/web/Request::$referrer*
 
@@ -232,11 +235,11 @@ $authPassword				*yii/web/Request::$authPassword*
 
 $port					*yii/web/Request::$port*
 
- (integer) Port number for insecure requests.
+ (int) Port number for insecure requests.
 
 $securePort				*yii/web/Request::$securePort*
 
- (integer) Port number for secure requests.
+ (int) Port number for secure requests.
 
 $acceptableContentTypes			*yii/web/Request::$acceptableContentTypes*
 
@@ -470,7 +473,7 @@ value returned is turned into upper case.
 >
  getIsGet()
 <
-return (boolean) Whether this is a GET request.
+return (bool) Whether this is a GET request.
 
 
 
@@ -478,7 +481,7 @@ return (boolean) Whether this is a GET request.
 >
  getIsOptions()
 <
-return (boolean) Whether this is a OPTIONS request.
+return (bool) Whether this is a OPTIONS request.
 
 
 
@@ -486,7 +489,7 @@ return (boolean) Whether this is a OPTIONS request.
 >
  getIsHead()
 <
-return (boolean) Whether this is a HEAD request.
+return (bool) Whether this is a HEAD request.
 
 
 
@@ -494,7 +497,7 @@ return (boolean) Whether this is a HEAD request.
 >
  getIsPost()
 <
-return (boolean) Whether this is a POST request.
+return (bool) Whether this is a POST request.
 
 
 
@@ -502,7 +505,7 @@ return (boolean) Whether this is a POST request.
 >
  getIsDelete()
 <
-return (boolean) Whether this is a DELETE request.
+return (bool) Whether this is a DELETE request.
 
 
 
@@ -510,7 +513,7 @@ return (boolean) Whether this is a DELETE request.
 >
  getIsPut()
 <
-return (boolean) Whether this is a PUT request.
+return (bool) Whether this is a PUT request.
 
 
 
@@ -518,7 +521,7 @@ return (boolean) Whether this is a PUT request.
 >
  getIsPatch()
 <
-return (boolean) Whether this is a PATCH request.
+return (bool) Whether this is a PATCH request.
 
 
 
@@ -526,7 +529,7 @@ return (boolean) Whether this is a PATCH request.
 >
  getIsAjax()
 <
-return (boolean) Whether this is an AJAX (XMLHttpRequest) request.
+return (bool) Whether this is an AJAX (XMLHttpRequest) request.
 
  Note that jQuery doesn't set the header in case of cross domain requests:
  https://stackoverflow.com/questions/8163703/cross-domain-ajax-doesnt-send-x-requested-with-header
@@ -536,7 +539,7 @@ return (boolean) Whether this is an AJAX (XMLHttpRequest) request.
 >
  getIsPjax()
 <
-return (boolean) Whether this is a PJAX request
+return (bool) Whether this is a PJAX request
 
 
 
@@ -544,7 +547,7 @@ return (boolean) Whether this is a PJAX request
 >
  getIsFlash()
 <
-return (boolean) Whether this is an Adobe Flash or Adobe Flex request.
+return (bool) Whether this is an Adobe Flash or Adobe Flex request.
 
 
 
@@ -662,9 +665,27 @@ return (string|null) Schema and hostname part (with port number if needed) of th
 request URL (e.g. 'http://www.yiiframework.com'), null if can't be obtained
 from '$_SERVER' and wasn't set.
 
- The returned URL does not have an ending slash. By default this is determined
- based on the user request information. You may explicitly specify it by
- setting the 'setHostInfo()|hostInfo' property.
+ The returned URL does not have an ending slash.
+
+ By default this value is based on the user request information. This method
+ will return the value of '$_SERVER['HTTP_HOST']' if it is available or
+ '$_SERVER['SERVER_NAME']' if not. You may want to check out the [PHP
+ documentation](http://php.net/manual/en/reserved.variables.server.php) for
+ more information on these variables.
+
+ You may explicitly specify it by setting the 'setHostInfo()|hostInfo'
+ property.
+
+ > Warning: Dependent on the server configuration this information may not be
+ > reliable and [may be faked by the user sending the HTTP
+ request](https://www.acunetix.com/vulnerabilities/web/host-header-attack). >
+ If the webserver is configured to serve the same site independent of the
+ value of > the 'Host' header, this value is not reliable. In such situations
+ you should either > fix your webserver configuration or explicitly set the
+ value by setting the 'setHostInfo()|hostInfo' property. > If you don't have
+ access to the server configuration, you can setup '\yii\filters\HostControl'
+ filter at > application level in order to protect against such kind of
+ attack.
 
 
 *yii/web/Request::setHostInfo*				public
@@ -687,6 +708,9 @@ return (void)
 return (string|null) Hostname part of the request URL (e.g. 'www.yiiframework.com')
 
  Value is calculated from current 'getHostInfo()|hostInfo' property.
+
+ > Warning: The content of this value may not be reliable, dependent on the
+ server > configuration. Please refer to 'getHostInfo()' for more information.
 
 
 *yii/web/Request::getBaseUrl*				public
@@ -804,7 +828,7 @@ return (void)
 >
  resolveRequestUri()
 <
-return (string|boolean) The request URI portion for the currently requested URL. Note
+return (string|bool) The request URI portion for the currently requested URL. Note
 that the URI returned is URL-encoded.
 
  This refers to the portion that is after the 'hostInfo' part. It includes the
@@ -824,7 +848,7 @@ return (string) Part of the request URL that is after the question mark
 >
  getIsSecureConnection()
 <
-return (boolean) If the request is sent via secure channel (https)
+return (bool) If the request is sent via secure channel (https)
 
 
 
@@ -840,7 +864,7 @@ return (string) Server name, null if not available
 >
  getServerPort()
 <
-return (integer|null) Server port number, null if not available
+return (int|null) Server port number, null if not available
 
 
 
@@ -898,7 +922,7 @@ is not given
 >
  getPort()
 <
-return (integer) Port number for insecure requests.
+return (int) Port number for insecure requests.
 
  Defaults to 80, or the port specified by the server if the current request is
  insecure.
@@ -913,14 +937,14 @@ return (void)
  This setter is provided in case a custom port is necessary for certain server
  configurations.
 
-    [$value] (integer) Port number.
+    [$value] (int) Port number.
 
 
 *yii/web/Request::getSecurePort*				public
 >
  getSecurePort()
 <
-return (integer) Port number for secure requests.
+return (int) Port number for secure requests.
 
  Defaults to 443, or the port specified by the server if the current request
  is secure.
@@ -935,7 +959,7 @@ return (void)
  This setter is provided in case a custom port is necessary for certain server
  configurations.
 
-    [$value] (integer) Port number.
+    [$value] (int) Port number.
 
 
 *yii/web/Request::getAcceptableContentTypes*		public
@@ -1097,9 +1121,9 @@ return (string) The token used to perform CSRF validation.
  attacks](http://breachattack.com/). It may be passed along via a hidden field
  of an HTML form or an HTTP header value to support CSRF validation.
 
-    [$regenerate] (boolean) Whether to regenerate CSRF token. When this
-    parameter is true, each time this method is called, a new CSRF token will
-    be generated and persisted (in session or cookie).
+    [$regenerate] (bool) Whether to regenerate CSRF token. When this parameter
+    is true, each time this method is called, a new CSRF token will be
+    generated and persisted (in session or cookie).
 
 
 *yii/web/Request::loadCsrfToken*				protected
@@ -1144,8 +1168,8 @@ return (\yii\web\Cookie) The generated cookie
 >
  validateCsrfToken($token='null')
 <
-return (boolean) Whether CSRF token is valid. If 'enableCsrfValidation' is false,
-this method will return true.
+return (bool) Whether CSRF token is valid. If 'enableCsrfValidation' is false, this
+method will return true.
 
  This method will validate the user-provided CSRF token by comparing it with
  the one stored in cookie or session. This method is mainly called in

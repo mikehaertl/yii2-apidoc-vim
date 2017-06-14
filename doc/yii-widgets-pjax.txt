@@ -39,11 +39,19 @@ PROPERTY DETAILS
 
 $counter				*yii/widgets/Pjax::$counter*
 
- See |yii/base/Widget::$counter|
+ (int) A counter used to generate 'id' for widgets.
+
+ A counter used to generate 'id' for widgets.
+
+
 
 $autoIdPrefix				*yii/widgets/Pjax::$autoIdPrefix*
 
- See |yii/base/Widget::$autoIdPrefix|
+ (string) The prefix to the automatically generated widget IDs.
+
+ The prefix to the automatically generated widget IDs.
+
+
 
 $stack					*yii/widgets/Pjax::$stack*
 
@@ -82,23 +90,23 @@ $submitEvent				*yii/widgets/Pjax::$submitEvent*
 
 $enablePushState			*yii/widgets/Pjax::$enablePushState*
 
- (boolean) Whether to enable push state.
+ (bool) Whether to enable push state.
 
 $enableReplaceState			*yii/widgets/Pjax::$enableReplaceState*
 
- (boolean) Whether to enable replace state.
+ (bool) Whether to enable replace state.
 
 $timeout				*yii/widgets/Pjax::$timeout*
 
- (integer) Pjax timeout setting (in milliseconds). This timeout is used when
+ (int) Pjax timeout setting (in milliseconds). This timeout is used when
  making AJAX requests. Use a bigger number if your server is slow. If the
  server does not respond within the timeout, a full page load will be
  triggered.
 
 $scrollTo				*yii/widgets/Pjax::$scrollTo*
 
- (boolean|integer) How to scroll the page when pjax response is received. If
- false, no page scroll will be made. Use a number if you want to scroll to a
+ (bool|int) How to scroll the page when pjax response is received. If false,
+ no page scroll will be made. Use a number if you want to scroll to a
  particular place.
 
 $clientOptions				*yii/widgets/Pjax::$clientOptions*
@@ -147,8 +155,8 @@ return (void)
 
 
 
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
+ This method is called at the end of the constructor. The default
+ implementation will trigger an 'EVENT_INIT' event.
 
 
 
@@ -326,11 +334,21 @@ return (string) The result of widget execution to be outputted.
  See |yii/base/Widget::getViewPath|
 
 
+*yii/widgets/Pjax::beforeRun*				public
+
+ See |yii/base/Widget::beforeRun|
+
+
+*yii/widgets/Pjax::afterRun*				public
+
+ See |yii/base/Widget::afterRun|
+
+
 *yii/widgets/Pjax::requiresPjax*				protected
 >
  requiresPjax()
 <
-return (boolean) Whether the current request requires pjax response from this widget
+return (bool) Whether the current request requires pjax response from this widget
 
 
 

@@ -41,6 +41,9 @@ DESCRIPTION
  Because '\yii\base\Module' extends from ServiceLocator, modules and the
  application are all service locators.
 
+ For more details and usage information on ServiceLocator, see the [guide
+ article on service locators](guide:concept-service-locator).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -96,7 +99,7 @@ return (mixed) The named property value
 >
  __isset($name)
 <
-return (boolean) Whether the property value is null
+return (bool) Whether the property value is null
 
  This method overrides the parent implementation by checking if the named
  component is loaded.
@@ -203,7 +206,7 @@ return (boolean) Whether the property value is null
 >
  has($id, $checkInstance='false')
 <
-return (boolean) Whether the locator has the specified component definition or has
+return (bool) Whether the locator has the specified component definition or has
 instantiated the component.
 
  This method may return different results depending on the value of
@@ -217,8 +220,8 @@ instantiated the component.
    indicating whether the locator has   instantiated the specified component.
 
     [$id] (string) Component ID (e.g. 'db').
-    [$checkInstance] (boolean) Whether the method should check if the
-    component is shared and instantiated.
+    [$checkInstance] (bool) Whether the method should check if the component
+    is shared and instantiated.
 
 
 *yii/di/ServiceLocator::get*				public
@@ -229,7 +232,7 @@ return (object|null) The component of the specified ID. If '$throwException' is 
 and '$id' is not registered before, null will be returned.
 
     [$id] (string) Component ID (e.g. 'db').
-    [$throwException] (boolean) Whether to throw an exception if '$id' is not
+    [$throwException] (bool) Whether to throw an exception if '$id' is not
     registered with the locator before.
 
 
@@ -297,7 +300,7 @@ return (void)
 return (array) The list of the component definitions or the loaded component
 instances (ID => definition or instance).
 
-    [$returnDefinitions] (boolean) Whether to return component definitions
+    [$returnDefinitions] (bool) Whether to return component definitions
     instead of the loaded component instances.
 
 

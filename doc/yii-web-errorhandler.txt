@@ -12,6 +12,9 @@ DESCRIPTION
  '\yii\base\Application' by default. You can access that instance via
  'Yii::$app->errorHandler'.
 
+ For more details and usage information on ErrorHandler, see the [guide
+ article on handling errors](guide:runtime-handling-errors).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -30,13 +33,12 @@ $exception				*yii/web/ErrorHandler::$exception*
 
 $maxSourceLines				*yii/web/ErrorHandler::$maxSourceLines*
 
- (integer) Maximum number of source code lines to be displayed. Defaults to
- 19.
+ (int) Maximum number of source code lines to be displayed. Defaults to 19.
 
 $maxTraceSourceLines			*yii/web/ErrorHandler::$maxTraceSourceLines*
 
- (integer) Maximum number of trace source code lines to be displayed. Defaults
- to 13.
+ (int) Maximum number of trace source code lines to be displayed. Defaults to
+ 13.
 
 $errorAction				*yii/web/ErrorHandler::$errorAction*
 
@@ -220,6 +222,11 @@ METHOD DETAILS
  See |yii/base/ErrorHandler::handleException|
 
 
+*yii/web/ErrorHandler::handleFallbackExceptionMessage*	protected
+
+ See |yii/base/ErrorHandler::handleFallbackExceptionMessage|
+
+
 *yii/web/ErrorHandler::handleHhvmError*			public
 
  See |yii/base/ErrorHandler::handleHhvmError|
@@ -330,11 +337,11 @@ there are none.
 return (string) HTML content of the rendered call stack element.
 
     [$file] (string|null) Name where call has happened.
-    [$line] (integer|null) Number on which call has happened.
+    [$line] (int|null) Number on which call has happened.
     [$class] (string|null) Called class name.
     [$method] (string|null) Called function/method name.
     [$args] (array) Array of method arguments.
-    [$index] (integer) Number of the call stack element.
+    [$index] (int) Number of the call stack element.
 
 
 *yii/web/ErrorHandler::renderRequest*			public
@@ -350,7 +357,7 @@ return (string) The rendering result
 >
  isCoreFile($file)
 <
-return (boolean) Whether given name of the file belongs to the framework.
+return (bool) Whether given name of the file belongs to the framework.
 
     [$file] (string) Name to be checked.
 
@@ -361,7 +368,7 @@ return (boolean) Whether given name of the file belongs to the framework.
 <
 return (string) Generated HTML with HTTP status code information.
 
-    [$statusCode] (integer) To be used to generate information link.
+    [$statusCode] (int) To be used to generate information link.
     [$statusDescription] (string) Description to display after the the status
     code.
 

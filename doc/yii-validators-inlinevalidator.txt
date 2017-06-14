@@ -7,11 +7,12 @@ DESCRIPTION
 
  The validation method must have the following signature:
 
-   function foo($attribute, $params)
+   function foo($attribute, $params, $validator)
 
  where '$attribute' refers to the name of the attribute being validated, while
  '$params' is an array representing the additional parameters supplied in the
- validation rule.
+ validation rule. Parameter '$validator' refers to the related
+ 'InlineValidator' object and is available since version 2.0.11.
 
 
 PROPERTY DETAILS
@@ -65,13 +66,16 @@ $method					*yii/validators/InlineValidator::$method*
 
  (string|\Closure) An anonymous function or the name of a model class method
  that will be called to perform the actual validation. The signature of the
- method should be like the following, where '$attribute' is the name of the
- attribute to be validated, and '$params' contains the value of 'params' that
- you specify when declaring the inline validation rule:
+ method should be like the following:
 
-   function foo($attribute, $params)
+   function foo($attribute, $params, $validator)
 
 
+   - '$attribute' is the name of the attribute to be validated; 
+   - '$params' contains the value of 'params' that you specify when
+   declaring the inline validation rule; 
+   - '$validator' is a reference to related 'InlineValidator' object.
+   This parameter is available since version 2.0.11.
 
 $params					*yii/validators/InlineValidator::$params*
 
@@ -83,7 +87,7 @@ $clientValidate				*yii/validators/InlineValidator::$clientValidate*
  that returns the client validation code. The signature of the method should
  be like the following:
 
-   function foo($attribute, $params)
+   function foo($attribute, $params, $validator)
    {
        return "javascript";
    }
@@ -274,6 +278,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -310,6 +317,11 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/InlineValidator::getClientOptions*	public
+
+ See |yii/validators/Validator::getClientOptions|
 
 
 *yii/validators/InlineValidator::isActive*		public

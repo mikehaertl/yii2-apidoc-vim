@@ -66,8 +66,8 @@ $falseValue				*yii/validators/BooleanValidator::$falseValue*
 
 $strict					*yii/validators/BooleanValidator::$strict*
 
- (boolean) Whether the comparison to 'trueValue' and 'falseValue' is strict.
- When this is true, the attribute value and type must both match those of
+ (bool) Whether the comparison to 'trueValue' and 'falseValue' is strict. When
+ this is true, the attribute value and type must both match those of
  'trueValue' or 'falseValue'. Defaults to false, meaning only the value needs
  to be matched.
 
@@ -261,6 +261,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -297,6 +300,24 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/BooleanValidator::getClientOptions*	public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/BooleanValidator::isActive*		public

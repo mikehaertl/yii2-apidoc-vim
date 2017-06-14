@@ -41,7 +41,8 @@ DESCRIPTION
        'pagination' => $pages,
    ]);
 
-
+ For more details and usage information on Pagination, see the [guide article
+ on pagination](guide:output-pagination).
 
 
 PROPERTY DETAILS
@@ -57,7 +58,7 @@ $pageSizeParam				*yii/data/Pagination::$pageSizeParam*
 
 $forcePageParam				*yii/data/Pagination::$forcePageParam*
 
- (boolean) Whether to always have the page parameter in the URL created by
+ (bool) Whether to always have the page parameter in the URL created by
  'createUrl()'. If false and 'page' is 0, the page parameter will not be put
  in the URL.
 
@@ -86,20 +87,20 @@ $urlManager				*yii/data/Pagination::$urlManager*
 
 $validatePage				*yii/data/Pagination::$validatePage*
 
- (boolean) Whether to check if 'page' is within valid range. When this
- property is true, the value of 'page' will always be between 0 and
- ('pageCount'-1). Because 'pageCount' relies on the correct value of
- 'totalCount' which may not be available in some cases (e.g. MongoDB), you may
- want to set this property to be false to disable the page number validation.
- By doing so, 'page' will return the value indexed by 'pageParam' in 'params'.
+ (bool) Whether to check if 'page' is within valid range. When this property
+ is true, the value of 'page' will always be between 0 and ('pageCount'-1).
+ Because 'pageCount' relies on the correct value of 'totalCount' which may not
+ be available in some cases (e.g. MongoDB), you may want to set this property
+ to be false to disable the page number validation. By doing so, 'page' will
+ return the value indexed by 'pageParam' in 'params'.
 
 $totalCount				*yii/data/Pagination::$totalCount*
 
- (integer) Total number of items.
+ (int) Total number of items.
 
 $defaultPageSize			*yii/data/Pagination::$defaultPageSize*
 
- (integer) The default page size. This property will be returned by 'pageSize'
+ (int) The default page size. This property will be returned by 'pageSize'
  when page size cannot be determined by 'pageSizeParam' from 'params'.
 
 $pageSizeLimit				*yii/data/Pagination::$pageSizeLimit*
@@ -110,26 +111,26 @@ $pageSizeLimit				*yii/data/Pagination::$pageSizeLimit*
 
 $pageCount				*yii/data/Pagination::$pageCount*
 
- (integer) Number of pages
+ (int) Number of pages
 
 $page					*yii/data/Pagination::$page*
 
- (integer) The zero-based current page number.
+ (int) The zero-based current page number.
 
 $pageSize				*yii/data/Pagination::$pageSize*
 
- (integer) The number of items per page. If it is less than 1, it means the
- page size is infinite, and thus a single page contains all items.
+ (int) The number of items per page. If it is less than 1, it means the page
+ size is infinite, and thus a single page contains all items.
 
 $offset					*yii/data/Pagination::$offset*
 
- (integer) The offset of the data. This may be used to set the OFFSET value
- for a SQL statement for fetching the current page of data.
+ (int) The offset of the data. This may be used to set the OFFSET value for a
+ SQL statement for fetching the current page of data.
 
 $limit					*yii/data/Pagination::$limit*
 
- (integer) The limit of the data. This may be used to set the LIMIT value for
- a SQL statement for fetching the current page of data. Note that if the page
+ (int) The limit of the data. This may be used to set the LIMIT value for a
+ SQL statement for fetching the current page of data. Note that if the page
  size is infinite, a value -1 will be returned.
 
 $links					*yii/data/Pagination::$links*
@@ -208,7 +209,7 @@ METHOD DETAILS
 >
  getPageCount()
 <
-return (integer) Number of pages
+return (int) Number of pages
 
 
 
@@ -216,10 +217,10 @@ return (integer) Number of pages
 >
  getPage($recalculate='false')
 <
-return (integer) The zero-based current page number.
+return (int) The zero-based current page number.
 
-    [$recalculate] (boolean) Whether to recalculate the current page based on
-    the page size and item count.
+    [$recalculate] (bool) Whether to recalculate the current page based on the
+    page size and item count.
 
 
 *yii/data/Pagination::setPage*				public
@@ -228,18 +229,18 @@ return (integer) The zero-based current page number.
 <
 return (void)
 
-    [$value] (integer) The zero-based index of the current page.
-    [$validatePage] (boolean) Whether to validate the page number. Note that
-    in order to validate the page number, both 'validatePage' and this
-    parameter must be true.
+    [$value] (int) The zero-based index of the current page.
+    [$validatePage] (bool) Whether to validate the page number. Note that in
+    order to validate the page number, both 'validatePage' and this parameter
+    must be true.
 
 
 *yii/data/Pagination::getPageSize*			public
 >
  getPageSize()
 <
-return (integer) The number of items per page. If it is less than 1, it means the
-page size is infinite, and thus a single page contains all items.
+return (int) The number of items per page. If it is less than 1, it means the page
+size is infinite, and thus a single page contains all items.
 
  By default, this method will try to determine the page size by
  'pageSizeParam' in 'params'. If the page size cannot be determined this way,
@@ -252,8 +253,8 @@ page size is infinite, and thus a single page contains all items.
 <
 return (void)
 
-    [$value] (integer) The number of items per page.
-    [$validatePageSize] (boolean) Whether to validate page size.
+    [$value] (int) The number of items per page.
+    [$validatePageSize] (bool) Whether to validate page size.
 
 
 *yii/data/Pagination::createUrl*				public
@@ -265,19 +266,18 @@ return (string) The created URL
  This method is mainly called by pagers when creating URLs used to perform
  pagination.
 
-    [$page] (integer) The zero-based page number that the URL should point to.
-    [$pageSize] (integer) The number of items on each page. If not set, the
-    value of 'pageSize' will be used.
-    [$absolute] (boolean) Whether to create an absolute URL. Defaults to
-    'false'.
+    [$page] (int) The zero-based page number that the URL should point to.
+    [$pageSize] (int) The number of items on each page. If not set, the value
+    of 'pageSize' will be used.
+    [$absolute] (bool) Whether to create an absolute URL. Defaults to 'false'.
 
 
 *yii/data/Pagination::getOffset*				public
 >
  getOffset()
 <
-return (integer) The offset of the data. This may be used to set the OFFSET value for
-a SQL statement for fetching the current page of data.
+return (int) The offset of the data. This may be used to set the OFFSET value for a
+SQL statement for fetching the current page of data.
 
 
 
@@ -285,9 +285,9 @@ a SQL statement for fetching the current page of data.
 >
  getLimit()
 <
-return (integer) The limit of the data. This may be used to set the LIMIT value for a
-SQL statement for fetching the current page of data. Note that if the page
-size is infinite, a value -1 will be returned.
+return (int) The limit of the data. This may be used to set the LIMIT value for a SQL
+statement for fetching the current page of data. Note that if the page size is
+infinite, a value -1 will be returned.
 
 
 
@@ -299,7 +299,7 @@ return (array) The links for navigational purpose. The array keys specify the pu
 of the links (e.g. 'LINK_FIRST'), and the array values are the corresponding
 URLs.
 
-    [$absolute] (boolean) Whether the generated URLs should be absolute.
+    [$absolute] (bool) Whether the generated URLs should be absolute.
 
 
 *yii/data/Pagination::getQueryParam*			protected

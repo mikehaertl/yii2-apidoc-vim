@@ -20,7 +20,11 @@ DESCRIPTION
        // ...
    ]
 
+ Rules are classes implementing the 'UrlRuleInterface', by default that is
+ 'UrlRule'. For nesting rules, there is also a 'GroupUrlRule' class.
 
+ For more details and usage information on UrlManager, see the [guide article
+ on routing](guide:runtime-routing).
 
 
 PROPERTY DETAILS
@@ -28,7 +32,7 @@ PROPERTY DETAILS
 
 $enablePrettyUrl			*yii/web/UrlManager::$enablePrettyUrl*
 
- (boolean) Whether to enable pretty URLs. Instead of putting all parameters in
+ (bool) Whether to enable pretty URLs. Instead of putting all parameters in
  the query string part of a URL, pretty URLs allow using path info to
  represent some of the parameters and can thus produce more user-friendly
  URLs, such as "/news/Yii-is-released", instead of
@@ -36,7 +40,7 @@ $enablePrettyUrl			*yii/web/UrlManager::$enablePrettyUrl*
 
 $enableStrictParsing			*yii/web/UrlManager::$enableStrictParsing*
 
- (boolean) Whether to enable strict parsing. If strict parsing is enabled, the
+ (bool) Whether to enable strict parsing. If strict parsing is enabled, the
  incoming requested URL must match at least one of the 'rules' in order to be
  treated as a valid request. Otherwise, the path info part of the request will
  be treated as the requested route. This property is used only when
@@ -91,8 +95,8 @@ $suffix					*yii/web/UrlManager::$suffix*
 
 $showScriptName				*yii/web/UrlManager::$showScriptName*
 
- (boolean) Whether to show entry script name in the constructed URL. Defaults
- to 'true'. This property is used only if 'enablePrettyUrl' is 'true'.
+ (bool) Whether to show entry script name in the constructed URL. Defaults to
+ 'true'. This property is used only if 'enablePrettyUrl' is 'true'.
 
 $routeParam				*yii/web/UrlManager::$routeParam*
 
@@ -150,7 +154,7 @@ $scriptUrl				*yii/web/UrlManager::$scriptUrl*
 
 $hostInfo				*yii/web/UrlManager::$hostInfo*
 
- (string) The host info (e.g. "http://www.example.com") that is used by
+ (string) The host info (e.g. 'http://www.example.com') that is used by
  'createAbsoluteUrl()' to prepend to created URLs.
 
 
@@ -301,8 +305,8 @@ return (void)
     [$rules] (array) The new rules to be added. Each array element represents
     a single rule declaration. Please refer to 'rules' for the acceptable rule
     format.
-    [$append] (boolean) Whether to add the new rules by appending them to the
-    end of the existing rules.
+    [$append] (bool) Whether to add the new rules by appending them to the end
+    of the existing rules.
 
 
 *yii/web/UrlManager::buildRules*				protected
@@ -321,7 +325,7 @@ declarations
 >
  parseRequest($request)
 <
-return (array|boolean) The route and the associated parameters. The latter is always
+return (array|bool) The route and the associated parameters. The latter is always
 empty if 'enablePrettyUrl' is 'false'. 'false' is returned if the current
 request cannot be successfully parsed.
 
@@ -362,7 +366,7 @@ return (string) The created URL
 >
  getUrlFromCache($cacheKey, $route, $params)
 <
-return (boolean|string) The created URL
+return (bool|string) The created URL
 
     [$cacheKey] (string) Generated cache key to store data.
     [$route] (string) The route (e.g. 'site/index').
@@ -393,8 +397,9 @@ return (string) The created URL
     [$params] (string|array) Use a string to represent a route (e.g.
     'site/index'), or an array to represent a route with query parameters
     (e.g. '['site/index', 'param1' => 'value1']').
-    [$scheme] (string) The scheme to use for the url (either 'http' or
-    'https'). If not specified the scheme of the current request will be used.
+    [$scheme] (string|null) The scheme to use for the URL (either 'http',
+    'https' or empty string for protocol-relative URL). If not specified the
+    scheme of the current request will be used.
 
 
 *yii/web/UrlManager::getBaseUrl*				public
@@ -449,7 +454,7 @@ return (void)
 >
  getHostInfo()
 <
-return (string) The host info (e.g. "http://www.example.com") that is used by
+return (string) The host info (e.g. 'http://www.example.com') that is used by
 'createAbsoluteUrl()' to prepend to created URLs.
 
 

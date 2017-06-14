@@ -2,6 +2,12 @@
 *yii/widgets/ListView*   >> |yii/widgets/BaseListView|
 ======================
 
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For more details and usage information on ListView, see the [guide article on
+ data widgets](guide:output-data-widgets).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -62,10 +68,20 @@ $layout					*yii/widgets/ListView::$layout*
 
 $itemOptions				*yii/widgets/ListView::$itemOptions*
 
- (array) The HTML attributes for the container of the rendering result of each
- data model. The "tag" element specifies the tag name of the container element
- and defaults to "div". If "tag" is false, it means no container element will
- be rendered.
+ (array|\Closure) The HTML attributes for the container of the rendering
+ result of each data model. This can be either an array specifying the common
+ HTML attributes for rendering each data item, or an anonymous function that
+ returns an array of the HTML attributes. The anonymous function will be
+ called once for every data model returned by 'dataProvider'. The "tag"
+ element specifies the tag name of the container element and defaults to
+ "div". If "tag" is false, it means no container element will be rendered.
+
+ If this property is specified as an anonymous function, it should have the
+ following signature:
+
+   function ($model, $key, $index, $widget)
+
+
 
 $itemView				*yii/widgets/ListView::$itemView*
 
@@ -99,6 +115,33 @@ $viewParams				*yii/widgets/ListView::$viewParams*
 $separator				*yii/widgets/ListView::$separator*
 
  (string) The HTML code to be displayed between any two consecutive items.
+
+$beforeItem				*yii/widgets/ListView::$beforeItem*
+
+ (\Closure) An anonymous function that is called once BEFORE rendering each
+ data model. It should have the following signature:
+
+   function ($model, $key, $index, $widget)
+
+
+   - '$model': the current data model being rendered 
+   - '$key': the key value associated with the current data model 
+   - '$index': the zero-based index of the data model in the model
+   array returned by 'dataProvider' 
+   - '$widget': the ListView object
+
+ The return result of the function will be rendered directly. Note: If the
+ function returns 'null', nothing will be rendered before the item.
+
+$afterItem				*yii/widgets/ListView::$afterItem*
+
+ (\Closure) An anonymous function that is called once AFTER rendering each
+ data model.
+
+ It should have the same signature as 'beforeItem'.
+
+ The return result of the function will be rendered directly. Note: If the
+ function returns 'null', nothing will be rendered after the item.
 
 $behaviors				*yii/widgets/ListView::$behaviors*
 
@@ -134,7 +177,7 @@ METHOD DETAILS
 
 *yii/widgets/ListView::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/Widget::init|
 
 
 *yii/widgets/ListView::__get*				public
@@ -302,6 +345,16 @@ METHOD DETAILS
  See |yii/base/Widget::getViewPath|
 
 
+*yii/widgets/ListView::beforeRun*				public
+
+ See |yii/base/Widget::beforeRun|
+
+
+*yii/widgets/ListView::afterRun*				public
+
+ See |yii/base/Widget::afterRun|
+
+
 *yii/widgets/ListView::renderItems*			public
 >
  renderItems()
@@ -335,6 +388,36 @@ return (string) The rendering result
  See |yii/widgets/BaseListView::renderSorter|
 
 
+*yii/widgets/ListView::renderBeforeItem*			protected
+>
+ renderBeforeItem($model, $key, $index)
+<
+return (string|null) 'beforeItem' call result or 'null' when 'beforeItem' is not a
+closure
+
+ If 'beforeItem' is not a closure, 'null' will be returned.
+
+    [$model] (mixed) The data model to be rendered
+    [$key] (mixed) The key value associated with the data model
+    [$index] (int) The zero-based index of the data model in the model array
+    returned by 'dataProvider'.
+
+
+*yii/widgets/ListView::renderAfterItem*			protected
+>
+ renderAfterItem($model, $key, $index)
+<
+return (string|null) 'afterItem' call result or 'null' when 'afterItem' is not a
+closure
+
+ If 'afterItem' is not a closure, 'null' will be returned.
+
+    [$model] (mixed) The data model to be rendered
+    [$key] (mixed) The key value associated with the data model
+    [$index] (int) The zero-based index of the data model in the model array
+    returned by 'dataProvider'.
+
+
 *yii/widgets/ListView::renderItem*			public
 >
  renderItem($model, $key, $index)
@@ -343,8 +426,8 @@ return (string) The rendering result
 
     [$model] (mixed) The data model to be rendered
     [$key] (mixed) The key value associated with the data model
-    [$index] (integer) The zero-based index of the data model in the model
-    array returned by 'dataProvider'.
+    [$index] (int) The zero-based index of the data model in the model array
+    returned by 'dataProvider'.
 
 
 

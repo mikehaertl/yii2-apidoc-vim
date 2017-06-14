@@ -49,8 +49,8 @@ $skipOnError				*yii/validators/FilterValidator::$skipOnError*
 
 $skipOnEmpty				*yii/validators/FilterValidator::$skipOnEmpty*
 
- (boolean) This property is overwritten to be false so that this validator
- will be applied when the value being validated is empty.
+ (bool) This property is overwritten to be false so that this validator will
+ be applied when the value being validated is empty.
 
 $enableClientValidation			*yii/validators/FilterValidator::$enableClientValidation*
 
@@ -82,7 +82,7 @@ $filter					*yii/validators/FilterValidator::$filter*
 
 $skipOnArray				*yii/validators/FilterValidator::$skipOnArray*
 
- (boolean) Whether the filter should be skipped if an array input is given. If
+ (bool) Whether the filter should be skipped if an array input is given. If
  true and an array input is given, the filter will not be applied.
 
 $behaviors				*yii/validators/FilterValidator::$behaviors*
@@ -275,6 +275,9 @@ support client-side validation.
 
 
 
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
  You may override this method to return the JavaScript validation code if the
  validator can support client-side validation.
 
@@ -311,6 +314,24 @@ support client-side validation.
     [$attribute] (string) The name of the attribute to be validated.
     [$view] (\yii\web\View) The view object that is going to be used to render
     views or view files containing a model form with this validator applied.
+
+
+*yii/validators/FilterValidator::getClientOptions*	public
+>
+ getClientOptions($model, $attribute)
+<
+return (array) The client-side validation options
+
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/FilterValidator::isActive*		public

@@ -443,14 +443,30 @@ return (\yii\db\ActiveQueryInterface) The newly created
 >
  updateAll($attributes, $condition='\'\'', $params='[]')
 <
-return (integer) The number of rows updated
+return (int) The number of rows updated
 
  For example, to change the status to be 1 for all customers whose status is
  2:
 
    Customer::updateAll(['status' => 1], 'status = 2');
 
+ > Warning: If you do not specify any condition, this method will update
+ **all** rows in the table.
 
+ Note that this method will not trigger any events. If you need
+ 'EVENT_BEFORE_UPDATE' or 'EVENT_AFTER_UPDATE' to be triggered, you need to
+ 'find()|find' the models first and then call 'update()' on each of them. For
+ example an equivalent of the example above would be:
+
+   $models = Customer::find()->where('status = 2')->all();
+   foreach($models as $model) {
+       $model->status = 1;
+       $model->update(false); // skipping validation as no user input is
+ involved
+   }
+
+ For a large set of models you might consider using 'ActiveQuery::each()' to
+ keep memory usage within limits.
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
     the table
@@ -464,13 +480,13 @@ return (integer) The number of rows updated
 >
  updateAllCounters($counters, $condition='\'\'', $params='[]')
 <
-return (integer) The number of rows updated
+return (int) The number of rows updated
 
  For example, to increment all customers' age by 1,
 
    Customer::updateAllCounters(['age' => 1]);
 
-
+ Note that this method will not trigger any events.
 
     [$counters] (array) The counters to be updated (attribute name =>
     increment value). Use negative values if you want to decrement the
@@ -487,16 +503,27 @@ return (integer) The number of rows updated
 >
  deleteAll($condition='\'\'', $params='[]')
 <
-return (integer) The number of rows deleted
-
- WARNING: If you do not specify any condition, this method will delete ALL
- rows in the table.
+return (int) The number of rows deleted
 
  For example, to delete all customers whose status is 3:
 
    Customer::deleteAll('status = 3');
 
+ > Warning: If you do not specify any condition, this method will delete
+ **all** rows in the table.
 
+ Note that this method will not trigger any events. If you need
+ 'EVENT_BEFORE_DELETE' or 'EVENT_AFTER_DELETE' to be triggered, you need to
+ 'find()|find' the models first and then call 'delete()' on each of them. For
+ example an equivalent of the example above would be:
+
+   $models = Customer::find()->where('status = 3')->all();
+   foreach($models as $model) {
+       $model->delete();
+   }
+
+ For a large set of models you might consider using 'ActiveQuery::each()' to
+ keep memory usage within limits.
 
     [$condition] (string|array) The conditions that will be put in the WHERE
     part of the DELETE SQL. Please refer to 'Query::where()' on how to specify
@@ -593,7 +620,7 @@ return (integer) The number of rows deleted
 >
  update($runValidation='true', $attributeNames='null')
 <
-return (integer|false) The number of rows affected, or false if validation fails or
+return (int|false) The number of rows affected, or false if validation fails or
 'beforeSave()' stops the updating process.
 
  This method performs the following steps in order:
@@ -632,7 +659,7 @@ return (integer|false) The number of rows affected, or false if validation fails
 
 
 
-    [$runValidation] (boolean) Whether to perform validation (calling
+    [$runValidation] (bool) Whether to perform validation (calling
     'validate()') before saving the record. Defaults to 'true'. If the
     validation fails, the record will not be saved to the database and this
     method will return 'false'.
@@ -660,7 +687,7 @@ return (integer|false) The number of rows affected, or false if validation fails
 >
  delete()
 <
-return (integer|false) The number of rows deleted, or 'false' if the deletion is
+return (int|false) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -723,7 +750,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  equals($record)
 <
-return (boolean) Whether the two active records refer to the same row in the same
+return (bool) Whether the two active records refer to the same row in the same
 database table.
 
  The comparison is made by comparing the table names and the primary key
@@ -867,7 +894,7 @@ return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance.
 >
  insert($runValidation='true', $attributes='null')
 <
-return (boolean) Whether the attributes are valid and the record is inserted
+return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
  This method performs the following steps in order:
@@ -899,7 +926,7 @@ successfully.
 
 
 
-    [$runValidation] (boolean) Whether to perform validation (calling
+    [$runValidation] (bool) Whether to perform validation (calling
     'validate()') before saving the record. Defaults to 'true'. If the
     validation fails, the record will not be saved to the database and this
     method will return 'false'.
@@ -933,8 +960,8 @@ return ($this) The model instance itself.
 
 
 
-    [$skipIfSet] (boolean) Whether existing value should be preserved. This
-    will only set defaults for attributes that are 'null'.
+    [$skipIfSet] (bool) Whether existing value should be preserved. This will
+    only set defaults for attributes that are 'null'.
 
 
 *yii/db/ActiveRecord::findBySql*				public
@@ -1014,7 +1041,7 @@ operations.
 >
  insertInternal($attributes='null')
 <
-return (boolean) Whether the record is inserted successfully.
+return (bool) Whether the record is inserted successfully.
 
     [$attributes] (array) List of attributes that need to be saved. Defaults
     to 'null', meaning all attributes that are loaded from DB will be saved.
@@ -1024,7 +1051,7 @@ return (boolean) Whether the record is inserted successfully.
 >
  deleteInternal()
 <
-return (integer|false) The number of rows deleted, or 'false' if the deletion is
+return (int|false) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -1034,10 +1061,10 @@ deleted is 0, even though the deletion execution is successful.
 >
  isTransactional($operation)
 <
-return (boolean) Whether the specified operation is transactional in the current
+return (bool) Whether the specified operation is transactional in the current
 'scenario'.
 
-    [$operation] (integer) The operation to check. Possible values are
+    [$operation] (int) The operation to check. Possible values are
     'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE'.
 
 

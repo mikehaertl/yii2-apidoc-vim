@@ -59,16 +59,16 @@ $action					*yii/console/Controller::$action*
 
 $interactive				*yii/console/Controller::$interactive*
 
- (boolean) Whether to run the command interactively.
+ (bool) Whether to run the command interactively.
 
 $color					*yii/console/Controller::$color*
 
- (boolean) Whether to enable ANSI color in the output. If not set, ANSI color
+ (bool) Whether to enable ANSI color in the output. If not set, ANSI color
  will only be enabled for terminals that support it.
 
 $help					*yii/console/Controller::$help*
 
- (boolean) Whether to display help information about current command.
+ (bool) Whether to display help information about current command.
 
 $behaviors				*yii/console/Controller::$behaviors*
 
@@ -246,8 +246,8 @@ METHOD DETAILS
 >
  runAction($id, $params='[]')
 <
-return (integer) The status of the action execution. 0 means normal, other values
-mean abnormal.
+return (int) The status of the action execution. 0 means normal, other values mean
+abnormal.
 
  If the action ID is empty, the method will use 'defaultAction'.
 
@@ -355,7 +355,7 @@ return (array) The valid parameters that the action can run with.
 >
  isColorEnabled($stream='\\STDOUT')
 <
-return (boolean) Whether to enable ANSI style in output.
+return (bool) Whether to enable ANSI style in output.
 
  ANSI color is enabled only if 'color' is set true or is not set and the
  terminal supports ANSI color.
@@ -384,7 +384,7 @@ return (string)
 >
  stdout($string)
 <
-return (integer|boolean) Number of bytes printed or false on error
+return (int|bool) Number of bytes printed or false on error
 
  You may optionally format the string with ANSI codes by passing additional
  parameters using the constants defined in '\yii\helpers\Console'.
@@ -401,7 +401,7 @@ return (integer|boolean) Number of bytes printed or false on error
 >
  stderr($string)
 <
-return (integer|boolean) Number of bytes printed or false on error
+return (int|bool) Number of bytes printed or false on error
 
  You may optionally format the string with ANSI codes by passing additional
  parameters using the constants defined in '\yii\helpers\Console'.
@@ -450,10 +450,20 @@ return (string) The user input
 >
  confirm($message, $default='false')
 <
-return (boolean) Whether user confirmed. Will return true if 'interactive' is false.
+return (bool) Whether user confirmed. Will return true if 'interactive' is false.
+
+ A typical usage looks like the following:
+
+   if ($this->confirm("Are you sure?")) {
+       echo "user typed yes\n";
+   } else {
+       echo "user typed no\n";
+   }
+
+
 
     [$message] (string) To echo out before waiting for user input
-    [$default] (boolean) This value is returned if no selection is made.
+    [$default] (bool) This value is returned if no selection is made.
 
 
 *yii/console/Controller::select*				public
@@ -470,7 +480,7 @@ return (string) An option character the user chose
 >
  options($actionID)
 <
-return (array) The names of the options valid for the action
+return (string[]) The names of the options valid for the action
 
  Child classes may override this method to specify possible options.
 

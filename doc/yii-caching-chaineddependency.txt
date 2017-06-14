@@ -9,6 +9,9 @@ DESCRIPTION
  dependency is considered changed; When 'dependOnAll' is false, if one of the
  dependencies has NOT changed, this dependency is considered NOT changed.
 
+ For more details and usage information on Cache, see the [guide article on
+ caching](guide:caching-overview).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -28,7 +31,7 @@ $dependencies				*yii/caching/ChainedDependency::$dependencies*
 
 $dependOnAll				*yii/caching/ChainedDependency::$dependOnAll*
 
- (boolean) Whether this dependency is depending on every dependency in
+ (bool) Whether this dependency is depending on every dependency in
  'dependencies'. Defaults to true, meaning if any of the dependencies has
  changed, this dependency is considered changed. When it is set false, it
  means if one of the dependencies has NOT changed, this dependency is
@@ -111,13 +114,21 @@ return (void)
 
 
 *yii/caching/ChainedDependency::getHasChanged*		public
->
- getHasChanged($cache)
-<
-return (boolean) Whether the dependency is changed or not.
 
- This method returns true if any of the dependency objects reports a
- dependency change.
+ See |yii/caching/Dependency::getHasChanged|
+
+
+*yii/caching/ChainedDependency::isChanged*		public
+>
+ isChanged($cache)
+<
+return (bool) Whether the dependency has changed.
+
+
+
+
+
+
 
     [$cache] (\yii\caching\Cache) The cache component that is currently
     evaluating this dependency

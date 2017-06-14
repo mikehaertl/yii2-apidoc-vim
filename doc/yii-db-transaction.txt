@@ -19,9 +19,16 @@ DESCRIPTION
    } catch (\Exception $e) {
        $transaction->rollBack();
        throw $e;
+   } catch (\Throwable $e) {
+       $transaction->rollBack();
+       throw $e;
    }
 
-
+ > Note: in the above code we have two catch-blocks for compatibility > with
+ PHP 5.x and PHP 7.x. '\Exception' implements the ['\Throwable'
+ interface](http://php.net/manual/en/class.throwable.php) > since PHP 7.0, so
+ you can skip the part with '\Exception' if your app uses only PHP 7.0 and
+ higher.
 
 
 PROPERTY DETAILS
@@ -34,7 +41,7 @@ $db					*yii/db/Transaction::$db*
 
 $isActive				*yii/db/Transaction::$isActive*
 
- (boolean) Whether this transaction is active. Only an active transaction can
+ (bool) Whether this transaction is active. Only an active transaction can
  'commit()' or 'rollBack()'.
 
 $isolationLevel				*yii/db/Transaction::$isolationLevel*
@@ -46,7 +53,7 @@ $isolationLevel				*yii/db/Transaction::$isolationLevel*
 
 $level					*yii/db/Transaction::$level*
 
- (integer) The current nesting level of the transaction.
+ (int) The current nesting level of the transaction.
 
 
 
@@ -118,7 +125,7 @@ METHOD DETAILS
 >
  getIsActive()
 <
-return (boolean) Whether this transaction is active. Only an active transaction can
+return (bool) Whether this transaction is active. Only an active transaction can
 'commit()' or 'rollBack()'.
 
 
@@ -187,7 +194,7 @@ return (void)
 >
  getLevel()
 <
-return (integer) The current nesting level of the transaction.
+return (int) The current nesting level of the transaction.
 
 
 

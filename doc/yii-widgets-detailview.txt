@@ -27,7 +27,8 @@ DESCRIPTION
        ],
    ]);
 
-
+ For more details and usage information on DetailView, see the [guide article
+ on data widgets](guide:output-data-widgets).
 
 
 PROPERTY DETAILS
@@ -76,7 +77,15 @@ $attributes				*yii/widgets/DetailView::$attributes*
    - 'value': the value to be displayed. If this is not specified, it
    will be retrieved from 'model' using the attribute name   by calling
  'ArrayHelper::getValue()'. Note that this value will be formatted into a
- displayable text   according to the 'format' option. 
+ displayable text   according to the 'format' option. Since version 2.0.11 it
+ can be defined as closure with the following   parameters:
+
+     function ($model, $widget)
+
+ '$model' refers to displayed model and '$widget' is an instance of
+ 'DetailView' widget.
+
+
    - 'format': the type of the value that determines how the value
    would be formatted into a displayable text.   Please refer to 'Formatter'
  for supported types. 
@@ -329,6 +338,16 @@ return (void)
  See |yii/base/Widget::getViewPath|
 
 
+*yii/widgets/DetailView::beforeRun*			public
+
+ See |yii/base/Widget::beforeRun|
+
+
+*yii/widgets/DetailView::afterRun*			public
+
+ See |yii/base/Widget::afterRun|
+
+
 *yii/widgets/DetailView::renderAttribute*			protected
 >
  renderAttribute($attribute, $index)
@@ -336,8 +355,8 @@ return (void)
 return (string) The rendering result
 
     [$attribute] (array) The specification of the attribute to be rendered.
-    [$index] (integer) The zero-based index of the attribute in the
-    'attributes' array
+    [$index] (int) The zero-based index of the attribute in the 'attributes'
+    array
 
 
 *yii/widgets/DetailView::normalizeAttributes*		protected

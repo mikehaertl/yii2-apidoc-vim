@@ -12,6 +12,9 @@ DESCRIPTION
  Please refer to 'Cache' for common cache operations that are supported by
  FileCache.
 
+ For more details and usage information on Cache, see the [guide article on
+ caching](guide:caching-overview).
+
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
@@ -28,6 +31,10 @@ $serializer				*yii/caching/FileCache::$serializer*
 
  See |yii/caching/Cache::$serializer|
 
+$defaultDuration			*yii/caching/FileCache::$defaultDuration*
+
+ See |yii/caching/Cache::$defaultDuration|
+
 $cachePath				*yii/caching/FileCache::$cachePath*
 
  (string) The directory to store cache files. You may use path alias here. If
@@ -40,31 +47,31 @@ $cacheFileSuffix			*yii/caching/FileCache::$cacheFileSuffix*
 
 $directoryLevel				*yii/caching/FileCache::$directoryLevel*
 
- (integer) The level of sub-directories to store cache files. Defaults to 1.
- If the system has huge number of cache files (e.g. one million), you may use
- a bigger value (usually no bigger than 3). Using sub-directories is mainly to
+ (int) The level of sub-directories to store cache files. Defaults to 1. If
+ the system has huge number of cache files (e.g. one million), you may use a
+ bigger value (usually no bigger than 3). Using sub-directories is mainly to
  ensure the file system is not over burdened with a single directory having
  too many files.
 
 $gcProbability				*yii/caching/FileCache::$gcProbability*
 
- (integer) The probability (parts per million) that garbage collection (GC)
- should be performed when storing a piece of data in the cache. Defaults to
- 10, meaning 0.001% chance. This number should be between 0 and 1000000. A
- value 0 means no GC will be performed at all.
+ (int) The probability (parts per million) that garbage collection (GC) should
+ be performed when storing a piece of data in the cache. Defaults to 10,
+ meaning 0.001% chance. This number should be between 0 and 1000000. A value 0
+ means no GC will be performed at all.
 
 $fileMode				*yii/caching/FileCache::$fileMode*
 
- (integer) The permission to be set for newly created cache files. This value
- will be used by PHP chmod() function. No umask will be applied. If not set,
- the permission will be determined by the current environment.
+ (int) The permission to be set for newly created cache files. This value will
+ be used by PHP chmod() function. No umask will be applied. If not set, the
+ permission will be determined by the current environment.
 
 $dirMode				*yii/caching/FileCache::$dirMode*
 
- (integer) The permission to be set for newly created directories. This value
- will be used by PHP chmod() function. No umask will be applied. Defaults to
- 0775, meaning the directory is read-writable by owner and group, but
- read-only for other users.
+ (int) The permission to be set for newly created directories. This value will
+ be used by PHP chmod() function. No umask will be applied. Defaults to 0775,
+ meaning the directory is read-writable by owner and group, but read-only for
+ other users.
 
 $behaviors				*yii/caching/FileCache::$behaviors*
 
@@ -218,8 +225,8 @@ return (void)
 >
  exists($key)
 <
-return (boolean) True if a value exists in cache, false if the value is not in the
-cache or expired.
+return (bool) True if a value exists in cache, false if the value is not in the cache
+or expired.
 
  This can be faster than getting the value from the cache if the data is big.
  Note that this method does not check whether the dependency associated with
@@ -297,14 +304,14 @@ cache or expired.
 >
  setValue($key, $value, $duration)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
 
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached. Other types (If you have
     disabled 'serializer') unable to get is correct in 'getValue()'.
-    [$duration] (integer) The number of seconds in which the cached value will
+    [$duration] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -312,14 +319,14 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  addValue($key, $value, $duration)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
  This is the implementation of the method declared in the parent class.
 
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached. Other types (if you have
     disabled 'serializer') unable to get is correct in 'getValue()'.
-    [$duration] (integer) The number of seconds in which the cached value will
+    [$duration] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -327,7 +334,7 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  deleteValue($key)
 <
-return (boolean) If no error happens during deletion
+return (bool) If no error happens during deletion
 
     [$key] (string) The key of the value to be deleted
 
@@ -336,7 +343,7 @@ return (boolean) If no error happens during deletion
 >
  flushValues()
 <
-return (boolean) Whether the flush operation was successful.
+return (bool) Whether the flush operation was successful.
 
  This is the implementation of the method declared in the parent class.
 
@@ -376,6 +383,11 @@ return (boolean) Whether the flush operation was successful.
  See |yii/caching/Cache::offsetUnset|
 
 
+*yii/caching/FileCache::getOrSet*				public
+
+ See |yii/caching/Cache::getOrSet|
+
+
 *yii/caching/FileCache::getCacheFile*			protected
 >
  getCacheFile($key)
@@ -391,10 +403,10 @@ return (string) The cache file path
 <
 return (void)
 
-    [$force] (boolean) Whether to enforce the garbage collection regardless of
+    [$force] (bool) Whether to enforce the garbage collection regardless of
     'gcProbability'. Defaults to false, meaning the actual deletion happens
     with the probability as specified by 'gcProbability'.
-    [$expiredOnly] (boolean) Whether to removed expired cache files only. If
+    [$expiredOnly] (bool) Whether to removed expired cache files only. If
     false, all cache files under 'cachePath' will be removed.
 
 
@@ -408,7 +420,7 @@ return (void)
 
     [$path] (string) The directory under which expired cache files are
     removed.
-    [$expiredOnly] (boolean) Whether to only remove expired cache files. If
+    [$expiredOnly] (bool) Whether to only remove expired cache files. If
     false, all files under '$path' will be removed.
 
 

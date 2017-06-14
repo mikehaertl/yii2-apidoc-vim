@@ -431,10 +431,39 @@ METHOD DETAILS
 >
  actionIndex($command='null')
 <
-return (integer) The exit status
+return (int) The exit status
 
     [$command] (string) The name of the command to show help about. If not
     provided, all available commands will be displayed.
+
+
+*yii/console/controllers/HelpController::actionList*	public
+>
+ actionList()
+<
+return (void)
+
+ This is used for shell completion.
+
+
+*yii/console/controllers/HelpController::actionListActionOptions*public
+>
+ actionListActionOptions($action)
+<
+return (void)
+
+ This is used for shell completion.
+
+    [$action] (string) Route to action
+
+
+*yii/console/controllers/HelpController::actionUsage*	public
+>
+ actionUsage($action)
+<
+return (void)
+
+    [$action] (string) Route to action
 
 
 *yii/console/controllers/HelpController::getCommands*	public
@@ -475,7 +504,7 @@ return (array) The available command names
 >
  validateControllerClass($controllerClass)
 <
-return (boolean) 
+return (bool) 
 
     [$controllerClass] (string) 
 
@@ -514,7 +543,7 @@ return (void)
 return (string) The formatted string for the argument or option
 
     [$name] (string) The name of the argument or option
-    [$required] (boolean) Whether the argument is required
+    [$required] (bool) Whether the argument is required
     [$type] (string) The type of the option or argument
     [$defaultValue] (mixed) The default value of the option or argument
     [$comment] (string) Comment about the option or argument
@@ -535,6 +564,14 @@ return (string) The formatted string for the alias argument or option
  getScriptName()
 <
 return (string) The name of the cli script currently running.
+
+
+
+*yii/console/controllers/HelpController::getDefaultHelpHeader*protected
+>
+ getDefaultHelpHeader()
+<
+return (string) Default help header.
 
 
 
