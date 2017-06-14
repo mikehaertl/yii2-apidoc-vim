@@ -17,6 +17,15 @@ $rules					*yii/web/CompositeUrlRule::$rules*
  (\yii\web\UrlRuleInterface[]) The URL rules contained in this composite rule.
  This property is set in 'init()' by the return value of 'createRules()'.
 
+$createStatus				*yii/web/CompositeUrlRule::$createStatus*
+
+ (int|null) Status of the URL creation after the last 'createUrl()' call.
+
+$createUrlStatus			*yii/web/CompositeUrlRule::$createUrlStatus*
+
+ (null|int) Status of the URL creation after the last 'createUrl()' call.
+ 'null' if rule does not provide info about create status.
+
 
 
 METHOD DETAILS
@@ -134,6 +143,32 @@ creating this URL.
     [$route] (string) The route. It should not have slashes at the beginning
     or the end.
     [$params] (array) The parameters
+
+
+*yii/web/CompositeUrlRule::iterateRules*			protected
+>
+ iterateRules($rules, $manager, $route, $params)
+<
+return (bool|string) The created URL, or 'false' if none of specified rules cannot be
+used for creating this URL.
+
+    [$rules] (\yii\web\UrlRuleInterface[]) Rules to iterate.
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$route] (string) The route. It should not have slashes at the beginning
+    or the end.
+    [$params] (array) The parameters
+
+
+*yii/web/CompositeUrlRule::getCreateUrlStatus*		public
+>
+ getCreateUrlStatus()
+<
+return (null|int) Status of the URL creation after the last 'createUrl()' call.
+'null' if rule does not provide info about create status.
+
+ For multiple rules statuses will be combined by bitwise 'or' operator (e.g.
+ 'UrlRule::CREATE_STATUS_PARSING_ONLY |
+ UrlRule::CREATE_STATUS_PARAMS_MISMATCH').
 
 
 

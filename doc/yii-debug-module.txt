@@ -28,16 +28,7 @@ $controllerMap				*yii/debug/Module::$controllerMap*
 
 $controllerNamespace			*yii/debug/Module::$controllerNamespace*
 
- (string) The namespace that controller classes are in. This namespace will be
- used to load controller classes by prepending it to the controller class
- name.
-
- If not set, it will use the 'controllers' sub-namespace under the namespace
- of this module. For example, if the namespace of this module is 'foo\bar',
- then the default controller namespace would be 'foo\bar\controllers'.
-
- See also the [guide section on autoloading](guide:concept-autoloading) to
- learn more about defining namespaces and how classes are loaded.
+ (string) 
 
  The namespace that controller classes are in. This namespace will be used to
  load controller classes by prepending it to the controller class name.
@@ -82,6 +73,11 @@ $panels					*yii/debug/Module::$panels*
  panel via this property by using the same panel ID. You may also disable a
  core panel by setting it to be false in this property.
 
+$defaultPanel				*yii/debug/Module::$defaultPanel*
+
+ (string) The name of the panel that should be visible when opening the debug
+ panel. The default value is 'log'.
+
 $dataPath				*yii/debug/Module::$dataPath*
 
  (string) The directory storing the debugger data files. This can be specified
@@ -111,6 +107,24 @@ $enableDebugLogs			*yii/debug/Module::$enableDebugLogs*
  module actions. You normally do not want to keep these logs because they may
  distract you from the logs about your applications. You may want to enable
  the debug logs if you want to investigate how the debug module itself works.
+
+$traceLine				*yii/debug/Module::$traceLine*
+
+ (mixed) The string with placeholders to be be substituted or an anonymous
+ function that returns the trace line string. The placeholders are {file},
+ {line} and {text} and the string should be as follows:
+
+ 'File: {file} 
+   - Line: {line} - Text: {text}'
+
+ The signature of the anonymous function should be as follows:
+
+   function($trace, $panel) {
+       // compute line string
+       return $line;
+   }
+
+
 
 $behaviors				*yii/debug/Module::$behaviors*
 
@@ -151,6 +165,14 @@ $aliases				*yii/debug/Module::$aliases*
 $modules				*yii/debug/Module::$modules*
 
  See |yii/base/Module::$modules|
+
+$debugHeaders				*yii/debug/Module::$debugHeaders*
+
+ (\yii\base\Event)
+
+$toolbarHtml				*yii/debug/Module::$toolbarHtml*
+
+ ()
 
 
 
@@ -387,8 +409,17 @@ return (void)
 
 
 *yii/debug/Module::defaultVersion*			protected
+>
+ defaultVersion()
+<
+return (string) The version of this module.
 
- See |yii/base/Module::defaultVersion|
+
+
+ Child class may override this method to provide more specific version
+ detection.
+
+
 
 
 *yii/debug/Module::setAliases*				public
@@ -478,8 +509,17 @@ return (bool) Whether the action should continue to be executed.
 >
  getYiiLogo()
 <
-return (string) Base64 representation of the image
+return (string) The logo URL
 
+
+
+*yii/debug/Module::setYiiLogo*				public
+>
+ setYiiLogo($logo)
+<
+return (void)
+
+    [$logo] (string) The logo URL
 
 
 *yii/debug/Module::initPanels*				protected
@@ -505,9 +545,26 @@ return (void)
     [$app] (\yii\base\Application) The application currently running
 
 
+*yii/debug/Module::setDebugHeaders*			public
+>
+ setDebugHeaders($event)
+<
+return (void)
+
+    [$event] (\yii\base\Event) 
+
+
 *yii/debug/Module::resetGlobalSettings*			protected
 >
  resetGlobalSettings()
+<
+return (void)
+
+
+
+*yii/debug/Module::getToolbarHtml*			public
+>
+ getToolbarHtml()
 <
 return (void)
 
@@ -526,7 +583,7 @@ return (void)
 >
  checkAccess()
 <
-return (boolean) If access is granted
+return (bool) If access is granted
 
 
 

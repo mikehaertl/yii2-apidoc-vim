@@ -248,7 +248,7 @@ METHOD DETAILS
 <
 return (void)
 
-    [$exception] (\Exception) The exception to be rendered.
+    [$exception] (\Exception|\Error) The exception to be rendered.
 
 
 *yii/web/ErrorHandler::logException*			public
@@ -277,7 +277,7 @@ return (void)
 <
 return (array) The array representation of the exception.
 
-    [$exception] (\Exception) The exception being converted
+    [$exception] (\Exception|\Error) The exception being converted
 
 
 *yii/web/ErrorHandler::htmlEncode*			public
@@ -344,6 +344,15 @@ return (string) HTML content of the rendered call stack element.
     [$index] (int) Number of the call stack element.
 
 
+*yii/web/ErrorHandler::renderCallStack*			public
+>
+ renderCallStack($exception)
+<
+return (string) HTML content of the rendered call stack.
+
+    [$exception] (\Exception|\ParseError) Exception to get call stack from
+
+
 *yii/web/ErrorHandler::renderRequest*			public
 >
  renderRequest()
@@ -405,6 +414,14 @@ return (string) String representation of the arguments array
 return (string) Human-readable exception name or null if it cannot be determined
 
     [$exception] (\Exception) 
+
+
+*yii/web/ErrorHandler::shouldRenderSimpleHtml*		protected
+>
+ shouldRenderSimpleHtml()
+<
+return (bool) If simple HTML should be rendered
+
 
 
 

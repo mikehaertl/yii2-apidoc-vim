@@ -117,8 +117,8 @@ METHOD DETAILS
 return (void)
 
     [$protocol] (string) Name of the protocol to be used.
-    [$force] (boolean) Whether to register wrapper, even if protocol is
-    already taken.
+    [$force] (bool) Whether to register wrapper, even if protocol is already
+    taken.
 
 
 *yii/mongodb/file/StreamWrapper::getContextOptions*	public
@@ -142,8 +142,8 @@ return (void)
 >
  stream_eof()
 <
-return (boolean) 'true' if the read/write position is at the end of the stream and if
-no more data is available to be read, or 'false' otherwise.
+return (bool) 'true' if the read/write position is at the end of the stream and if no
+more data is available to be read, or 'false' otherwise.
 
  This method is called in response to 'feof()'.
 
@@ -152,7 +152,7 @@ no more data is available to be read, or 'false' otherwise.
 >
  stream_open($path, $mode, $options, $openedPath)
 <
-return (boolean) Whether operation is successful.
+return (bool) Whether operation is successful.
 
  This method is called immediately after the wrapper is initialized (f.e. by
  'fopen()' and 'file_get_contents()').
@@ -160,7 +160,7 @@ return (boolean) Whether operation is successful.
     [$path] (string) Specifies the URL that was passed to the original
     function.
     [$mode] (string) Mode used to open the file, as detailed for 'fopen()'.
-    [$options] (integer) Additional flags set by the streams API.
+    [$options] (int) Additional flags set by the streams API.
     [$openedPath] (string) Real opened path.
 
 
@@ -173,15 +173,15 @@ are available. If no more data is available, return 'false'.
 
  This method is called in response to 'fread()' and 'fgets()'.
 
-    [$count] (integer) Count of bytes of data from the current position should
-    be returned.
+    [$count] (int) Count of bytes of data from the current position should be
+    returned.
 
 
 *yii/mongodb/file/StreamWrapper::stream_write*		public
 >
  stream_write($data)
 <
-return (integer) The number of bytes that were successfully stored.
+return (int) The number of bytes that were successfully stored.
 
  This method is called in response to 'fwrite()'.
 
@@ -192,7 +192,7 @@ return (integer) The number of bytes that were successfully stored.
 >
  stream_flush()
 <
-return (boolean) Whether cached data was successfully stored.
+return (bool) Whether cached data was successfully stored.
 
 
 
@@ -209,12 +209,12 @@ return (array) File statistic information.
 >
  stream_seek($offset, $whence=SEEK_SET)
 <
-return (boolean) Return true if the position was updated, false otherwise.
+return (bool) Return true if the position was updated, false otherwise.
 
  This method is called in response to 'fseek()'.
 
-    [$offset] (integer) The stream offset to seek to.
-    [$whence] (integer) Possible values:
+    [$offset] (int) The stream offset to seek to.
+    [$whence] (int) Possible values:
 
 
       - SEEK_SET - Set position equal to offset bytes. 
@@ -226,7 +226,7 @@ return (boolean) Return true if the position was updated, false otherwise.
 >
  stream_tell()
 <
-return (integer) Should return the current position of the stream.
+return (int) Should return the current position of the stream.
 
  This method is called in response to 'fseek()' to determine the current
  position.

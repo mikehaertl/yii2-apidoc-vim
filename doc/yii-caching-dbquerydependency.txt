@@ -1,0 +1,162 @@
+
+*yii/caching/DbQueryDependency*   >> |yii/caching/Dependency|
+===============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ If the query result changes, the dependency is considered as changed. The
+ query is specified via the 'query' property.
+
+ Object of any class which matches 'QueryInterface' can be used, so this
+ dependency can be used not only with regular relational databases but with
+ MongoDB, Redis and so on as well.
+
+ For more details and usage information on Cache, see the [guide article on
+ caching](guide:caching-overview).
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$data					*yii/caching/DbQueryDependency::$data*
+
+ See |yii/caching/Dependency::$data|
+
+$reusable				*yii/caching/DbQueryDependency::$reusable*
+
+ See |yii/caching/Dependency::$reusable|
+
+$db					*yii/caching/DbQueryDependency::$db*
+
+ (string|array|object) The application component ID of the database
+ connection, connection object or its array configuration. This field can be
+ left blank, allowing query to determine connection automatically.
+
+$query					*yii/caching/DbQueryDependency::$query*
+
+ (\yii\db\QueryInterface) The query which result is used to determine if the
+ dependency has been changed. Actual query method to be invoked is determined
+ by 'method'.
+
+$method					*yii/caching/DbQueryDependency::$method*
+
+ (string|callable) Method which should be invoked in over the 'query' object.
+
+ If specified as a string an own query method with such name will be invoked,
+ passing 'db' value as its first argument. For example: 'exists', 'all'.
+
+ This field can be specified as a PHP callback of following signature:
+
+   function (QueryInterface $query, mixed $db) {
+       //return mixed;
+   }
+
+ If not set 
+   - 'QueryInterface::one()' will be used.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/caching/DbQueryDependency::className*		public
+
+ See |yii/base/Object::className|
+
+
+*yii/caching/DbQueryDependency::__construct*		public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/caching/DbQueryDependency::init*			public
+
+ See |yii/base/Object::init|
+
+
+*yii/caching/DbQueryDependency::__get*			public
+
+ See |yii/base/Object::__get|
+
+
+*yii/caching/DbQueryDependency::__set*			public
+
+ See |yii/base/Object::__set|
+
+
+*yii/caching/DbQueryDependency::__isset*			public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/caching/DbQueryDependency::__unset*			public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/caching/DbQueryDependency::__call*			public
+
+ See |yii/base/Object::__call|
+
+
+*yii/caching/DbQueryDependency::hasProperty*		public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/caching/DbQueryDependency::canGetProperty*		public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/caching/DbQueryDependency::canSetProperty*		public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/caching/DbQueryDependency::hasMethod*		public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/caching/DbQueryDependency::evaluateDependency*	public
+
+ See |yii/caching/Dependency::evaluateDependency|
+
+
+*yii/caching/DbQueryDependency::getHasChanged*		public
+
+ See |yii/caching/Dependency::getHasChanged|
+
+
+*yii/caching/DbQueryDependency::isChanged*		public
+
+ See |yii/caching/Dependency::isChanged|
+
+
+*yii/caching/DbQueryDependency::resetReusableData*	public
+
+ See |yii/caching/Dependency::resetReusableData|
+
+
+*yii/caching/DbQueryDependency::generateReusableHash*	protected
+
+ See |yii/caching/Dependency::generateReusableHash|
+
+
+*yii/caching/DbQueryDependency::generateDependencyData*	protected
+>
+ generateDependencyData($cache)
+<
+return (mixed) The data needed to determine if dependency has been changed.
+
+ This method returns the query result
+
+    [$cache] (\yii\caching\Cache) The cache component that is currently
+    evaluating this dependency
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

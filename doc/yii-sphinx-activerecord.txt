@@ -451,7 +451,7 @@ return (array) List of attribute names.
 >
  updateAll($attributes, $condition='\'\'', $params='[]')
 <
-return (integer) The number of rows updated
+return (int) The number of rows updated
 
  For example, to change the status to be 1 for all articles which status is 2:
 
@@ -476,7 +476,7 @@ return (integer) The number of rows updated
 >
  deleteAll($condition='\'\'', $params='[]')
 <
-return (integer) The number of rows deleted
+return (int) The number of rows deleted
 
  For example, to delete all articles whose status is 3:
 
@@ -503,6 +503,11 @@ return (integer) The number of rows deleted
 *yii/sphinx/ActiveRecord::hasMany*			public
 
  See |yii/db/BaseActiveRecord::hasMany|
+
+
+*yii/sphinx/ActiveRecord::createRelationQuery*		protected
+
+ See |yii/db/BaseActiveRecord::createRelationQuery|
 
 
 *yii/sphinx/ActiveRecord::populateRelation*		public
@@ -579,7 +584,7 @@ return (integer) The number of rows deleted
 >
  update($runValidation='true', $attributeNames='null')
 <
-return (integer|boolean) The number of rows affected, or false if validation fails or
+return (int|false) The number of rows affected, or 'false' if validation fails or
 'beforeSave()' stops the updating process.
 
  This method performs the following steps in order:
@@ -616,7 +621,7 @@ return (integer|boolean) The number of rows affected, or false if validation fai
 
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
+    [$runValidation] (bool) Whether to perform validation before saving the
     record. If the validation fails, the record will not be inserted into the
     database.
     [$attributeNames] (array) List of attributes that need to be saved.
@@ -647,7 +652,7 @@ return (void)
 >
  delete()
 <
-return (integer|boolean) The number of rows deleted, or false if the deletion is
+return (int|false) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -710,8 +715,7 @@ deleted is 0, even though the deletion execution is successful.
 >
  equals($record)
 <
-return (boolean) Whether the two active records refer to the same row in the same
-index.
+return (bool) Whether the two active records refer to the same row in the same index.
 
  The comparison is made by comparing the index names and the primary key
  values of the two active records. If one of the records 'isNewRecord|is new'
@@ -850,7 +854,7 @@ return (\yii\sphinx\ActiveQuery) The newly created 'ActiveQuery' instance.
 >
  insert($runValidation='true', $attributes='null')
 <
-return (boolean) Whether the attributes are valid and the record is inserted
+return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
  This method performs the following steps in order:
@@ -878,7 +882,7 @@ successfully.
 
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
+    [$runValidation] (bool) Whether to perform validation before saving the
     record. If the validation fails, the record will not be inserted.
     [$attributes] (array) List of attributes that need to be saved. Defaults
     to null, meaning all attributes that are loaded from index will be saved.
@@ -959,7 +963,7 @@ snippets in case "source" is an array.
 return (array) Keywords and statistics
 
     [$text] (string) The text to break down to keywords.
-    [$fetchStatistic] (boolean) Whether to return document and hit occurrence
+    [$fetchStatistic] (bool) Whether to return document and hit occurrence
     statistics
 
 
@@ -1042,10 +1046,10 @@ operations.
 >
  isTransactional($operation)
 <
-return (boolean) Whether the specified operation is transactional in the current
+return (bool) Whether the specified operation is transactional in the current
 'scenario'.
 
-    [$operation] (integer) The operation to check. Possible values are
+    [$operation] (int) The operation to check. Possible values are
     'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE'.
 
 

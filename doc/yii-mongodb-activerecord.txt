@@ -412,7 +412,7 @@ return (array) List of attribute names.
 >
  updateAll($attributes, $condition='[]', $options='[]')
 <
-return (integer) The number of documents updated.
+return (int) The number of documents updated.
 
  For example, to change the status to be 1 for all customers whose status is
  2:
@@ -432,7 +432,7 @@ return (integer) The number of documents updated.
 >
  updateAllCounters($counters, $condition='[]', $options='[]')
 <
-return (integer) The number of documents updated.
+return (int) The number of documents updated.
 
  For example, to increment all customers' age by 1,
 
@@ -452,7 +452,7 @@ return (integer) The number of documents updated.
 >
  deleteAll($condition='[]', $options='[]')
 <
-return (integer) The number of documents deleted.
+return (int) The number of documents deleted.
 
  WARNING: If you do not specify any condition, this method will delete
  documents rows in the collection.
@@ -481,6 +481,11 @@ return (integer) The number of documents deleted.
 *yii/mongodb/ActiveRecord::hasMany*			public
 
  See |yii/db/BaseActiveRecord::hasMany|
+
+
+*yii/mongodb/ActiveRecord::createRelationQuery*		protected
+
+ See |yii/db/BaseActiveRecord::createRelationQuery|
 
 
 *yii/mongodb/ActiveRecord::populateRelation*		public
@@ -581,7 +586,7 @@ return (void)
 >
  delete()
 <
-return (integer|boolean) The number of documents deleted, or false if the deletion is
+return (int|bool) The number of documents deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of documents
 deleted is 0, even though the deletion execution is successful.
 
@@ -644,8 +649,8 @@ deleted is 0, even though the deletion execution is successful.
 >
  equals($record)
 <
-return (boolean) Whether the two active records refer to the same row in the same
-Mongo collection.
+return (bool) Whether the two active records refer to the same row in the same Mongo
+collection.
 
  The comparison is made by comparing the collection names and the primary key
  values of the two active records. If one of the records 'isNewRecord|is new'
@@ -766,7 +771,7 @@ return (\yii\mongodb\ActiveQuery) The newly created 'ActiveQuery' instance.
 >
  insert($runValidation='true', $attributes='null')
 <
-return (boolean) Whether the attributes are valid and the record is inserted
+return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
  This method performs the following steps in order:
@@ -797,7 +802,7 @@ successfully.
 
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
+    [$runValidation] (bool) Whether to perform validation before saving the
     record. If the validation fails, the record will not be inserted into the
     collection.
     [$attributes] (array) List of attributes that need to be saved. Defaults

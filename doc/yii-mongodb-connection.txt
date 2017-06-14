@@ -95,16 +95,15 @@ $typeMap				*yii/mongodb/Connection::$typeMap*
 
 $enableLogging				*yii/mongodb/Connection::$enableLogging*
 
- (boolean) Whether to log command and query executions. While enabled this
- option may reduce performance, since MongoDB commands may contain large data,
- consuming both CPU and memory. It make sense to disable this option at
- production environment.
+ (bool) Whether to log command and query executions. When enabled this option
+ may reduce performance. MongoDB commands may contain large data, consuming
+ both CPU and memory. It makes sense to disable this option in the production
+ environment.
 
 $enableProfiling			*yii/mongodb/Connection::$enableProfiling*
 
- (boolean) Whether to enable profiling the commands and queries being
- executed. This option will have no effect in case 'enableLogging' is
- disabled.
+ (bool) Whether to enable profiling the commands and queries being executed.
+ This option will have no effect in case 'enableLogging' is disabled.
 
 $fileStreamProtocol			*yii/mongodb/Connection::$fileStreamProtocol*
 
@@ -144,7 +143,7 @@ $fileCollection				*yii/mongodb/Connection::$fileCollection*
 
 $isActive				*yii/mongodb/Connection::$isActive*
 
- (boolean) Whether the Mongo connection is established
+ (bool) Whether the Mongo connection is established
 
 
 
@@ -337,8 +336,8 @@ return (void)
 return (\yii\mongodb\Database) Database instance.
 
     [$name] (string|null) Database name, if null default one will be used.
-    [$refresh] (boolean) Whether to reestablish the database connection even,
-    if it is found in the cache.
+    [$refresh] (bool) Whether to reestablish the database connection even, if
+    it is found in the cache.
 
 
 *yii/mongodb/Connection::selectDatabase*			protected
@@ -360,8 +359,8 @@ return (\yii\mongodb\Collection) Mongo collection instance.
     of the collection inside the default database. If array 
       - first element considered as the name of the database, second 
       - as name of collection inside that database
-    [$refresh] (boolean) Whether to reload the collection instance even if it
-    is found in the cache.
+    [$refresh] (bool) Whether to reload the collection instance even if it is
+    found in the cache.
 
 
 *yii/mongodb/Connection::getFileCollection*		public
@@ -375,15 +374,15 @@ return (\yii\mongodb\file\Collection) Mongo GridFS collection instance.
       - first element considered as the name of the database, second 
       - as prefix of the GridFS collection inside that database, if no
       second element present default "fs" prefix will be used.
-    [$refresh] (boolean) Whether to reload the collection instance even if it
-    is found in the cache.
+    [$refresh] (bool) Whether to reload the collection instance even if it is
+    found in the cache.
 
 
 *yii/mongodb/Connection::getIsActive*			public
 >
  getIsActive()
 <
-return (boolean) Whether the Mongo connection is established
+return (bool) Whether the Mongo connection is established
 
 
 
@@ -432,7 +431,7 @@ return (\yii\mongodb\Command) Command instance.
 <
 return (string) Registered stream protocol name.
 
-    [$force] (boolean) Whether to enforce registration even wrapper has been
+    [$force] (bool) Whether to enforce registration even wrapper has been
     already registered.
 
 

@@ -178,6 +178,10 @@ $behaviors				*yii/validators/Validator::$behaviors*
 
  See |yii/base/Component::$behaviors|
 
+$attributeNames				*yii/validators/Validator::$attributeNames*
+
+ (array) Attribute names.
+
 
 
 METHOD DETAILS
@@ -343,8 +347,7 @@ return (void)
 
     [$model] (\yii\base\Model) The data model being validated
     [$attributes] (array|null) The list of attributes to be validated. Note
-    that if an attribute is not associated with the validator, or is is
-    prefixed with '!' char 
+    that if an attribute is not associated with the validator 
       - it will be ignored. If this parameter is null, every attribute listed
     in 'attributes' will be validated.
 
@@ -393,8 +396,8 @@ error message. Null should be returned if the data is valid.
 >
  clientValidateAttribute($model, $attribute, $view)
 <
-return (string) The client-side validation script. Null if the validator does not
-support client-side validation.
+return (string|null) The client-side validation script. Null if the validator does
+not support client-side validation.
 
  Calls 'getClientOptions()' to generate options array for client-side
  validation.
@@ -490,6 +493,24 @@ return (bool) Whether the value is empty
  false when the value is 0.
 
     [$value] (mixed) The value to be checked
+
+
+*yii/validators/Validator::formatMessage*			protected
+>
+ formatMessage($message, $params)
+<
+return (string) 
+
+    [$message] (string) 
+    [$params] (array) 
+
+
+*yii/validators/Validator::getAttributeNames*		public
+>
+ getAttributeNames()
+<
+return (array) Attribute names.
+
 
 
 

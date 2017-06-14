@@ -284,8 +284,8 @@ return (string) The encrypted data
     [$data] (string) Data to be encrypted
     [$passwordBased] (bool) Set true to use password-based key derivation
     [$secret] (string) The encryption password or key
-    [$info] (string) Context/application specific information, e.g. a user ID
-    See [RFC 5869 Section
+    [$info] (string|null) Context/application specific information, e.g. a
+    user ID See [RFC 5869 Section
     3.2](https://tools.ietf.org/html/rfc5869#section-3.2) for more details.
 
 
@@ -298,7 +298,8 @@ return (bool|string) The decrypted data or false on authentication failure
     [$data] (string) Encrypted data to be decrypted.
     [$passwordBased] (bool) Set true to use password-based key derivation
     [$secret] (string) The decryption password or key
-    [$info] (string) Context/application specific information, @see encrypt()
+    [$info] (string|null) Context/application specific information, @see
+    encrypt()
 
 
 *yii/base/Security::hkdf*					public
@@ -362,7 +363,7 @@ return (string) The data prefixed with the keyed hash
 >
  validateData($data, $key, $rawHash='false')
 <
-return (string) The real data with the hash stripped off. False if the data is
+return (string|false) The real data with the hash stripped off. False if the data is
 tampered.
 
     [$data] (string) The data to be validated. The data must be previously
@@ -469,6 +470,29 @@ return (bool) Whether strings are equal.
 
     [$expected] (string) String to compare.
     [$actual] (string) User-supplied string.
+
+
+*yii/base/Security::maskToken*				public
+>
+ maskToken($token)
+<
+return (string) A masked token.
+
+ Applies a random mask to the token and prepends the mask used to the result
+ making the string always unique. Used to mitigate BREACH attack by
+ randomizing how token is outputted on each request.
+
+    [$token] (string) An unmasked token.
+
+
+*yii/base/Security::unmaskToken*				public
+>
+ unmaskToken($maskedToken)
+<
+return (string) An unmasked token, or an empty string in case of token format is
+invalid.
+
+    [$maskedToken] (string) A masked token.
 
 
 

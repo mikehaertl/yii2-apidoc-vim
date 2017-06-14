@@ -23,6 +23,24 @@ $conditionBuilders			*yii/db/oci/QueryBuilder::$conditionBuilders*
 
  See |yii/db/QueryBuilder::$conditionBuilders|
 
+$likeEscapingReplacements		*yii/db/oci/QueryBuilder::$likeEscapingReplacements*
+
+ (array) 
+
+ Map of chars to their replacements in LIKE conditions. By default it's
+ configured to escape '%', '_' and '\' with '\'.
+
+
+
+$likeEscapeCharacter			*yii/db/oci/QueryBuilder::$likeEscapeCharacter*
+
+ (string|null) 
+
+ Character used to escape special characters in LIKE conditions. By default
+ it's assumed to be '\'.
+
+
+
 
 
 METHOD DETAILS
@@ -457,8 +475,24 @@ return (string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
 
 
 *yii/db/oci/QueryBuilder::buildInCondition*		public
+>
+ buildInCondition($operator, $operands, $params)
+<
+return (string) The generated SQL expression
 
- See |yii/db/QueryBuilder::buildInCondition|
+
+
+
+
+
+
+    [$operator] (string) The operator to use (e.g. 'IN' or 'NOT IN')
+    [$operands] (array) The first operand is the column name. If it is an
+    array a composite IN condition will be generated. The second operand is an
+    array of values that column value should be among. If it is an empty array
+    the generated expression will be a 'false' value if operator is 'IN' and
+    empty if operator is 'NOT IN'.
+    [$params] (array) The binding parameters to be populated
 
 
 *yii/db/oci/QueryBuilder::buildSubqueryInCondition*	protected
@@ -472,8 +506,37 @@ return (string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
 
 
 *yii/db/oci/QueryBuilder::buildLikeCondition*		public
+>
+ buildLikeCondition($operator, $operands, $params)
+<
+return (string) The generated SQL expression
 
- See |yii/db/QueryBuilder::buildLikeCondition|
+
+
+
+
+
+
+    [$operator] (string) The operator to use (e.g. 'LIKE', 'NOT LIKE', 'OR
+    LIKE' or 'OR NOT LIKE')
+    [$operands] (array) An array of two or three operands
+
+
+      - The first operand is the column name. 
+      - The second operand is a single value or an array of values that
+      column value   should be compared with. If it is an empty array the
+    generated expression will   be a 'false' value if operator is 'LIKE' or
+    'OR LIKE', and empty if operator   is 'NOT LIKE' or 'OR NOT LIKE'. 
+      - An optional third operand can also be provided to specify how to
+      escape special characters   in the value(s). The operand should be an
+    array of mappings from the special characters to their   escaped
+    counterparts. If this operand is not provided, a default escape mapping
+    will be used.   You may use 'false' or an empty array to indicate the
+    values are already escaped and no escape   should be applied. Note that
+    when using an escape mapping (or the third operand is not provided),   the
+    values will be automatically enclosed within a pair of percentage
+    characters.
+    [$params] (array) The binding parameters to be populated
 
 
 *yii/db/oci/QueryBuilder::buildExistsCondition*		public
@@ -499,6 +562,20 @@ return (string) The SELECT EXISTS() SQL statement.
 
 
     [$rawSql] (string) The subquery in a raw form to select from.
+
+
+*yii/db/oci/QueryBuilder::splitInCondition*		protected
+>
+ splitInCondition($operator, $operands, $params)
+<
+return (null|string) Null when split is not required. Otherwise 
+  - built SQL condition.
+
+ This method splits long 'IN' condition into series of smaller ones.
+
+    [$operator] (string) 
+    [$operands] (array) 
+    [$params] (array) 
 
 
 

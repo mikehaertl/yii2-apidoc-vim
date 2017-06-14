@@ -100,6 +100,10 @@ $behaviors				*yii/validators/StringValidator::$behaviors*
 
  See |yii/base/Component::$behaviors|
 
+$attributeNames				*yii/validators/StringValidator::$attributeNames*
+
+ See |yii/validators/Validator::$attributeNames|
+
 
 
 METHOD DETAILS
@@ -293,8 +297,8 @@ error message. Null should be returned if the data is valid.
 >
  clientValidateAttribute($model, $attribute, $view)
 <
-return (string) The client-side validation script. Null if the validator does not
-support client-side validation.
+return (string|null) The client-side validation script. Null if the validator does
+not support client-side validation.
 
 
 
@@ -343,10 +347,18 @@ support client-side validation.
 >
  getClientOptions($model, $attribute)
 <
-return (void)
+return (array) The client-side validation options
 
-    [$model] () 
-    [$attribute] () 
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/StringValidator::isActive*		public
@@ -362,6 +374,16 @@ return (void)
 *yii/validators/StringValidator::isEmpty*			public
 
  See |yii/validators/Validator::isEmpty|
+
+
+*yii/validators/StringValidator::formatMessage*		protected
+
+ See |yii/validators/Validator::formatMessage|
+
+
+*yii/validators/StringValidator::getAttributeNames*	public
+
+ See |yii/validators/Validator::getAttributeNames|
 
 
 

@@ -53,7 +53,7 @@ $transactionIsolationLevel		*yii/db/pgsql/Schema::$transactionIsolationLevel*
 
 $viewNames				*yii/db/pgsql/Schema::$viewNames*
 
- (string[]) All view names in the database.
+ See |yii/db/ViewFinderTrait::$viewNames|
 
 
 
@@ -335,6 +335,20 @@ return (string) The properly quoted table name
  See |yii/db/Schema::isReadQuery|
 
 
+*yii/db/pgsql/Schema::findViewNames*			protected
+>
+ findViewNames($schema='\'\'')
+<
+return (void)
+
+    [$schema] () 
+
+
+*yii/db/pgsql/Schema::getViewNames*			public
+
+ See |yii/db/ViewFinderTrait::getViewNames|
+
+
 *yii/db/pgsql/Schema::resolveTableNames*			protected
 >
  resolveTableNames($table, $name)
@@ -343,30 +357,6 @@ return (void)
 
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
-
-
-*yii/db/pgsql/Schema::findViewNames*			protected
->
- findViewNames($schema='''')
-<
-return (array) All views names in the database. The names have NO schema name prefix.
-
-    [$schema] (string) The schema of the views. Defaults to empty string,
-    meaning the current or default schema.
-
-
-*yii/db/pgsql/Schema::getViewNames*			public
->
- getViewNames($schema='''', $refresh='false')
-<
-return (string[]) All view names in the database.
-
-    [$schema] (string) The schema of the views. Defaults to empty string,
-    meaning the current or default schema name. If not empty, the returned
-    view names will be prefixed with the schema name.
-    [$refresh] (bool) Whether to fetch the latest available view names. If
-    this is false, view names fetched previously (if available) will be
-    returned.
 
 
 *yii/db/pgsql/Schema::findConstraints*			protected

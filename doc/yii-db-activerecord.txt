@@ -459,7 +459,7 @@ return (int) The number of rows updated
  example an equivalent of the example above would be:
 
    $models = Customer::find()->where('status = 2')->all();
-   foreach($models as $model) {
+   foreach ($models as $model) {
        $model->status = 1;
        $model->update(false); // skipping validation as no user input is
  involved
@@ -501,7 +501,7 @@ return (int) The number of rows updated
 
 *yii/db/ActiveRecord::deleteAll*				public
 >
- deleteAll($condition='\'\'', $params='[]')
+ deleteAll($condition='null', $params='[]')
 <
 return (int) The number of rows deleted
 
@@ -518,7 +518,7 @@ return (int) The number of rows deleted
  example an equivalent of the example above would be:
 
    $models = Customer::find()->where('status = 3')->all();
-   foreach($models as $model) {
+   foreach ($models as $model) {
        $model->delete();
    }
 
@@ -544,6 +544,11 @@ return (int) The number of rows deleted
 *yii/db/ActiveRecord::hasMany*				public
 
  See |yii/db/BaseActiveRecord::hasMany|
+
+
+*yii/db/ActiveRecord::createRelationQuery*		protected
+
+ See |yii/db/BaseActiveRecord::createRelationQuery|
 
 
 *yii/db/ActiveRecord::populateRelation*			public

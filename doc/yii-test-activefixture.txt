@@ -42,12 +42,12 @@ $data					*yii/test/ActiveFixture::$data*
 
 $dataFile				*yii/test/ActiveFixture::$dataFile*
 
- (string|bool) The file path or path alias of the data file that contains the
- fixture data to be returned by 'getData()'. If this is not set, it will
- default to 'FixturePath/data/TableName.php', where 'FixturePath' stands for
- the directory containing this fixture class, and 'TableName' stands for the
- name of the table associated with this fixture. You can set this property to
- be false to prevent loading any data.
+ (string|bool) The file path or [path alias](guide:concept-aliases) of the
+ data file that contains the fixture data to be returned by 'getData()'. If
+ this is not set, it will default to 'FixturePath/data/TableName.php', where
+ 'FixturePath' stands for the directory containing this fixture class, and
+ 'TableName' stands for the name of the table associated with this fixture.
+ You can set this property to be false to prevent loading any data.
 
 $tableName				*yii/test/ActiveFixture::$tableName*
 
@@ -233,8 +233,17 @@ return (void)
 
 
 *yii/test/ActiveFixture::unload*				public
+>
+ unload()
+<
+return (void)
 
- See |yii/test/Fixture::unload|
+
+
+ This method is called after every test method finishes. You may override this
+ method to perform necessary cleanup work for the fixture.
+
+
 
 
 *yii/test/ActiveFixture::beforeUnload*			public

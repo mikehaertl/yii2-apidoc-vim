@@ -21,7 +21,8 @@ DESCRIPTION
 
    use yii\authclient\OAuth2;
 
-   $oauthClient = new OAuth2();
+   // assuming class MyAuthClient extends OAuth2
+   $oauthClient = new MyAuthClient();
    $url = $oauthClient->buildAuthUrl(); // Build authorization URL
    Yii::$app->getResponse()->redirect($url); // Redirect to authorization URL.
    // After user returns at our site:
@@ -68,8 +69,8 @@ $tokenUrl				*yii/authclient/OAuth2::$tokenUrl*
 
 $validateAuthState			*yii/authclient/OAuth2::$validateAuthState*
 
- (boolean) Whether to use and validate auth 'state' parameter in
- authentication flow. If enabled 
+ (bool) Whether to use and validate auth 'state' parameter in authentication
+ flow. If enabled 
    - the opaque value will be generated and applied to auth URL to
    maintain state between the request and callback. The authorization server
  includes this value, when redirecting the user-agent back to the client. The

@@ -29,10 +29,14 @@ $controllers				*yii/filters/AccessRule::$controllers*
 
  If not set or empty, it means this rule applies to all controllers.
 
+ Since version 2.0.12 controller IDs can be specified as wildcards, e.g.
+ 'module/*'.
+
 $roles					*yii/filters/AccessRule::$roles*
 
- (array) List of roles that this rule applies to. Two special roles are
- recognized, and they are checked via 'User::isGuest':
+ (array) List of roles that this rule applies to (requires properly configured
+ User component). Two special roles are recognized, and they are checked via
+ 'User::isGuest':
 
 
    - '?': matches a guest user (not authenticated yet) 
@@ -44,6 +48,35 @@ $roles					*yii/filters/AccessRule::$roles*
 
  If this property is not set or empty, it means this rule applies to all
  roles.
+
+$roleParams				*yii/filters/AccessRule::$roleParams*
+
+ (array|\Closure) Parameters to pass to the 'User::can()' function for
+ evaluating user permissions in '$roles'.
+
+ If this is an array, it will be passed directly to 'User::can()'. For example
+ for passing an ID from the current request, you may use the following:
+
+   ['postId' => Yii::$app->request->get('id')]
+
+ You may also specify a closure that returns an array. This can be used to
+ evaluate the array values only if they are needed, for example when a model
+ needs to be loaded like in the following code:
+
+   'rules' => [
+       [
+           'allow' => true,
+           'actions' => ['update'],
+           'roles' => ['updatePost'],
+           'roleParams' => function($rule) {
+               return ['post' =>
+ Post::findOne(Yii::$app->request->get('id'))];
+           },
+       ],
+   ],
+
+ A reference to the 'AccessRule' instance will be passed to the closure as the
+ first parameter.
 
 $ips					*yii/filters/AccessRule::$ips*
 
@@ -221,11 +254,12 @@ METHOD DETAILS
 >
  allows($action, $user, $request)
 <
-return (bool|null) True if the user is allowed, false if the user is denied, null if
-the rule does not apply to the user
+return (bool|null) 'true' if the user is allowed, 'false' if the user is denied,
+'null' if the rule does not apply to the user
 
     [$action] (\yii\base\Action) The action to be performed
-    [$user] (\yii\web\User) The user object
+    [$user] (\yii\web\User|false) The user object or 'false' in case of
+    detached User component
     [$request] (\yii\web\Request) 
 
 
@@ -262,7 +296,7 @@ return (bool) Whether the rule applies to the role
 <
 return (bool) Whether the rule applies to the IP address
 
-    [$ip] (string) The IP address
+    [$ip] (string|null) The IP address
 
 
 *yii/filters/AccessRule::matchVerb*			protected

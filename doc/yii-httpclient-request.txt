@@ -28,7 +28,7 @@ $content				*yii/httpclient/Request::$content*
 
 $data					*yii/httpclient/Request::$data*
 
- See |yii/httpclient/Message::$data|
+ (mixed) Content data fields.
 
 $format					*yii/httpclient/Request::$format*
 
@@ -234,8 +234,18 @@ METHOD DETAILS
 
 
 *yii/httpclient/Request::setData*				public
+>
+ setData($data)
+<
+return ($this) Self reference.
 
- See |yii/httpclient/Message::setData|
+
+
+
+
+
+
+    [$data] (mixed) Content data fields.
 
 
 *yii/httpclient/Request::getData*				public
@@ -244,8 +254,18 @@ METHOD DETAILS
 
 
 *yii/httpclient/Request::addData*				public
+>
+ addData($data)
+<
+return ($this) Self reference.
 
- See |yii/httpclient/Message::addData|
+
+
+
+
+
+
+    [$data] (array) Additional content data fields.
 
 
 *yii/httpclient/Request::setFormat*			public
@@ -313,6 +333,18 @@ return (string|array) Target URL or URL parameters
 
 
 
+*yii/httpclient/Request::setFullUrl*			public
+>
+ setFullUrl($fullUrl)
+<
+return (void)
+
+ This method can be use during request formatting and preparation. Do not use
+ it for the target URL specification, use 'setUrl()' instead.
+
+    [$fullUrl] (string) Full target URL.
+
+
 *yii/httpclient/Request::getFullUrl*			public
 >
  getFullUrl()
@@ -349,11 +381,11 @@ return ($this) Self reference.
    tcp://proxy.example.com:5100). 
    - userAgent: string, the contents of the "User-Agent: " header to be
    used in a HTTP request. 
-   - followLocation: boolean, whether to follow any "Location: " header
+   - followLocation: bool, whether to follow any "Location: " header
    that the server sends as part of the HTTP header. 
-   - maxRedirects: integer, the max number of redirects to follow. 
+   - maxRedirects: int, the max number of redirects to follow. 
    - protocolVersion: float|string, HTTP protocol version. 
-   - sslVerifyPeer: boolean, whether verification of the peer's
+   - sslVerifyPeer: bool, whether verification of the peer's
    certificate should be performed. 
    - sslCafile: string, location of Certificate Authority file on local
    filesystem which should be used with   the 'sslVerifyPeer' option to

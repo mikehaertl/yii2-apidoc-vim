@@ -9,6 +9,7 @@ SUBCLASSES
 |yii/data/SqlDataProvider|
 |yii/data/ActiveDataProvider|
 |yii/sphinx/ActiveDataProvider|
+|yii/debug/models/timeline/DataProvider|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -23,9 +24,12 @@ PROPERTY DETAILS
 $id					*yii/data/BaseDataProvider::$id*
 
  (string) An ID that uniquely identifies the data provider among all data
- providers. You should set this property if the same page contains two or more
- different data providers. Otherwise, the 'pagination' and 'sort' may not work
- properly.
+ providers. Generated automatically the following way in case it is not set:
+
+
+   - First data provider ID is empty. 
+   - Second and all subsequent data provider IDs are: "dp-1", "dp-2",
+   etc.
 
 $behaviors				*yii/data/BaseDataProvider::$behaviors*
 
@@ -75,8 +79,17 @@ METHOD DETAILS
 
 
 *yii/data/BaseDataProvider::init*				public
+>
+ init()
+<
+return (void)
 
- See |yii/base/Object::init|
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/data/BaseDataProvider::__get*			public

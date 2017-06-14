@@ -49,6 +49,16 @@ $conditionBuilders			*yii/db/QueryBuilder::$conditionBuilders*
  (array) Map of query condition to builder methods. These methods are used by
  'buildCondition' to build SQL conditions from array syntax.
 
+$likeEscapingReplacements		*yii/db/QueryBuilder::$likeEscapingReplacements*
+
+ (array) Map of chars to their replacements in LIKE conditions. By default
+ it's configured to escape '%', '_' and '\' with '\'.
+
+$likeEscapeCharacter			*yii/db/QueryBuilder::$likeEscapeCharacter*
+
+ (string|null) Character used to escape special characters in LIKE conditions.
+ By default it's assumed to be '\'.
+
 
 
 METHOD DETAILS
@@ -162,14 +172,17 @@ return (string) The INSERT SQL
 
 *yii/db/QueryBuilder::prepareInsertSelectSubQuery*	protected
 >
- prepareInsertSelectSubQuery($columns, $schema)
+ prepareInsertSelectSubQuery($columns, $schema, $params='[]')
 <
 return (array) 
 
  .. SELECT SQL statement.
 
-    [$columns] (\yii\db\Query) Object, which represents select query
-    [$schema] (\yii\db\Schema) Schema object to qoute column name
+    [$columns] (\yii\db\Query) Object, which represents select query.
+    [$schema] (\yii\db\Schema) Schema object to quote column name.
+    [$params] (array) The parameters to be bound to the generated SQL
+    statement. These parameters will be included in the result with the
+    additional parameters generated during the query building process.
 
 
 *yii/db/QueryBuilder::batchInsert*			public

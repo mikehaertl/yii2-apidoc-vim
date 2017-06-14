@@ -226,5 +226,95 @@ return ($this) The expression object itself
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
 
 
+*yii/sphinx/MatchExpression::filterMatch*			public
+>
+ filterMatch($condition)
+<
+return ($this) The query object itself
+
+ This method is similar to 'match()'. The main difference is that this method
+ will remove 'isEmpty()|empty query operands'. As a result, this method is
+ best suited for building query conditions based on filter values entered by
+ users.
+
+ The following code shows the difference between this method and 'match()':
+
+   // MATCH (@title :title)
+   $query->filterMatch(['name' => null, 'title' => 'foo']);
+   // MATCH (@title :title)
+   $query->match(['title' => 20]);
+   // MATCH (@name :name @title :title)
+   $query->match(['name' => null, 'age' => 20]);
+
+ Note that unlike 'match()', you cannot pass binding parameters to this
+ method.
+
+    [$condition] (array) The conditions that should be put in the MATCH part.
+    See 'match()' on how to specify this parameter.
+
+
+*yii/sphinx/MatchExpression::andFilterMatch*		public
+>
+ andFilterMatch($condition)
+<
+return ($this) The query object itself
+
+ The new condition and the existing one will be joined using the 'AND'
+ operator.
+
+ This method is similar to 'andMatch()'. The main difference is that this
+ method will remove 'isEmpty()|empty query operands'. As a result, this method
+ is best suited for building query conditions based on filter values entered
+ by users.
+
+    [$condition] (array) The new MATCH condition. Please refer to 'match()' on
+    how to specify this parameter.
+
+
+*yii/sphinx/MatchExpression::orFilterMatch*		public
+>
+ orFilterMatch($condition)
+<
+return ($this) The query object itself
+
+ The new condition and the existing one will be joined using the 'OR'
+ operator.
+
+ This method is similar to 'orMatch()'. The main difference is that this
+ method will remove 'isEmpty()|empty query operands'. As a result, this method
+ is best suited for building query conditions based on filter values entered
+ by users.
+
+    [$condition] (array) The new MATCH condition. Please refer to 'match()' on
+    how to specify this parameter.
+
+
+*yii/sphinx/MatchExpression::filterCondition*		protected
+>
+ filterCondition($condition)
+<
+return (array) The condition with 'isEmpty()|empty operands' removed.
+
+    [$condition] (array) The original condition
+
+
+*yii/sphinx/MatchExpression::isEmpty*			protected
+>
+ isEmpty($value)
+<
+return (bool) If the value is empty
+
+ The value is considered "empty", if one of the following conditions is
+ satisfied:
+
+
+   - it is 'null', 
+   - an empty string (''''), 
+   - a string containing only whitespace characters, 
+   - or an empty array.
+
+    [$value] (mixed) 
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

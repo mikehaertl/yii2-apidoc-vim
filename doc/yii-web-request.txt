@@ -188,8 +188,8 @@ $absoluteUrl				*yii/web/Request::$absoluteUrl*
 
 $url					*yii/web/Request::$url*
 
- (string) The currently requested relative URL. Note that the URI returned is
- URL-encoded.
+ (string) The currently requested relative URL. Note that the URI returned may
+ be URL-encoded depending on the client.
 
 $queryString				*yii/web/Request::$queryString*
 
@@ -805,8 +805,8 @@ return (string) The currently requested absolute URL.
 >
  getUrl()
 <
-return (string) The currently requested relative URL. Note that the URI returned is
-URL-encoded.
+return (string) The currently requested relative URL. Note that the URI returned may
+be URL-encoded depending on the client.
 
  This refers to the portion of the URL that is after the 'hostInfo' part. It
  includes the 'queryString' part if any.
@@ -829,7 +829,7 @@ return (void)
  resolveRequestUri()
 <
 return (string|bool) The request URI portion for the currently requested URL. Note
-that the URI returned is URL-encoded.
+that the URI returned may be URL-encoded depending on the client.
 
  This refers to the portion that is after the 'hostInfo' part. It includes the
  'queryString' part if any. The implementation of this method referenced
@@ -1166,7 +1166,7 @@ return (\yii\web\Cookie) The generated cookie
 
 *yii/web/Request::validateCsrfToken*			public
 >
- validateCsrfToken($token='null')
+ validateCsrfToken($clientSuppliedToken='null')
 <
 return (bool) Whether CSRF token is valid. If 'enableCsrfValidation' is false, this
 method will return true.
@@ -1179,9 +1179,9 @@ method will return true.
  'enableCsrfValidation' is false or the HTTP method is among GET, HEAD or
  OPTIONS.
 
-    [$token] (string) The user-provided CSRF token to be validated. If null,
-    the token will be retrieved from the 'csrfParam' POST field or HTTP
-    header. This parameter is available since version 2.0.4.
+    [$clientSuppliedToken] (string) The user-provided CSRF token to be
+    validated. If null, the token will be retrieved from the 'csrfParam' POST
+    field or HTTP header. This parameter is available since version 2.0.4.
 
 
 

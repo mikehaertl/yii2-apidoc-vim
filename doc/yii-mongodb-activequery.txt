@@ -380,20 +380,24 @@ return (\yii\mongodb\Collection) Collection instance.
  See |yii/mongodb/Query::andFilterCompare|
 
 
-*yii/mongodb/ActiveQuery::buildCursor*			public
+*yii/mongodb/ActiveQuery::prepare*			public
 >
- buildCursor($db='null')
+ prepare()
 <
-return (\MongoDB\Driver\Cursor) Mongo cursor instance.
+return ($this) A prepared query instance.
+
+
+
+ This method is called before actual query composition, e.g. building cursor,
+ count etc. You may override this method to do some final preparation work
+ before query execution.
 
 
 
 
+*yii/mongodb/ActiveQuery::buildCursor*			public
 
-
-
-    [$db] (\yii\mongodb\Connection) The database connection used to execute
-    the query.
+ See |yii/mongodb/Query::buildCursor|
 
 
 *yii/mongodb/ActiveQuery::fetchRows*			protected
@@ -451,6 +455,16 @@ ActiveRecord object. Null will be returned if the query results in nothing.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If null, the Mongo connection returned by 'modelClass' will be
     used.
+
+
+*yii/mongodb/ActiveQuery::scalar*				public
+
+ See |yii/mongodb/Query::scalar|
+
+
+*yii/mongodb/ActiveQuery::column*				public
+
+ See |yii/mongodb/Query::column|
 
 
 *yii/mongodb/ActiveQuery::modify*				public

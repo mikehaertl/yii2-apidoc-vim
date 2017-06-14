@@ -626,13 +626,26 @@ matches.
  non-associative array.
 
  That this method will automatically call the 'one()' method and return an
- 'ActiveRecordInterface|ActiveRecord' instance. For example,
+ 'ActiveRecordInterface|ActiveRecord' instance.
+
+ > Note: As this is a short-hand method only, using more complex conditions,
+ like ['!=', 'id', 1] will not work. > If you need to specify more complex
+ conditions, use 'find()' in combination with 'ActiveQuery::where()|where()'
+ instead.
+
+ See the following code for usage examples:
 
    // find a single customer whose primary key value is 10
    $customer = Customer::findOne(10);
 
    // the above code is equivalent to:
    $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findOne([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->one();
 
    // find the first customer whose age is 30 and whose status is 1
    $customer = Customer::findOne(['age' => 30, 'status' => 1]);
@@ -671,7 +684,14 @@ matches.
   a non-associative array.
 
  This method will automatically call the 'all()' method and return an array of
- 'ActiveRecordInterface|ActiveRecord' instances. For example,
+ 'ActiveRecordInterface|ActiveRecord' instances.
+
+ > Note: As this is a short-hand method only, using more complex conditions,
+ like ['!=', 'id', 1] will not work. > If you need to specify more complex
+ conditions, use 'find()' in combination with 'ActiveQuery::where()|where()'
+ instead.
+
+ See the following code for usage examples:
 
    // find the customers whose primary key value is 10
    $customers = Customer::findAll(10);
@@ -751,7 +771,7 @@ return (int) The number of rows updated
 
 *yii/db/BaseActiveRecord::deleteAll*			public
 >
- deleteAll($condition='\'\'', $params='[]')
+ deleteAll($condition='null')
 <
 return (int) The number of rows deleted
 
@@ -767,7 +787,6 @@ return (int) The number of rows deleted
     [$condition] (string|array) The conditions that will be put in the WHERE
     part of the DELETE SQL. Please refer to 'Query::where()' on how to specify
     this parameter.
-    [$params] (array) The parameters (name => value) to be bound to the query.
 
 
 *yii/db/BaseActiveRecord::optimisticLock*			public
@@ -863,6 +882,18 @@ return (\yii\db\ActiveQueryInterface) The relational query object.
     refer to the attributes of the record associated with the '$class' model,
     while the values of the array refer to the corresponding attributes in
     **this** AR class.
+
+
+*yii/db/BaseActiveRecord::createRelationQuery*		protected
+>
+ createRelationQuery($class, $link, $multiple)
+<
+return (\yii\db\ActiveQueryInterface) The relational query object.
+
+    [$class] (string) The class name of the related record.
+    [$link] (array) The primary-foreign key constraint.
+    [$multiple] (bool) Whether this query represents a relation to more than
+    one record.
 
 
 *yii/db/BaseActiveRecord::populateRelation*		public
@@ -1202,12 +1233,12 @@ insertion or updating will be cancelled.
 
    public function beforeSave($insert)
    {
-       if (parent::beforeSave($insert)) {
-           // ...custom code here...
-           return true;
-       } else {
+       if (!parent::beforeSave($insert)) {
            return false;
        }
+
+       // ...custom code here...
+       return true;
    }
 
 
@@ -1255,12 +1286,12 @@ return (bool) Whether the record should be deleted. Defaults to 'true'.
 
    public function beforeDelete()
    {
-       if (parent::beforeDelete()) {
-           // ...custom code here...
-           return true;
-       } else {
+       if (!parent::beforeDelete()) {
            return false;
        }
+
+       // ...custom code here...
+       return true;
    }
 
 

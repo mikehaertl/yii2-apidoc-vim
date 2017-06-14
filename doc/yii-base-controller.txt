@@ -297,8 +297,8 @@ return (array) The valid parameters that the action can run with.
 >
  createAction($id)
 <
-return (\yii\base\Action) The newly created action instance. Null if the ID doesn't
-resolve into any action.
+return (\yii\base\Action|null) The newly created action instance. Null if the ID
+doesn't resolve into any action.
 
  The method first checks if the action ID has been declared in 'actions()'. If
  so, it will use the configuration declared there to create the action object.
@@ -406,7 +406,8 @@ return (string) The rendering result.
  The view to be rendered can be specified in one of the following formats:
 
 
-   - path alias (e.g. "@app/views/site/index"); 
+   - [path alias](guide:concept-aliases) (e.g.
+   "@app/views/site/index"); 
    - absolute path within application (e.g. "//site/index"): the view
    name starts with double slashes.   The actual view file will be looked for
  under the 'Application::viewPath|view path' of the application. 
@@ -435,7 +436,8 @@ return (string) The rendering result.
  previously found layout name    and context module. The layout name can be:
 
 
-   - a path alias (e.g. "@app/views/layouts/main"); 
+   - a [path alias](guide:concept-aliases) (e.g.
+   "@app/views/layouts/main"); 
    - an absolute path (e.g. "/main"): the layout name starts with a
    slash. The actual layout file will be   looked for under the
  'Application::layoutPath|layout path' of the application; 
@@ -484,7 +486,7 @@ return (string) The rendering result.
 return (string) The rendering result.
 
     [$file] (string) The view file to be rendered. This can be either a file
-    path or a path alias.
+    path or a [path alias](guide:concept-aliases).
     [$params] (array) The parameters (name-value pairs) that should be made
     available in the view.
 

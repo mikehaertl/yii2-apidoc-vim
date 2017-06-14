@@ -75,6 +75,10 @@ $normalizer				*yii/web/UrlRule::$normalizer*
  'UrlNormalizer' used by this rule. If 'null', 'UrlManager::normalizer' will
  be used, if 'false', normalization will be skipped for this rule.
 
+$createStatus				*yii/web/UrlRule::$createStatus*
+
+ (int|null) Status of the URL creation after the last 'createUrl()' call.
+
 $placeholders				*yii/web/UrlRule::$placeholders*
 
  (array) List of placeholders for matching parameters names. Used in
@@ -82,6 +86,11 @@ $placeholders				*yii/web/UrlRule::$placeholders*
  parameters names will be replaced with placeholders. This array contains
  relations between the original parameters names and their placeholders. The
  array keys are the placeholders and the values are the original names.
+
+$createUrlStatus			*yii/web/UrlRule::$createUrlStatus*
+
+ (null|int) Status of the URL creation after the last 'createUrl()' call.
+ 'null' if rule does not provide info about create status.
 
 
 
@@ -201,6 +210,15 @@ creating this URL.
     [$route] (string) The route. It should not have slashes at the beginning
     or the end.
     [$params] (array) The parameters
+
+
+*yii/web/UrlRule::getCreateUrlStatus*			public
+>
+ getCreateUrlStatus()
+<
+return (null|int) Status of the URL creation after the last 'createUrl()' call.
+'null' if rule does not provide info about create status.
+
 
 
 *yii/web/UrlRule::getParamRules*				protected

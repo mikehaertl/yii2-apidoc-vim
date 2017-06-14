@@ -103,12 +103,12 @@ $dsn					*yii/db/Connection::$dsn*
 
  (string) The Data Source Name, or DSN, contains the information required to
  connect to the database. Please refer to the [PHP
- manual](http://www.php.net/manual/en/function.PDO-construct.php) on the
- format of the DSN string.
+ manual](http://php.net/manual/en/pdo.construct.php) on the format of the DSN
+ string.
 
  For [SQLite](http://php.net/manual/en/ref.pdo-sqlite.connection.php) you may
- use a path alias for specifying the database path, e.g.
- 'sqlite:@app/data/db.sql'.
+ use a [path alias](guide:concept-aliases) for specifying the database path,
+ e.g. 'sqlite:@app/data/db.sql'.
 
 $username				*yii/db/Connection::$username*
 
@@ -124,8 +124,8 @@ $attributes				*yii/db/Connection::$attributes*
 
  (array) PDO attributes (name => value) that should be set when calling
  'open()' to establish a DB connection. Please refer to the [PHP
- manual](http://www.php.net/manual/en/function.PDO-setAttribute.php) for
- details about available attributes.
+ manual](http://php.net/manual/en/pdo.setattribute.php) for details about
+ available attributes.
 
 $pdo					*yii/db/Connection::$pdo*
 
@@ -300,6 +300,18 @@ $shuffleMasters				*yii/db/Connection::$shuffleMasters*
 
  (bool) Whether to shuffle 'masters' before getting one.
 
+$enableLogging				*yii/db/Connection::$enableLogging*
+
+ (bool) Whether to enable logging of database queries. Defaults to true. You
+ may want to disable this option in a production environment to gain
+ performance if you do not need the information being logged.
+
+$enableProfiling			*yii/db/Connection::$enableProfiling*
+
+ (bool) Whether to enable profiling of database queries. Defaults to true. You
+ may want to disable this option in a production environment to gain
+ performance if you do not need the information being logged.
+
 $behaviors				*yii/db/Connection::$behaviors*
 
  See |yii/base/Component::$behaviors|
@@ -418,8 +430,11 @@ METHOD DETAILS
 
 
 *yii/db/Connection::__clone*				public
+>
+ __clone()
+<
+return (void)
 
- See |yii/base/Component::__clone|
 
 
 *yii/db/Connection::behaviors*				public

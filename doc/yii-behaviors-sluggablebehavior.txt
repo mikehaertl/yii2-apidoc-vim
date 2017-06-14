@@ -59,10 +59,11 @@ $attributes				*yii/behaviors/SluggableBehavior::$attributes*
 
 $value					*yii/behaviors/SluggableBehavior::$value*
 
- (string|callable) The value that will be used as a slug. This can be an
- anonymous function or an arbitrary value. If the former, the return value of
- the function will be used as a slug. The signature of the function should be
- as follows,
+ (callable|string|null) The value that will be used as a slug. This can be an
+ anonymous function or an arbitrary value or null. If the former, the return
+ value of the function will be used as a slug. If 'null' then the '$attribute'
+ property will be used to generate a slug. The signature of the function
+ should be as follows,
 
    function ($event)
    {
@@ -81,8 +82,9 @@ $slugAttribute				*yii/behaviors/SluggableBehavior::$slugAttribute*
 
 $attribute				*yii/behaviors/SluggableBehavior::$attribute*
 
- (string|array) The attribute or list of attributes whose value will be
- converted into a slug
+ (string|array|null) The attribute or list of attributes whose value will be
+ converted into a slug or 'null' meaning that the '$value' property will be
+ used to generate a slug.
 
 $immutable				*yii/behaviors/SluggableBehavior::$immutable*
 

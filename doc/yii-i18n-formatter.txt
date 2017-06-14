@@ -184,7 +184,7 @@ $thousandSeparator			*yii/i18n/Formatter::$thousandSeparator*
 $numberFormatterOptions			*yii/i18n/Formatter::$numberFormatterOptions*
 
  (array) A list of name value pairs that are passed to the intl
- [Numberformatter::setAttribute()](http://php.net/manual/en/numberformatter.setattribute.php)
+ [NumberFormatter::setAttribute()](http://php.net/manual/en/numberformatter.setattribute.php)
  method of all the number formatter objects created by
  'createNumberFormatter()'. This property takes only effect if the [PHP intl
  extension](http://php.net/manual/en/book.intl.php) is installed.
@@ -206,7 +206,7 @@ $numberFormatterOptions			*yii/i18n/Formatter::$numberFormatterOptions*
 $numberFormatterTextOptions		*yii/i18n/Formatter::$numberFormatterTextOptions*
 
  (array) A list of name value pairs that are passed to the intl
- [Numberformatter::setTextAttribute()](http://php.net/manual/en/numberformatter.settextattribute.php)
+ [NumberFormatter::setTextAttribute()](http://php.net/manual/en/numberformatter.settextattribute.php)
  method of all the number formatter objects created by
  'createNumberFormatter()'. This property takes only effect if the [PHP intl
  extension](http://php.net/manual/en/book.intl.php) is installed.
@@ -227,7 +227,7 @@ $numberFormatterTextOptions		*yii/i18n/Formatter::$numberFormatterTextOptions*
 $numberFormatterSymbols			*yii/i18n/Formatter::$numberFormatterSymbols*
 
  (array) A list of name value pairs that are passed to the intl
- [Numberformatter::setSymbol()](http://php.net/manual/en/numberformatter.setsymbol.php)
+ [NumberFormatter::setSymbol()](http://php.net/manual/en/numberformatter.setsymbol.php)
  method of all the number formatter objects created by
  'createNumberFormatter()'. This property takes only effect if the [PHP intl
  extension](http://php.net/manual/en/book.intl.php) is installed.
@@ -612,12 +612,14 @@ return (string) The formatted result.
 
 *yii/i18n/Formatter::normalizeDatetimeValue*		protected
 >
- normalizeDatetimeValue($value, $checkTimeInfo='false')
+ normalizeDatetimeValue($value, $checkDateTimeInfo='false')
 <
 return (\DateTime|array) The normalized datetime value. Since version 2.0.1 this may
 also return an array if '$checkTimeInfo' is true. The first element of the
 array is the normalized timestamp and the second is a boolean indicating
-whether the timestamp has time information or it is just a date value.
+whether the timestamp has time information or it is just a date value. Since
+version 2.0.12 the array has third boolean element indicating whether the
+timestamp has date information or it is just a time value.
 
     [$value] (int|string|\DateTime) The datetime value to be normalized. The
     following types of value are supported:
@@ -630,12 +632,13 @@ whether the timestamp has time information or it is just a date value.
     given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
       object
-    [$checkTimeInfo] (bool) Whether to also check if the date/time value has
-    some time information attached. Defaults to 'false'. If 'true', the method
-    will then return an array with the first element being the normalized
-    timestamp and the second a boolean indicating whether the timestamp has
-    time information or it is just a date value. This parameter is available
-    since version 2.0.1.
+    [$checkDateTimeInfo] (bool) Whether to also check if the date/time value
+    has some time and date information attached. Defaults to 'false'. If
+    'true', the method will then return an array with the first element being
+    the normalized timestamp, the second a boolean indicating whether the
+    timestamp has time information and third a boolean indicating whether the
+    timestamp has date information. This parameter is available since version
+    2.0.1.
 
 
 *yii/i18n/Formatter::asTimestamp*				public

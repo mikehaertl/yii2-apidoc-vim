@@ -91,6 +91,15 @@ $attributes				*yii/data/Sort::$attributes*
        'label' => Inflector::camel2words('age'),
    ]
 
+ Since 2.0.12 particular sort direction can be also specified as direct sort
+ expression, like following:
+
+   'name' => [
+       'asc' => '[[last_name]] ASC NULLS FIRST', // PostgreSQL specific
+ feature
+       'desc' => '[[last_name]] DESC NULLS LAST',
+   ]
+
  The 'name' attribute is a composite attribute:
 
 
@@ -255,6 +264,28 @@ return (array) Sort directions indexed by attribute names. Sort direction can be
 either 'SORT_ASC' for ascending order or 'SORT_DESC' for descending order.
 
     [$recalculate] (bool) Whether to recalculate the sort directions
+
+
+*yii/data/Sort::parseSortParam*				protected
+>
+ parseSortParam($param)
+<
+return (array) The valid sort attributes.
+
+ The format must be the attribute name only for ascending or the attribute
+ name prefixed with '-' for descending.
+
+ For example the following return value will result in ascending sort by
+ 'category' and descending sort by 'created_at':
+
+   [
+       'category',
+       '-created_at'
+   ]
+
+
+
+    [$param] (string) The value of the 'sortParam'.
 
 
 *yii/data/Sort::setAttributeOrders*			public

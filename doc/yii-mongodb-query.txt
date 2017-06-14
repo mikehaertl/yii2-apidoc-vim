@@ -359,25 +359,36 @@ return ($this) The query object itself.
     example: use 'LIKE' or 'REGEX' for partial cq regex matching
 
 
+*yii/mongodb/Query::prepare*				public
+>
+ prepare()
+<
+return ($this) A prepared query instance.
+
+ This method is called before actual query composition, e.g. building cursor,
+ count etc. You may override this method to do some final preparation work
+ before query execution.
+
+
 *yii/mongodb/Query::buildCursor*				public
 >
  buildCursor($db='null')
 <
 return (\MongoDB\Driver\Cursor) Mongo cursor instance.
 
-    [$db] (\yii\mongodb\Connection) The database connection used to execute
-    the query.
+    [$db] (\yii\mongodb\Connection) The MongoDB connection used to execute the
+    query.
 
 
 *yii/mongodb/Query::fetchRows*				protected
 >
  fetchRows($cursor, $all='true', $indexBy='null')
 <
-return (array|boolean) Result.
+return (array|bool) Result.
 
     [$cursor] (\MongoDB\Driver\Cursor) Mongo cursor instance to fetch data
     from.
-    [$all] (boolean) Whether to fetch all rows or only first one.
+    [$all] (bool) Whether to fetch all rows or only first one.
     [$indexBy] (string|callable) The column name or PHP callback, by which the
     query results should be indexed by.
 
@@ -386,11 +397,11 @@ return (array|boolean) Result.
 >
  fetchRowsInternal($cursor, $all)
 <
-return (array|boolean) Result.
+return (array|bool) Result.
 
     [$cursor] (\MongoDB\Driver\Cursor) Mongo cursor instance to fetch data
     from.
-    [$all] (boolean) Whether to fetch all rows or only first one.
+    [$all] (bool) Whether to fetch all rows or only first one.
 
 
 *yii/mongodb/Query::batch*				public
@@ -414,7 +425,7 @@ return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
 
 
 
-    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$batchSize] (int) The number of records to be fetched in each batch.
     [$db] (\yii\mongodb\Connection) The MongoDB connection. If not set, the
     "mongodb" application component will be used.
 
@@ -435,7 +446,7 @@ return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
 
 
 
-    [$batchSize] (integer) The number of records to be fetched in each batch.
+    [$batchSize] (int) The number of records to be fetched in each batch.
     [$db] (\yii\mongodb\Connection) The MongoDB connection. If not set, the
     "mongodb" application component will be used.
 
@@ -468,12 +479,43 @@ return (array) The converted query result
 >
  one($db='null')
 <
-return (array|boolean) The first row (in terms of an array) of the query result.
-False is returned if the query results in nothing.
+return (array|false) The first row (in terms of an array) of the query result.
+'false' is returned if the query results in nothing.
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
     will be used.
+
+
+*yii/mongodb/Query::scalar*				public
+>
+ scalar($db='null')
+<
+return (string|null|false) The value of the first column in the first row of the
+query result. 'false' is returned if the query result is empty.
+
+ The value returned will be the first column in the first row of the query
+ results. Column '_id' will be automatically excluded from select fields, if
+ 'select' is not empty and '_id' is not selected explicitly.
+
+    [$db] (\yii\mongodb\Connection) The MongoDB connection used to generate
+    the query. If this parameter is not given, the 'mongodb' application
+    component will be used.
+
+
+*yii/mongodb/Query::column*				public
+>
+ column($db='null')
+<
+return (array) The first column of the query result. An empty array is returned if
+the query results in nothing.
+
+ Column '_id' will be automatically excluded from select fields, if 'select'
+ is not empty and '_id' is not selected explicitly.
+
+    [$db] (\yii\mongodb\Connection) The MongoDB connection used to generate
+    the query. If this parameter is not given, the 'mongodb' application
+    component will be used.
 
 
 *yii/mongodb/Query::modify*				public
@@ -493,7 +535,7 @@ $options['new'] is set.
 >
  count($q=''*'', $db='null')
 <
-return (integer) Number of records
+return (int) Number of records
 
     [$q] (string) Kept to match 'QueryInterface', its value is ignored.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -505,7 +547,7 @@ return (integer) Number of records
 >
  exists($db='null')
 <
-return (boolean) Whether the query result contains any row of data.
+return (bool) Whether the query result contains any row of data.
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
@@ -516,7 +558,7 @@ return (boolean) Whether the query result contains any row of data.
 >
  sum($q, $db='null')
 <
-return (integer) The sum of the specified column values
+return (int) The sum of the specified column values
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -529,7 +571,7 @@ return (integer) The sum of the specified column values
 >
  average($q, $db='null')
 <
-return (integer) The average of the specified column values.
+return (int) The average of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -542,7 +584,7 @@ return (integer) The average of the specified column values.
 >
  min($q, $db='null')
 <
-return (integer) The minimum of the specified column values.
+return (int) The minimum of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -555,7 +597,7 @@ return (integer) The minimum of the specified column values.
 >
  max($q, $db='null')
 <
-return (integer) The maximum of the specified column values.
+return (int) The maximum of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -568,7 +610,7 @@ return (integer) The maximum of the specified column values.
 >
  aggregate($column, $operator, $db)
 <
-return (integer) Aggregation result.
+return (int) Aggregation result.
 
     [$column] (string) Column name.
     [$operator] (string) Aggregation operator.

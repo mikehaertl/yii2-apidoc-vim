@@ -118,7 +118,7 @@ return (string) Full name of this collection, including database name.
 >
  drop()
 <
-return (boolean) Whether the operation successful.
+return (bool) Whether the operation successful.
 
 
 
@@ -135,7 +135,7 @@ return (array) List of indexes info.
 >
  createIndexes($indexes)
 <
-return (boolean) Whether operation was successful.
+return (bool) Whether operation was successful.
 
  Example:
 
@@ -161,12 +161,12 @@ return (boolean) Whether operation was successful.
 
       - keys: array, column names with sort order, to be indexed. This
       option is mandatory. 
-      - unique: boolean, whether to create unique index. 
+      - unique: bool, whether to create unique index. 
       - name: string, the name of the index, if not set it will be
       generated automatically. 
-      - background: boolean, whether to bind index in the background. 
-      - sparse: boolean, whether index should reference only documents
-      with the specified field.
+      - background: bool, whether to bind index in the background. 
+      - sparse: bool, whether index should reference only documents with
+      the specified field.
 
     See
     'https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/#options-for-all-index-types'
@@ -177,7 +177,7 @@ return (boolean) Whether operation was successful.
 >
  dropIndexes($indexes)
 <
-return (integer) Count of dropped indexes.
+return (int) Count of dropped indexes.
 
     [$indexes] (string) Wildcard for name of the indexes to be dropped. You
     can use '*' to drop all indexes.
@@ -187,7 +187,7 @@ return (integer) Count of dropped indexes.
 >
  createIndex($columns, $options='[]')
 <
-return (boolean) Whether the operation successful.
+return (bool) Whether the operation successful.
 
     [$columns] (array|string) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
@@ -208,7 +208,7 @@ return (boolean) Whether the operation successful.
 >
  dropIndex($columns)
 <
-return (boolean) Whether the operation successful.
+return (bool) Whether the operation successful.
 
     [$columns] (string|array) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
@@ -230,7 +230,7 @@ return (boolean) Whether the operation successful.
 >
  dropAllIndexes()
 <
-return (integer) Count of dropped indexes.
+return (int) Count of dropped indexes.
 
 
 
@@ -295,8 +295,7 @@ return (array) Inserted data, each row will have "_id" key assigned to it.
 >
  update($condition, $newData, $options='[]')
 <
-return (integer|boolean) Number of updated documents or whether operation was
-successful.
+return (int|bool) Number of updated documents or whether operation was successful.
 
  Note: for "multi" mode Mongo requires explicit strategy "$set" or "$inc" to
  be specified for the "newData". If no strategy is passed "$set" will be used.
@@ -320,8 +319,7 @@ return (\MongoId) Updated/new record id instance.
 >
  remove($condition='[]', $options='[]')
 <
-return (integer|boolean) Number of updated documents or whether operation was
-successful.
+return (int|bool) Number of updated documents or whether operation was successful.
 
     [$condition] (array) Description of records to remove.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -331,7 +329,7 @@ successful.
 >
  count($condition='[]', $options='[]')
 <
-return (integer) Records count.
+return (int) Records count.
 
     [$condition] (array) Query condition
     [$options] (array) List of options in format: optionName => optionValue.
@@ -341,7 +339,7 @@ return (integer) Records count.
 >
  distinct($column, $condition='[]', $options='[]')
 <
-return (array|boolean) Array of distinct values, or "false" on failure.
+return (array|bool) Array of distinct values, or "false" on failure.
 
     [$column] (string) Column to use.
     [$condition] (array) Query parameters.
@@ -419,17 +417,16 @@ return (string|array) The map reduce output collection name or output results.
 
       - sort: array, key to sort the input documents. The sort key must be
       in an existing index for this collection. 
-      - limit: integer, the maximum number of documents to return in the
+      - limit: int, the maximum number of documents to return in the
       collection. 
       - finalize: \MongoDB\BSON\Javascript|string, function, which follows
       the reduce method and modifies the output. 
       - scope: array, specifies global variables that are accessible in
       the map, reduce and finalize functions. 
-      - jsMode: boolean, specifies whether to convert intermediate data
-      into BSON format between the execution of the map and reduce
-      functions. 
-      - verbose: boolean, specifies whether to include the timing
-      information in the result information.
+      - jsMode: bool, specifies whether to convert intermediate data into
+      BSON format between the execution of the map and reduce functions. 
+      - verbose: bool, specifies whether to include the timing information
+      in the result information.
 
 
 

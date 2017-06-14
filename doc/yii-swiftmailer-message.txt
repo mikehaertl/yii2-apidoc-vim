@@ -55,14 +55,18 @@ $signature				*yii/swiftmailer/Message::$signature*
  (array|callable|\Swift_Signer) Signature specification. See 'addSignature()'
  for details on how it should be specified.
 
+$headers				*yii/swiftmailer/Message::$headers*
+
+ (array) Headers in format: '[name => value]'.
+
 $returnPath				*yii/swiftmailer/Message::$returnPath*
 
  (string) The bounce email address.
 
 $priority				*yii/swiftmailer/Message::$priority*
 
- (integer) Priority value, should be an integer in range: '1..5', where 1 is
- the highest priority and 5 is the lowest.
+ (int) Priority value, should be an integer in range: '1..5', where 1 is the
+ highest priority and 5 is the lowest.
 
 $readReceiptTo				*yii/swiftmailer/Message::$readReceiptTo*
 
@@ -477,6 +481,15 @@ return (string) The string representation of this message.
 
 
 
+*yii/swiftmailer/Message::__clone*			public
+>
+ __clone()
+<
+return (void)
+
+ It ensures 'swiftMessage' is also cloned.
+
+
 *yii/swiftmailer/Message::getSwiftMessage*		public
 >
  getSwiftMessage()
@@ -573,6 +586,15 @@ return (array) Header values list.
     [$name] (string) Header name.
 
 
+*yii/swiftmailer/Message::setHeaders*			public
+>
+ setHeaders($headers)
+<
+return ($this) Self reference.
+
+    [$headers] (array) Headers in format: '[name => value]'.
+
+
 *yii/swiftmailer/Message::setReturnPath*			public
 >
  setReturnPath($address)
@@ -596,15 +618,15 @@ return (string) The bounce email address.
 <
 return ($this) Self reference.
 
-    [$priority] (integer) Priority value, should be an integer in range:
-    '1..5', where 1 is the highest priority and 5 is the lowest.
+    [$priority] (int) Priority value, should be an integer in range: '1..5',
+    where 1 is the highest priority and 5 is the lowest.
 
 
 *yii/swiftmailer/Message::getPriority*			public
 >
  getPriority()
 <
-return (integer) Priority value as integer in range: '1..5', where 1 is the highest
+return (int) Priority value as integer in range: '1..5', where 1 is the highest
 priority and 5 is the lowest.
 
 

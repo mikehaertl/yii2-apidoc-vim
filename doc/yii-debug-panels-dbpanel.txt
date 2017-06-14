@@ -42,6 +42,16 @@ $db					*yii/debug/panels/DbPanel::$db*
  (string) The name of the database component to use for executing (explain)
  queries
 
+$defaultOrder				*yii/debug/panels/DbPanel::$defaultOrder*
+
+ (array) The default ordering of the database queries. In the format of [
+ property => sort direction ], for example: [ 'duration' => SORT_DESC ]
+
+$defaultFilter				*yii/debug/panels/DbPanel::$defaultFilter*
+
+ (array) The default filter to apply to the database queries. In the format of
+ [ property => value ], for example: [ 'type' => 'SELECT' ]
+
 $behaviors				*yii/debug/panels/DbPanel::$behaviors*
 
  See |yii/base/Component::$behaviors|
@@ -276,6 +286,11 @@ return (mixed) Data to be saved
  See |yii/debug/Panel::getUrl|
 
 
+*yii/debug/panels/DbPanel::getTraceLine*			public
+
+ See |yii/debug/Panel::getTraceLine|
+
+
 *yii/debug/panels/DbPanel::getSummaryName*		public
 >
  getSummaryName()
@@ -305,7 +320,7 @@ return (array)
 >
  getTotalQueryTime($timings)
 <
-return (integer) Total time
+return (int) Total time
 
     [$timings] (array) 
 
@@ -332,9 +347,9 @@ return (string) Query type such as select, insert, delete, etc.
 >
  isQueryCountCritical($count)
 <
-return (boolean) 
+return (bool) 
 
-    [$count] (integer) Queries count
+    [$count] (int) Queries count
 
 
 *yii/debug/panels/DbPanel::getTypes*			public
@@ -349,7 +364,7 @@ return (array)
 >
  hasExplain()
 <
-return (boolean) Whether the DB component has support for EXPLAIN queries
+return (bool) Whether the DB component has support for EXPLAIN queries
 
 
 
@@ -357,7 +372,7 @@ return (boolean) Whether the DB component has support for EXPLAIN queries
 >
  canBeExplained($type)
 <
-return (boolean) 
+return (bool) 
 
     [$type] (string) Query type
 

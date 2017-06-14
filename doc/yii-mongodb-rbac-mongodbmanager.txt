@@ -87,6 +87,10 @@ $roles					*yii/mongodb/rbac/MongoDbManager::$roles*
 
  See |yii/rbac/BaseManager::$roles|
 
+$defaultRoleInstances			*yii/mongodb/rbac/MongoDbManager::$defaultRoleInstances*
+
+ See |yii/rbac/BaseManager::$defaultRoleInstances|
+
 $permissions				*yii/mongodb/rbac/MongoDbManager::$permissions*
 
  See |yii/rbac/BaseManager::$permissions|
@@ -391,6 +395,11 @@ return (bool) Whether the rule is successfully updated
  See |yii/rbac/BaseManager::getRoles|
 
 
+*yii/mongodb/rbac/MongoDbManager::getDefaultRoleInstances*public
+
+ See |yii/rbac/BaseManager::getDefaultRoleInstances|
+
+
 *yii/mongodb/rbac/MongoDbManager::getPermissions*		public
 
  See |yii/rbac/BaseManager::getPermissions|
@@ -424,8 +433,19 @@ indexed by the role names.
 
 
 *yii/mongodb/rbac/MongoDbManager::getChildRoles*		public
+>
+ getChildRoles($roleName)
+<
+return (\yii\rbac\Role[]) Child roles. The array is indexed by the role names. First
+element is an instance of the parent Role itself.
 
- See |yii/rbac/ManagerInterface::getChildRoles|
+
+
+
+
+
+
+    [$roleName] (string) Name of the role to file child roles for
 
 
 *yii/mongodb/rbac/MongoDbManager::getPermissionsByRole*	public
@@ -760,12 +780,12 @@ return (void)
 >
  checkAccessFromCache($user, $itemName, $params, $assignments)
 <
-return (boolean) Whether the operations can be performed by the user.
+return (bool) Whether the operations can be performed by the user.
 
  This method is internally called by 'checkAccess()' when 'cache' is enabled.
 
-    [$user] (string|integer) The user ID. This should can be either an integer
-    or a string representing the unique identifier of a user. See
+    [$user] (string|int) The user ID. This should can be either an integer or
+    a string representing the unique identifier of a user. See
     '\yii\web\User::id'.
     [$itemName] (string) The name of the operation that need access check
     [$params] (array) Name-value pairs that would be passed to rules
@@ -779,12 +799,12 @@ return (boolean) Whether the operations can be performed by the user.
 >
  checkAccessRecursive($user, $itemName, $params, $assignments)
 <
-return (boolean) Whether the operations can be performed by the user.
+return (bool) Whether the operations can be performed by the user.
 
  This method is internally called by 'checkAccess()'.
 
-    [$user] (string|integer) The user ID. This should can be either an integer
-    or a string representing the unique identifier of a user. See
+    [$user] (string|int) The user ID. This should can be either an integer or
+    a string representing the unique identifier of a user. See
     '\yii\web\User::id'.
     [$itemName] (string) The name of the operation that need access check
     [$params] (array) Name-value pairs that would be passed to rules
@@ -817,7 +837,7 @@ return (\yii\rbac\Item) The populated auth item instance (either Role or Permiss
 <
 return (void)
 
-    [$type] (integer) The auth item type (either Item::TYPE_PERMISSION or
+    [$type] (int) The auth item type (either Item::TYPE_PERMISSION or
     Item::TYPE_ROLE)
 
 
@@ -853,7 +873,7 @@ return (void)
 >
  detectLoop($parent, $child)
 <
-return (boolean) Whether a loop exists
+return (bool) Whether a loop exists
 
     [$parent] (\yii\rbac\Item) The parent item
     [$child] (\yii\rbac\Item) The child item to be added to the hierarchy

@@ -65,9 +65,18 @@ return (\Imagine\Image\ImagineInterface) The new 'Imagine' object
 
 
 
+*yii/imagine/BaseImage::ensureImageInterfaceInstance*	protected
+>
+ ensureImageInterfaceInstance($image)
+<
+return (\Imagine\Image\ImageInterface) 
+
+    [$image] (string|resource|\Imagine\Image\ImageInterface) 
+
+
 *yii/imagine/BaseImage::crop*				public
 >
- crop($filename, $width, $height, $start='[0,0]')
+ crop($image, $width, $height, $start='[0,0]')
 <
 return (\Imagine\Image\ImageInterface) 
 
@@ -80,16 +89,28 @@ return (\Imagine\Image\ImageInterface)
 
 
 
-    [$filename] (string) The image file path or path alias.
-    [$width] (integer) The crop width
-    [$height] (integer) The crop height
+    [$image] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing file path
+    [$width] (int) The crop width
+    [$height] (int) The crop height
     [$start] (array) The starting point. This must be an array with two
     elements representing 'x' and 'y' coordinates.
 
 
+*yii/imagine/BaseImage::autorotate*			public
+>
+ autorotate($image, $color=''000000'')
+<
+return (\Imagine\Image\ImageInterface) 
+
+    [$image] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing file path
+    [$color] (string) 
+
+
 *yii/imagine/BaseImage::thumbnail*			public
 >
- thumbnail($filename, $width, $height, $mode='\Imagine\Image\ManipulatorInterface::THUMBNAIL_OUTBOUND')
+ thumbnail($image, $width, $height, $mode='\Imagine\Image\ManipulatorInterface::THUMBNAIL_OUTBOUND')
 <
 return (\Imagine\Image\ImageInterface) 
 
@@ -111,33 +132,36 @@ return (\Imagine\Image\ImageInterface)
  rest is filled with background that could be configured via
  'Image::$thumbnailBackgroundColor' and 'Image::$thumbnailBackgroundAlpha'.
 
-    [$filename] (string) The image file path or path alias.
-    [$width] (integer) The width in pixels to create the thumbnail
-    [$height] (integer) The height in pixels to create the thumbnail
+    [$image] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing file path
+    [$width] (int) The width in pixels to create the thumbnail
+    [$height] (int) The height in pixels to create the thumbnail
     [$mode] (string) Mode of resizing original image to use in case both width
     and height specified
 
 
 *yii/imagine/BaseImage::watermark*			public
 >
- watermark($filename, $watermarkFilename, $start='[0,0]')
+ watermark($image, $watermarkImage, $start='[0,0]')
 <
 return (\Imagine\Image\ImageInterface) 
 
-    [$filename] (string) The image file path or path alias.
-    [$watermarkFilename] (string) The file path or path alias of the watermark
-    image.
+    [$image] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing file path
+    [$watermarkImage] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing watermark file path
     [$start] (array) The starting point. This must be an array with two
     elements representing 'x' and 'y' coordinates.
 
 
 *yii/imagine/BaseImage::text*				public
 >
- text($filename, $text, $fontFile, $start='[0,0]', $fontOptions='[]')
+ text($image, $text, $fontFile, $start='[0,0]', $fontOptions='[]')
 <
 return (\Imagine\Image\ImageInterface) 
 
-    [$filename] (string) The image file path or path alias.
+    [$image] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing file path
     [$text] (string) The text to write to the image
     [$fontFile] (string) The file path or path alias
     [$start] (array) The starting position of the text. This must be an array
@@ -153,14 +177,15 @@ return (\Imagine\Image\ImageInterface)
 
 *yii/imagine/BaseImage::frame*				public
 >
- frame($filename, $margin=20, $color=''666'', $alpha=100)
+ frame($image, $margin=20, $color=''666'', $alpha=100)
 <
 return (\Imagine\Image\ImageInterface) 
 
-    [$filename] (string) The full path to the image file
-    [$margin] (integer) The frame size to add around the image
+    [$image] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing file path
+    [$margin] (int) The frame size to add around the image
     [$color] (string) The frame color
-    [$alpha] (integer) The alpha value of the frame.
+    [$alpha] (int) The alpha value of the frame.
 
 
 *yii/imagine/BaseImage::getThumbnailBox*			protected
@@ -170,8 +195,8 @@ return (\Imagine\Image\ImageInterface)
 return (\Imagine\Image\BoxInterface) Thumbnail box
 
     [$sourceBox] (\Imagine\Image\BoxInterface) Original image box
-    [$width] (integer) Thumbnail width
-    [$height] (integer) Thumbnail height
+    [$width] (int) Thumbnail width
+    [$height] (int) Thumbnail height
 
 
 

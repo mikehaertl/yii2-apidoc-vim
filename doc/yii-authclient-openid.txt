@@ -55,7 +55,7 @@ $optionalAttributes			*yii/authclient/OpenId::$optionalAttributes*
 
 $verifyPeer				*yii/authclient/OpenId::$verifyPeer*
 
- (boolean) Whether to verify the peer's certificate.
+ (bool) Whether to verify the peer's certificate.
 
 $capath					*yii/authclient/OpenId::$capath*
 
@@ -503,7 +503,7 @@ return (string) Default authentication return URL.
 >
  hostExists($url)
 <
-return (boolean) True, if the server exists; false otherwise
+return (bool) True, if the server exists; false otherwise
 
     [$url] (string) URL to check
 
@@ -534,7 +534,7 @@ return (string) Composed URL.
 >
  extractHtmlTagValue($content, $tag, $matchAttributeName, $matchAttributeValue, $valueAttributeName)
 <
-return (string|boolean) Searched value, "false" on failure.
+return (string|bool) Searched value, "false" on failure.
 
     [$content] (string) HTML content to be be parsed.
     [$tag] (string) Name of the source tag.
@@ -549,14 +549,16 @@ return (string|boolean) Searched value, "false" on failure.
 >
  discover($url)
 <
-return (array) OpenID provider info, following keys will be available: 
-  - 'url' - string OP Endpoint (i.e. OpenID provider address). 
-  - 'version' - integer OpenID protocol version used by provider. 
-  - 'identity' - string identity value. 
-  - 'identifier_select' - boolean whether to request OP to select
-  identity for an user in OpenID 2, does not affect OpenID 1. 
-  - 'ax' - boolean whether AX attributes should be used. 
-  - 'sreg' - boolean whether SREG attributes should be used.
+return (array) OpenID provider info, following keys will be available:
+
+
+  - url: string, OP Endpoint (i.e. OpenID provider address). 
+  - version: int, OpenID protocol version used by provider. 
+  - identity: string, identity value. 
+  - identifier_select: bool, whether to request OP to select identity
+  for an user in OpenID 2, does not affect OpenID 1. 
+  - ax: bool, whether AX attributes should be used. 
+  - sreg: bool, whether SREG attributes should be used.
 
     [$url] (string) Identity URL.
 
@@ -601,17 +603,17 @@ return (string) Authentication URL.
 <
 return (string) The authentication URL.
 
-    [$identifierSelect] (boolean) Whether to request OP to select identity for
-    an user in OpenID 2, does not affect OpenID 1.
+    [$identifierSelect] (bool) Whether to request OP to select identity for an
+    user in OpenID 2, does not affect OpenID 1.
 
 
 *yii/authclient/OpenId::validate*				public
 >
  validate($validateRequiredAttributes='true')
 <
-return (boolean) Whether the verification was successful.
+return (bool) Whether the verification was successful.
 
-    [$validateRequiredAttributes] (boolean) Whether to validate required
+    [$validateRequiredAttributes] (bool) Whether to validate required
     attributes.
 
 
@@ -619,7 +621,7 @@ return (boolean) Whether the verification was successful.
 >
  validateRequiredAttributes()
 <
-return (boolean) Whether all required attributes are present.
+return (bool) Whether all required attributes are present.
 
 
 
@@ -657,7 +659,7 @@ return (array) Array of attributes with keys being the AX schema names, e.g.
 >
  compareUrl($expectedUrl, $actualUrl)
 <
-return (boolean) Whether URLs are equal.
+return (bool) Whether URLs are equal.
 
     [$expectedUrl] (string) Expected URL.
     [$actualUrl] (string) Actual URL.

@@ -18,13 +18,14 @@ $where					*yii/db/QueryTrait::$where*
 
 $limit					*yii/db/QueryTrait::$limit*
 
- (int) Maximum number of records to be returned. If not set or less than 0, it
- means no limit.
+ (int|\yii\db\Expression) Maximum number of records to be returned. May be an
+ instance of 'Expression'. If not set or less than 0, it means no limit.
 
 $offset					*yii/db/QueryTrait::$offset*
 
- (int) Zero-based offset from where the records are to be returned. If not set
- or less than 0, it means starting from the beginning.
+ (int|\yii\db\Expression) Zero-based offset from where the records are to be
+ returned. May be an instance of 'Expression'. If not set or less than 0, it
+ means starting from the beginning.
 
 $orderBy				*yii/db/QueryTrait::$orderBy*
 
@@ -264,7 +265,8 @@ return (array)
 <
 return ($this) The query object itself
 
-    [$limit] (int) The limit. Use null or negative value to disable limit.
+    [$limit] (int|\yii\db\Expression|null) The limit. Use null or negative
+    value to disable limit.
 
 
 *yii/db/QueryTrait::offset*				public
@@ -273,7 +275,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
-    [$offset] (int) The offset. Use null or negative value to disable offset.
+    [$offset] (int|\yii\db\Expression|null) The offset. Use null or negative
+    value to disable offset.
 
 
 *yii/db/QueryTrait::emulateExecution*			public

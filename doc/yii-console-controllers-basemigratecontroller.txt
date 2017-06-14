@@ -46,8 +46,8 @@ $help					*yii/console/controllers/BaseMigrateController::$help*
 
 $migrationPath				*yii/console/controllers/BaseMigrateController::$migrationPath*
 
- (string) The directory containing the migration classes. This can be either a
- path alias or a directory path.
+ (string|array) The directory containing the migration classes. This can be
+ either a [path alias](guide:concept-aliases) or a directory path.
 
  Migration classes located at this path should be declared without a
  namespace. Use 'migrationNamespaces' property in case you are using
@@ -56,14 +56,26 @@ $migrationPath				*yii/console/controllers/BaseMigrateController::$migrationPath
  If you have set up 'migrationNamespaces', you may set this field to 'null' in
  order to disable usage of migrations that are not namespaced.
 
+ Since version 2.0.12 you may also specify an array of migration paths that
+ should be searched for migrations to load. This is mainly useful to support
+ old extensions that provide migrations without namespace and to adopt the new
+ feature of namespaced migrations while keeping existing migrations.
+
+ In general, to load migrations from different locations,
+ 'migrationNamespaces' is the preferable solution as the migration name
+ contains the origin of the migration in the history, which is not the case
+ when using multiple migration paths.
+
 $migrationNamespaces			*yii/console/controllers/BaseMigrateController::$migrationNamespaces*
 
  (array) List of namespaces containing the migration classes.
 
- Migration namespaces should be resolvable as a path alias if prefixed with
- '@', e.g. if you specify the namespace 'app\migrations', the code
- 'Yii::getAlias('@app/migrations')' should be able to return the file path to
- the directory this namespace refers to.
+ Migration namespaces should be resolvable as a [path
+ alias](guide:concept-aliases) if prefixed with '@', e.g. if you specify the
+ namespace 'app\migrations', the code 'Yii::getAlias('@app/migrations')'
+ should be able to return the file path to the directory this namespace refers
+ to. This corresponds with the [autoloading
+ conventions](guide:concept-autoloading) of Yii.
 
  For example:
 
@@ -77,7 +89,8 @@ $migrationNamespaces			*yii/console/controllers/BaseMigrateController::$migratio
 $templateFile				*yii/console/controllers/BaseMigrateController::$templateFile*
 
  (string) The template file for generating new migrations. This can be either
- a path alias (e.g. "@app/migrations/template.php") or a file path.
+ a [path alias](guide:concept-aliases) (e.g. "@app/migrations/template.php")
+ or a file path.
 
 $behaviors				*yii/console/controllers/BaseMigrateController::$behaviors*
 
@@ -652,6 +665,19 @@ return (bool) Whether the migration is successful
 return (\yii\db\MigrationInterface) The migration instance
 
     [$class] (string) The migration class name
+
+
+*yii/console/controllers/BaseMigrateController::includeMigrationFile*protected
+>
+ includeMigrationFile($class)
+<
+return (void)
+
+ This function will do nothing on namespaced migrations, which are loaded by
+ autoloading automatically. It will include the migration file, by searching
+ 'migrationPath' for classes without namespace.
+
+    [$class] (string) The migration class name.
 
 
 *yii/console/controllers/BaseMigrateController::migrateToTime*protected

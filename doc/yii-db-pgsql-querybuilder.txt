@@ -24,6 +24,14 @@ $conditionBuilders			*yii/db/pgsql/QueryBuilder::$conditionBuilders*
  (array) Map of query condition to builder methods. These methods are used by
  'buildCondition' to build SQL conditions from array syntax.
 
+$likeEscapingReplacements		*yii/db/pgsql/QueryBuilder::$likeEscapingReplacements*
+
+ See |yii/db/QueryBuilder::$likeEscapingReplacements|
+
+$likeEscapeCharacter			*yii/db/pgsql/QueryBuilder::$likeEscapeCharacter*
+
+ See |yii/db/QueryBuilder::$likeEscapeCharacter|
+
 
 
 METHOD DETAILS
@@ -219,8 +227,16 @@ return (string) The SQL statement for renaming a DB table.
 
 
 *yii/db/pgsql/QueryBuilder::truncateTable*		public
+>
+ truncateTable($table)
+<
+return (string) The SQL statement for truncating a DB table.
 
- See |yii/db/QueryBuilder::truncateTable|
+ Explicitly restarts identity for PGSQL to be consistent with other databases
+ which all do this by default.
+
+    [$table] (string) The table to be truncated. The name will be properly
+    quoted by the method.
 
 
 *yii/db/pgsql/QueryBuilder::addColumn*			public

@@ -1,0 +1,509 @@
+
+*yii/debug/models/timeline/Search*   >> |yii/debug/models/search/Base|
+==================================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$category				*yii/debug/models/timeline/Search::$category*
+
+ (string) Attribute search
+
+$duration				*yii/debug/models/timeline/Search::$duration*
+
+ (integer) Attribute search
+
+$behaviors				*yii/debug/models/timeline/Search::$behaviors*
+
+ See |yii/base/Component::$behaviors|
+
+$validators				*yii/debug/models/timeline/Search::$validators*
+
+ See |yii/base/Model::$validators|
+
+$activeValidators			*yii/debug/models/timeline/Search::$activeValidators*
+
+ See |yii/base/Model::$activeValidators|
+
+$errors					*yii/debug/models/timeline/Search::$errors*
+
+ See |yii/base/Model::$errors|
+
+$firstErrors				*yii/debug/models/timeline/Search::$firstErrors*
+
+ See |yii/base/Model::$firstErrors|
+
+$attributes				*yii/debug/models/timeline/Search::$attributes*
+
+ See |yii/base/Model::$attributes|
+
+$scenario				*yii/debug/models/timeline/Search::$scenario*
+
+ See |yii/base/Model::$scenario|
+
+$iterator				*yii/debug/models/timeline/Search::$iterator*
+
+ See |yii/base/Model::$iterator|
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/debug/models/timeline/Search::className*		public
+
+ See |yii/base/Object::className|
+
+
+*yii/debug/models/timeline/Search::__construct*		public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/debug/models/timeline/Search::init*			public
+
+ See |yii/base/Object::init|
+
+
+*yii/debug/models/timeline/Search::__get*			public
+
+ See |yii/base/Object::__get|
+
+
+*yii/debug/models/timeline/Search::__set*			public
+
+ See |yii/base/Object::__set|
+
+
+*yii/debug/models/timeline/Search::__isset*		public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/debug/models/timeline/Search::__unset*		public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/debug/models/timeline/Search::__call*		public
+
+ See |yii/base/Object::__call|
+
+
+*yii/debug/models/timeline/Search::hasProperty*		public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/debug/models/timeline/Search::canGetProperty*	public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/debug/models/timeline/Search::canSetProperty*	public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/debug/models/timeline/Search::hasMethod*		public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/debug/models/timeline/Search::__clone*		public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/debug/models/timeline/Search::behaviors*		public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/debug/models/timeline/Search::hasEventHandlers*	public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/debug/models/timeline/Search::on*			public
+
+ See |yii/base/Component::on|
+
+
+*yii/debug/models/timeline/Search::off*			public
+
+ See |yii/base/Component::off|
+
+
+*yii/debug/models/timeline/Search::trigger*		public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/debug/models/timeline/Search::getBehavior*		public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/debug/models/timeline/Search::getBehaviors*		public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/debug/models/timeline/Search::attachBehavior*	public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/debug/models/timeline/Search::attachBehaviors*	public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/debug/models/timeline/Search::detachBehavior*	public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/debug/models/timeline/Search::detachBehaviors*	public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/debug/models/timeline/Search::ensureBehaviors*	public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/debug/models/timeline/Search::fields*		public
+
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/debug/models/timeline/Search::extraFields*		public
+
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/debug/models/timeline/Search::toArray*		public
+
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/debug/models/timeline/Search::resolveFields*		protected
+
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/debug/models/timeline/Search::rules*			public
+>
+ rules()
+<
+return (array) Validation rules
+
+
+
+ Validation rules are used by 'validate()' to check if attribute values are
+ valid. Child classes may override this method to declare different validation
+ rules.
+
+ Each rule is an array with the following structure:
+
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       //...other parameters...
+   ]
+
+ where
+
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass a string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array in which
+   the validation    rule can be applied. If this option is not set, the rule
+ will apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
+
+ A validator can be either an object of a class extending 'Validator', or a
+ model class method (called *inline validator*) that has the following
+ signature:
+
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
+
+ In the above '$attribute' refers to the attribute currently being validated
+ while '$params' contains an array of validator configuration options such as
+ 'max' in case of 'string' validator. The value of the attribute currently
+ being validated can be accessed as '$this->$attribute'. Note the '$' before
+ 'attribute'; this is taking the value of the variable '$attribute' and using
+ it as the name of the property to access.
+
+ Yii also provides a set of 'Validator::builtInValidators|built-in
+ validators'. Each one has an alias name which can be used when specifying a
+ validation rule.
+
+ Below are some examples:
+
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
+
+ Note, in order to inherit rules defined in the parent class, a child class
+ needs to merge the parent rules with child rules using functions such as
+ 'array_merge()'.
+
+
+
+
+*yii/debug/models/timeline/Search::scenarios*		public
+
+ See |yii/base/Model::scenarios|
+
+
+*yii/debug/models/timeline/Search::formName*		public
+
+ See |yii/base/Model::formName|
+
+
+*yii/debug/models/timeline/Search::attributes*		public
+
+ See |yii/base/Model::attributes|
+
+
+*yii/debug/models/timeline/Search::attributeLabels*	public
+>
+ attributeLabels()
+<
+return (array) Attribute labels (name => label)
+
+
+
+ Attribute labels are mainly used for display purpose. For example, given an
+ attribute 'firstName', we can declare a label 'First Name' which is more
+ user-friendly and can be displayed to end users.
+
+ By default an attribute label is generated using 'generateAttributeLabel()'.
+ This method allows you to explicitly specify attribute labels.
+
+ Note, in order to inherit labels defined in the parent class, a child class
+ needs to merge the parent labels with child labels using functions such as
+ 'array_merge()'.
+
+
+
+
+*yii/debug/models/timeline/Search::attributeHints*	public
+
+ See |yii/base/Model::attributeHints|
+
+
+*yii/debug/models/timeline/Search::validate*		public
+
+ See |yii/base/Model::validate|
+
+
+*yii/debug/models/timeline/Search::beforeValidate*	public
+
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/debug/models/timeline/Search::afterValidate*		public
+
+ See |yii/base/Model::afterValidate|
+
+
+*yii/debug/models/timeline/Search::getValidators*		public
+
+ See |yii/base/Model::getValidators|
+
+
+*yii/debug/models/timeline/Search::getActiveValidators*	public
+
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/debug/models/timeline/Search::createValidators*	public
+
+ See |yii/base/Model::createValidators|
+
+
+*yii/debug/models/timeline/Search::isAttributeRequired*	public
+
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/debug/models/timeline/Search::isAttributeSafe*	public
+
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/debug/models/timeline/Search::isAttributeActive*	public
+
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/debug/models/timeline/Search::getAttributeLabel*	public
+
+ See |yii/base/Model::getAttributeLabel|
+
+
+*yii/debug/models/timeline/Search::getAttributeHint*	public
+
+ See |yii/base/Model::getAttributeHint|
+
+
+*yii/debug/models/timeline/Search::hasErrors*		public
+
+ See |yii/base/Model::hasErrors|
+
+
+*yii/debug/models/timeline/Search::getErrors*		public
+
+ See |yii/base/Model::getErrors|
+
+
+*yii/debug/models/timeline/Search::getFirstErrors*	public
+
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/debug/models/timeline/Search::getFirstError*		public
+
+ See |yii/base/Model::getFirstError|
+
+
+*yii/debug/models/timeline/Search::addError*		public
+
+ See |yii/base/Model::addError|
+
+
+*yii/debug/models/timeline/Search::addErrors*		public
+
+ See |yii/base/Model::addErrors|
+
+
+*yii/debug/models/timeline/Search::clearErrors*		public
+
+ See |yii/base/Model::clearErrors|
+
+
+*yii/debug/models/timeline/Search::generateAttributeLabel*public
+
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/debug/models/timeline/Search::getAttributes*		public
+
+ See |yii/base/Model::getAttributes|
+
+
+*yii/debug/models/timeline/Search::setAttributes*		public
+
+ See |yii/base/Model::setAttributes|
+
+
+*yii/debug/models/timeline/Search::onUnsafeAttribute*	public
+
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/debug/models/timeline/Search::getScenario*		public
+
+ See |yii/base/Model::getScenario|
+
+
+*yii/debug/models/timeline/Search::setScenario*		public
+
+ See |yii/base/Model::setScenario|
+
+
+*yii/debug/models/timeline/Search::safeAttributes*	public
+
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/debug/models/timeline/Search::activeAttributes*	public
+
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/debug/models/timeline/Search::load*			public
+
+ See |yii/base/Model::load|
+
+
+*yii/debug/models/timeline/Search::loadMultiple*		public
+
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/debug/models/timeline/Search::validateMultiple*	public
+
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/debug/models/timeline/Search::getIterator*		public
+
+ See |yii/base/Model::getIterator|
+
+
+*yii/debug/models/timeline/Search::offsetExists*		public
+
+ See |yii/base/Model::offsetExists|
+
+
+*yii/debug/models/timeline/Search::offsetGet*		public
+
+ See |yii/base/Model::offsetGet|
+
+
+*yii/debug/models/timeline/Search::offsetSet*		public
+
+ See |yii/base/Model::offsetSet|
+
+
+*yii/debug/models/timeline/Search::offsetUnset*		public
+
+ See |yii/base/Model::offsetUnset|
+
+
+*yii/debug/models/timeline/Search::addCondition*		public
+
+ See |yii/debug/models/search/Base::addCondition|
+
+
+*yii/debug/models/timeline/Search::search*		public
+>
+ search($params, $panel)
+<
+return (\yii\debug\models\timeline\DataProvider) 
+
+    [$params] (array) $params an array of parameter values indexed by
+    parameter names
+    [$panel] (\yii\debug\models\timeline\TimeLinePanel) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

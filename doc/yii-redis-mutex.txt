@@ -1,0 +1,256 @@
+
+*yii/redis/Mutex*   >> |yii/mutex/Mutex|
+=================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Redis Mutex requires redis version 2.6.12 or higher to work properly.
+
+ It needs to be configured with a redis 'Connection' that is also configured
+ as an application component. By default it will use the 'redis' application
+ component.
+
+ To use redis Mutex as the application component, configure the application as
+ follows:
+
+   [
+       'components' => [
+           'mutex' => [
+               'class' => 'yii\redis\Mutex',
+               'redis' => [
+                   'hostname' => 'localhost',
+                   'port' => 6379,
+                   'database' => 0,
+               ]
+           ],
+       ],
+   ]
+
+ Or if you have configured the redis 'Connection' as an application component,
+ the following is sufficient:
+
+   [
+       'components' => [
+           'mutex' => [
+               'class' => 'yii\redis\Mutex',
+               // 'redis' => 'redis' // id of the connection application
+ component
+           ],
+       ],
+   ]
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$autoRelease				*yii/redis/Mutex::$autoRelease*
+
+ See |yii/mutex/Mutex::$autoRelease|
+
+$expire					*yii/redis/Mutex::$expire*
+
+ (int) The number of seconds in which the lock will be auto released.
+
+$keyPrefix				*yii/redis/Mutex::$keyPrefix*
+
+ (string) A string prefixed to every cache key so that it is unique. If not
+ set, it will use a prefix generated from 'Application::id'. You may set this
+ property to be an empty string if you don't want to use key prefix. It is
+ recommended that you explicitly set this property to some static value if the
+ cached data needs to be shared among multiple applications.
+
+$redis					*yii/redis/Mutex::$redis*
+
+ (\yii\redis\Connection|string|array) The Redis 'Connection' object or the
+ application component ID of the Redis 'Connection'. This can also be an array
+ that is used to create a redis 'Connection' instance in case you do not want
+ do configure redis connection as an application component. After the Mutex
+ object is created, if you want to change this property, you should only
+ assign it with a Redis 'Connection' object.
+
+$behaviors				*yii/redis/Mutex::$behaviors*
+
+ See |yii/base/Component::$behaviors|
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/redis/Mutex::className*				public
+
+ See |yii/base/Object::className|
+
+
+*yii/redis/Mutex::__construct*				public
+
+ See |yii/base/Object::__construct|
+
+
+*yii/redis/Mutex::init*					public
+>
+ init()
+<
+return (void)
+
+ This method will initialize the 'redis' property to make sure it refers to a
+ valid redis connection.
+
+
+*yii/redis/Mutex::__get*					public
+
+ See |yii/base/Object::__get|
+
+
+*yii/redis/Mutex::__set*					public
+
+ See |yii/base/Object::__set|
+
+
+*yii/redis/Mutex::__isset*				public
+
+ See |yii/base/Object::__isset|
+
+
+*yii/redis/Mutex::__unset*				public
+
+ See |yii/base/Object::__unset|
+
+
+*yii/redis/Mutex::__call*					public
+
+ See |yii/base/Object::__call|
+
+
+*yii/redis/Mutex::hasProperty*				public
+
+ See |yii/base/Object::hasProperty|
+
+
+*yii/redis/Mutex::canGetProperty*				public
+
+ See |yii/base/Object::canGetProperty|
+
+
+*yii/redis/Mutex::canSetProperty*				public
+
+ See |yii/base/Object::canSetProperty|
+
+
+*yii/redis/Mutex::hasMethod*				public
+
+ See |yii/base/Object::hasMethod|
+
+
+*yii/redis/Mutex::__clone*				public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/redis/Mutex::behaviors*				public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/redis/Mutex::hasEventHandlers*			public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/redis/Mutex::on*					public
+
+ See |yii/base/Component::on|
+
+
+*yii/redis/Mutex::off*					public
+
+ See |yii/base/Component::off|
+
+
+*yii/redis/Mutex::trigger*				public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/redis/Mutex::getBehavior*				public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/redis/Mutex::getBehaviors*				public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/redis/Mutex::attachBehavior*				public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/redis/Mutex::attachBehaviors*			public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/redis/Mutex::detachBehavior*				public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/redis/Mutex::detachBehaviors*			public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/redis/Mutex::ensureBehaviors*			public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/redis/Mutex::acquire*				public
+
+ See |yii/mutex/Mutex::acquire|
+
+
+*yii/redis/Mutex::release*				public
+
+ See |yii/mutex/Mutex::release|
+
+
+*yii/redis/Mutex::acquireLock*				protected
+>
+ acquireLock($name, $timeout=0)
+<
+return (bool) Lock acquiring result.
+
+    [$name] (string) Of the lock to be acquired. Must be unique.
+    [$timeout] (int) Time to wait for lock to be released. Defaults to '0'
+    meaning that method will return false immediately in case lock was already
+    acquired.
+
+
+*yii/redis/Mutex::releaseLock*				protected
+>
+ releaseLock($name)
+<
+return (bool) Lock release result: 'false' in case named lock was not found or Redis
+command failed.
+
+    [$name] (string) Of the lock to be released. This lock must already exist.
+
+
+*yii/redis/Mutex::calculateKey*				protected
+>
+ calculateKey($name)
+<
+return (string) A safe cache key associated with the mutex name.
+
+    [$name] (string) Mutex name.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

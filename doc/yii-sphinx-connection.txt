@@ -108,15 +108,7 @@ $tablePrefix				*yii/sphinx/Connection::$tablePrefix*
 
 $schemaMap				*yii/sphinx/Connection::$schemaMap*
 
- (array) Mapping between PDO driver names and 'Schema' classes. The keys of
- the array are PDO driver names while the values the corresponding schema
- class name or configuration. Please refer to 'Yii::createObject()' for
- details on how to specify a configuration.
-
- This property is mainly used by 'getSchema()' when fetching the database
- schema information. You normally do not need to set this property unless you
- want to use your own 'Schema' class to support DBMS that is not supported by
- Yii.
+ (array) 
 
  Mapping between PDO driver names and 'Schema' classes. The keys of the array
  are PDO driver names while the values the corresponding schema class name or
@@ -174,12 +166,20 @@ $shuffleMasters				*yii/sphinx/Connection::$shuffleMasters*
 
  See |yii/db/Connection::$shuffleMasters|
 
+$enableLogging				*yii/sphinx/Connection::$enableLogging*
+
+ See |yii/db/Connection::$enableLogging|
+
+$enableProfiling			*yii/sphinx/Connection::$enableProfiling*
+
+ See |yii/db/Connection::$enableProfiling|
+
 $enableFloatConversion			*yii/sphinx/Connection::$enableFloatConversion*
 
- (boolean) Whether to enable conversion of the float query params into the
- direct literal SQL insertion. This allows processing of the float values,
- since PDO does not provide specific param type for float binding, while
- Sphinx is unable to process float values passed as quoted strings.
+ (bool) Whether to enable conversion of the float query params into the direct
+ literal SQL insertion. This allows processing of the float values, since PDO
+ does not provide specific param type for float binding, while Sphinx is
+ unable to process float values passed as quoted strings.
 
 $behaviors				*yii/sphinx/Connection::$behaviors*
 
@@ -294,7 +294,7 @@ METHOD DETAILS
 
 *yii/sphinx/Connection::__clone*				public
 
- See |yii/base/Component::__clone|
+ See |yii/db/Connection::__clone|
 
 
 *yii/sphinx/Connection::behaviors*			public
@@ -529,8 +529,8 @@ return (\yii\sphinx\IndexSchema) Index schema information. Null if the named ind
 does not exist.
 
     [$name] (string) Index name.
-    [$refresh] (boolean) Whether to reload the table schema even if it is
-    found in the cache.
+    [$refresh] (bool) Whether to reload the table schema even if it is found
+    in the cache.
 
 
 *yii/sphinx/Connection::quoteIndexName*			public

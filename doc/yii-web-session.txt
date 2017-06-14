@@ -307,6 +307,8 @@ return (void)
 <
 return (void)
 
+ This method has no effect when session is not 'getIsActive()|active'. Make
+ sure to call 'open()' before calling it.
 
 
 *yii/web/Session::getIsActive*				public
@@ -371,6 +373,9 @@ return (void)
 
  Please refer to <http://php.net/session_regenerate_id> for more details.
 
+ This method has no effect when session is not 'getIsActive()|active'. Make
+ sure to call 'open()' before calling it.
+
     [$deleteOldSession] (bool) Whether to delete the old associated session
     file or not.
 
@@ -418,7 +423,7 @@ return (void)
  session_save_path()](http://php.net/manual/en/function.session-save-path.php).
 
     [$value] (string) The current session save path. This can be either a
-    directory name or a path alias.
+    directory name or a [path alias](guide:concept-aliases).
 
 
 *yii/web/Session::getCookieParams*			public
@@ -531,8 +536,7 @@ return (void)
 <
 return (bool) Whether session is opened successfully
 
- This method should be overridden if 'useCustomStorage' returns true. Do not
- call this method directly.
+ This method should be overridden if 'useCustomStorage' returns true.
 
     [$savePath] (string) Session save path
     [$sessionName] (string) Session name
@@ -544,8 +548,7 @@ return (bool) Whether session is opened successfully
 <
 return (bool) Whether session is closed successfully
 
- This method should be overridden if 'useCustomStorage' returns true. Do not
- call this method directly.
+ This method should be overridden if 'useCustomStorage' returns true.
 
 
 *yii/web/Session::readSession*				public
@@ -554,8 +557,7 @@ return (bool) Whether session is closed successfully
 <
 return (string) The session data
 
- This method should be overridden if 'useCustomStorage' returns true. Do not
- call this method directly.
+ This method should be overridden if 'useCustomStorage' returns true.
 
     [$id] (string) Session ID
 
@@ -566,8 +568,7 @@ return (string) The session data
 <
 return (bool) Whether session write is successful
 
- This method should be overridden if 'useCustomStorage' returns true. Do not
- call this method directly.
+ This method should be overridden if 'useCustomStorage' returns true.
 
     [$id] (string) Session ID
     [$data] (string) Session data
@@ -579,8 +580,7 @@ return (bool) Whether session write is successful
 <
 return (bool) Whether session is destroyed successfully
 
- This method should be overridden if 'useCustomStorage' returns true. Do not
- call this method directly.
+ This method should be overridden if 'useCustomStorage' returns true.
 
     [$id] (string) Session ID
 
@@ -591,8 +591,7 @@ return (bool) Whether session is destroyed successfully
 <
 return (bool) Whether session is GCed successfully
 
- This method should be overridden if 'useCustomStorage' returns true. Do not
- call this method directly.
+ This method should be overridden if 'useCustomStorage' returns true.
 
     [$maxLifetime] (int) The number of seconds after which data will be seen
     as 'garbage' and cleaned up.

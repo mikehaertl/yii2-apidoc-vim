@@ -57,10 +57,10 @@ $cacheCollection			*yii/mongodb/Cache::$cacheCollection*
 
 $gcProbability				*yii/mongodb/Cache::$gcProbability*
 
- (integer) The probability (parts per million) that garbage collection (GC)
- should be performed when storing a piece of data in the cache. Defaults to
- 100, meaning 0.01% chance. This number should be between 0 and 1000000. A
- value 0 meaning no GC will be performed at all.
+ (int) The probability (parts per million) that garbage collection (GC) should
+ be performed when storing a piece of data in the cache. Defaults to 100,
+ meaning 0.01% chance. This number should be between 0 and 1000000. A value 0
+ meaning no GC will be performed at all.
 
 $behaviors				*yii/mongodb/Cache::$behaviors*
 
@@ -271,7 +271,7 @@ return (void)
 >
  getValue($key)
 <
-return (string|boolean) The value stored in cache, false if the value is not in the
+return (string|bool) The value stored in cache, false if the value is not in the
 cache or expired.
 
  This method should be implemented by child classes to retrieve the data from
@@ -284,14 +284,14 @@ cache or expired.
 >
  setValue($key, $value, $expire)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
  This method should be implemented by child classes to store the data in
  specific cache storage.
 
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
-    [$expire] (integer) The number of seconds in which the cached value will
+    [$expire] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -299,14 +299,14 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  addValue($key, $value, $expire)
 <
-return (boolean) True if the value is successfully stored into cache, false otherwise
+return (bool) True if the value is successfully stored into cache, false otherwise
 
  This method should be implemented by child classes to store the data in
  specific cache storage.
 
     [$key] (string) The key identifying the value to be cached
     [$value] (string) The value to be cached
-    [$expire] (integer) The number of seconds in which the cached value will
+    [$expire] (int) The number of seconds in which the cached value will
     expire. 0 means never expire.
 
 
@@ -314,7 +314,7 @@ return (boolean) True if the value is successfully stored into cache, false othe
 >
  deleteValue($key)
 <
-return (boolean) If no error happens during deletion
+return (bool) If no error happens during deletion
 
     [$key] (string) The key of the value to be deleted
 
@@ -323,7 +323,7 @@ return (boolean) If no error happens during deletion
 >
  flushValues()
 <
-return (boolean) Whether the flush operation was successful.
+return (bool) Whether the flush operation was successful.
 
  Child classes may implement this method to realize the flush operation.
 
@@ -374,7 +374,7 @@ return (boolean) Whether the flush operation was successful.
 <
 return (void)
 
-    [$force] (boolean) Whether to enforce the garbage collection regardless of
+    [$force] (bool) Whether to enforce the garbage collection regardless of
     'gcProbability'. Defaults to false, meaning the actual deletion happens
     with the probability as specified by 'gcProbability'.
 
