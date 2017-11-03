@@ -23,31 +23,6 @@ $columnSchemaClass			*yii/db/oci/Schema::$columnSchemaClass*
 
  See |yii/db/Schema::$columnSchemaClass|
 
-$tableSchemas				*yii/db/oci/Schema::$tableSchemas*
-
- See |yii/db/Schema::$tableSchemas|
-
-$schemaNames				*yii/db/oci/Schema::$schemaNames*
-
- See |yii/db/Schema::$schemaNames|
-
-$tableNames				*yii/db/oci/Schema::$tableNames*
-
- See |yii/db/Schema::$tableNames|
-
-$queryBuilder				*yii/db/oci/Schema::$queryBuilder*
-
- See |yii/db/Schema::$queryBuilder|
-
-$lastInsertID				*yii/db/oci/Schema::$lastInsertID*
-
- (string) The row ID of the last row inserted, or the last value retrieved
- from the sequence object
-
-$transactionIsolationLevel		*yii/db/oci/Schema::$transactionIsolationLevel*
-
- See |yii/db/Schema::$transactionIsolationLevel|
-
 
 
 METHOD DETAILS
@@ -56,12 +31,12 @@ METHOD DETAILS
 
 *yii/db/oci/Schema::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/oci/Schema::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/oci/Schema::init*					public
@@ -80,59 +55,100 @@ return (void)
 
 *yii/db/oci/Schema::__get*				public
 
- See |yii/base/Object::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/db/oci/Schema::__set*				public
 
- See |yii/base/Object::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/db/oci/Schema::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/db/oci/Schema::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/db/oci/Schema::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/db/oci/Schema::hasProperty*				public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/db/oci/Schema::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/db/oci/Schema::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/db/oci/Schema::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
-*yii/db/oci/Schema::createColumnSchema*			protected
+*yii/db/oci/Schema::resolveTableName*			protected
+>
+ resolveTableName($name)
+<
+return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
 
- See |yii/db/Schema::createColumnSchema|
 
 
-*yii/db/oci/Schema::loadTableSchema*			public
+
+
+
+
+    [$name] (string) The table name
+
+
+*yii/db/oci/Schema::findSchemaNames*			protected
+>
+ findSchemaNames()
+<
+return (array) All schema names in the database, except system schemas.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+
+*yii/db/oci/Schema::findTableNames*			protected
+>
+ findTableNames($schema='''')
+<
+return (array) All table names in the database. The names have NO schema name prefix.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
+
+
+*yii/db/oci/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (null|\yii\db\TableSchema) DBMS-dependent table metadata, null if the table
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
 does not exist.
 
 
@@ -144,19 +160,14 @@ does not exist.
     [$name] (string) Table name
 
 
+*yii/db/oci/Schema::createColumnSchema*			protected
+
+ See |yii/db/Schema::createColumnSchema|
+
+
 *yii/db/oci/Schema::getTableSchema*			public
 
  See |yii/db/Schema::getTableSchema|
-
-
-*yii/db/oci/Schema::getCacheKey*				protected
-
- See |yii/db/Schema::getCacheKey|
-
-
-*yii/db/oci/Schema::getCacheTag*				protected
-
- See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/oci/Schema::getTableSchemas*			public
@@ -226,44 +237,13 @@ return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
     'ColumnSchemaBuilder::$length'.
 
 
-*yii/db/oci/Schema::findSchemaNames*			protected
->
- findSchemaNames()
-<
-return (array) All schema names in the database, except system schemas
-
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
-
-
-*yii/db/oci/Schema::findTableNames*			protected
->
- findTableNames($schema='''')
-<
-return (array) All table names in the database. The names have NO schema name prefix.
-
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
-
-
 *yii/db/oci/Schema::findUniqueIndexes*			public
 >
  findUniqueIndexes($table)
 <
 return (array) All unique indexes for the given table.
 
- Each array element is of the following structure:
+ Each array element is of the following structure:.
 
    [
        'IndexName1' => ['col1' [, ...]],
@@ -392,6 +372,150 @@ return (string) The properly quoted table name
 *yii/db/oci/Schema::isReadQuery*				public
 
  See |yii/db/Schema::isReadQuery|
+
+
+*yii/db/oci/Schema::getCacheKey*				protected
+
+ See |yii/db/Schema::getCacheKey|
+
+
+*yii/db/oci/Schema::getCacheTag*				protected
+
+ See |yii/db/Schema::getCacheTag|
+
+
+*yii/db/oci/Schema::getTableMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getTableMetadata|
+
+
+*yii/db/oci/Schema::getSchemaMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getSchemaMetadata|
+
+
+*yii/db/oci/Schema::setTableMetadata*			protected
+
+ See |yii/db/Schema::setTableMetadata|
+
+
+*yii/db/oci/Schema::normalizePdoRowKeyCase*		protected
+
+ See |yii/db/Schema::normalizePdoRowKeyCase|
+
+
+*yii/db/oci/Schema::loadTablePrimaryKey*			protected
+>
+ loadTablePrimaryKey($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/oci/Schema::loadTableForeignKeys*			protected
+>
+ loadTableForeignKeys($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/oci/Schema::loadTableIndexes*			protected
+>
+ loadTableIndexes($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/oci/Schema::loadTableUniques*			protected
+>
+ loadTableUniques($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/oci/Schema::loadTableChecks*			protected
+>
+ loadTableChecks($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/oci/Schema::loadTableDefaultValues*		protected
+>
+ loadTableDefaultValues($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/oci/Schema::getTablePrimaryKey*			public
+
+ See |yii/db/ConstraintFinderTrait::getTablePrimaryKey|
+
+
+*yii/db/oci/Schema::getSchemaPrimaryKeys*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaPrimaryKeys|
+
+
+*yii/db/oci/Schema::getTableForeignKeys*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableForeignKeys|
+
+
+*yii/db/oci/Schema::getSchemaForeignKeys*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaForeignKeys|
+
+
+*yii/db/oci/Schema::getTableIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableIndexes|
+
+
+*yii/db/oci/Schema::getSchemaIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaIndexes|
+
+
+*yii/db/oci/Schema::getTableUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableUniques|
+
+
+*yii/db/oci/Schema::getSchemaUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaUniques|
+
+
+*yii/db/oci/Schema::getTableChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableChecks|
+
+
+*yii/db/oci/Schema::getSchemaChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaChecks|
+
+
+*yii/db/oci/Schema::getTableDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableDefaultValues|
+
+
+*yii/db/oci/Schema::getSchemaDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaDefaultValues|
 
 
 *yii/db/oci/Schema::resolveTableNames*			protected

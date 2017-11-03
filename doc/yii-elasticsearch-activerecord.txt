@@ -27,80 +27,6 @@ DESCRIPTION
  record represents.
 
 
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/elasticsearch/ActiveRecord::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$validators				*yii/elasticsearch/ActiveRecord::$validators*
-
- See |yii/base/Model::$validators|
-
-$activeValidators			*yii/elasticsearch/ActiveRecord::$activeValidators*
-
- See |yii/base/Model::$activeValidators|
-
-$errors					*yii/elasticsearch/ActiveRecord::$errors*
-
- See |yii/base/Model::$errors|
-
-$firstErrors				*yii/elasticsearch/ActiveRecord::$firstErrors*
-
- See |yii/base/Model::$firstErrors|
-
-$attributes				*yii/elasticsearch/ActiveRecord::$attributes*
-
- See |yii/base/Model::$attributes|
-
-$scenario				*yii/elasticsearch/ActiveRecord::$scenario*
-
- See |yii/base/Model::$scenario|
-
-$iterator				*yii/elasticsearch/ActiveRecord::$iterator*
-
- See |yii/base/Model::$iterator|
-
-$relatedRecords				*yii/elasticsearch/ActiveRecord::$relatedRecords*
-
- See |yii/db/BaseActiveRecord::$relatedRecords|
-
-$oldAttributes				*yii/elasticsearch/ActiveRecord::$oldAttributes*
-
- See |yii/db/BaseActiveRecord::$oldAttributes|
-
-$dirtyAttributes			*yii/elasticsearch/ActiveRecord::$dirtyAttributes*
-
- See |yii/db/BaseActiveRecord::$dirtyAttributes|
-
-$isNewRecord				*yii/elasticsearch/ActiveRecord::$isNewRecord*
-
- See |yii/db/BaseActiveRecord::$isNewRecord|
-
-$primaryKey				*yii/elasticsearch/ActiveRecord::$primaryKey*
-
- (mixed) The primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is 'true'. A string is
- returned otherwise (null will be returned if the key value is null).
-
-$oldPrimaryKey				*yii/elasticsearch/ActiveRecord::$oldPrimaryKey*
-
- (mixed) The old primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is 'true'. A string is
- returned otherwise (null will be returned if the key value is null).
-
-$score					*yii/elasticsearch/ActiveRecord::$score*
-
- (float) Returns the score of this record when it was retrieved via a 'find()'
- query.
-
-$highlight				*yii/elasticsearch/ActiveRecord::$highlight*
-
- (array|null) A list of arrays with highlighted excerpts indexed by field
- names.
-
-
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -108,12 +34,12 @@ METHOD DETAILS
 
 *yii/elasticsearch/ActiveRecord::className*		public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/elasticsearch/ActiveRecord::__construct*		public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/elasticsearch/ActiveRecord::init*			public
@@ -143,12 +69,12 @@ METHOD DETAILS
 
 *yii/elasticsearch/ActiveRecord::__call*			public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/elasticsearch/ActiveRecord::hasProperty*		public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/elasticsearch/ActiveRecord::canGetProperty*		public
@@ -163,7 +89,7 @@ METHOD DETAILS
 
 *yii/elasticsearch/ActiveRecord::hasMethod*		public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/elasticsearch/ActiveRecord::__clone*			public
@@ -229,6 +155,11 @@ METHOD DETAILS
 *yii/elasticsearch/ActiveRecord::ensureBehaviors*		public
 
  See |yii/base/Component::ensureBehaviors|
+
+
+*yii/elasticsearch/ActiveRecord::instance*		public
+
+ See |yii/base/StaticInstanceTrait::instance|
 
 
 *yii/elasticsearch/ActiveRecord::fields*			public
@@ -467,8 +398,8 @@ return (string[]) List of attribute names.
 >
  findOne($condition)
 <
-return (static) ActiveRecord instance matching the condition, or 'null' if nothing
-matches.
+return (static|null) ActiveRecord instance matching the condition, or 'null' if
+nothing matches.
 
 
 
@@ -939,6 +870,11 @@ deleted is 0, even though the deletion execution is successful.
 *yii/elasticsearch/ActiveRecord::refresh*			public
 
  See |yii/db/BaseActiveRecord::refresh|
+
+
+*yii/elasticsearch/ActiveRecord::refreshInternal*		protected
+
+ See |yii/db/BaseActiveRecord::refreshInternal|
 
 
 *yii/elasticsearch/ActiveRecord::afterRefresh*		public

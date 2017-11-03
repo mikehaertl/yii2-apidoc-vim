@@ -124,7 +124,8 @@ $bootstrap				*yii/base/Application::$bootstrap*
    - an application component ID as specified via 'components'. 
    - a module ID as specified via 'modules'. 
    - a class name. 
-   - a configuration array.
+   - a configuration array. 
+   - a Closure
 
  During the bootstrapping process, each component will be instantiated. If the
  component class implements 'BootstrapInterface', its
@@ -139,124 +140,6 @@ $loadedModules				*yii/base/Application::$loadedModules*
 
  (array) List of loaded modules indexed by their class names.
 
-$behaviors				*yii/base/Application::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$components				*yii/base/Application::$components*
-
- See |yii/di/ServiceLocator::$components|
-
-$uniqueId				*yii/base/Application::$uniqueId*
-
- (string) The unique ID of the module.
-
-$basePath				*yii/base/Application::$basePath*
-
- See |yii/base/Module::$basePath|
-
-$controllerPath				*yii/base/Application::$controllerPath*
-
- See |yii/base/Module::$controllerPath|
-
-$viewPath				*yii/base/Application::$viewPath*
-
- See |yii/base/Module::$viewPath|
-
-$layoutPath				*yii/base/Application::$layoutPath*
-
- See |yii/base/Module::$layoutPath|
-
-$version				*yii/base/Application::$version*
-
- See |yii/base/Module::$version|
-
-$aliases				*yii/base/Application::$aliases*
-
- See |yii/base/Module::$aliases|
-
-$modules				*yii/base/Application::$modules*
-
- See |yii/base/Module::$modules|
-
-$runtimePath				*yii/base/Application::$runtimePath*
-
- (string) The directory that stores runtime files. Defaults to the "runtime"
- subdirectory under 'basePath'.
-
-$vendorPath				*yii/base/Application::$vendorPath*
-
- (string) The directory that stores vendor files. Defaults to "vendor"
- directory under 'basePath'.
-
-$timeZone				*yii/base/Application::$timeZone*
-
- (string) The time zone used by this application.
-
-$db					*yii/base/Application::$db*
-
- (\yii\db\Connection) The database connection.
-
-$log					*yii/base/Application::$log*
-
- (\yii\log\Dispatcher) The log dispatcher application component.
-
-$errorHandler				*yii/base/Application::$errorHandler*
-
- (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
- application component.
-
-$cache					*yii/base/Application::$cache*
-
- (\yii\caching\Cache) The cache application component. Null if the component
- is not enabled.
-
-$formatter				*yii/base/Application::$formatter*
-
- (\yii\i18n\Formatter) The formatter application component.
-
-$request				*yii/base/Application::$request*
-
- (\yii\web\Request|\yii\console\Request) The request component.
-
-$response				*yii/base/Application::$response*
-
- (\yii\web\Response|\yii\console\Response) The response component.
-
-$view					*yii/base/Application::$view*
-
- (\yii\base\View|\yii\web\View) The view application component that is used to
- render various view files.
-
-$urlManager				*yii/base/Application::$urlManager*
-
- (\yii\web\UrlManager) The URL manager for this application.
-
-$i18n					*yii/base/Application::$i18n*
-
- (\yii\i18n\I18N) The internationalization application component.
-
-$mailer					*yii/base/Application::$mailer*
-
- (\yii\mail\MailerInterface) The mailer application component.
-
-$authManager				*yii/base/Application::$authManager*
-
- (\yii\rbac\ManagerInterface) The auth manager application component. Null is
- returned if auth manager is not configured.
-
-$assetManager				*yii/base/Application::$assetManager*
-
- (\yii\web\AssetManager) The asset manager application component.
-
-$security				*yii/base/Application::$security*
-
- (\yii\base\Security) The security application component.
-
-$container				*yii/base/Application::$container*
-
- (array) Values given in terms of name-value pairs
-
 
 
 METHOD DETAILS
@@ -265,7 +148,7 @@ METHOD DETAILS
 
 *yii/base/Application::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/base/Application::__construct*			public
@@ -304,7 +187,7 @@ return (void)
 
 *yii/base/Application::__set*				public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/base/Application::__isset*				public
@@ -314,32 +197,32 @@ return (void)
 
 *yii/base/Application::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/base/Application::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/base/Application::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/base/Application::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/base/Application::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/base/Application::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/base/Application::__clone*				public
@@ -710,8 +593,8 @@ application component.
 >
  getCache()
 <
-return (\yii\caching\Cache) The cache application component. Null if the component is
-not enabled.
+return (\yii\caching\CacheInterface) The cache application component. Null if the
+component is not enabled.
 
 
 

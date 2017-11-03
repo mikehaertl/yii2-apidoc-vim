@@ -54,19 +54,6 @@ $tableName				*yii/test/ActiveFixture::$tableName*
  (string) The name of the database table that this fixture is about. If this
  property is not set, the table name will be determined via 'modelClass'.
 
-$behaviors				*yii/test/ActiveFixture::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$iterator				*yii/test/ActiveFixture::$iterator*
-
- See |yii/base/ArrayAccessTrait::$iterator|
-
-$tableSchema				*yii/test/ActiveFixture::$tableSchema*
-
- (\yii\db\TableSchema) The schema information of the database table associated
- with this fixture.
-
 
 
 METHOD DETAILS
@@ -75,12 +62,12 @@ METHOD DETAILS
 
 *yii/test/ActiveFixture::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/test/ActiveFixture::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/test/ActiveFixture::init*				public
@@ -213,9 +200,7 @@ return (void)
 <
 return (void)
 
- The default implementation will first clean up the table by calling
- 'resetTable()'. It will then populate the table with the data returned by
- 'getData()'.
+ It populate the table with the data returned by 'getData()'.
 
  If you override this method, you should consider calling the parent
  implementation so that the data returned by 'getData()' can be populated into

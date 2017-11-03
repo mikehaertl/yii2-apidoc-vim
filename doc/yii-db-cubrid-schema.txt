@@ -30,34 +30,6 @@ $typeMap				*yii/db/cubrid/Schema::$typeMap*
  manual](http://www.cubrid.org/manual/91/en/sql/datatype.html) for details on
  data types.
 
-$tableSchemas				*yii/db/cubrid/Schema::$tableSchemas*
-
- See |yii/db/Schema::$tableSchemas|
-
-$schemaNames				*yii/db/cubrid/Schema::$schemaNames*
-
- See |yii/db/Schema::$schemaNames|
-
-$tableNames				*yii/db/cubrid/Schema::$tableNames*
-
- See |yii/db/Schema::$tableNames|
-
-$queryBuilder				*yii/db/cubrid/Schema::$queryBuilder*
-
- See |yii/db/Schema::$queryBuilder|
-
-$lastInsertID				*yii/db/cubrid/Schema::$lastInsertID*
-
- See |yii/db/Schema::$lastInsertID|
-
-$transactionIsolationLevel		*yii/db/cubrid/Schema::$transactionIsolationLevel*
-
- (string) The transaction isolation level to use for this transaction. This
- can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
- 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
- string containing DBMS specific syntax to be used after 'SET TRANSACTION
- ISOLATION LEVEL'.
-
 
 
 METHOD DETAILS
@@ -66,62 +38,105 @@ METHOD DETAILS
 
 *yii/db/cubrid/Schema::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/cubrid/Schema::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/cubrid/Schema::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/db/cubrid/Schema::__get*				public
 
- See |yii/base/Object::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/db/cubrid/Schema::__set*				public
 
- See |yii/base/Object::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/db/cubrid/Schema::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/db/cubrid/Schema::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/db/cubrid/Schema::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/db/cubrid/Schema::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/db/cubrid/Schema::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/db/cubrid/Schema::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/db/cubrid/Schema::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/db/cubrid/Schema::resolveTableName*			protected
+
+ See |yii/db/Schema::resolveTableName|
+
+
+*yii/db/cubrid/Schema::findSchemaNames*			protected
+
+ See |yii/db/Schema::findSchemaNames|
+
+
+*yii/db/cubrid/Schema::findTableNames*			protected
+>
+ findTableNames($schema='''')
+<
+return (array) All table names in the database. The names have NO schema name prefix.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
+
+
+*yii/db/cubrid/Schema::loadTableSchema*			protected
+>
+ loadTableSchema($name)
+<
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
+
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/cubrid/Schema::createColumnSchema*		protected
@@ -129,29 +144,9 @@ METHOD DETAILS
  See |yii/db/Schema::createColumnSchema|
 
 
-*yii/db/cubrid/Schema::loadTableSchema*			protected
->
- loadTableSchema($name)
-<
-return (\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
-not exist.
-
-    [$name] (string) Table name
-
-
 *yii/db/cubrid/Schema::getTableSchema*			public
 
  See |yii/db/Schema::getTableSchema|
-
-
-*yii/db/cubrid/Schema::getCacheKey*			protected
-
- See |yii/db/Schema::getCacheKey|
-
-
-*yii/db/cubrid/Schema::getCacheTag*			protected
-
- See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/cubrid/Schema::getTableSchemas*			public
@@ -217,21 +212,6 @@ return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
     [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
     [$length] (int|string|array) Length or precision of the column. See
     'ColumnSchemaBuilder::$length'.
-
-
-*yii/db/cubrid/Schema::findSchemaNames*			protected
-
- See |yii/db/Schema::findSchemaNames|
-
-
-*yii/db/cubrid/Schema::findTableNames*			protected
->
- findTableNames($schema='''')
-<
-return (array) All table names in the database. The names have NO schema name prefix.
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
 
 
 *yii/db/cubrid/Schema::findUniqueIndexes*			public
@@ -353,6 +333,150 @@ return (string) The properly quoted column name
 *yii/db/cubrid/Schema::isReadQuery*			public
 
  See |yii/db/Schema::isReadQuery|
+
+
+*yii/db/cubrid/Schema::getCacheKey*			protected
+
+ See |yii/db/Schema::getCacheKey|
+
+
+*yii/db/cubrid/Schema::getCacheTag*			protected
+
+ See |yii/db/Schema::getCacheTag|
+
+
+*yii/db/cubrid/Schema::getTableMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getTableMetadata|
+
+
+*yii/db/cubrid/Schema::getSchemaMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getSchemaMetadata|
+
+
+*yii/db/cubrid/Schema::setTableMetadata*			protected
+
+ See |yii/db/Schema::setTableMetadata|
+
+
+*yii/db/cubrid/Schema::normalizePdoRowKeyCase*		protected
+
+ See |yii/db/Schema::normalizePdoRowKeyCase|
+
+
+*yii/db/cubrid/Schema::loadTablePrimaryKey*		protected
+>
+ loadTablePrimaryKey($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/cubrid/Schema::loadTableForeignKeys*		protected
+>
+ loadTableForeignKeys($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/cubrid/Schema::loadTableIndexes*			protected
+>
+ loadTableIndexes($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/cubrid/Schema::loadTableUniques*			protected
+>
+ loadTableUniques($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/cubrid/Schema::loadTableChecks*			protected
+>
+ loadTableChecks($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/cubrid/Schema::loadTableDefaultValues*		protected
+>
+ loadTableDefaultValues($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/cubrid/Schema::getTablePrimaryKey*		public
+
+ See |yii/db/ConstraintFinderTrait::getTablePrimaryKey|
+
+
+*yii/db/cubrid/Schema::getSchemaPrimaryKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaPrimaryKeys|
+
+
+*yii/db/cubrid/Schema::getTableForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableForeignKeys|
+
+
+*yii/db/cubrid/Schema::getSchemaForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaForeignKeys|
+
+
+*yii/db/cubrid/Schema::getTableIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableIndexes|
+
+
+*yii/db/cubrid/Schema::getSchemaIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaIndexes|
+
+
+*yii/db/cubrid/Schema::getTableUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableUniques|
+
+
+*yii/db/cubrid/Schema::getSchemaUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaUniques|
+
+
+*yii/db/cubrid/Schema::getTableChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableChecks|
+
+
+*yii/db/cubrid/Schema::getSchemaChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaChecks|
+
+
+*yii/db/cubrid/Schema::getTableDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableDefaultValues|
+
+
+*yii/db/cubrid/Schema::getSchemaDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaDefaultValues|
 
 
 *yii/db/cubrid/Schema::loadColumnSchema*			protected

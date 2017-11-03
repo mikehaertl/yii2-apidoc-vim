@@ -1,0 +1,266 @@
+
+*yii/db/sqlite/SqlTokenizer*   >> |yii/db/SqlTokenizer|
+============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It's used to obtain a 'CHECK' constraint information from a 'CREATE TABLE'
+ SQL code.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/sqlite/SqlTokenizer::className*			public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/db/sqlite/SqlTokenizer::__construct*			public
+
+ See |yii/db/SqlTokenizer::__construct|
+
+
+*yii/db/sqlite/SqlTokenizer::init*			public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/db/sqlite/SqlTokenizer::__get*			public
+
+ See |yii/base/Component::__get|
+
+
+*yii/db/sqlite/SqlTokenizer::__set*			public
+
+ See |yii/base/Component::__set|
+
+
+*yii/db/sqlite/SqlTokenizer::__isset*			public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/db/sqlite/SqlTokenizer::__unset*			public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/db/sqlite/SqlTokenizer::__call*			public
+
+ See |yii/base/Component::__call|
+
+
+*yii/db/sqlite/SqlTokenizer::hasProperty*			public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/db/sqlite/SqlTokenizer::canGetProperty*		public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/db/sqlite/SqlTokenizer::canSetProperty*		public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/db/sqlite/SqlTokenizer::hasMethod*			public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/db/sqlite/SqlTokenizer::__clone*			public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/db/sqlite/SqlTokenizer::behaviors*			public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/db/sqlite/SqlTokenizer::hasEventHandlers*		public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/db/sqlite/SqlTokenizer::on*				public
+
+ See |yii/base/Component::on|
+
+
+*yii/db/sqlite/SqlTokenizer::off*				public
+
+ See |yii/base/Component::off|
+
+
+*yii/db/sqlite/SqlTokenizer::trigger*			public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/db/sqlite/SqlTokenizer::getBehavior*			public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/db/sqlite/SqlTokenizer::getBehaviors*		public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/db/sqlite/SqlTokenizer::attachBehavior*		public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/db/sqlite/SqlTokenizer::attachBehaviors*		public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/db/sqlite/SqlTokenizer::detachBehavior*		public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/db/sqlite/SqlTokenizer::detachBehaviors*		public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/db/sqlite/SqlTokenizer::ensureBehaviors*		public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/db/sqlite/SqlTokenizer::tokenize*			public
+
+ See |yii/db/SqlTokenizer::tokenize|
+
+
+*yii/db/sqlite/SqlTokenizer::isWhitespace*		protected
+>
+ isWhitespace($length)
+<
+return (bool) Whether there's a whitespace at the current offset.
+
+
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string.
+
+
+
+    [$length] (int) Length of the matched string.
+
+
+*yii/db/sqlite/SqlTokenizer::isComment*			protected
+>
+ isComment($length)
+<
+return (bool) Whether there's a commentary at the current offset.
+
+
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string.
+
+
+
+    [$length] (int) Length of the matched string.
+
+
+*yii/db/sqlite/SqlTokenizer::isOperator*			protected
+>
+ isOperator($length, $content)
+<
+return (bool) Whether there's an operator at the current offset.
+
+
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string. It may also set '$content' to a string that
+ will be used as a token content.
+
+
+
+    [$length] (int) Length of the matched string.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/sqlite/SqlTokenizer::isIdentifier*		protected
+>
+ isIdentifier($length, $content)
+<
+return (bool) Whether there's an identifier at the current offset.
+
+
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string. It may also set '$content' to a string that
+ will be used as a token content.
+
+
+
+    [$length] (int) Length of the matched string.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/sqlite/SqlTokenizer::isStringLiteral*		protected
+>
+ isStringLiteral($length, $content)
+<
+return (bool) Whether there's a string literal at the current offset.
+
+
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string. It may also set '$content' to a string that
+ will be used as a token content.
+
+
+
+    [$length] (int) Length of the matched string.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/sqlite/SqlTokenizer::isKeyword*			protected
+>
+ isKeyword($string, $content)
+<
+return (bool) Whether the given string is a keyword.
+
+
+
+ The method may set '$content' to a string that will be used as a token
+ content.
+
+
+
+    [$string] (string) String to be matched.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/sqlite/SqlTokenizer::startsWithAnyLongest*	protected
+
+ See |yii/db/SqlTokenizer::startsWithAnyLongest|
+
+
+*yii/db/sqlite/SqlTokenizer::substring*			protected
+
+ See |yii/db/SqlTokenizer::substring|
+
+
+*yii/db/sqlite/SqlTokenizer::indexAfter*			protected
+
+ See |yii/db/SqlTokenizer::indexAfter|
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

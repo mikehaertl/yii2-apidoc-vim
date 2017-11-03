@@ -92,41 +92,12 @@ $templateFile				*yii/console/controllers/BaseMigrateController::$templateFile*
  a [path alias](guide:concept-aliases) (e.g. "@app/migrations/template.php")
  or a file path.
 
-$behaviors				*yii/console/controllers/BaseMigrateController::$behaviors*
+$compact				*yii/console/controllers/BaseMigrateController::$compact*
 
- See |yii/base/Component::$behaviors|
-
-$modules				*yii/console/controllers/BaseMigrateController::$modules*
-
- See |yii/base/Controller::$modules|
-
-$uniqueId				*yii/console/controllers/BaseMigrateController::$uniqueId*
-
- See |yii/base/Controller::$uniqueId|
-
-$route					*yii/console/controllers/BaseMigrateController::$route*
-
- See |yii/base/Controller::$route|
-
-$view					*yii/console/controllers/BaseMigrateController::$view*
-
- See |yii/base/Controller::$view|
-
-$viewPath				*yii/console/controllers/BaseMigrateController::$viewPath*
-
- See |yii/base/ViewContextInterface::$viewPath|
-
-$passedOptions				*yii/console/controllers/BaseMigrateController::$passedOptions*
-
- See |yii/console/Controller::$passedOptions|
-
-$passedOptionValues			*yii/console/controllers/BaseMigrateController::$passedOptionValues*
-
- See |yii/console/Controller::$passedOptionValues|
-
-$helpSummary				*yii/console/controllers/BaseMigrateController::$helpSummary*
-
- See |yii/console/Controller::$helpSummary|
+ (bool) Indicates whether the console output should be compacted. If this is
+ set to true, the individual commands ran within the migration will not be
+ output to the console. Default is false, in other words the output is fully
+ verbose by default.
 
 
 
@@ -136,7 +107,7 @@ METHOD DETAILS
 
 *yii/console/controllers/BaseMigrateController::className*public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/console/controllers/BaseMigrateController::__construct*public
@@ -146,52 +117,52 @@ METHOD DETAILS
 
 *yii/console/controllers/BaseMigrateController::init*	public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/console/controllers/BaseMigrateController::__get*	public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/console/controllers/BaseMigrateController::__set*	public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/console/controllers/BaseMigrateController::__isset*	public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/console/controllers/BaseMigrateController::__unset*	public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/console/controllers/BaseMigrateController::__call*	public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/console/controllers/BaseMigrateController::hasProperty*public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/console/controllers/BaseMigrateController::canGetProperty*public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/console/controllers/BaseMigrateController::canSetProperty*public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/console/controllers/BaseMigrateController::hasMethod*public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/console/controllers/BaseMigrateController::__clone*	public
@@ -499,7 +470,7 @@ abnormal.
 
 *yii/console/controllers/BaseMigrateController::actionDown*public
 >
- actionDown($limit=1)
+ actionDown($limit='1')
 <
 return (int) The status of the action execution. 0 means normal, other values mean
 abnormal.
@@ -509,13 +480,14 @@ abnormal.
  ''' yii migrate/down     # revert the last migration yii migrate/down 3   #
  revert the last 3 migrations yii migrate/down all # revert all migrations '''
 
-    [$limit] (int) The number of migrations to be reverted. Defaults to 1,
-    meaning the last applied migration will be reverted.
+    [$limit] (int|string) The number of migrations to be reverted. Defaults to
+    1, meaning the last applied migration will be reverted. When value is
+    "all", all migrations will be reverted.
 
 
 *yii/console/controllers/BaseMigrateController::actionRedo*public
 >
- actionRedo($limit=1)
+ actionRedo($limit='1')
 <
 return (int) The status of the action execution. 0 means normal, other values mean
 abnormal.
@@ -527,8 +499,9 @@ abnormal.
    # redo the last 3 applied migrations yii migrate/redo all # redo all
  migrations '''
 
-    [$limit] (int) The number of migrations to be redone. Defaults to 1,
-    meaning the last applied migration will be redone.
+    [$limit] (int|string) The number of migrations to be redone. Defaults to
+    1, meaning the last applied migration will be redone. When equals "all",
+    all migrations will be redone.
 
 
 *yii/console/controllers/BaseMigrateController::actionTo*	public
@@ -568,17 +541,28 @@ return (int) CLI exit code
 
  ''' yii migrate/mark 101129_185401                        # using timestamp
  yii migrate/mark m101129_185401_create_user_table     # using full name yii
- migrate/to app\migrations\M101129185401CreateUser # using full namespace name
- '''
+ migrate/mark app\migrations\M101129185401CreateUser # using full namespace
+ name yii migrate/mark m000000_000000_base # reset the complete migration
+ history '''
 
     [$version] (string) The version at which the migration history should be
     marked. This can be either the timestamp or the full name of the
-    migration.
+    migration. You may specify the name 'm000000_000000_base' to set the
+    migration history to a state where no migration has been applied.
+
+
+*yii/console/controllers/BaseMigrateController::actionFresh*public
+>
+ actionFresh()
+<
+return (void)
+
+ ''' yii migrate/fresh '''
 
 
 *yii/console/controllers/BaseMigrateController::actionHistory*public
 >
- actionHistory($limit=10)
+ actionHistory($limit='10')
 <
 return (void)
 
@@ -589,13 +573,13 @@ return (void)
  migrate/history 5   # showing the last 5 migrations yii migrate/history all #
  showing the whole history '''
 
-    [$limit] (int) The maximum number of migrations to be displayed. If it is
-    "all", the whole migration history will be displayed.
+    [$limit] (int|string) The maximum number of migrations to be displayed. If
+    it is "all", the whole migration history will be displayed.
 
 
 *yii/console/controllers/BaseMigrateController::actionNew*public
 >
- actionNew($limit=10)
+ actionNew($limit='10')
 <
 return (void)
 
@@ -606,8 +590,8 @@ return (void)
  5   # showing the first 5 new migrations yii migrate/new all # showing all
  new migrations '''
 
-    [$limit] (int) The maximum number of new migrations to be displayed. If it
-    is 'all', all available new migrations will be displayed.
+    [$limit] (int|string) The maximum number of new migrations to be
+    displayed. If it is 'all', all available new migrations will be displayed.
 
 
 *yii/console/controllers/BaseMigrateController::actionCreate*public
@@ -721,6 +705,26 @@ return (string) Generated PHP code.
      
       - name: string migration base name  
       - className: string migration class name
+
+
+*yii/console/controllers/BaseMigrateController::truncateDatabase*protected
+>
+ truncateDatabase()
+<
+return (void)
+
+ This method should be overwritten in subclasses to implement the task of
+ clearing the database.
+
+
+*yii/console/controllers/BaseMigrateController::getMigrationNameLimit*protected
+>
+ getMigrationNameLimit()
+<
+return (int|null) The maximum name length for a migration or 'null' if no limit
+applies.
+
+ Subclasses may override this method to define a limit.
 
 
 *yii/console/controllers/BaseMigrateController::getMigrationHistory*protected

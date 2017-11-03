@@ -31,6 +31,10 @@ SUBCLASSES
 |yii/sphinx/gii/model/Generator|
 |yii/debug/models/Router|
 |yii/debug/models/timeline/Search|
+|yii/data/ActiveDataFilter|
+|yii/data/DataFilter|
+|yii/debug/models/search/User|
+|yii/debug/models/UserSwitch|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -59,60 +63,6 @@ DESCRIPTION
  models](guide:structure-models).
 
 
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/base/Model::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$validators				*yii/base/Model::$validators*
-
- (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
- model.
-
-$activeValidators			*yii/base/Model::$activeValidators*
-
- (\yii\validators\Validator[]) The validators applicable to the current
- 'scenario'.
-
-$errors					*yii/base/Model::$errors*
-
- (array) Errors for all attributes or the specified attribute. Empty array is
- returned if no error. Note that when returning errors for all attributes, the
- result is a two-dimensional array, like the following:
-
-   [
-       'username' => [
-           'Username is required.',
-           'Username must contain only word characters.',
-       ],
-       'email' => [
-           'Email address is invalid.',
-       ]
-   ]
-
-
-
-$firstErrors				*yii/base/Model::$firstErrors*
-
- (array) The first errors. The array keys are the attribute names, and the
- array values are the corresponding error messages. An empty array will be
- returned if there is no error.
-
-$attributes				*yii/base/Model::$attributes*
-
- (array) Attribute values (name => value).
-
-$scenario				*yii/base/Model::$scenario*
-
- (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
-
-$iterator				*yii/base/Model::$iterator*
-
- (\ArrayIterator) An iterator for traversing the items in the list.
-
-
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -120,62 +70,62 @@ METHOD DETAILS
 
 *yii/base/Model::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/base/Model::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/base/Model::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/base/Model::__get*					public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/base/Model::__set*					public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/base/Model::__isset*					public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/base/Model::__unset*					public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/base/Model::__call*					public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/base/Model::hasProperty*				public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/base/Model::canGetProperty*				public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/base/Model::canSetProperty*				public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/base/Model::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/base/Model::__clone*					public
@@ -241,6 +191,11 @@ METHOD DETAILS
 *yii/base/Model::ensureBehaviors*				public
 
  See |yii/base/Component::ensureBehaviors|
+
+
+*yii/base/Model::instance*				public
+
+ See |yii/base/StaticInstanceTrait::instance|
 
 
 *yii/base/Model::fields*					public

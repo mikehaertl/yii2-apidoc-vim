@@ -58,9 +58,17 @@ $db					*yii/db/Migration::$db*
 
 
 
-$behaviors				*yii/db/Migration::$behaviors*
+$maxSqlOutputLength			*yii/db/Migration::$maxSqlOutputLength*
 
- See |yii/base/Component::$behaviors|
+ (int) Max number of characters of the SQL outputted. Useful for reduction of
+ long statements and making console output more compact.
+
+$compact				*yii/db/Migration::$compact*
+
+ (bool) Indicates whether the console output should be compacted. If this is
+ set to true, the individual commands ran within the migration will not be
+ output to the console. Default is false, in other words the output is fully
+ verbose by default.
 
 
 
@@ -70,12 +78,12 @@ METHOD DETAILS
 
 *yii/db/Migration::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/Migration::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/Migration::init*					public
@@ -331,8 +339,7 @@ proceed further. All other return values mean the migration succeeds.
 
  Note: Not all DBMS support transactions. And some DB queries cannot be put
  into a transaction. For some examples, please refer to [implicit
- commit](http://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html). If this
- is the case, you should still implement 'up()' and 'down()', instead.
+ commit](http://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html).
 
 
 *yii/db/Migration::safeDown*				public
@@ -348,8 +355,7 @@ proceed further. All other return values mean the migration succeeds.
 
  Note: Not all DBMS support transactions. And some DB queries cannot be put
  into a transaction. For some examples, please refer to [implicit
- commit](http://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html). If this
- is the case, you should still implement 'up()' and 'down()', instead.
+ commit](http://dev.mysql.com/doc/refman/5.7/en/implicit-commit.html).
 
 
 *yii/db/Migration::execute*				public
@@ -677,6 +683,26 @@ return (void)
 
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
+
+
+*yii/db/Migration::beginCommand*				protected
+>
+ beginCommand($description)
+<
+return (float) The time before the command is executed, for the time elapsed to be
+calculated.
+
+    [$description] (string) The description for the command, to be output to
+    the console.
+
+
+*yii/db/Migration::endCommand*				protected
+>
+ endCommand($time)
+<
+return (void)
+
+    [$time] (float) The time before the command was executed.
 
 
 

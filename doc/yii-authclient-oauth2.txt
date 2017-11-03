@@ -13,6 +13,7 @@ SUBCLASSES
 |yii/authclient/clients/Live|
 |yii/authclient/clients/GoogleHybrid|
 |yii/authclient/clients/VKontakte|
+|yii/authclient/OpenIdConnect|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -76,58 +77,6 @@ $validateAuthState			*yii/authclient/OAuth2::$validateAuthState*
  includes this value, when redirecting the user-agent back to the client. The
  option is used for preventing cross-site request forgery.
 
-$behaviors				*yii/authclient/OAuth2::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$id					*yii/authclient/OAuth2::$id*
-
- See |yii/authclient/ClientInterface::$id|
-
-$name					*yii/authclient/OAuth2::$name*
-
- See |yii/authclient/ClientInterface::$name|
-
-$title					*yii/authclient/OAuth2::$title*
-
- See |yii/authclient/ClientInterface::$title|
-
-$userAttributes				*yii/authclient/OAuth2::$userAttributes*
-
- See |yii/authclient/BaseClient::$userAttributes|
-
-$normalizeUserAttributeMap		*yii/authclient/OAuth2::$normalizeUserAttributeMap*
-
- See |yii/authclient/BaseClient::$normalizeUserAttributeMap|
-
-$viewOptions				*yii/authclient/OAuth2::$viewOptions*
-
- See |yii/authclient/BaseClient::$viewOptions|
-
-$httpClient				*yii/authclient/OAuth2::$httpClient*
-
- See |yii/authclient/BaseClient::$httpClient|
-
-$requestOptions				*yii/authclient/OAuth2::$requestOptions*
-
- See |yii/authclient/BaseClient::$requestOptions|
-
-$stateStorage				*yii/authclient/OAuth2::$stateStorage*
-
- See |yii/authclient/BaseClient::$stateStorage|
-
-$returnUrl				*yii/authclient/OAuth2::$returnUrl*
-
- See |yii/authclient/BaseOAuth::$returnUrl|
-
-$accessToken				*yii/authclient/OAuth2::$accessToken*
-
- See |yii/authclient/BaseOAuth::$accessToken|
-
-$signatureMethod			*yii/authclient/OAuth2::$signatureMethod*
-
- See |yii/authclient/BaseOAuth::$signatureMethod|
-
 
 
 METHOD DETAILS
@@ -136,17 +85,17 @@ METHOD DETAILS
 
 *yii/authclient/OAuth2::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/authclient/OAuth2::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/authclient/OAuth2::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/authclient/OAuth2::__get*				public
@@ -545,6 +494,18 @@ return (\yii\authclient\OAuthToken) Access token.
     [$params] (array) Additional request params.
 
 
+*yii/authclient/OAuth2::applyClientCredentialsToRequest*	protected
+>
+ applyClientCredentialsToRequest($request)
+<
+return (void)
+
+ This method should be invoked before sending any HTTP request, which requires
+ client credentials.
+
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+
+
 *yii/authclient/OAuth2::generateAuthState*		protected
 >
  generateAuthState()
@@ -570,6 +531,27 @@ return (\yii\authclient\OAuthToken) Access token.
 
     [$username] (string) User name.
     [$password] (string) User password.
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/OAuth2::authenticateUserJwt*		public
+>
+ authenticateUserJwt($username, $signature='null', $options='[]', $params='[]')
+<
+return (\yii\authclient\OAuthToken) Access token.
+
+    [$username] (string) 
+    [$signature] (\yii\authclient\signature\BaseMethod|array) Signature method
+    or its array configuration. If empty 
+      - 'signatureMethod' will be used.
+    [$options] (array) Additional options. Valid options are:
+
+
+      - header: array, additional JWS header parameters. 
+      - payload: array, additional JWS payload (message or claim-set)
+      parameters. 
+      - signatureKey: string, signature key to be used, if not set -
+      'clientSecret' will be used.
     [$params] (array) Additional request params.
 
 

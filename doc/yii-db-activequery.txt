@@ -183,14 +183,6 @@ $joinWith				*yii/db/ActiveQuery::$joinWith*
 
  (array) A list of relations that this query should be joined with
 
-$behaviors				*yii/db/ActiveQuery::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$tablesUsedInFrom			*yii/db/ActiveQuery::$tablesUsedInFrom*
-
- (string[]) Table names indexed by aliases
-
 
 
 METHOD DETAILS
@@ -199,7 +191,7 @@ METHOD DETAILS
 
 *yii/db/ActiveQuery::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/ActiveQuery::__construct*				public
@@ -545,6 +537,19 @@ return (bool|string)
     [$db] (\yii\db\Connection|null) 
 
 
+*yii/db/ActiveQuery::getTablesUsedInFrom*			public
+>
+ getTablesUsedInFrom()
+<
+return (string[]) Table names indexed by aliases
+
+
+
+ Both aliases and names are enclosed into {{ and }}.
+
+
+
+
 *yii/db/ActiveQuery::select*				public
 
  See |yii/db/Query::select|
@@ -746,9 +751,11 @@ return ($this) The query object itself
 
     The alias syntax is available since version 2.0.7.
     [$eagerLoading] (bool|array) Whether to eager load the relations specified
-    in '$with'. When this is a boolean, it applies to all relations specified
+    in '$with'.  When this is a boolean, it applies to all relations specified
     in '$with'. Use an array to explicitly list which relations in '$with'
-    need to be eagerly loaded. Defaults to 'true'.
+    need to be eagerly loaded.  Note, that this does not mean, that the
+    relations are populated from the query result. An extra query will still
+    be performed to bring in the related data. Defaults to 'true'.
     [$joinType] (string|array) The join type of the relations specified in
     '$with'. When this is a string, it applies to all relations specified in
     '$with'. Use an array in the format of 'relationName => joinType' to
@@ -765,7 +772,10 @@ return ($this) The query object itself
  JOIN". Please refer to 'joinWith()' for detailed usage of this method.
 
     [$with] (string|array) The relations to be joined with.
-    [$eagerLoading] (bool|array) Whether to eager loading the relations.
+    [$eagerLoading] (bool|array) Whether to eager load the relations. Note,
+    that this does not mean, that the relations are populated from the query
+    result. An extra query will still be performed to bring in the related
+    data.
 
 
 *yii/db/ActiveQuery::onCondition*				public
@@ -862,15 +872,6 @@ return ($this) The query object itself
  alias.
 
     [$alias] (string) The table alias.
-
-
-*yii/db/ActiveQuery::getTablesUsedInFrom*			public
->
- getTablesUsedInFrom()
-<
-return (string[]) Table names indexed by aliases
-
- Both aliases and names are enclosed into {{ and }}.
 
 
 *yii/db/ActiveQuery::getPrimaryTableName*			protected

@@ -1,0 +1,54 @@
+
+*yii/console/ExitCode*  
+======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ The exit codes follow the codes defined in the [FreeBSD
+ sysexits(3)](http://man.openbsd.org/sysexits) manual page.
+
+ These constants can be used in console controllers for example like this:
+
+   public function actionIndex()
+   {
+       if (!$this->isAllowedToPerformAction()) {
+            $this->stderr('Error: ' . ExitCode::getReason(ExitCode::NOPERM));
+            return ExitCode::NOPERM;
+       }
+
+       // do something
+
+       return ExitCode::OK;
+   }
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$reasons				*yii/console/ExitCode::$reasons*
+
+ (array) A map of reason descriptions for exit codes.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/console/ExitCode::getReason*				public
+>
+ getReason($exitCode)
+<
+return (string) The reason text, or '"Unknown exit code"' if the code is not listed
+in '$reasons'.
+
+ This method uses '$reasons' to determine the reason for an exit code.
+
+    [$exitCode] (int) One of the constants defined in this class.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

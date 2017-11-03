@@ -76,6 +76,10 @@ $defaultTimeZone			*yii/i18n/Formatter::$defaultTimeZone*
  It defaults to 'UTC' so you only have to adjust this value if you store
  datetime values in another time zone in your database.
 
+ Note that a UNIX timestamp is always in UTC by its definition. That means
+ that specifying a default time zone different from UTC has no effect on date
+ values given as UNIX timestamp.
+
 $dateFormat				*yii/i18n/Formatter::$dateFormat*
 
  (string) The default format string to be used to format a 'asDate()|date'.
@@ -259,9 +263,31 @@ $sizeFormatBase				*yii/i18n/Formatter::$sizeFormatBase*
  (int) The base at which a kilobyte is calculated (1000 or 1024 bytes per
  kilobyte), used by 'asSize' and 'asShortSize'. Defaults to 1024.
 
-$behaviors				*yii/i18n/Formatter::$behaviors*
+$systemOfUnits				*yii/i18n/Formatter::$systemOfUnits*
 
- See |yii/base/Component::$behaviors|
+ (string) Default system of measure units. Defaults to 'UNIT_SYSTEM_METRIC'.
+ Possible values:  
+   - 'UNIT_SYSTEM_METRIC'  
+   - 'UNIT_SYSTEM_IMPERIAL'
+
+$measureUnits				*yii/i18n/Formatter::$measureUnits*
+
+ (array) Configuration of weight and length measurement units. This array
+ contains the most usable measurement units, but you can change it in case you
+ have some special requirements.
+
+ For example, you can add smaller measure unit:
+
+   $this->measureUnits[self::UNIT_LENGTH][self::UNIT_SYSTEM_METRIC] = [
+       'nanometer' => 0.000001
+   ]
+
+
+
+$baseUnits				*yii/i18n/Formatter::$baseUnits*
+
+ (array) The base units that are used as multipliers for smallest possible
+ unit from 'measureUnits'.
 
 
 
@@ -271,12 +297,12 @@ METHOD DETAILS
 
 *yii/i18n/Formatter::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/i18n/Formatter::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/i18n/Formatter::init*				public
@@ -415,12 +441,20 @@ return (string) The formatting result.
  insensitive.
 
     [$value] (mixed) The value to be formatted.
-    [$format] (string|array) The format of the value, e.g., "html", "text". To
-    specify additional parameters of the formatting method, you may use an
+    [$format] (string|array|\Closure) The format of the value, e.g., "html",
+    "text" or an anonymous function returning the formatted value.
+
+    To specify additional parameters of the formatting method, you may use an
     array. The first element of the array specifies the format name, while the
     rest of the elements will be used as the parameters to the formatting
     method. For example, a format of '['date', 'Y-m-d']' will cause the
     invocation of 'asDate($value, 'Y-m-d')'.
+
+    The anonymous function signature should be: 'function($value,
+    $formatter)', where '$value' is the value that should be formatted and
+    '$formatter' is an instance of the Formatter class, which can be used to
+    call other formatting functions. The possibility to use an anonymous
+    function is available since version 2.0.13.
 
 
 *yii/i18n/Formatter::asRaw*				public
@@ -530,13 +564,21 @@ return (string) The formatted result.
     types of value are supported:
 
 
-      - an integer representing a UNIX timestamp 
+      - an integer representing a UNIX timestamp. A UNIX timestamp is
+      always in UTC by its definition. 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
     is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
     given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
-      object
+      object. You may set the time zone   for the DateTime object to specify
+    the source time zone.
+
+    The formatter will convert date values according to 'timeZone' before
+    formatting it. If no timezone conversion should be performed, you need to
+    set 'defaultTimeZone' and 'timeZone' to the same value. Also no conversion
+    will be performed on values that have no time information, e.g.
+    '"2017-06-05"'.
     [$format] (string) The format used to convert the value into a date
     string. If null, 'dateFormat' will be used.
 
@@ -560,13 +602,19 @@ return (string) The formatted result.
     types of value are supported:
 
 
-      - an integer representing a UNIX timestamp 
+      - an integer representing a UNIX timestamp. A UNIX timestamp is
+      always in UTC by its definition. 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
     is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
     given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
-      object
+      object. You may set the time zone   for the DateTime object to specify
+    the source time zone.
+
+    The formatter will convert date values according to 'timeZone' before
+    formatting it. If no timezone conversion should be performed, you need to
+    set 'defaultTimeZone' and 'timeZone' to the same value.
     [$format] (string) The format used to convert the value into a date
     string. If null, 'timeFormat' will be used.
 
@@ -590,15 +638,21 @@ return (string) The formatted result.
     types of value are supported:
 
 
-      - an integer representing a UNIX timestamp 
+      - an integer representing a UNIX timestamp. A UNIX timestamp is
+      always in UTC by its definition. 
       - a string that can be [parsed to create a DateTime
       object](http://php.net/manual/en/datetime.formats.php).   The timestamp
     is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
     given. 
       - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
-      object
+      object. You may set the time zone   for the DateTime object to specify
+    the source time zone.
+
+    The formatter will convert date values according to 'timeZone' before
+    formatting it. If no timezone conversion should be performed, you need to
+    set 'defaultTimeZone' and 'timeZone' to the same value.
     [$format] (string) The format used to convert the value into a date
-    string. If null, 'dateFormat' will be used.
+    string. If null, 'datetimeFormat' will be used.
 
     This can be "short", "medium", "long", or "full", which represents a
     preset format of different lengths. It can also be a custom format as
@@ -615,7 +669,7 @@ return (string) The formatted result.
  normalizeDatetimeValue($value, $checkDateTimeInfo='false')
 <
 return (\DateTime|array) The normalized datetime value. Since version 2.0.1 this may
-also return an array if '$checkTimeInfo' is true. The first element of the
+also return an array if '$checkDateTimeInfo' is true. The first element of the
 array is the normalized timestamp and the second is a boolean indicating
 whether the timestamp has time information or it is just a date value. Since
 version 2.0.12 the array has third boolean element indicating whether the
@@ -872,6 +926,82 @@ return (string) The formatted result.
  mebibyte/MiB, ...) are used in the formatting result.
 
     [$value] (string|int|float) Value in bytes to be formatted.
+    [$decimals] (int) The number of digits after the decimal point.
+    [$options] (array) Optional configuration for the number formatter. This
+    parameter will be merged with 'numberFormatterOptions'.
+    [$textOptions] (array) Optional configuration for the number formatter.
+    This parameter will be merged with 'numberFormatterTextOptions'.
+
+
+*yii/i18n/Formatter::asLength*				public
+>
+ asLength($value, $decimals=null, $numberOptions='[]', $textOptions='[]')
+<
+return (string) The formatted result.
+
+ Check properties 'baseUnits' if you need to change unit of value as the
+ multiplier of the smallest unit and 'systemOfUnits' to switch between
+ 'UNIT_SYSTEM_METRIC' or 'UNIT_SYSTEM_IMPERIAL'.
+
+    [$value] (float|int) Value to be formatted.
+    [$decimals] (int) The number of digits after the decimal point.
+    [$numberOptions] (array) Optional configuration for the number formatter.
+    This parameter will be merged with 'numberFormatterOptions'.
+    [$textOptions] (array) Optional configuration for the number formatter.
+    This parameter will be merged with 'numberFormatterTextOptions'.
+
+
+*yii/i18n/Formatter::asShortLength*			public
+>
+ asShortLength($value, $decimals=null, $options='[]', $textOptions='[]')
+<
+return (string) The formatted result.
+
+ This is the short form of 'asLength'.
+
+ Check properties 'baseUnits' if you need to change unit of value as the
+ multiplier of the smallest unit and 'systemOfUnits' to switch between
+ 'UNIT_SYSTEM_METRIC' or 'UNIT_SYSTEM_IMPERIAL'.
+
+    [$value] (float|int) Value to be formatted.
+    [$decimals] (int) The number of digits after the decimal point.
+    [$options] (array) Optional configuration for the number formatter. This
+    parameter will be merged with 'numberFormatterOptions'.
+    [$textOptions] (array) Optional configuration for the number formatter.
+    This parameter will be merged with 'numberFormatterTextOptions'.
+
+
+*yii/i18n/Formatter::asWeight*				public
+>
+ asWeight($value, $decimals=null, $options='[]', $textOptions='[]')
+<
+return (string) The formatted result.
+
+ Check properties 'baseUnits' if you need to change unit of value as the
+ multiplier of the smallest unit and 'systemOfUnits' to switch between
+ 'UNIT_SYSTEM_METRIC' or 'UNIT_SYSTEM_IMPERIAL'.
+
+    [$value] (float|int) Value to be formatted.
+    [$decimals] (int) The number of digits after the decimal point.
+    [$options] (array) Optional configuration for the number formatter. This
+    parameter will be merged with 'numberFormatterOptions'.
+    [$textOptions] (array) Optional configuration for the number formatter.
+    This parameter will be merged with 'numberFormatterTextOptions'.
+
+
+*yii/i18n/Formatter::asShortWeight*			public
+>
+ asShortWeight($value, $decimals=null, $options='[]', $textOptions='[]')
+<
+return (string) The formatted result.
+
+ This is the short form of 'asWeight'.
+
+ Check properties 'baseUnits' if you need to change unit of value as the
+ multiplier of the smallest unit and 'systemOfUnits' to switch between
+ 'UNIT_SYSTEM_METRIC' or 'UNIT_SYSTEM_IMPERIAL'.
+
+    [$value] (float|int) Value to be formatted.
     [$decimals] (int) The number of digits after the decimal point.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.

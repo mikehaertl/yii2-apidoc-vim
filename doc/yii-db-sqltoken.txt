@@ -1,0 +1,232 @@
+
+*yii/db/SqlToken*   >> |yii/base/BaseObject|
+=================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$type					*yii/db/SqlToken::$type*
+
+ (int) Token type. It has to be one of the following constants:
+
+
+   - 'TYPE_CODE' 
+   - 'TYPE_STATEMENT' 
+   - 'TYPE_TOKEN' 
+   - 'TYPE_PARENTHESIS' 
+   - 'TYPE_KEYWORD' 
+   - 'TYPE_OPERATOR' 
+   - 'TYPE_IDENTIFIER' 
+   - 'TYPE_STRING_LITERAL'
+
+$content				*yii/db/SqlToken::$content*
+
+ (string|null) Token content.
+
+$startOffset				*yii/db/SqlToken::$startOffset*
+
+ (int) Original SQL token start position.
+
+$endOffset				*yii/db/SqlToken::$endOffset*
+
+ (int) Original SQL token end position.
+
+$parent					*yii/db/SqlToken::$parent*
+
+ (\yii\db\SqlToken) Parent token.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/SqlToken::className*				public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/db/SqlToken::__construct*				public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/db/SqlToken::init*					public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/db/SqlToken::__get*					public
+
+ See |yii/base/BaseObject::__get|
+
+
+*yii/db/SqlToken::__set*					public
+
+ See |yii/base/BaseObject::__set|
+
+
+*yii/db/SqlToken::__isset*				public
+
+ See |yii/base/BaseObject::__isset|
+
+
+*yii/db/SqlToken::__unset*				public
+
+ See |yii/base/BaseObject::__unset|
+
+
+*yii/db/SqlToken::__call*					public
+
+ See |yii/base/BaseObject::__call|
+
+
+*yii/db/SqlToken::hasProperty*				public
+
+ See |yii/base/BaseObject::hasProperty|
+
+
+*yii/db/SqlToken::canGetProperty*				public
+
+ See |yii/base/BaseObject::canGetProperty|
+
+
+*yii/db/SqlToken::canSetProperty*				public
+
+ See |yii/base/BaseObject::canSetProperty|
+
+
+*yii/db/SqlToken::hasMethod*				public
+
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/db/SqlToken::__toString*				public
+>
+ __toString()
+<
+return (string) SQL code.
+
+
+
+*yii/db/SqlToken::offsetExists*				public
+>
+ offsetExists($offset)
+<
+return (bool) Whether the token exists.
+
+ This method is required by the SPL '\ArrayAccess' interface. It is implicitly
+ called when you use something like 'isset($token[$offset])'.
+
+    [$offset] (int) Child token offset.
+
+
+*yii/db/SqlToken::offsetGet*				public
+>
+ offsetGet($offset)
+<
+return (\yii\db\SqlToken|null) The child token at the specified offset, 'null' if
+there's no token.
+
+ This method is required by the SPL '\ArrayAccess' interface. It is implicitly
+ called when you use something like '$child = $token[$offset];'.
+
+    [$offset] (int) Child token offset.
+
+
+*yii/db/SqlToken::offsetSet*				public
+>
+ offsetSet($offset, $token)
+<
+return (void)
+
+ This method is required by the SPL '\ArrayAccess' interface. It is implicitly
+ called when you use something like '$token[$offset] = $child;'.
+
+    [$offset] (int|null) Child token offset.
+    [$token] (\yii\db\SqlToken) Token to be added.
+
+
+*yii/db/SqlToken::offsetUnset*				public
+>
+ offsetUnset($offset)
+<
+return (void)
+
+ This method is required by the SPL '\ArrayAccess' interface. It is implicitly
+ called when you use something like 'unset($token[$offset])'.
+
+    [$offset] (int) Child token offset.
+
+
+*yii/db/SqlToken::getChildren*				public
+>
+ getChildren()
+<
+return (\yii\db\SqlToken[]) Child tokens.
+
+
+
+*yii/db/SqlToken::setChildren*				public
+>
+ setChildren($children)
+<
+return (void)
+
+    [$children] (\yii\db\SqlToken[]) Child tokens.
+
+
+*yii/db/SqlToken::getIsCollection*			public
+>
+ getIsCollection()
+<
+return (bool) Whether the token represents a collection of tokens.
+
+
+
+*yii/db/SqlToken::getHasChildren*				public
+>
+ getHasChildren()
+<
+return (bool) Whether the token has children.
+
+
+
+*yii/db/SqlToken::getSql*					public
+>
+ getSql()
+<
+return (string) SQL code.
+
+
+
+*yii/db/SqlToken::matches*				public
+>
+ matches($patternToken, $offset=0, $firstMatchIndex='null', $lastMatchIndex='null')
+<
+return (bool) Whether this token matches the pattern SQL code.
+
+ Usage Example:
+
+   $patternToken = (new \yii\db\sqlite\SqlTokenizer('SELECT any FROM
+ any'))->tokenize();
+   if ($sqlToken->matches($patternToken, 0, $firstMatchIndex,
+ $lastMatchIndex)) {
+       // ...
+   }
+
+
+
+    [$patternToken] (\yii\db\SqlToken) Tokenized SQL code to match against. In
+    addition to normal SQL, the 'any' keyword is supported which will match
+    any number of keywords, identifiers, whitespaces.
+    [$offset] (int) Token children offset to start lookup with.
+    [$firstMatchIndex] (int|null) Token children offset where a successful
+    match begins.
+    [$lastMatchIndex] (int|null) Token children offset where a successful
+    match ends.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

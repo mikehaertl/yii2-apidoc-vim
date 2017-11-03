@@ -13,9 +13,10 @@ SUBCLASSES
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- An input widget can be associated with a data model and an attribute, or a
- name and a value. If the former, the name and the value will be generated
- automatically.
+ An input widget can be associated with a data 'model' and an 'attribute', or
+ a 'name' and a 'value'. If the former, the name and the value will be
+ generated automatically (subclasses may call 'renderInputHtml()' to follow
+ this behavior).
 
  Classes extending from this widget can be used in an
  '\yii\widgets\ActiveForm|ActiveForm' using the
@@ -71,22 +72,6 @@ $options				*yii/widgets/InputWidget::$options*
 
  (array) The HTML attributes for the input tag.
 
-$behaviors				*yii/widgets/InputWidget::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$id					*yii/widgets/InputWidget::$id*
-
- See |yii/base/Widget::$id|
-
-$view					*yii/widgets/InputWidget::$view*
-
- See |yii/base/Widget::$view|
-
-$viewPath				*yii/widgets/InputWidget::$viewPath*
-
- See |yii/base/Widget::$viewPath|
-
 
 
 METHOD DETAILS
@@ -95,12 +80,12 @@ METHOD DETAILS
 
 *yii/widgets/InputWidget::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/widgets/InputWidget::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/widgets/InputWidget::init*				public
@@ -294,6 +279,18 @@ return (void)
 <
 return (bool) Whether this widget is associated with a data model.
 
+
+
+*yii/widgets/InputWidget::renderInputHtml*		protected
+>
+ renderInputHtml($type)
+<
+return (string) The HTML of the input field.
+
+ This will call 'Html::activeInput()' if the input widget is 'hasModel()|tied
+ to a model', or 'Html::input()' if not.
+
+    [$type] (string) The type of the input to create.
 
 
 

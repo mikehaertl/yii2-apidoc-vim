@@ -43,11 +43,20 @@ $roles					*yii/filters/AccessRule::$roles*
    - '@': matches an authenticated user
 
  If you are using RBAC (Role-Based Access Control), you may also specify role
- or permission names. In this case, 'User::can()' will be called to check
- access.
+ names. In this case, 'User::can()' will be called to check access.
 
- If this property is not set or empty, it means this rule applies to all
- roles.
+ Note that it is preferred to check for permissions instead.
+
+ If this property is not set or empty, it means this rule applies regardless
+ of roles.
+
+$permissions				*yii/filters/AccessRule::$permissions*
+
+ (array) List of RBAC (Role-Based Access Control) permissions that this rules
+ applies to. 'User::can()' will be called to check access.
+
+ If this property is not set or empty, it means this rule applies regardless
+ of permissions.
 
 $roleParams				*yii/filters/AccessRule::$roleParams*
 
@@ -105,8 +114,12 @@ $matchCallback				*yii/filters/AccessRule::$matchCallback*
 $denyCallback				*yii/filters/AccessRule::$denyCallback*
 
  (callable) A callback that will be called if this rule determines the access
- to the current action should be denied. If not set, the behavior will be
- determined by 'AccessControl'.
+ to the current action should be denied. This is the case when this rule
+ matches and '$allow' is set to 'false'.
+
+ If not set, the behavior will be determined by 'AccessControl', either using
+ 'AccessControl::denyAccess()' or 'AccessControl::$denyCallback', if
+ configured.
 
  The signature of the callback should be as follows:
 
@@ -114,10 +127,6 @@ $denyCallback				*yii/filters/AccessRule::$denyCallback*
 
  where '$rule' is this rule, and '$action' is the current 'Action|action'
  object.
-
-$behaviors				*yii/filters/AccessRule::$behaviors*
-
- See |yii/base/Component::$behaviors|
 
 
 
@@ -127,17 +136,17 @@ METHOD DETAILS
 
 *yii/filters/AccessRule::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/filters/AccessRule::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/filters/AccessRule::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/filters/AccessRule::__get*				public

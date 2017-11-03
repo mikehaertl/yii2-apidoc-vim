@@ -73,70 +73,6 @@ $sessionTable				*yii/web/DbSession::$sessionTable*
  may need to adjust the length of the 'id' column. For example, if
  'session.hash_function=sha256', you should use length 64 instead of 40.
 
-$behaviors				*yii/web/DbSession::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$useCustomStorage			*yii/web/DbSession::$useCustomStorage*
-
- See |yii/web/MultiFieldSession::$useCustomStorage|
-
-$isActive				*yii/web/DbSession::$isActive*
-
- See |yii/web/Session::$isActive|
-
-$hasSessionId				*yii/web/DbSession::$hasSessionId*
-
- See |yii/web/Session::$hasSessionId|
-
-$id					*yii/web/DbSession::$id*
-
- See |yii/web/Session::$id|
-
-$name					*yii/web/DbSession::$name*
-
- See |yii/web/Session::$name|
-
-$savePath				*yii/web/DbSession::$savePath*
-
- See |yii/web/Session::$savePath|
-
-$cookieParams				*yii/web/DbSession::$cookieParams*
-
- See |yii/web/Session::$cookieParams|
-
-$useCookies				*yii/web/DbSession::$useCookies*
-
- See |yii/web/Session::$useCookies|
-
-$gCProbability				*yii/web/DbSession::$gCProbability*
-
- See |yii/web/Session::$gCProbability|
-
-$useTransparentSessionID		*yii/web/DbSession::$useTransparentSessionID*
-
- See |yii/web/Session::$useTransparentSessionID|
-
-$timeout				*yii/web/DbSession::$timeout*
-
- See |yii/web/Session::$timeout|
-
-$iterator				*yii/web/DbSession::$iterator*
-
- See |yii/web/Session::$iterator|
-
-$count					*yii/web/DbSession::$count*
-
- See |yii/web/Session::$count|
-
-$allFlashes				*yii/web/DbSession::$allFlashes*
-
- See |yii/web/Session::$allFlashes|
-
-$flash					*yii/web/DbSession::$flash*
-
- See |yii/web/Session::$flash|
-
 
 
 METHOD DETAILS
@@ -145,12 +81,12 @@ METHOD DETAILS
 
 *yii/web/DbSession::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/web/DbSession::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/web/DbSession::init*					public
@@ -561,6 +497,19 @@ return (bool) Whether session is GCed successfully
 *yii/web/DbSession::extractData*				protected
 
  See |yii/web/MultiFieldSession::extractData|
+
+
+*yii/web/DbSession::typecastFields*			protected
+>
+ typecastFields($fields)
+<
+return (array) 
+
+ Default implementation casts field 'data' to '\PDO::PARAM_LOB'. You can
+ override this method in case you need special type casting.
+
+    [$fields] (array) Fields, that will be passed to PDO. Key 
+      - name, Value - value
 
 
 

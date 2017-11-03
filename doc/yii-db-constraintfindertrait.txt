@@ -1,0 +1,248 @@
+
+*yii/db/ConstraintFinderTrait*  
+==============================
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/ConstraintFinderTrait::getTableMetadata*		protected
+>
+ getTableMetadata($name, $type, $refresh)
+<
+return (mixed) Metadata.
+
+    [$name] (string) Table name. The table name may contain schema name if
+    any. Do not quote the table name.
+    [$type] (string) Metadata type.
+    [$refresh] (bool) Whether to reload the table metadata even if it is found
+    in the cache.
+
+
+*yii/db/ConstraintFinderTrait::getSchemaMetadata*		protected
+>
+ getSchemaMetadata($schema, $type, $refresh)
+<
+return (array) Array of metadata.
+
+    [$schema] (string) The schema of the metadata. Defaults to empty string,
+    meaning the current or default schema name.
+    [$type] (string) Metadata type.
+    [$refresh] (bool) Whether to fetch the latest available table metadata. If
+    this is 'false', cached data may be returned if available.
+
+
+*yii/db/ConstraintFinderTrait::loadTablePrimaryKey*	protected
+>
+ loadTablePrimaryKey($tableName)
+<
+return (\yii\db\Constraint|null) Primary key for the given table, 'null' if the table
+has no primary key.
+
+    [$tableName] (string) Table name.
+
+
+*yii/db/ConstraintFinderTrait::loadTableForeignKeys*	protected
+>
+ loadTableForeignKeys($tableName)
+<
+return (\yii\db\ForeignKeyConstraint[]) Foreign keys for the given table.
+
+    [$tableName] (string) Table name.
+
+
+*yii/db/ConstraintFinderTrait::loadTableIndexes*		protected
+>
+ loadTableIndexes($tableName)
+<
+return (\yii\db\IndexConstraint[]) Indexes for the given table.
+
+    [$tableName] (string) Table name.
+
+
+*yii/db/ConstraintFinderTrait::loadTableUniques*		protected
+>
+ loadTableUniques($tableName)
+<
+return (\yii\db\Constraint[]) Unique constraints for the given table.
+
+    [$tableName] (string) Table name.
+
+
+*yii/db/ConstraintFinderTrait::loadTableChecks*		protected
+>
+ loadTableChecks($tableName)
+<
+return (\yii\db\CheckConstraint[]) Check constraints for the given table.
+
+    [$tableName] (string) Table name.
+
+
+*yii/db/ConstraintFinderTrait::loadTableDefaultValues*	protected
+>
+ loadTableDefaultValues($tableName)
+<
+return (\yii\db\DefaultValueConstraint[]) Default value constraints for the given
+table.
+
+    [$tableName] (string) Table name.
+
+
+*yii/db/ConstraintFinderTrait::getTablePrimaryKey*	public
+>
+ getTablePrimaryKey($name, $refresh='false')
+<
+return (\yii\db\Constraint|null) Table primary key, 'null' if the table has no
+primary key.
+
+    [$name] (string) Table name. The table name may contain schema name if
+    any. Do not quote the table name.
+    [$refresh] (bool) Whether to reload the information even if it is found in
+    the cache.
+
+
+*yii/db/ConstraintFinderTrait::getSchemaPrimaryKeys*	public
+>
+ getSchemaPrimaryKeys($schema='''', $refresh='false')
+<
+return (\yii\db\Constraint[]) Primary keys for all tables in the database. Each array
+element is an instance of 'Constraint' or its child class.
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema name.
+    [$refresh] (bool) Whether to fetch the latest available table schemas. If
+    this is 'false', cached data may be returned if available.
+
+
+*yii/db/ConstraintFinderTrait::getTableForeignKeys*	public
+>
+ getTableForeignKeys($name, $refresh='false')
+<
+return (\yii\db\ForeignKeyConstraint[]) Table foreign keys.
+
+    [$name] (string) Table name. The table name may contain schema name if
+    any. Do not quote the table name.
+    [$refresh] (bool) Whether to reload the information even if it is found in
+    the cache.
+
+
+*yii/db/ConstraintFinderTrait::getSchemaForeignKeys*	public
+>
+ getSchemaForeignKeys($schema='''', $refresh='false')
+<
+return (\yii\db\ForeignKeyConstraint[][]) Foreign keys for all tables in the
+database. Each array element is an array of 'ForeignKeyConstraint' or its
+child classes.
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema name.
+    [$refresh] (bool) Whether to fetch the latest available table schemas. If
+    this is false, cached data may be returned if available.
+
+
+*yii/db/ConstraintFinderTrait::getTableIndexes*		public
+>
+ getTableIndexes($name, $refresh='false')
+<
+return (\yii\db\IndexConstraint[]) Table indexes.
+
+    [$name] (string) Table name. The table name may contain schema name if
+    any. Do not quote the table name.
+    [$refresh] (bool) Whether to reload the information even if it is found in
+    the cache.
+
+
+*yii/db/ConstraintFinderTrait::getSchemaIndexes*		public
+>
+ getSchemaIndexes($schema='''', $refresh='false')
+<
+return (\yii\db\IndexConstraint[][]) Indexes for all tables in the database. Each
+array element is an array of 'IndexConstraint' or its child classes.
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema name.
+    [$refresh] (bool) Whether to fetch the latest available table schemas. If
+    this is false, cached data may be returned if available.
+
+
+*yii/db/ConstraintFinderTrait::getTableUniques*		public
+>
+ getTableUniques($name, $refresh='false')
+<
+return (\yii\db\Constraint[]) Table unique constraints.
+
+    [$name] (string) Table name. The table name may contain schema name if
+    any. Do not quote the table name.
+    [$refresh] (bool) Whether to reload the information even if it is found in
+    the cache.
+
+
+*yii/db/ConstraintFinderTrait::getSchemaUniques*		public
+>
+ getSchemaUniques($schema='''', $refresh='false')
+<
+return (\yii\db\Constraint[][]) Unique constraints for all tables in the database.
+Each array element is an array of 'Constraint' or its child classes.
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema name.
+    [$refresh] (bool) Whether to fetch the latest available table schemas. If
+    this is false, cached data may be returned if available.
+
+
+*yii/db/ConstraintFinderTrait::getTableChecks*		public
+>
+ getTableChecks($name, $refresh='false')
+<
+return (\yii\db\CheckConstraint[]) Table check constraints.
+
+    [$name] (string) Table name. The table name may contain schema name if
+    any. Do not quote the table name.
+    [$refresh] (bool) Whether to reload the information even if it is found in
+    the cache.
+
+
+*yii/db/ConstraintFinderTrait::getSchemaChecks*		public
+>
+ getSchemaChecks($schema='''', $refresh='false')
+<
+return (\yii\db\CheckConstraint[][]) Check constraints for all tables in the
+database. Each array element is an array of 'CheckConstraint' or its child
+classes.
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema name.
+    [$refresh] (bool) Whether to fetch the latest available table schemas. If
+    this is false, cached data may be returned if available.
+
+
+*yii/db/ConstraintFinderTrait::getTableDefaultValues*	public
+>
+ getTableDefaultValues($name, $refresh='false')
+<
+return (\yii\db\DefaultValueConstraint[]) Table default value constraints.
+
+    [$name] (string) Table name. The table name may contain schema name if
+    any. Do not quote the table name.
+    [$refresh] (bool) Whether to reload the information even if it is found in
+    the cache.
+
+
+*yii/db/ConstraintFinderTrait::getSchemaDefaultValues*	public
+>
+ getSchemaDefaultValues($schema='''', $refresh='false')
+<
+return (\yii\db\DefaultValueConstraint[]) Default value constraints for all tables in
+the database. Each array element is an array of 'DefaultValueConstraint' or
+its child classes.
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema name.
+    [$refresh] (bool) Whether to fetch the latest available table schemas. If
+    this is false, cached data may be returned if available.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

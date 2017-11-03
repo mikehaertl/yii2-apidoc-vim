@@ -91,56 +91,6 @@ $defaultRoute				*yii/base/Module::$defaultRoute*
  'help', 'post/create', 'admin/post/create'. If action ID is not given, it
  will take the default value as specified in 'Controller::defaultAction'.
 
-$behaviors				*yii/base/Module::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$components				*yii/base/Module::$components*
-
- See |yii/di/ServiceLocator::$components|
-
-$uniqueId				*yii/base/Module::$uniqueId*
-
- (string) The unique ID of the module.
-
-$basePath				*yii/base/Module::$basePath*
-
- (string) The root directory of the module.
-
-$controllerPath				*yii/base/Module::$controllerPath*
-
- (string) The directory that contains the controller classes.
-
-$viewPath				*yii/base/Module::$viewPath*
-
- (string) The root directory of view files. Defaults to "'basePath'/views".
-
-$layoutPath				*yii/base/Module::$layoutPath*
-
- (string) The root directory of layout files. Defaults to
- "'viewPath'/layouts".
-
-$version				*yii/base/Module::$version*
-
- (string) The version of this module.
-
-$aliases				*yii/base/Module::$aliases*
-
- (array) List of path aliases to be defined. The array keys are alias names
- (must start with '@') and the array values are the corresponding paths or
- aliases. For example,
-
-   [
-       '@models' => '@app/models', // an existing alias
-       '@backend' => __DIR__ . '/../backend',  // a directory
-   ]
-
-
-
-$modules				*yii/base/Module::$modules*
-
- (array) The modules (indexed by their IDs).
-
 
 
 METHOD DETAILS
@@ -149,7 +99,7 @@ METHOD DETAILS
 
 *yii/base/Module::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/base/Module::__construct*				public
@@ -185,7 +135,7 @@ return (void)
 
 *yii/base/Module::__set*					public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/base/Module::__isset*				public
@@ -195,32 +145,32 @@ return (void)
 
 *yii/base/Module::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/base/Module::__call*					public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/base/Module::hasProperty*				public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/base/Module::canGetProperty*				public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/base/Module::canSetProperty*				public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/base/Module::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/base/Module::__clone*				public
@@ -289,13 +239,29 @@ return (void)
 
 
 *yii/base/Module::has*					public
+>
+ has($id, $checkInstance='false')
+<
+return (void)
 
- See |yii/di/ServiceLocator::has|
+ Since version 2.0.13, if a component isn't defined in the module, it will be
+ looked up in the parent module. The parent module may be the application.
+
+    [$id] () 
+    [$checkInstance] () 
 
 
 *yii/base/Module::get*					public
+>
+ get($id, $throwException='true')
+<
+return (void)
 
- See |yii/di/ServiceLocator::get|
+ Since version 2.0.13, if a component isn't defined in the module, it will be
+ looked up in the parent module. The parent module may be the application.
+
+    [$id] () 
+    [$throwException] () 
 
 
 *yii/base/Module::set*					public

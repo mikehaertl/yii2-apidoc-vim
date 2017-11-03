@@ -57,8 +57,8 @@ $ruleTable				*yii/rbac/DbManager::$ruleTable*
 
 $cache					*yii/rbac/DbManager::$cache*
 
- (\yii\caching\Cache|array|string) The cache used to improve RBAC performance.
- This can be one of the following:
+ (\yii\caching\CacheInterface|array|string) The cache used to improve RBAC
+ performance. This can be one of the following:
 
 
    - an application component ID (e.g. 'cache') 
@@ -94,22 +94,6 @@ $parents				*yii/rbac/DbManager::$parents*
 
  (array) Auth item parent-child relationships (childName => list of parents)
 
-$behaviors				*yii/rbac/DbManager::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$roles					*yii/rbac/DbManager::$roles*
-
- See |yii/rbac/BaseManager::$roles|
-
-$defaultRoleInstances			*yii/rbac/DbManager::$defaultRoleInstances*
-
- See |yii/rbac/BaseManager::$defaultRoleInstances|
-
-$permissions				*yii/rbac/DbManager::$permissions*
-
- See |yii/rbac/BaseManager::$permissions|
-
 
 
 METHOD DETAILS
@@ -118,12 +102,12 @@ METHOD DETAILS
 
 *yii/rbac/DbManager::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/rbac/DbManager::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/rbac/DbManager::init*				public
@@ -442,7 +426,8 @@ indexed by the role names.
  Note that child roles that are not assigned directly to the user will not be
  returned.
 
-
+ The roles returned by this method include the roles assigned via
+ '$defaultRoles'.
 
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
@@ -632,7 +617,7 @@ return (\yii\rbac\Assignment) The role assignment information.
 
 
 
-    [$role] (\yii\rbac\Role) 
+    [$role] (\yii\rbac\Role|\yii\rbac\Permission) 
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
@@ -648,7 +633,7 @@ return (bool) Whether the revoking is successful
 
 
 
-    [$role] (\yii\rbac\Role) 
+    [$role] (\yii\rbac\Role|\yii\rbac\Permission) 
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 

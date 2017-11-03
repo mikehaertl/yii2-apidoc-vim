@@ -47,7 +47,7 @@ $indexBy				*yii/db/QueryTrait::$indexBy*
 
 $emulateExecution			*yii/db/QueryTrait::$emulateExecution*
 
- (boolean) Whether to emulate the actual query execution, returning empty or
+ (bool) Whether to emulate the actual query execution, returning empty or
  false results.
 
 
@@ -83,8 +83,7 @@ return ($this) The query object itself
 
  See 'QueryInterface::where()' for detailed documentation.
 
-    [$condition] (string|array) The conditions that should be put in the WHERE
-    part.
+    [$condition] (array) The conditions that should be put in the WHERE part.
 
 
 *yii/db/QueryTrait::andWhere*				public
@@ -96,8 +95,8 @@ return ($this) The query object itself
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
-    [$condition] (string|array) The new WHERE condition. Please refer to
-    'where()' on how to specify this parameter.
+    [$condition] (array) The new WHERE condition. Please refer to 'where()' on
+    how to specify this parameter.
 
 
 *yii/db/QueryTrait::orWhere*				public
@@ -109,8 +108,8 @@ return ($this) The query object itself
  The new condition and the existing one will be joined using the 'OR'
  operator.
 
-    [$condition] (string|array) The new WHERE condition. Please refer to
-    'where()' on how to specify this parameter.
+    [$condition] (array) The new WHERE condition. Please refer to 'where()' on
+    how to specify this parameter.
 
 
 *yii/db/QueryTrait::filterWhere*				public
@@ -285,10 +284,11 @@ return ($this) The query object itself
 <
 return ($this) The query object itself.
 
- After this mode is enabled, methods, returning query results like 'one()',
- 'all()', 'exists()' and so on, will return empty or false values. You should
- use this method in case your program logic indicates query should not return
- any results, like in case you set false where condition like '0=1'.
+ After this mode is enabled, methods, returning query results like
+ 'QueryInterface::one()', 'QueryInterface::all()', 'QueryInterface::exists()'
+ and so on, will return empty or false values. You should use this method in
+ case your program logic indicates query should not return any results, like
+ in case you set false where condition like '0=1'.
 
     [$value] (bool) Whether to prevent query execution.
 

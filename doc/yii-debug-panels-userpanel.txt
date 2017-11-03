@@ -26,25 +26,30 @@ $actions				*yii/debug/panels/UserPanel::$actions*
 
  See |yii/debug/Panel::$actions|
 
-$behaviors				*yii/debug/panels/UserPanel::$behaviors*
+$error					*yii/debug/panels/UserPanel::$error*
 
- See |yii/base/Component::$behaviors|
+ See |yii/debug/Panel::$error|
 
-$name					*yii/debug/panels/UserPanel::$name*
+$ruleUserSwitch				*yii/debug/panels/UserPanel::$ruleUserSwitch*
 
- (string) Name of the panel
+ (array) The rule which defines who allowed to switch user identity. Access
+ Control Filter single rule. Ignore: actions, controllers, verbs. Settable:
+ allow, roles, ips, matchCallback, denyCallback. By default deny for everyone.
+ Recommendation: can allow for administrator or developer (if implement) role:
+ ['allow' => true, 'roles' => ['admin''
 
-$summary				*yii/debug/panels/UserPanel::$summary*
+$userSwitch				*yii/debug/panels/UserPanel::$userSwitch*
 
- (string) Content that is displayed at debug toolbar
+ (\yii\debug\models\UserSwitch) Object of switching users
 
-$detail					*yii/debug/panels/UserPanel::$detail*
+$filterModel				*yii/debug/panels/UserPanel::$filterModel*
 
- (string) Content that is displayed in debugger detail view
+ (\yii\base\Model|\yii\debug\models\search\UserSearchInterface) Implements of
+ User model with search method.
 
-$url					*yii/debug/panels/UserPanel::$url*
+$filterColumns				*yii/debug/panels/UserPanel::$filterColumns*
 
- See |yii/debug/Panel::$url|
+ (array) Allowed columns for GridView.
 
 
 
@@ -54,17 +59,26 @@ METHOD DETAILS
 
 *yii/debug/panels/UserPanel::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/debug/panels/UserPanel::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/debug/panels/UserPanel::init*			public
+>
+ init()
+<
+return (void)
 
- See |yii/base/Object::init|
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/debug/panels/UserPanel::__get*			public
@@ -244,6 +258,66 @@ return (mixed) Data to be saved
  See |yii/debug/Panel::getTraceLine|
 
 
+*yii/debug/panels/UserPanel::setError*			public
+
+ See |yii/debug/Panel::setError|
+
+
+*yii/debug/panels/UserPanel::getError*			public
+
+ See |yii/debug/Panel::getError|
+
+
+*yii/debug/panels/UserPanel::hasError*			public
+
+ See |yii/debug/Panel::hasError|
+
+
+*yii/debug/panels/UserPanel::isEnabled*			public
+>
+ isEnabled()
+<
+return (bool) 
+
+
+
+
+
+
+
+
+*yii/debug/panels/UserPanel::getUsersFilterModel*		public
+>
+ getUsersFilterModel()
+<
+return (\yii\base\Model|\yii\debug\models\search\UserSearchInterface) 
+
+
+
+*yii/debug/panels/UserPanel::getUserDataProvider*		public
+>
+ getUserDataProvider()
+<
+return (\yii\data\DataProviderInterface) 
+
+
+
+*yii/debug/panels/UserPanel::canSearchUsers*		public
+>
+ canSearchUsers()
+<
+return (bool) 
+
+
+
+*yii/debug/panels/UserPanel::canSwitchUser*		public
+>
+ canSwitchUser()
+<
+return (bool) 
+
+
+
 *yii/debug/panels/UserPanel::dataToString*		protected
 >
  dataToString($data)
@@ -251,6 +325,15 @@ return (mixed) Data to be saved
 return (string) 
 
     [$data] (mixed) 
+
+
+*yii/debug/panels/UserPanel::identityData*		protected
+>
+ identityData($identity)
+<
+return (array) 
+
+    [$identity] (\yii\web\IdentityInterface) 
 
 
 

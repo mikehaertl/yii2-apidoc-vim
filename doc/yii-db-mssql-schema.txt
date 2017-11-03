@@ -27,34 +27,6 @@ $typeMap				*yii/db/mssql/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
  (values)
 
-$tableSchemas				*yii/db/mssql/Schema::$tableSchemas*
-
- See |yii/db/Schema::$tableSchemas|
-
-$schemaNames				*yii/db/mssql/Schema::$schemaNames*
-
- See |yii/db/Schema::$schemaNames|
-
-$tableNames				*yii/db/mssql/Schema::$tableNames*
-
- See |yii/db/Schema::$tableNames|
-
-$queryBuilder				*yii/db/mssql/Schema::$queryBuilder*
-
- See |yii/db/Schema::$queryBuilder|
-
-$lastInsertID				*yii/db/mssql/Schema::$lastInsertID*
-
- See |yii/db/Schema::$lastInsertID|
-
-$transactionIsolationLevel		*yii/db/mssql/Schema::$transactionIsolationLevel*
-
- See |yii/db/Schema::$transactionIsolationLevel|
-
-$viewNames				*yii/db/mssql/Schema::$viewNames*
-
- See |yii/db/ViewFinderTrait::$viewNames|
-
 
 
 METHOD DETAILS
@@ -63,62 +35,118 @@ METHOD DETAILS
 
 *yii/db/mssql/Schema::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/mssql/Schema::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/mssql/Schema::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/db/mssql/Schema::__get*				public
 
- See |yii/base/Object::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/db/mssql/Schema::__set*				public
 
- See |yii/base/Object::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/db/mssql/Schema::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/db/mssql/Schema::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/db/mssql/Schema::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/db/mssql/Schema::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/db/mssql/Schema::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/db/mssql/Schema::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/db/mssql/Schema::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/db/mssql/Schema::resolveTableName*			protected
+>
+ resolveTableName($name)
+<
+return (\yii\db\mssql\TableSchema) Resolved table, schema, etc. names.
+
+    [$name] (string) The table name
+
+
+*yii/db/mssql/Schema::findSchemaNames*			protected
+>
+ findSchemaNames()
+<
+return (array) All schema names in the database, except system schemas.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+
+*yii/db/mssql/Schema::findTableNames*			protected
+>
+ findTableNames($schema='''')
+<
+return (array) All table names in the database. The names have NO schema name prefix.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
+
+
+*yii/db/mssql/Schema::loadTableSchema*			protected
+>
+ loadTableSchema($name)
+<
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
+
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/mssql/Schema::createColumnSchema*			protected
@@ -126,29 +154,9 @@ METHOD DETAILS
  See |yii/db/Schema::createColumnSchema|
 
 
-*yii/db/mssql/Schema::loadTableSchema*			public
->
- loadTableSchema($name)
-<
-return (\yii\db\mssql\TableSchema|null) Driver dependent table metadata. Null if the
-table does not exist.
-
-    [$name] (string) Table name
-
-
 *yii/db/mssql/Schema::getTableSchema*			public
 
  See |yii/db/Schema::getTableSchema|
-
-
-*yii/db/mssql/Schema::getCacheKey*			protected
-
- See |yii/db/Schema::getCacheKey|
-
-
-*yii/db/mssql/Schema::getCacheTag*			protected
-
- See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/mssql/Schema::getTableSchemas*			public
@@ -197,21 +205,6 @@ return (\yii\db\mssql\QueryBuilder) Query builder interface.
 *yii/db/mssql/Schema::createColumnSchemaBuilder*		public
 
  See |yii/db/Schema::createColumnSchemaBuilder|
-
-
-*yii/db/mssql/Schema::findSchemaNames*			protected
-
- See |yii/db/Schema::findSchemaNames|
-
-
-*yii/db/mssql/Schema::findTableNames*			protected
->
- findTableNames($schema='''')
-<
-return (array) All table names in the database. The names have NO schema name prefix.
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
 
 
 *yii/db/mssql/Schema::findUniqueIndexes*			public
@@ -352,6 +345,150 @@ return (string) The properly quoted column name.
 *yii/db/mssql/Schema::isReadQuery*			public
 
  See |yii/db/Schema::isReadQuery|
+
+
+*yii/db/mssql/Schema::getCacheKey*			protected
+
+ See |yii/db/Schema::getCacheKey|
+
+
+*yii/db/mssql/Schema::getCacheTag*			protected
+
+ See |yii/db/Schema::getCacheTag|
+
+
+*yii/db/mssql/Schema::getTableMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getTableMetadata|
+
+
+*yii/db/mssql/Schema::getSchemaMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getSchemaMetadata|
+
+
+*yii/db/mssql/Schema::setTableMetadata*			protected
+
+ See |yii/db/Schema::setTableMetadata|
+
+
+*yii/db/mssql/Schema::normalizePdoRowKeyCase*		protected
+
+ See |yii/db/Schema::normalizePdoRowKeyCase|
+
+
+*yii/db/mssql/Schema::loadTablePrimaryKey*		protected
+>
+ loadTablePrimaryKey($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mssql/Schema::loadTableForeignKeys*		protected
+>
+ loadTableForeignKeys($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mssql/Schema::loadTableIndexes*			protected
+>
+ loadTableIndexes($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mssql/Schema::loadTableUniques*			protected
+>
+ loadTableUniques($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mssql/Schema::loadTableChecks*			protected
+>
+ loadTableChecks($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mssql/Schema::loadTableDefaultValues*		protected
+>
+ loadTableDefaultValues($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mssql/Schema::getTablePrimaryKey*			public
+
+ See |yii/db/ConstraintFinderTrait::getTablePrimaryKey|
+
+
+*yii/db/mssql/Schema::getSchemaPrimaryKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaPrimaryKeys|
+
+
+*yii/db/mssql/Schema::getTableForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableForeignKeys|
+
+
+*yii/db/mssql/Schema::getSchemaForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaForeignKeys|
+
+
+*yii/db/mssql/Schema::getTableIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableIndexes|
+
+
+*yii/db/mssql/Schema::getSchemaIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaIndexes|
+
+
+*yii/db/mssql/Schema::getTableUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableUniques|
+
+
+*yii/db/mssql/Schema::getSchemaUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaUniques|
+
+
+*yii/db/mssql/Schema::getTableChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableChecks|
+
+
+*yii/db/mssql/Schema::getSchemaChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaChecks|
+
+
+*yii/db/mssql/Schema::getTableDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableDefaultValues|
+
+
+*yii/db/mssql/Schema::getSchemaDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaDefaultValues|
 
 
 *yii/db/mssql/Schema::findViewNames*			protected

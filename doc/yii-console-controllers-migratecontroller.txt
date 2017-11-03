@@ -104,6 +104,10 @@ $templateFile				*yii/console/controllers/MigrateController::$templateFile*
 
 
 
+$compact				*yii/console/controllers/MigrateController::$compact*
+
+ See |yii/console/controllers/BaseMigrateController::$compact|
+
 $migrationTable				*yii/console/controllers/MigrateController::$migrationTable*
 
  (string) The name of the table for keeping applied migration information.
@@ -145,42 +149,6 @@ $db					*yii/console/controllers/MigrateController::$db*
  from version 2.0.3, this can also be a configuration array for creating the
  object.
 
-$behaviors				*yii/console/controllers/MigrateController::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$modules				*yii/console/controllers/MigrateController::$modules*
-
- See |yii/base/Controller::$modules|
-
-$uniqueId				*yii/console/controllers/MigrateController::$uniqueId*
-
- See |yii/base/Controller::$uniqueId|
-
-$route					*yii/console/controllers/MigrateController::$route*
-
- See |yii/base/Controller::$route|
-
-$view					*yii/console/controllers/MigrateController::$view*
-
- See |yii/base/Controller::$view|
-
-$viewPath				*yii/console/controllers/MigrateController::$viewPath*
-
- See |yii/base/Controller::$viewPath|
-
-$passedOptions				*yii/console/controllers/MigrateController::$passedOptions*
-
- See |yii/console/Controller::$passedOptions|
-
-$passedOptionValues			*yii/console/controllers/MigrateController::$passedOptionValues*
-
- See |yii/console/Controller::$passedOptionValues|
-
-$helpSummary				*yii/console/controllers/MigrateController::$helpSummary*
-
- See |yii/console/Controller::$helpSummary|
-
 
 
 METHOD DETAILS
@@ -189,7 +157,7 @@ METHOD DETAILS
 
 *yii/console/controllers/MigrateController::className*	public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/console/controllers/MigrateController::__construct*	public
@@ -199,52 +167,52 @@ METHOD DETAILS
 
 *yii/console/controllers/MigrateController::init*		public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/console/controllers/MigrateController::__get*	public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/console/controllers/MigrateController::__set*	public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/console/controllers/MigrateController::__isset*	public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/console/controllers/MigrateController::__unset*	public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/console/controllers/MigrateController::__call*	public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/console/controllers/MigrateController::hasProperty*	public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/console/controllers/MigrateController::canGetProperty*public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/console/controllers/MigrateController::canSetProperty*public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/console/controllers/MigrateController::hasMethod*	public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/console/controllers/MigrateController::__clone*	public
@@ -568,6 +536,11 @@ name for option and value is option name.
  See |yii/console/controllers/BaseMigrateController::actionMark|
 
 
+*yii/console/controllers/MigrateController::actionFresh*	public
+
+ See |yii/console/controllers/BaseMigrateController::actionFresh|
+
+
 *yii/console/controllers/MigrateController::actionHistory*public
 
  See |yii/console/controllers/BaseMigrateController::actionHistory|
@@ -641,6 +614,34 @@ return (string) Generated PHP code.
      
       - name: string migration base name  
       - className: string migration class name
+
+
+*yii/console/controllers/MigrateController::truncateDatabase*protected
+>
+ truncateDatabase()
+<
+return (void)
+
+
+
+ This method should be overwritten in subclasses to implement the task of
+ clearing the database.
+
+
+
+
+*yii/console/controllers/MigrateController::getMigrationNameLimit*protected
+>
+ getMigrationNameLimit()
+<
+return (int|null) The maximum name length for a migration or 'null' if no limit
+applies.
+
+
+
+ Subclasses may override this method to define a limit.
+
+
 
 
 *yii/console/controllers/MigrateController::getMigrationHistory*protected

@@ -35,6 +35,10 @@ DESCRIPTION
                         'label' => 'DropdownB',
                         'content' => 'DropdownB, Anim pariatur cliche...',
                     ],
+                    [
+                        'label' => 'External Link',
+                        'url' => 'http://www.example.com',
+                    ],
                ],
            ],
        ],
@@ -137,21 +141,15 @@ $renderTabContent			*yii/bootstrap/Tabs::$renderTabContent*
  may set this property to be false so that you can manually render
  'tab-content' yourself in case your tab contents are complex.
 
-$behaviors				*yii/bootstrap/Tabs::$behaviors*
+$tabContentOptions			*yii/bootstrap/Tabs::$tabContentOptions*
 
- See |yii/base/Component::$behaviors|
+ (array) List of HTML attributes for the 'tab-content' container. This will
+ always contain the CSS class 'tab-content'.
 
-$id					*yii/bootstrap/Tabs::$id*
+$dropdownClass				*yii/bootstrap/Tabs::$dropdownClass*
 
- See |yii/base/Widget::$id|
-
-$view					*yii/bootstrap/Tabs::$view*
-
- See |yii/bootstrap/BootstrapWidgetTrait::$view|
-
-$viewPath				*yii/bootstrap/Tabs::$viewPath*
-
- See |yii/base/Widget::$viewPath|
+ (string) Name of a class to use for rendering dropdowns withing this widget.
+ Defaults to 'Dropdown'.
 
 
 
@@ -161,12 +159,12 @@ METHOD DETAILS
 
 *yii/bootstrap/Tabs::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/bootstrap/Tabs::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/bootstrap/Tabs::init*				public
@@ -377,19 +375,38 @@ return (string) The rendering result.
 >
  hasActiveTab()
 <
-return (boolean) If there's active tab defined
+return (bool) If there's active tab defined
 
+
+
+*yii/bootstrap/Tabs::activateFirstVisibleTab*		protected
+>
+ activateFirstVisibleTab()
+<
+return (void)
+
+ This method activates the first tab that is visible and not explicitly set to
+ inactive (''active' => false').
 
 
 *yii/bootstrap/Tabs::renderDropdown*			protected
 >
  renderDropdown($itemNumber, $items, $panes)
 <
-return (boolean) Whether any of the dropdown items is 'active' or not.
+return (bool) Whether any of the dropdown items is 'active' or not.
 
     [$itemNumber] (string) Number of the item
     [$items] (array) The dropdown items configuration.
     [$panes] (array) The panes reference array.
+
+
+*yii/bootstrap/Tabs::renderPanes*				public
+>
+ renderPanes($panes)
+<
+return (string) The rendering result.
+
+    [$panes] (array) 
 
 
 

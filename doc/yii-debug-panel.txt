@@ -46,25 +46,9 @@ $actions				*yii/debug/Panel::$actions*
  array will be merged with all other panels actions property. See
  '\yii\base\Controller::actions()' for the format.
 
-$behaviors				*yii/debug/Panel::$behaviors*
+$error					*yii/debug/Panel::$error*
 
- See |yii/base/Component::$behaviors|
-
-$name					*yii/debug/Panel::$name*
-
- (string) Name of the panel
-
-$summary				*yii/debug/Panel::$summary*
-
- (string) Content that is displayed at debug toolbar
-
-$detail					*yii/debug/Panel::$detail*
-
- (string) Content that is displayed in debugger detail view
-
-$url					*yii/debug/Panel::$url*
-
- (string) URL pointing to panel detail view
+ (\yii\debug\FlattenException|null) Error while saving the panel
 
 
 
@@ -74,17 +58,17 @@ METHOD DETAILS
 
 *yii/debug/Panel::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/debug/Panel::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/debug/Panel::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/debug/Panel::__get*					public
@@ -256,6 +240,39 @@ return (string) URL pointing to panel detail view
 return (string) The trace line
 
     [$options] (array) The array with trace
+
+
+*yii/debug/Panel::setError*				public
+>
+ setError($error)
+<
+return (void)
+
+    [$error] (\yii\debug\FlattenException) 
+
+
+*yii/debug/Panel::getError*				public
+>
+ getError()
+<
+return (\yii\debug\FlattenException|null) 
+
+
+
+*yii/debug/Panel::hasError*				public
+>
+ hasError()
+<
+return (bool) 
+
+
+
+*yii/debug/Panel::isEnabled*				public
+>
+ isEnabled()
+<
+return (bool) 
+
 
 
 

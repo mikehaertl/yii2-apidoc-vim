@@ -37,10 +37,6 @@ $autoRelease				*yii/mutex/Mutex::$autoRelease*
  Setting this property to true means that all locks acquired in this process
  must be released (regardless of errors or exceptions).
 
-$behaviors				*yii/mutex/Mutex::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
 
 
 METHOD DETAILS
@@ -49,12 +45,12 @@ METHOD DETAILS
 
 *yii/mutex/Mutex::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/mutex/Mutex::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/mutex/Mutex::init*					public
@@ -67,47 +63,47 @@ return (void)
 
 *yii/mutex/Mutex::__get*					public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/mutex/Mutex::__set*					public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/mutex/Mutex::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/mutex/Mutex::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/mutex/Mutex::__call*					public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/mutex/Mutex::hasProperty*				public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/mutex/Mutex::canGetProperty*				public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/mutex/Mutex::canSetProperty*				public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/mutex/Mutex::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/mutex/Mutex::__clone*				public
@@ -182,9 +178,9 @@ return (void)
 return (bool) Lock acquiring result.
 
     [$name] (string) Of the lock to be acquired. Must be unique.
-    [$timeout] (int) Time to wait for lock to be released. Defaults to zero
-    meaning that method will return false immediately in case lock was already
-    acquired.
+    [$timeout] (int) Time (in seconds) to wait for lock to be released.
+    Defaults to zero meaning that method will return false immediately in case
+    lock was already acquired.
 
 
 *yii/mutex/Mutex::release*				public
@@ -203,7 +199,7 @@ return (bool) Lock release result: false in case named lock was not found..
 return (bool) Acquiring result.
 
     [$name] (string) Of the lock to be acquired.
-    [$timeout] (int) Time to wait for the lock to be released.
+    [$timeout] (int) Time (in seconds) to wait for the lock to be released.
 
 
 *yii/mutex/Mutex::releaseLock*				protected

@@ -138,41 +138,20 @@ $ignoreCategories			*yii/console/controllers/MessageController::$ignoreCategorie
  (array) Message categories to ignore. For example, 'yii', 'app*',
  'widgets/menu', etc.
 
-$behaviors				*yii/console/controllers/MessageController::$behaviors*
+$phpFileHeader				*yii/console/controllers/MessageController::$phpFileHeader*
 
- See |yii/base/Component::$behaviors|
+ (string) File header in generated PHP file with messages. This property is
+ used only if '$format' is "php".
 
-$modules				*yii/console/controllers/MessageController::$modules*
+$phpDocBlock				*yii/console/controllers/MessageController::$phpDocBlock*
 
- See |yii/base/Controller::$modules|
+ (string|null) DocBlock used for messages array in generated PHP file. If
+ 'null', default DocBlock will be used. This property is used only if
+ '$format' is "php".
 
-$uniqueId				*yii/console/controllers/MessageController::$uniqueId*
+$config					*yii/console/controllers/MessageController::$config*
 
- See |yii/base/Controller::$uniqueId|
-
-$route					*yii/console/controllers/MessageController::$route*
-
- See |yii/base/Controller::$route|
-
-$view					*yii/console/controllers/MessageController::$view*
-
- See |yii/base/Controller::$view|
-
-$viewPath				*yii/console/controllers/MessageController::$viewPath*
-
- See |yii/base/Controller::$viewPath|
-
-$passedOptions				*yii/console/controllers/MessageController::$passedOptions*
-
- See |yii/console/Controller::$passedOptions|
-
-$passedOptionValues			*yii/console/controllers/MessageController::$passedOptionValues*
-
- See |yii/console/Controller::$passedOptionValues|
-
-$helpSummary				*yii/console/controllers/MessageController::$helpSummary*
-
- See |yii/console/Controller::$helpSummary|
+ (array) Config for messages extraction.
 
 
 
@@ -182,7 +161,7 @@ METHOD DETAILS
 
 *yii/console/controllers/MessageController::className*	public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/console/controllers/MessageController::__construct*	public
@@ -192,52 +171,52 @@ METHOD DETAILS
 
 *yii/console/controllers/MessageController::init*		public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/console/controllers/MessageController::__get*	public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/console/controllers/MessageController::__set*	public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/console/controllers/MessageController::__isset*	public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/console/controllers/MessageController::__unset*	public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/console/controllers/MessageController::__call*	public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/console/controllers/MessageController::hasProperty*	public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/console/controllers/MessageController::canGetProperty*public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/console/controllers/MessageController::canSetProperty*public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/console/controllers/MessageController::hasMethod*	public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/console/controllers/MessageController::__clone*	public
@@ -599,6 +578,17 @@ return (array)
     is available since version 2.0.4.
 
 
+*yii/console/controllers/MessageController::extractMessagesFromTokens*protected
+>
+ extractMessagesFromTokens($tokens, $translatorTokens, $ignoreCategories)
+<
+return (array) Messages.
+
+    [$tokens] (array) Tokens to be processed.
+    [$translatorTokens] (array) Translator tokens.
+    [$ignoreCategories] (array) Message categories to ignore.
+
+
 *yii/console/controllers/MessageController::isCategoryIgnored*protected
 >
  isCategoryIgnored($category, $ignoreCategories)
@@ -689,6 +679,15 @@ return (void)
     [$messages] (array) 
     [$dirName] (string) Name of the directory to write to
     [$catalog] (string) Message catalog
+
+
+*yii/console/controllers/MessageController::initConfig*	protected
+>
+ initConfig($configFile)
+<
+return (void)
+
+    [$configFile] (string) 
 
 
 

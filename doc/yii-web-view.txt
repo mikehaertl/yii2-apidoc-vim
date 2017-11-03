@@ -93,19 +93,6 @@ $jsFiles				*yii/web/View::$jsFiles*
 
  (array) The registered JS files.
 
-$behaviors				*yii/web/View::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$viewFile				*yii/web/View::$viewFile*
-
- See |yii/base/View::$viewFile|
-
-$assetManager				*yii/web/View::$assetManager*
-
- (\yii\web\AssetManager) The asset manager. Defaults to the "assetManager"
- application component.
-
 
 
 METHOD DETAILS
@@ -114,12 +101,12 @@ METHOD DETAILS
 
 *yii/web/View::className*					public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/web/View::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/web/View::init*					public
@@ -129,47 +116,47 @@ METHOD DETAILS
 
 *yii/web/View::__get*					public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/web/View::__set*					public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/web/View::__isset*					public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/web/View::__unset*					public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/web/View::__call*					public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/web/View::hasProperty*				public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/web/View::canGetProperty*				public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/web/View::canSetProperty*				public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/web/View::hasMethod*					public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/web/View::__clone*					public
@@ -453,6 +440,24 @@ return (void)
     this is null, the new meta tag will be appended to the existing ones.
 
 
+*yii/web/View::registerCsrfMetaTags*			public
+>
+ registerCsrfMetaTags()
+<
+return (void)
+
+ They are rendered dynamically to retrieve a new CSRF token for each request.
+
+   $view->registerCsrfMetaTags();
+
+ The above code will result in '<meta name="csrf-param"
+ content="[yii\web\Request::$csrfParam]">' and '<meta name="csrf-token"
+ content="tTNpWKpdy-bx8ZmIq9R72...K1y8IP3XGkzZA==">' added to the page.
+
+ Note: Hidden CSRF input of ActiveForm will be automatically refreshed by
+ calling 'window.yii.refreshCsrfToken()' from 'yii.js'.
+
+
 *yii/web/View::registerLinkTag*				public
 >
  registerLinkTag($options, $key='null')
@@ -497,6 +502,11 @@ return (void)
 <
 return (void)
 
+ This method should be used for simple registration of CSS files. If you want
+ to use features of 'AssetManager' like appending timestamps to the URL and
+ file publishing options, use 'AssetBundle' and 'registerAssetBundle()'
+ instead.
+
     [$url] (string) The CSS file to be registered.
     [$options] (array) The HTML attributes for the link tag. Please refer to
     'Html::cssFile()' for the supported options. The following options are
@@ -540,6 +550,11 @@ return (void)
  registerJsFile($url, $options='[]', $key='null')
 <
 return (void)
+
+ This method should be used for simple registration of JS files. If you want
+ to use features of 'AssetManager' like appending timestamps to the URL and
+ file publishing options, use 'AssetBundle' and 'registerAssetBundle()'
+ instead.
 
     [$url] (string) The JS file to be registered.
     [$options] (array) The HTML attributes for the script tag. The following

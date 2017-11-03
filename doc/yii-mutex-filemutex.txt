@@ -9,15 +9,19 @@ DESCRIPTION
 
  Application configuration example:
 
- ''' [     'components' => [         'mutex' => [             'class' =>
- 'yii\mutex\FileMutex'         ],     ], ] '''
+   [
+       'components' => [
+           'mutex' => [
+               'class' => 'yii\mutex\FileMutex'
+           ],
+       ],
+   ]
 
- Note: this component can maintain the locks only for the single web server,
- it probably will not suffice to your in case you are using cloud server
- solution.
+ > Note: this component can maintain the locks only for the single web server,
+ > it probably will not suffice in case you are using cloud server solution.
 
- Warning: due to 'flock()' function nature this component is unreliable when
- using a multithreaded server API like ISAPI.
+ > Warning: due to 'flock()' function nature this component is unreliable when
+ > using a multithreaded server API like ISAPI.
 
 
 PROPERTY DETAILS
@@ -46,10 +50,6 @@ $dirMode				*yii/mutex/FileMutex::$dirMode*
  meaning the directory is read-writable by owner and group, but read-only for
  other users.
 
-$behaviors				*yii/mutex/FileMutex::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
 
 
 METHOD DETAILS
@@ -58,12 +58,12 @@ METHOD DETAILS
 
 *yii/mutex/FileMutex::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/mutex/FileMutex::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/mutex/FileMutex::init*				public
@@ -76,47 +76,47 @@ return (void)
 
 *yii/mutex/FileMutex::__get*				public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/mutex/FileMutex::__set*				public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/mutex/FileMutex::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/mutex/FileMutex::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/mutex/FileMutex::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/mutex/FileMutex::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/mutex/FileMutex::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/mutex/FileMutex::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/mutex/FileMutex::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/mutex/FileMutex::__clone*				public
@@ -201,7 +201,7 @@ return (void)
 return (bool) Acquiring result.
 
     [$name] (string) Of the lock to be acquired.
-    [$timeout] (int) To wait for lock to become released.
+    [$timeout] (int) Time (in seconds) to wait for lock to become released.
 
 
 *yii/mutex/FileMutex::releaseLock*			protected

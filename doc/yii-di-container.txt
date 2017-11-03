@@ -27,7 +27,7 @@ DESCRIPTION
 
    namespace app\models;
 
-   use yii\base\Object;
+   use yii\base\BaseObject;
    use yii\db\Connection;
    use yii\di\Container;
 
@@ -36,7 +36,7 @@ DESCRIPTION
        function findUser();
    }
 
-   class UserFinder extends Object implements UserFinderInterface
+   class UserFinder extends BaseObject implements UserFinderInterface
    {
        public $db;
 
@@ -51,7 +51,7 @@ DESCRIPTION
        }
    }
 
-   class UserLister extends Object
+   class UserLister extends BaseObject
    {
        public $finder;
 
@@ -83,28 +83,6 @@ DESCRIPTION
  on di-containers](guide:concept-di-container).
 
 
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/di/Container::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$singleton				*yii/di/Container::$singleton*
-
- (string) Class name, interface name or alias name
-
-$definitions				*yii/di/Container::$definitions*
-
- (array) The list of the object definitions or the loaded shared objects (type
- or ID => definition or instance).
-
-$singletons				*yii/di/Container::$singletons*
-
- (array) Array of singleton definitions. See 'setDefinitions()' for allowed
- formats of array.
-
-
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -112,62 +90,62 @@ METHOD DETAILS
 
 *yii/di/Container::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/di/Container::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/di/Container::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/di/Container::__get*					public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/di/Container::__set*					public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/di/Container::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/di/Container::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/di/Container::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/di/Container::hasProperty*				public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/di/Container::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/di/Container::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/di/Container::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/di/Container::__clone*				public

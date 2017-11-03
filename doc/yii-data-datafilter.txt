@@ -1,0 +1,960 @@
+
+*yii/data/DataFilter*   >> |yii/base/Model|
+=====================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/data/ActiveDataFilter|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It allows validating and building a filter condition passed via request.
+
+ Filter example:
+
+ '''json {     "or": [         {             "and": [                 {       
+              "name": "some name",                 },                 {       
+              "price": "25",                 }             ]         },       
+  {             "id": {"in": [2, 5, 9]},             "price": {               
+  "gt": 10,                 "lt": 50             }         }     ] } '''
+
+ In the request the filter should be specified using a key name equal to
+ 'filterAttributeName'. Thus actual HTTP request body will look like
+ following:
+
+ '''json {     "filter": {"or": {...}},     "page": 2,     ... } '''
+
+ Raw filter value should be assigned to 'filter' property of the model. You
+ may populate it from request data via 'load()' method:
+
+   use yii\data\DataFilter;
+
+   $dataFilter = new DataFilter();
+   $dataFilter->load(Yii::$app->request->getBodyParams());
+
+ In order to function this class requires a search model specified via
+ 'searchModel'. This search model should declare all available search
+ attributes and their validation rules. For example:
+
+   class SearchModel extends \yii\base\Model
+   {
+       public $id;
+       public $name;
+
+       public function rules()
+       {
+           return [
+               [['id', 'name'], 'trim'],
+               ['id', 'integer'],
+               ['name', 'string'],
+           ];
+       }
+   }
+
+ In order to reduce amount of classes, you may use '\yii\base\DynamicModel'
+ instance as a 'searchModel'. In this case you should specify 'searchModel'
+ using a PHP callable:
+
+   function () {
+       return (new \yii\base\DynamicModel(['id' => null, 'name' => null]))
+           ->addRule(['id', 'name'], 'trim')
+           ->addRule('id', 'integer')
+           ->addRule('name', 'string');
+   }
+
+ You can use 'validate()' method to check if filter value is valid. If
+ validation fails you can use 'getErrors()' to get actual error messages.
+
+ In order to acquire filter condition suitable for fetching data use 'build()'
+ method.
+
+ > Note: This is a base class. Its implementation of 'build()' simply returns
+ normalized 'filter' value. In order to convert filter to particular format
+ you should use descendant of this class that implements 'buildInternal()'
+ method accordingly.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$filterAttributeName			*yii/data/DataFilter::$filterAttributeName*
+
+ (string) Name of the attribute that handles filter value. The name is used to
+ load data via 'load()' method.
+
+$filterAttributeLabel			*yii/data/DataFilter::$filterAttributeLabel*
+
+ (string) Label for the filter attribute specified via 'filterAttributeName'.
+ It will be used during error messages composition.
+
+$filterControls				*yii/data/DataFilter::$filterControls*
+
+ (array) Keywords or expressions that could be used in a filter. Array keys
+ are the expressions used in raw filter value obtained from user request.
+ Array values are internal build keys used in this class methods.
+
+ Any unspecified keyword will not be recognized as a filter control and will
+ be treated as an attribute name. Thus you should avoid conflicts between
+ control keywords and attribute names. For example: in case you have control
+ keyword 'like' and an attribute named 'like', specifying condition for such
+ attribute will be impossible.
+
+ You may specify several keywords for the same filter build key, creating
+ multiple aliases. For example:
+
+   [
+       'eq' => '=',
+       '=' => '=',
+       '==' => '=',
+       '===' => '=',
+       // ...
+   ]
+
+ > Note: while specifying filter controls take actual data exchange format,
+ which your API uses, in mind.   Make sure each specified control keyword is
+ valid for the format. For example, in XML tag name can start   only with a
+ letter character, thus controls like '>', '=' or '$gt' will break the XML
+ schema.
+
+$conditionValidators			*yii/data/DataFilter::$conditionValidators*
+
+ (array) Maps filter condition keywords to validation methods. These methods
+ are used by 'validateCondition()' to validate raw filter conditions.
+
+$operatorTypes				*yii/data/DataFilter::$operatorTypes*
+
+ (array) Specifies the list of supported search attribute types per each
+ operator. This field should be in format: 'operatorKeyword' => ['type1',
+ 'type2' ...]. Supported types list can be specified as '*', which indicates
+ that operator supports all types available. Any unspecified keyword will not
+ be considered as a valid operator.
+
+$multiValueOperators			*yii/data/DataFilter::$multiValueOperators*
+
+ (array) List of operators keywords, which should accept multiple values.
+
+$attributeMap				*yii/data/DataFilter::$attributeMap*
+
+ (array) Actual attribute names to be used in searched condition, in format:
+ [filterAttribute => actualAttribute]. For example, in case of using table
+ joins in the search query, attribute map may look like the following:
+
+   [
+       'authorName' => '{{author}}.[[name]]'
+   ]
+
+ Attribute map will be applied to filter condition in 'normalize()' method.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/data/DataFilter::className*				public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/data/DataFilter::__construct*			public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/data/DataFilter::init*				public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/data/DataFilter::__get*				public
+>
+ __get($name)
+<
+return (mixed) The property value or the value of a behavior's property
+
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a getter: return the getter result  
+   - a property of a behavior: return the behavior property value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$value = $component->property;'.
+
+
+
+    [$name] (string) The property name
+
+
+*yii/data/DataFilter::__set*				public
+>
+ __set($name, $value)
+<
+return (void)
+
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a setter: set the property value  
+   - an event in the format of "on xyz": attach the handler to the
+   event "xyz"  
+   - a behavior in the format of "as xyz": attach the behavior named as
+   "xyz"  
+   - a property of a behavior: set the behavior property value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$component->property = $value;'.
+
+
+
+    [$name] (string) The property name or the event name
+    [$value] (mixed) The property value
+
+
+*yii/data/DataFilter::__isset*				public
+>
+ __isset($name)
+<
+return (bool) Whether the named property is set
+
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a setter: return whether the property is set  
+   - a property of a behavior: return whether the property is set  
+   - return 'false' for non existing properties
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'isset($component->property)'.
+
+
+
+    [$name] (string) The property name or the event name
+
+
+*yii/data/DataFilter::__unset*				public
+>
+ __unset($name)
+<
+return (void)
+
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a setter: set the property value to be null  
+   - a property of a behavior: set the property value to be null
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'unset($component->property)'.
+
+
+
+    [$name] (string) The property name
+
+
+*yii/data/DataFilter::__call*				public
+
+ See |yii/base/Component::__call|
+
+
+*yii/data/DataFilter::hasProperty*			public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/data/DataFilter::canGetProperty*			public
+>
+ canGetProperty($name, $checkVars='true', $checkBehaviors='true')
+<
+return (bool) Whether the property can be read
+
+
+
+ A property can be read if:
+
+
+   - the class has a getter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a readable property of the given name
+   (when '$checkBehaviors' is true).
+
+
+
+    [$name] (string) The property name
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
+    properties of this component
+
+
+*yii/data/DataFilter::canSetProperty*			public
+>
+ canSetProperty($name, $checkVars='true', $checkBehaviors='true')
+<
+return (bool) Whether the property can be written
+
+
+
+ A property can be written if:
+
+
+   - the class has a setter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a writable property of the given name
+   (when '$checkBehaviors' is true).
+
+
+
+    [$name] (string) The property name
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
+    properties of this component
+
+
+*yii/data/DataFilter::hasMethod*				public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/data/DataFilter::__clone*				public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/data/DataFilter::behaviors*				public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/data/DataFilter::hasEventHandlers*			public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/data/DataFilter::on*					public
+
+ See |yii/base/Component::on|
+
+
+*yii/data/DataFilter::off*				public
+
+ See |yii/base/Component::off|
+
+
+*yii/data/DataFilter::trigger*				public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/data/DataFilter::getBehavior*			public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/data/DataFilter::getBehaviors*			public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/data/DataFilter::attachBehavior*			public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/data/DataFilter::attachBehaviors*			public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/data/DataFilter::detachBehavior*			public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/data/DataFilter::detachBehaviors*			public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/data/DataFilter::ensureBehaviors*			public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/data/DataFilter::instance*				public
+
+ See |yii/base/StaticInstanceTrait::instance|
+
+
+*yii/data/DataFilter::fields*				public
+
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/data/DataFilter::extraFields*			public
+
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/data/DataFilter::toArray*				public
+
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/data/DataFilter::resolveFields*			protected
+
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/data/DataFilter::rules*				public
+>
+ rules()
+<
+return (array) Validation rules
+
+
+
+ Validation rules are used by 'validate()' to check if attribute values are
+ valid. Child classes may override this method to declare different validation
+ rules.
+
+ Each rule is an array with the following structure:
+
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       //...other parameters...
+   ]
+
+ where
+
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass a string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array in which
+   the validation    rule can be applied. If this option is not set, the rule
+ will apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
+
+ A validator can be either an object of a class extending 'Validator', or a
+ model class method (called *inline validator*) that has the following
+ signature:
+
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
+
+ In the above '$attribute' refers to the attribute currently being validated
+ while '$params' contains an array of validator configuration options such as
+ 'max' in case of 'string' validator. The value of the attribute currently
+ being validated can be accessed as '$this->$attribute'. Note the '$' before
+ 'attribute'; this is taking the value of the variable '$attribute' and using
+ it as the name of the property to access.
+
+ Yii also provides a set of 'Validator::builtInValidators|built-in
+ validators'. Each one has an alias name which can be used when specifying a
+ validation rule.
+
+ Below are some examples:
+
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
+
+ Note, in order to inherit rules defined in the parent class, a child class
+ needs to merge the parent rules with child rules using functions such as
+ 'array_merge()'.
+
+
+
+
+*yii/data/DataFilter::scenarios*				public
+
+ See |yii/base/Model::scenarios|
+
+
+*yii/data/DataFilter::formName*				public
+>
+ formName()
+<
+return (string) The form name of this model class.
+
+
+
+ The form name is mainly used by '\yii\widgets\ActiveForm' to determine how to
+ name the input fields for the attributes in a model. If the form name is "A"
+ and an attribute name is "b", then the corresponding input name would be
+ "A[b]". If the form name is an empty string, then the input name would be
+ "b".
+
+ The purpose of the above naming schema is that for forms which contain
+ multiple different models, the attributes of each model are grouped in
+ sub-arrays of the POST-data and it is easier to differentiate between them.
+
+ By default, this method returns the model class name (without the namespace
+ part) as the form name. You may override it when the model is used in
+ different forms.
+
+
+
+
+*yii/data/DataFilter::attributes*				public
+>
+ attributes()
+<
+return (array) List of attribute names.
+
+
+
+ By default, this method returns all public non-static properties of the
+ class. You may override this method to change the default behavior.
+
+
+
+
+*yii/data/DataFilter::attributeLabels*			public
+>
+ attributeLabels()
+<
+return (array) Attribute labels (name => label)
+
+
+
+ Attribute labels are mainly used for display purpose. For example, given an
+ attribute 'firstName', we can declare a label 'First Name' which is more
+ user-friendly and can be displayed to end users.
+
+ By default an attribute label is generated using 'generateAttributeLabel()'.
+ This method allows you to explicitly specify attribute labels.
+
+ Note, in order to inherit labels defined in the parent class, a child class
+ needs to merge the parent labels with child labels using functions such as
+ 'array_merge()'.
+
+
+
+
+*yii/data/DataFilter::attributeHints*			public
+
+ See |yii/base/Model::attributeHints|
+
+
+*yii/data/DataFilter::validate*				public
+
+ See |yii/base/Model::validate|
+
+
+*yii/data/DataFilter::beforeValidate*			public
+
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/data/DataFilter::afterValidate*			public
+
+ See |yii/base/Model::afterValidate|
+
+
+*yii/data/DataFilter::getValidators*			public
+
+ See |yii/base/Model::getValidators|
+
+
+*yii/data/DataFilter::getActiveValidators*		public
+
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/data/DataFilter::createValidators*			public
+
+ See |yii/base/Model::createValidators|
+
+
+*yii/data/DataFilter::isAttributeRequired*		public
+
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/data/DataFilter::isAttributeSafe*			public
+
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/data/DataFilter::isAttributeActive*			public
+
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/data/DataFilter::getAttributeLabel*			public
+
+ See |yii/base/Model::getAttributeLabel|
+
+
+*yii/data/DataFilter::getAttributeHint*			public
+
+ See |yii/base/Model::getAttributeHint|
+
+
+*yii/data/DataFilter::hasErrors*				public
+
+ See |yii/base/Model::hasErrors|
+
+
+*yii/data/DataFilter::getErrors*				public
+
+ See |yii/base/Model::getErrors|
+
+
+*yii/data/DataFilter::getFirstErrors*			public
+
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/data/DataFilter::getFirstError*			public
+
+ See |yii/base/Model::getFirstError|
+
+
+*yii/data/DataFilter::addError*				public
+
+ See |yii/base/Model::addError|
+
+
+*yii/data/DataFilter::addErrors*				public
+
+ See |yii/base/Model::addErrors|
+
+
+*yii/data/DataFilter::clearErrors*			public
+
+ See |yii/base/Model::clearErrors|
+
+
+*yii/data/DataFilter::generateAttributeLabel*		public
+
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/data/DataFilter::getAttributes*			public
+
+ See |yii/base/Model::getAttributes|
+
+
+*yii/data/DataFilter::setAttributes*			public
+
+ See |yii/base/Model::setAttributes|
+
+
+*yii/data/DataFilter::onUnsafeAttribute*			public
+
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/data/DataFilter::getScenario*			public
+
+ See |yii/base/Model::getScenario|
+
+
+*yii/data/DataFilter::setScenario*			public
+
+ See |yii/base/Model::setScenario|
+
+
+*yii/data/DataFilter::safeAttributes*			public
+
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/data/DataFilter::activeAttributes*			public
+
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/data/DataFilter::load*				public
+
+ See |yii/base/Model::load|
+
+
+*yii/data/DataFilter::loadMultiple*			public
+
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/data/DataFilter::validateMultiple*			public
+
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/data/DataFilter::getIterator*			public
+
+ See |yii/base/Model::getIterator|
+
+
+*yii/data/DataFilter::offsetExists*			public
+
+ See |yii/base/Model::offsetExists|
+
+
+*yii/data/DataFilter::offsetGet*				public
+
+ See |yii/base/Model::offsetGet|
+
+
+*yii/data/DataFilter::offsetSet*				public
+
+ See |yii/base/Model::offsetSet|
+
+
+*yii/data/DataFilter::offsetUnset*			public
+
+ See |yii/base/Model::offsetUnset|
+
+
+*yii/data/DataFilter::getFilter*				public
+>
+ getFilter()
+<
+return (mixed) Raw filter value.
+
+
+
+*yii/data/DataFilter::setFilter*				public
+>
+ setFilter($filter)
+<
+return (void)
+
+    [$filter] (mixed) Raw filter value.
+
+
+*yii/data/DataFilter::getSearchModel*			public
+>
+ getSearchModel()
+<
+return (\yii\base\Model) Model instance.
+
+
+
+*yii/data/DataFilter::setSearchModel*			public
+>
+ setSearchModel($model)
+<
+return (void)
+
+    [$model] (\yii\base\Model|array|string|callable) Model instance or its DI
+    compatible configuration.
+
+
+*yii/data/DataFilter::getSearchAttributeTypes*		public
+>
+ getSearchAttributeTypes()
+<
+return (array) Search attribute type map.
+
+
+
+*yii/data/DataFilter::setSearchAttributeTypes*		public
+>
+ setSearchAttributeTypes($searchAttributeTypes)
+<
+return (void)
+
+    [$searchAttributeTypes] (array|null) Search attribute type map.
+
+
+*yii/data/DataFilter::detectSearchAttributeTypes*		protected
+>
+ detectSearchAttributeTypes()
+<
+return (array) Attribute type map.
+
+
+
+*yii/data/DataFilter::getErrorMessages*			public
+>
+ getErrorMessages()
+<
+return (array) Error messages in format '[errorKey => message]'.
+
+
+
+*yii/data/DataFilter::setErrorMessages*			public
+>
+ setErrorMessages($errorMessages)
+<
+return (void)
+
+ Message may contain placeholders that will be populated depending on the
+ message context. For each message a '{filter}' placeholder is available
+ referring to the label for 'filterAttributeName' attribute.
+
+    [$errorMessages] (array|\Closure) Error messages in '[errorKey =>
+    message]' format, or a PHP callback returning them.
+
+
+*yii/data/DataFilter::defaultErrorMessages*		protected
+>
+ defaultErrorMessages()
+<
+return (array) Default error messages in '[errorKey => message]' format.
+
+
+
+*yii/data/DataFilter::parseErrorMessage*			protected
+>
+ parseErrorMessage($messageKey, $params='[]')
+<
+return (string) Composed message string.
+
+    [$messageKey] (string) Message key.
+    [$params] (array) Params to be parsed into the message.
+
+
+*yii/data/DataFilter::validateFilter*			public
+>
+ validateFilter()
+<
+return (void)
+
+
+
+*yii/data/DataFilter::validateCondition*			protected
+>
+ validateCondition($condition)
+<
+return (void)
+
+    [$condition] (mixed) Raw filter condition.
+
+
+*yii/data/DataFilter::validateConjunctionCondition*	protected
+>
+ validateConjunctionCondition($operator, $condition)
+<
+return (void)
+
+ This covers such operators as 'and' and 'or'.
+
+    [$operator] (string) Raw operator control keyword.
+    [$condition] (mixed) Raw condition.
+
+
+*yii/data/DataFilter::validateBlockCondition*		protected
+>
+ validateBlockCondition($operator, $condition)
+<
+return (void)
+
+ This covers such operators as 'not'.
+
+    [$operator] (string) Raw operator control keyword.
+    [$condition] (mixed) Raw condition.
+
+
+*yii/data/DataFilter::validateAttributeCondition*		protected
+>
+ validateAttributeCondition($attribute, $condition)
+<
+return (void)
+
+    [$attribute] (string) Search attribute name.
+    [$condition] (mixed) Search condition.
+
+
+*yii/data/DataFilter::validateOperatorCondition*		protected
+>
+ validateOperatorCondition($operator, $condition, $attribute='null')
+<
+return (void)
+
+    [$operator] (string) Raw operator control keyword.
+    [$condition] (mixed) Attribute condition.
+    [$attribute] (string) Attribute name.
+
+
+*yii/data/DataFilter::validateAttributeValue*		protected
+>
+ validateAttributeValue($attribute, $value)
+<
+return (void)
+
+    [$attribute] (string) Attribute name.
+    [$value] (mixed) Attribute value.
+
+
+*yii/data/DataFilter::filterAttributeValue*		protected
+>
+ filterAttributeValue($attribute, $value)
+<
+return (mixed) Filtered attribute value.
+
+    [$attribute] (string) Attribute name.
+    [$value] (mixed) Attribute value.
+
+
+*yii/data/DataFilter::build*				public
+>
+ build($runValidation='true')
+<
+return (mixed|false) Built actual filter value, or 'false' if validation fails.
+
+    [$runValidation] (bool) Whether to perform validation (calling
+    'validate()') before building the filter. Defaults to 'true'. If the
+    validation fails, no filter will be built and this method will return
+    'false'.
+
+
+*yii/data/DataFilter::buildInternal*			protected
+>
+ buildInternal()
+<
+return (mixed) Built actual filter value.
+
+ By default this method returns result of 'normalize()'. The child class may
+ override this method providing more specific implementation.
+
+
+*yii/data/DataFilter::normalize*				public
+>
+ normalize($runValidation='true')
+<
+return (array|bool) Normalized filter value, or 'false' if validation fails.
+
+    [$runValidation] (bool) Whether to perform validation (calling
+    'validate()') before normalizing the filter. Defaults to 'true'. If the
+    validation fails, no filter will be processed and this method will return
+    'false'.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

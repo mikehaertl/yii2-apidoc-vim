@@ -5,16 +5,36 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
+ This logger will be automatically created and applied to underlying
+ '\Swift_Mailer' instance, if 'Mailer::$enableSwiftMailerLogging' is enabled.
+ For example:
+
+   [
+       'components' => [
+           'mailer' => [
+               'class' => 'yii\swiftmailer\Mailer',
+               'enableSwiftMailerLogging' => true,
+           ],
+        ],
+       // ...
+   ],
+
  In order to catch logs written by this class, you need to setup a log route
  for 'yii\swiftmailer\Logger::add' category. For example:
 
-   'log' => [
-       'targets' => [
-           [
-               'class' => 'yii\log\FileTarget',
-               'categories' => ['yii\swiftmailer\Logger::add'],
+   [
+       'components' => [
+           'log' => [
+               'targets' => [
+                   [
+                       'class' => 'yii\log\FileTarget',
+                       'categories' => ['yii\swiftmailer\Logger::add'],
+                   ],
+               ],
            ],
+           // ...
        ],
+       // ...
    ],
 
 

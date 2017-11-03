@@ -1,0 +1,604 @@
+
+*yii/data/ActiveDataFilter*   >> |yii/data/DataFilter|
+===========================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$filterAttributeName			*yii/data/ActiveDataFilter::$filterAttributeName*
+
+ See |yii/data/DataFilter::$filterAttributeName|
+
+$filterAttributeLabel			*yii/data/ActiveDataFilter::$filterAttributeLabel*
+
+ See |yii/data/DataFilter::$filterAttributeLabel|
+
+$filterControls				*yii/data/ActiveDataFilter::$filterControls*
+
+ See |yii/data/DataFilter::$filterControls|
+
+$conditionValidators			*yii/data/ActiveDataFilter::$conditionValidators*
+
+ See |yii/data/DataFilter::$conditionValidators|
+
+$operatorTypes				*yii/data/ActiveDataFilter::$operatorTypes*
+
+ See |yii/data/DataFilter::$operatorTypes|
+
+$multiValueOperators			*yii/data/ActiveDataFilter::$multiValueOperators*
+
+ See |yii/data/DataFilter::$multiValueOperators|
+
+$attributeMap				*yii/data/ActiveDataFilter::$attributeMap*
+
+ See |yii/data/DataFilter::$attributeMap|
+
+$conditionBuilders			*yii/data/ActiveDataFilter::$conditionBuilders*
+
+ (array) Maps filtering condition keywords to build methods. These methods are
+ used by 'buildCondition()' to build the actual filtering conditions.
+ Particular condition builder can be specified using a PHP callback. For
+ example:
+
+   [
+       'XOR' => function (string $operator, mixed $condition) {
+           //return array;
+       },
+       'LIKE' => function (string $operator, mixed $condition, string
+ $attribute) {
+           //return array;
+       },
+   ]
+
+
+
+$queryOperatorMap			*yii/data/ActiveDataFilter::$queryOperatorMap*
+
+ (array) Map filtering operators to operators used in
+ '\yii\db\QueryInterface::where()'. The format is: '[filterOperator =>
+ queryOperator]'. If particular operator keyword does not appear in the map,
+ it will be used as is.
+
+ Usually the map can be left empty as filter operator names are consistent
+ with the ones used in '\yii\db\QueryInterface::where()'. However, you may
+ want to adjust it in some special cases. For example, when using PosgreSQL
+ you may want to setup the following map:
+
+   [
+       'LIKE' => 'ILIKE'
+   ]
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/data/ActiveDataFilter::className*			public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/data/ActiveDataFilter::__construct*			public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/data/ActiveDataFilter::init*				public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/data/ActiveDataFilter::__get*			public
+
+ See |yii/data/DataFilter::__get|
+
+
+*yii/data/ActiveDataFilter::__set*			public
+
+ See |yii/data/DataFilter::__set|
+
+
+*yii/data/ActiveDataFilter::__isset*			public
+
+ See |yii/data/DataFilter::__isset|
+
+
+*yii/data/ActiveDataFilter::__unset*			public
+
+ See |yii/data/DataFilter::__unset|
+
+
+*yii/data/ActiveDataFilter::__call*			public
+
+ See |yii/base/Component::__call|
+
+
+*yii/data/ActiveDataFilter::hasProperty*			public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/data/ActiveDataFilter::canGetProperty*		public
+
+ See |yii/data/DataFilter::canGetProperty|
+
+
+*yii/data/ActiveDataFilter::canSetProperty*		public
+
+ See |yii/data/DataFilter::canSetProperty|
+
+
+*yii/data/ActiveDataFilter::hasMethod*			public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/data/ActiveDataFilter::__clone*			public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/data/ActiveDataFilter::behaviors*			public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/data/ActiveDataFilter::hasEventHandlers*		public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/data/ActiveDataFilter::on*				public
+
+ See |yii/base/Component::on|
+
+
+*yii/data/ActiveDataFilter::off*				public
+
+ See |yii/base/Component::off|
+
+
+*yii/data/ActiveDataFilter::trigger*			public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/data/ActiveDataFilter::getBehavior*			public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/data/ActiveDataFilter::getBehaviors*			public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/data/ActiveDataFilter::attachBehavior*		public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/data/ActiveDataFilter::attachBehaviors*		public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/data/ActiveDataFilter::detachBehavior*		public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/data/ActiveDataFilter::detachBehaviors*		public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/data/ActiveDataFilter::ensureBehaviors*		public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/data/ActiveDataFilter::instance*			public
+
+ See |yii/base/StaticInstanceTrait::instance|
+
+
+*yii/data/ActiveDataFilter::fields*			public
+
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/data/ActiveDataFilter::extraFields*			public
+
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/data/ActiveDataFilter::toArray*			public
+
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/data/ActiveDataFilter::resolveFields*		protected
+
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/data/ActiveDataFilter::rules*			public
+
+ See |yii/base/Model::rules|
+
+
+*yii/data/ActiveDataFilter::scenarios*			public
+
+ See |yii/base/Model::scenarios|
+
+
+*yii/data/ActiveDataFilter::formName*			public
+
+ See |yii/base/Model::formName|
+
+
+*yii/data/ActiveDataFilter::attributes*			public
+
+ See |yii/base/Model::attributes|
+
+
+*yii/data/ActiveDataFilter::attributeLabels*		public
+
+ See |yii/base/Model::attributeLabels|
+
+
+*yii/data/ActiveDataFilter::attributeHints*		public
+
+ See |yii/base/Model::attributeHints|
+
+
+*yii/data/ActiveDataFilter::validate*			public
+
+ See |yii/base/Model::validate|
+
+
+*yii/data/ActiveDataFilter::beforeValidate*		public
+
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/data/ActiveDataFilter::afterValidate*		public
+
+ See |yii/base/Model::afterValidate|
+
+
+*yii/data/ActiveDataFilter::getValidators*		public
+
+ See |yii/base/Model::getValidators|
+
+
+*yii/data/ActiveDataFilter::getActiveValidators*		public
+
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/data/ActiveDataFilter::createValidators*		public
+
+ See |yii/base/Model::createValidators|
+
+
+*yii/data/ActiveDataFilter::isAttributeRequired*		public
+
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/data/ActiveDataFilter::isAttributeSafe*		public
+
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/data/ActiveDataFilter::isAttributeActive*		public
+
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/data/ActiveDataFilter::getAttributeLabel*		public
+
+ See |yii/base/Model::getAttributeLabel|
+
+
+*yii/data/ActiveDataFilter::getAttributeHint*		public
+
+ See |yii/base/Model::getAttributeHint|
+
+
+*yii/data/ActiveDataFilter::hasErrors*			public
+
+ See |yii/base/Model::hasErrors|
+
+
+*yii/data/ActiveDataFilter::getErrors*			public
+
+ See |yii/base/Model::getErrors|
+
+
+*yii/data/ActiveDataFilter::getFirstErrors*		public
+
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/data/ActiveDataFilter::getFirstError*		public
+
+ See |yii/base/Model::getFirstError|
+
+
+*yii/data/ActiveDataFilter::addError*			public
+
+ See |yii/base/Model::addError|
+
+
+*yii/data/ActiveDataFilter::addErrors*			public
+
+ See |yii/base/Model::addErrors|
+
+
+*yii/data/ActiveDataFilter::clearErrors*			public
+
+ See |yii/base/Model::clearErrors|
+
+
+*yii/data/ActiveDataFilter::generateAttributeLabel*	public
+
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/data/ActiveDataFilter::getAttributes*		public
+
+ See |yii/base/Model::getAttributes|
+
+
+*yii/data/ActiveDataFilter::setAttributes*		public
+
+ See |yii/base/Model::setAttributes|
+
+
+*yii/data/ActiveDataFilter::onUnsafeAttribute*		public
+
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/data/ActiveDataFilter::getScenario*			public
+
+ See |yii/base/Model::getScenario|
+
+
+*yii/data/ActiveDataFilter::setScenario*			public
+
+ See |yii/base/Model::setScenario|
+
+
+*yii/data/ActiveDataFilter::safeAttributes*		public
+
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/data/ActiveDataFilter::activeAttributes*		public
+
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/data/ActiveDataFilter::load*				public
+
+ See |yii/base/Model::load|
+
+
+*yii/data/ActiveDataFilter::loadMultiple*			public
+
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/data/ActiveDataFilter::validateMultiple*		public
+
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/data/ActiveDataFilter::getIterator*			public
+
+ See |yii/base/Model::getIterator|
+
+
+*yii/data/ActiveDataFilter::offsetExists*			public
+
+ See |yii/base/Model::offsetExists|
+
+
+*yii/data/ActiveDataFilter::offsetGet*			public
+
+ See |yii/base/Model::offsetGet|
+
+
+*yii/data/ActiveDataFilter::offsetSet*			public
+
+ See |yii/base/Model::offsetSet|
+
+
+*yii/data/ActiveDataFilter::offsetUnset*			public
+
+ See |yii/base/Model::offsetUnset|
+
+
+*yii/data/ActiveDataFilter::getFilter*			public
+
+ See |yii/data/DataFilter::getFilter|
+
+
+*yii/data/ActiveDataFilter::setFilter*			public
+
+ See |yii/data/DataFilter::setFilter|
+
+
+*yii/data/ActiveDataFilter::getSearchModel*		public
+
+ See |yii/data/DataFilter::getSearchModel|
+
+
+*yii/data/ActiveDataFilter::setSearchModel*		public
+
+ See |yii/data/DataFilter::setSearchModel|
+
+
+*yii/data/ActiveDataFilter::getSearchAttributeTypes*	public
+
+ See |yii/data/DataFilter::getSearchAttributeTypes|
+
+
+*yii/data/ActiveDataFilter::setSearchAttributeTypes*	public
+
+ See |yii/data/DataFilter::setSearchAttributeTypes|
+
+
+*yii/data/ActiveDataFilter::detectSearchAttributeTypes*	protected
+
+ See |yii/data/DataFilter::detectSearchAttributeTypes|
+
+
+*yii/data/ActiveDataFilter::getErrorMessages*		public
+
+ See |yii/data/DataFilter::getErrorMessages|
+
+
+*yii/data/ActiveDataFilter::setErrorMessages*		public
+
+ See |yii/data/DataFilter::setErrorMessages|
+
+
+*yii/data/ActiveDataFilter::defaultErrorMessages*		protected
+
+ See |yii/data/DataFilter::defaultErrorMessages|
+
+
+*yii/data/ActiveDataFilter::parseErrorMessage*		protected
+
+ See |yii/data/DataFilter::parseErrorMessage|
+
+
+*yii/data/ActiveDataFilter::validateFilter*		public
+
+ See |yii/data/DataFilter::validateFilter|
+
+
+*yii/data/ActiveDataFilter::validateCondition*		protected
+
+ See |yii/data/DataFilter::validateCondition|
+
+
+*yii/data/ActiveDataFilter::validateConjunctionCondition*	protected
+
+ See |yii/data/DataFilter::validateConjunctionCondition|
+
+
+*yii/data/ActiveDataFilter::validateBlockCondition*	protected
+
+ See |yii/data/DataFilter::validateBlockCondition|
+
+
+*yii/data/ActiveDataFilter::validateAttributeCondition*	protected
+
+ See |yii/data/DataFilter::validateAttributeCondition|
+
+
+*yii/data/ActiveDataFilter::validateOperatorCondition*	protected
+
+ See |yii/data/DataFilter::validateOperatorCondition|
+
+
+*yii/data/ActiveDataFilter::validateAttributeValue*	protected
+
+ See |yii/data/DataFilter::validateAttributeValue|
+
+
+*yii/data/ActiveDataFilter::filterAttributeValue*		protected
+
+ See |yii/data/DataFilter::filterAttributeValue|
+
+
+*yii/data/ActiveDataFilter::build*			public
+
+ See |yii/data/DataFilter::build|
+
+
+*yii/data/ActiveDataFilter::buildInternal*		protected
+>
+ buildInternal()
+<
+return (mixed) Built actual filter value.
+
+
+
+ By default this method returns result of 'normalize()'. The child class may
+ override this method providing more specific implementation.
+
+
+
+
+*yii/data/ActiveDataFilter::normalize*			public
+
+ See |yii/data/DataFilter::normalize|
+
+
+*yii/data/ActiveDataFilter::buildCondition*		protected
+>
+ buildCondition($condition)
+<
+return (array) Built condition.
+
+    [$condition] (array) 
+
+
+*yii/data/ActiveDataFilter::buildConjunctionCondition*	protected
+>
+ buildConjunctionCondition($operator, $condition)
+<
+return (array) Actual condition.
+
+ It covers such operators as 'and' and 'or'.
+
+    [$operator] (string) Operator keyword.
+    [$condition] (mixed) Raw condition.
+
+
+*yii/data/ActiveDataFilter::buildBlockCondition*		protected
+>
+ buildBlockCondition($operator, $condition)
+<
+return (array) Actual condition.
+
+ It covers such operators as 'not'.
+
+    [$operator] (string) Operator keyword.
+    [$condition] (mixed) Raw condition.
+
+
+*yii/data/ActiveDataFilter::buildAttributeCondition*	protected
+>
+ buildAttributeCondition($attribute, $condition)
+<
+return (array) Actual condition.
+
+    [$attribute] (string) Search attribute name.
+    [$condition] (mixed) Search condition.
+
+
+*yii/data/ActiveDataFilter::buildOperatorCondition*	protected
+>
+ buildOperatorCondition($operator, $condition, $attribute)
+<
+return (array) Actual condition.
+
+    [$operator] (string) Operator keyword.
+    [$condition] (mixed) Attribute condition.
+    [$attribute] (string) Attribute name.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

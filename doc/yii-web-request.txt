@@ -86,198 +86,56 @@ $parsers				*yii/web/Request::$parsers*
  To register a parser for parsing all request types you can use ''*'' as the
  array key. This one will be used as a fallback in case no other types match.
 
-$behaviors				*yii/web/Request::$behaviors*
+$trustedHosts				*yii/web/Request::$trustedHosts*
 
- See |yii/base/Component::$behaviors|
+ (array) The configuration for trusted security related headers.
 
-$isConsoleRequest			*yii/web/Request::$isConsoleRequest*
+ An array key is an IPv4 or IPv6 IP address in CIDR notation for matching a
+ client.
 
- See |yii/base/Request::$isConsoleRequest|
+ An array value is a list of headers to trust. These will be matched against
+ 'secureHeaders' to determine which headers are allowed to be sent by a
+ specified host. The case of the header names must be the same as specified in
+ 'secureHeaders'.
 
-$scriptFile				*yii/web/Request::$scriptFile*
+ For example, to trust all headers listed in 'secureHeaders' for IP addresses
+ in range '192.168.0.0-192.168.0.254' write the following:
 
- (string) The entry script file path
+   [
+       '192.168.0.0/24',
+   ]
 
-$headers				*yii/web/Request::$headers*
+ To trust just the 'X-Forwarded-For' header from '10.0.0.1', use:
 
- (\yii\web\HeaderCollection) The header collection
+ ''' [     '10.0.0.1' => ['X-Forwarded-For'] ] '''
 
-$method					*yii/web/Request::$method*
+ Default is to trust all headers except those listed in 'secureHeaders' from
+ all hosts. Matches are tried in order and searching is stopped when IP
+ matches.
 
- (string) Request method, such as GET, POST, HEAD, PUT, PATCH, DELETE. The
- value returned is turned into upper case.
+ > Info: Matching is performed using 'IpValidator'.   See
+ 'IpValidator::::setRanges()|IpValidator::setRanges()'   and
+ 'IpValidator::networks' for advanced matching.
 
-$isGet					*yii/web/Request::$isGet*
+$secureHeaders				*yii/web/Request::$secureHeaders*
 
- (bool) Whether this is a GET request.
+ (array) Lists of headers that are, by default, subject to the trusted host
+ configuration. These headers will be filtered unless explicitly allowed in
+ 'trustedHosts'. The match of header names is case-insensitive.
 
-$isOptions				*yii/web/Request::$isOptions*
+$ipHeaders				*yii/web/Request::$ipHeaders*
 
- (bool) Whether this is a OPTIONS request.
+ (string[]) List of headers where proxies store the real client IP. It's not
+ advisable to put insecure headers here. The match of header names is
+ case-insensitive.
 
-$isHead					*yii/web/Request::$isHead*
+$secureProtocolHeaders			*yii/web/Request::$secureProtocolHeaders*
 
- (bool) Whether this is a HEAD request.
-
-$isPost					*yii/web/Request::$isPost*
-
- (bool) Whether this is a POST request.
-
-$isDelete				*yii/web/Request::$isDelete*
-
- (bool) Whether this is a DELETE request.
-
-$isPut					*yii/web/Request::$isPut*
-
- (bool) Whether this is a PUT request.
-
-$isPatch				*yii/web/Request::$isPatch*
-
- (bool) Whether this is a PATCH request.
-
-$isAjax					*yii/web/Request::$isAjax*
-
- (bool) Whether this is an AJAX (XMLHttpRequest) request.
-
-$isPjax					*yii/web/Request::$isPjax*
-
- (bool) Whether this is a PJAX request
-
-$isFlash				*yii/web/Request::$isFlash*
-
- (bool) Whether this is an Adobe Flash or Adobe Flex request.
-
-$rawBody				*yii/web/Request::$rawBody*
-
- (string) The request body
-
-$bodyParams				*yii/web/Request::$bodyParams*
-
- (array) The request parameters given in the request body.
-
-$queryParams				*yii/web/Request::$queryParams*
-
- (array) The request GET parameter values.
-
-$hostInfo				*yii/web/Request::$hostInfo*
-
- (string|null) Schema and hostname part (with port number if needed) of the
- request URL (e.g. 'http://www.yiiframework.com'), null if can't be obtained
- from '$_SERVER' and wasn't set.
-
-$hostName				*yii/web/Request::$hostName*
-
- (string|null) Hostname part of the request URL (e.g. 'www.yiiframework.com')
-
-$baseUrl				*yii/web/Request::$baseUrl*
-
- (string) The relative URL for the application
-
-$scriptUrl				*yii/web/Request::$scriptUrl*
-
- (string) The relative URL of the entry script.
-
-$pathInfo				*yii/web/Request::$pathInfo*
-
- (string) Part of the request URL that is after the entry script and before
- the question mark. Note, the returned path info is already URL-decoded.
-
-$absoluteUrl				*yii/web/Request::$absoluteUrl*
-
- (string) The currently requested absolute URL.
-
-$url					*yii/web/Request::$url*
-
- (string) The currently requested relative URL. Note that the URI returned may
- be URL-encoded depending on the client.
-
-$queryString				*yii/web/Request::$queryString*
-
- (string) Part of the request URL that is after the question mark
-
-$isSecureConnection			*yii/web/Request::$isSecureConnection*
-
- (bool) If the request is sent via secure channel (https)
-
-$serverName				*yii/web/Request::$serverName*
-
- (string) Server name, null if not available
-
-$serverPort				*yii/web/Request::$serverPort*
-
- (int|null) Server port number, null if not available
-
-$referrer				*yii/web/Request::$referrer*
-
- (string|null) URL referrer, null if not available
-
-$userAgent				*yii/web/Request::$userAgent*
-
- (string|null) User agent, null if not available
-
-$userIP					*yii/web/Request::$userIP*
-
- (string|null) User IP address, null if not available
-
-$userHost				*yii/web/Request::$userHost*
-
- (string|null) User host name, null if not available
-
-$authUser				*yii/web/Request::$authUser*
-
- (string|null) The username sent via HTTP authentication, null if the username
- is not given
-
-$authPassword				*yii/web/Request::$authPassword*
-
- (string|null) The password sent via HTTP authentication, null if the password
- is not given
-
-$port					*yii/web/Request::$port*
-
- (int) Port number for insecure requests.
-
-$securePort				*yii/web/Request::$securePort*
-
- (int) Port number for secure requests.
-
-$acceptableContentTypes			*yii/web/Request::$acceptableContentTypes*
-
- (array) The content types ordered by the quality score. Types with the
- highest scores will be returned first. The array keys are the content types,
- while the array values are the corresponding quality score and other
- parameters as given in the header.
-
-$contentType				*yii/web/Request::$contentType*
-
- (string) Request content-type. Null is returned if this information is not
- available.
-
-$acceptableLanguages			*yii/web/Request::$acceptableLanguages*
-
- (array) The languages ordered by the preference level. The first element
- represents the most preferred language.
-
-$preferredLanguage			*yii/web/Request::$preferredLanguage*
-
- (string) The language that the application should use.
-
-$eTags					*yii/web/Request::$eTags*
-
- (array) The entity tags
-
-$cookies				*yii/web/Request::$cookies*
-
- (\yii\web\CookieCollection) The cookie collection.
-
-$csrfToken				*yii/web/Request::$csrfToken*
-
- (string) The token used to perform CSRF validation.
-
-$csrfTokenFromHeader			*yii/web/Request::$csrfTokenFromHeader*
-
- (string) The CSRF token sent via 'CSRF_HEADER' by browser. Null is returned
- if no such header is sent.
+ (array) List of headers to check for determining whether the connection is
+ made via HTTPS. The array keys are header names and the array value is a list
+ of header values that indicate a secure connection. The match of header names
+ and values is case-insensitive. It's not advisable to put insecure headers
+ here.
 
 
 
@@ -287,62 +145,62 @@ METHOD DETAILS
 
 *yii/web/Request::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/web/Request::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/web/Request::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/web/Request::__get*					public
 
- See |yii/base/Object::__get|
+ See |yii/base/Component::__get|
 
 
 *yii/web/Request::__set*					public
 
- See |yii/base/Object::__set|
+ See |yii/base/Component::__set|
 
 
 *yii/web/Request::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/Component::__isset|
 
 
 *yii/web/Request::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/Component::__unset|
 
 
 *yii/web/Request::__call*					public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/web/Request::hasProperty*				public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/web/Request::canGetProperty*				public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/Component::canGetProperty|
 
 
 *yii/web/Request::canSetProperty*				public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/Component::canSetProperty|
 
 
 *yii/web/Request::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/web/Request::__clone*				public
@@ -449,6 +307,25 @@ return (void)
  the correct value, you may configure this property to make it right.
 
     [$value] (string) The entry script file path.
+
+
+*yii/web/Request::filterHeaders*				protected
+>
+ filterHeaders($headerCollection)
+<
+return (void)
+
+    [$headerCollection] (\yii\web\HeaderCollection) 
+
+
+*yii/web/Request::getIpValidator*				protected
+>
+ getIpValidator()
+<
+return (\yii\validators\IpValidator) 
+
+ You can override this method to adjust validator or implement different
+ matching strategy.
 
 
 *yii/web/Request::getHeaders*				public
@@ -876,6 +753,24 @@ return (string|null) URL referrer, null if not available
 
 
 
+*yii/web/Request::getOrigin*				public
+>
+ getOrigin()
+<
+return (string|null) URL origin of a CORS request, 'null' if not available.
+
+ The return value is taken from the 'Origin' 'getHeaders()|header' sent by the
+ browser.
+
+ Note that the origin request header indicates where a fetch originates from.
+ It doesn't include any path information, but only the server name. It is sent
+ with a CORS requests, as well as with POST requests. It is similar to the
+ referer header, but, unlike this header, it doesn't disclose the whole path.
+ Please refer to
+ <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin> for more
+ information.
+
+
 *yii/web/Request::getUserAgent*				public
 >
  getUserAgent()
@@ -890,6 +785,7 @@ return (string|null) User agent, null if not available
 <
 return (string|null) User IP address, null if not available
 
+ The IP is determined using headers and / or '$_SERVER' variables.
 
 
 *yii/web/Request::getUserHost*				public
@@ -898,14 +794,33 @@ return (string|null) User IP address, null if not available
 <
 return (string|null) User host name, null if not available
 
+ The HOST is determined using headers and / or '$_SERVER' variables.
+
+
+*yii/web/Request::getRemoteIP*				public
+>
+ getRemoteIP()
+<
+return (string|null) Remote IP address, 'null' if not available.
+
+ This is always the next hop, any headers are ignored.
+
+
+*yii/web/Request::getRemoteHost*				public
+>
+ getRemoteHost()
+<
+return (string|null) Remote host name, 'null' if not available
+
+ This is always the next hop, any headers are ignored.
 
 
 *yii/web/Request::getAuthUser*				public
 >
  getAuthUser()
 <
-return (string|null) The username sent via HTTP authentication, null if the username
-is not given
+return (string|null) The username sent via HTTP authentication, 'null' if the
+username is not given
 
 
 
@@ -913,8 +828,20 @@ is not given
 >
  getAuthPassword()
 <
-return (string|null) The password sent via HTTP authentication, null if the password
-is not given
+return (string|null) The password sent via HTTP authentication, 'null' if the
+password is not given
+
+
+
+*yii/web/Request::getAuthCredentials*			public
+>
+ getAuthCredentials()
+<
+return (array) That contains exactly two elements: 
+  - 0: the username sent via HTTP authentication, 'null' if the
+  username is not given 
+  - 1: the password sent via HTTP authentication, 'null' if the
+  password is not given
 
 
 

@@ -18,71 +18,6 @@ DESCRIPTION
  See '\yii\db\ActiveRecord' for a concrete implementation.
 
 
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/db/BaseActiveRecord::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$validators				*yii/db/BaseActiveRecord::$validators*
-
- See |yii/base/Model::$validators|
-
-$activeValidators			*yii/db/BaseActiveRecord::$activeValidators*
-
- See |yii/base/Model::$activeValidators|
-
-$errors					*yii/db/BaseActiveRecord::$errors*
-
- See |yii/base/Model::$errors|
-
-$firstErrors				*yii/db/BaseActiveRecord::$firstErrors*
-
- See |yii/base/Model::$firstErrors|
-
-$attributes				*yii/db/BaseActiveRecord::$attributes*
-
- See |yii/base/Model::$attributes|
-
-$scenario				*yii/db/BaseActiveRecord::$scenario*
-
- See |yii/base/Model::$scenario|
-
-$iterator				*yii/db/BaseActiveRecord::$iterator*
-
- See |yii/base/Model::$iterator|
-
-$relatedRecords				*yii/db/BaseActiveRecord::$relatedRecords*
-
- (array) An array of related records indexed by relation names.
-
-$oldAttributes				*yii/db/BaseActiveRecord::$oldAttributes*
-
- (array) The old attribute values (name-value pairs)
-
-$dirtyAttributes			*yii/db/BaseActiveRecord::$dirtyAttributes*
-
- (array) The changed attribute values (name-value pairs)
-
-$isNewRecord				*yii/db/BaseActiveRecord::$isNewRecord*
-
- (bool) Whether the record is new and should be inserted when calling
- 'save()'.
-
-$primaryKey				*yii/db/BaseActiveRecord::$primaryKey*
-
- (mixed) The primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is 'true'. A string is
- returned otherwise (null will be returned if the key value is null).
-
-$oldPrimaryKey				*yii/db/BaseActiveRecord::$oldPrimaryKey*
-
- (mixed) The old primary key value. An array (column name => column value) is
- returned if the primary key is composite or '$asArray' is 'true'. A string is
- returned otherwise (null will be returned if the key value is null).
-
-
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -90,12 +25,12 @@ METHOD DETAILS
 
 *yii/db/BaseActiveRecord::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/BaseActiveRecord::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/BaseActiveRecord::init*				public
@@ -161,12 +96,12 @@ return (void)
 
 *yii/db/BaseActiveRecord::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/db/BaseActiveRecord::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/db/BaseActiveRecord::canGetProperty*			public
@@ -223,7 +158,7 @@ return (bool) Whether the property can be written
 
 *yii/db/BaseActiveRecord::hasMethod*			public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/db/BaseActiveRecord::__clone*			public
@@ -289,6 +224,11 @@ return (bool) Whether the property can be written
 *yii/db/BaseActiveRecord::ensureBehaviors*		public
 
  See |yii/base/Component::ensureBehaviors|
+
+
+*yii/db/BaseActiveRecord::instance*			public
+
+ See |yii/base/StaticInstanceTrait::instance|
 
 
 *yii/db/BaseActiveRecord::fields*				public
@@ -608,8 +548,8 @@ return (void)
 >
  findOne($condition)
 <
-return (static) ActiveRecord instance matching the condition, or 'null' if nothing
-matches.
+return (static|null) ActiveRecord instance matching the condition, or 'null' if
+nothing matches.
 
 
 
@@ -1320,6 +1260,15 @@ remain unchanged.
  triggered. This event is available since version 2.0.8.
 
 
+*yii/db/BaseActiveRecord::refreshInternal*		protected
+>
+ refreshInternal($record)
+<
+return (bool) Whether refresh was successful.
+
+    [$record] (\yii\db\BaseActiveRecord) The record to take attributes from.
+
+
 *yii/db/BaseActiveRecord::afterRefresh*			public
 >
  afterRefresh()
@@ -1495,6 +1444,11 @@ return (void)
     'orders' for a relation defined via 'getOrders()' method.
     [$delete] (bool) Whether to delete the model that contains the foreign
     key.
+
+    Note that the deletion will be performed using 'deleteAll()', which will
+    not trigger any events on the related models. If you need
+    'EVENT_BEFORE_DELETE' or 'EVENT_AFTER_DELETE' to be triggered, you need to
+    'find()|find' the models first and then call 'delete()' on each of them.
 
 
 *yii/db/BaseActiveRecord::isPrimaryKey*			public

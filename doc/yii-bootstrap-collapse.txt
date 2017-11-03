@@ -84,25 +84,37 @@ $items					*yii/bootstrap/Collapse::$items*
    - contentOptions: optional, the HTML attributes of the group's
    content
 
+ Since version 2.0.7 you may also specify this property as key-value pairs,
+ where the key refers to the 'label' and the value refers to 'content'. If
+ value is a string it is interpreted as label. If it is an array, it is
+ interpreted as explained above.
+
+ For example:
+
+   echo Collapse::widget([
+       'items' => [
+         'Introduction' => 'This is the first collapsable menu',
+         'Second panel' => [
+             'content' => 'This is the second collapsable menu',
+         ],
+         [
+             'label' => 'Third panel',
+             'content' => 'This is the third collapsable menu',
+         ],
+     ]
+   ])
+
+
+
 $encodeLabels				*yii/bootstrap/Collapse::$encodeLabels*
 
  (boolean) Whether the labels for header items should be HTML-encoded.
 
-$behaviors				*yii/bootstrap/Collapse::$behaviors*
+$autoCloseItems				*yii/bootstrap/Collapse::$autoCloseItems*
 
- See |yii/base/Component::$behaviors|
-
-$id					*yii/bootstrap/Collapse::$id*
-
- See |yii/base/Widget::$id|
-
-$view					*yii/bootstrap/Collapse::$view*
-
- See |yii/bootstrap/BootstrapWidgetTrait::$view|
-
-$viewPath				*yii/bootstrap/Collapse::$viewPath*
-
- See |yii/base/Widget::$viewPath|
+ (boolean) Whether to close other items if an item is opened. Defaults to
+ 'true' which causes an accordion effect. Set this to 'false' to allow keeping
+ multiple items open at once.
 
 
 
@@ -112,12 +124,12 @@ METHOD DETAILS
 
 *yii/bootstrap/Collapse::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/bootstrap/Collapse::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/bootstrap/Collapse::init*				public
@@ -332,8 +344,7 @@ return (string) The rendering result
 
     [$header] (string) A label of the item group 'items'
     [$item] (array) A single item from 'items'
-    [$index] (integer) The item index as each item group content must have an
-    id
+    [$index] (int) The item index as each item group content must have an id
 
 
 

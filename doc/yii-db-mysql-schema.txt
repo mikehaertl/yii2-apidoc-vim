@@ -27,30 +27,6 @@ $typeMap				*yii/db/mysql/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
  (values)
 
-$tableSchemas				*yii/db/mysql/Schema::$tableSchemas*
-
- See |yii/db/Schema::$tableSchemas|
-
-$schemaNames				*yii/db/mysql/Schema::$schemaNames*
-
- See |yii/db/Schema::$schemaNames|
-
-$tableNames				*yii/db/mysql/Schema::$tableNames*
-
- See |yii/db/Schema::$tableNames|
-
-$queryBuilder				*yii/db/mysql/Schema::$queryBuilder*
-
- See |yii/db/Schema::$queryBuilder|
-
-$lastInsertID				*yii/db/mysql/Schema::$lastInsertID*
-
- See |yii/db/Schema::$lastInsertID|
-
-$transactionIsolationLevel		*yii/db/mysql/Schema::$transactionIsolationLevel*
-
- See |yii/db/Schema::$transactionIsolationLevel|
-
 
 
 METHOD DETAILS
@@ -59,62 +35,115 @@ METHOD DETAILS
 
 *yii/db/mysql/Schema::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/mysql/Schema::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/mysql/Schema::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/db/mysql/Schema::__get*				public
 
- See |yii/base/Object::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/db/mysql/Schema::__set*				public
 
- See |yii/base/Object::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/db/mysql/Schema::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/db/mysql/Schema::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/db/mysql/Schema::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/db/mysql/Schema::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/db/mysql/Schema::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/db/mysql/Schema::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/db/mysql/Schema::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/db/mysql/Schema::resolveTableName*			protected
+>
+ resolveTableName($name)
+<
+return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
+
+
+
+
+
+
+
+    [$name] (string) The table name
+
+
+*yii/db/mysql/Schema::findSchemaNames*			protected
+
+ See |yii/db/Schema::findSchemaNames|
+
+
+*yii/db/mysql/Schema::findTableNames*			protected
+>
+ findTableNames($schema='''')
+<
+return (array) All table names in the database. The names have NO schema name prefix.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
+
+
+*yii/db/mysql/Schema::loadTableSchema*			protected
+>
+ loadTableSchema($name)
+<
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
+
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/mysql/Schema::createColumnSchema*			protected
@@ -122,29 +151,9 @@ METHOD DETAILS
  See |yii/db/Schema::createColumnSchema|
 
 
-*yii/db/mysql/Schema::loadTableSchema*			protected
->
- loadTableSchema($name)
-<
-return (\yii\db\TableSchema) Driver dependent table metadata. Null if the table does
-not exist.
-
-    [$name] (string) Table name
-
-
 *yii/db/mysql/Schema::getTableSchema*			public
 
  See |yii/db/Schema::getTableSchema|
-
-
-*yii/db/mysql/Schema::getCacheKey*			protected
-
- See |yii/db/Schema::getCacheKey|
-
-
-*yii/db/mysql/Schema::getCacheTag*			protected
-
- See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/mysql/Schema::getTableSchemas*			public
@@ -206,21 +215,6 @@ return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
     [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
     [$length] (int|string|array) Length or precision of the column. See
     'ColumnSchemaBuilder::$length'.
-
-
-*yii/db/mysql/Schema::findSchemaNames*			protected
-
- See |yii/db/Schema::findSchemaNames|
-
-
-*yii/db/mysql/Schema::findTableNames*			protected
->
- findTableNames($schema='''')
-<
-return (array) All table names in the database. The names have NO schema name prefix.
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
 
 
 *yii/db/mysql/Schema::findUniqueIndexes*			public
@@ -333,6 +327,150 @@ return (string) The properly quoted column name
  See |yii/db/Schema::isReadQuery|
 
 
+*yii/db/mysql/Schema::getCacheKey*			protected
+
+ See |yii/db/Schema::getCacheKey|
+
+
+*yii/db/mysql/Schema::getCacheTag*			protected
+
+ See |yii/db/Schema::getCacheTag|
+
+
+*yii/db/mysql/Schema::getTableMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getTableMetadata|
+
+
+*yii/db/mysql/Schema::getSchemaMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getSchemaMetadata|
+
+
+*yii/db/mysql/Schema::setTableMetadata*			protected
+
+ See |yii/db/Schema::setTableMetadata|
+
+
+*yii/db/mysql/Schema::normalizePdoRowKeyCase*		protected
+
+ See |yii/db/Schema::normalizePdoRowKeyCase|
+
+
+*yii/db/mysql/Schema::loadTablePrimaryKey*		protected
+>
+ loadTablePrimaryKey($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mysql/Schema::loadTableForeignKeys*		protected
+>
+ loadTableForeignKeys($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mysql/Schema::loadTableIndexes*			protected
+>
+ loadTableIndexes($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mysql/Schema::loadTableUniques*			protected
+>
+ loadTableUniques($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mysql/Schema::loadTableChecks*			protected
+>
+ loadTableChecks($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mysql/Schema::loadTableDefaultValues*		protected
+>
+ loadTableDefaultValues($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/mysql/Schema::getTablePrimaryKey*			public
+
+ See |yii/db/ConstraintFinderTrait::getTablePrimaryKey|
+
+
+*yii/db/mysql/Schema::getSchemaPrimaryKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaPrimaryKeys|
+
+
+*yii/db/mysql/Schema::getTableForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableForeignKeys|
+
+
+*yii/db/mysql/Schema::getSchemaForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaForeignKeys|
+
+
+*yii/db/mysql/Schema::getTableIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableIndexes|
+
+
+*yii/db/mysql/Schema::getSchemaIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaIndexes|
+
+
+*yii/db/mysql/Schema::getTableUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableUniques|
+
+
+*yii/db/mysql/Schema::getSchemaUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaUniques|
+
+
+*yii/db/mysql/Schema::getTableChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableChecks|
+
+
+*yii/db/mysql/Schema::getSchemaChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaChecks|
+
+
+*yii/db/mysql/Schema::getTableDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableDefaultValues|
+
+
+*yii/db/mysql/Schema::getSchemaDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaDefaultValues|
+
+
 *yii/db/mysql/Schema::resolveTableNames*			protected
 >
  resolveTableNames($table, $name)
@@ -377,6 +515,14 @@ return (string) $sql the result of 'SHOW CREATE TABLE'
 return (void)
 
     [$table] (\yii\db\TableSchema) The table metadata
+
+
+*yii/db/mysql/Schema::isOldMysql*				protected
+>
+ isOldMysql()
+<
+return (bool) Whether the version of the MySQL being used is older than 5.1.
+
 
 
 

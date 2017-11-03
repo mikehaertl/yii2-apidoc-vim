@@ -153,7 +153,7 @@ $schemaCacheExclude			*yii/db/Connection::$schemaCacheExclude*
 
 $schemaCache				*yii/db/Connection::$schemaCache*
 
- (\yii\caching\Cache|string) The cache object or the ID of the cache
+ (\yii\caching\CacheInterface|string) The cache object or the ID of the cache
  application component that is used to cache the table metadata.
 
 $enableQueryCache			*yii/db/Connection::$enableQueryCache*
@@ -172,7 +172,7 @@ $queryCacheDuration			*yii/db/Connection::$queryCacheDuration*
 
 $queryCache				*yii/db/Connection::$queryCache*
 
- (\yii\caching\Cache|string) The cache object or the ID of the cache
+ (\yii\caching\CacheInterface|string) The cache object or the ID of the cache
  application component that is used for query caching.
 
 $charset				*yii/db/Connection::$charset*
@@ -233,7 +233,7 @@ $enableSavepoint			*yii/db/Connection::$enableSavepoint*
 
 $serverStatusCache			*yii/db/Connection::$serverStatusCache*
 
- (\yii\caching\Cache|string) The cache object or the ID of the cache
+ (\yii\caching\CacheInterface|string) The cache object or the ID of the cache
  application component that is used to store the health status of the DB
  servers specified in 'masters' and 'slaves'. This is used only when
  read/write splitting is enabled or 'masters' is not empty.
@@ -308,60 +308,10 @@ $enableLogging				*yii/db/Connection::$enableLogging*
 
 $enableProfiling			*yii/db/Connection::$enableProfiling*
 
- (bool) Whether to enable profiling of database queries. Defaults to true. You
- may want to disable this option in a production environment to gain
- performance if you do not need the information being logged.
-
-$behaviors				*yii/db/Connection::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$isActive				*yii/db/Connection::$isActive*
-
- (bool) Whether the DB connection is established
-
-$transaction				*yii/db/Connection::$transaction*
-
- (\yii\db\Transaction) The currently active transaction. Null if no active
- transaction.
-
-$schema					*yii/db/Connection::$schema*
-
- (\yii\db\Schema) The schema information for the database opened by this
- connection.
-
-$queryBuilder				*yii/db/Connection::$queryBuilder*
-
- (\yii\db\QueryBuilder) The query builder for the current DB connection.
-
-$lastInsertID				*yii/db/Connection::$lastInsertID*
-
- (string) The row ID of the last row inserted, or the last value retrieved
- from the sequence object
-
-$driverName				*yii/db/Connection::$driverName*
-
- (string) Name of the DB driver
-
-$slavePdo				*yii/db/Connection::$slavePdo*
-
- (\PDO) The PDO instance for the currently active slave connection. 'null' is
- returned if no slave connection is available and '$fallbackToMaster' is
- false.
-
-$masterPdo				*yii/db/Connection::$masterPdo*
-
- (\PDO) The PDO instance for the currently active master connection.
-
-$slave					*yii/db/Connection::$slave*
-
- (\yii\db\Connection) The currently active slave connection. 'null' is
- returned if there is no slave available and '$fallbackToMaster' is false.
-
-$master					*yii/db/Connection::$master*
-
- (\yii\db\Connection) The currently active master connection. 'null' is
- returned if there is no master available.
+ (bool) Whether to enable profiling of opening database connection and
+ database queries. Defaults to true. You may want to disable this option in a
+ production environment to gain performance if you do not need the information
+ being logged.
 
 
 
@@ -371,17 +321,17 @@ METHOD DETAILS
 
 *yii/db/Connection::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/Connection::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/Connection::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/db/Connection::__get*				public

@@ -76,6 +76,10 @@ $skipUpdateOnClean			*yii/behaviors/SluggableBehavior::$skipUpdateOnClean*
 
  See |yii/behaviors/AttributeBehavior::$skipUpdateOnClean|
 
+$preserveNonEmptyValues			*yii/behaviors/SluggableBehavior::$preserveNonEmptyValues*
+
+ See |yii/behaviors/AttributeBehavior::$preserveNonEmptyValues|
+
 $slugAttribute				*yii/behaviors/SluggableBehavior::$slugAttribute*
 
  (string) The attribute that will receive the slug value
@@ -98,6 +102,12 @@ $ensureUnique				*yii/behaviors/SluggableBehavior::$ensureUnique*
  records. If enabled behavior will validate slug uniqueness automatically. If
  validation fails it will attempt generating unique slug value from based one
  until success.
+
+$skipOnEmpty				*yii/behaviors/SluggableBehavior::$skipOnEmpty*
+
+ (bool) Whether to skip slug generation if 'attribute' is null or an empty
+ string. If true, the behaviour will not generate a new slug if 'attribute' is
+ null or an empty string.
 
 $uniqueValidator			*yii/behaviors/SluggableBehavior::$uniqueValidator*
 
@@ -127,12 +137,12 @@ METHOD DETAILS
 
 *yii/behaviors/SluggableBehavior::className*		public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/behaviors/SluggableBehavior::__construct*		public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/behaviors/SluggableBehavior::init*			public
@@ -151,47 +161,47 @@ return (void)
 
 *yii/behaviors/SluggableBehavior::__get*			public
 
- See |yii/base/Object::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/behaviors/SluggableBehavior::__set*			public
 
- See |yii/base/Object::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/behaviors/SluggableBehavior::__isset*		public
 
- See |yii/base/Object::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/behaviors/SluggableBehavior::__unset*		public
 
- See |yii/base/Object::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/behaviors/SluggableBehavior::__call*			public
 
- See |yii/base/Object::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/behaviors/SluggableBehavior::hasProperty*		public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/behaviors/SluggableBehavior::canGetProperty*		public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/behaviors/SluggableBehavior::canSetProperty*		public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/behaviors/SluggableBehavior::hasMethod*		public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/behaviors/SluggableBehavior::events*			public
@@ -282,6 +292,15 @@ return (string) New slug value
 
     [$baseSlug] (string) Base slug value
     [$iteration] (int) Iteration number
+
+
+*yii/behaviors/SluggableBehavior::isEmpty*		protected
+>
+ isEmpty($slugPart)
+<
+return (bool) Whether $slugPart empty or not.
+
+    [$slugPart] (string) One of attributes that is used for slug generation.
 
 
 

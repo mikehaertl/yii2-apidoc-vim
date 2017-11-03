@@ -1,0 +1,300 @@
+
+*yii/db/SqlTokenizer*   >> |yii/base/Component|
+=====================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/db/sqlite/SqlTokenizer|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It can be used to obtain an addition information from an SQL code.
+
+ Usage example:
+
+   $tokenizer = new SqlTokenizer("SELECT * FROM user WHERE id = 1");
+   $root = $tokeinzer->tokenize();
+   $sqlTokens = $root->getChildren();
+
+ Tokens are instances of 'SqlToken'.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$sql					*yii/db/SqlTokenizer::$sql*
+
+ (string) SQL code.
+
+$length					*yii/db/SqlTokenizer::$length*
+
+ (int) SQL code string length.
+
+$offset					*yii/db/SqlTokenizer::$offset*
+
+ (int) SQL code string current offset.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/SqlTokenizer::className*				public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/db/SqlTokenizer::__construct*			public
+>
+ __construct($sql, $config='[]')
+<
+return (void)
+
+    [$sql] (string) SQL code to be tokenized.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii/db/SqlTokenizer::init*				public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/db/SqlTokenizer::__get*				public
+
+ See |yii/base/Component::__get|
+
+
+*yii/db/SqlTokenizer::__set*				public
+
+ See |yii/base/Component::__set|
+
+
+*yii/db/SqlTokenizer::__isset*				public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/db/SqlTokenizer::__unset*				public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/db/SqlTokenizer::__call*				public
+
+ See |yii/base/Component::__call|
+
+
+*yii/db/SqlTokenizer::hasProperty*			public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/db/SqlTokenizer::canGetProperty*			public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/db/SqlTokenizer::canSetProperty*			public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/db/SqlTokenizer::hasMethod*				public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/db/SqlTokenizer::__clone*				public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/db/SqlTokenizer::behaviors*				public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/db/SqlTokenizer::hasEventHandlers*			public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/db/SqlTokenizer::on*					public
+
+ See |yii/base/Component::on|
+
+
+*yii/db/SqlTokenizer::off*				public
+
+ See |yii/base/Component::off|
+
+
+*yii/db/SqlTokenizer::trigger*				public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/db/SqlTokenizer::getBehavior*			public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/db/SqlTokenizer::getBehaviors*			public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/db/SqlTokenizer::attachBehavior*			public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/db/SqlTokenizer::attachBehaviors*			public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/db/SqlTokenizer::detachBehavior*			public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/db/SqlTokenizer::detachBehaviors*			public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/db/SqlTokenizer::ensureBehaviors*			public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/db/SqlTokenizer::tokenize*				public
+>
+ tokenize()
+<
+return (\yii\db\SqlToken) Code type token.
+
+
+
+*yii/db/SqlTokenizer::isWhitespace*			protected
+>
+ isWhitespace($length)
+<
+return (bool) Whether there's a whitespace at the current offset.
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string.
+
+    [$length] (int) Length of the matched string.
+
+
+*yii/db/SqlTokenizer::isComment*				protected
+>
+ isComment($length)
+<
+return (bool) Whether there's a commentary at the current offset.
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string.
+
+    [$length] (int) Length of the matched string.
+
+
+*yii/db/SqlTokenizer::isOperator*				protected
+>
+ isOperator($length, $content)
+<
+return (bool) Whether there's an operator at the current offset.
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string. It may also set '$content' to a string that
+ will be used as a token content.
+
+    [$length] (int) Length of the matched string.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/SqlTokenizer::isIdentifier*			protected
+>
+ isIdentifier($length, $content)
+<
+return (bool) Whether there's an identifier at the current offset.
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string. It may also set '$content' to a string that
+ will be used as a token content.
+
+    [$length] (int) Length of the matched string.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/SqlTokenizer::isStringLiteral*			protected
+>
+ isStringLiteral($length, $content)
+<
+return (bool) Whether there's a string literal at the current offset.
+
+ If this methos returns 'true', it has to set the '$length' parameter to the
+ length of the matched string. It may also set '$content' to a string that
+ will be used as a token content.
+
+    [$length] (int) Length of the matched string.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/SqlTokenizer::isKeyword*				protected
+>
+ isKeyword($string, $content)
+<
+return (bool) Whether the given string is a keyword.
+
+ The method may set '$content' to a string that will be used as a token
+ content.
+
+    [$string] (string) String to be matched.
+    [$content] (string) Optional content instead of the matched string.
+
+
+*yii/db/SqlTokenizer::startsWithAnyLongest*		protected
+>
+ startsWithAnyLongest($with, $caseSensitive, $length='null', $content='null')
+<
+return (bool) Whether a match is found.
+
+    [$with] (string[]) Strings to be tested. The method **will** modify this
+    parameter to speed up lookups.
+    [$caseSensitive] (bool) Whether to perform a case sensitive comparison.
+    [$length] (int|null) Length of the matched string.
+    [$content] (string|null) Matched string.
+
+
+*yii/db/SqlTokenizer::substring*				protected
+>
+ substring($length, $caseSensitive='true', $offset='null')
+<
+return (string) Result string, it may be empty if there's nothing to return.
+
+    [$length] (int) String length to be returned.
+    [$caseSensitive] (bool) If it's 'false', the string will be uppercased.
+    [$offset] (int|null) SQL code offset, defaults to current if 'null' is
+    passed.
+
+
+*yii/db/SqlTokenizer::indexAfter*				protected
+>
+ indexAfter($string, $offset='null')
+<
+return (int) Index after the given string or end of string index.
+
+    [$string] (string) String to be found.
+    [$offset] (int|null) SQL code offset, defaults to current if 'null' is
+    passed.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

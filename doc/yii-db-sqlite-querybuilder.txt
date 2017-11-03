@@ -44,7 +44,7 @@ METHOD DETAILS
 
 *yii/db/sqlite/QueryBuilder::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/sqlite/QueryBuilder::__construct*			public
@@ -54,52 +54,52 @@ METHOD DETAILS
 
 *yii/db/sqlite/QueryBuilder::init*			public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/db/sqlite/QueryBuilder::__get*			public
 
- See |yii/base/Object::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/db/sqlite/QueryBuilder::__set*			public
 
- See |yii/base/Object::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/db/sqlite/QueryBuilder::__isset*			public
 
- See |yii/base/Object::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/db/sqlite/QueryBuilder::__unset*			public
 
- See |yii/base/Object::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/db/sqlite/QueryBuilder::__call*			public
 
- See |yii/base/Object::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/db/sqlite/QueryBuilder::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/db/sqlite/QueryBuilder::canGetProperty*		public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/db/sqlite/QueryBuilder::canSetProperty*		public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/db/sqlite/QueryBuilder::hasMethod*			public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/db/sqlite/QueryBuilder::build*			public
@@ -151,7 +151,7 @@ return (string) The batch INSERT SQL statement
 
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
-    [$rows] (array) The rows to be batch inserted into the table
+    [$rows] (array|\Generator) The rows to be batch inserted into the table
 
 
 *yii/db/sqlite/QueryBuilder::update*			public
@@ -322,6 +322,123 @@ return (string) The SQL statement for dropping an index.
     properly quoted by the method.
     [$table] (string) The table whose index is to be dropped. The name will be
     properly quoted by the method.
+
+
+*yii/db/sqlite/QueryBuilder::addUnique*			public
+>
+ addUnique($name, $table, $columns)
+<
+return (string) The SQL statement for adding an unique constraint to an existing
+table.
+
+
+
+
+
+
+
+    [$name] (string) The name of the unique constraint. The name will be
+    properly quoted by the method.
+    [$table] (string) The table that the unique constraint will be added to.
+    The name will be properly quoted by the method.
+    [$columns] (string|array) The name of the column to that the constraint
+    will be added on. If there are multiple columns, separate them with
+    commas. The name will be properly quoted by the method.
+
+
+*yii/db/sqlite/QueryBuilder::dropUnique*			public
+>
+ dropUnique($name, $table)
+<
+return (string) The SQL statement for dropping an unique constraint.
+
+
+
+
+
+
+
+    [$name] (string) The name of the unique constraint to be dropped. The name
+    will be properly quoted by the method.
+    [$table] (string) The table whose unique constraint is to be dropped. The
+    name will be properly quoted by the method.
+
+
+*yii/db/sqlite/QueryBuilder::addCheck*			public
+>
+ addCheck($name, $table, $expression)
+<
+return (string) The SQL statement for adding a check constraint to an existing table.
+
+
+
+
+
+
+
+    [$name] (string) The name of the check constraint. The name will be
+    properly quoted by the method.
+    [$table] (string) The table that the check constraint will be added to.
+    The name will be properly quoted by the method.
+    [$expression] (string) The SQL of the 'CHECK' constraint.
+
+
+*yii/db/sqlite/QueryBuilder::dropCheck*			public
+>
+ dropCheck($name, $table)
+<
+return (string) The SQL statement for dropping a check constraint.
+
+
+
+
+
+
+
+    [$name] (string) The name of the check constraint to be dropped. The name
+    will be properly quoted by the method.
+    [$table] (string) The table whose check constraint is to be dropped. The
+    name will be properly quoted by the method.
+
+
+*yii/db/sqlite/QueryBuilder::addDefaultValue*		public
+>
+ addDefaultValue($name, $table, $column, $value)
+<
+return (string) The SQL statement for adding a default value constraint to an
+existing table.
+
+
+
+
+
+
+
+    [$name] (string) The name of the default value constraint. The name will
+    be properly quoted by the method.
+    [$table] (string) The table that the default value constraint will be
+    added to. The name will be properly quoted by the method.
+    [$column] (string) The name of the column to that the constraint will be
+    added on. The name will be properly quoted by the method.
+    [$value] (mixed) Default value.
+
+
+*yii/db/sqlite/QueryBuilder::dropDefaultValue*		public
+>
+ dropDefaultValue($name, $table)
+<
+return (string) The SQL statement for dropping a default value constraint.
+
+
+
+
+
+
+
+    [$name] (string) The name of the default value constraint to be dropped.
+    The name will be properly quoted by the method.
+    [$table] (string) The table whose default value constraint is to be
+    dropped. The name will be properly quoted by the method.
 
 
 *yii/db/sqlite/QueryBuilder::resetSequence*		public

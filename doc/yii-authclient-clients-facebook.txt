@@ -62,7 +62,12 @@ $scope					*yii/authclient/clients/Facebook::$scope*
 
 $autoRefreshAccessToken			*yii/authclient/clients/Facebook::$autoRefreshAccessToken*
 
- See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
+ (bool) 
+
+ Whether to automatically perform 'refresh access token' request on expired
+ access token.
+
+
 
 $clientId				*yii/authclient/clients/Facebook::$clientId*
 
@@ -89,57 +94,14 @@ $attributeNames				*yii/authclient/clients/Facebook::$attributeNames*
  (array) List of attribute names, which should be requested from API to
  initialize user attributes.
 
-$behaviors				*yii/authclient/clients/Facebook::$behaviors*
+$autoExchangeAccessToken		*yii/authclient/clients/Facebook::$autoExchangeAccessToken*
 
- See |yii/base/Component::$behaviors|
+ (bool) Whether to automatically upgrade short-live (2 hours) access token to
+ long-live (60 days) one, after fetching it.
 
-$id					*yii/authclient/clients/Facebook::$id*
+$clientAuthCodeUrl			*yii/authclient/clients/Facebook::$clientAuthCodeUrl*
 
- See |yii/authclient/ClientInterface::$id|
-
-$name					*yii/authclient/clients/Facebook::$name*
-
- See |yii/authclient/ClientInterface::$name|
-
-$title					*yii/authclient/clients/Facebook::$title*
-
- See |yii/authclient/ClientInterface::$title|
-
-$userAttributes				*yii/authclient/clients/Facebook::$userAttributes*
-
- See |yii/authclient/BaseClient::$userAttributes|
-
-$normalizeUserAttributeMap		*yii/authclient/clients/Facebook::$normalizeUserAttributeMap*
-
- See |yii/authclient/BaseClient::$normalizeUserAttributeMap|
-
-$viewOptions				*yii/authclient/clients/Facebook::$viewOptions*
-
- See |yii/authclient/BaseClient::$viewOptions|
-
-$httpClient				*yii/authclient/clients/Facebook::$httpClient*
-
- See |yii/authclient/BaseClient::$httpClient|
-
-$requestOptions				*yii/authclient/clients/Facebook::$requestOptions*
-
- See |yii/authclient/BaseClient::$requestOptions|
-
-$stateStorage				*yii/authclient/clients/Facebook::$stateStorage*
-
- See |yii/authclient/BaseClient::$stateStorage|
-
-$returnUrl				*yii/authclient/clients/Facebook::$returnUrl*
-
- See |yii/authclient/BaseOAuth::$returnUrl|
-
-$accessToken				*yii/authclient/clients/Facebook::$accessToken*
-
- See |yii/authclient/BaseOAuth::$accessToken|
-
-$signatureMethod			*yii/authclient/clients/Facebook::$signatureMethod*
-
- See |yii/authclient/BaseOAuth::$signatureMethod|
+ (string) URL endpoint for the client auth code generation.
 
 
 
@@ -149,17 +111,17 @@ METHOD DETAILS
 
 *yii/authclient/clients/Facebook::className*		public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/authclient/clients/Facebook::__construct*		public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/authclient/clients/Facebook::init*			public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/authclient/clients/Facebook::__get*			public
@@ -567,8 +529,24 @@ return (void)
 
 
 *yii/authclient/clients/Facebook::fetchAccessToken*	public
+>
+ fetchAccessToken($authCode, $params='[]')
+<
+return (\yii\authclient\OAuthToken) Access token.
 
- See |yii/authclient/OAuth2::fetchAccessToken|
+
+
+
+
+
+
+    [$authCode] (string) Authorization code, usually comes at $_GET['code'].
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/clients/Facebook::applyClientCredentialsToRequest*protected
+
+ See |yii/authclient/OAuth2::applyClientCredentialsToRequest|
 
 
 *yii/authclient/clients/Facebook::generateAuthState*	protected
@@ -584,6 +562,53 @@ return (void)
 *yii/authclient/clients/Facebook::authenticateUser*	public
 
  See |yii/authclient/OAuth2::authenticateUser|
+
+
+*yii/authclient/clients/Facebook::authenticateUserJwt*	public
+
+ See |yii/authclient/OAuth2::authenticateUserJwt|
+
+
+*yii/authclient/clients/Facebook::exchangeAccessToken*	public
+>
+ exchangeAccessToken($token)
+<
+return (\yii\authclient\OAuthToken) Long-live access token.
+
+ Note that this method will success for already long-live token, but will not
+ actually prolong it any further. Pay attention, that this method will fail on
+ already expired access token.
+
+    [$token] (\yii\authclient\OAuthToken) Short-live access token.
+
+
+*yii/authclient/clients/Facebook::fetchClientAuthCode*	public
+>
+ fetchClientAuthCode($token='null', $params='[]')
+<
+return (string) Client auth code.
+
+ This make sense for the distributed applications, which provides several Auth
+ clients (web and mobile) to avoid triggering Facebook's automated spam
+ systems.
+
+    [$token] (\yii\authclient\OAuthToken|null) Access token, if not set
+    'accessToken' will be used.
+    [$params] (array) Additional request params.
+
+
+*yii/authclient/clients/Facebook::fetchClientAccessToken*	public
+>
+ fetchClientAccessToken($authCode, $params='[]')
+<
+return (\yii\authclient\OAuthToken) Long-live client-specific access token.
+
+ This make sense for the distributed applications, which provides several Auth
+ clients (web and mobile) to avoid triggering Facebook's automated spam
+ systems.
+
+    [$authCode] (string) Client auth code.
+    [$params] (array) 
 
 
 

@@ -26,7 +26,7 @@ DESCRIPTION
    ]) ?>
 
  The masked text field is implemented based on the [jQuery input masked
- plugin](https://github.com/RobinHerbots/jquery.inputmask).
+ plugin](https://github.com/RobinHerbots/Inputmask).
 
 
 PROPERTY DETAILS
@@ -125,22 +125,6 @@ $_hashVar				*yii/widgets/MaskedInput::$_hashVar*
 
  (string) The hashed variable to store the pluginOptions
 
-$behaviors				*yii/widgets/MaskedInput::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
-$id					*yii/widgets/MaskedInput::$id*
-
- See |yii/base/Widget::$id|
-
-$view					*yii/widgets/MaskedInput::$view*
-
- See |yii/base/Widget::$view|
-
-$viewPath				*yii/widgets/MaskedInput::$viewPath*
-
- See |yii/base/Widget::$viewPath|
-
 
 
 METHOD DETAILS
@@ -149,12 +133,12 @@ METHOD DETAILS
 
 *yii/widgets/MaskedInput::className*			public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/widgets/MaskedInput::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/widgets/MaskedInput::init*				public
@@ -353,11 +337,20 @@ return (string) The result of widget execution to be outputted.
  See |yii/widgets/InputWidget::hasModel|
 
 
+*yii/widgets/MaskedInput::renderInputHtml*		protected
+
+ See |yii/widgets/InputWidget::renderInputHtml|
+
+
 *yii/widgets/MaskedInput::hashPluginOptions*		protected
 >
  hashPluginOptions($view)
 <
 return (void)
+
+ Helps in reusing the variable for similar options passed for other widgets on
+ the same page. The following special data attribute will also be added to the
+ input field to allow accessing the client options via javascript:
 
 
    - 'data-plugin-inputmask' will store the hashed variable storing the

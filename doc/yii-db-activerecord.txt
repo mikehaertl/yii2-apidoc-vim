@@ -68,12 +68,12 @@ METHOD DETAILS
 
 *yii/db/ActiveRecord::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/ActiveRecord::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/ActiveRecord::init*				public
@@ -103,12 +103,12 @@ METHOD DETAILS
 
 *yii/db/ActiveRecord::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/Component::__call|
 
 
 *yii/db/ActiveRecord::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/Component::hasProperty|
 
 
 *yii/db/ActiveRecord::canGetProperty*			public
@@ -123,7 +123,7 @@ METHOD DETAILS
 
 *yii/db/ActiveRecord::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/Component::hasMethod|
 
 
 *yii/db/ActiveRecord::__clone*				public
@@ -189,6 +189,11 @@ METHOD DETAILS
 *yii/db/ActiveRecord::ensureBehaviors*			public
 
  See |yii/base/Component::ensureBehaviors|
+
+
+*yii/db/ActiveRecord::instance*				public
+
+ See |yii/base/StaticInstanceTrait::instance|
 
 
 *yii/db/ActiveRecord::fields*				public
@@ -742,8 +747,24 @@ deleted is 0, even though the deletion execution is successful.
 
 
 *yii/db/ActiveRecord::refresh*				public
+>
+ refresh()
+<
+return (bool) Whether the row still exists in the database. If 'true', the latest
+data will be populated to this active record. Otherwise, this record will
+remain unchanged.
 
- See |yii/db/BaseActiveRecord::refresh|
+
+
+ If the refresh is successful, an 'EVENT_AFTER_REFRESH' event will be
+ triggered. This event is available since version 2.0.8.
+
+
+
+
+*yii/db/ActiveRecord::refreshInternal*			protected
+
+ See |yii/db/BaseActiveRecord::refreshInternal|
 
 
 *yii/db/ActiveRecord::afterRefresh*			public

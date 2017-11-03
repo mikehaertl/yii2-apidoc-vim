@@ -128,10 +128,6 @@ $params					*yii/db/Query::$params*
  (array) List of query parameter values indexed by parameter placeholders. For
  example, '[':name' => 'Dan', ':age' => 31]'.
 
-$behaviors				*yii/db/Query::$behaviors*
-
- See |yii/base/Component::$behaviors|
-
 
 
 METHOD DETAILS
@@ -140,17 +136,17 @@ METHOD DETAILS
 
 *yii/db/Query::className*					public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/Query::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/Query::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/db/Query::__get*					public
@@ -713,6 +709,15 @@ return (bool|string)
     [$db] (\yii\db\Connection|null) 
 
 
+*yii/db/Query::getTablesUsedInFrom*			public
+>
+ getTablesUsedInFrom()
+<
+return (string[]) Table names indexed by aliases
+
+ Both aliases and names are enclosed into {{ and }}.
+
+
 *yii/db/Query::select*					public
 >
  select($columns, $option='null')
@@ -777,13 +782,13 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
-    [$tables] (string|array) The table(s) to be selected from. This can be
-    either a string (e.g. ''user'') or an array (e.g. '['user', 'profile']')
-    specifying one or several table names. Table names can contain schema
-    prefixes (e.g. ''public.user'') and/or table aliases (e.g. ''user u'').
-    The method will automatically quote the table names unless it contains
-    some parenthesis (which means the table is given as a sub-query or DB
-    expression).
+    [$tables] (string|array|\yii\db\Expression) The table(s) to be selected
+    from. This can be either a string (e.g. ''user'') or an array (e.g.
+    '['user', 'profile']') specifying one or several table names. Table names
+    can contain schema prefixes (e.g. ''public.user'') and/or table aliases
+    (e.g. ''user u''). The method will automatically quote the table names
+    unless it contains some parenthesis (which means the table is given as a
+    sub-query or DB expression).
 
     When the tables are specified as an array, you may also use the array keys
     as the table aliases (if a table does not need alias, do not use a string
@@ -791,6 +796,9 @@ return ($this) The query object itself
 
     Use a Query object to represent a sub-query. In this case, the
     corresponding array key will be used as the alias for the sub-query.
+
+    To specify the 'FROM' part in plain SQL, you may pass an instance of
+    'Expression'.
 
     Here are some examples:
 

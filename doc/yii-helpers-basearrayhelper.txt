@@ -123,6 +123,58 @@ return (mixed) The value of the element if found, default value otherwise
     key does not exist. Not used when getting value from an object.
 
 
+*yii/helpers/BaseArrayHelper::setValue*			public
+>
+ setValue($array, $path, $value)
+<
+return (void)
+
+ If there is no such key path yet, it will be created recursively. If the key
+ exists, it will be overwritten.
+
+    $array = [
+        'key' => [
+            'in' => [
+                'val1',
+                'key' => 'val'
+            ]
+        ]
+    ];
+
+ The result of 'ArrayHelper::setValue($array, 'key.in.0', ['arr' => 'val']);'
+ will be the following:
+
+    [
+        'key' => [
+            'in' => [
+                ['arr' => 'val'],
+                'key' => 'val'
+            ]
+        ]
+    ]
+
+ The result of 'ArrayHelper::setValue($array, 'key.in', ['arr' => 'val']);' or
+ 'ArrayHelper::setValue($array, ['key', 'in'], ['arr' => 'val']);' will be the
+ following:
+
+    [
+        'key' => [
+            'in' => [
+                'arr' => 'val'
+            ]
+        ]
+    ]
+
+
+
+    [$array] (array) The array to write the value to
+    [$path] (string|array|null) The path of where do you want to write a value
+    to '$array'  the path can be described by a string when each key should be
+    separated by a dot  you can also describe the path as an array of keys  if
+    the path is null then '$array' will be assigned the '$value'
+    [$value] (mixed) The value to be written
+
+
 *yii/helpers/BaseArrayHelper::remove*			public
 >
  remove($array, $key, $default='null')

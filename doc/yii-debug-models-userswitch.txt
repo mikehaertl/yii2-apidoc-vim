@@ -1,0 +1,490 @@
+
+*yii/debug/models/UserSwitch*   >> |yii/base/Model|
+=============================
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/debug/models/UserSwitch::className*			public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/debug/models/UserSwitch::__construct*		public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/debug/models/UserSwitch::init*			public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/debug/models/UserSwitch::__get*			public
+
+ See |yii/base/Component::__get|
+
+
+*yii/debug/models/UserSwitch::__set*			public
+
+ See |yii/base/Component::__set|
+
+
+*yii/debug/models/UserSwitch::__isset*			public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/debug/models/UserSwitch::__unset*			public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/debug/models/UserSwitch::__call*			public
+
+ See |yii/base/Component::__call|
+
+
+*yii/debug/models/UserSwitch::hasProperty*		public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/debug/models/UserSwitch::canGetProperty*		public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/debug/models/UserSwitch::canSetProperty*		public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/debug/models/UserSwitch::hasMethod*			public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/debug/models/UserSwitch::__clone*			public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/debug/models/UserSwitch::behaviors*			public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/debug/models/UserSwitch::hasEventHandlers*		public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/debug/models/UserSwitch::on*				public
+
+ See |yii/base/Component::on|
+
+
+*yii/debug/models/UserSwitch::off*			public
+
+ See |yii/base/Component::off|
+
+
+*yii/debug/models/UserSwitch::trigger*			public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/debug/models/UserSwitch::getBehavior*		public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/debug/models/UserSwitch::getBehaviors*		public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/debug/models/UserSwitch::attachBehavior*		public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/debug/models/UserSwitch::attachBehaviors*		public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/debug/models/UserSwitch::detachBehavior*		public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/debug/models/UserSwitch::detachBehaviors*		public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/debug/models/UserSwitch::ensureBehaviors*		public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/debug/models/UserSwitch::instance*			public
+
+ See |yii/base/StaticInstanceTrait::instance|
+
+
+*yii/debug/models/UserSwitch::fields*			public
+
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/debug/models/UserSwitch::extraFields*		public
+
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/debug/models/UserSwitch::toArray*			public
+
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/debug/models/UserSwitch::resolveFields*		protected
+
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/debug/models/UserSwitch::rules*			public
+>
+ rules()
+<
+return (array) Validation rules
+
+
+
+ Validation rules are used by 'validate()' to check if attribute values are
+ valid. Child classes may override this method to declare different validation
+ rules.
+
+ Each rule is an array with the following structure:
+
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       //...other parameters...
+   ]
+
+ where
+
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass a string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array in which
+   the validation    rule can be applied. If this option is not set, the rule
+ will apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
+
+ A validator can be either an object of a class extending 'Validator', or a
+ model class method (called *inline validator*) that has the following
+ signature:
+
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
+
+ In the above '$attribute' refers to the attribute currently being validated
+ while '$params' contains an array of validator configuration options such as
+ 'max' in case of 'string' validator. The value of the attribute currently
+ being validated can be accessed as '$this->$attribute'. Note the '$' before
+ 'attribute'; this is taking the value of the variable '$attribute' and using
+ it as the name of the property to access.
+
+ Yii also provides a set of 'Validator::builtInValidators|built-in
+ validators'. Each one has an alias name which can be used when specifying a
+ validation rule.
+
+ Below are some examples:
+
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
+
+ Note, in order to inherit rules defined in the parent class, a child class
+ needs to merge the parent rules with child rules using functions such as
+ 'array_merge()'.
+
+
+
+
+*yii/debug/models/UserSwitch::scenarios*			public
+
+ See |yii/base/Model::scenarios|
+
+
+*yii/debug/models/UserSwitch::formName*			public
+
+ See |yii/base/Model::formName|
+
+
+*yii/debug/models/UserSwitch::attributes*			public
+
+ See |yii/base/Model::attributes|
+
+
+*yii/debug/models/UserSwitch::attributeLabels*		public
+>
+ attributeLabels()
+<
+return (array) Customized attribute labels
+
+
+
+*yii/debug/models/UserSwitch::attributeHints*		public
+
+ See |yii/base/Model::attributeHints|
+
+
+*yii/debug/models/UserSwitch::validate*			public
+
+ See |yii/base/Model::validate|
+
+
+*yii/debug/models/UserSwitch::beforeValidate*		public
+
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/debug/models/UserSwitch::afterValidate*		public
+
+ See |yii/base/Model::afterValidate|
+
+
+*yii/debug/models/UserSwitch::getValidators*		public
+
+ See |yii/base/Model::getValidators|
+
+
+*yii/debug/models/UserSwitch::getActiveValidators*	public
+
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/debug/models/UserSwitch::createValidators*		public
+
+ See |yii/base/Model::createValidators|
+
+
+*yii/debug/models/UserSwitch::isAttributeRequired*	public
+
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/debug/models/UserSwitch::isAttributeSafe*		public
+
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/debug/models/UserSwitch::isAttributeActive*		public
+
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/debug/models/UserSwitch::getAttributeLabel*		public
+
+ See |yii/base/Model::getAttributeLabel|
+
+
+*yii/debug/models/UserSwitch::getAttributeHint*		public
+
+ See |yii/base/Model::getAttributeHint|
+
+
+*yii/debug/models/UserSwitch::hasErrors*			public
+
+ See |yii/base/Model::hasErrors|
+
+
+*yii/debug/models/UserSwitch::getErrors*			public
+
+ See |yii/base/Model::getErrors|
+
+
+*yii/debug/models/UserSwitch::getFirstErrors*		public
+
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/debug/models/UserSwitch::getFirstError*		public
+
+ See |yii/base/Model::getFirstError|
+
+
+*yii/debug/models/UserSwitch::addError*			public
+
+ See |yii/base/Model::addError|
+
+
+*yii/debug/models/UserSwitch::addErrors*			public
+
+ See |yii/base/Model::addErrors|
+
+
+*yii/debug/models/UserSwitch::clearErrors*		public
+
+ See |yii/base/Model::clearErrors|
+
+
+*yii/debug/models/UserSwitch::generateAttributeLabel*	public
+
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/debug/models/UserSwitch::getAttributes*		public
+
+ See |yii/base/Model::getAttributes|
+
+
+*yii/debug/models/UserSwitch::setAttributes*		public
+
+ See |yii/base/Model::setAttributes|
+
+
+*yii/debug/models/UserSwitch::onUnsafeAttribute*		public
+
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/debug/models/UserSwitch::getScenario*		public
+
+ See |yii/base/Model::getScenario|
+
+
+*yii/debug/models/UserSwitch::setScenario*		public
+
+ See |yii/base/Model::setScenario|
+
+
+*yii/debug/models/UserSwitch::safeAttributes*		public
+
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/debug/models/UserSwitch::activeAttributes*		public
+
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/debug/models/UserSwitch::load*			public
+
+ See |yii/base/Model::load|
+
+
+*yii/debug/models/UserSwitch::loadMultiple*		public
+
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/debug/models/UserSwitch::validateMultiple*		public
+
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/debug/models/UserSwitch::getIterator*		public
+
+ See |yii/base/Model::getIterator|
+
+
+*yii/debug/models/UserSwitch::offsetExists*		public
+
+ See |yii/base/Model::offsetExists|
+
+
+*yii/debug/models/UserSwitch::offsetGet*			public
+
+ See |yii/base/Model::offsetGet|
+
+
+*yii/debug/models/UserSwitch::offsetSet*			public
+
+ See |yii/base/Model::offsetSet|
+
+
+*yii/debug/models/UserSwitch::offsetUnset*		public
+
+ See |yii/base/Model::offsetUnset|
+
+
+*yii/debug/models/UserSwitch::getUser*			public
+>
+ getUser()
+<
+return (null|\yii\web\User) 
+
+
+
+*yii/debug/models/UserSwitch::getMainUser*		public
+>
+ getMainUser()
+<
+return (\yii\web\User) 
+
+
+
+*yii/debug/models/UserSwitch::setUser*			public
+>
+ setUser($user)
+<
+return (void)
+
+    [$user] (\yii\web\User) 
+
+
+*yii/debug/models/UserSwitch::setUserByIdentity*		public
+>
+ setUserByIdentity($identity)
+<
+return (void)
+
+    [$identity] (\yii\web\IdentityInterface) 
+
+
+*yii/debug/models/UserSwitch::reset*			public
+>
+ reset()
+<
+return (void)
+
+
+
+*yii/debug/models/UserSwitch::isMainUser*			public
+>
+ isMainUser()
+<
+return (bool) 
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

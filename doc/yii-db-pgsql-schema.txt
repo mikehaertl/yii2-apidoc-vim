@@ -27,34 +27,6 @@ $typeMap				*yii/db/pgsql/Schema::$typeMap*
  (array) Mapping from physical column types (keys) to abstract column types
  (values)
 
-$tableSchemas				*yii/db/pgsql/Schema::$tableSchemas*
-
- See |yii/db/Schema::$tableSchemas|
-
-$schemaNames				*yii/db/pgsql/Schema::$schemaNames*
-
- See |yii/db/Schema::$schemaNames|
-
-$tableNames				*yii/db/pgsql/Schema::$tableNames*
-
- See |yii/db/Schema::$tableNames|
-
-$queryBuilder				*yii/db/pgsql/Schema::$queryBuilder*
-
- See |yii/db/Schema::$queryBuilder|
-
-$lastInsertID				*yii/db/pgsql/Schema::$lastInsertID*
-
- See |yii/db/Schema::$lastInsertID|
-
-$transactionIsolationLevel		*yii/db/pgsql/Schema::$transactionIsolationLevel*
-
- See |yii/db/Schema::$transactionIsolationLevel|
-
-$viewNames				*yii/db/pgsql/Schema::$viewNames*
-
- See |yii/db/ViewFinderTrait::$viewNames|
-
 
 
 METHOD DETAILS
@@ -63,62 +35,124 @@ METHOD DETAILS
 
 *yii/db/pgsql/Schema::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/db/pgsql/Schema::__construct*			public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/db/pgsql/Schema::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/db/pgsql/Schema::__get*				public
 
- See |yii/base/Object::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/db/pgsql/Schema::__set*				public
 
- See |yii/base/Object::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/db/pgsql/Schema::__isset*				public
 
- See |yii/base/Object::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/db/pgsql/Schema::__unset*				public
 
- See |yii/base/Object::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/db/pgsql/Schema::__call*				public
 
- See |yii/base/Object::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/db/pgsql/Schema::hasProperty*			public
 
- See |yii/base/Object::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/db/pgsql/Schema::canGetProperty*			public
 
- See |yii/base/Object::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/db/pgsql/Schema::canSetProperty*			public
 
- See |yii/base/Object::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/db/pgsql/Schema::hasMethod*				public
 
- See |yii/base/Object::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/db/pgsql/Schema::resolveTableName*			protected
+>
+ resolveTableName($name)
+<
+return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
+
+
+
+
+
+
+
+    [$name] (string) The table name
+
+
+*yii/db/pgsql/Schema::findSchemaNames*			protected
+>
+ findSchemaNames()
+<
+return (array) All schema names in the database, except system schemas.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+
+*yii/db/pgsql/Schema::findTableNames*			protected
+>
+ findTableNames($schema='''')
+<
+return (array) All table names in the database. The names have NO schema name prefix.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
+
+
+*yii/db/pgsql/Schema::loadTableSchema*			protected
+>
+ loadTableSchema($name)
+<
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
+
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/pgsql/Schema::createColumnSchema*			protected
@@ -126,29 +160,9 @@ METHOD DETAILS
  See |yii/db/Schema::createColumnSchema|
 
 
-*yii/db/pgsql/Schema::loadTableSchema*			public
->
- loadTableSchema($name)
-<
-return (\yii\db\TableSchema|null) Driver dependent table metadata. Null if the table
-does not exist.
-
-    [$name] (string) Table name
-
-
 *yii/db/pgsql/Schema::getTableSchema*			public
 
  See |yii/db/Schema::getTableSchema|
-
-
-*yii/db/pgsql/Schema::getCacheKey*			protected
-
- See |yii/db/Schema::getCacheKey|
-
-
-*yii/db/pgsql/Schema::getCacheTag*			protected
-
- See |yii/db/Schema::getCacheTag|
 
 
 *yii/db/pgsql/Schema::getTableSchemas*			public
@@ -197,26 +211,6 @@ return (\yii\db\pgsql\QueryBuilder) Query builder instance
 *yii/db/pgsql/Schema::createColumnSchemaBuilder*		public
 
  See |yii/db/Schema::createColumnSchemaBuilder|
-
-
-*yii/db/pgsql/Schema::findSchemaNames*			protected
->
- findSchemaNames()
-<
-return (array) All schema names in the database, except system schemas
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
-*yii/db/pgsql/Schema::findTableNames*			protected
->
- findTableNames($schema='''')
-<
-return (array) All table names in the database. The names have NO schema name prefix.
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
 
 
 *yii/db/pgsql/Schema::findUniqueIndexes*			public
@@ -335,6 +329,150 @@ return (string) The properly quoted table name
  See |yii/db/Schema::isReadQuery|
 
 
+*yii/db/pgsql/Schema::getCacheKey*			protected
+
+ See |yii/db/Schema::getCacheKey|
+
+
+*yii/db/pgsql/Schema::getCacheTag*			protected
+
+ See |yii/db/Schema::getCacheTag|
+
+
+*yii/db/pgsql/Schema::getTableMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getTableMetadata|
+
+
+*yii/db/pgsql/Schema::getSchemaMetadata*			protected
+
+ See |yii/db/ConstraintFinderTrait::getSchemaMetadata|
+
+
+*yii/db/pgsql/Schema::setTableMetadata*			protected
+
+ See |yii/db/Schema::setTableMetadata|
+
+
+*yii/db/pgsql/Schema::normalizePdoRowKeyCase*		protected
+
+ See |yii/db/Schema::normalizePdoRowKeyCase|
+
+
+*yii/db/pgsql/Schema::loadTablePrimaryKey*		protected
+>
+ loadTablePrimaryKey($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/pgsql/Schema::loadTableForeignKeys*		protected
+>
+ loadTableForeignKeys($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/pgsql/Schema::loadTableIndexes*			protected
+>
+ loadTableIndexes($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/pgsql/Schema::loadTableUniques*			protected
+>
+ loadTableUniques($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/pgsql/Schema::loadTableChecks*			protected
+>
+ loadTableChecks($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/pgsql/Schema::loadTableDefaultValues*		protected
+>
+ loadTableDefaultValues($tableName)
+<
+return (void)
+
+    [$tableName] () 
+
+
+*yii/db/pgsql/Schema::getTablePrimaryKey*			public
+
+ See |yii/db/ConstraintFinderTrait::getTablePrimaryKey|
+
+
+*yii/db/pgsql/Schema::getSchemaPrimaryKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaPrimaryKeys|
+
+
+*yii/db/pgsql/Schema::getTableForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableForeignKeys|
+
+
+*yii/db/pgsql/Schema::getSchemaForeignKeys*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaForeignKeys|
+
+
+*yii/db/pgsql/Schema::getTableIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableIndexes|
+
+
+*yii/db/pgsql/Schema::getSchemaIndexes*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaIndexes|
+
+
+*yii/db/pgsql/Schema::getTableUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableUniques|
+
+
+*yii/db/pgsql/Schema::getSchemaUniques*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaUniques|
+
+
+*yii/db/pgsql/Schema::getTableChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getTableChecks|
+
+
+*yii/db/pgsql/Schema::getSchemaChecks*			public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaChecks|
+
+
+*yii/db/pgsql/Schema::getTableDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getTableDefaultValues|
+
+
+*yii/db/pgsql/Schema::getSchemaDefaultValues*		public
+
+ See |yii/db/ConstraintFinderTrait::getSchemaDefaultValues|
+
+
 *yii/db/pgsql/Schema::findViewNames*			protected
 >
  findViewNames($schema='\'\'')
@@ -390,7 +528,7 @@ return (bool) Whether the table exists in the database
 >
  loadColumnSchema($info)
 <
-return (\yii\db\ColumnSchema) The column schema object
+return (\yii\db\pgsql\ColumnSchema) The column schema object
 
     [$info] (array) Column information
 

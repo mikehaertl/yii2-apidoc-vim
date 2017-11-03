@@ -1,0 +1,231 @@
+
+*yii/authclient/signature/RsaSha*   >> |yii/authclient/signature/BaseMethod|
+=================================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/authclient/signature/RsaSha1|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ > **Note:** This class requires PHP "OpenSSL"
+ extension(<http://php.net/manual/en/book.openssl.php>).
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$privateCertificateFile			*yii/authclient/signature/RsaSha::$privateCertificateFile*
+
+ (string) Path to the file, which holds private key certificate.
+
+$publicCertificateFile			*yii/authclient/signature/RsaSha::$publicCertificateFile*
+
+ (string) Path to the file, which holds public key certificate.
+
+$algorithm				*yii/authclient/signature/RsaSha::$algorithm*
+
+ (int|string) Signature hash algorithm, e.g. 'OPENSSL_ALGO_SHA1',
+ 'OPENSSL_ALGO_SHA256' and so on.
+
+$_privateCertificate			*yii/authclient/signature/RsaSha::$_privateCertificate*
+
+ (string) OpenSSL private key certificate content. This value can be fetched
+ from file specified by 'privateCertificateFile'.
+
+$_publicCertificate			*yii/authclient/signature/RsaSha::$_publicCertificate*
+
+ (string) OpenSSL public key certificate content. This value can be fetched
+ from file specified by 'publicCertificateFile'.
+
+$name					*yii/authclient/signature/RsaSha::$name*
+
+ (string) Method name.
+
+$publicCertificate			*yii/authclient/signature/RsaSha::$publicCertificate*
+
+ (string) Public key certificate content.
+
+$privateCertificate			*yii/authclient/signature/RsaSha::$privateCertificate*
+
+ (string) Private key certificate content.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/authclient/signature/RsaSha::className*		public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/authclient/signature/RsaSha::__construct*		public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/authclient/signature/RsaSha::init*			public
+>
+ init()
+<
+return (void)
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+
+
+*yii/authclient/signature/RsaSha::__get*			public
+
+ See |yii/base/BaseObject::__get|
+
+
+*yii/authclient/signature/RsaSha::__set*			public
+
+ See |yii/base/BaseObject::__set|
+
+
+*yii/authclient/signature/RsaSha::__isset*		public
+
+ See |yii/base/BaseObject::__isset|
+
+
+*yii/authclient/signature/RsaSha::__unset*		public
+
+ See |yii/base/BaseObject::__unset|
+
+
+*yii/authclient/signature/RsaSha::__call*			public
+
+ See |yii/base/BaseObject::__call|
+
+
+*yii/authclient/signature/RsaSha::hasProperty*		public
+
+ See |yii/base/BaseObject::hasProperty|
+
+
+*yii/authclient/signature/RsaSha::canGetProperty*		public
+
+ See |yii/base/BaseObject::canGetProperty|
+
+
+*yii/authclient/signature/RsaSha::canSetProperty*		public
+
+ See |yii/base/BaseObject::canSetProperty|
+
+
+*yii/authclient/signature/RsaSha::hasMethod*		public
+
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/authclient/signature/RsaSha::getName*		public
+>
+ getName()
+<
+return (string) Method name.
+
+
+
+
+
+
+
+
+*yii/authclient/signature/RsaSha::generateSignature*	public
+>
+ generateSignature($baseString, $key)
+<
+return (string) Signature string.
+
+
+
+
+
+
+
+    [$baseString] (string) Signature base string.
+    [$key] (string) Signature key.
+
+
+*yii/authclient/signature/RsaSha::verify*			public
+>
+ verify($signature, $baseString, $key)
+<
+return (bool) Success.
+
+
+
+
+
+
+
+    [$signature] (string) Signature to be verified.
+    [$baseString] (string) Signature base string.
+    [$key] (string) Signature key.
+
+
+*yii/authclient/signature/RsaSha::setPublicCertificate*	public
+>
+ setPublicCertificate($publicCertificate)
+<
+return (void)
+
+    [$publicCertificate] (string) Public key certificate content.
+
+
+*yii/authclient/signature/RsaSha::getPublicCertificate*	public
+>
+ getPublicCertificate()
+<
+return (string) Public key certificate content.
+
+
+
+*yii/authclient/signature/RsaSha::setPrivateCertificate*	public
+>
+ setPrivateCertificate($privateCertificate)
+<
+return (void)
+
+    [$privateCertificate] (string) Private key certificate content.
+
+
+*yii/authclient/signature/RsaSha::getPrivateCertificate*	public
+>
+ getPrivateCertificate()
+<
+return (string) Private key certificate content.
+
+
+
+*yii/authclient/signature/RsaSha::initPublicCertificate*	protected
+>
+ initPublicCertificate()
+<
+return (string) Public certificate content.
+
+ This method will attempt to fetch the certificate value from
+ 'publicCertificateFile' file.
+
+
+*yii/authclient/signature/RsaSha::initPrivateCertificate*	protected
+>
+ initPrivateCertificate()
+<
+return (string) Private certificate content.
+
+ This method will attempt to fetch the certificate value from
+ 'privateCertificateFile' file.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,5 +1,5 @@
 
-*yii/base/Component*   >> |yii/base/Object|
+*yii/base/Component*   >> |yii/base/BaseObject|
 ====================
 
 SUBCLASSES
@@ -328,13 +328,22 @@ SUBCLASSES
 |yii/debug/panels/RouterPanel|
 |yii/debug/components/search/matchers/GreaterThanOrEqual|
 |yii/redis/Mutex|
+|yii/db/SqlTokenizer|
+|yii/db/sqlite/SqlTokenizer|
+|yii/data/ActiveDataFilter|
+|yii/data/DataFilter|
+|yii/console/widgets/Table|
+|yii/authclient/OpenIdConnect|
+|yii/debug/models/search/User|
+|yii/debug/models/UserSwitch|
+|yii/debug/controllers/UserController|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
 
  Component provides the *event* and *behavior* features, in addition to the
  *property* feature which is implemented in its parent class
- '\yii\base\Object|Object'.
+ '\yii\base\BaseObject|BaseObject'.
 
  Event is a way to "inject" custom code into existing code at certain places.
  For example, a comment object can trigger an "add" event when the user adds a
@@ -414,14 +423,6 @@ DESCRIPTION
  on components](guide:concept-components).
 
 
-PROPERTY DETAILS
-------------------------------------------------------------------------------
-
-$behaviors				*yii/base/Component::$behaviors*
-
- (\yii\base\Behavior[]) List of behaviors attached to this component
-
-
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -429,17 +430,17 @@ METHOD DETAILS
 
 *yii/base/Component::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/base/Component::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/base/Component::init*				public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/base/Component::__get*				public

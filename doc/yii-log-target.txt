@@ -28,10 +28,6 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-$enabled				*yii/log/Target::$enabled*
-
- (bool) Whether to enable this log target. Defaults to true.
-
 $categories				*yii/log/Target::$categories*
 
  (array) List of message categories that this target is interested in.
@@ -89,14 +85,9 @@ $messages				*yii/log/Target::$messages*
  target. Please refer to 'Logger::messages' for the details about the message
  structure.
 
-$behaviors				*yii/log/Target::$behaviors*
+$microtime				*yii/log/Target::$microtime*
 
- See |yii/base/Component::$behaviors|
-
-$levels					*yii/log/Target::$levels*
-
- (int) The message levels that this target is interested in. This is a bitmap
- of level values. Defaults to 0, meaning  all available levels.
+ (bool) Whether to log time with microseconds. Defaults to false.
 
 
 
@@ -106,17 +97,17 @@ METHOD DETAILS
 
 *yii/log/Target::className*				public
 
- See |yii/base/Object::className|
+ See |yii/base/BaseObject::className|
 
 
 *yii/log/Target::__construct*				public
 
- See |yii/base/Object::__construct|
+ See |yii/base/BaseObject::__construct|
 
 
 *yii/log/Target::init*					public
 
- See |yii/base/Object::init|
+ See |yii/base/BaseObject::init|
 
 
 *yii/log/Target::__get*					public
@@ -334,6 +325,45 @@ return (string) The prefix string
 
     [$message] (array) The message being exported. The message structure
     follows that in 'Logger::messages'.
+
+
+*yii/log/Target::setEnabled*				public
+>
+ setEnabled($value)
+<
+return (void)
+
+    [$value] (bool|callable) A boolean value or a callable to obtain the value
+    from. The callable value is available since version 2.0.13.
+
+    A callable may be used to determine whether the log target should be
+    enabled in a dynamic way. For example, to only enable a log if the current
+    user is logged in you can configure the target as follows:
+
+      'enabled' => function() {
+          return !Yii::$app->user->isGuest;
+      }
+
+
+
+
+*yii/log/Target::getEnabled*				public
+>
+ getEnabled()
+<
+return (bool) A value indicating whether this log target is enabled.
+
+
+
+*yii/log/Target::getTime*					protected
+>
+ getTime($timestamp)
+<
+return (string) 
+
+ If 'microtime' is configured to true it will return format 'Y-m-d H:i:s.u'.
+
+    [$timestamp] (float) 
 
 
 
