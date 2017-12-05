@@ -216,8 +216,12 @@ METHOD DETAILS
 
 
 *yii/sphinx/Command::getRawSql*				public
+>
+ getRawSql()
+<
+return (void)
 
- See |yii/db/Command::getRawSql|
+ {@inheritdoc}
 
 
 *yii/sphinx/Command::prepare*				public
@@ -226,19 +230,9 @@ METHOD DETAILS
 <
 return (void)
 
- Prepares the SQL statement to be executed.
+ {@inheritdoc}
 
-
-
- For complex SQL statement that is to be executed multiple times, this may
- improve performance. For SQL statement with binding parameters, this method
- is invoked automatically.
-
-
-
-    [$forRead] (bool) Whether this method is called for a read query. If null,
-    it means the SQL statement should be used to determine whether it is for
-    read or write.
+    [$forRead] () 
 
 
 *yii/sphinx/Command::cancel*				public
@@ -258,50 +252,26 @@ return (void)
 
 *yii/sphinx/Command::bindValue*				public
 >
- bindValue($name, $value, $dataType=null)
+ bindValue($name, $value, $dataType='null')
 <
-return ($this) The current command being executed
+return (void)
 
- Binds a value to a parameter.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string|int) Parameter identifier. For a prepared statement using
-    named placeholders, this will be a parameter name of the form ':name'. For
-    a prepared statement using question mark placeholders, this will be the
-    1-indexed position of the parameter.
-    [$value] (mixed) The value to bind to the parameter
-    [$dataType] (int) SQL data type of the parameter. If null, the type is
-    determined by the PHP type of the value.
+    [$name] () 
+    [$value] () 
+    [$dataType] () 
 
 
 *yii/sphinx/Command::bindValues*				public
 >
  bindValues($values)
 <
-return ($this) The current command being executed
+return (void)
 
- Binds a list of values to the corresponding parameters.
+ {@inheritdoc}
 
-
-
- This is similar to 'bindValue()' except that it binds multiple values at a
- time. Note that the SQL data type of each value is determined by its PHP
- type.
-
-
-
-    [$values] (array) The values to be bound. This must be given in terms of
-    an associative array with array keys being the parameter names, and array
-    values the corresponding parameter values, e.g. '[':name' => 'John',
-    ':age' => 25]'. By default, the PDO type of each value is determined by
-    its PHP type. You may explicitly specify the PDO type by using an array:
-    '[value, type]', e.g. '[':name' => 'John', ':profile' => [$profile,
-    \PDO::PARAM_LOB''.
+    [$values] () 
 
 
 *yii/sphinx/Command::query*				public
@@ -392,312 +362,178 @@ return ($this) The command object itself
 >
  createTable($table, $columns, $options='null')
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for creating a new DB table.
+ {@inheritdoc}
 
-
-
- The columns in the new table should be specified as name-definition pairs
- (e.g. 'name' => 'string'), where name stands for a column name which will be
- properly quoted by the method, and definition stands for the column type
- which can contain an abstract DB type. The method
- 'QueryBuilder::getColumnType()' will be called to convert the abstract column
- types to physical ones. For example, 'string' will be converted as
- 'varchar(255)', and 'string not null' becomes 'varchar(255) not null'.
-
- If a column is specified with definition only (e.g. 'PRIMARY KEY (name,
- type)'), it will be directly inserted into the generated SQL.
-
-
-
-    [$table] (string) The name of the table to be created. The name will be
-    properly quoted by the method.
-    [$columns] (array) The columns (name => definition) in the new table.
-    [$options] (string) Additional SQL fragment that will be appended to the
-    generated SQL.
+    [$table] () 
+    [$columns] () 
+    [$options] () 
 
 
 *yii/sphinx/Command::renameTable*				public
 >
  renameTable($table, $newName)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for renaming a DB table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table to be renamed. The name will be properly
-    quoted by the method.
-    [$newName] (string) The new table name. The name will be properly quoted
-    by the method.
+    [$table] () 
+    [$newName] () 
 
 
 *yii/sphinx/Command::dropTable*				public
 >
  dropTable($table)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for dropping a DB table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table to be dropped. The name will be properly
-    quoted by the method.
+    [$table] () 
 
 
 *yii/sphinx/Command::truncateTable*			public
 >
  truncateTable($table)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for truncating a DB table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table to be truncated. The name will be properly
-    quoted by the method.
+    [$table] () 
 
 
 *yii/sphinx/Command::addColumn*				public
 >
  addColumn($table, $column, $type)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for adding a new DB column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table that the new column will be added to. The
-    table name will be properly quoted by the method.
-    [$column] (string) The name of the new column. The name will be properly
-    quoted by the method.
-    [$type] (string) The column type. '\yii\db\QueryBuilder::getColumnType()'
-    will be called to convert the give column type to the physical one. For
-    example, 'string' will be converted as 'varchar(255)', and 'string not
-    null' becomes 'varchar(255) not null'.
+    [$table] () 
+    [$column] () 
+    [$type] () 
 
 
 *yii/sphinx/Command::dropColumn*				public
 >
  dropColumn($table, $column)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for dropping a DB column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be dropped. The name will
-    be properly quoted by the method.
-    [$column] (string) The name of the column to be dropped. The name will be
-    properly quoted by the method.
+    [$table] () 
+    [$column] () 
 
 
 *yii/sphinx/Command::renameColumn*			public
 >
  renameColumn($table, $oldName, $newName)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for renaming a column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be renamed. The name will
-    be properly quoted by the method.
-    [$oldName] (string) The old name of the column. The name will be properly
-    quoted by the method.
-    [$newName] (string) The new name of the column. The name will be properly
-    quoted by the method.
+    [$table] () 
+    [$oldName] () 
+    [$newName] () 
 
 
 *yii/sphinx/Command::alterColumn*				public
 >
  alterColumn($table, $column, $type)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for changing the definition of a column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be changed. The table name
-    will be properly quoted by the method.
-    [$column] (string) The name of the column to be changed. The name will be
-    properly quoted by the method.
-    [$type] (string) The column type. '\yii\db\QueryBuilder::getColumnType()'
-    will be called to convert the give column type to the physical one. For
-    example, 'string' will be converted as 'varchar(255)', and 'string not
-    null' becomes 'varchar(255) not null'.
+    [$table] () 
+    [$column] () 
+    [$type] () 
 
 
 *yii/sphinx/Command::addPrimaryKey*			public
 >
  addPrimaryKey($name, $table, $columns)
 <
-return ($this) The command object itself.
+return (void)
 
- Creates a SQL command for adding a primary key constraint to an existing
- table.
+ {@inheritdoc}
 
-
-
- The method will properly quote the table and column names.
-
-
-
-    [$name] (string) The name of the primary key constraint.
-    [$table] (string) The table that the primary key constraint will be added
-    to.
-    [$columns] (string|array) Comma separated string or array of columns that
-    the primary key will consist of.
+    [$name] () 
+    [$table] () 
+    [$columns] () 
 
 
 *yii/sphinx/Command::dropPrimaryKey*			public
 >
  dropPrimaryKey($name, $table)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for removing a primary key constraint to an existing
- table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the primary key constraint to be removed.
-    [$table] (string) The table that the primary key constraint will be
-    removed from.
+    [$name] () 
+    [$table] () 
 
 
 *yii/sphinx/Command::addForeignKey*			public
 >
  addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for adding a foreign key constraint to an existing
- table.
+ {@inheritdoc}
 
-
-
- The method will properly quote the table and column names.
-
-
-
-    [$name] (string) The name of the foreign key constraint.
-    [$table] (string) The table that the foreign key constraint will be added
-    to.
-    [$columns] (string|array) The name of the column to that the constraint
-    will be added on. If there are multiple columns, separate them with
-    commas.
-    [$refTable] (string) The table that the foreign key references to.
-    [$refColumns] (string|array) The name of the column that the foreign key
-    references to. If there are multiple columns, separate them with commas.
-    [$delete] (string) The ON DELETE option. Most DBMS support these options:
-    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
-    [$update] (string) The ON UPDATE option. Most DBMS support these options:
-    RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+    [$name] () 
+    [$table] () 
+    [$columns] () 
+    [$refTable] () 
+    [$refColumns] () 
+    [$delete] () 
+    [$update] () 
 
 
 *yii/sphinx/Command::dropForeignKey*			public
 >
  dropForeignKey($name, $table)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for dropping a foreign key constraint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the foreign key constraint to be dropped. The
-    name will be properly quoted by the method.
-    [$table] (string) The table whose foreign is to be dropped. The name will
-    be properly quoted by the method.
+    [$name] () 
+    [$table] () 
 
 
 *yii/sphinx/Command::createIndex*				public
 >
  createIndex($name, $table, $columns, $unique='false')
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for creating a new index.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the index. The name will be properly quoted
-    by the method.
-    [$table] (string) The table that the new index will be created for. The
-    table name will be properly quoted by the method.
-    [$columns] (string|array) The column(s) that should be included in the
-    index. If there are multiple columns, please separate them by commas. The
-    column names will be properly quoted by the method.
-    [$unique] (bool) Whether to add UNIQUE constraint on the created index.
+    [$name] () 
+    [$table] () 
+    [$columns] () 
+    [$unique] () 
 
 
 *yii/sphinx/Command::dropIndex*				public
 >
  dropIndex($name, $table)
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for dropping an index.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the index to be dropped. The name will be
-    properly quoted by the method.
-    [$table] (string) The table whose index is to be dropped. The name will be
-    properly quoted by the method.
+    [$name] () 
+    [$table] () 
 
 
 *yii/sphinx/Command::addUnique*				public
@@ -734,43 +570,25 @@ return ($this) The command object itself
 >
  resetSequence($table, $value='null')
 <
-return ($this) The command object itself
+return (void)
 
- Creates a SQL command for resetting the sequence value of a table's primary
- key.
+ {@inheritdoc}
 
-
-
- The sequence will be reset such that the primary key of the next new row
- inserted will have the specified value or 1.
-
-
-
-    [$table] (string) The name of the table whose primary key sequence will be
-    reset
-    [$value] (mixed) The value for the primary key of the next new row
-    inserted. If this is not set, the next new row's primary key will have a
-    value 1.
+    [$table] () 
+    [$value] () 
 
 
 *yii/sphinx/Command::checkIntegrity*			public
 >
- checkIntegrity($check='true', $schema='''', $table='''')
+ checkIntegrity($check='true', $schema='\'\'', $table='\'\'')
 <
-return ($this) The command object itself
+return (void)
 
- Builds a SQL command for enabling or disabling integrity check.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$check] (bool) Whether to turn on or off the integrity check.
-    [$schema] (string) The schema name of the tables. Defaults to empty
-    string, meaning the current or default schema.
-    [$table] (string) The table name.
+    [$check] () 
+    [$schema] () 
+    [$table] () 
 
 
 *yii/sphinx/Command::addCommentOnColumn*			public

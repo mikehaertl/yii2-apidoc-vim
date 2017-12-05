@@ -13,15 +13,19 @@ DESCRIPTION
  In order to acquire access token perform following sequence:
 
    use yii\authclient\OAuth1;
+   use Yii;
 
-   $oauthClient = new OAuth1();
+   // assuming class MyAuthClient extends OAuth1
+   $oauthClient = new MyAuthClient();
    $requestToken = $oauthClient->fetchRequestToken(); // Get request token
    $url = $oauthClient->buildAuthUrl($requestToken); // Get authorization URL
    return Yii::$app->getResponse()->redirect($url); // Redirect to
  authorization URL
+
    // After user returns at our site:
-   $accessToken = $oauthClient->fetchAccessToken($requestToken); // Upgrade to
- access token
+   $accessToken =
+ $oauthClient->fetchAccessToken(Yii::$app->request->get('oauth_token'),
+ $requestToken); // Upgrade to access token
 
 
 
@@ -340,15 +344,9 @@ METHOD DETAILS
 >
  createRequest()
 <
-return (\yii\httpclient\Request) HTTP request instance.
+return (void)
 
- Creates HTTP request instance.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/OAuth1::defaultRequestOptions*		protected
@@ -449,17 +447,9 @@ return (string) Return URL.
 >
  createApiRequest()
 <
-return (\yii\httpclient\Request) HTTP request instance.
+return (void)
 
- Creates an HTTP request for the API call.
-
-
-
- The created request will be automatically processed adding access token
- parameters and signature before sending. You may use 'createRequest()' to
- gain full control over request composition and execution.
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/OAuth1::beforeApiRequestSend*		public
@@ -489,16 +479,10 @@ return (\yii\authclient\OAuthToken) New auth token.
 <
 return (void)
 
- Applies access token to the HTTP request instance.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$request] (\yii\httpclient\Request) HTTP request instance.
-    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
+    [$request] () 
+    [$accessToken] () 
 
 
 *yii/authclient/OAuth1::fetchRequestToken*		public

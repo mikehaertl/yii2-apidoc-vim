@@ -51,11 +51,7 @@ $authUrl				*yii/authclient/OpenIdConnect::$authUrl*
 
 $scope					*yii/authclient/OpenIdConnect::$scope*
 
- (string) 
-
- Auth request scope.
-
-
+ ()
 
 $autoRefreshAccessToken			*yii/authclient/OpenIdConnect::$autoRefreshAccessToken*
 
@@ -335,15 +331,9 @@ METHOD DETAILS
 >
  initUserAttributes()
 <
-return (array) Auth user attributes.
+return (void)
 
- Initializes authenticated user attributes.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/OpenIdConnect::defaultNormalizeUserAttributeMap*protected
@@ -430,15 +420,9 @@ return (array) Auth user attributes.
 >
  defaultReturnUrl()
 <
-return (string) Return URL.
+return (void)
 
- Composes default 'returnUrl' value.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/OpenIdConnect::createSignatureMethod*	protected
@@ -450,17 +434,11 @@ return (string) Return URL.
 >
  createToken($tokenConfig='[]')
 <
-return (\yii\authclient\OAuthToken) Token instance.
+return (void)
 
- Creates token from its configuration.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$tokenConfig] (array) Token configuration.
+    [$tokenConfig] () 
 
 
 *yii/authclient/OpenIdConnect::sendRequest*		protected
@@ -502,17 +480,11 @@ return (\yii\authclient\OAuthToken) Token instance.
 >
  refreshAccessToken($token)
 <
-return (\yii\authclient\OAuthToken) New auth token.
+return (void)
 
- Gets new auth token to replace expired one.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$token] (\yii\authclient\OAuthToken) Expired auth token.
+    [$token] () 
 
 
 *yii/authclient/OpenIdConnect::applyAccessTokenToRequest*	public
@@ -524,35 +496,23 @@ return (\yii\authclient\OAuthToken) New auth token.
 >
  buildAuthUrl($params='[]')
 <
-return (string) Authorization URL.
+return (void)
 
- Composes user authorization URL.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$params] (array) Additional auth GET params.
+    [$params] () 
 
 
 *yii/authclient/OpenIdConnect::fetchAccessToken*		public
 >
  fetchAccessToken($authCode, $params='[]')
 <
-return (\yii\authclient\OAuthToken) Access token.
+return (void)
 
- Fetches access token from authorization code.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$authCode] (string) Authorization code, usually comes at $_GET['code'].
-    [$params] (array) Additional request params.
+    [$authCode] () 
+    [$params] () 
 
 
 *yii/authclient/OpenIdConnect::applyClientCredentialsToRequest*protected
@@ -561,17 +521,9 @@ return (\yii\authclient\OAuthToken) Access token.
 <
 return (void)
 
- Applies client credentials (e.g. 'clientId' and 'clientSecret') to the HTTP
- request instance.
+ {@inheritdoc}
 
-
-
- This method should be invoked before sending any HTTP request, which requires
- client credentials.
-
-
-
-    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$request] () 
 
 
 *yii/authclient/OpenIdConnect::generateAuthState*		protected

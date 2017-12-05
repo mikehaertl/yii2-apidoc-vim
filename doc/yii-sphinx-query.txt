@@ -423,38 +423,22 @@ return (\yii\sphinx\Command) The created Sphinx command instance.
 >
  populate($rows)
 <
-return (array) The converted query result
+return (void)
 
- Converts the raw query results into the format as specified by this query.
+ {@inheritdoc}
 
-
-
- This method is internally used to convert the data fetched from database into
- the format as required by this query.
-
-
-
-    [$rows] (array) The raw query result from database
+    [$rows] () 
 
 
 *yii/sphinx/Query::one*					public
 >
  one($db='null')
 <
-return (array|bool) The first row (in terms of an array) of the query result. False
-is returned if the query results in nothing.
+return (void)
 
- Executes the query and returns a single row of result.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$db] (\yii\db\Connection) The database connection used to generate the
-    SQL statement. If this parameter is not given, the 'db' application
-    component will be used.
+    [$db] () 
 
 
 *yii/sphinx/Query::scalar*				public
@@ -501,23 +485,21 @@ is returned if the query results in nothing.
 >
  queryScalar($selectExpression, $db)
 <
-return (bool|string) 
+return (void)
 
- Queries a scalar value by setting 'select' first.
+ {@inheritdoc}
 
-
-
- Restores the value of select to make this query reusable.
-
-
-
-    [$selectExpression] (string|\yii\db\Expression) 
-    [$db] (\yii\db\Connection|null) 
+    [$selectExpression] () 
+    [$db] () 
 
 
 *yii/sphinx/Query::getTablesUsedInFrom*			public
+>
+ getTablesUsedInFrom()
+<
+return (void)
 
- See |yii/db/Query::getTablesUsedInFrom|
+ {@inheritdoc}
 
 
 *yii/sphinx/Query::select*				public
@@ -549,135 +531,53 @@ return (bool|string)
 >
  join($type, $table, $on='\'\'', $params='[]')
 <
-return ($this) The query object itself
+return (void)
 
- Appends a JOIN part to the query.
+ {@inheritdoc}
 
-
-
- The first parameter specifies what type of join it is.
-
-
-
-    [$type] (string) The type of join, such as INNER JOIN, LEFT JOIN.
-    [$table] (string|array) The table to be joined.
-
-    Use a string to represent the name of the table to be joined. The table
-    name can contain a schema prefix (e.g. 'public.user') and/or table alias
-    (e.g. 'user u'). The method will automatically quote the table name unless
-    it contains some parenthesis (which means the table is given as a
-    sub-query or DB expression).
-
-    Use an array to represent joining with a sub-query. The array must contain
-    only one element. The value must be a 'Query' object representing the
-    sub-query while the corresponding key represents the alias for the
-    sub-query.
-    [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'where()' on how to specify this parameter.
-
-    Note that the array format of 'where()' is designed to match columns to
-    values instead of columns to columns, so the following would **not** work
-    as expected: '['post.author_id' => 'user.id']', it would match the
-    'post.author_id' column value against the string ''user.id''. It is
-    recommended to use the string syntax here which is more suited for a join:
-
-      'post.author_id = user.id'
-
-
-    [$params] (array) The parameters (name => value) to be bound to the query.
+    [$type] () 
+    [$table] () 
+    [$on] () 
+    [$params] () 
 
 
 *yii/sphinx/Query::innerJoin*				public
 >
  innerJoin($table, $on='\'\'', $params='[]')
 <
-return ($this) The query object itself
+return (void)
 
- Appends an INNER JOIN part to the query.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string|array) The table to be joined.
-
-    Use a string to represent the name of the table to be joined. The table
-    name can contain a schema prefix (e.g. 'public.user') and/or table alias
-    (e.g. 'user u'). The method will automatically quote the table name unless
-    it contains some parenthesis (which means the table is given as a
-    sub-query or DB expression).
-
-    Use an array to represent joining with a sub-query. The array must contain
-    only one element. The value must be a 'Query' object representing the
-    sub-query while the corresponding key represents the alias for the
-    sub-query.
-    [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'join()' on how to specify this parameter.
-    [$params] (array) The parameters (name => value) to be bound to the query.
+    [$table] () 
+    [$on] () 
+    [$params] () 
 
 
 *yii/sphinx/Query::leftJoin*				public
 >
  leftJoin($table, $on='\'\'', $params='[]')
 <
-return ($this) The query object itself
+return (void)
 
- Appends a LEFT OUTER JOIN part to the query.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string|array) The table to be joined.
-
-    Use a string to represent the name of the table to be joined. The table
-    name can contain a schema prefix (e.g. 'public.user') and/or table alias
-    (e.g. 'user u'). The method will automatically quote the table name unless
-    it contains some parenthesis (which means the table is given as a
-    sub-query or DB expression).
-
-    Use an array to represent joining with a sub-query. The array must contain
-    only one element. The value must be a 'Query' object representing the
-    sub-query while the corresponding key represents the alias for the
-    sub-query.
-    [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'join()' on how to specify this parameter.
-    [$params] (array) The parameters (name => value) to be bound to the query
+    [$table] () 
+    [$on] () 
+    [$params] () 
 
 
 *yii/sphinx/Query::rightJoin*				public
 >
  rightJoin($table, $on='\'\'', $params='[]')
 <
-return ($this) The query object itself
+return (void)
 
- Appends a RIGHT OUTER JOIN part to the query.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string|array) The table to be joined.
-
-    Use a string to represent the name of the table to be joined. The table
-    name can contain a schema prefix (e.g. 'public.user') and/or table alias
-    (e.g. 'user u'). The method will automatically quote the table name unless
-    it contains some parenthesis (which means the table is given as a
-    sub-query or DB expression).
-
-    Use an array to represent joining with a sub-query. The array must contain
-    only one element. The value must be a 'Query' object representing the
-    sub-query while the corresponding key represents the alias for the
-    sub-query.
-    [$on] (string|array) The join condition that should appear in the ON part.
-    Please refer to 'join()' on how to specify this parameter.
-    [$params] (array) The parameters (name => value) to be bound to the query
+    [$table] () 
+    [$on] () 
+    [$params] () 
 
 
 *yii/sphinx/Query::groupBy*				public

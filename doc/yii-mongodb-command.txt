@@ -1,5 +1,5 @@
 
-*yii/mongodb/Command*   >> |yii/base/Object|
+*yii/mongodb/Command*   >> |yii/base/BaseObject|
 =====================
 
 DESCRIPTION
@@ -47,18 +47,6 @@ $databaseName				*yii/mongodb/Command::$databaseName*
 $document				*yii/mongodb/Command::$document*
 
  (array) Command document contents.
-
-$readPreference				*yii/mongodb/Command::$readPreference*
-
- (\MongoDB\Driver\ReadPreference) Read preference.
-
-$writeConcern				*yii/mongodb/Command::$writeConcern*
-
- (\MongoDB\Driver\WriteConcern|null) Write concern to be used in this command.
-
-$readConcern				*yii/mongodb/Command::$readConcern*
-
- (\MongoDB\Driver\ReadConcern|string) Read concern to be used in this command.
 
 
 
@@ -525,9 +513,13 @@ return (string|array) The map reduce output collection name or output results.
 >
  aggregate($collectionName, $pipelines, $options='[]')
 <
-return (array) Aggregation result.
+return (array|\MongoDB\Driver\Cursor) Aggregation result.
 
  Performs aggregation using MongoDB Aggregation Framework.
+
+ In case 'cursor' option is specified '\MongoDB\Driver\Cursor' instance is
+ returned, otherwise 
+   - an array of aggregation results.
 
     [$collectionName] (string) Collection name
     [$pipelines] (array) List of pipeline operators.

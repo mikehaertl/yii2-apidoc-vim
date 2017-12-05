@@ -157,29 +157,13 @@ METHOD DETAILS
 >
  toArray($fields='[]', $expand='[]', $recursive='true')
 <
-return (array) The array representation of the object
+return (void)
 
- Converts the model into an array.
+ {@inheritdoc}
 
-
-
- This method will first identify which fields to be included in the resulting
- array by calling 'resolveFields()'. It will then turn the model into an array
- with these fields. If '$recursive' is true, any embedded objects will also be
- converted into arrays.
-
- If the model implements the 'Linkable' interface, the resulting array will
- also have a '_link' element which refers to a list of links as specified by
- the interface.
-
-
-
-    [$fields] (array) The fields being requested. If empty, all fields as
-    specified by 'fields()' will be returned.
-    [$expand] (array) The additional fields being requested for exporting.
-    Only fields declared in 'extraFields()' will be considered.
-    [$recursive] (bool) Whether to recursively return array representation of
-    embedded objects.
+    [$fields] () 
+    [$expand] () 
+    [$recursive] () 
 
 
 *yii/mongodb/ActiveRecord::resolveFields*			protected
@@ -751,51 +735,7 @@ return (string[]) The primary keys of the associated Mongo collection.
 <
 return (\yii\mongodb\ActiveQuery) The newly created 'ActiveQuery' instance.
 
- Creates an 'ActiveQueryInterface' instance for query purpose.
-
-
-
- The returned 'ActiveQueryInterface' instance can be further customized by
- calling methods defined in 'ActiveQueryInterface' before 'one()' or 'all()'
- is called to return populated ActiveRecord instances. For example,
-
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
-
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
-
- This method is also called by 'BaseActiveRecord::hasOne()' and
- 'BaseActiveRecord::hasMany()' to create a relational query.
-
- You may override this method to return a customized query. For example,
-
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
-
- The following code shows how to apply a default condition for all queries:
-
- '''php class Customer extends ActiveRecord {     public static function
- find()     {         return parent::find()->where(['deleted' => false]);    
- } }
-
- // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
- customer WHERE 'deleted'=:deleted AND age>30 $customers =
- Customer::find()->andWhere('age>30')->all();
-
- // Use where() to ignore the default condition // SELECT FROM customer WHERE
- age>30 $customers = Customer::find()->where('age>30')->all();
-
-
+ {@inheritdoc}
 
 
 *yii/mongodb/ActiveRecord::insert*			public

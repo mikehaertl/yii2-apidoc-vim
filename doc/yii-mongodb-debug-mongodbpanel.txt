@@ -36,11 +36,7 @@ $criticalQueryThreshold			*yii/mongodb/debug/MongoDbPanel::$criticalQueryThresho
 
 $db					*yii/mongodb/debug/MongoDbPanel::$db*
 
- (string) 
-
- The name of the database component to use for executing (explain) queries
-
-
+ ()
 
 $defaultOrder				*yii/mongodb/debug/MongoDbPanel::$defaultOrder*
 
@@ -72,14 +68,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/mongodb/debug/MongoDbPanel::__get*			public
@@ -196,13 +185,9 @@ return (void)
 >
  getName()
 <
-return (string) Name of the panel
+return (void)
 
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/mongodb/debug/MongoDbPanel::getSummary*		public
@@ -214,13 +199,9 @@ return (string) Name of the panel
 >
  getDetail()
 <
-return (string) Content that is displayed in debugger detail view
+return (void)
 
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/mongodb/debug/MongoDbPanel::save*			public
@@ -267,13 +248,9 @@ return (string) Content that is displayed in debugger detail view
 >
  getSummaryName()
 <
-return (string) Short name of the panel, which will be use in summary.
+return (void)
 
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/mongodb/debug/MongoDbPanel::calculateTimings*	public
@@ -300,21 +277,25 @@ return (array)
  See |yii/debug/panels/DbPanel::getModels|
 
 
+*yii/mongodb/debug/MongoDbPanel::countDuplicateQuery*	public
+
+ See |yii/debug/panels/DbPanel::countDuplicateQuery|
+
+
+*yii/mongodb/debug/MongoDbPanel::sumDuplicateQueries*	public
+
+ See |yii/debug/panels/DbPanel::sumDuplicateQueries|
+
+
 *yii/mongodb/debug/MongoDbPanel::getQueryType*		protected
 >
  getQueryType($timing)
 <
-return (string) Query type such as select, insert, delete, etc.
+return (void)
 
- Returns database query type.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$timing] (string) Timing procedure string
+    [$timing] () 
 
 
 *yii/mongodb/debug/MongoDbPanel::isQueryCountCritical*	public
@@ -331,30 +312,20 @@ return (string) Query type such as select, insert, delete, etc.
 >
  hasExplain()
 <
-return (bool) Whether the DB component has support for EXPLAIN queries
+return (void)
 
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/mongodb/debug/MongoDbPanel::canBeExplained*		public
 >
  canBeExplained($type)
 <
-return (bool) 
+return (void)
 
- Check if given query type can be explained.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$type] (string) Query type
+    [$type] () 
 
 
 *yii/mongodb/debug/MongoDbPanel::getDb*			public

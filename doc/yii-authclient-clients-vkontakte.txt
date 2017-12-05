@@ -21,7 +21,7 @@ DESCRIPTION
                ],
            ],
        ]
-       ...
+       // ...
    ]
 
 
@@ -36,21 +36,11 @@ $version				*yii/authclient/clients/VKontakte::$version*
 
 $apiBaseUrl				*yii/authclient/clients/VKontakte::$apiBaseUrl*
 
- (string) 
-
- API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
- value of 'httpClient'. Note: changing this property will take no effect after
- 'httpClient' is instantiated.
-
-
+ ()
 
 $authUrl				*yii/authclient/clients/VKontakte::$authUrl*
 
- (string) 
-
- Authorize URL.
-
-
+ ()
 
 $scope					*yii/authclient/clients/VKontakte::$scope*
 
@@ -70,11 +60,7 @@ $clientSecret				*yii/authclient/clients/VKontakte::$clientSecret*
 
 $tokenUrl				*yii/authclient/clients/VKontakte::$tokenUrl*
 
- (string) 
-
- Token request URL endpoint.
-
-
+ ()
 
 $validateAuthState			*yii/authclient/clients/VKontakte::$validateAuthState*
 
@@ -84,6 +70,10 @@ $attributeNames				*yii/authclient/clients/VKontakte::$attributeNames*
 
  (array) List of attribute names, which should be requested from API to
  initialize user attributes.
+
+$apiVersion				*yii/authclient/clients/VKontakte::$apiVersion*
+
+ (string) The API version to send in the API request.
 
 
 
@@ -310,61 +300,36 @@ METHOD DETAILS
 >
  defaultName()
 <
-return (string) Service name.
+return (void)
 
- Generates service name.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/VKontakte::defaultTitle*		protected
 >
  defaultTitle()
 <
-return (string) Service title.
+return (void)
 
- Generates service title.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/VKontakte::initUserAttributes*	protected
 >
  initUserAttributes()
 <
-return (array) Auth user attributes.
+return (void)
 
- Initializes authenticated user attributes.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/VKontakte::defaultNormalizeUserAttributeMap*protected
 >
  defaultNormalizeUserAttributeMap()
 <
-return (array) Normalize attribute map.
+return (void)
 
- Returns the default 'normalizeUserAttributeMap' value.
-
-
-
- Particular client may override this method in order to provide specific
- default map.
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/VKontakte::defaultViewOptions*	protected
@@ -503,16 +468,10 @@ return (array) Normalize attribute map.
 <
 return (void)
 
- Applies access token to the HTTP request instance.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$request] (\yii\httpclient\Request) HTTP request instance.
-    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
+    [$request] () 
+    [$accessToken] () 
 
 
 *yii/authclient/clients/VKontakte::buildAuthUrl*		public

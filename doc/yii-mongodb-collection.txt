@@ -1,5 +1,5 @@
 
-*yii/mongodb/Collection*   >> |yii/base/Object|
+*yii/mongodb/Collection*   >> |yii/base/BaseObject|
 ========================
 
 SUBCLASSES
@@ -35,10 +35,6 @@ $database				*yii/mongodb/Collection::$database*
 $name					*yii/mongodb/Collection::$name*
 
  (string) Name of this collection.
-
-$fullName				*yii/mongodb/Collection::$fullName*
-
- (string) Full name of this collection, including database name.
 
 
 
@@ -382,9 +378,13 @@ return (array|bool) Array of distinct values, or "false" on failure.
 >
  aggregate($pipelines, $options='[]')
 <
-return (array) The result of the aggregation.
+return (array|\MongoDB\Driver\Cursor) The result of the aggregation.
 
  Performs aggregation using Mongo Aggregation Framework.
+
+ In case 'cursor' option is specified '\MongoDB\Driver\Cursor' instance is
+ returned, otherwise 
+   - an array of aggregation results.
 
     [$pipelines] (array) List of pipeline operators.
     [$options] (array) Optional parameters.

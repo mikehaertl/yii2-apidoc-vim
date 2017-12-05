@@ -31,6 +31,23 @@ DESCRIPTION
        ],
    ]);
 
+ Selectable in begin mode.
+
+   Selectable::begin([
+       'clientOptions' => [
+           'filter' => 'my-selectable-item',
+           'tolerance' => 'touch',
+       ],
+   ]);
+
+ <ul>      <li class="my-selectable-item">Item 1</li>      <li
+ class="my-selectable-item">Item 2</li>      <li
+ class="no-selectable-item">Item 3</li>      <li
+ class="my-selectable-item">Item 4</li> </ul> <div>      <div>          <div
+ class="my-selectable-item">Another item</div>      </div> </div>
+
+   Selectable::end();
+
 
 
 
@@ -69,6 +86,10 @@ $clientEvents				*yii/jui/Selectable::$clientEvents*
 $clientEventMap				*yii/jui/Selectable::$clientEventMap*
 
  See |yii/jui/Widget::$clientEventMap|
+
+$mode					*yii/jui/Selectable::$mode*
+
+ (string) The mode used to render the widget.
 
 $items					*yii/jui/Selectable::$items*
 
@@ -111,8 +132,12 @@ METHOD DETAILS
 
 
 *yii/jui/Selectable::init*				public
+>
+ init()
+<
+return (void)
 
- See |yii/base/Widget::init|
+ Initializes the widget.
 
 
 *yii/jui/Selectable::__get*				public
@@ -226,8 +251,22 @@ METHOD DETAILS
 
 
 *yii/jui/Selectable::begin*				public
+>
+ begin($config='[]')
+<
+return (static) The newly created widget instance
 
- See |yii/base/Widget::begin|
+ Begins a widget.
+
+ This method creates an instance of the calling class setting the MODE_BEGIN
+ mode. Any item between 'begin()' and 'end()' which match the filter
+ attribute, will be selectable. It will apply the configuration to the created
+ instance. A matching 'end()' call should be called later. As some widgets may
+ use output buffering, the 'end()' call should be made in the same view to
+ avoid breaking the nesting of output buffers.
+
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
 
 
 *yii/jui/Selectable::end*					public

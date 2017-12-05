@@ -21,7 +21,7 @@ DESCRIPTION
                ],
            ],
        ]
-       ...
+       // ...
    ]
 
 
@@ -36,38 +36,19 @@ $version				*yii/authclient/clients/Facebook::$version*
 
 $apiBaseUrl				*yii/authclient/clients/Facebook::$apiBaseUrl*
 
- (string) 
-
- API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
- value of 'httpClient'. Note: changing this property will take no effect after
- 'httpClient' is instantiated.
-
-
+ ()
 
 $authUrl				*yii/authclient/clients/Facebook::$authUrl*
 
- (string) 
-
- Authorize URL.
-
-
+ ()
 
 $scope					*yii/authclient/clients/Facebook::$scope*
 
- (string) 
-
- Auth request scope.
-
-
+ ()
 
 $autoRefreshAccessToken			*yii/authclient/clients/Facebook::$autoRefreshAccessToken*
 
- (bool) 
-
- Whether to automatically perform 'refresh access token' request on expired
- access token.
-
-
+ ()
 
 $clientId				*yii/authclient/clients/Facebook::$clientId*
 
@@ -79,11 +60,7 @@ $clientSecret				*yii/authclient/clients/Facebook::$clientSecret*
 
 $tokenUrl				*yii/authclient/clients/Facebook::$tokenUrl*
 
- (string) 
-
- Token request URL endpoint.
-
-
+ ()
 
 $validateAuthState			*yii/authclient/clients/Facebook::$validateAuthState*
 
@@ -328,45 +305,27 @@ METHOD DETAILS
 >
  defaultName()
 <
-return (string) Service name.
+return (void)
 
- Generates service name.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/Facebook::defaultTitle*		protected
 >
  defaultTitle()
 <
-return (string) Service title.
+return (void)
 
- Generates service title.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/Facebook::initUserAttributes*	protected
 >
  initUserAttributes()
 <
-return (array) Auth user attributes.
+return (void)
 
- Initializes authenticated user attributes.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/Facebook::defaultNormalizeUserAttributeMap*protected
@@ -378,16 +337,9 @@ return (array) Auth user attributes.
 >
  defaultViewOptions()
 <
-return (array) List of default 'viewOptions'
+return (void)
 
- Returns the default 'viewOptions' value.
-
-
-
- Particular client may override this method in order to provide specific
- default view options.
-
-
+ {@inheritdoc}
 
 
 *yii/authclient/clients/Facebook::createHttpClient*	protected
@@ -521,16 +473,10 @@ return (array) List of default 'viewOptions'
 <
 return (void)
 
- Applies access token to the HTTP request instance.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$request] (\yii\httpclient\Request) HTTP request instance.
-    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
+    [$request] () 
+    [$accessToken] () 
 
 
 *yii/authclient/clients/Facebook::buildAuthUrl*		public
@@ -542,18 +488,12 @@ return (void)
 >
  fetchAccessToken($authCode, $params='[]')
 <
-return (\yii\authclient\OAuthToken) Access token.
+return (void)
 
- Fetches access token from authorization code.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$authCode] (string) Authorization code, usually comes at $_GET['code'].
-    [$params] (array) Additional request params.
+    [$authCode] () 
+    [$params] () 
 
 
 *yii/authclient/clients/Facebook::applyClientCredentialsToRequest*protected
