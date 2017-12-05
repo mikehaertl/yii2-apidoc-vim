@@ -163,6 +163,8 @@ METHOD DETAILS
 return (\yii\rbac\Item) The auth item corresponding to the specified name. Null is
 returned if no such item.
 
+ Returns the named auth item.
+
     [$name] (string) The auth item name.
 
 
@@ -171,6 +173,8 @@ returned if no such item.
  getItems($type)
 <
 return (\yii\rbac\Item[]) The auth items of the specified type.
+
+ Returns the items of the specified type.
 
     [$type] (int) The auth item type (either 'Item::TYPE_ROLE' or
     'Item::TYPE_PERMISSION'
@@ -182,6 +186,8 @@ return (\yii\rbac\Item[]) The auth items of the specified type.
 <
 return (bool) Whether the auth item is successfully added to the system
 
+ Adds an auth item to the RBAC system.
+
     [$item] (\yii\rbac\Item) The item to add
 
 
@@ -190,6 +196,8 @@ return (bool) Whether the auth item is successfully added to the system
  addRule($rule)
 <
 return (bool) Whether the rule is successfully added to the system
+
+ Adds a rule to the RBAC system.
 
     [$rule] (\yii\rbac\Rule) The rule to add
 
@@ -200,6 +208,8 @@ return (bool) Whether the rule is successfully added to the system
 <
 return (bool) Whether the role or permission is successfully removed
 
+ Removes an auth item from the RBAC system.
+
     [$item] (\yii\rbac\Item) The item to remove
 
 
@@ -209,6 +219,8 @@ return (bool) Whether the role or permission is successfully removed
 <
 return (bool) Whether the rule is successfully removed
 
+ Removes a rule from the RBAC system.
+
     [$rule] (\yii\rbac\Rule) The rule to remove
 
 
@@ -217,6 +229,8 @@ return (bool) Whether the rule is successfully removed
  updateItem($name, $item)
 <
 return (bool) Whether the auth item is successfully updated
+
+ Updates an auth item in the RBAC system.
 
     [$name] (string) The name of the item being updated
     [$item] (\yii\rbac\Item) The updated item
@@ -228,6 +242,8 @@ return (bool) Whether the auth item is successfully updated
 <
 return (bool) Whether the rule is successfully updated
 
+ Updates a rule to the RBAC system.
+
     [$name] (string) The name of the rule being updated
     [$rule] (\yii\rbac\Rule) The updated rule
 
@@ -237,6 +253,8 @@ return (bool) Whether the rule is successfully updated
  createRole($name)
 <
 return (\yii\rbac\Role) The new Role object
+
+ Creates a new Role object.
 
 
 
@@ -253,6 +271,8 @@ return (\yii\rbac\Role) The new Role object
  createPermission($name)
 <
 return (\yii\rbac\Permission) The new Permission object
+
+ Creates a new Permission object.
 
 
 
@@ -271,6 +291,8 @@ return (\yii\rbac\Permission) The new Permission object
 return (bool) Whether the role, permission or rule is successfully added to the
 system
 
+ Adds a role, permission or rule to the RBAC system.
+
 
 
 
@@ -286,6 +308,8 @@ system
 <
 return (bool) Whether the role, permission or rule is successfully removed
 
+ Removes a role, permission or rule from the RBAC system.
+
 
 
 
@@ -300,6 +324,8 @@ return (bool) Whether the role, permission or rule is successfully removed
  update($name, $object)
 <
 return (bool) Whether the update is successful
+
+ Updates the specified role, permission or rule in the system.
 
 
 
@@ -318,6 +344,8 @@ return (bool) Whether the update is successful
 return (null|\yii\rbac\Role) The role corresponding to the specified name. Null is
 returned if no such role.
 
+ Returns the named role.
+
 
 
 
@@ -333,6 +361,8 @@ returned if no such role.
 <
 return (null|\yii\rbac\Permission) The permission corresponding to the specified
 name. Null is returned if no such permission.
+
+ Returns the named permission.
 
 
 
@@ -350,6 +380,8 @@ name. Null is returned if no such permission.
 return (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
 names.
 
+ Returns all roles in the system.
+
 
 
 
@@ -363,6 +395,7 @@ names.
 <
 return (\yii\rbac\Role[]) Default roles. The array is indexed by the role names
 
+ Returns defaultRoles as array of Role objects.
 
 
 *yii/rbac/BaseManager::getPermissions*			public
@@ -371,6 +404,8 @@ return (\yii\rbac\Role[]) Default roles. The array is indexed by the role names
 <
 return (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
 by the permission names.
+
+ Returns all permissions in the system.
 
 
 
@@ -385,6 +420,8 @@ by the permission names.
 <
 return (bool) The return value of 'Rule::execute()'. If the auth item does not
 specify a rule, true will be returned.
+
+ Executes the rule associated with the specified auth item.
 
  If the item does not specify a rule, this method will return true. Otherwise,
  it will return the value of 'Rule::execute()'.
@@ -403,6 +440,9 @@ specify a rule, true will be returned.
 <
 return (bool) Whether array of $assignments is empty and 'defaultRoles' property is
 empty as well
+
+ Checks whether array of $assignments is empty and 'defaultRoles' property is
+ empty as well.
 
     [$assignments] (\yii\rbac\Assignment[]) Array of user's assignments
 

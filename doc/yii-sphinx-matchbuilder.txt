@@ -37,6 +37,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$connection] (\yii\sphinx\Connection) The Sphinx connection.
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties
@@ -98,6 +100,8 @@ return (void)
 <
 return (string) Generated MATCH expression.
 
+ Generates the MATCH expression from given 'MatchExpression' object.
+
     [$match] (\yii\sphinx\MatchExpression) The 'MatchExpression' object from
     which the MATCH expression will be generated.
 
@@ -107,6 +111,8 @@ return (string) Generated MATCH expression.
  buildMatch($match, $params)
 <
 return (string) The MATCH expression
+
+ Create MATCH expression.
 
     [$match] (string|array) MATCH specification.
     [$params] (array) The expression parameters to be populated
@@ -118,6 +124,8 @@ return (string) The MATCH expression
 <
 return (string) The MATCH expression
 
+ Creates a MATCH based on column-value pairs.
+
     [$match] (array) The match condition
     [$params] (array) The expression parameters to be populated
 
@@ -127,6 +135,8 @@ return (string) The MATCH expression
  buildAndMatch($operator, $operands, $params)
 <
 return (string) The MATCH expression
+
+ Connects two or more MATCH expressions with the 'AND' or 'OR' operator
 
     [$operator] (string) The operator which is used for connecting the given
     operands
@@ -140,6 +150,8 @@ return (string) The MATCH expression
 <
 return (string) The MATCH expression
 
+ Create MAYBE, SENTENCE or PARAGRAPH expressions.
+
     [$operator] (string) The operator which is used for Create Match
     expressions
     [$operands] (array) The Match expressions
@@ -151,6 +163,8 @@ return (string) The MATCH expression
  buildZoneMatch($operator, $operands, $params)
 <
 return (string) The MATCH expression
+
+ Create MATCH expressions for zones.
 
     [$operator] (string) The operator which is used for Create Match
     expressions
@@ -164,6 +178,8 @@ return (string) The MATCH expression
 <
 return (string) The MATCH expression
 
+ Create PROXIMITY expressions
+
     [$operator] (string) The operator which is used for Create Match
     expressions
     [$operands] (array) The Match expressions
@@ -175,6 +191,8 @@ return (string) The MATCH expression
  buildIgnoreMatch($operator, $operands, $params)
 <
 return (string) The MATCH expression
+
+ Create ignored MATCH expressions
 
     [$operator] (string) The operator which is used for Create Match
     expressions
@@ -188,6 +206,8 @@ return (string) The MATCH expression
 <
 return (string) The MATCH expression
 
+ Creates an Match expressions like '"column" operator value'.
+
     [$operator] (string) The operator to use. Anything could be used e.g. '>',
     '<=', etc.
     [$operands] (array) Contains two column names.
@@ -200,6 +220,8 @@ return (string) The MATCH expression
 <
 return (string) The MATCH expression
 
+ Create placeholder for expression of MATCH
+
     [$value] (string|array|\yii\db\Expression) 
     [$params] (array) The expression parameters to be populated
 
@@ -210,6 +232,8 @@ return (string) The MATCH expression
 <
 return (string) The column statement.
 
+ Created column as string for expression of MATCH
+
     [$column] (string) Column specification.
     [$ignored] (bool) Whether column should be specified as 'ignored'.
 
@@ -219,6 +243,9 @@ return (string) The column statement.
  parseParams($expression, $params)
 <
 return (string) Parsed expression.
+
+ Returns the actual MATCH expression by inserting parameter values into the
+ corresponding placeholders.
 
     [$expression] (string) The expression string which is needed to prepare.
     [$params] (array) The binding parameters for inserting.

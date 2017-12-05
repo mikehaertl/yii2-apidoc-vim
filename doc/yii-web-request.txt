@@ -275,6 +275,7 @@ METHOD DETAILS
 return (array) The first element is the route, and the second is the associated
 parameters.
 
+ Resolves the current request into a route and the associated parameters.
 
 
 *yii/web/Request::getIsConsoleRequest*			public
@@ -293,6 +294,8 @@ parameters.
 <
 return (string) The entry script file path
 
+ Returns the entry script file path.
+
  The default implementation will simply return '$_SERVER['SCRIPT_FILENAME']'.
 
 
@@ -301,6 +304,8 @@ return (string) The entry script file path
  setScriptFile($value)
 <
 return (void)
+
+ Sets the entry script file path.
 
  The entry script file path normally can be obtained from
  '$_SERVER['SCRIPT_FILENAME']'. If your server configuration does not return
@@ -315,6 +320,8 @@ return (void)
 <
 return (void)
 
+ Filters headers according to the 'trustedHosts'.
+
     [$headerCollection] (\yii\web\HeaderCollection) 
 
 
@@ -323,6 +330,8 @@ return (void)
  getIpValidator()
 <
 return (\yii\validators\IpValidator) 
+
+ Creates instance of 'IpValidator'.
 
  You can override this method to adjust validator or implement different
  matching strategy.
@@ -334,6 +343,8 @@ return (\yii\validators\IpValidator)
 <
 return (\yii\web\HeaderCollection) The header collection
 
+ Returns the header collection.
+
  The header collection contains incoming HTTP headers.
 
 
@@ -344,6 +355,8 @@ return (\yii\web\HeaderCollection) The header collection
 return (string) Request method, such as GET, POST, HEAD, PUT, PATCH, DELETE. The
 value returned is turned into upper case.
 
+ Returns the method of the current request (e.g. GET, POST, HEAD, PUT, PATCH,
+ DELETE).
 
 
 *yii/web/Request::getIsGet*				public
@@ -352,6 +365,7 @@ value returned is turned into upper case.
 <
 return (bool) Whether this is a GET request.
 
+ Returns whether this is a GET request.
 
 
 *yii/web/Request::getIsOptions*				public
@@ -360,6 +374,7 @@ return (bool) Whether this is a GET request.
 <
 return (bool) Whether this is a OPTIONS request.
 
+ Returns whether this is an OPTIONS request.
 
 
 *yii/web/Request::getIsHead*				public
@@ -368,6 +383,7 @@ return (bool) Whether this is a OPTIONS request.
 <
 return (bool) Whether this is a HEAD request.
 
+ Returns whether this is a HEAD request.
 
 
 *yii/web/Request::getIsPost*				public
@@ -376,6 +392,7 @@ return (bool) Whether this is a HEAD request.
 <
 return (bool) Whether this is a POST request.
 
+ Returns whether this is a POST request.
 
 
 *yii/web/Request::getIsDelete*				public
@@ -384,6 +401,7 @@ return (bool) Whether this is a POST request.
 <
 return (bool) Whether this is a DELETE request.
 
+ Returns whether this is a DELETE request.
 
 
 *yii/web/Request::getIsPut*				public
@@ -392,6 +410,7 @@ return (bool) Whether this is a DELETE request.
 <
 return (bool) Whether this is a PUT request.
 
+ Returns whether this is a PUT request.
 
 
 *yii/web/Request::getIsPatch*				public
@@ -400,6 +419,7 @@ return (bool) Whether this is a PUT request.
 <
 return (bool) Whether this is a PATCH request.
 
+ Returns whether this is a PATCH request.
 
 
 *yii/web/Request::getIsAjax*				public
@@ -407,6 +427,8 @@ return (bool) Whether this is a PATCH request.
  getIsAjax()
 <
 return (bool) Whether this is an AJAX (XMLHttpRequest) request.
+
+ Returns whether this is an AJAX (XMLHttpRequest) request.
 
  Note that jQuery doesn't set the header in case of cross domain requests:
  https://stackoverflow.com/questions/8163703/cross-domain-ajax-doesnt-send-x-requested-with-header
@@ -418,6 +440,7 @@ return (bool) Whether this is an AJAX (XMLHttpRequest) request.
 <
 return (bool) Whether this is a PJAX request
 
+ Returns whether this is a PJAX request.
 
 
 *yii/web/Request::getIsFlash*				public
@@ -426,6 +449,7 @@ return (bool) Whether this is a PJAX request
 <
 return (bool) Whether this is an Adobe Flash or Adobe Flex request.
 
+ Returns whether this is an Adobe Flash or Flex request.
 
 
 *yii/web/Request::getRawBody*				public
@@ -434,6 +458,7 @@ return (bool) Whether this is an Adobe Flash or Adobe Flex request.
 <
 return (string) The request body
 
+ Returns the raw HTTP request body.
 
 
 *yii/web/Request::setRawBody*				public
@@ -441,6 +466,9 @@ return (string) The request body
  setRawBody($rawBody)
 <
 return (void)
+
+ Sets the raw HTTP request body, this method is mainly used by test scripts to
+ simulate raw HTTP requests.
 
     [$rawBody] (string) The request body
 
@@ -450,6 +478,8 @@ return (void)
  getBodyParams()
 <
 return (array) The request parameters given in the request body.
+
+ Returns the request parameters given in the request body.
 
  Request parameters are determined using the parsers configured in 'parsers'
  property. If no parsers are configured for the current 'contentType' it uses
@@ -462,6 +492,8 @@ return (array) The request parameters given in the request body.
 <
 return (void)
 
+ Sets the request body parameters.
+
     [$values] (array) The request body parameters (name-value pairs)
 
 
@@ -470,6 +502,8 @@ return (void)
  getBodyParam($name, $defaultValue='null')
 <
 return (mixed) The parameter value
+
+ Returns the named request body parameter value.
 
  If the parameter does not exist, the second parameter passed to this method
  will be returned.
@@ -485,6 +519,9 @@ return (mixed) The parameter value
 <
 return (array|mixed) 
 
+ Returns POST parameter with a given name. If name isn't specified, returns an
+ array of all POST parameters.
+
     [$name] (string) The parameter name
     [$defaultValue] (mixed) The default parameter value if the parameter does
     not exist.
@@ -496,6 +533,8 @@ return (array|mixed)
 <
 return (array) The request GET parameter values.
 
+ Returns the request parameters given in the 'queryString'.
+
  This method will return the contents of '$_GET' if params where not
  explicitly set.
 
@@ -506,6 +545,8 @@ return (array) The request GET parameter values.
 <
 return (void)
 
+ Sets the request 'queryString' parameters.
+
     [$values] (array) The request query parameters (name-value pairs)
 
 
@@ -514,6 +555,9 @@ return (void)
  get($name='null', $defaultValue='null')
 <
 return (array|mixed) 
+
+ Returns GET parameter with a given name. If name isn't specified, returns an
+ array of all GET parameters.
 
     [$name] (string) The parameter name
     [$defaultValue] (mixed) The default parameter value if the parameter does
@@ -525,6 +569,8 @@ return (array|mixed)
  getQueryParam($name, $defaultValue='null')
 <
 return (mixed) The GET parameter value
+
+ Returns the named GET parameter value.
 
  If the GET parameter does not exist, the second parameter passed to this
  method will be returned.
@@ -541,6 +587,8 @@ return (mixed) The GET parameter value
 return (string|null) Schema and hostname part (with port number if needed) of the
 request URL (e.g. 'http://www.yiiframework.com'), null if can't be obtained
 from '$_SERVER' and wasn't set.
+
+ Returns the schema and host part of the current request URL.
 
  The returned URL does not have an ending slash.
 
@@ -571,6 +619,8 @@ from '$_SERVER' and wasn't set.
 <
 return (void)
 
+ Sets the schema and host part of the application URL.
+
  This setter is provided in case the schema and hostname cannot be determined
  on certain Web servers.
 
@@ -584,6 +634,8 @@ return (void)
 <
 return (string|null) Hostname part of the request URL (e.g. 'www.yiiframework.com')
 
+ Returns the host part of the current request URL.
+
  Value is calculated from current 'getHostInfo()|hostInfo' property.
 
  > Warning: The content of this value may not be reliable, dependent on the
@@ -596,6 +648,8 @@ return (string|null) Hostname part of the request URL (e.g. 'www.yiiframework.co
 <
 return (string) The relative URL for the application
 
+ Returns the relative URL for the application.
+
  This is similar to 'scriptUrl' except that it does not include the script
  file name, and the ending slashes are removed.
 
@@ -605,6 +659,8 @@ return (string) The relative URL for the application
  setBaseUrl($value)
 <
 return (void)
+
+ Sets the relative URL for the application.
 
  By default the URL is determined based on the entry script URL. This setter
  is provided in case you want to change this behavior.
@@ -618,6 +674,8 @@ return (void)
 <
 return (string) The relative URL of the entry script.
 
+ Returns the relative URL of the entry script.
+
  The implementation of this method referenced Zend_Controller_Request_Http in
  Zend Framework.
 
@@ -627,6 +685,8 @@ return (string) The relative URL of the entry script.
  setScriptUrl($value)
 <
 return (void)
+
+ Sets the relative URL for the application entry script.
 
  This setter is provided in case the entry script URL cannot be determined on
  certain Web servers.
@@ -641,6 +701,8 @@ return (void)
 return (string) Part of the request URL that is after the entry script and before the
 question mark. Note, the returned path info is already URL-decoded.
 
+ Returns the path info of the currently requested URL.
+
  A path info refers to the part that is after the entry script and before the
  question mark (query string). The starting and ending slashes are both
  removed.
@@ -651,6 +713,8 @@ question mark. Note, the returned path info is already URL-decoded.
  setPathInfo($value)
 <
 return (void)
+
+ Sets the path info of the current request.
 
  This method is mainly provided for testing purpose.
 
@@ -664,6 +728,8 @@ return (void)
 return (string) Part of the request URL that is after the entry script and before the
 question mark. Note, the returned path info is decoded.
 
+ Resolves the path info part of the currently requested URL.
+
  A path info refers to the part that is after the entry script and before the
  question mark (query string). The starting slashes are both removed (ending
  slashes will be kept).
@@ -675,6 +741,8 @@ question mark. Note, the returned path info is decoded.
 <
 return (string) The currently requested absolute URL.
 
+ Returns the currently requested absolute URL.
+
  This is a shortcut to the concatenation of 'hostInfo' and 'url'.
 
 
@@ -685,6 +753,8 @@ return (string) The currently requested absolute URL.
 return (string) The currently requested relative URL. Note that the URI returned may
 be URL-encoded depending on the client.
 
+ Returns the currently requested relative URL.
+
  This refers to the portion of the URL that is after the 'hostInfo' part. It
  includes the 'queryString' part if any.
 
@@ -694,6 +764,8 @@ be URL-encoded depending on the client.
  setUrl($value)
 <
 return (void)
+
+ Sets the currently requested relative URL.
 
  The URI must refer to the portion that is after 'hostInfo'. Note that the URI
  should be URL-encoded.
@@ -708,6 +780,8 @@ return (void)
 return (string|bool) The request URI portion for the currently requested URL. Note
 that the URI returned may be URL-encoded depending on the client.
 
+ Resolves the request URI portion for the currently requested URL.
+
  This refers to the portion that is after the 'hostInfo' part. It includes the
  'queryString' part if any. The implementation of this method referenced
  Zend_Controller_Request_Http in Zend Framework.
@@ -719,6 +793,7 @@ that the URI returned may be URL-encoded depending on the client.
 <
 return (string) Part of the request URL that is after the question mark
 
+ Returns part of the request URL that is after the question mark.
 
 
 *yii/web/Request::getIsSecureConnection*			public
@@ -727,6 +802,7 @@ return (string) Part of the request URL that is after the question mark
 <
 return (bool) If the request is sent via secure channel (https)
 
+ Return if the request is sent via secure channel (https).
 
 
 *yii/web/Request::getServerName*				public
@@ -735,6 +811,7 @@ return (bool) If the request is sent via secure channel (https)
 <
 return (string) Server name, null if not available
 
+ Returns the server name.
 
 
 *yii/web/Request::getServerPort*				public
@@ -743,6 +820,7 @@ return (string) Server name, null if not available
 <
 return (int|null) Server port number, null if not available
 
+ Returns the server port number.
 
 
 *yii/web/Request::getReferrer*				public
@@ -751,6 +829,7 @@ return (int|null) Server port number, null if not available
 <
 return (string|null) URL referrer, null if not available
 
+ Returns the URL referrer.
 
 
 *yii/web/Request::getOrigin*				public
@@ -758,6 +837,8 @@ return (string|null) URL referrer, null if not available
  getOrigin()
 <
 return (string|null) URL origin of a CORS request, 'null' if not available.
+
+ Returns the URL origin of a CORS request.
 
  The return value is taken from the 'Origin' 'getHeaders()|header' sent by the
  browser.
@@ -777,6 +858,7 @@ return (string|null) URL origin of a CORS request, 'null' if not available.
 <
 return (string|null) User agent, null if not available
 
+ Returns the user agent.
 
 
 *yii/web/Request::getUserIP*				public
@@ -784,6 +866,8 @@ return (string|null) User agent, null if not available
  getUserIP()
 <
 return (string|null) User IP address, null if not available
+
+ Returns the user IP address.
 
  The IP is determined using headers and / or '$_SERVER' variables.
 
@@ -794,6 +878,8 @@ return (string|null) User IP address, null if not available
 <
 return (string|null) User host name, null if not available
 
+ Returns the user host name.
+
  The HOST is determined using headers and / or '$_SERVER' variables.
 
 
@@ -803,6 +889,8 @@ return (string|null) User host name, null if not available
 <
 return (string|null) Remote IP address, 'null' if not available.
 
+ Returns the IP on the other end of this connection.
+
  This is always the next hop, any headers are ignored.
 
 
@@ -811,6 +899,8 @@ return (string|null) Remote IP address, 'null' if not available.
  getRemoteHost()
 <
 return (string|null) Remote host name, 'null' if not available
+
+ Returns the host name of the other end of this connection.
 
  This is always the next hop, any headers are ignored.
 
@@ -851,6 +941,8 @@ return (array) That contains exactly two elements:
 <
 return (int) Port number for insecure requests.
 
+ Returns the port to use for insecure requests.
+
  Defaults to 80, or the port specified by the server if the current request is
  insecure.
 
@@ -860,6 +952,8 @@ return (int) Port number for insecure requests.
  setPort($value)
 <
 return (void)
+
+ Sets the port to use for insecure requests.
 
  This setter is provided in case a custom port is necessary for certain server
  configurations.
@@ -873,6 +967,8 @@ return (void)
 <
 return (int) Port number for secure requests.
 
+ Returns the port to use for secure requests.
+
  Defaults to 443, or the port specified by the server if the current request
  is secure.
 
@@ -882,6 +978,8 @@ return (int) Port number for secure requests.
  setSecurePort($value)
 <
 return (void)
+
+ Sets the port to use for secure requests.
 
  This setter is provided in case a custom port is necessary for certain server
  configurations.
@@ -897,6 +995,8 @@ return (array) The content types ordered by the quality score. Types with the hi
 scores will be returned first. The array keys are the content types, while the
 array values are the corresponding quality score and other parameters as given
 in the header.
+
+ Returns the content types acceptable by the end user.
 
  This is determined by the 'Accept' HTTP header. For example,
 
@@ -920,6 +1020,8 @@ in the header.
 <
 return (void)
 
+ Sets the acceptable content types.
+
  Please refer to 'getAcceptableContentTypes()' on the format of the parameter.
 
     [$value] (array) The content types that are acceptable by the end user.
@@ -933,6 +1035,10 @@ return (void)
 return (string) Request content-type. Null is returned if this information is not
 available.
 
+ Returns request content-type The Content-Type header field indicates the MIME
+ type of the data contained in 'getRawBody()' or, in the case of the HEAD
+ method, the media type that would have been sent had the request been a GET.
+
  For the MIME-types the user expects in response, see
  'acceptableContentTypes'.
 
@@ -943,6 +1049,8 @@ available.
 <
 return (array) The languages ordered by the preference level. The first element
 represents the most preferred language.
+
+ Returns the languages acceptable by the end user.
 
  This is determined by the 'Accept-Language' HTTP header.
 
@@ -963,6 +1071,8 @@ return (void)
 <
 return (array) The acceptable values ordered by their quality score. The values with
 the highest scores will be returned first.
+
+ Parses the given 'Accept' (or 'Accept-Language') header.
 
  This method will return the acceptable values with their quality scores and
  the corresponding parameters as specified in the given 'Accept' header. The
@@ -993,6 +1103,8 @@ the highest scores will be returned first.
 <
 return (string) The language that the application should use.
 
+ Returns the user-preferred language that should be used by this application.
+
  The language resolution is based on the user preferred languages and the
  languages supported by the application. The method will try to find the best
  match.
@@ -1008,6 +1120,7 @@ return (string) The language that the application should use.
 <
 return (array) The entity tags
 
+ Gets the Etags.
 
 
 *yii/web/Request::getCookies*				public
@@ -1015,6 +1128,8 @@ return (array) The entity tags
  getCookies()
 <
 return (\yii\web\CookieCollection) The cookie collection.
+
+ Returns the cookie collection.
 
  Through the returned cookie collection, you may access a cookie using the
  following syntax:
@@ -1036,6 +1151,7 @@ return (\yii\web\CookieCollection) The cookie collection.
 <
 return (array) The cookies obtained from request
 
+ Converts '$_COOKIE' into an array of 'Cookie'.
 
 
 *yii/web/Request::getCsrfToken*				public
@@ -1043,6 +1159,8 @@ return (array) The cookies obtained from request
  getCsrfToken($regenerate='false')
 <
 return (string) The token used to perform CSRF validation.
+
+ Returns the token used to perform CSRF validation.
 
  This token is generated in a way to prevent [BREACH
  attacks](http://breachattack.com/). It may be passed along via a hidden field
@@ -1060,6 +1178,7 @@ return (string) The token used to perform CSRF validation.
 return (string) The CSRF token loaded from cookie or session. Null is returned if the
 cookie or session does not have CSRF token.
 
+ Loads the CSRF token from cookie or session.
 
 
 *yii/web/Request::generateCsrfToken*			protected
@@ -1068,6 +1187,7 @@ cookie or session does not have CSRF token.
 <
 return (string) The random token for CSRF validation.
 
+ Generates an unmasked random token used to perform CSRF validation.
 
 
 *yii/web/Request::getCsrfTokenFromHeader*			public
@@ -1085,6 +1205,8 @@ no such header is sent.
 <
 return (\yii\web\Cookie) The generated cookie
 
+ Creates a cookie with a randomly generated CSRF token.
+
  Initial values specified in 'csrfCookie' will be applied to the generated
  cookie.
 
@@ -1097,6 +1219,8 @@ return (\yii\web\Cookie) The generated cookie
 <
 return (bool) Whether CSRF token is valid. If 'enableCsrfValidation' is false, this
 method will return true.
+
+ Performs the CSRF validation.
 
  This method will validate the user-provided CSRF token by comparing it with
  the one stored in cookie or session. This method is mainly called in

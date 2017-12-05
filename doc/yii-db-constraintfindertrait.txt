@@ -14,6 +14,8 @@ METHOD DETAILS
 <
 return (mixed) Metadata.
 
+ Returns the metadata of the given type for the given table.
+
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
     [$type] (string) Metadata type.
@@ -26,6 +28,8 @@ return (mixed) Metadata.
  getSchemaMetadata($schema, $type, $refresh)
 <
 return (array) Array of metadata.
+
+ Returns the metadata of the given type for all tables in the given schema.
 
     [$schema] (string) The schema of the metadata. Defaults to empty string,
     meaning the current or default schema name.
@@ -41,6 +45,8 @@ return (array) Array of metadata.
 return (\yii\db\Constraint|null) Primary key for the given table, 'null' if the table
 has no primary key.
 
+ Loads a primary key for the given table.
+
     [$tableName] (string) Table name.
 
 
@@ -49,6 +55,8 @@ has no primary key.
  loadTableForeignKeys($tableName)
 <
 return (\yii\db\ForeignKeyConstraint[]) Foreign keys for the given table.
+
+ Loads all foreign keys for the given table.
 
     [$tableName] (string) Table name.
 
@@ -59,6 +67,8 @@ return (\yii\db\ForeignKeyConstraint[]) Foreign keys for the given table.
 <
 return (\yii\db\IndexConstraint[]) Indexes for the given table.
 
+ Loads all indexes for the given table.
+
     [$tableName] (string) Table name.
 
 
@@ -68,6 +78,8 @@ return (\yii\db\IndexConstraint[]) Indexes for the given table.
 <
 return (\yii\db\Constraint[]) Unique constraints for the given table.
 
+ Loads all unique constraints for the given table.
+
     [$tableName] (string) Table name.
 
 
@@ -76,6 +88,8 @@ return (\yii\db\Constraint[]) Unique constraints for the given table.
  loadTableChecks($tableName)
 <
 return (\yii\db\CheckConstraint[]) Check constraints for the given table.
+
+ Loads all check constraints for the given table.
 
     [$tableName] (string) Table name.
 
@@ -87,6 +101,8 @@ return (\yii\db\CheckConstraint[]) Check constraints for the given table.
 return (\yii\db\DefaultValueConstraint[]) Default value constraints for the given
 table.
 
+ Loads all default value constraints for the given table.
+
     [$tableName] (string) Table name.
 
 
@@ -96,6 +112,8 @@ table.
 <
 return (\yii\db\Constraint|null) Table primary key, 'null' if the table has no
 primary key.
+
+ Obtains the primary key for the named table.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -110,6 +128,8 @@ primary key.
 return (\yii\db\Constraint[]) Primary keys for all tables in the database. Each array
 element is an instance of 'Constraint' or its child class.
 
+ Returns primary keys for all tables in the database.
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
     [$refresh] (bool) Whether to fetch the latest available table schemas. If
@@ -121,6 +141,8 @@ element is an instance of 'Constraint' or its child class.
  getTableForeignKeys($name, $refresh='false')
 <
 return (\yii\db\ForeignKeyConstraint[]) Table foreign keys.
+
+ Obtains the foreign keys information for the named table.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -136,6 +158,8 @@ return (\yii\db\ForeignKeyConstraint[][]) Foreign keys for all tables in the
 database. Each array element is an array of 'ForeignKeyConstraint' or its
 child classes.
 
+ Returns foreign keys for all tables in the database.
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
     [$refresh] (bool) Whether to fetch the latest available table schemas. If
@@ -147,6 +171,8 @@ child classes.
  getTableIndexes($name, $refresh='false')
 <
 return (\yii\db\IndexConstraint[]) Table indexes.
+
+ Obtains the indexes information for the named table.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -161,6 +187,8 @@ return (\yii\db\IndexConstraint[]) Table indexes.
 return (\yii\db\IndexConstraint[][]) Indexes for all tables in the database. Each
 array element is an array of 'IndexConstraint' or its child classes.
 
+ Returns indexes for all tables in the database.
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
     [$refresh] (bool) Whether to fetch the latest available table schemas. If
@@ -172,6 +200,8 @@ array element is an array of 'IndexConstraint' or its child classes.
  getTableUniques($name, $refresh='false')
 <
 return (\yii\db\Constraint[]) Table unique constraints.
+
+ Obtains the unique constraints information for the named table.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -186,6 +216,8 @@ return (\yii\db\Constraint[]) Table unique constraints.
 return (\yii\db\Constraint[][]) Unique constraints for all tables in the database.
 Each array element is an array of 'Constraint' or its child classes.
 
+ Returns unique constraints for all tables in the database.
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
     [$refresh] (bool) Whether to fetch the latest available table schemas. If
@@ -197,6 +229,8 @@ Each array element is an array of 'Constraint' or its child classes.
  getTableChecks($name, $refresh='false')
 <
 return (\yii\db\CheckConstraint[]) Table check constraints.
+
+ Obtains the check constraints information for the named table.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -212,6 +246,8 @@ return (\yii\db\CheckConstraint[][]) Check constraints for all tables in the
 database. Each array element is an array of 'CheckConstraint' or its child
 classes.
 
+ Returns check constraints for all tables in the database.
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
     [$refresh] (bool) Whether to fetch the latest available table schemas. If
@@ -223,6 +259,8 @@ classes.
  getTableDefaultValues($name, $refresh='false')
 <
 return (\yii\db\DefaultValueConstraint[]) Table default value constraints.
+
+ Obtains the default value constraints information for the named table.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -237,6 +275,8 @@ return (\yii\db\DefaultValueConstraint[]) Table default value constraints.
 return (\yii\db\DefaultValueConstraint[]) Default value constraints for all tables in
 the database. Each array element is an array of 'DefaultValueConstraint' or
 its child classes.
+
+ Returns default value constraints for all tables in the database.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.

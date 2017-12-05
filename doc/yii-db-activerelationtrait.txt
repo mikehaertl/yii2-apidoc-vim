@@ -56,6 +56,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Clones internal objects.
 
 
 *yii/db/ActiveRelationTrait::via*				public
@@ -63,6 +64,8 @@ return (void)
  via($relationName, $callable='null')
 <
 return ($this) The relation object itself.
+
+ Specifies the relation associated with the junction table.
 
  Use this method to specify a pivot record/table when declaring a relation in
  the 'ActiveRecord' class:
@@ -93,6 +96,8 @@ return ($this) The relation object itself.
  inverseOf($relationName)
 <
 return ($this) The relation object itself.
+
+ Sets the name of the relation that is the inverse of this relation.
 
  For example, a customer has orders, which means the inverse of the "orders"
  relation is the "customer". If this property is set, the primary record(s)
@@ -142,6 +147,8 @@ return ($this) The relation object itself.
 <
 return (mixed) The related record(s)
 
+ Finds the related records for the specified primary record.
+
  This method is invoked when a relation of an ActiveRecord is being accessed
  in a lazy fashion.
 
@@ -155,6 +162,8 @@ return (mixed) The related record(s)
  populateRelation($name, $primaryModels)
 <
 return (array) The related models
+
+ Finds the related records and populates them into the primary models.
 
     [$name] (string) The relation name
     [$primaryModels] (array) Primary models

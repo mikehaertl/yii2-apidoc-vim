@@ -338,6 +338,9 @@ METHOD DETAILS
 <
 return (string[]) The names of the options valid for the action
 
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
+
 
 
  Child classes may override this method to specify possible options.
@@ -356,6 +359,8 @@ return (string[]) The names of the options valid for the action
 <
 return (array) The options alias names valid for the action where the keys is alias
 name for option and value is option name.
+
+ Returns option alias names.
 
 
 
@@ -475,6 +480,8 @@ name for option and value is option name.
 <
 return (int) Return code
 
+ Loads the specified fixture data.
+
  For example,
 
  ''' # load the fixture data specified by User and UserProfile. # any existing
@@ -494,6 +501,8 @@ return (int) Return code
  actionUnload($fixturesInput='[]')
 <
 return (int) Return code
+
+ Unloads the specified fixtures.
 
  For example,
 
@@ -515,6 +524,8 @@ return (int) Return code
 <
 return (void)
 
+ Notifies user that there are no fixtures to load according input conditions.
+
     [$foundFixtures] (array) Array of found fixtures
     [$except] (array) Array of names of fixtures that should not be loaded
 
@@ -525,6 +536,9 @@ return (void)
 <
 return (void)
 
+ Notifies user that there are no fixtures to unload according input
+ conditions.
+
     [$foundFixtures] (array) Array of found fixtures
     [$except] (array) Array of names of fixtures that should not be loaded
 
@@ -534,6 +548,8 @@ return (void)
  needToApplyAll($fixture)
 <
 return (bool) 
+
+ Checks if needed to apply all fixtures.
 
     [$fixture] (string) 
 

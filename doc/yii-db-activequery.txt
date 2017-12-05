@@ -200,6 +200,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$modelClass] (string) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
     object
@@ -210,6 +212,8 @@ return (void)
  init()
 <
 return (void)
+
+ Initializes the object.
 
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event. If you override this
@@ -408,6 +412,8 @@ return (void)
 <
 return (\yii\db\Command) The created DB command instance.
 
+ Creates a DB command that can be used to execute this query.
+
     [$db] (\yii\db\Connection|null) The DB connection used to create the DB
     command. If 'null', the DB connection returned by 'modelClass' will be
     used.
@@ -419,6 +425,8 @@ return (\yii\db\Command) The created DB command instance.
 <
 return ($this) A prepared query instance which will be used by 'QueryBuilder' to
 build the SQL
+
+ Prepares for building SQL.
 
 
 
@@ -448,6 +456,8 @@ build the SQL
 return (array|\yii\db\ActiveRecord[]) The query results. If the query results in
 nothing, an empty array will be returned.
 
+ Executes query and returns all results as an array.
+
     [$db] (\yii\db\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
 
@@ -457,6 +467,8 @@ nothing, an empty array will be returned.
  populate($rows)
 <
 return (array) The converted query result
+
+ Converts the raw query results into the format as specified by this query.
 
 
 
@@ -475,6 +487,8 @@ return (array) The converted query result
 return (\yii\db\ActiveRecord|array|null) A single row of query result. Depending on
 the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. 'null' will be returned if the query results in nothing.
+
+ Executes query and returns a single row of result.
 
     [$db] (\yii\db\Connection|null) The DB connection used to create the DB
     command. If 'null', the DB connection returned by 'modelClass' will be
@@ -527,6 +541,8 @@ ActiveRecord object. 'null' will be returned if the query results in nothing.
 <
 return (bool|string) 
 
+ Queries a scalar value by setting 'select' first.
+
 
 
  Restores the value of select to make this query reusable.
@@ -542,6 +558,8 @@ return (bool|string)
  getTablesUsedInFrom()
 <
 return (string[]) Table names indexed by aliases
+
+ Returns table names used in 'from' indexed by aliases.
 
 
 
@@ -701,6 +719,8 @@ return (string[]) Table names indexed by aliases
 <
 return ($this) The query object itself
 
+ Joins with the specified relations.
+
  This method allows you to reuse existing relation definitions to perform JOIN
  queries. Based on the definition of the specified relation(s), the method
  will append one or multiple JOIN statements to the current query.
@@ -768,6 +788,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Inner joins with the specified relations.
+
  This is a shortcut method to 'joinWith()' with the join type set as "INNER
  JOIN". Please refer to 'joinWith()' for detailed usage of this method.
 
@@ -783,6 +805,8 @@ return ($this) The query object itself
  onCondition($condition, $params='[]')
 <
 return ($this) The query object itself
+
+ Sets the ON condition for a relational query.
 
  The condition will be used in the ON part when 'ActiveQuery::joinWith()' is
  called. Otherwise, the condition will be used in the WHERE part of a query.
@@ -812,6 +836,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional ON condition to the existing one.
+
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
@@ -826,6 +852,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional ON condition to the existing one.
+
  The new condition and the existing one will be joined using the 'OR'
  operator.
 
@@ -839,6 +867,8 @@ return ($this) The query object itself
  viaTable($tableName, $link, $callable='null')
 <
 return ($this) The query object itself
+
+ Specifies the junction table for a relational query.
 
  Use this method to specify a junction table when declaring a relation in the
  'ActiveRecord' class:
@@ -866,6 +896,8 @@ return ($this) The query object itself
  alias($alias)
 <
 return ($this) The query object itself
+
+ Define an alias for the table defined in 'modelClass'.
 
  This method will adjust 'from' so that an already defined alias will be
  overwritten. If none was defined, 'from' will be populated with the given

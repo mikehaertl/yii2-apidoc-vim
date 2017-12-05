@@ -105,6 +105,8 @@ METHOD DETAILS
 return (\yii\sphinx\IndexSchema|null) Driver dependent index metadata. 'null' 
   - if the index does not exist.
 
+ Loads the metadata for the specified index.
+
     [$name] (string) Index name
 
 
@@ -113,6 +115,8 @@ return (\yii\sphinx\IndexSchema|null) Driver dependent index metadata. 'null'
  resolveIndexNames($index, $name)
 <
 return (void)
+
+ Resolves the index name.
 
     [$index] (\yii\sphinx\IndexSchema) The index metadata object
     [$name] (string) The index name
@@ -124,6 +128,8 @@ return (void)
 <
 return (void)
 
+ Resolves the index name.
+
     [$index] (\yii\sphinx\IndexSchema) The index metadata object
 
 
@@ -133,6 +139,8 @@ return (void)
 <
 return (\yii\sphinx\IndexSchema|null) Index metadata. 'null' 
   - if the named index does not exist.
+
+ Obtains the metadata for the named index.
 
     [$name] (string) Index name. The index name may contain schema name if
     any. Do not quote the index name.
@@ -146,6 +154,8 @@ return (\yii\sphinx\IndexSchema|null) Index metadata. 'null'
 <
 return (mixed) The cache key
 
+ Returns the cache key for the specified index name.
+
     [$name] (string) The index name
 
 
@@ -154,6 +164,8 @@ return (mixed) The cache key
  getCacheTag()
 <
 return (string) The cache tag name
+
+ Returns the cache tag name.
 
  This allows 'refresh()' to invalidate all cached index schemas.
 
@@ -165,6 +177,8 @@ return (string) The cache tag name
 return (\yii\sphinx\IndexSchema[]) The metadata for all indexes in the Sphinx. Each
 array element is an instance of 'IndexSchema' or its child class.
 
+ Returns the metadata for all indexes in the database.
+
     [$refresh] (bool) Whether to fetch the latest available index schemas. If
     this is false, cached data may be returned if available.
 
@@ -174,6 +188,8 @@ array element is an instance of 'IndexSchema' or its child class.
  getIndexNames($refresh='false')
 <
 return (string[]) All index names in the Sphinx.
+
+ Returns all index names in the Sphinx.
 
     [$refresh] (bool) Whether to fetch the latest available index names. If
     this is false, index names fetched previously (if available) will be
@@ -186,6 +202,8 @@ return (string[]) All index names in the Sphinx.
 <
 return (array) All index types in the Sphinx in format: index name => index type.
 
+ Returns all index types in the Sphinx.
+
     [$refresh] (bool) Whether to fetch the latest available index types. If
     this is false, index types fetched previously (if available) will be
     returned.
@@ -197,6 +215,7 @@ return (array) All index types in the Sphinx in format: index name => index type
 <
 return (void)
 
+ Initializes information about name and type of all index in the Sphinx.
 
 
 *yii/sphinx/Schema::findIndexes*				protected
@@ -205,6 +224,7 @@ return (void)
 <
 return (array) All index names in the Sphinx.
 
+ Returns all index names in the Sphinx.
 
 
 *yii/sphinx/Schema::getQueryBuilder*			public
@@ -221,6 +241,8 @@ return (\yii\sphinx\QueryBuilder) The query builder for this connection.
 <
 return (int) The PDO type
 
+ Determines the PDO type for the given PHP data value.
+
     [$data] (mixed) The data whose PDO type is to be determined
 
 
@@ -229,6 +251,8 @@ return (int) The PDO type
  refresh()
 <
 return (void)
+
+ Refreshes the schema.
 
  This method cleans up all cached index schemas so that they can be re-created
  later to reflect the Sphinx schema change.
@@ -240,6 +264,7 @@ return (void)
 <
 return (\yii\sphinx\QueryBuilder) Query builder instance
 
+ Creates a query builder for the Sphinx.
 
 
 *yii/sphinx/Schema::quoteValue*				public
@@ -247,6 +272,8 @@ return (\yii\sphinx\QueryBuilder) Query builder instance
  quoteValue($str)
 <
 return (string) The properly quoted string
+
+ Quotes a string value for use in a query.
 
  Note that if the parameter is not a string, it will be returned without
  change.
@@ -259,6 +286,8 @@ return (string) The properly quoted string
  quoteIndexName($name)
 <
 return (string) The properly quoted index name
+
+ Quotes a index name for use in a query.
 
  If the index name contains schema prefix, the prefix will also be properly
  quoted. If the index name is already quoted or contains '(' or '{{', then
@@ -273,6 +302,8 @@ return (string) The properly quoted index name
 <
 return (string) The properly quoted column name
 
+ Quotes a column name for use in a query.
+
  If the column name contains prefix, the prefix will also be properly quoted.
  If the column name is already quoted or contains '(', ''' or '{{', then this
  method will do nothing.
@@ -286,6 +317,8 @@ return (string) The properly quoted column name
 <
 return (string) The properly quoted index name
 
+ Quotes a index name for use in a query.
+
  A simple index name has no schema prefix.
 
     [$name] (string) Index name
@@ -297,6 +330,8 @@ return (string) The properly quoted index name
 <
 return (string) The properly quoted column name
 
+ Quotes a column name for use in a query.
+
  A simple column name has no prefix.
 
     [$name] (string) Column name
@@ -307,6 +342,8 @@ return (string) The properly quoted column name
  getRawIndexName($name)
 <
 return (string) The real name of the given index name
+
+ Returns the actual name of a given index name.
 
  This method will strip off curly brackets from the given index name and
  replace the percentage character '%' with 'Connection::indexPrefix'.
@@ -320,6 +357,8 @@ return (string) The real name of the given index name
 <
 return (string) PHP type name
 
+ Extracts the PHP type from abstract DB type.
+
     [$column] (\yii\sphinx\ColumnSchema) The column schema information
 
 
@@ -329,6 +368,8 @@ return (string) PHP type name
 <
 return (bool) Whether the index exists in the database
 
+ Collects the metadata of index columns.
+
     [$index] (\yii\sphinx\IndexSchema) The index metadata
 
 
@@ -337,6 +378,8 @@ return (bool) Whether the index exists in the database
  applyDefaultColumns($index)
 <
 return (void)
+
+ Sets up the default columns for given index.
 
  This method should be used in case there is no way to find actual columns,
  like in some distributed indexes.
@@ -350,6 +393,8 @@ return (void)
 <
 return (\yii\sphinx\ColumnSchema) The column schema object
 
+ Loads the column information into a 'ColumnSchema' object.
+
     [$info] (array) Column information
 
 
@@ -358,6 +403,8 @@ return (\yii\sphinx\ColumnSchema) The column schema object
  convertException($e, $rawSql)
 <
 return (\yii\db\Exception) 
+
+ Converts a DB exception to a more concrete one if possible.
 
     [$e] (\Exception) 
     [$rawSql] (string) SQL that produced exception
@@ -368,6 +415,8 @@ return (\yii\db\Exception)
  isReadQuery($sql)
 <
 return (bool) Whether a SQL statement is for read purpose.
+
+ Returns a value indicating whether a SQL statement is for read purpose.
 
     [$sql] (string) The SQL statement
 

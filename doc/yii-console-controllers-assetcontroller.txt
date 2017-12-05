@@ -478,6 +478,7 @@ METHOD DETAILS
 <
 return (\yii\web\AssetManager) Asset manager instance.
 
+ Returns the asset manager instance.
 
 
 *yii/console/controllers/AssetController::setAssetManager*public
@@ -485,6 +486,8 @@ return (\yii\web\AssetManager) Asset manager instance.
  setAssetManager($assetManager)
 <
 return (void)
+
+ Sets asset manager instance or configuration.
 
     [$assetManager] (\yii\web\AssetManager|array) Asset manager instance or
     its array configuration.
@@ -495,6 +498,8 @@ return (void)
  actionCompress($configFile, $bundleFile)
 <
 return (void)
+
+ Combines and compresses the asset files according to the given configuration.
 
  During the process new asset bundle configuration file will be created. You
  should replace your original asset bundle configuration with this file in
@@ -510,6 +515,8 @@ return (void)
 <
 return (void)
 
+ Applies configuration from the given file to self instance.
+
     [$configFile] (string) Configuration file name.
 
 
@@ -519,6 +526,8 @@ return (void)
 <
 return (\yii\web\AssetBundle[]) List of source asset bundles.
 
+ Creates full list of source asset bundles.
+
     [$bundles] (string[]) List of asset bundle names
 
 
@@ -527,6 +536,8 @@ return (\yii\web\AssetBundle[]) List of source asset bundles.
  loadDependency($bundle, $result)
 <
 return (void)
+
+ Loads asset bundle dependencies recursively.
 
     [$bundle] (\yii\web\AssetBundle) Bundle instance
     [$result] (array) Already loaded bundles list.
@@ -538,6 +549,8 @@ return (void)
 <
 return (\yii\web\AssetBundle[]) List of output asset bundles.
 
+ Creates full list of output asset bundles.
+
     [$targets] (array) Output asset bundles configuration.
     [$bundles] (\yii\web\AssetBundle[]) List of source asset bundles.
 
@@ -547,6 +560,8 @@ return (\yii\web\AssetBundle[]) List of output asset bundles.
  buildTarget($target, $type, $bundles)
 <
 return (void)
+
+ Builds output asset bundle.
 
     [$target] (\yii\web\AssetBundle) Output asset bundle
     [$type] (string) Either 'js' or 'css'.
@@ -559,6 +574,9 @@ return (void)
 <
 return (\yii\web\AssetBundle[]) Output asset bundles.
 
+ Adjust dependencies between asset bundles in the way source bundles begin to
+ depend on output ones.
+
     [$targets] (\yii\web\AssetBundle[]) Output asset bundles.
     [$bundles] (\yii\web\AssetBundle[]) Source asset bundles.
 
@@ -568,6 +586,8 @@ return (\yii\web\AssetBundle[]) Output asset bundles.
  registerBundle($bundles, $name, $registered)
 <
 return (void)
+
+ Registers asset bundles including their dependencies.
 
     [$bundles] (\yii\web\AssetBundle[]) Asset bundles list.
     [$name] (string) Bundle name.
@@ -580,6 +600,8 @@ return (void)
 <
 return (void)
 
+ Saves new asset bundles configuration.
+
     [$targets] (\yii\web\AssetBundle[]) List of asset bundles to be saved.
     [$bundleFile] (string) Output file name.
 
@@ -589,6 +611,8 @@ return (void)
  compressJsFiles($inputFiles, $outputFile)
 <
 return (void)
+
+ Compresses given JavaScript files and combines them into the single one.
 
     [$inputFiles] (array) List of source file names.
     [$outputFile] (string) Output file name.
@@ -600,6 +624,8 @@ return (void)
 <
 return (void)
 
+ Compresses given CSS files and combines them into the single one.
+
     [$inputFiles] (array) List of source file names.
     [$outputFile] (string) Output file name.
 
@@ -609,6 +635,8 @@ return (void)
  combineJsFiles($inputFiles, $outputFile)
 <
 return (void)
+
+ Combines JavaScript files into a single one.
 
     [$inputFiles] (array) Source file names.
     [$outputFile] (string) Output file name.
@@ -620,6 +648,8 @@ return (void)
 <
 return (void)
 
+ Combines CSS files into a single one.
+
     [$inputFiles] (array) Source file names.
     [$outputFile] (string) Output file name.
 
@@ -629,6 +659,9 @@ return (void)
  adjustCssUrl($cssContent, $inputFilePath, $outputFilePath)
 <
 return (string) Adjusted CSS content.
+
+ Adjusts CSS content allowing URL references pointing to the original
+ resources.
 
     [$cssContent] (string) Source CSS content.
     [$inputFilePath] (string) Input CSS file name.
@@ -640,6 +673,8 @@ return (string) Adjusted CSS content.
  actionTemplate($configFile)
 <
 return (int) CLI exit code
+
+ Creates template of configuration file for 'actionCompress'.
 
     [$configFile] (string) Output file name.
 

@@ -94,6 +94,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the view component.
 
 
 *yii/base/View::__get*					public
@@ -212,6 +213,8 @@ return (void)
 <
 return (string) The rendering result
 
+ Renders a view.
+
  The view to be rendered can be specified in one of the following formats:
 
 
@@ -246,6 +249,8 @@ return (string) The rendering result
 <
 return (string) The view file path. Note that the file may not exist.
 
+ Finds the view file based on the given view name.
+
     [$view] (string) The view name or the [path alias](guide:concept-aliases)
     of the view file. Please refer to 'render()' on how to specify this
     parameter.
@@ -260,6 +265,8 @@ return (string) The view file path. Note that the file may not exist.
  renderFile($viewFile, $params='[]', $context='null')
 <
 return (string) The rendering result
+
+ Renders a view file.
 
  If 'theme' is enabled (not null), it will try to render the themed version of
  the view file as long as it is available.
@@ -293,6 +300,8 @@ being rendered.
 <
 return (bool) Whether to continue rendering the view file.
 
+ This method is invoked right before 'renderFile()' renders a view file.
+
  The default implementation will trigger the 'EVENT_BEFORE_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
 
@@ -305,6 +314,8 @@ return (bool) Whether to continue rendering the view file.
  afterRender($viewFile, $params, $output)
 <
 return (void)
+
+ This method is invoked right after 'renderFile()' renders a view file.
 
  The default implementation will trigger the 'EVENT_AFTER_RENDER' event. If
  you override this method, make sure you call the parent implementation first.
@@ -320,6 +331,8 @@ return (void)
  renderPhpFile($_file_, $_params_='[]')
 <
 return (string) The rendering result
+
+ Renders a view file as a PHP script.
 
  This method treats the view file as a PHP script and includes the file. It
  extracts the given parameters and makes them available in the view file. The
@@ -340,6 +353,8 @@ return (string) The rendering result
 return (string) The placeholder of the dynamic content, or the dynamic content if
 there is no active content cache currently.
 
+ Renders dynamic content returned by the given PHP statements.
+
  This method is mainly used together with content caching (fragment caching
  and page caching) when some portions of the content (called *dynamic
  content*) should not be cached. The dynamic content must be returned by some
@@ -355,6 +370,8 @@ there is no active content cache currently.
 <
 return (void)
 
+ Adds a placeholder for dynamic content.
+
  This method is internally used.
 
     [$placeholder] (string) The placeholder name
@@ -368,6 +385,8 @@ return (void)
 <
 return (mixed) The return value of the PHP statements.
 
+ Evaluates the given PHP statements.
+
  This method is mainly used internally to implement dynamic content feature.
 
     [$statements] (string) The PHP statements to be evaluated.
@@ -378,6 +397,8 @@ return (mixed) The return value of the PHP statements.
  beginBlock($id, $renderInPlace='false')
 <
 return (\yii\widgets\Block) The Block widget instance
+
+ Begins recording a block.
 
  This method is a shortcut to beginning 'Block'.
 
@@ -392,6 +413,7 @@ return (\yii\widgets\Block) The Block widget instance
 <
 return (void)
 
+ Ends recording a block.
 
 
 *yii/base/View::beginContent*				public
@@ -399,6 +421,9 @@ return (void)
  beginContent($viewFile, $params='[]')
 <
 return (\yii\widgets\ContentDecorator) The ContentDecorator widget instance
+
+ Begins the rendering of content that is to be decorated by the specified
+ view.
 
  This method can be used to implement nested layout. For example, a layout can
  be embedded in another layout file specified as '@app/views/layouts/base.php'
@@ -423,6 +448,7 @@ return (\yii\widgets\ContentDecorator) The ContentDecorator widget instance
 <
 return (void)
 
+ Ends the rendering of content.
 
 
 *yii/base/View::beginCache*				public
@@ -431,6 +457,8 @@ return (void)
 <
 return (bool) Whether you should generate the content for caching. False if the
 cached version is available.
+
+ Begins fragment caching.
 
  This method will display cached content if it is available. If not, it will
  start caching and would expect an 'endCache()' call to end the cache and save
@@ -453,6 +481,7 @@ cached version is available.
 <
 return (void)
 
+ Ends fragment caching.
 
 
 *yii/base/View::beginPage*				public
@@ -461,6 +490,7 @@ return (void)
 <
 return (void)
 
+ Marks the beginning of a page.
 
 
 *yii/base/View::endPage*					public
@@ -469,6 +499,7 @@ return (void)
 <
 return (void)
 
+ Marks the ending of a page.
 
 
 

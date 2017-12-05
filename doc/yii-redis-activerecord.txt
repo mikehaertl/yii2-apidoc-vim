@@ -201,6 +201,8 @@ METHOD DETAILS
 <
 return (array) List of attribute names.
 
+ Returns the list of all attribute names of the model.
+
  This method must be overridden by child classes to define available
  attributes.
 
@@ -406,6 +408,8 @@ return (array) List of attribute names.
 <
 return (int) The number of rows updated
 
+ Updates the whole table using the provided attribute values and conditions.
+
  For example, to change the status to be 1 for all customers whose status is
  2:
 
@@ -426,6 +430,8 @@ return (int) The number of rows updated
 <
 return (int) The number of rows updated
 
+ Updates the whole table using the provided counter changes and conditions.
+
  For example, to increment all customers' age by 1,
 
    Customer::updateAllCounters(['age' => 1]);
@@ -445,6 +451,8 @@ return (int) The number of rows updated
  deleteAll($condition='null')
 <
 return (int) The number of rows deleted
+
+ Deletes rows in the table using the provided conditions.
 
  WARNING: If you do not specify any condition, this method will delete ALL
  rows in the table.
@@ -681,6 +689,8 @@ return (int) The number of rows deleted
 <
 return (string[]) The primary keys of this record.
 
+ Returns the primary key name(s) for this AR class.
+
  This method should be overridden by child classes to define the primary key.
 
  Note that an array should be returned even when it is a single primary key.
@@ -691,6 +701,8 @@ return (string[]) The primary keys of this record.
  find()
 <
 return (\yii\redis\ActiveQuery) The newly created 'ActiveQuery' instance.
+
+ Creates an 'ActiveQueryInterface' instance for query purpose.
 
 
 
@@ -744,6 +756,9 @@ return (\yii\redis\ActiveQuery) The newly created 'ActiveQuery' instance.
 return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
+ Inserts the record into the database using the attribute values of this
+ record.
+
 
 
  Usage example:
@@ -769,6 +784,8 @@ successfully.
 <
 return (\yii\redis\Connection) The database connection used by this AR class.
 
+ Returns the database connection used by this AR class.
+
  By default, the "redis" application component is used as the database
  connection. You may override this method if you want to use a different
  database connection.
@@ -779,6 +796,9 @@ return (\yii\redis\Connection) The database connection used by this AR class.
  keyPrefix()
 <
 return (string) The prefix to apply to all AR keys
+
+ Declares prefix of the key that represents the keys that store this records
+ in redis.
 
  By default this method returns the class name as the table name by calling
  'Inflector::camel2id()'. For example, 'Customer' becomes 'customer', and
@@ -791,6 +811,8 @@ return (string) The prefix to apply to all AR keys
  buildKey($key)
 <
 return (string) The generated key
+
+ Builds a normalized key from a given primary key value.
 
     [$key] (mixed) The key to be normalized
 

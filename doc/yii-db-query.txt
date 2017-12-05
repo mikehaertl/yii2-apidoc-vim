@@ -270,6 +270,8 @@ METHOD DETAILS
 <
 return ($this) The query object itself
 
+ Sets the WHERE part of the query.
+
  The method requires a '$condition' parameter, and optionally a '$params'
  parameter specifying the values to be bound to the query.
 
@@ -402,6 +404,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional WHERE condition to the existing one.
+
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
@@ -415,6 +419,8 @@ return ($this) The query object itself
  orWhere($condition, $params='[]')
 <
 return ($this) The query object itself
+
+ Adds an additional WHERE condition to the existing one.
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -485,6 +491,8 @@ return ($this) The query object itself
 <
 return (\yii\db\Command) The created DB command instance.
 
+ Creates a DB command that can be used to execute this query.
+
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -496,6 +504,8 @@ return (\yii\db\Command) The created DB command instance.
 <
 return ($this) A prepared query instance which will be used by 'QueryBuilder' to
 build the SQL
+
+ Prepares for building SQL.
 
  This method is called by 'QueryBuilder' when it starts to build SQL from a
  query object. You may override this method to do some final preparation work
@@ -510,6 +520,8 @@ build the SQL
 <
 return (\yii\db\BatchQueryResult) The batch query result. It implements the
 '\Iterator' interface and can be traversed to retrieve the data in batches.
+
+ Starts a batch query.
 
  A batch query supports fetching data in batches, which can keep the memory
  usage under a limit. This method will return a 'BatchQueryResult' object
@@ -537,6 +549,8 @@ return (\yii\db\BatchQueryResult) The batch query result. It implements the
 return (\yii\db\BatchQueryResult) The batch query result. It implements the
 '\Iterator' interface and can be traversed to retrieve the data in batches.
 
+ Starts a batch query and retrieves data row by row.
+
  This method is similar to 'batch()' except that in each iteration of the
  result, only one row of data is returned. For example,
 
@@ -558,6 +572,8 @@ return (\yii\db\BatchQueryResult) The batch query result. It implements the
 return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
+ Executes the query and returns all results as an array.
+
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -568,6 +584,8 @@ will be returned.
  populate($rows)
 <
 return (array) The converted query result
+
+ Converts the raw query results into the format as specified by this query.
 
  This method is internally used to convert the data fetched from database into
  the format as required by this query.
@@ -582,6 +600,8 @@ return (array) The converted query result
 return (array|bool) The first row (in terms of an array) of the query result. False
 is returned if the query results in nothing.
 
+ Executes the query and returns a single row of result.
+
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -593,6 +613,8 @@ is returned if the query results in nothing.
 <
 return (string|null|false) The value of the first column in the first row of the
 query result. False is returned if the query result is empty.
+
+ Returns the query result as a scalar value.
 
  The value returned will be the first column in the first row of the query
  results.
@@ -609,6 +631,8 @@ query result. False is returned if the query result is empty.
 return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
+ Executes the query and returns the first column of the result.
+
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -621,6 +645,8 @@ the query results in nothing.
 return (int|string) Number of records. The result may be a string depending on the
 underlying database engine and to support integer values higher than a 32bit
 PHP integer can handle.
+
+ Returns the number of records.
 
     [$q] (string) The COUNT expression. Defaults to '*'. Make sure you
     properly [quote](guide:db-dao#quoting-table-and-column-names) column names
@@ -636,6 +662,8 @@ PHP integer can handle.
 <
 return (mixed) The sum of the specified column values.
 
+ Returns the sum of the specified column values.
+
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
     expression.
@@ -649,6 +677,8 @@ return (mixed) The sum of the specified column values.
  average($q, $db='null')
 <
 return (mixed) The average of the specified column values.
+
+ Returns the average of the specified column values.
 
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
@@ -664,6 +694,8 @@ return (mixed) The average of the specified column values.
 <
 return (mixed) The minimum of the specified column values.
 
+ Returns the minimum of the specified column values.
+
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
     expression.
@@ -677,6 +709,8 @@ return (mixed) The minimum of the specified column values.
  max($q, $db='null')
 <
 return (mixed) The maximum of the specified column values.
+
+ Returns the maximum of the specified column values.
 
     [$q] (string) The column name or expression. Make sure you properly
     [quote](guide:db-dao#quoting-table-and-column-names) column names in the
@@ -692,6 +726,8 @@ return (mixed) The maximum of the specified column values.
 <
 return (bool) Whether the query result contains any row of data.
 
+ Returns a value indicating whether the query result contains any row of data.
+
     [$db] (\yii\db\Connection) The database connection used to generate the
     SQL statement. If this parameter is not given, the 'db' application
     component will be used.
@@ -702,6 +738,8 @@ return (bool) Whether the query result contains any row of data.
  queryScalar($selectExpression, $db)
 <
 return (bool|string) 
+
+ Queries a scalar value by setting 'select' first.
 
  Restores the value of select to make this query reusable.
 
@@ -715,6 +753,8 @@ return (bool|string)
 <
 return (string[]) Table names indexed by aliases
 
+ Returns table names used in 'from' indexed by aliases.
+
  Both aliases and names are enclosed into {{ and }}.
 
 
@@ -723,6 +763,8 @@ return (string[]) Table names indexed by aliases
  select($columns, $option='null')
 <
 return ($this) The query object itself
+
+ Sets the SELECT part of the query.
 
     [$columns] (string|array|\yii\db\Expression) The columns to be selected.
     Columns can be specified in either a string (e.g. "id, name") or an array
@@ -754,6 +796,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Add more columns to the SELECT part of the query.
+
  Note, that if 'select' has not been specified before, you should include '*'
  explicitly if you want to select all remaining columns too:
 
@@ -773,6 +817,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the value indicating whether to SELECT DISTINCT or not.
+
     [$value] (bool) Whether to SELECT DISTINCT or not.
 
 
@@ -781,6 +827,8 @@ return ($this) The query object itself
  from($tables)
 <
 return ($this) The query object itself
+
+ Sets the FROM part of the query.
 
     [$tables] (string|array|\yii\db\Expression) The table(s) to be selected
     from. This can be either a string (e.g. ''user'') or an array (e.g.
@@ -825,6 +873,9 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds a filtering condition for a specific column and allow the user to choose
+ a filter operator.
+
  It adds an additional WHERE condition for the given field and determines the
  comparison operator based on the first few characters of the given value. The
  condition is added in the same way as in 'andFilterWhere' so 'isEmpty()|empty
@@ -857,6 +908,8 @@ return ($this) The query object itself
  join($type, $table, $on='\'\'', $params='[]')
 <
 return ($this) The query object itself
+
+ Appends a JOIN part to the query.
 
  The first parameter specifies what type of join it is.
 
@@ -894,6 +947,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Appends an INNER JOIN part to the query.
+
     [$table] (string|array) The table to be joined.
 
     Use a string to represent the name of the table to be joined. The table
@@ -916,6 +971,8 @@ return ($this) The query object itself
  leftJoin($table, $on='\'\'', $params='[]')
 <
 return ($this) The query object itself
+
+ Appends a LEFT OUTER JOIN part to the query.
 
     [$table] (string|array) The table to be joined.
 
@@ -940,6 +997,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Appends a RIGHT OUTER JOIN part to the query.
+
     [$table] (string|array) The table to be joined.
 
     Use a string to represent the name of the table to be joined. The table
@@ -963,6 +1022,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the GROUP BY part of the query.
+
     [$columns] (string|array|\yii\db\Expression) The columns to be grouped by.
     Columns can be specified in either a string (e.g. "id, name") or an array
     (e.g. ['id', 'name']). The method will automatically quote the column
@@ -982,6 +1043,8 @@ return ($this) The query object itself
  addGroupBy($columns)
 <
 return ($this) The query object itself
+
+ Adds additional group-by columns to the existing ones.
 
     [$columns] (string|array) Additional columns to be grouped by. Columns can
     be specified in either a string (e.g. "id, name") or an array (e.g. ['id',
@@ -1003,6 +1066,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the HAVING part of the query.
+
     [$condition] (string|array|\yii\db\Expression) The conditions to be put
     after HAVING. Please refer to 'where()' on how to specify this parameter.
     [$params] (array) The parameters (name => value) to be bound to the query.
@@ -1013,6 +1078,8 @@ return ($this) The query object itself
  andHaving($condition, $params='[]')
 <
 return ($this) The query object itself
+
+ Adds an additional HAVING condition to the existing one.
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -1028,6 +1095,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional HAVING condition to the existing one.
+
  The new condition and the existing one will be joined using the 'OR'
  operator.
 
@@ -1041,6 +1110,8 @@ return ($this) The query object itself
  filterHaving($condition)
 <
 return ($this) The query object itself
+
+ Sets the HAVING part of the query but ignores 'isEmpty()|empty operands'.
 
  This method is similar to 'having()'. The main difference is that this method
  will remove 'isEmpty()|empty query operands'. As a result, this method is
@@ -1069,6 +1140,9 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional HAVING condition to the existing one but ignores
+ 'isEmpty()|empty operands'.
+
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
@@ -1086,6 +1160,9 @@ return ($this) The query object itself
  orFilterHaving($condition)
 <
 return ($this) The query object itself
+
+ Adds an additional HAVING condition to the existing one but ignores
+ 'isEmpty()|empty operands'.
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -1105,6 +1182,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Appends a SQL statement using UNION operator.
+
     [$sql] (string|\yii\db\Query) The SQL statement to be appended using UNION
     [$all] (bool) TRUE if using UNION ALL and FALSE if using UNION
 
@@ -1114,6 +1193,8 @@ return ($this) The query object itself
  params($params)
 <
 return ($this) The query object itself
+
+ Sets the parameters to be bound to the query.
 
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
@@ -1125,6 +1206,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds additional parameters to be bound to the query.
+
     [$params] (array) List of query parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
 
@@ -1134,6 +1217,9 @@ return ($this) The query object itself
  create($from)
 <
 return (\yii\db\Query) The new Query object
+
+ Creates a new Query object and copies its property values from an existing
+ one.
 
  The properties being copies are the ones to be used by query builders.
 

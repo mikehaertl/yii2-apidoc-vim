@@ -213,6 +213,8 @@ METHOD DETAILS
 <
 return (array) Validation rules
 
+ Returns the validation rules for attributes.
+
 
 
  Validation rules are used by 'validate()' to check if attribute values are
@@ -314,6 +316,8 @@ return (array) Validation rules
  attributeLabels()
 <
 return (array) Attribute labels (name => label)
+
+ Returns the attribute labels.
 
 
 
@@ -525,6 +529,9 @@ return (string) Name of the code generator
 <
 return (\yii\gii\CodeFile[]) A list of code files to be created.
 
+ Generates the code based on the current user input and the specified code
+ template files.
+
 
 
  This is the main method that child classes should implement. Please refer to
@@ -541,6 +548,8 @@ return (\yii\gii\CodeFile[]) A list of code files to be created.
 return (array) List of code template files that are required. They should be file
 paths relative to 'templatePath'.
 
+ Returns a list of code template files that are required.
+
 
 
  Derived classes usually should override this method if they require the
@@ -555,6 +564,8 @@ paths relative to 'templatePath'.
 <
 return (array) List of sticky attributes
 
+ Returns the list of sticky attributes.
+
 
 
  A sticky attribute will remember its value and will initialize the attribute
@@ -568,6 +579,8 @@ return (array) List of sticky attributes
  hints()
 <
 return (array) The list of hint messages
+
+ Returns the list of hint messages.
 
 
 
@@ -677,6 +690,7 @@ return (string) The detailed description of the generator.
 <
 return (void)
 
+ Checks if model class is valid
 
 
 *yii/gii/generators/crud/Generator::getControllerID*	public
@@ -709,6 +723,8 @@ return (void)
 <
 return (string) 
 
+ Generates code for active field
+
     [$attribute] (string) 
 
 
@@ -717,6 +733,8 @@ return (string)
  generateActiveSearchField($attribute)
 <
 return (string) 
+
+ Generates code for active search field
 
     [$attribute] (string) 
 
@@ -727,6 +745,8 @@ return (string)
 <
 return (string) 
 
+ Generates column format
+
     [$column] (\yii\db\ColumnSchema) 
 
 
@@ -736,6 +756,7 @@ return (string)
 <
 return (array) The generated validation rules
 
+ Generates validation rules for the search model.
 
 
 *yii/gii/generators/crud/Generator::getSearchAttributes*	public
@@ -752,6 +773,7 @@ return (array) Searchable attributes
 <
 return (array) The generated attribute labels (name => label)
 
+ Generates the attribute labels for the search model.
 
 
 *yii/gii/generators/crud/Generator::generateSearchConditions*public
@@ -760,6 +782,7 @@ return (array) The generated attribute labels (name => label)
 <
 return (array) 
 
+ Generates search conditions
 
 
 *yii/gii/generators/crud/Generator::generateUrlParams*	public
@@ -768,6 +791,7 @@ return (array)
 <
 return (string) 
 
+ Generates URL parameters
 
 
 *yii/gii/generators/crud/Generator::generateActionParams*	public
@@ -776,6 +800,7 @@ return (string)
 <
 return (string) 
 
+ Generates action parameters
 
 
 *yii/gii/generators/crud/Generator::generateActionParamComments*public
@@ -784,6 +809,7 @@ return (string)
 <
 return (array) Parameter tags for phpdoc
 
+ Generates parameter tags for phpdoc
 
 
 *yii/gii/generators/crud/Generator::getTableSchema*	public
@@ -792,6 +818,8 @@ return (array) Parameter tags for phpdoc
 <
 return (boolean|\yii\db\TableSchema) 
 
+ Returns table schema for current model class or false if it is not an active
+ record
 
 
 *yii/gii/generators/crud/Generator::getColumnNames*	public

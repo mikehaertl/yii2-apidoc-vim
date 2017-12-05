@@ -185,6 +185,8 @@ METHOD DETAILS
 <
 return (array) List of attribute names.
 
+ Returns the list of all attribute names of the model.
+
  The default implementation will return all column names of the table
  associated with this AR class.
 
@@ -390,6 +392,8 @@ return (array) List of attribute names.
 <
 return (int) The number of rows updated
 
+ Updates the whole table using the provided attribute values and conditions.
+
  For example, to change the status to be 1 for all articles which status is 2:
 
    Article::updateAll(['status' => 1], 'status = 2');
@@ -414,6 +418,8 @@ return (int) The number of rows updated
  deleteAll($condition='\'\'', $params='[]')
 <
 return (int) The number of rows deleted
+
+ Deletes rows in the index using the provided conditions.
 
  For example, to delete all articles whose status is 3:
 
@@ -524,6 +530,8 @@ return (int) The number of rows deleted
 return (int|false) The number of rows affected, or 'false' if validation fails or
 'beforeSave()' stops the updating process.
 
+ Saves the changes to this active record into the associated Sphinx index.
+
  This method performs the following steps in order:
 
  1. call 'beforeValidate()' when '$runValidation' is true. If validation   
@@ -593,6 +601,8 @@ return (int|false) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
+ Deletes the index entry corresponding to this active record.
+
  This method performs the following steps in order:
 
  1. call 'beforeDelete()'. If the method returns false, it will skip the   
@@ -659,6 +669,9 @@ deleted is 0, even though the deletion execution is successful.
 <
 return (bool) Whether the two active records refer to the same row in the same index.
 
+ Returns a value indicating whether the given active record is the same as the
+ current one.
+
  The comparison is made by comparing the index names and the primary key
  values of the two active records. If one of the records 'isNewRecord|is new'
  they are also considered not equal.
@@ -681,6 +694,9 @@ return (bool) Whether the two active records refer to the same row in the same i
  populateRecord($record, $row)
 <
 return (void)
+
+ Populates an active record object using a row of data from the
+ database/storage.
 
 
 
@@ -734,6 +750,8 @@ return (void)
 <
 return (string[]) The primary keys of the associated Sphinx index.
 
+ Returns the primary key name for this AR class.
+
  The default implementation will return the primary key as declared in the
  Sphinx index, which is associated with this AR class.
 
@@ -746,6 +764,8 @@ return (string[]) The primary keys of the associated Sphinx index.
  find()
 <
 return (\yii\sphinx\ActiveQuery) The newly created 'ActiveQuery' instance.
+
+ Creates an 'ActiveQueryInterface' instance for query purpose.
 
 
 
@@ -799,6 +819,9 @@ return (\yii\sphinx\ActiveQuery) The newly created 'ActiveQuery' instance.
 return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
+ Inserts a row into the associated Sphinx index using the attribute values of
+ this record.
+
  This method performs the following steps in order:
 
  1. call 'beforeValidate()' when '$runValidation' is true. If validation   
@@ -836,6 +859,8 @@ successfully.
 <
 return (\yii\sphinx\Connection) The Sphinx connection used by this AR class.
 
+ Returns the Sphinx connection used by this AR class.
+
  By default, the "sphinx" application component is used as the Sphinx
  connection. You may override this method if you want to use a different
  Sphinx connection.
@@ -846,6 +871,8 @@ return (\yii\sphinx\Connection) The Sphinx connection used by this AR class.
  findBySql($sql, $params='[]')
 <
 return (\yii\sphinx\ActiveQuery) The newly created 'ActiveQuery' instance
+
+ Creates an 'ActiveQuery' instance with a given SQL statement.
 
  Note that because the SQL statement is already specified, calling additional
  query modification methods (such as 'where()', 'order()') on the created
@@ -870,6 +897,8 @@ return (\yii\sphinx\ActiveQuery) The newly created 'ActiveQuery' instance
 <
 return (string) The index name
 
+ Declares the name of the Sphinx index associated with this AR class.
+
  By default this method returns the class name as the index name by calling
  'Inflector::camel2id()'. For example, 'Article' becomes 'article', and
  'StockItem' becomes 'stock_item'. You may override this method if the index
@@ -883,6 +912,8 @@ return (string) The index name
 return (\yii\sphinx\IndexSchema) The schema information of the Sphinx index
 associated with this AR class.
 
+ Returns the schema information of the Sphinx index associated with this AR
+ class.
 
 
 *yii/sphinx/ActiveRecord::callSnippets*			public
@@ -891,6 +922,9 @@ associated with this AR class.
 <
 return (string|array) Built snippet in case "source" is a string, list of built
 snippets in case "source" is an array.
+
+ Builds a snippet from provided data and query, using specified index
+ settings.
 
     [$source] (string|array) Is the source data to extract a snippet from. It
     could be either a single string or array of strings.
@@ -903,6 +937,9 @@ snippets in case "source" is an array.
  callKeywords($text, $fetchStatistic='false')
 <
 return (array) Keywords and statistics
+
+ Returns tokenized and normalized forms of the keywords, and, optionally,
+ keyword statistics.
 
     [$text] (string) The text to break down to keywords.
     [$fetchStatistic] (bool) Whether to return document and hit occurrence
@@ -924,6 +961,8 @@ return (void)
 <
 return (string) Snippet value
 
+ Returns current snippet value or generates new one from given match.
+
     [$match] (string) Snippet source query
     [$options] (array) List of options in format: optionName => optionValue
 
@@ -934,6 +973,8 @@ return (string) Snippet value
 <
 return (string) Snippet value.
 
+ Builds up the snippet value from the given query.
+
     [$match] (string) The full-text query to build snippets for.
     [$options] (array) List of options in format: optionName => optionValue
 
@@ -943,6 +984,9 @@ return (string) Snippet value.
  getSnippetSource()
 <
 return (string) Snippet source string.
+
+ Returns the string, which should be used as a source to create snippet for
+ this Active Record instance.
 
  Child classes must implement this method to return the actual snippet source
  text. For example:
@@ -962,6 +1006,9 @@ return (string) Snippet source string.
 return (array) The declarations of transactional operations. The array keys are
 scenarios names, and the array values are the corresponding transaction
 operations.
+
+ Declares which operations should be performed within a transaction in
+ different scenarios.
 
  The supported DB operations are: 'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE',
  which correspond to the 'insert()', 'update()' and 'delete()' methods,
@@ -990,6 +1037,9 @@ operations.
 <
 return (bool) Whether the specified operation is transactional in the current
 'scenario'.
+
+ Returns a value indicating whether the specified operation is transactional
+ in the current 'scenario'.
 
     [$operation] (int) The operation to check. Possible values are
     'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE'.

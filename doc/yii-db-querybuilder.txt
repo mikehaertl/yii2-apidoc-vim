@@ -76,6 +76,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$connection] (\yii\db\Connection) The database connection.
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties
@@ -139,6 +141,8 @@ return (array) The generated SQL statement (the first array element) and the
 corresponding parameters to be bound to the SQL statement (the second array
 element). The parameters returned include those provided in '$params'.
 
+ Generates a SELECT SQL statement from a 'Query' object.
+
     [$query] (\yii\db\Query) The 'Query' object from which the SQL statement
     will be generated.
     [$params] (array) The parameters to be bound to the generated SQL
@@ -151,6 +155,8 @@ element). The parameters returned include those provided in '$params'.
  insert($table, $columns, $params)
 <
 return (string) The INSERT SQL
+
+ Creates an INSERT SQL statement.
 
  For example,
 
@@ -176,6 +182,8 @@ return (string) The INSERT SQL
 <
 return (array) 
 
+ Prepare select-subquery and field names for INSERT INTO .
+
  .. SELECT SQL statement.
 
     [$columns] (\yii\db\Query) Object, which represents select query.
@@ -190,6 +198,8 @@ return (array)
  batchInsert($table, $columns, $rows)
 <
 return (string) The batch INSERT SQL statement
+
+ Generates a batch INSERT SQL statement.
 
  For example,
 
@@ -215,6 +225,8 @@ return (string) The batch INSERT SQL statement
 <
 return (string) The UPDATE SQL
 
+ Creates an UPDATE SQL statement.
+
  For example,
 
    $params = [];
@@ -236,6 +248,8 @@ return (string) The UPDATE SQL
 <
 return (string) The DELETE SQL
 
+ Creates a DELETE SQL statement.
+
  For example,
 
    $sql = $queryBuilder->delete('user', 'status = 0');
@@ -254,6 +268,8 @@ return (string) The DELETE SQL
  createTable($table, $columns, $options='null')
 <
 return (string) The SQL statement for creating a new DB table.
+
+ Builds a SQL statement for creating a new DB table.
 
  The columns in the new  table should be specified as name-definition pairs
  (e.g. 'name' => 'string'), where name stands for a column name which will be
@@ -287,6 +303,8 @@ return (string) The SQL statement for creating a new DB table.
 <
 return (string) The SQL statement for renaming a DB table.
 
+ Builds a SQL statement for renaming a DB table.
+
     [$oldName] (string) The table to be renamed. The name will be properly
     quoted by the method.
     [$newName] (string) The new table name. The name will be properly quoted
@@ -299,6 +317,8 @@ return (string) The SQL statement for renaming a DB table.
 <
 return (string) The SQL statement for dropping a DB table.
 
+ Builds a SQL statement for dropping a DB table.
+
     [$table] (string) The table to be dropped. The name will be properly
     quoted by the method.
 
@@ -309,6 +329,9 @@ return (string) The SQL statement for dropping a DB table.
 <
 return (string) The SQL statement for adding a primary key constraint to an existing
 table.
+
+ Builds a SQL statement for adding a primary key constraint to an existing
+ table.
 
     [$name] (string) The name of the primary key constraint.
     [$table] (string) The table that the primary key constraint will be added
@@ -324,6 +347,9 @@ table.
 return (string) The SQL statement for removing a primary key constraint from an
 existing table.
 
+ Builds a SQL statement for removing a primary key constraint to an existing
+ table.
+
     [$name] (string) The name of the primary key constraint to be removed.
     [$table] (string) The table that the primary key constraint will be
     removed from.
@@ -335,6 +361,8 @@ existing table.
 <
 return (string) The SQL statement for truncating a DB table.
 
+ Builds a SQL statement for truncating a DB table.
+
     [$table] (string) The table to be truncated. The name will be properly
     quoted by the method.
 
@@ -344,6 +372,8 @@ return (string) The SQL statement for truncating a DB table.
  addColumn($table, $column, $type)
 <
 return (string) The SQL statement for adding a new column.
+
+ Builds a SQL statement for adding a new DB column.
 
     [$table] (string) The table that the new column will be added to. The
     table name will be properly quoted by the method.
@@ -362,6 +392,8 @@ return (string) The SQL statement for adding a new column.
 <
 return (string) The SQL statement for dropping a DB column.
 
+ Builds a SQL statement for dropping a DB column.
+
     [$table] (string) The table whose column is to be dropped. The name will
     be properly quoted by the method.
     [$column] (string) The name of the column to be dropped. The name will be
@@ -373,6 +405,8 @@ return (string) The SQL statement for dropping a DB column.
  renameColumn($table, $oldName, $newName)
 <
 return (string) The SQL statement for renaming a DB column.
+
+ Builds a SQL statement for renaming a column.
 
     [$table] (string) The table whose column is to be renamed. The name will
     be properly quoted by the method.
@@ -387,6 +421,8 @@ return (string) The SQL statement for renaming a DB column.
  alterColumn($table, $column, $type)
 <
 return (string) The SQL statement for changing the definition of a column.
+
+ Builds a SQL statement for changing the definition of a column.
 
     [$table] (string) The table whose column is to be changed. The table name
     will be properly quoted by the method.
@@ -405,6 +441,9 @@ return (string) The SQL statement for changing the definition of a column.
 <
 return (string) The SQL statement for adding a foreign key constraint to an existing
 table.
+
+ Builds a SQL statement for adding a foreign key constraint to an existing
+ table.
 
  The method will properly quote the table and column names.
 
@@ -430,6 +469,8 @@ table.
 <
 return (string) The SQL statement for dropping a foreign key constraint.
 
+ Builds a SQL statement for dropping a foreign key constraint.
+
     [$name] (string) The name of the foreign key constraint to be dropped. The
     name will be properly quoted by the method.
     [$table] (string) The table whose foreign is to be dropped. The name will
@@ -441,6 +482,8 @@ return (string) The SQL statement for dropping a foreign key constraint.
  createIndex($name, $table, $columns, $unique='false')
 <
 return (string) The SQL statement for creating a new index.
+
+ Builds a SQL statement for creating a new index.
 
     [$name] (string) The name of the index. The name will be properly quoted
     by the method.
@@ -459,6 +502,8 @@ return (string) The SQL statement for creating a new index.
 <
 return (string) The SQL statement for dropping an index.
 
+ Builds a SQL statement for dropping an index.
+
     [$name] (string) The name of the index to be dropped. The name will be
     properly quoted by the method.
     [$table] (string) The table whose index is to be dropped. The name will be
@@ -471,6 +516,8 @@ return (string) The SQL statement for dropping an index.
 <
 return (string) The SQL statement for adding an unique constraint to an existing
 table.
+
+ Creates a SQL command for adding an unique constraint to an existing table.
 
     [$name] (string) The name of the unique constraint. The name will be
     properly quoted by the method.
@@ -487,6 +534,8 @@ table.
 <
 return (string) The SQL statement for dropping an unique constraint.
 
+ Creates a SQL command for dropping an unique constraint.
+
     [$name] (string) The name of the unique constraint to be dropped. The name
     will be properly quoted by the method.
     [$table] (string) The table whose unique constraint is to be dropped. The
@@ -498,6 +547,8 @@ return (string) The SQL statement for dropping an unique constraint.
  addCheck($name, $table, $expression)
 <
 return (string) The SQL statement for adding a check constraint to an existing table.
+
+ Creates a SQL command for adding a check constraint to an existing table.
 
     [$name] (string) The name of the check constraint. The name will be
     properly quoted by the method.
@@ -512,6 +563,8 @@ return (string) The SQL statement for adding a check constraint to an existing t
 <
 return (string) The SQL statement for dropping a check constraint.
 
+ Creates a SQL command for dropping a check constraint.
+
     [$name] (string) The name of the check constraint to be dropped. The name
     will be properly quoted by the method.
     [$table] (string) The table whose check constraint is to be dropped. The
@@ -524,6 +577,9 @@ return (string) The SQL statement for dropping a check constraint.
 <
 return (string) The SQL statement for adding a default value constraint to an
 existing table.
+
+ Creates a SQL command for adding a default value constraint to an existing
+ table.
 
     [$name] (string) The name of the default value constraint. The name will
     be properly quoted by the method.
@@ -540,6 +596,8 @@ existing table.
 <
 return (string) The SQL statement for dropping a default value constraint.
 
+ Creates a SQL command for dropping a default value constraint.
+
     [$name] (string) The name of the default value constraint to be dropped.
     The name will be properly quoted by the method.
     [$table] (string) The table whose default value constraint is to be
@@ -551,6 +609,9 @@ return (string) The SQL statement for dropping a default value constraint.
  resetSequence($table, $value='null')
 <
 return (string) The SQL statement for resetting sequence
+
+ Creates a SQL statement for resetting the sequence value of a table's primary
+ key.
 
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
@@ -568,6 +629,8 @@ return (string) The SQL statement for resetting sequence
 <
 return (string) The SQL statement for checking integrity
 
+ Builds a SQL statement for enabling or disabling integrity check.
+
     [$check] (bool) Whether to turn on or off the integrity check.
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema.
@@ -580,6 +643,8 @@ return (string) The SQL statement for checking integrity
  addCommentOnColumn($table, $column, $comment)
 <
 return (string) The SQL statement for adding comment on column
+
+ Builds a SQL command for adding comment to column.
 
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
@@ -595,6 +660,8 @@ return (string) The SQL statement for adding comment on column
 <
 return (string) The SQL statement for adding comment on table
 
+ Builds a SQL command for adding comment to table.
+
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
     [$comment] (string) The text of the comment to be added. The comment will
@@ -606,6 +673,8 @@ return (string) The SQL statement for adding comment on table
  dropCommentFromColumn($table, $column)
 <
 return (string) The SQL statement for adding comment on column
+
+ Builds a SQL command for adding comment to column.
 
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
@@ -619,6 +688,8 @@ return (string) The SQL statement for adding comment on column
 <
 return (string) The SQL statement for adding comment on column
 
+ Builds a SQL command for adding comment to table.
+
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
 
@@ -628,6 +699,8 @@ return (string) The SQL statement for adding comment on column
  getColumnType($type)
 <
 return (string) Physical column type.
+
+ Converts an abstract column type into a physical column type.
 
  The conversion is done using the type map specified in 'typeMap'. The
  following abstract column types are supported (using MySQL as an example to
@@ -742,6 +815,9 @@ return (string) The HAVING clause built from 'Query::$having'.
 <
 return (string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
 
+ Builds the ORDER BY and LIMIT/OFFSET clauses and appends them to the given
+ SQL.
+
     [$sql] (string) The existing SQL (without ORDER BY/LIMIT/OFFSET)
     [$orderBy] (array) The order by columns. See 'Query::orderBy' for more
     details on how to specify this parameter.
@@ -774,6 +850,8 @@ return (string) The LIMIT and OFFSET clauses
 <
 return (bool) Whether the limit is effective
 
+ Checks to see if the given limit is effective.
+
     [$limit] (mixed) The given limit
 
 
@@ -782,6 +860,8 @@ return (bool) Whether the limit is effective
  hasOffset($offset)
 <
 return (bool) Whether the offset is effective
+
+ Checks to see if the given offset is effective.
 
     [$offset] (mixed) The given offset
 
@@ -802,6 +882,8 @@ return (string) The UNION clause built from 'Query::$union'.
 <
 return (string) The processing result
 
+ Processes columns and properly quotes them if necessary.
+
  It will join all columns into a string with comma as separators.
 
     [$columns] (string|array) The columns to be processed
@@ -812,6 +894,9 @@ return (string) The processing result
  buildCondition($condition, $params)
 <
 return (string) The generated SQL expression
+
+ Parses the condition specification and generates the corresponding SQL
+ expression.
 
     [$condition] (string|array|\yii\db\Expression) The condition
     specification. Please refer to 'Query::where()' on how to specify a
@@ -825,6 +910,8 @@ return (string) The generated SQL expression
 <
 return (string) The generated SQL expression
 
+ Creates a condition based on column-value pairs.
+
     [$condition] (array) The condition specification.
     [$params] (array) The binding parameters to be populated
 
@@ -834,6 +921,8 @@ return (string) The generated SQL expression
  buildAndCondition($operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Connects two or more SQL expressions with the 'AND' or 'OR' operator.
 
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The SQL expressions to connect.
@@ -846,6 +935,8 @@ return (string) The generated SQL expression
 <
 return (string) The generated SQL expression
 
+ Inverts an SQL expressions with 'NOT' operator.
+
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The SQL expressions to connect.
     [$params] (array) The binding parameters to be populated
@@ -856,6 +947,8 @@ return (string) The generated SQL expression
  buildBetweenCondition($operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Creates an SQL expressions with the 'BETWEEN' operator.
 
     [$operator] (string) The operator to use (e.g. 'BETWEEN' or 'NOT BETWEEN')
     [$operands] (array) The first operand is the column name. The second and
@@ -868,6 +961,8 @@ return (string) The generated SQL expression
  buildInCondition($operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Creates an SQL expressions with the 'IN' operator.
 
     [$operator] (string) The operator to use (e.g. 'IN' or 'NOT IN')
     [$operands] (array) The first operand is the column name. If it is an
@@ -884,6 +979,8 @@ return (string) The generated SQL expression
 <
 return (string) SQL
 
+ Builds SQL for IN condition.
+
     [$operator] (string) 
     [$columns] (array) 
     [$values] (\yii\db\Query) 
@@ -896,6 +993,8 @@ return (string) SQL
 <
 return (string) SQL
 
+ Builds SQL for IN condition.
+
     [$operator] (string) 
     [$columns] (array|\Traversable) 
     [$values] (array) 
@@ -907,6 +1006,8 @@ return (string) SQL
  buildLikeCondition($operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Creates an SQL expressions with the 'LIKE' operator.
 
     [$operator] (string) The operator to use (e.g. 'LIKE', 'NOT LIKE', 'OR
     LIKE' or 'OR NOT LIKE')
@@ -936,6 +1037,8 @@ return (string) The generated SQL expression
 <
 return (string) The generated SQL expression
 
+ Creates an SQL expressions with the 'EXISTS' operator.
+
     [$operator] (string) The operator to use (e.g. 'EXISTS' or 'NOT EXISTS')
     [$operands] (array) Contains only one element which is a 'Query' object
     representing the sub-query.
@@ -948,6 +1051,8 @@ return (string) The generated SQL expression
 <
 return (string) The generated SQL expression
 
+ Creates an SQL expressions like '"column" operator value'.
+
     [$operator] (string) The operator to use. Anything could be used e.g. '>',
     '<=', etc.
     [$operands] (array) Contains two column names.
@@ -959,6 +1064,8 @@ return (string) The generated SQL expression
  selectExists($rawSql)
 <
 return (string) The SELECT EXISTS() SQL statement.
+
+ Creates a SELECT EXISTS() SQL statement.
 
     [$rawSql] (string) The subquery in a raw form to select from.
 

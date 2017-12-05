@@ -449,6 +449,8 @@ METHOD DETAILS
 <
 return (mixed) The property value or the value of a behavior's property
 
+ Returns the value of a component property.
+
  This method will check in the following order and act accordingly:
 
   
@@ -466,6 +468,8 @@ return (mixed) The property value or the value of a behavior's property
  __set($name, $value)
 <
 return (void)
+
+ Sets the value of a component property.
 
  This method will check in the following order and act accordingly:
 
@@ -490,6 +494,8 @@ return (void)
 <
 return (bool) Whether the named property is set
 
+ Checks if a property is set, i.e. defined and not null.
+
  This method will check in the following order and act accordingly:
 
   
@@ -509,6 +515,8 @@ return (bool) Whether the named property is set
 <
 return (void)
 
+ Sets a component property to be null.
+
  This method will check in the following order and act accordingly:
 
   
@@ -527,6 +535,8 @@ return (void)
 <
 return (mixed) The method return value
 
+ Calls the named method which is not a class method.
+
  This method will check if any attached behavior has the named method and will
  execute it if available.
 
@@ -542,6 +552,8 @@ return (mixed) The method return value
  hasProperty($name, $checkVars='true', $checkBehaviors='true')
 <
 return (bool) Whether the property is defined
+
+ Returns a value indicating whether a property is defined for this component.
 
  A property is defined if:
 
@@ -565,6 +577,8 @@ return (bool) Whether the property is defined
 <
 return (bool) Whether the property can be read
 
+ Returns a value indicating whether a property can be read.
+
  A property can be read if:
 
 
@@ -586,6 +600,8 @@ return (bool) Whether the property can be read
  canSetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
 return (bool) Whether the property can be written
+
+ Returns a value indicating whether a property can be set.
 
  A property can be written if:
 
@@ -609,6 +625,8 @@ return (bool) Whether the property can be written
 <
 return (bool) Whether the method is defined
 
+ Returns a value indicating whether a method is defined.
+
  A method is defined if:
 
 
@@ -627,6 +645,8 @@ return (bool) Whether the method is defined
 <
 return (void)
 
+ This method is called after the object is created by cloning an existing one.
+
  It removes all behaviors because they are attached to the old object.
 
 
@@ -635,6 +655,8 @@ return (void)
  behaviors()
 <
 return (array) The behavior configurations.
+
+ Returns a list of behaviors that this component should behave as.
 
  Child classes may override this method to specify the behaviors they want to
  behave as.
@@ -666,6 +688,9 @@ return (array) The behavior configurations.
 <
 return (bool) Whether there is any handler attached to the event.
 
+ Returns a value indicating whether there is any handler attached to the named
+ event.
+
     [$name] (string) The event name
 
 
@@ -674,6 +699,8 @@ return (bool) Whether there is any handler attached to the event.
  on($name, $handler, $data='null', $append='true')
 <
 return (void)
+
+ Attaches an event handler to an event.
 
  The event handler must be a valid PHP callback. The following are some
  examples:
@@ -706,6 +733,8 @@ return (void)
 <
 return (bool) If a handler is found and detached
 
+ Detaches an existing event handler from this component.
+
  This method is the opposite of 'on()'.
 
     [$name] (string) Event name
@@ -718,6 +747,8 @@ return (bool) If a handler is found and detached
  trigger($name, $event='null')
 <
 return (void)
+
+ Triggers an event.
 
  This method represents the happening of an event. It invokes all attached
  handlers for the event including class-level handlers.
@@ -734,6 +765,8 @@ return (void)
 return (null|\yii\base\Behavior) The behavior object, or null if the behavior does
 not exist
 
+ Returns the named behavior object.
+
     [$name] (string) The behavior name
 
 
@@ -743,6 +776,7 @@ not exist
 <
 return (\yii\base\Behavior[]) List of behaviors attached to this component
 
+ Returns all behaviors attached to this component.
 
 
 *yii/base/Component::attachBehavior*			public
@@ -750,6 +784,8 @@ return (\yii\base\Behavior[]) List of behaviors attached to this component
  attachBehavior($name, $behavior)
 <
 return (\yii\base\Behavior) The behavior object
+
+ Attaches a behavior to this component.
 
  This method will create the behavior object based on the given configuration.
  After that, the behavior object will be attached to this component by calling
@@ -772,6 +808,8 @@ return (\yii\base\Behavior) The behavior object
 <
 return (void)
 
+ Attaches a list of behaviors to the component.
+
  Each behavior is indexed by its name and should be a 'Behavior' object, a
  string specifying the behavior class, or an configuration array for creating
  the behavior.
@@ -786,6 +824,8 @@ return (void)
 return (null|\yii\base\Behavior) The detached behavior. Null if the behavior does not
 exist.
 
+ Detaches a behavior from the component.
+
  The behavior's 'Behavior::detach()' method will be invoked.
 
     [$name] (string) The behavior's name.
@@ -797,6 +837,7 @@ exist.
 <
 return (void)
 
+ Detaches all behaviors from the component.
 
 
 *yii/base/Component::ensureBehaviors*			public
@@ -805,6 +846,8 @@ return (void)
 <
 return (void)
 
+ Makes sure that the behaviors declared in 'behaviors()' are attached to this
+ component.
 
 
 

@@ -159,6 +159,8 @@ METHOD DETAILS
 <
 return (array) The array representation of the object
 
+ Converts the model into an array.
+
 
 
  This method will first identify which fields to be included in the resulting
@@ -205,6 +207,8 @@ return (array) The array representation of the object
  attributes()
 <
 return (array) List of attribute names.
+
+ Returns the list of all attribute names of the model.
 
  This method must be overridden by child classes to define available
  attributes. Note: primary key attribute "_id" should be always present in
@@ -419,6 +423,9 @@ return (array) List of attribute names.
 <
 return (int) The number of documents updated.
 
+ Updates all documents in the collection using the provided attribute values
+ and conditions.
+
  For example, to change the status to be 1 for all customers whose status is
  2:
 
@@ -439,6 +446,9 @@ return (int) The number of documents updated.
 <
 return (int) The number of documents updated.
 
+ Updates all documents in the collection using the provided counter changes
+ and conditions.
+
  For example, to increment all customers' age by 1,
 
    Customer::updateAllCounters(['age' => 1]);
@@ -458,6 +468,8 @@ return (int) The number of documents updated.
  deleteAll($condition='[]', $options='[]')
 <
 return (int) The number of documents deleted.
+
+ Deletes documents in the collection using the provided conditions.
 
  WARNING: If you do not specify any condition, this method will delete
  documents rows in the collection.
@@ -595,6 +607,8 @@ return (int|bool) The number of documents deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of documents
 deleted is 0, even though the deletion execution is successful.
 
+ Deletes the document corresponding to this active record from the collection.
+
  This method performs the following steps in order:
 
  1. call 'beforeDelete()'. If the method returns false, it will skip the   
@@ -662,6 +676,9 @@ deleted is 0, even though the deletion execution is successful.
 return (bool) Whether the two active records refer to the same row in the same Mongo
 collection.
 
+ Returns a value indicating whether the given active record is the same as the
+ current one.
+
  The comparison is made by comparing the collection names and the primary key
  values of the two active records. If one of the records 'isNewRecord|is new'
  they are also considered not equal.
@@ -720,6 +737,8 @@ collection.
 <
 return (string[]) The primary keys of the associated Mongo collection.
 
+ Returns the primary key name(s) for this AR class.
+
  The default implementation will return ['_id'].
 
  Note that an array should be returned even for a collection with single
@@ -731,6 +750,8 @@ return (string[]) The primary keys of the associated Mongo collection.
  find()
 <
 return (\yii\mongodb\ActiveQuery) The newly created 'ActiveQuery' instance.
+
+ Creates an 'ActiveQueryInterface' instance for query purpose.
 
 
 
@@ -784,6 +805,9 @@ return (\yii\mongodb\ActiveQuery) The newly created 'ActiveQuery' instance.
 return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
+ Inserts a row into the associated Mongo collection using the attribute values
+ of this record.
+
  This method performs the following steps in order:
 
  1. call 'beforeValidate()' when '$runValidation' is true. If validation   
@@ -825,6 +849,8 @@ successfully.
 <
 return (\yii\mongodb\Connection) The database connection used by this AR class.
 
+ Returns the Mongo connection used by this AR class.
+
  By default, the "mongodb" application component is used as the Mongo
  connection. You may override this method if you want to use a different
  database connection.
@@ -835,6 +861,8 @@ return (\yii\mongodb\Connection) The database connection used by this AR class.
  collectionName()
 <
 return (string|array) The collection name
+
+ Declares the name of the Mongo collection associated with this AR class.
 
  Collection name can be either a string or array:  
    - if string considered as the name of the collection inside the
@@ -854,6 +882,7 @@ return (string|array) The collection name
 <
 return (\yii\mongodb\Collection) Collection instance.
 
+ Return the Mongo collection instance for this AR class.
 
 
 *yii/mongodb/ActiveRecord::insertInternal*		protected

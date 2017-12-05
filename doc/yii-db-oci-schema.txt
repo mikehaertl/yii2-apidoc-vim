@@ -45,6 +45,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -104,6 +106,8 @@ return (void)
 <
 return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
 
+ Resolves the table name and schema name (if any).
+
 
 
 
@@ -119,6 +123,9 @@ return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. nam
 <
 return (array) All schema names in the database, except system schemas.
 
+ Returns all schema names in the database, including the default one but not
+ system schemas.
+
 
 
  This method should be overridden by child classes in order to support this
@@ -132,6 +139,8 @@ return (array) All schema names in the database, except system schemas.
  findTableNames($schema='''')
 <
 return (array) All table names in the database. The names have NO schema name prefix.
+
+ Returns all table names in the database.
 
 
 
@@ -150,6 +159,8 @@ return (array) All table names in the database. The names have NO schema name pr
 <
 return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
 does not exist.
+
+ Loads the metadata for the specified table.
 
 
 
@@ -211,6 +222,8 @@ does not exist.
 <
 return (\yii\db\QueryBuilder) Query builder instance
 
+ Creates a query builder for the database.
+
 
 
  This method may be overridden by child classes to create a DBMS-specific
@@ -224,6 +237,8 @@ return (\yii\db\QueryBuilder) Query builder instance
  createColumnSchemaBuilder($type, $length='null')
 <
 return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+
+ Create a column schema builder instance giving the type and value precision.
 
 
 
@@ -242,6 +257,8 @@ return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
  findUniqueIndexes($table)
 <
 return (array) All unique indexes for the given table.
+
+ Returns all unique indexes for the given table.
 
  Each array element is of the following structure:.
 
@@ -282,6 +299,8 @@ the sequence object
 <
 return (void)
 
+ Releases an existing savepoint.
+
 
 
 
@@ -306,6 +325,8 @@ return (void)
  insert($table, $columns)
 <
 return (array|false) Primary key values or false if the command fails
+
+ Executes the INSERT command, returning primary key values.
 
 
 
@@ -338,6 +359,8 @@ return (array|false) Primary key values or false if the command fails
  quoteSimpleTableName($name)
 <
 return (string) The properly quoted table name
+
+ Quotes a simple table name for use in a query.
 
 
 
@@ -524,6 +547,8 @@ return (void)
 <
 return (void)
 
+ Resolves the table name and schema name (if any).
+
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
 
@@ -534,6 +559,8 @@ return (void)
 <
 return (bool) Whether the table exists
 
+ Collects the table column metadata.
+
     [$table] (\yii\db\TableSchema) The table schema
 
 
@@ -542,6 +569,8 @@ return (bool) Whether the table exists
  getTableSequenceName($tableName)
 <
 return (string|null) Whether the sequence exists
+
+ Sequence name of table.
 
     [$tableName] (string) 
 
@@ -552,6 +581,8 @@ return (string|null) Whether the sequence exists
 <
 return (\yii\db\ColumnSchema) 
 
+ Creates ColumnSchema instance.
+
     [$column] (array) 
 
 
@@ -561,6 +592,8 @@ return (\yii\db\ColumnSchema)
 <
 return (void)
 
+ Finds constraints and fills them into TableSchema object passed.
+
     [$table] (\yii\db\TableSchema) 
 
 
@@ -569,6 +602,8 @@ return (void)
  extractColumnType($column, $dbType, $precision, $scale, $length)
 <
 return (void)
+
+ Extracts the data types for the given column.
 
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) DB type
@@ -585,6 +620,8 @@ return (void)
  extractColumnSize($column, $dbType, $precision, $scale, $length)
 <
 return (void)
+
+ Extracts size, precision and scale information from column's DB type.
 
     [$column] (\yii\db\ColumnSchema) 
     [$dbType] (string) The column's DB type

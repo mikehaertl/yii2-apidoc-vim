@@ -78,6 +78,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -227,6 +229,8 @@ return (void)
 <
 return (array) Validation rules
 
+ Returns the validation rules for attributes.
+
 
 
  Validation rules are used by 'validate()' to check if attribute values are
@@ -328,6 +332,8 @@ return (array) Validation rules
  attributeLabels()
 <
 return (array) Attribute labels (name => label)
+
+ Returns the attribute labels.
 
 
 
@@ -534,6 +540,9 @@ return (string) Name of the code generator
 <
 return (\yii\gii\CodeFile[]) A list of code files to be created.
 
+ Generates the code based on the current user input and the specified code
+ template files.
+
  This is the main method that child classes should implement. Please refer to
  '\yii\gii\generators\controller\Generator::generate()' as an example on how
  to implement this method.
@@ -546,6 +555,8 @@ return (\yii\gii\CodeFile[]) A list of code files to be created.
 return (array) List of code template files that are required. They should be file
 paths relative to 'templatePath'.
 
+ Returns a list of code template files that are required.
+
  Derived classes usually should override this method if they require the
  existence of certain template files.
 
@@ -555,6 +566,8 @@ paths relative to 'templatePath'.
  stickyAttributes()
 <
 return (array) List of sticky attributes
+
+ Returns the list of sticky attributes.
 
  A sticky attribute will remember its value and will initialize the attribute
  with this value when the generator is restarted.
@@ -566,6 +579,8 @@ return (array) List of sticky attributes
 <
 return (array) The list of hint messages
 
+ Returns the list of hint messages.
+
  The array keys are the attribute names, and the array values are the
  corresponding hint messages. Hint messages will be displayed to end users
  when they are filling the form for the generator.
@@ -576,6 +591,8 @@ return (array) The list of hint messages
  autoCompleteData()
 <
 return (array) The list of auto complete values
+
+ Returns the list of auto complete values.
 
  The array keys are the attribute names, and the array values are the
  corresponding auto complete values. Auto complete values can also be callable
@@ -589,6 +606,9 @@ return (array) The list of auto complete values
 return (string) The message to be displayed when the newly generated code is saved
 successfully.
 
+ Returns the message to be displayed when the newly generated code is saved
+ successfully.
+
  Child classes may override this method to customize the message.
 
 
@@ -597,6 +617,8 @@ successfully.
  formView()
 <
 return (string) The view file for the input form of the generator.
+
+ Returns the view file for the input form of the generator.
 
  The default implementation will return the "form.php" file under the
  directory that contains the generator class file.
@@ -607,6 +629,8 @@ return (string) The view file for the input form of the generator.
  defaultTemplate()
 <
 return (string) The root path to the default code template files.
+
+ Returns the root path to the default code template files.
 
  The default implementation will return the "templates" subdirectory of the
  directory containing the generator class file.
@@ -626,6 +650,8 @@ return (string) The detailed description of the generator.
 <
 return (void)
 
+ Loads sticky attributes from an internal file and populates them into the
+ generator.
 
 
 *yii/gii/Generator::saveStickyAttributes*			public
@@ -634,6 +660,7 @@ return (void)
 <
 return (void)
 
+ Saves sticky attributes into an internal file.
 
 
 *yii/gii/Generator::getStickyDataFile*			public
@@ -649,6 +676,8 @@ return (string) The file path that stores the sticky attribute values.
  save($files, $answers, $results)
 <
 return (boolean) Whether files are successfully saved without any error.
+
+ Saves the generated code into files.
 
     [$files] (\yii\gii\CodeFile[]) The code files to be saved
     [$answers] (array) 
@@ -670,6 +699,8 @@ return (string) The root path of the template files that are currently being use
 <
 return (string) The generated code
 
+ Generates code using the specified code template and parameters.
+
  Note that the code template will be used as a PHP file.
 
     [$template] (string) The code template file. This must be specified as a
@@ -683,6 +714,8 @@ return (string) The generated code
 <
 return (void)
 
+ Validates the template selection.
+
  This method validates whether the user selects an existing template and the
  template contains all required template files as specified in
  'requiredTemplates()'.
@@ -693,6 +726,9 @@ return (void)
  validateClass($attribute, $params)
 <
 return (void)
+
+ An inline validator that checks if the attribute value refers to an existing
+ class name.
 
  If the 'extends' option is specified, it will also check if the class is a
  child class of the class represented by the 'extends' option.
@@ -707,6 +743,9 @@ return (void)
 <
 return (void)
 
+ An inline validator that checks if the attribute value refers to a valid
+ namespaced class name.
+
  The validator will check if the directory containing the new class file exist
  or not.
 
@@ -720,6 +759,7 @@ return (void)
 <
 return (void)
 
+ Checks if message category is not empty when I18N is enabled.
 
 
 *yii/gii/Generator::isReservedKeyword*			public
@@ -736,6 +776,8 @@ return (boolean) Whether the value is a reserved PHP keyword.
  generateString($string='''', $placeholders='[]')
 <
 return (string) 
+
+ Generates a string depending on enableI18N property
 
     [$string] (string) The text be generated
     [$placeholders] (array) The placeholders to use by 'Yii::t()'

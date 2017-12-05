@@ -102,6 +102,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$match] (string) The MATCH expression
     [$params] (array) Expression parameters.
     [$config] (array) Name-value pairs that will be used to initialize the
@@ -164,6 +166,8 @@ return (void)
 <
 return ($this) The expression object itself
 
+ Sets the MATCH expression.
+
  The method requires a '$condition' parameter, and optionally a '$params'
  parameter specifying the values to be parsed into the expression.
 
@@ -182,6 +186,8 @@ return ($this) The expression object itself
 <
 return ($this) The expression object itself
 
+ Adds an additional MATCH condition to the existing one.
+
  The new condition and the existing one will be joined using the 'AND' (' ')
  operator.
 
@@ -196,6 +202,8 @@ return ($this) The expression object itself
  orMatch($condition, $params='[]')
 <
 return ($this) The expression object itself
+
+ Adds an additional MATCH condition to the existing one.
 
  The new condition and the existing one will be joined using the 'OR' ('|')
  operator.
@@ -212,6 +220,8 @@ return ($this) The expression object itself
 <
 return ($this) The expression object itself
 
+ Sets the parameters to be parsed into the query.
+
     [$params] (array) List of expression parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
 
@@ -222,6 +232,8 @@ return ($this) The expression object itself
 <
 return ($this) The expression object itself
 
+ Adds additional parameters to be parsed into the query.
+
     [$params] (array) List of expression parameter values indexed by parameter
     placeholders. For example, '[':name' => 'Dan', ':age' => 31]'.
 
@@ -231,6 +243,8 @@ return ($this) The expression object itself
  filterMatch($condition)
 <
 return ($this) The query object itself
+
+ Sets the MATCH part of the query but ignores 'isEmpty()|empty operands'.
 
  This method is similar to 'match()'. The main difference is that this method
  will remove 'isEmpty()|empty query operands'. As a result, this method is
@@ -259,6 +273,9 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional MATCH condition to the existing one but ignores
+ 'isEmpty()|empty operands'.
+
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
@@ -276,6 +293,9 @@ return ($this) The query object itself
  orFilterMatch($condition)
 <
 return ($this) The query object itself
+
+ Adds an additional MATCH condition to the existing one but ignores
+ 'isEmpty()|empty operands'.
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -295,6 +315,8 @@ return ($this) The query object itself
 <
 return (array) The condition with 'isEmpty()|empty operands' removed.
 
+ Removes 'isEmpty()|empty operands' from the given query condition.
+
     [$condition] (array) The original condition
 
 
@@ -303,6 +325,8 @@ return (array) The condition with 'isEmpty()|empty operands' removed.
  isEmpty($value)
 <
 return (bool) If the value is empty
+
+ Returns a value indicating whether the give value is "empty".
 
  The value is considered "empty", if one of the following conditions is
  satisfied:

@@ -152,6 +152,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the application component.
 
 
 *yii/web/User::__get*					public
@@ -272,6 +273,8 @@ return (\yii\web\IdentityInterface|null) The identity object associated with the
 currently logged-in user. 'null' is returned if the user is not logged in (not
 authenticated).
 
+ Returns the identity object associated with the currently logged-in user.
+
  When 'enableSession' is true, this method may attempt to read the user's
  authentication data stored in session and reconstruct the corresponding
  identity object, if it has not done so before.
@@ -287,6 +290,8 @@ authenticated).
 <
 return (void)
 
+ Sets the user identity object.
+
  Note that this method does not deal with session or cookie. You should
  usually use 'switchIdentity()' to change the identity of the current user.
 
@@ -300,6 +305,8 @@ return (void)
  login($identity, $duration=0)
 <
 return (bool) Whether the user is logged in
+
+ Logs in a user.
 
  After logging in a user: 
    - the user's identity information is obtainable from the 'identity'
@@ -331,6 +338,8 @@ return (\yii\web\IdentityInterface|null) The identity associated with the given
 access token. Null is returned if the access token is invalid or 'login()' is
 unsuccessful.
 
+ Logs in a user by the given access token.
+
  This method will first authenticate the user by calling
  'IdentityInterface::findIdentityByAccessToken()' with the provided access
  token. If successful, it will call 'login()' to log in the authenticated
@@ -349,6 +358,8 @@ unsuccessful.
 <
 return (void)
 
+ Logs in a user by cookie.
+
  This method attempts to log in a user using the ID and authKey information
  provided by the 'identityCookie|identity cookie'.
 
@@ -358,6 +369,8 @@ return (void)
  logout($destroySession='true')
 <
 return (bool) Whether the user is logged out
+
+ Logs out the current user.
 
  This will remove authentication-related session data. If '$destroySession' is
  true, all session data will be removed.
@@ -372,6 +385,7 @@ return (bool) Whether the user is logged out
 <
 return (bool) Whether the current user is a guest.
 
+ Returns a value indicating whether the user is a guest (not authenticated).
 
 
 *yii/web/User::getId*					public
@@ -381,6 +395,7 @@ return (bool) Whether the current user is a guest.
 return (string|int) The unique identifier for the user. If 'null', it means the user
 is a guest.
 
+ Returns a value that uniquely represents the user.
 
 
 *yii/web/User::getReturnUrl*				public
@@ -388,6 +403,9 @@ is a guest.
  getReturnUrl($defaultUrl='null')
 <
 return (string) The URL that the user should be redirected to after login.
+
+ Returns the URL that the browser should be redirected to after successful
+ login.
 
  This method reads the return URL from the session. It is usually used by the
  login action which may call this method to redirect the browser to where it
@@ -405,6 +423,9 @@ return (string) The URL that the user should be redirected to after login.
 <
 return (void)
 
+ Remembers the URL in the session so that it can be retrieved back later by
+ 'getReturnUrl()'.
+
     [$url] (string|array) The URL that the user should be redirected to after
     login. If an array is given, 'UrlManager::createUrl()' will be called to
     create the corresponding URL. The first element of the array should be the
@@ -421,6 +442,8 @@ return (void)
  loginRequired($checkAjax='true', $checkAcceptHeader='true')
 <
 return (\yii\web\Response) The redirection response if 'loginUrl' is set
+
+ Redirects the user browser to the login page.
 
  Before the redirection, the current URL (if it's not an AJAX url) will be
  kept as 'returnUrl' so that the user browser may be redirected back to the
@@ -448,6 +471,8 @@ return (\yii\web\Response) The redirection response if 'loginUrl' is set
 <
 return (bool) Whether the user should continue to be logged in
 
+ This method is called before logging in a user.
+
  The default implementation will trigger the 'EVENT_BEFORE_LOGIN' event. If
  you override this method, make sure you call the parent implementation so
  that the event is triggered.
@@ -464,6 +489,8 @@ return (bool) Whether the user should continue to be logged in
  afterLogin($identity, $cookieBased, $duration)
 <
 return (void)
+
+ This method is called after the user is successfully logged in.
 
  The default implementation will trigger the 'EVENT_AFTER_LOGIN' event. If you
  override this method, make sure you call the parent implementation so that
@@ -482,6 +509,8 @@ return (void)
 <
 return (bool) Whether the user should continue to be logged out
 
+ This method is invoked when calling 'logout()' to log out a user.
+
  The default implementation will trigger the 'EVENT_BEFORE_LOGOUT' event. If
  you override this method, make sure you call the parent implementation so
  that the event is triggered.
@@ -494,6 +523,8 @@ return (bool) Whether the user should continue to be logged out
  afterLogout($identity)
 <
 return (void)
+
+ This method is invoked right after a user is logged out via 'logout()'.
 
  The default implementation will trigger the 'EVENT_AFTER_LOGOUT' event. If
  you override this method, make sure you call the parent implementation so
@@ -508,6 +539,8 @@ return (void)
 <
 return (void)
 
+ Renews the identity cookie.
+
  This method will set the expiration time of the identity cookie to be the
  current time plus the originally specified cookie duration.
 
@@ -517,6 +550,8 @@ return (void)
  sendIdentityCookie($identity, $duration)
 <
 return (void)
+
+ Sends an identity cookie.
 
  This method is used when 'enableAutoLogin' is true. It saves 'id',
  'IdentityInterface::getAuthKey()|auth key', and the duration of cookie-based
@@ -534,6 +569,9 @@ return (void)
 return (array|null) Returns an array of 'identity' and 'duration' if valid, otherwise
 null.
 
+ Determines if an identity cookie has a valid format and contains a valid auth
+ key.
+
  This method is used when 'enableAutoLogin' is true. This method attempts to
  authenticate a user using the information in the identity cookie.
 
@@ -544,6 +582,8 @@ null.
 <
 return (void)
 
+ Removes the identity cookie.
+
  This method is used when 'enableAutoLogin' is true.
 
 
@@ -552,6 +592,8 @@ return (void)
  switchIdentity($identity, $duration=0)
 <
 return (void)
+
+ Switches to a new identity for the current user.
 
  When 'enableSession' is true, this method may use session and/or cookie to
  store the user identity information, according to the value of '$duration'.
@@ -574,6 +616,9 @@ return (void)
 <
 return (void)
 
+ Updates the authentication status using the information from session and
+ cookie.
+
  This method will try to determine the user identity using the 'idParam'
  session variable.
 
@@ -589,6 +634,9 @@ return (void)
 <
 return (bool) Whether the user can perform the operation as specified by the given
 permission.
+
+ Checks if the user can perform the operation as specified by the given
+ permission.
 
  Note that you must configure "authManager" application component in order to
  use this method. Otherwise it will always return false.
@@ -613,6 +661,9 @@ permission.
 <
 return (bool) Whether this request may be redirected to the login page.
 
+ Checks if the 'Accept' header contains a content type that allows redirection
+ to the login page.
+
  The login page is assumed to serve 'text/html' or 'application/xhtml+xml' by
  default. You can change acceptable content types by modifying
  'acceptableRedirectTypes' property.
@@ -624,6 +675,8 @@ return (bool) Whether this request may be redirected to the login page.
 <
 return (\yii\rbac\ManagerInterface) 
 
+ Returns auth manager associated with the user component.
+
  By default this is the 'authManager' application component. You may override
  this method to return a different auth manager instance if needed.
 
@@ -634,6 +687,7 @@ return (\yii\rbac\ManagerInterface)
 <
 return (\yii\rbac\CheckAccessInterface) 
 
+ Returns the access checker used for checking access.
 
 
 

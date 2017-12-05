@@ -458,6 +458,9 @@ return (void)
 <
 return (string[]) The names of the options valid for the action
 
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
+
 
 
  Child classes may override this method to specify possible options.
@@ -611,6 +614,7 @@ return (string[]) The names of the options valid for the action
 <
 return (void)
 
+ Lists all available fixtures template files.
 
 
 *yii/faker/FixtureController::actionGenerate*		public
@@ -618,6 +622,8 @@ return (void)
  actionGenerate()
 <
 return (void)
+
+ Generates fixtures and fill them with Faker data.
 
  For example,
 
@@ -636,6 +642,7 @@ return (void)
 <
 return (void)
 
+ Generates all fixtures template path that can be found.
 
 
 *yii/faker/FixtureController::getGenerator*		public
@@ -644,6 +651,7 @@ return (void)
 <
 return (\Faker\Generator) 
 
+ Returns Faker generator instance. Getter for private property.
 
 
 *yii/faker/FixtureController::checkPaths*			public
@@ -652,6 +660,7 @@ return (\Faker\Generator)
 <
 return (void)
 
+ Check if the template path and migrations path exists and writable.
 
 
 *yii/faker/FixtureController::addProviders*		public
@@ -660,6 +669,7 @@ return (void)
 <
 return (void)
 
+ Adds users providers to the faker generator.
 
 
 *yii/faker/FixtureController::exportFixtures*		public
@@ -667,6 +677,8 @@ return (void)
  exportFixtures($fixtures)
 <
 return (string) Exported fixtures format
+
+ Returns exported to the string representation of given fixtures array.
 
     [$fixtures] (array) 
 
@@ -677,6 +689,8 @@ return (string) Exported fixtures format
 <
 return (array) Fixture
 
+ Generates fixture from given template
+
     [$_template_] (string) The fixture template file
     [$index] (integer) The current fixture index
 
@@ -686,6 +700,8 @@ return (array) Fixture
  generateFixtureFile($templateName, $templatePath, $fixtureDataPath)
 <
 return (void)
+
+ Generates fixture file by the given fixture template file.
 
     [$templateName] (string) Template file name
     [$templatePath] (string) Path where templates are stored
@@ -698,6 +714,9 @@ return (void)
  confirmGeneration($files)
 <
 return (boolean) 
+
+ Prompts user with message if he confirm generation with given fixture
+ templates files.
 
     [$files] (array) 
 

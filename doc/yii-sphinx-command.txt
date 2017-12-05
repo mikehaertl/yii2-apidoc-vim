@@ -226,6 +226,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Prepares the SQL statement to be executed.
+
 
 
  For complex SQL statement that is to be executed multiple times, this may
@@ -260,6 +262,8 @@ return (void)
 <
 return ($this) The current command being executed
 
+ Binds a value to a parameter.
+
 
 
 
@@ -280,6 +284,8 @@ return ($this) The current command being executed
  bindValues($values)
 <
 return ($this) The current command being executed
+
+ Binds a list of values to the corresponding parameters.
 
 
 
@@ -334,6 +340,8 @@ return ($this) The current command being executed
 <
 return ($this) The command object itself
 
+ Creates a batch INSERT command.
+
  For example,
 
    $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
@@ -354,6 +362,8 @@ return ($this) The command object itself
  update($index, $columns, $condition='\'\'', $params='[]', $options='[]')
 <
 return ($this) The command object itself
+
+ Creates an UPDATE command.
 
  For example,
 
@@ -384,6 +394,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for creating a new DB table.
+
 
 
  The columns in the new table should be specified as name-definition pairs
@@ -412,6 +424,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for renaming a DB table.
+
 
 
 
@@ -430,6 +444,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for dropping a DB table.
+
 
 
 
@@ -446,6 +462,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for truncating a DB table.
+
 
 
 
@@ -461,6 +479,8 @@ return ($this) The command object itself
  addColumn($table, $column, $type)
 <
 return ($this) The command object itself
+
+ Creates a SQL command for adding a new DB column.
 
 
 
@@ -484,6 +504,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for dropping a DB column.
+
 
 
 
@@ -501,6 +523,8 @@ return ($this) The command object itself
  renameColumn($table, $oldName, $newName)
 <
 return ($this) The command object itself
+
+ Creates a SQL command for renaming a column.
 
 
 
@@ -521,6 +545,8 @@ return ($this) The command object itself
  alterColumn($table, $column, $type)
 <
 return ($this) The command object itself
+
+ Creates a SQL command for changing the definition of a column.
 
 
 
@@ -544,6 +570,9 @@ return ($this) The command object itself
 <
 return ($this) The command object itself.
 
+ Creates a SQL command for adding a primary key constraint to an existing
+ table.
+
 
 
  The method will properly quote the table and column names.
@@ -563,6 +592,9 @@ return ($this) The command object itself.
 <
 return ($this) The command object itself
 
+ Creates a SQL command for removing a primary key constraint to an existing
+ table.
+
 
 
 
@@ -579,6 +611,9 @@ return ($this) The command object itself
  addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
 <
 return ($this) The command object itself
+
+ Creates a SQL command for adding a foreign key constraint to an existing
+ table.
 
 
 
@@ -607,6 +642,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for dropping a foreign key constraint.
+
 
 
 
@@ -624,6 +661,8 @@ return ($this) The command object itself
  createIndex($name, $table, $columns, $unique='false')
 <
 return ($this) The command object itself
+
+ Creates a SQL command for creating a new index.
 
 
 
@@ -646,6 +685,8 @@ return ($this) The command object itself
  dropIndex($name, $table)
 <
 return ($this) The command object itself
+
+ Creates a SQL command for dropping an index.
 
 
 
@@ -695,6 +736,9 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for resetting the sequence value of a table's primary
+ key.
+
 
 
  The sequence will be reset such that the primary key of the next new row
@@ -714,6 +758,8 @@ return ($this) The command object itself
  checkIntegrity($check='true', $schema='''', $table='''')
 <
 return ($this) The command object itself
+
+ Builds a SQL command for enabling or disabling integrity check.
 
 
 
@@ -778,6 +824,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates an REPLACE command.
+
  For example,
 
    $connection->createCommand()->replace('idx_user', [
@@ -801,6 +849,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a batch REPLACE command.
+
  For example,
 
    $connection->createCommand()->batchReplace('idx_user', ['name', 'age'], [
@@ -822,6 +872,8 @@ return ($this) The command object itself
 <
 return ($this) The command object itself
 
+ Creates a SQL command for truncating a runtime index.
+
     [$index] (string) The index to be truncated. The name will be properly
     quoted by the method.
 
@@ -831,6 +883,9 @@ return ($this) The command object itself
  callSnippets($index, $source, $match, $options='[]')
 <
 return ($this) The command object itself
+
+ Builds a snippet from provided data and query, using specified index
+ settings.
 
     [$index] (string) Name of the index, from which to take the text
     processing settings.
@@ -845,6 +900,9 @@ return ($this) The command object itself
  callKeywords($index, $text, $fetchStatistic='false')
 <
 return ($this) The command object itself
+
+ Returns tokenized and normalized forms of the keywords, and, optionally,
+ keyword statistics.
 
     [$index] (string) The name of the index from which to take the text
     processing settings

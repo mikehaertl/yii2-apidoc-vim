@@ -52,6 +52,8 @@ METHOD DETAILS
 <
 return ($this) Self instance.
 
+ Check the given requirements, collecting results into internal field.
+
  This method can be invoked several times checking different requirement sets.
  Use 'getResult()' or 'render()' to get the results.
 
@@ -66,6 +68,7 @@ return ($this) Self instance.
 <
 return (\YiiRequirementChecker) Self instance.
 
+ Performs the check for the Yii core requirements.
 
 
 *YiiRequirementChecker::getResult*			public
@@ -92,6 +95,7 @@ return (array|null) Check results in format:
 
 
 
+ Return the check results.
 
 
 *YiiRequirementChecker::render*				public
@@ -99,6 +103,8 @@ return (array|null) Check results in format:
  render()
 <
 return (void)
+
+ Renders the requirements check result.
 
  The output will vary depending is a script running from web or from console.
 
@@ -108,6 +114,9 @@ return (void)
  checkPhpExtensionVersion($extensionName, $version, $compare=''>='')
 <
 return (bool) If PHP extension version matches.
+
+ Checks if the given PHP extension is available and its version matches the
+ given one.
 
     [$extensionName] (string) PHP extension name.
     [$version] (string) Required PHP extension version.
@@ -120,6 +129,8 @@ return (bool) If PHP extension version matches.
 <
 return (bool) Option is on.
 
+ Checks if PHP configuration option (from php.ini) is on.
+
     [$name] (string) Configuration option name.
 
 
@@ -129,6 +140,8 @@ return (bool) Option is on.
 <
 return (bool) Option is off.
 
+ Checks if PHP configuration option (from php.ini) is off.
+
     [$name] (string) Configuration option name.
 
 
@@ -137,6 +150,9 @@ return (bool) Option is off.
  compareByteSize($a, $b, $compare=''>='')
 <
 return (bool) Comparison result.
+
+ Compare byte sizes of values given in the verbose representation, like '5M',
+ '15K' etc.
 
     [$a] (string) First value.
     [$b] (string) Second value.
@@ -149,6 +165,8 @@ return (bool) Comparison result.
 <
 return (int) Actual size in bytes.
 
+ Gets the size in bytes from verbose size representation.
+
  For example: '5K' => 5*1024
 
     [$verboseSize] (string) Verbose size representation.
@@ -159,6 +177,8 @@ return (int) Actual size in bytes.
  checkUploadMaxFileSize($min='null', $max='null')
 <
 return (bool) Success.
+
+ Checks if upload max file size matches the given range.
 
     [$min] (string|null) Verbose file size minimum required value, pass null
     to skip minimum check.
@@ -171,6 +191,8 @@ return (bool) Success.
  renderViewFile($_viewFile_, $_data_='null', $_return_='false')
 <
 return (string) The rendering result. Null if the rendering result is not required.
+
+ Renders a view file.
 
  This method includes the view file as a PHP script and captures the display
  result if required.
@@ -187,6 +209,8 @@ return (string) The rendering result. Null if the rendering result is not requir
 <
 return (array) Normalized requirement.
 
+ Normalizes requirement ensuring it has correct format.
+
     [$requirement] (array) Raw requirement.
     [$requirementKey] (int) Requirement key in the list.
 
@@ -196,6 +220,8 @@ return (array) Normalized requirement.
  usageError($message)
 <
 return (void)
+
+ Displays a usage error.
 
  This method will then terminate the execution of the current application.
 
@@ -208,6 +234,8 @@ return (void)
 <
 return (mixed) The expression result.
 
+ Evaluates a PHP expression under the context of this class.
+
     [$expression] (string) A PHP expression to be evaluated.
 
 
@@ -217,6 +245,7 @@ return (mixed) The expression result.
 <
 return (string) Server information.
 
+ Returns the server information.
 
 
 *YiiRequirementChecker::getNowDate*			public
@@ -225,6 +254,7 @@ return (string) Server information.
 <
 return (string) Now date.
 
+ Returns the now date if possible in string representation.
 
 
 

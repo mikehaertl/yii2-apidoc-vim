@@ -116,6 +116,8 @@ METHOD DETAILS
 <
 return (bool) Whether the operation successful.
 
+ Drops this collection.
+
 
 
 
@@ -158,6 +160,8 @@ return (bool) Whether the operation successful.
  find($condition='[]', $fields='[]', $options='[]')
 <
 return (\yii\mongodb\file\Cursor) Cursor for the search results
+
+ Returns a cursor for the search results.
 
 
 
@@ -205,6 +209,8 @@ return (\yii\mongodb\file\Cursor) Cursor for the search results
  remove($condition='[]', $options='[]')
 <
 return (int|bool) Number of updated documents or whether operation was successful.
+
+ Removes data from the collection.
 
 
 
@@ -264,6 +270,8 @@ return (void)
 <
 return (\yii\mongodb\file\Upload) File upload instance.
 
+ Creates upload command.
+
     [$options] (array) Upload options.
 
 
@@ -273,6 +281,8 @@ return (\yii\mongodb\file\Upload) File upload instance.
 <
 return (\yii\mongodb\file\Download) File download instance.
 
+ Creates download command.
+
     [$document] (array|\MongoDB\BSON\ObjectID) File document ot be downloaded.
 
 
@@ -281,6 +291,8 @@ return (\yii\mongodb\file\Download) File download instance.
  getChunkCollection($refresh='false')
 <
 return (\yii\mongodb\Collection) Mongo collection instance.
+
+ Returns the MongoDB collection for the file chunks.
 
     [$refresh] (bool) Whether to reload the collection instance even if it is
     found in the cache.
@@ -292,6 +304,8 @@ return (\yii\mongodb\Collection) Mongo collection instance.
 <
 return (\yii\mongodb\Collection) Mongo collection instance.
 
+ Returns the MongoDB collection for the files.
+
     [$refresh] (bool) Whether to reload the collection instance even if it is
     found in the cache.
 
@@ -302,6 +316,8 @@ return (\yii\mongodb\Collection) Mongo collection instance.
 <
 return (mixed) The "_id" of the saved file document. This will be a generated
 '\MongoId' unless an "_id" was explicitly specified in the metadata.
+
+ Creates new file in GridFS collection from given local filesystem file.
 
  Additional attributes can be added file document using $metadata.
 
@@ -317,6 +333,8 @@ return (mixed) The "_id" of the saved file document. This will be a generated
 return (mixed) The "_id" of the saved file document. This will be a generated
 '\MongoId' unless an "_id" was explicitly specified in the metadata.
 
+ Creates new file in GridFS collection with specified content.
+
  Additional attributes can be added file document using $metadata.
 
     [$bytes] (string) String of bytes to store.
@@ -330,6 +348,8 @@ return (mixed) The "_id" of the saved file document. This will be a generated
 <
 return (mixed) The "_id" of the saved file document. This will be a generated
 '\MongoId' unless an "_id" was explicitly specified in the metadata.
+
+ Creates new file in GridFS collection from uploaded file.
 
  Additional attributes can be added file document using $metadata.
 
@@ -345,6 +365,8 @@ return (mixed) The "_id" of the saved file document. This will be a generated
 <
 return (\yii\mongodb\file\Download|null) Found file, or null if file does not exist
 
+ Retrieves the file with given _id.
+
     [$id] (mixed) _id of the file to find.
 
 
@@ -354,6 +376,8 @@ return (\yii\mongodb\file\Download|null) Found file, or null if file does not ex
 <
 return (bool) Whether the operation was successful.
 
+ Deletes the file with given _id.
+
     [$id] (mixed) _id of the file to find.
 
 
@@ -362,6 +386,9 @@ return (bool) Whether the operation was successful.
  ensureIndexes($force='false')
 <
 return ($this) Self reference.
+
+ Makes sure that indexes, which are crucial for the file processing, exist at
+ this collection and 'chunkCollection'.
 
  The check result is cached per collection instance.
 

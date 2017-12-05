@@ -60,6 +60,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes this application component.
+
  It checks if extension required is loaded.
 
 
@@ -190,6 +192,8 @@ return (void)
 return (bool) True if a value exists in cache, false if the value is not in the cache
 or expired.
 
+ Checks whether a specified key exists in the cache.
+
  This can be faster than getting the value from the cache if the data is big.
  Note that this method does not check whether the dependency associated with
  the cached data, if there is any, has changed. So a call to 'get' may return
@@ -257,6 +261,8 @@ or expired.
 return (mixed|false) The value stored in cache, false if the value is not in the
 cache or expired.
 
+ Retrieves a value from cache with a specified key.
+
  This is the implementation of the method declared in the parent class.
 
     [$key] (string) A unique key identifying the cached value
@@ -267,6 +273,8 @@ cache or expired.
  setValue($key, $value, $duration)
 <
 return (bool) True if the value is successfully stored into cache, false otherwise.
+
+ Stores a value identified by a key in cache.
 
  This is the implementation of the method declared in the parent class.
 
@@ -283,6 +291,9 @@ return (bool) True if the value is successfully stored into cache, false otherwi
 <
 return (bool) True if the value is successfully stored into cache, false otherwise
 
+ Stores a value identified by a key into cache if the cache does not contain
+ this key.
+
  This is the implementation of the method declared in the parent class.
 
     [$key] (string) The key identifying the value to be cached
@@ -298,6 +309,9 @@ return (bool) True if the value is successfully stored into cache, false otherwi
 <
 return (bool) If no error happens during deletion
 
+ Deletes a value with the specified key from cache This is the implementation
+ of the method declared in the parent class.
+
     [$key] (string) The key of the value to be deleted
 
 
@@ -306,6 +320,8 @@ return (bool) If no error happens during deletion
  flushValues()
 <
 return (bool) Whether the flush operation was successful.
+
+ Deletes all values from cache.
 
  This is the implementation of the method declared in the parent class.
 
@@ -316,6 +332,8 @@ return (bool) Whether the flush operation was successful.
 <
 return (array) A list of cached values indexed by the keys
 
+ Retrieves multiple values from cache with the specified keys.
+
     [$keys] (array) A list of keys identifying the cached values
 
 
@@ -324,6 +342,8 @@ return (array) A list of cached values indexed by the keys
  setValues($data, $duration)
 <
 return (array) Array of failed keys
+
+ Stores multiple key-value pairs in cache.
 
     [$data] (array) Array where key corresponds to cache key while value
     [$duration] (int) The number of seconds in which the cached values will
@@ -335,6 +355,8 @@ return (array) Array of failed keys
  addValues($data, $duration)
 <
 return (array) Array of failed keys
+
+ Adds multiple key-value pairs to cache.
 
     [$data] (array) Array where key corresponds to cache key while value is
     the value stored

@@ -28,6 +28,8 @@ METHOD DETAILS
 <
 return (array) The fixtures needed by the current test case
 
+ Declares the fixtures that are needed by the current test case.
+
  The return value of this method must be an array of fixture configurations.
  For example,
 
@@ -53,6 +55,8 @@ return (array) The fixtures needed by the current test case
 <
 return (array) The fixtures shared and required by different test cases.
 
+ Declares the fixtures shared required by different test cases.
+
  The return value should be similar to that of 'fixtures()'. You should
  usually override this method in a base class.
 
@@ -62,6 +66,8 @@ return (array) The fixtures shared and required by different test cases.
  loadFixtures($fixtures='null')
 <
 return (void)
+
+ Loads the specified fixtures.
 
  This method will call 'Fixture::load()' for every fixture object.
 
@@ -76,6 +82,8 @@ return (void)
 <
 return (void)
 
+ Unloads the specified fixtures.
+
  This method will call 'Fixture::unload()' for every fixture object.
 
     [$fixtures] (\yii\test\Fixture[]) The fixtures to be loaded. If this
@@ -89,6 +97,7 @@ return (void)
 <
 return (void)
 
+ Initialize the fixtures.
 
 
 *yii/test/FixtureTrait::getFixtures*			public
@@ -97,6 +106,8 @@ return (void)
 <
 return (\yii\test\Fixture[]) The loaded fixtures for the current test case
 
+ Returns the fixture objects as specified in 'globalFixtures()' and
+ 'fixtures()'.
 
 
 *yii/test/FixtureTrait::getFixture*			public
@@ -105,6 +116,8 @@ return (\yii\test\Fixture[]) The loaded fixtures for the current test case
 <
 return (\yii\test\Fixture) The fixture object, or null if the named fixture does not
 exist.
+
+ Returns the named fixture.
 
     [$name] (string) The fixture name. This can be either the fixture alias
     name, or the class name if the alias is not used.
@@ -115,6 +128,8 @@ exist.
  createFixtures($fixtures)
 <
 return (\yii\test\Fixture[]) The created fixture instances
+
+ Creates the specified fixture instances.
 
  All dependent fixtures will also be created.
 

@@ -311,6 +311,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -435,6 +437,8 @@ return (void)
 <
 return (string) The formatting result.
 
+ Formats the value based on the given format type.
+
  This method will call one of the "as" methods available in this class to do
  the formatting. For type "xyz", the method "asXyz" will be used. For example,
  if the format is "html", then 'asHtml()' will be used. Format names are case
@@ -463,6 +467,8 @@ return (string) The formatting result.
 <
 return (string) The formatted result.
 
+ Formats the value as is without any formatting.
+
  This method simply returns back the parameter without any format. The only
  exception is a 'null' value which will be formatted using 'nullDisplay'.
 
@@ -475,6 +481,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as an HTML-encoded plain text.
+
     [$value] (string) The value to be formatted.
 
 
@@ -484,6 +492,9 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as an HTML-encoded plain text with newlines converted into
+ breaks.
+
     [$value] (string) The value to be formatted.
 
 
@@ -492,6 +503,8 @@ return (string) The formatted result.
  asParagraphs($value)
 <
 return (string) The formatted result.
+
+ Formats the value as HTML-encoded text paragraphs.
 
  Each text paragraph is enclosed within a '<p>' tag. One or multiple
  consecutive empty lines divide two paragraphs.
@@ -504,6 +517,8 @@ return (string) The formatted result.
  asHtml($value, $config='null')
 <
 return (string) The formatted result.
+
+ Formats the value as HTML text.
 
  The value will be purified using 'HtmlPurifier' to avoid XSS attacks. Use
  'asRaw()' if you do not want any purification of the value.
@@ -518,6 +533,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a mailto link.
+
     [$value] (string) The value to be formatted.
     [$options] (array) The tag options in terms of name-value pairs. See
     'Html::mailto()'.
@@ -528,6 +545,8 @@ return (string) The formatted result.
  asImage($value, $options='[]')
 <
 return (string) The formatted result.
+
+ Formats the value as an image tag.
 
     [$value] (mixed) The value to be formatted.
     [$options] (array) The tag options in terms of name-value pairs. See
@@ -540,6 +559,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a hyperlink.
+
     [$value] (mixed) The value to be formatted.
     [$options] (array) The tag options in terms of name-value pairs. See
     'Html::a()'.
@@ -551,6 +572,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a boolean.
+
     [$value] (mixed) The value to be formatted.
 
 
@@ -559,6 +582,8 @@ return (string) The formatted result.
  asDate($value, $format='null')
 <
 return (string) The formatted result.
+
+ Formats the value as a date.
 
     [$value] (int|string|\DateTime) The value to be formatted. The following
     types of value are supported:
@@ -598,6 +623,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a time.
+
     [$value] (int|string|\DateTime) The value to be formatted. The following
     types of value are supported:
 
@@ -633,6 +660,8 @@ return (string) The formatted result.
  asDatetime($value, $format='null')
 <
 return (string) The formatted result.
+
+ Formats the value as a datetime.
 
     [$value] (int|string|\DateTime) The value to be formatted. The following
     types of value are supported:
@@ -675,6 +704,9 @@ whether the timestamp has time information or it is just a date value. Since
 version 2.0.12 the array has third boolean element indicating whether the
 timestamp has date information or it is just a time value.
 
+ Normalizes the given datetime value as a DateTime object that can be taken by
+ various date/time formatting methods.
+
     [$value] (int|string|\DateTime) The datetime value to be normalized. The
     following types of value are supported:
 
@@ -701,6 +733,9 @@ timestamp has date information or it is just a time value.
 <
 return (string) The formatted result.
 
+ Formats a date, time or datetime in a float number as UNIX timestamp (seconds
+ since 01-01-1970).
+
     [$value] (int|string|\DateTime) The value to be formatted. The following
     types of value are supported:
 
@@ -719,6 +754,9 @@ return (string) The formatted result.
  asRelativeTime($value, $referenceTime='null')
 <
 return (string) The formatted result.
+
+ Formats the value as the time interval between a date and now in human
+ readable form.
 
  This method can be used in three different ways:
 
@@ -749,6 +787,8 @@ return (string) The formatted result.
 <
 return (string) The formatted duration.
 
+ Represents the value as duration in human readable format.
+
     [$value] (\DateInterval|string|int) The value to be formatted. Acceptable
     formats:  
       - [DateInterval
@@ -775,6 +815,9 @@ return (string) The formatted duration.
 <
 return (string) The formatted result.
 
+ Formats the value as an integer number by removing any decimal digits without
+ rounding.
+
     [$value] (mixed) The value to be formatted.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
@@ -787,6 +830,8 @@ return (string) The formatted result.
  asDecimal($value, $decimals=null, $options='[]', $textOptions='[]')
 <
 return (string) The formatted result.
+
+ Formats the value as a decimal number.
 
  Property 'decimalSeparator' will be used to represent the decimal point. The
  value is rounded automatically to the defined decimal digits.
@@ -813,6 +858,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a percent number with "%" sign.
+
     [$value] (mixed) The value to be formatted. It must be a factor e.g.
     '0.75' will result in '75%'.
     [$decimals] (int) The number of digits after the decimal point. If not
@@ -836,6 +883,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a scientific number.
+
     [$value] (mixed) The value to be formatted.
     [$decimals] (int) The number of digits after the decimal point. If not
     given, the number of digits depends in the input value and is determined
@@ -858,6 +907,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a currency number.
+
  This function does not require the [PHP intl
  extension](http://php.net/manual/en/book.intl.php) to be installed to work,
  but it is highly recommended to install it to get good formatting results.
@@ -877,6 +928,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a number spellout.
+
  This function requires the [PHP intl
  extension](http://php.net/manual/en/book.intl.php) to be installed.
 
@@ -889,6 +942,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a ordinal value of a number.
+
  This function requires the [PHP intl
  extension](http://php.net/manual/en/book.intl.php) to be installed.
 
@@ -900,6 +955,9 @@ return (string) The formatted result.
  asShortSize($value, $decimals=null, $options='[]', $textOptions='[]')
 <
 return (string) The formatted result.
+
+ Formats the value in bytes as a size in human readable form for example '12
+ KB'.
 
  This is the short form of 'asSize'.
 
@@ -921,6 +979,9 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value in bytes as a size in human readable form, for example '12
+ kilobytes'.
+
  If 'sizeFormatBase' is 1024, [binary
  prefixes](http://en.wikipedia.org/wiki/Binary_prefix) (e.g. kibibyte/KiB,
  mebibyte/MiB, ...) are used in the formatting result.
@@ -939,6 +1000,8 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a length in human readable form for example '12 meters'.
+
  Check properties 'baseUnits' if you need to change unit of value as the
  multiplier of the smallest unit and 'systemOfUnits' to switch between
  'UNIT_SYSTEM_METRIC' or 'UNIT_SYSTEM_IMPERIAL'.
@@ -956,6 +1019,8 @@ return (string) The formatted result.
  asShortLength($value, $decimals=null, $options='[]', $textOptions='[]')
 <
 return (string) The formatted result.
+
+ Formats the value as a length in human readable form for example '12 m'.
 
  This is the short form of 'asLength'.
 
@@ -977,6 +1042,9 @@ return (string) The formatted result.
 <
 return (string) The formatted result.
 
+ Formats the value as a weight in human readable form for example '12
+ kilograms'.
+
  Check properties 'baseUnits' if you need to change unit of value as the
  multiplier of the smallest unit and 'systemOfUnits' to switch between
  'UNIT_SYSTEM_METRIC' or 'UNIT_SYSTEM_IMPERIAL'.
@@ -994,6 +1062,8 @@ return (string) The formatted result.
  asShortWeight($value, $decimals=null, $options='[]', $textOptions='[]')
 <
 return (string) The formatted result.
+
+ Formats the value as a weight in human readable form for example '12 kg'.
 
  This is the short form of 'asWeight'.
 
@@ -1015,6 +1085,8 @@ return (string) The formatted result.
 <
 return (float|int) The normalized number value
 
+ Normalizes a numeric input value.
+
 
    - everything [empty](http://php.net/manual/en/function.empty.php)
    will result in '0' 
@@ -1032,6 +1104,8 @@ return (float|int) The normalized number value
  createNumberFormatter($style, $decimals=null, $options='[]', $textOptions='[]')
 <
 return (\NumberFormatter) The created formatter instance
+
+ Creates a number formatter based on the given type and format.
 
  You may override this method to create a number formatter based on patterns.
 

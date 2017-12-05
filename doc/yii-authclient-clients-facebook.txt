@@ -330,6 +330,8 @@ METHOD DETAILS
 <
 return (string) Service name.
 
+ Generates service name.
+
 
 
 
@@ -343,6 +345,8 @@ return (string) Service name.
 <
 return (string) Service title.
 
+ Generates service title.
+
 
 
 
@@ -355,6 +359,8 @@ return (string) Service title.
  initUserAttributes()
 <
 return (array) Auth user attributes.
+
+ Initializes authenticated user attributes.
 
 
 
@@ -373,6 +379,8 @@ return (array) Auth user attributes.
  defaultViewOptions()
 <
 return (array) List of default 'viewOptions'
+
+ Returns the default 'viewOptions' value.
 
 
 
@@ -513,6 +521,8 @@ return (array) List of default 'viewOptions'
 <
 return (void)
 
+ Applies access token to the HTTP request instance.
+
 
 
 
@@ -533,6 +543,8 @@ return (void)
  fetchAccessToken($authCode, $params='[]')
 <
 return (\yii\authclient\OAuthToken) Access token.
+
+ Fetches access token from authorization code.
 
 
 
@@ -575,6 +587,8 @@ return (\yii\authclient\OAuthToken) Access token.
 <
 return (\yii\authclient\OAuthToken) Long-live access token.
 
+ Exchanges short-live (2 hours) access token to long-live (60 days) one.
+
  Note that this method will success for already long-live token, but will not
  actually prolong it any further. Pay attention, that this method will fail on
  already expired access token.
@@ -587,6 +601,8 @@ return (\yii\authclient\OAuthToken) Long-live access token.
  fetchClientAuthCode($token='null', $params='[]')
 <
 return (string) Client auth code.
+
+ Requests the authorization code for the client-specific access token.
 
  This make sense for the distributed applications, which provides several Auth
  clients (web and mobile) to avoid triggering Facebook's automated spam
@@ -602,6 +618,8 @@ return (string) Client auth code.
  fetchClientAccessToken($authCode, $params='[]')
 <
 return (\yii\authclient\OAuthToken) Long-live client-specific access token.
+
+ Fetches access token from client-specific authorization code.
 
  This make sense for the distributed applications, which provides several Auth
  clients (web and mobile) to avoid triggering Facebook's automated spam

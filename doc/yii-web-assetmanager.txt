@@ -208,6 +208,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the component.
 
 
 *yii/web/AssetManager::__get*				public
@@ -326,6 +327,8 @@ return (void)
 <
 return (\yii\web\AssetBundle) The asset bundle instance
 
+ Returns the named asset bundle.
+
  This method will first look for the bundle in 'bundles'. If not found, it
  will treat '$name' as the class of the asset bundle and create a new instance
  of it.
@@ -343,6 +346,8 @@ return (\yii\web\AssetBundle) The asset bundle instance
 <
 return (\yii\web\AssetBundle) 
 
+ Loads asset bundle class by name.
+
     [$name] (string) Bundle name
     [$config] (array) Bundle object configuration
     [$publish] (bool) If bundle should be published
@@ -354,6 +359,8 @@ return (\yii\web\AssetBundle)
 <
 return (\yii\web\AssetBundle) 
 
+ Loads dummy bundle by name.
+
     [$name] (string) 
 
 
@@ -362,6 +369,8 @@ return (\yii\web\AssetBundle)
  getAssetUrl($bundle, $asset)
 <
 return (string) The actual URL for the specified asset.
+
+ Returns the actual URL for the specified asset.
 
  The actual URL is obtained by prepending either 'AssetBundle::$baseUrl' or
  'AssetManager::$baseUrl' to the given asset path.
@@ -378,6 +387,8 @@ return (string) The actual URL for the specified asset.
 <
 return (string|false) The actual file path, or 'false' if the asset is specified as
 an absolute URL
+
+ Returns the actual file path for the specified asset.
 
     [$bundle] (\yii\web\AssetBundle) The asset bundle which the asset file
     belongs to
@@ -401,6 +412,7 @@ return (string|bool)
 <
 return (\yii\web\AssetConverterInterface) The asset converter.
 
+ Returns the asset converter.
 
 
 *yii/web/AssetManager::setConverter*			public
@@ -408,6 +420,8 @@ return (\yii\web\AssetConverterInterface) The asset converter.
  setConverter($value)
 <
 return (void)
+
+ Sets the asset converter.
 
     [$value] (array|\yii\web\AssetConverterInterface) The asset converter.
     This can be either an object implementing the 'AssetConverterInterface',
@@ -421,6 +435,8 @@ return (void)
 <
 return (array) The path (directory or file path) and the URL that the asset is
 published as.
+
+ Publishes a file or a directory.
 
  This method will copy the specified file or directory to 'basePath' so that
  it can be accessed via the Web server.
@@ -474,6 +490,8 @@ published as.
 <
 return (string[]) The path and the URL that the asset is published as.
 
+ Publishes a file.
+
     [$src] (string) The asset file to be published
 
 
@@ -482,6 +500,8 @@ return (string[]) The path and the URL that the asset is published as.
  publishDirectory($src, $options)
 <
 return (string[]) The path directory and the URL that the asset is published as.
+
+ Publishes a directory.
 
     [$src] (string) The asset directory to be published
     [$options] (array) The options to be applied when publishing a directory.
@@ -512,6 +532,8 @@ return (string[]) The path directory and the URL that the asset is published as.
 return (string|false) String the published file path. False if the file or directory
 does not exist
 
+ Returns the published path of a file path.
+
  This method does not perform any publishing. It merely tells you if the file
  or directory is published, where it will go.
 
@@ -525,6 +547,8 @@ does not exist
 return (string|false) String the published URL for the file or directory. False if
 the file or directory does not exist.
 
+ Returns the URL of a published file path.
+
  This method does not perform any publishing. It merely tells you if the file
  path is published, what the URL will be to access it.
 
@@ -536,6 +560,9 @@ the file or directory does not exist.
  hash($path)
 <
 return (string) Hashed string.
+
+ Generate a CRC32 hash for the directory path. Collisions are higher than MD5
+ but generates a much smaller hash string.
 
     [$path] (string) String to be hashed.
 

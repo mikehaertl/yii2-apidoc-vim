@@ -141,6 +141,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes this component.
 
 
 *yii/web/Response::__get*					public
@@ -259,6 +260,7 @@ return (void)
 <
 return (void)
 
+ Sends the response to the client.
 
 
 *yii/web/Response::clearOutputBuffers*			public
@@ -280,6 +282,8 @@ return (int) The HTTP status code to send with the response.
 <
 return ($this) The response object itself
 
+ Sets the response status code.
+
  This method will set the corresponding status text if '$text' is null.
 
     [$value] (int) The status code
@@ -293,6 +297,8 @@ return ($this) The response object itself
 <
 return ($this) The response object itself
 
+ Sets the response status code based on the exception.
+
     [$e] (\Exception|\Error) The exception object.
 
 
@@ -301,6 +307,8 @@ return ($this) The response object itself
  getHeaders()
 <
 return (\yii\web\HeaderCollection) The header collection
+
+ Returns the header collection.
 
  The header collection contains the currently registered HTTP headers.
 
@@ -311,6 +319,7 @@ return (\yii\web\HeaderCollection) The header collection
 <
 return (void)
 
+ Clears the headers, cookies, content, status code of the response.
 
 
 *yii/web/Response::sendHeaders*				protected
@@ -319,6 +328,7 @@ return (void)
 <
 return (void)
 
+ Sends the response headers to the client.
 
 
 *yii/web/Response::sendCookies*				protected
@@ -327,6 +337,7 @@ return (void)
 <
 return (void)
 
+ Sends the cookies to the client.
 
 
 *yii/web/Response::sendContent*				protected
@@ -335,6 +346,7 @@ return (void)
 <
 return (void)
 
+ Sends the response content to the client.
 
 
 *yii/web/Response::sendFile*				public
@@ -342,6 +354,8 @@ return (void)
  sendFile($filePath, $attachmentName='null', $options='[]')
 <
 return ($this) The response object itself
+
+ Sends a file to the browser.
 
  Note that this method only prepares the response for file sending. The file
  is not sent until 'send()' is called explicitly or implicitly. The latter is
@@ -387,6 +401,8 @@ return ($this) The response object itself
 <
 return ($this) The response object itself
 
+ Sends the specified content as a file to the browser.
+
  Note that this method only prepares the response for file sending. The file
  is not sent until 'send()' is called explicitly or implicitly. The latter is
  done after you return from a controller action.
@@ -410,6 +426,8 @@ return ($this) The response object itself
  sendStreamAsFile($handle, $attachmentName, $options='[]')
 <
 return ($this) The response object itself
+
+ Sends the specified stream as a file to the browser.
 
  Note that this method only prepares the response for file sending. The file
  is not sent until 'send()' is called explicitly or implicitly. The latter is
@@ -438,6 +456,8 @@ return ($this) The response object itself
 <
 return ($this) The response object itself
 
+ Sets a default set of HTTP headers for file downloading purpose.
+
     [$attachmentName] (string) The attachment file name
     [$mimeType] (string) The MIME type for the response. If null,
     'Content-Type' header will NOT be set.
@@ -453,6 +473,8 @@ return ($this) The response object itself
 <
 return (array|bool) The range (begin, end), or false if the range request is invalid.
 
+ Determines the HTTP range given in the request.
+
     [$fileSize] (int) The size of the file that will be used to validate the
     requested HTTP range.
 
@@ -462,6 +484,8 @@ return (array|bool) The range (begin, end), or false if the range request is inv
  xSendFile($filePath, $attachmentName='null', $options='[]')
 <
 return ($this) The response object itself
+
+ Sends existing file to a browser as a download using x-sendfile.
 
  X-Sendfile is a feature allowing a web application to redirect the request
  for a file to the webserver that in turn processes the request, this way
@@ -543,6 +567,9 @@ return ($this) The response object itself
 <
 return (string) 
 
+ Returns Content-Disposition header value that is safe to use with both old
+ and new browsers.
+
  Fallback name:
 
 
@@ -574,6 +601,8 @@ return (string)
  redirect($url, $statusCode=302, $checkAjax='true')
 <
 return ($this) The response object itself
+
+ Redirects the browser to the specified URL.
 
  This method adds a "Location" header to the current response. Note that it
  does not send out the header until 'send()' is called. In a controller action
@@ -631,6 +660,8 @@ return ($this) The response object itself
 <
 return (\yii\web\Response) The response object itself
 
+ Refreshes the current page.
+
  The effect of this method call is the same as the user pressing the refresh
  button of his browser (without re-posting data).
 
@@ -650,6 +681,8 @@ return (\yii\web\Response) The response object itself
  getCookies()
 <
 return (\yii\web\CookieCollection) The cookie collection.
+
+ Returns the cookie collection.
 
  Through the returned cookie collection, you add or remove cookies as follows,
 
@@ -761,6 +794,8 @@ return (array) The formatters that are supported by default
  prepare()
 <
 return (void)
+
+ Prepares for sending the response.
 
  The default implementation will convert 'data' into 'content' and set headers
  accordingly.

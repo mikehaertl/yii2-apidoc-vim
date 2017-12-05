@@ -172,6 +172,9 @@ METHOD DETAILS
 <
 return (void)
 
+ Sets the HTTP message transport. It can be specified in one of the following
+ forms:
+
 
    - an instance of 'Transport': actual transport object to be used 
    - a string: representing the class name of the object to be created 
@@ -200,6 +203,8 @@ return (\yii\httpclient\Transport) HTTP message transport instance.
 <
 return (\yii\httpclient\FormatterInterface) Formatter instance.
 
+ Returns HTTP message formatter instance for the specified format.
+
     [$format] (string) Format name.
 
 
@@ -208,6 +213,8 @@ return (\yii\httpclient\FormatterInterface) Formatter instance.
  getParser($format)
 <
 return (\yii\httpclient\ParserInterface) Parser instance.
+
+ Returns HTTP message parser instance for the specified format.
 
     [$format] (string) Format name
 
@@ -226,6 +233,8 @@ return (\yii\httpclient\Request) Request instance.
 <
 return (\yii\httpclient\Response) Request instance.
 
+ Creates a response instance.
+
     [$content] (string) Raw content
     [$headers] (array) Headers list.
 
@@ -236,6 +245,8 @@ return (\yii\httpclient\Response) Request instance.
 <
 return (\yii\httpclient\Response) Response instance.
 
+ Performs given request.
+
     [$request] (\yii\httpclient\Request) Request to be sent.
 
 
@@ -244,6 +255,8 @@ return (\yii\httpclient\Response) Response instance.
  batchSend($requests)
 <
 return (\yii\httpclient\Response[]) Responses list.
+
+ Performs multiple HTTP requests in parallel.
 
  This method accepts an array of the 'Request' objects and returns an array of
  the  'Response' objects. Keys of the response array correspond the ones from
@@ -270,6 +283,9 @@ return (\yii\httpclient\Response[]) Responses list.
 <
 return (string) Log token.
 
+ Composes the log/profiling message token for the given HTTP request
+ parameters.
+
  This method should be used by transports during request sending logging.
 
     [$method] (string) Request method name.
@@ -284,6 +300,8 @@ return (string) Log token.
 <
 return (\yii\httpclient\Request) Request instance.
 
+ Creates 'GET' request.
+
     [$url] (string) Target URL.
     [$data] (array|string) If array 
       - request data, otherwise - request content.
@@ -296,6 +314,8 @@ return (\yii\httpclient\Request) Request instance.
  post($url, $data='null', $headers='[]', $options='[]')
 <
 return (\yii\httpclient\Request) Request instance.
+
+ Creates 'POST' request.
 
     [$url] (string) Target URL.
     [$data] (array|string) If array 
@@ -310,6 +330,8 @@ return (\yii\httpclient\Request) Request instance.
 <
 return (\yii\httpclient\Request) Request instance.
 
+ Creates 'PUT' request.
+
     [$url] (string) Target URL.
     [$data] (array|string) If array 
       - request data, otherwise - request content.
@@ -322,6 +344,8 @@ return (\yii\httpclient\Request) Request instance.
  patch($url, $data='null', $headers='[]', $options='[]')
 <
 return (\yii\httpclient\Request) Request instance.
+
+ Creates 'PATCH' request.
 
     [$url] (string) Target URL.
     [$data] (array|string) If array 
@@ -336,6 +360,8 @@ return (\yii\httpclient\Request) Request instance.
 <
 return (\yii\httpclient\Request) Request instance.
 
+ Creates 'DELETE' request.
+
     [$url] (string) Target URL.
     [$data] (array|string) If array 
       - request data, otherwise - request content.
@@ -349,6 +375,8 @@ return (\yii\httpclient\Request) Request instance.
 <
 return (\yii\httpclient\Request) Request instance.
 
+ Creates 'HEAD' request.
+
     [$url] (string) Target URL.
     [$headers] (array) Request headers.
     [$options] (array) Request options.
@@ -360,6 +388,8 @@ return (\yii\httpclient\Request) Request instance.
 <
 return (\yii\httpclient\Request) Request instance.
 
+ Creates 'OPTIONS' request.
+
     [$url] (string) Target URL.
     [$options] (array) Request options.
 
@@ -369,6 +399,8 @@ return (\yii\httpclient\Request) Request instance.
  beforeSend($request)
 <
 return (void)
+
+ This method is invoked right before request is sent.
 
  The method will trigger the 'EVENT_BEFORE_SEND' event.
 
@@ -380,6 +412,8 @@ return (void)
  afterSend($request, $response)
 <
 return (void)
+
+ This method is invoked right after request is sent.
 
  The method will trigger the 'EVENT_AFTER_SEND' event.
 

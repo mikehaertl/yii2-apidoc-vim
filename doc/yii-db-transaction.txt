@@ -112,6 +112,7 @@ METHOD DETAILS
 return (bool) Whether this transaction is active. Only an active transaction can
 'commit()' or 'rollBack()'.
 
+ Returns a value indicating whether this transaction is active.
 
 
 *yii/db/Transaction::begin*				public
@@ -119,6 +120,8 @@ return (bool) Whether this transaction is active. Only an active transaction can
  begin($isolationLevel='null')
 <
 return (void)
+
+ Begins a transaction.
 
     [$isolationLevel] (string|null) The [isolation level][] to use for this
     transaction. This can be one of 'READ_UNCOMMITTED', 'READ_COMMITTED',
@@ -148,6 +151,7 @@ return (void)
 <
 return (void)
 
+ Commits a transaction.
 
 
 *yii/db/Transaction::rollBack*				public
@@ -156,6 +160,7 @@ return (void)
 <
 return (void)
 
+ Rolls back a transaction.
 
 
 *yii/db/Transaction::setIsolationLevel*			public
@@ -163,6 +168,8 @@ return (void)
  setIsolationLevel($level)
 <
 return (void)
+
+ Sets the transaction isolation level for this transaction.
 
  This method can be used to set the isolation level while the transaction is
  already active. However this is not supported by all DBMS so you might rather

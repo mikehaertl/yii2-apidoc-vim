@@ -399,6 +399,7 @@ METHOD DETAILS
 <
 return (string) Return URL.
 
+ Composes default 'returnUrl' value.
 
 
 *yii/authclient/OAuth2::createSignatureMethod*		protected
@@ -411,6 +412,8 @@ return (string) Return URL.
  createToken($tokenConfig='[]')
 <
 return (\yii\authclient\OAuthToken) Token instance.
+
+ Creates token from its configuration.
 
     [$tokenConfig] (array) Token configuration.
 
@@ -456,6 +459,8 @@ return (\yii\authclient\OAuthToken) Token instance.
 <
 return (\yii\authclient\OAuthToken) New auth token.
 
+ Gets new auth token to replace expired one.
+
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
@@ -464,6 +469,8 @@ return (\yii\authclient\OAuthToken) New auth token.
  applyAccessTokenToRequest($request, $accessToken)
 <
 return (void)
+
+ Applies access token to the HTTP request instance.
 
 
 
@@ -481,6 +488,8 @@ return (void)
 <
 return (string) Authorization URL.
 
+ Composes user authorization URL.
+
     [$params] (array) Additional auth GET params.
 
 
@@ -489,6 +498,8 @@ return (string) Authorization URL.
  fetchAccessToken($authCode, $params='[]')
 <
 return (\yii\authclient\OAuthToken) Access token.
+
+ Fetches access token from authorization code.
 
     [$authCode] (string) Authorization code, usually comes at $_GET['code'].
     [$params] (array) Additional request params.
@@ -499,6 +510,9 @@ return (\yii\authclient\OAuthToken) Access token.
  applyClientCredentialsToRequest($request)
 <
 return (void)
+
+ Applies client credentials (e.g. 'clientId' and 'clientSecret') to the HTTP
+ request instance.
 
  This method should be invoked before sending any HTTP request, which requires
  client credentials.
@@ -512,6 +526,7 @@ return (void)
 <
 return (string) Auth state value.
 
+ Generates the auth state value.
 
 
 *yii/authclient/OAuth2::authenticateClient*		public
@@ -519,6 +534,9 @@ return (string) Auth state value.
  authenticateClient($params='[]')
 <
 return (\yii\authclient\OAuthToken) Access token.
+
+ Authenticate OAuth client directly at the provider without third party (user)
+ involved, using 'client_credentials' grant type.
 
     [$params] (array) Additional request params.
 
@@ -528,6 +546,9 @@ return (\yii\authclient\OAuthToken) Access token.
  authenticateUser($username, $password, $params='[]')
 <
 return (\yii\authclient\OAuthToken) Access token.
+
+ Authenticates user directly by 'username/password' pair, using 'password'
+ grant type.
 
     [$username] (string) User name.
     [$password] (string) User password.
@@ -539,6 +560,8 @@ return (\yii\authclient\OAuthToken) Access token.
  authenticateUserJwt($username, $signature='null', $options='[]', $params='[]')
 <
 return (\yii\authclient\OAuthToken) Access token.
+
+ Authenticates user directly using JSON Web Token (JWT).
 
     [$username] (string) 
     [$signature] (\yii\authclient\signature\BaseMethod|array) Signature method

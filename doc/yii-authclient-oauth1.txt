@@ -342,6 +342,8 @@ METHOD DETAILS
 <
 return (\yii\httpclient\Request) HTTP request instance.
 
+ Creates HTTP request instance.
+
 
 
 
@@ -410,6 +412,7 @@ return (\yii\httpclient\Request) HTTP request instance.
 <
 return (string) Return URL.
 
+ Composes default 'returnUrl' value.
 
 
 *yii/authclient/OAuth1::createSignatureMethod*		protected
@@ -448,6 +451,8 @@ return (string) Return URL.
 <
 return (\yii\httpclient\Request) HTTP request instance.
 
+ Creates an HTTP request for the API call.
+
 
 
  The created request will be automatically processed adding access token
@@ -473,6 +478,8 @@ return (\yii\httpclient\Request) HTTP request instance.
 <
 return (\yii\authclient\OAuthToken) New auth token.
 
+ Gets new auth token to replace expired one.
+
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
@@ -481,6 +488,8 @@ return (\yii\authclient\OAuthToken) New auth token.
  applyAccessTokenToRequest($request, $accessToken)
 <
 return (void)
+
+ Applies access token to the HTTP request instance.
 
 
 
@@ -498,6 +507,8 @@ return (void)
 <
 return (\yii\authclient\OAuthToken) Request token.
 
+ Fetches the OAuth request token.
+
     [$params] (array) Additional request params.
 
 
@@ -506,6 +517,8 @@ return (\yii\authclient\OAuthToken) Request token.
  buildAuthUrl($requestToken='null', $params='[]')
 <
 return (string) Authorize URL
+
+ Composes user authorization URL.
 
     [$requestToken] (\yii\authclient\OAuthToken) OAuth request token.
     [$params] (array) Additional request params.
@@ -516,6 +529,8 @@ return (string) Authorize URL
  fetchAccessToken($oauthToken='null', $requestToken='null', $oauthVerifier='null', $params='[]')
 <
 return (\yii\authclient\OAuthToken) OAuth access token.
+
+ Fetches OAuth access token.
 
     [$oauthToken] (string) OAuth token returned with redirection back to
     client.
@@ -530,6 +545,8 @@ return (\yii\authclient\OAuthToken) OAuth access token.
 <
 return (void)
 
+ Handles 'Request::EVENT_BEFORE_SEND' event.
+
  Ensures every request has been signed up before sending.
 
     [$event] (\yii\httpclient\RequestEvent) Event instance.
@@ -541,6 +558,7 @@ return (void)
 <
 return (string) Nonce value.
 
+ Generates nonce value.
 
 
 *yii/authclient/OAuth1::generateTimestamp*		protected
@@ -549,6 +567,7 @@ return (string) Nonce value.
 <
 return (int) Timestamp.
 
+ Generates timestamp.
 
 
 *yii/authclient/OAuth1::generateCommonRequestParams*	protected
@@ -557,6 +576,7 @@ return (int) Timestamp.
 <
 return (array) Common request params.
 
+ Generate common request params like version, timestamp etc.
 
 
 *yii/authclient/OAuth1::signRequest*			public
@@ -564,6 +584,8 @@ return (array) Common request params.
  signRequest($request, $token='null')
 <
 return (void)
+
+ Sign given request with 'signatureMethod'.
 
     [$request] (\yii\httpclient\Request) Request instance.
     [$token] (\yii\authclient\OAuthToken|null) OAuth token to be used for
@@ -576,6 +598,8 @@ return (void)
 <
 return (string) Base signature string.
 
+ Creates signature base string, which will be signed by 'signatureMethod'.
+
     [$method] (string) Request method.
     [$url] (string) Request URL.
     [$params] (array) Request params.
@@ -587,6 +611,8 @@ return (string) Base signature string.
 <
 return (string) Signature key.
 
+ Composes request signature key.
+
     [$token] (\yii\authclient\OAuthToken|null) OAuth token to be used for
     signature key.
 
@@ -596,6 +622,8 @@ return (string) Signature key.
  composeAuthorizationHeader($params, $realm='''')
 <
 return (array) Authorization header in format: [name => content].
+
+ Composes authorization header.
 
     [$params] (array) Request params.
     [$realm] (string) Authorization realm.

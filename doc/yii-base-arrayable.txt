@@ -26,6 +26,9 @@ METHOD DETAILS
 <
 return (array) The list of field names or field definitions.
 
+ Returns the list of fields that should be returned by default by 'toArray()'
+ when no specific fields are specified.
+
  A field is a named element in the returned array by 'toArray()'.
 
  This method should return an array of field names or field definitions. If
@@ -69,6 +72,9 @@ return (array) The list of field names or field definitions.
 return (array) The list of expandable field names or field definitions. Please refer
 to 'fields()' on the format of the return value.
 
+ Returns the list of additional fields that can be returned by 'toArray()' in
+ addition to those listed in 'fields()'.
+
  This method is similar to 'fields()' except that the list of fields declared
  by this method are not returned by default by 'toArray()'. Only when a field
  in the list is explicitly requested, will it be included in the result of
@@ -80,6 +86,8 @@ to 'fields()' on the format of the return value.
  toArray($fields='[]', $expand='[]', $recursive='true')
 <
 return (array) The array representation of the object
+
+ Converts the object into an array.
 
     [$fields] (array) The fields that the output array should contain. Fields
     not specified in 'fields()' will be ignored. If this parameter is empty,

@@ -170,6 +170,7 @@ METHOD DETAILS
 <
 return (string) Code of the last error.
 
+ Get the error code from the last operation.
 
 
 *yii/i18n/MessageFormatter::getErrorMessage*		public
@@ -178,6 +179,7 @@ return (string) Code of the last error.
 <
 return (string) Description of the last error.
 
+ Get the error text from the last operation.
 
 
 *yii/i18n/MessageFormatter::format*			public
@@ -185,6 +187,9 @@ return (string) Description of the last error.
  format($pattern, $params, $language)
 <
 return (string|false) The formatted pattern string or 'false' if an error occurred
+
+ Formats a message via [ICU message
+ format](http://userguide.icu-project.org/formatparse/messages).
 
  It uses the PHP intl extension's
  [MessageFormatter](http://www.php.net/manual/en/class.messageformatter.php)
@@ -204,6 +209,9 @@ return (string|false) The formatted pattern string or 'false' if an error occurr
 <
 return (array|bool) An array containing items extracted, or 'FALSE' on error.
 
+ Parses an input string according to an [ICU message
+ format](http://userguide.icu-project.org/formatparse/messages) pattern.
+
  It uses the PHP intl extension's
  [MessageFormatter::parse()](http://www.php.net/manual/en/messageformatter.parsemessage.php)
  and adds support for named arguments. Usage of this method requires PHP intl
@@ -220,6 +228,8 @@ return (array|bool) An array containing items extracted, or 'FALSE' on error.
  fallbackFormat($pattern, $args, $locale)
 <
 return (false|string) The formatted pattern string or 'false' if an error occurred
+
+ Fallback implementation for MessageFormatter::formatMessage.
 
     [$pattern] (string) The pattern string to insert things into.
     [$args] (array) The array of values to insert into the format string

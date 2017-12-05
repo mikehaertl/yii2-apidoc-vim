@@ -285,6 +285,8 @@ METHOD DETAILS
 <
 return (\yii\mongodb\Collection) Collection instance.
 
+ Returns the Mongo collection for this query.
+
     [$db] (\yii\mongodb\Connection) Mongo connection.
 
 
@@ -293,6 +295,8 @@ return (\yii\mongodb\Collection) Collection instance.
  select($fields)
 <
 return ($this) The query object itself.
+
+ Sets the list of fields of the results to return.
 
     [$fields] (array) Fields of the results to return.
 
@@ -303,6 +307,8 @@ return ($this) The query object itself.
 <
 return ($this) The query object itself.
 
+ Sets the collection to be selected from.
+
     [$collection] () 
 
 
@@ -311,6 +317,8 @@ return ($this) The query object itself.
  options($options)
 <
 return ($this) The query object itself
+
+ Sets the cursor options.
 
     [$options] (array) Cursor options in format: optionName => optionValue
 
@@ -321,6 +329,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds additional cursor options.
+
     [$options] (array) Cursor options in format: optionName => optionValue
 
 
@@ -329,6 +339,8 @@ return ($this) The query object itself
  andFilterCompare($name, $value, $defaultOperator=''='')
 <
 return ($this) The query object itself.
+
+ Helper method for easy querying on values containing some common operators.
 
  The comparison operator is intelligently determined based on the first few
  characters in the given value and internally translated to a MongoDB
@@ -357,6 +369,8 @@ return ($this) The query object itself.
 <
 return ($this) A prepared query instance.
 
+ Prepares for query building.
+
  This method is called before actual query composition, e.g. building cursor,
  count etc. You may override this method to do some final preparation work
  before query execution.
@@ -368,6 +382,8 @@ return ($this) A prepared query instance.
 <
 return (\MongoDB\Driver\Cursor) Mongo cursor instance.
 
+ Builds the MongoDB cursor for this query.
+
     [$db] (\yii\mongodb\Connection) The MongoDB connection used to execute the
     query.
 
@@ -377,6 +393,8 @@ return (\MongoDB\Driver\Cursor) Mongo cursor instance.
  fetchRows($cursor, $all='true', $indexBy='null')
 <
 return (array|bool) Result.
+
+ Fetches rows from the given Mongo cursor.
 
     [$cursor] (\MongoDB\Driver\Cursor) Mongo cursor instance to fetch data
     from.
@@ -402,6 +420,8 @@ return (array|bool) Result.
 <
 return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
 'Iterator' interface and can be traversed to retrieve the data in batches.
+
+ Starts a batch query.
 
  A batch query supports fetching data in batches, which can keep the memory
  usage under a limit. This method will return a 'BatchQueryResult' object
@@ -429,6 +449,8 @@ return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
 return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
 'Iterator' interface and can be traversed to retrieve the data in batches.
 
+ Starts a batch query and retrieves data row by row.
+
  This method is similar to 'batch()' except that in each iteration of the
  result, only one row of data is returned. For example,
 
@@ -450,6 +472,8 @@ return (\yii\mongodb\BatchQueryResult) The batch query result. It implements the
 return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
+ Executes the query and returns all results as an array.
+
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
     will be used.
@@ -460,6 +484,8 @@ will be returned.
  populate($rows)
 <
 return (array) The converted query result
+
+ Converts the raw query results into the format as specified by this query.
 
  This method is internally used to convert the data fetched from database into
  the format as required by this query.
@@ -474,6 +500,8 @@ return (array) The converted query result
 return (array|false) The first row (in terms of an array) of the query result.
 'false' is returned if the query results in nothing.
 
+ Executes the query and returns a single row of result.
+
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
     will be used.
@@ -485,6 +513,8 @@ return (array|false) The first row (in terms of an array) of the query result.
 <
 return (string|null|false) The value of the first column in the first row of the
 query result. 'false' is returned if the query result is empty.
+
+ Returns the query result as a scalar value.
 
  The value returned will be the first column in the first row of the query
  results. Column '_id' will be automatically excluded from select fields, if
@@ -502,6 +532,8 @@ query result. 'false' is returned if the query result is empty.
 return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
+ Executes the query and returns the first column of the result.
+
  Column '_id' will be automatically excluded from select fields, if 'select'
  is not empty and '_id' is not selected explicitly.
 
@@ -517,6 +549,8 @@ the query results in nothing.
 return (array|null) The original document, or the modified document when
 $options['new'] is set.
 
+ Performs 'findAndModify' query and returns a single row of result.
+
     [$update] (array) Update criteria
     [$options] (array) List of options in format: optionName => optionValue.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -528,6 +562,8 @@ $options['new'] is set.
  count($q=''*'', $db='null')
 <
 return (int) Number of records
+
+ Returns the number of records.
 
     [$q] (string) Kept to match 'QueryInterface', its value is ignored.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -541,6 +577,8 @@ return (int) Number of records
 <
 return (bool) Whether the query result contains any row of data.
 
+ Returns a value indicating whether the query result contains any row of data.
+
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If this parameter is not given, the 'mongodb' application component
     will be used.
@@ -551,6 +589,8 @@ return (bool) Whether the query result contains any row of data.
  sum($q, $db='null')
 <
 return (int) The sum of the specified column values
+
+ Returns the sum of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -565,6 +605,8 @@ return (int) The sum of the specified column values
 <
 return (int) The average of the specified column values.
 
+ Returns the average of the specified column values.
+
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
@@ -577,6 +619,8 @@ return (int) The average of the specified column values.
  min($q, $db='null')
 <
 return (int) The minimum of the specified column values.
+
+ Returns the minimum of the specified column values.
 
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
@@ -591,6 +635,8 @@ return (int) The minimum of the specified column values.
 <
 return (int) The maximum of the specified column values.
 
+ Returns the maximum of the specified column values.
+
     [$q] (string) The column name. Make sure you properly quote column names
     in the expression.
     [$db] (\yii\mongodb\Connection) The MongoDB connection used to execute the
@@ -604,6 +650,8 @@ return (int) The maximum of the specified column values.
 <
 return (int) Aggregation result.
 
+ Performs the aggregation for the given column.
+
     [$column] (string) Column name.
     [$operator] (string) Aggregation operator.
     [$db] (\yii\mongodb\Connection) The database connection used to execute
@@ -615,6 +663,8 @@ return (int) Aggregation result.
  distinct($q, $db='null')
 <
 return (array) Array of distinct values
+
+ Returns a list of distinct values for the given column across a collection.
 
     [$q] (string) Column to use.
     [$db] (\yii\mongodb\Connection) The MongoDB connection used to execute the

@@ -189,6 +189,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -323,6 +325,8 @@ return (void)
 <
 return (void)
 
+ Validates a single attribute.
+
 
 
  Child classes must implement this method to provide the actual validation
@@ -346,6 +350,8 @@ return (void)
 return (array|null) The error message and the parameters to be inserted into the
 error message. Null should be returned if the data is valid.
 
+ Validates a value.
+
 
 
  A validator class can implement this method to support data validation out of
@@ -362,6 +368,8 @@ error message. Null should be returned if the data is valid.
 <
 return (string|null) The client-side validation script. Null if the validator does
 not support client-side validation.
+
+ Returns the JavaScript needed for performing client-side validation.
 
 
 
@@ -412,6 +420,8 @@ not support client-side validation.
 <
 return (array) The client-side validation options
 
+ Returns the client-side validation options.
+
 
 
  This method is usually called from 'clientValidateAttribute()'. You may
@@ -439,6 +449,8 @@ return (array) The client-side validation options
  isEmpty($value, $trim='false')
 <
 return (bool) Whether the value is empty
+
+ Checks if the given value is empty.
 
 
 
@@ -468,6 +480,8 @@ return (bool) Whether the value is empty
 <
 return (int) The size limit for uploaded files.
 
+ Returns the maximum size allowed for uploaded files.
+
  This is determined based on four factors:
 
 
@@ -483,6 +497,9 @@ return (int) The size limit for uploaded files.
 <
 return (bool) 
 
+ Checks if given uploaded file have correct type (extension) according current
+ validator settings.
+
     [$file] (\yii\web\UploadedFile) 
 
 
@@ -491,6 +508,9 @@ return (bool)
  validateMimeType($file)
 <
 return (bool) Whether the $file mimeType is allowed
+
+ Checks the mimeType of the $file against the list in the 'mimeTypes'
+ property.
 
     [$file] (\yii\web\UploadedFile) 
 

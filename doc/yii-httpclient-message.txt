@@ -153,6 +153,8 @@ METHOD DETAILS
 <
 return ($this) Self reference.
 
+ Sets the HTTP headers associated with HTTP message.
+
     [$headers] (array|\yii\web\HeaderCollection) Headers collection or headers
     list in format: [headerName => headerValue]
 
@@ -163,6 +165,8 @@ return ($this) Self reference.
 <
 return (\yii\web\HeaderCollection) The header collection
 
+ Returns the header collection.
+
  The header collection contains the HTTP headers associated with HTTP message.
 
 
@@ -171,6 +175,8 @@ return (\yii\web\HeaderCollection) The header collection
  addHeaders($headers)
 <
 return ($this) Self reference.
+
+ Adds more headers to the already defined ones.
 
     [$headers] (array) Additional headers in format: [headerName =>
     headerValue]
@@ -182,6 +188,8 @@ return ($this) Self reference.
 <
 return (bool) Whether message contains any header.
 
+ Checks of HTTP message contains any header.
+
  Using this method you are able to check cookie presence without instantiating
  'HeaderCollection'.
 
@@ -191,6 +199,8 @@ return (bool) Whether message contains any header.
  setCookies($cookies)
 <
 return ($this) Self reference.
+
+ Sets the cookies associated with HTTP message.
 
     [$cookies] (\yii\web\CookieCollection|\yii\web\Cookie[]|array) Cookie
     collection or cookies list.
@@ -202,6 +212,8 @@ return ($this) Self reference.
 <
 return (\yii\web\CookieCollection|\yii\web\Cookie[]) The cookie collection.
 
+ Returns the cookie collection.
+
  The cookie collection contains the cookies associated with HTTP message.
 
 
@@ -211,6 +223,8 @@ return (\yii\web\CookieCollection|\yii\web\Cookie[]) The cookie collection.
 <
 return ($this) Self reference.
 
+ Adds more cookies to the already defined ones.
+
     [$cookies] (\yii\web\Cookie[]|array) Additional cookies.
 
 
@@ -219,6 +233,8 @@ return ($this) Self reference.
  hasCookies()
 <
 return (bool) Whether message contains any cookie.
+
+ Checks of HTTP message contains any cookie.
 
  Using this method you are able to check cookie presence without instantiating
  'CookieCollection'.
@@ -230,6 +246,8 @@ return (bool) Whether message contains any cookie.
 <
 return ($this) Self reference.
 
+ Sets the HTTP message raw content.
+
     [$content] (string) Raw content.
 
 
@@ -239,6 +257,7 @@ return ($this) Self reference.
 <
 return (string) Raw body.
 
+ Returns HTTP message raw content.
 
 
 *yii/httpclient/Message::setData*				public
@@ -246,6 +265,8 @@ return (string) Raw body.
  setData($data)
 <
 return ($this) Self reference.
+
+ Sets the data fields, which composes message content.
 
     [$data] (mixed) Content data fields.
 
@@ -256,6 +277,7 @@ return ($this) Self reference.
 <
 return (mixed) Content data fields.
 
+ Returns the data fields, parsed from raw content.
 
 
 *yii/httpclient/Message::addData*				public
@@ -263,6 +285,8 @@ return (mixed) Content data fields.
  addData($data)
 <
 return ($this) Self reference.
+
+ Adds data fields to the existing ones.
 
     [$data] (array) Additional content data fields.
 
@@ -273,6 +297,8 @@ return ($this) Self reference.
 <
 return ($this) Self reference.
 
+ Sets body format.
+
     [$format] (string) Body format name.
 
 
@@ -282,6 +308,7 @@ return ($this) Self reference.
 <
 return (string) Body format name.
 
+ Returns body format.
 
 
 *yii/httpclient/Message::defaultFormat*			protected
@@ -290,6 +317,7 @@ return (string) Body format name.
 <
 return (string) Default format name.
 
+ Returns default format name.
 
 
 *yii/httpclient/Message::composeHeaderLines*		public
@@ -297,6 +325,8 @@ return (string) Default format name.
  composeHeaderLines()
 <
 return (array) Raw header lines.
+
+ Composes raw header lines from 'headers'.
 
  Each line will be a string in format: 'header-name: value'.
 
@@ -307,6 +337,7 @@ return (array) Raw header lines.
 <
 return (string) The string representation of this HTTP message.
 
+ Returns string representation of this HTTP message.
 
 
 *yii/httpclient/Message::__toString*			public
@@ -315,6 +346,7 @@ return (string) The string representation of this HTTP message.
 <
 return (string) The string representation of this object.
 
+ PHP magic method that returns the string representation of this object.
 
 
 

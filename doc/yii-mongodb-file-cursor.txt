@@ -22,6 +22,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$collection] (\yii\mongodb\file\Collection) 
     [$cursor] (\MongoDB\Driver\Cursor) 
 
@@ -32,6 +34,8 @@ return (void)
 <
 return (mixed) Current row
 
+ Return the current element This method is required by the interface
+ '\Iterator'.
 
 
 *yii/mongodb/file/Cursor::count*				public
@@ -39,6 +43,8 @@ return (mixed) Current row
  count()
 <
 return (int) Elements count.
+
+ Count elements of this cursor.
 
  This method is required by the interface '\Countable'.
 
@@ -49,6 +55,7 @@ return (int) Elements count.
 <
 return (array) Containing all results for this cursor.
 
+ Returns an array containing all results for this cursor
 
 
 *yii/mongodb/file/Cursor::getId*				public
@@ -57,6 +64,7 @@ return (array) Containing all results for this cursor.
 <
 return (\MongoDB\Driver\CursorId) Cursor ID.
 
+ Returns the ID for this cursor.
 
 
 *yii/mongodb/file/Cursor::setTypeMap*			public
@@ -64,6 +72,8 @@ return (\MongoDB\Driver\CursorId) Cursor ID.
  setTypeMap($typemap)
 <
 return (void)
+
+ Sets a type map to use for BSON unserialization.
 
     [$typemap] (array) Type map.
 
@@ -73,6 +83,9 @@ return (void)
  __call($name, $arguments)
 <
 return (mixed) Method result.
+
+ PHP magic method, which is invoked on attempt of invocation not existing
+ method.
 
  It redirects method call to inner iterator.
 
@@ -86,6 +99,9 @@ return (mixed) Method result.
 <
 return (void)
 
+ PHP magic method, which is invoked on attempt of setting not existing
+ property.
+
  It passes value to the inner iterator.
 
     [$name] (string) Field name.
@@ -98,6 +114,9 @@ return (void)
 <
 return (mixed) Field value.
 
+ PHP magic method, which is invoked on attempt of getting not existing
+ property.
+
  It returns value from the inner iterator.
 
     [$name] (string) Field name.
@@ -109,6 +128,9 @@ return (mixed) Field value.
 <
 return (bool) Whether field exists or not.
 
+ PHP magic method, which is invoked on attempt of checking if a property is
+ set.
+
     [$name] (string) Field name.
 
 
@@ -117,6 +139,8 @@ return (bool) Whether field exists or not.
  __unset($name)
 <
 return (void)
+
+ PHP magic method, which is invoked on attempt of unsetting of property.
 
     [$name] (string) Field name.
 

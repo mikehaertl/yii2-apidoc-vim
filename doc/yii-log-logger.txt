@@ -84,6 +84,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the logger by registering 'flush()' as a shutdown function.
 
 
 *yii/log/Logger::__get*					public
@@ -202,6 +203,8 @@ return (void)
 <
 return (void)
 
+ Logs a message with the given type and category.
+
  If 'traceLevel' is greater than 0, additional call stack information about
  the application code will be logged as well.
 
@@ -221,6 +224,8 @@ return (void)
 <
 return (void)
 
+ Flushes log messages from memory to targets.
+
     [$final] (bool) Whether this is a final call during a request.
 
 
@@ -229,6 +234,8 @@ return (void)
  getElapsedTime()
 <
 return (float) The total elapsed time in seconds for current request.
+
+ Returns the total elapsed time since the start of the current request.
 
  This method calculates the difference between now and the timestamp defined
  by constant 'YII_BEGIN_TIME' which is evaluated at the beginning of
@@ -243,6 +250,8 @@ return (array) The profiling results. Each element is an array consisting of the
 elements: 'info', 'category', 'timestamp', 'trace', 'level', 'duration',
 'memory', 'memoryDiff'. The 'memory' and 'memoryDiff' values are available
 since version 2.0.11.
+
+ Returns the profiling results.
 
  By default, all profiling results will be returned. You may provide
  '$categories' and '$excludeCategories' as parameters to retrieve the results
@@ -262,6 +271,8 @@ since version 2.0.11.
 return (array) The first element indicates the number of SQL statements executed, and
 the second element the total time spent in SQL execution.
 
+ Returns the statistical results of DB queries.
+
  The results returned include the number of SQL statements executed and the
  total time spent.
 
@@ -275,6 +286,8 @@ return (array) Timings. Each element is an array consisting of these elements:
 'memoryDiff'. The 'memory' and 'memoryDiff' values are available since version
 2.0.11.
 
+ Calculates the elapsed time for the given log messages.
+
     [$messages] (array) The log messages obtained from profiling
 
 
@@ -283,6 +296,8 @@ return (array) Timings. Each element is an array consisting of these elements:
  getLevelName($level)
 <
 return (string) The text display of the level
+
+ Returns the text display of the specified level.
 
     [$level] (int) The message level, e.g. 'LEVEL_ERROR', 'LEVEL_WARNING'.
 

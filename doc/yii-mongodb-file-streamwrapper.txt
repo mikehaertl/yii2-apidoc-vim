@@ -116,6 +116,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Registers this steam wrapper.
+
     [$protocol] (string) Name of the protocol to be used.
     [$force] (bool) Whether to register wrapper, even if protocol is already
     taken.
@@ -127,6 +129,7 @@ return (void)
 <
 return (array) Context options.
 
+ Returns options associated with 'context'.
 
 
 *yii/mongodb/file/StreamWrapper::stream_close*		public
@@ -134,6 +137,8 @@ return (array) Context options.
  stream_close()
 <
 return (void)
+
+ Closes a resource.
 
  This method is called in response to 'fclose()'.
 
@@ -145,6 +150,8 @@ return (void)
 return (bool) 'true' if the read/write position is at the end of the stream and if no
 more data is available to be read, or 'false' otherwise.
 
+ Tests for end-of-file on a file pointer.
+
  This method is called in response to 'feof()'.
 
 
@@ -153,6 +160,8 @@ more data is available to be read, or 'false' otherwise.
  stream_open($path, $mode, $options, $openedPath)
 <
 return (bool) Whether operation is successful.
+
+ Opens file.
 
  This method is called immediately after the wrapper is initialized (f.e. by
  'fopen()' and 'file_get_contents()').
@@ -171,6 +180,8 @@ return (bool) Whether operation is successful.
 return (string|false) If there are less than count bytes available, return as many as
 are available. If no more data is available, return 'false'.
 
+ Reads from stream.
+
  This method is called in response to 'fread()' and 'fgets()'.
 
     [$count] (int) Count of bytes of data from the current position should be
@@ -183,6 +194,8 @@ are available. If no more data is available, return 'false'.
 <
 return (int) The number of bytes that were successfully stored.
 
+ Writes to stream.
+
  This method is called in response to 'fwrite()'.
 
     [$data] (string) String to be stored into the underlying stream.
@@ -194,6 +207,8 @@ return (int) The number of bytes that were successfully stored.
 <
 return (bool) Whether cached data was successfully stored.
 
+ This method is called in response to 'fflush()' and when the stream is being
+ closed while any unflushed data has been written to it before.
 
 
 *yii/mongodb/file/StreamWrapper::stream_stat*		public
@@ -201,6 +216,8 @@ return (bool) Whether cached data was successfully stored.
  stream_stat()
 <
 return (array) File statistic information.
+
+ Retrieve information about a file resource.
 
  This method is called in response to 'stat()'.
 
@@ -210,6 +227,8 @@ return (array) File statistic information.
  stream_seek($offset, $whence=SEEK_SET)
 <
 return (bool) Return true if the position was updated, false otherwise.
+
+ Seeks to specific location in a stream.
 
  This method is called in response to 'fseek()'.
 
@@ -227,6 +246,8 @@ return (bool) Return true if the position was updated, false otherwise.
  stream_tell()
 <
 return (int) Should return the current position of the stream.
+
+ Retrieve the current position of a stream.
 
  This method is called in response to 'fseek()' to determine the current
  position.

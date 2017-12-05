@@ -108,6 +108,7 @@ METHOD DETAILS
 <
 return (string) SQL code.
 
+ Returns the SQL code representing the token.
 
 
 *yii/db/SqlToken::offsetExists*				public
@@ -115,6 +116,8 @@ return (string) SQL code.
  offsetExists($offset)
 <
 return (bool) Whether the token exists.
+
+ Returns whether there is a child token at the specified offset.
 
  This method is required by the SPL '\ArrayAccess' interface. It is implicitly
  called when you use something like 'isset($token[$offset])'.
@@ -129,6 +132,8 @@ return (bool) Whether the token exists.
 return (\yii\db\SqlToken|null) The child token at the specified offset, 'null' if
 there's no token.
 
+ Returns a child token at the specified offset.
+
  This method is required by the SPL '\ArrayAccess' interface. It is implicitly
  called when you use something like '$child = $token[$offset];'.
 
@@ -140,6 +145,8 @@ there's no token.
  offsetSet($offset, $token)
 <
 return (void)
+
+ Adds a child token to the token.
 
  This method is required by the SPL '\ArrayAccess' interface. It is implicitly
  called when you use something like '$token[$offset] = $child;'.
@@ -154,6 +161,8 @@ return (void)
 <
 return (void)
 
+ Removes a child token at the specified offset.
+
  This method is required by the SPL '\ArrayAccess' interface. It is implicitly
  called when you use something like 'unset($token[$offset])'.
 
@@ -166,6 +175,7 @@ return (void)
 <
 return (\yii\db\SqlToken[]) Child tokens.
 
+ Returns child tokens.
 
 
 *yii/db/SqlToken::setChildren*				public
@@ -173,6 +183,8 @@ return (\yii\db\SqlToken[]) Child tokens.
  setChildren($children)
 <
 return (void)
+
+ Sets a list of child tokens.
 
     [$children] (\yii\db\SqlToken[]) Child tokens.
 
@@ -183,6 +195,7 @@ return (void)
 <
 return (bool) Whether the token represents a collection of tokens.
 
+ Returns whether the token represents a collection of tokens.
 
 
 *yii/db/SqlToken::getHasChildren*				public
@@ -191,6 +204,8 @@ return (bool) Whether the token represents a collection of tokens.
 <
 return (bool) Whether the token has children.
 
+ Returns whether the token represents a collection of tokens and has non-zero
+ number of children.
 
 
 *yii/db/SqlToken::getSql*					public
@@ -199,6 +214,7 @@ return (bool) Whether the token has children.
 <
 return (string) SQL code.
 
+ Returns the SQL code representing the token.
 
 
 *yii/db/SqlToken::matches*				public
@@ -206,6 +222,9 @@ return (string) SQL code.
  matches($patternToken, $offset=0, $firstMatchIndex='null', $lastMatchIndex='null')
 <
 return (bool) Whether this token matches the pattern SQL code.
+
+ Returns whether this token (including its children) matches the specified
+ "pattern" SQL code.
 
  Usage Example:
 

@@ -53,6 +53,8 @@ return (\yii\web\IdentityInterface) The identity object that matches the given I
 Null should be returned if such an identity cannot be found or the identity is
 not in an active state (disabled, deleted, etc.)
 
+ Finds an identity by the given ID.
+
     [$id] (string|int) The ID to be looked for
 
 
@@ -63,6 +65,8 @@ not in an active state (disabled, deleted, etc.)
 return (\yii\web\IdentityInterface) The identity object that matches the given token.
 Null should be returned if such an identity cannot be found or the identity is
 not in an active state (disabled, deleted, etc.)
+
+ Finds an identity by the given token.
 
     [$token] (mixed) The token to be looked for
     [$type] (mixed) The type of the token. The value of this parameter depends
@@ -76,6 +80,7 @@ not in an active state (disabled, deleted, etc.)
 <
 return (string|int) An ID that uniquely identifies a user identity.
 
+ Returns an ID that can uniquely identify a user identity.
 
 
 *yii/web/IdentityInterface::getAuthKey*			public
@@ -83,6 +88,8 @@ return (string|int) An ID that uniquely identifies a user identity.
  getAuthKey()
 <
 return (string) A key that is used to check the validity of a given identity ID.
+
+ Returns a key that can be used to check the validity of a given identity ID.
 
  The key should be unique for each individual user, and should be persistent
  so that it can be used to check the validity of the user identity.
@@ -98,6 +105,8 @@ return (string) A key that is used to check the validity of a given identity ID.
  validateAuthKey($authKey)
 <
 return (bool) Whether the given auth key is valid.
+
+ Validates the given auth key.
 
  This is required if 'User::enableAutoLogin' is enabled.
 

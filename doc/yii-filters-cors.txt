@@ -185,6 +185,10 @@ METHOD DETAILS
 <
 return (bool) Whether the action should continue to be executed.
 
+ This method is invoked right before an action is to be executed (after all
+ possible filters.) You may override this method to do last-minute preparation
+ for the action.
+
 
 
 
@@ -215,6 +219,8 @@ return (bool) Whether the action should continue to be executed.
 <
 return (void)
 
+ Override settings for specific action.
+
     [$action] (\yii\base\Action) The action settings to override
 
 
@@ -224,6 +230,7 @@ return (void)
 <
 return (array) CORS headers to handle
 
+ Extract CORS headers from the request.
 
 
 *yii/filters/Cors::prepareHeaders*			public
@@ -231,6 +238,8 @@ return (array) CORS headers to handle
  prepareHeaders($requestHeaders)
 <
 return (array) CORS headers ready to be sent
+
+ For each CORS headers create the specific response.
 
     [$requestHeaders] (array) CORS headers we have detected
 
@@ -240,6 +249,8 @@ return (array) CORS headers ready to be sent
  prepareAllowHeaders($type, $requestHeaders, $responseHeaders)
 <
 return (void)
+
+ Handle classic CORS request to avoid duplicate code.
 
     [$type] (string) The kind of headers we would handle
     [$requestHeaders] (array) CORS headers request by client
@@ -252,6 +263,8 @@ return (void)
 <
 return (void)
 
+ Adds the CORS headers to the response.
+
     [$response] (\yii\web\Response) 
     [$headers] (array) CORS headers which have been computed
 
@@ -261,6 +274,8 @@ return (void)
  headerize($string)
 <
 return (string) The result in "header" format
+
+ Convert any string (including php headers with HTTP prefix) to header format.
 
  Example:  
    - X-PINGOTHER -> X-Pingother  
@@ -274,6 +289,8 @@ return (string) The result in "header" format
  headerizeToPhp($string)
 <
 return (string) The result in "php $_SERVER header" format
+
+ Convert any string (including php headers with HTTP prefix) to header format.
 
  Example:  
    - X-Pingother -> HTTP_X_PINGOTHER  

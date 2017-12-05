@@ -78,6 +78,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -241,6 +243,8 @@ return (string) Content that is displayed in debugger detail view
 <
 return (mixed) Data to be saved
 
+ Saves data to be later used in debugger detail view.
+
 
 
  This method is called on every page where debugger is enabled.
@@ -284,6 +288,8 @@ return (mixed) Data to be saved
 <
 return (bool) 
 
+ Is the panel enabled?
+
 
 
 
@@ -306,6 +312,7 @@ return (string) Short name of the panel, which will be use in summary.
 return (array) Timings [token, category, timestamp, traces, nesting level, elapsed
 time]
 
+ Calculates given request profile timings.
 
 
 *yii/debug/panels/DbPanel::getProfileLogs*		public
@@ -314,6 +321,8 @@ time]
 <
 return (array) 
 
+ Returns all profile logs of the current request for this panel. It includes
+ categories such as: 'yii\db\Command::query', 'yii\db\Command::execute'.
 
 
 *yii/debug/panels/DbPanel::getTotalQueryTime*		protected
@@ -321,6 +330,8 @@ return (array)
  getTotalQueryTime($timings)
 <
 return (int) Total time
+
+ Returns total query time.
 
     [$timings] (array) 
 
@@ -331,6 +342,8 @@ return (int) Total time
 <
 return (array) Models
 
+ Returns an  array of models that represents logs of the current request.
+
  Can be used with data providers such as \yii\data\ArrayDataProvider.
 
 
@@ -339,6 +352,8 @@ return (array) Models
  getQueryType($timing)
 <
 return (string) Query type such as select, insert, delete, etc.
+
+ Returns database query type.
 
     [$timing] (string) Timing procedure string
 
@@ -349,6 +364,8 @@ return (string) Query type such as select, insert, delete, etc.
 <
 return (bool) 
 
+ Check if given queries count is critical according settings.
+
     [$count] (int) Queries count
 
 
@@ -358,6 +375,7 @@ return (bool)
 <
 return (array) 
 
+ Returns array query types
 
 
 *yii/debug/panels/DbPanel::hasExplain*			protected
@@ -374,6 +392,8 @@ return (bool) Whether the DB component has support for EXPLAIN queries
 <
 return (bool) 
 
+ Check if given query type can be explained.
+
     [$type] (string) Query type
 
 
@@ -383,6 +403,7 @@ return (bool)
 <
 return (\yii\db\Connection) 
 
+ Returns a reference to the DB component associated with the panel
 
 
 

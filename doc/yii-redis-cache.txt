@@ -95,6 +95,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the redis Cache component.
+
  This method will initialize the 'redis' property to make sure it refers to a
  valid redis connection.
 
@@ -226,6 +228,8 @@ return (void)
 return (bool) True if a value exists in cache, false if the value is not in the cache
 or expired.
 
+ Checks whether a specified key exists in the cache.
+
  This can be faster than getting the value from the cache if the data is big.
  Note that this method does not check whether the dependency associated with
  the cached data, if there is any, has changed. So a call to 'get' may return
@@ -294,6 +298,8 @@ return (mixed|false) The value stored in cache, false if the value is not in the
 cache or expired. Most often value is a string. If you have disabled
 'serializer', it could be something else.
 
+ Retrieves a value from cache with a specified key.
+
 
 
  This method should be implemented by child classes to retrieve the data from
@@ -309,6 +315,8 @@ cache or expired. Most often value is a string. If you have disabled
  setValue($key, $value, $expire)
 <
 return (bool) True if the value is successfully stored into cache, false otherwise
+
+ Stores a value identified by a key in cache.
 
 
 
@@ -329,6 +337,9 @@ return (bool) True if the value is successfully stored into cache, false otherwi
 <
 return (bool) True if the value is successfully stored into cache, false otherwise
 
+ Stores a value identified by a key into cache if the cache does not contain
+ this key.
+
 
 
  This method should be implemented by child classes to store the data in
@@ -348,6 +359,9 @@ return (bool) True if the value is successfully stored into cache, false otherwi
 <
 return (bool) If no error happens during deletion
 
+ Deletes a value with the specified key from cache This method should be
+ implemented by child classes to delete the data from actual cache storage.
+
 
 
 
@@ -363,6 +377,8 @@ return (bool) If no error happens during deletion
 <
 return (bool) Whether the flush operation was successful.
 
+ Deletes all values from cache.
+
 
 
  Child classes may implement this method to realize the flush operation.
@@ -375,6 +391,8 @@ return (bool) Whether the flush operation was successful.
  getValues($keys)
 <
 return (array) A list of cached values indexed by the keys
+
+ Retrieves multiple values from cache with the specified keys.
 
 
 
@@ -392,6 +410,8 @@ return (array) A list of cached values indexed by the keys
  setValues($data, $expire)
 <
 return (array) Array of failed keys
+
+ Stores multiple key-value pairs in cache.
 
 
 

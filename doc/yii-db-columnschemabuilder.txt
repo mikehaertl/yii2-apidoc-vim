@@ -96,6 +96,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Create a column schema builder instance giving the type and value precision.
+
     [$type] (string) Type of the column. See '$type'.
     [$length] (int|string|array) Length or precision of the column. See
     '$length'.
@@ -160,6 +162,7 @@ return (void)
 <
 return ($this) 
 
+ Adds a 'NOT NULL' constraint to the column.
 
 
 *yii/db/ColumnSchemaBuilder::null*			public
@@ -168,6 +171,7 @@ return ($this)
 <
 return ($this) 
 
+ Adds a 'NULL' constraint to the column.
 
 
 *yii/db/ColumnSchemaBuilder::unique*			public
@@ -176,6 +180,7 @@ return ($this)
 <
 return ($this) 
 
+ Adds a 'UNIQUE' constraint to the column.
 
 
 *yii/db/ColumnSchemaBuilder::check*			public
@@ -183,6 +188,8 @@ return ($this)
  check($check)
 <
 return ($this) 
+
+ Sets a 'CHECK' constraint for the column.
 
     [$check] (string) The SQL of the 'CHECK' constraint to be added.
 
@@ -193,6 +200,8 @@ return ($this)
 <
 return ($this) 
 
+ Specify the default value for the column.
+
     [$default] (mixed) The default value.
 
 
@@ -201,6 +210,8 @@ return ($this)
  comment($comment)
 <
 return ($this) 
+
+ Specifies the comment for column.
 
     [$comment] (string) The comment
 
@@ -211,6 +222,7 @@ return ($this)
 <
 return ($this) 
 
+ Marks column as unsigned.
 
 
 *yii/db/ColumnSchemaBuilder::after*			public
@@ -218,6 +230,8 @@ return ($this)
  after($after)
 <
 return ($this) 
+
+ Adds an 'AFTER' constraint to the column.
 
  Note: MySQL, Oracle and Cubrid support only.
 
@@ -230,6 +244,8 @@ return ($this)
 <
 return ($this) 
 
+ Adds an 'FIRST' constraint to the column.
+
  Note: MySQL, Oracle and Cubrid support only.
 
 
@@ -239,6 +255,8 @@ return ($this)
 <
 return ($this) 
 
+ Specify the default SQL expression for the column.
+
     [$default] (string) The default value expression.
 
 
@@ -247,6 +265,8 @@ return ($this)
  append($sql)
 <
 return ($this) 
+
+ Specify additional SQL to be appended to column definition.
 
  Position modifiers will be appended after column definition in databases that
  support them.
@@ -260,6 +280,7 @@ return ($this)
 <
 return (string) 
 
+ Builds the full string for the column's schema.
 
 
 *yii/db/ColumnSchemaBuilder::buildLengthString*		protected
@@ -268,6 +289,7 @@ return (string)
 <
 return (string) 
 
+ Builds the length/precision part of the column.
 
 
 *yii/db/ColumnSchemaBuilder::buildNotNullString*		protected
@@ -277,6 +299,7 @@ return (string)
 return (string) Returns 'NOT NULL' if 'isNotNull' is true, 'NULL' if 'isNotNull' is
 false or an empty string otherwise.
 
+ Builds the not null constraint for the column.
 
 
 *yii/db/ColumnSchemaBuilder::buildUniqueString*		protected
@@ -286,6 +309,7 @@ false or an empty string otherwise.
 return (string) Returns string 'UNIQUE' if 'isUnique' is true, otherwise it returns
 an empty string.
 
+ Builds the unique constraint for the column.
 
 
 *yii/db/ColumnSchemaBuilder::buildDefaultString*		protected
@@ -294,6 +318,7 @@ an empty string.
 <
 return (string) String with default value of column.
 
+ Builds the default value specification for the column.
 
 
 *yii/db/ColumnSchemaBuilder::buildCheckString*		protected
@@ -302,6 +327,7 @@ return (string) String with default value of column.
 <
 return (string) A string containing the CHECK constraint.
 
+ Builds the check constraint for the column.
 
 
 *yii/db/ColumnSchemaBuilder::buildUnsignedString*		protected
@@ -310,6 +336,7 @@ return (string) A string containing the CHECK constraint.
 <
 return (string) A string containing UNSIGNED keyword.
 
+ Builds the unsigned string for column. Defaults to unsupported.
 
 
 *yii/db/ColumnSchemaBuilder::buildAfterString*		protected
@@ -318,6 +345,7 @@ return (string) A string containing UNSIGNED keyword.
 <
 return (string) A string containing the AFTER constraint.
 
+ Builds the after constraint for the column. Defaults to unsupported.
 
 
 *yii/db/ColumnSchemaBuilder::buildFirstString*		protected
@@ -326,6 +354,7 @@ return (string) A string containing the AFTER constraint.
 <
 return (string) A string containing the FIRST constraint.
 
+ Builds the first constraint for the column. Defaults to unsupported.
 
 
 *yii/db/ColumnSchemaBuilder::buildAppendString*		protected
@@ -334,6 +363,7 @@ return (string) A string containing the FIRST constraint.
 <
 return (string) Custom string to append.
 
+ Builds the custom string that's appended to column definition.
 
 
 *yii/db/ColumnSchemaBuilder::getTypeCategory*		protected
@@ -342,6 +372,7 @@ return (string) Custom string to append.
 <
 return (string) A string containing the column type category name.
 
+ Returns the category of the column type.
 
 
 *yii/db/ColumnSchemaBuilder::buildCommentString*		protected
@@ -350,6 +381,7 @@ return (string) A string containing the column type category name.
 <
 return (string) A string containing the COMMENT keyword and the comment itself
 
+ Builds the comment specification for the column.
 
 
 *yii/db/ColumnSchemaBuilder::buildCompleteString*		protected
@@ -357,6 +389,8 @@ return (string) A string containing the COMMENT keyword and the comment itself
  buildCompleteString($format)
 <
 return (string) A string containing the complete column definition.
+
+ Returns the complete column definition from input format.
 
     [$format] (string) The format of the definition.
 

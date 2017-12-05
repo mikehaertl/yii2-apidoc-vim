@@ -157,6 +157,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties. Note that the configuration must contain both 'id' and
     'basePath'.
@@ -167,6 +169,8 @@ return (void)
  init()
 <
 return (void)
+
+ Initializes the module.
 
 
 
@@ -336,6 +340,9 @@ return (void)
 <
 return (string) The unique ID of the module.
 
+ Returns an ID that uniquely identifies this module among all modules within
+ the current application.
+
  Since this is an application instance, it will always return an empty string.
 
 
@@ -349,6 +356,8 @@ return (string) The unique ID of the module.
  setBasePath($path)
 <
 return (void)
+
+ Sets the root directory of the application and the @app alias.
 
  This method can only be invoked at the beginning of the constructor.
 
@@ -456,6 +465,8 @@ return (void)
 <
 return (void)
 
+ Pre-initializes the application.
+
  This method is called at the beginning of the application constructor. It
  initializes several important application properties. If you override this
  method, please make sure you call the parent implementation.
@@ -469,6 +480,8 @@ return (void)
 <
 return (void)
 
+ Initializes extensions and executes bootstrap components.
+
  This method is called by 'init()' after the application has been fully
  configured. If you override this method, make sure you also call the parent
  implementation.
@@ -480,6 +493,8 @@ return (void)
 <
 return (void)
 
+ Registers the errorHandler component as a PHP error handler.
+
     [$config] (array) Application config
 
 
@@ -489,6 +504,8 @@ return (void)
 <
 return (int) The exit status (0 means normal, non-zero values mean abnormal)
 
+ Runs the application.
+
  This is the main entrance of an application.
 
 
@@ -497,6 +514,8 @@ return (int) The exit status (0 means normal, non-zero values mean abnormal)
  handleRequest($request)
 <
 return (\yii\base\Response) The resulting response
+
+ Handles the specified request.
 
  This method should return an instance of 'Response' or its child class which
  represents the handling result of the request.
@@ -511,6 +530,7 @@ return (\yii\base\Response) The resulting response
 return (string) The directory that stores runtime files. Defaults to the "runtime"
 subdirectory under 'basePath'.
 
+ Returns the directory that stores runtime files.
 
 
 *yii/base/Application::setRuntimePath*			public
@@ -518,6 +538,8 @@ subdirectory under 'basePath'.
  setRuntimePath($path)
 <
 return (void)
+
+ Sets the directory that stores runtime files.
 
     [$path] (string) The directory that stores runtime files.
 
@@ -529,6 +551,7 @@ return (void)
 return (string) The directory that stores vendor files. Defaults to "vendor"
 directory under 'basePath'.
 
+ Returns the directory that stores vendor files.
 
 
 *yii/base/Application::setVendorPath*			public
@@ -536,6 +559,8 @@ directory under 'basePath'.
  setVendorPath($path)
 <
 return (void)
+
+ Sets the directory that stores vendor files.
 
     [$path] (string) The directory that stores vendor files.
 
@@ -545,6 +570,8 @@ return (void)
  getTimeZone()
 <
 return (string) The time zone used by this application.
+
+ Returns the time zone used by this application.
 
  This is a simple wrapper of PHP function date_default_timezone_get(). If time
  zone is not configured in php.ini or application config, it will be set to
@@ -556,6 +583,8 @@ return (string) The time zone used by this application.
  setTimeZone($value)
 <
 return (void)
+
+ Sets the time zone used by this application.
 
  This is a simple wrapper of PHP function date_default_timezone_set(). Refer
  to the [php manual](http://www.php.net/manual/en/timezones.php) for available
@@ -570,6 +599,7 @@ return (void)
 <
 return (\yii\db\Connection) The database connection.
 
+ Returns the database connection component.
 
 
 *yii/base/Application::getLog*				public
@@ -578,6 +608,7 @@ return (\yii\db\Connection) The database connection.
 <
 return (\yii\log\Dispatcher) The log dispatcher application component.
 
+ Returns the log dispatcher component.
 
 
 *yii/base/Application::getErrorHandler*			public
@@ -587,6 +618,7 @@ return (\yii\log\Dispatcher) The log dispatcher application component.
 return (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
 application component.
 
+ Returns the error handler component.
 
 
 *yii/base/Application::getCache*				public
@@ -596,6 +628,7 @@ application component.
 return (\yii\caching\CacheInterface) The cache application component. Null if the
 component is not enabled.
 
+ Returns the cache component.
 
 
 *yii/base/Application::getFormatter*			public
@@ -604,6 +637,7 @@ component is not enabled.
 <
 return (\yii\i18n\Formatter) The formatter application component.
 
+ Returns the formatter component.
 
 
 *yii/base/Application::getRequest*			public
@@ -612,6 +646,7 @@ return (\yii\i18n\Formatter) The formatter application component.
 <
 return (\yii\web\Request|\yii\console\Request) The request component.
 
+ Returns the request component.
 
 
 *yii/base/Application::getResponse*			public
@@ -620,6 +655,7 @@ return (\yii\web\Request|\yii\console\Request) The request component.
 <
 return (\yii\web\Response|\yii\console\Response) The response component.
 
+ Returns the response component.
 
 
 *yii/base/Application::getView*				public
@@ -629,6 +665,7 @@ return (\yii\web\Response|\yii\console\Response) The response component.
 return (\yii\base\View|\yii\web\View) The view application component that is used to
 render various view files.
 
+ Returns the view object.
 
 
 *yii/base/Application::getUrlManager*			public
@@ -637,6 +674,7 @@ render various view files.
 <
 return (\yii\web\UrlManager) The URL manager for this application.
 
+ Returns the URL manager for this application.
 
 
 *yii/base/Application::getI18n*				public
@@ -645,6 +683,7 @@ return (\yii\web\UrlManager) The URL manager for this application.
 <
 return (\yii\i18n\I18N) The internationalization application component.
 
+ Returns the internationalization (i18n) component.
 
 
 *yii/base/Application::getMailer*				public
@@ -653,6 +692,7 @@ return (\yii\i18n\I18N) The internationalization application component.
 <
 return (\yii\mail\MailerInterface) The mailer application component.
 
+ Returns the mailer component.
 
 
 *yii/base/Application::getAuthManager*			public
@@ -662,6 +702,7 @@ return (\yii\mail\MailerInterface) The mailer application component.
 return (\yii\rbac\ManagerInterface) The auth manager application component. Null is
 returned if auth manager is not configured.
 
+ Returns the auth manager for this application.
 
 
 *yii/base/Application::getAssetManager*			public
@@ -670,6 +711,7 @@ returned if auth manager is not configured.
 <
 return (\yii\web\AssetManager) The asset manager application component.
 
+ Returns the asset manager.
 
 
 *yii/base/Application::getSecurity*			public
@@ -678,6 +720,7 @@ return (\yii\web\AssetManager) The asset manager application component.
 <
 return (\yii\base\Security) The security application component.
 
+ Returns the security component.
 
 
 *yii/base/Application::coreComponents*			public
@@ -686,6 +729,7 @@ return (\yii\base\Security) The security application component.
 <
 return (void)
 
+ Returns the configuration of core application components.
 
 
 *yii/base/Application::end*				public
@@ -693,6 +737,8 @@ return (void)
  end($status=0, $response='null')
 <
 return (void)
+
+ Terminates the application.
 
  This method replaces the 'exit()' function by ensuring the application life
  cycle is completed before terminating the application.
@@ -708,6 +754,8 @@ return (void)
  setContainer($config)
 <
 return (void)
+
+ Configures 'Yii::$container' with the $config.
 
     [$config] (array) Values given in terms of name-value pairs
 

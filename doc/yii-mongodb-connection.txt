@@ -253,6 +253,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Sets default database name.
+
     [$name] (string) Default database name.
 
 
@@ -262,6 +264,8 @@ return (void)
 <
 return (string) Default database name
 
+ Returns default database name, if it is not set, attempts to determine it
+ from 'dsn' value.
 
 
 *yii/mongodb/Connection::getQueryBuilder*			public
@@ -270,6 +274,7 @@ return (string) Default database name
 <
 return (\yii\mongodb\QueryBuilder) The query builder for the this MongoDB connection.
 
+ Returns the query builder for the this MongoDB connection.
 
 
 *yii/mongodb/Connection::setQueryBuilder*			public
@@ -277,6 +282,8 @@ return (\yii\mongodb\QueryBuilder) The query builder for the this MongoDB connec
  setQueryBuilder($queryBuilder)
 <
 return (void)
+
+ Sets the query builder for the this MongoDB connection.
 
     [$queryBuilder] (\yii\mongodb\QueryBuilder|array|string|null) The query
     builder for this MongoDB connection.
@@ -288,6 +295,7 @@ return (void)
 <
 return (\yii\mongodb\LogBuilder) The log builder for this connection.
 
+ Returns log builder for this connection.
 
 
 *yii/mongodb/Connection::setLogBuilder*			public
@@ -295,6 +303,8 @@ return (\yii\mongodb\LogBuilder) The log builder for this connection.
  setLogBuilder($logBuilder)
 <
 return (void)
+
+ Sets log builder used for this connection.
 
     [$logBuilder] (array|string|\yii\mongodb\LogBuilder) The log builder for
     this connection.
@@ -305,6 +315,8 @@ return (void)
  getDatabase($name='null', $refresh='false')
 <
 return (\yii\mongodb\Database) Database instance.
+
+ Returns the MongoDB database with the given name.
 
     [$name] (string|null) Database name, if null default one will be used.
     [$refresh] (bool) Whether to reestablish the database connection even, if
@@ -317,6 +329,8 @@ return (\yii\mongodb\Database) Database instance.
 <
 return (\yii\mongodb\Database) Database instance.
 
+ Selects the database with given name.
+
     [$name] (string) Database name.
 
 
@@ -325,6 +339,8 @@ return (\yii\mongodb\Database) Database instance.
  getCollection($name, $refresh='false')
 <
 return (\yii\mongodb\Collection) Mongo collection instance.
+
+ Returns the MongoDB collection with the given name.
 
     [$name] (string|array) Collection name. If string considered as the name
     of the collection inside the default database. If array 
@@ -339,6 +355,8 @@ return (\yii\mongodb\Collection) Mongo collection instance.
  getFileCollection($prefix='\'fs\'', $refresh='false')
 <
 return (\yii\mongodb\file\Collection) Mongo GridFS collection instance.
+
+ Returns the MongoDB GridFS collection.
 
     [$prefix] (string|array) Collection prefix. If string considered as the
     prefix of the GridFS collection inside the default database. If array 
@@ -355,6 +373,7 @@ return (\yii\mongodb\file\Collection) Mongo GridFS collection instance.
 <
 return (bool) Whether the Mongo connection is established
 
+ Returns a value indicating whether the Mongo connection is established.
 
 
 *yii/mongodb/Connection::open*				public
@@ -362,6 +381,8 @@ return (bool) Whether the Mongo connection is established
  open()
 <
 return (void)
+
+ Establishes a Mongo connection.
 
  It does nothing if a MongoDB connection has already been established.
 
@@ -372,6 +393,8 @@ return (void)
 <
 return (void)
 
+ Closes the currently active DB connection.
+
  It does nothing if the connection is already closed.
 
 
@@ -380,6 +403,8 @@ return (void)
  initConnection()
 <
 return (void)
+
+ Initializes the DB connection.
 
  This method is invoked right after the DB connection is established. The
  default implementation triggers an 'EVENT_AFTER_OPEN' event.
@@ -391,6 +416,8 @@ return (void)
 <
 return (\yii\mongodb\Command) Command instance.
 
+ Creates MongoDB command.
+
     [$document] (array) Command document contents.
     [$databaseName] (string|null) Database name, if not set
     'defaultDatabaseName' will be used.
@@ -401,6 +428,8 @@ return (\yii\mongodb\Command) Command instance.
  registerFileStreamWrapper($force='false')
 <
 return (string) Registered stream protocol name.
+
+ Registers GridFS stream wrapper for the 'fileStreamProtocol' protocol.
 
     [$force] (bool) Whether to enforce registration even wrapper has been
     already registered.

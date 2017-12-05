@@ -288,6 +288,9 @@ METHOD DETAILS
 <
 return (bool) Whether the action should continue to be executed.
 
+ This method is invoked right before an action is to be executed (after all
+ possible filters.) It checks the existence of the 'migrationPath'.
+
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -396,6 +399,9 @@ return (bool) Whether the action should continue to be executed.
  options($actionID)
 <
 return (string[]) The names of the options valid for the action
+
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
 
 
 
@@ -540,6 +546,8 @@ return (string[]) The names of the options valid for the action
 <
 return (\yii\mongodb\Migration) The migration instance
 
+ Creates a new migration instance.
+
     [$class] (string) The migration class name
 
 
@@ -584,6 +592,8 @@ return (\yii\mongodb\Migration) The migration instance
 <
 return (array) The migration history
 
+ Returns the migration history.
+
 
 
 
@@ -600,6 +610,8 @@ return (array) The migration history
 <
 return (void)
 
+ Adds new migration entry to the history.
+
 
 
 
@@ -614,6 +626,8 @@ return (void)
  removeMigrationHistory($version)
 <
 return (void)
+
+ Removes existing migration from the history.
 
 
 
@@ -630,6 +644,7 @@ return (void)
 <
 return (void)
 
+ Ensures migration history contains at least base migration entry.
 
 
 

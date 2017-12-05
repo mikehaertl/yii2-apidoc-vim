@@ -130,6 +130,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Attaches an event handler to a class-level event.
+
  When a class-level event is triggered, event handlers attached to that class
  and all parent classes will be invoked.
 
@@ -164,6 +166,8 @@ return (void)
 <
 return (bool) Whether a handler is found and detached.
 
+ Detaches an event handler from a class-level event.
+
  This method is the opposite of 'on()'.
 
     [$class] (string) The fully qualified class name from which the event
@@ -179,6 +183,7 @@ return (bool) Whether a handler is found and detached.
 <
 return (void)
 
+ Detaches all registered class-level event handlers.
 
 
 *yii/base/Event::hasHandlers*				public
@@ -186,6 +191,9 @@ return (void)
  hasHandlers($class, $name)
 <
 return (bool) Whether there is any handler attached to the event.
+
+ Returns a value indicating whether there is any handler attached to the
+ specified class-level event.
 
  Note that this method will also check all parent classes to see if there is
  any handler attached to the named event.
@@ -200,6 +208,8 @@ return (bool) Whether there is any handler attached to the event.
  trigger($class, $name, $event='null')
 <
 return (void)
+
+ Triggers a class-level event.
 
  This method will cause invocation of event handlers that are attached to the
  named event for the specified class and all its parent classes.

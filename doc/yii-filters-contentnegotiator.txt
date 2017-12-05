@@ -236,6 +236,10 @@ METHOD DETAILS
 <
 return (bool) Whether the action should continue to be executed.
 
+ This method is invoked right before an action is to be executed (after all
+ possible filters.) You may override this method to do last-minute preparation
+ for the action.
+
 
 
 
@@ -266,6 +270,8 @@ return (bool) Whether the action should continue to be executed.
 <
 return (void)
 
+ Bootstrap method to be called during application bootstrap stage.
+
 
 
 
@@ -281,6 +287,7 @@ return (void)
 <
 return (void)
 
+ Negotiates the response format and application language.
 
 
 *yii/filters/ContentNegotiator::negotiateContentType*	protected
@@ -288,6 +295,8 @@ return (void)
  negotiateContentType($request, $response)
 <
 return (void)
+
+ Negotiates the response format.
 
     [$request] (\yii\web\Request) 
     [$response] (\yii\web\Response) 
@@ -299,6 +308,8 @@ return (void)
 <
 return (string) The chosen language
 
+ Negotiates the application language.
+
     [$request] (\yii\web\Request) 
 
 
@@ -307,6 +318,9 @@ return (string) The chosen language
  isLanguageSupported($requested, $supported)
 <
 return (bool) Whether the requested language is supported
+
+ Returns a value indicating whether the requested language matches the
+ supported language.
 
     [$requested] (string) The requested language code
     [$supported] (string) The supported language code

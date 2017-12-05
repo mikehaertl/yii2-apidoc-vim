@@ -91,6 +91,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
     object
@@ -101,6 +103,8 @@ return (void)
  init()
 <
 return (void)
+
+ Initializes the object.
 
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event. If you override this
@@ -299,6 +303,8 @@ return (void)
 <
 return (\yii\elasticsearch\Command) The created DB command instance.
 
+ Creates a DB command that can be used to execute this query.
+
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
     DB command. If null, the DB connection returned by 'modelClass' will be
     used.
@@ -311,6 +317,8 @@ return (\yii\elasticsearch\Command) The created DB command instance.
 return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
+ Executes query and returns all results as an array.
+
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
     DB command. If null, the DB connection returned by 'modelClass' will be
     used.
@@ -321,6 +329,8 @@ will be returned.
  populate($rows)
 <
 return (array) The converted query result
+
+ Converts the raw query results into the format as specified by this query.
 
 
 
@@ -341,6 +351,8 @@ Depending on the setting of 'asArray', the query result may be either an array
 or an ActiveRecord object. Null will be returned if the query results in
 nothing.
 
+ Executes query and returns a single row of result.
+
     [$db] (\yii\elasticsearch\Connection) The DB connection used to create the
     DB command. If null, the DB connection returned by 'modelClass' will be
     used.
@@ -351,6 +363,9 @@ nothing.
  search($db='null', $options='[]')
 <
 return (array) The query results.
+
+ Executes the query and returns the complete search result including e.g.
+ hits, facets, totalCount.
 
 
 
@@ -390,6 +405,8 @@ return (array) The query results.
 <
 return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
+
+ Executes the query and returns the first column of the result.
 
 
 

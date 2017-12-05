@@ -110,6 +110,8 @@ return (array) The generated SQL statement (the first array element) and the
 corresponding parameters to be bound to the SQL statement (the second array
 element). The parameters returned include those provided in '$params'.
 
+ Generates a SELECT SQL statement from a 'Query' object.
+
 
 
 
@@ -138,6 +140,8 @@ element). The parameters returned include those provided in '$params'.
  batchInsert($table, $columns, $rows)
 <
 return (string) The batch INSERT SQL statement
+
+ Generates a batch INSERT SQL statement.
 
  For example,
 
@@ -175,6 +179,8 @@ return (string) The batch INSERT SQL statement
 <
 return (string) The SQL statement for renaming a DB table.
 
+ Builds a SQL statement for renaming a DB table.
+
     [$table] (string) The table to be renamed. The name will be properly
     quoted by the method.
     [$newName] (string) The new table name. The name will be properly quoted
@@ -193,6 +199,9 @@ return (string) The SQL statement for renaming a DB table.
 return (string) The SQL statement for adding a primary key constraint to an existing
 table.
 
+ Builds a SQL statement for adding a primary key constraint to an existing
+ table.
+
     [$name] (string) The name of the primary key constraint.
     [$table] (string) The table that the primary key constraint will be added
     to.
@@ -207,6 +216,9 @@ table.
 return (string) The SQL statement for removing a primary key constraint from an
 existing table.
 
+ Builds a SQL statement for removing a primary key constraint to an existing
+ table.
+
     [$name] (string) The name of the primary key constraint to be removed.
     [$table] (string) The table that the primary key constraint will be
     removed from.
@@ -217,6 +229,8 @@ existing table.
  truncateTable($table)
 <
 return (string) The SQL statement for truncating a DB table.
+
+ Builds a SQL statement for truncating a DB table.
 
     [$table] (string) The table to be truncated. The name will be properly
     quoted by the method.
@@ -233,6 +247,8 @@ return (string) The SQL statement for truncating a DB table.
 <
 return (string) The SQL statement for dropping a DB column.
 
+ Builds a SQL statement for dropping a DB column.
+
     [$table] (string) The table whose column is to be dropped. The name will
     be properly quoted by the method.
     [$column] (string) The name of the column to be dropped. The name will be
@@ -244,6 +260,8 @@ return (string) The SQL statement for dropping a DB column.
  renameColumn($table, $oldName, $newName)
 <
 return (string) The SQL statement for renaming a DB column.
+
+ Builds a SQL statement for renaming a column.
 
     [$table] (string) The table whose column is to be renamed. The name will
     be properly quoted by the method.
@@ -258,6 +276,8 @@ return (string) The SQL statement for renaming a DB column.
  alterColumn($table, $column, $type)
 <
 return (string) The SQL statement for changing the definition of a column.
+
+ Builds a SQL statement for changing the definition of a column.
 
     [$table] (string) The table whose column is to be changed. The table name
     will be properly quoted by the method.
@@ -276,6 +296,9 @@ return (string) The SQL statement for changing the definition of a column.
 <
 return (string) The SQL statement for adding a foreign key constraint to an existing
 table.
+
+ Builds a SQL statement for adding a foreign key constraint to an existing
+ table.
 
  The method will properly quote the table and column names.
 
@@ -301,6 +324,8 @@ table.
 <
 return (string) The SQL statement for dropping a foreign key constraint.
 
+ Builds a SQL statement for dropping a foreign key constraint.
+
     [$name] (string) The name of the foreign key constraint to be dropped. The
     name will be properly quoted by the method.
     [$table] (string) The table whose foreign is to be dropped. The name will
@@ -318,6 +343,8 @@ return (string) The SQL statement for dropping a foreign key constraint.
 <
 return (string) The SQL statement for dropping an index.
 
+ Builds a SQL statement for dropping an index.
+
     [$name] (string) The name of the index to be dropped. The name will be
     properly quoted by the method.
     [$table] (string) The table whose index is to be dropped. The name will be
@@ -330,6 +357,8 @@ return (string) The SQL statement for dropping an index.
 <
 return (string) The SQL statement for adding an unique constraint to an existing
 table.
+
+ Creates a SQL command for adding an unique constraint to an existing table.
 
 
 
@@ -352,6 +381,8 @@ table.
 <
 return (string) The SQL statement for dropping an unique constraint.
 
+ Creates a SQL command for dropping an unique constraint.
+
 
 
 
@@ -369,6 +400,8 @@ return (string) The SQL statement for dropping an unique constraint.
  addCheck($name, $table, $expression)
 <
 return (string) The SQL statement for adding a check constraint to an existing table.
+
+ Creates a SQL command for adding a check constraint to an existing table.
 
 
 
@@ -389,6 +422,8 @@ return (string) The SQL statement for adding a check constraint to an existing t
 <
 return (string) The SQL statement for dropping a check constraint.
 
+ Creates a SQL command for dropping a check constraint.
+
 
 
 
@@ -407,6 +442,9 @@ return (string) The SQL statement for dropping a check constraint.
 <
 return (string) The SQL statement for adding a default value constraint to an
 existing table.
+
+ Creates a SQL command for adding a default value constraint to an existing
+ table.
 
 
 
@@ -429,6 +467,8 @@ existing table.
 <
 return (string) The SQL statement for dropping a default value constraint.
 
+ Creates a SQL command for dropping a default value constraint.
+
 
 
 
@@ -447,6 +487,9 @@ return (string) The SQL statement for dropping a default value constraint.
 <
 return (string) The SQL statement for resetting sequence
 
+ Creates a SQL statement for resetting the sequence value of a table's primary
+ key.
+
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
 
@@ -463,6 +506,8 @@ return (string) The SQL statement for resetting sequence
 <
 return (string) The SQL statement for checking integrity
 
+ Enables or disables integrity check.
+
     [$check] (bool) Whether to turn on or off the integrity check.
     [$schema] (string) The schema of the tables. Meaningless for SQLite.
     [$table] (string) The table name. Meaningless for SQLite.
@@ -473,6 +518,8 @@ return (string) The SQL statement for checking integrity
  addCommentOnColumn($table, $column, $comment)
 <
 return (string) The SQL statement for adding comment on column
+
+ Builds a SQL command for adding comment to column.
 
 
 
@@ -494,6 +541,8 @@ return (string) The SQL statement for adding comment on column
 <
 return (string) The SQL statement for adding comment on table
 
+ Builds a SQL command for adding comment to table.
+
 
 
 
@@ -512,6 +561,8 @@ return (string) The SQL statement for adding comment on table
 <
 return (string) The SQL statement for adding comment on column
 
+ Builds a SQL command for adding comment to column.
+
 
 
 
@@ -529,6 +580,8 @@ return (string) The SQL statement for adding comment on column
  dropCommentFromTable($table)
 <
 return (string) The SQL statement for adding comment on column
+
+ Builds a SQL command for adding comment to table.
 
 
 
@@ -668,6 +721,8 @@ return (string) The UNION clause built from 'Query::$union'.
 <
 return (string) SQL
 
+ Builds SQL for IN condition.
+
 
 
 
@@ -685,6 +740,8 @@ return (string) SQL
  buildCompositeInCondition($operator, $columns, $values, $params)
 <
 return (string) SQL
+
+ Builds SQL for IN condition.
 
     [$operator] (string) 
     [$columns] (array) 

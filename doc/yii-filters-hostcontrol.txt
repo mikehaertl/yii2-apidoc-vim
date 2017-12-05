@@ -208,6 +208,10 @@ METHOD DETAILS
 <
 return (bool) Whether the action should continue to be executed.
 
+ This method is invoked right before an action is to be executed (after all
+ possible filters.) You may override this method to do last-minute preparation
+ for the action.
+
 
 
 
@@ -237,6 +241,8 @@ return (bool) Whether the action should continue to be executed.
  denyAccess($action)
 <
 return (void)
+
+ Denies the access.
 
  The default implementation will display 404 page right away, terminating the
  program execution. You may override this method, creating your own deny

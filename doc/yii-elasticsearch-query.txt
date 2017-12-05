@@ -199,6 +199,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -398,6 +400,8 @@ return (void)
 <
 return (\yii\elasticsearch\Command) The created DB command instance.
 
+ Creates a DB command that can be used to execute this query.
+
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -410,6 +414,8 @@ return (\yii\elasticsearch\Command) The created DB command instance.
 return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
+ Executes the query and returns all results as an array.
+
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -420,6 +426,8 @@ will be returned.
  populate($rows)
 <
 return (array) The converted query result
+
+ Converts the raw query results into the format as specified by this query.
 
  This method is internally used to convert the data fetched from database into
  the format as required by this query.
@@ -434,6 +442,8 @@ return (array) The converted query result
 return (array|boolean) The first row (in terms of an array) of the query result.
 False is returned if the query results in nothing.
 
+ Executes the query and returns a single row of result.
+
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -444,6 +454,9 @@ False is returned if the query results in nothing.
  search($db='null', $options='[]')
 <
 return (array) The query results.
+
+ Executes the query and returns the complete search result including e.g.
+ hits, facets, totalCount.
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -467,6 +480,8 @@ return (array) The query results.
 <
 return (array) The query results.
 
+ Executes the query and deletes all matching documents.
+
  Everything except query and filter will be ignored.
 
     [$db] (\yii\elasticsearch\Connection) The database connection used to
@@ -482,6 +497,8 @@ return (array) The query results.
 return (string) The value of the specified attribute in the first record of the query
 result. Null is returned if the query result is empty or the field does not
 exist.
+
+ Returns the query result as a scalar value.
 
  The value returned will be the specified field in the first document of the
  query results.
@@ -499,6 +516,8 @@ exist.
 return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
 
+ Executes the query and returns the first column of the result.
+
     [$field] (string) The field to query over
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
@@ -510,6 +529,8 @@ the query results in nothing.
  count($q=''*'', $db='null')
 <
 return (integer) Number of records
+
+ Returns the number of records.
 
     [$q] (string) The COUNT expression. This parameter is ignored by this
     implementation.
@@ -524,6 +545,8 @@ return (integer) Number of records
 <
 return (boolean) Whether the query result contains any row of data.
 
+ Returns a value indicating whether the query result contains any row of data.
+
     [$db] (\yii\elasticsearch\Connection) The database connection used to
     execute the query. If this parameter is not given, the 'elasticsearch'
     application component will be used.
@@ -535,6 +558,8 @@ return (boolean) Whether the query result contains any row of data.
 <
 return ($this) The query object itself
 
+ Adds a 'stats' part to the query.
+
     [$groups] (array) An array of groups to maintain a statistics aggregation
     for.
 
@@ -545,6 +570,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets a highlight parameters to retrieve from the documents.
+
     [$highlight] (array) Array of parameters to highlight results.
 
 
@@ -553,6 +580,8 @@ return ($this) The query object itself
  addAggregation($name, $type, $options)
 <
 return ($this) The query object itself
+
+ Adds an aggregation to this query.
 
     [$name] (string) The name of the aggregation
     [$type] (string) The aggregation type. e.g. 'terms', 'range',
@@ -566,6 +595,8 @@ return ($this) The query object itself
  addAgg($name, $type, $options)
 <
 return ($this) The query object itself
+
+ Adds an aggregation to this query.
 
  This is an alias for 'addAggregation'.
 
@@ -582,6 +613,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds a suggester to this query.
+
     [$name] (string) The name of the suggester
     [$definition] (string|array) The configuration options for this suggester.
     Can be an array or a json string.
@@ -593,6 +626,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the querypart of this search query.
+
     [$query] (string) 
 
 
@@ -603,6 +638,8 @@ return ($this) The query object itself
 return (\yii\elasticsearch\BatchQueryResult) The batch query result. It implements
 the '\Iterator' interface and can be traversed to retrieve the data in
 batches.
+
+ Starts a batch query.
 
  A batch query supports fetching data in batches, which can keep the memory
  usage under a limit. This method will return a 'BatchQueryResult' object
@@ -634,6 +671,8 @@ return (\yii\elasticsearch\BatchQueryResult) The batch query result. It implemen
 the '\Iterator' interface and can be traversed to retrieve the data in
 batches.
 
+ Starts a batch query and retrieves data row by row.
+
  This method is similar to 'batch()' except that in each iteration of the
  result, only one row of data is returned. For example,
 
@@ -656,6 +695,8 @@ batches.
 <
 return ($this) The query object itself
 
+ Sets the filter part of this search query.
+
     [$filter] (string) 
 
 
@@ -664,6 +705,8 @@ return ($this) The query object itself
  from($index, $type='null')
 <
 return ($this) The query object itself
+
+ Sets the index and type to retrieve documents from.
 
     [$index] (string|array) The index to retrieve data from. This can be a
     string representing a single index or a an array of multiple indexes. If
@@ -679,6 +722,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the fields to retrieve from the documents.
+
     [$fields] (array) The fields to be selected.
 
 
@@ -688,6 +733,9 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the source filtering, specifying how the '_source' field of the document
+ should be returned.
+
     [$source] (array) The source patterns to be selected.
 
 
@@ -696,6 +744,8 @@ return ($this) The query object itself
  timeout($timeout)
 <
 return ($this) The query object itself
+
+ Sets the search timeout.
 
     [$timeout] (integer) A search timeout, bounding the search request to be
     executed within the specified time value and bail with the hits
@@ -718,6 +768,8 @@ return (static) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the options to be passed to the command created by this query.
+
     [$options] (array) The options to be set.
 
 
@@ -726,6 +778,8 @@ return ($this) The query object itself
  addOptions($options)
 <
 return ($this) The query object itself
+
+ Adds more options, overwriting existing options.
 
     [$options] (array) The options to be added.
 

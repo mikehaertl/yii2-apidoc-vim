@@ -80,6 +80,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the application component.
+
  This method is required by IApplicationComponent and is invoked by
  application.
 
@@ -200,6 +202,8 @@ return (void)
 <
 return (bool) Whether to use custom storage.
 
+ Returns a value indicating whether to use custom session storage.
+
  This method should be overridden to return true by child classes that
  implement custom session storage. To implement custom session storage,
  override these methods: 'openSession()', 'closeSession()', 'readSession()',
@@ -212,6 +216,7 @@ return (bool) Whether to use custom storage.
 <
 return (void)
 
+ Starts the session.
 
 
 *yii/web/Session::registerSessionHandler*			protected
@@ -220,6 +225,7 @@ return (void)
 <
 return (void)
 
+ Registers session handler.
 
 
 *yii/web/Session::close*					public
@@ -228,6 +234,7 @@ return (void)
 <
 return (void)
 
+ Ends the current session and store session data.
 
 
 *yii/web/Session::destroy*				public
@@ -235,6 +242,8 @@ return (void)
  destroy()
 <
 return (void)
+
+ Frees all session variables and destroys all data registered to a session.
 
  This method has no effect when session is not 'getIsActive()|active'. Make
  sure to call 'open()' before calling it.
@@ -254,6 +263,9 @@ return (bool) Whether the session has started
 <
 return (bool) Whether the current request has sent the session ID.
 
+ Returns a value indicating whether the current request has sent the session
+ ID.
+
  The default implementation will check cookie and $_GET using the session
  name. If you send session ID via other ways, you may need to override this
  method or call 'setHasSessionId()' to explicitly set whether the session ID
@@ -265,6 +277,9 @@ return (bool) Whether the current request has sent the session ID.
  setHasSessionId($value)
 <
 return (void)
+
+ Sets the value indicating whether the current request has sent the session
+ ID.
 
  This method is provided so that you can override the default way of
  determining whether the session ID is sent.
@@ -278,6 +293,8 @@ return (void)
 <
 return (string) The current session ID
 
+ Gets the session ID.
+
  This is a wrapper for [PHP
  session_id()](http://php.net/manual/en/function.session-id.php).
 
@@ -287,6 +304,8 @@ return (string) The current session ID
  setId($value)
 <
 return (void)
+
+ Sets the session ID.
 
  This is a wrapper for [PHP
  session_id()](http://php.net/manual/en/function.session-id.php).
@@ -299,6 +318,8 @@ return (void)
  regenerateID($deleteOldSession='false')
 <
 return (void)
+
+ Updates the current session ID with a newly generated one.
 
  Please refer to <http://php.net/session_regenerate_id> for more details.
 
@@ -315,6 +336,8 @@ return (void)
 <
 return (string) The current session name
 
+ Gets the name of the current session.
+
  This is a wrapper for [PHP
  session_name()](http://php.net/manual/en/function.session-name.php).
 
@@ -324,6 +347,8 @@ return (string) The current session name
  setName($value)
 <
 return (void)
+
+ Sets the name for the current session.
 
  This is a wrapper for [PHP
  session_name()](http://php.net/manual/en/function.session-name.php).
@@ -338,6 +363,8 @@ return (void)
 <
 return (string) The current session save path, defaults to '/tmp'.
 
+ Gets the current session save path.
+
  This is a wrapper for [PHP
  session_save_path()](http://php.net/manual/en/function.session-save-path.php).
 
@@ -347,6 +374,8 @@ return (string) The current session save path, defaults to '/tmp'.
  setSavePath($value)
 <
 return (void)
+
+ Sets the current session save path.
 
  This is a wrapper for [PHP
  session_save_path()](http://php.net/manual/en/function.session-save-path.php).
@@ -369,6 +398,8 @@ return (array) The session cookie parameters.
 <
 return (void)
 
+ Sets the session cookie parameters.
+
  The cookie parameters passed to this method will be merged with the result of
  'session_get_cookie_params()'.
 
@@ -383,6 +414,8 @@ return (void)
 return (bool|null) The value indicating whether cookies should be used to store
 session IDs.
 
+ Returns the value indicating whether cookies should be used to store session
+ IDs.
 
 
 *yii/web/Session::setUseCookies*				public
@@ -390,6 +423,9 @@ session IDs.
  setUseCookies($value)
 <
 return (void)
+
+ Sets the value indicating whether cookies should be used to store session
+ IDs.
 
  Three states are possible:
 
@@ -465,6 +501,8 @@ return (void)
 <
 return (bool) Whether session is opened successfully
 
+ Session open handler.
+
  This method should be overridden if 'useCustomStorage' returns true.
 
     [$savePath] (string) Session save path
@@ -477,6 +515,8 @@ return (bool) Whether session is opened successfully
 <
 return (bool) Whether session is closed successfully
 
+ Session close handler.
+
  This method should be overridden if 'useCustomStorage' returns true.
 
 
@@ -485,6 +525,8 @@ return (bool) Whether session is closed successfully
  readSession($id)
 <
 return (string) The session data
+
+ Session read handler.
 
  This method should be overridden if 'useCustomStorage' returns true.
 
@@ -496,6 +538,8 @@ return (string) The session data
  writeSession($id, $data)
 <
 return (bool) Whether session write is successful
+
+ Session write handler.
 
  This method should be overridden if 'useCustomStorage' returns true.
 
@@ -509,6 +553,8 @@ return (bool) Whether session write is successful
 <
 return (bool) Whether session is destroyed successfully
 
+ Session destroy handler.
+
  This method should be overridden if 'useCustomStorage' returns true.
 
     [$id] (string) Session ID
@@ -519,6 +565,8 @@ return (bool) Whether session is destroyed successfully
  gcSession($maxLifetime)
 <
 return (bool) Whether session is GCed successfully
+
+ Session GC (garbage collection) handler.
 
  This method should be overridden if 'useCustomStorage' returns true.
 
@@ -532,6 +580,8 @@ return (bool) Whether session is GCed successfully
 <
 return (\yii\web\SessionIterator) An iterator for traversing the session variables.
 
+ Returns an iterator for traversing the session variables.
+
  This method is required by the interface '\IteratorAggregate'.
 
 
@@ -541,6 +591,7 @@ return (\yii\web\SessionIterator) An iterator for traversing the session variabl
 <
 return (int) The number of session variables
 
+ Returns the number of items in the session.
 
 
 *yii/web/Session::count*					public
@@ -548,6 +599,8 @@ return (int) The number of session variables
  count()
 <
 return (int) Number of items in the session.
+
+ Returns the number of items in the session.
 
  This method is required by '\Countable' interface.
 
@@ -558,6 +611,8 @@ return (int) Number of items in the session.
 <
 return (mixed) The session variable value, or $defaultValue if the session variable
 does not exist.
+
+ Returns the session variable value with the session variable name.
 
  If the session variable does not exist, the '$defaultValue' will be returned.
 
@@ -572,6 +627,8 @@ does not exist.
 <
 return (void)
 
+ Adds a session variable.
+
  If the specified name already exists, the old value will be overwritten.
 
     [$key] (string) Session variable name
@@ -584,6 +641,8 @@ return (void)
 <
 return (mixed) The removed value, null if no such session variable.
 
+ Removes a session variable.
+
     [$key] (string) The name of the session variable to be removed
 
 
@@ -593,6 +652,7 @@ return (mixed) The removed value, null if no such session variable.
 <
 return (void)
 
+ Removes all session variables.
 
 
 *yii/web/Session::has*					public
@@ -610,6 +670,8 @@ return (bool) Whether there is the named session variable
 <
 return (void)
 
+ Updates the counters for flash messages and removes outdated flash messages.
+
  This method should only be called once in 'init()'.
 
 
@@ -618,6 +680,8 @@ return (void)
  getFlash($key, $defaultValue='null', $delete='false')
 <
 return (mixed) The flash message or an array of messages if addFlash was used
+
+ Returns a flash message.
 
     [$key] (string) The key identifying the flash message
     [$defaultValue] (mixed) Value to be returned if the flash message does not
@@ -632,6 +696,8 @@ return (mixed) The flash message or an array of messages if addFlash was used
  getAllFlashes($delete='false')
 <
 return (array) Flash messages (key => message or key => [message1, message2]).
+
+ Returns all flash messages.
 
  You may use this method to display all the flash messages in a view file:
 
@@ -660,6 +726,8 @@ return (array) Flash messages (key => message or key => [message1, message2]).
 <
 return (void)
 
+ Sets a flash message.
+
  A flash message will be automatically deleted after it is accessed in a
  request and the deletion will happen in the next request. If there is already
  an existing flash message with the same key, it will be overwritten by the
@@ -683,6 +751,8 @@ return (void)
 <
 return (void)
 
+ Adds a flash message.
+
  If there are existing flash messages with the same key, the new one will be
  appended to the existing message array.
 
@@ -701,6 +771,8 @@ return (void)
 <
 return (mixed) The removed flash message. Null if the flash message does not exist.
 
+ Removes a flash message.
+
     [$key] (string) The key identifying the flash message. Note that flash
     messages and normal session variables share the same name space.  If you
     have a normal session variable using the same name, it will be removed by
@@ -713,6 +785,8 @@ return (mixed) The removed flash message. Null if the flash message does not exi
 <
 return (void)
 
+ Removes all flash messages.
+
  Note that flash messages and normal session variables share the same name
  space. If you have a normal session variable using the same name, it will be
  removed by this method.
@@ -724,6 +798,9 @@ return (void)
 <
 return (bool) Whether any flash messages exist under specified key
 
+ Returns a value indicating whether there are flash messages associated with
+ the specified key.
+
     [$key] (string) Key identifying the flash message type
 
 
@@ -732,6 +809,8 @@ return (bool) Whether any flash messages exist under specified key
  offsetExists($offset)
 <
 return (bool) 
+
+ This method is required by the interface '\ArrayAccess'.
 
     [$offset] (mixed) The offset to check on
 
@@ -742,6 +821,8 @@ return (bool)
 <
 return (mixed) The element at the offset, null if no element is found at the offset
 
+ This method is required by the interface '\ArrayAccess'.
+
     [$offset] (int) The offset to retrieve element.
 
 
@@ -750,6 +831,8 @@ return (mixed) The element at the offset, null if no element is found at the off
  offsetSet($offset, $item)
 <
 return (void)
+
+ This method is required by the interface '\ArrayAccess'.
 
     [$offset] (int) The offset to set element
     [$item] (mixed) The element value
@@ -760,6 +843,8 @@ return (void)
  offsetUnset($offset)
 <
 return (void)
+
+ This method is required by the interface '\ArrayAccess'.
 
     [$offset] (mixed) The offset to unset element
 

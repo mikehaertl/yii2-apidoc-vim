@@ -189,6 +189,8 @@ return (int) Number of pages
 <
 return (int) The zero-based current page number.
 
+ Returns the zero-based current page number.
+
     [$recalculate] (bool) Whether to recalculate the current page based on the
     page size and item count.
 
@@ -198,6 +200,8 @@ return (int) The zero-based current page number.
  setPage($value, $validatePage='false')
 <
 return (void)
+
+ Sets the current page number.
 
     [$value] (int) The zero-based index of the current page.
     [$validatePage] (bool) Whether to validate the page number. Note that in
@@ -211,6 +215,8 @@ return (void)
 <
 return (int) The number of items per page. If it is less than 1, it means the page
 size is infinite, and thus a single page contains all items.
+
+ Returns the number of items per page.
 
  By default, this method will try to determine the page size by
  'pageSizeParam' in 'params'. If the page size cannot be determined this way,
@@ -232,6 +238,8 @@ return (void)
  createUrl($page, $pageSize=null, $absolute='false')
 <
 return (string) The created URL
+
+ Creates the URL suitable for pagination with the specified page number.
 
  This method is mainly called by pagers when creating URLs used to perform
  pagination.
@@ -269,6 +277,9 @@ return (array) The links for navigational purpose. The array keys specify the pu
 of the links (e.g. 'LINK_FIRST'), and the array values are the corresponding
 URLs.
 
+ Returns a whole set of links for navigating to the first, last, next and
+ previous pages.
+
     [$absolute] (bool) Whether the generated URLs should be absolute.
 
 
@@ -277,6 +288,8 @@ URLs.
  getQueryParam($name, $defaultValue='null')
 <
 return (string) The parameter value
+
+ Returns the value of the specified query parameter.
 
  This method returns the named parameter value from 'params'. Null is returned
  if the value does not exist.

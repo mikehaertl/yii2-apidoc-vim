@@ -110,6 +110,9 @@ METHOD DETAILS
 <
 return (void)
 
+ Evaluates the dependency by generating and saving the data related with
+ dependency.
+
  This method is invoked by cache before writing data into it.
 
     [$cache] (\yii\caching\CacheInterface) The cache component that is
@@ -122,6 +125,8 @@ return (void)
 <
 return (bool) Whether the dependency has changed.
 
+ Returns a value indicating whether the dependency has changed.
+
     [$cache] (\yii\caching\CacheInterface) The cache component that is
     currently evaluating this dependency
 
@@ -131,6 +136,8 @@ return (bool) Whether the dependency has changed.
  isChanged($cache)
 <
 return (bool) Whether the dependency has changed.
+
+ Checks whether the dependency is changed.
 
     [$cache] (\yii\caching\CacheInterface) The cache component that is
     currently evaluating this dependency
@@ -142,6 +149,7 @@ return (bool) Whether the dependency has changed.
 <
 return (void)
 
+ Resets all cached data for reusable dependencies.
 
 
 *yii/caching/Dependency::generateReusableHash*		protected
@@ -150,6 +158,8 @@ return (void)
 <
 return (string) A unique hash value for this cache dependency.
 
+ Generates a unique hash that can be used for retrieving reusable dependency
+ data.
 
 
 *yii/caching/Dependency::generateDependencyData*		protected
@@ -157,6 +167,8 @@ return (string) A unique hash value for this cache dependency.
  generateDependencyData($cache)
 <
 return (mixed) The data needed to determine if dependency has been changed.
+
+ Generates the data needed to determine if dependency is changed.
 
  Derived classes should override this method to generate the actual dependency
  data.

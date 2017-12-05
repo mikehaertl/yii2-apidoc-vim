@@ -114,6 +114,8 @@ METHOD DETAILS
 <
 return (string) The string representation of the object
 
+ String output.
+
  This is PHP magic method that returns string representation of an object. The
  implementation here returns the uploaded file's name.
 
@@ -124,6 +126,8 @@ return (string) The string representation of the object
 <
 return (\yii\web\UploadedFile) The instance of the uploaded file. Null is returned if
 no file is uploaded for the specified model attribute.
+
+ Returns an uploaded file for the given model attribute.
 
  The file should be uploaded using '\yii\widgets\ActiveField::fileInput()'.
 
@@ -140,6 +144,8 @@ no file is uploaded for the specified model attribute.
 return (\yii\web\UploadedFile[]) Array of UploadedFile objects. Empty array is
 returned if no available file was found for the given attribute.
 
+ Returns all uploaded files for the given model attribute.
+
     [$model] (\yii\base\Model) The data model
     [$attribute] (string) The attribute name. The attribute name may contain
     array indexes for tabular file uploading, e.g. '[1]file'.
@@ -151,6 +157,8 @@ returned if no available file was found for the given attribute.
 <
 return (null|\yii\web\UploadedFile) The instance of the uploaded file. Null is
 returned if no file is uploaded for the specified name.
+
+ Returns an uploaded file according to the given file input name.
 
  The name can be a plain string or a string like an array element (e.g.
  'Post[imageFile]', or 'Post[0][imageFile]').
@@ -166,6 +174,9 @@ return (\yii\web\UploadedFile[]) The array of UploadedFile objects. Empty array 
 returned if no adequate upload was found. Please note that this array will
 contain all files from all sub-arrays regardless how deeply nested they are.
 
+ Returns an array of uploaded files corresponding to the specified file input
+ name.
+
  This is mainly used when multiple files were uploaded and saved as
  'files[0]', 'files[1]', 'files[n]'..., and you can retrieve them all by
  passing 'files' as the name.
@@ -179,6 +190,8 @@ contain all files from all sub-arrays regardless how deeply nested they are.
 <
 return (void)
 
+ Cleans up the loaded UploadedFile instances.
+
  This method is mainly used by test scripts to set up a fixture.
 
 
@@ -187,6 +200,8 @@ return (void)
  saveAs($file, $deleteTempFile='true')
 <
 return (bool) True whether the file is saved successfully
+
+ Saves the uploaded file.
 
  Note that this method uses php's move_uploaded_file() method. If the target
  file '$file' already exists, it will be overwritten.

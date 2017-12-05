@@ -174,6 +174,8 @@ METHOD DETAILS
 <
 return (mixed) The property value or the value of a behavior's property
 
+ Returns the value of a component property.
+
 
 
  This method will check in the following order and act accordingly:
@@ -195,6 +197,8 @@ return (mixed) The property value or the value of a behavior's property
  __set($name, $value)
 <
 return (void)
+
+ Sets the value of a component property.
 
 
 
@@ -223,6 +227,8 @@ return (void)
 <
 return (bool) Whether the named property is set
 
+ Checks if a property is set, i.e. defined and not null.
+
 
 
  This method will check in the following order and act accordingly:
@@ -245,6 +251,8 @@ return (bool) Whether the named property is set
  __unset($name)
 <
 return (void)
+
+ Sets a component property to be null.
 
 
 
@@ -278,6 +286,8 @@ return (void)
 <
 return (bool) Whether the property can be read
 
+ Returns a value indicating whether a property can be read.
+
 
 
  A property can be read if:
@@ -303,6 +313,8 @@ return (bool) Whether the property can be read
  canSetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
 return (bool) Whether the property can be written
+
+ Returns a value indicating whether a property can be set.
 
 
 
@@ -425,6 +437,8 @@ return (bool) Whether the property can be written
 <
 return (array) Validation rules
 
+ Returns the validation rules for attributes.
+
 
 
  Validation rules are used by 'validate()' to check if attribute values are
@@ -510,6 +524,8 @@ return (array) Validation rules
 <
 return (string) The form name of this model class.
 
+ Returns the form name that this model class should use.
+
 
 
  The form name is mainly used by '\yii\widgets\ActiveForm' to determine how to
@@ -535,6 +551,8 @@ return (string) The form name of this model class.
 <
 return (array) List of attribute names.
 
+ Returns the list of attribute names.
+
 
 
  By default, this method returns all public non-static properties of the
@@ -548,6 +566,8 @@ return (array) List of attribute names.
  attributeLabels()
 <
 return (array) Attribute labels (name => label)
+
+ Returns the attribute labels.
 
 
 
@@ -798,6 +818,8 @@ return (void)
 <
 return (array) Attribute type map.
 
+ Composes default value for 'searchAttributeTypes' from the 'searchModel'
+ validation rules.
 
 
 *yii/data/DataFilter::getErrorMessages*			public
@@ -814,6 +836,9 @@ return (array) Error messages in format '[errorKey => message]'.
 <
 return (void)
 
+ Sets the list of error messages responding to invalid filter structure, in
+ format: '[errorKey => message]'.
+
  Message may contain placeholders that will be populated depending on the
  message context. For each message a '{filter}' placeholder is available
  referring to the label for 'filterAttributeName' attribute.
@@ -828,6 +853,7 @@ return (void)
 <
 return (array) Default error messages in '[errorKey => message]' format.
 
+ Returns default values for 'errorMessages'.
 
 
 *yii/data/DataFilter::parseErrorMessage*			protected
@@ -835,6 +861,8 @@ return (array) Default error messages in '[errorKey => message]' format.
  parseErrorMessage($messageKey, $params='[]')
 <
 return (string) Composed message string.
+
+ Parses content of the message from 'errorMessages', specified by message key.
 
     [$messageKey] (string) Message key.
     [$params] (array) Params to be parsed into the message.
@@ -846,6 +874,7 @@ return (string) Composed message string.
 <
 return (void)
 
+ Validates filter attribute value to match filer condition specification.
 
 
 *yii/data/DataFilter::validateCondition*			protected
@@ -853,6 +882,8 @@ return (void)
  validateCondition($condition)
 <
 return (void)
+
+ Validates filter condition.
 
     [$condition] (mixed) Raw filter condition.
 
@@ -862,6 +893,8 @@ return (void)
  validateConjunctionCondition($operator, $condition)
 <
 return (void)
+
+ Validates conjunction condition that consists of multiple independent ones.
 
  This covers such operators as 'and' and 'or'.
 
@@ -875,6 +908,8 @@ return (void)
 <
 return (void)
 
+ Validates block condition that consists of a single condition.
+
  This covers such operators as 'not'.
 
     [$operator] (string) Raw operator control keyword.
@@ -887,6 +922,8 @@ return (void)
 <
 return (void)
 
+ Validates search condition for a particular attribute.
+
     [$attribute] (string) Search attribute name.
     [$condition] (mixed) Search condition.
 
@@ -896,6 +933,8 @@ return (void)
  validateOperatorCondition($operator, $condition, $attribute='null')
 <
 return (void)
+
+ Validates operator condition.
 
     [$operator] (string) Raw operator control keyword.
     [$condition] (mixed) Attribute condition.
@@ -908,6 +947,8 @@ return (void)
 <
 return (void)
 
+ Validates attribute value in the scope of 'model'.
+
     [$attribute] (string) Attribute name.
     [$value] (mixed) Attribute value.
 
@@ -918,6 +959,9 @@ return (void)
 <
 return (mixed) Filtered attribute value.
 
+ Validates attribute value in the scope of 'searchModel', applying attribute
+ value filters if any.
+
     [$attribute] (string) Attribute name.
     [$value] (mixed) Attribute value.
 
@@ -927,6 +971,8 @@ return (mixed) Filtered attribute value.
  build($runValidation='true')
 <
 return (mixed|false) Built actual filter value, or 'false' if validation fails.
+
+ Builds actual filter specification form 'filter' value.
 
     [$runValidation] (bool) Whether to perform validation (calling
     'validate()') before building the filter. Defaults to 'true'. If the
@@ -940,6 +986,8 @@ return (mixed|false) Built actual filter value, or 'false' if validation fails.
 <
 return (mixed) Built actual filter value.
 
+ Performs actual filter build.
+
  By default this method returns result of 'normalize()'. The child class may
  override this method providing more specific implementation.
 
@@ -949,6 +997,9 @@ return (mixed) Built actual filter value.
  normalize($runValidation='true')
 <
 return (array|bool) Normalized filter value, or 'false' if validation fails.
+
+ Normalizes filter value, replacing raw keys according to 'filterControls' and
+ 'attributeMap'.
 
     [$runValidation] (bool) Whether to perform validation (calling
     'validate()') before normalizing the filter. Defaults to 'true'. If the

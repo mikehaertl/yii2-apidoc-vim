@@ -99,6 +99,8 @@ METHOD DETAILS
 <
 return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
 
+ Resolves the table name and schema name (if any).
+
 
 
 
@@ -119,6 +121,8 @@ return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. nam
 <
 return (array) All table names in the database. The names have NO schema name prefix.
 
+ Returns all table names in the database.
+
 
 
  This method should be overridden by child classes in order to support this
@@ -136,6 +140,8 @@ return (array) All table names in the database. The names have NO schema name pr
 <
 return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
 does not exist.
+
+ Loads the metadata for the specified table.
 
 
 
@@ -197,6 +203,7 @@ does not exist.
 <
 return (\yii\db\mysql\QueryBuilder) Query builder instance
 
+ Creates a query builder for the MySQL database.
 
 
 *yii/db/mysql/Schema::createColumnSchemaBuilder*		public
@@ -204,6 +211,8 @@ return (\yii\db\mysql\QueryBuilder) Query builder instance
  createColumnSchemaBuilder($type, $length='null')
 <
 return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+
+ Create a column schema builder instance giving the type and value precision.
 
 
 
@@ -222,6 +231,8 @@ return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
  findUniqueIndexes($table)
 <
 return (array) All unique indexes for the given table.
+
+ Returns all unique indexes for the given table.
 
  Each array element is of the following structure:
 
@@ -291,6 +302,8 @@ return (array) All unique indexes for the given table.
 <
 return (string) The properly quoted table name
 
+ Quotes a table name for use in a query.
+
  A simple table name has no schema prefix.
 
     [$name] (string) Table name
@@ -301,6 +314,8 @@ return (string) The properly quoted table name
  quoteSimpleColumnName($name)
 <
 return (string) The properly quoted column name
+
+ Quotes a column name for use in a query.
 
  A simple column name has no prefix.
 
@@ -477,6 +492,8 @@ return (void)
 <
 return (void)
 
+ Resolves the table name and schema name (if any).
+
     [$table] (\yii\db\TableSchema) The table metadata object
     [$name] (string) The table name
 
@@ -487,6 +504,8 @@ return (void)
 <
 return (\yii\db\ColumnSchema) The column schema object
 
+ Loads the column information into a 'ColumnSchema' object.
+
     [$info] (array) Column information
 
 
@@ -495,6 +514,8 @@ return (\yii\db\ColumnSchema) The column schema object
  findColumns($table)
 <
 return (bool) Whether the table exists in the database
+
+ Collects the metadata of table columns.
 
     [$table] (\yii\db\TableSchema) The table metadata
 
@@ -505,6 +526,8 @@ return (bool) Whether the table exists in the database
 <
 return (string) $sql the result of 'SHOW CREATE TABLE'
 
+ Gets the CREATE TABLE sql string.
+
     [$table] (\yii\db\TableSchema) The table metadata
 
 
@@ -513,6 +536,8 @@ return (string) $sql the result of 'SHOW CREATE TABLE'
  findConstraints($table)
 <
 return (void)
+
+ Collects the foreign key column details for the given table.
 
     [$table] (\yii\db\TableSchema) The table metadata
 

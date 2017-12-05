@@ -93,6 +93,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the redis Mutex component.
+
  This method will initialize the 'redis' property to make sure it refers to a
  valid redis connection.
 
@@ -223,6 +225,8 @@ return (void)
 <
 return (bool) Lock acquiring result.
 
+ Acquires a lock by name.
+
     [$name] (string) Of the lock to be acquired. Must be unique.
     [$timeout] (int) Time to wait for lock to be released. Defaults to '0'
     meaning that method will return false immediately in case lock was already
@@ -236,6 +240,9 @@ return (bool) Lock acquiring result.
 return (bool) Lock release result: 'false' in case named lock was not found or Redis
 command failed.
 
+ Releases acquired lock. This method will return 'false' in case the lock was
+ not found or Redis command failed.
+
     [$name] (string) Of the lock to be released. This lock must already exist.
 
 
@@ -244,6 +251,8 @@ command failed.
  calculateKey($name)
 <
 return (string) A safe cache key associated with the mutex name.
+
+ Generates a unique key used for storing the mutex in Redis.
 
     [$name] (string) Mutex name.
 

@@ -259,6 +259,7 @@ return (array) View options in format: optionName => optionValue
 <
 return (\yii\httpclient\Client) Internal HTTP client.
 
+ Returns HTTP client.
 
 
 *yii/authclient/BaseClient::setHttpClient*		public
@@ -266,6 +267,8 @@ return (\yii\httpclient\Client) Internal HTTP client.
  setHttpClient($httpClient)
 <
 return (void)
+
+ Sets HTTP client to be used.
 
     [$httpClient] (array|\yii\httpclient\Client) Internal HTTP client.
 
@@ -311,6 +314,7 @@ return (void)
 <
 return (string) Service name.
 
+ Generates service name.
 
 
 *yii/authclient/BaseClient::defaultTitle*			protected
@@ -319,6 +323,7 @@ return (string) Service name.
 <
 return (string) Service title.
 
+ Generates service title.
 
 
 *yii/authclient/BaseClient::initUserAttributes*		protected
@@ -327,6 +332,7 @@ return (string) Service title.
 <
 return (array) Auth user attributes.
 
+ Initializes authenticated user attributes.
 
 
 *yii/authclient/BaseClient::defaultNormalizeUserAttributeMap*protected
@@ -334,6 +340,8 @@ return (array) Auth user attributes.
  defaultNormalizeUserAttributeMap()
 <
 return (array) Normalize attribute map.
+
+ Returns the default 'normalizeUserAttributeMap' value.
 
  Particular client may override this method in order to provide specific
  default map.
@@ -345,6 +353,8 @@ return (array) Normalize attribute map.
 <
 return (array) List of default 'viewOptions'
 
+ Returns the default 'viewOptions' value.
+
  Particular client may override this method in order to provide specific
  default view options.
 
@@ -355,6 +365,8 @@ return (array) List of default 'viewOptions'
 <
 return (\yii\httpclient\Client) HTTP client instance.
 
+ Creates HTTP client instance from reference or configuration.
+
     [$reference] (string|array) Component name or array configuration.
 
 
@@ -363,6 +375,8 @@ return (\yii\httpclient\Client) HTTP client instance.
  normalizeUserAttributes($attributes)
 <
 return (array) Normalized attributes.
+
+ Normalize given user attributes according to 'normalizeUserAttributeMap'.
 
     [$attributes] (array) Raw attributes.
 
@@ -373,6 +387,7 @@ return (array) Normalized attributes.
 <
 return (\yii\httpclient\Request) HTTP request instance.
 
+ Creates HTTP request instance.
 
 
 *yii/authclient/BaseClient::defaultRequestOptions*	protected
@@ -381,6 +396,7 @@ return (\yii\httpclient\Request) HTTP request instance.
 <
 return (array) HTTP request options.
 
+ Returns default HTTP request options.
 
 
 *yii/authclient/BaseClient::setState*			protected
@@ -388,6 +404,8 @@ return (array) HTTP request options.
  setState($key, $value)
 <
 return ($this) The object itself
+
+ Sets persistent state.
 
     [$key] (string) State key.
     [$value] (mixed) State value
@@ -399,6 +417,8 @@ return ($this) The object itself
 <
 return (mixed) State value.
 
+ Returns persistent state value.
+
     [$key] (string) State key.
 
 
@@ -407,6 +427,8 @@ return (mixed) State value.
  removeState($key)
 <
 return (bool) Success.
+
+ Removes persistent state value.
 
     [$key] (string) State key.
 
@@ -417,6 +439,7 @@ return (bool) Success.
 <
 return (string) Session key prefix.
 
+ Returns session key prefix, which is used to store internal states.
 
 
 

@@ -203,6 +203,8 @@ METHOD DETAILS
 <
 return (array) List of attribute names.
 
+ Returns the list of all attribute names of the model.
+
  This method could be overridden by child classes to define available
  attributes. Note: all attributes defined in base Active Record class should
  be always present in returned array. For example:
@@ -658,6 +660,8 @@ return (void)
 <
 return (\yii\mongodb\file\ActiveQuery) The newly created 'ActiveQuery' instance.
 
+ Creates an 'ActiveQueryInterface' instance for query purpose.
+
 
 
  The returned 'ActiveQueryInterface' instance can be further customized by
@@ -724,6 +728,7 @@ return (\yii\mongodb\file\ActiveQuery) The newly created 'ActiveQuery' instance.
 <
 return (\yii\mongodb\file\Collection) Collection instance.
 
+ Return the Mongo GridFS collection instance for this AR class.
 
 
 *yii/mongodb/file/ActiveRecord::insertInternal*		protected
@@ -746,6 +751,8 @@ return (void)
 <
 return (string) File name.
 
+ Extracts filename from given raw file value.
+
     [$file] (mixed) Raw file value.
 
 
@@ -755,6 +762,8 @@ return (string) File name.
 <
 return (\MongoGridFSFile|null) Refreshed file value.
 
+ Refreshes the 'file' attribute from file collection, using current primary
+ key.
 
 
 *yii/mongodb/file/ActiveRecord::getFileContent*		public
@@ -763,6 +772,7 @@ return (\MongoGridFSFile|null) Refreshed file value.
 <
 return (null|string) File content.
 
+ Returns the associated file content.
 
 
 *yii/mongodb/file/ActiveRecord::writeFile*		public
@@ -770,6 +780,8 @@ return (null|string) File content.
  writeFile($filename)
 <
 return (bool) Whether the operation was successful.
+
+ Writes the the internal file content into the given filename.
 
     [$filename] (string) Full filename to be written.
 
@@ -780,6 +792,10 @@ return (bool) Whether the operation was successful.
 <
 return (resource) File stream resource.
 
+ This method returns a stream resource that can be used with all file
+ functions in PHP, which deal with reading files. The contents of the file are
+ pulled out of MongoDB on the fly, so that the whole file does not have to be
+ loaded into memory first.
 
 
 

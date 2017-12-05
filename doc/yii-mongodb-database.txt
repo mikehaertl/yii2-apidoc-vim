@@ -90,6 +90,8 @@ METHOD DETAILS
 <
 return (\yii\mongodb\Collection) Mongo collection instance.
 
+ Returns the Mongo collection with the given name.
+
     [$name] (string) Collection name
     [$refresh] (bool) Whether to reload the collection instance even if it is
     found in the cache.
@@ -100,6 +102,8 @@ return (\yii\mongodb\Collection) Mongo collection instance.
  getFileCollection($prefix=''fs'', $refresh='false')
 <
 return (\yii\mongodb\file\Collection) Mongo GridFS collection.
+
+ Returns Mongo GridFS collection with given prefix.
 
     [$prefix] (string) Collection prefix.
     [$refresh] (bool) Whether to reload the collection instance even if it is
@@ -112,6 +116,8 @@ return (\yii\mongodb\file\Collection) Mongo GridFS collection.
 <
 return (\yii\mongodb\Collection) Collection instance.
 
+ Selects collection with given name.
+
     [$name] (string) Collection name.
 
 
@@ -120,6 +126,8 @@ return (\yii\mongodb\Collection) Collection instance.
  selectFileCollection($prefix)
 <
 return (\yii\mongodb\file\Collection) File collection instance.
+
+ Selects GridFS collection with given prefix.
 
     [$prefix] (string) File collection prefix.
 
@@ -130,6 +138,8 @@ return (\yii\mongodb\file\Collection) File collection instance.
 <
 return (\yii\mongodb\Command) Command instance.
 
+ Creates MongoDB command associated with this database.
+
     [$document] (array) Command document contents.
 
 
@@ -138,6 +148,8 @@ return (\yii\mongodb\Command) Command instance.
  createCollection($name, $options='[]')
 <
 return (bool) Whether operation was successful.
+
+ Creates new collection.
 
  Note: Mongo creates new collections automatically on the first demand, this
  method makes sense only for the migration script or for the case you need to
@@ -153,6 +165,8 @@ return (bool) Whether operation was successful.
 <
 return (bool) Whether operation was successful.
 
+ Drops specified collection.
+
     [$name] (string) Name of the collection
 
 
@@ -161,6 +175,8 @@ return (bool) Whether operation was successful.
  listCollections($condition='[]', $options='[]')
 <
 return (array) Collections information.
+
+ Returns the list of available collections in this database.
 
     [$condition] (array) Filter condition.
     [$options] (array) Options list.
@@ -171,6 +187,8 @@ return (array) Collections information.
  clearCollections()
 <
 return (void)
+
+ Clears internal collection lists.
 
  This method can be used to break cycle references between 'Database' and
  'Collection' instances.

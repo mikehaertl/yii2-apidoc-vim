@@ -110,6 +110,8 @@ METHOD DETAILS
 <
 return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
 
+ Resolves the table name and schema name (if any).
+
     [$name] (string) The table name
 
 
@@ -118,6 +120,9 @@ return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. nam
  findSchemaNames()
 <
 return (array) All schema names in the database, except system schemas.
+
+ Returns all schema names in the database, including the default one but not
+ system schemas.
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception.
@@ -128,6 +133,8 @@ return (array) All schema names in the database, except system schemas.
  findTableNames($schema='''')
 <
 return (array) All table names in the database. The names have NO schema name prefix.
+
+ Returns all table names in the database.
 
  This method should be overridden by child classes in order to support this
  feature because the default implementation simply throws an exception.
@@ -143,6 +150,8 @@ return (array) All table names in the database. The names have NO schema name pr
 return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
 does not exist.
 
+ Loads the metadata for the specified table.
+
     [$name] (string) Table name
 
 
@@ -151,6 +160,8 @@ does not exist.
  createColumnSchema()
 <
 return (\yii\db\ColumnSchema) Column schema instance.
+
+ Creates a column schema for the database.
 
  This method may be overridden by child classes to create a DBMS-specific
  column schema.
@@ -162,6 +173,8 @@ return (\yii\db\ColumnSchema) Column schema instance.
 <
 return (\yii\db\TableSchema|null) Table metadata. 'null' if the named table does not
 exist.
+
+ Obtains the metadata for the named table.
 
     [$name] (string) Table name. The table name may contain schema name if
     any. Do not quote the table name.
@@ -176,6 +189,8 @@ exist.
 return (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
 array element is an instance of 'TableSchema' or its child class.
 
+ Returns the metadata for all tables in the database.
+
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name.
     [$refresh] (bool) Whether to fetch the latest available table schemas. If
@@ -188,6 +203,8 @@ array element is an instance of 'TableSchema' or its child class.
 <
 return (string[]) All schema names in the database, except system schemas.
 
+ Returns all schema names in the database, except system schemas.
+
     [$refresh] (bool) Whether to fetch the latest available schema names. If
     this is false, schema names fetched previously (if available) will be
     returned.
@@ -198,6 +215,8 @@ return (string[]) All schema names in the database, except system schemas.
  getTableNames($schema='''', $refresh='false')
 <
 return (string[]) All table names in the database.
+
+ Returns all table names in the database.
 
     [$schema] (string) The schema of the tables. Defaults to empty string,
     meaning the current or default schema name. If not empty, the returned
@@ -221,6 +240,8 @@ return (\yii\db\QueryBuilder) The query builder for this connection.
 <
 return (int) The PDO type
 
+ Determines the PDO type for the given PHP data value.
+
     [$data] (mixed) The data whose PDO type is to be determined
 
 
@@ -229,6 +250,8 @@ return (int) The PDO type
  refresh()
 <
 return (void)
+
+ Refreshes the schema.
 
  This method cleans up all cached table schemas so that they can be re-created
  later to reflect the database schema change.
@@ -239,6 +262,8 @@ return (void)
  refreshTableSchema($name)
 <
 return (void)
+
+ Refreshes the particular table schema.
 
  This method cleans up cached table schema so that it can be re-created later
  to reflect the database schema change.
@@ -252,6 +277,8 @@ return (void)
 <
 return (\yii\db\QueryBuilder) Query builder instance
 
+ Creates a query builder for the database.
+
  This method may be overridden by child classes to create a DBMS-specific
  query builder.
 
@@ -261,6 +288,8 @@ return (\yii\db\QueryBuilder) Query builder instance
  createColumnSchemaBuilder($type, $length='null')
 <
 return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+
+ Create a column schema builder instance giving the type and value precision.
 
  This method may be overridden by child classes to create a DBMS-specific
  column schema builder.
@@ -275,6 +304,8 @@ return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
  findUniqueIndexes($table)
 <
 return (array) All unique indexes for the given table.
+
+ Returns all unique indexes for the given table.
 
  Each array element is of the following structure:
 
@@ -296,6 +327,8 @@ return (array) All unique indexes for the given table.
 return (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
+ Returns the ID of the last inserted row or sequence value.
+
     [$sequenceName] (string) Name of the sequence object (required by some
     DBMS)
 
@@ -315,6 +348,8 @@ return (bool) Whether this DBMS supports
 <
 return (void)
 
+ Creates a new savepoint.
+
     [$name] (string) The savepoint name
 
 
@@ -323,6 +358,8 @@ return (void)
  releaseSavepoint($name)
 <
 return (void)
+
+ Releases an existing savepoint.
 
     [$name] (string) The savepoint name
 
@@ -333,6 +370,8 @@ return (void)
 <
 return (void)
 
+ Rolls back to a previously created savepoint.
+
     [$name] (string) The savepoint name
 
 
@@ -341,6 +380,8 @@ return (void)
  setTransactionIsolationLevel($level)
 <
 return (void)
+
+ Sets the isolation level of the current transaction.
 
     [$level] (string) The transaction isolation level to use for this
     transaction. This can be one of 'Transaction::READ_UNCOMMITTED',
@@ -355,6 +396,8 @@ return (void)
 <
 return (array|false) Primary key values or false if the command fails
 
+ Executes the INSERT command, returning primary key values.
+
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column data (name => value) to be inserted into the
     table.
@@ -365,6 +408,8 @@ return (array|false) Primary key values or false if the command fails
  quoteValue($str)
 <
 return (string) The properly quoted string
+
+ Quotes a string value for use in a query.
 
  Note that if the parameter is not a string, it will be returned without
  change.
@@ -377,6 +422,8 @@ return (string) The properly quoted string
  quoteTableName($name)
 <
 return (string) The properly quoted table name
+
+ Quotes a table name for use in a query.
 
  If the table name contains schema prefix, the prefix will also be properly
  quoted. If the table name is already quoted or contains '(' or '{{', then
@@ -391,6 +438,8 @@ return (string) The properly quoted table name
 <
 return (string) The properly quoted column name
 
+ Quotes a column name for use in a query.
+
  If the column name contains prefix, the prefix will also be properly quoted.
  If the column name is already quoted or contains '(', ''' or '{{', then this
  method will do nothing.
@@ -404,6 +453,8 @@ return (string) The properly quoted column name
 <
 return (string) The properly quoted table name
 
+ Quotes a simple table name for use in a query.
+
  A simple table name should contain the table name only without any schema
  prefix. If the table name is already quoted, this method will do nothing.
 
@@ -415,6 +466,8 @@ return (string) The properly quoted table name
  quoteSimpleColumnName($name)
 <
 return (string) The properly quoted column name
+
+ Quotes a simple column name for use in a query.
 
  A simple column name should contain the column name only without any prefix.
  If the column name is already quoted or is the asterisk character '*', this
@@ -429,6 +482,8 @@ return (string) The properly quoted column name
 <
 return (string) The real name of the given table name
 
+ Returns the actual name of a given table name.
+
  This method will strip off curly brackets from the given table name and
  replace the percentage character '%' with 'Connection::tablePrefix'.
 
@@ -441,6 +496,8 @@ return (string) The real name of the given table name
 <
 return (string) PHP type name
 
+ Extracts the PHP type from abstract DB type.
+
     [$column] (\yii\db\ColumnSchema) The column schema information
 
 
@@ -449,6 +506,8 @@ return (string) PHP type name
  convertException($e, $rawSql)
 <
 return (\yii\db\Exception) 
+
+ Converts a DB exception to a more concrete one if possible.
 
     [$e] (\Exception) 
     [$rawSql] (string) SQL that produced exception
@@ -460,6 +519,8 @@ return (\yii\db\Exception)
 <
 return (bool) Whether a SQL statement is for read purpose.
 
+ Returns a value indicating whether a SQL statement is for read purpose.
+
     [$sql] (string) The SQL statement
 
 
@@ -468,6 +529,8 @@ return (bool) Whether a SQL statement is for read purpose.
  getCacheKey($name)
 <
 return (mixed) The cache key
+
+ Returns the cache key for the specified table name.
 
     [$name] (string) The table name
 
@@ -478,6 +541,8 @@ return (mixed) The cache key
 <
 return (string) The cache tag name
 
+ Returns the cache tag name.
+
  This allows 'refresh()' to invalidate all cached table schemas.
 
 
@@ -486,6 +551,8 @@ return (string) The cache tag name
  getTableMetadata($name, $type, $refresh)
 <
 return (mixed) Metadata.
+
+ Returns the metadata of the given type for the given table.
 
  If there's no metadata in the cache, this method will call a ''loadTable' .
  ucfirst($type)' named method with the table name to obtain the metadata.
@@ -503,6 +570,8 @@ return (mixed) Metadata.
 <
 return (array) Array of metadata.
 
+ Returns the metadata of the given type for all tables in the given schema.
+
  This method will call a ''getTable' . ucfirst($type)' named method with the
  table name and the refresh flag to obtain the metadata.
 
@@ -519,6 +588,8 @@ return (array) Array of metadata.
 <
 return (void)
 
+ Sets the metadata of the given type for the given table.
+
     [$name] (string) Table name.
     [$type] (string) Metadata type.
     [$data] (mixed) Metadata.
@@ -529,6 +600,8 @@ return (void)
  normalizePdoRowKeyCase($row, $multiple)
 <
 return (array) Normalized row or rows.
+
+ Changes row's array key case to lower if PDO's one is set to uppercase.
 
     [$row] (array) Row's array or an array of row's arrays.
     [$multiple] (bool) Whether multiple rows or a single row passed.

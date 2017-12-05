@@ -24,6 +24,8 @@ METHOD DETAILS
 return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
+ Executes the query and returns all results as an array.
+
     [$db] (\yii\db\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -36,6 +38,8 @@ will be returned.
 return (array|bool) The first row (in terms of an array) of the query result. False
 is returned if the query results in nothing.
 
+ Executes the query and returns a single row of result.
+
     [$db] (\yii\db\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -46,6 +50,8 @@ is returned if the query results in nothing.
  count($q=''*'', $db='null')
 <
 return (int) Number of records.
+
+ Returns the number of records.
 
     [$q] (string) The COUNT expression. Defaults to '*'.
     [$db] (\yii\db\Connection) The database connection used to execute the
@@ -59,6 +65,8 @@ return (int) Number of records.
 <
 return (bool) Whether the query result contains any row of data.
 
+ Returns a value indicating whether the query result contains any row of data.
+
     [$db] (\yii\db\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -69,6 +77,8 @@ return (bool) Whether the query result contains any row of data.
  indexBy($column)
 <
 return ($this) The query object itself
+
+ Sets the 'indexBy' property.
 
     [$column] (string|callable) The name of the column by which the query
     results should be indexed by. This can also be a callable (e.g. anonymous
@@ -88,6 +98,8 @@ return ($this) The query object itself
  where($condition)
 <
 return ($this) The query object itself
+
+ Sets the WHERE part of the query.
 
  The '$condition' specified as an array can be in one of the following two
  formats:
@@ -211,6 +223,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional WHERE condition to the existing one.
+
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
@@ -223,6 +237,8 @@ return ($this) The query object itself
  orWhere($condition)
 <
 return ($this) The query object itself
+
+ Adds an additional WHERE condition to the existing one.
 
  The new condition and the existing one will be joined using the 'OR'
  operator.
@@ -237,6 +253,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the WHERE part of the query ignoring empty parameters.
+
     [$condition] (array) The conditions that should be put in the WHERE part.
     Please refer to 'where()' on how to specify this parameter.
 
@@ -246,6 +264,9 @@ return ($this) The query object itself
  andFilterWhere($condition)
 <
 return ($this) The query object itself
+
+ Adds an additional WHERE condition to the existing one ignoring empty
+ parameters.
 
  The new condition and the existing one will be joined using the 'AND'
  operator.
@@ -260,6 +281,9 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds an additional WHERE condition to the existing one ignoring empty
+ parameters.
+
  The new condition and the existing one will be joined using the 'OR'
  operator.
 
@@ -272,6 +296,8 @@ return ($this) The query object itself
  orderBy($columns)
 <
 return ($this) The query object itself
+
+ Sets the ORDER BY part of the query.
 
     [$columns] (string|array) The columns (and the directions) to be ordered
     by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
@@ -286,6 +312,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds additional ORDER BY columns to the query.
+
     [$columns] (string|array) The columns (and the directions) to be ordered
     by. Columns can be specified in either a string (e.g. "id ASC, name DESC")
     or an array (e.g. '['id' => SORT_ASC, 'name' => SORT_DESC]'). The method
@@ -299,6 +327,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the LIMIT part of the query.
+
     [$limit] (int|null) The limit. Use null or negative value to disable
     limit.
 
@@ -309,6 +339,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the OFFSET part of the query.
+
     [$offset] (int|null) The offset. Use null or negative value to disable
     offset.
 
@@ -318,6 +350,9 @@ return ($this) The query object itself
  emulateExecution($value='true')
 <
 return ($this) The query object itself.
+
+ Sets whether to emulate query execution, preventing any interaction with data
+ storage.
 
  After this mode is enabled, methods, returning query results like 'one()',
  'all()', 'exists()' and so on, will return empty or false values. You should

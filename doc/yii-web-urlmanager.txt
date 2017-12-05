@@ -160,6 +160,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes UrlManager.
 
 
 *yii/web/UrlManager::__get*				public
@@ -278,6 +279,8 @@ return (void)
 <
 return (void)
 
+ Adds additional URL rules.
+
  This method will call 'buildRules()' to parse the given rule declarations and
  then append or insert them to the existing 'rules'.
 
@@ -297,6 +300,8 @@ return (void)
 return (\yii\web\UrlRuleInterface[]) The rule objects built from the given rule
 declarations
 
+ Builds URL rule objects from the given rule declarations.
+
     [$rules] (array) The rule declarations. Each array element represents a
     single rule declaration. Please refer to 'rules' for the acceptable rule
     formats.
@@ -310,6 +315,8 @@ return (array|bool) The route and the associated parameters. The latter is alway
 empty if 'enablePrettyUrl' is 'false'. 'false' is returned if the current
 request cannot be successfully parsed.
 
+ Parses the user request.
+
     [$request] (\yii\web\Request) The request component
 
 
@@ -318,6 +325,8 @@ request cannot be successfully parsed.
  createUrl($params)
 <
 return (string) The created URL
+
+ Creates a URL using the given route and query parameters.
 
  You may specify the route as a string, e.g., 'site/index'. You may also use
  an array if you want to specify additional query parameters for the URL being
@@ -349,6 +358,9 @@ return (string) The created URL
 <
 return (bool) 'true' if result should be cached, 'false' if not.
 
+ Returns the value indicating whether result of 'createUrl()' of rule should
+ be cached in internal cache.
+
     [$rule] (\yii\web\UrlRuleInterface) 
 
 
@@ -357,6 +369,8 @@ return (bool) 'true' if result should be cached, 'false' if not.
  getUrlFromCache($cacheKey, $route, $params)
 <
 return (bool|string) The created URL
+
+ Get URL from internal cache if exists.
 
     [$cacheKey] (string) Generated cache key to store data.
     [$route] (string) The route (e.g. 'site/index').
@@ -369,6 +383,8 @@ return (bool|string) The created URL
 <
 return (void)
 
+ Store rule (e.g. 'UrlRule') to internal cache.
+
     [$cacheKey] () 
     [$rule] (\yii\web\UrlRuleInterface) 
 
@@ -378,6 +394,8 @@ return (void)
  createAbsoluteUrl($params, $scheme='null')
 <
 return (string) The created URL
+
+ Creates an absolute URL using the given route and query parameters.
 
  This method prepends the URL created by 'createUrl()' with the 'hostInfo'.
 
@@ -399,6 +417,9 @@ return (string) The created URL
 return (string) The base URL that is used by 'createUrl()' to prepend to created
 URLs.
 
+ Returns the base URL that is used by 'createUrl()' to prepend to created
+ URLs.
+
  It defaults to 'Request::baseUrl'. This is mainly used when 'enablePrettyUrl'
  is 'true' and 'showScriptName' is 'false'.
 
@@ -408,6 +429,8 @@ URLs.
  setBaseUrl($value)
 <
 return (void)
+
+ Sets the base URL that is used by 'createUrl()' to prepend to created URLs.
 
  This is mainly used when 'enablePrettyUrl' is 'true' and 'showScriptName' is
  'false'.
@@ -423,6 +446,9 @@ return (void)
 return (string) The entry script URL that is used by 'createUrl()' to prepend to
 created URLs.
 
+ Returns the entry script URL that is used by 'createUrl()' to prepend to
+ created URLs.
+
  It defaults to 'Request::scriptUrl'. This is mainly used when
  'enablePrettyUrl' is 'false' or 'showScriptName' is 'true'.
 
@@ -432,6 +458,9 @@ created URLs.
  setScriptUrl($value)
 <
 return (void)
+
+ Sets the entry script URL that is used by 'createUrl()' to prepend to created
+ URLs.
 
  This is mainly used when 'enablePrettyUrl' is 'false' or 'showScriptName' is
  'true'.
@@ -447,6 +476,8 @@ return (void)
 return (string) The host info (e.g. 'http://www.example.com') that is used by
 'createAbsoluteUrl()' to prepend to created URLs.
 
+ Returns the host info that is used by 'createAbsoluteUrl()' to prepend to
+ created URLs.
 
 
 *yii/web/UrlManager::setHostInfo*				public
@@ -454,6 +485,9 @@ return (string) The host info (e.g. 'http://www.example.com') that is used by
  setHostInfo($value)
 <
 return (void)
+
+ Sets the host info that is used by 'createAbsoluteUrl()' to prepend to
+ created URLs.
 
     [$value] (string) The host info (e.g. "http://www.example.com") that is
     used by 'createAbsoluteUrl()' to prepend to created URLs.

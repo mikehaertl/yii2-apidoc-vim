@@ -267,6 +267,7 @@ return (string) Cancel URL.
 <
 return (string) Success URL value.
 
+ Creates default 'successUrl' value.
 
 
 *yii/authclient/AuthAction::defaultCancelUrl*		protected
@@ -275,6 +276,7 @@ return (string) Success URL value.
 <
 return (string) Cancel URL value.
 
+ Creates default 'cancelUrl' value.
 
 
 *yii/authclient/AuthAction::run*				public
@@ -283,6 +285,7 @@ return (string) Cancel URL value.
 <
 return (void)
 
+ Runs the action.
 
 
 *yii/authclient/AuthAction::auth*				protected
@@ -290,6 +293,8 @@ return (void)
  auth($client)
 <
 return (\yii\web\Response) Response instance.
+
+ Perform authentication for the given client.
 
     [$client] (mixed) Auth client instance.
 
@@ -300,6 +305,8 @@ return (\yii\web\Response) Response instance.
 <
 return (\yii\web\Response) Response instance.
 
+ This method is invoked in case of successful authentication via auth client.
+
     [$client] (\yii\authclient\ClientInterface) Auth client instance.
 
 
@@ -308,6 +315,8 @@ return (\yii\web\Response) Response instance.
  redirect($url, $enforceRedirect='true')
 <
 return (\yii\web\Response) Response instance.
+
+ Redirect to the given URL or simply close the popup window.
 
     [$url] (mixed) URL to redirect, could be a string or array config to
     generate a valid URL.
@@ -321,6 +330,8 @@ return (\yii\web\Response) Response instance.
 <
 return (\yii\web\Response) Response instance.
 
+ Redirect to the URL. If URL is null, 'successUrl' will be used.
+
     [$url] (string) URL to redirect.
 
 
@@ -329,6 +340,8 @@ return (\yii\web\Response) Response instance.
  redirectCancel($url='null')
 <
 return (\yii\web\Response) Response instance.
+
+ Redirect to the 'cancelUrl' or simply close the popup window.
 
     [$url] (string) URL to redirect.
 
@@ -339,6 +352,8 @@ return (\yii\web\Response) Response instance.
 <
 return (\yii\web\Response) Action response.
 
+ Performs OpenID auth flow.
+
     [$client] (\yii\authclient\OpenId) Auth client instance.
 
 
@@ -348,6 +363,8 @@ return (\yii\web\Response) Action response.
 <
 return (\yii\web\Response) Action response.
 
+ Performs OAuth1 auth flow.
+
     [$client] (\yii\authclient\OAuth1) Auth client instance.
 
 
@@ -356,6 +373,8 @@ return (\yii\web\Response) Action response.
  authOAuth2($client)
 <
 return (\yii\web\Response) Action response.
+
+ Performs OAuth2 auth flow.
 
     [$client] (\yii\authclient\OAuth2) Auth client instance.
 

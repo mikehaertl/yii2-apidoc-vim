@@ -92,6 +92,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the migration.
+
  This method will set 'db' to be the 'db' application component, if it is
  'null'.
 
@@ -311,6 +313,8 @@ return (void)
 return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
 
+ This method contains the logic to be executed when applying this migration.
+
  Child classes may override this method to provide actual migration logic.
 
 
@@ -320,6 +324,8 @@ proceed further. All other return values mean the migration succeeds.
 <
 return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
+
+ This method contains the logic to be executed when removing this migration.
 
  The default implementation throws an exception indicating the migration
  cannot be removed. Child classes may override this method if the
@@ -332,6 +338,8 @@ proceed further. All other return values mean the migration succeeds.
 <
 return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
+
+ This method contains the logic to be executed when applying this migration.
 
  This method differs from 'up()' in that the DB logic implemented here will be
  enclosed within a DB transaction. Child classes may implement this method
@@ -349,6 +357,8 @@ proceed further. All other return values mean the migration succeeds.
 return (bool) Return a false value to indicate the migration fails and should not
 proceed further. All other return values mean the migration succeeds.
 
+ This method contains the logic to be executed when removing this migration.
+
  This method differs from 'down()' in that the DB logic implemented here will
  be enclosed within a DB transaction. Child classes may implement this method
  instead of 'down()' if the DB logic needs to be within a transaction.
@@ -364,6 +374,8 @@ proceed further. All other return values mean the migration succeeds.
 <
 return (void)
 
+ Executes a SQL statement.
+
  This method executes the specified SQL statement using 'db'.
 
     [$sql] (string) The SQL statement to be executed
@@ -376,6 +388,8 @@ return (void)
  insert($table, $columns)
 <
 return (void)
+
+ Creates and executes an INSERT SQL statement.
 
  The method will properly escape the column names, and bind the values to be
  inserted.
@@ -391,6 +405,8 @@ return (void)
 <
 return (void)
 
+ Creates and executes a batch INSERT SQL statement.
+
  The method will properly escape the column names, and bind the values to be
  inserted.
 
@@ -404,6 +420,8 @@ return (void)
  update($table, $columns, $condition='\'\'', $params='[]')
 <
 return (void)
+
+ Creates and executes an UPDATE SQL statement.
 
  The method will properly escape the column names and bind the values to be
  updated.
@@ -421,6 +439,8 @@ return (void)
 <
 return (void)
 
+ Creates and executes a DELETE SQL statement.
+
     [$table] (string) The table where the data will be deleted from.
     [$condition] (array|string) The conditions that will be put in the WHERE
     part. Please refer to 'Query::where()' on how to specify conditions.
@@ -432,6 +452,8 @@ return (void)
  createTable($table, $columns, $options='null')
 <
 return (void)
+
+ Builds and executes a SQL statement for creating a new DB table.
 
  The columns in the new  table should be specified as name-definition pairs
  (e.g. 'name' => 'string'), where name stands for a column name which will be
@@ -457,6 +479,8 @@ return (void)
 <
 return (void)
 
+ Builds and executes a SQL statement for renaming a DB table.
+
     [$table] (string) The table to be renamed. The name will be properly
     quoted by the method.
     [$newName] (string) The new table name. The name will be properly quoted
@@ -469,6 +493,8 @@ return (void)
 <
 return (void)
 
+ Builds and executes a SQL statement for dropping a DB table.
+
     [$table] (string) The table to be dropped. The name will be properly
     quoted by the method.
 
@@ -479,6 +505,8 @@ return (void)
 <
 return (void)
 
+ Builds and executes a SQL statement for truncating a DB table.
+
     [$table] (string) The table to be truncated. The name will be properly
     quoted by the method.
 
@@ -488,6 +516,8 @@ return (void)
  addColumn($table, $column, $type)
 <
 return (void)
+
+ Builds and executes a SQL statement for adding a new DB column.
 
     [$table] (string) The table that the new column will be added to. The
     table name will be properly quoted by the method.
@@ -507,6 +537,8 @@ return (void)
 <
 return (void)
 
+ Builds and executes a SQL statement for dropping a DB column.
+
     [$table] (string) The table whose column is to be dropped. The name will
     be properly quoted by the method.
     [$column] (string) The name of the column to be dropped. The name will be
@@ -518,6 +550,8 @@ return (void)
  renameColumn($table, $name, $newName)
 <
 return (void)
+
+ Builds and executes a SQL statement for renaming a column.
 
     [$table] (string) The table whose column is to be renamed. The name will
     be properly quoted by the method.
@@ -532,6 +566,8 @@ return (void)
  alterColumn($table, $column, $type)
 <
 return (void)
+
+ Builds and executes a SQL statement for changing the definition of a column.
 
     [$table] (string) The table whose column is to be changed. The table name
     will be properly quoted by the method.
@@ -551,6 +587,8 @@ return (void)
 <
 return (void)
 
+ Builds and executes a SQL statement for creating a primary key.
+
  The method will properly quote the table and column names.
 
     [$name] (string) The name of the primary key constraint.
@@ -566,6 +604,8 @@ return (void)
 <
 return (void)
 
+ Builds and executes a SQL statement for dropping a primary key.
+
     [$name] (string) The name of the primary key constraint to be removed.
     [$table] (string) The table that the primary key constraint will be
     removed from.
@@ -576,6 +616,9 @@ return (void)
  addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
 <
 return (void)
+
+ Builds a SQL statement for adding a foreign key constraint to an existing
+ table.
 
  The method will properly quote the table and column names.
 
@@ -601,6 +644,8 @@ return (void)
 <
 return (void)
 
+ Builds a SQL statement for dropping a foreign key constraint.
+
     [$name] (string) The name of the foreign key constraint to be dropped. The
     name will be properly quoted by the method.
     [$table] (string) The table whose foreign is to be dropped. The name will
@@ -612,6 +657,8 @@ return (void)
  createIndex($name, $table, $columns, $unique='false')
 <
 return (void)
+
+ Builds and executes a SQL statement for creating a new index.
 
     [$name] (string) The name of the index. The name will be properly quoted
     by the method.
@@ -631,6 +678,8 @@ return (void)
 <
 return (void)
 
+ Builds and executes a SQL statement for dropping an index.
+
     [$name] (string) The name of the index to be dropped. The name will be
     properly quoted by the method.
     [$table] (string) The table whose index is to be dropped. The name will be
@@ -642,6 +691,8 @@ return (void)
  addCommentOnColumn($table, $column, $comment)
 <
 return (void)
+
+ Builds and execute a SQL statement for adding comment to column.
 
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
@@ -657,6 +708,8 @@ return (void)
 <
 return (void)
 
+ Builds a SQL statement for adding comment to table.
+
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
     [$comment] (string) The text of the comment to be added. The comment will
@@ -668,6 +721,8 @@ return (void)
  dropCommentFromColumn($table, $column)
 <
 return (void)
+
+ Builds and execute a SQL statement for dropping comment from column.
 
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
@@ -681,6 +736,8 @@ return (void)
 <
 return (void)
 
+ Builds a SQL statement for dropping comment from table.
+
     [$table] (string) The table whose column is to be commented. The table
     name will be properly quoted by the method.
 
@@ -692,6 +749,8 @@ return (void)
 return (float) The time before the command is executed, for the time elapsed to be
 calculated.
 
+ Prepares for a command to be executed, and outputs to the console.
+
     [$description] (string) The description for the command, to be output to
     the console.
 
@@ -701,6 +760,9 @@ calculated.
  endCommand($time)
 <
 return (void)
+
+ Finalizes after the command has been executed, and outputs to the console the
+ time elapsed.
 
     [$time] (float) The time before the command was executed.
 

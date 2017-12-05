@@ -91,6 +91,7 @@ METHOD DETAILS
 <
 return (void)
 
+ {@inheritdoc}
 
 
 *yii/web/ErrorAction::__get*				public
@@ -229,6 +230,7 @@ return (void)
 <
 return (string) Result content
 
+ Runs the action.
 
 
 *yii/web/ErrorAction::renderAjaxResponse*			protected
@@ -236,6 +238,8 @@ return (string) Result content
  renderAjaxResponse()
 <
 return (string) 
+
+ Builds string that represents the exception.
 
  Normally used to generate a response to AJAX request.
 
@@ -246,6 +250,7 @@ return (string)
 <
 return (string) 
 
+ Renders a view that represents the exception.
 
 
 *yii/web/ErrorAction::getViewRenderParams*		protected
@@ -254,6 +259,7 @@ return (string)
 <
 return (array) 
 
+ Builds array of parameters that will be passed to the view.
 
 
 *yii/web/ErrorAction::findException*			protected
@@ -261,6 +267,8 @@ return (array)
  findException()
 <
 return (\Exception) 
+
+ Gets exception from the 'yii\web\ErrorHandler|ErrorHandler' component.
 
  In case there is no exception in the component, treat as the action has been
  invoked not from error handler, but by direct route, so '404 Not Found' error
@@ -273,6 +281,7 @@ return (\Exception)
 <
 return (mixed) 
 
+ Gets the code from the 'exception'.
 
 
 *yii/web/ErrorAction::getExceptionName*			protected
@@ -281,6 +290,7 @@ return (mixed)
 <
 return (string) 
 
+ Returns the exception name, followed by the code (if present).
 
 
 *yii/web/ErrorAction::getExceptionMessage*		protected
@@ -288,6 +298,8 @@ return (string)
  getExceptionMessage()
 <
 return (string) 
+
+ Returns the 'exception' message for 'yii\base\UserException' only.
 
  For other cases 'defaultMessage' will be returned.
 

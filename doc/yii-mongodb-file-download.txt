@@ -137,6 +137,8 @@ return (array) Document to be downloaded.
 <
 return (void)
 
+ Sets data of the document to be downloaded.
+
  Document can be specified by its ID, in this case its data will be fetched
  automatically via extra query.
 
@@ -150,6 +152,7 @@ return (void)
 <
 return (int) File size.
 
+ Returns the size of the associated file.
 
 
 *yii/mongodb/file/Download::getFilename*			public
@@ -158,6 +161,7 @@ return (int) File size.
 <
 return (string|null) File name.
 
+ Returns associated file's filename.
 
 
 *yii/mongodb/file/Download::getChunkCursor*		public
@@ -165,6 +169,8 @@ return (string|null) File name.
  getChunkCursor($refresh='false')
 <
 return (\MongoDB\Driver\Cursor) Chuck list cursor.
+
+ Returns file chunks read cursor.
 
     [$refresh] (bool) Whether to recreate cursor, if it is already exist.
 
@@ -175,6 +181,8 @@ return (\MongoDB\Driver\Cursor) Chuck list cursor.
 <
 return (\Iterator) Chuck cursor iterator.
 
+ Returns iterator for the file chunks cursor.
+
     [$refresh] (bool) Whether to recreate iterator, if it is already exist.
 
 
@@ -183,6 +191,8 @@ return (\Iterator) Chuck cursor iterator.
  toStream($stream)
 <
 return (int) Number of written bytes.
+
+ Saves file into the given stream.
 
     [$stream] (resource) Stream, which file should be saved to.
 
@@ -193,6 +203,8 @@ return (int) Number of written bytes.
 <
 return (int) Number of written bytes.
 
+ Saves download to the physical file.
+
     [$filename] (string) Name of the physical file.
 
 
@@ -202,6 +214,7 @@ return (int) Number of written bytes.
 <
 return (string) File content.
 
+ Returns a string of the bytes in the associated file.
 
 
 *yii/mongodb/file/Download::toResource*			public
@@ -209,6 +222,8 @@ return (string) File content.
  toResource()
 <
 return (resource) Stream resource.
+
+ Returns an opened stream resource, which can be used to read file.
 
  Note: each invocation of this method will create new file resource.
 
@@ -218,6 +233,8 @@ return (resource) Stream resource.
  substr($start, $length)
 <
 return (string|false) The extracted part of file or 'false' on failure
+
+ Return part of a file.
 
     [$start] (int) Reading start position. If non-negative, the returned
     string will start at the start'th position in file, counting from zero. If
@@ -236,6 +253,7 @@ return (string|false) The extracted part of file or 'false' on failure
 <
 return (string) File content.
 
+ Alias of 'toString()' method.
 
 
 *yii/mongodb/file/Download::write*			public
@@ -243,6 +261,8 @@ return (string) File content.
  write($filename)
 <
 return (int) Number of written bytes.
+
+ Alias of 'toFile()' method.
 
     [$filename] (string) Name of the physical file.
 
@@ -253,6 +273,7 @@ return (int) Number of written bytes.
 <
 return (resource) File stream resource.
 
+ Returns persistent stream resource, which can be used to read file.
 
 
 

@@ -151,6 +151,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -230,6 +232,8 @@ return (void)
 <
 return (mixed) The attribute value
 
+ Returns the value for the current attributes.
+
 
 
  This method is called by 'evaluateAttributes()'. Its return value will be
@@ -247,6 +251,9 @@ return (mixed) The attribute value
 <
 return (bool) 
 
+ Checks whether the new slug generation is needed This method is called by
+ 'getValue' to check whether the new slug generation is needed.
+
  You may override it to customize checking.
 
 
@@ -255,6 +262,8 @@ return (bool)
  generateSlug($slugParts)
 <
 return (string) The conversion result.
+
+ This method is called by 'getValue' to generate the slug.
 
  You may override it to customize slug generation. The default implementation
  calls '\yii\helpers\Inflector::slug()' on the input strings concatenated by
@@ -270,6 +279,9 @@ return (string) The conversion result.
 <
 return (string) Unique slug
 
+ This method is called by 'getValue' when 'ensureUnique' is true to generate
+ the unique slug.
+
  Calls 'generateUniqueSlug' until generated slug is unique and returns it.
 
     [$slug] (string) Basic slug value
@@ -281,6 +293,8 @@ return (string) Unique slug
 <
 return (bool) Whether slug is unique.
 
+ Checks if given slug value is unique.
+
     [$slug] (string) Slug value
 
 
@@ -289,6 +303,8 @@ return (bool) Whether slug is unique.
  generateUniqueSlug($baseSlug, $iteration)
 <
 return (string) New slug value
+
+ Generates slug using configured callback or increment of iteration.
 
     [$baseSlug] (string) Base slug value
     [$iteration] (int) Iteration number
@@ -299,6 +315,8 @@ return (string) New slug value
  isEmpty($slugPart)
 <
 return (bool) Whether $slugPart empty or not.
+
+ Checks if $slugPart is empty string or null.
 
     [$slugPart] (string) One of attributes that is used for slug generation.
 

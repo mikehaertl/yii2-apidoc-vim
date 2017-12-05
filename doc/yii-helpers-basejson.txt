@@ -32,6 +32,8 @@ METHOD DETAILS
 <
 return (string) The encoding result.
 
+ Encodes the given value into a JSON string.
+
  The method enhances 'json_encode()' by supporting JavaScript expressions. In
  particular, the method will not encode a JavaScript expression that is
  represented in terms of a 'JsExpression' object.
@@ -52,6 +54,9 @@ return (string) The encoding result.
 <
 return (string) The encoding result
 
+ Encodes the given value into a JSON string HTML-escaping entities so it is
+ safe to be embedded in HTML code.
+
  The method enhances 'json_encode()' by supporting JavaScript expressions. In
  particular, the method will not encode a JavaScript expression that is
  represented in terms of a 'JsExpression' object.
@@ -69,6 +74,8 @@ return (string) The encoding result
 <
 return (mixed) The PHP data
 
+ Decodes the given JSON string into a PHP data structure.
+
     [$json] (string) The JSON string to be decoded
     [$asArray] (bool) Whether to return objects in terms of associative
     arrays.
@@ -80,6 +87,9 @@ return (mixed) The PHP data
 <
 return (void)
 
+ Handles 'encode()' and 'decode()' errors by throwing exceptions with the
+ respective error message.
+
     [$lastError] (int) Error code from
     [json_last_error()](http://php.net/manual/en/function.json-last-error.php).
 
@@ -89,6 +99,8 @@ return (void)
  processData($data, $expressions, $expPrefix)
 <
 return (mixed) The processed data
+
+ Pre-processes the data before sending it to 'json_encode()'.
 
     [$data] (mixed) The data to be processed
     [$expressions] (array) Collection of JavaScript expressions

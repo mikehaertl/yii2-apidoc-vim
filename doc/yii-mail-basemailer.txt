@@ -236,6 +236,8 @@ return (\yii\web\View) View instance.
 <
 return (\yii\web\View) View instance.
 
+ Creates view instance from given configuration.
+
     [$config] (array) View configuration.
 
 
@@ -244,6 +246,9 @@ return (\yii\web\View) View instance.
  compose($view='null', $params='[]')
 <
 return (\yii\mail\MessageInterface) Message instance.
+
+ Creates a new message instance and optionally composes its body content via
+ view rendering.
 
     [$view] (string|array|null) The view to be used for rendering the message
     body. This can be:
@@ -275,6 +280,8 @@ return (\yii\mail\MessageInterface) Message instance.
 <
 return (\yii\mail\MessageInterface) Message instance.
 
+ Creates a new message instance.
+
  The newly created instance will be initialized with the configuration
  specified by 'messageConfig'. If the configuration does not specify a
  'class', the 'messageClass' will be used as the class of the new message
@@ -286,6 +293,8 @@ return (\yii\mail\MessageInterface) Message instance.
  send($message)
 <
 return (bool) Whether the message has been sent successfully
+
+ Sends the given email message.
 
  This method will log a message about the email being sent. If
  'useFileTransport' is true, it will save the email as a file under
@@ -302,6 +311,8 @@ return (bool) Whether the message has been sent successfully
 <
 return (int) Number of messages that are successfully sent.
 
+ Sends multiple messages at once.
+
  The default implementation simply calls 'send()' multiple times. Child
  classes may override this method to implement more efficient way of sending
  multiple messages.
@@ -314,6 +325,8 @@ return (int) Number of messages that are successfully sent.
  render($view, $params='[]', $layout='false')
 <
 return (string) The rendering result.
+
+ Renders the specified view with optional parameters and layout.
 
  The view will be rendered using the 'view' component.
 
@@ -331,6 +344,8 @@ return (string) The rendering result.
 <
 return (bool) Whether the message is sent successfully
 
+ Sends the specified message.
+
  This method should be implemented by child classes with the actual email
  sending logic.
 
@@ -342,6 +357,8 @@ return (bool) Whether the message is sent successfully
  saveMessage($message)
 <
 return (bool) Whether the message is saved successfully
+
+ Saves the message as a file under 'fileTransportPath'.
 
     [$message] (\yii\mail\MessageInterface) 
 
@@ -380,6 +397,8 @@ return (void)
 <
 return (bool) Whether to continue sending an email.
 
+ This method is invoked right before mail send.
+
  You may override this method to do last-minute preparation for the message.
  If you override this method, please make sure you call the parent
  implementation first.
@@ -392,6 +411,8 @@ return (bool) Whether to continue sending an email.
  afterSend($message, $isSuccessful)
 <
 return (void)
+
+ This method is invoked right after mail was send.
 
  You may override this method to do some postprocessing or logging based on
  mail send status. If you override this method, please make sure you call the

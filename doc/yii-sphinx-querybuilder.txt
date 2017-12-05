@@ -53,6 +53,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$connection] (\yii\sphinx\Connection) The Sphinx connection.
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties
@@ -124,6 +126,8 @@ return (array) The generated SQL statement (the first array element) and the
 corresponding parameters to be bound to the SQL statement (the second array
 element). The parameters returned include those provided in '$params'.
 
+ Generates a SELECT SQL statement from a 'Query' object.
+
     [$query] (\yii\sphinx\Query) The 'Query' object from which the SQL
     statement will be generated
     [$params] (array) The parameters to be bound to the generated SQL
@@ -136,6 +140,8 @@ element). The parameters returned include those provided in '$params'.
  insert($index, $columns, $params)
 <
 return (string) The INSERT SQL
+
+ Creates an INSERT SQL statement.
 
  For example,
 
@@ -160,6 +166,8 @@ return (string) The INSERT SQL
 <
 return (string) The INSERT SQL
 
+ Creates an REPLACE SQL statement.
+
  For example,
 
    $sql = $queryBuilder->replace('idx_user', [
@@ -183,6 +191,8 @@ return (string) The INSERT SQL
 <
 return (string) Generated SQL
 
+ Generates INSERT/REPLACE SQL statement.
+
     [$statement] (string) Statement ot be generated.
     [$index] (string) The affected index name.
     [$columns] (array) The column data (name => value).
@@ -195,6 +205,8 @@ return (string) Generated SQL
  batchInsert($index, $columns, $rows, $params)
 <
 return (string) The batch INSERT SQL statement
+
+ Generates a batch INSERT SQL statement.
 
  For example,
 
@@ -219,6 +231,8 @@ return (string) The batch INSERT SQL statement
 <
 return (string) The batch INSERT SQL statement
 
+ Generates a batch REPLACE SQL statement.
+
  For example,
 
    $sql = $queryBuilder->batchReplace('idx_user', ['id', 'name', 'age'], [
@@ -242,6 +256,8 @@ return (string) The batch INSERT SQL statement
 <
 return (string) Generated SQL
 
+ Generates a batch INSERT/REPLACE SQL statement.
+
     [$statement] (string) Statement ot be generated.
     [$index] (string) The affected index name.
     [$columns] (array) The column data (name => value).
@@ -255,6 +271,8 @@ return (string) Generated SQL
  update($index, $columns, $condition, $params, $options)
 <
 return (string) The UPDATE SQL
+
+ Creates an UPDATE SQL statement.
 
  For example,
 
@@ -279,6 +297,8 @@ return (string) The UPDATE SQL
 <
 return (string) The DELETE SQL
 
+ Creates a DELETE SQL statement.
+
  For example,
 
    $sql = $queryBuilder->delete('idx_user', 'status = 0');
@@ -298,6 +318,8 @@ return (string) The DELETE SQL
 <
 return (string) The SQL statement for truncating an index.
 
+ Builds a SQL statement for truncating an index.
+
     [$index] (string) The index to be truncated. The name will be properly
     quoted by the method.
 
@@ -307,6 +329,9 @@ return (string) The SQL statement for truncating an index.
  callSnippets($index, $source, $match, $options, $params)
 <
 return (string) The SQL statement for call snippets.
+
+ Builds a SQL statement for call snippet from provided data and query, using
+ specified index settings.
 
     [$index] (string) Name of the index, from which to take the text
     processing settings.
@@ -323,6 +348,9 @@ return (string) The SQL statement for call snippets.
  callKeywords($index, $text, $fetchStatistic, $params)
 <
 return (string) The SQL statement for call keywords.
+
+ Builds a SQL statement for returning tokenized and normalized forms of the
+ keywords, and, optionally, keyword statistics.
 
     [$index] (string) The name of the index from which to take the text
     processing settings
@@ -405,6 +433,9 @@ return (string) The HAVING clause built from 'Query::$having'.
 <
 return (string) The SQL completed with ORDER BY/LIMIT/OFFSET (if any)
 
+ Builds the ORDER BY and LIMIT/OFFSET clauses and appends them to the given
+ SQL.
+
     [$sql] (string) The existing SQL (without ORDER BY/LIMIT/OFFSET)
     [$orderBy] (array) The order by columns. See 'Query::orderBy' for more
     details on how to specify this parameter.
@@ -437,6 +468,8 @@ return (string) The LIMIT and OFFSET clauses built from 'query'.
 <
 return (string) The processing result
 
+ Processes columns and properly quote them if necessary.
+
  It will join all columns into a string with comma as separators.
 
     [$columns] (string|array) The columns to be processed
@@ -447,6 +480,9 @@ return (string) The processing result
  buildCondition($indexes, $condition, $params)
 <
 return (string) The generated SQL expression
+
+ Parses the condition specification and generates the corresponding SQL
+ expression.
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -461,6 +497,8 @@ return (string) The generated SQL expression
 <
 return (string) The generated SQL expression
 
+ Creates a condition based on column-value pairs.
+
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
     [$condition] (array) The condition specification.
@@ -472,6 +510,8 @@ return (string) The generated SQL expression
  buildAndCondition($indexes, $operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Connects two or more SQL expressions with the 'AND' or 'OR' operator.
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -486,6 +526,8 @@ return (string) The generated SQL expression
 <
 return (string) The generated SQL expression
 
+ Inverts an SQL expressions with 'NOT' operator.
+
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
     [$operator] (string) The operator to use for connecting the given operands
@@ -498,6 +540,8 @@ return (string) The generated SQL expression
  buildBetweenCondition($indexes, $operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Creates an SQL expressions with the 'BETWEEN' operator.
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -512,6 +556,8 @@ return (string) The generated SQL expression
  buildInCondition($indexes, $operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Creates an SQL expressions with the 'IN' operator.
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -544,6 +590,8 @@ return (string) The generated SQL expression
 <
 return (string) The generated SQL expression
 
+ Creates an SQL expressions with the 'LIKE' operator.
+
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
     [$operator] (string) The operator to use (e.g. 'LIKE', 'NOT LIKE', 'OR
@@ -573,6 +621,8 @@ return (string) The generated SQL expression
  buildSimpleCondition($indexes, $operator, $operands, $params)
 <
 return (string) The generated SQL expression
+
+ Creates an SQL expressions like '"column" operator value'.
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query
@@ -618,6 +668,8 @@ return (string) The FACET clause build from 'query'
 return (string) SHOW META query, if it does not required 
   - empty string.
 
+ Builds SHOW META query.
+
     [$showMeta] (bool|string|\yii\db\Expression) Show meta specification.
     [$params] (array) The binding parameters to be populated
 
@@ -627,6 +679,8 @@ return (string) SHOW META query, if it does not required
  composeColumnValue($indexes, $columnName, $value, $params)
 <
 return (string) SQL expression, which represents column value
+
+ Composes column value for SQL, taking in account the column type.
 
     [$indexes] (\yii\sphinx\IndexSchema[]) List of indexes, which affected by
     query

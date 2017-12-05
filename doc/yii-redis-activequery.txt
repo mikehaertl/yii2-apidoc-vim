@@ -81,6 +81,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
     object
@@ -91,6 +93,8 @@ return (void)
  init()
 <
 return (void)
+
+ Initializes the object.
 
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event. If you override this
@@ -330,6 +334,8 @@ return (void)
 return (array|\yii\redis\ActiveRecord[]) The query results. If the query results in
 nothing, an empty array will be returned.
 
+ Executes the query and returns all results as an array.
+
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -343,6 +349,8 @@ return (\yii\redis\ActiveRecord|array|null) A single row of query result. Depend
 on the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. Null will be returned if the query results in nothing.
 
+ Executes the query and returns a single row of result.
+
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -353,6 +361,8 @@ ActiveRecord object. Null will be returned if the query results in nothing.
  count($q=''*'', $db='null')
 <
 return (int) Number of records
+
+ Returns the number of records.
 
     [$q] (string) The COUNT expression. This parameter is ignored by this
     implementation.
@@ -367,6 +377,8 @@ return (int) Number of records
 <
 return (bool) Whether the query result contains any row of data.
 
+ Returns a value indicating whether the query result contains any row of data.
+
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
     be used.
@@ -378,6 +390,8 @@ return (bool) Whether the query result contains any row of data.
 <
 return (array) The first column of the query result. An empty array is returned if
 the query results in nothing.
+
+ Executes the query and returns the first column of the result.
 
     [$column] (string) Name of the column to select
     [$db] (\yii\redis\Connection) The database connection used to execute the
@@ -391,6 +405,8 @@ the query results in nothing.
 <
 return (int) Number of records
 
+ Returns the number of records.
+
     [$column] (string) The column to sum up
     [$db] (\yii\redis\Connection) The database connection used to execute the
     query. If this parameter is not given, the 'db' application component will
@@ -402,6 +418,8 @@ return (int) Number of records
  average($column, $db='null')
 <
 return (int) The average of the specified column values.
+
+ Returns the average of the specified column values.
 
     [$column] (string) The column name or expression. Make sure you properly
     quote column names in the expression.
@@ -416,6 +434,8 @@ return (int) The average of the specified column values.
 <
 return (int) The minimum of the specified column values.
 
+ Returns the minimum of the specified column values.
+
     [$column] (string) The column name or expression. Make sure you properly
     quote column names in the expression.
     [$db] (\yii\redis\Connection) The database connection used to execute the
@@ -428,6 +448,8 @@ return (int) The minimum of the specified column values.
  max($column, $db='null')
 <
 return (int) The maximum of the specified column values.
+
+ Returns the maximum of the specified column values.
 
     [$column] (string) The column name or expression. Make sure you properly
     quote column names in the expression.
@@ -443,6 +465,8 @@ return (int) The maximum of the specified column values.
 return (string) The value of the specified attribute in the first record of the query
 result. Null is returned if the query result is empty.
 
+ Returns the query result as a scalar value.
+
  The value returned will be the specified attribute in the first record of the
  query results.
 
@@ -457,6 +481,8 @@ result. Null is returned if the query result is empty.
  executeScript($db, $type, $columnName='null')
 <
 return (array|bool|null|string) 
+
+ Executes a script created by 'LuaScriptBuilder'
 
     [$db] (\yii\redis\Connection|null) The database connection used to execute
     the query. If this parameter is not given, the 'db' application component

@@ -175,6 +175,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Register this error handler.
 
 
 *yii/base/ErrorHandler::unregister*			public
@@ -183,6 +184,8 @@ return (void)
 <
 return (void)
 
+ Unregisters this error handler by restoring the PHP error and exception
+ handlers.
 
 
 *yii/base/ErrorHandler::handleException*			public
@@ -190,6 +193,8 @@ return (void)
  handleException($exception)
 <
 return (void)
+
+ Handles uncaught PHP exceptions.
 
  This method is implemented as a PHP exception handler.
 
@@ -202,6 +207,8 @@ return (void)
 <
 return (void)
 
+ Handles exception thrown during exception processing in 'handleException()'.
+
     [$exception] (\Exception|\Throwable) Exception that was thrown during main
     exception processing.
     [$previousException] (\Exception) Main exception processed in
@@ -213,6 +220,8 @@ return (void)
  handleHhvmError($code, $message, $file, $line, $context, $backtrace)
 <
 return (bool) Whether the normal error handler continues.
+
+ Handles HHVM execution errors such as warnings and notices.
 
  This method is used as a HHVM error handler. It will store exception that
  will be used in fatal error handler
@@ -231,6 +240,8 @@ return (bool) Whether the normal error handler continues.
 <
 return (bool) Whether the normal error handler continues.
 
+ Handles PHP execution errors such as warnings and notices.
+
  This method is used as a PHP error handler. It will simply raise an
  'ErrorException'.
 
@@ -246,6 +257,7 @@ return (bool) Whether the normal error handler continues.
 <
 return (void)
 
+ Handles fatal PHP errors.
 
 
 *yii/base/ErrorHandler::renderException*			protected
@@ -253,6 +265,8 @@ return (void)
  renderException($exception)
 <
 return (void)
+
+ Renders the exception.
 
     [$exception] (\Exception) The exception to be rendered.
 
@@ -263,6 +277,8 @@ return (void)
 <
 return (void)
 
+ Logs the given exception.
+
     [$exception] (\Exception) The exception to be logged
 
 
@@ -272,6 +288,7 @@ return (void)
 <
 return (void)
 
+ Removes all output echoed before calling this method.
 
 
 *yii/base/ErrorHandler::convertExceptionToError*		public
@@ -279,6 +296,8 @@ return (void)
  convertExceptionToError($exception)
 <
 return (void)
+
+ Converts an exception into a PHP error.
 
  This method can be used to convert exceptions inside of methods like
  '__toString()' to PHP errors because exceptions cannot be thrown inside of
@@ -292,6 +311,8 @@ return (void)
  convertExceptionToString($exception)
 <
 return (string) The string representation of the exception.
+
+ Converts an exception into a simple string.
 
     [$exception] (\Exception|\Error) The exception being converted
 

@@ -51,6 +51,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the migration.
+
  This method will set 'db' to be the 'db' application component, if it is
  null.
 
@@ -171,6 +173,8 @@ return (void)
 <
 return (void)
 
+ Creates new collection with the specified options.
+
     [$collection] (string|array) Name of the collection
     [$options] (array) Collection options in format: "name" => "value"
 
@@ -181,6 +185,8 @@ return (void)
 <
 return (void)
 
+ Drops existing collection.
+
     [$collection] (string|array) Name of the collection
 
 
@@ -189,6 +195,8 @@ return (void)
  createIndexes($collection, $indexes)
 <
 return (void)
+
+ Creates indexes in the collection.
 
     [$collection] (string|array) Name of the collection
     [$indexes] (array) Indexes specifications.
@@ -200,6 +208,8 @@ return (void)
 <
 return (void)
 
+ Drops collection indexes by name.
+
     [$collection] (string|array) Name of the collection
     [$indexes] (string) Wildcard for name of the indexes to be dropped.
 
@@ -209,6 +219,8 @@ return (void)
  createIndex($collection, $columns, $options='[]')
 <
 return (void)
+
+ Creates an index on the collection and the specified fields.
 
     [$collection] (string|array) Name of the collection
     [$columns] (array|string) Column name or list of column names.
@@ -221,6 +233,8 @@ return (void)
 <
 return (void)
 
+ Drop indexes for specified column(s).
+
     [$collection] (string|array) Name of the collection
     [$columns] (string|array) Column name or list of column names.
 
@@ -231,6 +245,8 @@ return (void)
 <
 return (void)
 
+ Drops all indexes for specified collection.
+
     [$collection] (string|array) Name of the collection.
 
 
@@ -239,6 +255,8 @@ return (void)
  insert($collection, $data, $options='[]')
 <
 return (\MongoDB\BSON\ObjectID) New record id instance.
+
+ Inserts new data into collection.
 
     [$collection] (array|string) Collection name.
     [$data] (array|object) Data to be inserted.
@@ -251,6 +269,8 @@ return (\MongoDB\BSON\ObjectID) New record id instance.
 <
 return (array) Inserted data, each row will have "_id" key assigned to it.
 
+ Inserts several new rows into collection.
+
     [$collection] (array|string) Collection name.
     [$rows] (array) Array of arrays or objects to be inserted.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -261,6 +281,8 @@ return (array) Inserted data, each row will have "_id" key assigned to it.
  update($collection, $condition, $newData, $options='[]')
 <
 return (int|bool) Number of updated documents or whether operation was successful.
+
+ Updates the rows, which matches given criteria by given data.
 
  Note: for "multiple" mode Mongo requires explicit strategy "$set" or "$inc"
  to be specified for the "newData". If no strategy is passed "$set" will be
@@ -278,6 +300,8 @@ return (int|bool) Number of updated documents or whether operation was successfu
 <
 return (\MongoDB\BSON\ObjectID) Updated/new record id instance.
 
+ Update the existing database data, otherwise insert this data
+
     [$collection] (array|string) Collection name.
     [$data] (array|object) Data to be updated/inserted.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -288,6 +312,8 @@ return (\MongoDB\BSON\ObjectID) Updated/new record id instance.
  remove($collection, $condition='[]', $options='[]')
 <
 return (int|bool) Number of updated documents or whether operation was successful.
+
+ Removes data from the collection.
 
     [$collection] (array|string) Collection name.
     [$condition] (array) Description of records to remove.
@@ -300,6 +326,8 @@ return (int|bool) Number of updated documents or whether operation was successfu
 <
 return (string) Collection name.
 
+ Composes string representing collection name.
+
     [$collection] (array|string) Collection name.
 
 
@@ -308,6 +336,8 @@ return (string) Collection name.
  log($string)
 <
 return (void)
+
+ Logs the incoming message.
 
  By default this method sends message to 'stdout'.
 
@@ -320,6 +350,8 @@ return (void)
 <
 return (void)
 
+ Marks the beginning of a code block for profiling.
+
     [$token] (string) Token for the code block.
 
 
@@ -328,6 +360,8 @@ return (void)
  endProfile($token)
 <
 return (void)
+
+ Marks the end of a code block for profiling.
 
     [$token] (string) Token for the code block.
 

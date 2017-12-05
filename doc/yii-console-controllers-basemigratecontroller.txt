@@ -261,6 +261,9 @@ METHOD DETAILS
 <
 return (bool) Whether the action should continue to be executed.
 
+ This method is invoked right before an action is to be executed (after all
+ possible filters.) It checks the existence of the 'migrationPath'.
+
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -370,6 +373,9 @@ return (bool) Whether the action should continue to be executed.
 <
 return (string[]) The names of the options valid for the action
 
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
+
 
 
  Child classes may override this method to specify possible options.
@@ -459,6 +465,8 @@ return (string[]) The names of the options valid for the action
 return (int) The status of the action execution. 0 means normal, other values mean
 abnormal.
 
+ Upgrades the application by applying new migrations.
+
  For example,
 
  ''' yii migrate     # apply all new migrations yii migrate 3   # apply the
@@ -474,6 +482,8 @@ abnormal.
 <
 return (int) The status of the action execution. 0 means normal, other values mean
 abnormal.
+
+ Downgrades the application by reverting old migrations.
 
  For example,
 
@@ -492,6 +502,8 @@ abnormal.
 return (int) The status of the action execution. 0 means normal, other values mean
 abnormal.
 
+ Redoes the last few migrations.
+
  This command will first revert the specified migrations, and then apply them
  again. For example,
 
@@ -509,6 +521,8 @@ abnormal.
  actionTo($version)
 <
 return (void)
+
+ Upgrades or downgrades till the specified version.
 
  Can also downgrade versions to the certain apply time in the past by
  providing a UNIX timestamp or a string parseable by the strtotime() function.
@@ -537,6 +551,8 @@ return (void)
 <
 return (int) CLI exit code
 
+ Modifies the migration history to the specified version.
+
  No actual migration will be performed.
 
  ''' yii migrate/mark 101129_185401                        # using timestamp
@@ -557,6 +573,8 @@ return (int) CLI exit code
 <
 return (void)
 
+ Truncates the whole database and starts the migration from the beginning.
+
  ''' yii migrate/fresh '''
 
 
@@ -565,6 +583,8 @@ return (void)
  actionHistory($limit='10')
 <
 return (void)
+
+ Displays the migration history.
 
  This command will show the list of migrations that have been applied so far.
  For example,
@@ -583,6 +603,8 @@ return (void)
 <
 return (void)
 
+ Displays the un-applied new migrations.
+
  This command will show the new migrations that have not been applied. For
  example,
 
@@ -599,6 +621,8 @@ return (void)
  actionCreate($name)
 <
 return (void)
+
+ Creates a new migration.
 
  This command creates a new migration using the available migration template.
  After using this command, developers should modify the created migration
@@ -630,6 +654,8 @@ return (void)
 <
 return (bool) Whether the migration is successful
 
+ Upgrades with the specified migration class.
+
     [$class] (string) The migration class name
 
 
@@ -638,6 +664,8 @@ return (bool) Whether the migration is successful
  migrateDown($class)
 <
 return (bool) Whether the migration is successful
+
+ Downgrades with the specified migration class.
 
     [$class] (string) The migration class name
 
@@ -648,6 +676,8 @@ return (bool) Whether the migration is successful
 <
 return (\yii\db\MigrationInterface) The migration instance
 
+ Creates a new migration instance.
+
     [$class] (string) The migration class name
 
 
@@ -656,6 +686,8 @@ return (\yii\db\MigrationInterface) The migration instance
  includeMigrationFile($class)
 <
 return (void)
+
+ Includes the migration file for a given migration class name.
 
  This function will do nothing on namespaced migrations, which are loaded by
  autoloading automatically. It will include the migration file, by searching
@@ -670,6 +702,8 @@ return (void)
 <
 return (void)
 
+ Migrates to the specified apply time in the past.
+
     [$time] (int) UNIX timestamp value.
 
 
@@ -678,6 +712,8 @@ return (void)
  migrateToVersion($version)
 <
 return (int) CLI exit code
+
+ Migrates to the certain version.
 
     [$version] (string) Name in the full format.
 
@@ -688,6 +724,7 @@ return (int) CLI exit code
 <
 return (array) List of new migrations
 
+ Returns the migrations that are not applied.
 
 
 *yii/console/controllers/BaseMigrateController::generateMigrationSourceCode*protected
@@ -695,6 +732,8 @@ return (array) List of new migrations
  generateMigrationSourceCode($params)
 <
 return (string) Generated PHP code.
+
+ Generates new migration source PHP code.
 
  Child class may override this method, adding extra logic or variation to the
  process.
@@ -713,6 +752,8 @@ return (string) Generated PHP code.
 <
 return (void)
 
+ Truncates the database.
+
  This method should be overwritten in subclasses to implement the task of
  clearing the database.
 
@@ -724,6 +765,8 @@ return (void)
 return (int|null) The maximum name length for a migration or 'null' if no limit
 applies.
 
+ Return the maximum name length for a migration.
+
  Subclasses may override this method to define a limit.
 
 
@@ -732,6 +775,8 @@ applies.
  getMigrationHistory($limit)
 <
 return (array) The migration history
+
+ Returns the migration history.
 
     [$limit] (int) The maximum number of records in the history to be
     returned. 'null' for "no limit".
@@ -743,6 +788,8 @@ return (array) The migration history
 <
 return (void)
 
+ Adds new migration entry to the history.
+
     [$version] (string) Migration version name.
 
 
@@ -751,6 +798,8 @@ return (void)
  removeMigrationHistory($version)
 <
 return (void)
+
+ Removes existing migration from the history.
 
     [$version] (string) Migration version name.
 

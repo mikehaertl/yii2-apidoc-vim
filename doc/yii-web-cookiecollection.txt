@@ -33,6 +33,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$cookies] (array) The cookies that this collection initially contains.
     This should be an array of name-value pairs.
     [$config] (array) Name-value pairs that will be used to initialize the
@@ -95,6 +97,8 @@ return (void)
 <
 return (\ArrayIterator) An iterator for traversing the cookies in the collection.
 
+ Returns an iterator for traversing the cookies in the collection.
+
  This method is required by the SPL interface '\IteratorAggregate'. It will be
  implicitly called when you use 'foreach' to traverse the collection.
 
@@ -104,6 +108,8 @@ return (\ArrayIterator) An iterator for traversing the cookies in the collection
  count()
 <
 return (int) The number of cookies in the collection.
+
+ Returns the number of cookies in the collection.
 
  This method is required by the SPL 'Countable' interface. It will be
  implicitly called when you use 'count($collection)'.
@@ -115,6 +121,7 @@ return (int) The number of cookies in the collection.
 <
 return (int) The number of cookies in the collection.
 
+ Returns the number of cookies in the collection.
 
 
 *yii/web/CookieCollection::get*				public
@@ -124,6 +131,8 @@ return (int) The number of cookies in the collection.
 return (\yii\web\Cookie) The cookie with the specified name. Null if the named cookie
 does not exist.
 
+ Returns the cookie with the specified name.
+
     [$name] (string) The cookie name
 
 
@@ -132,6 +141,8 @@ does not exist.
  getValue($name, $defaultValue='null')
 <
 return (mixed) The value of the named cookie.
+
+ Returns the value of the named cookie.
 
     [$name] (string) The cookie name
     [$defaultValue] (mixed) The value that should be returned when the named
@@ -143,6 +154,8 @@ return (mixed) The value of the named cookie.
  has($name)
 <
 return (bool) Whether the named cookie exists
+
+ Returns whether there is a cookie with the specified name.
 
  Note that if a cookie is marked for deletion from browser, this method will
  return false.
@@ -156,6 +169,8 @@ return (bool) Whether the named cookie exists
 <
 return (void)
 
+ Adds a cookie to the collection.
+
  If there is already a cookie with the same name in the collection, it will be
  removed first.
 
@@ -167,6 +182,8 @@ return (void)
  remove($cookie, $removeFromBrowser='true')
 <
 return (void)
+
+ Removes a cookie.
 
  If '$removeFromBrowser' is true, the cookie will be removed from the browser.
  In this case, a cookie with outdated expiry will be added to the collection.
@@ -182,6 +199,7 @@ return (void)
 <
 return (void)
 
+ Removes all cookies.
 
 
 *yii/web/CookieCollection::toArray*			public
@@ -191,6 +209,7 @@ return (void)
 return (array) The array representation of the collection. The array keys are cookie
 names, and the array values are the corresponding cookie objects.
 
+ Returns the collection as a PHP array.
 
 
 *yii/web/CookieCollection::fromArray*			public
@@ -198,6 +217,8 @@ names, and the array values are the corresponding cookie objects.
  fromArray($array)
 <
 return (void)
+
+ Populates the cookie collection from an array.
 
     [$array] (array) The cookies to populate from
 
@@ -207,6 +228,8 @@ return (void)
  offsetExists($name)
 <
 return (bool) Whether the named cookie exists
+
+ Returns whether there is a cookie with the specified name.
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'isset($collection[$name])'.
@@ -221,6 +244,8 @@ return (bool) Whether the named cookie exists
 return (\yii\web\Cookie) The cookie with the specified name, null if the named cookie
 does not exist.
 
+ Returns the cookie with the specified name.
+
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$cookie = $collection[$name];'. This is
  equivalent to 'get()'.
@@ -233,6 +258,8 @@ does not exist.
  offsetSet($name, $cookie)
 <
 return (void)
+
+ Adds the cookie to the collection.
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$collection[$name] = $cookie;'. This is
@@ -247,6 +274,8 @@ return (void)
  offsetUnset($name)
 <
 return (void)
+
+ Removes the named cookie.
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'unset($collection[$name])'. This is

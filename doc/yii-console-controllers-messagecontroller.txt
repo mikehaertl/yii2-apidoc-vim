@@ -420,6 +420,9 @@ METHOD DETAILS
 <
 return (string[]) The names of the options valid for the action
 
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
+
 
 
  Child classes may override this method to specify possible options.
@@ -438,6 +441,8 @@ return (string[]) The names of the options valid for the action
 <
 return (array) The options alias names valid for the action where the keys is alias
 name for option and value is option name.
+
+ Returns option alias names.
 
 
 
@@ -517,6 +522,9 @@ name for option and value is option name.
 <
 return (int) CLI exit code
 
+ Creates a configuration file for the "extract" command using command line
+ options specified.
+
  The generated configuration file contains parameters required for source code
  messages extraction. You may use this configuration file with the "extract"
  command.
@@ -529,6 +537,8 @@ return (int) CLI exit code
  actionConfigTemplate($filePath)
 <
 return (int) CLI exit code
+
+ Creates a configuration file template for the "extract" command.
 
  The created configuration file contains detailed instructions on how to
  customize it to fit for your needs. After customization, you may use this
@@ -543,6 +553,8 @@ return (int) CLI exit code
 <
 return (void)
 
+ Extracts messages to be translated from source code.
+
  This command will search through source code files and extract messages that
  need to be translated in different languages.
 
@@ -556,6 +568,8 @@ return (void)
  saveMessagesToDb($messages, $db, $sourceMessageTable, $messageTable, $removeUnused, $languages, $markUnused)
 <
 return (void)
+
+ Saves messages to database.
 
     [$messages] (array) 
     [$db] (\yii\db\Connection) 
@@ -572,6 +586,8 @@ return (void)
 <
 return (array) 
 
+ Extracts messages from a file.
+
     [$fileName] (string) Name of the file to extract messages from
     [$translator] (string) Name of the function used to translate messages
     [$ignoreCategories] (array) Message categories to ignore. This parameter
@@ -584,6 +600,8 @@ return (array)
 <
 return (array) Messages.
 
+ Extracts messages from a parsed PHP tokens list.
+
     [$tokens] (array) Tokens to be processed.
     [$translatorTokens] (array) Translator tokens.
     [$ignoreCategories] (array) Message categories to ignore.
@@ -594,6 +612,9 @@ return (array) Messages.
  isCategoryIgnored($category, $ignoreCategories)
 <
 return (bool) 
+
+ The method checks, whether the $category is ignored according to
+ $ignoreCategories array.
 
  Examples:
 
@@ -613,6 +634,8 @@ return (bool)
 <
 return (bool) 
 
+ Finds out if two PHP tokens are equal.
+
     [$a] (array|string) 
     [$b] (array|string) 
 
@@ -623,6 +646,8 @@ return (bool)
 <
 return (int|string) 
 
+ Finds out a line of the first non-char PHP token found.
+
     [$tokens] (array) 
 
 
@@ -631,6 +656,8 @@ return (int|string)
  saveMessagesToPHP($messages, $dirName, $overwrite, $removeUnused, $sort, $markUnused)
 <
 return (void)
+
+ Writes messages into PHP files.
 
     [$messages] (array) 
     [$dirName] (string) Name of the directory to write to
@@ -645,6 +672,8 @@ return (void)
  saveMessagesCategoryToPHP($messages, $fileName, $overwrite, $removeUnused, $sort, $category, $markUnused)
 <
 return (int) Exit code
+
+ Writes category messages into PHP file.
 
     [$messages] (array) 
     [$fileName] (string) Name of the file to write to
@@ -661,6 +690,8 @@ return (int) Exit code
 <
 return (void)
 
+ Writes messages into PO file.
+
     [$messages] (array) 
     [$dirName] (string) Name of the directory to write to
     [$overwrite] (bool) If existing file should be overwritten without backup
@@ -675,6 +706,8 @@ return (void)
  saveMessagesToPOT($messages, $dirName, $catalog)
 <
 return (void)
+
+ Writes messages into POT file.
 
     [$messages] (array) 
     [$dirName] (string) Name of the directory to write to

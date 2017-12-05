@@ -94,6 +94,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the FragmentCache object.
 
 
 *yii/widgets/FragmentCache::__get*			public
@@ -247,6 +248,8 @@ return (void)
 <
 return (void)
 
+ Marks the end of content to be cached.
+
  Content displayed before this method call and after 'init()' will be captured
  and saved in cache. This method does nothing if valid content is already
  found in cache.
@@ -284,6 +287,7 @@ return (void)
 return (string|false) The cached content. False is returned if valid content is not
 found in the cache.
 
+ Returns the cached content if available.
 
 
 *yii/widgets/FragmentCache::updateDynamicContent*		protected
@@ -291,6 +295,8 @@ found in the cache.
  updateDynamicContent($content, $placeholders)
 <
 return (string) Final content
+
+ Replaces placeholders in content by results of evaluated dynamic statements.
 
     [$content] (string) 
     [$placeholders] (array) 
@@ -301,6 +307,8 @@ return (string) Final content
  calculateKey()
 <
 return (mixed) A valid cache key
+
+ Generates a unique key used for storing the content in cache.
 
  The key generated depends on both 'id' and 'variations'.
 

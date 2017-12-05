@@ -247,6 +247,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Sets HTTP client to be used.
+
 
 
 
@@ -307,6 +309,8 @@ return (void)
 <
 return (\yii\httpclient\Client) HTTP client instance.
 
+ Creates HTTP client instance from reference or configuration.
+
 
 
 
@@ -331,6 +335,8 @@ return (\yii\httpclient\Client) HTTP client instance.
  defaultRequestOptions()
 <
 return (array) HTTP request options.
+
+ Returns default HTTP request options.
 
 
 
@@ -382,6 +388,8 @@ return (string) Return URL.
 <
 return (void)
 
+ Sets access token to be used.
+
     [$token] (array|\yii\authclient\OAuthToken) Access token or its
     configuration.
 
@@ -399,6 +407,8 @@ return (\yii\authclient\OAuthToken) Auth token instance.
  setSignatureMethod($signatureMethod)
 <
 return (void)
+
+ Set signature method to be used.
 
     [$signatureMethod] (array|\yii\authclient\signature\BaseMethod) Signature
     method instance or its array configuration.
@@ -418,6 +428,7 @@ return (\yii\authclient\signature\BaseMethod) Signature method instance.
 <
 return (string) Return URL.
 
+ Composes default 'returnUrl' value.
 
 
 *yii/authclient/BaseOAuth::createSignatureMethod*		protected
@@ -425,6 +436,8 @@ return (string) Return URL.
  createSignatureMethod($signatureMethodConfig)
 <
 return (\yii\authclient\signature\BaseMethod) Signature method instance.
+
+ Creates signature method instance from its configuration.
 
     [$signatureMethodConfig] (array) Signature method configuration.
 
@@ -435,6 +448,8 @@ return (\yii\authclient\signature\BaseMethod) Signature method instance.
 <
 return (\yii\authclient\OAuthToken) Token instance.
 
+ Creates token from its configuration.
+
     [$tokenConfig] (array) Token configuration.
 
 
@@ -444,6 +459,8 @@ return (\yii\authclient\OAuthToken) Token instance.
 <
 return (array) Response data.
 
+ Sends the given HTTP request, returning response data.
+
     [$request] (\yii\httpclient\Request) HTTP request to be sent.
 
 
@@ -452,6 +469,8 @@ return (array) Response data.
  composeUrl($url, $params='[]')
 <
 return (string) Composed URL.
+
+ Composes URL from base URL and GET params.
 
     [$url] (string) Base URL.
     [$params] (array) GET params.
@@ -463,6 +482,8 @@ return (string) Composed URL.
 <
 return ($this) The object itself.
 
+ Saves token as persistent state.
+
     [$token] (\yii\authclient\OAuthToken|null) Auth token to be saved.
 
 
@@ -472,6 +493,7 @@ return ($this) The object itself.
 <
 return (\yii\authclient\OAuthToken) Auth token.
 
+ Restores access token.
 
 
 *yii/authclient/BaseOAuth::createApiRequest*		public
@@ -479,6 +501,8 @@ return (\yii\authclient\OAuthToken) Auth token.
  createApiRequest()
 <
 return (\yii\httpclient\Request) HTTP request instance.
+
+ Creates an HTTP request for the API call.
 
  The created request will be automatically processed adding access token
  parameters and signature before sending. You may use 'createRequest()' to
@@ -491,6 +515,8 @@ return (\yii\httpclient\Request) HTTP request instance.
 <
 return (void)
 
+ Handles 'Request::EVENT_BEFORE_SEND' event.
+
  Applies 'accessToken' to the request.
 
     [$event] (\yii\httpclient\RequestEvent) Event instance.
@@ -501,6 +527,8 @@ return (void)
  api($apiSubUrl, $method=''GET'', $data='[]', $headers='[]')
 <
 return (array) API response data.
+
+ Performs request to the OAuth API returning response data.
 
  You may use 'createApiRequest()' method instead, gaining more control over
  request execution.
@@ -518,6 +546,8 @@ return (array) API response data.
 <
 return (\yii\authclient\OAuthToken) New auth token.
 
+ Gets new auth token to replace expired one.
+
     [$token] (\yii\authclient\OAuthToken) Expired auth token.
 
 
@@ -526,6 +556,8 @@ return (\yii\authclient\OAuthToken) New auth token.
  applyAccessTokenToRequest($request, $accessToken)
 <
 return (void)
+
+ Applies access token to the HTTP request instance.
 
     [$request] (\yii\httpclient\Request) HTTP request instance.
     [$accessToken] (\yii\authclient\OAuthToken) Access token instance.

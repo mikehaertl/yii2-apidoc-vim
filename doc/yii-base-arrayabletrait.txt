@@ -20,6 +20,9 @@ METHOD DETAILS
 <
 return (array) The list of field names or field definitions.
 
+ Returns the list of fields that should be returned by default by 'toArray()'
+ when no specific fields are specified.
+
  A field is a named element in the returned array by 'toArray()'.
 
  This method should return an array of field names or field definitions. If
@@ -69,6 +72,9 @@ return (array) The list of field names or field definitions.
 return (array) The list of expandable field names or field definitions. Please refer
 to 'fields()' on the format of the return value.
 
+ Returns the list of fields that can be expanded further and returned by
+ 'toArray()'.
+
  This method is similar to 'fields()' except that the list of fields returned
  by this method are not returned by default by 'toArray()'. Only when field
  names to be expanded are explicitly specified when calling 'toArray()', will
@@ -85,6 +91,8 @@ to 'fields()' on the format of the return value.
  toArray($fields='[]', $expand='[]', $recursive='true')
 <
 return (array) The array representation of the object
+
+ Converts the model into an array.
 
  This method will first identify which fields to be included in the resulting
  array by calling 'resolveFields()'. It will then turn the model into an array
@@ -110,6 +118,8 @@ return (array) The array representation of the object
 return (array) The list of fields to be exported. The array keys are the field names,
 and the array values are the corresponding object property names or PHP
 callables returning the field values.
+
+ Determines which fields can be returned by 'toArray()'.
 
  This method will check the requested fields against those declared in
  'fields()' and 'extraFields()' to determine which fields can be returned.

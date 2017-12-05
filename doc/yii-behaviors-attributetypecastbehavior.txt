@@ -226,6 +226,8 @@ METHOD DETAILS
 return (array) Events (array keys) and the corresponding event handler methods (array
 values).
 
+ Declares event handlers for the 'owner''s events.
+
 
 
  Child classes may override this method to declare what PHP callbacks should
@@ -260,6 +262,8 @@ values).
 <
 return (void)
 
+ Attaches the behavior object to the component.
+
 
 
  The default implementation will set the 'owner' property and attach event
@@ -283,6 +287,8 @@ return (void)
 <
 return (void)
 
+ Clears internal static cache of auto detected 'attributeTypes' values over
+ all affected owner classes.
 
 
 *yii/behaviors/AttributeTypecastBehavior::typecastAttributes*public
@@ -290,6 +296,8 @@ return (void)
  typecastAttributes($attributeNames='null')
 <
 return (void)
+
+ Typecast owner attributes according to 'attributeTypes'.
 
     [$attributeNames] (array) List of attribute names that should be
     type-casted. If this parameter is empty, it means any attribute listed in
@@ -302,6 +310,8 @@ return (void)
 <
 return (mixed) Typecast result.
 
+ Casts the given value to the specified type.
+
     [$value] (mixed) Value to be type-casted.
     [$type] (string|callable) Type name or typecast callable.
 
@@ -312,6 +322,7 @@ return (mixed) Typecast result.
 <
 return (array) Attribute type map.
 
+ Composes default value for 'attributeTypes' from the owner validation rules.
 
 
 *yii/behaviors/AttributeTypecastBehavior::afterValidate*	public
@@ -319,6 +330,8 @@ return (array) Attribute type map.
  afterValidate($event)
 <
 return (void)
+
+ Handles owner 'afterValidate' event, ensuring attribute typecasting.
 
     [$event] (\yii\base\Event) Event instance.
 
@@ -329,6 +342,9 @@ return (void)
 <
 return (void)
 
+ Handles owner 'afterInsert' and 'afterUpdate' events, ensuring attribute
+ typecasting.
+
     [$event] (\yii\base\Event) Event instance.
 
 
@@ -337,6 +353,8 @@ return (void)
  afterFind($event)
 <
 return (void)
+
+ Handles owner 'afterFind' event, ensuring attribute typecasting.
 
     [$event] (\yii\base\Event) Event instance.
 

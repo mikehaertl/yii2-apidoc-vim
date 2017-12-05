@@ -182,6 +182,8 @@ METHOD DETAILS
 return (array) The loaded messages. The keys are original messages, and the values
 are translated messages.
 
+ Loads the message translation for the specified $language and $category.
+
  If translation for specific locale code such as 'en-US' isn't found it tries
  more generic 'en'. When both are present, the 'en-US' messages will be merged
  over 'en'. See 'loadFallbackMessages' for details. If the $language is less
@@ -210,6 +212,9 @@ are translated messages.
 return (array) The loaded messages. The keys are original messages, and the values
 are the translated messages.
 
+ The method is normally called by 'loadMessages' to load the fallback messages
+ for the language.
+
  Method tries to load the $category messages for the $fallbackLanguage and
  adds them to the $messages array.
 
@@ -228,6 +233,8 @@ are the translated messages.
 <
 return (string) Path to message file
 
+ Returns message file path for the specified language and category.
+
     [$language] (string) The target language
 
 
@@ -236,6 +243,9 @@ return (string) Path to message file
  loadMessagesFromFile($messageFile, $category)
 <
 return (array|null) Array of messages or null if file not found
+
+ Loads the message translation for the specified language and category or
+ returns null if file doesn't exist.
 
     [$messageFile] (string) Path to message file
     [$category] (string) The message category

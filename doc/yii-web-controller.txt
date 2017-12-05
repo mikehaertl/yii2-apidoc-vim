@@ -203,6 +203,8 @@ METHOD DETAILS
 <
 return (array) The valid parameters that the action can run with.
 
+ Binds the parameters to the action.
+
  This method is invoked by '\yii\base\Action' when it begins to run with the
  given parameters. This method will check the parameter names that the action
  requires and return the provided parameters according to the requirement. If
@@ -222,6 +224,8 @@ return (array) The valid parameters that the action can run with.
  beforeAction($action)
 <
 return (bool) Whether the action should continue to run.
+
+ This method is invoked right before an action is executed.
 
 
 
@@ -326,6 +330,8 @@ return (bool) Whether the action should continue to run.
 <
 return (string) The rendering result.
 
+ Renders a view in response to an AJAX request.
+
  This method is similar to 'renderPartial()' except that it will inject into
  the rendering result with JS/CSS scripts and files which are registered with
  the view. For this reason, you should use this method instead of
@@ -343,6 +349,8 @@ return (string) The rendering result.
 <
 return (\yii\web\Response) A response that is configured to send '$data' formatted as
 JSON.
+
+ Send data formatted as JSON.
 
  This method is a shortcut for sending data formatted as JSON. It will return
  the 'Application::getResponse()|response' application component after
@@ -363,6 +371,8 @@ JSON.
 return (\yii\web\Response) A response that is configured to send '$data' formatted as
 XML.
 
+ Send data formatted as XML.
+
  This method is a shortcut for sending data formatted as XML. It will return
  the 'Application::getResponse()|response' application component after
  configuring the 'Response::$format|format' and setting the
@@ -380,6 +390,8 @@ XML.
  redirect($url, $statusCode=302)
 <
 return (\yii\web\Response) The current response object
+
+ Redirects the browser to the specified URL.
 
  This method is a shortcut to 'Response::redirect()'.
 
@@ -414,6 +426,8 @@ return (\yii\web\Response) The current response object
 <
 return (\yii\web\Response) The current response object
 
+ Redirects the browser to the home page.
+
  You can use this method in an action by returning the 'Response' directly:
 
    // stop executing this action and redirect to home page
@@ -427,6 +441,8 @@ return (\yii\web\Response) The current response object
  goBack($defaultUrl='null')
 <
 return (\yii\web\Response) The current response object
+
+ Redirects the browser to the last visited page.
 
  You can use this method in an action by returning the 'Response' directly:
 
@@ -447,6 +463,8 @@ return (\yii\web\Response) The current response object
  refresh($anchor='''')
 <
 return (\yii\web\Response) The response object itself
+
+ Refreshes the current page.
 
  This method is a shortcut to 'Response::refresh()'.
 

@@ -218,6 +218,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
     object
@@ -228,6 +230,8 @@ return (void)
  init()
 <
 return (void)
+
+ Initializes the object.
 
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event. If you override this
@@ -426,6 +430,8 @@ return (void)
 <
 return (\yii\sphinx\Command) The created DB command instance.
 
+ Creates a DB command that can be used to execute this query.
+
     [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
 
@@ -452,6 +458,8 @@ return (\yii\sphinx\Command) The created DB command instance.
 return (array) The query results. If the query results in nothing, an empty array
 will be returned.
 
+ Executes query and returns all results as an array.
+
     [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
 
@@ -461,6 +469,8 @@ will be returned.
  populate($rows)
 <
 return (array) The converted query result
+
+ Converts the raw query results into the format as specified by this query.
 
 
 
@@ -479,6 +489,8 @@ return (array) The converted query result
 return (\yii\sphinx\ActiveRecord|array|null) A single row of query result. Depending
 on the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. Null will be returned if the query results in nothing.
+
+ Executes query and returns a single row of result.
 
     [$db] (\yii\sphinx\Connection) The DB connection used to create the DB
     command. If null, the DB connection returned by 'modelClass' will be used.
@@ -733,6 +745,8 @@ return (\yii\sphinx\Connection) Default connection value.
 <
 return (array) Snippets list.
 
+ Builds a snippets from provided source data.
+
 
 
 
@@ -793,6 +807,10 @@ return (array) Snippets list.
 <
 return ($this) The query object itself
 
+ Sets the 'snippetCallback' to 'fetchSnippetSourceFromModels()', which allows
+ to fetch the snippet source strings from the Active Record models, using
+ method 'ActiveRecord::getSnippetSource()'.
+
  For example:
 
    class Article extends ActiveRecord
@@ -814,6 +832,9 @@ return ($this) The query object itself
  fetchSnippetSourceFromModels($models)
 <
 return (array) Snippet source strings
+
+ Fetches the source for the snippets using 'ActiveRecord::getSnippetSource()'
+ method.
 
     [$models] (\yii\sphinx\ActiveRecord[]) Raw query result rows.
 

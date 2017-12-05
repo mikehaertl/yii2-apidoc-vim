@@ -32,6 +32,8 @@ METHOD DETAILS
 <
 return (string) The normalized file/directory path
 
+ Normalizes a file/directory path.
+
  The normalization does the following work:
 
 
@@ -56,6 +58,8 @@ return (string) The normalized file/directory path
 return (string) The matching localized file, or the original file if the localized
 version is not found. If the target and the source language codes are the
 same, the original file will be returned.
+
+ Returns the localized version of a specified file.
 
  The searching is based on the specified language code. In particular, a file
  with the same name will be looked for under the subdirectory whose name is
@@ -84,6 +88,8 @@ same, the original file will be returned.
 return (string) The MIME type (e.g. 'text/plain'). Null is returned if the MIME type
 cannot be determined.
 
+ Determines the MIME type of the specified file.
+
  This method will first try to determine the MIME type based on
  [finfo_open](http://php.net/manual/en/function.finfo-open.php). If the
  'fileinfo' extension is not installed, it will fall back to
@@ -108,6 +114,8 @@ cannot be determined.
 return (string|null) The MIME type. Null is returned if the MIME type cannot be
 determined.
 
+ Determines the MIME type based on the extension name of the specified file.
+
  This method will use a local map between extension names and MIME types.
 
     [$file] (string) The file name.
@@ -121,6 +129,8 @@ determined.
  getExtensionsByMimeType($mimeType, $magicFile='null')
 <
 return (array) The extensions corresponding to the specified MIME type
+
+ Determines the extensions by given MIME type.
 
  This method will use a local map between extension names and MIME types.
 
@@ -136,6 +146,8 @@ return (array) The extensions corresponding to the specified MIME type
 <
 return (array) The mapping from file extensions to MIME types
 
+ Loads MIME types from the specified file.
+
     [$magicFile] (string) The path (or alias) of the file that contains all
     available MIME type information. If this is not set, the file specified by
     'mimeMagicFile' will be used.
@@ -146,6 +158,8 @@ return (array) The mapping from file extensions to MIME types
  copyDirectory($src, $dst, $options='[]')
 <
 return (void)
+
+ Copies a whole directory as another one.
 
  The files and sub-directories will also be copied over.
 
@@ -213,6 +227,8 @@ return (void)
 <
 return (void)
 
+ Removes a directory (and all its content) recursively.
+
     [$dir] (string) The directory to be deleted recursively.
     [$options] (array) Options for directory remove. Valid options are:
 
@@ -229,6 +245,8 @@ return (void)
 <
 return (array) Files found under the directory, in no particular order. Ordering
 depends on the files system used.
+
+ Returns the files found under the specified directory and subdirectories.
 
     [$dir] (string) The directory under which the files will be looked for.
     [$options] (array) Options for file searching. Valid options are:
@@ -283,6 +301,8 @@ depends on the files system used.
 <
 return (bool) Whether the file or directory satisfies the filtering options.
 
+ Checks if the given file path satisfies the filtering options.
+
     [$path] (string) The path of the file or directory to be checked
     [$options] (array) The filtering options. See 'findFiles()' for
     explanations of the supported options.
@@ -293,6 +313,8 @@ return (bool) Whether the file or directory satisfies the filtering options.
  createDirectory($path, $mode=509, $recursive='true')
 <
 return (bool) Whether the directory is created successfully
+
+ Creates a new directory.
 
  This method is similar to the PHP 'mkdir()' function except that it uses
  'chmod()' to set the permission of the created directory in order to avoid

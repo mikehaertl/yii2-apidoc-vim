@@ -69,6 +69,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -193,6 +195,8 @@ return (void)
 <
 return (void)
 
+ Loads the fixture data.
+
  The default implementation will first reset the MongoDB collection and then
  populate it with the data returned by 'getData()'.
 
@@ -263,6 +267,8 @@ return (void)
 <
 return (array) The data rows to be inserted into the collection.
 
+ Returns the fixture data.
+
  This method is called by 'loadData()' to get the needed fixture data.
 
  The default implementation will try to return the fixture data by including
@@ -279,6 +285,7 @@ return (array) The data rows to be inserted into the collection.
 <
 return (\yii\mongodb\Collection) Related collection.
 
+ Returns collection used by this fixture.
 
 
 *yii/mongodb/ActiveFixture::getCollectionName*		protected
@@ -287,6 +294,7 @@ return (\yii\mongodb\Collection) Related collection.
 <
 return (array|string) Related collection name
 
+ Returns collection name used by this fixture.
 
 
 *yii/mongodb/ActiveFixture::resetCollection*		protected
@@ -294,6 +302,9 @@ return (array|string) Related collection name
  resetCollection()
 <
 return (void)
+
+ Removes all existing data from the specified collection and resets sequence
+ number if any.
 
  This method is called before populating fixture data into the collection
  associated with this fixture.

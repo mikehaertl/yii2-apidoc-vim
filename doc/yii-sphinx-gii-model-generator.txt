@@ -208,6 +208,8 @@ METHOD DETAILS
 <
 return (array) Validation rules
 
+ Returns the validation rules for attributes.
+
 
 
  Validation rules are used by 'validate()' to check if attribute values are
@@ -309,6 +311,8 @@ return (array) Validation rules
  attributeLabels()
 <
 return (array) Attribute labels (name => label)
+
+ Returns the attribute labels.
 
 
 
@@ -520,6 +524,9 @@ return (string) Name of the code generator
 <
 return (\yii\gii\CodeFile[]) A list of code files to be created.
 
+ Generates the code based on the current user input and the specified code
+ template files.
+
 
 
  This is the main method that child classes should implement. Please refer to
@@ -536,6 +543,8 @@ return (\yii\gii\CodeFile[]) A list of code files to be created.
 return (array) List of code template files that are required. They should be file
 paths relative to 'templatePath'.
 
+ Returns a list of code template files that are required.
+
 
 
  Derived classes usually should override this method if they require the
@@ -549,6 +558,8 @@ paths relative to 'templatePath'.
  stickyAttributes()
 <
 return (array) List of sticky attributes
+
+ Returns the list of sticky attributes.
 
 
 
@@ -564,6 +575,8 @@ return (array) List of sticky attributes
 <
 return (array) The list of hint messages
 
+ Returns the list of hint messages.
+
 
 
  The array keys are the attribute names, and the array values are the
@@ -578,6 +591,8 @@ return (array) The list of hint messages
  autoCompleteData()
 <
 return (array) The list of auto complete values
+
+ Returns the list of auto complete values.
 
 
 
@@ -682,6 +697,8 @@ return (string) The detailed description of the generator.
 <
 return (array) The generated attribute labels (name => label)
 
+ Generates the attribute labels for the specified table.
+
     [$table] (\yii\db\TableSchema) The table schema
 
 
@@ -690,6 +707,8 @@ return (array) The generated attribute labels (name => label)
  generateRules($index)
 <
 return (array) The generated validation rules
+
+ Generates validation rules for the specified index.
 
     [$index] (\yii\sphinx\IndexSchema) The index schema
 
@@ -700,6 +719,7 @@ return (array) The generated validation rules
 <
 return (void)
 
+ Validates the 'db' attribute.
 
 
 *yii/sphinx/gii/model/Generator::validateNamespace*	public
@@ -708,6 +728,7 @@ return (void)
 <
 return (void)
 
+ Validates the 'ns' attribute.
 
 
 *yii/sphinx/gii/model/Generator::validateModelClass*	public
@@ -716,6 +737,7 @@ return (void)
 <
 return (void)
 
+ Validates the 'modelClass' attribute.
 
 
 *yii/sphinx/gii/model/Generator::validateIndexName*	public
@@ -724,6 +746,7 @@ return (void)
 <
 return (void)
 
+ Validates the 'indexName' attribute.
 
 
 *yii/sphinx/gii/model/Generator::getIndexNames*		protected
@@ -740,6 +763,8 @@ return (array) The index names that match the pattern specified by 'indexName'.
 <
 return (string) The generated table name
 
+ Generates the table name by considering table prefix.
+
  If 'useIndexPrefix' is false, the table name will be returned without change.
 
     [$indexName] (string) The table name (which may contain schema prefix)
@@ -750,6 +775,8 @@ return (string) The generated table name
  generateClassName($indexName)
 <
 return (string) The generated class name
+
+ Generates a class name from the specified table name.
 
     [$indexName] (string) The table name (which may contain schema prefix)
 

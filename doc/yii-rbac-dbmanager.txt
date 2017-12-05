@@ -116,6 +116,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the application component.
+
  This method overrides the parent implementation by establishing the database
  connection.
 
@@ -237,6 +239,8 @@ return (void)
 return (\yii\rbac\Item) The auth item corresponding to the specified name. Null is
 returned if no such item.
 
+ Returns the named auth item.
+
 
 
 
@@ -251,6 +255,8 @@ returned if no such item.
  getItems($type)
 <
 return (\yii\rbac\Item[]) The auth items of the specified type.
+
+ Returns the items of the specified type.
 
 
 
@@ -268,6 +274,8 @@ return (\yii\rbac\Item[]) The auth items of the specified type.
 <
 return (bool) Whether the auth item is successfully added to the system
 
+ Adds an auth item to the RBAC system.
+
 
 
 
@@ -282,6 +290,8 @@ return (bool) Whether the auth item is successfully added to the system
  addRule($rule)
 <
 return (bool) Whether the rule is successfully added to the system
+
+ Adds a rule to the RBAC system.
 
 
 
@@ -298,6 +308,8 @@ return (bool) Whether the rule is successfully added to the system
 <
 return (bool) Whether the role or permission is successfully removed
 
+ Removes an auth item from the RBAC system.
+
 
 
 
@@ -312,6 +324,8 @@ return (bool) Whether the role or permission is successfully removed
  removeRule($rule)
 <
 return (bool) Whether the rule is successfully removed
+
+ Removes a rule from the RBAC system.
 
 
 
@@ -328,6 +342,8 @@ return (bool) Whether the rule is successfully removed
 <
 return (bool) Whether the auth item is successfully updated
 
+ Updates an auth item in the RBAC system.
+
 
 
 
@@ -343,6 +359,8 @@ return (bool) Whether the auth item is successfully updated
  updateRule($name, $rule)
 <
 return (bool) Whether the rule is successfully updated
+
+ Updates a rule to the RBAC system.
 
 
 
@@ -421,6 +439,8 @@ return (bool) Whether the rule is successfully updated
 return (\yii\rbac\Role[]) All roles directly assigned to the user. The array is
 indexed by the role names.
 
+ Returns the roles that are assigned to the user via 'assign()'.
+
 
 
  Note that child roles that are not assigned directly to the user will not be
@@ -439,6 +459,8 @@ indexed by the role names.
 return (\yii\rbac\Role[]) Child roles. The array is indexed by the role names. First
 element is an instance of the parent Role itself.
 
+ Returns child roles of the role specified. Depth isn't limited.
+
 
 
 
@@ -454,6 +476,8 @@ element is an instance of the parent Role itself.
 <
 return (\yii\rbac\Permission[]) All permissions that the role represents. The array
 is indexed by the permission names.
+
+ Returns all permissions that the specified role represents.
 
 
 
@@ -471,6 +495,8 @@ is indexed by the permission names.
 return (\yii\rbac\Permission[]) All permissions that the user has. The array is
 indexed by the permission names.
 
+ Returns all permissions that the user has.
+
 
 
 
@@ -487,6 +513,8 @@ indexed by the permission names.
 return (null|\yii\rbac\Rule) The rule object, or null if the specified name does not
 correspond to a rule.
 
+ Returns the rule of the specified name.
+
 
 
 
@@ -502,6 +530,8 @@ correspond to a rule.
 <
 return (\yii\rbac\Rule[]) The rules indexed by the rule names
 
+ Returns all rules available in the system.
+
 
 
 
@@ -514,6 +544,8 @@ return (\yii\rbac\Rule[]) The rules indexed by the rule names
  canAddChild($parent, $child)
 <
 return (bool) Possibility of adding
+
+ Checks the possibility of adding a child to parent.
 
 
 
@@ -531,6 +563,8 @@ return (bool) Possibility of adding
 <
 return (bool) Whether the child successfully added
 
+ Adds an item as a child of another item.
+
 
 
 
@@ -546,6 +580,8 @@ return (bool) Whether the child successfully added
  removeChild($parent, $child)
 <
 return (bool) Whether the removal is successful
+
+ Removes a child from its parent.
 
 
 
@@ -564,6 +600,8 @@ return (bool) Whether the removal is successful
 <
 return (bool) Whether the removal is successful
 
+ Removed all children form their parent.
+
 
 
  Note, the children items are not deleted. Only the parent-child relationships
@@ -579,6 +617,8 @@ return (bool) Whether the removal is successful
  hasChild($parent, $child)
 <
 return (bool) Whether '$child' is already a child of '$parent'
+
+ Returns a value indicating whether the child already exists for the parent.
 
 
 
@@ -596,6 +636,8 @@ return (bool) Whether '$child' is already a child of '$parent'
 <
 return (\yii\rbac\Item[]) The child permissions and/or roles
 
+ Returns the child permissions and/or roles.
+
 
 
 
@@ -610,6 +652,8 @@ return (\yii\rbac\Item[]) The child permissions and/or roles
  assign($role, $userId)
 <
 return (\yii\rbac\Assignment) The role assignment information.
+
+ Assigns a role to a user.
 
 
 
@@ -627,6 +671,8 @@ return (\yii\rbac\Assignment) The role assignment information.
 <
 return (bool) Whether the revoking is successful
 
+ Revokes a role from a user.
+
 
 
 
@@ -643,6 +689,8 @@ return (bool) Whether the revoking is successful
 <
 return (bool) Whether the revoking is successful
 
+ Revokes all roles from a user.
+
 
 
 
@@ -658,6 +706,8 @@ return (bool) Whether the revoking is successful
 <
 return (null|\yii\rbac\Assignment) The assignment information. Null is returned if
 the role is not assigned to the user.
+
+ Returns the assignment information regarding a role and a user.
 
 
 
@@ -676,6 +726,8 @@ the role is not assigned to the user.
 return (\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
 will be returned if there is no role assigned to the user.
 
+ Returns all role assignment information for the specified user.
+
 
 
 
@@ -692,6 +744,8 @@ will be returned if there is no role assigned to the user.
 return (string[]) The ids. An empty array will be returned if role is not assigned to
 any user.
 
+ Returns all role assignment information for the specified role.
+
     [$roleName] (string) 
 
 
@@ -700,6 +754,9 @@ any user.
  removeAll()
 <
 return (void)
+
+ Removes all authorization data, including roles, permissions, rules, and
+ assignments.
 
 
 
@@ -714,6 +771,8 @@ return (void)
 <
 return (void)
 
+ Removes all permissions.
+
 
 
  All parent child relations will be adjusted accordingly.
@@ -726,6 +785,8 @@ return (void)
  removeAllRoles()
 <
 return (void)
+
+ Removes all roles.
 
 
 
@@ -740,6 +801,8 @@ return (void)
 <
 return (void)
 
+ Removes all rules.
+
 
 
  All roles and permissions which have rules will be adjusted accordingly.
@@ -752,6 +815,8 @@ return (void)
  removeAllAssignments()
 <
 return (void)
+
+ Removes all role assignments.
 
 
 
@@ -777,6 +842,9 @@ return (void)
 <
 return (bool) Whether the operations can be performed by the user.
 
+ Performs access check for the specified user based on the data loaded from
+ cache.
+
  This method is internally called by 'checkAccess()' when 'cache' is enabled.
 
     [$user] (string|int) The user ID. This should can be either an integer or
@@ -795,6 +863,8 @@ return (bool) Whether the operations can be performed by the user.
  checkAccessRecursive($user, $itemName, $params, $assignments)
 <
 return (bool) Whether the operations can be performed by the user.
+
+ Performs access check for the specified user.
 
  This method is internally called by 'checkAccess()'.
 
@@ -815,6 +885,9 @@ return (bool) Whether the operations can be performed by the user.
 <
 return (bool) Whether the database supports cascading update and delete.
 
+ Returns a value indicating whether the database supports cascading update and
+ delete.
+
  The default implementation will return false for SQLite database and true for
  all other databases.
 
@@ -824,6 +897,8 @@ return (bool) Whether the database supports cascading update and delete.
  populateItem($row)
 <
 return (\yii\rbac\Item) The populated auth item instance (either Role or Permission)
+
+ Populates an auth item with the data fetched from database.
 
     [$row] (array) The data from the auth item table
 
@@ -835,6 +910,8 @@ return (\yii\rbac\Item) The populated auth item instance (either Role or Permiss
 return (\yii\rbac\Permission[]) All direct permissions that the user has. The array
 is indexed by the permission names.
 
+ Returns all permissions that are directly assigned to user.
+
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
@@ -844,6 +921,9 @@ is indexed by the permission names.
 <
 return (\yii\rbac\Permission[]) All inherited permissions that the user has. The
 array is indexed by the permission names.
+
+ Returns all permissions that the user inherits from the roles assigned to
+ him.
 
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
@@ -855,6 +935,7 @@ array is indexed by the permission names.
 return (array) The children list. Each array key is a parent item name, and the
 corresponding array value is a list of child item names.
 
+ Returns the children for every parent.
 
 
 *yii/rbac/DbManager::getChildrenRecursive*		protected
@@ -862,6 +943,8 @@ corresponding array value is a list of child item names.
  getChildrenRecursive($name, $childrenList, $result)
 <
 return (void)
+
+ Recursively finds all children and grand children of the specified item.
 
     [$name] (string) The name of the item whose children are to be looked for.
     [$childrenList] (array) The child list built via 'getChildrenList()'
@@ -874,6 +957,8 @@ return (void)
 <
 return (bool) Whether a loop exists
 
+ Checks whether there is a loop in the authorization item hierarchy.
+
     [$parent] (\yii\rbac\Item) The parent item
     [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
 
@@ -883,6 +968,8 @@ return (bool) Whether a loop exists
  removeAllItems($type)
 <
 return (void)
+
+ Removes all auth items of the specified type.
 
     [$type] (int) The auth item type (either Item::TYPE_PERMISSION or
     Item::TYPE_ROLE)

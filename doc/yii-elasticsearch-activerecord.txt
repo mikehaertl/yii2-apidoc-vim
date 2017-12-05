@@ -203,6 +203,8 @@ METHOD DETAILS
 <
 return (string[]) List of attribute names.
 
+ Returns the list of all attribute names of the model.
+
  This method must be overridden by child classes to define available
  attributes.
 
@@ -401,6 +403,9 @@ return (string[]) List of attribute names.
 return (static|null) ActiveRecord instance matching the condition, or 'null' if
 nothing matches.
 
+ Returns a single active record model instance by a primary key or an array of
+ column values.
+
 
 
  The method accepts:
@@ -454,6 +459,9 @@ nothing matches.
 <
 return (static[]) An array of ActiveRecord instances, or an empty array if nothing
 matches.
+
+ Returns a list of active record models that match the specified primary key
+ value(s) or a set of column values.
 
 
 
@@ -517,6 +525,8 @@ matches.
 <
 return (integer) The number of rows updated
 
+ Updates all records whos primary keys are given.
+
  For example, to change the status to be 1 for all customers whose status is
  2:
 
@@ -536,6 +546,9 @@ return (integer) The number of rows updated
  updateAllCounters($counters, $condition='[]')
 <
 return (integer) The number of rows updated
+
+ Updates all matching records using the provided counter changes and
+ conditions.
 
  For example, to increment all customers' age by 1,
 
@@ -557,6 +570,8 @@ return (integer) The number of rows updated
 <
 return (integer) The number of rows deleted
 
+ Deletes rows in the table using the provided conditions.
+
  WARNING: If you do not specify any condition, this method will delete ALL
  rows in the table.
 
@@ -576,6 +591,8 @@ return (integer) The number of rows deleted
  optimisticLock()
 <
 return (void)
+
+ This method has no effect in Elasticsearch ActiveRecord.
 
  Elasticsearch ActiveRecord uses [native Optimistic
  locking](http://www.elastic.co/guide/en/elasticsearch/guide/current/optimistic-concurrency-control.html).
@@ -673,6 +690,8 @@ return (void)
 <
 return (integer|boolean) The number of rows affected, or false if validation fails or
 'beforeSave()' stops the updating process.
+
+ Saves the changes to this active record into the associated database table.
 
 
 
@@ -785,6 +804,8 @@ return (integer|boolean) The number of rows deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
+ Deletes the table row corresponding to this active record.
+
 
 
  This method performs the following steps in order:
@@ -895,6 +916,8 @@ return (mixed) The primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is 'true'. A string is
 returned otherwise (null will be returned if the key value is null).
 
+ Returns the primary key value(s).
+
 
 
 
@@ -914,6 +937,8 @@ returned otherwise (null will be returned if the key value is null).
 return (mixed) The old primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is 'true'. A string is
 returned otherwise (null will be returned if the key value is null).
+
+ Returns the old primary key value(s).
 
 
 
@@ -936,6 +961,9 @@ returned otherwise (null will be returned if the key value is null).
 <
 return (void)
 
+ Populates an active record object using a row of data from the
+ database/storage.
+
 
 
  This is an internal method meant to be called to create active record objects
@@ -957,6 +985,8 @@ return (void)
  instantiate($row)
 <
 return (static) The newly created active record
+
+ Creates an active record instance.
 
  This method is called together with 'populateRecord()' by 'ActiveQuery'. It
  is not meant to be used for creating new records directly.
@@ -994,6 +1024,8 @@ return (static) The newly created active record
 <
 return (void)
 
+ Destroys the relationship in current model.
+
  This method is not supported by elasticsearch.
 
     [$name] () 
@@ -1011,6 +1043,8 @@ return (void)
 <
 return (string[]) Array of primary key attributes. Only the first element of the
 array will be used.
+
+ This method defines the attribute that uniquely identifies a record.
 
  The primaryKey for elasticsearch documents is the '_id' field by default.
  This field is not part of the ActiveRecord attributes so you should never add
@@ -1033,6 +1067,8 @@ array will be used.
  find()
 <
 return (\yii\elasticsearch\ActiveQuery) The newly created 'ActiveQuery' instance.
+
+ Creates an 'ActiveQueryInterface' instance for query purpose.
 
 
 
@@ -1085,6 +1121,9 @@ return (\yii\elasticsearch\ActiveQuery) The newly created 'ActiveQuery' instance
 <
 return (boolean) Whether the attributes are valid and the record is inserted
 successfully.
+
+ Inserts a document into the associated index using the attribute values of
+ this record.
 
  This method performs the following steps in order:
 
@@ -1144,6 +1183,8 @@ successfully.
 <
 return (\yii\elasticsearch\Connection) The database connection used by this AR class.
 
+ Returns the database connection used by this AR class.
+
  By default, the "elasticsearch" application component is used as the database
  connection. You may override this method if you want to use a different
  database connection.
@@ -1154,6 +1195,8 @@ return (\yii\elasticsearch\Connection) The database connection used by this AR c
  get($primaryKey, $options='[]')
 <
 return (static|null) The record instance or null if it was not found.
+
+ Gets a record by its primary key.
 
     [$primaryKey] (mixed) The primaryKey value
     [$options] (array) Options given in this parameter are passed to
@@ -1168,6 +1211,8 @@ return (static|null) The record instance or null if it was not found.
  mget($primaryKeys, $options='[]')
 <
 return (array) The record instances, or empty array if nothing was found
+
+ Gets a list of records by its primary keys.
 
     [$primaryKeys] (array) An array of primaryKey values
     [$options] (array) Options given in this parameter are passed to
@@ -1202,6 +1247,8 @@ names.
 <
 return (void)
 
+ Sets the primary key
+
     [$value] (mixed) 
 
 
@@ -1210,6 +1257,9 @@ return (void)
  arrayAttributes()
 <
 return (string[]) List of attribute names. Must be a subset of 'attributes()'.
+
+ A list of attributes that should be treated as array valued when retrieved
+ through 'ActiveQuery::fields'.
 
  If not listed by this method, attributes retrieved through
  'ActiveQuery::fields' will converted to a scalar value when the result array
@@ -1237,6 +1287,9 @@ return (string) The name of the type of this record.
  primaryKeysByCondition($condition)
 <
 return (array) Primary keys that correspond to given conditions
+
+ Performs a quick and highly efficient scroll/scan query to get the list of
+ primary keys that satisfy the given condition.
 
     [$condition] (array) Please refer to 'ActiveQuery::where()' on how to
     specify this parameter

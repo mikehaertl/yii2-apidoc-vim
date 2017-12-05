@@ -120,6 +120,7 @@ return (string) Full name of this collection, including database name.
 <
 return (bool) Whether the operation successful.
 
+ Drops this collection.
 
 
 *yii/mongodb/Collection::listIndexes*			public
@@ -127,6 +128,8 @@ return (bool) Whether the operation successful.
  listIndexes($options='[]')
 <
 return (array) List of indexes info.
+
+ Returns the list of defined indexes.
 
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -136,6 +139,8 @@ return (array) List of indexes info.
  createIndexes($indexes)
 <
 return (bool) Whether operation was successful.
+
+ Creates several indexes at once.
 
  Example:
 
@@ -179,6 +184,8 @@ return (bool) Whether operation was successful.
 <
 return (int) Count of dropped indexes.
 
+ Drops collection indexes by name.
+
     [$indexes] (string) Wildcard for name of the indexes to be dropped. You
     can use '*' to drop all indexes.
 
@@ -188,6 +195,8 @@ return (int) Count of dropped indexes.
  createIndex($columns, $options='[]')
 <
 return (bool) Whether the operation successful.
+
+ Creates an index on the collection and the specified fields.
 
     [$columns] (array|string) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
@@ -209,6 +218,8 @@ return (bool) Whether the operation successful.
  dropIndex($columns)
 <
 return (bool) Whether the operation successful.
+
+ Drop indexes for specified column(s).
 
     [$columns] (string|array) Column name or list of column names. If array is
     given, each element in the array has as key the field name, and as value
@@ -232,6 +243,7 @@ return (bool) Whether the operation successful.
 <
 return (int) Count of dropped indexes.
 
+ Drops all indexes for this collection.
 
 
 *yii/mongodb/Collection::find*				public
@@ -239,6 +251,8 @@ return (int) Count of dropped indexes.
  find($condition='[]', $fields='[]', $options='[]')
 <
 return (\MongoDB\Driver\Cursor) Cursor for the search results
+
+ Returns a cursor for the search results.
 
  In order to perform "find" queries use 'Query' class.
 
@@ -254,6 +268,8 @@ return (\MongoDB\Driver\Cursor) Cursor for the search results
 return (array|null) The single document. Null is returned if the query results in
 nothing.
 
+ Returns a single document.
+
     [$condition] (array) Query condition
     [$fields] (array) Fields to be selected
     [$options] (array) Query options (available since 2.1).
@@ -266,6 +282,8 @@ nothing.
 return (array|null) The original document, or the modified document when
 $options['new'] is set.
 
+ Updates a document and returns it.
+
     [$condition] (array) Query condition
     [$update] (array) Update criteria
     [$options] (array) List of options in format: optionName => optionValue.
@@ -277,6 +295,8 @@ $options['new'] is set.
 <
 return (\MongoDB\BSON\ObjectID) New record ID instance.
 
+ Inserts new data into collection.
+
     [$data] (array|object) Data to be inserted.
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -287,6 +307,8 @@ return (\MongoDB\BSON\ObjectID) New record ID instance.
 <
 return (array) Inserted data, each row will have "_id" key assigned to it.
 
+ Inserts several new rows into collection.
+
     [$rows] (array) Array of arrays or objects to be inserted.
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -296,6 +318,8 @@ return (array) Inserted data, each row will have "_id" key assigned to it.
  update($condition, $newData, $options='[]')
 <
 return (int|bool) Number of updated documents or whether operation was successful.
+
+ Updates the rows, which matches given criteria by given data.
 
  Note: for "multi" mode Mongo requires explicit strategy "$set" or "$inc" to
  be specified for the "newData". If no strategy is passed "$set" will be used.
@@ -311,6 +335,8 @@ return (int|bool) Number of updated documents or whether operation was successfu
 <
 return (\MongoId) Updated/new record id instance.
 
+ Update the existing database data, otherwise insert this data
+
     [$data] (array|object) Data to be updated/inserted.
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -320,6 +346,8 @@ return (\MongoId) Updated/new record id instance.
  remove($condition='[]', $options='[]')
 <
 return (int|bool) Number of updated documents or whether operation was successful.
+
+ Removes data from the collection.
 
     [$condition] (array) Description of records to remove.
     [$options] (array) List of options in format: optionName => optionValue.
@@ -331,6 +359,8 @@ return (int|bool) Number of updated documents or whether operation was successfu
 <
 return (int) Records count.
 
+ Counts records in this collection.
+
     [$condition] (array) Query condition
     [$options] (array) List of options in format: optionName => optionValue.
 
@@ -340,6 +370,8 @@ return (int) Records count.
  distinct($column, $condition='[]', $options='[]')
 <
 return (array|bool) Array of distinct values, or "false" on failure.
+
+ Returns a list of distinct values for the given column across a collection.
 
     [$column] (string) Column to use.
     [$condition] (array) Query parameters.
@@ -352,6 +384,8 @@ return (array|bool) Array of distinct values, or "false" on failure.
 <
 return (array) The result of the aggregation.
 
+ Performs aggregation using Mongo Aggregation Framework.
+
     [$pipelines] (array) List of pipeline operators.
     [$options] (array) Optional parameters.
 
@@ -361,6 +395,8 @@ return (array) The result of the aggregation.
  group($keys, $initial, $reduce, $options='[]')
 <
 return (array) The result of the aggregation.
+
+ Performs aggregation using Mongo "group" command.
 
     [$keys] (mixed) Fields to group by. If an array or non-code object is
     passed, it will be the key used to group results. If instance of
@@ -383,6 +419,8 @@ return (array) The result of the aggregation.
  mapReduce($map, $reduce, $out, $condition='[]', $options='[]')
 <
 return (string|array) The map reduce output collection name or output results.
+
+ Performs aggregation using MongoDB "map-reduce" mechanism.
 
  Note: this function will not return the aggregation result, instead it will
  write it inside the another Mongo collection specified by "out" parameter.

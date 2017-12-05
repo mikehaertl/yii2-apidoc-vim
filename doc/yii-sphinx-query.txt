@@ -392,6 +392,8 @@ METHOD DETAILS
 <
 return (\yii\sphinx\Command) The created Sphinx command instance.
 
+ Creates a Sphinx command that can be used to execute this query.
+
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
     SQL statement. If this parameter is not given, the 'sphinx' application
     component will be used.
@@ -423,6 +425,8 @@ return (\yii\sphinx\Command) The created Sphinx command instance.
 <
 return (array) The converted query result
 
+ Converts the raw query results into the format as specified by this query.
+
 
 
  This method is internally used to convert the data fetched from database into
@@ -439,6 +443,8 @@ return (array) The converted query result
 <
 return (array|bool) The first row (in terms of an array) of the query result. False
 is returned if the query results in nothing.
+
+ Executes the query and returns a single row of result.
 
 
 
@@ -497,6 +503,8 @@ is returned if the query results in nothing.
 <
 return (bool|string) 
 
+ Queries a scalar value by setting 'select' first.
+
 
 
  Restores the value of select to make this query reusable.
@@ -543,6 +551,8 @@ return (bool|string)
 <
 return ($this) The query object itself
 
+ Appends a JOIN part to the query.
+
 
 
  The first parameter specifies what type of join it is.
@@ -583,6 +593,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Appends an INNER JOIN part to the query.
+
 
 
 
@@ -612,6 +624,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Appends a LEFT OUTER JOIN part to the query.
+
 
 
 
@@ -640,6 +654,8 @@ return ($this) The query object itself
  rightJoin($table, $on='\'\'', $params='[]')
 <
 return ($this) The query object itself
+
+ Appends a RIGHT OUTER JOIN part to the query.
 
 
 
@@ -725,6 +741,9 @@ return ($this) The query object itself
 <
 return (\yii\sphinx\Query) The new Query object
 
+ Creates a new Query object and copies its property values from an existing
+ one.
+
  The properties being copies are the ones to be used by query builders.
 
     [$from] (\yii\sphinx\Query) The source query object
@@ -761,6 +780,9 @@ return (\yii\sphinx\Connection) Default connection value.
 <
 return (array) The query results.
 
+ Executes the query and returns the complete search result including e.g.
+ hits, facets.
+
     [$db] (\yii\sphinx\Connection) The Sphinx connection used to generate the
     SQL statement.
 
@@ -770,6 +792,9 @@ return (array) The query results.
  match($query)
 <
 return ($this) The query object itself.
+
+ Sets the fulltext query text. This text will be composed into MATCH operator
+ inside the WHERE clause.
 
  Note: this value will be processed by 'Connection::escapeMatchValue()', if
  you need to compose complex match condition use 'Expression':
@@ -792,6 +817,8 @@ return ($this) The query object itself.
 <
 return ($this) The query object itself
 
+ Sets the query options.
+
     [$options] (array) Query options in format: optionName => optionValue
 
 
@@ -801,6 +828,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds additional query options.
+
     [$options] (array) Query options in format: optionName => optionValue
 
 
@@ -809,6 +838,8 @@ return ($this) The query object itself
  within($columns)
 <
 return ($this) The query object itself
+
+ Sets the WITHIN GROUP ORDER BY part of the query.
 
     [$columns] (string|array) The columns (and the directions) to find best
     row within a group. Columns can be specified in either a string (e.g. "id
@@ -824,6 +855,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds additional WITHIN GROUP ORDER BY columns to the query.
+
     [$columns] (string|array) The columns (and the directions) to find best
     row within a group. Columns can be specified in either a string (e.g. "id
     ASC, name DESC") or an array (e.g. '['id' => Query::SORT_ASC, 'name' =>
@@ -838,6 +871,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself.
 
+ Sets groups limit: to return (no more than) N top matches for each group.
+
  This option will take effect only if 'groupBy' is set.
 
     [$limit] (int) Group limit.
@@ -849,6 +884,8 @@ return ($this) The query object itself.
 <
 return ($this) The query object itself
 
+ Sets FACET part of the query.
+
     [$facets] (array) Facet specifications.
 
 
@@ -858,6 +895,8 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Adds additional FACET part of the query.
+
     [$facets] (array) Facet specifications.
 
 
@@ -866,6 +905,8 @@ return ($this) The query object itself
  showMeta($showMeta)
 <
 return ($this) The query object itself
+
+ Sets whether to automatically perform 'SHOW META' for the search query.
 
     [$showMeta] (bool|string|\yii\db\Expression) Whether to automatically
     perform 'SHOW META'
@@ -877,6 +918,9 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
+ Sets the PHP callback, which should be used to retrieve the source data for
+ the snippets building.
+
     [$callback] (callable) PHP callback, which should be used to fetch source
     data for the snippets.
 
@@ -886,6 +930,8 @@ return ($this) The query object itself
  snippetOptions($options)
 <
 return ($this) The query object itself
+
+ Sets the call snippets query options.
 
     [$options] (array) Call snippet options in format: option_name =>
     option_value
@@ -897,6 +943,9 @@ return ($this) The query object itself
 <
 return (array|\yii\sphinx\ActiveRecord[]) Query result rows with filled up snippets.
 
+ Fills the query result rows with the snippets built from source determined by
+ 'snippetCallback' result.
+
     [$rows] (array) Raw query result rows.
 
 
@@ -906,6 +955,8 @@ return (array|\yii\sphinx\ActiveRecord[]) Query result rows with filled up snipp
 <
 return (array) Snippets list.
 
+ Builds a snippets from provided source data.
+
     [$source] (array) The source data to extract a snippet from.
 
 
@@ -914,6 +965,8 @@ return (array) Snippets list.
  callSnippetsInternal($source, $from)
 <
 return (array) Snippets list.
+
+ Builds a snippets from provided source data by the given index.
 
     [$source] (array) The source data to extract a snippet from.
     [$from] (string) Name of the source index.

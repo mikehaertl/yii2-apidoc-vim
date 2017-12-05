@@ -213,6 +213,8 @@ METHOD DETAILS
 return (int) The status of the action execution. 0 means normal, other values mean
 abnormal.
 
+ Runs an action with the specified action ID and parameters.
+
  If the action ID is empty, the method will use 'defaultAction'.
 
     [$id] (string) The ID of the action to be executed.
@@ -230,6 +232,8 @@ abnormal.
  bindActionParams($action, $params)
 <
 return (array) The valid parameters that the action can run with.
+
+ Binds the parameters to the action.
 
  This method is invoked by 'Action' when it begins to run with the given
  parameters. This method will first bind the parameters with the
@@ -321,6 +325,8 @@ return (array) The valid parameters that the action can run with.
 <
 return (bool) Whether to enable ANSI style in output.
 
+ Returns a value indicating whether ANSI color is enabled.
+
  ANSI color is enabled only if 'color' is set true or is not set and the
  terminal supports ANSI color.
 
@@ -332,6 +338,8 @@ return (bool) Whether to enable ANSI style in output.
  ansiFormat($string)
 <
 return (string) 
+
+ Formats a string with ANSI codes.
 
  You may pass additional parameters using the constants defined in
  '\yii\helpers\Console'.
@@ -350,6 +358,8 @@ return (string)
 <
 return (int|bool) Number of bytes printed or false on error
 
+ Prints a string to STDOUT.
+
  You may optionally format the string with ANSI codes by passing additional
  parameters using the constants defined in '\yii\helpers\Console'.
 
@@ -367,6 +377,8 @@ return (int|bool) Number of bytes printed or false on error
 <
 return (int|bool) Number of bytes printed or false on error
 
+ Prints a string to STDERR.
+
  You may optionally format the string with ANSI codes by passing additional
  parameters using the constants defined in '\yii\helpers\Console'.
 
@@ -383,6 +395,8 @@ return (int|bool) Number of bytes printed or false on error
  prompt($text, $options='[]')
 <
 return (string) The user input
+
+ Prompts the user for input and validates it.
 
     [$text] (string) Prompt string
     [$options] (array) The options to validate the input:
@@ -416,6 +430,8 @@ return (string) The user input
 <
 return (bool) Whether user confirmed. Will return true if 'interactive' is false.
 
+ Asks user to confirm by typing y or n.
+
  A typical usage looks like the following:
 
    if ($this->confirm("Are you sure?")) {
@@ -436,6 +452,9 @@ return (bool) Whether user confirmed. Will return true if 'interactive' is false
 <
 return (string) An option character the user chose
 
+ Gives the user an option to choose from. Giving '?' as an input will show a
+ list of options to choose from and their explanations.
+
     [$prompt] (string) The prompt message
     [$options] (array) Key-value array of options to choose from
 
@@ -445,6 +464,9 @@ return (string) An option character the user chose
  options($actionID)
 <
 return (string[]) The names of the options valid for the action
+
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
 
  Child classes may override this method to specify possible options.
 
@@ -461,6 +483,8 @@ return (string[]) The names of the options valid for the action
 return (array) The options alias names valid for the action where the keys is alias
 name for option and value is option name.
 
+ Returns option alias names.
+
  Child classes may override this method to specify alias options.
 
 
@@ -469,6 +493,9 @@ name for option and value is option name.
  getOptionValues($actionID)
 <
 return (array) Properties corresponding to the options for the action
+
+ Returns properties corresponding to the options for the action id Child
+ classes may override this method to specify possible properties.
 
     [$actionID] (string) The action id of the current request
 
@@ -479,6 +506,7 @@ return (array) Properties corresponding to the options for the action
 <
 return (array) The names of the options passed during execution
 
+ Returns the names of valid options passed during execution.
 
 
 *yii/console/Controller::getPassedOptionValues*		public
@@ -487,6 +515,7 @@ return (array) The names of the options passed during execution
 <
 return (array) The properties corresponding to the passed options
 
+ Returns the properties corresponding to the passed options.
 
 
 *yii/console/Controller::getHelpSummary*			public
@@ -494,6 +523,8 @@ return (array) The properties corresponding to the passed options
  getHelpSummary()
 <
 return (string) 
+
+ Returns one-line short summary describing this controller.
 
  You may override this method to return customized summary. The default
  implementation returns first line from the PHPDoc comment.
@@ -505,6 +536,8 @@ return (string)
 <
 return (string) 
 
+ Returns help information for this controller.
+
  You may override this method to return customized help. The default
  implementation returns help information retrieved from the PHPDoc comment.
 
@@ -515,6 +548,8 @@ return (string)
 <
 return (string) A one-line short summary describing the specified action.
 
+ Returns a one-line short summary describing the specified action.
+
     [$action] (\yii\base\Action) Action to get summary for
 
 
@@ -524,6 +559,8 @@ return (string) A one-line short summary describing the specified action.
 <
 return (string) The detailed help information for the specified action.
 
+ Returns the detailed help information for the specified action.
+
     [$action] (\yii\base\Action) Action to get help for
 
 
@@ -532,6 +569,8 @@ return (string) The detailed help information for the specified action.
  getActionArgsHelp($action)
 <
 return (array) The help information of the action arguments
+
+ Returns the help information for the anonymous arguments for the action.
 
  The returned value should be an array. The keys are the argument names, and
  the values are the corresponding help information. Each value must be an
@@ -554,6 +593,8 @@ return (array) The help information of the action arguments
  getActionOptionsHelp($action)
 <
 return (array) The help information of the action options
+
+ Returns the help information for the options for the action.
 
  The returned value should be an array. The keys are the option names, and the
  values are the corresponding help information. Each value must be an array of
@@ -585,6 +626,8 @@ return (\ReflectionMethod)
 <
 return (array) The parsed tags
 
+ Parses the comment block into tags.
+
     [$reflection] (\Reflector) The comment block
 
 
@@ -594,6 +637,8 @@ return (array) The parsed tags
 <
 return (string) 
 
+ Returns the first line of docblock.
+
     [$reflection] (\Reflector) 
 
 
@@ -602,6 +647,8 @@ return (string)
  parseDocCommentDetail($reflection)
 <
 return (string) 
+
+ Returns full description from the docblock.
 
     [$reflection] (\Reflector) 
 

@@ -59,6 +59,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the Mutex component.
 
 
 *yii/mutex/Mutex::__get*					public
@@ -177,6 +178,8 @@ return (void)
 <
 return (bool) Lock acquiring result.
 
+ Acquires a lock by name.
+
     [$name] (string) Of the lock to be acquired. Must be unique.
     [$timeout] (int) Time (in seconds) to wait for lock to be released.
     Defaults to zero meaning that method will return false immediately in case
@@ -189,6 +192,9 @@ return (bool) Lock acquiring result.
 <
 return (bool) Lock release result: false in case named lock was not found..
 
+ Releases acquired lock. This method will return false in case the lock was
+ not found.
+
     [$name] (string) Of the lock to be released. This lock must already exist.
 
 
@@ -197,6 +203,9 @@ return (bool) Lock release result: false in case named lock was not found..
  acquireLock($name, $timeout=0)
 <
 return (bool) Acquiring result.
+
+ This method should be extended by a concrete Mutex implementations. Acquires
+ lock by name.
 
     [$name] (string) Of the lock to be acquired.
     [$timeout] (int) Time (in seconds) to wait for the lock to be released.
@@ -207,6 +216,9 @@ return (bool) Acquiring result.
  releaseLock($name)
 <
 return (bool) Release result.
+
+ This method should be extended by a concrete Mutex implementations. Releases
+ lock by given name.
 
     [$name] (string) Of the lock to be released.
 

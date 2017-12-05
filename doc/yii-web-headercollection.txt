@@ -74,6 +74,8 @@ METHOD DETAILS
 <
 return (\ArrayIterator) An iterator for traversing the headers in the collection.
 
+ Returns an iterator for traversing the headers in the collection.
+
  This method is required by the SPL interface '\IteratorAggregate'. It will be
  implicitly called when you use 'foreach' to traverse the collection.
 
@@ -83,6 +85,8 @@ return (\ArrayIterator) An iterator for traversing the headers in the collection
  count()
 <
 return (int) The number of headers in the collection.
+
+ Returns the number of headers in the collection.
 
  This method is required by the SPL 'Countable' interface. It will be
  implicitly called when you use 'count($collection)'.
@@ -94,6 +98,7 @@ return (int) The number of headers in the collection.
 <
 return (int) The number of headers in the collection.
 
+ Returns the number of headers in the collection.
 
 
 *yii/web/HeaderCollection::get*				public
@@ -102,6 +107,8 @@ return (int) The number of headers in the collection.
 <
 return (string|array) The named header(s). If '$first' is true, a string will be
 returned; If '$first' is false, an array will be returned.
+
+ Returns the named header(s).
 
     [$name] (string) The name of the header to return
     [$default] (mixed) The value to return in case the named header does not
@@ -116,6 +123,8 @@ returned; If '$first' is false, an array will be returned.
 <
 return ($this) The collection object itself
 
+ Adds a new header.
+
  If there is already a header with the same name, it will be replaced.
 
     [$name] (string) The name of the header
@@ -127,6 +136,8 @@ return ($this) The collection object itself
  add($name, $value)
 <
 return ($this) The collection object itself
+
+ Adds a new header.
 
  If there is already a header with the same name, the new one will be appended
  to it instead of replacing it.
@@ -141,6 +152,8 @@ return ($this) The collection object itself
 <
 return ($this) The collection object itself
 
+ Sets a new header only if it does not exist yet.
+
  If there is already a header with the same name, the new one will be ignored.
 
     [$name] (string) The name of the header
@@ -153,6 +166,8 @@ return ($this) The collection object itself
 <
 return (bool) Whether the named header exists
 
+ Returns a value indicating whether the named header exists.
+
     [$name] (string) The name of the header
 
 
@@ -163,6 +178,8 @@ return (bool) Whether the named header exists
 return (array) The value of the removed header. Null is returned if the header does
 not exist.
 
+ Removes a header.
+
     [$name] (string) The name of the header to be removed.
 
 
@@ -172,6 +189,7 @@ not exist.
 <
 return (void)
 
+ Removes all headers.
 
 
 *yii/web/HeaderCollection::toArray*			public
@@ -181,6 +199,7 @@ return (void)
 return (array) The array representation of the collection. The array keys are header
 names, and the array values are the corresponding header values.
 
+ Returns the collection as a PHP array.
 
 
 *yii/web/HeaderCollection::fromArray*			public
@@ -188,6 +207,8 @@ names, and the array values are the corresponding header values.
  fromArray($array)
 <
 return (void)
+
+ Populates the header collection from an array.
 
     [$array] (array) The headers to populate from
 
@@ -197,6 +218,8 @@ return (void)
  offsetExists($name)
 <
 return (bool) Whether the named header exists
+
+ Returns whether there is a header with the specified name.
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'isset($collection[$name])'.
@@ -211,6 +234,8 @@ return (bool) Whether the named header exists
 return (string) The header value with the specified name, null if the named header
 does not exist.
 
+ Returns the header with the specified name.
+
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$header = $collection[$name];'. This is
  equivalent to 'get()'.
@@ -223,6 +248,8 @@ does not exist.
  offsetSet($name, $value)
 <
 return (void)
+
+ Adds the header to the collection.
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like '$collection[$name] = $header;'. This is
@@ -237,6 +264,8 @@ return (void)
  offsetUnset($name)
 <
 return (void)
+
+ Removes the named header.
 
  This method is required by the SPL interface '\ArrayAccess'. It is implicitly
  called when you use something like 'unset($collection[$name])'. This is

@@ -95,6 +95,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the DbSession component.
+
  This method will initialize the 'db' property to make sure it refers to a
  valid DB connection.
 
@@ -265,6 +267,8 @@ return (void)
 <
 return (void)
 
+ Updates the current session ID with a newly generated one .
+
  Please refer to <http://php.net/session_regenerate_id> for more details.
 
     [$deleteOldSession] (bool) Whether to delete the old associated session
@@ -357,6 +361,8 @@ return (void)
 <
 return (string) The session data
 
+ Session read handler.
+
     [$id] (string) Session ID
 
 
@@ -365,6 +371,8 @@ return (string) The session data
  writeSession($id, $data)
 <
 return (bool) Whether session write is successful
+
+ Session write handler.
 
     [$id] (string) Session ID
     [$data] (string) Session data
@@ -376,6 +384,8 @@ return (bool) Whether session write is successful
 <
 return (bool) Whether session is destroyed successfully
 
+ Session destroy handler.
+
     [$id] (string) Session ID
 
 
@@ -384,6 +394,8 @@ return (bool) Whether session is destroyed successfully
  gcSession($maxLifetime)
 <
 return (bool) Whether session is GCed successfully
+
+ Session GC (garbage collection) handler.
 
     [$maxLifetime] (int) The number of seconds after which data will be seen
     as 'garbage' and cleaned up.
@@ -504,6 +516,8 @@ return (bool) Whether session is GCed successfully
  typecastFields($fields)
 <
 return (array) 
+
+ Method typecasts $fields before passing them to PDO.
 
  Default implementation casts field 'data' to '\PDO::PARAM_LOB'. You can
  override this method in case you need special type casting.

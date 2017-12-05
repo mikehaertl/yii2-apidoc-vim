@@ -109,6 +109,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes this rule.
 
 
 *yii/web/UrlRule::__get*					public
@@ -190,6 +191,8 @@ return (array|bool) The parsing result. The route and the parameters are returne
 an array. If 'false', it means this rule cannot be used to parse this path
 info.
 
+ Parses the given request and returns the corresponding route and parameters.
+
     [$manager] (\yii\web\UrlManager) The URL manager
     [$request] (\yii\web\Request) The request component
 
@@ -200,6 +203,8 @@ info.
 <
 return (string|bool) The created URL, or 'false' if this rule cannot be used for
 creating this URL.
+
+ Creates a URL according to the given route and parameters.
 
     [$manager] (\yii\web\UrlManager) The URL manager
     [$route] (string) The route. It should not have slashes at the beginning
@@ -214,6 +219,7 @@ creating this URL.
 return (null|int) Status of the URL creation after the last 'createUrl()' call.
 'null' if rule does not provide info about create status.
 
+ Returns status of the URL creation after the last 'createUrl()' call.
 
 
 *yii/web/UrlRule::getParamRules*				protected
@@ -222,6 +228,7 @@ return (null|int) Status of the URL creation after the last 'createUrl()' call.
 <
 return (array) Parameter keys and regexp rules.
 
+ Returns list of regex for matching parameter.
 
 
 *yii/web/UrlRule::substitutePlaceholderNames*		protected
@@ -229,6 +236,9 @@ return (array) Parameter keys and regexp rules.
  substitutePlaceholderNames($matches)
 <
 return (array) Input array with replaced placeholder keys
+
+ Iterates over 'placeholders' and checks whether each placeholder exists as a
+ key in $matches array.
 
  When found 
    - replaces this placeholder key with a appropriate name of matching

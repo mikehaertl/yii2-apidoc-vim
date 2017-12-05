@@ -99,6 +99,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -323,6 +325,8 @@ return (void)
 <
 return (array) Auth user attributes.
 
+ Initializes authenticated user attributes.
+
 
 
 
@@ -360,6 +364,8 @@ return (array) Auth user attributes.
  defaultRequestOptions()
 <
 return (array) HTTP request options.
+
+ Returns default HTTP request options.
 
 
 
@@ -445,6 +451,7 @@ return (string) Client trust root (realm).
 <
 return (string) Default authentication return URL.
 
+ Generates default 'returnUrl' value.
 
 
 *yii/authclient/OpenId::hostExists*			public
@@ -452,6 +459,8 @@ return (string) Default authentication return URL.
  hostExists($url)
 <
 return (bool) True, if the server exists; false otherwise
+
+ Checks if the server specified in the url exists.
 
     [$url] (string) URL to check
 
@@ -461,6 +470,8 @@ return (bool) True, if the server exists; false otherwise
  sendRequest($url, $method=''GET'', $params='[]')
 <
 return (array|string) Response.
+
+ Sends request to the server
 
     [$url] (string) Request URL.
     [$method] (string) Request method.
@@ -473,6 +484,8 @@ return (array|string) Response.
 <
 return (string) Composed URL.
 
+ Combines given URLs into single one.
+
     [$baseUrl] (string) Base URL.
     [$additionalUrl] (string|array) Additional URL string or information
     array.
@@ -483,6 +496,8 @@ return (string) Composed URL.
  extractHtmlTagValue($content, $tag, $matchAttributeName, $matchAttributeValue, $valueAttributeName)
 <
 return (string|bool) Searched value, "false" on failure.
+
+ Scans content for <meta>/<link> tags and extract information from them.
 
     [$content] (string) HTML content to be be parsed.
     [$tag] (string) Name of the source tag.
@@ -508,6 +523,8 @@ return (array) OpenID provider info, following keys will be available:
   - ax: bool, whether AX attributes should be used. 
   - sreg: bool, whether SREG attributes should be used.
 
+ Performs Yadis and HTML discovery.
+
     [$url] (string) Identity URL.
 
 
@@ -517,6 +534,7 @@ return (array) OpenID provider info, following keys will be available:
 <
 return (array) SREG parameters.
 
+ Composes SREG request parameters.
 
 
 *yii/authclient/OpenId::buildAxParams*			protected
@@ -525,6 +543,7 @@ return (array) SREG parameters.
 <
 return (array) AX parameters.
 
+ Composes AX request parameters.
 
 
 *yii/authclient/OpenId::buildAuthUrlV1*			protected
@@ -532,6 +551,8 @@ return (array) AX parameters.
  buildAuthUrlV1($serverInfo)
 <
 return (string) Authentication URL.
+
+ Builds authentication URL for the protocol version 1.
 
     [$serverInfo] (array) OpenID server info.
 
@@ -542,6 +563,8 @@ return (string) Authentication URL.
 <
 return (string) Authentication URL.
 
+ Builds authentication URL for the protocol version 2.
+
     [$serverInfo] (array) OpenID server info.
 
 
@@ -550,6 +573,8 @@ return (string) Authentication URL.
  buildAuthUrl($identifierSelect='null')
 <
 return (string) The authentication URL.
+
+ Returns authentication URL. Usually, you want to redirect your user to it.
 
     [$identifierSelect] (bool) Whether to request OP to select identity for an
     user in OpenID 2, does not affect OpenID 1.
@@ -561,6 +586,8 @@ return (string) The authentication URL.
 <
 return (bool) Whether the verification was successful.
 
+ Performs OpenID verification with the OP.
+
     [$validateRequiredAttributes] (bool) Whether to validate required
     attributes.
 
@@ -571,6 +598,7 @@ return (bool) Whether the verification was successful.
 <
 return (bool) Whether all required attributes are present.
 
+ Checks if all required attributes are present in the server response.
 
 
 *yii/authclient/OpenId::fetchAxAttributes*		protected
@@ -579,6 +607,7 @@ return (bool) Whether all required attributes are present.
 <
 return (array) Array of attributes.
 
+ Gets AX attributes provided by OP.
 
 
 *yii/authclient/OpenId::fetchSregAttributes*		protected
@@ -588,6 +617,7 @@ return (array) Array of attributes.
 return (array) Array of attributes with keys being the AX schema names, e.g.
 'contact/email'
 
+ Gets SREG attributes provided by OP. SREG names will be mapped to AX names.
 
 
 *yii/authclient/OpenId::fetchAttributes*			public
@@ -596,6 +626,9 @@ return (array) Array of attributes with keys being the AX schema names, e.g.
 <
 return (array) Array of attributes with keys being the AX schema names, e.g.
 'contact/email'
+
+ Gets AX/SREG attributes provided by OP. Should be used only after successful
+ validation.
 
  Note that it does not guarantee that any of the required/optional parameters
  will be present, or that there will be no other attributes besides those
@@ -608,6 +641,9 @@ return (array) Array of attributes with keys being the AX schema names, e.g.
  compareUrl($expectedUrl, $actualUrl)
 <
 return (bool) Whether URLs are equal.
+
+ Compares 2 URLs taking in account possible GET parameters order miss match
+ and URL encoding inconsistencies.
 
     [$expectedUrl] (string) Expected URL.
     [$actualUrl] (string) Actual URL.

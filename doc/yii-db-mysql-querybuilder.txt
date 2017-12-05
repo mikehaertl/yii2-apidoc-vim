@@ -108,6 +108,8 @@ METHOD DETAILS
 <
 return (string) The INSERT SQL
 
+ Creates an INSERT SQL statement.
+
 
 
  For example,
@@ -177,6 +179,9 @@ return (string) The INSERT SQL
 return (string) The SQL statement for removing a primary key constraint from an
 existing table.
 
+ Builds a SQL statement for removing a primary key constraint to an existing
+ table.
+
     [$name] (string) The name of the primary key constraint to be removed.
     [$table] (string) The table that the primary key constraint will be
     removed from.
@@ -203,6 +208,8 @@ existing table.
 <
 return (string) The SQL statement for renaming a DB column.
 
+ Builds a SQL statement for renaming a column.
+
     [$table] (string) The table whose column is to be renamed. The name will
     be properly quoted by the method.
     [$oldName] (string) The old name of the column. The name will be properly
@@ -227,6 +234,8 @@ return (string) The SQL statement for renaming a DB column.
 <
 return (string) The SQL statement for dropping a foreign key constraint.
 
+ Builds a SQL statement for dropping a foreign key constraint.
+
     [$name] (string) The name of the foreign key constraint to be dropped. The
     name will be properly quoted by the method.
     [$table] (string) The table whose foreign is to be dropped. The name will
@@ -238,6 +247,8 @@ return (string) The SQL statement for dropping a foreign key constraint.
  createIndex($name, $table, $columns, $unique='false')
 <
 return (string) The SQL statement for creating a new index.
+
+ Builds a SQL statement for creating a new index.
 
 
 
@@ -272,6 +283,8 @@ return (string) The SQL statement for creating a new index.
 <
 return (string) The SQL statement for dropping an unique constraint.
 
+ Creates a SQL command for dropping an unique constraint.
+
 
 
 
@@ -289,6 +302,8 @@ return (string) The SQL statement for dropping an unique constraint.
  addCheck($name, $table, $expression)
 <
 return (string) The SQL statement for adding a check constraint to an existing table.
+
+ Creates a SQL command for adding a check constraint to an existing table.
 
 
 
@@ -308,6 +323,8 @@ return (string) The SQL statement for adding a check constraint to an existing t
  dropCheck($name, $table)
 <
 return (string) The SQL statement for dropping a check constraint.
+
+ Creates a SQL command for dropping a check constraint.
 
 
 
@@ -337,6 +354,9 @@ return (string) The SQL statement for dropping a check constraint.
 <
 return (string) The SQL statement for resetting sequence
 
+ Creates a SQL statement for resetting the sequence value of a table's primary
+ key.
+
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
 
@@ -353,6 +373,8 @@ return (string) The SQL statement for resetting sequence
 <
 return (string) The SQL statement for checking integrity
 
+ Builds a SQL statement for enabling or disabling integrity check.
+
     [$check] (bool) Whether to turn on or off the integrity check.
     [$schema] (string) The schema of the tables. Meaningless for MySQL.
     [$table] (string) The table name. Meaningless for MySQL.
@@ -363,6 +385,8 @@ return (string) The SQL statement for checking integrity
  addCommentOnColumn($table, $column, $comment)
 <
 return (string) The SQL statement for adding comment on column
+
+ Builds a SQL command for adding comment to column.
 
 
 
@@ -384,6 +408,8 @@ return (string) The SQL statement for adding comment on column
 <
 return (string) The SQL statement for adding comment on table
 
+ Builds a SQL command for adding comment to table.
+
 
 
 
@@ -402,6 +428,8 @@ return (string) The SQL statement for adding comment on table
 <
 return (string) The SQL statement for adding comment on column
 
+ Builds a SQL command for adding comment to column.
+
 
 
 
@@ -419,6 +447,8 @@ return (string) The SQL statement for adding comment on column
  dropCommentFromTable($table)
 <
 return (string) The SQL statement for adding comment on column
+
+ Builds a SQL command for adding comment to table.
 
 
 
@@ -497,6 +527,8 @@ return (string) The LIMIT and OFFSET clauses
 <
 return (bool) Whether the limit is effective
 
+ Checks to see if the given limit is effective.
+
 
 
 
@@ -511,6 +543,8 @@ return (bool) Whether the limit is effective
  hasOffset($offset)
 <
 return (bool) Whether the offset is effective
+
+ Checks to see if the given offset is effective.
 
 
 

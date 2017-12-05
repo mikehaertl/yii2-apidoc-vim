@@ -192,6 +192,7 @@ return (void)
 <
 return (array) 
 
+ Closes the connection when this component is being serialized.
 
 
 *yii/elasticsearch/Connection::getIsActive*		public
@@ -200,6 +201,7 @@ return (array)
 <
 return (boolean) Whether the DB connection is established
 
+ Returns a value indicating whether the DB connection is established.
 
 
 *yii/elasticsearch/Connection::open*			public
@@ -207,6 +209,8 @@ return (boolean) Whether the DB connection is established
  open()
 <
 return (void)
+
+ Establishes a DB connection.
 
  It does nothing if a DB connection has already been established.
 
@@ -217,6 +221,7 @@ return (void)
 <
 return (void)
 
+ Populates 'nodes' with the result of a cluster nodes request.
 
 
 *yii/elasticsearch/Connection::selectActiveNode*		protected
@@ -225,6 +230,7 @@ return (void)
 <
 return (void)
 
+ Select active node randomly
 
 
 *yii/elasticsearch/Connection::close*			public
@@ -232,6 +238,8 @@ return (void)
  close()
 <
 return (void)
+
+ Closes the currently active DB connection.
 
  It does nothing if the connection is already closed.
 
@@ -241,6 +249,8 @@ return (void)
  initConnection()
 <
 return (void)
+
+ Initializes the DB connection.
 
  This method is invoked right after the DB connection is established. The
  default implementation triggers an 'EVENT_AFTER_OPEN' event.
@@ -252,6 +262,7 @@ return (void)
 <
 return (string) Name of the DB driver
 
+ Returns the name of the DB driver for the current 'dsn'.
 
 
 *yii/elasticsearch/Connection::createCommand*		public
@@ -259,6 +270,8 @@ return (string) Name of the DB driver
  createCommand($config='[]')
 <
 return (\yii\elasticsearch\Command) The DB command
+
+ Creates a command for execution.
 
     [$config] (array) The configuration for the Command class
 
@@ -269,6 +282,7 @@ return (\yii\elasticsearch\Command) The DB command
 <
 return (\yii\elasticsearch\QueryBuilder) 
 
+ Creates new query builder instance
 
 
 *yii/elasticsearch/Connection::get*			public
@@ -276,6 +290,8 @@ return (\yii\elasticsearch\QueryBuilder)
  get($url, $options='[]', $body='null', $raw='false')
 <
 return (mixed) Response
+
+ Performs GET HTTP request
 
     [$url] (string|array) URL
     [$options] (array) URL options
@@ -289,6 +305,8 @@ return (mixed) Response
 <
 return (mixed) Response
 
+ Performs HEAD HTTP request
+
     [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
@@ -299,6 +317,8 @@ return (mixed) Response
  post($url, $options='[]', $body='null', $raw='false')
 <
 return (mixed) Response
+
+ Performs POST HTTP request
 
     [$url] (string|array) URL
     [$options] (array) URL options
@@ -312,6 +332,8 @@ return (mixed) Response
 <
 return (mixed) Response
 
+ Performs PUT HTTP request
+
     [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
@@ -323,6 +345,8 @@ return (mixed) Response
  delete($url, $options='[]', $body='null', $raw='false')
 <
 return (mixed) Response
+
+ Performs DELETE HTTP request
 
     [$url] (string|array) URL
     [$options] (array) URL options
@@ -336,6 +360,8 @@ return (mixed) Response
 <
 return (mixed) If request failed
 
+ Performs HTTP request
+
     [$method] (string) Method name
     [$url] (string) URL
     [$requestBody] (string) Request body
@@ -347,6 +373,8 @@ return (mixed) If request failed
  decodeErrorBody($body)
 <
 return (mixed) 
+
+ Try to decode error information if it is valid json, return it if not.
 
     [$body] () 
 

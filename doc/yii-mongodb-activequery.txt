@@ -64,6 +64,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$modelClass] (array) The model class associated with this query
     [$config] (array) Configurations to be applied to the newly created query
     object
@@ -74,6 +76,8 @@ return (void)
  init()
 <
 return (void)
+
+ Initializes the object.
 
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event. If you override this
@@ -272,6 +276,8 @@ return (void)
 <
 return (\yii\mongodb\Collection) Collection instance.
 
+ Returns the Mongo collection for this query.
+
     [$db] (\yii\mongodb\Connection) Mongo connection.
 
 
@@ -305,6 +311,8 @@ return (\yii\mongodb\Collection) Collection instance.
  prepare()
 <
 return ($this) A prepared query instance.
+
+ Prepares for query building.
 
 
 
@@ -347,6 +355,8 @@ return ($this) A prepared query instance.
 return (array|\yii\mongodb\ActiveRecord) The query results. If the query results in
 nothing, an empty array will be returned.
 
+ Executes query and returns all results as an array.
+
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If null, the Mongo connection returned by 'modelClass' will be
     used.
@@ -357,6 +367,8 @@ nothing, an empty array will be returned.
  populate($rows)
 <
 return (array) The converted query result
+
+ Converts the raw query results into the format as specified by this query.
 
  This method is internally used to convert the data fetched from MongoDB into
  the format as required by this query.
@@ -371,6 +383,8 @@ return (array) The converted query result
 return (\yii\mongodb\ActiveRecord|array|null) A single row of query result. Depending
 on the setting of 'asArray', the query result may be either an array or an
 ActiveRecord object. Null will be returned if the query results in nothing.
+
+ Executes query and returns a single row of result.
 
     [$db] (\yii\mongodb\Connection) The Mongo connection used to execute the
     query. If null, the Mongo connection returned by 'modelClass' will be
@@ -395,6 +409,8 @@ return (\yii\mongodb\ActiveRecord|array|null) The original document, or the modi
 document when $options['new'] is set. Depending on the setting of 'asArray',
 the query result may be either an array or an ActiveRecord object. Null will
 be returned if the query results in nothing.
+
+ Performs 'findAndModify' query and returns a single row of result.
 
  Warning: in case 'new' option is set to 'false' (which is by default) usage
  of this method may lead to unexpected behavior at some Active Record

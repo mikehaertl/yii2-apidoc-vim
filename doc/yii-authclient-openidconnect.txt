@@ -337,6 +337,8 @@ METHOD DETAILS
 <
 return (array) Auth user attributes.
 
+ Initializes authenticated user attributes.
+
 
 
 
@@ -430,6 +432,8 @@ return (array) Auth user attributes.
 <
 return (string) Return URL.
 
+ Composes default 'returnUrl' value.
+
 
 
 
@@ -447,6 +451,8 @@ return (string) Return URL.
  createToken($tokenConfig='[]')
 <
 return (\yii\authclient\OAuthToken) Token instance.
+
+ Creates token from its configuration.
 
 
 
@@ -498,6 +504,8 @@ return (\yii\authclient\OAuthToken) Token instance.
 <
 return (\yii\authclient\OAuthToken) New auth token.
 
+ Gets new auth token to replace expired one.
+
 
 
 
@@ -518,6 +526,8 @@ return (\yii\authclient\OAuthToken) New auth token.
 <
 return (string) Authorization URL.
 
+ Composes user authorization URL.
+
 
 
 
@@ -532,6 +542,8 @@ return (string) Authorization URL.
  fetchAccessToken($authCode, $params='[]')
 <
 return (\yii\authclient\OAuthToken) Access token.
+
+ Fetches access token from authorization code.
 
 
 
@@ -548,6 +560,9 @@ return (\yii\authclient\OAuthToken) Access token.
  applyClientCredentialsToRequest($request)
 <
 return (void)
+
+ Applies client credentials (e.g. 'clientId' and 'clientSecret') to the HTTP
+ request instance.
 
 
 
@@ -613,6 +628,8 @@ return (\yii\caching\Cache|null) The cache object, 'null'
 <
 return (void)
 
+ Sets up a component to be used for caching.
+
  This can be one of the following:
 
 
@@ -640,6 +657,8 @@ return (array) OpenID provider configuration parameters.
 <
 return (mixed) Configuration parameter value.
 
+ Returns particular configuration parameter value.
+
     [$name] (string) Configuration parameter name.
 
 
@@ -649,6 +668,7 @@ return (mixed) Configuration parameter value.
 <
 return (array) OpenID Provider configuration parameters.
 
+ Discovers OpenID Provider configuration parameters.
 
 
 *yii/authclient/OpenIdConnect::loadJws*			protected
@@ -656,6 +676,8 @@ return (array) OpenID Provider configuration parameters.
  loadJws($jws)
 <
 return (array) JWS underlying data.
+
+ Decrypts/validates JWS, returning related data.
 
     [$jws] (string) Raw JWS input.
 
@@ -666,6 +688,7 @@ return (array) JWS underlying data.
 <
 return (string) Auth nonce value.
 
+ Generates the auth nonce value.
 
 
 

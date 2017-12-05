@@ -244,6 +244,8 @@ METHOD DETAILS
 <
 return (array) Validation rules
 
+ Returns the validation rules for attributes.
+
 
 
  Validation rules are used by 'validate()' to check if attribute values are
@@ -345,6 +347,8 @@ return (array) Validation rules
  attributeLabels()
 <
 return (array) Attribute labels (name => label)
+
+ Returns the attribute labels.
 
 
 
@@ -556,6 +560,9 @@ return (string) Name of the code generator
 <
 return (\yii\gii\CodeFile[]) A list of code files to be created.
 
+ Generates the code based on the current user input and the specified code
+ template files.
+
 
 
  This is the main method that child classes should implement. Please refer to
@@ -572,6 +579,8 @@ return (\yii\gii\CodeFile[]) A list of code files to be created.
 return (array) List of code template files that are required. They should be file
 paths relative to 'templatePath'.
 
+ Returns a list of code template files that are required.
+
 
 
  Derived classes usually should override this method if they require the
@@ -585,6 +594,8 @@ paths relative to 'templatePath'.
  stickyAttributes()
 <
 return (array) List of sticky attributes
+
+ Returns the list of sticky attributes.
 
 
 
@@ -600,6 +611,8 @@ return (array) List of sticky attributes
 <
 return (array) The list of hint messages
 
+ Returns the list of hint messages.
+
 
 
  The array keys are the attribute names, and the array values are the
@@ -614,6 +627,8 @@ return (array) The list of hint messages
  autoCompleteData()
 <
 return (array) The list of auto complete values
+
+ Returns the list of auto complete values.
 
 
 
@@ -718,6 +733,7 @@ return (string) The detailed description of the generator.
 <
 return (string) 
 
+ Returns the 'tablePrefix' property of the DB connection as specified
 
 
 *yii/gii/generators/model/Generator::generateLabels*	public
@@ -725,6 +741,8 @@ return (string)
  generateLabels($table)
 <
 return (array) The generated attribute labels (name => label)
+
+ Generates the attribute labels for the specified table.
 
     [$table] (\yii\db\TableSchema) The table schema
 
@@ -734,6 +752,8 @@ return (array) The generated attribute labels (name => label)
  generateRules($table)
 <
 return (array) The generated validation rules
+
+ Generates validation rules for the specified table.
 
     [$table] (\yii\db\TableSchema) The table schema
 
@@ -760,6 +780,8 @@ return (array) The generated relation declarations
 <
 return (array) Relation declarations extended with inverse relation names
 
+ Adds inverse relations
+
     [$relations] (array) Relation declarations
 
 
@@ -768,6 +790,8 @@ return (array) Relation declarations extended with inverse relation names
  isHasManyRelation($table, $fks)
 <
 return (boolean) 
+
+ Determines if relation is of has many type
 
     [$table] (\yii\db\TableSchema) 
     [$fks] (array) 
@@ -779,6 +803,9 @@ return (boolean)
 <
 return (string) The generated link parameter.
 
+ Generates the link parameter to be used in generating the relation
+ declaration.
+
     [$refs] (array) Reference constraint
 
 
@@ -789,6 +816,9 @@ return (string) The generated link parameter.
 return (array|boolean) All unique foreign key pairs if the table is a junction table,
 or false if the table is not a junction table.
 
+ Checks if the given table is a junction table, that is it has at least one
+ pair of unique foreign keys.
+
     [$table] () 
 
 
@@ -797,6 +827,8 @@ or false if the table is not a junction table.
  generateRelationName($relations, $table, $key, $multiple)
 <
 return (string) The relation name
+
+ Generate a relation name for the specified table and a base name.
 
     [$relations] (array) The relations being generated currently.
     [$table] (\yii\db\TableSchema) The table schema
@@ -810,6 +842,7 @@ return (string) The relation name
 <
 return (void)
 
+ Validates the 'db' attribute.
 
 
 *yii/gii/generators/model/Generator::validateNamespace*	public
@@ -817,6 +850,8 @@ return (void)
  validateNamespace($attribute)
 <
 return (void)
+
+ Validates the namespace.
 
     [$attribute] (string) Namespace variable.
 
@@ -827,6 +862,7 @@ return (void)
 <
 return (void)
 
+ Validates the 'modelClass' attribute.
 
 
 *yii/gii/generators/model/Generator::validateTableName*	public
@@ -835,6 +871,7 @@ return (void)
 <
 return (void)
 
+ Validates the 'tableName' attribute.
 
 
 *yii/gii/generators/model/Generator::getTableNames*	protected
@@ -851,6 +888,8 @@ return (array) The table names that match the pattern specified by 'tableName'.
 <
 return (string) The generated table name
 
+ Generates the table name by considering table prefix.
+
  If 'useTablePrefix' is false, the table name will be returned without change.
 
     [$tableName] (string) The table name (which may contain schema prefix)
@@ -862,6 +901,8 @@ return (string) The generated table name
 <
 return (string) The generated class name
 
+ Generates a class name from the specified table name.
+
     [$tableName] (string) The table name (which may contain schema prefix)
     [$useSchemaName] (boolean) Should schema name be included in the class
     name, if present
@@ -872,6 +913,8 @@ return (string) The generated class name
  generateQueryClassName($modelClassName)
 <
 return (string) Generated class name
+
+ Generates a query class name from the specified model class name.
 
     [$modelClassName] (string) Model class name
 
@@ -889,6 +932,8 @@ return (\yii\db\Connection) The DB connection as specified by 'db'.
  isColumnAutoIncremental($table, $columns)
 <
 return (boolean) Whether any of the specified columns is auto incremental.
+
+ Checks if any of the specified columns is auto incremental.
 
     [$table] (\yii\db\TableSchema) The table schema
     [$columns] (array) Columns to check for autoIncrement property

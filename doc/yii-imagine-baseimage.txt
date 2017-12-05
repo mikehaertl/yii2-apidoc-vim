@@ -46,6 +46,7 @@ METHOD DETAILS
 <
 return (\Imagine\Image\ImagineInterface) The 'Imagine' object
 
+ Returns the 'Imagine' object that supports various image manipulations.
 
 
 *yii/imagine/BaseImage::setImagine*			public
@@ -63,6 +64,7 @@ return (void)
 <
 return (\Imagine\Image\ImagineInterface) The new 'Imagine' object
 
+ Creates an 'Imagine' object based on the specified 'driver'.
 
 
 *yii/imagine/BaseImage::ensureImageInterfaceInstance*	protected
@@ -70,6 +72,9 @@ return (\Imagine\Image\ImagineInterface) The new 'Imagine' object
  ensureImageInterfaceInstance($image)
 <
 return (\Imagine\Image\ImageInterface) 
+
+ Takes either file path or ImageInterface. In case of file path, creates an
+ instance of ImageInterface from it.
 
     [$image] (string|resource|\Imagine\Image\ImageInterface) 
 
@@ -79,6 +84,8 @@ return (\Imagine\Image\ImageInterface)
  crop($image, $width, $height, $start='[0,0]')
 <
 return (\Imagine\Image\ImageInterface) 
+
+ Crops an image.
 
  For example,
 
@@ -103,6 +110,8 @@ return (\Imagine\Image\ImageInterface)
 <
 return (\Imagine\Image\ImageInterface) 
 
+ Rotates an image automatically based on EXIF information.
+
     [$image] (string|resource|\Imagine\Image\ImageInterface) Either
     ImageInterface, resource or a string containing file path
     [$color] (string) 
@@ -113,6 +122,8 @@ return (\Imagine\Image\ImageInterface)
  thumbnail($image, $width, $height, $mode='\Imagine\Image\ManipulatorInterface::THUMBNAIL_OUTBOUND')
 <
 return (\Imagine\Image\ImageInterface) 
+
+ Creates a thumbnail image.
 
  If one of thumbnail dimensions is set to 'null', another one is calculated
  automatically based on aspect ratio of original image. Note that calculated
@@ -146,6 +157,8 @@ return (\Imagine\Image\ImageInterface)
 <
 return (\Imagine\Image\ImageInterface) 
 
+ Adds a watermark to an existing image.
+
     [$image] (string|resource|\Imagine\Image\ImageInterface) Either
     ImageInterface, resource or a string containing file path
     [$watermarkImage] (string|resource|\Imagine\Image\ImageInterface) Either
@@ -159,6 +172,8 @@ return (\Imagine\Image\ImageInterface)
  text($image, $text, $fontFile, $start='[0,0]', $fontOptions='[]')
 <
 return (\Imagine\Image\ImageInterface) 
+
+ Draws a text string on an existing image.
 
     [$image] (string|resource|\Imagine\Image\ImageInterface) Either
     ImageInterface, resource or a string containing file path
@@ -181,6 +196,9 @@ return (\Imagine\Image\ImageInterface)
 <
 return (\Imagine\Image\ImageInterface) 
 
+ Adds a frame around of the image. Please note that the image size will
+ increase by '$margin' x 2.
+
     [$image] (string|resource|\Imagine\Image\ImageInterface) Either
     ImageInterface, resource or a string containing file path
     [$margin] (int) The frame size to add around the image
@@ -193,6 +211,10 @@ return (\Imagine\Image\ImageInterface)
  getThumbnailBox($sourceBox, $width, $height)
 <
 return (\Imagine\Image\BoxInterface) Thumbnail box
+
+ Returns box for a thumbnail to be created. If one of the dimensions is set to
+ 'null', another one is calculated automatically based on width to height
+ ratio of original image box.
 
     [$sourceBox] (\Imagine\Image\BoxInterface) Original image box
     [$width] (int) Thumbnail width

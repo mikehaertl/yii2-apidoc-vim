@@ -53,6 +53,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -177,6 +179,7 @@ return (void)
 <
 return (array) The available data models
 
+ Prepares the data models that will be made available in the current page.
 
 
 *yii/data/BaseDataProvider::prepareKeys*			protected
@@ -184,6 +187,8 @@ return (array) The available data models
  prepareKeys($models)
 <
 return (array) The keys
+
+ Prepares the keys associated with the currently available data models.
 
     [$models] (array) The available data models
 
@@ -194,6 +199,8 @@ return (array) The keys
 <
 return (int) Total number of data models in this data provider.
 
+ Returns a value indicating the total number of data models in this data
+ provider.
 
 
 *yii/data/BaseDataProvider::prepare*			public
@@ -201,6 +208,8 @@ return (int) Total number of data models in this data provider.
  prepare($forcePrepare='false')
 <
 return (void)
+
+ Prepares the data models and keys.
 
  This method will prepare the data models and keys that can be retrieved via
  'getModels()' and 'getKeys()'.
@@ -218,6 +227,7 @@ return (void)
 <
 return (array) The list of data models in the current page.
 
+ Returns the data models in the current page.
 
 
 *yii/data/BaseDataProvider::setModels*			public
@@ -225,6 +235,8 @@ return (array) The list of data models in the current page.
  setModels($models)
 <
 return (void)
+
+ Sets the data models in the current page.
 
     [$models] (array) The models in the current page
 
@@ -236,6 +248,7 @@ return (void)
 return (array) The list of key values corresponding to 'models'. Each data model in
 'models' is uniquely identified by the corresponding key value in this array.
 
+ Returns the key values associated with the data models.
 
 
 *yii/data/BaseDataProvider::setKeys*			public
@@ -243,6 +256,8 @@ return (array) The list of key values corresponding to 'models'. Each data model
  setKeys($keys)
 <
 return (void)
+
+ Sets the key values associated with the data models.
 
     [$keys] (array) The list of key values corresponding to 'models'.
 
@@ -253,6 +268,7 @@ return (void)
 <
 return (int) The number of data models in the current page.
 
+ Returns the number of data models in the current page.
 
 
 *yii/data/BaseDataProvider::getTotalCount*		public
@@ -260,6 +276,8 @@ return (int) The number of data models in the current page.
  getTotalCount()
 <
 return (int) Total number of possible data models.
+
+ Returns the total number of data models.
 
  When 'pagination' is false, this returns the same value as 'count'.
  Otherwise, it will call 'prepareTotalCount()' to get the count.
@@ -271,6 +289,8 @@ return (int) Total number of possible data models.
 <
 return (void)
 
+ Sets the total number of data models.
+
     [$value] (int) The total number of data models.
 
 
@@ -281,6 +301,8 @@ return (void)
 return (\yii\data\Pagination|false) The pagination object. If this is false, it means
 the pagination is disabled.
 
+ Returns the pagination object used by this data provider.
+
  Note that you should call 'prepare()' or 'getModels()' first to get correct
  values of 'Pagination::totalCount' and 'Pagination::pageCount'.
 
@@ -290,6 +312,8 @@ the pagination is disabled.
  setPagination($value)
 <
 return (void)
+
+ Sets the pagination for this data provider.
 
     [$value] (array|\yii\data\Pagination|bool) The pagination to be used by
     this data provider. This can be one of the following:
@@ -308,6 +332,7 @@ return (void)
 return (\yii\data\Sort|bool) The sorting object. If this is false, it means the
 sorting is disabled.
 
+ Returns the sorting object used by this data provider.
 
 
 *yii/data/BaseDataProvider::setSort*			public
@@ -315,6 +340,8 @@ sorting is disabled.
  setSort($value)
 <
 return (void)
+
+ Sets the sort definition for this data provider.
 
     [$value] (array|\yii\data\Sort|bool) The sort definition to be used by
     this data provider. This can be one of the following:
@@ -331,6 +358,8 @@ return (void)
  refresh()
 <
 return (void)
+
+ Refreshes the data provider.
 
  After calling this method, if 'getModels()', 'getKeys()' or 'getTotalCount()'
  is called again, they will re-execute the query and return the latest data

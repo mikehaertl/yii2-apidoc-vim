@@ -24,6 +24,8 @@ METHOD DETAILS
 <
 return (array) The array representation of the object
 
+ Converts an object or an array of objects into an array.
+
     [$object] (object|array|string) The object to be converted into an array
     [$properties] (array) A mapping from object class names to the properties
     that need to put into the resulting arrays. The properties specified for
@@ -63,6 +65,8 @@ return (array) The array representation of the object
 <
 return (array) The merged array (the original arrays are not changed.)
 
+ Merges two or more arrays into one recursively.
+
  If each array has an element with the same string key value, the latter will
  overwrite the former (different from array_merge_recursive). Recursive
  merging will be conducted if both arrays have an element of array type and
@@ -82,6 +86,9 @@ return (array) The merged array (the original arrays are not changed.)
  getValue($array, $key, $default='null')
 <
 return (mixed) The value of the element if found, default value otherwise
+
+ Retrieves the value of an array element or object property with the given key
+ or property name.
 
  If the key does not exist in the array or object, the default value will be
  returned instead.
@@ -128,6 +135,8 @@ return (mixed) The value of the element if found, default value otherwise
  setValue($array, $path, $value)
 <
 return (void)
+
+ Writes a value into an associative array at the key path specified.
 
  If there is no such key path yet, it will be created recursively. If the key
  exists, it will be overwritten.
@@ -181,6 +190,9 @@ return (void)
 <
 return (mixed|null) The value of the element if found, default value otherwise
 
+ Removes an item from an array and returns the value. If the key does not
+ exist in the array, the default value will be returned instead.
+
  Usage examples,
 
    // $array = ['type' => 'A', 'options' => [1, 2]];
@@ -203,6 +215,9 @@ return (mixed|null) The value of the element if found, default value otherwise
 <
 return (array) The items that were removed from the array
 
+ Removes items with matching values from the array and returns the removed
+ items.
+
  Example,
 
    $array = ['Bob' => 'Dylan', 'Michael' => 'Jackson', 'Mick' => 'Jagger',
@@ -223,6 +238,8 @@ return (array) The items that were removed from the array
  index($array, $key, $groups='[]')
 <
 return (array) The indexed and/or grouped array
+
+ Indexes and/or groups the array according to a specified key.
 
  The input should be either multidimensional array or an array of objects.
 
@@ -327,6 +344,8 @@ return (array) The indexed and/or grouped array
 <
 return (array) The list of column values
 
+ Returns the values of a specified column in an array.
+
  The input array should be multidimensional or an array of objects.
 
  For example,
@@ -356,6 +375,9 @@ return (array) The list of column values
  map($array, $from, $to, $group='null')
 <
 return (array) 
+
+ Builds a map (key-value pairs) from a multidimensional array or an array of
+ objects.
 
  The '$from' and '$to' parameters specify the key names or property names to
  set up the map. Optionally, one can further group the map according to a
@@ -403,6 +425,8 @@ return (array)
 <
 return (bool) Whether the array contains the specified key
 
+ Checks if the given array contains the specified key.
+
  This method enhances the 'array_key_exists()' function by supporting
  case-insensitive key comparison.
 
@@ -417,6 +441,9 @@ return (bool) Whether the array contains the specified key
  multisort($array, $key, $direction='SORT_ASC', $sortFlag='SORT_REGULAR')
 <
 return (void)
+
+ Sorts an array of objects or arrays (with the same structure) by one or
+ several keys.
 
     [$array] (array) The array to be sorted. The array will be modified after
     calling this method.
@@ -442,6 +469,8 @@ return (void)
 <
 return (array) The encoded data
 
+ Encodes special characters in an array of strings into HTML entities.
+
  Only array values will be encoded by default. If a value is an array, this
  method will also encode it recursively. Only string values will be encoded.
 
@@ -458,6 +487,9 @@ return (array) The encoded data
 <
 return (array) The decoded data
 
+ Decodes HTML entities into the corresponding characters in an array of
+ strings.
+
  Only array values will be decoded by default. If a value is an array, this
  method will also decode it recursively. Only string values will be decoded.
 
@@ -471,6 +503,8 @@ return (array) The decoded data
  isAssociative($array, $allStrings='true')
 <
 return (bool) Whether the array is associative
+
+ Returns a value indicating whether the given array is an associative array.
 
  An array is associative if all its keys are strings. If '$allStrings' is
  false, then an array will be treated as associative if at least one of its
@@ -489,6 +523,8 @@ return (bool) Whether the array is associative
 <
 return (bool) Whether the array is associative
 
+ Returns a value indicating whether the given array is an indexed array.
+
  An array is indexed if all its keys are integers. If '$consecutive' is true,
  then the array keys must be a consecutive sequence starting from 0.
 
@@ -505,6 +541,8 @@ return (bool) Whether the array is associative
 <
 return (bool) 'true' if '$needle' was found in '$haystack', 'false' otherwise.
 
+ Check whether an array or '\Traversable' contains an element.
+
  This method does the same as the PHP function
  [in_array()](http://php.net/manual/en/function.in-array.php) but additionally
  works for objects that implement the '\Traversable' interface.
@@ -520,6 +558,8 @@ return (bool) 'true' if '$needle' was found in '$haystack', 'false' otherwise.
 <
 return (bool) Whether $var is array-like
 
+ Checks whether a variable is an array or '\Traversable'.
+
  This method does the same as the PHP function
  [is_array()](http://php.net/manual/en/function.is-array.php) but additionally
  works on objects that implement the '\Traversable' interface.
@@ -532,6 +572,9 @@ return (bool) Whether $var is array-like
  isSubset($needles, $haystack, $strict='false')
 <
 return (bool) 'true' if '$needles' is a subset of '$haystack', 'false' otherwise.
+
+ Checks whether an array or '\Traversable' is a subset of another array or
+ '\Traversable'.
 
  This method will return 'true', if all elements of '$needles' are contained
  in '$haystack'. If at least one element is missing, 'false' will be returned.
@@ -547,6 +590,8 @@ return (bool) 'true' if '$needles' is a subset of '$haystack', 'false' otherwise
  filter($array, $filters)
 <
 return (array) Filtered array
+
+ Filters array according to rules specified.
 
  For example:
 

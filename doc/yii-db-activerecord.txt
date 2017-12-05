@@ -237,6 +237,8 @@ METHOD DETAILS
 <
 return (array) List of attribute names.
 
+ Returns the list of all attribute names of the model.
+
  The default implementation will return all column names of the table
  associated with this AR class.
 
@@ -438,6 +440,8 @@ return (array) List of attribute names.
 return (\yii\db\ActiveQueryInterface) The newly created
 'ActiveQueryInterface|ActiveQuery' instance.
 
+ Finds ActiveRecord instance(s) by the given condition.
+
  This method is internally called by 'findOne()' and 'findAll()'.
 
     [$condition] (mixed) Please refer to 'findOne()' for the explanation of
@@ -449,6 +453,8 @@ return (\yii\db\ActiveQueryInterface) The newly created
  updateAll($attributes, $condition='\'\'', $params='[]')
 <
 return (int) The number of rows updated
+
+ Updates the whole table using the provided attribute values and conditions.
 
  For example, to change the status to be 1 for all customers whose status is
  2:
@@ -487,6 +493,8 @@ return (int) The number of rows updated
 <
 return (int) The number of rows updated
 
+ Updates the whole table using the provided counter changes and conditions.
+
  For example, to increment all customers' age by 1,
 
    Customer::updateAllCounters(['age' => 1]);
@@ -509,6 +517,8 @@ return (int) The number of rows updated
  deleteAll($condition='null', $params='[]')
 <
 return (int) The number of rows deleted
+
+ Deletes rows in the table using the provided conditions.
 
  For example, to delete all customers whose status is 3:
 
@@ -633,6 +643,8 @@ return (int) The number of rows deleted
 return (int|false) The number of rows affected, or false if validation fails or
 'beforeSave()' stops the updating process.
 
+ Saves the changes to this active record into the associated database table.
+
  This method performs the following steps in order:
 
  1. call 'beforeValidate()' when '$runValidation' is 'true'. If
@@ -701,6 +713,8 @@ return (int|false) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
+ Deletes the table row corresponding to this active record.
+
  This method performs the following steps in order:
 
  1. call 'beforeDelete()'. If the method returns 'false', it will skip the   
@@ -754,6 +768,8 @@ return (bool) Whether the row still exists in the database. If 'true', the lates
 data will be populated to this active record. Otherwise, this record will
 remain unchanged.
 
+ Repopulates this active record with the latest data.
+
 
 
  If the refresh is successful, an 'EVENT_AFTER_REFRESH' event will be
@@ -779,6 +795,9 @@ remain unchanged.
 return (bool) Whether the two active records refer to the same row in the same
 database table.
 
+ Returns a value indicating whether the given active record is the same as the
+ current one.
+
  The comparison is made by comparing the table names and the primary key
  values of the two active records. If one of the records 'isNewRecord|is new'
  they are also considered not equal.
@@ -801,6 +820,9 @@ database table.
  populateRecord($record, $row)
 <
 return (void)
+
+ Populates an active record object using a row of data from the
+ database/storage.
 
 
 
@@ -854,6 +876,8 @@ return (void)
 <
 return (string[]) The primary keys of the associated database table.
 
+ Returns the primary key name(s) for this AR class.
+
  The default implementation will return the primary key(s) as declared in the
  DB table that is associated with this AR class.
 
@@ -870,6 +894,8 @@ return (string[]) The primary keys of the associated database table.
  find()
 <
 return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance.
+
+ Creates an 'ActiveQueryInterface' instance for query purpose.
 
 
 
@@ -923,6 +949,9 @@ return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance.
 return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
+ Inserts a row into the associated database table using the attribute values
+ of this record.
+
  This method performs the following steps in order:
 
  1. call 'beforeValidate()' when '$runValidation' is 'true'. If
@@ -966,6 +995,8 @@ successfully.
 <
 return (\yii\db\Connection) The database connection used by this AR class.
 
+ Returns the database connection used by this AR class.
+
  By default, the "db" application component is used as the database
  connection. You may override this method if you want to use a different
  database connection.
@@ -976,6 +1007,8 @@ return (\yii\db\Connection) The database connection used by this AR class.
  loadDefaultValues($skipIfSet='true')
 <
 return ($this) The model instance itself.
+
+ Loads default values from database table schema.
 
  You may call this method to load default values after creating a new
  instance:
@@ -995,6 +1028,8 @@ return ($this) The model instance itself.
  findBySql($sql, $params='[]')
 <
 return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance
+
+ Creates an 'ActiveQuery' instance with a given SQL statement.
 
  Note that because the SQL statement is already specified, calling additional
  query modification methods (such as 'where()', 'order()') on the created
@@ -1018,6 +1053,8 @@ return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance
 <
 return (string) The table name
 
+ Declares the name of the database table associated with this AR class.
+
  By default this method returns the class name as the table name by calling
  'Inflector::camel2id()' with prefix 'Connection::tablePrefix'. For example if
  'Connection::tablePrefix' is 'tbl_', 'Customer' becomes 'tbl_customer', and
@@ -1032,6 +1069,7 @@ return (string) The table name
 return (\yii\db\TableSchema) The schema information of the DB table associated with
 this AR class.
 
+ Returns the schema information of the DB table associated with this AR class.
 
 
 *yii/db/ActiveRecord::transactions*			public
@@ -1041,6 +1079,9 @@ this AR class.
 return (array) The declarations of transactional operations. The array keys are
 scenarios names, and the array values are the corresponding transaction
 operations.
+
+ Declares which DB operations should be performed within a transaction in
+ different scenarios.
 
  The supported DB operations are: 'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE',
  which correspond to the 'insert()', 'update()' and 'delete()' methods,
@@ -1069,6 +1110,8 @@ operations.
 <
 return (bool) Whether the record is inserted successfully.
 
+ Inserts an ActiveRecord into DB without considering transaction.
+
     [$attributes] (array) List of attributes that need to be saved. Defaults
     to 'null', meaning all attributes that are loaded from DB will be saved.
 
@@ -1081,6 +1124,7 @@ return (int|false) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
+ Deletes an ActiveRecord without considering transaction.
 
 
 *yii/db/ActiveRecord::isTransactional*			public
@@ -1089,6 +1133,9 @@ deleted is 0, even though the deletion execution is successful.
 <
 return (bool) Whether the specified operation is transactional in the current
 'scenario'.
+
+ Returns a value indicating whether the specified operation is transactional
+ in the current '$scenario'.
 
     [$operation] (int) The operation to check. Possible values are
     'OP_INSERT', 'OP_UPDATE' and 'OP_DELETE'.

@@ -121,6 +121,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the action.
 
 
 *yii/captcha/CaptchaAction::__get*			public
@@ -259,6 +260,7 @@ return (void)
 <
 return (void)
 
+ Runs the action.
 
 
 *yii/captcha/CaptchaAction::generateValidationHash*	public
@@ -266,6 +268,8 @@ return (void)
  generateValidationHash($code)
 <
 return (string) A hash code generated from the CAPTCHA code
+
+ Generates a hash code that can be used for client-side validation.
 
     [$code] (string) The CAPTCHA code
 
@@ -276,6 +280,8 @@ return (string) A hash code generated from the CAPTCHA code
 <
 return (string) The verification code.
 
+ Gets the verification code.
+
     [$regenerate] (bool) Whether the verification code should be regenerated.
 
 
@@ -284,6 +290,8 @@ return (string) The verification code.
  validate($input, $caseSensitive)
 <
 return (bool) Whether the input is valid
+
+ Validates the input to see if it matches the generated code.
 
     [$input] (string) User input
     [$caseSensitive] (bool) Whether the comparison should be case-sensitive
@@ -295,6 +303,7 @@ return (bool) Whether the input is valid
 <
 return (string) The generated verification code
 
+ Generates a new verification code.
 
 
 *yii/captcha/CaptchaAction::getSessionKey*		protected
@@ -303,6 +312,7 @@ return (string) The generated verification code
 <
 return (string) The session variable name
 
+ Returns the session variable name used to store verification code.
 
 
 *yii/captcha/CaptchaAction::renderImage*			protected
@@ -310,6 +320,8 @@ return (string) The session variable name
  renderImage($code)
 <
 return (string) Image contents
+
+ Renders the CAPTCHA image.
 
     [$code] (string) The verification code
 
@@ -320,6 +332,8 @@ return (string) Image contents
 <
 return (string) Image contents in PNG format.
 
+ Renders the CAPTCHA image based on the code using GD library.
+
     [$code] (string) The verification code
 
 
@@ -328,6 +342,8 @@ return (string) Image contents in PNG format.
  renderImageByImagick($code)
 <
 return (string) Image contents in PNG format.
+
+ Renders the CAPTCHA image based on the code using ImageMagick library.
 
     [$code] (string) The verification code
 
@@ -338,6 +354,7 @@ return (string) Image contents in PNG format.
 <
 return (void)
 
+ Sets the HTTP headers needed by image response.
 
 
 

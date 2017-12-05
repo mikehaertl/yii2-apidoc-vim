@@ -189,6 +189,8 @@ METHOD DETAILS
 <
 return ($this) Self reference.
 
+ Sets the data fields, which composes message content.
+
 
 
 
@@ -208,6 +210,8 @@ return ($this) Self reference.
  addData($data)
 <
 return ($this) Self reference.
+
+ Adds data fields to the existing ones.
 
 
 
@@ -239,6 +243,8 @@ return ($this) Self reference.
 <
 return (array) Raw header lines.
 
+ Composes raw header lines from 'headers'.
+
 
 
  Each line will be a string in format: 'header-name: value'.
@@ -251,6 +257,8 @@ return (array) Raw header lines.
  toString()
 <
 return (string) The string representation of this HTTP message.
+
+ Returns string representation of this HTTP message.
 
 
 
@@ -270,6 +278,8 @@ return (string) The string representation of this HTTP message.
 <
 return ($this) Self reference.
 
+ Sets target URL.
+
     [$url] (string|array) Use a string to represent a URL (e.g.
     'http://some-domain.com', 'item/list'), or an array to represent a URL
     with query parameters (e.g. '['item/list', 'param1' => 'value1']').
@@ -281,6 +291,7 @@ return ($this) Self reference.
 <
 return (string|array) Target URL or URL parameters
 
+ Returns target URL.
 
 
 *yii/httpclient/Request::setFullUrl*			public
@@ -288,6 +299,8 @@ return (string|array) Target URL or URL parameters
  setFullUrl($fullUrl)
 <
 return (void)
+
+ Sets full target URL.
 
  This method can be use during request formatting and preparation. Do not use
  it for the target URL specification, use 'setUrl()' instead.
@@ -301,6 +314,7 @@ return (void)
 <
 return (string) Full target URL.
 
+ Returns full target URL, including 'Client::baseUrl' as a string.
 
 
 *yii/httpclient/Request::setMethod*			public
@@ -325,6 +339,10 @@ return (string) Request method
  setOptions($options)
 <
 return ($this) Self reference.
+
+ Following options are supported: 
+   - timeout: int, the maximum number of seconds to allow request to be
+   executed.
 
 
    - proxy: string, URI specifying address of proxy server. (e.g.
@@ -363,6 +381,8 @@ return (array) Request options.
 <
 return ($this) Self reference.
 
+ Adds more options to already defined ones.
+
  Please refer to 'setOptions()' on how to specify options.
 
     [$options] (array) Additional options
@@ -373,6 +393,8 @@ return ($this) Self reference.
  addContent($name, $content, $options='[]')
 <
 return ($this) Self reference.
+
+ Adds a content part for multi-part content request.
 
     [$name] (string) Part (form input) name.
     [$content] (string) Content.
@@ -387,6 +409,8 @@ return ($this) Self reference.
  addFile($name, $fileName, $options='[]')
 <
 return ($this) 
+
+ Adds a file for upload as multi-part content.
 
     [$name] (string) Part (form input) name
     [$fileName] (string) Full name of the source file.
@@ -403,6 +427,8 @@ return ($this)
 <
 return ($this) 
 
+ Adds a string as a file upload.
+
     [$name] (string) Part (form input) name
     [$content] (string) File content.
     [$options] (array) Content part options, valid options are:  
@@ -417,6 +443,8 @@ return ($this)
 <
 return ($this) Self reference.
 
+ Prepares this request instance for sending.
+
  This method should be invoked by transport before sending a request. Do not
  call this method unless you know what you are doing.
 
@@ -427,6 +455,7 @@ return ($this) Self reference.
 <
 return (\yii\httpclient\Response) Response instance.
 
+ Sends this request.
 
 
 *yii/httpclient/Request::beforeSend*			public
@@ -434,6 +463,8 @@ return (\yii\httpclient\Response) Response instance.
  beforeSend()
 <
 return (void)
+
+ This method is invoked right before this request is sent.
 
  The method will invoke 'Client::beforeSend()' and trigger the
  'EVENT_BEFORE_SEND' event.
@@ -444,6 +475,8 @@ return (void)
  afterSend($response)
 <
 return (void)
+
+ This method is invoked right after this request is sent.
 
  The method will invoke 'Client::afterSend()' and trigger the
  'EVENT_AFTER_SEND' event.

@@ -108,6 +108,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$id] (string) The ID of this module.
     [$parent] (\yii\base\Module) The parent module (if any).
     [$config] (array) Name-value pairs that will be used to initialize the
@@ -119,6 +121,8 @@ return (void)
  init()
 <
 return (void)
+
+ Initializes the module.
 
  This method is called after the module is created and initialized with
  property values given in configuration. The default implementation will
@@ -244,6 +248,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
  Since version 2.0.13, if a component isn't defined in the module, it will be
  looked up in the parent module. The parent module may be the application.
 
@@ -256,6 +262,8 @@ return (void)
  get($id, $throwException='true')
 <
 return (void)
+
+ {@inheritdoc}
 
  Since version 2.0.13, if a component isn't defined in the module, it will be
  looked up in the parent module. The parent module may be the application.
@@ -291,6 +299,8 @@ return (void)
 return (static|null) The currently requested instance of this module class, or 'null'
 if the module class is not requested.
 
+ Returns the currently requested instance of this module class.
+
  If the module class is not currently requested, 'null' will be returned. This
  method is provided so that you access the module instance from anywhere
  within the module.
@@ -301,6 +311,8 @@ if the module class is not requested.
  setInstance($instance)
 <
 return (void)
+
+ Sets the currently requested instance of this module class.
 
     [$instance] (\yii\base\Module|null) The currently requested instance of
     this module class. If it is 'null', the instance of the calling class will
@@ -313,6 +325,9 @@ return (void)
 <
 return (string) The unique ID of the module.
 
+ Returns an ID that uniquely identifies this module among all modules within
+ the current application.
+
  Note that if the module is an application, an empty string will be returned.
 
 
@@ -322,6 +337,8 @@ return (string) The unique ID of the module.
 <
 return (string) The root directory of the module.
 
+ Returns the root directory of the module.
+
  It defaults to the directory containing the module class file.
 
 
@@ -330,6 +347,8 @@ return (string) The root directory of the module.
  setBasePath($path)
 <
 return (void)
+
+ Sets the root directory of the module.
 
  This method can only be invoked at the beginning of the constructor.
 
@@ -343,6 +362,9 @@ return (void)
 <
 return (string) The directory that contains the controller classes.
 
+ Returns the directory that contains the controller classes according to
+ 'controllerNamespace'.
+
  Note that in order for this method to return a value, you must define an
  alias for the root namespace of 'controllerNamespace'.
 
@@ -353,6 +375,7 @@ return (string) The directory that contains the controller classes.
 <
 return (string) The root directory of view files. Defaults to "'basePath'/views".
 
+ Returns the directory that contains the view files for this module.
 
 
 *yii/base/Module::setViewPath*				public
@@ -360,6 +383,8 @@ return (string) The root directory of view files. Defaults to "'basePath'/views"
  setViewPath($path)
 <
 return (void)
+
+ Sets the directory that contains the view files.
 
     [$path] (string) The root directory of view files.
 
@@ -370,6 +395,7 @@ return (void)
 <
 return (string) The root directory of layout files. Defaults to "'viewPath'/layouts".
 
+ Returns the directory that contains layout view files for this module.
 
 
 *yii/base/Module::setLayoutPath*				public
@@ -377,6 +403,8 @@ return (string) The root directory of layout files. Defaults to "'viewPath'/layo
  setLayoutPath($path)
 <
 return (void)
+
+ Sets the directory that contains the layout files.
 
     [$path] (string) The root directory or [path alias](guide:concept-aliases)
     of layout files.
@@ -388,6 +416,8 @@ return (void)
 <
 return (string) The version of this module.
 
+ Returns current module version.
+
  If version is not explicitly set, 'defaultVersion()' method will be used to
  determine its value.
 
@@ -397,6 +427,8 @@ return (string) The version of this module.
  setVersion($version)
 <
 return (void)
+
+ Sets current module version.
 
     [$version] (string|callable) The version of this module. Version can be
     specified as a PHP callback, which can accept module instance as an
@@ -415,6 +447,8 @@ return (void)
 <
 return (string) The version of this module.
 
+ Returns default module version.
+
  Child class may override this method to provide more specific version
  detection.
 
@@ -424,6 +458,8 @@ return (string) The version of this module.
  setAliases($aliases)
 <
 return (void)
+
+ Defines path aliases.
 
  This method calls 'Yii::setAlias()' to register the path aliases. This method
  is provided so that you can define path aliases when configuring a module.
@@ -447,6 +483,8 @@ return (void)
 return (bool) Whether the named module exists. Both loaded and unloaded modules are
 considered.
 
+ Checks whether the child module of the specified ID exists.
+
  This method supports checking the existence of both child and grand child
  modules.
 
@@ -461,6 +499,8 @@ considered.
 return (\yii\base\Module|null) The module instance, 'null' if the module does not
 exist.
 
+ Retrieves the child module of the specified ID.
+
  This method supports retrieving both child modules and grand child modules.
 
     [$id] (string) Module ID (case-sensitive). To retrieve grand child
@@ -473,6 +513,8 @@ exist.
  setModule($id, $module)
 <
 return (void)
+
+ Adds a sub-module to this module.
 
     [$id] (string) Module ID.
     [$module] (\yii\base\Module|array|null) The sub-module to be added to this
@@ -491,6 +533,8 @@ return (void)
 <
 return (array) The modules (indexed by their IDs).
 
+ Returns the sub-modules in this module.
+
     [$loadedOnly] (bool) Whether to return the loaded sub-modules only. If
     this is set 'false', then all sub-modules registered in this module will
     be returned, whether they are loaded or not. Loaded modules will be
@@ -502,6 +546,8 @@ return (array) The modules (indexed by their IDs).
  setModules($modules)
 <
 return (void)
+
+ Registers sub-modules in the current module.
 
  Each sub-module should be specified as a name-value pair, where name refers
  to the ID of the module and value the module or a configuration array that
@@ -532,6 +578,8 @@ return (void)
 <
 return (mixed) The result of the action.
 
+ Runs a controller action specified by a route.
+
  This method parses the specified route and creates the corresponding child
  module(s), controller and action instances. It then calls
  'Controller::runAction()' to run the action with the given parameters. If the
@@ -547,6 +595,8 @@ return (mixed) The result of the action.
 <
 return (array|bool) If the controller is created successfully, it will be returned
 together with the requested action ID. Otherwise 'false' will be returned.
+
+ Creates a controller instance based on the given route.
 
  The route should be relative to this module. The method implements the
  following algorithm to resolve the given route:
@@ -575,6 +625,8 @@ together with the requested action ID. Otherwise 'false' will be returned.
 return (\yii\base\Controller|null) The newly created controller instance, or 'null'
 if the controller ID is invalid.
 
+ Creates a controller based on the given controller ID.
+
  The controller ID is relative to this module. The controller class should be
  namespaced under 'controllerNamespace'.
 
@@ -588,6 +640,8 @@ if the controller ID is invalid.
  beforeAction($action)
 <
 return (bool) Whether the action should continue to be executed.
+
+ This method is invoked right before an action within this module is executed.
 
  The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
  the method will determine whether the action should continue to run.
@@ -619,6 +673,8 @@ return (bool) Whether the action should continue to be executed.
  afterAction($action, $result)
 <
 return (mixed) The processed action result.
+
+ This method is invoked right after an action within this module is executed.
 
  The method will trigger the 'EVENT_AFTER_ACTION' event. The return value of
  the method will be used as the action return value.

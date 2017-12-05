@@ -121,6 +121,8 @@ METHOD DETAILS
 <
 return (mixed) 
 
+ Allows issuing all supported commands via magic methods.
+
 
 
    $redis->hmset('test_collection', 'key1', 'val1', 'key2', 'val2')
@@ -222,6 +224,7 @@ return (mixed)
 <
 return (array) 
 
+ Closes the connection when this component is being serialized.
 
 
 *yii/redis/Connection::getIsActive*			public
@@ -230,6 +233,7 @@ return (array)
 <
 return (bool) Whether the DB connection is established
 
+ Returns a value indicating whether the DB connection is established.
 
 
 *yii/redis/Connection::open*				public
@@ -237,6 +241,8 @@ return (bool) Whether the DB connection is established
  open()
 <
 return (void)
+
+ Establishes a DB connection.
 
  It does nothing if a DB connection has already been established.
 
@@ -247,6 +253,8 @@ return (void)
 <
 return (void)
 
+ Closes the currently active DB connection.
+
  It does nothing if the connection is already closed.
 
 
@@ -255,6 +263,8 @@ return (void)
  initConnection()
 <
 return (void)
+
+ Initializes the DB connection.
 
  This method is invoked right after the DB connection is established. The
  default implementation triggers an 'EVENT_AFTER_OPEN' event.
@@ -266,6 +276,7 @@ return (void)
 <
 return (string) Name of the DB driver
 
+ Returns the name of the DB driver for the current 'dsn'.
 
 
 *yii/redis/Connection::getLuaScriptBuilder*		public
@@ -295,6 +306,8 @@ range of a signed 64 bit integer.
 
 See [redis protocol description](http://redis.io/topics/protocol) for details
 on the mentioned reply types.
+
+ Executes a redis command.
 
  For a list of available commands and their parameters see
  http://redis.io/commands.

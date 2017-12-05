@@ -19,6 +19,8 @@ METHOD DETAILS
 <
 return (string[]) The primary key name(s) for this AR class.
 
+ Returns the primary key **name(s)** for this AR class.
+
  Note that an array should be returned even when the record only has a single
  primary key.
 
@@ -31,6 +33,7 @@ return (string[]) The primary key name(s) for this AR class.
 <
 return (array) List of attribute names.
 
+ Returns the list of all attribute names of the record.
 
 
 *yii/db/ActiveRecordInterface::getAttribute*		public
@@ -39,6 +42,8 @@ return (array) List of attribute names.
 <
 return (mixed) The attribute value. 'null' if the attribute is not set or does not
 exist.
+
+ Returns the named attribute value.
 
  If this record is the result of a query and the attribute is not loaded,
  'null' will be returned.
@@ -52,6 +57,8 @@ exist.
 <
 return (void)
 
+ Sets the named attribute value.
+
     [$name] (string) The attribute name.
     [$value] (mixed) The attribute value.
 
@@ -61,6 +68,9 @@ return (void)
  hasAttribute($name)
 <
 return (bool) Whether the record has an attribute with the specified name.
+
+ Returns a value indicating whether the record has an attribute with the
+ specified name.
 
     [$name] (string) The name of the attribute
 
@@ -72,6 +82,8 @@ return (bool) Whether the record has an attribute with the specified name.
 return (mixed) The primary key value. An array (attribute name => attribute value) is
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise ('null' will be returned if the key value is 'null').
+
+ Returns the primary key value(s).
 
     [$asArray] (bool) Whether to return the primary key value as an array. If
     true, the return value will be an array with attribute names as keys and
@@ -86,6 +98,8 @@ returned otherwise ('null' will be returned if the key value is 'null').
 return (mixed) The old primary key value. An array (column name => column value) is
 returned if the primary key is composite or '$asArray' is true. A string is
 returned otherwise ('null' will be returned if the key value is 'null').
+
+ Returns the old primary key value(s).
 
  This refers to the primary key value that is populated into the record after
  executing a find method (e.g. find(), findOne()). The value remains unchanged
@@ -105,6 +119,9 @@ returned otherwise ('null' will be returned if the key value is 'null').
 return (bool) Whether the given set of attributes represents the primary key for this
 model
 
+ Returns a value indicating whether the given set of attributes represents the
+ primary key for this model.
+
     [$keys] (array) The set of attributes to check
 
 
@@ -114,6 +131,8 @@ model
 <
 return (\yii\db\ActiveQueryInterface) The newly created 'ActiveQueryInterface'
 instance.
+
+ Creates an 'ActiveQueryInterface' instance for query purpose.
 
  The returned 'ActiveQueryInterface' instance can be further customized by
  calling methods defined in 'ActiveQueryInterface' before 'one()' or 'all()'
@@ -162,6 +181,9 @@ instance.
 <
 return (static) ActiveRecord instance matching the condition, or 'null' if nothing
 matches.
+
+ Returns a single active record model instance by a primary key or an array of
+ column values.
 
  The method accepts:
 
@@ -214,6 +236,9 @@ matches.
 <
 return (array) An array of ActiveRecord instance, or an empty array if nothing
 matches.
+
+ Returns a list of active record models that match the specified primary key
+ value(s) or a set of column values.
 
  The method accepts:
 
@@ -270,6 +295,8 @@ matches.
 <
 return (int) The number of rows updated
 
+ Updates records using the provided attribute values and conditions.
+
  For example, to change the status to be 1 for all customers whose status is
  2:
 
@@ -290,6 +317,8 @@ return (int) The number of rows updated
 <
 return (int) The number of rows deleted
 
+ Deletes records using the provided conditions.
+
  WARNING: If you do not specify any condition, this method will delete ALL
  rows in the table.
 
@@ -309,6 +338,8 @@ return (int) The number of rows deleted
  save($runValidation='true', $attributeNames='null')
 <
 return (bool) Whether the saving succeeded (i.e. no validation errors occurred).
+
+ Saves the current record.
 
  This method will call 'insert()' when 'getIsNewRecord()|isNewRecord' is true,
  or 'update()' when 'getIsNewRecord()|isNewRecord' is false.
@@ -338,6 +369,9 @@ return (bool) Whether the saving succeeded (i.e. no validation errors occurred).
 return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
+ Inserts the record into the database using the attribute values of this
+ record.
+
  Usage example:
 
    $customer = new Customer;
@@ -363,6 +397,8 @@ return (int|bool) The number of rows affected, or 'false' if validation fails or
 updating process is stopped for other reasons. Note that it is possible that
 the number of rows affected is 0, even though the update execution is
 successful.
+
+ Saves the changes to this active record into the database.
 
  Usage example:
 
@@ -390,6 +426,7 @@ return (int|bool) The number of rows deleted, or 'false' if the deletion is
 unsuccessful for some reason. Note that it is possible that the number of rows
 deleted is 0, even though the deletion execution is successful.
 
+ Deletes the record from the database.
 
 
 *yii/db/ActiveRecordInterface::getIsNewRecord*		public
@@ -398,6 +435,8 @@ deleted is 0, even though the deletion execution is successful.
 <
 return (bool) Whether the record is new and should be inserted when calling 'save()'.
 
+ Returns a value indicating whether the current record is new (not saved in
+ the database).
 
 
 *yii/db/ActiveRecordInterface::equals*			public
@@ -406,6 +445,9 @@ return (bool) Whether the record is new and should be inserted when calling 'sav
 <
 return (bool) Whether the two active records refer to the same row in the same
 database table.
+
+ Returns a value indicating whether the given active record is the same as the
+ current one.
 
  Two 'getIsNewRecord()|new' records are considered to be not equal.
 
@@ -417,6 +459,8 @@ database table.
  getRelation($name, $throwException='true')
 <
 return (\yii\db\ActiveQueryInterface) The relational query object
+
+ Returns the relation object with the specified name.
 
  A relation is defined by a getter method which returns an object implementing
  the 'ActiveQueryInterface' (normally this would be a relational 'ActiveQuery'
@@ -435,6 +479,8 @@ return (\yii\db\ActiveQueryInterface) The relational query object
 <
 return (void)
 
+ Populates the named relation with the related records.
+
  Note that this method does not check if the relation exists or not.
 
     [$name] (string) The relation name, e.g. 'orders' for a relation defined
@@ -448,6 +494,8 @@ return (void)
  link($name, $model, $extraColumns='[]')
 <
 return (void)
+
+ Establishes the relationship between two records.
 
  The relationship is established by setting the foreign key value(s) in one
  record to be the corresponding primary key value(s) in the other record. The
@@ -475,6 +523,8 @@ return (void)
 <
 return (void)
 
+ Destroys the relationship between two records.
+
  The record with the foreign key of the relationship will be deleted if
  '$delete' is true. Otherwise, the foreign key will be set 'null' and the
  record will be saved without validation.
@@ -493,6 +543,7 @@ return (void)
 <
 return (mixed) The database connection used by this AR class.
 
+ Returns the connection used by this AR class.
 
 
 

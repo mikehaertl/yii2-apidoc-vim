@@ -93,6 +93,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the redis Session component.
+
  This method will initialize the 'redis' property to make sure it refers to a
  valid redis connection.
 
@@ -212,6 +214,8 @@ return (void)
  getUseCustomStorage()
 <
 return (bool) Whether to use custom storage.
+
+ Returns a value indicating whether to use custom session storage.
 
  This method overrides the parent implementation and always returns true.
 
@@ -352,6 +356,8 @@ return (bool) Whether to use custom storage.
 <
 return (string) The session data
 
+ Session read handler.
+
  Do not call this method directly.
 
     [$id] (string) Session ID
@@ -362,6 +368,8 @@ return (string) The session data
  writeSession($id, $data)
 <
 return (bool) Whether session write is successful
+
+ Session write handler.
 
  Do not call this method directly.
 
@@ -374,6 +382,8 @@ return (bool) Whether session write is successful
  destroySession($id)
 <
 return (bool) Whether session is destroyed successfully
+
+ Session destroy handler.
 
  Do not call this method directly.
 
@@ -490,6 +500,8 @@ return (bool) Whether session is destroyed successfully
  calculateKey($id)
 <
 return (string) A safe cache key associated with the session variable name
+
+ Generates a unique key used for storing session data in cache.
 
     [$id] (string) Session variable name
 

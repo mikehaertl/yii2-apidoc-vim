@@ -385,6 +385,7 @@ METHOD DETAILS
 <
 return (void)
 
+ Reset the connection after cloning.
 
 
 *yii/db/Connection::behaviors*				public
@@ -453,6 +454,7 @@ return (void)
 <
 return (bool) Whether the DB connection is established
 
+ Returns a value indicating whether the DB connection is established.
 
 
 *yii/db/Connection::cache*				public
@@ -460,6 +462,8 @@ return (bool) Whether the DB connection is established
  cache($callable, $duration=null, $dependency='null')
 <
 return (mixed) The return result of the callable
+
+ Uses query cache for the queries performed with the callable.
 
  When query caching is enabled ('enableQueryCache' is true and 'queryCache'
  refers to a valid cache), queries performed within the callable will be
@@ -493,6 +497,8 @@ return (mixed) The return result of the callable
 <
 return (mixed) The return result of the callable
 
+ Disables query cache temporarily.
+
  Queries performed within the callable will not use query cache at all. For
  example,
 
@@ -521,6 +527,8 @@ return (mixed) The return result of the callable
 return (array) The current query cache information, or null if query cache is not
 enabled.
 
+ Returns the current query cache information.
+
  This method is used internally by 'Command'.
 
     [$duration] (int) The preferred caching duration. If null, it will be
@@ -535,6 +543,8 @@ enabled.
 <
 return (void)
 
+ Establishes a DB connection.
+
  It does nothing if a DB connection has already been established.
 
 
@@ -544,6 +554,8 @@ return (void)
 <
 return (void)
 
+ Closes the currently active DB connection.
+
  It does nothing if the connection is already closed.
 
 
@@ -552,6 +564,8 @@ return (void)
  createPdoInstance()
 <
 return (\PDO) The pdo instance
+
+ Creates the PDO instance.
 
  This method is called by 'open' to establish a DB connection. The default
  implementation will create a PHP PDO instance. You may override this method
@@ -563,6 +577,8 @@ return (\PDO) The pdo instance
  initConnection()
 <
 return (void)
+
+ Initializes the DB connection.
 
  This method is invoked right after the DB connection is established. The
  default implementation turns on 'PDO::ATTR_EMULATE_PREPARES' if
@@ -576,6 +592,8 @@ return (void)
 <
 return (\yii\db\Command) The DB command
 
+ Creates a command for execution.
+
     [$sql] (string) The SQL statement to be executed
     [$params] (array) The parameters to be bound to the SQL statement
 
@@ -587,6 +605,7 @@ return (\yii\db\Command) The DB command
 return (\yii\db\Transaction) The currently active transaction. Null if no active
 transaction.
 
+ Returns the currently active transaction.
 
 
 *yii/db/Connection::beginTransaction*			public
@@ -594,6 +613,8 @@ transaction.
  beginTransaction($isolationLevel='null')
 <
 return (\yii\db\Transaction) The transaction initiated
+
+ Starts a transaction.
 
     [$isolationLevel] (string|null) The isolation level to use for this
     transaction. See 'Transaction::begin()' for details.
@@ -604,6 +625,8 @@ return (\yii\db\Transaction) The transaction initiated
  transaction($callback, $isolationLevel='null')
 <
 return (mixed) Result of callback function
+
+ Executes callback provided in a transaction.
 
     [$callback] (callable) A valid PHP callback that performs the job. Accepts
     connection instance as parameter.
@@ -618,6 +641,7 @@ return (mixed) Result of callback function
 return (\yii\db\Schema) The schema information for the database opened by this
 connection.
 
+ Returns the schema information for the database opened by this connection.
 
 
 *yii/db/Connection::getQueryBuilder*			public
@@ -626,6 +650,7 @@ connection.
 <
 return (\yii\db\QueryBuilder) The query builder for the current DB connection.
 
+ Returns the query builder for the current DB connection.
 
 
 *yii/db/Connection::getTableSchema*			public
@@ -634,6 +659,8 @@ return (\yii\db\QueryBuilder) The query builder for the current DB connection.
 <
 return (\yii\db\TableSchema) Table schema information. Null if the named table does
 not exist.
+
+ Obtains the schema information for the named table.
 
     [$name] (string) Table name.
     [$refresh] (bool) Whether to reload the table schema even if it is found
@@ -647,6 +674,8 @@ not exist.
 return (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
+ Returns the ID of the last inserted row or sequence value.
+
     [$sequenceName] (string) Name of the sequence object (required by some
     DBMS)
 
@@ -656,6 +685,8 @@ the sequence object
  quoteValue($value)
 <
 return (string) The properly quoted string
+
+ Quotes a string value for use in a query.
 
  Note that if the parameter is not a string, it will be returned without
  change.
@@ -668,6 +699,8 @@ return (string) The properly quoted string
  quoteTableName($name)
 <
 return (string) The properly quoted table name
+
+ Quotes a table name for use in a query.
 
  If the table name contains schema prefix, the prefix will also be properly
  quoted. If the table name is already quoted or contains special characters
@@ -682,6 +715,8 @@ return (string) The properly quoted table name
 <
 return (string) The properly quoted column name
 
+ Quotes a column name for use in a query.
+
  If the column name contains prefix, the prefix will also be properly quoted.
  If the column name is already quoted or contains special characters including
  '(', ''' and '{{', then this method will do nothing.
@@ -694,6 +729,9 @@ return (string) The properly quoted column name
  quoteSql($sql)
 <
 return (string) The quoted SQL
+
+ Processes a SQL statement by quoting table and column names that are enclosed
+ within double brackets.
 
  Tokens enclosed within double curly brackets are treated as table names,
  while tokens enclosed within double square brackets are column names. They
@@ -709,6 +747,8 @@ return (string) The quoted SQL
 <
 return (string) Name of the DB driver
 
+ Returns the name of the DB driver. Based on the the current 'dsn', in case it
+ was not set explicitly by an end user.
 
 
 *yii/db/Connection::setDriverName*			public
@@ -716,6 +756,8 @@ return (string) Name of the DB driver
  setDriverName($driverName)
 <
 return (void)
+
+ Changes the current driver name.
 
     [$driverName] (string) Name of the DB driver
 
@@ -726,6 +768,8 @@ return (void)
 <
 return (\PDO) The PDO instance for the currently active slave connection. 'null' is
 returned if no slave connection is available and '$fallbackToMaster' is false.
+
+ Returns the PDO instance for the currently active slave connection.
 
  When 'enableSlaves' is true, one of the slaves will be used for read queries,
  and its PDO instance will be returned by this method.
@@ -740,6 +784,8 @@ returned if no slave connection is available and '$fallbackToMaster' is false.
 <
 return (\PDO) The PDO instance for the currently active master connection.
 
+ Returns the PDO instance for the currently active master connection.
+
  This method will open the master DB connection and then return 'pdo'.
 
 
@@ -749,6 +795,8 @@ return (\PDO) The PDO instance for the currently active master connection.
 <
 return (\yii\db\Connection) The currently active slave connection. 'null' is returned
 if there is no slave available and '$fallbackToMaster' is false.
+
+ Returns the currently active slave connection.
 
  If this method is called for the first time, it will try to open a slave
  connection when 'enableSlaves' is true.
@@ -764,6 +812,8 @@ if there is no slave available and '$fallbackToMaster' is false.
 return (\yii\db\Connection) The currently active master connection. 'null' is
 returned if there is no master available.
 
+ Returns the currently active master connection.
+
  If this method is called for the first time, it will try to open a master
  connection.
 
@@ -773,6 +823,8 @@ returned if there is no master available.
  useMaster($callback)
 <
 return (mixed) The return value of the callback
+
+ Executes the provided callback by using the master connection.
 
  This method is provided so that you can temporarily force using the master
  connection to perform DB operations even if they are read queries. For
@@ -796,6 +848,8 @@ return (mixed) The return value of the callback
 return (\yii\db\Connection) The opened DB connection, or 'null' if no server is
 available
 
+ Opens the connection to a server in the pool.
+
  This method implements the load balancing among the given list of the
  servers. Connections will be tried in random order.
 
@@ -811,6 +865,8 @@ available
 return (\yii\db\Connection) The opened DB connection, or 'null' if no server is
 available
 
+ Opens the connection to a server in the pool.
+
  This method implements the load balancing among the given list of the
  servers. Connections will be tried in sequential order.
 
@@ -825,6 +881,7 @@ available
 <
 return (array) 
 
+ Close the connection before serializing.
 
 
 

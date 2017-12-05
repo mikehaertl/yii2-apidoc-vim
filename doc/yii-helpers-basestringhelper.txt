@@ -24,6 +24,8 @@ METHOD DETAILS
 <
 return (int) The number of bytes in the given string.
 
+ Returns the number of bytes in the given string.
+
  This method ensures the string is treated as a byte array by using
  'mb_strlen()'.
 
@@ -35,6 +37,8 @@ return (int) The number of bytes in the given string.
  byteSubstr($string, $start, $length=null)
 <
 return (string) The extracted part of string, or FALSE on failure or an empty string.
+
+ Returns the portion of string specified by the start and length parameters.
 
  This method ensures the string is treated as a byte array by using
  'mb_substr()'.
@@ -51,6 +55,8 @@ return (string) The extracted part of string, or FALSE on failure or an empty st
  basename($path, $suffix='''')
 <
 return (string) The trailing name component of the given path.
+
+ Returns the trailing name component of a path.
 
  This method is similar to the php function 'basename()' except that it will
  treat both \ and / as directory separators, independent of the operating
@@ -70,6 +76,8 @@ return (string) The trailing name component of the given path.
 <
 return (string) The parent directory's path.
 
+ Returns parent directory's path.
+
  This method is similar to 'dirname()' except that it will treat both \ and /
  as directory separators, independent of the operating system.
 
@@ -81,6 +89,8 @@ return (string) The parent directory's path.
  truncate($string, $length, $suffix=''...'', $encoding='null', $asHtml='false')
 <
 return (string) The truncated string.
+
+ Truncates a string to the number of characters specified.
 
     [$string] (string) The string to truncate.
     [$length] (int) How many characters from original string to include into
@@ -99,6 +109,8 @@ return (string) The truncated string.
 <
 return (string) The truncated string.
 
+ Truncates a string to the number of words specified.
+
     [$string] (string) The string to truncate.
     [$count] (int) How many words from original string to include into
     truncated string.
@@ -114,6 +126,8 @@ return (string) The truncated string.
 <
 return (string) 
 
+ Truncate a string while preserving the HTML.
+
     [$string] (string) The string to truncate
     [$count] (int) 
     [$suffix] (string) String to append to the end of the truncated string.
@@ -125,6 +139,8 @@ return (string)
  startsWith($string, $with, $caseSensitive='true')
 <
 return (bool) Returns true if first input starts with second input, false otherwise
+
+ Check if given string starts with specified substring.
 
  Binary and multibyte safe.
 
@@ -141,6 +157,8 @@ return (bool) Returns true if first input starts with second input, false otherw
 <
 return (bool) Returns true if first input ends with second input, false otherwise
 
+ Check if given string ends with specified substring.
+
  Binary and multibyte safe.
 
     [$string] (string) Input string to check
@@ -155,6 +173,8 @@ return (bool) Returns true if first input ends with second input, false otherwis
  explode($string, $delimiter='','', $trim='true', $skipEmpty='false')
 <
 return (array) 
+
+ Explodes string into array, optionally trims values and skips empty ones.
 
     [$string] (string) String to be exploded.
     [$delimiter] (string) Delimiter. Default is ','.
@@ -174,6 +194,8 @@ return (array)
 <
 return (int) 
 
+ Counts words in a string.
+
     [$string] (string) 
 
 
@@ -183,6 +205,9 @@ return (int)
 <
 return (string) 
 
+ Returns string representation of number value with replaced commas to dots,
+ if decimal point of current locale is comma.
+
     [$value] (int|float|string) 
 
 
@@ -191,6 +216,9 @@ return (string)
  base64UrlEncode($input)
 <
 return (string) Encoded string.
+
+ Encodes string into "Base 64 Encoding with URL and Filename Safe Alphabet"
+ (RFC 4648).
 
  > Note: Base 64 padding '=' may be at the end of the returned string. > '='
  is not transparent to URL encoding.
@@ -204,6 +232,8 @@ return (string) Encoded string.
 <
 return (string) Decoded string.
 
+ Decodes "Base 64 Encoding with URL and Filename Safe Alphabet" (RFC 4648).
+
     [$input] (string) Encoded string.
 
 
@@ -212,6 +242,8 @@ return (string) Decoded string.
  floatToString($number)
 <
 return (string) The string representation of the number.
+
+ Safely casts a float to string independent of the current locale.
 
  The decimal separator will always be '.'.
 

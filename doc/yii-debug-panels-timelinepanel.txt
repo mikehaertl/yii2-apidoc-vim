@@ -24,6 +24,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -179,6 +181,8 @@ return (string) Content that is displayed in debugger detail view
 <
 return (mixed) Data to be saved
 
+ Saves data to be later used in debugger detail view.
+
 
 
  This method is called on every page where debugger is enabled.
@@ -191,6 +195,8 @@ return (mixed) Data to be saved
  load($data)
 <
 return (void)
+
+ Loads data into the panel
 
 
 
@@ -237,6 +243,8 @@ return (void)
 <
 return (void)
 
+ Sets color indicators.
+
  key: percentages of time request, value: hex color
 
     [$colors] (array) 
@@ -248,6 +256,8 @@ return (void)
 <
 return (array) 
 
+ Color indicators item profile, key: percentages of time request, value: hex
+ color
 
 
 *yii/debug/panels/TimelinePanel::setSvgOptions*		public
@@ -273,6 +283,7 @@ return (array)
 <
 return (float) 
 
+ Start request, timestamp (obtained by microtime(true))
 
 
 *yii/debug/panels/TimelinePanel::getDuration*		public
@@ -281,6 +292,7 @@ return (float)
 <
 return (float) 
 
+ Request duration, milliseconds
 
 
 *yii/debug/panels/TimelinePanel::getMemory*		public
@@ -289,6 +301,7 @@ return (float)
 <
 return (int) 
 
+ Memory peak in request, bytes. (obtained by memory_get_peak_usage())
 
 
 *yii/debug/panels/TimelinePanel::getSvg*			public
@@ -304,6 +317,8 @@ return (\yii\debug\models\timeline\Svg)
  getModels($refresh='false')
 <
 return (array) Models
+
+ Returns an array of models that represents logs of the current request.
 
  Can be used with data providers, such as \yii\data\ArrayDataProvider.
 

@@ -50,6 +50,8 @@ METHOD DETAILS
 <
 return (string) The encoded content
 
+ Encodes special characters into HTML entities.
+
  The '\yii\base\Application::charset|application charset' will be used for
  encoding.
 
@@ -64,6 +66,8 @@ return (string) The encoded content
 <
 return (string) The decoded content
 
+ Decodes special HTML entities back to the corresponding characters.
+
  This is the opposite of 'encode()'.
 
     [$content] (string) The content to be decoded
@@ -74,6 +78,8 @@ return (string) The decoded content
  tag($name, $content='''', $options='[]')
 <
 return (string) The generated HTML tag
+
+ Generates a complete HTML tag.
 
     [$name] (string|bool|null) The tag name. If $name is 'null' or 'false',
     the corresponding content will be rendered without any tag.
@@ -99,6 +105,8 @@ return (string) The generated HTML tag
 <
 return (string) The generated start tag
 
+ Generates a start tag.
+
     [$name] (string|bool|null) The tag name. If $name is 'null' or 'false',
     the corresponding content will be rendered without any tag.
     [$options] (array) The tag options in terms of name-value pairs. These
@@ -114,6 +122,8 @@ return (string) The generated start tag
 <
 return (string) The generated end tag
 
+ Generates an end tag.
+
     [$name] (string|bool|null) The tag name. If $name is 'null' or 'false',
     the corresponding content will be rendered without any tag.
 
@@ -123,6 +133,8 @@ return (string) The generated end tag
  style($content, $options='[]')
 <
 return (string) The generated style tag
+
+ Generates a style tag.
 
     [$content] (string) The style content
     [$options] (array) The tag options in terms of name-value pairs. These
@@ -138,6 +150,8 @@ return (string) The generated style tag
 <
 return (string) The generated script tag
 
+ Generates a script tag.
+
     [$content] (string) The script content
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
@@ -151,6 +165,8 @@ return (string) The generated script tag
  cssFile($url, $options='[]')
 <
 return (string) The generated link tag
+
+ Generates a link tag that refers to an external CSS file.
 
     [$url] (array|string) The URL of the external CSS file. This parameter
     will be processed by 'Url::to()'.
@@ -177,6 +193,8 @@ return (string) The generated link tag
 <
 return (string) The generated script tag
 
+ Generates a script tag that refers to an external JavaScript file.
+
     [$url] (string) The URL of the external JavaScript file. This parameter
     will be processed by 'Url::to()'.
     [$options] (array) The tag options in terms of name-value pairs. The
@@ -200,6 +218,7 @@ return (string) The generated script tag
 <
 return (string) The generated meta tags
 
+ Generates the meta tags containing CSRF token information.
 
 
 *yii/helpers/BaseHtml::beginForm*				public
@@ -207,6 +226,8 @@ return (string) The generated meta tags
  beginForm($action='\'\'', $method=''post'', $options='[]')
 <
 return (string) The generated form start tag.
+
+ Generates a form start tag.
 
     [$action] (array|string) The form action URL. This parameter will be
     processed by 'Url::to()'.
@@ -234,6 +255,7 @@ return (string) The generated form start tag.
 <
 return (string) The generated tag
 
+ Generates a form end tag.
 
 
 *yii/helpers/BaseHtml::a*					public
@@ -241,6 +263,8 @@ return (string) The generated tag
  a($text, $url='null', $options='[]')
 <
 return (string) The generated hyperlink
+
+ Generates a hyperlink tag.
 
     [$text] (string) Link body. It will NOT be HTML-encoded. Therefore you can
     pass in HTML code such as an image tag. If this is coming from end users,
@@ -269,6 +293,8 @@ return (string) The generated hyperlink
 <
 return (string) The generated mailto link
 
+ Generates a mailto hyperlink.
+
     [$text] (string) Link body. It will NOT be HTML-encoded. Therefore you can
     pass in HTML code such as an image tag. If this is coming from end users,
     you should consider 'encode()' it to prevent XSS attacks.
@@ -286,6 +312,8 @@ return (string) The generated mailto link
  img($src, $options='[]')
 <
 return (string) The generated image tag.
+
+ Generates an image tag.
 
     [$src] (array|string) The image URL. This parameter will be processed by
     'Url::to()'.
@@ -306,6 +334,8 @@ return (string) The generated image tag.
 <
 return (string) The generated label tag
 
+ Generates a label tag.
+
     [$content] (string) Label text. It will NOT be HTML-encoded. Therefore you
     can pass in HTML code such as an image tag. If this is is coming from end
     users, you should 'encode()' it to prevent XSS attacks.
@@ -324,6 +354,8 @@ return (string) The generated label tag
 <
 return (string) The generated button tag
 
+ Generates a button tag.
+
     [$content] (string) The content enclosed within the button tag. It will
     NOT be HTML-encoded. Therefore you can pass in HTML code such as an image
     tag. If this is is coming from end users, you should consider 'encode()'
@@ -340,6 +372,8 @@ return (string) The generated button tag
  submitButton($content=''Submit'', $options='[]')
 <
 return (string) The generated submit button tag
+
+ Generates a submit button tag.
 
  Be careful when naming form elements such as submit buttons. According to the
  [jQuery documentation](https://api.jquery.com/submit/) there are some
@@ -363,6 +397,8 @@ return (string) The generated submit button tag
 <
 return (string) The generated reset button tag
 
+ Generates a reset button tag.
+
     [$content] (string) The content enclosed within the button tag. It will
     NOT be HTML-encoded. Therefore you can pass in HTML code such as an image
     tag. If this is is coming from end users, you should consider 'encode()'
@@ -379,6 +415,8 @@ return (string) The generated reset button tag
  input($type, $name='null', $value='null', $options='[]')
 <
 return (string) The generated input tag
+
+ Generates an input type of the given type.
 
     [$type] (string) The type attribute.
     [$name] (string) The name attribute. If it is null, the name attribute
@@ -398,6 +436,8 @@ return (string) The generated input tag
 <
 return (string) The generated button tag
 
+ Generates an input button.
+
     [$label] (string) The value attribute. If it is null, the value attribute
     will not be generated.
     [$options] (array) The tag options in terms of name-value pairs. These
@@ -412,6 +452,8 @@ return (string) The generated button tag
  submitInput($label=''Submit'', $options='[]')
 <
 return (string) The generated button tag
+
+ Generates a submit input button.
 
  Be careful when naming form elements such as submit buttons. According to the
  [jQuery documentation](https://api.jquery.com/submit/) there are some
@@ -433,6 +475,8 @@ return (string) The generated button tag
 <
 return (string) The generated button tag
 
+ Generates a reset input button.
+
     [$label] (string) The value attribute. If it is null, the value attribute
     will not be generated.
     [$options] (array) The attributes of the button tag. The values will be
@@ -446,6 +490,8 @@ return (string) The generated button tag
  textInput($name, $value='null', $options='[]')
 <
 return (string) The generated text input tag
+
+ Generates a text input field.
 
     [$name] (string) The name attribute.
     [$value] (string) The value attribute. If it is null, the value attribute
@@ -463,6 +509,8 @@ return (string) The generated text input tag
 <
 return (string) The generated hidden input tag
 
+ Generates a hidden input field.
+
     [$name] (string) The name attribute.
     [$value] (string) The value attribute. If it is null, the value attribute
     will not be generated.
@@ -479,6 +527,8 @@ return (string) The generated hidden input tag
 <
 return (string) The generated password input tag
 
+ Generates a password input field.
+
     [$name] (string) The name attribute.
     [$value] (string) The value attribute. If it is null, the value attribute
     will not be generated.
@@ -494,6 +544,8 @@ return (string) The generated password input tag
  fileInput($name, $value='null', $options='[]')
 <
 return (string) The generated file input tag
+
+ Generates a file input field.
 
  To use a file input field, you should set the enclosing form's "enctype"
  attribute to be "multipart/form-data". After the form is submitted, the
@@ -515,6 +567,8 @@ return (string) The generated file input tag
  textarea($name, $value='''', $options='[]')
 <
 return (string) The generated text area tag
+
+ Generates a text area input.
 
     [$name] (string) The input name
     [$value] (string) The input value. Note that it will be encoded using
@@ -538,6 +592,8 @@ return (string) The generated text area tag
 <
 return (string) The generated radio button tag
 
+ Generates a radio button input.
+
     [$name] (string) The name attribute.
     [$checked] (bool) Whether the radio button should be checked.
     [$options] (array) The tag options in terms of name-value pairs. See
@@ -550,6 +606,8 @@ return (string) The generated radio button tag
 <
 return (string) The generated checkbox tag
 
+ Generates a checkbox input.
+
     [$name] (string) The name attribute.
     [$checked] (bool) Whether the checkbox should be checked.
     [$options] (array) The tag options in terms of name-value pairs. See
@@ -561,6 +619,8 @@ return (string) The generated checkbox tag
  booleanInput($type, $name, $checked='false', $options='[]')
 <
 return (string) The generated checkbox tag
+
+ Generates a boolean input.
 
     [$type] (string) The input type. This can be either 'radio' or 'checkbox'.
     [$name] (string) The name attribute.
@@ -593,6 +653,8 @@ return (string) The generated checkbox tag
  dropDownList($name, $selection='null', $items='[]', $options='[]')
 <
 return (string) The generated drop-down list tag
+
+ Generates a drop-down list.
 
     [$name] (string) The input name
     [$selection] (string|array|null) The selected value(s). String for single
@@ -648,6 +710,8 @@ return (string) The generated drop-down list tag
  listBox($name, $selection='null', $items='[]', $options='[]')
 <
 return (string) The generated list box tag
+
+ Generates a list box.
 
     [$name] (string) The input name
     [$selection] (string|array|null) The selected value(s). String for single
@@ -708,6 +772,8 @@ return (string) The generated list box tag
 <
 return (string) The generated checkbox list
 
+ Generates a list of checkboxes.
+
  A checkbox list allows multiple selection, like 'listBox()'. As a result, the
  corresponding submitted value is an array.
 
@@ -751,6 +817,8 @@ return (string) The generated checkbox list
  radioList($name, $selection='null', $items='[]', $options='[]')
 <
 return (string) The generated radio button list
+
+ Generates a list of radio buttons.
 
  A radio button list is like a checkbox list, except that it only allows
  single selection.
@@ -797,6 +865,8 @@ return (string) The generated radio button list
 return (string) The generated unordered list. An empty list tag will be returned if
 '$items' is empty.
 
+ Generates an unordered list.
+
     [$items] (array|\Traversable) The items for generating the list. Each item
     generates a single list item. Note that items will be automatically HTML
     encoded if '$options['encode']' is not set or true.
@@ -830,6 +900,8 @@ return (string) The generated unordered list. An empty list tag will be returned
 return (string) The generated ordered list. An empty string is returned if '$items'
 is empty.
 
+ Generates an ordered list.
+
     [$items] (array|\Traversable) The items for generating the list. Each item
     generates a single list item. Note that items will be automatically HTML
     encoded if '$options['encode']' is not set or true.
@@ -859,6 +931,8 @@ is empty.
 <
 return (string) The generated label tag
 
+ Generates a label tag for the given model attribute.
+
  The label text is the label associated with the attribute, obtained via
  'Model::getAttributeLabel()'.
 
@@ -886,6 +960,8 @@ return (string) The generated label tag
  activeHint($model, $attribute, $options='[]')
 <
 return (string) The generated hint tag
+
+ Generates a hint tag for the given model attribute.
 
  The hint text is the hint associated with the attribute, obtained via
  'Model::getAttributeHint()'. If no hint content can be obtained, method will
@@ -915,6 +991,8 @@ return (string) The generated hint tag
  errorSummary($models, $options='[]')
 <
 return (string) The generated error summary
+
+ Generates a summary of the validation errors.
 
  If there is no validation error, an empty error summary markup will still be
  generated, but it will be hidden.
@@ -946,6 +1024,9 @@ return (string) The generated error summary
 <
 return (string) The generated label tag
 
+ Generates a tag that contains the first validation error of the specified
+ model attribute.
+
  Note that even if there is no validation error, this method will still return
  an empty error tag.
 
@@ -974,6 +1055,8 @@ return (string) The generated label tag
 <
 return (string) The generated input tag
 
+ Generates an input tag for the given model attribute.
+
  This method will generate the "name" and "value" tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
 
@@ -992,6 +1075,8 @@ return (string) The generated input tag
  activeTextInput($model, $attribute, $options='[]')
 <
 return (string) The generated input tag
+
+ Generates a text input tag for the given model attribute.
 
  This method will generate the "name" and "value" tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
@@ -1018,6 +1103,8 @@ return (string) The generated input tag
 <
 return (string) The generated input tag
 
+ Generates a hidden input tag for the given model attribute.
+
  This method will generate the "name" and "value" tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
 
@@ -1035,6 +1122,8 @@ return (string) The generated input tag
  activePasswordInput($model, $attribute, $options='[]')
 <
 return (string) The generated input tag
+
+ Generates a password input tag for the given model attribute.
 
  This method will generate the "name" and "value" tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
@@ -1061,6 +1150,8 @@ return (string) The generated input tag
 <
 return (string) The generated input tag
 
+ Generates a file input tag for the given model attribute.
+
  This method will generate the "name" and "value" tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
 
@@ -1078,6 +1169,8 @@ return (string) The generated input tag
  activeTextarea($model, $attribute, $options='[]')
 <
 return (string) The generated textarea tag
+
+ Generates a textarea tag for the given model attribute.
 
  The model attribute value will be used as the content in the textarea.
 
@@ -1103,6 +1196,9 @@ return (string) The generated textarea tag
 <
 return (string) The generated radio button tag
 
+ Generates a radio button tag together with a label for the given model
+ attribute.
+
  This method will generate the "checked" tag attribute according to the model
  attribute value.
 
@@ -1118,6 +1214,8 @@ return (string) The generated radio button tag
  activeCheckbox($model, $attribute, $options='[]')
 <
 return (string) The generated checkbox tag
+
+ Generates a checkbox tag together with a label for the given model attribute.
 
  This method will generate the "checked" tag attribute according to the model
  attribute value.
@@ -1135,6 +1233,9 @@ return (string) The generated checkbox tag
 <
 return (string) The generated input element
 
+ Generates a boolean input This method is mainly called by 'activeCheckbox()'
+ and 'activeRadio()'.
+
     [$type] (string) The input type. This can be either 'radio' or 'checkbox'.
     [$model] (\yii\base\Model) The model object
     [$attribute] (string) The attribute name or expression. See
@@ -1148,6 +1249,8 @@ return (string) The generated input element
  activeDropDownList($model, $attribute, $items, $options='[]')
 <
 return (string) The generated drop-down list tag
+
+ Generates a drop-down list for the given model attribute.
 
  The selection of the drop-down list is taken from the value of the model
  attribute.
@@ -1206,6 +1309,8 @@ return (string) The generated drop-down list tag
  activeListBox($model, $attribute, $items, $options='[]')
 <
 return (string) The generated list box tag
+
+ Generates a list box.
 
  The selection of the list box is taken from the value of the model attribute.
 
@@ -1268,6 +1373,8 @@ return (string) The generated list box tag
 <
 return (string) The generated checkbox list
 
+ Generates a list of checkboxes.
+
  A checkbox list allows multiple selection, like 'listBox()'. As a result, the
  corresponding submitted value is an array. The selection of the checkbox list
  is taken from the value of the model attribute.
@@ -1313,6 +1420,8 @@ return (string) The generated checkbox list
  activeRadioList($model, $attribute, $items, $options='[]')
 <
 return (string) The generated radio button list
+
+ Generates a list of radio buttons.
 
  A radio button list is like a checkbox list, except that it only allows
  single selection. The selection of the radio buttons is taken from the value
@@ -1361,6 +1470,8 @@ return (string) The generated radio button list
 <
 return (string) The generated input list
 
+ Generates a list of input fields.
+
  This method is mainly called by 'activeListBox()', 'activeRadioList()' and
  'activeCheckboxList()'.
 
@@ -1382,6 +1493,8 @@ return (string) The generated input list
  renderSelectOptions($selection, $items, $tagOptions='[]')
 <
 return (string) The generated list options
+
+ Renders the option tags that can be used by 'dropDownList()' and 'listBox()'.
 
     [$selection] (string|array|null) The selected value(s). String for single
     or array for multiple selection(s).
@@ -1410,6 +1523,8 @@ rendered into a string with a leading white space (so that it can be directly
 appended to the tag name in a tag. If there is no attribute, an empty string
 will be returned.
 
+ Renders the HTML tag attributes.
+
  Attributes whose values are of boolean type will be treated as [boolean
  attributes](http://www.w3.org/TR/html5/infrastructure.html#boolean-attributes).
 
@@ -1434,6 +1549,8 @@ will be returned.
 <
 return (void)
 
+ Adds a CSS class (or several classes) to the specified options.
+
  If the CSS class is already in the options, it will not be added again. If
  class specification at given options is an array, and some class placed there
  with the named (string) key, overriding of such key will have no effect. For
@@ -1455,6 +1572,8 @@ return (void)
 <
 return (void)
 
+ Removes a CSS class from the specified options.
+
     [$options] (array) The options to be modified.
     [$class] (string|array) The CSS class(es) to be removed
 
@@ -1464,6 +1583,8 @@ return (void)
  addCssStyle($options, $style, $overwrite='true')
 <
 return (void)
+
+ Adds the specified CSS style to the HTML options.
 
  If the options already contain a 'style' element, the new style will be
  merged with the existing one. If a CSS property exists in both the new and
@@ -1488,6 +1609,8 @@ return (void)
 <
 return (void)
 
+ Removes the specified CSS style from the HTML options.
+
  For example,
 
    Html::removeCssStyle($options, ['width', 'height']);
@@ -1505,6 +1628,8 @@ return (void)
 <
 return (string) The CSS style string. If the CSS style is empty, a null will be
 returned.
+
+ Converts a CSS style array into a string representation.
 
  For example,
 
@@ -1524,6 +1649,8 @@ returned.
 <
 return (array) The array representation of the CSS style
 
+ Converts a CSS style string into an array representation.
+
  The array keys are the CSS property names, and the array values are the
  corresponding CSS property values.
 
@@ -1542,6 +1669,8 @@ return (array) The array representation of the CSS style
  getAttributeName($attribute)
 <
 return (string) The attribute name without prefix and suffix.
+
+ Returns the real attribute name from the given attribute expression.
 
  An attribute expression is an attribute name prefixed and/or suffixed with
  array indexes. It is mainly used in tabular data input and/or input of array
@@ -1567,6 +1696,8 @@ return (string) The attribute name without prefix and suffix.
 <
 return (string|array) The corresponding attribute value
 
+ Returns the value of the specified attribute name or expression.
+
  For an attribute expression like '[0]dates[0]', this method will return the
  value of '$model->dates[0]'. See 'getAttributeName()' for more details about
  attribute expression.
@@ -1584,6 +1715,9 @@ return (string|array) The corresponding attribute value
  getInputName($model, $attribute)
 <
 return (string) The generated input name
+
+ Generates an appropriate input name for the specified attribute name or
+ expression.
 
  This method generates a name that can be used as the input name to collect
  user input for the specified attribute. The name is generated according to
@@ -1603,6 +1737,9 @@ return (string) The generated input name
 <
 return (string) The generated input ID
 
+ Generates an appropriate input ID for the specified attribute name or
+ expression.
+
  This method converts the result 'getInputName()' into a valid input ID. For
  example, if 'getInputName()' returns 'Post[content]', this method will return
  'post-content'.
@@ -1617,6 +1754,8 @@ return (string) The generated input ID
  escapeJsRegularExpression($regexp)
 <
 return (string) The escaped result.
+
+ Escapes regular expression to use in JavaScript.
 
     [$regexp] (string) The regular expression to be escaped.
 

@@ -109,6 +109,8 @@ METHOD DETAILS
 <
 return (string) The INSERT SQL
 
+ Creates an INSERT SQL statement.
+
 
 
  For example,
@@ -142,6 +144,8 @@ return (string) The INSERT SQL
 <
 return (string) The batch INSERT SQL statement
 
+ Generates a batch INSERT SQL statement.
+
 
 
  For example,
@@ -169,6 +173,8 @@ return (string) The batch INSERT SQL statement
  update($table, $columns, $condition, $params)
 <
 return (string) The UPDATE SQL
+
+ Creates an UPDATE SQL statement.
 
 
 
@@ -205,6 +211,8 @@ return (string) The UPDATE SQL
 <
 return (string) The SQL statement for renaming a DB table.
 
+ Builds a SQL statement for renaming a DB table.
+
     [$oldName] (string) The table to be renamed. The name will be properly
     quoted by the method.
     [$newName] (string) The new table name. The name will be properly quoted
@@ -231,6 +239,8 @@ return (string) The SQL statement for renaming a DB table.
  truncateTable($table)
 <
 return (string) The SQL statement for truncating a DB table.
+
+ Builds a SQL statement for truncating a DB table.
 
  Explicitly restarts identity for PGSQL to be consistent with other databases
  which all do this by default.
@@ -260,6 +270,8 @@ return (string) The SQL statement for truncating a DB table.
 <
 return (string) The SQL statement for changing the definition of a column.
 
+ Builds a SQL statement for changing the definition of a column.
+
     [$table] (string) The table whose column is to be changed. The table name
     will be properly quoted by the method.
     [$column] (string) The name of the column to be changed. The name will be
@@ -288,6 +300,8 @@ return (string) The SQL statement for changing the definition of a column.
 <
 return (string) The SQL statement for creating a new index.
 
+ Builds a SQL statement for creating a new index.
+
     [$name] (string) The name of the index. The name will be properly quoted
     by the method.
     [$table] (string) The table that the new index will be created for. The
@@ -308,6 +322,8 @@ return (string) The SQL statement for creating a new index.
  dropIndex($name, $table)
 <
 return (string) The SQL statement for dropping an index.
+
+ Builds a SQL statement for dropping an index.
 
     [$name] (string) The name of the index to be dropped. The name will be
     properly quoted by the method.
@@ -351,6 +367,9 @@ return (string) The SQL statement for dropping an index.
 <
 return (string) The SQL statement for resetting sequence
 
+ Creates a SQL statement for resetting the sequence value of a table's primary
+ key.
+
  The sequence will be reset such that the primary key of the next new row
  inserted will have the specified value or 1.
 
@@ -366,6 +385,8 @@ return (string) The SQL statement for resetting sequence
  checkIntegrity($check='true', $schema='''', $table='''')
 <
 return (string) The SQL statement for checking integrity
+
+ Builds a SQL statement for enabling or disabling integrity check.
 
     [$check] (bool) Whether to turn on or off the integrity check.
     [$schema] (string) The schema of the tables.

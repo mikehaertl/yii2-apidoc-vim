@@ -219,6 +219,8 @@ METHOD DETAILS
 <
 return (object) An instance of the requested class.
 
+ Returns an instance of the requested class.
+
  You may provide constructor parameters ('$params') and object configurations
  ('$config') that will be used during the creation of the instance.
 
@@ -247,6 +249,8 @@ return (object) An instance of the requested class.
  set($class, $definition='[]', $params='[]')
 <
 return ($this) The container itself
+
+ Registers a class definition with this container.
 
  For example,
 
@@ -318,6 +322,9 @@ return ($this) The container itself
 <
 return ($this) The container itself
 
+ Registers a class definition with this container and marks the class as a
+ singleton class.
+
  This method is similar to 'set()' except that classes registered via this
  method will only have one instance. Each time 'get()' is called, the same
  instance of the specified class will be returned.
@@ -335,6 +342,9 @@ return ($this) The container itself
 <
 return (bool) Whether the container has the definition of the specified name..
 
+ Returns a value indicating whether the container has the definition of the
+ specified name.
+
     [$class] (string) Class name, interface name or alias name
 
 
@@ -345,6 +355,9 @@ return (bool) Whether the container has the definition of the specified name..
 return (bool) Whether the given name corresponds to a registered singleton. If
 '$checkInstance' is true, the method should return a value indicating whether
 the singleton has been instantiated.
+
+ Returns a value indicating whether the given name corresponds to a registered
+ singleton.
 
     [$class] (string) Class name, interface name or alias name
     [$checkInstance] (bool) Whether to check if the singleton has been
@@ -357,6 +370,8 @@ the singleton has been instantiated.
 <
 return (void)
 
+ Removes the definition for the specified name.
+
     [$class] (string) Class name, interface name or alias name
 
 
@@ -365,6 +380,8 @@ return (void)
  normalizeDefinition($class, $definition)
 <
 return (array) The normalized class definition
+
+ Normalizes the class definition.
 
     [$class] (string) Class name
     [$definition] (string|array|callable) The class definition
@@ -377,6 +394,7 @@ return (array) The normalized class definition
 return (array) The list of the object definitions or the loaded shared objects (type
 or ID => definition or instance).
 
+ Returns the list of the object definitions or the loaded shared objects.
 
 
 *yii/di/Container::build*					protected
@@ -384,6 +402,8 @@ or ID => definition or instance).
  build($class, $params, $config)
 <
 return (object) The newly created instance of the specified class
+
+ Creates an instance of the specified class.
 
  This method will resolve dependencies of the specified class, instantiate
  them, and inject them into the new instance of the specified class.
@@ -399,6 +419,9 @@ return (object) The newly created instance of the specified class
 <
 return (array) The merged parameters
 
+ Merges the user-specified constructor parameters with the ones registered via
+ 'set()'.
+
     [$class] (string) Class name, interface name or alias name
     [$params] (array) The constructor parameters
 
@@ -409,6 +432,8 @@ return (array) The merged parameters
 <
 return (array) The dependencies of the specified class.
 
+ Returns the dependencies of the specified class.
+
     [$class] (string) Class name, interface name or alias name
 
 
@@ -417,6 +442,8 @@ return (array) The dependencies of the specified class.
  resolveDependencies($dependencies, $reflection='null')
 <
 return (array) The resolved dependencies
+
+ Resolves dependencies by replacing them with the actual object instances.
 
     [$dependencies] (array) The dependencies
     [$reflection] (\ReflectionClass) The class reflection associated with the
@@ -428,6 +455,8 @@ return (array) The resolved dependencies
  invoke($callback, $params='[]')
 <
 return (mixed) The callback return value.
+
+ Invoke a callback with resolving dependencies in parameters.
 
  This methods allows invoking a callback and let type hinted parameter names
  to be resolved as objects of the Container. It additionally allow calling
@@ -457,6 +486,8 @@ return (mixed) The callback return value.
 <
 return (array) The resolved dependencies.
 
+ Resolve dependencies for a function.
+
  This method can be used to implement similar functionality as provided by
  'invoke()' in other components.
 
@@ -470,6 +501,8 @@ return (array) The resolved dependencies.
  setDefinitions($definitions)
 <
 return (void)
+
+ Registers class definitions within this container.
 
     [$definitions] (array) Array of definitions. There are two allowed formats
     of array. The first format:  
@@ -519,6 +552,9 @@ return (void)
  setSingletons($singletons)
 <
 return (void)
+
+ Registers class definitions as singletons within this container by calling
+ 'setSingleton()'.
 
     [$singletons] (array) Array of singleton definitions. See
     'setDefinitions()' for allowed formats of array.

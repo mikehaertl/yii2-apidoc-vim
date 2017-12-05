@@ -20,6 +20,8 @@ METHOD DETAILS
 <
 return (int) Last inserted ID value.
 
+ Returns value of the last inserted ID.
+
     [$sequence] (string|null) The sequence name. Defaults to null.
 
 
@@ -29,6 +31,8 @@ return (int) Last inserted ID value.
 <
 return (bool) The result of a transaction start.
 
+ Starts a transaction. It is necessary to override PDO's method as MSSQL PDO
+ driver does not natively support transactions.
 
 
 *yii/db/mssql/PDO::commit*				public
@@ -37,6 +41,8 @@ return (bool) The result of a transaction start.
 <
 return (bool) The result of a transaction commit.
 
+ Commits a transaction. It is necessary to override PDO's method as MSSQL PDO
+ driver does not natively support transactions.
 
 
 *yii/db/mssql/PDO::rollBack*				public
@@ -45,6 +51,8 @@ return (bool) The result of a transaction commit.
 <
 return (bool) The result of a transaction roll back.
 
+ Rollbacks a transaction. It is necessary to override PDO's method as MSSQL
+ PDO driver does not natively support transactions.
 
 
 *yii/db/mssql/PDO::getAttribute*				public
@@ -53,6 +61,8 @@ return (bool) The result of a transaction roll back.
 <
 return (mixed) A successful call returns the value of the requested PDO attribute. An
 unsuccessful call returns null.
+
+ Retrieve a database connection attribute.
 
  It is necessary to override PDO's method as some MSSQL PDO driver (e.g.
  dblib) does not support getting attributes.

@@ -53,6 +53,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$sql] (string) SQL code to be tokenized.
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties
@@ -179,6 +181,7 @@ return (void)
 <
 return (\yii\db\SqlToken) Code type token.
 
+ Tokenizes and returns a code type token.
 
 
 *yii/db/SqlTokenizer::isWhitespace*			protected
@@ -186,6 +189,8 @@ return (\yii\db\SqlToken) Code type token.
  isWhitespace($length)
 <
 return (bool) Whether there's a whitespace at the current offset.
+
+ Returns whether there's a whitespace at the current offset.
 
  If this methos returns 'true', it has to set the '$length' parameter to the
  length of the matched string.
@@ -199,6 +204,8 @@ return (bool) Whether there's a whitespace at the current offset.
 <
 return (bool) Whether there's a commentary at the current offset.
 
+ Returns whether there's a commentary at the current offset.
+
  If this methos returns 'true', it has to set the '$length' parameter to the
  length of the matched string.
 
@@ -210,6 +217,8 @@ return (bool) Whether there's a commentary at the current offset.
  isOperator($length, $content)
 <
 return (bool) Whether there's an operator at the current offset.
+
+ Returns whether there's an operator at the current offset.
 
  If this methos returns 'true', it has to set the '$length' parameter to the
  length of the matched string. It may also set '$content' to a string that
@@ -225,6 +234,8 @@ return (bool) Whether there's an operator at the current offset.
 <
 return (bool) Whether there's an identifier at the current offset.
 
+ Returns whether there's an identifier at the current offset.
+
  If this methos returns 'true', it has to set the '$length' parameter to the
  length of the matched string. It may also set '$content' to a string that
  will be used as a token content.
@@ -238,6 +249,8 @@ return (bool) Whether there's an identifier at the current offset.
  isStringLiteral($length, $content)
 <
 return (bool) Whether there's a string literal at the current offset.
+
+ Returns whether there's a string literal at the current offset.
 
  If this methos returns 'true', it has to set the '$length' parameter to the
  length of the matched string. It may also set '$content' to a string that
@@ -253,6 +266,8 @@ return (bool) Whether there's a string literal at the current offset.
 <
 return (bool) Whether the given string is a keyword.
 
+ Returns whether the given string is a keyword.
+
  The method may set '$content' to a string that will be used as a token
  content.
 
@@ -265,6 +280,9 @@ return (bool) Whether the given string is a keyword.
  startsWithAnyLongest($with, $caseSensitive, $length='null', $content='null')
 <
 return (bool) Whether a match is found.
+
+ Returns whether the longest common prefix equals to the SQL code of the same
+ length at the current offset.
 
     [$with] (string[]) Strings to be tested. The method **will** modify this
     parameter to speed up lookups.
@@ -279,6 +297,8 @@ return (bool) Whether a match is found.
 <
 return (string) Result string, it may be empty if there's nothing to return.
 
+ Returns a string of the given length starting with the specified offset.
+
     [$length] (int) String length to be returned.
     [$caseSensitive] (bool) If it's 'false', the string will be uppercased.
     [$offset] (int|null) SQL code offset, defaults to current if 'null' is
@@ -290,6 +310,9 @@ return (string) Result string, it may be empty if there's nothing to return.
  indexAfter($string, $offset='null')
 <
 return (int) Index after the given string or end of string index.
+
+ Returns an index after the given string in the SQL code starting with the
+ specified offset.
 
     [$string] (string) String to be found.
     [$offset] (int|null) SQL code offset, defaults to current if 'null' is

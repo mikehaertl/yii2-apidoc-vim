@@ -357,6 +357,9 @@ METHOD DETAILS
 <
 return (int) The exit status
 
+ Displays available commands or the detailed information about a particular
+ command.
+
     [$command] (string) The name of the command to show help about. If not
     provided, all available commands will be displayed.
 
@@ -367,6 +370,8 @@ return (int) The exit status
 <
 return (void)
 
+ List all available controllers and actions in machine readable format.
+
  This is used for shell completion.
 
 
@@ -375,6 +380,8 @@ return (void)
  actionListActionOptions($action)
 <
 return (void)
+
+ List all available options for the $action in machine readable format.
 
  This is used for shell completion.
 
@@ -387,6 +394,8 @@ return (void)
 <
 return (void)
 
+ Displays usage information for $action.
+
     [$action] (string) Route to action
 
 
@@ -396,6 +405,7 @@ return (void)
 <
 return (array) All available command names
 
+ Returns all available command names.
 
 
 *yii/console/controllers/HelpController::getCommandDescriptions*protected
@@ -404,6 +414,7 @@ return (array) All available command names
 <
 return (array) All available commands as keys and their description as values.
 
+ Returns an array of commands an their descriptions.
 
 
 *yii/console/controllers/HelpController::getActions*	public
@@ -411,6 +422,8 @@ return (array) All available commands as keys and their description as values.
  getActions($controller)
 <
 return (array) All available action IDs.
+
+ Returns all available actions of the specified controller.
 
     [$controller] (\yii\console\Controller) The controller instance
 
@@ -421,6 +434,8 @@ return (array) All available action IDs.
 <
 return (array) The available command names
 
+ Returns available commands of a specified module.
+
     [$module] (\yii\base\Module) The module instance
 
 
@@ -429,6 +444,8 @@ return (array) The available command names
  validateControllerClass($controllerClass)
 <
 return (bool) 
+
+ Validates if the given class is a valid console controller class.
 
     [$controllerClass] (string) 
 
@@ -439,6 +456,7 @@ return (bool)
 <
 return (void)
 
+ Displays all available commands.
 
 
 *yii/console/controllers/HelpController::getCommandHelp*	protected
@@ -446,6 +464,8 @@ return (void)
  getCommandHelp($controller)
 <
 return (void)
+
+ Displays the overall information of the command.
 
     [$controller] (\yii\console\Controller) The controller instance
 
@@ -456,6 +476,8 @@ return (void)
 <
 return (void)
 
+ Displays the detailed information of a command action.
+
     [$controller] (\yii\console\Controller) The controller instance
     [$actionID] (string) Action ID
 
@@ -465,6 +487,8 @@ return (void)
  formatOptionHelp($name, $required, $type, $defaultValue, $comment)
 <
 return (string) The formatted string for the argument or option
+
+ Generates a well-formed string for an argument or option.
 
     [$name] (string) The name of the argument or option
     [$required] (bool) Whether the argument is required
@@ -497,6 +521,7 @@ return (string) The name of the cli script currently running.
 <
 return (string) Default help header.
 
+ Return a default help header.
 
 
 

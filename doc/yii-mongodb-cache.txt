@@ -84,6 +84,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the Cache component.
+
  This method will initialize the 'db' property to make sure it refers to a
  valid MongoDB connection.
 
@@ -270,6 +272,8 @@ return (void)
 return (string|bool) The value stored in cache, false if the value is not in the
 cache or expired.
 
+ Retrieves a value from cache with a specified key.
+
  This method should be implemented by child classes to retrieve the data from
  specific cache storage.
 
@@ -281,6 +285,8 @@ cache or expired.
  setValue($key, $value, $expire)
 <
 return (bool) True if the value is successfully stored into cache, false otherwise
+
+ Stores a value identified by a key in cache.
 
  This method should be implemented by child classes to store the data in
  specific cache storage.
@@ -297,6 +303,9 @@ return (bool) True if the value is successfully stored into cache, false otherwi
 <
 return (bool) True if the value is successfully stored into cache, false otherwise
 
+ Stores a value identified by a key into cache if the cache does not contain
+ this key.
+
  This method should be implemented by child classes to store the data in
  specific cache storage.
 
@@ -312,6 +321,9 @@ return (bool) True if the value is successfully stored into cache, false otherwi
 <
 return (bool) If no error happens during deletion
 
+ Deletes a value with the specified key from cache This method should be
+ implemented by child classes to delete the data from actual cache storage.
+
     [$key] (string) The key of the value to be deleted
 
 
@@ -320,6 +332,8 @@ return (bool) If no error happens during deletion
  flushValues()
 <
 return (bool) Whether the flush operation was successful.
+
+ Deletes all values from cache.
 
  Child classes may implement this method to realize the flush operation.
 
@@ -369,6 +383,8 @@ return (bool) Whether the flush operation was successful.
  gc($force='false')
 <
 return (void)
+
+ Removes the expired data values.
 
     [$force] (bool) Whether to enforce the garbage collection regardless of
     'gcProbability'. Defaults to false, meaning the actual deletion happens

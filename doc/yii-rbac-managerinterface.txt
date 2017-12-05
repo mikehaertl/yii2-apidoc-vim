@@ -19,6 +19,8 @@ METHOD DETAILS
 <
 return (\yii\rbac\Role) The new Role object
 
+ Creates a new Role object.
+
  Note that the newly created role is not added to the RBAC system yet. You
  must fill in the needed data and call 'add()' to add it to the system.
 
@@ -30,6 +32,8 @@ return (\yii\rbac\Role) The new Role object
  createPermission($name)
 <
 return (\yii\rbac\Permission) The new Permission object
+
+ Creates a new Permission object.
 
  Note that the newly created permission is not added to the RBAC system yet.
  You must fill in the needed data and call 'add()' to add it to the system.
@@ -44,6 +48,8 @@ return (\yii\rbac\Permission) The new Permission object
 return (bool) Whether the role, permission or rule is successfully added to the
 system
 
+ Adds a role, permission or rule to the RBAC system.
+
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
@@ -53,6 +59,8 @@ system
 <
 return (bool) Whether the role, permission or rule is successfully removed
 
+ Removes a role, permission or rule from the RBAC system.
+
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
@@ -61,6 +69,8 @@ return (bool) Whether the role, permission or rule is successfully removed
  update($name, $object)
 <
 return (bool) Whether the update is successful
+
+ Updates the specified role, permission or rule in the system.
 
     [$name] (string) The old name of the role, permission or rule
     [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
@@ -73,6 +83,8 @@ return (bool) Whether the update is successful
 return (null|\yii\rbac\Role) The role corresponding to the specified name. Null is
 returned if no such role.
 
+ Returns the named role.
+
     [$name] (string) The role name.
 
 
@@ -83,6 +95,7 @@ returned if no such role.
 return (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
 names.
 
+ Returns all roles in the system.
 
 
 *yii/rbac/ManagerInterface::getRolesByUser*		public
@@ -91,6 +104,8 @@ names.
 <
 return (\yii\rbac\Role[]) All roles directly assigned to the user. The array is
 indexed by the role names.
+
+ Returns the roles that are assigned to the user via 'assign()'.
 
  Note that child roles that are not assigned directly to the user will not be
  returned.
@@ -105,6 +120,8 @@ indexed by the role names.
 return (\yii\rbac\Role[]) Child roles. The array is indexed by the role names. First
 element is an instance of the parent Role itself.
 
+ Returns child roles of the role specified. Depth isn't limited.
+
     [$roleName] (string) Name of the role to file child roles for
 
 
@@ -114,6 +131,8 @@ element is an instance of the parent Role itself.
 <
 return (null|\yii\rbac\Permission) The permission corresponding to the specified
 name. Null is returned if no such permission.
+
+ Returns the named permission.
 
     [$name] (string) The permission name.
 
@@ -125,6 +144,7 @@ name. Null is returned if no such permission.
 return (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
 by the permission names.
 
+ Returns all permissions in the system.
 
 
 *yii/rbac/ManagerInterface::getPermissionsByRole*		public
@@ -133,6 +153,8 @@ by the permission names.
 <
 return (\yii\rbac\Permission[]) All permissions that the role represents. The array
 is indexed by the permission names.
+
+ Returns all permissions that the specified role represents.
 
     [$roleName] (string) The role name
 
@@ -144,6 +166,8 @@ is indexed by the permission names.
 return (\yii\rbac\Permission[]) All permissions that the user has. The array is
 indexed by the permission names.
 
+ Returns all permissions that the user has.
+
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
@@ -154,6 +178,8 @@ indexed by the permission names.
 return (null|\yii\rbac\Rule) The rule object, or null if the specified name does not
 correspond to a rule.
 
+ Returns the rule of the specified name.
+
     [$name] (string) The rule name
 
 
@@ -163,6 +189,7 @@ correspond to a rule.
 <
 return (\yii\rbac\Rule[]) The rules indexed by the rule names
 
+ Returns all rules available in the system.
 
 
 *yii/rbac/ManagerInterface::canAddChild*			public
@@ -170,6 +197,8 @@ return (\yii\rbac\Rule[]) The rules indexed by the rule names
  canAddChild($parent, $child)
 <
 return (bool) Possibility of adding
+
+ Checks the possibility of adding a child to parent.
 
     [$parent] (\yii\rbac\Item) The parent item
     [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
@@ -181,6 +210,8 @@ return (bool) Possibility of adding
 <
 return (bool) Whether the child successfully added
 
+ Adds an item as a child of another item.
+
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
 
@@ -190,6 +221,8 @@ return (bool) Whether the child successfully added
  removeChild($parent, $child)
 <
 return (bool) Whether the removal is successful
+
+ Removes a child from its parent.
 
  Note, the child item is not deleted. Only the parent-child relationship is
  removed.
@@ -204,6 +237,8 @@ return (bool) Whether the removal is successful
 <
 return (bool) Whether the removal is successful
 
+ Removed all children form their parent.
+
  Note, the children items are not deleted. Only the parent-child relationships
  are removed.
 
@@ -216,6 +251,8 @@ return (bool) Whether the removal is successful
 <
 return (bool) Whether '$child' is already a child of '$parent'
 
+ Returns a value indicating whether the child already exists for the parent.
+
     [$parent] (\yii\rbac\Item) 
     [$child] (\yii\rbac\Item) 
 
@@ -226,6 +263,8 @@ return (bool) Whether '$child' is already a child of '$parent'
 <
 return (\yii\rbac\Item[]) The child permissions and/or roles
 
+ Returns the child permissions and/or roles.
+
     [$name] (string) The parent name
 
 
@@ -234,6 +273,8 @@ return (\yii\rbac\Item[]) The child permissions and/or roles
  assign($role, $userId)
 <
 return (\yii\rbac\Assignment) The role assignment information.
+
+ Assigns a role to a user.
 
     [$role] (\yii\rbac\Role|\yii\rbac\Permission) 
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
@@ -245,6 +286,8 @@ return (\yii\rbac\Assignment) The role assignment information.
 <
 return (bool) Whether the revoking is successful
 
+ Revokes a role from a user.
+
     [$role] (\yii\rbac\Role|\yii\rbac\Permission) 
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
@@ -255,6 +298,8 @@ return (bool) Whether the revoking is successful
 <
 return (bool) Whether the revoking is successful
 
+ Revokes all roles from a user.
+
     [$userId] (mixed) The user ID (see '\yii\web\User::id')
 
 
@@ -264,6 +309,8 @@ return (bool) Whether the revoking is successful
 <
 return (null|\yii\rbac\Assignment) The assignment information. Null is returned if
 the role is not assigned to the user.
+
+ Returns the assignment information regarding a role and a user.
 
     [$roleName] (string) The role name
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
@@ -276,6 +323,8 @@ the role is not assigned to the user.
 return (\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
 will be returned if there is no role assigned to the user.
 
+ Returns all role assignment information for the specified user.
+
     [$userId] (string|int) The user ID (see '\yii\web\User::id')
 
 
@@ -284,6 +333,8 @@ will be returned if there is no role assigned to the user.
  getUserIdsByRole($roleName)
 <
 return (array) Array of user ID strings
+
+ Returns all user IDs assigned to the role specified.
 
     [$roleName] (string) 
 
@@ -294,6 +345,8 @@ return (array) Array of user ID strings
 <
 return (void)
 
+ Removes all authorization data, including roles, permissions, rules, and
+ assignments.
 
 
 *yii/rbac/ManagerInterface::removeAllPermissions*		public
@@ -301,6 +354,8 @@ return (void)
  removeAllPermissions()
 <
 return (void)
+
+ Removes all permissions.
 
  All parent child relations will be adjusted accordingly.
 
@@ -311,6 +366,8 @@ return (void)
 <
 return (void)
 
+ Removes all roles.
+
  All parent child relations will be adjusted accordingly.
 
 
@@ -319,6 +376,8 @@ return (void)
  removeAllRules()
 <
 return (void)
+
+ Removes all rules.
 
  All roles and permissions which have rules will be adjusted accordingly.
 
@@ -329,6 +388,7 @@ return (void)
 <
 return (void)
 
+ Removes all role assignments.
 
 
 

@@ -63,6 +63,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$connection] (\yii\mongodb\Connection) The database connection.
     [$config] (array) Name-value pairs that will be used to initialize the
     object properties
@@ -124,6 +126,8 @@ return (void)
 <
 return (array) Command document.
 
+ Generates 'create collection' command.
+
  https://docs.mongodb.com/manual/reference/method/db.createCollection/
 
     [$collectionName] (string) Collection name.
@@ -136,6 +140,8 @@ return (array) Command document.
 <
 return (array) Command document.
 
+ Generates drop database command.
+
  https://docs.mongodb.com/manual/reference/method/db.dropDatabase/
 
 
@@ -144,6 +150,8 @@ return (array) Command document.
  dropCollection($collectionName)
 <
 return (array) Command document.
+
+ Generates drop collection command.
 
  https://docs.mongodb.com/manual/reference/method/db.collection.drop/
 
@@ -155,6 +163,8 @@ return (array) Command document.
  createIndexes($databaseName, $collectionName, $indexes)
 <
 return (array) Command document.
+
+ Generates create indexes command.
 
     [$databaseName] (string|null) Database name.
     [$collectionName] (string) Collection name.
@@ -182,6 +192,8 @@ return (array) Command document.
 <
 return (array) Command document.
 
+ Generates drop indexes command.
+
     [$collectionName] (string) Collection name
     [$index] (string) Index name or pattern, use '*' in order to drop all
     indexes.
@@ -192,6 +204,8 @@ return (array) Command document.
  listIndexes($collectionName, $options='[]')
 <
 return (array) Command document.
+
+ Generates list indexes command.
 
     [$collectionName] (string) Collection name
     [$options] (array) Command options. Available options are:
@@ -206,6 +220,8 @@ return (array) Command document.
 <
 return (array) Command document.
 
+ Generates count command
+
     [$collectionName] (string) 
     [$condition] (array) 
     [$options] (array) 
@@ -216,6 +232,8 @@ return (array) Command document.
  findAndModify($collectionName, $condition='[]', $update='[]', $options='[]')
 <
 return (array) Command document.
+
+ Generates 'find and modify' command.
 
     [$collectionName] (string) Collection name
     [$condition] (array) Filter condition
@@ -228,6 +246,8 @@ return (array) Command document.
  distinct($collectionName, $fieldName, $condition='[]', $options='[]')
 <
 return (array) Command document.
+
+ Generates 'distinct' command.
 
     [$collectionName] (string) Collection name.
     [$fieldName] (string) Target field name.
@@ -253,6 +273,8 @@ return (void)
  mapReduce($collectionName, $map, $reduce, $out, $condition='[]', $options='[]')
 <
 return (array) Command document.
+
+ Generates 'map-reduce' command.
 
     [$collectionName] (string) Collection name.
     [$map] (\MongoDB\BSON\Javascript|string) Function, which emits map data
@@ -291,6 +313,8 @@ return (array) Command document.
 <
 return (array) Command document.
 
+ Generates 'aggregate' command.
+
     [$collectionName] (string) Collection name
     [$pipelines] (array) List of pipeline operators.
     [$options] (array) Optional parameters.
@@ -302,6 +326,8 @@ return (array) Command document.
 <
 return (array) Command document.
 
+ Generates 'explain' command.
+
     [$collectionName] (string) Collection name.
     [$query] (array) Query options.
 
@@ -311,6 +337,8 @@ return (array) Command document.
  listDatabases($condition='[]', $options='[]')
 <
 return (array) Command document.
+
+ Generates 'listDatabases' command.
 
     [$condition] (array) Filter condition.
     [$options] (array) Command options.
@@ -322,6 +350,8 @@ return (array) Command document.
 <
 return (array) Command document.
 
+ Generates 'listCollections' command.
+
     [$condition] (array) Filter condition.
     [$options] (array) Command options.
 
@@ -332,6 +362,8 @@ return (array) Command document.
 <
 return (array) Normalized select fields.
 
+ Normalizes fields list for the MongoDB select composition.
+
     [$fields] (array|string) Raw fields.
 
 
@@ -340,6 +372,8 @@ return (array) Normalized select fields.
  buildSortFields($fields)
 <
 return (array) Normalized sort fields.
+
+ Normalizes fields list for the MongoDB sort composition.
 
     [$fields] (array|string) Raw fields.
 
@@ -350,6 +384,9 @@ return (array) Normalized sort fields.
 <
 return (string) Actual key.
 
+ Converts "\yii\db\*" quick condition keyword into actual Mongo condition
+ keyword.
+
     [$key] (string) Raw condition key.
 
 
@@ -358,6 +395,8 @@ return (string) Actual key.
  ensureMongoId($rawId)
 <
 return (array|\MongoDB\BSON\ObjectID) Normalized id(s).
+
+ Converts given value into 'ObjectID' instance.
 
  If array given, each element of it will be processed.
 
@@ -370,6 +409,9 @@ return (array|\MongoDB\BSON\ObjectID) Normalized id(s).
 <
 return (array) The generated Mongo condition
 
+ Parses the condition specification and generates the corresponding Mongo
+ condition.
+
     [$condition] (array) The condition specification. Please refer to
     'Query::where()' on how to specify a condition.
 
@@ -380,6 +422,8 @@ return (array) The generated Mongo condition
 <
 return (array) The generated Mongo condition.
 
+ Creates a condition based on column-value pairs.
+
     [$condition] (array) The condition specification.
 
 
@@ -388,6 +432,8 @@ return (array) The generated Mongo condition.
  buildNotCondition($operator, $operands)
 <
 return (array) The generated Mongo condition.
+
+ Composes 'NOT' condition.
 
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The Mongo conditions to connect.
@@ -399,6 +445,8 @@ return (array) The generated Mongo condition.
 <
 return (array) The generated Mongo condition.
 
+ Connects two or more conditions with the 'AND' operator.
+
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The Mongo conditions to connect.
 
@@ -408,6 +456,8 @@ return (array) The generated Mongo condition.
  buildOrCondition($operator, $operands)
 <
 return (array) The generated Mongo condition.
+
+ Connects two or more conditions with the 'OR' operator.
 
     [$operator] (string) The operator to use for connecting the given operands
     [$operands] (array) The Mongo conditions to connect.
@@ -419,6 +469,8 @@ return (array) The generated Mongo condition.
 <
 return (array) The generated Mongo condition.
 
+ Creates an Mongo condition, which emulates the 'BETWEEN' operator.
+
     [$operator] (string) The operator to use
     [$operands] (array) The first operand is the column name. The second and
     third operands describe the interval that column value should be in.
@@ -429,6 +481,8 @@ return (array) The generated Mongo condition.
  buildInCondition($operator, $operands)
 <
 return (array) The generated Mongo condition.
+
+ Creates an Mongo condition with the 'IN' operator.
 
     [$operator] (string) The operator to use (e.g. 'IN' or 'NOT IN')
     [$operands] (array) The first operand is the column name. If it is an
@@ -442,6 +496,8 @@ return (array) The generated Mongo condition.
 <
 return (array) The generated Mongo condition.
 
+ Creates a Mongo regular expression condition.
+
     [$operator] (string) The operator to use
     [$operands] (array) The first operand is the column name. The second
     operand is a single value that column value should be compared with.
@@ -453,6 +509,8 @@ return (array) The generated Mongo condition.
 <
 return (array) The generated Mongo condition.
 
+ Creates a Mongo condition, which emulates the 'LIKE' operator.
+
     [$operator] (string) The operator to use
     [$operands] (array) The first operand is the column name. The second
     operand is a single value that column value should be compared with.
@@ -463,6 +521,8 @@ return (array) The generated Mongo condition.
  buildSimpleCondition($operator, $operands)
 <
 return (string) The generated Mongo condition.
+
+ Creates an Mongo condition like '{$operator:{field:value}}'.
 
     [$operator] (string) The operator to use. Besides regular MongoDB
     operators, aliases like '>', '<=', and so on, can be used here.

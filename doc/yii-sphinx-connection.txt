@@ -358,6 +358,8 @@ METHOD DETAILS
 <
 return (\yii\sphinx\Command) The Sphinx command
 
+ Creates a command for execution.
+
     [$sql] (string) The SQL statement to be executed
     [$params] (array) The parameters to be bound to the SQL statement
 
@@ -399,6 +401,8 @@ return (\yii\sphinx\Command) The Sphinx command
 return (string) The row ID of the last row inserted, or the last value retrieved from
 the sequence object
 
+ This method is not supported by Sphinx.
+
     [$sequenceName] (string) Name of the sequence object
 
 
@@ -412,6 +416,8 @@ the sequence object
  quoteTableName($name)
 <
 return (string) The properly quoted table name
+
+ Alias of 'quoteIndexName()'.
 
     [$name] (string) Table name
 
@@ -483,6 +489,8 @@ return (string) The properly quoted table name
 return (\yii\sphinx\IndexSchema) Index schema information. Null if the named index
 does not exist.
 
+ Obtains the schema information for the named index.
+
     [$name] (string) Index name.
     [$refresh] (bool) Whether to reload the table schema even if it is found
     in the cache.
@@ -493,6 +501,8 @@ does not exist.
  quoteIndexName($name)
 <
 return (string) The properly quoted index name
+
+ Quotes a index name for use in a query.
 
  If the index name contains schema prefix, the prefix will also be properly
  quoted. If the index name is already quoted or contains special characters
@@ -506,6 +516,8 @@ return (string) The properly quoted index name
  escapeMatchValue($str)
 <
 return (string) The properly escaped string.
+
+ Escapes all special characters from 'MATCH' statement argument.
 
  Make sure you are using this method whenever composing 'MATCH' search
  statement. Note: this method does not perform quoting, you should place the

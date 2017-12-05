@@ -226,6 +226,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Exports log 'messages' to a specific destination.
+
  Child classes must implement this method.
 
 
@@ -234,6 +236,8 @@ return (void)
  collect($messages, $final)
 <
 return (void)
+
+ Processes the given log messages.
 
  This method will filter the given messages with 'levels' and 'categories'.
  And if requested, it will also export the filtering result to specific medium
@@ -252,6 +256,8 @@ return (void)
 return (string) The context information. If an empty string, it means no context
 information.
 
+ Generates the context information to be logged.
+
  The default implementation will dump user information, system variables, etc.
 
 
@@ -269,6 +275,8 @@ of level values. Defaults to 0, meaning  all available levels.
  setLevels($levels)
 <
 return (void)
+
+ Sets the message levels that this target is interested in.
 
  The parameter can be either an array of interested level names or an integer
  representing the bitmap of the interested level values. Valid level names
@@ -293,6 +301,8 @@ return (void)
 <
 return (array) The filtered messages.
 
+ Filters the given messages according to their categories and levels.
+
     [$messages] (array) Messages to be filtered. The message structure follows
     that in 'Logger::messages'.
     [$levels] (int) The message levels to filter by. This is a bitmap of level
@@ -309,6 +319,8 @@ return (array) The filtered messages.
 <
 return (string) The formatted message
 
+ Formats a log message for display as a string.
+
     [$message] (array) The log message to be formatted. The message structure
     follows that in 'Logger::messages'.
 
@@ -318,6 +330,8 @@ return (string) The formatted message
  getMessagePrefix($message)
 <
 return (string) The prefix string
+
+ Returns a string to be prefixed to the given message.
 
  If 'prefix' is configured it will return the result of the callback. The
  default implementation will return user IP, user ID and session ID as a
@@ -332,6 +346,8 @@ return (string) The prefix string
  setEnabled($value)
 <
 return (void)
+
+ Sets a value indicating whether this log target is enabled.
 
     [$value] (bool|callable) A boolean value or a callable to obtain the value
     from. The callable value is available since version 2.0.13.
@@ -353,6 +369,7 @@ return (void)
 <
 return (bool) A value indicating whether this log target is enabled.
 
+ Check whether the log target is enabled.
 
 
 *yii/log/Target::getTime*					protected
@@ -360,6 +377,8 @@ return (bool) A value indicating whether this log target is enabled.
  getTime($timestamp)
 <
 return (string) 
+
+ Returns formatted ('Y-m-d H:i:s') timestamp for message.
 
  If 'microtime' is configured to true it will return format 'Y-m-d H:i:s.u'.
 

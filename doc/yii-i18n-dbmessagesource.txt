@@ -96,6 +96,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the DbMessageSource component.
+
  This method will initialize the 'db' property to make sure it refers to a
  valid DB connection. Configured 'cache' component would also be initialized.
 
@@ -217,6 +219,8 @@ return (void)
 return (array) The loaded messages. The keys are original messages, and the values
 are translated messages.
 
+ Loads the message translation for the specified language and category.
+
  If translation for specific locale code such as 'en-US' isn't found it tries
  more generic 'en'.
 
@@ -240,6 +244,8 @@ are translated messages.
 <
 return (array) The messages loaded from database.
 
+ Loads the messages from database.
+
  You may override this method to customize the message storage in the
  database.
 
@@ -252,6 +258,9 @@ return (array) The messages loaded from database.
  createFallbackQuery($category, $language, $fallbackLanguage)
 <
 return (\yii\db\Query) 
+
+ The method builds the 'Query' object for the fallback language messages
+ search.
 
  Normally is called from 'loadMessagesFromDb'.
 

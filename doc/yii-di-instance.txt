@@ -63,6 +63,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
     [$id] (string) The component ID
 
 
@@ -71,6 +73,8 @@ return (void)
  of($id)
 <
 return (\yii\di\Instance) The new Instance object.
+
+ Creates a new Instance object.
 
     [$id] (string) The component ID
 
@@ -81,6 +85,9 @@ return (\yii\di\Instance) The new Instance object.
 <
 return (object) The object referenced by the Instance, or '$reference' itself if it
 is an object.
+
+ Resolves the specified reference into the actual object and makes sure it is
+ of the specified type.
 
  The reference may be specified as a string or an Instance object. If the
  former, it will be treated as a component ID, a class/interface name or an
@@ -118,6 +125,8 @@ is an object.
 <
 return (object) The actual object referenced by this Instance object.
 
+ Returns the actual object referenced by this Instance object.
+
     [$container] (\yii\di\ServiceLocator|\yii\di\Container) The container used
     to locate the referenced object. If null, the method will first try
     'Yii::$app' then 'Yii::$container'.
@@ -128,6 +137,8 @@ return (object) The actual object referenced by this Instance object.
  __set_state($state)
 <
 return (\yii\di\Instance) 
+
+ Restores class state after using 'var_export()'.
 
     [$state] (array) 
 

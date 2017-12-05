@@ -157,6 +157,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
 
 
  This method is invoked at the end of the constructor after the object is
@@ -241,6 +243,10 @@ return (void)
 <
 return (bool) Whether the action should continue to be executed.
 
+ This method is invoked right before an action is to be executed (after all
+ possible filters.) You may override this method to do last-minute preparation
+ for the action.
+
     [$action] (\yii\base\Action) The action to be executed.
 
 
@@ -266,6 +272,8 @@ return (bool) Whether the action should continue to be executed.
 return (bool|array) Whether to cache or not, return an array instead of 'true' to
 store an additional data.
 
+ This method is invoked right before the response caching is to be started.
+
  You may override this method to cancel caching by returning 'false' or store
  an additional data in a cache entry by returning an array instead of 'true'.
 
@@ -275,6 +283,9 @@ store an additional data.
  afterRestoreResponse($data)
 <
 return (void)
+
+ This method is invoked right after the response restoring is finished (but
+ before the response is sent).
 
  You may override this method to do last-minute preparation before the
  response is sent.
@@ -289,6 +300,8 @@ return (void)
 <
 return (void)
 
+ Restores response properties from the given data.
+
     [$response] (\yii\web\Response) The response to be restored.
     [$data] (array) The response property data.
 
@@ -299,6 +312,7 @@ return (void)
 <
 return (void)
 
+ Caches response properties.
 
 
 *yii/filters/PageCache::updateDynamicContent*		protected
@@ -306,6 +320,8 @@ return (void)
  updateDynamicContent($content, $placeholders)
 <
 return (string) Final content.
+
+ Replaces placeholders in content by results of evaluated dynamic statements.
 
     [$content] (string) Content to be parsed.
     [$placeholders] (array) Placeholders and their values.

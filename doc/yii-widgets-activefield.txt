@@ -287,6 +287,7 @@ METHOD DETAILS
 <
 return (string) The string representation of this object.
 
+ PHP magic method that returns the string representation of this object.
 
 
 *yii/widgets/ActiveField::render*				public
@@ -294,6 +295,8 @@ return (string) The string representation of this object.
  render($content='null')
 <
 return (string) The rendering result.
+
+ Renders the whole field.
 
  This method will generate the label, error tag, input tag and hint tag (if
  any), and assemble them into HTML according to 'template'.
@@ -317,6 +320,7 @@ return (string) The rendering result.
 <
 return (string) The rendering result.
 
+ Renders the opening tag of the field container.
 
 
 *yii/widgets/ActiveField::end*				public
@@ -325,6 +329,7 @@ return (string) The rendering result.
 <
 return (string) The rendering result.
 
+ Renders the closing tag of the field container.
 
 
 *yii/widgets/ActiveField::label*				public
@@ -332,6 +337,8 @@ return (string) The rendering result.
  label($label='null', $options='[]')
 <
 return ($this) The field object itself.
+
+ Generates a label tag for 'attribute'.
 
     [$label] (null|string|false) The label to use. If 'null', the label will
     be generated via 'Model::getAttributeLabel()'. If 'false', the generated
@@ -349,6 +356,8 @@ return ($this) The field object itself.
  error($options='[]')
 <
 return ($this) The field object itself.
+
+ Generates a tag that contains the first validation error of 'attribute'.
 
  Note that even if there is no validation error, this method will still return
  an empty error tag.
@@ -375,6 +384,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders the hint tag.
+
     [$content] (string|bool) The hint content. If 'null', the hint will be
     generated via 'Model::getAttributeHint()'. If 'false', the generated field
     will not contain the hint part. Note that this will NOT be
@@ -396,6 +407,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders an input tag.
+
     [$type] (string) The input type (e.g. 'text', 'password')
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
@@ -410,6 +423,8 @@ return ($this) The field object itself.
  textInput($options='[]')
 <
 return ($this) The field object itself.
+
+ Renders a text input.
 
  This method will generate the 'name' and 'value' tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
@@ -436,6 +451,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders a hidden input.
+
  Note that this method is provided for completeness. In most cases because you
  do not need to validate a hidden input, you should not need to use this
  method. Instead, you should use '\yii\helpers\Html::activeHiddenInput()'.
@@ -457,6 +474,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders a password input.
+
  This method will generate the 'name' and 'value' tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
 
@@ -473,6 +492,8 @@ return ($this) The field object itself.
  fileInput($options='[]')
 <
 return ($this) The field object itself.
+
+ Renders a file input.
 
  This method will generate the 'name' and 'value' tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
@@ -491,6 +512,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders a text area.
+
  The model attribute value will be used as the content in the textarea.
 
     [$options] (array) The tag options in terms of name-value pairs. These
@@ -506,6 +529,8 @@ return ($this) The field object itself.
  radio($options='[]', $enclosedByLabel='true')
 <
 return ($this) The field object itself.
+
+ Renders a radio button.
 
  This method will generate the 'checked' tag attribute according to the model
  attribute value.
@@ -545,6 +570,8 @@ return ($this) The field object itself.
  checkbox($options='[]', $enclosedByLabel='true')
 <
 return ($this) The field object itself.
+
+ Renders a checkbox.
 
  This method will generate the 'checked' tag attribute according to the model
  attribute value.
@@ -586,6 +613,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders a drop-down list.
+
  The selection of the drop-down list is taken from the value of the model
  attribute.
 
@@ -612,6 +641,8 @@ return ($this) The field object itself.
  listBox($items, $options='[]')
 <
 return ($this) The field object itself.
+
+ Renders a list box.
 
  The selection of the list box is taken from the value of the model attribute.
 
@@ -640,6 +671,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders a list of checkboxes.
+
  A checkbox list allows multiple selection, like 'listBox()'. As a result, the
  corresponding submitted value is an array. The selection of the checkbox list
  is taken from the value of the model attribute.
@@ -658,6 +691,8 @@ return ($this) The field object itself.
 <
 return ($this) The field object itself.
 
+ Renders a list of radio buttons.
+
  A radio button list is like a checkbox list, except that it only allows
  single selection. The selection of the radio buttons is taken from the value
  of the model attribute.
@@ -675,6 +710,8 @@ return ($this) The field object itself.
  widget($class, $config='[]')
 <
 return ($this) The field object itself.
+
+ Renders a widget as the input of the field.
 
  Note that the widget must have both 'model' and 'attribute' properties. They
  will be initialized with 'model' and 'attribute' of this field, respectively.
@@ -704,6 +741,8 @@ return ($this) The field object itself.
 <
 return (void)
 
+ Adjusts the 'for' attribute for the label based on the input options.
+
     [$options] (array) The input options.
 
 
@@ -713,6 +752,7 @@ return (void)
 <
 return (array) The JS options.
 
+ Returns the JS options for the field.
 
 
 *yii/widgets/ActiveField::isClientValidationEnabled*	protected
@@ -721,6 +761,7 @@ return (array) The JS options.
 <
 return (bool) 
 
+ Checks if client validation enabled for the field.
 
 
 *yii/widgets/ActiveField::isAjaxValidationEnabled*	protected
@@ -729,6 +770,7 @@ return (bool)
 <
 return (bool) 
 
+ Checks if ajax validation enabled for the field.
 
 
 *yii/widgets/ActiveField::getInputId*			protected
@@ -737,6 +779,7 @@ return (bool)
 <
 return (string) The input id.
 
+ Returns the HTML 'id' of the input element of this form field.
 
 
 *yii/widgets/ActiveField::addAriaAttributes*		protected
@@ -744,6 +787,8 @@ return (string) The input id.
  addAriaAttributes($options)
 <
 return (void)
+
+ Adds aria attributes to the input options.
 
     [$options] () Array input options
 

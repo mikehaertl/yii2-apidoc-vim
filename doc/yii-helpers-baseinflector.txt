@@ -55,6 +55,8 @@ METHOD DETAILS
 <
 return (string) The pluralized word
 
+ Converts a word to its plural form.
+
  Note that this is for English only! For example, 'apple' will become
  'apples', and 'child' will become 'children'.
 
@@ -67,6 +69,8 @@ return (string) The pluralized word
 <
 return (string) Singular noun.
 
+ Returns the singular of the $word.
+
     [$word] (string) The english word to singularize
 
 
@@ -75,6 +79,8 @@ return (string) Singular noun.
  titleize($words, $ucAll='false')
 <
 return (string) 
+
+ Converts an underscored or CamelCase word into a English sentence.
 
     [$words] (string) 
     [$ucAll] (bool) Whether to set all words to uppercase
@@ -85,6 +91,8 @@ return (string)
  camelize($word)
 <
 return (string) 
+
+ Returns given word as CamelCased.
 
  Converts a word like "send_email" to "SendEmail". It will remove non
  alphanumeric character from the word, so "who's online" will be converted to
@@ -99,6 +107,8 @@ return (string)
 <
 return (string) The resulting words
 
+ Converts a CamelCase name into space-separated words.
+
  For example, 'PostTag' will be converted to 'Post Tag'.
 
     [$name] (string) The string to be converted
@@ -110,6 +120,8 @@ return (string) The resulting words
  camel2id($name, $separator=''-'', $strict='false')
 <
 return (string) The resulting ID
+
+ Converts a CamelCase name into an ID in lowercase.
 
  Words in the ID may be concatenated using the specified character (defaults
  to '-'). For example, 'PostTag' will be converted to 'post-tag'.
@@ -127,6 +139,8 @@ return (string) The resulting ID
 <
 return (string) The resulting CamelCase name
 
+ Converts an ID into a CamelCase name.
+
  Words in the ID separated by '$separator' (defaults to '-') will be
  concatenated into a CamelCase name. For example, 'post-tag' is converted to
  'PostTag'.
@@ -141,6 +155,8 @@ return (string) The resulting CamelCase name
 <
 return (string) 
 
+ Converts any "CamelCased" into an "underscored_word".
+
     [$words] (string) The word(s) to underscore
 
 
@@ -149,6 +165,8 @@ return (string)
  humanize($word, $ucAll='false')
 <
 return (string) 
+
+ Returns a human-readable string from $word.
 
     [$word] (string) The string to humanize
     [$ucAll] (bool) Whether to set all words to uppercase or not
@@ -159,6 +177,8 @@ return (string)
  variablize($word)
 <
 return (string) 
+
+ Same as camelize but first char is in lowercase.
 
  Converts a word like "send_email" to "sendEmail". It will remove non
  alphanumeric character from the word, so "who's online" will be converted to
@@ -173,6 +193,8 @@ return (string)
 <
 return (string) 
 
+ Converts a class name to its table name (pluralized) naming conventions.
+
  For example, converts "Person" to "people".
 
     [$className] (string) The class name for getting related table_name
@@ -183,6 +205,9 @@ return (string)
  slug($string, $replacement=''-'', $lowercase='true')
 <
 return (string) The converted string.
+
+ Returns a string with all spaces converted to given replacement, non word
+ characters removed and the rest of characters transliterated.
 
  If intl extension isn't available uses fallback that converts latin
  characters only and removes the rest. You may customize characters map via
@@ -199,6 +224,8 @@ return (string) The converted string.
  transliterate($string, $transliterator='null')
 <
 return (string) 
+
+ Returns transliterated version of a string.
 
  If intl extension isn't available uses fallback that converts latin
  characters only and removes the rest. You may customize characters map via
@@ -223,6 +250,8 @@ return (bool) If intl extension is loaded
 <
 return (string) 
 
+ Converts a table name to its class name.
+
  For example, converts "people" to "Person".
 
     [$tableName] (string) 
@@ -234,6 +263,9 @@ return (string)
 <
 return (string) 
 
+ Converts number to its ordinal English form. For example, converts 13 to
+ 13th, 2 to 2nd .
+
  ..
 
     [$number] (int) The number to get its ordinal value
@@ -244,6 +276,8 @@ return (string)
  sentence($words, $twoWordsConnector='null', $lastWordConnector='null', $connector='', '')
 <
 return (string) The generated sentence
+
+ Converts a list of words into a sentence.
 
  Special treatment is done for the last few words. For example,
 

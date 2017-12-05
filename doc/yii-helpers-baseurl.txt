@@ -32,6 +32,8 @@ METHOD DETAILS
 <
 return (string) The generated URL
 
+ Creates a URL for the given route.
+
  This method will use '\yii\web\UrlManager' to create a URL.
 
  You may specify the route as a string, e.g., 'site/index'. You may also use
@@ -105,6 +107,9 @@ return (string) The generated URL
 <
 return (string) Normalized route suitable for UrlManager
 
+ Normalizes route and makes it suitable for UrlManager. Absolute routes are
+ staying as is while relative routes are converted to absolute ones.
+
  A relative route is a route without a leading slash, such as "view",
  "post/view".
 
@@ -131,6 +136,8 @@ return (string) Normalized route suitable for UrlManager
  to($url='\'\'', $scheme='false')
 <
 return (string) The generated URL
+
+ Creates a URL based on the given parameters.
 
  This method is very similar to 'toRoute()'. The only difference is that this
  method requires a route to be specified as an array only. If a string is
@@ -199,6 +206,8 @@ return (string) The generated URL
 <
 return (string) The processed URL
 
+ Normalize URL by ensuring that it use specified scheme.
+
  If URL is relative or scheme is not string, normalization is skipped.
 
     [$url] (string) The URL to process
@@ -212,6 +221,8 @@ return (string) The processed URL
  base($scheme='false')
 <
 return (string) 
+
+ Returns the base URL of the current request.
 
     [$scheme] (bool|string) The URI scheme to use in the returned base URL:
 
@@ -229,6 +240,9 @@ return (string)
 <
 return (void)
 
+ Remembers the specified URL so that it can be later fetched back by
+ 'previous()'.
+
     [$url] (string|array) The URL to remember. Please refer to 'to()' for
     acceptable formats. If this parameter is not specified, the currently
     requested URL will be used.
@@ -244,6 +258,8 @@ return (void)
 return (string|null) The URL previously remembered. Null is returned if no URL was
 remembered with the given name and '$name' is not specified.
 
+ Returns the URL previously 'remember()|remembered'.
+
     [$name] (string) The named associated with the URL that was remembered
     previously. If not set, '\yii\web\User::getReturnUrl()' will be used to
     obtain remembered URL.
@@ -254,6 +270,8 @@ remembered with the given name and '$name' is not specified.
  canonical()
 <
 return (string) The canonical URL of the currently requested page
+
+ Returns the canonical URL of the currently requested page.
 
  The canonical URL is constructed using the current controller's
  '\yii\web\Controller::route' and '\yii\web\Controller::actionParams'. You may
@@ -271,6 +289,8 @@ return (string) The canonical URL of the currently requested page
 <
 return (string) Home URL
 
+ Returns the home URL.
+
     [$scheme] (bool|string) The URI scheme to use for the returned URL:
 
 
@@ -287,6 +307,8 @@ return (string) Home URL
 <
 return (bool) Whether the URL is relative
 
+ Returns a value indicating whether a URL is relative.
+
  A relative URL does not have host info part.
 
     [$url] (string) The URL to be checked
@@ -297,6 +319,8 @@ return (bool) Whether the URL is relative
  current($params='[]', $scheme='false')
 <
 return (string) The generated URL
+
+ Creates a URL by using the current route and the GET parameters.
 
  You may modify or remove some of the GET parameters, or add additional query
  parameters through the '$params' parameter. In particular, if you specify a

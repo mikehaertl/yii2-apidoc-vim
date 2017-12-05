@@ -106,6 +106,8 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
  This method is called at the end of the constructor. The default
  implementation will trigger an 'EVENT_INIT' event.
 
@@ -226,6 +228,8 @@ return (void)
 <
 return (static) The newly created widget instance
 
+ Begins a widget.
+
  This method creates an instance of the calling class. It will apply the
  configuration to the created instance. A matching 'end()' call should be
  called later. As some widgets may use output buffering, the 'end()' call
@@ -242,6 +246,8 @@ return (static) The newly created widget instance
 <
 return (static) The widget instance that is ended.
 
+ Ends a widget.
+
  Note that the rendering result of the widget is directly echoed out.
 
 
@@ -250,6 +256,8 @@ return (static) The widget instance that is ended.
  widget($config='[]')
 <
 return (string) The rendering result of the widget.
+
+ Creates a widget instance and runs it.
 
  The widget rendering result is returned by this method.
 
@@ -263,6 +271,8 @@ return (string) The rendering result of the widget.
 <
 return (string) ID of the widget.
 
+ Returns the ID of the widget.
+
     [$autoGenerate] (bool) Whether to generate an ID if it is not set
     previously
 
@@ -273,6 +283,8 @@ return (string) ID of the widget.
 <
 return (void)
 
+ Sets the ID of the widget.
+
     [$value] (string) Id of the widget.
 
 
@@ -282,6 +294,8 @@ return (void)
 <
 return (\yii\web\View) The view object that can be used to render views or view
 files.
+
+ Returns the view object that can be used to render views or view files.
 
  The 'render()' and 'renderFile()' methods will use this view object to
  implement the actual view rendering. If not set, it will default to the
@@ -294,6 +308,8 @@ files.
 <
 return (void)
 
+ Sets the view object to be used by this widget.
+
     [$view] (\yii\base\View) The view object that can be used to render views
     or view files.
 
@@ -304,6 +320,7 @@ return (void)
 <
 return (string) The result of widget execution to be outputted.
 
+ Executes the widget.
 
 
 *yii/base/Widget::render*					public
@@ -311,6 +328,8 @@ return (string) The result of widget execution to be outputted.
  render($view, $params='[]')
 <
 return (string) The rendering result.
+
+ Renders a view.
 
  The view to be rendered can be specified in one of the following formats:
 
@@ -340,6 +359,8 @@ return (string) The rendering result.
 <
 return (string) The rendering result.
 
+ Renders a view file.
+
     [$file] (string) The view file to be rendered. This can be either a file
     path or a [path alias](guide:concept-aliases).
     [$params] (array) The parameters (name-value pairs) that should be made
@@ -352,6 +373,8 @@ return (string) The rendering result.
 <
 return (string) The directory containing the view files for this widget.
 
+ Returns the directory containing the view files for this widget.
+
  The default implementation returns the 'views' subdirectory under the
  directory containing the widget class file.
 
@@ -361,6 +384,8 @@ return (string) The directory containing the view files for this widget.
  beforeRun()
 <
 return (bool) Whether the widget should continue to be executed.
+
+ This method is invoked right before the widget is executed.
 
  The method will trigger the 'EVENT_BEFORE_RUN' event. The return value of the
  method will determine whether the widget should continue to run.
@@ -387,6 +412,8 @@ return (bool) Whether the widget should continue to be executed.
  afterRun($result)
 <
 return (mixed) The processed widget result.
+
+ This method is invoked right after a widget is executed.
 
  The method will trigger the 'EVENT_AFTER_RUN' event. The return value of the
  method will be used as the widget return value.
