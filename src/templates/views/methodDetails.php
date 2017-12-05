@@ -24,8 +24,16 @@ foreach($type->methods as $method) {
         echo ' '.$this->context->renderMethodSignature($method)."\n";
         echo "<\n";
         echo 'return '. $this->context->renderMethodReturnValue($method)."\n";
-        if (!empty($method->description)) {
-            echo $this->context->renderDescription($method->description,1)."\n";
+        if (!empty($method->description) || !empty($method->shortDescription)) {
+            if (!empty($method->shortDescription)) {
+                echo $this->context->renderDescription($method->shortDescription,1)."\n";
+            }
+            if (!empty($method->description)) {
+                if (!empty($method->shortDescription)) {
+                    echo "\n";
+                }
+                echo $this->context->renderDescription($method->description,1)."\n";
+            }
             if ($method->params) {
                 echo "\n";
             }
