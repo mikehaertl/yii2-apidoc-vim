@@ -46,6 +46,31 @@ DESCRIPTION
        ],
    ]
 
+ If you have multiple redis replicas (e.g. AWS ElasticCache Redis) you can
+ configure the cache to send read operations to the replicas. If no replicas
+ are configured, all operations will be performed on the master connection
+ configured via the 'redis' property.
+
+   [
+       'components' => [
+           'cache' => [
+               'class' => 'yii\redis\Cache',
+               'enableReplicas' => true,
+               'replicas' => [
+                   // config for replica redis connections, (default class
+ will be yii\redis\Connection if not provided)
+                   // you can optionally put in master as hostname as well, as
+ all GET operation will use replicas
+                   'redis',//id of Redis [[Connection]] Component
+                   ['hostname' =>
+ 'redis-slave-002.xyz.0001.apse1.cache.amazonaws.com'],
+                   ['hostname' =>
+ 'redis-slave-003.xyz.0001.apse1.cache.amazonaws.com'],
+               ],
+           ],
+       ],
+   ]
+
 
 
 
@@ -72,6 +97,27 @@ $redis					*yii/redis/Cache::$redis*
  do configure redis connection as an application component. After the Cache
  object is created, if you want to change this property, you should only
  assign it with a Redis 'Connection' object.
+
+$enableReplicas				*yii/redis/Cache::$enableReplicas*
+
+ (bool) Whether to enable read / get from redis replicas.
+
+$replicas				*yii/redis/Cache::$replicas*
+
+ (array) The Redis 'Connection' configurations for redis replicas. Each entry
+ is a class configuration, which will be used to instantiate a replica
+ connection. The default class is 'Connection|yii\redis\Connection'. You
+ should at least provide a hostname.
+
+ Configuration example:
+
+   'replicas' => [
+       'redis',
+       ['hostname' => 'redis-slave-002.xyz.0001.apse1.cache.amazonaws.com'],
+       ['hostname' => 'redis-slave-003.xyz.0001.apse1.cache.amazonaws.com'],
+   ],
+
+
 
 
 
@@ -454,6 +500,17 @@ return (array) Array of failed keys
 *yii/redis/Cache::getOrSet*				public
 
  See |yii/caching/Cache::getOrSet|
+
+
+*yii/redis/Cache::getReplica*				protected
+>
+ getReplica()
+<
+return (array|string|\yii\redis\Connection) 
+
+ It will return the current Replica Redis 'Connection', and fall back to
+ default 'redis' 'Connection' defined in this instance. Only used in
+ getValue() and getValues().
 
 
 

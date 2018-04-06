@@ -113,6 +113,11 @@ $cache					*yii/web/UrlManager::$cache*
  you should only assign it with a cache object. Set this property to 'false'
  if you do not want to cache the URL rules.
 
+ Cache entries are stored for the time set by
+ '\yii\caching\Cache::$defaultDuration|$defaultDuration' in the cache
+ configuration, which is unlimited by default. You may want to tune this value
+ if your 'rules' change frequently.
+
 $ruleConfig				*yii/web/UrlManager::$ruleConfig*
 
  (array) The default configuration of URL rules. Individual rule
@@ -295,16 +300,47 @@ return (void)
 
 *yii/web/UrlManager::buildRules*				protected
 >
- buildRules($rules)
+ buildRules($ruleDeclarations)
 <
 return (\yii\web\UrlRuleInterface[]) The rule objects built from the given rule
 declarations
 
  Builds URL rule objects from the given rule declarations.
 
-    [$rules] (array) The rule declarations. Each array element represents a
-    single rule declaration. Please refer to 'rules' for the acceptable rule
-    formats.
+    [$ruleDeclarations] (array) The rule declarations. Each array element
+    represents a single rule declaration. Please refer to 'rules' for the
+    acceptable rule formats.
+
+
+*yii/web/UrlManager::setBuiltRulesCache*			protected
+>
+ setBuiltRulesCache($ruleDeclarations, $builtRules)
+<
+return (bool) Whether the value is successfully stored into cache
+
+ Stores $builtRules to cache, using $rulesDeclaration as a part of cache key.
+
+    [$ruleDeclarations] (array) The rule declarations. Each array element
+    represents a single rule declaration. Please refer to 'rules' for the
+    acceptable rule formats.
+    [$builtRules] (\yii\web\UrlRuleInterface[]) The rule objects built from
+    the given rule declarations.
+
+
+*yii/web/UrlManager::getBuiltRulesFromCache*		protected
+>
+ getBuiltRulesFromCache($ruleDeclarations)
+<
+return (\yii\web\UrlRuleInterface[]|false) The rule objects built from the given rule
+declarations or boolean 'false' when there are no cache items for this
+definition exists.
+
+ Provides the built URL rules that are associated with the $ruleDeclarations
+ from cache.
+
+    [$ruleDeclarations] (array) The rule declarations. Each array element
+    represents a single rule declaration. Please refer to 'rules' for the
+    acceptable rule formats.
 
 
 *yii/web/UrlManager::parseRequest*			public

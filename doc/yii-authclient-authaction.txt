@@ -61,7 +61,7 @@ $successCallback			*yii/authclient/AuthAction::$successCallback*
  authentication. This callback should accept 'ClientInterface' instance as an
  argument. For example:
 
-   public function onAuthSuccess($client)
+   public function onAuthSuccess(ClientInterface $client)
    {
        $attributes = $client->getUserAttributes();
        // user login or signup comes here
@@ -69,6 +69,20 @@ $successCallback			*yii/authclient/AuthAction::$successCallback*
 
  If this callback returns 'Response' instance, it will be used as action
  response, otherwise redirection to 'successUrl' will be performed.
+
+$cancelCallback				*yii/authclient/AuthAction::$cancelCallback*
+
+ (callable) PHP callback, which should be triggered in case of authentication
+ cancelation. This callback should accept 'ClientInterface' instance as an
+ argument. For example:
+
+   public function onAuthCancel(ClientInterface $client)
+   {
+       // set flash, logging, etc.
+   }
+
+ If this callback returns 'Response' instance, it will be used as action
+ response, otherwise redirection to 'cancelUrl' will be performed.
 
 $redirectView				*yii/authclient/AuthAction::$redirectView*
 
@@ -99,47 +113,47 @@ METHOD DETAILS
 
 *yii/authclient/AuthAction::__get*			public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/authclient/AuthAction::__set*			public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/authclient/AuthAction::__isset*			public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/authclient/AuthAction::__unset*			public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/authclient/AuthAction::__call*			public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/authclient/AuthAction::hasProperty*			public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/authclient/AuthAction::canGetProperty*		public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/authclient/AuthAction::canSetProperty*		public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/authclient/AuthAction::hasMethod*			public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/authclient/AuthAction::__clone*			public
@@ -306,6 +320,17 @@ return (\yii\web\Response) Response instance.
 return (\yii\web\Response) Response instance.
 
  This method is invoked in case of successful authentication via auth client.
+
+    [$client] (\yii\authclient\ClientInterface) Auth client instance.
+
+
+*yii/authclient/AuthAction::authCancel*			protected
+>
+ authCancel($client)
+<
+return (\yii\web\Response) Response instance.
+
+ This method is invoked in case of authentication cancelation.
 
     [$client] (\yii\authclient\ClientInterface) Auth client instance.
 

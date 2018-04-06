@@ -144,6 +144,14 @@ $typecastBeforeSave			*yii/behaviors/AttributeTypecastBehavior::$typecastBeforeS
  will grant no benefit an thus can be disabled. Note that changing this option
  value will have no effect after this behavior has been attached to the model.
 
+$typecastAfterSave			*yii/behaviors/AttributeTypecastBehavior::$typecastAfterSave*
+
+ (bool) Whether to perform typecasting after saving owner model (insert or
+ update). This option may be disabled in order to achieve better performance.
+ For example, in case of '\yii\db\ActiveRecord' usage, typecasting after save
+ will grant no benefit an thus can be disabled. Note that changing this option
+ value will have no effect after this behavior has been attached to the model.
+
 $typecastAfterFind			*yii/behaviors/AttributeTypecastBehavior::$typecastAfterFind*
 
  (bool) Whether to perform typecasting after retrieving owner model data from
@@ -223,37 +231,9 @@ METHOD DETAILS
 >
  events()
 <
-return (array) Events (array keys) and the corresponding event handler methods (array
-values).
+return (void)
 
- Declares event handlers for the 'owner''s events.
-
-
-
- Child classes may override this method to declare what PHP callbacks should
- be attached to the events of the 'owner' component.
-
- The callbacks will be attached to the 'owner''s events when the behavior is
- attached to the owner; and they will be detached from the events when the
- behavior is detached from the component.
-
- The callbacks can be any of the following:
-
-
-   - method in this behavior: ''handleClick'', equivalent to '[$this,
-   'handleClick']' 
-   - object method: '[$object, 'handleClick']' 
-   - static method: '['Page', 'handleClick']' 
-   - anonymous function: 'function ($event) { ... }'
-
- The following is an example:
-
-   [
-       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
-       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
-   ]
-
-
+ {@inheritdoc}
 
 
 *yii/behaviors/AttributeTypecastBehavior::attach*		public
@@ -262,18 +242,9 @@ values).
 <
 return (void)
 
- Attaches the behavior object to the component.
+ {@inheritdoc}
 
-
-
- The default implementation will set the 'owner' property and attach event
- handlers as declared in 'events'. Make sure you call the parent
- implementation if you override this method.
-
-
-
-    [$owner] (\yii\base\Component) The component that this behavior is to be
-    attached to.
+    [$owner] () 
 
 
 *yii/behaviors/AttributeTypecastBehavior::detach*		public
@@ -339,6 +310,18 @@ return (void)
 *yii/behaviors/AttributeTypecastBehavior::beforeSave*	public
 >
  beforeSave($event)
+<
+return (void)
+
+ Handles owner 'beforeInsert' and 'beforeUpdate' events, ensuring attribute
+ typecasting.
+
+    [$event] (\yii\base\Event) Event instance.
+
+
+*yii/behaviors/AttributeTypecastBehavior::afterSave*	public
+>
+ afterSave($event)
 <
 return (void)
 

@@ -62,9 +62,9 @@ $blocks					*yii/base/View::$blocks*
 
 $cacheStack				*yii/base/View::$cacheStack*
 
- (array) A list of currently active fragment cache widgets. This property is
- used internally to implement the content caching feature. Do not modify it
- directly.
+ (array|\yii\base\DynamicContentAwareInterface[]) A list of currently active
+ dynamic content class instances. This property is used internally to
+ implement the dynamic content caching feature. Do not modify it directly.
 
 $dynamicPlaceholders			*yii/base/View::$dynamicPlaceholders*
 
@@ -99,47 +99,47 @@ return (void)
 
 *yii/base/View::__get*					public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/base/View::__set*					public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/base/View::__isset*					public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/base/View::__unset*					public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/base/View::__call*					public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/base/View::hasProperty*				public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/base/View::canGetProperty*				public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/base/View::canSetProperty*				public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/base/View::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/base/View::__clone*					public
@@ -364,19 +364,36 @@ there is no active content cache currently.
     content.
 
 
+*yii/base/View::getDynamicPlaceholders*			public
+>
+ getDynamicPlaceholders()
+<
+return (void)
+
+ {@inheritdoc}
+
+
+*yii/base/View::setDynamicPlaceholders*			public
+>
+ setDynamicPlaceholders($placeholders)
+<
+return (void)
+
+ {@inheritdoc}
+
+    [$placeholders] () 
+
+
 *yii/base/View::addDynamicPlaceholder*			public
 >
  addDynamicPlaceholder($placeholder, $statements)
 <
 return (void)
 
- Adds a placeholder for dynamic content.
+ {@inheritdoc}
 
- This method is internally used.
-
-    [$placeholder] (string) The placeholder name
-    [$statements] (string) The PHP statements for generating the dynamic
-    content
+    [$placeholder] () 
+    [$statements] () 
 
 
 *yii/base/View::evaluateDynamicContent*			public
@@ -390,6 +407,39 @@ return (mixed) The return value of the PHP statements.
  This method is mainly used internally to implement dynamic content feature.
 
     [$statements] (string) The PHP statements to be evaluated.
+
+
+*yii/base/View::getDynamicContents*			public
+>
+ getDynamicContents()
+<
+return (\yii\base\DynamicContentAwareInterface[]) Class instances supporting dynamic
+contents.
+
+ Returns a list of currently active dynamic content class instances.
+
+
+*yii/base/View::pushDynamicContent*			public
+>
+ pushDynamicContent($instance)
+<
+return (void)
+
+ Adds a class instance supporting dynamic contents to the end of a list of
+ currently active dynamic content class instances.
+
+    [$instance] (\yii\base\DynamicContentAwareInterface) Class instance
+    supporting dynamic contents.
+
+
+*yii/base/View::popDynamicContent*			public
+>
+ popDynamicContent()
+<
+return (void)
+
+ Removes a last class instance supporting dynamic contents from a list of
+ currently active dynamic content class instances.
 
 
 *yii/base/View::beginBlock*				public

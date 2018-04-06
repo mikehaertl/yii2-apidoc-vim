@@ -20,7 +20,9 @@ $nodes					*yii/elasticsearch/Connection::$nodes*
  Additional special options:
 
   
-   - 'auth': overrides 'auth' property. For example:###CODE###
+   - 'auth': overrides 'auth' property. For example:###CODE###-
+   'protocol': explicitly sets the protocol for the current node
+   (useful when manually defining a HTTPS cluster)
 
 $activeNode				*yii/elasticsearch/Connection::$activeNode*
 
@@ -39,6 +41,10 @@ $auth					*yii/elasticsearch/Connection::$auth*
 
  Array either MUST contain both username and password on not contain any
  authentication credentials.
+
+$defaultProtocol			*yii/elasticsearch/Connection::$defaultProtocol*
+
+ (string) Default protocol to connect to nodes
 
 $connectionTimeout			*yii/elasticsearch/Connection::$connectionTimeout*
 
@@ -199,7 +205,7 @@ return (array)
 >
  getIsActive()
 <
-return (boolean) Whether the DB connection is established
+return (bool) Whether the DB connection is established
 
  Returns a value indicating whether the DB connection is established.
 
@@ -276,6 +282,17 @@ return (\yii\elasticsearch\Command) The DB command
     [$config] (array) The configuration for the Command class
 
 
+*yii/elasticsearch/Connection::createBulkCommand*		public
+>
+ createBulkCommand($config='[]')
+<
+return (\yii\elasticsearch\BulkCommand) The DB command
+
+ Creates a bulk command for execution.
+
+    [$config] (array) The configuration for the 'BulkCommand' class
+
+
 *yii/elasticsearch/Connection::getQueryBuilder*		public
 >
  getQueryBuilder()
@@ -296,7 +313,7 @@ return (mixed) Response
     [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
-    [$raw] (boolean) If response body contains JSON and should be decoded
+    [$raw] (bool) If response body contains JSON and should be decoded
 
 
 *yii/elasticsearch/Connection::head*			public
@@ -323,7 +340,7 @@ return (mixed) Response
     [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
-    [$raw] (boolean) If response body contains JSON and should be decoded
+    [$raw] (bool) If response body contains JSON and should be decoded
 
 
 *yii/elasticsearch/Connection::put*			public
@@ -337,7 +354,7 @@ return (mixed) Response
     [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
-    [$raw] (boolean) If response body contains JSON and should be decoded
+    [$raw] (bool) If response body contains JSON and should be decoded
 
 
 *yii/elasticsearch/Connection::delete*			public
@@ -351,7 +368,7 @@ return (mixed) Response
     [$url] (string|array) URL
     [$options] (array) URL options
     [$body] (string) Request body
-    [$raw] (boolean) If response body contains JSON and should be decoded
+    [$raw] (bool) If response body contains JSON and should be decoded
 
 
 *yii/elasticsearch/Connection::httpRequest*		protected
@@ -365,7 +382,7 @@ return (mixed) If request failed
     [$method] (string) Method name
     [$url] (string) URL
     [$requestBody] (string) Request body
-    [$raw] (boolean) If response body contains JSON and should be decoded
+    [$raw] (bool) If response body contains JSON and should be decoded
 
 
 *yii/elasticsearch/Connection::decodeErrorBody*		protected

@@ -1,0 +1,143 @@
+
+*yii/queue/cli/SignalLoop*   >> |yii/base/BaseObject|
+==========================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$exitSignals				*yii/queue/cli/SignalLoop::$exitSignals*
+
+ (array) Of signals to exit from listening of the queue.
+
+$suspendSignals				*yii/queue/cli/SignalLoop::$suspendSignals*
+
+ (array) Of signals to suspend listening of the queue. For example: SIGTSTP
+
+$resumeSignals				*yii/queue/cli/SignalLoop::$resumeSignals*
+
+ (array) Of signals to resume listening of the queue. For example: SIGCONT
+
+$queue					*yii/queue/cli/SignalLoop::$queue*
+
+ (\yii\queue\cli\Queue)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/queue/cli/SignalLoop::className*			public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/queue/cli/SignalLoop::__construct*			public
+>
+ __construct($queue, $config='[]')
+<
+return (void)
+
+ Constructor.
+
+
+
+ The default implementation does two things:
+
+
+   - Initializes the object with the given configuration '$config'. 
+   - Call 'init()'.
+
+ If this method is overridden in a child class, it is recommended that
+
+
+   - the last parameter of the constructor is a configuration array,
+   like '$config' here. 
+   - call the parent implementation at the end of the constructor.
+
+
+
+    [$queue] (\yii\queue\cli\Queue) 
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
+
+
+*yii/queue/cli/SignalLoop::init*				public
+>
+ init()
+<
+return (void)
+
+ Sets signal handlers.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+
+
+*yii/queue/cli/SignalLoop::__get*				public
+
+ See |yii/base/BaseObject::__get|
+
+
+*yii/queue/cli/SignalLoop::__set*				public
+
+ See |yii/base/BaseObject::__set|
+
+
+*yii/queue/cli/SignalLoop::__isset*			public
+
+ See |yii/base/BaseObject::__isset|
+
+
+*yii/queue/cli/SignalLoop::__unset*			public
+
+ See |yii/base/BaseObject::__unset|
+
+
+*yii/queue/cli/SignalLoop::__call*			public
+
+ See |yii/base/BaseObject::__call|
+
+
+*yii/queue/cli/SignalLoop::hasProperty*			public
+
+ See |yii/base/BaseObject::hasProperty|
+
+
+*yii/queue/cli/SignalLoop::canGetProperty*		public
+
+ See |yii/base/BaseObject::canGetProperty|
+
+
+*yii/queue/cli/SignalLoop::canSetProperty*		public
+
+ See |yii/base/BaseObject::canSetProperty|
+
+
+*yii/queue/cli/SignalLoop::hasMethod*			public
+
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/queue/cli/SignalLoop::canContinue*			public
+>
+ canContinue()
+<
+return (bool) Whether to continue listening of the queue.
+
+ Checks signals state.
+
+
+
+
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

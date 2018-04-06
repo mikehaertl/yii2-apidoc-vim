@@ -18,8 +18,8 @@ DESCRIPTION
    'radioList()' 
    - 'enableError' can be set to 'false' to disable to the error 
    - 'enableLabel' can be set to 'false' to disable to the label 
-   - 'label()' can be used with a 'boolean' argument to enable/disable
-   the label
+   - 'label()' can be used with a 'bool' argument to enable/disable the
+   label
 
  There are also some new placeholders that you can use in the 'template'
  configuration:
@@ -167,7 +167,7 @@ $addAriaAttributes			*yii/bootstrap/ActiveField::$addAriaAttributes*
 
 $inline					*yii/bootstrap/ActiveField::$inline*
 
- (boolean) Whether to render 'checkboxList()' and 'radioList()' inline.
+ (bool) Whether to render 'checkboxList()' and 'radioList()' inline.
 
 $inputTemplate				*yii/bootstrap/ActiveField::$inputTemplate*
 
@@ -214,12 +214,12 @@ $inlineRadioListTemplate		*yii/bootstrap/ActiveField::$inlineRadioListTemplate*
 
 $enableError				*yii/bootstrap/ActiveField::$enableError*
 
- (boolean) Whether to render the error. Default is 'true' except for layout
+ (bool) Whether to render the error. Default is 'true' except for layout
  'inline'.
 
 $enableLabel				*yii/bootstrap/ActiveField::$enableLabel*
 
- (boolean) Whether to render the label. Default is 'true'.
+ (bool) Whether to render the label. Default is 'true'.
 
 
 
@@ -238,27 +238,9 @@ METHOD DETAILS
 <
 return (void)
 
- Constructor.
+ {@inheritdoc}
 
-
-
- The default implementation does two things:
-
-
-   - Initializes the object with the given configuration '$config'. 
-   - Call 'init()'.
-
- If this method is overridden in a child class, it is recommended that
-
-
-   - the last parameter of the constructor is a configuration array,
-   like '$config' here. 
-   - call the parent implementation at the end of the constructor.
-
-
-
-    [$config] (array) Name-value pairs that will be used to initialize the
-    object properties
+    [$config] () 
 
 
 *yii/bootstrap/ActiveField::init*				public
@@ -385,28 +367,11 @@ return (void)
 >
  render($content='null')
 <
-return (string) The rendering result.
+return (void)
 
- Renders the whole field.
+ {@inheritdoc}
 
-
-
- This method will generate the label, error tag, input tag and hint tag (if
- any), and assemble them into HTML according to 'template'.
-
-
-
-    [$content] (string|callable) The content within the field container. If
-    'null' (not set), the default methods will be called to generate the
-    label, error tag and input tag, and use them as the content. If a
-    callable, it will be called to generate the content. The signature of the
-    callable should be:
-
-      function ($field) {
-          return $html;
-      }
-
-
+    [$content] () 
 
 
 *yii/bootstrap/ActiveField::begin*			public
@@ -423,25 +388,12 @@ return (string) The rendering result.
 >
  label($label='null', $options='[]')
 <
-return ($this) The field object itself.
+return (void)
 
- Generates a label tag for 'attribute'.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$label] (null|string|false) The label to use. If 'null', the label will
-    be generated via 'Model::getAttributeLabel()'. If 'false', the generated
-    field will not contain the label part. Note that this will NOT be
-    'Html::encode()|encoded'.
-    [$options] (null|array) The tag options in terms of name-value pairs. It
-    will be merged with 'labelOptions'. The options will be rendered as the
-    attributes of the resulting tag. The values will be HTML-encoded using
-    'Html::encode()'. If a value is 'null', the corresponding attribute will
-    not be rendered.
+    [$label] () 
+    [$options] () 
 
 
 *yii/bootstrap/ActiveField::error*			public
@@ -488,91 +440,24 @@ return ($this) The field object itself.
 >
  radio($options='[]', $enclosedByLabel='true')
 <
-return ($this) The field object itself.
+return (void)
 
- Renders a radio button.
+ {@inheritdoc}
 
-
-
- This method will generate the 'checked' tag attribute according to the model
- attribute value.
-
-
-
-    [$options] (array) The tag options in terms of name-value pairs. The
-    following options are specially handled:
-
-
-      - 'uncheck': string, the value associated with the uncheck state of
-      the radio button. If not set,   it will take the default value '0'. This
-    method will render a hidden input so that if the radio button   is not
-    checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. If you do not want any
-    hidden input, you should explicitly set this option as 'null'. 
-      - 'label': string, a label displayed next to the radio button. It
-      will NOT be HTML-encoded. Therefore you can pass   in HTML code such as
-    an image tag. If this is coming from end users, you should
-    'Html::encode()|encode' it to prevent XSS attacks.   When this option is
-    specified, the radio button will be enclosed by a label tag. If you do not
-    want any label, you should   explicitly set this option as 'null'. 
-      - 'labelOptions': array, the HTML attributes for the label tag. This
-      is only used when the 'label' option is specified.
-
-    The rest of the options will be rendered as the attributes of the
-    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
-    a value is 'null', the corresponding attribute will not be rendered.
-
-    If you set a custom 'id' for the input element, you may need to adjust the
-    '$selectors' accordingly.
-    [$enclosedByLabel] (bool) Whether to enclose the radio within the label.
-    If 'true', the method will still use 'template' to layout the radio button
-    and the error message except that the radio is enclosed by the label tag.
+    [$options] () 
+    [$enclosedByLabel] () 
 
 
 *yii/bootstrap/ActiveField::checkbox*			public
 >
  checkbox($options='[]', $enclosedByLabel='true')
 <
-return ($this) The field object itself.
+return (void)
 
- Renders a checkbox.
+ {@inheritdoc}
 
-
-
- This method will generate the 'checked' tag attribute according to the model
- attribute value.
-
-
-
-    [$options] (array) The tag options in terms of name-value pairs. The
-    following options are specially handled:
-
-
-      - 'uncheck': string, the value associated with the uncheck state of
-      the radio button. If not set,   it will take the default value '0'. This
-    method will render a hidden input so that if the radio button   is not
-    checked and is submitted, the value of this attribute will still be
-    submitted to the server   via the hidden input. If you do not want any
-    hidden input, you should explicitly set this option as 'null'. 
-      - 'label': string, a label displayed next to the checkbox. It will
-      NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
-    image tag. If this is coming from end users, you should
-    'Html::encode()|encode' it to prevent XSS attacks.   When this option is
-    specified, the checkbox will be enclosed by a label tag. If you do not
-    want any label, you should   explicitly set this option as 'null'. 
-      - 'labelOptions': array, the HTML attributes for the label tag. This
-      is only used when the 'label' option is specified.
-
-    The rest of the options will be rendered as the attributes of the
-    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
-    a value is 'null', the corresponding attribute will not be rendered.
-
-    If you set a custom 'id' for the input element, you may need to adjust the
-    '$selectors' accordingly.
-    [$enclosedByLabel] (bool) Whether to enclose the checkbox within the
-    label. If 'true', the method will still use 'template' to layout the
-    checkbox and the error message except that the checkbox is enclosed by the
-    label tag.
+    [$options] () 
+    [$enclosedByLabel] () 
 
 
 *yii/bootstrap/ActiveField::dropDownList*			public
@@ -589,48 +474,24 @@ return ($this) The field object itself.
 >
  checkboxList($items, $options='[]')
 <
-return ($this) The field object itself.
+return (void)
 
- Renders a list of checkboxes.
+ {@inheritdoc}
 
-
-
- A checkbox list allows multiple selection, like 'listBox()'. As a result, the
- corresponding submitted value is an array. The selection of the checkbox list
- is taken from the value of the model attribute.
-
-
-
-    [$items] (array) The data item used to generate the checkboxes. The array
-    values are the labels, while the array keys are the corresponding checkbox
-    values.
-    [$options] (array) Options (name => config) for the checkbox list. For the
-    list of available options please refer to the '$options' parameter of
-    '\yii\helpers\Html::activeCheckboxList()'.
+    [$items] () 
+    [$options] () 
 
 
 *yii/bootstrap/ActiveField::radioList*			public
 >
  radioList($items, $options='[]')
 <
-return ($this) The field object itself.
+return (void)
 
- Renders a list of radio buttons.
+ {@inheritdoc}
 
-
-
- A radio button list is like a checkbox list, except that it only allows
- single selection. The selection of the radio buttons is taken from the value
- of the model attribute.
-
-
-
-    [$items] (array) The data item used to generate the radio buttons. The
-    array values are the labels, while the array keys are the corresponding
-    radio values.
-    [$options] (array) Options (name => config) for the radio button list. For
-    the list of available options please refer to the '$options' parameter of
-    '\yii\helpers\Html::activeRadioList()'.
+    [$items] () 
+    [$options] () 
 
 
 *yii/bootstrap/ActiveField::widget*			public
@@ -668,6 +529,11 @@ return ($this) The field object itself.
  See |yii/widgets/ActiveField::addAriaAttributes|
 
 
+*yii/bootstrap/ActiveField::addErrorClassIfNeeded*	protected
+
+ See |yii/widgets/ActiveField::addErrorClassIfNeeded|
+
+
 *yii/bootstrap/ActiveField::staticControl*		public
 >
  staticControl($options='[]')
@@ -681,7 +547,7 @@ return ($this) The field object itself
     special options:
 
 
-      - encode: boolean, whether value should be HTML-encoded or not.
+      - encode: bool, whether value should be HTML-encoded or not.
 
 
 *yii/bootstrap/ActiveField::inline*			public

@@ -205,9 +205,9 @@ $tablePrefix				*yii/db/Connection::$tablePrefix*
 $schemaMap				*yii/db/Connection::$schemaMap*
 
  (array) Mapping between PDO driver names and 'Schema' classes. The keys of
- the array are PDO driver names while the values the corresponding schema
- class name or configuration. Please refer to 'Yii::createObject()' for
- details on how to specify a configuration.
+ the array are PDO driver names while the values are either the corresponding
+ schema class names or configurations. Please refer to 'Yii::createObject()'
+ for details on how to specify a configuration.
 
  This property is mainly used by 'getSchema()' when fetching the database
  schema information. You normally do not need to set this property unless you
@@ -223,7 +223,20 @@ $commandClass				*yii/db/Connection::$commandClass*
 
  (string) The class used to create new database 'Command' objects. If you want
  to extend the 'Command' class, you may configure this property to use your
- extended version of the class.
+ extended version of the class. Since version 2.0.14 '$commandMap' is used if
+ this property is set to its default value.
+
+$commandMap				*yii/db/Connection::$commandMap*
+
+ (array) Mapping between PDO driver names and 'Command' classes. The keys of
+ the array are PDO driver names while the values are either the corresponding
+ command class names or configurations. Please refer to 'Yii::createObject()'
+ for details on how to specify a configuration.
+
+ This property is mainly used by 'createCommand()' to create new database
+ 'Command' objects. You normally do not need to set this property unless you
+ want to use your own 'Command' class or support DBMS that is not supported by
+ Yii.
 
 $enableSavepoint			*yii/db/Connection::$enableSavepoint*
 
@@ -653,6 +666,18 @@ return (\yii\db\QueryBuilder) The query builder for the current DB connection.
  Returns the query builder for the current DB connection.
 
 
+*yii/db/Connection::setQueryBuilder*			public
+>
+ setQueryBuilder($value)
+<
+return (void)
+
+ Can be used to set 'QueryBuilder' configuration via Connection configuration
+ array.
+
+    [$value] (array) The 'QueryBuilder' properties to be configured.
+
+
 *yii/db/Connection::getTableSchema*			public
 >
  getTableSchema($name, $refresh='false')
@@ -760,6 +785,15 @@ return (void)
  Changes the current driver name.
 
     [$driverName] (string) Name of the DB driver
+
+
+*yii/db/Connection::getServerVersion*			public
+>
+ getServerVersion()
+<
+return (string) Server version as a string.
+
+ Returns a server version as a string comparable by '\version_compare()'.
 
 
 *yii/db/Connection::getSlavePdo*				public

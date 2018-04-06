@@ -1043,7 +1043,11 @@ return (string) The generated label tag
       - tag: this specifies the tag name. If not set, "div" will be used.  
     See also 'tag()'. 
       - encode: boolean, if set to false then the error message won't be
-      encoded.
+      encoded. 
+      - errorSource (since 2.0.14): \Closure|callable, callback that will
+      be called to obtain an error message.   The signature of the callback
+    must be: 'function ($model, $attribute)' and return a string.   When not
+    set, the '$model->getFirstError()' method will be called.
 
     See 'renderTagAttributes()' for details on how attributes are being
     rendered.
@@ -1094,7 +1098,26 @@ return (string) The generated input tag
       - maxlength: integer|boolean, when 'maxlength' is set true and the
       model attribute is validated   by a string validator, the 'maxlength'
     option will take the value of '\yii\validators\StringValidator::max'.  
-    This is available since version 2.0.3.
+    This is available since version 2.0.3. 
+      - placeholder: string|boolean, when 'placeholder' equals 'true', the
+      attribute label from the $model will be used   as a placeholder (this
+    behavior is available since version 2.0.14).
+
+
+*yii/helpers/BaseHtml::setActivePlaceholder*		protected
+>
+ setActivePlaceholder($model, $attribute, $options='[]')
+<
+return (void)
+
+ Generate placeholder from model attribute label.
+
+    [$model] (\yii\base\Model) The model object
+    [$attribute] (string) The attribute name or expression. See
+    'getAttributeName()' for the format about attribute expression.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the resulting tag. The values will
+    be HTML-encoded using 'encode()'.
 
 
 *yii/helpers/BaseHtml::activeHiddenInput*			public
@@ -1141,7 +1164,10 @@ return (string) The generated input tag
       - maxlength: integer|boolean, when 'maxlength' is set true and the
       model attribute is validated   by a string validator, the 'maxlength'
     option will take the value of '\yii\validators\StringValidator::max'.  
-    This option is available since version 2.0.6.
+    This option is available since version 2.0.6. 
+      - placeholder: string|boolean, when 'placeholder' equals 'true', the
+      attribute label from the $model will be used   as a placeholder (this
+    behavior is available since version 2.0.14).
 
 
 *yii/helpers/BaseHtml::activeFileInput*			public
@@ -1154,6 +1180,9 @@ return (string) The generated input tag
 
  This method will generate the "name" and "value" tag attributes automatically
  for the model attribute unless they are explicitly specified in '$options'.
+ Additionally, if a separate set of HTML options array is defined inside
+ '$options' with a key named 'hiddenOptions', it will be passed to the
+ 'activeHiddenInput' field as its own '$options' parameter.
 
     [$model] (\yii\base\Model) The model object
     [$attribute] (string) The attribute name or expression. See
@@ -1161,7 +1190,9 @@ return (string) The generated input tag
     [$options] (array) The tag options in terms of name-value pairs. These
     will be rendered as the attributes of the resulting tag. The values will
     be HTML-encoded using 'encode()'. See 'renderTagAttributes()' for details
-    on how attributes are being rendered.
+    on how attributes are being rendered. If 'hiddenOptions' parameter which
+    is another set of HTML options array is defined, it will be extracted from
+    '$options' to be used for the hidden input.
 
 
 *yii/helpers/BaseHtml::activeTextarea*			public
@@ -1187,7 +1218,10 @@ return (string) The generated textarea tag
       - maxlength: integer|boolean, when 'maxlength' is set true and the
       model attribute is validated   by a string validator, the 'maxlength'
     option will take the value of '\yii\validators\StringValidator::max'.  
-    This option is available since version 2.0.6.
+    This option is available since version 2.0.6. 
+      - placeholder: string|boolean, when 'placeholder' equals 'true', the
+      attribute label from the $model will be used   as a placeholder (this
+    behavior is available since version 2.0.14).
 
 
 *yii/helpers/BaseHtml::activeRadio*			public

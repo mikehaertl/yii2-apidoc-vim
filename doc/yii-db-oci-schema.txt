@@ -23,6 +23,14 @@ $columnSchemaClass			*yii/db/oci/Schema::$columnSchemaClass*
 
  See |yii/db/Schema::$columnSchemaClass|
 
+$tableQuoteCharacter			*yii/db/oci/Schema::$tableQuoteCharacter*
+
+ ()
+
+$columnQuoteCharacter			*yii/db/oci/Schema::$columnQuoteCharacter*
+
+ See |yii/db/Schema::$columnQuoteCharacter|
+
 
 
 METHOD DETAILS
@@ -45,14 +53,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/db/oci/Schema::__get*				public
@@ -104,71 +105,42 @@ return (void)
 >
  resolveTableName($name)
 <
-return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
+return (void)
 
- Resolves the table name and schema name (if any).
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The table name
+    [$name] () 
 
 
 *yii/db/oci/Schema::findSchemaNames*			protected
 >
  findSchemaNames()
 <
-return (array) All schema names in the database, except system schemas.
+return (void)
 
- Returns all schema names in the database, including the default one but not
- system schemas.
-
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
+ {@inheritdoc}
 
 
 *yii/db/oci/Schema::findTableNames*			protected
 >
- findTableNames($schema='''')
+ findTableNames($schema='\'\'')
 <
-return (array) All table names in the database. The names have NO schema name prefix.
+return (void)
 
- Returns all table names in the database.
+ {@inheritdoc}
 
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
+    [$schema] () 
 
 
 *yii/db/oci/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
-does not exist.
+return (void)
 
- Loads the metadata for the specified table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) Table name
+    [$name] () 
 
 
 *yii/db/oci/Schema::createColumnSchema*			protected
@@ -220,36 +192,21 @@ does not exist.
 >
  createQueryBuilder()
 <
-return (\yii\db\QueryBuilder) Query builder instance
+return (void)
 
- Creates a query builder for the database.
-
-
-
- This method may be overridden by child classes to create a DBMS-specific
- query builder.
-
-
+ {@inheritdoc}
 
 
 *yii/db/oci/Schema::createColumnSchemaBuilder*		public
 >
  createColumnSchemaBuilder($type, $length='null')
 <
-return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+return (void)
 
- Create a column schema builder instance giving the type and value precision.
+ {@inheritdoc}
 
-
-
- This method may be overridden by child classes to create a DBMS-specific
- column schema builder.
-
-
-
-    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
-    [$length] (int|string|array) Length or precision of the column. See
-    'ColumnSchemaBuilder::$length'.
+    [$type] () 
+    [$length] () 
 
 
 *yii/db/oci/Schema::findUniqueIndexes*			public
@@ -299,15 +256,9 @@ the sequence object
 <
 return (void)
 
- Releases an existing savepoint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The savepoint name
+    [$name] () 
 
 
 *yii/db/oci/Schema::rollBackSavepoint*			public
@@ -324,19 +275,12 @@ return (void)
 >
  insert($table, $columns)
 <
-return (array|false) Primary key values or false if the command fails
+return (void)
 
- Executes the INSERT command, returning primary key values.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table that new rows will be inserted into.
-    [$columns] (array) The column data (name => value) to be inserted into the
-    table.
+    [$table] () 
+    [$columns] () 
 
 
 *yii/db/oci/Schema::quoteValue*				public
@@ -358,23 +302,26 @@ return (array|false) Primary key values or false if the command fails
 >
  quoteSimpleTableName($name)
 <
-return (string) The properly quoted table name
+return (void)
 
- Quotes a simple table name for use in a query.
+ {@inheritdoc}
 
-
-
- A simple table name should contain the table name only without any schema
- prefix. If the table name is already quoted, this method will do nothing.
-
-
-
-    [$name] (string) Table name
+    [$name] () 
 
 
 *yii/db/oci/Schema::quoteSimpleColumnName*		public
 
  See |yii/db/Schema::quoteSimpleColumnName|
+
+
+*yii/db/oci/Schema::unquoteSimpleTableName*		public
+
+ See |yii/db/Schema::unquoteSimpleTableName|
+
+
+*yii/db/oci/Schema::unquoteSimpleColumnName*		public
+
+ See |yii/db/Schema::unquoteSimpleColumnName|
 
 
 *yii/db/oci/Schema::getRawTableName*			public
@@ -395,6 +342,11 @@ return (string) The properly quoted table name
 *yii/db/oci/Schema::isReadQuery*				public
 
  See |yii/db/Schema::isReadQuery|
+
+
+*yii/db/oci/Schema::getServerVersion*			public
+
+ See |yii/db/Schema::getServerVersion|
 
 
 *yii/db/oci/Schema::getCacheKey*				protected
@@ -433,6 +385,8 @@ return (string) The properly quoted table name
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -441,6 +395,8 @@ return (void)
  loadTableForeignKeys($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -451,6 +407,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -459,6 +417,8 @@ return (void)
  loadTableUniques($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -469,6 +429,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -477,6 +439,8 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 

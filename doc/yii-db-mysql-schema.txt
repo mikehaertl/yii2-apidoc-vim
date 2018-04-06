@@ -22,6 +22,14 @@ $columnSchemaClass			*yii/db/mysql/Schema::$columnSchemaClass*
 
  See |yii/db/Schema::$columnSchemaClass|
 
+$tableQuoteCharacter			*yii/db/mysql/Schema::$tableQuoteCharacter*
+
+ ()
+
+$columnQuoteCharacter			*yii/db/mysql/Schema::$columnQuoteCharacter*
+
+ ()
+
 $typeMap				*yii/db/mysql/Schema::$typeMap*
 
  (array) Mapping from physical column types (keys) to abstract column types
@@ -97,17 +105,11 @@ METHOD DETAILS
 >
  resolveTableName($name)
 <
-return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
+return (void)
 
- Resolves the table name and schema name (if any).
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The table name
+    [$name] () 
 
 
 *yii/db/mysql/Schema::findSchemaNames*			protected
@@ -117,39 +119,24 @@ return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. nam
 
 *yii/db/mysql/Schema::findTableNames*			protected
 >
- findTableNames($schema='''')
+ findTableNames($schema='\'\'')
 <
-return (array) All table names in the database. The names have NO schema name prefix.
+return (void)
 
- Returns all table names in the database.
+ {@inheritdoc}
 
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
+    [$schema] () 
 
 
 *yii/db/mysql/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
-does not exist.
+return (void)
 
- Loads the metadata for the specified table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) Table name
+    [$name] () 
 
 
 *yii/db/mysql/Schema::createColumnSchema*			protected
@@ -210,20 +197,12 @@ return (\yii\db\mysql\QueryBuilder) Query builder instance
 >
  createColumnSchemaBuilder($type, $length='null')
 <
-return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
+return (void)
 
- Create a column schema builder instance giving the type and value precision.
+ {@inheritdoc}
 
-
-
- This method may be overridden by child classes to create a DBMS-specific
- column schema builder.
-
-
-
-    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
-    [$length] (int|string|array) Length or precision of the column. See
-    'ColumnSchemaBuilder::$length'.
+    [$type] () 
+    [$length] () 
 
 
 *yii/db/mysql/Schema::findUniqueIndexes*			public
@@ -297,29 +276,23 @@ return (array) All unique indexes for the given table.
 
 
 *yii/db/mysql/Schema::quoteSimpleTableName*		public
->
- quoteSimpleTableName($name)
-<
-return (string) The properly quoted table name
 
- Quotes a table name for use in a query.
-
- A simple table name has no schema prefix.
-
-    [$name] (string) Table name
+ See |yii/db/Schema::quoteSimpleTableName|
 
 
 *yii/db/mysql/Schema::quoteSimpleColumnName*		public
->
- quoteSimpleColumnName($name)
-<
-return (string) The properly quoted column name
 
- Quotes a column name for use in a query.
+ See |yii/db/Schema::quoteSimpleColumnName|
 
- A simple column name has no prefix.
 
-    [$name] (string) Column name
+*yii/db/mysql/Schema::unquoteSimpleTableName*		public
+
+ See |yii/db/Schema::unquoteSimpleTableName|
+
+
+*yii/db/mysql/Schema::unquoteSimpleColumnName*		public
+
+ See |yii/db/Schema::unquoteSimpleColumnName|
 
 
 *yii/db/mysql/Schema::getRawTableName*			public
@@ -340,6 +313,11 @@ return (string) The properly quoted column name
 *yii/db/mysql/Schema::isReadQuery*			public
 
  See |yii/db/Schema::isReadQuery|
+
+
+*yii/db/mysql/Schema::getServerVersion*			public
+
+ See |yii/db/Schema::getServerVersion|
 
 
 *yii/db/mysql/Schema::getCacheKey*			protected
@@ -378,6 +356,8 @@ return (string) The properly quoted column name
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -386,6 +366,8 @@ return (void)
  loadTableForeignKeys($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -396,6 +378,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -404,6 +388,8 @@ return (void)
  loadTableUniques($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -414,6 +400,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -422,6 +410,8 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 

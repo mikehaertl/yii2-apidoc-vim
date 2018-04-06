@@ -6,6 +6,7 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/authclient/clients/Facebook|
+|yii/authclient/clients/TwitterOAuth2|
 |yii/authclient/clients/Google|
 |yii/authclient/clients/Yandex|
 |yii/authclient/clients/LinkedIn|
@@ -14,7 +15,6 @@ SUBCLASSES
 |yii/authclient/clients/GoogleHybrid|
 |yii/authclient/clients/VKontakte|
 |yii/authclient/OpenIdConnect|
-|yii/authclient/clients/TwitterOAuth2|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ DESCRIPTION
    $url = $oauthClient->buildAuthUrl(); // Build authorization URL
    Yii::$app->getResponse()->redirect($url); // Redirect to authorization URL.
    // After user returns at our site:
-   $code = $_GET['code'];
+   $code = Yii::$app->getRequest()->get('code');
    $accessToken = $oauthClient->fetchAccessToken($code); // Get access token
 
 
@@ -496,7 +496,8 @@ return (\yii\authclient\OAuthToken) Access token.
 
  Fetches access token from authorization code.
 
-    [$authCode] (string) Authorization code, usually comes at $_GET['code'].
+    [$authCode] (string) Authorization code, usually comes at GET parameter
+    'code'.
     [$params] (array) Additional request params.
 
 

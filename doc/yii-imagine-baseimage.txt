@@ -87,7 +87,7 @@ return (\Imagine\Image\ImageInterface)
 
  Crops an image.
 
- For example,
+ For example:
 
    $obj->crop('path\to\image.jpg', 200, 200, [5, 5]);
 
@@ -149,6 +149,31 @@ return (\Imagine\Image\ImageInterface)
     [$height] (int) The height in pixels to create the thumbnail
     [$mode] (string) Mode of resizing original image to use in case both width
     and height specified
+
+
+*yii/imagine/BaseImage::resize*				public
+>
+ resize($image, $width, $height, $keepAspectRatio='true', $allowUpscaling='false')
+<
+return (\Imagine\Image\ImageInterface) 
+
+ Resizes an image.
+
+ If one of the dimensions is set to 'null', another one is calculated
+ automatically based on aspect ratio of original image.
+
+ If both of the dimensions are set then new dimensions are calculated so that
+ image keeps aspect ratio.
+
+ You can set $keepAspectRatio to false if you want to force fixed width and
+ height.
+
+    [$image] (string|resource|\Imagine\Image\ImageInterface) Either
+    ImageInterface, resource or a string containing file path
+    [$width] (int) The width in pixels
+    [$height] (int) The height in pixels
+    [$keepAspectRatio] (bool) Should the image keep aspect ratio
+    [$allowUpscaling] (bool) Should the image be upscaled if needed
 
 
 *yii/imagine/BaseImage::watermark*			public
@@ -219,6 +244,42 @@ return (\Imagine\Image\BoxInterface) Thumbnail box
     [$sourceBox] (\Imagine\Image\BoxInterface) Original image box
     [$width] (int) Thumbnail width
     [$height] (int) Thumbnail height
+
+
+*yii/imagine/BaseImage::getBox*				protected
+>
+ getBox($sourceBox, $width, $height, $keepAspectRatio='true')
+<
+return (\Imagine\Image\BoxInterface) New image box
+
+ Returns box for an image to be created.
+
+ If one of the dimensions is set to 'null', another one is calculated
+ automatically based on width to height ratio of original image box.
+
+ If both of the dimensions are set then new dimensions are calculated so that
+ image keeps aspect ratio.
+
+ You can set $keepAspectRatio to false if you want to force fixed width and
+ height.
+
+    [$sourceBox] (\Imagine\Image\BoxInterface) Original image box
+    [$width] (int) New image width
+    [$height] (int) New image height
+    [$keepAspectRatio] (bool) Should we keep aspect ratio even if both with
+    and height are set
+
+
+*yii/imagine/BaseImage::isUpscaling*			protected
+>
+ isUpscaling($sourceBox, $destinationBox)
+<
+return (bool) 
+
+ Checks if upscaling is going to happen
+
+    [$sourceBox] (\Imagine\Image\BoxInterface) 
+    [$destinationBox] (\Imagine\Image\BoxInterface) 
 
 
 

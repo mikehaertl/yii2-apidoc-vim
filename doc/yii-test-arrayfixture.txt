@@ -16,16 +16,18 @@ $depends				*yii/test/ArrayFixture::$depends*
 
  See |yii/test/Fixture::$depends|
 
+$dataDirectory				*yii/test/ArrayFixture::$dataDirectory*
+
+ See |yii/test/FileFixtureTrait::$dataDirectory|
+
+$dataFile				*yii/test/ArrayFixture::$dataFile*
+
+ See |yii/test/FileFixtureTrait::$dataFile|
+
 $data					*yii/test/ArrayFixture::$data*
 
  (array) The data rows. Each array element represents one row of data (column
  name => column value).
-
-$dataFile				*yii/test/ArrayFixture::$dataFile*
-
- (string|bool) The file path or [path alias](guide:concept-aliases) of the
- data file that contains the fixture data to be returned by 'getData()'. You
- can set this property to be false to prevent loading any data.
 
 
 
@@ -187,14 +189,7 @@ return (void)
 <
 return (void)
 
- Unloads the fixture.
-
-
-
- This method is called after every test method finishes. You may override this
- method to perform necessary cleanup work for the fixture.
-
-
+ {@inheritdoc}
 
 
 *yii/test/ArrayFixture::beforeUnload*			public
@@ -205,6 +200,11 @@ return (void)
 *yii/test/ArrayFixture::afterUnload*			public
 
  See |yii/test/Fixture::afterUnload|
+
+
+*yii/test/ArrayFixture::loadData*				protected
+
+ See |yii/test/FileFixtureTrait::loadData|
 
 
 *yii/test/ArrayFixture::getIterator*			public

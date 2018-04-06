@@ -1,0 +1,309 @@
+
+*yii/elasticsearch/ActiveDataProvider*   >> |yii/data/ActiveDataProvider|
+======================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ It allows to fetch not only rows and total rows count, but full query results
+ including aggregations and so on.
+
+ Note: this data provider fetches result models and total count using single
+ ElasticSearch query, so results total count will be fetched after pagination
+ limit applying, which eliminates ability to verify if requested page number
+ actually exist. Data provider disables 'yii\data\Pagination::validatePage'
+ automatically because of this.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/elasticsearch/ActiveDataProvider::className*		public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/elasticsearch/ActiveDataProvider::__construct*	public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/elasticsearch/ActiveDataProvider::init*		public
+
+ See |yii/data/ActiveDataProvider::init|
+
+
+*yii/elasticsearch/ActiveDataProvider::__get*		public
+
+ See |yii/base/Component::__get|
+
+
+*yii/elasticsearch/ActiveDataProvider::__set*		public
+
+ See |yii/base/Component::__set|
+
+
+*yii/elasticsearch/ActiveDataProvider::__isset*		public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/elasticsearch/ActiveDataProvider::__unset*		public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/elasticsearch/ActiveDataProvider::__call*		public
+
+ See |yii/base/Component::__call|
+
+
+*yii/elasticsearch/ActiveDataProvider::hasProperty*	public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/elasticsearch/ActiveDataProvider::canGetProperty*	public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/elasticsearch/ActiveDataProvider::canSetProperty*	public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/elasticsearch/ActiveDataProvider::hasMethod*		public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/elasticsearch/ActiveDataProvider::__clone*		public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/elasticsearch/ActiveDataProvider::behaviors*		public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/elasticsearch/ActiveDataProvider::hasEventHandlers*	public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/elasticsearch/ActiveDataProvider::on*		public
+
+ See |yii/base/Component::on|
+
+
+*yii/elasticsearch/ActiveDataProvider::off*		public
+
+ See |yii/base/Component::off|
+
+
+*yii/elasticsearch/ActiveDataProvider::trigger*		public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/elasticsearch/ActiveDataProvider::getBehavior*	public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/elasticsearch/ActiveDataProvider::getBehaviors*	public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/elasticsearch/ActiveDataProvider::attachBehavior*	public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/elasticsearch/ActiveDataProvider::attachBehaviors*	public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/elasticsearch/ActiveDataProvider::detachBehavior*	public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/elasticsearch/ActiveDataProvider::detachBehaviors*	public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/elasticsearch/ActiveDataProvider::ensureBehaviors*	public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/elasticsearch/ActiveDataProvider::prepareModels*	protected
+>
+ prepareModels()
+<
+return (void)
+
+ {@inheritdoc}
+
+
+
+
+
+
+
+
+*yii/elasticsearch/ActiveDataProvider::prepareKeys*	protected
+>
+ prepareKeys($models)
+<
+return (void)
+
+ {@inheritdoc}
+
+
+
+
+
+
+
+    [$models] () 
+
+
+*yii/elasticsearch/ActiveDataProvider::prepareTotalCount*	protected
+>
+ prepareTotalCount()
+<
+return (void)
+
+ {@inheritdoc}
+
+
+
+
+
+
+
+
+*yii/elasticsearch/ActiveDataProvider::prepare*		public
+
+ See |yii/data/BaseDataProvider::prepare|
+
+
+*yii/elasticsearch/ActiveDataProvider::getModels*		public
+
+ See |yii/data/BaseDataProvider::getModels|
+
+
+*yii/elasticsearch/ActiveDataProvider::setModels*		public
+
+ See |yii/data/BaseDataProvider::setModels|
+
+
+*yii/elasticsearch/ActiveDataProvider::getKeys*		public
+
+ See |yii/data/BaseDataProvider::getKeys|
+
+
+*yii/elasticsearch/ActiveDataProvider::setKeys*		public
+
+ See |yii/data/BaseDataProvider::setKeys|
+
+
+*yii/elasticsearch/ActiveDataProvider::getCount*		public
+
+ See |yii/data/BaseDataProvider::getCount|
+
+
+*yii/elasticsearch/ActiveDataProvider::getTotalCount*	public
+
+ See |yii/data/BaseDataProvider::getTotalCount|
+
+
+*yii/elasticsearch/ActiveDataProvider::setTotalCount*	public
+
+ See |yii/data/BaseDataProvider::setTotalCount|
+
+
+*yii/elasticsearch/ActiveDataProvider::getPagination*	public
+
+ See |yii/data/BaseDataProvider::getPagination|
+
+
+*yii/elasticsearch/ActiveDataProvider::setPagination*	public
+
+ See |yii/data/BaseDataProvider::setPagination|
+
+
+*yii/elasticsearch/ActiveDataProvider::getSort*		public
+
+ See |yii/data/BaseDataProvider::getSort|
+
+
+*yii/elasticsearch/ActiveDataProvider::setSort*		public
+
+ See |yii/data/ActiveDataProvider::setSort|
+
+
+*yii/elasticsearch/ActiveDataProvider::refresh*		public
+>
+ refresh()
+<
+return (void)
+
+ Refreshes the data provider.
+
+
+
+ After calling this method, if 'getModels()', 'getKeys()' or 'getTotalCount()'
+ is called again, they will re-execute the query and return the latest data
+ available.
+
+
+
+
+*yii/elasticsearch/ActiveDataProvider::setQueryResults*	public
+>
+ setQueryResults($results)
+<
+return (void)
+
+    [$results] (array) Full query results
+
+
+*yii/elasticsearch/ActiveDataProvider::getQueryResults*	public
+>
+ getQueryResults()
+<
+return (array) Full query results
+
+
+
+*yii/elasticsearch/ActiveDataProvider::getAggregations*	public
+>
+ getAggregations()
+<
+return (array) All aggregations results
+
+
+
+*yii/elasticsearch/ActiveDataProvider::getAggregation*	public
+>
+ getAggregation($name)
+<
+return (array) Aggregation results.
+
+ Returns results of the specified aggregation.
+
+    [$name] (string) Aggregation name.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

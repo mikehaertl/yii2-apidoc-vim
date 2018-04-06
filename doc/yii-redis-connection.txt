@@ -26,12 +26,12 @@ $hostname				*yii/redis/Connection::$hostname*
 
  (string) The hostname or ip address to use for connecting to the redis
  server. Defaults to 'localhost'. If 'unixSocket' is specified, hostname and
- port will be ignored.
+ 'port' will be ignored.
 
 $port					*yii/redis/Connection::$port*
 
  (integer) The port to use for connecting to the redis server. Default port is
- 6379. If 'unixSocket' is specified, hostname and port will be ignored.
+ 6379. If 'unixSocket' is specified, 'hostname' and port will be ignored.
 
 $unixSocket				*yii/redis/Connection::$unixSocket*
 
@@ -69,6 +69,27 @@ $socketClientFlags			*yii/redis/Connection::$socketClientFlags*
  Currently the select of connection flags is limited to
  'STREAM_CLIENT_CONNECT' (default), 'STREAM_CLIENT_ASYNC_CONNECT' and
  'STREAM_CLIENT_PERSISTENT'.
+
+ > Warning: 'STREAM_CLIENT_PERSISTENT' will make PHP reuse connections to the
+ same server. If you are using multiple > connection objects to refer to
+ different redis '$database|databases' on the same 'port', redis commands may
+ > get executed on the wrong database. 'STREAM_CLIENT_PERSISTENT' is only safe
+ to use if you use only one database. > > You may still use persistent
+ connections in this case when disambiguating ports as described > in [a
+ comment on the PHP
+ manual](http://php.net/manual/en/function.stream-socket-client.php#105393) >
+ e.g. on the connection used for session storage, specify the port as: > >
+
+   > 'port' => '6379/session'
+   > 
+
+
+
+$retries				*yii/redis/Connection::$retries*
+
+ (integer) The number of times a command execution should be retried when a
+ connection failure occurs. This is used in 'executeCommand()' when a
+ 'SocketException' is thrown. Defaults to 0 meaning no retries on failure.
 
 $redisCommands				*yii/redis/Connection::$redisCommands*
 

@@ -150,6 +150,11 @@ $filter					*yii/elasticsearch/Query::$filter*
  string that follows the format of the elasticsearch [Query
  DSL](http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).
 
+$postFilter				*yii/elasticsearch/Query::$postFilter*
+
+ (string|array) The 'post_filter' part of the search query for differentially
+ filter search results and aggregations.
+
 $highlight				*yii/elasticsearch/Query::$highlight*
 
  (array) The highlight part of this search query. This is an array that allows
@@ -176,6 +181,10 @@ $minScore				*yii/elasticsearch/Query::$minScore*
 $options				*yii/elasticsearch/Query::$options*
 
  (array) List of options that will passed to commands created by this query.
+
+$explain				*yii/elasticsearch/Query::$explain*
+
+ (bool) Enables explanation for each hit on how its score was computed.
 
 
 
@@ -439,8 +448,8 @@ return (array) The converted query result
 >
  one($db='null')
 <
-return (array|boolean) The first row (in terms of an array) of the query result.
-False is returned if the query results in nothing.
+return (array|bool) The first row (in terms of an array) of the query result. False
+is returned if the query results in nothing.
 
  Executes the query and returns a single row of result.
 
@@ -528,7 +537,7 @@ the query results in nothing.
 >
  count($q=''*'', $db='null')
 <
-return (integer) Number of records
+return (int) Number of records
 
  Returns the number of records.
 
@@ -543,7 +552,7 @@ return (integer) Number of records
 >
  exists($db='null')
 <
-return (boolean) Whether the query result contains any row of data.
+return (bool) Whether the query result contains any row of data.
 
  Returns a value indicating whether the query result contains any row of data.
 
@@ -581,8 +590,6 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
- Adds an aggregation to this query.
-
     [$name] (string) The name of the aggregation
     [$type] (string) The aggregation type. e.g. 'terms', 'range',
     'histogram'...
@@ -596,13 +603,22 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
- Adds an aggregation to this query.
-
- This is an alias for 'addAggregation'.
-
     [$name] (string) The name of the aggregation
     [$type] (string) The aggregation type. e.g. 'terms', 'range',
     'histogram'...
+    [$options] (string|array) The configuration options for this aggregation.
+    Can be an array or a json string.
+
+
+*yii/elasticsearch/Query::addAggregate*			public
+>
+ addAggregate($name, $options)
+<
+return ($this) The query object itself
+
+ Adds an aggregation to this query. Supports nested aggregations.
+
+    [$name] (string) The name of the aggregation
     [$options] (string|array) The configuration options for this aggregation.
     Can be an array or a json string.
 
@@ -626,9 +642,9 @@ return ($this) The query object itself
 <
 return ($this) The query object itself
 
- Sets the querypart of this search query.
+ Sets the query part of this search query.
 
-    [$query] (string) 
+    [$query] (string|array) 
 
 
 *yii/elasticsearch/Query::batch*				public
@@ -747,7 +763,7 @@ return ($this) The query object itself
 
  Sets the search timeout.
 
-    [$timeout] (integer) A search timeout, bounding the search request to be
+    [$timeout] (int) A search timeout, bounding the search request to be
     executed within the specified time value and bail with the hits
     accumulated up to that point when expired. Defaults to no timeout.
 
@@ -782,6 +798,28 @@ return ($this) The query object itself
  Adds more options, overwriting existing options.
 
     [$options] (array) The options to be added.
+
+
+*yii/elasticsearch/Query::postFilter*			public
+>
+ postFilter($filter)
+<
+return ($this) The query object itself
+
+ Set the 'post_filter' part of the search query.
+
+    [$filter] (string|array) 
+
+
+*yii/elasticsearch/Query::explain*			public
+>
+ explain($explain)
+<
+return ($this) 
+
+ Explain for how the score of each document was computer
+
+    [$explain] () 
 
 
 

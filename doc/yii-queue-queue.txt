@@ -1,0 +1,308 @@
+
+*yii/queue/Queue*   >> |yii/base/Component|
+=================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/queue/cli/Queue|
+|yii/queue/file/Queue|
+|yii/queue/sync/Queue|
+|yii/queue/db/Queue|
+|yii/queue/amqp_interop/Queue|
+|yii/queue/redis/Queue|
+|yii/queue/amqp/Queue|
+|yii/queue/gearman/Queue|
+|yii/queue/beanstalk/Queue|
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$strictJobType				*yii/queue/Queue::$strictJobType*
+
+ (bool) Whether to enable strict job type control. Note that in order to
+ enable type control, a pushing job must be 'JobInterface' instance.
+
+$serializer				*yii/queue/Queue::$serializer*
+
+ (\yii\queue\serializers\SerializerInterface|array)
+
+$ttr					*yii/queue/Queue::$ttr*
+
+ (int) Default time to reserve a job
+
+$attempts				*yii/queue/Queue::$attempts*
+
+ (int) Default attempt count
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/queue/Queue::className*				public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/queue/Queue::__construct*				public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/queue/Queue::init*					public
+>
+ init()
+<
+return (void)
+
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+
+
+*yii/queue/Queue::__get*					public
+
+ See |yii/base/Component::__get|
+
+
+*yii/queue/Queue::__set*					public
+
+ See |yii/base/Component::__set|
+
+
+*yii/queue/Queue::__isset*				public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/queue/Queue::__unset*				public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/queue/Queue::__call*					public
+
+ See |yii/base/Component::__call|
+
+
+*yii/queue/Queue::hasProperty*				public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/queue/Queue::canGetProperty*				public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/queue/Queue::canSetProperty*				public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/queue/Queue::hasMethod*				public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/queue/Queue::__clone*				public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/queue/Queue::behaviors*				public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/queue/Queue::hasEventHandlers*			public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/queue/Queue::on*					public
+
+ See |yii/base/Component::on|
+
+
+*yii/queue/Queue::off*					public
+
+ See |yii/base/Component::off|
+
+
+*yii/queue/Queue::trigger*				public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/queue/Queue::getBehavior*				public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/queue/Queue::getBehaviors*				public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/queue/Queue::attachBehavior*				public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/queue/Queue::attachBehaviors*			public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/queue/Queue::detachBehavior*				public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/queue/Queue::detachBehaviors*			public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/queue/Queue::ensureBehaviors*			public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/queue/Queue::ttr*					public
+>
+ ttr($value)
+<
+return ($this) 
+
+ Sets TTR for job execute
+
+    [$value] (int|mixed) 
+
+
+*yii/queue/Queue::delay*					public
+>
+ delay($value)
+<
+return ($this) 
+
+ Sets delay for later execute
+
+    [$value] (int|mixed) 
+
+
+*yii/queue/Queue::priority*				public
+>
+ priority($value)
+<
+return ($this) 
+
+ Sets job priority
+
+    [$value] (mixed) 
+
+
+*yii/queue/Queue::push*					public
+>
+ push($job)
+<
+return (string|null) Id of a job message
+
+ Pushes job into queue
+
+    [$job] (\yii\queue\JobInterface|mixed) 
+
+
+*yii/queue/Queue::pushMessage*				protected
+>
+ pushMessage($message, $ttr, $delay, $priority)
+<
+return (string) Id of a job message
+
+    [$message] (string) 
+    [$ttr] (int) Time to reserve in seconds
+    [$delay] (int) 
+    [$priority] (mixed) 
+
+
+*yii/queue/Queue::getWorkerPid*				public
+>
+ getWorkerPid()
+<
+return (null) 
+
+ Uses for CLI drivers and gets process ID of a worker.
+
+
+*yii/queue/Queue::handleMessage*				protected
+>
+ handleMessage($id, $message, $ttr, $attempt)
+<
+return (bool) 
+
+    [$id] (string) Of a job message
+    [$message] (string) 
+    [$ttr] (int) Time to reserve
+    [$attempt] (int) Number
+
+
+*yii/queue/Queue::handleError*				public
+>
+ handleError($id, $job, $ttr, $attempt, $error)
+<
+return (bool) 
+
+    [$id] (string|null) 
+    [$job] (\yii\queue\JobInterface) 
+    [$ttr] (int) 
+    [$attempt] (int) 
+    [$error] (\Exception|\Throwable) 
+
+
+*yii/queue/Queue::isWaiting*				public
+>
+ isWaiting($id)
+<
+return (bool) 
+
+    [$id] (string) Of a job message
+
+
+*yii/queue/Queue::isReserved*				public
+>
+ isReserved($id)
+<
+return (bool) 
+
+    [$id] (string) Of a job message
+
+
+*yii/queue/Queue::isDone*					public
+>
+ isDone($id)
+<
+return (bool) 
+
+    [$id] (string) Of a job message
+
+
+*yii/queue/Queue::status*					public
+>
+ status($id)
+<
+return (int) Status code
+
+    [$id] (string) Of a job message
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -57,22 +57,8 @@ $attributes				*yii/behaviors/BlameableBehavior::$attributes*
 
 $value					*yii/behaviors/BlameableBehavior::$value*
 
- (mixed) 
-
- The value that will be assigned to the current attributes. This can be an
- anonymous function, callable in array format (e.g. '[$this, 'methodName']'),
- an '\yii\db\Expression|Expression' object representing a DB expression (e.g.
- 'new Expression('NOW()')'), scalar, string or an arbitrary value. If the
- former, the return value of the function will be assigned to the attributes.
- The signature of the function should be as follows,
-
-   function ($event)
-   {
-       // return value will be assigned to the attribute
-   }
-
- In case, when the property is 'null', the value of 'Yii::$app->user->id' will
- be used as the value.
+ () In case, when the property is 'null', the value of 'Yii::$app->user->id'
+ will be used as the value.
 
 $skipUpdateOnClean			*yii/behaviors/BlameableBehavior::$skipUpdateOnClean*
 
@@ -91,6 +77,10 @@ $updatedByAttribute			*yii/behaviors/BlameableBehavior::$updatedByAttribute*
 
  (string) The attribute that will receive current user ID value Set this
  property to false if you do not want to record the updater ID.
+
+$defaultValue				*yii/behaviors/BlameableBehavior::$defaultValue*
+
+ (mixed) Default value for cases when the user is guest
 
 
 
@@ -114,14 +104,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/behaviors/BlameableBehavior::__get*			public
@@ -193,20 +176,25 @@ return (void)
 >
  getValue($event)
 <
-return (mixed) The attribute value
+return (void)
 
- Returns the value for the current attributes.
+ {@inheritdoc}
+
+ In case, when the 'value' property is 'null', the value of 'defaultValue'
+ will be used as the value.
+
+    [$event] () 
 
 
+*yii/behaviors/BlameableBehavior::getDefaultValue*	protected
+>
+ getDefaultValue($event)
+<
+return (array|mixed) 
 
- This method is called by 'evaluateAttributes()'. Its return value will be
- assigned to the attributes corresponding to the triggering event.
+ Get default value
 
- In case, when the 'value' property is 'null', the value of
- 'Yii::$app->user->id' will be used as the value.
-
-    [$event] (\yii\base\Event) The event that triggers the current attribute
-    updating.
+    [$event] (\yii\base\Event) 
 
 
 

@@ -139,7 +139,9 @@ $filter					*yii/grid/DataColumn::$filter*
 
 
    - If this property is not set, a text field will be generated as the
-   filter input; 
+   filter input with attributes defined   with 'filterInputOptions'. See
+ '\yii\helpers\BaseHtml::activeInput' for details on how an active   input tag
+ is generated. 
    - If this property is an array, a dropdown list will be generated
    that uses this property value as   the list options. 
    - If you don't want a filter for this data column, set this value to
@@ -151,6 +153,9 @@ $filterInputOptions			*yii/grid/DataColumn::$filterInputOptions*
  used in combination with the 'filter' property. When 'filter' is not set or
  is an array, this property will be used to render the HTML attributes for the
  generated filter input fields.
+
+ Empty 'id' in the default value ensures that id would not be obtained from
+ the model attribute thus providing better performance.
 
 
 
@@ -242,31 +247,18 @@ METHOD DETAILS
 >
  renderHeaderCellContent()
 <
-return (string) The rendering result
+return (void)
 
- Renders the header cell content.
-
-
-
- The default implementation simply renders 'header'. This method may be
- overridden to customize the rendering of the header cell.
-
-
+ {@inheritdoc}
 
 
 *yii/grid/DataColumn::getHeaderCellLabel*			protected
 >
  getHeaderCellLabel()
 <
-return (string) Label
+return (void)
 
- Returns header cell label.
-
-
-
- This method may be overridden to customize the label of the header cell.
-
-
+ {@inheritdoc]
 
 
 *yii/grid/DataColumn::renderFooterCellContent*		protected
@@ -278,36 +270,22 @@ return (string) Label
 >
  renderDataCellContent($model, $key, $index)
 <
-return (string) The rendering result
+return (void)
 
- Renders the data cell content.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$model] (mixed) The data model
-    [$key] (mixed) The key associated with the data model
-    [$index] (int) The zero-based index of the data model among the models
-    array returned by 'GridView::dataProvider'.
+    [$model] () 
+    [$key] () 
+    [$index] () 
 
 
 *yii/grid/DataColumn::renderFilterCellContent*		protected
 >
  renderFilterCellContent()
 <
-return (string) The rendering result
+return (void)
 
- Renders the filter cell content.
-
-
-
- The default implementation simply renders a space. This method may be
- overridden to customize the rendering of the filter cell (if any).
-
-
+ {@inheritdoc}
 
 
 *yii/grid/DataColumn::getDataCellValue*			public

@@ -196,14 +196,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/validators/Validator::__get*				public
@@ -385,8 +378,25 @@ return (bool) Whether the data is valid.
 >
  validateValue($value)
 <
-return (array|null) The error message and the parameters to be inserted into the
-error message. Null should be returned if the data is valid.
+return (array|null) The error message and the array of parameters to be inserted into
+the error message.
+
+  if (!$valid) {
+      return [$this->message, [
+          'param1' => $this->param1,
+          'formattedLimit' =>
+Yii::$app->formatter->asShortSize($this->getSizeLimit()),
+          'mimeTypes' => implode(', ', $this->mimeTypes),
+          'param4' => 'etc...',
+      ]];
+  }
+
+  return null;
+
+for this example 'message' template can contain '{param1}',
+'{formattedLimit}', '{mimeTypes}', '{param4}'
+
+Null should be returned if the data is valid.
 
  Validates a value.
 

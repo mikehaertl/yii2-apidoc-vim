@@ -1,0 +1,67 @@
+
+*yii/db/conditions/LikeConditionBuilder*  
+========================================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/db/mssql/conditions/LikeConditionBuilder|
+|yii/db/oci/conditions/LikeConditionBuilder|
+|yii/db/sqlite/conditions/LikeConditionBuilder|
+|yii/db/cubrid/conditions/LikeConditionBuilder|
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$queryBuilder				*yii/db/conditions/LikeConditionBuilder::$queryBuilder*
+
+ See |yii/db/ExpressionBuilderTrait::$queryBuilder|
+
+$escapingReplacements			*yii/db/conditions/LikeConditionBuilder::$escapingReplacements*
+
+ (array) Map of chars to their replacements in LIKE conditions. By default
+ it's configured to escape '%', '_' and '\' with '\'.
+
+$escapeCharacter			*yii/db/conditions/LikeConditionBuilder::$escapeCharacter*
+
+ (string|null) Character used to escape special characters in LIKE conditions.
+ By default it's assumed to be '\'.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/conditions/LikeConditionBuilder::__construct*	public
+
+ See |yii/db/ExpressionBuilderTrait::__construct|
+
+
+*yii/db/conditions/LikeConditionBuilder::build*		public
+>
+ build($expression, $params='[]')
+<
+return (string) The raw SQL that will not be additionally escaped or quoted.
+
+ Method builds the raw SQL from the $expression that will not be additionally
+ escaped or quoted.
+
+    [$expression]
+    (\yii\db\ExpressionInterface|\yii\db\conditions\LikeCondition) The
+    expression to be built.
+    [$params] (array) The binding parameters.
+
+
+*yii/db/conditions/LikeConditionBuilder::parseOperator*	protected
+>
+ parseOperator($operator)
+<
+return (array) 
+
+    [$operator] (string) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

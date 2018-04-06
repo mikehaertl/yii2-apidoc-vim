@@ -49,15 +49,40 @@ $conditionBuilders			*yii/db/QueryBuilder::$conditionBuilders*
  (array) Map of query condition to builder methods. These methods are used by
  'buildCondition' to build SQL conditions from array syntax.
 
-$likeEscapingReplacements		*yii/db/QueryBuilder::$likeEscapingReplacements*
+$conditionClasses			*yii/db/QueryBuilder::$conditionClasses*
 
- (array) Map of chars to their replacements in LIKE conditions. By default
- it's configured to escape '%', '_' and '\' with '\'.
+ (array) Map of condition aliases to condition classes. For example:
 
-$likeEscapeCharacter			*yii/db/QueryBuilder::$likeEscapeCharacter*
+   return [
+       'LIKE' => yii\db\condition\LikeCondition::class,
+   ];
 
- (string|null) Character used to escape special characters in LIKE conditions.
- By default it's assumed to be '\'.
+ This property is used by 'createConditionFromArray' method. See default
+ condition classes list in 'defaultConditionClasses()' method.
+
+ In case you want to add custom conditions support, use the
+ 'setConditionClasses()' method.
+
+$expressionBuilders			*yii/db/QueryBuilder::$expressionBuilders*
+
+ (string[]|\yii\db\ExpressionBuilderInterface[]) Maps expression class to
+ expression builder class. For example:
+
+   [
+      yii\db\Expression::class => yii\db\ExpressionBuilder::class
+   ]
+
+ This property is mainly used by 'buildExpression()' to build SQL expressions
+ form expression objects. See default values in 'defaultExpressionBuilders()'
+ method.
+
+  To override existing builders or add custom, use 'setExpressionBuilder()'
+ method. New items will be added to the end of this array.
+
+ To find a builder, 'buildExpression()' will check the expression class for
+ its exact presence in this map. In case it is NOT present, the array will be
+ iterated in reverse direction, checking whether the expression extends the
+ class, defined in this map.
 
 
 
@@ -84,8 +109,12 @@ return (void)
 
 
 *yii/db/QueryBuilder::init*				public
+>
+ init()
+<
+return (void)
 
- See |yii/base/BaseObject::init|
+ {@inheritdoc}
 
 
 *yii/db/QueryBuilder::__get*				public
@@ -133,6 +162,40 @@ return (void)
  See |yii/base/BaseObject::hasMethod|
 
 
+*yii/db/QueryBuilder::defaultConditionClasses*		protected
+>
+ defaultConditionClasses()
+<
+return (array) 
+
+ Contains array of default condition classes. Extend this method, if you want
+ to change default condition classes for the query builder. See
+ 'conditionClasses' docs for details.
+
+
+*yii/db/QueryBuilder::defaultExpressionBuilders*		protected
+>
+ defaultExpressionBuilders()
+<
+return (array) 
+
+ Contains array of default expression builders. Extend this method and
+ override it, if you want to change default expression builders for this query
+ builder. See 'expressionBuilders' docs for details.
+
+
+*yii/db/QueryBuilder::setExpressionBuilders*		public
+>
+ setExpressionBuilders($builders)
+<
+return (void)
+
+ Setter for 'expressionBuilders' property.
+
+    [$builders] (string[]) Array of builders that should be merged with the
+    pre-defined ones in 'expressionBuilders' property.
+
+
 *yii/db/QueryBuilder::build*				public
 >
  build($query, $params='[]')
@@ -148,6 +211,34 @@ element). The parameters returned include those provided in '$params'.
     [$params] (array) The parameters to be bound to the generated SQL
     statement. These parameters will be included in the result with the
     additional parameters generated during the query building process.
+
+
+*yii/db/QueryBuilder::buildExpression*			public
+>
+ buildExpression($expression, $params='[]')
+<
+return (string) The SQL statement that will not be neither quoted nor encoded before
+passing to DBMS
+
+ Builds given $expression
+
+    [$expression] (\yii\db\ExpressionInterface) The expression to be built
+    [$params] (array) The parameters to be bound to the generated SQL
+    statement. These parameters will be included in the result with the
+    additional parameters generated during the expression building process.
+
+
+*yii/db/QueryBuilder::getExpressionBuilder*		public
+>
+ getExpressionBuilder($expression)
+<
+return (\yii\db\ExpressionBuilderInterface) 
+
+ Gets object of 'ExpressionBuilderInterface' that is suitable for $expression.
+
+ Uses 'expressionBuilders' array to find a suitable builder class.
+
+    [$expression] (\yii\db\ExpressionInterface) 
 
 
 *yii/db/QueryBuilder::insert*				public
@@ -176,11 +267,27 @@ return (string) The INSERT SQL
     method. They should be bound to the DB command later.
 
 
+*yii/db/QueryBuilder::prepareInsertValues*		protected
+>
+ prepareInsertValues($table, $columns, $params='[]')
+<
+return (array) Array of column names, placeholders, values and params.
+
+ Prepares a 'VALUES' part for an 'INSERT' SQL statement.
+
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array|\yii\db\Query) The column data (name => value) to be
+    inserted into the table or instance of 'yii\db\Query|Query' to perform
+    INSERT INTO ... SELECT SQL statement.
+    [$params] (array) The binding parameters that will be generated by this
+    method. They should be bound to the DB command later.
+
+
 *yii/db/QueryBuilder::prepareInsertSelectSubQuery*	protected
 >
  prepareInsertSelectSubQuery($columns, $schema, $params='[]')
 <
-return (array) 
+return (array) Array of column names, values and params.
 
  Prepare select-subquery and field names for INSERT INTO .
 
@@ -195,7 +302,7 @@ return (array)
 
 *yii/db/QueryBuilder::batchInsert*			public
 >
- batchInsert($table, $columns, $rows)
+ batchInsert($table, $columns, $rows, $params='[]')
 <
 return (string) The batch INSERT SQL statement
 
@@ -217,6 +324,55 @@ return (string) The batch INSERT SQL statement
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array|\Generator) The rows to be batch inserted into the table
+    [$params] (array) The binding parameters. This parameter exists since
+    2.0.14
+
+
+*yii/db/QueryBuilder::upsert*				public
+>
+ upsert($table, $insertColumns, $updateColumns, $params)
+<
+return (string) The resulting SQL.
+
+ Creates an SQL statement to insert rows into a database table if they do not
+ already exist (matching unique constraints), or update them if they do.
+
+ For example,
+
+   $sql = $queryBuilder->upsert('pages', [
+       'name' => 'Front page',
+       'url' => 'http://example.com/', // url is unique
+       'visits' => 0,
+   ], [
+       'visits' => new \yii\db\Expression('visits + 1'),
+   ], $params);
+
+ The method will properly escape the table and column names.
+
+    [$table] (string) The table that new rows will be inserted into/updated
+    in.
+    [$insertColumns] (array|\yii\db\Query) The column data (name => value) to
+    be inserted into the table or instance of 'Query' to perform 'INSERT INTO
+    ... SELECT' SQL statement.
+    [$updateColumns] (array|bool) The column data (name => value) to be
+    updated if they already exist. If 'true' is passed, the column data will
+    be updated to match the insert column data. If 'false' is passed, no
+    update will be performed if the column data already exists.
+    [$params] (array) The binding parameters that will be generated by this
+    method. They should be bound to the DB command later.
+
+
+*yii/db/QueryBuilder::prepareUpsertColumns*		protected
+>
+ prepareUpsertColumns($table, $insertColumns, $updateColumns, $constraints='[]')
+<
+return (array) 
+
+    [$table] (string) 
+    [$insertColumns] (array|\yii\db\Query) 
+    [$updateColumns] (array|bool) 
+    [$constraints] (\yii\db\Constraint[]) This parameter recieves a matched
+    constraint list. The constraints will be unique by their column names.
 
 
 *yii/db/QueryBuilder::update*				public
@@ -238,6 +394,21 @@ return (string) The UPDATE SQL
     [$columns] (array) The column data (name => value) to be updated.
     [$condition] (array|string) The condition that will be put in the WHERE
     part. Please refer to 'Query::where()' on how to specify condition.
+    [$params] (array) The binding parameters that will be modified by this
+    method so that they can be bound to the DB command later.
+
+
+*yii/db/QueryBuilder::prepareUpdateSets*			protected
+>
+ prepareUpdateSets($table, $columns, $params='[]')
+<
+return (array) An array 'SET' parts for an 'UPDATE' SQL statement (the first array
+element) and params (the second array element).
+
+ Prepares a 'SET' parts for an 'UPDATE' SQL statement.
+
+    [$table] (string) The table to be updated.
+    [$columns] (array) The column data (name => value) to be updated.
     [$params] (array) The binding parameters that will be modified by this
     method so that they can be bound to the DB command later.
 
@@ -694,6 +865,30 @@ return (string) The SQL statement for adding comment on column
     name will be properly quoted by the method.
 
 
+*yii/db/QueryBuilder::createView*				public
+>
+ createView($viewName, $subQuery)
+<
+return (string) The 'CREATE VIEW' SQL statement.
+
+ Creates a SQL View.
+
+    [$viewName] (string) The name of the view to be created.
+    [$subQuery] (string|\yii\db\Query) The select statement which defines the
+    view. This can be either a string or a 'Query' object.
+
+
+*yii/db/QueryBuilder::dropView*				public
+>
+ dropView($viewName)
+<
+return (string) The 'DROP VIEW' SQL statement.
+
+ Drops a SQL View.
+
+    [$viewName] (string) The name of the view to be dropped.
+
+
 *yii/db/QueryBuilder::getColumnType*			public
 >
  getColumnType($type)
@@ -898,10 +1093,24 @@ return (string) The generated SQL expression
  Parses the condition specification and generates the corresponding SQL
  expression.
 
-    [$condition] (string|array|\yii\db\Expression) The condition
+    [$condition] (string|array|\yii\db\ExpressionInterface) The condition
     specification. Please refer to 'Query::where()' on how to specify a
     condition.
     [$params] (array) The binding parameters to be populated
+
+
+*yii/db/QueryBuilder::createConditionFromArray*		public
+>
+ createConditionFromArray($condition)
+<
+return (\yii\db\conditions\ConditionInterface) 
+
+ Transforms $condition defined in array format (as described in
+ 'Query::where()' to instance of
+ 'yii\db\condition\ConditionInterface|ConditionInterface' according to
+ 'conditionClasses' map.
+
+    [$condition] (string|array) 
 
 
 *yii/db/QueryBuilder::buildHashCondition*			public
@@ -973,34 +1182,6 @@ return (string) The generated SQL expression
     [$params] (array) The binding parameters to be populated
 
 
-*yii/db/QueryBuilder::buildSubqueryInCondition*		protected
->
- buildSubqueryInCondition($operator, $columns, $values, $params)
-<
-return (string) SQL
-
- Builds SQL for IN condition.
-
-    [$operator] (string) 
-    [$columns] (array) 
-    [$values] (\yii\db\Query) 
-    [$params] (array) 
-
-
-*yii/db/QueryBuilder::buildCompositeInCondition*		protected
->
- buildCompositeInCondition($operator, $columns, $values, $params)
-<
-return (string) SQL
-
- Builds SQL for IN condition.
-
-    [$operator] (string) 
-    [$columns] (array|\Traversable) 
-    [$values] (array) 
-    [$params] (array) 
-
-
 *yii/db/QueryBuilder::buildLikeCondition*			public
 >
  buildLikeCondition($operator, $operands, $params)
@@ -1068,6 +1249,18 @@ return (string) The SELECT EXISTS() SQL statement.
  Creates a SELECT EXISTS() SQL statement.
 
     [$rawSql] (string) The subquery in a raw form to select from.
+
+
+*yii/db/QueryBuilder::bindParam*				public
+>
+ bindParam($value, $params)
+<
+return (string) The placeholder name in $params array
+
+ Helper method to add $value to $params array using 'PARAM_PREFIX'.
+
+    [$value] (string|null) 
+    [$params] (array) Passed by reference
 
 
 

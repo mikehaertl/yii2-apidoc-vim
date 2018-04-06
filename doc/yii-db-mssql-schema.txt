@@ -22,6 +22,14 @@ $columnSchemaClass			*yii/db/mssql/Schema::$columnSchemaClass*
 
  See |yii/db/Schema::$columnSchemaClass|
 
+$tableQuoteCharacter			*yii/db/mssql/Schema::$tableQuoteCharacter*
+
+ ()
+
+$columnQuoteCharacter			*yii/db/mssql/Schema::$columnQuoteCharacter*
+
+ ()
+
 $typeMap				*yii/db/mssql/Schema::$typeMap*
 
  (array) Mapping from physical column types (keys) to abstract column types
@@ -108,54 +116,31 @@ return (\yii\db\mssql\TableSchema) Resolved table, schema, etc. names.
 >
  findSchemaNames()
 <
-return (array) All schema names in the database, except system schemas.
+return (void)
 
- Returns all schema names in the database, including the default one but not
- system schemas.
-
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
+ {@inheritdoc}
 
 
 *yii/db/mssql/Schema::findTableNames*			protected
 >
- findTableNames($schema='''')
+ findTableNames($schema='\'\'')
 <
-return (array) All table names in the database. The names have NO schema name prefix.
+return (void)
 
- Returns all table names in the database.
+ {@inheritdoc}
 
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
+    [$schema] () 
 
 
 *yii/db/mssql/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
-does not exist.
+return (void)
 
- Loads the metadata for the specified table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) Table name
+    [$name] () 
 
 
 *yii/db/mssql/Schema::createColumnSchema*			protected
@@ -253,15 +238,9 @@ return (array) All unique indexes for the given table.
 <
 return (void)
 
- Creates a new savepoint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The savepoint name
+    [$name] () 
 
 
 *yii/db/mssql/Schema::releaseSavepoint*			public
@@ -270,15 +249,9 @@ return (void)
 <
 return (void)
 
- Releases an existing savepoint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The savepoint name
+    [$name] () 
 
 
 *yii/db/mssql/Schema::rollBackSavepoint*			public
@@ -287,15 +260,9 @@ return (void)
 <
 return (void)
 
- Rolls back to a previously created savepoint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The savepoint name
+    [$name] () 
 
 
 *yii/db/mssql/Schema::setTransactionIsolationLevel*	public
@@ -324,29 +291,23 @@ return (void)
 
 
 *yii/db/mssql/Schema::quoteSimpleTableName*		public
->
- quoteSimpleTableName($name)
-<
-return (string) The properly quoted table name.
 
- Quotes a table name for use in a query.
-
- A simple table name has no schema prefix.
-
-    [$name] (string) Table name.
+ See |yii/db/Schema::quoteSimpleTableName|
 
 
 *yii/db/mssql/Schema::quoteSimpleColumnName*		public
->
- quoteSimpleColumnName($name)
-<
-return (string) The properly quoted column name.
 
- Quotes a column name for use in a query.
+ See |yii/db/Schema::quoteSimpleColumnName|
 
- A simple column name has no prefix.
 
-    [$name] (string) Column name.
+*yii/db/mssql/Schema::unquoteSimpleTableName*		public
+
+ See |yii/db/Schema::unquoteSimpleTableName|
+
+
+*yii/db/mssql/Schema::unquoteSimpleColumnName*		public
+
+ See |yii/db/Schema::unquoteSimpleColumnName|
 
 
 *yii/db/mssql/Schema::getRawTableName*			public
@@ -367,6 +328,11 @@ return (string) The properly quoted column name.
 *yii/db/mssql/Schema::isReadQuery*			public
 
  See |yii/db/Schema::isReadQuery|
+
+
+*yii/db/mssql/Schema::getServerVersion*			public
+
+ See |yii/db/Schema::getServerVersion|
 
 
 *yii/db/mssql/Schema::getCacheKey*			protected
@@ -405,6 +371,8 @@ return (string) The properly quoted column name.
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -413,6 +381,8 @@ return (void)
  loadTableForeignKeys($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -423,6 +393,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -431,6 +403,8 @@ return (void)
  loadTableUniques($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -441,6 +415,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -449,6 +425,8 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -518,6 +496,8 @@ return (void)
  findViewNames($schema='\'\'')
 <
 return (void)
+
+ {@inheritdoc}
 
     [$schema] () 
 

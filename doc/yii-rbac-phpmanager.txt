@@ -206,140 +206,90 @@ return (void)
 >
  getItem($name)
 <
-return (\yii\rbac\Item) The auth item corresponding to the specified name. Null is
-returned if no such item.
+return (void)
 
- Returns the named auth item.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The auth item name.
+    [$name] () 
 
 
 *yii/rbac/PhpManager::getItems*				public
 >
  getItems($type)
 <
-return (\yii\rbac\Item[]) The auth items of the specified type.
+return (void)
 
- Returns the items of the specified type.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$type] (int) The auth item type (either 'Item::TYPE_ROLE' or
-    'Item::TYPE_PERMISSION'
+    [$type] () 
 
 
 *yii/rbac/PhpManager::addItem*				protected
 >
  addItem($item)
 <
-return (bool) Whether the auth item is successfully added to the system
+return (void)
 
- Adds an auth item to the RBAC system.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$item] (\yii\rbac\Item) The item to add
+    [$item] () 
 
 
 *yii/rbac/PhpManager::addRule*				protected
 >
  addRule($rule)
 <
-return (bool) Whether the rule is successfully added to the system
+return (void)
 
- Adds a rule to the RBAC system.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$rule] (\yii\rbac\Rule) The rule to add
+    [$rule] () 
 
 
 *yii/rbac/PhpManager::removeItem*				public
 >
  removeItem($item)
 <
-return (bool) Whether the role or permission is successfully removed
+return (void)
 
- Removes an auth item from the RBAC system.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$item] (\yii\rbac\Item) The item to remove
+    [$item] () 
 
 
 *yii/rbac/PhpManager::removeRule*				protected
 >
  removeRule($rule)
 <
-return (bool) Whether the rule is successfully removed
+return (void)
 
- Removes a rule from the RBAC system.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$rule] (\yii\rbac\Rule) The rule to remove
+    [$rule] () 
 
 
 *yii/rbac/PhpManager::updateItem*				protected
 >
  updateItem($name, $item)
 <
-return (bool) Whether the auth item is successfully updated
+return (void)
 
- Updates an auth item in the RBAC system.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the item being updated
-    [$item] (\yii\rbac\Item) The updated item
+    [$name] () 
+    [$item] () 
 
 
 *yii/rbac/PhpManager::updateRule*				public
 >
  updateRule($name, $rule)
 <
-return (bool) Whether the rule is successfully updated
+return (void)
 
- Updates a rule to the RBAC system.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the rule being updated
-    [$rule] (\yii\rbac\Rule) The updated rule
+    [$name] () 
+    [$rule] () 
 
 
 *yii/rbac/PhpManager::createRole*				public
@@ -382,6 +332,16 @@ return (bool) Whether the rule is successfully updated
  See |yii/rbac/BaseManager::getRoles|
 
 
+*yii/rbac/PhpManager::setDefaultRoles*			public
+
+ See |yii/rbac/BaseManager::setDefaultRoles|
+
+
+*yii/rbac/PhpManager::getDefaultRoles*			public
+
+ See |yii/rbac/BaseManager::getDefaultRoles|
+
+
 *yii/rbac/PhpManager::getDefaultRoleInstances*		public
 
  See |yii/rbac/BaseManager::getDefaultRoleInstances|
@@ -406,322 +366,204 @@ return (bool) Whether the rule is successfully updated
 >
  getRolesByUser($userId)
 <
-return (\yii\rbac\Role[]) All roles directly assigned to the user. The array is
-indexed by the role names.
+return (void)
 
- Returns the roles that are assigned to the user via 'assign()'.
+ {@inheritdoc} The roles returned by this method include the roles assigned
+ via '$defaultRoles'.
 
-
-
- Note that child roles that are not assigned directly to the user will not be
- returned.
-
- The roles returned by this method include the roles assigned via
- '$defaultRoles'.
-
-    [$userId] (string|int) The user ID (see '\yii\web\User::id')
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::getChildRoles*			public
 >
  getChildRoles($roleName)
 <
-return (\yii\rbac\Role[]) Child roles. The array is indexed by the role names. First
-element is an instance of the parent Role itself.
+return (void)
 
- Returns child roles of the role specified. Depth isn't limited.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$roleName] (string) Name of the role to file child roles for
+    [$roleName] () 
 
 
 *yii/rbac/PhpManager::getPermissionsByRole*		public
 >
  getPermissionsByRole($roleName)
 <
-return (\yii\rbac\Permission[]) All permissions that the role represents. The array
-is indexed by the permission names.
+return (void)
 
- Returns all permissions that the specified role represents.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$roleName] (string) The role name
+    [$roleName] () 
 
 
 *yii/rbac/PhpManager::getPermissionsByUser*		public
 >
  getPermissionsByUser($userId)
 <
-return (\yii\rbac\Permission[]) All permissions that the user has. The array is
-indexed by the permission names.
+return (void)
 
- Returns all permissions that the user has.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$userId] (string|int) The user ID (see '\yii\web\User::id')
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::getRule*				public
 >
  getRule($name)
 <
-return (null|\yii\rbac\Rule) The rule object, or null if the specified name does not
-correspond to a rule.
+return (void)
 
- Returns the rule of the specified name.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The rule name
+    [$name] () 
 
 
 *yii/rbac/PhpManager::getRules*				public
 >
  getRules()
 <
-return (\yii\rbac\Rule[]) The rules indexed by the rule names
+return (void)
 
- Returns all rules available in the system.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/rbac/PhpManager::canAddChild*			public
 >
  canAddChild($parent, $child)
 <
-return (bool) Possibility of adding
+return (void)
 
- Checks the possibility of adding a child to parent.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$parent] (\yii\rbac\Item) The parent item
-    [$child] (\yii\rbac\Item) The child item to be added to the hierarchy
+    [$parent] () 
+    [$child] () 
 
 
 *yii/rbac/PhpManager::addChild*				public
 >
  addChild($parent, $child)
 <
-return (bool) Whether the child successfully added
+return (void)
 
- Adds an item as a child of another item.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$parent] (\yii\rbac\Item) 
-    [$child] (\yii\rbac\Item) 
+    [$parent] () 
+    [$child] () 
 
 
 *yii/rbac/PhpManager::removeChild*			public
 >
  removeChild($parent, $child)
 <
-return (bool) Whether the removal is successful
+return (void)
 
- Removes a child from its parent.
+ {@inheritdoc}
 
-
-
- Note, the child item is not deleted. Only the parent-child relationship is
- removed.
-
-
-
-    [$parent] (\yii\rbac\Item) 
-    [$child] (\yii\rbac\Item) 
+    [$parent] () 
+    [$child] () 
 
 
 *yii/rbac/PhpManager::removeChildren*			public
 >
  removeChildren($parent)
 <
-return (bool) Whether the removal is successful
+return (void)
 
- Removed all children form their parent.
+ {@inheritdoc}
 
-
-
- Note, the children items are not deleted. Only the parent-child relationships
- are removed.
-
-
-
-    [$parent] (\yii\rbac\Item) 
+    [$parent] () 
 
 
 *yii/rbac/PhpManager::hasChild*				public
 >
  hasChild($parent, $child)
 <
-return (bool) Whether '$child' is already a child of '$parent'
+return (void)
 
- Returns a value indicating whether the child already exists for the parent.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$parent] (\yii\rbac\Item) 
-    [$child] (\yii\rbac\Item) 
+    [$parent] () 
+    [$child] () 
 
 
 *yii/rbac/PhpManager::getChildren*			public
 >
  getChildren($name)
 <
-return (\yii\rbac\Item[]) The child permissions and/or roles
+return (void)
 
- Returns the child permissions and/or roles.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The parent name
+    [$name] () 
 
 
 *yii/rbac/PhpManager::assign*				public
 >
  assign($role, $userId)
 <
-return (\yii\rbac\Assignment) The role assignment information.
+return (void)
 
- Assigns a role to a user.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$role] (\yii\rbac\Role|\yii\rbac\Permission) 
-    [$userId] (string|int) The user ID (see '\yii\web\User::id')
+    [$role] () 
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::revoke*				public
 >
  revoke($role, $userId)
 <
-return (bool) Whether the revoking is successful
+return (void)
 
- Revokes a role from a user.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$role] (\yii\rbac\Role|\yii\rbac\Permission) 
-    [$userId] (string|int) The user ID (see '\yii\web\User::id')
+    [$role] () 
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::revokeAll*				public
 >
  revokeAll($userId)
 <
-return (bool) Whether the revoking is successful
+return (void)
 
- Revokes all roles from a user.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$userId] (mixed) The user ID (see '\yii\web\User::id')
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::getAssignment*			public
 >
  getAssignment($roleName, $userId)
 <
-return (null|\yii\rbac\Assignment) The assignment information. Null is returned if
-the role is not assigned to the user.
+return (void)
 
- Returns the assignment information regarding a role and a user.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$roleName] (string) The role name
-    [$userId] (string|int) The user ID (see '\yii\web\User::id')
+    [$roleName] () 
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::getAssignments*			public
 >
  getAssignments($userId)
 <
-return (\yii\rbac\Assignment[]) The assignments indexed by role names. An empty array
-will be returned if there is no role assigned to the user.
+return (void)
 
- Returns all role assignment information for the specified user.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$userId] (string|int) The user ID (see '\yii\web\User::id')
+    [$userId] () 
 
 
 *yii/rbac/PhpManager::getUserIdsByRole*			public
 >
  getUserIdsByRole($roleName)
 <
-return (array) Array of user ID strings
+return (void)
 
- Returns all user IDs assigned to the role specified.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$roleName] (string) 
+    [$roleName] () 
 
 
 *yii/rbac/PhpManager::removeAll*				public
@@ -730,14 +572,7 @@ return (array) Array of user ID strings
 <
 return (void)
 
- Removes all authorization data, including roles, permissions, rules, and
- assignments.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/rbac/PhpManager::removeAllPermissions*		public
@@ -746,13 +581,7 @@ return (void)
 <
 return (void)
 
- Removes all permissions.
-
-
-
- All parent child relations will be adjusted accordingly.
-
-
+ {@inheritdoc}
 
 
 *yii/rbac/PhpManager::removeAllRoles*			public
@@ -761,13 +590,7 @@ return (void)
 <
 return (void)
 
- Removes all roles.
-
-
-
- All parent child relations will be adjusted accordingly.
-
-
+ {@inheritdoc}
 
 
 *yii/rbac/PhpManager::removeAllRules*			public
@@ -776,13 +599,7 @@ return (void)
 <
 return (void)
 
- Removes all rules.
-
-
-
- All roles and permissions which have rules will be adjusted accordingly.
-
-
+ {@inheritdoc}
 
 
 *yii/rbac/PhpManager::removeAllAssignments*		public
@@ -791,13 +608,7 @@ return (void)
 <
 return (void)
 
- Removes all role assignments.
-
-
-
-
-
-
+ {@inheritdoc}
 
 
 *yii/rbac/PhpManager::checkAccess*			public
@@ -805,6 +616,8 @@ return (void)
  checkAccess($userId, $permissionName, $params='[]')
 <
 return (void)
+
+ {@inheritdoc}
 
     [$userId] () 
     [$permissionName] () 

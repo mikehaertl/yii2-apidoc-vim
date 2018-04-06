@@ -38,6 +38,17 @@ $columnSchemaClass			*yii/db/Schema::$columnSchemaClass*
 
  (string) Column schema class
 
+$tableQuoteCharacter			*yii/db/Schema::$tableQuoteCharacter*
+
+ (string|string[]) Character used to quote schema, table, etc. names. An array
+ of 2 characters can be used in case starting and ending characters are
+ different.
+
+$columnQuoteCharacter			*yii/db/Schema::$columnQuoteCharacter*
+
+ (string|string[]) Character used to quote column names. An array of 2
+ characters can be used in case starting and ending characters are different.
+
 
 
 METHOD DETAILS
@@ -476,6 +487,35 @@ return (string) The properly quoted column name
     [$name] (string) Column name
 
 
+*yii/db/Schema::unquoteSimpleTableName*			public
+>
+ unquoteSimpleTableName($name)
+<
+return (string) Unquoted table name.
+
+ Unquotes a simple table name.
+
+ A simple table name should contain the table name only without any schema
+ prefix. If the table name is not quoted, this method will do nothing.
+
+    [$name] (string) Table name.
+
+
+*yii/db/Schema::unquoteSimpleColumnName*			public
+>
+ unquoteSimpleColumnName($name)
+<
+return (string) Unquoted column name.
+
+ Unquotes a simple column name.
+
+ A simple column name should contain the column name only without any prefix.
+ If the column name is not quoted or is the asterisk character '*', this
+ method will do nothing.
+
+    [$name] (string) Column name.
+
+
 *yii/db/Schema::getRawTableName*				public
 >
  getRawTableName($name)
@@ -522,6 +562,15 @@ return (bool) Whether a SQL statement is for read purpose.
  Returns a value indicating whether a SQL statement is for read purpose.
 
     [$sql] (string) The SQL statement
+
+
+*yii/db/Schema::getServerVersion*				public
+>
+ getServerVersion()
+<
+return (string) Server version as a string.
+
+ Returns a server version as a string comparable by '\version_compare()'.
 
 
 *yii/db/Schema::getCacheKey*				protected

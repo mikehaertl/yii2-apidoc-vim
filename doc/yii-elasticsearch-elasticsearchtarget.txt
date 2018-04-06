@@ -1,0 +1,310 @@
+
+*yii/elasticsearch/ElasticsearchTarget*   >> |yii/log/Target|
+=======================================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$categories				*yii/elasticsearch/ElasticsearchTarget::$categories*
+
+ See |yii/log/Target::$categories|
+
+$except					*yii/elasticsearch/ElasticsearchTarget::$except*
+
+ See |yii/log/Target::$except|
+
+$logVars				*yii/elasticsearch/ElasticsearchTarget::$logVars*
+
+ See |yii/log/Target::$logVars|
+
+$prefix					*yii/elasticsearch/ElasticsearchTarget::$prefix*
+
+ See |yii/log/Target::$prefix|
+
+$exportInterval				*yii/elasticsearch/ElasticsearchTarget::$exportInterval*
+
+ See |yii/log/Target::$exportInterval|
+
+$messages				*yii/elasticsearch/ElasticsearchTarget::$messages*
+
+ See |yii/log/Target::$messages|
+
+$microtime				*yii/elasticsearch/ElasticsearchTarget::$microtime*
+
+ See |yii/log/Target::$microtime|
+
+$index					*yii/elasticsearch/ElasticsearchTarget::$index*
+
+ (string) Elasticsearch index name.
+
+$type					*yii/elasticsearch/ElasticsearchTarget::$type*
+
+ (string) Elasticsearch type name.
+
+$db					*yii/elasticsearch/ElasticsearchTarget::$db*
+
+ (\yii\elasticsearch\Connection|array|string) The elasticsearch connection
+ object or the application component ID of the elasticsearch connection.
+
+$options				*yii/elasticsearch/ElasticsearchTarget::$options*
+
+ (array) URL options.
+
+$logContext				*yii/elasticsearch/ElasticsearchTarget::$logContext*
+
+ (boolean) If true, context will be logged as a separate message after all
+ other messages.
+
+$includeContext				*yii/elasticsearch/ElasticsearchTarget::$includeContext*
+
+ (boolean) If true, context will be included in every message. This is
+ convenient if you log application errors and analyze them with tools like
+ Kibana.
+
+$cacheContext				*yii/elasticsearch/ElasticsearchTarget::$cacheContext*
+
+ (boolean) If true, context message will cached once it's been created. Makes
+ sense to use with 'includeContext'.
+
+$_contextMessage			*yii/elasticsearch/ElasticsearchTarget::$_contextMessage*
+
+ (string) Context message cache (can be used multiple times if context is
+ appended to every message)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/elasticsearch/ElasticsearchTarget::className*	public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/elasticsearch/ElasticsearchTarget::__construct*	public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/elasticsearch/ElasticsearchTarget::init*		public
+>
+ init()
+<
+return (void)
+
+ This method will initialize the 'elasticsearch' property to make sure it
+ refers to a valid Elasticsearch connection.
+
+
+*yii/elasticsearch/ElasticsearchTarget::__get*		public
+
+ See |yii/base/Component::__get|
+
+
+*yii/elasticsearch/ElasticsearchTarget::__set*		public
+
+ See |yii/base/Component::__set|
+
+
+*yii/elasticsearch/ElasticsearchTarget::__isset*		public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/elasticsearch/ElasticsearchTarget::__unset*		public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/elasticsearch/ElasticsearchTarget::__call*		public
+
+ See |yii/base/Component::__call|
+
+
+*yii/elasticsearch/ElasticsearchTarget::hasProperty*	public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/elasticsearch/ElasticsearchTarget::canGetProperty*	public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/elasticsearch/ElasticsearchTarget::canSetProperty*	public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/elasticsearch/ElasticsearchTarget::hasMethod*	public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/elasticsearch/ElasticsearchTarget::__clone*		public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/elasticsearch/ElasticsearchTarget::behaviors*	public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/elasticsearch/ElasticsearchTarget::hasEventHandlers*	public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/elasticsearch/ElasticsearchTarget::on*		public
+
+ See |yii/base/Component::on|
+
+
+*yii/elasticsearch/ElasticsearchTarget::off*		public
+
+ See |yii/base/Component::off|
+
+
+*yii/elasticsearch/ElasticsearchTarget::trigger*		public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/elasticsearch/ElasticsearchTarget::getBehavior*	public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/elasticsearch/ElasticsearchTarget::getBehaviors*	public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/elasticsearch/ElasticsearchTarget::attachBehavior*	public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/elasticsearch/ElasticsearchTarget::attachBehaviors*	public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/elasticsearch/ElasticsearchTarget::detachBehavior*	public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/elasticsearch/ElasticsearchTarget::detachBehaviors*	public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/elasticsearch/ElasticsearchTarget::ensureBehaviors*	public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/elasticsearch/ElasticsearchTarget::export*		public
+>
+ export()
+<
+return (void)
+
+ Exports log 'messages' to a specific destination.
+
+
+
+ Child classes must implement this method.
+
+
+
+
+*yii/elasticsearch/ElasticsearchTarget::collect*		public
+>
+ collect($messages, $final)
+<
+return (void)
+
+ Processes the given log messages.
+
+ This method will filter the given messages with 'levels' and 'categories'.
+ And if requested, it will also export the filtering result to specific medium
+ (e.g. email). Depending on the 'includeContext' attribute, a context message
+ will be either created or ignored.
+
+    [$messages] (array) Log messages to be processed. See 'Logger::messages'
+    for the structure of each message.
+    [$final] (bool) Whether this method is called at the end of the current
+    application
+
+
+*yii/elasticsearch/ElasticsearchTarget::getContextMessage*protected
+>
+ getContextMessage()
+<
+return (array) The context information
+
+ If 'includeContext' property is false, returns context message normally.
+
+ If 'includeContext' is true, returns an empty string (so that context message
+ in 'collect' is not generated), expecting that context will be appended to
+ every message in 'prepareMessage'.
+
+
+*yii/elasticsearch/ElasticsearchTarget::getLevels*	public
+
+ See |yii/log/Target::getLevels|
+
+
+*yii/elasticsearch/ElasticsearchTarget::setLevels*	public
+
+ See |yii/log/Target::setLevels|
+
+
+*yii/elasticsearch/ElasticsearchTarget::filterMessages*	public
+
+ See |yii/log/Target::filterMessages|
+
+
+*yii/elasticsearch/ElasticsearchTarget::formatMessage*	public
+
+ See |yii/log/Target::formatMessage|
+
+
+*yii/elasticsearch/ElasticsearchTarget::getMessagePrefix*	public
+
+ See |yii/log/Target::getMessagePrefix|
+
+
+*yii/elasticsearch/ElasticsearchTarget::setEnabled*	public
+
+ See |yii/log/Target::setEnabled|
+
+
+*yii/elasticsearch/ElasticsearchTarget::getEnabled*	public
+
+ See |yii/log/Target::getEnabled|
+
+
+*yii/elasticsearch/ElasticsearchTarget::getTime*		protected
+
+ See |yii/log/Target::getTime|
+
+
+*yii/elasticsearch/ElasticsearchTarget::prepareMessage*	public
+>
+ prepareMessage($message)
+<
+return (string) 
+
+ Prepares a log message.
+
+    [$message] (array) The log message to be formatted.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

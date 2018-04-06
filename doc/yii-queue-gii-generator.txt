@@ -1,0 +1,716 @@
+
+*yii/queue/gii/Generator*   >> |yii/gii/Generator|
+=========================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$templates				*yii/queue/gii/Generator::$templates*
+
+ See |yii/gii/Generator::$templates|
+
+$template				*yii/queue/gii/Generator::$template*
+
+ See |yii/gii/Generator::$template|
+
+$enableI18N				*yii/queue/gii/Generator::$enableI18N*
+
+ See |yii/gii/Generator::$enableI18N|
+
+$messageCategory			*yii/queue/gii/Generator::$messageCategory*
+
+ See |yii/gii/Generator::$messageCategory|
+
+$jobClass				*yii/queue/gii/Generator::$jobClass*
+
+ ()
+
+$properties				*yii/queue/gii/Generator::$properties*
+
+ ()
+
+$retryable				*yii/queue/gii/Generator::$retryable*
+
+ ()
+
+$ns					*yii/queue/gii/Generator::$ns*
+
+ ()
+
+$baseClass				*yii/queue/gii/Generator::$baseClass*
+
+ ()
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/queue/gii/Generator::className*			public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/queue/gii/Generator::__construct*			public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/queue/gii/Generator::init*				public
+
+ See |yii/gii/Generator::init|
+
+
+*yii/queue/gii/Generator::__get*				public
+
+ See |yii/base/BaseObject::__get|
+
+
+*yii/queue/gii/Generator::__set*				public
+
+ See |yii/base/BaseObject::__set|
+
+
+*yii/queue/gii/Generator::__isset*			public
+
+ See |yii/base/BaseObject::__isset|
+
+
+*yii/queue/gii/Generator::__unset*			public
+
+ See |yii/base/BaseObject::__unset|
+
+
+*yii/queue/gii/Generator::__call*				public
+
+ See |yii/base/BaseObject::__call|
+
+
+*yii/queue/gii/Generator::hasProperty*			public
+
+ See |yii/base/BaseObject::hasProperty|
+
+
+*yii/queue/gii/Generator::canGetProperty*			public
+
+ See |yii/base/BaseObject::canGetProperty|
+
+
+*yii/queue/gii/Generator::canSetProperty*			public
+
+ See |yii/base/BaseObject::canSetProperty|
+
+
+*yii/queue/gii/Generator::hasMethod*			public
+
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/queue/gii/Generator::__clone*			public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/queue/gii/Generator::behaviors*			public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/queue/gii/Generator::hasEventHandlers*		public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/queue/gii/Generator::on*				public
+
+ See |yii/base/Component::on|
+
+
+*yii/queue/gii/Generator::off*				public
+
+ See |yii/base/Component::off|
+
+
+*yii/queue/gii/Generator::trigger*			public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/queue/gii/Generator::getBehavior*			public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/queue/gii/Generator::getBehaviors*			public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/queue/gii/Generator::attachBehavior*			public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/queue/gii/Generator::attachBehaviors*		public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/queue/gii/Generator::detachBehavior*			public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/queue/gii/Generator::detachBehaviors*		public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/queue/gii/Generator::ensureBehaviors*		public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/queue/gii/Generator::instance*			public
+
+ See |yii/base/StaticInstanceTrait::instance|
+
+
+*yii/queue/gii/Generator::fields*				public
+
+ See |yii/base/ArrayableTrait::fields|
+
+
+*yii/queue/gii/Generator::extraFields*			public
+
+ See |yii/base/ArrayableTrait::extraFields|
+
+
+*yii/queue/gii/Generator::toArray*			public
+
+ See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/queue/gii/Generator::extractRootFields*		protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/queue/gii/Generator::extractFieldsFor*		protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
+
+
+*yii/queue/gii/Generator::resolveFields*			protected
+
+ See |yii/base/ArrayableTrait::resolveFields|
+
+
+*yii/queue/gii/Generator::rules*				public
+>
+ rules()
+<
+return (array) Validation rules
+
+ Returns the validation rules for attributes.
+
+
+
+ Validation rules are used by 'validate()' to check if attribute values are
+ valid. Child classes may override this method to declare different validation
+ rules.
+
+ Each rule is an array with the following structure:
+
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       //...other parameters...
+   ]
+
+ where
+
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass a string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array in which
+   the validation    rule can be applied. If this option is not set, the rule
+ will apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
+
+ A validator can be either an object of a class extending 'Validator', or a
+ model class method (called *inline validator*) that has the following
+ signature:
+
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
+
+ In the above '$attribute' refers to the attribute currently being validated
+ while '$params' contains an array of validator configuration options such as
+ 'max' in case of 'string' validator. The value of the attribute currently
+ being validated can be accessed as '$this->$attribute'. Note the '$' before
+ 'attribute'; this is taking the value of the variable '$attribute' and using
+ it as the name of the property to access.
+
+ Yii also provides a set of 'Validator::builtInValidators|built-in
+ validators'. Each one has an alias name which can be used when specifying a
+ validation rule.
+
+ Below are some examples:
+
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
+
+ Note, in order to inherit rules defined in the parent class, a child class
+ needs to merge the parent rules with child rules using functions such as
+ 'array_merge()'.
+
+ Child classes should override this method like the following so that the
+ parent rules are included:
+
+   return array_merge(parent::rules(), [
+       ...rules for the child class...
+   ]);
+
+
+
+
+*yii/queue/gii/Generator::scenarios*			public
+
+ See |yii/base/Model::scenarios|
+
+
+*yii/queue/gii/Generator::formName*			public
+
+ See |yii/base/Model::formName|
+
+
+*yii/queue/gii/Generator::attributes*			public
+
+ See |yii/base/Model::attributes|
+
+
+*yii/queue/gii/Generator::attributeLabels*		public
+>
+ attributeLabels()
+<
+return (array) Attribute labels (name => label)
+
+ Returns the attribute labels.
+
+
+
+ Attribute labels are mainly used for display purpose. For example, given an
+ attribute 'firstName', we can declare a label 'First Name' which is more
+ user-friendly and can be displayed to end users.
+
+ By default an attribute label is generated using 'generateAttributeLabel()'.
+ This method allows you to explicitly specify attribute labels.
+
+ Note, in order to inherit labels defined in the parent class, a child class
+ needs to merge the parent labels with child labels using functions such as
+ 'array_merge()'.
+
+
+
+
+*yii/queue/gii/Generator::attributeHints*			public
+
+ See |yii/base/Model::attributeHints|
+
+
+*yii/queue/gii/Generator::validate*			public
+
+ See |yii/base/Model::validate|
+
+
+*yii/queue/gii/Generator::beforeValidate*			public
+
+ See |yii/base/Model::beforeValidate|
+
+
+*yii/queue/gii/Generator::afterValidate*			public
+
+ See |yii/base/Model::afterValidate|
+
+
+*yii/queue/gii/Generator::getValidators*			public
+
+ See |yii/base/Model::getValidators|
+
+
+*yii/queue/gii/Generator::getActiveValidators*		public
+
+ See |yii/base/Model::getActiveValidators|
+
+
+*yii/queue/gii/Generator::createValidators*		public
+
+ See |yii/base/Model::createValidators|
+
+
+*yii/queue/gii/Generator::isAttributeRequired*		public
+
+ See |yii/base/Model::isAttributeRequired|
+
+
+*yii/queue/gii/Generator::isAttributeSafe*		public
+
+ See |yii/base/Model::isAttributeSafe|
+
+
+*yii/queue/gii/Generator::isAttributeActive*		public
+
+ See |yii/base/Model::isAttributeActive|
+
+
+*yii/queue/gii/Generator::getAttributeLabel*		public
+
+ See |yii/base/Model::getAttributeLabel|
+
+
+*yii/queue/gii/Generator::getAttributeHint*		public
+
+ See |yii/base/Model::getAttributeHint|
+
+
+*yii/queue/gii/Generator::hasErrors*			public
+
+ See |yii/base/Model::hasErrors|
+
+
+*yii/queue/gii/Generator::getErrors*			public
+
+ See |yii/base/Model::getErrors|
+
+
+*yii/queue/gii/Generator::getFirstErrors*			public
+
+ See |yii/base/Model::getFirstErrors|
+
+
+*yii/queue/gii/Generator::getFirstError*			public
+
+ See |yii/base/Model::getFirstError|
+
+
+*yii/queue/gii/Generator::getErrorSummary*		public
+
+ See |yii/base/Model::getErrorSummary|
+
+
+*yii/queue/gii/Generator::addError*			public
+
+ See |yii/base/Model::addError|
+
+
+*yii/queue/gii/Generator::addErrors*			public
+
+ See |yii/base/Model::addErrors|
+
+
+*yii/queue/gii/Generator::clearErrors*			public
+
+ See |yii/base/Model::clearErrors|
+
+
+*yii/queue/gii/Generator::generateAttributeLabel*		public
+
+ See |yii/base/Model::generateAttributeLabel|
+
+
+*yii/queue/gii/Generator::getAttributes*			public
+
+ See |yii/base/Model::getAttributes|
+
+
+*yii/queue/gii/Generator::setAttributes*			public
+
+ See |yii/base/Model::setAttributes|
+
+
+*yii/queue/gii/Generator::onUnsafeAttribute*		public
+
+ See |yii/base/Model::onUnsafeAttribute|
+
+
+*yii/queue/gii/Generator::getScenario*			public
+
+ See |yii/base/Model::getScenario|
+
+
+*yii/queue/gii/Generator::setScenario*			public
+
+ See |yii/base/Model::setScenario|
+
+
+*yii/queue/gii/Generator::safeAttributes*			public
+
+ See |yii/base/Model::safeAttributes|
+
+
+*yii/queue/gii/Generator::activeAttributes*		public
+
+ See |yii/base/Model::activeAttributes|
+
+
+*yii/queue/gii/Generator::load*				public
+
+ See |yii/base/Model::load|
+
+
+*yii/queue/gii/Generator::loadMultiple*			public
+
+ See |yii/base/Model::loadMultiple|
+
+
+*yii/queue/gii/Generator::validateMultiple*		public
+
+ See |yii/base/Model::validateMultiple|
+
+
+*yii/queue/gii/Generator::getIterator*			public
+
+ See |yii/base/Model::getIterator|
+
+
+*yii/queue/gii/Generator::offsetExists*			public
+
+ See |yii/base/Model::offsetExists|
+
+
+*yii/queue/gii/Generator::offsetGet*			public
+
+ See |yii/base/Model::offsetGet|
+
+
+*yii/queue/gii/Generator::offsetSet*			public
+
+ See |yii/base/Model::offsetSet|
+
+
+*yii/queue/gii/Generator::offsetUnset*			public
+
+ See |yii/base/Model::offsetUnset|
+
+
+*yii/queue/gii/Generator::getName*			public
+>
+ getName()
+<
+return (string) Name of the code generator
+
+
+
+
+
+
+
+
+*yii/queue/gii/Generator::generate*			public
+>
+ generate()
+<
+return (\yii\gii\CodeFile[]) A list of code files to be created.
+
+ Generates the code based on the current user input and the specified code
+ template files.
+
+
+
+ This is the main method that child classes should implement. Please refer to
+ '\yii\gii\generators\controller\Generator::generate()' as an example on how
+ to implement this method.
+
+
+
+
+*yii/queue/gii/Generator::requiredTemplates*		public
+>
+ requiredTemplates()
+<
+return (array) List of code template files that are required. They should be file
+paths relative to 'templatePath'.
+
+ Returns a list of code template files that are required.
+
+
+
+ Derived classes usually should override this method if they require the
+ existence of certain template files.
+
+
+
+
+*yii/queue/gii/Generator::stickyAttributes*		public
+>
+ stickyAttributes()
+<
+return (array) List of sticky attributes
+
+ Returns the list of sticky attributes.
+
+
+
+ A sticky attribute will remember its value and will initialize the attribute
+ with this value when the generator is restarted.
+
+
+
+
+*yii/queue/gii/Generator::hints*				public
+>
+ hints()
+<
+return (array) The list of hint messages
+
+ Returns the list of hint messages.
+
+
+
+ The array keys are the attribute names, and the array values are the
+ corresponding hint messages. Hint messages will be displayed to end users
+ when they are filling the form for the generator.
+
+
+
+
+*yii/queue/gii/Generator::autoCompleteData*		public
+
+ See |yii/gii/Generator::autoCompleteData|
+
+
+*yii/queue/gii/Generator::successMessage*			public
+
+ See |yii/gii/Generator::successMessage|
+
+
+*yii/queue/gii/Generator::formView*			public
+
+ See |yii/gii/Generator::formView|
+
+
+*yii/queue/gii/Generator::defaultTemplate*		public
+
+ See |yii/gii/Generator::defaultTemplate|
+
+
+*yii/queue/gii/Generator::getDescription*			public
+>
+ getDescription()
+<
+return (string) The detailed description of the generator.
+
+
+
+
+
+
+
+
+*yii/queue/gii/Generator::loadStickyAttributes*		public
+
+ See |yii/gii/Generator::loadStickyAttributes|
+
+
+*yii/queue/gii/Generator::saveStickyAttributes*		public
+
+ See |yii/gii/Generator::saveStickyAttributes|
+
+
+*yii/queue/gii/Generator::getStickyDataFile*		public
+
+ See |yii/gii/Generator::getStickyDataFile|
+
+
+*yii/queue/gii/Generator::save*				public
+
+ See |yii/gii/Generator::save|
+
+
+*yii/queue/gii/Generator::getTemplatePath*		public
+
+ See |yii/gii/Generator::getTemplatePath|
+
+
+*yii/queue/gii/Generator::render*				public
+
+ See |yii/gii/Generator::render|
+
+
+*yii/queue/gii/Generator::validateTemplate*		public
+
+ See |yii/gii/Generator::validateTemplate|
+
+
+*yii/queue/gii/Generator::validateClass*			public
+
+ See |yii/gii/Generator::validateClass|
+
+
+*yii/queue/gii/Generator::validateNewClass*		public
+
+ See |yii/gii/Generator::validateNewClass|
+
+
+*yii/queue/gii/Generator::validateMessageCategory*	public
+
+ See |yii/gii/Generator::validateMessageCategory|
+
+
+*yii/queue/gii/Generator::isReservedKeyword*		public
+
+ See |yii/gii/Generator::isReservedKeyword|
+
+
+*yii/queue/gii/Generator::generateString*			public
+
+ See |yii/gii/Generator::generateString|
+
+
+*yii/queue/gii/Generator::validateJobClass*		public
+>
+ validateJobClass($attribute)
+<
+return (void)
+
+ Validates the job class.
+
+    [$attribute] (string) Job attribute name.
+
+
+*yii/queue/gii/Generator::validateNamespace*		public
+>
+ validateNamespace($attribute)
+<
+return (void)
+
+ Validates the namespace.
+
+    [$attribute] (string) Namespace attribute name.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

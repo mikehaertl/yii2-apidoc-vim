@@ -116,47 +116,47 @@ METHOD DETAILS
 
 *yii/web/View::__get*					public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/web/View::__set*					public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/web/View::__isset*					public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/web/View::__unset*					public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/web/View::__call*					public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/web/View::hasProperty*				public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/web/View::canGetProperty*				public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/web/View::canSetProperty*				public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/web/View::hasMethod*					public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/web/View::__clone*					public
@@ -264,6 +264,16 @@ METHOD DETAILS
  See |yii/base/View::renderDynamic|
 
 
+*yii/web/View::getDynamicPlaceholders*			public
+
+ See |yii/base/View::getDynamicPlaceholders|
+
+
+*yii/web/View::setDynamicPlaceholders*			public
+
+ See |yii/base/View::setDynamicPlaceholders|
+
+
 *yii/web/View::addDynamicPlaceholder*			public
 
  See |yii/base/View::addDynamicPlaceholder|
@@ -272,6 +282,21 @@ METHOD DETAILS
 *yii/web/View::evaluateDynamicContent*			public
 
  See |yii/base/View::evaluateDynamicContent|
+
+
+*yii/web/View::getDynamicContents*			public
+
+ See |yii/base/View::getDynamicContents|
+
+
+*yii/web/View::pushDynamicContent*			public
+
+ See |yii/base/View::pushDynamicContent|
+
+
+*yii/web/View::popDynamicContent*				public
+
+ See |yii/base/View::popDynamicContent|
 
 
 *yii/web/View::beginBlock*				public
@@ -604,6 +629,32 @@ return (void)
     at the same position, the latter will overwrite the former. Note that
     position option takes precedence, thus files registered with the same key,
     but different position option will not override each other.
+
+
+*yii/web/View::registerJsVar*				public
+>
+ registerJsVar($name, $value, $position=self::POS_HEAD)
+<
+return (void)
+
+ Registers a JS code block defining a variable. The name of variable will be
+ used as key, preventing duplicated variable names.
+
+    [$name] (string) Name of the variable
+    [$value] (array|string) Value of the variable
+    [$position] (int) The position in a page at which the JavaScript variable
+    should be inserted. The possible values are:
+
+
+      - 'POS_HEAD': in the head section. This is the default value. 
+      - 'POS_BEGIN': at the beginning of the body section. 
+      - 'POS_END': at the end of the body section. 
+      - 'POS_LOAD': enclosed within jQuery(window).load().   Note that by
+    using this position, the method will automatically register the jQuery js
+    file. 
+      - 'POS_READY': enclosed within jQuery(document).ready().   Note that by
+    using this position, the method will automatically register the jQuery js
+    file.
 
 
 *yii/web/View::renderHeadHtml*				protected

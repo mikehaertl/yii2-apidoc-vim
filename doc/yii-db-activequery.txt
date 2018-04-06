@@ -134,6 +134,14 @@ $params					*yii/db/ActiveQuery::$params*
 
  See |yii/db/Query::$params|
 
+$queryCacheDuration			*yii/db/ActiveQuery::$queryCacheDuration*
+
+ See |yii/db/Query::$queryCacheDuration|
+
+$queryCacheDependency			*yii/db/ActiveQuery::$queryCacheDependency*
+
+ See |yii/db/Query::$queryCacheDependency|
+
 $multiple				*yii/db/ActiveQuery::$multiple*
 
  See |yii/db/ActiveRelationTrait::$multiple|
@@ -423,20 +431,11 @@ return (\yii\db\Command) The created DB command instance.
 >
  prepare($builder)
 <
-return ($this) A prepared query instance which will be used by 'QueryBuilder' to
-build the SQL
+return (void)
 
- Prepares for building SQL.
+ {@inheritdoc}
 
-
-
- This method is called by 'QueryBuilder' when it starts to build SQL from a
- query object. You may override this method to do some final preparation work
- when converting a query into a SQL statement.
-
-
-
-    [$builder] (\yii\db\QueryBuilder) 
+    [$builder] () 
 
 
 *yii/db/ActiveQuery::batch*				public
@@ -466,18 +465,11 @@ nothing, an empty array will be returned.
 >
  populate($rows)
 <
-return (array) The converted query result
+return (void)
 
- Converts the raw query results into the format as specified by this query.
+ {@inheritdoc}
 
-
-
- This method is internally used to convert the data fetched from database into
- the format as required by this query.
-
-
-
-    [$rows] (array) The raw query result from database
+    [$rows] () 
 
 
 *yii/db/ActiveQuery::one*					public
@@ -539,33 +531,26 @@ ActiveRecord object. 'null' will be returned if the query results in nothing.
 >
  queryScalar($selectExpression, $db)
 <
-return (bool|string) 
+return (void)
 
- Queries a scalar value by setting 'select' first.
+ {@inheritdoc}
 
-
-
- Restores the value of select to make this query reusable.
-
-
-
-    [$selectExpression] (string|\yii\db\Expression) 
-    [$db] (\yii\db\Connection|null) 
+    [$selectExpression] () 
+    [$db] () 
 
 
 *yii/db/ActiveQuery::getTablesUsedInFrom*			public
 >
  getTablesUsedInFrom()
 <
-return (string[]) Table names indexed by aliases
+return (void)
 
- Returns table names used in 'from' indexed by aliases.
-
-
-
- Both aliases and names are enclosed into {{ and }}.
+ {@inheritdoc}
 
 
+*yii/db/ActiveQuery::cleanUpTableNames*			protected
+
+ See |yii/db/Query::cleanUpTableNames|
 
 
 *yii/db/ActiveQuery::select*				public
@@ -576,6 +561,16 @@ return (string[]) Table names indexed by aliases
 *yii/db/ActiveQuery::addSelect*				public
 
  See |yii/db/Query::addSelect|
+
+
+*yii/db/ActiveQuery::getUniqueColumns*			protected
+
+ See |yii/db/Query::getUniqueColumns|
+
+
+*yii/db/ActiveQuery::getUnaliasedColumnsFromSelect*	protected
+
+ See |yii/db/Query::getUnaliasedColumnsFromSelect|
 
 
 *yii/db/ActiveQuery::distinct*				public
@@ -668,9 +663,29 @@ return (string[]) Table names indexed by aliases
  See |yii/db/Query::addParams|
 
 
+*yii/db/ActiveQuery::cache*				public
+
+ See |yii/db/Query::cache|
+
+
+*yii/db/ActiveQuery::noCache*				public
+
+ See |yii/db/Query::noCache|
+
+
+*yii/db/ActiveQuery::setCommandCache*			protected
+
+ See |yii/db/Query::setCommandCache|
+
+
 *yii/db/ActiveQuery::create*				public
 
  See |yii/db/Query::create|
+
+
+*yii/db/ActiveQuery::__toString*				public
+
+ See |yii/db/Query::__toString|
 
 
 *yii/db/ActiveQuery::via*					public

@@ -8,12 +8,18 @@ SUBCLASSES
 |yii/base/DynamicModel|
 |yii/db/BaseActiveRecord|
 |yii/db/ActiveRecord|
+|yii/data/ActiveDataFilter|
+|yii/data/DataFilter|
 |yii/debug/models/search/Mail|
+|yii/debug/models/search/User|
 |yii/debug/models/search/Db|
 |yii/debug/models/search/Profile|
 |yii/debug/models/search/Log|
 |yii/debug/models/search/Debug|
 |yii/debug/models/search/Base|
+|yii/debug/models/Router|
+|yii/debug/models/UserSwitch|
+|yii/debug/models/timeline/Search|
 |yii/elasticsearch/ActiveRecord|
 |yii/gii/Generator|
 |yii/gii/generators/module/Generator|
@@ -26,15 +32,10 @@ SUBCLASSES
 |yii/mongodb/file/ActiveRecord|
 |yii/mongodb/ActiveRecord|
 |yii/mongodb/gii/model/Generator|
+|yii/queue/gii/Generator|
 |yii/redis/ActiveRecord|
 |yii/sphinx/ActiveRecord|
 |yii/sphinx/gii/model/Generator|
-|yii/debug/models/Router|
-|yii/debug/models/timeline/Search|
-|yii/data/ActiveDataFilter|
-|yii/data/DataFilter|
-|yii/debug/models/search/User|
-|yii/debug/models/UserSwitch|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -85,47 +86,47 @@ METHOD DETAILS
 
 *yii/base/Model::__get*					public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/base/Model::__set*					public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/base/Model::__isset*					public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/base/Model::__unset*					public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/base/Model::__call*					public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/base/Model::hasProperty*				public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/base/Model::canGetProperty*				public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/base/Model::canSetProperty*				public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/base/Model::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/base/Model::__clone*					public
@@ -257,6 +258,16 @@ return (array) The list of field names or field definitions.
 *yii/base/Model::toArray*					public
 
  See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/base/Model::extractRootFields*			protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/base/Model::extractFieldsFor*			protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
 
 
 *yii/base/Model::resolveFields*				protected
@@ -472,9 +483,9 @@ return (bool) Whether the validation is successful without any error.
  Errors found during the validation can be retrieved via 'getErrors()',
  'getFirstErrors()' and 'getFirstError()'.
 
-    [$attributeNames] (array) List of attribute names that should be
-    validated. If this parameter is empty, it means any attribute listed in
-    the applicable validation rules should be validated.
+    [$attributeNames] (string[]|string) Attribute name or list of attribute
+    names that should be validated. If this parameter is empty, it means any
+    attribute listed in the applicable validation rules should be validated.
     [$clearErrors] (bool) Whether to call 'clearErrors()' before performing
     validation
 
@@ -677,6 +688,20 @@ return (string) The error message. Null is returned if no error.
  Returns the first error of the specified attribute.
 
     [$attribute] (string) Attribute name.
+
+
+*yii/base/Model::getErrorSummary*				public
+>
+ getErrorSummary($showAllErrors)
+<
+return (array) Errors for all attributes as a one-dimensional array. Empty array is
+returned if no error.
+
+ Returns the errors for all attributes as a one-dimensional array.
+
+    [$showAllErrors] (bool) Boolean, if set to true every error message for
+    each attribute will be shown otherwise only the first error message for
+    each attribute will be shown.
 
 
 *yii/base/Model::addError*				public

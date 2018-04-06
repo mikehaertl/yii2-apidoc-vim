@@ -1,0 +1,208 @@
+
+*yii/elasticsearch/BulkCommand*   >> |yii/base/Component|
+===============================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Further details on bulk API is available in [elasticsearch
+ guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html).
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$db					*yii/elasticsearch/BulkCommand::$db*
+
+ (\yii\elasticsearch\Connection)
+
+$index					*yii/elasticsearch/BulkCommand::$index*
+
+ (string) Default index to execute the queries on. Defaults to null meaning
+ that index needs to be specified in every action.
+
+$type					*yii/elasticsearch/BulkCommand::$type*
+
+ (string) Default type to execute the queries on. Defaults to null meaning
+ that type needs to be specified in every action.
+
+$actions				*yii/elasticsearch/BulkCommand::$actions*
+
+ (array|string) Actions to be executed in this bulk command, given as either
+ an array of arrays or as one newline-delimited string. All actions except
+ delete span two lines.
+
+$options				*yii/elasticsearch/BulkCommand::$options*
+
+ (array) Options to be appended to the query URL.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/elasticsearch/BulkCommand::className*		public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/elasticsearch/BulkCommand::__construct*		public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/elasticsearch/BulkCommand::init*			public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/elasticsearch/BulkCommand::__get*			public
+
+ See |yii/base/Component::__get|
+
+
+*yii/elasticsearch/BulkCommand::__set*			public
+
+ See |yii/base/Component::__set|
+
+
+*yii/elasticsearch/BulkCommand::__isset*			public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/elasticsearch/BulkCommand::__unset*			public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/elasticsearch/BulkCommand::__call*			public
+
+ See |yii/base/Component::__call|
+
+
+*yii/elasticsearch/BulkCommand::hasProperty*		public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/elasticsearch/BulkCommand::canGetProperty*		public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/elasticsearch/BulkCommand::canSetProperty*		public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/elasticsearch/BulkCommand::hasMethod*		public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/elasticsearch/BulkCommand::__clone*			public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/elasticsearch/BulkCommand::behaviors*		public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/elasticsearch/BulkCommand::hasEventHandlers*		public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/elasticsearch/BulkCommand::on*			public
+
+ See |yii/base/Component::on|
+
+
+*yii/elasticsearch/BulkCommand::off*			public
+
+ See |yii/base/Component::off|
+
+
+*yii/elasticsearch/BulkCommand::trigger*			public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/elasticsearch/BulkCommand::getBehavior*		public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/elasticsearch/BulkCommand::getBehaviors*		public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/elasticsearch/BulkCommand::attachBehavior*		public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/elasticsearch/BulkCommand::attachBehaviors*		public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/elasticsearch/BulkCommand::detachBehavior*		public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/elasticsearch/BulkCommand::detachBehaviors*		public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/elasticsearch/BulkCommand::ensureBehaviors*		public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/elasticsearch/BulkCommand::execute*			public
+>
+ execute()
+<
+return (mixed) 
+
+ Executes the bulk command.
+
+
+*yii/elasticsearch/BulkCommand::addAction*		public
+>
+ addAction($line1, $line2='null')
+<
+return (void)
+
+ Adds an action to the command. Will overwrite existing actions if they are
+ specified as a string.
+
+    [$line1] () 
+    [$line2] () 
+
+
+*yii/elasticsearch/BulkCommand::addDeleteAction*		public
+>
+ addDeleteAction($id, $index='null', $type='null')
+<
+return (void)
+
+ Adds a delete action to the command.
+
+    [$id] (string) Document ID
+    [$index] (string) Index that the document belogs to. Can be set to null if
+    the command has a default index ('BulkCommand::$index') assigned.
+    [$type] (string) Type that the document belogs to. Can be set to null if
+    the command has a default type ('BulkCommand::$type') assigned.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

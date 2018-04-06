@@ -46,6 +46,10 @@ $generateRelations			*yii/gii/generators/model/Generator::$generateRelations*
 
  ()
 
+$generateRelationsFromCurrentSchema	*yii/gii/generators/model/Generator::$generateRelationsFromCurrentSchema*
+
+ ()
+
 $generateLabelsFromComments		*yii/gii/generators/model/Generator::$generateLabelsFromComments*
 
  ()
@@ -105,47 +109,47 @@ METHOD DETAILS
 
 *yii/gii/generators/model/Generator::__get*		public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/gii/generators/model/Generator::__set*		public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/gii/generators/model/Generator::__isset*		public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/gii/generators/model/Generator::__unset*		public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/gii/generators/model/Generator::__call*		public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/gii/generators/model/Generator::hasProperty*		public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/gii/generators/model/Generator::canGetProperty*	public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/gii/generators/model/Generator::canSetProperty*	public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/gii/generators/model/Generator::hasMethod*		public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/gii/generators/model/Generator::__clone*		public
@@ -231,6 +235,16 @@ METHOD DETAILS
 *yii/gii/generators/model/Generator::toArray*		public
 
  See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/gii/generators/model/Generator::extractRootFields*	protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/gii/generators/model/Generator::extractFieldsFor*	protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
 
 
 *yii/gii/generators/model/Generator::resolveFields*	protected
@@ -444,6 +458,11 @@ return (array) Attribute labels (name => label)
 *yii/gii/generators/model/Generator::getFirstError*	public
 
  See |yii/base/Model::getFirstError|
+
+
+*yii/gii/generators/model/Generator::getErrorSummary*	public
+
+ See |yii/base/Model::getErrorSummary|
 
 
 *yii/gii/generators/model/Generator::addError*		public
@@ -736,6 +755,17 @@ return (string)
  Returns the 'tablePrefix' property of the DB connection as specified
 
 
+*yii/gii/generators/model/Generator::generateProperties*	protected
+>
+ generateProperties($table)
+<
+return (array) The generated properties (property => type)
+
+ Generates the properties for the specified table.
+
+    [$table] (\yii\db\TableSchema) The table schema
+
+
 *yii/gii/generators/model/Generator::generateLabels*	public
 >
  generateLabels($table)
@@ -789,7 +819,7 @@ return (array) Relation declarations extended with inverse relation names
 >
  isHasManyRelation($table, $fks)
 <
-return (boolean) 
+return (bool) 
 
  Determines if relation is of has many type
 
@@ -813,8 +843,8 @@ return (string) The generated link parameter.
 >
  checkJunctionTable($table)
 <
-return (array|boolean) All unique foreign key pairs if the table is a junction table,
-or false if the table is not a junction table.
+return (array|bool) All unique foreign key pairs if the table is a junction table, or
+false if the table is not a junction table.
 
  Checks if the given table is a junction table, that is it has at least one
  pair of unique foreign keys.
@@ -833,7 +863,7 @@ return (string) The relation name
     [$relations] (array) The relations being generated currently.
     [$table] (\yii\db\TableSchema) The table schema
     [$key] (string) A base name that the relation name may be generated from
-    [$multiple] (boolean) Whether this is a has-many relation
+    [$multiple] (bool) Whether this is a has-many relation
 
 
 *yii/gii/generators/model/Generator::validateDb*		public
@@ -904,8 +934,8 @@ return (string) The generated class name
  Generates a class name from the specified table name.
 
     [$tableName] (string) The table name (which may contain schema prefix)
-    [$useSchemaName] (boolean) Should schema name be included in the class
-    name, if present
+    [$useSchemaName] (bool) Should schema name be included in the class name,
+    if present
 
 
 *yii/gii/generators/model/Generator::generateQueryClassName*protected
@@ -927,11 +957,20 @@ return (\yii\db\Connection) The DB connection as specified by 'db'.
 
 
 
+*yii/gii/generators/model/Generator::getDbDriverName*	protected
+>
+ getDbDriverName()
+<
+return (string|null) Driver name of db connection. In case db is not instance of
+\yii\db\Connection null will be returned.
+
+
+
 *yii/gii/generators/model/Generator::isColumnAutoIncremental*protected
 >
  isColumnAutoIncremental($table, $columns)
 <
-return (boolean) Whether any of the specified columns is auto incremental.
+return (bool) Whether any of the specified columns is auto incremental.
 
  Checks if any of the specified columns is auto incremental.
 

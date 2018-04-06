@@ -95,15 +95,15 @@ $generators				*yii/gii/Module::$generators*
 
 $newFileMode				*yii/gii/Module::$newFileMode*
 
- (integer) The permission to be set for newly generated code files. This value
+ (int) The permission to be set for newly generated code files. This value
  will be used by PHP chmod function. Defaults to 0666, meaning the file is
  read-writable by all users.
 
 $newDirMode				*yii/gii/Module::$newDirMode*
 
- (integer) The permission to be set for newly generated directories. This
- value will be used by PHP chmod function. Defaults to 0777, meaning the
- directory can be read, written and executed by all users.
+ (int) The permission to be set for newly generated directories. This value
+ will be used by PHP chmod function. Defaults to 0777, meaning the directory
+ can be read, written and executed by all users.
 
 
 
@@ -133,7 +133,7 @@ METHOD DETAILS
 
 *yii/gii/Module::__set*					public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/gii/Module::__isset*					public
@@ -143,32 +143,32 @@ METHOD DETAILS
 
 *yii/gii/Module::__unset*					public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/gii/Module::__call*					public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/gii/Module::hasProperty*				public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/gii/Module::canGetProperty*				public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/gii/Module::canSetProperty*				public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/gii/Module::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/gii/Module::__clone*					public
@@ -327,8 +327,19 @@ METHOD DETAILS
 
 
 *yii/gii/Module::defaultVersion*				protected
+>
+ defaultVersion()
+<
+return (string) The version of this module.
 
- See |yii/base/Module::defaultVersion|
+ Returns default module version.
+
+
+
+ Child class may override this method to provide more specific version
+ detection.
+
+
 
 
 *yii/gii/Module::setAliases*				public
@@ -446,7 +457,7 @@ return (void)
 >
  checkAccess()
 <
-return (boolean) Whether the module can be accessed by the current user
+return (int) Whether the module can be accessed by the current user
 
 
 

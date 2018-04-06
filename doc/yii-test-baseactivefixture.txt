@@ -28,6 +28,14 @@ $db					*yii/test/BaseActiveFixture::$db*
 
  See |yii/test/DbFixture::$db|
 
+$dataDirectory				*yii/test/BaseActiveFixture::$dataDirectory*
+
+ See |yii/test/FileFixtureTrait::$dataDirectory|
+
+$dataFile				*yii/test/BaseActiveFixture::$dataFile*
+
+ See |yii/test/FileFixtureTrait::$dataFile|
+
 $modelClass				*yii/test/BaseActiveFixture::$modelClass*
 
  (string) The AR model class associated with this fixture.
@@ -36,12 +44,6 @@ $data					*yii/test/BaseActiveFixture::$data*
 
  (array) The data rows. Each array element represents one row of data (column
  name => column value).
-
-$dataFile				*yii/test/BaseActiveFixture::$dataFile*
-
- (string|bool) The file path or [path alias](guide:concept-aliases) of the
- data file that contains the fixture data to be returned by 'getData()'. You
- can set this property to be false to prevent loading any data.
 
 
 
@@ -203,14 +205,7 @@ return (void)
 <
 return (void)
 
- Unloads the fixture.
-
-
-
- This method is called after every test method finishes. You may override this
- method to perform necessary cleanup work for the fixture.
-
-
+ {@inheritdoc}
 
 
 *yii/test/BaseActiveFixture::beforeUnload*		public
@@ -221,6 +216,11 @@ return (void)
 *yii/test/BaseActiveFixture::afterUnload*			public
 
  See |yii/test/Fixture::afterUnload|
+
+
+*yii/test/BaseActiveFixture::loadData*			protected
+
+ See |yii/test/FileFixtureTrait::loadData|
 
 
 *yii/test/BaseActiveFixture::getIterator*			public
@@ -274,10 +274,6 @@ in the database
 return (array) The data to be put into the database
 
  Returns the fixture data.
-
- The default implementation will try to return the fixture data by including
- the external file specified by 'dataFile'. The file should return the data
- array that will be stored in 'data' after inserting into the database.
 
 
 

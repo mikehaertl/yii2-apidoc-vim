@@ -1,0 +1,96 @@
+
+*yii/db/conditions/BetweenColumnsCondition*  
+===========================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+
+
+   new BetweenColumnsCondition(42, 'BETWEEN', 'min_value', 'max_value')
+   // Will be build to:
+   // 42 BETWEEN min_value AND max_value
+
+ And a more complex example:
+
+   new BetweenColumnsCondition(
+      new Expression('NOW()'),
+      'NOT BETWEEN',
+      (new Query)->select('time')->from('log')->orderBy('id ASC')->limit(1),
+      'update_time'
+   );
+
+   // Will be built to:
+   // NOW() BETWEEN (SELECT time FROM log ORDER BY id ASC LIMIT 1) AND
+ update_time
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/conditions/BetweenColumnsCondition::__construct*	public
+>
+ __construct($value, $operator, $intervalStartColumn, $intervalEndColumn)
+<
+return (void)
+
+ Creates a condition with the 'BETWEEN' operator.
+
+    [$value] () 
+    [$operator] (string) The operator to use (e.g. 'BETWEEN' or 'NOT BETWEEN')
+    [$intervalStartColumn] (string|\yii\db\ExpressionInterface) The column
+    name or expression that is a beginning of the interval
+    [$intervalEndColumn] (string|\yii\db\ExpressionInterface) The column name
+    or expression that is an end of the interval
+
+
+*yii/db/conditions/BetweenColumnsCondition::getOperator*	public
+>
+ getOperator()
+<
+return (string) 
+
+
+
+*yii/db/conditions/BetweenColumnsCondition::getValue*	public
+>
+ getValue()
+<
+return (mixed) 
+
+
+
+*yii/db/conditions/BetweenColumnsCondition::getIntervalStartColumn*public
+>
+ getIntervalStartColumn()
+<
+return (string|\yii\db\ExpressionInterface|\yii\db\Query) 
+
+
+
+*yii/db/conditions/BetweenColumnsCondition::getIntervalEndColumn*public
+>
+ getIntervalEndColumn()
+<
+return (string|\yii\db\ExpressionInterface|\yii\db\Query) 
+
+
+
+*yii/db/conditions/BetweenColumnsCondition::fromArrayDefinition*public
+>
+ fromArrayDefinition($operator, $operands)
+<
+return (void)
+
+ {@inheritdoc}
+
+    [$operator] () 
+    [$operands] () 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

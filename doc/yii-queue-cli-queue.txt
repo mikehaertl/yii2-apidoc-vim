@@ -1,0 +1,316 @@
+
+*yii/queue/cli/Queue*   >> |yii/queue/Queue|
+=====================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/queue/file/Queue|
+|yii/queue/db/Queue|
+|yii/queue/amqp_interop/Queue|
+|yii/queue/redis/Queue|
+|yii/queue/amqp/Queue|
+|yii/queue/gearman/Queue|
+|yii/queue/beanstalk/Queue|
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$strictJobType				*yii/queue/cli/Queue::$strictJobType*
+
+ See |yii/queue/Queue::$strictJobType|
+
+$serializer				*yii/queue/cli/Queue::$serializer*
+
+ See |yii/queue/Queue::$serializer|
+
+$ttr					*yii/queue/cli/Queue::$ttr*
+
+ See |yii/queue/Queue::$ttr|
+
+$attempts				*yii/queue/cli/Queue::$attempts*
+
+ See |yii/queue/Queue::$attempts|
+
+$loopConfig				*yii/queue/cli/Queue::$loopConfig*
+
+ (array|string)
+
+$commandClass				*yii/queue/cli/Queue::$commandClass*
+
+ (string) Command class name
+
+$commandOptions				*yii/queue/cli/Queue::$commandOptions*
+
+ (array) Of additional options of command
+
+$messageHandler				*yii/queue/cli/Queue::$messageHandler*
+
+ (callable|null)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/queue/cli/Queue::className*				public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/queue/cli/Queue::__construct*			public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/queue/cli/Queue::init*				public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/queue/cli/Queue::__get*				public
+
+ See |yii/base/Component::__get|
+
+
+*yii/queue/cli/Queue::__set*				public
+
+ See |yii/base/Component::__set|
+
+
+*yii/queue/cli/Queue::__isset*				public
+
+ See |yii/base/Component::__isset|
+
+
+*yii/queue/cli/Queue::__unset*				public
+
+ See |yii/base/Component::__unset|
+
+
+*yii/queue/cli/Queue::__call*				public
+
+ See |yii/base/Component::__call|
+
+
+*yii/queue/cli/Queue::hasProperty*			public
+
+ See |yii/base/Component::hasProperty|
+
+
+*yii/queue/cli/Queue::canGetProperty*			public
+
+ See |yii/base/Component::canGetProperty|
+
+
+*yii/queue/cli/Queue::canSetProperty*			public
+
+ See |yii/base/Component::canSetProperty|
+
+
+*yii/queue/cli/Queue::hasMethod*				public
+
+ See |yii/base/Component::hasMethod|
+
+
+*yii/queue/cli/Queue::__clone*				public
+
+ See |yii/base/Component::__clone|
+
+
+*yii/queue/cli/Queue::behaviors*				public
+
+ See |yii/base/Component::behaviors|
+
+
+*yii/queue/cli/Queue::hasEventHandlers*			public
+
+ See |yii/base/Component::hasEventHandlers|
+
+
+*yii/queue/cli/Queue::on*					public
+
+ See |yii/base/Component::on|
+
+
+*yii/queue/cli/Queue::off*				public
+
+ See |yii/base/Component::off|
+
+
+*yii/queue/cli/Queue::trigger*				public
+
+ See |yii/base/Component::trigger|
+
+
+*yii/queue/cli/Queue::getBehavior*			public
+
+ See |yii/base/Component::getBehavior|
+
+
+*yii/queue/cli/Queue::getBehaviors*			public
+
+ See |yii/base/Component::getBehaviors|
+
+
+*yii/queue/cli/Queue::attachBehavior*			public
+
+ See |yii/base/Component::attachBehavior|
+
+
+*yii/queue/cli/Queue::attachBehaviors*			public
+
+ See |yii/base/Component::attachBehaviors|
+
+
+*yii/queue/cli/Queue::detachBehavior*			public
+
+ See |yii/base/Component::detachBehavior|
+
+
+*yii/queue/cli/Queue::detachBehaviors*			public
+
+ See |yii/base/Component::detachBehaviors|
+
+
+*yii/queue/cli/Queue::ensureBehaviors*			public
+
+ See |yii/base/Component::ensureBehaviors|
+
+
+*yii/queue/cli/Queue::ttr*				public
+
+ See |yii/queue/Queue::ttr|
+
+
+*yii/queue/cli/Queue::delay*				public
+
+ See |yii/queue/Queue::delay|
+
+
+*yii/queue/cli/Queue::priority*				public
+
+ See |yii/queue/Queue::priority|
+
+
+*yii/queue/cli/Queue::push*				public
+
+ See |yii/queue/Queue::push|
+
+
+*yii/queue/cli/Queue::pushMessage*			protected
+
+ See |yii/queue/Queue::pushMessage|
+
+
+*yii/queue/cli/Queue::getWorkerPid*			public
+>
+ getWorkerPid()
+<
+return (int) 
+
+ Gets process ID of a worker.
+
+
+
+
+
+
+
+
+*yii/queue/cli/Queue::handleMessage*			protected
+>
+ handleMessage($id, $message, $ttr, $attempt)
+<
+return (bool) 
+
+
+
+
+
+
+
+    [$id] (string) Of a job message
+    [$message] (string) 
+    [$ttr] (int) Time to reserve
+    [$attempt] (int) Number
+
+
+*yii/queue/cli/Queue::handleError*			public
+
+ See |yii/queue/Queue::handleError|
+
+
+*yii/queue/cli/Queue::isWaiting*				public
+
+ See |yii/queue/Queue::isWaiting|
+
+
+*yii/queue/cli/Queue::isReserved*				public
+
+ See |yii/queue/Queue::isReserved|
+
+
+*yii/queue/cli/Queue::isDone*				public
+
+ See |yii/queue/Queue::isDone|
+
+
+*yii/queue/cli/Queue::status*				public
+
+ See |yii/queue/Queue::status|
+
+
+*yii/queue/cli/Queue::getCommandId*			protected
+>
+ getCommandId()
+<
+return (string) Command id
+
+
+
+*yii/queue/cli/Queue::bootstrap*				public
+>
+ bootstrap($app)
+<
+return (void)
+
+ Bootstrap method to be called during application bootstrap stage.
+
+
+
+
+
+
+
+    [$app] (\yii\base\Application) The application currently running
+
+
+*yii/queue/cli/Queue::runWorker*				protected
+>
+ runWorker($handler)
+<
+return (null|int) Exit code
+
+ Runs worker.
+
+    [$handler] (callable) 
+
+
+*yii/queue/cli/Queue::execute*				public
+>
+ execute($id, $message, $ttr, $attempt, $workerPid)
+<
+return (bool) 
+
+    [$id] (string) Of a message
+    [$message] (string) 
+    [$ttr] (int) Time to reserve
+    [$attempt] (int) Number
+    [$workerPid] (int) Of worker process
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

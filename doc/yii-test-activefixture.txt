@@ -32,13 +32,9 @@ $db					*yii/test/ActiveFixture::$db*
 
  See |yii/test/DbFixture::$db|
 
-$modelClass				*yii/test/ActiveFixture::$modelClass*
+$dataDirectory				*yii/test/ActiveFixture::$dataDirectory*
 
- See |yii/test/BaseActiveFixture::$modelClass|
-
-$data					*yii/test/ActiveFixture::$data*
-
- See |yii/test/BaseActiveFixture::$data|
+ See |yii/test/FileFixtureTrait::$dataDirectory|
 
 $dataFile				*yii/test/ActiveFixture::$dataFile*
 
@@ -48,6 +44,14 @@ $dataFile				*yii/test/ActiveFixture::$dataFile*
  'FixturePath' stands for the directory containing this fixture class, and
  'TableName' stands for the name of the table associated with this fixture.
  You can set this property to be false to prevent loading any data.
+
+$modelClass				*yii/test/ActiveFixture::$modelClass*
+
+ See |yii/test/BaseActiveFixture::$modelClass|
+
+$data					*yii/test/ActiveFixture::$data*
+
+ See |yii/test/BaseActiveFixture::$data|
 
 $tableName				*yii/test/ActiveFixture::$tableName*
 
@@ -76,14 +80,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/test/ActiveFixture::__get*				public
@@ -227,14 +224,7 @@ return (void)
 <
 return (void)
 
- Unloads the fixture.
-
-
-
- This method is called after every test method finishes. You may override this
- method to perform necessary cleanup work for the fixture.
-
-
+ {@inheritdoc}
 
 
 *yii/test/ActiveFixture::beforeUnload*			public
@@ -245,6 +235,11 @@ return (void)
 *yii/test/ActiveFixture::afterUnload*			public
 
  See |yii/test/Fixture::afterUnload|
+
+
+*yii/test/ActiveFixture::loadData*			protected
+
+ See |yii/test/FileFixtureTrait::loadData|
 
 
 *yii/test/ActiveFixture::getIterator*			public

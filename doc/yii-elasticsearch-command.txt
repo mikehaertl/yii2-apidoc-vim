@@ -355,6 +355,92 @@ return (mixed)
     [$type] () 
 
 
+*yii/elasticsearch/Command::aliasExists*			public
+>
+ aliasExists($alias)
+<
+return (bool) 
+
+    [$alias] (string) 
+
+
+*yii/elasticsearch/Command::getAliasInfo*			public
+>
+ getAliasInfo()
+<
+return (array) 
+
+
+
+*yii/elasticsearch/Command::getIndexInfoByAlias*		public
+>
+ getIndexInfoByAlias($alias)
+<
+return (array) 
+
+    [$alias] (string) 
+
+
+*yii/elasticsearch/Command::getIndexesByAlias*		public
+>
+ getIndexesByAlias($alias)
+<
+return (array) 
+
+    [$alias] (string) 
+
+
+*yii/elasticsearch/Command::getIndexAliases*		public
+>
+ getIndexAliases($index)
+<
+return (array) 
+
+    [$index] (string) 
+
+
+*yii/elasticsearch/Command::addAlias*			public
+>
+ addAlias($index, $alias, $aliasParameters='[]')
+<
+return (bool) 
+
+    [$index] () 
+    [$alias] () 
+    [$aliasParameters] (array) 
+
+
+*yii/elasticsearch/Command::removeAlias*			public
+>
+ removeAlias($index, $alias)
+<
+return (bool) 
+
+    [$index] (string) 
+    [$alias] (string) 
+
+
+*yii/elasticsearch/Command::aliasActions*			public
+>
+ aliasActions($actions)
+<
+return (bool) 
+
+ Runs alias manipulations.
+
+ If you want to add alias1 to index1 and remove alias2 from index2 you can use
+ following commands:
+
+   $actions = [
+        ['add' => ['index' => 'index1', 'alias' => 'alias1']],
+        ['remove' => ['index' => 'index2', 'alias' => 'alias2']],
+   ];
+
+
+
+    [$actions] (array) 
+
+
 *yii/elasticsearch/Command::updateSettings*		public
 >
  updateSettings($index, $setting, $options='[]')
@@ -524,7 +610,7 @@ return (mixed)
     [$pattern] () 
     [$settings] () 
     [$mappings] () 
-    [$order] (integer) 
+    [$order] (int) 
 
 
 *yii/elasticsearch/Command::deleteTemplate*		public

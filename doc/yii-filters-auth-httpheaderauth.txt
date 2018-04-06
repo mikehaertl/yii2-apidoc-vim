@@ -1,0 +1,210 @@
+
+*yii/filters/auth/HttpHeaderAuth*   >> |yii/filters/auth/AuthMethod|
+=================================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/filters/auth/HttpBearerAuth|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ You may use HttpHeaderAuth by attaching it as a behavior to a controller or
+ module, like the following:
+
+   public function behaviors()
+   {
+       return [
+           'basicAuth' => [
+               'class' => \yii\filters\auth\HttpHeaderAuth::className(),
+           ],
+       ];
+   }
+
+ The default implementation of HttpHeaderAuth uses the
+ '\yii\web\User::loginByAccessToken()|loginByAccessToken()' method of the
+ 'user' application component and passes the value of the 'X-Api-Key' header.
+ This implementation is used for authenticating API clients.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$owner					*yii/filters/auth/HttpHeaderAuth::$owner*
+
+ See |yii/base/Behavior::$owner|
+
+$only					*yii/filters/auth/HttpHeaderAuth::$only*
+
+ See |yii/base/ActionFilter::$only|
+
+$except					*yii/filters/auth/HttpHeaderAuth::$except*
+
+ See |yii/base/ActionFilter::$except|
+
+$user					*yii/filters/auth/HttpHeaderAuth::$user*
+
+ See |yii/filters/auth/AuthMethod::$user|
+
+$request				*yii/filters/auth/HttpHeaderAuth::$request*
+
+ See |yii/filters/auth/AuthMethod::$request|
+
+$response				*yii/filters/auth/HttpHeaderAuth::$response*
+
+ See |yii/filters/auth/AuthMethod::$response|
+
+$optional				*yii/filters/auth/HttpHeaderAuth::$optional*
+
+ See |yii/filters/auth/AuthMethod::$optional|
+
+$header					*yii/filters/auth/HttpHeaderAuth::$header*
+
+ (string) The HTTP header name
+
+$pattern				*yii/filters/auth/HttpHeaderAuth::$pattern*
+
+ (string) A pattern to use to extract the HTTP authentication value
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/filters/auth/HttpHeaderAuth::className*		public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/filters/auth/HttpHeaderAuth::__construct*		public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/filters/auth/HttpHeaderAuth::init*			public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/filters/auth/HttpHeaderAuth::__get*			public
+
+ See |yii/base/BaseObject::__get|
+
+
+*yii/filters/auth/HttpHeaderAuth::__set*			public
+
+ See |yii/base/BaseObject::__set|
+
+
+*yii/filters/auth/HttpHeaderAuth::__isset*		public
+
+ See |yii/base/BaseObject::__isset|
+
+
+*yii/filters/auth/HttpHeaderAuth::__unset*		public
+
+ See |yii/base/BaseObject::__unset|
+
+
+*yii/filters/auth/HttpHeaderAuth::__call*			public
+
+ See |yii/base/BaseObject::__call|
+
+
+*yii/filters/auth/HttpHeaderAuth::hasProperty*		public
+
+ See |yii/base/BaseObject::hasProperty|
+
+
+*yii/filters/auth/HttpHeaderAuth::canGetProperty*		public
+
+ See |yii/base/BaseObject::canGetProperty|
+
+
+*yii/filters/auth/HttpHeaderAuth::canSetProperty*		public
+
+ See |yii/base/BaseObject::canSetProperty|
+
+
+*yii/filters/auth/HttpHeaderAuth::hasMethod*		public
+
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/filters/auth/HttpHeaderAuth::events*			public
+
+ See |yii/base/Behavior::events|
+
+
+*yii/filters/auth/HttpHeaderAuth::attach*			public
+
+ See |yii/base/ActionFilter::attach|
+
+
+*yii/filters/auth/HttpHeaderAuth::detach*			public
+
+ See |yii/base/ActionFilter::detach|
+
+
+*yii/filters/auth/HttpHeaderAuth::beforeFilter*		public
+
+ See |yii/base/ActionFilter::beforeFilter|
+
+
+*yii/filters/auth/HttpHeaderAuth::afterFilter*		public
+
+ See |yii/base/ActionFilter::afterFilter|
+
+
+*yii/filters/auth/HttpHeaderAuth::beforeAction*		public
+
+ See |yii/filters/auth/AuthMethod::beforeAction|
+
+
+*yii/filters/auth/HttpHeaderAuth::afterAction*		public
+
+ See |yii/base/ActionFilter::afterAction|
+
+
+*yii/filters/auth/HttpHeaderAuth::getActionId*		protected
+
+ See |yii/base/ActionFilter::getActionId|
+
+
+*yii/filters/auth/HttpHeaderAuth::isActive*		protected
+
+ See |yii/base/ActionFilter::isActive|
+
+
+*yii/filters/auth/HttpHeaderAuth::challenge*		public
+
+ See |yii/filters/auth/AuthMethod::challenge|
+
+
+*yii/filters/auth/HttpHeaderAuth::handleFailure*		public
+
+ See |yii/filters/auth/AuthMethod::handleFailure|
+
+
+*yii/filters/auth/HttpHeaderAuth::isOptional*		protected
+
+ See |yii/filters/auth/AuthMethod::isOptional|
+
+
+*yii/filters/auth/HttpHeaderAuth::authenticate*		public
+>
+ authenticate($user, $request, $response)
+<
+return (void)
+
+ {@inheritdoc}
+
+    [$user] () 
+    [$request] () 
+    [$response] () 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

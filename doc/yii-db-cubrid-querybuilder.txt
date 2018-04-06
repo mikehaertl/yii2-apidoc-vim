@@ -23,23 +23,13 @@ $conditionBuilders			*yii/db/cubrid/QueryBuilder::$conditionBuilders*
 
  See |yii/db/QueryBuilder::$conditionBuilders|
 
-$likeEscapingReplacements		*yii/db/cubrid/QueryBuilder::$likeEscapingReplacements*
+$conditionClasses			*yii/db/cubrid/QueryBuilder::$conditionClasses*
 
- (array) 
+ See |yii/db/QueryBuilder::$conditionClasses|
 
- Map of chars to their replacements in LIKE conditions. By default it's
- configured to escape '%', '_' and '\' with '\'.
+$expressionBuilders			*yii/db/cubrid/QueryBuilder::$expressionBuilders*
 
-
-
-$likeEscapeCharacter			*yii/db/cubrid/QueryBuilder::$likeEscapeCharacter*
-
- (string|null) 
-
- Character used to escape special characters in LIKE conditions. By default
- it's assumed to be '\'.
-
-
+ See |yii/db/QueryBuilder::$expressionBuilders|
 
 
 
@@ -59,7 +49,7 @@ METHOD DETAILS
 
 *yii/db/cubrid/QueryBuilder::init*			public
 
- See |yii/base/BaseObject::init|
+ See |yii/db/QueryBuilder::init|
 
 
 *yii/db/cubrid/QueryBuilder::__get*			public
@@ -107,14 +97,48 @@ METHOD DETAILS
  See |yii/base/BaseObject::hasMethod|
 
 
+*yii/db/cubrid/QueryBuilder::defaultConditionClasses*	protected
+
+ See |yii/db/QueryBuilder::defaultConditionClasses|
+
+
+*yii/db/cubrid/QueryBuilder::defaultExpressionBuilders*	protected
+>
+ defaultExpressionBuilders()
+<
+return (void)
+
+ {@inheritdoc}
+
+
+*yii/db/cubrid/QueryBuilder::setExpressionBuilders*	public
+
+ See |yii/db/QueryBuilder::setExpressionBuilders|
+
+
 *yii/db/cubrid/QueryBuilder::build*			public
 
  See |yii/db/QueryBuilder::build|
 
 
+*yii/db/cubrid/QueryBuilder::buildExpression*		public
+
+ See |yii/db/QueryBuilder::buildExpression|
+
+
+*yii/db/cubrid/QueryBuilder::getExpressionBuilder*	public
+
+ See |yii/db/QueryBuilder::getExpressionBuilder|
+
+
 *yii/db/cubrid/QueryBuilder::insert*			public
 
  See |yii/db/QueryBuilder::insert|
+
+
+*yii/db/cubrid/QueryBuilder::prepareInsertValues*		protected
+
+ See |yii/db/QueryBuilder::prepareInsertValues|
 
 
 *yii/db/cubrid/QueryBuilder::prepareInsertSelectSubQuery*	protected
@@ -127,9 +151,33 @@ METHOD DETAILS
  See |yii/db/QueryBuilder::batchInsert|
 
 
+*yii/db/cubrid/QueryBuilder::upsert*			public
+>
+ upsert($table, $insertColumns, $updateColumns, $params)
+<
+return (void)
+
+ {@inheritdoc}
+
+    [$table] () 
+    [$insertColumns] () 
+    [$updateColumns] () 
+    [$params] () 
+
+
+*yii/db/cubrid/QueryBuilder::prepareUpsertColumns*	protected
+
+ See |yii/db/QueryBuilder::prepareUpsertColumns|
+
+
 *yii/db/cubrid/QueryBuilder::update*			public
 
  See |yii/db/QueryBuilder::update|
+
+
+*yii/db/cubrid/QueryBuilder::prepareUpdateSets*		protected
+
+ See |yii/db/QueryBuilder::prepareUpdateSets|
 
 
 *yii/db/cubrid/QueryBuilder::delete*			public
@@ -206,20 +254,12 @@ METHOD DETAILS
 >
  dropIndex($name, $table)
 <
-return (string) The SQL statement for dropping an index.
+return (void)
 
- Builds a SQL statement for dropping an index.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the index to be dropped. The name will be
-    properly quoted by the method.
-    [$table] (string) The table whose index is to be dropped. The name will be
-    properly quoted by the method.
+    [$name] () 
+    [$table] () 
 
 
 *yii/db/cubrid/QueryBuilder::addUnique*			public
@@ -236,41 +276,25 @@ return (string) The SQL statement for dropping an index.
 >
  addCheck($name, $table, $expression)
 <
-return (string) The SQL statement for adding a check constraint to an existing table.
+return (void)
 
- Creates a SQL command for adding a check constraint to an existing table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the check constraint. The name will be
-    properly quoted by the method.
-    [$table] (string) The table that the check constraint will be added to.
-    The name will be properly quoted by the method.
-    [$expression] (string) The SQL of the 'CHECK' constraint.
+    [$name] () 
+    [$table] () 
+    [$expression] () 
 
 
 *yii/db/cubrid/QueryBuilder::dropCheck*			public
 >
  dropCheck($name, $table)
 <
-return (string) The SQL statement for dropping a check constraint.
+return (void)
 
- Creates a SQL command for dropping a check constraint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the check constraint to be dropped. The name
-    will be properly quoted by the method.
-    [$table] (string) The table whose check constraint is to be dropped. The
-    name will be properly quoted by the method.
+    [$name] () 
+    [$table] () 
 
 
 *yii/db/cubrid/QueryBuilder::addDefaultValue*		public
@@ -311,80 +335,58 @@ return (string) The SQL statement for resetting sequence
 >
  addCommentOnColumn($table, $column, $comment)
 <
-return (string) The SQL statement for adding comment on column
+return (void)
 
- Builds a SQL command for adding comment to column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
-    [$column] (string) The name of the column to be commented. The column name
-    will be properly quoted by the method.
-    [$comment] (string) The text of the comment to be added. The comment will
-    be properly quoted by the method.
+    [$table] () 
+    [$column] () 
+    [$comment] () 
 
 
 *yii/db/cubrid/QueryBuilder::addCommentOnTable*		public
 >
  addCommentOnTable($table, $comment)
 <
-return (string) The SQL statement for adding comment on table
+return (void)
 
- Builds a SQL command for adding comment to table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
-    [$comment] (string) The text of the comment to be added. The comment will
-    be properly quoted by the method.
+    [$table] () 
+    [$comment] () 
 
 
 *yii/db/cubrid/QueryBuilder::dropCommentFromColumn*	public
 >
  dropCommentFromColumn($table, $column)
 <
-return (string) The SQL statement for adding comment on column
+return (void)
 
- Builds a SQL command for adding comment to column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
-    [$column] (string) The name of the column to be commented. The column name
-    will be properly quoted by the method.
+    [$table] () 
+    [$column] () 
 
 
 *yii/db/cubrid/QueryBuilder::dropCommentFromTable*	public
 >
  dropCommentFromTable($table)
 <
-return (string) The SQL statement for adding comment on column
+return (void)
 
- Builds a SQL command for adding comment to table.
+ {@inheritdoc}
 
-
-
-
+    [$table] () 
 
 
+*yii/db/cubrid/QueryBuilder::createView*			public
 
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
+ See |yii/db/QueryBuilder::createView|
+
+
+*yii/db/cubrid/QueryBuilder::dropView*			public
+
+ See |yii/db/QueryBuilder::dropView|
 
 
 *yii/db/cubrid/QueryBuilder::getColumnType*		public
@@ -436,16 +438,12 @@ return (string) The SQL statement for adding comment on column
 >
  buildLimit($limit, $offset)
 <
-return (string) The LIMIT and OFFSET clauses
+return (void)
 
+ {@inheritdoc}
 
-
-
-
-
-
-    [$limit] (int) 
-    [$offset] (int) 
+    [$limit] () 
+    [$offset] () 
 
 
 *yii/db/cubrid/QueryBuilder::hasLimit*			protected
@@ -473,6 +471,11 @@ return (string) The LIMIT and OFFSET clauses
  See |yii/db/QueryBuilder::buildCondition|
 
 
+*yii/db/cubrid/QueryBuilder::createConditionFromArray*	public
+
+ See |yii/db/QueryBuilder::createConditionFromArray|
+
+
 *yii/db/cubrid/QueryBuilder::buildHashCondition*		public
 
  See |yii/db/QueryBuilder::buildHashCondition|
@@ -498,16 +501,6 @@ return (string) The LIMIT and OFFSET clauses
  See |yii/db/QueryBuilder::buildInCondition|
 
 
-*yii/db/cubrid/QueryBuilder::buildSubqueryInCondition*	protected
-
- See |yii/db/QueryBuilder::buildSubqueryInCondition|
-
-
-*yii/db/cubrid/QueryBuilder::buildCompositeInCondition*	protected
-
- See |yii/db/QueryBuilder::buildCompositeInCondition|
-
-
 *yii/db/cubrid/QueryBuilder::buildLikeCondition*		public
 
  See |yii/db/QueryBuilder::buildLikeCondition|
@@ -527,17 +520,16 @@ return (string) The LIMIT and OFFSET clauses
 >
  selectExists($rawSql)
 <
-return (string) The SELECT EXISTS() SQL statement.
+return (void)
 
- Creates a SELECT EXISTS() SQL statement.
+ {@inheritdoc}
 
-
-
-
+    [$rawSql] () 
 
 
+*yii/db/cubrid/QueryBuilder::bindParam*			public
 
-    [$rawSql] (string) The subquery in a raw form to select from.
+ See |yii/db/QueryBuilder::bindParam|
 
 
 

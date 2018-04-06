@@ -12,6 +12,7 @@ SUBCLASSES
 |yii/gii/generators/model/Generator|
 |yii/gii/generators/crud/Generator|
 |yii/mongodb/gii/model/Generator|
+|yii/queue/gii/Generator|
 |yii/sphinx/gii/model/Generator|
 
 DESCRIPTION
@@ -48,7 +49,7 @@ $template				*yii/gii/Generator::$template*
 
 $enableI18N				*yii/gii/Generator::$enableI18N*
 
- (boolean) Whether the strings will be generated using 'Yii::t()' or normal
+ (bool) Whether the strings will be generated using 'Yii::t()' or normal
  strings.
 
 $messageCategory			*yii/gii/Generator::$messageCategory*
@@ -90,47 +91,47 @@ return (void)
 
 *yii/gii/Generator::__get*				public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/gii/Generator::__set*				public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/gii/Generator::__isset*				public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/gii/Generator::__unset*				public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/gii/Generator::__call*				public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/gii/Generator::hasProperty*				public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/gii/Generator::canGetProperty*			public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/gii/Generator::canSetProperty*			public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/gii/Generator::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/gii/Generator::__clone*				public
@@ -216,6 +217,16 @@ return (void)
 *yii/gii/Generator::toArray*				public
 
  See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/gii/Generator::extractRootFields*			protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/gii/Generator::extractFieldsFor*			protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
 
 
 *yii/gii/Generator::resolveFields*			protected
@@ -429,6 +440,11 @@ return (array) Attribute labels (name => label)
 *yii/gii/Generator::getFirstError*			public
 
  See |yii/base/Model::getFirstError|
+
+
+*yii/gii/Generator::getErrorSummary*			public
+
+ See |yii/base/Model::getErrorSummary|
 
 
 *yii/gii/Generator::addError*				public
@@ -675,7 +691,7 @@ return (string) The file path that stores the sticky attribute values.
 >
  save($files, $answers, $results)
 <
-return (boolean) Whether files are successfully saved without any error.
+return (bool) Whether files are successfully saved without any error.
 
  Saves the generated code into files.
 
@@ -766,7 +782,7 @@ return (void)
 >
  isReservedKeyword($value)
 <
-return (boolean) Whether the value is a reserved PHP keyword.
+return (bool) Whether the value is a reserved PHP keyword.
 
     [$value] (string) The attribute to be validated
 

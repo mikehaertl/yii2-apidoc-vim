@@ -92,11 +92,11 @@ $dependency				*yii/filters/PageCache::$dependency*
 
 $variations				*yii/filters/PageCache::$variations*
 
- (array) List of factors that would cause the variation of the content being
- cached. Each factor is a string representing a variation (e.g. the language,
- a GET parameter). The following variation setting will cause the content to
- be cached in different versions according to the current application
- language:
+ (string[]|string) List of factors that would cause the variation of the
+ content being cached. Each factor is a string representing a variation (e.g.
+ the language, a GET parameter). The following variation setting will cause
+ the content to be cached in different versions according to the current
+ application language:
 
    [
        Yii::$app->language,
@@ -129,12 +129,6 @@ $cacheHeaders				*yii/filters/PageCache::$cacheHeaders*
  headers can be cached. Note if your HTTP headers contain sensitive
  information, you should white-list which headers can be cached.
 
-$dynamicPlaceholders			*yii/filters/PageCache::$dynamicPlaceholders*
-
- (array) A list of placeholders for embedding dynamic contents. This property
- is used internally to implement the content caching feature. Do not modify
- it.
-
 
 
 METHOD DETAILS
@@ -157,14 +151,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/filters/PageCache::__get*				public
@@ -265,6 +252,35 @@ return (bool) Whether the action should continue to be executed.
  See |yii/base/ActionFilter::isActive|
 
 
+*yii/filters/PageCache::getView*				public
+>
+ getView()
+<
+return (void)
+
+ {@inheritdoc}
+
+
+*yii/filters/PageCache::getDynamicPlaceholders*		public
+
+ See |yii/base/DynamicContentAwareTrait::getDynamicPlaceholders|
+
+
+*yii/filters/PageCache::setDynamicPlaceholders*		public
+
+ See |yii/base/DynamicContentAwareTrait::setDynamicPlaceholders|
+
+
+*yii/filters/PageCache::addDynamicPlaceholder*		public
+
+ See |yii/base/DynamicContentAwareTrait::addDynamicPlaceholder|
+
+
+*yii/filters/PageCache::updateDynamicContent*		protected
+
+ See |yii/base/DynamicContentAwareTrait::updateDynamicContent|
+
+
 *yii/filters/PageCache::beforeCacheResponse*		public
 >
  beforeCacheResponse()
@@ -313,18 +329,6 @@ return (void)
 return (void)
 
  Caches response properties.
-
-
-*yii/filters/PageCache::updateDynamicContent*		protected
->
- updateDynamicContent($content, $placeholders)
-<
-return (string) Final content.
-
- Replaces placeholders in content by results of evaluated dynamic statements.
-
-    [$content] (string) Content to be parsed.
-    [$placeholders] (array) Placeholders and their values.
 
 
 *yii/filters/PageCache::calculateCacheKey*		protected

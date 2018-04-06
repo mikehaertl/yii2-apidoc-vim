@@ -1,0 +1,122 @@
+
+*yii/db/ArrayExpression*  
+========================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Expressions of this type can be used in conditions as well:
+
+   $query->andWhere(['@>', 'items', new ArrayExpression([1, 2, 3],
+ 'integer')])
+
+ which, depending on DBMS, will result in a well-prepared condition. For
+ example, in PostgreSQL it will be compiled to 'WHERE "items" @> ARRAY[1, 2,
+ 3]::integer[]'.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/ArrayExpression::__construct*			public
+>
+ __construct($value, $type='null', $dimension=1)
+<
+return (void)
+
+ ArrayExpression constructor.
+
+    [$value] (array|\yii\db\QueryInterface|mixed) The array content. Either
+    represented as an array of values or a Query that returns these values. A
+    single value will be considered as an array containing one element.
+    [$type] (string|null) The type of the array elements. Defaults to 'null'
+    which means the type is not explicitly specified. In case when type is not
+    specified explicitly and DBMS can not guess it from the context, SQL error
+    will be raised.
+    [$dimension] (int) The number of indices needed to select an element
+
+
+*yii/db/ArrayExpression::getType*				public
+>
+ getType()
+<
+return (null|string) 
+
+
+
+*yii/db/ArrayExpression::getValue*			public
+>
+ getValue()
+<
+return (array|mixed|\yii\db\QueryInterface) 
+
+
+
+*yii/db/ArrayExpression::getDimension*			public
+>
+ getDimension()
+<
+return (int) The number of indices needed to select an element
+
+
+
+*yii/db/ArrayExpression::offsetExists*			public
+>
+ offsetExists($offset)
+<
+return (bool) True on success or false on failure. </p> <p> The return value will be
+casted to boolean if non-boolean was returned.
+
+ Whether a offset exists
+
+    [$offset] (mixed) <p> An offset to check for. </p>
+
+
+*yii/db/ArrayExpression::offsetGet*			public
+>
+ offsetGet($offset)
+<
+return (mixed) Can return all value types.
+
+ Offset to retrieve
+
+    [$offset] (mixed) <p> The offset to retrieve. </p>
+
+
+*yii/db/ArrayExpression::offsetSet*			public
+>
+ offsetSet($offset, $value)
+<
+return (void) 
+
+ Offset to set
+
+    [$offset] (mixed) <p> The offset to assign the value to. </p>
+    [$value] (mixed) <p> The value to set. </p>
+
+
+*yii/db/ArrayExpression::offsetUnset*			public
+>
+ offsetUnset($offset)
+<
+return (void) 
+
+ Offset to unset
+
+    [$offset] (mixed) <p> The offset to unset. </p>
+
+
+*yii/db/ArrayExpression::count*				public
+>
+ count()
+<
+return (int) The custom count as an integer. </p> <p> The return value is cast to an
+integer.
+
+ Count elements of an object
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

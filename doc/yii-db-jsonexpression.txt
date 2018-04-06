@@ -1,0 +1,67 @@
+
+*yii/db/JsonExpression*  
+=======================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ For example:
+
+   new JsonExpression(['a' => 1, 'b' => 2]); // will be encoded to '{"a": 1,
+ "b": 2}'
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$value					*yii/db/JsonExpression::$value*
+
+ (mixed) The value to be encoded to JSON. The value must be compatible with
+ [\yii\helpers\Json::encode()|Json::encode()' input requirements.
+
+$type					*yii/db/JsonExpression::$type*
+
+ (string|null) Type of JSON, expression should be casted to. Defaults to
+ 'null', meaning no explicit casting will be performed. This property will be
+ encountered only for DBMSs that support different types of JSON. For example,
+ PostgreSQL has 'json' and 'jsonb' types.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/db/JsonExpression::__construct*			public
+>
+ __construct($value, $type='null')
+<
+return (void)
+
+ JsonExpression constructor.
+
+    [$value] (mixed) The value to be encoded to JSON. The value must be
+    compatible with [\yii\helpers\Json::encode()|Json::encode()' requirements.
+    [$type] (string|null) The type of the JSON. See 'JsonExpression::type'
+
+
+*yii/db/JsonExpression::getValue*				public
+>
+ getValue()
+<
+return (mixed) 
+
+
+
+*yii/db/JsonExpression::getType*				public
+>
+ getType()
+<
+return (null|string) The type of JSON
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

@@ -1,5 +1,5 @@
 
-*yii/gii/CodeFile*   >> |yii/base/Object|
+*yii/gii/CodeFile*   >> |yii/base/BaseObject|
 ==================
 
 
@@ -23,14 +23,6 @@ $operation				*yii/gii/CodeFile::$operation*
  (string) The operation to be performed. This can be 'OP_CREATE',
  'OP_OVERWRITE' or 'OP_SKIP'.
 
-$relativePath				*yii/gii/CodeFile::$relativePath*
-
- (string) The code file path relative to the application base path.
-
-$type					*yii/gii/CodeFile::$type*
-
- (string) The code file extension (e.g. php, txt)
-
 
 
 METHOD DETAILS
@@ -44,7 +36,7 @@ METHOD DETAILS
 
 *yii/gii/CodeFile::__construct*				public
 >
- __construct($path, $content)
+ __construct($path, $content, $config='[]')
 <
 return (void)
 
@@ -52,6 +44,8 @@ return (void)
 
     [$path] (string) The file path that the new code should be saved to.
     [$content] (string) The newly generated code content.
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
 
 
 *yii/gii/CodeFile::init*					public
@@ -108,7 +102,7 @@ return (void)
 >
  save()
 <
-return (string|boolean) The error occurred while saving the code file, or true if no
+return (string|bool) The error occurred while saving the code file, or true if no
 error.
 
  Saves the code into the file specified by 'path'.
@@ -134,7 +128,7 @@ return (string) The code file extension (e.g. php, txt)
 >
  preview()
 <
-return (boolean|string) 
+return (bool|string) 
 
  Returns preview or false if it cannot be rendered
 
@@ -143,7 +137,7 @@ return (boolean|string)
 >
  diff()
 <
-return (boolean|string) 
+return (bool|string) 
 
  Returns diff or false if it cannot be calculated
 

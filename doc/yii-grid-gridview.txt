@@ -158,6 +158,10 @@ $showFooter				*yii/grid/GridView::$showFooter*
 
  (bool) Whether to show the footer section of the grid table.
 
+$placeFooterAfterBody			*yii/grid/GridView::$placeFooterAfterBody*
+
+ (bool) Whether to place footer after body in DOM if $showFooter is true
+
 $formatter				*yii/grid/GridView::$formatter*
 
  (array|\yii\i18n\Formatter) The formatter used to format model attribute
@@ -305,47 +309,47 @@ return (void)
 
 *yii/grid/GridView::__get*				public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/grid/GridView::__set*				public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/grid/GridView::__isset*				public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/grid/GridView::__unset*				public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/grid/GridView::__call*				public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/grid/GridView::hasProperty*				public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/grid/GridView::canGetProperty*			public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/grid/GridView::canSetProperty*			public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/grid/GridView::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/grid/GridView::__clone*				public
@@ -495,18 +499,11 @@ return (void)
 >
  renderSection($name)
 <
-return (string|bool) The rendering result of the section, or false if the named
-section is not supported.
+return (void)
 
- Renders a section of the specified name.
+ {@inheritdoc}
 
-
-
- If the named section is not supported, false will be returned.
-
-
-
-    [$name] (string) The section name, e.g., '{summary}', '{items}'.
+    [$name] () 
 
 
 *yii/grid/GridView::renderEmpty*				public

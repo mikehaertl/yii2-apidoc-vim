@@ -69,12 +69,12 @@ METHOD DETAILS
 
 *yii/elasticsearch/ActiveRecord::__call*			public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/elasticsearch/ActiveRecord::hasProperty*		public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/elasticsearch/ActiveRecord::canGetProperty*		public
@@ -89,7 +89,7 @@ METHOD DETAILS
 
 *yii/elasticsearch/ActiveRecord::hasMethod*		public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/elasticsearch/ActiveRecord::__clone*			public
@@ -175,6 +175,16 @@ METHOD DETAILS
 *yii/elasticsearch/ActiveRecord::toArray*			public
 
  See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/elasticsearch/ActiveRecord::extractRootFields*	protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/elasticsearch/ActiveRecord::extractFieldsFor*	protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
 
 
 *yii/elasticsearch/ActiveRecord::resolveFields*		protected
@@ -301,6 +311,11 @@ return (string[]) List of attribute names.
  See |yii/base/Model::getFirstError|
 
 
+*yii/elasticsearch/ActiveRecord::getErrorSummary*		public
+
+ See |yii/base/Model::getErrorSummary|
+
+
 *yii/elasticsearch/ActiveRecord::addError*		public
 
  See |yii/base/Model::addError|
@@ -403,54 +418,15 @@ return (string[]) List of attribute names.
 return (static|null) ActiveRecord instance matching the condition, or 'null' if
 nothing matches.
 
- Returns a single active record model instance by a primary key or an array of
- column values.
+ {@inheritdoc}
 
 
 
- The method accepts:
-
-  
-   - a scalar value (integer or string): query by a single primary key
-   value and return the    corresponding record (or 'null' if not found).  
-   - a non-associative array: query by a list of primary key values and
-   return the    first record (or 'null' if not found).  
-   - an associative array of name-value pairs: query by a set of
-   attribute values and return a single record    matching all of them (or
- 'null' if not found). Note that '['id' => 1, 2]' is treated as a
- non-associative array.
-
- That this method will automatically call the 'one()' method and return an
- 'ActiveRecordInterface|ActiveRecord' instance.
-
- > Note: As this is a short-hand method only, using more complex conditions,
- like ['!=', 'id', 1] will not work. > If you need to specify more complex
- conditions, use 'find()' in combination with 'ActiveQuery::where()|where()'
- instead.
-
- See the following code for usage examples:
-
-   // find a single customer whose primary key value is 10
-   $customer = Customer::findOne(10);
-
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['id' => 10])->one();
-
-   // find the customers whose primary key value is 10, 11 or 12.
-   $customers = Customer::findOne([10, 11, 12]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => [10, 11, 12]])->one();
-
-   // find the first customer whose age is 30 and whose status is 1
-   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
 
 
 
-    [$condition] (mixed) Primary key value or a set of column values
+
+    [$condition] () 
 
 
 *yii/elasticsearch/ActiveRecord::findAll*			public
@@ -460,58 +436,15 @@ nothing matches.
 return (static[]) An array of ActiveRecord instances, or an empty array if nothing
 matches.
 
- Returns a list of active record models that match the specified primary key
- value(s) or a set of column values.
+ {@inheritdoc}
 
 
 
- The method accepts:
-
-  
-   - a scalar value (integer or string): query by a single primary key
-   value and return an array containing the    corresponding record (or an
- empty array if not found).  
-   - a non-associative array: query by a list of primary key values and
-   return the    corresponding records (or an empty array if none was found). 
-   Note that an empty condition will result in an empty result as it will be
- interpreted as a search for    primary keys and not an empty 'WHERE'
- condition.  
-   - an associative array of name-value pairs: query by a set of
-   attribute values and return an array of records    matching all of them (or
- an empty array if none was found). Note that '['id' => 1, 2]' is treated as  
-  a non-associative array.
-
- This method will automatically call the 'all()' method and return an array of
- 'ActiveRecordInterface|ActiveRecord' instances.
-
- > Note: As this is a short-hand method only, using more complex conditions,
- like ['!=', 'id', 1] will not work. > If you need to specify more complex
- conditions, use 'find()' in combination with 'ActiveQuery::where()|where()'
- instead.
-
- See the following code for usage examples:
-
-   // find the customers whose primary key value is 10
-   $customers = Customer::findAll(10);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => 10])->all();
-
-   // find the customers whose primary key value is 10, 11 or 12.
-   $customers = Customer::findAll([10, 11, 12]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
-
-   // find customers whose age is 30 and whose status is 1
-   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
-
-   // the above code is equivalent to:
-   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
 
 
 
-    [$condition] (mixed) Primary key value or a set of column values
+
+    [$condition] () 
 
 
 *yii/elasticsearch/ActiveRecord::findByCondition*		protected
@@ -523,52 +456,52 @@ matches.
 >
  updateAll($attributes, $condition='[]')
 <
-return (integer) The number of rows updated
+return (int) The number of rows updated
 
  Updates all records whos primary keys are given.
 
  For example, to change the status to be 1 for all customers whose status is
  2:
 
-   Customer::updateAll(['status' => 1], [2, 3, 4]);
+   Customer::updateAll(['status' => 1], ['status' => 2]);
 
 
 
     [$attributes] (array) Attribute values (name-value pairs) to be saved into
     the table
-    [$condition] (array) The conditions that will be put in the WHERE part of
-    the UPDATE SQL. Please refer to 'ActiveQuery::where()' on how to specify
-    this parameter.
+    [$condition] (array) The conditions that will be passed to the 'where()'
+    method when building the query. Please refer to 'ActiveQuery::where()' on
+    how to specify this parameter.
 
 
 *yii/elasticsearch/ActiveRecord::updateAllCounters*	public
 >
  updateAllCounters($counters, $condition='[]')
 <
-return (integer) The number of rows updated
+return (int) The number of rows updated
 
  Updates all matching records using the provided counter changes and
  conditions.
 
- For example, to increment all customers' age by 1,
+ For example, to add 1 to age of all customers whose status is 2,
 
-   Customer::updateAllCounters(['age' => 1]);
+   Customer::updateAllCounters(['age' => 1], ['status' => 2]);
 
 
 
     [$counters] (array) The counters to be updated (attribute name =>
     increment value). Use negative values if you want to decrement the
     counters.
-    [$condition] (string|array) The conditions that will be put in the WHERE
-    part of the UPDATE SQL. Please refer to 'Query::where()' on how to specify
-    this parameter.
+    [$condition] (array) The conditions that will be passed to the 'where()'
+    method when building the query. Please refer to 'ActiveQuery::where()' on
+    how to specify this parameter.
 
 
 *yii/elasticsearch/ActiveRecord::deleteAll*		public
 >
  deleteAll($condition='[]')
 <
-return (integer) The number of rows deleted
+return (int) The number of rows deleted
 
  Deletes rows in the table using the provided conditions.
 
@@ -577,13 +510,13 @@ return (integer) The number of rows deleted
 
  For example, to delete all customers whose status is 3:
 
-   Customer::deleteAll('status = 3');
+   Customer::deleteAll(['status' => 3]);
 
 
 
-    [$condition] (array) The conditions that will be put in the WHERE part of
-    the DELETE SQL. Please refer to 'ActiveQuery::where()' on how to specify
-    this parameter.
+    [$condition] (array) The conditions that will be passed to the 'where()'
+    method when building the query. Please refer to 'ActiveQuery::where()' on
+    how to specify this parameter.
 
 
 *yii/elasticsearch/ActiveRecord::optimisticLock*		public
@@ -688,7 +621,7 @@ return (void)
 >
  update($runValidation='true', $attributeNames='null', $options='[]')
 <
-return (integer|boolean) The number of rows affected, or false if validation fails or
+return (int|bool) The number of rows affected, or false if validation fails or
 'beforeSave()' stops the updating process.
 
  Saves the changes to this active record into the associated database table.
@@ -731,7 +664,7 @@ return (integer|boolean) The number of rows affected, or false if validation fai
 
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
+    [$runValidation] (bool) Whether to perform validation before saving the
     record. If the validation fails, the record will not be inserted into the
     database.
     [$attributeNames] (array) List of attribute names that need to be saved.
@@ -783,8 +716,8 @@ return (integer|boolean) The number of rows affected, or false if validation fai
 >
  updateInternal($attributes='null', $options='[]')
 <
-return (integer|boolean) The number of rows affected, or false if validation fails or
-'beforeSave()' stops the updating process.
+return (int|false) The number of rows affected, or false if 'beforeSave()' stops the
+updating process.
 
     [$attributes] (array) Attributes to update
     [$options] (array) Options given in this parameter are passed to
@@ -800,7 +733,7 @@ return (integer|boolean) The number of rows affected, or false if validation fai
 >
  delete($options='[]')
 <
-return (integer|boolean) The number of rows deleted, or false if the deletion is
+return (int|bool) The number of rows deleted, or false if the deletion is
 unsuccessful for some reason. Note that it is possible the number of rows
 deleted is 0, even though the deletion execution is successful.
 
@@ -1119,7 +1052,7 @@ return (\yii\elasticsearch\ActiveQuery) The newly created 'ActiveQuery' instance
 >
  insert($runValidation='true', $attributes='null', $options='[\'op_type\'=>\'create\']')
 <
-return (boolean) Whether the attributes are valid and the record is inserted
+return (bool) Whether the attributes are valid and the record is inserted
 successfully.
 
  Inserts a document into the associated index using the attribute values of
@@ -1155,7 +1088,7 @@ successfully.
 
 
 
-    [$runValidation] (boolean) Whether to perform validation before saving the
+    [$runValidation] (bool) Whether to perform validation before saving the
     record. If the validation fails, the record will not be inserted into the
     database.
     [$attributes] (array) List of attributes that need to be saved. Defaults
@@ -1241,6 +1174,14 @@ names.
 
 
 
+*yii/elasticsearch/ActiveRecord::getExplanation*		public
+>
+ getExplanation()
+<
+return (array|null) An explanation for each hit on how its score was computed.
+
+
+
 *yii/elasticsearch/ActiveRecord::setPrimaryKey*		public
 >
  setPrimaryKey($value)
@@ -1289,7 +1230,9 @@ return (string) The name of the type of this record.
 return (array) Primary keys that correspond to given conditions
 
  Performs a quick and highly efficient scroll/scan query to get the list of
- primary keys that satisfy the given condition.
+ primary keys that satisfy the given condition. If condition is a list of
+ primary keys (e.g.: '['_id' => ['1', '2', '3'''), the query is not performed
+ for performance considerations.
 
     [$condition] (array) Please refer to 'ActiveQuery::where()' on how to
     specify this parameter

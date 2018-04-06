@@ -1,0 +1,85 @@
+
+*yii/helpers/BaseIpHelper*  
+==========================
+
+SUBCLASSES
+------------------------------------------------------------------------------
+
+|yii/helpers/IpHelper|
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Do not use BaseIpHelper, use 'IpHelper' instead.
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/helpers/BaseIpHelper::getIpVersion*			public
+>
+ getIpVersion($ip)
+<
+return (int) 'IPV4' or 'IPV6'
+
+ Gets the IP version. Does not perform IP address validation.
+
+    [$ip] (string) The valid IPv4 or IPv6 address.
+
+
+*yii/helpers/BaseIpHelper::inRange*			public
+>
+ inRange($subnet, $range)
+<
+return (bool) Whether $subnet is contained by $range
+
+ Checks whether IP address or subnet $subnet is contained by $subnet.
+
+ For example, the following code checks whether subnet '192.168.1.0/24' is in
+ subnet '192.168.0.0/22':
+
+   IpHelper::inRange('192.168.1.0/24', '192.168.0.0/22'); // true
+
+ In case you need to check whether a single IP address '192.168.1.21' is in
+ the subnet '192.168.1.0/24', you can use any of theses examples:
+
+   IpHelper::inRange('192.168.1.21', '192.168.1.0/24'); // true
+   IpHelper::inRange('192.168.1.21/32', '192.168.1.0/24'); // true
+
+
+
+    [$subnet] (string) The valid IPv4 or IPv6 address or CIDR range, e.g.:
+    '10.0.0.0/8' or '2001:af::/64'
+    [$range] (string) The valid IPv4 or IPv6 CIDR range, e.g. '10.0.0.0/8' or
+    '2001:af::/64'
+
+
+*yii/helpers/BaseIpHelper::expandIPv6*			public
+>
+ expandIPv6($ip)
+<
+return (string) The expanded IPv6 address
+
+ Expands an IPv6 address to it's full notation.
+
+ For example '2001:db8::1' will be expanded to
+ '2001:0db8:0000:0000:0000:0000:0000:0001'
+
+    [$ip] (string) The original valid IPv6 address
+
+
+*yii/helpers/BaseIpHelper::ip2bin*			public
+>
+ ip2bin($ip)
+<
+return (string) Bits as a string
+
+ Converts IP address to bits representation.
+
+    [$ip] (string) The valid IPv4 or IPv6 address
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

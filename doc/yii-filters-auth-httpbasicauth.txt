@@ -89,7 +89,8 @@ $auth					*yii/filters/auth/HttpBasicAuth::$auth*
  (callable) A PHP callable that will authenticate the user with the HTTP basic
  auth information. The callable receives a username and a password as its
  parameters. It should return an identity object that matches the username and
- password. Null should be returned if there is no such identity.
+ password. Null should be returned if there is no such identity. The callable
+ will be called only if current user is not authenticated.
 
  The following code is a typical implementation of this callable:
 
@@ -222,15 +223,9 @@ METHOD DETAILS
 <
 return (void)
 
- Generates challenges upon authentication failure.
+ {@inheritdoc}
 
-
-
- For example, some appropriate HTTP headers may be generated.
-
-
-
-    [$response] (\yii\web\Response) 
+    [$response] () 
 
 
 *yii/filters/auth/HttpBasicAuth::handleFailure*		public
@@ -247,20 +242,13 @@ return (void)
 >
  authenticate($user, $request, $response)
 <
-return (\yii\web\IdentityInterface) The authenticated user identity. If
-authentication information is not provided, null will be returned.
+return (void)
 
- Authenticates the current user.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$user] (\yii\web\User) 
-    [$request] (\yii\web\Request) 
-    [$response] (\yii\web\Response) 
+    [$user] () 
+    [$request] () 
+    [$response] () 
 
 
 

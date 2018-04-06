@@ -6,6 +6,7 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/base/ModelEvent|
+|yii/base/WidgetEvent|
 |yii/base/ViewEvent|
 |yii/base/ActionEvent|
 |yii/i18n/MissingTranslationEvent|
@@ -13,7 +14,11 @@ SUBCLASSES
 |yii/db/AfterSaveEvent|
 |yii/web/UserEvent|
 |yii/httpclient/RequestEvent|
-|yii/base/WidgetEvent|
+|yii/queue/ExecEvent|
+|yii/queue/cli/WorkerEvent|
+|yii/queue/JobEvent|
+|yii/queue/ErrorEvent|
+|yii/queue/PushEvent|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -145,6 +150,13 @@ return (void)
 
  The handler will be invoked for EVERY successful ActiveRecord insertion.
 
+ Since 2.0.14 you can specify either class name or event name as a wildcard
+ pattern:
+
+   Event::on('app\models\db\*', '*Insert', function ($event) {
+       Yii::trace(get_class($event->sender) . ' is inserted.');
+   });
+
  For more details about how to declare an event handler, please refer to
  'Component::on()'.
 
@@ -169,6 +181,10 @@ return (bool) Whether a handler is found and detached.
  Detaches an event handler from a class-level event.
 
  This method is the opposite of 'on()'.
+
+ Note: in case wildcard pattern is passed for class name or event name, only
+ the handlers registered with this wildcard will be removed, while handlers
+ registered with plain names matching this wildcard will remain.
 
     [$class] (string) The fully qualified class name from which the event
     handler needs to be detached.

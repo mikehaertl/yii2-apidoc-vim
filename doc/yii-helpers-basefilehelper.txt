@@ -20,6 +20,10 @@ $mimeMagicFile				*yii/helpers/BaseFileHelper::$mimeMagicFile*
 
  (string) The path (or alias) of a PHP file containing MIME type information.
 
+$mimeAliasesFile			*yii/helpers/BaseFileHelper::$mimeAliasesFile*
+
+ (string) The path (or alias) of a PHP file containing MIME aliases.
+
 
 
 METHOD DETAILS
@@ -153,6 +157,19 @@ return (array) The mapping from file extensions to MIME types
     'mimeMagicFile' will be used.
 
 
+*yii/helpers/BaseFileHelper::loadMimeAliases*		protected
+>
+ loadMimeAliases($aliasesFile)
+<
+return (array) The mapping from file extensions to MIME types
+
+ Loads MIME aliases from the specified file.
+
+    [$aliasesFile] (string) The path (or alias) of the file that contains MIME
+    type aliases. If this is not set, the file specified by 'mimeAliasesFile'
+    will be used.
+
+
 *yii/helpers/BaseFileHelper::copyDirectory*		public
 >
  copyDirectory($src, $dst, $options='[]')
@@ -239,6 +256,17 @@ return (void)
     removed in that default case.
 
 
+*yii/helpers/BaseFileHelper::unlink*			public
+>
+ unlink($path)
+<
+return (bool) 
+
+ Removes a file or symlink in a cross-platform way
+
+    [$path] (string) 
+
+
 *yii/helpers/BaseFileHelper::findFiles*			public
 >
  findFiles($dir, $options='[]')
@@ -291,6 +319,33 @@ depends on the files system used.
     returned. 
       - 'caseSensitive': boolean, whether patterns specified at 'only' or
       'except' should be case sensitive. Defaults to 'true'. 
+      - 'recursive': boolean, whether the files under the subdirectories
+      should also be looked for. Defaults to 'true'.
+
+
+*yii/helpers/BaseFileHelper::findDirectories*		public
+>
+ findDirectories($dir, $options='[]')
+<
+return (array) Directories found under the directory, in no particular order.
+Ordering depends on the files system used.
+
+ Returns the directories found under the specified directory and
+ subdirectories.
+
+    [$dir] (string) The directory under which the files will be looked for.
+    [$options] (array) Options for directory searching. Valid options are:
+
+
+      - 'filter': callback, a PHP callback that is called for each
+      directory or file.   The signature of the callback should be: 'function
+    ($path)', where '$path' refers the full path to be filtered.   The
+    callback can return one of the following values:
+
+      * 'true': the directory will be returned   * 'false': the directory will
+    NOT be returned
+
+
       - 'recursive': boolean, whether the files under the subdirectories
       should also be looked for. Defaults to 'true'.
 

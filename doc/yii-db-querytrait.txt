@@ -18,14 +18,15 @@ $where					*yii/db/QueryTrait::$where*
 
 $limit					*yii/db/QueryTrait::$limit*
 
- (int|\yii\db\Expression) Maximum number of records to be returned. May be an
- instance of 'Expression'. If not set or less than 0, it means no limit.
+ (int|\yii\db\ExpressionInterface) Maximum number of records to be returned.
+ May be an instance of 'ExpressionInterface'. If not set or less than 0, it
+ means no limit.
 
 $offset					*yii/db/QueryTrait::$offset*
 
- (int|\yii\db\Expression) Zero-based offset from where the records are to be
- returned. May be an instance of 'Expression'. If not set or less than 0, it
- means starting from the beginning.
+ (int|\yii\db\ExpressionInterface) Zero-based offset from where the records
+ are to be returned. May be an instance of 'ExpressionInterface'. If not set
+ or less than 0, it means starting from the beginning.
 
 $orderBy				*yii/db/QueryTrait::$orderBy*
 
@@ -35,8 +36,8 @@ $orderBy				*yii/db/QueryTrait::$orderBy*
  either
  [SORT_ASC](http://php.net/manual/en/array.constants.php#constant.sort-asc) or
  [SORT_DESC](http://php.net/manual/en/array.constants.php#constant.sort-desc).
- The array may also contain 'Expression' objects. If that is the case, the
- expressions will be converted into strings without any change.
+ The array may also contain 'ExpressionInterface' objects. If that is the
+ case, the expressions will be converted into strings without any change.
 
 $indexBy				*yii/db/QueryTrait::$indexBy*
 
@@ -230,7 +231,7 @@ return ($this) The query object itself
 
  Sets the ORDER BY part of the query.
 
-    [$columns] (string|array|\yii\db\Expression) The columns (and the
+    [$columns] (string|array|\yii\db\ExpressionInterface) The columns (and the
     directions) to be ordered by. Columns can be specified in either a string
     (e.g. '"id ASC, name DESC"') or an array (e.g. '['id' => SORT_ASC, 'name'
     => SORT_DESC]').
@@ -243,8 +244,8 @@ return ($this) The query object itself
     always use an array to represent the order-by information. Otherwise, the
     method will not be able to correctly determine the order-by columns.
 
-    Since version 2.0.7, an 'Expression' object can be passed to specify the
-    ORDER BY part explicitly in plain SQL.
+    Since version 2.0.7, an 'ExpressionInterface' object can be passed to
+    specify the ORDER BY part explicitly in plain SQL.
 
 
 *yii/db/QueryTrait::addOrderBy*				public
@@ -255,7 +256,7 @@ return ($this) The query object itself
 
  Adds additional ORDER BY columns to the query.
 
-    [$columns] (string|array|\yii\db\Expression) The columns (and the
+    [$columns] (string|array|\yii\db\ExpressionInterface) The columns (and the
     directions) to be ordered by. Columns can be specified in either a string
     (e.g. "id ASC, name DESC") or an array (e.g. '['id' => SORT_ASC, 'name' =>
     SORT_DESC]').
@@ -268,8 +269,8 @@ return ($this) The query object itself
     always use an array to represent the order-by information. Otherwise, the
     method will not be able to correctly determine the order-by columns.
 
-    Since version 2.0.7, an 'Expression' object can be passed to specify the
-    ORDER BY part explicitly in plain SQL.
+    Since version 2.0.7, an 'ExpressionInterface' object can be passed to
+    specify the ORDER BY part explicitly in plain SQL.
 
 
 *yii/db/QueryTrait::normalizeOrderBy*			protected
@@ -280,7 +281,7 @@ return (array)
 
  Normalizes format of ORDER BY data.
 
-    [$columns] (array|string|\yii\db\Expression) The columns value to
+    [$columns] (array|string|\yii\db\ExpressionInterface) The columns value to
     normalize. See 'orderBy' and 'addOrderBy'.
 
 
@@ -292,8 +293,8 @@ return ($this) The query object itself
 
  Sets the LIMIT part of the query.
 
-    [$limit] (int|\yii\db\Expression|null) The limit. Use null or negative
-    value to disable limit.
+    [$limit] (int|\yii\db\ExpressionInterface|null) The limit. Use null or
+    negative value to disable limit.
 
 
 *yii/db/QueryTrait::offset*				public
@@ -304,8 +305,8 @@ return ($this) The query object itself
 
  Sets the OFFSET part of the query.
 
-    [$offset] (int|\yii\db\Expression|null) The offset. Use null or negative
-    value to disable offset.
+    [$offset] (int|\yii\db\ExpressionInterface|null) The offset. Use null or
+    negative value to disable offset.
 
 
 *yii/db/QueryTrait::emulateExecution*			public

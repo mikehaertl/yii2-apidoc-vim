@@ -172,24 +172,11 @@ METHOD DETAILS
 >
  __get($name)
 <
-return (mixed) The property value or the value of a behavior's property
+return (void)
 
- Returns the value of a component property.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a getter: return the getter result  
-   - a property of a behavior: return the behavior property value
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing '$value = $component->property;'.
-
-
-
-    [$name] (string) The property name
+    [$name] () 
 
 
 *yii/data/DataFilter::__set*				public
@@ -198,52 +185,21 @@ return (mixed) The property value or the value of a behavior's property
 <
 return (void)
 
- Sets the value of a component property.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a setter: set the property value  
-   - an event in the format of "on xyz": attach the handler to the
-   event "xyz"  
-   - a behavior in the format of "as xyz": attach the behavior named as
-   "xyz"  
-   - a property of a behavior: set the behavior property value
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing '$component->property = $value;'.
-
-
-
-    [$name] (string) The property name or the event name
-    [$value] (mixed) The property value
+    [$name] () 
+    [$value] () 
 
 
 *yii/data/DataFilter::__isset*				public
 >
  __isset($name)
 <
-return (bool) Whether the named property is set
+return (void)
 
- Checks if a property is set, i.e. defined and not null.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a setter: return whether the property is set  
-   - a property of a behavior: return whether the property is set  
-   - return 'false' for non existing properties
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing 'isset($component->property)'.
-
-
-
-    [$name] (string) The property name or the event name
+    [$name] () 
 
 
 *yii/data/DataFilter::__unset*				public
@@ -252,93 +208,50 @@ return (bool) Whether the named property is set
 <
 return (void)
 
- Sets a component property to be null.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a setter: set the property value to be null  
-   - a property of a behavior: set the property value to be null
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing 'unset($component->property)'.
-
-
-
-    [$name] (string) The property name
+    [$name] () 
 
 
 *yii/data/DataFilter::__call*				public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/data/DataFilter::hasProperty*			public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/data/DataFilter::canGetProperty*			public
 >
  canGetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (bool) Whether the property can be read
+return (void)
 
- Returns a value indicating whether a property can be read.
+ {@inheritdoc}
 
-
-
- A property can be read if:
-
-
-   - the class has a getter method associated with the specified name   (in
- this case, property name is case-insensitive); 
-   - the class has a member variable with the specified name (when
-   '$checkVars' is true); 
-   - an attached behavior has a readable property of the given name
-   (when '$checkBehaviors' is true).
-
-
-
-    [$name] (string) The property name
-    [$checkVars] (bool) Whether to treat member variables as properties
-    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
-    properties of this component
+    [$name] () 
+    [$checkVars] () 
+    [$checkBehaviors] () 
 
 
 *yii/data/DataFilter::canSetProperty*			public
 >
  canSetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (bool) Whether the property can be written
+return (void)
 
- Returns a value indicating whether a property can be set.
+ {@inheritdoc}
 
-
-
- A property can be written if:
-
-
-   - the class has a setter method associated with the specified name   (in
- this case, property name is case-insensitive); 
-   - the class has a member variable with the specified name (when
-   '$checkVars' is true); 
-   - an attached behavior has a writable property of the given name
-   (when '$checkBehaviors' is true).
-
-
-
-    [$name] (string) The property name
-    [$checkVars] (bool) Whether to treat member variables as properties
-    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
-    properties of this component
+    [$name] () 
+    [$checkVars] () 
+    [$checkBehaviors] () 
 
 
 *yii/data/DataFilter::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/data/DataFilter::__clone*				public
@@ -426,6 +339,16 @@ return (bool) Whether the property can be written
  See |yii/base/ArrayableTrait::toArray|
 
 
+*yii/data/DataFilter::extractRootFields*			protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/data/DataFilter::extractFieldsFor*			protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
+
+
 *yii/data/DataFilter::resolveFields*			protected
 
  See |yii/base/ArrayableTrait::resolveFields|
@@ -435,82 +358,9 @@ return (bool) Whether the property can be written
 >
  rules()
 <
-return (array) Validation rules
+return (void)
 
- Returns the validation rules for attributes.
-
-
-
- Validation rules are used by 'validate()' to check if attribute values are
- valid. Child classes may override this method to declare different validation
- rules.
-
- Each rule is an array with the following structure:
-
-   [
-       ['attribute1', 'attribute2'],
-       'validator type',
-       'on' => ['scenario1', 'scenario2'],
-       //...other parameters...
-   ]
-
- where
-
-  
-   - attribute list: required, specifies the attributes array to be
-   validated, for single attribute you can pass a string;  
-   - validator type: required, specifies the validator to be used. It
-   can be a built-in validator name,    a method name of the model class, an
- anonymous function, or a validator class name.  
-   - on: optional, specifies the 'scenario|scenarios' array in which
-   the validation    rule can be applied. If this option is not set, the rule
- will apply to all scenarios.  
-   - additional name-value pairs can be specified to initialize the
-   corresponding validator properties.    Please refer to individual validator
- class API for possible properties.
-
- A validator can be either an object of a class extending 'Validator', or a
- model class method (called *inline validator*) that has the following
- signature:
-
-   // $params refers to validation parameters given in the rule
-   function validatorName($attribute, $params)
-
- In the above '$attribute' refers to the attribute currently being validated
- while '$params' contains an array of validator configuration options such as
- 'max' in case of 'string' validator. The value of the attribute currently
- being validated can be accessed as '$this->$attribute'. Note the '$' before
- 'attribute'; this is taking the value of the variable '$attribute' and using
- it as the name of the property to access.
-
- Yii also provides a set of 'Validator::builtInValidators|built-in
- validators'. Each one has an alias name which can be used when specifying a
- validation rule.
-
- Below are some examples:
-
-   [
-       // built-in "required" validator
-       [['username', 'password'], 'required'],
-       // built-in "string" validator customized with "min" and "max"
- properties
-       ['username', 'string', 'min' => 3, 'max' => 12],
-       // built-in "compare" validator that is used in "register" scenario
- only
-       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
- 'register'],
-       // an inline validator defined via the "authenticate()" method in the
- model class
-       ['password', 'authenticate', 'on' => 'login'],
-       // a validator of class "DateRangeValidator"
-       ['dateRange', 'DateRangeValidator'],
-   ];
-
- Note, in order to inherit rules defined in the parent class, a child class
- needs to merge the parent rules with child rules using functions such as
- 'array_merge()'.
-
-
+ {@inheritdoc}
 
 
 *yii/data/DataFilter::scenarios*				public
@@ -522,67 +372,27 @@ return (array) Validation rules
 >
  formName()
 <
-return (string) The form name of this model class.
+return (void)
 
- Returns the form name that this model class should use.
-
-
-
- The form name is mainly used by '\yii\widgets\ActiveForm' to determine how to
- name the input fields for the attributes in a model. If the form name is "A"
- and an attribute name is "b", then the corresponding input name would be
- "A[b]". If the form name is an empty string, then the input name would be
- "b".
-
- The purpose of the above naming schema is that for forms which contain
- multiple different models, the attributes of each model are grouped in
- sub-arrays of the POST-data and it is easier to differentiate between them.
-
- By default, this method returns the model class name (without the namespace
- part) as the form name. You may override it when the model is used in
- different forms.
-
-
+ {@inheritdoc}
 
 
 *yii/data/DataFilter::attributes*				public
 >
  attributes()
 <
-return (array) List of attribute names.
+return (void)
 
- Returns the list of attribute names.
-
-
-
- By default, this method returns all public non-static properties of the
- class. You may override this method to change the default behavior.
-
-
+ {@inheritdoc}
 
 
 *yii/data/DataFilter::attributeLabels*			public
 >
  attributeLabels()
 <
-return (array) Attribute labels (name => label)
+return (void)
 
- Returns the attribute labels.
-
-
-
- Attribute labels are mainly used for display purpose. For example, given an
- attribute 'firstName', we can declare a label 'First Name' which is more
- user-friendly and can be displayed to end users.
-
- By default an attribute label is generated using 'generateAttributeLabel()'.
- This method allows you to explicitly specify attribute labels.
-
- Note, in order to inherit labels defined in the parent class, a child class
- needs to merge the parent labels with child labels using functions such as
- 'array_merge()'.
-
-
+ {@inheritdoc}
 
 
 *yii/data/DataFilter::attributeHints*			public
@@ -663,6 +473,11 @@ return (array) Attribute labels (name => label)
 *yii/data/DataFilter::getFirstError*			public
 
  See |yii/base/Model::getFirstError|
+
+
+*yii/data/DataFilter::getErrorSummary*			public
+
+ See |yii/base/Model::getErrorSummary|
 
 
 *yii/data/DataFilter::addError*				public
@@ -820,6 +635,17 @@ return (array) Attribute type map.
 
  Composes default value for 'searchAttributeTypes' from the 'searchModel'
  validation rules.
+
+
+*yii/data/DataFilter::detectSearchAttributeType*		protected
+>
+ detectSearchAttributeType($validator)
+<
+return (string|null) Detected attribute type.
+
+ Detect attribute type from given validator.
+
+    [$validator] () 
 
 
 *yii/data/DataFilter::getErrorMessages*			public

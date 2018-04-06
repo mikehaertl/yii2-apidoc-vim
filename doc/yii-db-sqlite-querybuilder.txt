@@ -23,18 +23,13 @@ $conditionBuilders			*yii/db/sqlite/QueryBuilder::$conditionBuilders*
 
  See |yii/db/QueryBuilder::$conditionBuilders|
 
-$likeEscapingReplacements		*yii/db/sqlite/QueryBuilder::$likeEscapingReplacements*
+$conditionClasses			*yii/db/sqlite/QueryBuilder::$conditionClasses*
 
- See |yii/db/QueryBuilder::$likeEscapingReplacements|
+ See |yii/db/QueryBuilder::$conditionClasses|
 
-$likeEscapeCharacter			*yii/db/sqlite/QueryBuilder::$likeEscapeCharacter*
+$expressionBuilders			*yii/db/sqlite/QueryBuilder::$expressionBuilders*
 
- (string|null) 
-
- Character used to escape special characters in LIKE conditions. By default
- it's assumed to be '\'.
-
-
+ See |yii/db/QueryBuilder::$expressionBuilders|
 
 
 
@@ -54,7 +49,7 @@ METHOD DETAILS
 
 *yii/db/sqlite/QueryBuilder::init*			public
 
- See |yii/base/BaseObject::init|
+ See |yii/db/QueryBuilder::init|
 
 
 *yii/db/sqlite/QueryBuilder::__get*			public
@@ -102,32 +97,55 @@ METHOD DETAILS
  See |yii/base/BaseObject::hasMethod|
 
 
+*yii/db/sqlite/QueryBuilder::defaultConditionClasses*	protected
+
+ See |yii/db/QueryBuilder::defaultConditionClasses|
+
+
+*yii/db/sqlite/QueryBuilder::defaultExpressionBuilders*	protected
+>
+ defaultExpressionBuilders()
+<
+return (void)
+
+ {@inheritdoc}
+
+
+*yii/db/sqlite/QueryBuilder::setExpressionBuilders*	public
+
+ See |yii/db/QueryBuilder::setExpressionBuilders|
+
+
 *yii/db/sqlite/QueryBuilder::build*			public
 >
  build($query, $params='[]')
 <
-return (array) The generated SQL statement (the first array element) and the
-corresponding parameters to be bound to the SQL statement (the second array
-element). The parameters returned include those provided in '$params'.
+return (void)
 
- Generates a SELECT SQL statement from a 'Query' object.
+ {@inheritdoc}
 
-
-
+    [$query] () 
+    [$params] () 
 
 
+*yii/db/sqlite/QueryBuilder::buildExpression*		public
+
+ See |yii/db/QueryBuilder::buildExpression|
 
 
-    [$query] (\yii\db\Query) The 'Query' object from which the SQL statement
-    will be generated.
-    [$params] (array) The parameters to be bound to the generated SQL
-    statement. These parameters will be included in the result with the
-    additional parameters generated during the query building process.
+*yii/db/sqlite/QueryBuilder::getExpressionBuilder*	public
+
+ See |yii/db/QueryBuilder::getExpressionBuilder|
 
 
 *yii/db/sqlite/QueryBuilder::insert*			public
 
  See |yii/db/QueryBuilder::insert|
+
+
+*yii/db/sqlite/QueryBuilder::prepareInsertValues*		protected
+
+ See |yii/db/QueryBuilder::prepareInsertValues|
 
 
 *yii/db/sqlite/QueryBuilder::prepareInsertSelectSubQuery*	protected
@@ -137,7 +155,7 @@ element). The parameters returned include those provided in '$params'.
 
 *yii/db/sqlite/QueryBuilder::batchInsert*			public
 >
- batchInsert($table, $columns, $rows)
+ batchInsert($table, $columns, $rows, $params='[]')
 <
 return (string) The batch INSERT SQL statement
 
@@ -156,11 +174,36 @@ return (string) The batch INSERT SQL statement
     [$table] (string) The table that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array|\Generator) The rows to be batch inserted into the table
+    [$params] () 
+
+
+*yii/db/sqlite/QueryBuilder::upsert*			public
+>
+ upsert($table, $insertColumns, $updateColumns, $params)
+<
+return (void)
+
+ {@inheritdoc}
+
+    [$table] () 
+    [$insertColumns] () 
+    [$updateColumns] () 
+    [$params] () 
+
+
+*yii/db/sqlite/QueryBuilder::prepareUpsertColumns*	protected
+
+ See |yii/db/QueryBuilder::prepareUpsertColumns|
 
 
 *yii/db/sqlite/QueryBuilder::update*			public
 
  See |yii/db/QueryBuilder::update|
+
+
+*yii/db/sqlite/QueryBuilder::prepareUpdateSets*		protected
+
+ See |yii/db/QueryBuilder::prepareUpdateSets|
 
 
 *yii/db/sqlite/QueryBuilder::delete*			public
@@ -355,130 +398,76 @@ return (string) The SQL statement for dropping an index.
 >
  addUnique($name, $table, $columns)
 <
-return (string) The SQL statement for adding an unique constraint to an existing
-table.
+return (void)
 
- Creates a SQL command for adding an unique constraint to an existing table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the unique constraint. The name will be
-    properly quoted by the method.
-    [$table] (string) The table that the unique constraint will be added to.
-    The name will be properly quoted by the method.
-    [$columns] (string|array) The name of the column to that the constraint
-    will be added on. If there are multiple columns, separate them with
-    commas. The name will be properly quoted by the method.
+    [$name] () 
+    [$table] () 
+    [$columns] () 
 
 
 *yii/db/sqlite/QueryBuilder::dropUnique*			public
 >
  dropUnique($name, $table)
 <
-return (string) The SQL statement for dropping an unique constraint.
+return (void)
 
- Creates a SQL command for dropping an unique constraint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the unique constraint to be dropped. The name
-    will be properly quoted by the method.
-    [$table] (string) The table whose unique constraint is to be dropped. The
-    name will be properly quoted by the method.
+    [$name] () 
+    [$table] () 
 
 
 *yii/db/sqlite/QueryBuilder::addCheck*			public
 >
  addCheck($name, $table, $expression)
 <
-return (string) The SQL statement for adding a check constraint to an existing table.
+return (void)
 
- Creates a SQL command for adding a check constraint to an existing table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the check constraint. The name will be
-    properly quoted by the method.
-    [$table] (string) The table that the check constraint will be added to.
-    The name will be properly quoted by the method.
-    [$expression] (string) The SQL of the 'CHECK' constraint.
+    [$name] () 
+    [$table] () 
+    [$expression] () 
 
 
 *yii/db/sqlite/QueryBuilder::dropCheck*			public
 >
  dropCheck($name, $table)
 <
-return (string) The SQL statement for dropping a check constraint.
+return (void)
 
- Creates a SQL command for dropping a check constraint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the check constraint to be dropped. The name
-    will be properly quoted by the method.
-    [$table] (string) The table whose check constraint is to be dropped. The
-    name will be properly quoted by the method.
+    [$name] () 
+    [$table] () 
 
 
 *yii/db/sqlite/QueryBuilder::addDefaultValue*		public
 >
  addDefaultValue($name, $table, $column, $value)
 <
-return (string) The SQL statement for adding a default value constraint to an
-existing table.
+return (void)
 
- Creates a SQL command for adding a default value constraint to an existing
- table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the default value constraint. The name will
-    be properly quoted by the method.
-    [$table] (string) The table that the default value constraint will be
-    added to. The name will be properly quoted by the method.
-    [$column] (string) The name of the column to that the constraint will be
-    added on. The name will be properly quoted by the method.
-    [$value] (mixed) Default value.
+    [$name] () 
+    [$table] () 
+    [$column] () 
+    [$value] () 
 
 
 *yii/db/sqlite/QueryBuilder::dropDefaultValue*		public
 >
  dropDefaultValue($name, $table)
 <
-return (string) The SQL statement for dropping a default value constraint.
+return (void)
 
- Creates a SQL command for dropping a default value constraint.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The name of the default value constraint to be dropped.
-    The name will be properly quoted by the method.
-    [$table] (string) The table whose default value constraint is to be
-    dropped. The name will be properly quoted by the method.
+    [$name] () 
+    [$table] () 
 
 
 *yii/db/sqlite/QueryBuilder::resetSequence*		public
@@ -517,80 +506,58 @@ return (string) The SQL statement for checking integrity
 >
  addCommentOnColumn($table, $column, $comment)
 <
-return (string) The SQL statement for adding comment on column
+return (void)
 
- Builds a SQL command for adding comment to column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
-    [$column] (string) The name of the column to be commented. The column name
-    will be properly quoted by the method.
-    [$comment] (string) The text of the comment to be added. The comment will
-    be properly quoted by the method.
+    [$table] () 
+    [$column] () 
+    [$comment] () 
 
 
 *yii/db/sqlite/QueryBuilder::addCommentOnTable*		public
 >
  addCommentOnTable($table, $comment)
 <
-return (string) The SQL statement for adding comment on table
+return (void)
 
- Builds a SQL command for adding comment to table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
-    [$comment] (string) The text of the comment to be added. The comment will
-    be properly quoted by the method.
+    [$table] () 
+    [$comment] () 
 
 
 *yii/db/sqlite/QueryBuilder::dropCommentFromColumn*	public
 >
  dropCommentFromColumn($table, $column)
 <
-return (string) The SQL statement for adding comment on column
+return (void)
 
- Builds a SQL command for adding comment to column.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
-    [$column] (string) The name of the column to be commented. The column name
-    will be properly quoted by the method.
+    [$table] () 
+    [$column] () 
 
 
 *yii/db/sqlite/QueryBuilder::dropCommentFromTable*	public
 >
  dropCommentFromTable($table)
 <
-return (string) The SQL statement for adding comment on column
+return (void)
 
- Builds a SQL command for adding comment to table.
+ {@inheritdoc}
 
-
-
-
+    [$table] () 
 
 
+*yii/db/sqlite/QueryBuilder::createView*			public
 
-    [$table] (string) The table whose column is to be commented. The table
-    name will be properly quoted by the method.
+ See |yii/db/QueryBuilder::createView|
+
+
+*yii/db/sqlite/QueryBuilder::dropView*			public
+
+ See |yii/db/QueryBuilder::dropView|
 
 
 *yii/db/sqlite/QueryBuilder::getColumnType*		public
@@ -642,16 +609,12 @@ return (string) The SQL statement for adding comment on column
 >
  buildLimit($limit, $offset)
 <
-return (string) The LIMIT and OFFSET clauses
+return (void)
 
+ {@inheritdoc}
 
-
-
-
-
-
-    [$limit] (int) 
-    [$offset] (int) 
+    [$limit] () 
+    [$offset] () 
 
 
 *yii/db/sqlite/QueryBuilder::hasLimit*			protected
@@ -668,16 +631,12 @@ return (string) The LIMIT and OFFSET clauses
 >
  buildUnion($unions, $params)
 <
-return (string) The UNION clause built from 'Query::$union'.
+return (void)
 
+ {@inheritdoc}
 
-
-
-
-
-
-    [$unions] (array) 
-    [$params] (array) The binding parameters to be populated
+    [$unions] () 
+    [$params] () 
 
 
 *yii/db/sqlite/QueryBuilder::buildColumns*		public
@@ -688,6 +647,11 @@ return (string) The UNION clause built from 'Query::$union'.
 *yii/db/sqlite/QueryBuilder::buildCondition*		public
 
  See |yii/db/QueryBuilder::buildCondition|
+
+
+*yii/db/sqlite/QueryBuilder::createConditionFromArray*	public
+
+ See |yii/db/QueryBuilder::createConditionFromArray|
 
 
 *yii/db/sqlite/QueryBuilder::buildHashCondition*		public
@@ -715,40 +679,6 @@ return (string) The UNION clause built from 'Query::$union'.
  See |yii/db/QueryBuilder::buildInCondition|
 
 
-*yii/db/sqlite/QueryBuilder::buildSubqueryInCondition*	protected
->
- buildSubqueryInCondition($operator, $columns, $values, $params)
-<
-return (string) SQL
-
- Builds SQL for IN condition.
-
-
-
-
-
-
-
-    [$operator] (string) 
-    [$columns] (array) 
-    [$values] (\yii\db\Query) 
-    [$params] (array) 
-
-
-*yii/db/sqlite/QueryBuilder::buildCompositeInCondition*	protected
->
- buildCompositeInCondition($operator, $columns, $values, $params)
-<
-return (string) SQL
-
- Builds SQL for IN condition.
-
-    [$operator] (string) 
-    [$columns] (array) 
-    [$values] (array) 
-    [$params] (array) 
-
-
 *yii/db/sqlite/QueryBuilder::buildLikeCondition*		public
 
  See |yii/db/QueryBuilder::buildLikeCondition|
@@ -767,6 +697,11 @@ return (string) SQL
 *yii/db/sqlite/QueryBuilder::selectExists*		public
 
  See |yii/db/QueryBuilder::selectExists|
+
+
+*yii/db/sqlite/QueryBuilder::bindParam*			public
+
+ See |yii/db/QueryBuilder::bindParam|
 
 
 

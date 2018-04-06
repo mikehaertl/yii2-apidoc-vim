@@ -6,6 +6,7 @@ SUBCLASSES
 ------------------------------------------------------------------------------
 
 |yii/filters/auth/HttpBasicAuth|
+|yii/filters/auth/HttpHeaderAuth|
 |yii/filters/auth/CompositeAuth|
 |yii/filters/auth/QueryParamAuth|
 |yii/filters/auth/HttpBearerAuth|
@@ -144,19 +145,11 @@ METHOD DETAILS
 >
  beforeAction($action)
 <
-return (bool) Whether the action should continue to be executed.
+return (void)
 
- This method is invoked right before an action is to be executed (after all
- possible filters.) You may override this method to do last-minute preparation
- for the action.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$action] (\yii\base\Action) The action to be executed.
+    [$action] () 
 
 
 *yii/filters/auth/AuthMethod::afterAction*		public
@@ -180,15 +173,9 @@ return (bool) Whether the action should continue to be executed.
 <
 return (void)
 
- Generates challenges upon authentication failure.
+ {@inheritdoc}
 
-
-
- For example, some appropriate HTTP headers may be generated.
-
-
-
-    [$response] (\yii\web\Response) 
+    [$response] () 
 
 
 *yii/filters/auth/AuthMethod::handleFailure*		public
@@ -197,16 +184,9 @@ return (void)
 <
 return (void)
 
- Handles authentication failure.
+ {@inheritdoc}
 
-
-
- The implementation should normally throw UnauthorizedHttpException to
- indicate authentication failure.
-
-
-
-    [$response] (\yii\web\Response) 
+    [$response] () 
 
 
 *yii/filters/auth/AuthMethod::isOptional*			protected

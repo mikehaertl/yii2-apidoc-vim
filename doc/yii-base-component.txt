@@ -10,6 +10,7 @@ SUBCLASSES
 |yii/grid/GridView|
 |yii/mutex/FileMutex|
 |yii/mutex/PgsqlMutex|
+|yii/mutex/OracleMutex|
 |yii/mutex/MysqlMutex|
 |yii/mutex/Mutex|
 |yii/mutex/DbMutex|
@@ -50,14 +51,18 @@ SUBCLASSES
 |yii/i18n/GettextMessageSource|
 |yii/i18n/PhpMessageSource|
 |yii/i18n/DbMessageSource|
+|yii/i18n/Locale|
 |yii/i18n/GettextMoFile|
 |yii/mail/BaseMailer|
 |yii/db/ActiveQuery|
+|yii/db/SqlTokenizer|
 |yii/db/Migration|
 |yii/db/BaseActiveRecord|
 |yii/db/Connection|
 |yii/db/ActiveRecord|
 |yii/db/Command|
+|yii/db/sqlite/SqlTokenizer|
+|yii/db/sqlite/Command|
 |yii/db/Query|
 |yii/log/FileTarget|
 |yii/log/Logger|
@@ -66,9 +71,11 @@ SUBCLASSES
 |yii/log/SyslogTarget|
 |yii/log/Dispatcher|
 |yii/log/EmailTarget|
+|yii/data/ActiveDataFilter|
 |yii/data/BaseDataProvider|
 |yii/data/ArrayDataProvider|
 |yii/data/SqlDataProvider|
+|yii/data/DataFilter|
 |yii/data/ActiveDataProvider|
 |yii/web/ErrorAction|
 |yii/web/Request|
@@ -109,6 +116,7 @@ SUBCLASSES
 |yii/console/ErrorHandler|
 |yii/console/Response|
 |yii/console/Controller|
+|yii/console/widgets/Table|
 |yii/console/Application|
 |yii/console/controllers/HelpController|
 |yii/console/controllers/FixtureController|
@@ -185,6 +193,7 @@ SUBCLASSES
 |yii/authclient/widgets/AuthChoice|
 |yii/authclient/BaseOAuth|
 |yii/authclient/clients/Facebook|
+|yii/authclient/clients/TwitterOAuth2|
 |yii/authclient/clients/Google|
 |yii/authclient/clients/Yandex|
 |yii/authclient/clients/LinkedIn|
@@ -193,6 +202,7 @@ SUBCLASSES
 |yii/authclient/clients/Twitter|
 |yii/authclient/clients/GoogleHybrid|
 |yii/authclient/clients/VKontakte|
+|yii/authclient/OpenIdConnect|
 |yii/authclient/OAuth2|
 |yii/bootstrap/Progress|
 |yii/bootstrap/ToggleButtonGroup|
@@ -214,20 +224,29 @@ SUBCLASSES
 |yii/codeception/BasePage|
 |yii/debug/LogTarget|
 |yii/debug/models/search/Mail|
+|yii/debug/models/search/User|
 |yii/debug/models/search/Db|
 |yii/debug/models/search/Profile|
 |yii/debug/models/search/Log|
 |yii/debug/models/search/Debug|
 |yii/debug/models/search/Base|
+|yii/debug/models/Router|
+|yii/debug/models/UserSwitch|
+|yii/debug/models/timeline/DataProvider|
+|yii/debug/models/timeline/Search|
 |yii/debug/Panel|
 |yii/debug/panels/AssetPanel|
+|yii/debug/panels/TimelinePanel|
 |yii/debug/panels/ConfigPanel|
 |yii/debug/panels/DbPanel|
 |yii/debug/panels/RequestPanel|
 |yii/debug/panels/MailPanel|
+|yii/debug/panels/UserPanel|
+|yii/debug/panels/RouterPanel|
 |yii/debug/panels/LogPanel|
 |yii/debug/panels/ProfilingPanel|
 |yii/debug/components/search/Filter|
+|yii/debug/components/search/matchers/GreaterThanOrEqual|
 |yii/debug/components/search/matchers/GreaterThan|
 |yii/debug/components/search/matchers/SameAs|
 |yii/debug/components/search/matchers/LowerThan|
@@ -235,14 +254,18 @@ SUBCLASSES
 |yii/debug/actions/db/ExplainAction|
 |yii/debug/Module|
 |yii/debug/controllers/DefaultController|
+|yii/debug/controllers/UserController|
 |yii/elasticsearch/ActiveQuery|
 |yii/elasticsearch/ActiveFixture|
 |yii/elasticsearch/Connection|
 |yii/elasticsearch/ActiveRecord|
 |yii/elasticsearch/Command|
 |yii/elasticsearch/DebugPanel|
+|yii/elasticsearch/BulkCommand|
 |yii/elasticsearch/DebugAction|
+|yii/elasticsearch/ElasticsearchTarget|
 |yii/elasticsearch/Query|
+|yii/elasticsearch/ActiveDataProvider|
 |yii/faker/FixtureController|
 |yii/gii/Generator|
 |yii/gii/generators/module/Generator|
@@ -303,9 +326,39 @@ SUBCLASSES
 |yii/mongodb/Query|
 |yii/mongodb/validators/MongoDateValidator|
 |yii/mongodb/validators/MongoIdValidator|
+|yii/queue/debug/Panel|
+|yii/queue/cli/Action|
+|yii/queue/cli/Queue|
+|yii/queue/cli/Command|
+|yii/queue/Queue|
+|yii/queue/gii/Generator|
+|yii/queue/file/Queue|
+|yii/queue/file/Command|
+|yii/queue/file/InfoAction|
+|yii/queue/sync/Queue|
+|yii/queue/db/migrations/M170601155600Priority|
+|yii/queue/db/migrations/M170509001400Retry|
+|yii/queue/db/migrations/M170307170300Later|
+|yii/queue/db/migrations/M161119140200Queue|
+|yii/queue/db/Queue|
+|yii/queue/db/Command|
+|yii/queue/db/InfoAction|
+|yii/queue/amqp_interop/Queue|
+|yii/queue/amqp_interop/Command|
+|yii/queue/redis/Queue|
+|yii/queue/redis/Command|
+|yii/queue/redis/InfoAction|
+|yii/queue/amqp/Queue|
+|yii/queue/amqp/Command|
+|yii/queue/gearman/Queue|
+|yii/queue/gearman/Command|
+|yii/queue/beanstalk/Queue|
+|yii/queue/beanstalk/Command|
+|yii/queue/beanstalk/InfoAction|
 |yii/redis/ActiveQuery|
 |yii/redis/Connection|
 |yii/redis/ActiveRecord|
+|yii/redis/Mutex|
 |yii/redis/Session|
 |yii/redis/Cache|
 |yii/smarty/ViewRenderer|
@@ -319,25 +372,6 @@ SUBCLASSES
 |yii/sphinx/ActiveDataProvider|
 |yii/swiftmailer/Mailer|
 |yii/twig/ViewRenderer|
-|yii/mutex/OracleMutex|
-|yii/debug/models/Router|
-|yii/debug/models/timeline/DataProvider|
-|yii/debug/models/timeline/Search|
-|yii/debug/panels/TimelinePanel|
-|yii/debug/panels/UserPanel|
-|yii/debug/panels/RouterPanel|
-|yii/debug/components/search/matchers/GreaterThanOrEqual|
-|yii/redis/Mutex|
-|yii/db/SqlTokenizer|
-|yii/db/sqlite/SqlTokenizer|
-|yii/data/ActiveDataFilter|
-|yii/data/DataFilter|
-|yii/console/widgets/Table|
-|yii/authclient/OpenIdConnect|
-|yii/debug/models/search/User|
-|yii/debug/models/UserSwitch|
-|yii/debug/controllers/UserController|
-|yii/authclient/clients/TwitterOAuth2|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -718,6 +752,14 @@ return (void)
  where '$event' is an 'Event' object which includes parameters associated with
  the event.
 
+ Since 2.0.14 you can specify event name as a wildcard pattern:
+
+   $component->on('event.group.*', function ($event) {
+       Yii::trace($event->name . ' is triggered.');
+   });
+
+
+
     [$name] (string) The event name
     [$handler] (callable) The event handler
     [$data] (mixed) The data to be passed to the event handler when the event
@@ -737,6 +779,10 @@ return (bool) If a handler is found and detached
  Detaches an existing event handler from this component.
 
  This method is the opposite of 'on()'.
+
+ Note: in case wildcard pattern is passed for event name, only the handlers
+ registered with this wildcard will be removed, while handlers registered with
+ plain names matching this wildcard will remain.
 
     [$name] (string) Event name
     [$handler] (callable) The event handler to be removed. If it is null, all

@@ -48,7 +48,7 @@ $searchModelClass			*yii/gii/generators/crud/Generator::$searchModelClass*
 
 $enablePjax				*yii/gii/generators/crud/Generator::$enablePjax*
 
- (boolean) Whether to wrap the 'GridView' or 'ListView' widget with the
+ (bool) Whether to wrap the 'GridView' or 'ListView' widget with the
  'yii\widgets\Pjax' widget
 
 
@@ -74,47 +74,47 @@ METHOD DETAILS
 
 *yii/gii/generators/crud/Generator::__get*		public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/gii/generators/crud/Generator::__set*		public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/gii/generators/crud/Generator::__isset*		public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/gii/generators/crud/Generator::__unset*		public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/gii/generators/crud/Generator::__call*		public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/gii/generators/crud/Generator::hasProperty*		public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/gii/generators/crud/Generator::canGetProperty*	public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/gii/generators/crud/Generator::canSetProperty*	public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/gii/generators/crud/Generator::hasMethod*		public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/gii/generators/crud/Generator::__clone*		public
@@ -200,6 +200,16 @@ METHOD DETAILS
 *yii/gii/generators/crud/Generator::toArray*		public
 
  See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/gii/generators/crud/Generator::extractRootFields*	protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/gii/generators/crud/Generator::extractFieldsFor*	protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
 
 
 *yii/gii/generators/crud/Generator::resolveFields*	protected
@@ -413,6 +423,11 @@ return (array) Attribute labels (name => label)
 *yii/gii/generators/crud/Generator::getFirstError*	public
 
  See |yii/base/Model::getFirstError|
+
+
+*yii/gii/generators/crud/Generator::getErrorSummary*	public
+
+ See |yii/base/Model::getErrorSummary|
 
 
 *yii/gii/generators/crud/Generator::addError*		public
@@ -713,7 +728,7 @@ return (string) The controller view path
 >
  getNameAttribute()
 <
-return (void)
+return (string) 
 
 
 
@@ -816,7 +831,7 @@ return (array) Parameter tags for phpdoc
 >
  getTableSchema()
 <
-return (boolean|\yii\db\TableSchema) 
+return (bool|\yii\db\TableSchema) 
 
  Returns table schema for current model class or false if it is not an active
  record
@@ -827,6 +842,15 @@ return (boolean|\yii\db\TableSchema)
  getColumnNames()
 <
 return (array) Model column names
+
+
+
+*yii/gii/generators/crud/Generator::getClassDbDriverName*	protected
+>
+ getClassDbDriverName()
+<
+return (string|null) Driver name of modelClass db connection. In case db is not
+instance of \yii\db\Connection null will be returned.
 
 
 

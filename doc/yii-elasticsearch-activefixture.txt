@@ -32,13 +32,9 @@ $db					*yii/elasticsearch/ActiveFixture::$db*
  created, if you want to change this property, you should only assign it with
  a DB connection object.
 
-$modelClass				*yii/elasticsearch/ActiveFixture::$modelClass*
+$dataDirectory				*yii/elasticsearch/ActiveFixture::$dataDirectory*
 
- See |yii/test/BaseActiveFixture::$modelClass|
-
-$data					*yii/elasticsearch/ActiveFixture::$data*
-
- See |yii/test/BaseActiveFixture::$data|
+ See |yii/test/FileFixtureTrait::$dataDirectory|
 
 $dataFile				*yii/elasticsearch/ActiveFixture::$dataFile*
 
@@ -49,6 +45,14 @@ $dataFile				*yii/elasticsearch/ActiveFixture::$dataFile*
  elasticsearch 'index' name and 'Type' stands for the 'type' associated with
  this fixture. You can set this property to be false to prevent loading any
  data.
+
+$modelClass				*yii/elasticsearch/ActiveFixture::$modelClass*
+
+ See |yii/test/BaseActiveFixture::$modelClass|
+
+$data					*yii/elasticsearch/ActiveFixture::$data*
+
+ See |yii/test/BaseActiveFixture::$data|
 
 $index					*yii/elasticsearch/ActiveFixture::$index*
 
@@ -82,12 +86,11 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
+ {@inheritdoc}
 
 
 
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
+
 
 
 
@@ -242,6 +245,11 @@ return (void)
 *yii/elasticsearch/ActiveFixture::afterUnload*		public
 
  See |yii/test/Fixture::afterUnload|
+
+
+*yii/elasticsearch/ActiveFixture::loadData*		protected
+
+ See |yii/test/FileFixtureTrait::loadData|
 
 
 *yii/elasticsearch/ActiveFixture::getIterator*		public

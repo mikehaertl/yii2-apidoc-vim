@@ -92,6 +92,12 @@ $targetAttribute			*yii/validators/ExistValidator::$targetAttribute*
  is the name of the attribute with the value to validate, the array value is
  the name of the database field to search.
 
+$targetRelation				*yii/validators/ExistValidator::$targetRelation*
+
+ (string) The name of the relation that should be used to validate the
+ existence of the current attribute value This param overwrites $targetClass
+ and $targetAttribute
+
 $filter					*yii/validators/ExistValidator::$filter*
 
  (string|array|\Closure) Additional filter to be applied to the DB query used
@@ -108,6 +114,10 @@ $allowArray				*yii/validators/ExistValidator::$allowArray*
 $targetAttributeJunction		*yii/validators/ExistValidator::$targetAttributeJunction*
 
  (string) And|or define how target attributes are related
+
+$forceMasterDb				*yii/validators/ExistValidator::$forceMasterDb*
+
+ (bool) Whether this validator is forced to always use master DB
 
 
 
@@ -131,14 +141,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/validators/ExistValidator::__get*			public
@@ -267,17 +270,10 @@ return (void)
 <
 return (void)
 
- Validates a single attribute.
+ {@inheritdoc}
 
-
-
- Child classes must implement this method to provide the actual validation
- logic.
-
-
-
-    [$model] (\yii\base\Model) The data model to be validated
-    [$attribute] (string) The name of the attribute to be validated.
+    [$model] () 
+    [$attribute] () 
 
 
 *yii/validators/ExistValidator::validate*			public
@@ -289,19 +285,11 @@ return (void)
 >
  validateValue($value)
 <
-return (array|null) The error message and the parameters to be inserted into the
-error message. Null should be returned if the data is valid.
+return (void)
 
- Validates a value.
+ {@inheritdoc}
 
-
-
- A validator class can implement this method to support data validation out of
- the context of a data model.
-
-
-
-    [$value] (mixed) The data value to be validated.
+    [$value] () 
 
 
 *yii/validators/ExistValidator::clientValidateAttribute*	public

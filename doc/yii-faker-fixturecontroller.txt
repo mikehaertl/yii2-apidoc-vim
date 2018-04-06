@@ -210,47 +210,47 @@ METHOD DETAILS
 
 *yii/faker/FixtureController::__get*			public
 
- See |yii/base/Component::__get|
+ See |yii/base/BaseObject::__get|
 
 
 *yii/faker/FixtureController::__set*			public
 
- See |yii/base/Component::__set|
+ See |yii/base/BaseObject::__set|
 
 
 *yii/faker/FixtureController::__isset*			public
 
- See |yii/base/Component::__isset|
+ See |yii/base/BaseObject::__isset|
 
 
 *yii/faker/FixtureController::__unset*			public
 
- See |yii/base/Component::__unset|
+ See |yii/base/BaseObject::__unset|
 
 
 *yii/faker/FixtureController::__call*			public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/faker/FixtureController::hasProperty*		public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/faker/FixtureController::canGetProperty*		public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/faker/FixtureController::canSetProperty*		public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/faker/FixtureController::hasMethod*			public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/faker/FixtureController::__clone*			public
@@ -347,9 +347,40 @@ METHOD DETAILS
 >
  beforeAction($action)
 <
-return (void)
+return (bool) Whether the action should continue to run.
 
-    [$action] () 
+ This method is invoked right before an action is executed.
+
+
+
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
+
+ In case the action should not run, the request should be handled inside of
+ the 'beforeAction' code by either providing the necessary output or
+ redirecting the request. Otherwise the response will be empty.
+
+ If you override this method, your code should look like the following:
+
+   public function beforeAction($action)
+   {
+       // your custom code here, if you want the code to run before action
+ filters,
+       // which are triggered on the [[EVENT_BEFORE_ACTION]] event, e.g.
+ PageCache or AccessControl
+
+       if (!parent::beforeAction($action)) {
+           return false;
+       }
+
+       // other custom code here
+
+       return true; // or false to not run the action
+   }
+
+
+
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/faker/FixtureController::afterAction*		public
@@ -456,21 +487,17 @@ return (void)
 >
  options($actionID)
 <
-return (string[]) The names of the options valid for the action
+return (void)
 
- Returns the names of valid options for the action (id) An option requires the
- existence of a public member variable whose name is the option name.
-
-
-
- Child classes may override this method to specify possible options.
-
- Note that the values setting via options are not available until
- 'beforeAction()' is being called.
+ {@inheritdoc}
 
 
 
-    [$actionID] (string) The action id of the current request
+
+
+
+
+    [$actionID] () 
 
 
 *yii/faker/FixtureController::optionAliases*		public
@@ -645,6 +672,62 @@ return (void)
  Generates all fixtures template path that can be found.
 
 
+*yii/faker/FixtureController::notifyNotFoundTemplates*	protected
+>
+ notifyNotFoundTemplates($templatesNames)
+<
+return (void)
+
+ Notifies user that given fixtures template files were not found.
+
+    [$templatesNames] (array) 
+
+
+*yii/faker/FixtureController::notifyNoTemplatesFound*	protected
+>
+ notifyNoTemplatesFound()
+<
+return (void)
+
+ Notifies user that there was not found any files matching given input
+ conditions.
+
+
+*yii/faker/FixtureController::notifyTemplatesGenerated*	protected
+>
+ notifyTemplatesGenerated($templatesNames)
+<
+return (void)
+
+ Notifies user that given fixtures template files were generated.
+
+    [$templatesNames] (array) 
+
+
+*yii/faker/FixtureController::notifyTemplatesCanBeGenerated*protected
+>
+ notifyTemplatesCanBeGenerated($templatesNames)
+<
+return (void)
+
+ Notifies user about templates which could be generated.
+
+    [$templatesNames] (array) 
+
+
+*yii/faker/FixtureController::findTemplatesFiles*		protected
+>
+ findTemplatesFiles($templatesNames='[]')
+<
+return (array) 
+
+ Returns array containing fixtures templates file names. You can specify what
+ files to find by the given parameter.
+
+    [$templatesNames] (array) Template file names to search. If empty then all
+    files will be searched.
+
+
 *yii/faker/FixtureController::getGenerator*		public
 >
  getGenerator()
@@ -692,7 +775,7 @@ return (array) Fixture
  Generates fixture from given template
 
     [$_template_] (string) The fixture template file
-    [$index] (integer) The current fixture index
+    [$index] (int) The current fixture index
 
 
 *yii/faker/FixtureController::generateFixtureFile*	public
@@ -713,7 +796,7 @@ return (void)
 >
  confirmGeneration($files)
 <
-return (boolean) 
+return (bool) 
 
  Prompts user with message if he confirm generation with given fixture
  templates files.

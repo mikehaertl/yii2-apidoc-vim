@@ -75,24 +75,11 @@ return (void)
 >
  __get($name)
 <
-return (mixed) The property value or the value of a behavior's property
+return (void)
 
- Returns the value of a component property.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a getter: return the getter result  
-   - a property of a behavior: return the behavior property value
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing '$value = $component->property;'.
-
-
-
-    [$name] (string) The property name
+    [$name] () 
 
 
 *yii/base/DynamicModel::__set*				public
@@ -101,52 +88,21 @@ return (mixed) The property value or the value of a behavior's property
 <
 return (void)
 
- Sets the value of a component property.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a setter: set the property value  
-   - an event in the format of "on xyz": attach the handler to the
-   event "xyz"  
-   - a behavior in the format of "as xyz": attach the behavior named as
-   "xyz"  
-   - a property of a behavior: set the behavior property value
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing '$component->property = $value;'.
-
-
-
-    [$name] (string) The property name or the event name
-    [$value] (mixed) The property value
+    [$name] () 
+    [$value] () 
 
 
 *yii/base/DynamicModel::__isset*				public
 >
  __isset($name)
 <
-return (bool) Whether the named property is set
+return (void)
 
- Checks if a property is set, i.e. defined and not null.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a setter: return whether the property is set  
-   - a property of a behavior: return whether the property is set  
-   - return 'false' for non existing properties
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing 'isset($component->property)'.
-
-
-
-    [$name] (string) The property name or the event name
+    [$name] () 
 
 
 *yii/base/DynamicModel::__unset*				public
@@ -155,47 +111,34 @@ return (bool) Whether the named property is set
 <
 return (void)
 
- Sets a component property to be null.
+ {@inheritdoc}
 
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a setter: set the property value to be null  
-   - a property of a behavior: set the property value to be null
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing 'unset($component->property)'.
-
-
-
-    [$name] (string) The property name
+    [$name] () 
 
 
 *yii/base/DynamicModel::__call*				public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/base/DynamicModel::hasProperty*			public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/base/DynamicModel::canGetProperty*			public
 
- See |yii/base/Component::canGetProperty|
+ See |yii/base/BaseObject::canGetProperty|
 
 
 *yii/base/DynamicModel::canSetProperty*			public
 
- See |yii/base/Component::canSetProperty|
+ See |yii/base/BaseObject::canSetProperty|
 
 
 *yii/base/DynamicModel::hasMethod*			public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/base/DynamicModel::__clone*				public
@@ -283,6 +226,16 @@ return (void)
  See |yii/base/ArrayableTrait::toArray|
 
 
+*yii/base/DynamicModel::extractRootFields*		protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/base/DynamicModel::extractFieldsFor*			protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
+
+
 *yii/base/DynamicModel::resolveFields*			protected
 
  See |yii/base/ArrayableTrait::resolveFields|
@@ -307,16 +260,9 @@ return (void)
 >
  attributes()
 <
-return (array) List of attribute names.
+return (void)
 
- Returns the list of attribute names.
-
-
-
- By default, this method returns all public non-static properties of the
- class. You may override this method to change the default behavior.
-
-
+ {@inheritdoc}
 
 
 *yii/base/DynamicModel::attributeLabels*			public
@@ -402,6 +348,11 @@ return (array) List of attribute names.
 *yii/base/DynamicModel::getFirstError*			public
 
  See |yii/base/Model::getFirstError|
+
+
+*yii/base/DynamicModel::getErrorSummary*			public
+
+ See |yii/base/Model::getErrorSummary|
 
 
 *yii/base/DynamicModel::addError*				public

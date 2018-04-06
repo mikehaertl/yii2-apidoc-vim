@@ -48,11 +48,11 @@ $dependency				*yii/widgets/FragmentCache::$dependency*
 
 $variations				*yii/widgets/FragmentCache::$variations*
 
- (array) List of factors that would cause the variation of the content being
- cached. Each factor is a string representing a variation (e.g. the language,
- a GET parameter). The following variation setting will cause the content to
- be cached in different versions according to the current application
- language:
+ (string[]|string) List of factors that would cause the variation of the
+ content being cached. Each factor is a string representing a variation (e.g.
+ the language, a GET parameter). The following variation setting will cause
+ the content to be cached in different versions according to the current
+ application language:
 
    [
        Yii::$app->language,
@@ -65,12 +65,6 @@ $enabled				*yii/widgets/FragmentCache::$enabled*
  (bool) Whether to enable the fragment cache. You may use this property to
  turn on and off the fragment cache according to specific setting (e.g. enable
  fragment cache only for GET requests).
-
-$dynamicPlaceholders			*yii/widgets/FragmentCache::$dynamicPlaceholders*
-
- (array) A list of placeholders for embedding dynamic contents. This property
- is used internally to implement the content caching feature. Do not modify
- it.
 
 
 
@@ -232,9 +226,9 @@ return (void)
  See |yii/base/Widget::setId|
 
 
-*yii/widgets/FragmentCache::getView*			public
+*yii/widgets/FragmentCache::getView*			protected
 
- See |yii/base/Widget::getView|
+ See |yii/base/DynamicContentAwareTrait::getView|
 
 
 *yii/widgets/FragmentCache::setView*			public
@@ -280,6 +274,26 @@ return (void)
  See |yii/base/Widget::afterRun|
 
 
+*yii/widgets/FragmentCache::getDynamicPlaceholders*	public
+
+ See |yii/base/DynamicContentAwareTrait::getDynamicPlaceholders|
+
+
+*yii/widgets/FragmentCache::setDynamicPlaceholders*	public
+
+ See |yii/base/DynamicContentAwareTrait::setDynamicPlaceholders|
+
+
+*yii/widgets/FragmentCache::addDynamicPlaceholder*	public
+
+ See |yii/base/DynamicContentAwareTrait::addDynamicPlaceholder|
+
+
+*yii/widgets/FragmentCache::updateDynamicContent*		protected
+
+ See |yii/base/DynamicContentAwareTrait::updateDynamicContent|
+
+
 *yii/widgets/FragmentCache::getCachedContent*		public
 >
  getCachedContent()
@@ -288,18 +302,6 @@ return (string|false) The cached content. False is returned if valid content is 
 found in the cache.
 
  Returns the cached content if available.
-
-
-*yii/widgets/FragmentCache::updateDynamicContent*		protected
->
- updateDynamicContent($content, $placeholders)
-<
-return (string) Final content
-
- Replaces placeholders in content by results of evaluated dynamic statements.
-
-    [$content] (string) 
-    [$placeholders] (array) 
 
 
 *yii/widgets/FragmentCache::calculateKey*			protected

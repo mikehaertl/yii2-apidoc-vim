@@ -70,14 +70,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/log/SyslogTarget::__get*				public
@@ -198,6 +191,9 @@ return (void)
 
  Writes log messages to syslog.
 
+ Starting from version 2.0.14, this method throws LogRuntimeException in case
+ the log can not be exported.
+
 
 *yii/log/SyslogTarget::collect*				public
 
@@ -228,18 +224,11 @@ return (void)
 >
  formatMessage($message)
 <
-return (string) The formatted message
+return (void)
 
- Formats a log message for display as a string.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$message] (array) The log message to be formatted. The message structure
-    follows that in 'Logger::messages'.
+    [$message] () 
 
 
 *yii/log/SyslogTarget::getMessagePrefix*			public

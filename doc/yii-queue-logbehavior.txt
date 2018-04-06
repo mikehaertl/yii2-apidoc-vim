@@ -1,0 +1,207 @@
+
+*yii/queue/LogBehavior*   >> |yii/base/Behavior|
+=======================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+$owner					*yii/queue/LogBehavior::$owner*
+
+ (\yii\queue\Queue) 
+
+ The owner of this behavior
+
+
+
+$autoFlush				*yii/queue/LogBehavior::$autoFlush*
+
+ (bool)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+
+*yii/queue/LogBehavior::className*			public
+
+ See |yii/base/BaseObject::className|
+
+
+*yii/queue/LogBehavior::__construct*			public
+
+ See |yii/base/BaseObject::__construct|
+
+
+*yii/queue/LogBehavior::init*				public
+
+ See |yii/base/BaseObject::init|
+
+
+*yii/queue/LogBehavior::__get*				public
+
+ See |yii/base/BaseObject::__get|
+
+
+*yii/queue/LogBehavior::__set*				public
+
+ See |yii/base/BaseObject::__set|
+
+
+*yii/queue/LogBehavior::__isset*				public
+
+ See |yii/base/BaseObject::__isset|
+
+
+*yii/queue/LogBehavior::__unset*				public
+
+ See |yii/base/BaseObject::__unset|
+
+
+*yii/queue/LogBehavior::__call*				public
+
+ See |yii/base/BaseObject::__call|
+
+
+*yii/queue/LogBehavior::hasProperty*			public
+
+ See |yii/base/BaseObject::hasProperty|
+
+
+*yii/queue/LogBehavior::canGetProperty*			public
+
+ See |yii/base/BaseObject::canGetProperty|
+
+
+*yii/queue/LogBehavior::canSetProperty*			public
+
+ See |yii/base/BaseObject::canSetProperty|
+
+
+*yii/queue/LogBehavior::hasMethod*			public
+
+ See |yii/base/BaseObject::hasMethod|
+
+
+*yii/queue/LogBehavior::events*				public
+>
+ events()
+<
+return (array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+ Declares event handlers for the 'owner''s events.
+
+
+
+ Child classes may override this method to declare what PHP callbacks should
+ be attached to the events of the 'owner' component.
+
+ The callbacks will be attached to the 'owner''s events when the behavior is
+ attached to the owner; and they will be detached from the events when the
+ behavior is detached from the component.
+
+ The callbacks can be any of the following:
+
+
+   - method in this behavior: ''handleClick'', equivalent to '[$this,
+   'handleClick']' 
+   - object method: '[$object, 'handleClick']' 
+   - static method: '['Page', 'handleClick']' 
+   - anonymous function: 'function ($event) { ... }'
+
+ The following is an example:
+
+   [
+       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+   ]
+
+
+
+
+*yii/queue/LogBehavior::attach*				public
+
+ See |yii/base/Behavior::attach|
+
+
+*yii/queue/LogBehavior::detach*				public
+
+ See |yii/base/Behavior::detach|
+
+
+*yii/queue/LogBehavior::afterPush*			public
+>
+ afterPush($event)
+<
+return (void)
+
+    [$event] (\yii\queue\PushEvent) 
+
+
+*yii/queue/LogBehavior::beforeExec*			public
+>
+ beforeExec($event)
+<
+return (void)
+
+    [$event] (\yii\queue\ExecEvent) 
+
+
+*yii/queue/LogBehavior::afterExec*			public
+>
+ afterExec($event)
+<
+return (void)
+
+    [$event] (\yii\queue\ExecEvent) 
+
+
+*yii/queue/LogBehavior::afterError*			public
+>
+ afterError($event)
+<
+return (void)
+
+    [$event] (\yii\queue\ErrorEvent) 
+
+
+*yii/queue/LogBehavior::workerStart*			public
+>
+ workerStart($event)
+<
+return (void)
+
+    [$event] (\yii\queue\cli\WorkerEvent) 
+
+
+*yii/queue/LogBehavior::workerStop*			public
+>
+ workerStop($event)
+<
+return (void)
+
+    [$event] (\yii\queue\cli\WorkerEvent) 
+
+
+*yii/queue/LogBehavior::getJobTitle*			protected
+>
+ getJobTitle($event)
+<
+return (string) 
+
+    [$event] (\yii\queue\JobEvent) 
+
+
+*yii/queue/LogBehavior::getExecTitle*			protected
+>
+ getExecTitle($event)
+<
+return (string) 
+
+    [$event] (\yii\queue\ExecEvent) 
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

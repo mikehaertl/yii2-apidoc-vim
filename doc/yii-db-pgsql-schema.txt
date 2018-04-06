@@ -20,7 +20,15 @@ $exceptionMap				*yii/db/pgsql/Schema::$exceptionMap*
 
 $columnSchemaClass			*yii/db/pgsql/Schema::$columnSchemaClass*
 
- See |yii/db/Schema::$columnSchemaClass|
+ ()
+
+$tableQuoteCharacter			*yii/db/pgsql/Schema::$tableQuoteCharacter*
+
+ ()
+
+$columnQuoteCharacter			*yii/db/pgsql/Schema::$columnQuoteCharacter*
+
+ See |yii/db/Schema::$columnQuoteCharacter|
 
 $typeMap				*yii/db/pgsql/Schema::$typeMap*
 
@@ -97,71 +105,42 @@ METHOD DETAILS
 >
  resolveTableName($name)
 <
-return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
+return (void)
 
- Resolves the table name and schema name (if any).
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) The table name
+    [$name] () 
 
 
 *yii/db/pgsql/Schema::findSchemaNames*			protected
 >
  findSchemaNames()
 <
-return (array) All schema names in the database, except system schemas.
+return (void)
 
- Returns all schema names in the database, including the default one but not
- system schemas.
-
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
+ {@inheritdoc}
 
 
 *yii/db/pgsql/Schema::findTableNames*			protected
 >
- findTableNames($schema='''')
+ findTableNames($schema='\'\'')
 <
-return (array) All table names in the database. The names have NO schema name prefix.
+return (void)
 
- Returns all table names in the database.
+ {@inheritdoc}
 
-
-
- This method should be overridden by child classes in order to support this
- feature because the default implementation simply throws an exception.
-
-
-
-    [$schema] (string) The schema of the tables. Defaults to empty string,
-    meaning the current or default schema.
+    [$schema] () 
 
 
 *yii/db/pgsql/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
-does not exist.
+return (void)
 
- Loads the metadata for the specified table.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$name] (string) Table name
+    [$name] () 
 
 
 *yii/db/pgsql/Schema::createColumnSchema*			protected
@@ -277,19 +256,12 @@ return (array) All unique indexes for the given table.
 >
  insert($table, $columns)
 <
-return (array|false) Primary key values or false if the command fails
+return (void)
 
- Executes the INSERT command, returning primary key values.
+ {@inheritdoc}
 
-
-
-
-
-
-
-    [$table] (string) The table that new rows will be inserted into.
-    [$columns] (array) The column data (name => value) to be inserted into the
-    table.
+    [$table] () 
+    [$columns] () 
 
 
 *yii/db/pgsql/Schema::quoteValue*				public
@@ -308,21 +280,23 @@ return (array|false) Primary key values or false if the command fails
 
 
 *yii/db/pgsql/Schema::quoteSimpleTableName*		public
->
- quoteSimpleTableName($name)
-<
-return (string) The properly quoted table name
 
- Quotes a table name for use in a query.
-
- A simple table name has no schema prefix.
-
-    [$name] (string) Table name
+ See |yii/db/Schema::quoteSimpleTableName|
 
 
 *yii/db/pgsql/Schema::quoteSimpleColumnName*		public
 
  See |yii/db/Schema::quoteSimpleColumnName|
+
+
+*yii/db/pgsql/Schema::unquoteSimpleTableName*		public
+
+ See |yii/db/Schema::unquoteSimpleTableName|
+
+
+*yii/db/pgsql/Schema::unquoteSimpleColumnName*		public
+
+ See |yii/db/Schema::unquoteSimpleColumnName|
 
 
 *yii/db/pgsql/Schema::getRawTableName*			public
@@ -343,6 +317,11 @@ return (string) The properly quoted table name
 *yii/db/pgsql/Schema::isReadQuery*			public
 
  See |yii/db/Schema::isReadQuery|
+
+
+*yii/db/pgsql/Schema::getServerVersion*			public
+
+ See |yii/db/Schema::getServerVersion|
 
 
 *yii/db/pgsql/Schema::getCacheKey*			protected
@@ -381,6 +360,8 @@ return (string) The properly quoted table name
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -389,6 +370,8 @@ return (void)
  loadTableForeignKeys($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -399,6 +382,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -407,6 +392,8 @@ return (void)
  loadTableUniques($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -417,6 +404,8 @@ return (void)
 <
 return (void)
 
+ {@inheritdoc}
+
     [$tableName] () 
 
 
@@ -425,6 +414,8 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
+
+ {@inheritdoc}
 
     [$tableName] () 
 
@@ -494,6 +485,8 @@ return (void)
  findViewNames($schema='\'\'')
 <
 return (void)
+
+ {@inheritdoc]
 
     [$schema] () 
 

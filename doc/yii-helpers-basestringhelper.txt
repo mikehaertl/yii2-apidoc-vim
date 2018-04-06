@@ -250,5 +250,29 @@ return (string) The string representation of the number.
     [$number] (float|int) A floating point number or integer.
 
 
+*yii/helpers/BaseStringHelper::matchWildcard*		public
+>
+ matchWildcard($pattern, $string, $options='[]')
+<
+return (bool) Whether the string matches pattern or not.
+
+ Checks if the passed string would match the given shell wildcard pattern.
+
+ This function emulates 'fnmatch()', which may be unavailable at certain
+ environment, using PCRE.
+
+    [$pattern] (string) The shell wildcard pattern.
+    [$string] (string) The tested string.
+    [$options] (array) Options for matching. Valid options are:
+
+
+      - caseSensitive: bool, whether pattern should be case sensitive.
+      Defaults to 'true'. 
+      - escape: bool, whether backslash escaping is enabled. Defaults to
+      'true'. 
+      - filePath: bool, whether slashes in string only matches slashes in
+      the given pattern. Defaults to 'false'.
+
+
 
  vim:tw=78:ts=8:ft=help:norl:

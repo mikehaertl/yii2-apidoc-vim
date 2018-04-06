@@ -76,21 +76,7 @@ $attributes				*yii/behaviors/TimestampBehavior::$attributes*
 
 $value					*yii/behaviors/TimestampBehavior::$value*
 
- (mixed) 
-
- The value that will be assigned to the current attributes. This can be an
- anonymous function, callable in array format (e.g. '[$this, 'methodName']'),
- an '\yii\db\Expression|Expression' object representing a DB expression (e.g.
- 'new Expression('NOW()')'), scalar, string or an arbitrary value. If the
- former, the return value of the function will be assigned to the attributes.
- The signature of the function should be as follows,
-
-   function ($event)
-   {
-       // return value will be assigned to the attribute
-   }
-
- In case, when the value is 'null', the result of the PHP function
+ () In case, when the value is 'null', the result of the PHP function
  [time()](http://php.net/manual/en/function.time.php) will be used as value.
 
 $skipUpdateOnClean			*yii/behaviors/TimestampBehavior::$skipUpdateOnClean*
@@ -133,14 +119,7 @@ METHOD DETAILS
 <
 return (void)
 
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
+ {@inheritdoc}
 
 
 *yii/behaviors/TimestampBehavior::__get*			public
@@ -212,20 +191,14 @@ return (void)
 >
  getValue($event)
 <
-return (mixed) The attribute value
+return (void)
 
- Returns the value for the current attributes.
-
-
-
- This method is called by 'evaluateAttributes()'. Its return value will be
- assigned to the attributes corresponding to the triggering event.
+ {@inheritdoc}
 
  In case, when the 'value' is 'null', the result of the PHP function
  [time()](http://php.net/manual/en/function.time.php) will be used as value.
 
-    [$event] (\yii\base\Event) The event that triggers the current attribute
-    updating.
+    [$event] () 
 
 
 *yii/behaviors/TimestampBehavior::touch*			public

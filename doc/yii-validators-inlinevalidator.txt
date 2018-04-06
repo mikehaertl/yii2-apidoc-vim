@@ -244,17 +244,10 @@ METHOD DETAILS
 <
 return (void)
 
- Validates a single attribute.
+ {@inheritdoc}
 
-
-
- Child classes must implement this method to provide the actual validation
- logic.
-
-
-
-    [$model] (\yii\base\Model) The data model to be validated
-    [$attribute] (string) The name of the attribute to be validated.
+    [$model] () 
+    [$attribute] () 
 
 
 *yii/validators/InlineValidator::validate*		public
@@ -271,52 +264,13 @@ return (void)
 >
  clientValidateAttribute($model, $attribute, $view)
 <
-return (string|null) The client-side validation script. Null if the validator does
-not support client-side validation.
+return (void)
 
- Returns the JavaScript needed for performing client-side validation.
+ {@inheritdoc}
 
-
-
- Calls 'getClientOptions()' to generate options array for client-side
- validation.
-
- You may override this method to return the JavaScript validation code if the
- validator can support client-side validation.
-
- The following JavaScript variables are predefined and can be used in the
- validation code:
-
-
-   - 'attribute': an object describing the the attribute being
-   validated. 
-   - 'value': the value being validated. 
-   - 'messages': an array used to hold the validation error messages
-   for the attribute. 
-   - 'deferred': an array used to hold deferred objects for
-   asynchronous validation 
-   - '$form': a jQuery object containing the form element
-
- The 'attribute' object contains the following properties: 
-   - 'id': a unique ID identifying the attribute (e.g.
-   "loginform-username") in the form 
-   - 'name': attribute name or expression (e.g. "[0]content" for
-   tabular input) 
-   - 'container': the jQuery selector of the container of the input
-   field 
-   - 'input': the jQuery selector of the input field under the context
-   of the form 
-   - 'error': the jQuery selector of the error tag under the context of
-   the container 
-   - 'status': status of the input field, 0: empty, not entered before,
-   1: validated, 2: pending validation, 3: validating
-
-
-
-    [$model] (\yii\base\Model) The data model being validated
-    [$attribute] (string) The name of the attribute to be validated.
-    [$view] (\yii\web\View) The view object that is going to be used to render
-    views or view files containing a model form with this validator applied.
+    [$model] () 
+    [$attribute] () 
+    [$view] () 
 
 
 *yii/validators/InlineValidator::getClientOptions*	public

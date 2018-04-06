@@ -103,12 +103,12 @@ METHOD DETAILS
 
 *yii/db/ActiveRecord::__call*				public
 
- See |yii/base/Component::__call|
+ See |yii/base/BaseObject::__call|
 
 
 *yii/db/ActiveRecord::hasProperty*			public
 
- See |yii/base/Component::hasProperty|
+ See |yii/base/BaseObject::hasProperty|
 
 
 *yii/db/ActiveRecord::canGetProperty*			public
@@ -123,7 +123,7 @@ METHOD DETAILS
 
 *yii/db/ActiveRecord::hasMethod*				public
 
- See |yii/base/Component::hasMethod|
+ See |yii/base/BaseObject::hasMethod|
 
 
 *yii/db/ActiveRecord::__clone*				public
@@ -209,6 +209,16 @@ METHOD DETAILS
 *yii/db/ActiveRecord::toArray*				public
 
  See |yii/base/ArrayableTrait::toArray|
+
+
+*yii/db/ActiveRecord::extractRootFields*			protected
+
+ See |yii/base/ArrayableTrait::extractRootFields|
+
+
+*yii/db/ActiveRecord::extractFieldsFor*			protected
+
+ See |yii/base/ArrayableTrait::extractFieldsFor|
 
 
 *yii/db/ActiveRecord::resolveFields*			protected
@@ -326,6 +336,11 @@ return (array) List of attribute names.
 *yii/db/ActiveRecord::getFirstError*			public
 
  See |yii/base/Model::getFirstError|
+
+
+*yii/db/ActiveRecord::getErrorSummary*			public
+
+ See |yii/base/Model::getErrorSummary|
 
 
 *yii/db/ActiveRecord::addError*				public
@@ -764,18 +779,9 @@ deleted is 0, even though the deletion execution is successful.
 >
  refresh()
 <
-return (bool) Whether the row still exists in the database. If 'true', the latest
-data will be populated to this active record. Otherwise, this record will
-remain unchanged.
+return (void)
 
- Repopulates this active record with the latest data.
-
-
-
- If the refresh is successful, an 'EVENT_AFTER_REFRESH' event will be
- triggered. This event is available since version 2.0.8.
-
-
+ {@inheritdoc}
 
 
 *yii/db/ActiveRecord::refreshInternal*			protected
@@ -821,23 +827,10 @@ database table.
 <
 return (void)
 
- Populates an active record object using a row of data from the
- database/storage.
+ {@inheritdoc}
 
-
-
- This is an internal method meant to be called to create active record objects
- after fetching data from the database. It is mainly used by 'ActiveQuery' to
- populate the query results into active records.
-
- When calling this method manually you should call 'afterFind()' on the
- created record to trigger the 'EVENT_AFTER_FIND|afterFind Event'.
-
-
-
-    [$record] (\yii\db\BaseActiveRecord) The record to be populated. In most
-    cases this will be an instance created by 'instantiate()' beforehand.
-    [$row] (array) Attribute values (name => value)
+    [$record] () 
+    [$row] () 
 
 
 *yii/db/ActiveRecord::instantiate*			public
@@ -895,51 +888,7 @@ return (string[]) The primary keys of the associated database table.
 <
 return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance.
 
- Creates an 'ActiveQueryInterface' instance for query purpose.
-
-
-
- The returned 'ActiveQueryInterface' instance can be further customized by
- calling methods defined in 'ActiveQueryInterface' before 'one()' or 'all()'
- is called to return populated ActiveRecord instances. For example,
-
-   // find the customer whose ID is 1
-   $customer = Customer::find()->where(['id' => 1])->one();
-
-   // find all active customers and order them by their age:
-   $customers = Customer::find()
-       ->where(['status' => 1])
-       ->orderBy('age')
-       ->all();
-
- This method is also called by 'BaseActiveRecord::hasOne()' and
- 'BaseActiveRecord::hasMany()' to create a relational query.
-
- You may override this method to return a customized query. For example,
-
-   class Customer extends ActiveRecord
-   {
-       public static function find()
-       {
-           // use CustomerQuery instead of the default ActiveQuery
-           return new CustomerQuery(get_called_class());
-       }
-   }
-
- The following code shows how to apply a default condition for all queries:
-
- '''php class Customer extends ActiveRecord {     public static function
- find()     {         return parent::find()->where(['deleted' => false]);    
- } }
-
- // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
- customer WHERE 'deleted'=:deleted AND age>30 $customers =
- Customer::find()->andWhere('age>30')->all();
-
- // Use where() to ignore the default condition // SELECT FROM customer WHERE
- age>30 $customers = Customer::find()->where('age>30')->all();
-
-
+ {@inheritdoc}
 
 
 *yii/db/ActiveRecord::insert*				public
