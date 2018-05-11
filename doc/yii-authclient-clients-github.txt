@@ -30,9 +30,15 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-$version				*yii/authclient/clients/GitHub::$version*
+Inherited properties:
 
- See |yii/authclient/BaseOAuth::$version|
+ |yii/authclient/BaseOAuth::$version|
+ |yii/authclient/BaseOAuth::$scope|
+ |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
+ |yii/authclient/OAuth2::$clientId|
+ |yii/authclient/OAuth2::$clientSecret|
+ |yii/authclient/OAuth2::$validateAuthState|
+
 
 $apiBaseUrl				*yii/authclient/clients/GitHub::$apiBaseUrl*
 
@@ -42,44 +48,94 @@ $authUrl				*yii/authclient/clients/GitHub::$authUrl*
 
  ()
 
-$scope					*yii/authclient/clients/GitHub::$scope*
-
- See |yii/authclient/BaseOAuth::$scope|
-
-$autoRefreshAccessToken			*yii/authclient/clients/GitHub::$autoRefreshAccessToken*
-
- See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
-
-$clientId				*yii/authclient/clients/GitHub::$clientId*
-
- See |yii/authclient/OAuth2::$clientId|
-
-$clientSecret				*yii/authclient/clients/GitHub::$clientSecret*
-
- See |yii/authclient/OAuth2::$clientSecret|
-
 $tokenUrl				*yii/authclient/clients/GitHub::$tokenUrl*
 
  ()
-
-$validateAuthState			*yii/authclient/clients/GitHub::$validateAuthState*
-
- See |yii/authclient/OAuth2::$validateAuthState|
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+Inherited methods:
 
-*yii/authclient/clients/GitHub::className*		public
-
- See |yii/base/BaseObject::className|
-
-
-*yii/authclient/clients/GitHub::__construct*		public
-
- See |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/authclient/ClientInterface::setId|
+ |yii/authclient/ClientInterface::getId|
+ |yii/authclient/ClientInterface::setName|
+ |yii/authclient/ClientInterface::getName|
+ |yii/authclient/ClientInterface::setTitle|
+ |yii/authclient/ClientInterface::getTitle|
+ |yii/authclient/BaseClient::setUserAttributes|
+ |yii/authclient/ClientInterface::getUserAttributes|
+ |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
+ |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
+ |yii/authclient/BaseClient::setViewOptions|
+ |yii/authclient/ClientInterface::getViewOptions|
+ |yii/authclient/BaseClient::getHttpClient|
+ |yii/authclient/BaseOAuth::setHttpClient|
+ |yii/authclient/BaseClient::setRequestOptions|
+ |yii/authclient/BaseClient::getRequestOptions|
+ |yii/authclient/BaseClient::getStateStorage|
+ |yii/authclient/BaseClient::setStateStorage|
+ |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
+ |yii/authclient/BaseClient::defaultViewOptions|
+ |yii/authclient/BaseOAuth::createHttpClient|
+ |yii/authclient/BaseClient::normalizeUserAttributes|
+ |yii/authclient/BaseClient::createRequest|
+ |yii/authclient/BaseOAuth::defaultRequestOptions|
+ |yii/authclient/BaseClient::setState|
+ |yii/authclient/BaseClient::getState|
+ |yii/authclient/BaseClient::removeState|
+ |yii/authclient/BaseClient::getStateKeyPrefix|
+ |yii/authclient/BaseOAuth::setReturnUrl|
+ |yii/authclient/BaseOAuth::getReturnUrl|
+ |yii/authclient/BaseOAuth::setAccessToken|
+ |yii/authclient/BaseOAuth::getAccessToken|
+ |yii/authclient/BaseOAuth::setSignatureMethod|
+ |yii/authclient/BaseOAuth::getSignatureMethod|
+ |yii/authclient/BaseOAuth::defaultReturnUrl|
+ |yii/authclient/BaseOAuth::createSignatureMethod|
+ |yii/authclient/BaseOAuth::createToken|
+ |yii/authclient/BaseOAuth::sendRequest|
+ |yii/authclient/BaseOAuth::composeUrl|
+ |yii/authclient/BaseOAuth::saveAccessToken|
+ |yii/authclient/BaseOAuth::restoreAccessToken|
+ |yii/authclient/BaseOAuth::createApiRequest|
+ |yii/authclient/BaseOAuth::beforeApiRequestSend|
+ |yii/authclient/BaseOAuth::api|
+ |yii/authclient/BaseOAuth::refreshAccessToken|
+ |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
+ |yii/authclient/OAuth2::buildAuthUrl|
+ |yii/authclient/OAuth2::fetchAccessToken|
+ |yii/authclient/OAuth2::applyClientCredentialsToRequest|
+ |yii/authclient/OAuth2::generateAuthState|
+ |yii/authclient/OAuth2::authenticateClient|
+ |yii/authclient/OAuth2::authenticateUser|
+ |yii/authclient/OAuth2::authenticateUserJwt|
 
 
 *yii/authclient/clients/GitHub::init*			public
@@ -89,206 +145,6 @@ METHOD DETAILS
 return (void)
 
  {@inheritdoc}
-
-
-*yii/authclient/clients/GitHub::__get*			public
-
- See |yii/base/Component::__get|
-
-
-*yii/authclient/clients/GitHub::__set*			public
-
- See |yii/base/Component::__set|
-
-
-*yii/authclient/clients/GitHub::__isset*			public
-
- See |yii/base/Component::__isset|
-
-
-*yii/authclient/clients/GitHub::__unset*			public
-
- See |yii/base/Component::__unset|
-
-
-*yii/authclient/clients/GitHub::__call*			public
-
- See |yii/base/Component::__call|
-
-
-*yii/authclient/clients/GitHub::hasProperty*		public
-
- See |yii/base/Component::hasProperty|
-
-
-*yii/authclient/clients/GitHub::canGetProperty*		public
-
- See |yii/base/Component::canGetProperty|
-
-
-*yii/authclient/clients/GitHub::canSetProperty*		public
-
- See |yii/base/Component::canSetProperty|
-
-
-*yii/authclient/clients/GitHub::hasMethod*		public
-
- See |yii/base/Component::hasMethod|
-
-
-*yii/authclient/clients/GitHub::__clone*			public
-
- See |yii/base/Component::__clone|
-
-
-*yii/authclient/clients/GitHub::behaviors*		public
-
- See |yii/base/Component::behaviors|
-
-
-*yii/authclient/clients/GitHub::hasEventHandlers*		public
-
- See |yii/base/Component::hasEventHandlers|
-
-
-*yii/authclient/clients/GitHub::on*			public
-
- See |yii/base/Component::on|
-
-
-*yii/authclient/clients/GitHub::off*			public
-
- See |yii/base/Component::off|
-
-
-*yii/authclient/clients/GitHub::trigger*			public
-
- See |yii/base/Component::trigger|
-
-
-*yii/authclient/clients/GitHub::getBehavior*		public
-
- See |yii/base/Component::getBehavior|
-
-
-*yii/authclient/clients/GitHub::getBehaviors*		public
-
- See |yii/base/Component::getBehaviors|
-
-
-*yii/authclient/clients/GitHub::attachBehavior*		public
-
- See |yii/base/Component::attachBehavior|
-
-
-*yii/authclient/clients/GitHub::attachBehaviors*		public
-
- See |yii/base/Component::attachBehaviors|
-
-
-*yii/authclient/clients/GitHub::detachBehavior*		public
-
- See |yii/base/Component::detachBehavior|
-
-
-*yii/authclient/clients/GitHub::detachBehaviors*		public
-
- See |yii/base/Component::detachBehaviors|
-
-
-*yii/authclient/clients/GitHub::ensureBehaviors*		public
-
- See |yii/base/Component::ensureBehaviors|
-
-
-*yii/authclient/clients/GitHub::setId*			public
-
- See |yii/authclient/ClientInterface::setId|
-
-
-*yii/authclient/clients/GitHub::getId*			public
-
- See |yii/authclient/ClientInterface::getId|
-
-
-*yii/authclient/clients/GitHub::setName*			public
-
- See |yii/authclient/ClientInterface::setName|
-
-
-*yii/authclient/clients/GitHub::getName*			public
-
- See |yii/authclient/ClientInterface::getName|
-
-
-*yii/authclient/clients/GitHub::setTitle*			public
-
- See |yii/authclient/ClientInterface::setTitle|
-
-
-*yii/authclient/clients/GitHub::getTitle*			public
-
- See |yii/authclient/ClientInterface::getTitle|
-
-
-*yii/authclient/clients/GitHub::setUserAttributes*	public
-
- See |yii/authclient/BaseClient::setUserAttributes|
-
-
-*yii/authclient/clients/GitHub::getUserAttributes*	public
-
- See |yii/authclient/ClientInterface::getUserAttributes|
-
-
-*yii/authclient/clients/GitHub::setNormalizeUserAttributeMap*public
-
- See |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
-
-
-*yii/authclient/clients/GitHub::getNormalizeUserAttributeMap*public
-
- See |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
-
-
-*yii/authclient/clients/GitHub::setViewOptions*		public
-
- See |yii/authclient/BaseClient::setViewOptions|
-
-
-*yii/authclient/clients/GitHub::getViewOptions*		public
-
- See |yii/authclient/ClientInterface::getViewOptions|
-
-
-*yii/authclient/clients/GitHub::getHttpClient*		public
-
- See |yii/authclient/BaseClient::getHttpClient|
-
-
-*yii/authclient/clients/GitHub::setHttpClient*		public
-
- See |yii/authclient/BaseOAuth::setHttpClient|
-
-
-*yii/authclient/clients/GitHub::setRequestOptions*	public
-
- See |yii/authclient/BaseClient::setRequestOptions|
-
-
-*yii/authclient/clients/GitHub::getRequestOptions*	public
-
- See |yii/authclient/BaseClient::getRequestOptions|
-
-
-*yii/authclient/clients/GitHub::getStateStorage*		public
-
- See |yii/authclient/BaseClient::getStateStorage|
-
-
-*yii/authclient/clients/GitHub::setStateStorage*		public
-
- See |yii/authclient/BaseClient::setStateStorage|
 
 
 *yii/authclient/clients/GitHub::defaultName*		protected
@@ -316,181 +172,6 @@ return (void)
 return (void)
 
  {@inheritdoc}
-
-
-*yii/authclient/clients/GitHub::defaultNormalizeUserAttributeMap*protected
-
- See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
-
-
-*yii/authclient/clients/GitHub::defaultViewOptions*	protected
-
- See |yii/authclient/BaseClient::defaultViewOptions|
-
-
-*yii/authclient/clients/GitHub::createHttpClient*		protected
-
- See |yii/authclient/BaseOAuth::createHttpClient|
-
-
-*yii/authclient/clients/GitHub::normalizeUserAttributes*	protected
-
- See |yii/authclient/BaseClient::normalizeUserAttributes|
-
-
-*yii/authclient/clients/GitHub::createRequest*		public
-
- See |yii/authclient/BaseClient::createRequest|
-
-
-*yii/authclient/clients/GitHub::defaultRequestOptions*	protected
-
- See |yii/authclient/BaseOAuth::defaultRequestOptions|
-
-
-*yii/authclient/clients/GitHub::setState*			protected
-
- See |yii/authclient/BaseClient::setState|
-
-
-*yii/authclient/clients/GitHub::getState*			protected
-
- See |yii/authclient/BaseClient::getState|
-
-
-*yii/authclient/clients/GitHub::removeState*		protected
-
- See |yii/authclient/BaseClient::removeState|
-
-
-*yii/authclient/clients/GitHub::getStateKeyPrefix*	protected
-
- See |yii/authclient/BaseClient::getStateKeyPrefix|
-
-
-*yii/authclient/clients/GitHub::setReturnUrl*		public
-
- See |yii/authclient/BaseOAuth::setReturnUrl|
-
-
-*yii/authclient/clients/GitHub::getReturnUrl*		public
-
- See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/clients/GitHub::setAccessToken*		public
-
- See |yii/authclient/BaseOAuth::setAccessToken|
-
-
-*yii/authclient/clients/GitHub::getAccessToken*		public
-
- See |yii/authclient/BaseOAuth::getAccessToken|
-
-
-*yii/authclient/clients/GitHub::setSignatureMethod*	public
-
- See |yii/authclient/BaseOAuth::setSignatureMethod|
-
-
-*yii/authclient/clients/GitHub::getSignatureMethod*	public
-
- See |yii/authclient/BaseOAuth::getSignatureMethod|
-
-
-*yii/authclient/clients/GitHub::defaultReturnUrl*		protected
-
- See |yii/authclient/BaseOAuth::defaultReturnUrl|
-
-
-*yii/authclient/clients/GitHub::createSignatureMethod*	protected
-
- See |yii/authclient/BaseOAuth::createSignatureMethod|
-
-
-*yii/authclient/clients/GitHub::createToken*		protected
-
- See |yii/authclient/BaseOAuth::createToken|
-
-
-*yii/authclient/clients/GitHub::sendRequest*		protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/clients/GitHub::composeUrl*		protected
-
- See |yii/authclient/BaseOAuth::composeUrl|
-
-
-*yii/authclient/clients/GitHub::saveAccessToken*		protected
-
- See |yii/authclient/BaseOAuth::saveAccessToken|
-
-
-*yii/authclient/clients/GitHub::restoreAccessToken*	protected
-
- See |yii/authclient/BaseOAuth::restoreAccessToken|
-
-
-*yii/authclient/clients/GitHub::createApiRequest*		public
-
- See |yii/authclient/BaseOAuth::createApiRequest|
-
-
-*yii/authclient/clients/GitHub::beforeApiRequestSend*	public
-
- See |yii/authclient/BaseOAuth::beforeApiRequestSend|
-
-
-*yii/authclient/clients/GitHub::api*			public
-
- See |yii/authclient/BaseOAuth::api|
-
-
-*yii/authclient/clients/GitHub::refreshAccessToken*	public
-
- See |yii/authclient/BaseOAuth::refreshAccessToken|
-
-
-*yii/authclient/clients/GitHub::applyAccessTokenToRequest*public
-
- See |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
-
-
-*yii/authclient/clients/GitHub::buildAuthUrl*		public
-
- See |yii/authclient/OAuth2::buildAuthUrl|
-
-
-*yii/authclient/clients/GitHub::fetchAccessToken*		public
-
- See |yii/authclient/OAuth2::fetchAccessToken|
-
-
-*yii/authclient/clients/GitHub::applyClientCredentialsToRequest*protected
-
- See |yii/authclient/OAuth2::applyClientCredentialsToRequest|
-
-
-*yii/authclient/clients/GitHub::generateAuthState*	protected
-
- See |yii/authclient/OAuth2::generateAuthState|
-
-
-*yii/authclient/clients/GitHub::authenticateClient*	public
-
- See |yii/authclient/OAuth2::authenticateClient|
-
-
-*yii/authclient/clients/GitHub::authenticateUser*		public
-
- See |yii/authclient/OAuth2::authenticateUser|
-
-
-*yii/authclient/clients/GitHub::authenticateUserJwt*	public
-
- See |yii/authclient/OAuth2::authenticateUserJwt|
 
 
 

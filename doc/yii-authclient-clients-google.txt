@@ -39,9 +39,15 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-$version				*yii/authclient/clients/Google::$version*
+Inherited properties:
 
- See |yii/authclient/BaseOAuth::$version|
+ |yii/authclient/BaseOAuth::$version|
+ |yii/authclient/BaseOAuth::$scope|
+ |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
+ |yii/authclient/OAuth2::$clientId|
+ |yii/authclient/OAuth2::$clientSecret|
+ |yii/authclient/OAuth2::$validateAuthState|
+
 
 $apiBaseUrl				*yii/authclient/clients/Google::$apiBaseUrl*
 
@@ -51,44 +57,94 @@ $authUrl				*yii/authclient/clients/Google::$authUrl*
 
  ()
 
-$scope					*yii/authclient/clients/Google::$scope*
-
- See |yii/authclient/BaseOAuth::$scope|
-
-$autoRefreshAccessToken			*yii/authclient/clients/Google::$autoRefreshAccessToken*
-
- See |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
-
-$clientId				*yii/authclient/clients/Google::$clientId*
-
- See |yii/authclient/OAuth2::$clientId|
-
-$clientSecret				*yii/authclient/clients/Google::$clientSecret*
-
- See |yii/authclient/OAuth2::$clientSecret|
-
 $tokenUrl				*yii/authclient/clients/Google::$tokenUrl*
 
  ()
-
-$validateAuthState			*yii/authclient/clients/Google::$validateAuthState*
-
- See |yii/authclient/OAuth2::$validateAuthState|
 
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+Inherited methods:
 
-*yii/authclient/clients/Google::className*		public
-
- See |yii/base/BaseObject::className|
-
-
-*yii/authclient/clients/Google::__construct*		public
-
- See |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/authclient/ClientInterface::setId|
+ |yii/authclient/ClientInterface::getId|
+ |yii/authclient/ClientInterface::setName|
+ |yii/authclient/ClientInterface::getName|
+ |yii/authclient/ClientInterface::setTitle|
+ |yii/authclient/ClientInterface::getTitle|
+ |yii/authclient/BaseClient::setUserAttributes|
+ |yii/authclient/ClientInterface::getUserAttributes|
+ |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
+ |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
+ |yii/authclient/BaseClient::setViewOptions|
+ |yii/authclient/ClientInterface::getViewOptions|
+ |yii/authclient/BaseClient::getHttpClient|
+ |yii/authclient/BaseOAuth::setHttpClient|
+ |yii/authclient/BaseClient::setRequestOptions|
+ |yii/authclient/BaseClient::getRequestOptions|
+ |yii/authclient/BaseClient::getStateStorage|
+ |yii/authclient/BaseClient::setStateStorage|
+ |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
+ |yii/authclient/BaseClient::defaultViewOptions|
+ |yii/authclient/BaseOAuth::createHttpClient|
+ |yii/authclient/BaseClient::normalizeUserAttributes|
+ |yii/authclient/BaseClient::createRequest|
+ |yii/authclient/BaseOAuth::defaultRequestOptions|
+ |yii/authclient/BaseClient::setState|
+ |yii/authclient/BaseClient::getState|
+ |yii/authclient/BaseClient::removeState|
+ |yii/authclient/BaseClient::getStateKeyPrefix|
+ |yii/authclient/BaseOAuth::setReturnUrl|
+ |yii/authclient/BaseOAuth::getReturnUrl|
+ |yii/authclient/BaseOAuth::setAccessToken|
+ |yii/authclient/BaseOAuth::getAccessToken|
+ |yii/authclient/BaseOAuth::setSignatureMethod|
+ |yii/authclient/BaseOAuth::getSignatureMethod|
+ |yii/authclient/BaseOAuth::defaultReturnUrl|
+ |yii/authclient/BaseOAuth::createSignatureMethod|
+ |yii/authclient/BaseOAuth::createToken|
+ |yii/authclient/BaseOAuth::sendRequest|
+ |yii/authclient/BaseOAuth::composeUrl|
+ |yii/authclient/BaseOAuth::saveAccessToken|
+ |yii/authclient/BaseOAuth::restoreAccessToken|
+ |yii/authclient/BaseOAuth::createApiRequest|
+ |yii/authclient/BaseOAuth::beforeApiRequestSend|
+ |yii/authclient/BaseOAuth::api|
+ |yii/authclient/BaseOAuth::refreshAccessToken|
+ |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
+ |yii/authclient/OAuth2::buildAuthUrl|
+ |yii/authclient/OAuth2::fetchAccessToken|
+ |yii/authclient/OAuth2::applyClientCredentialsToRequest|
+ |yii/authclient/OAuth2::generateAuthState|
+ |yii/authclient/OAuth2::authenticateClient|
+ |yii/authclient/OAuth2::authenticateUser|
+ |yii/authclient/OAuth2::authenticateUserJwt|
 
 
 *yii/authclient/clients/Google::init*			public
@@ -98,206 +154,6 @@ METHOD DETAILS
 return (void)
 
  {@inheritdoc}
-
-
-*yii/authclient/clients/Google::__get*			public
-
- See |yii/base/Component::__get|
-
-
-*yii/authclient/clients/Google::__set*			public
-
- See |yii/base/Component::__set|
-
-
-*yii/authclient/clients/Google::__isset*			public
-
- See |yii/base/Component::__isset|
-
-
-*yii/authclient/clients/Google::__unset*			public
-
- See |yii/base/Component::__unset|
-
-
-*yii/authclient/clients/Google::__call*			public
-
- See |yii/base/Component::__call|
-
-
-*yii/authclient/clients/Google::hasProperty*		public
-
- See |yii/base/Component::hasProperty|
-
-
-*yii/authclient/clients/Google::canGetProperty*		public
-
- See |yii/base/Component::canGetProperty|
-
-
-*yii/authclient/clients/Google::canSetProperty*		public
-
- See |yii/base/Component::canSetProperty|
-
-
-*yii/authclient/clients/Google::hasMethod*		public
-
- See |yii/base/Component::hasMethod|
-
-
-*yii/authclient/clients/Google::__clone*			public
-
- See |yii/base/Component::__clone|
-
-
-*yii/authclient/clients/Google::behaviors*		public
-
- See |yii/base/Component::behaviors|
-
-
-*yii/authclient/clients/Google::hasEventHandlers*		public
-
- See |yii/base/Component::hasEventHandlers|
-
-
-*yii/authclient/clients/Google::on*			public
-
- See |yii/base/Component::on|
-
-
-*yii/authclient/clients/Google::off*			public
-
- See |yii/base/Component::off|
-
-
-*yii/authclient/clients/Google::trigger*			public
-
- See |yii/base/Component::trigger|
-
-
-*yii/authclient/clients/Google::getBehavior*		public
-
- See |yii/base/Component::getBehavior|
-
-
-*yii/authclient/clients/Google::getBehaviors*		public
-
- See |yii/base/Component::getBehaviors|
-
-
-*yii/authclient/clients/Google::attachBehavior*		public
-
- See |yii/base/Component::attachBehavior|
-
-
-*yii/authclient/clients/Google::attachBehaviors*		public
-
- See |yii/base/Component::attachBehaviors|
-
-
-*yii/authclient/clients/Google::detachBehavior*		public
-
- See |yii/base/Component::detachBehavior|
-
-
-*yii/authclient/clients/Google::detachBehaviors*		public
-
- See |yii/base/Component::detachBehaviors|
-
-
-*yii/authclient/clients/Google::ensureBehaviors*		public
-
- See |yii/base/Component::ensureBehaviors|
-
-
-*yii/authclient/clients/Google::setId*			public
-
- See |yii/authclient/ClientInterface::setId|
-
-
-*yii/authclient/clients/Google::getId*			public
-
- See |yii/authclient/ClientInterface::getId|
-
-
-*yii/authclient/clients/Google::setName*			public
-
- See |yii/authclient/ClientInterface::setName|
-
-
-*yii/authclient/clients/Google::getName*			public
-
- See |yii/authclient/ClientInterface::getName|
-
-
-*yii/authclient/clients/Google::setTitle*			public
-
- See |yii/authclient/ClientInterface::setTitle|
-
-
-*yii/authclient/clients/Google::getTitle*			public
-
- See |yii/authclient/ClientInterface::getTitle|
-
-
-*yii/authclient/clients/Google::setUserAttributes*	public
-
- See |yii/authclient/BaseClient::setUserAttributes|
-
-
-*yii/authclient/clients/Google::getUserAttributes*	public
-
- See |yii/authclient/ClientInterface::getUserAttributes|
-
-
-*yii/authclient/clients/Google::setNormalizeUserAttributeMap*public
-
- See |yii/authclient/BaseClient::setNormalizeUserAttributeMap|
-
-
-*yii/authclient/clients/Google::getNormalizeUserAttributeMap*public
-
- See |yii/authclient/BaseClient::getNormalizeUserAttributeMap|
-
-
-*yii/authclient/clients/Google::setViewOptions*		public
-
- See |yii/authclient/BaseClient::setViewOptions|
-
-
-*yii/authclient/clients/Google::getViewOptions*		public
-
- See |yii/authclient/ClientInterface::getViewOptions|
-
-
-*yii/authclient/clients/Google::getHttpClient*		public
-
- See |yii/authclient/BaseClient::getHttpClient|
-
-
-*yii/authclient/clients/Google::setHttpClient*		public
-
- See |yii/authclient/BaseOAuth::setHttpClient|
-
-
-*yii/authclient/clients/Google::setRequestOptions*	public
-
- See |yii/authclient/BaseClient::setRequestOptions|
-
-
-*yii/authclient/clients/Google::getRequestOptions*	public
-
- See |yii/authclient/BaseClient::getRequestOptions|
-
-
-*yii/authclient/clients/Google::getStateStorage*		public
-
- See |yii/authclient/BaseClient::getStateStorage|
-
-
-*yii/authclient/clients/Google::setStateStorage*		public
-
- See |yii/authclient/BaseClient::setStateStorage|
 
 
 *yii/authclient/clients/Google::defaultName*		protected
@@ -325,181 +181,6 @@ return (void)
 return (void)
 
  {@inheritdoc}
-
-
-*yii/authclient/clients/Google::defaultNormalizeUserAttributeMap*protected
-
- See |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
-
-
-*yii/authclient/clients/Google::defaultViewOptions*	protected
-
- See |yii/authclient/BaseClient::defaultViewOptions|
-
-
-*yii/authclient/clients/Google::createHttpClient*		protected
-
- See |yii/authclient/BaseOAuth::createHttpClient|
-
-
-*yii/authclient/clients/Google::normalizeUserAttributes*	protected
-
- See |yii/authclient/BaseClient::normalizeUserAttributes|
-
-
-*yii/authclient/clients/Google::createRequest*		public
-
- See |yii/authclient/BaseClient::createRequest|
-
-
-*yii/authclient/clients/Google::defaultRequestOptions*	protected
-
- See |yii/authclient/BaseOAuth::defaultRequestOptions|
-
-
-*yii/authclient/clients/Google::setState*			protected
-
- See |yii/authclient/BaseClient::setState|
-
-
-*yii/authclient/clients/Google::getState*			protected
-
- See |yii/authclient/BaseClient::getState|
-
-
-*yii/authclient/clients/Google::removeState*		protected
-
- See |yii/authclient/BaseClient::removeState|
-
-
-*yii/authclient/clients/Google::getStateKeyPrefix*	protected
-
- See |yii/authclient/BaseClient::getStateKeyPrefix|
-
-
-*yii/authclient/clients/Google::setReturnUrl*		public
-
- See |yii/authclient/BaseOAuth::setReturnUrl|
-
-
-*yii/authclient/clients/Google::getReturnUrl*		public
-
- See |yii/authclient/BaseOAuth::getReturnUrl|
-
-
-*yii/authclient/clients/Google::setAccessToken*		public
-
- See |yii/authclient/BaseOAuth::setAccessToken|
-
-
-*yii/authclient/clients/Google::getAccessToken*		public
-
- See |yii/authclient/BaseOAuth::getAccessToken|
-
-
-*yii/authclient/clients/Google::setSignatureMethod*	public
-
- See |yii/authclient/BaseOAuth::setSignatureMethod|
-
-
-*yii/authclient/clients/Google::getSignatureMethod*	public
-
- See |yii/authclient/BaseOAuth::getSignatureMethod|
-
-
-*yii/authclient/clients/Google::defaultReturnUrl*		protected
-
- See |yii/authclient/BaseOAuth::defaultReturnUrl|
-
-
-*yii/authclient/clients/Google::createSignatureMethod*	protected
-
- See |yii/authclient/BaseOAuth::createSignatureMethod|
-
-
-*yii/authclient/clients/Google::createToken*		protected
-
- See |yii/authclient/BaseOAuth::createToken|
-
-
-*yii/authclient/clients/Google::sendRequest*		protected
-
- See |yii/authclient/BaseOAuth::sendRequest|
-
-
-*yii/authclient/clients/Google::composeUrl*		protected
-
- See |yii/authclient/BaseOAuth::composeUrl|
-
-
-*yii/authclient/clients/Google::saveAccessToken*		protected
-
- See |yii/authclient/BaseOAuth::saveAccessToken|
-
-
-*yii/authclient/clients/Google::restoreAccessToken*	protected
-
- See |yii/authclient/BaseOAuth::restoreAccessToken|
-
-
-*yii/authclient/clients/Google::createApiRequest*		public
-
- See |yii/authclient/BaseOAuth::createApiRequest|
-
-
-*yii/authclient/clients/Google::beforeApiRequestSend*	public
-
- See |yii/authclient/BaseOAuth::beforeApiRequestSend|
-
-
-*yii/authclient/clients/Google::api*			public
-
- See |yii/authclient/BaseOAuth::api|
-
-
-*yii/authclient/clients/Google::refreshAccessToken*	public
-
- See |yii/authclient/BaseOAuth::refreshAccessToken|
-
-
-*yii/authclient/clients/Google::applyAccessTokenToRequest*public
-
- See |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
-
-
-*yii/authclient/clients/Google::buildAuthUrl*		public
-
- See |yii/authclient/OAuth2::buildAuthUrl|
-
-
-*yii/authclient/clients/Google::fetchAccessToken*		public
-
- See |yii/authclient/OAuth2::fetchAccessToken|
-
-
-*yii/authclient/clients/Google::applyClientCredentialsToRequest*protected
-
- See |yii/authclient/OAuth2::applyClientCredentialsToRequest|
-
-
-*yii/authclient/clients/Google::generateAuthState*	protected
-
- See |yii/authclient/OAuth2::generateAuthState|
-
-
-*yii/authclient/clients/Google::authenticateClient*	public
-
- See |yii/authclient/OAuth2::authenticateClient|
-
-
-*yii/authclient/clients/Google::authenticateUser*		public
-
- See |yii/authclient/OAuth2::authenticateUser|
-
-
-*yii/authclient/clients/Google::authenticateUserJwt*	public
-
- See |yii/authclient/OAuth2::authenticateUserJwt|
 
 
 
