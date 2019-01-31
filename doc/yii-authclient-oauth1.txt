@@ -83,31 +83,6 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
  |yii/authclient/ClientInterface::setId|
  |yii/authclient/ClientInterface::getId|
  |yii/authclient/ClientInterface::setName|
@@ -121,7 +96,7 @@ Inherited methods:
  |yii/authclient/BaseClient::setViewOptions|
  |yii/authclient/ClientInterface::getViewOptions|
  |yii/authclient/BaseClient::getHttpClient|
- |yii/authclient/BaseClient::setHttpClient|
+ |yii/authclient/BaseOAuth::setHttpClient|
  |yii/authclient/BaseClient::setRequestOptions|
  |yii/authclient/BaseClient::getRequestOptions|
  |yii/authclient/BaseClient::getStateStorage|
@@ -131,9 +106,9 @@ Inherited methods:
  |yii/authclient/BaseClient::initUserAttributes|
  |yii/authclient/BaseClient::defaultNormalizeUserAttributeMap|
  |yii/authclient/BaseClient::defaultViewOptions|
- |yii/authclient/BaseClient::createHttpClient|
+ |yii/authclient/BaseOAuth::createHttpClient|
  |yii/authclient/BaseClient::normalizeUserAttributes|
- |yii/authclient/BaseClient::defaultRequestOptions|
+ |yii/authclient/BaseOAuth::defaultRequestOptions|
  |yii/authclient/BaseClient::setState|
  |yii/authclient/BaseClient::getState|
  |yii/authclient/BaseClient::removeState|
@@ -158,9 +133,15 @@ Inherited methods:
 >
  createRequest()
 <
-return (void)
+return (\yii\httpclient\Request) HTTP request instance.
 
- {@inheritdoc}
+ Creates HTTP request instance.
+
+
+
+
+
+
 
 
 *yii/authclient/OAuth1::defaultReturnUrl*			protected
@@ -176,9 +157,17 @@ return (string) Return URL.
 >
  createApiRequest()
 <
-return (void)
+return (\yii\httpclient\Request) HTTP request instance.
 
- {@inheritdoc}
+ Creates an HTTP request for the API call.
+
+
+
+ The created request will be automatically processed adding access token
+ parameters and signature before sending. You may use 'createRequest()' to
+ gain full control over request composition and execution.
+
+
 
 
 *yii/authclient/OAuth1::refreshAccessToken*		public
@@ -198,10 +187,16 @@ return (\yii\authclient\OAuthToken) New auth token.
 <
 return (void)
 
- {@inheritdoc}
+ Applies access token to the HTTP request instance.
 
-    [$request] () 
-    [$accessToken] () 
+
+
+
+
+
+
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
 
 
 *yii/authclient/OAuth1::fetchRequestToken*		public

@@ -37,6 +37,10 @@ $extensionClass				*yii/smarty/ViewRenderer::$extensionClass*
 
  (string) Extension class name
 
+$smartyClass				*yii/smarty/ViewRenderer::$smartyClass*
+
+ (string) The Smarty class
+
 $smarty					*yii/smarty/ViewRenderer::$smarty*
 
  (\Smarty) The Smarty object used for rendering
@@ -46,32 +50,6 @@ $smarty					*yii/smarty/ViewRenderer::$smarty*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
-
 
 *yii/smarty/ViewRenderer::init*				public
 >
@@ -80,6 +58,18 @@ Inherited methods:
 return (void)
 
  Instantiates and configures the Smarty object.
+
+
+*yii/smarty/ViewRenderer::resolveTemplateDir*		protected
+>
+ resolveTemplateDir($dir)
+<
+return (string) The resolved directory name
+
+ The directory can be specified in Yii's standard convention using @, // and /
+ prefixes or no prefix for view relative directories.
+
+    [$dir] (string) Directory name to be resolved
 
 
 *yii/smarty/ViewRenderer::__call*				public
@@ -112,18 +102,6 @@ return (string) The rendering result
     [$view] (\yii\web\View) The view object used for rendering the file.
     [$file] (string) The view file.
     [$params] (array) The parameters to be passed to the view file.
-
-
-*yii/smarty/ViewRenderer::resolveTemplateDir*		protected
->
- resolveTemplateDir($dir)
-<
-return (string) The resolved directory name
-
- The directory can be specified in Yii's standard convention using @, // and /
- prefixes or no prefix for view relative directories.
-
-    [$dir] (string) Directory name to be resolved
 
 
 *yii/smarty/ViewRenderer::aliasHandler*			public

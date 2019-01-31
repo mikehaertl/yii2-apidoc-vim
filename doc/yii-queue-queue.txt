@@ -5,15 +5,16 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/queue/cli/Queue|
-|yii/queue/file/Queue|
 |yii/queue/sync/Queue|
-|yii/queue/db/Queue|
-|yii/queue/amqp_interop/Queue|
-|yii/queue/redis/Queue|
-|yii/queue/amqp/Queue|
 |yii/queue/gearman/Queue|
+|yii/queue/db/Queue|
+|yii/queue/redis/Queue|
+|yii/queue/file/Queue|
+|yii/queue/sqs/Queue|
+|yii/queue/amqp_interop/Queue|
+|yii/queue/amqp/Queue|
 |yii/queue/beanstalk/Queue|
+|yii/queue/cli/Queue|
 
 
 PROPERTY DETAILS
@@ -42,47 +43,12 @@ $attempts				*yii/queue/Queue::$attempts*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
-
 
 *yii/queue/Queue::init*					public
 >
  init()
 <
 return (void)
-
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
 
 
 
@@ -92,7 +58,7 @@ return (void)
 <
 return ($this) 
 
- Sets TTR for job execute
+ Sets TTR for job execute.
 
     [$value] (int|mixed) 
 
@@ -103,7 +69,7 @@ return ($this)
 <
 return ($this) 
 
- Sets delay for later execute
+ Sets delay for later execute.
 
     [$value] (int|mixed) 
 
@@ -114,7 +80,7 @@ return ($this)
 <
 return ($this) 
 
- Sets job priority
+ Sets job priority.
 
     [$value] (mixed) 
 
@@ -125,7 +91,7 @@ return ($this)
 <
 return (string|null) Id of a job message
 
- Pushes job into queue
+ Pushes job into queue.
 
     [$job] (\yii\queue\JobInterface|mixed) 
 
@@ -146,7 +112,7 @@ return (string) Id of a job message
 >
  getWorkerPid()
 <
-return (null) 
+return (void)
 
  Uses for CLI drivers and gets process ID of a worker.
 

@@ -51,7 +51,7 @@ PROPERTY DETAILS
 
 Inherited properties:
 
- |yii/authclient/BaseOAuth::$version|
+ |yii/authclient/OAuth2::$version|
  |yii/authclient/clients/Google::$apiBaseUrl|
  |yii/authclient/clients/Google::$authUrl|
  |yii/authclient/BaseOAuth::$scope|
@@ -63,7 +63,16 @@ Inherited properties:
 
 $validateAuthState			*yii/authclient/clients/GoogleHybrid::$validateAuthState*
 
- ()
+ (bool) 
+
+ Whether to use and validate auth 'state' parameter in authentication flow. If
+ enabled 
+   - the opaque value will be generated and applied to auth URL to
+   maintain state between the request and callback. The authorization server
+ includes this value, when redirecting the user-agent back to the client. The
+ option is used for preventing cross-site request forgery.
+
+
 
 
 
@@ -72,31 +81,6 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/authclient/clients/Google::init|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
  |yii/authclient/ClientInterface::setId|
  |yii/authclient/ClientInterface::getId|
  |yii/authclient/ClientInterface::setName|
@@ -134,7 +118,7 @@ Inherited methods:
  |yii/authclient/BaseOAuth::setSignatureMethod|
  |yii/authclient/BaseOAuth::getSignatureMethod|
  |yii/authclient/BaseOAuth::createSignatureMethod|
- |yii/authclient/BaseOAuth::createToken|
+ |yii/authclient/OAuth2::createToken|
  |yii/authclient/BaseOAuth::sendRequest|
  |yii/authclient/BaseOAuth::composeUrl|
  |yii/authclient/BaseOAuth::saveAccessToken|
@@ -142,8 +126,8 @@ Inherited methods:
  |yii/authclient/BaseOAuth::createApiRequest|
  |yii/authclient/BaseOAuth::beforeApiRequestSend|
  |yii/authclient/BaseOAuth::api|
- |yii/authclient/BaseOAuth::refreshAccessToken|
- |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
+ |yii/authclient/OAuth2::refreshAccessToken|
+ |yii/authclient/OAuth2::applyAccessTokenToRequest|
  |yii/authclient/OAuth2::buildAuthUrl|
  |yii/authclient/OAuth2::fetchAccessToken|
  |yii/authclient/OAuth2::applyClientCredentialsToRequest|
@@ -151,24 +135,38 @@ Inherited methods:
  |yii/authclient/OAuth2::authenticateClient|
  |yii/authclient/OAuth2::authenticateUser|
  |yii/authclient/OAuth2::authenticateUserJwt|
+ |yii/authclient/clients/Google::init|
 
 
 *yii/authclient/clients/GoogleHybrid::defaultViewOptions*	protected
 >
  defaultViewOptions()
 <
-return (void)
+return (array) List of default 'viewOptions'
 
- {@inheritdoc}
+ Returns the default 'viewOptions' value.
+
+
+
+ Particular client may override this method in order to provide specific
+ default view options.
+
+
 
 
 *yii/authclient/clients/GoogleHybrid::defaultReturnUrl*	protected
 >
  defaultReturnUrl()
 <
-return (void)
+return (string) Return URL.
 
- {@inheritdoc}
+ Composes default 'returnUrl' value.
+
+
+
+
+
+
 
 
 

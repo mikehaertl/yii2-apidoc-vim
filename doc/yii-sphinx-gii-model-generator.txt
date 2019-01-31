@@ -45,77 +45,7 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
  |yii/gii/Generator::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
- |yii/base/StaticInstanceTrait::instance|
- |yii/base/ArrayableTrait::fields|
- |yii/base/ArrayableTrait::extraFields|
- |yii/base/ArrayableTrait::toArray|
- |yii/base/ArrayableTrait::extractRootFields|
- |yii/base/ArrayableTrait::extractFieldsFor|
- |yii/base/ArrayableTrait::resolveFields|
- |yii/base/Model::scenarios|
- |yii/base/Model::formName|
- |yii/base/Model::attributes|
- |yii/base/Model::attributeHints|
- |yii/base/Model::validate|
- |yii/base/Model::beforeValidate|
- |yii/base/Model::afterValidate|
- |yii/base/Model::getValidators|
- |yii/base/Model::getActiveValidators|
- |yii/base/Model::createValidators|
- |yii/base/Model::isAttributeRequired|
- |yii/base/Model::isAttributeSafe|
- |yii/base/Model::isAttributeActive|
- |yii/base/Model::getAttributeLabel|
- |yii/base/Model::getAttributeHint|
- |yii/base/Model::hasErrors|
- |yii/base/Model::getErrors|
- |yii/base/Model::getFirstErrors|
- |yii/base/Model::getFirstError|
- |yii/base/Model::getErrorSummary|
- |yii/base/Model::addError|
- |yii/base/Model::addErrors|
- |yii/base/Model::clearErrors|
- |yii/base/Model::generateAttributeLabel|
- |yii/base/Model::getAttributes|
- |yii/base/Model::setAttributes|
- |yii/base/Model::onUnsafeAttribute|
- |yii/base/Model::getScenario|
- |yii/base/Model::setScenario|
- |yii/base/Model::safeAttributes|
- |yii/base/Model::activeAttributes|
- |yii/base/Model::load|
- |yii/base/Model::loadMultiple|
- |yii/base/Model::validateMultiple|
- |yii/base/Model::getIterator|
- |yii/base/Model::offsetExists|
- |yii/base/Model::offsetGet|
- |yii/base/Model::offsetSet|
- |yii/base/Model::offsetUnset|
  |yii/gii/Generator::successMessage|
  |yii/gii/Generator::formView|
  |yii/gii/Generator::defaultTemplate|
@@ -133,13 +63,35 @@ Inherited methods:
  |yii/gii/Generator::generateString|
 
 
-*yii/sphinx/gii/model/Generator::rules*			public
+*yii/sphinx/gii/model/Generator::getName*			public
 >
- rules()
+ getName()
 <
-return (void)
+return (string) Name of the code generator
 
- {@inheritdoc}
+
+
+
+
+
+
+
+*yii/sphinx/gii/model/Generator::generate*		public
+>
+ generate()
+<
+return (\yii\gii\CodeFile[]) A list of code files to be created.
+
+ Generates the code based on the current user input and the specified code
+ template files.
+
+
+
+ This is the main method that child classes should implement. Please refer to
+ '\yii\gii\generators\controller\Generator::generate()' as an example on how
+ to implement this method.
+
+
 
 
 *yii/sphinx/gii/model/Generator::attributeLabels*		public
@@ -148,70 +100,109 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
 
 
-*yii/sphinx/gii/model/Generator::getName*			public
->
- getName()
-<
-return (void)
-
- {@inheritdoc}
 
 
-*yii/sphinx/gii/model/Generator::generate*		public
->
- generate()
-<
-return (void)
 
- {@inheritdoc}
 
 
 *yii/sphinx/gii/model/Generator::requiredTemplates*	public
 >
  requiredTemplates()
 <
-return (void)
+return (array) List of code template files that are required. They should be file
+paths relative to 'templatePath'.
 
- {@inheritdoc}
+ Returns a list of code template files that are required.
+
+
+
+ Derived classes usually should override this method if they require the
+ existence of certain template files.
+
+
 
 
 *yii/sphinx/gii/model/Generator::stickyAttributes*	public
 >
  stickyAttributes()
 <
-return (void)
+return (array) List of sticky attributes
 
- {@inheritdoc}
+ Returns the list of sticky attributes.
+
+
+
+ A sticky attribute will remember its value and will initialize the attribute
+ with this value when the generator is restarted.
+
+
 
 
 *yii/sphinx/gii/model/Generator::hints*			public
 >
  hints()
 <
-return (void)
+return (array) The list of hint messages
 
- {@inheritdoc}
+ Returns the list of hint messages.
+
+
+
+ The array keys are the attribute names, and the array values are the
+ corresponding hint messages. Hint messages will be displayed to end users
+ when they are filling the form for the generator.
+
+
 
 
 *yii/sphinx/gii/model/Generator::autoCompleteData*	public
 >
  autoCompleteData()
 <
-return (void)
+return (array) The list of auto complete values
 
- {@inheritdoc}
+ Returns the list of auto complete values.
+
+
+
+ The array keys are the attribute names, and the array values are the
+ corresponding auto complete values. Auto complete values can also be callable
+ typed in order one want to make postponed data generation.
+
+
 
 
 *yii/sphinx/gii/model/Generator::getDescription*		public
 >
  getDescription()
 <
+return (string) The detailed description of the generator.
+
+
+
+
+
+
+
+
+*yii/sphinx/gii/model/Generator::rules*			public
+>
+ rules()
+<
 return (void)
 
- {@inheritdoc}
+
+
+ Child classes should override this method like the following so that the
+ parent rules are included:
+
+   return array_merge(parent::rules(), [
+       ...rules for the child class...
+   ]);
+
+
 
 
 *yii/sphinx/gii/model/Generator::generateLabels*		public

@@ -43,7 +43,7 @@ $channel				*yii/queue/db/Queue::$channel*
 
 $deleteReleased				*yii/queue/db/Queue::$deleteReleased*
 
- (boolean) Ability to delete released messages from table
+ (bool) Ability to delete released messages from table
 
 
 
@@ -52,36 +52,12 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
  |yii/queue/Queue::ttr|
  |yii/queue/Queue::delay|
  |yii/queue/Queue::priority|
  |yii/queue/Queue::push|
- |yii/queue/cli/Queue::getWorkerPid|
- |yii/queue/cli/Queue::handleMessage|
+ |yii/queue/Queue::getWorkerPid|
+ |yii/queue/Queue::handleMessage|
  |yii/queue/Queue::handleError|
  |yii/queue/Queue::isWaiting|
  |yii/queue/Queue::isReserved|
@@ -98,12 +74,9 @@ Inherited methods:
 <
 return (void)
 
- Initializes the object.
 
 
 
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
 
 
 
@@ -143,14 +116,14 @@ return (int) Status code
 
 *yii/queue/db/Queue::run*					public
 >
- run($repeat, $delay=0)
+ run($repeat, $timeout=0)
 <
 return (null|int) Exit code.
 
  Listens queue and runs each job.
 
     [$repeat] (bool) Whether to continue listening when queue is empty.
-    [$delay] (int) Number of seconds to sleep before next iteration.
+    [$timeout] (int) Number of seconds to sleep before next iteration.
 
 
 *yii/queue/db/Queue::clear*				public
@@ -159,7 +132,7 @@ return (null|int) Exit code.
 <
 return (void)
 
- Clears the queue
+ Clears the queue.
 
 
 *yii/queue/db/Queue::remove*				public
@@ -168,7 +141,7 @@ return (void)
 <
 return (bool) 
 
- Removes a job by ID
+ Removes a job by ID.
 
     [$id] (int) Of a job
 

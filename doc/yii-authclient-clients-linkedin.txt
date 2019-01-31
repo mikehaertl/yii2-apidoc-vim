@@ -32,7 +32,7 @@ PROPERTY DETAILS
 
 Inherited properties:
 
- |yii/authclient/BaseOAuth::$version|
+ |yii/authclient/OAuth2::$version|
  |yii/authclient/BaseOAuth::$scope|
  |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
  |yii/authclient/OAuth2::$clientId|
@@ -42,15 +42,29 @@ Inherited properties:
 
 $apiBaseUrl				*yii/authclient/clients/LinkedIn::$apiBaseUrl*
 
- ()
+ (string) 
+
+ API base URL. This field will be used as '\yii\httpclient\Client::baseUrl'
+ value of 'httpClient'. Note: changing this property will take no effect after
+ 'httpClient' is instantiated.
+
+
 
 $authUrl				*yii/authclient/clients/LinkedIn::$authUrl*
 
- ()
+ (string) 
+
+ Authorize URL.
+
+
 
 $tokenUrl				*yii/authclient/clients/LinkedIn::$tokenUrl*
 
- ()
+ (string) 
+
+ Token request URL endpoint.
+
+
 
 $attributeNames				*yii/authclient/clients/LinkedIn::$attributeNames*
 
@@ -64,30 +78,6 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
  |yii/authclient/ClientInterface::setId|
  |yii/authclient/ClientInterface::getId|
  |yii/authclient/ClientInterface::setName|
@@ -121,9 +111,9 @@ Inherited methods:
  |yii/authclient/BaseOAuth::getAccessToken|
  |yii/authclient/BaseOAuth::setSignatureMethod|
  |yii/authclient/BaseOAuth::getSignatureMethod|
- |yii/authclient/BaseOAuth::defaultReturnUrl|
+ |yii/authclient/OAuth2::defaultReturnUrl|
  |yii/authclient/BaseOAuth::createSignatureMethod|
- |yii/authclient/BaseOAuth::createToken|
+ |yii/authclient/OAuth2::createToken|
  |yii/authclient/BaseOAuth::sendRequest|
  |yii/authclient/BaseOAuth::composeUrl|
  |yii/authclient/BaseOAuth::saveAccessToken|
@@ -131,7 +121,7 @@ Inherited methods:
  |yii/authclient/BaseOAuth::createApiRequest|
  |yii/authclient/BaseOAuth::beforeApiRequestSend|
  |yii/authclient/BaseOAuth::api|
- |yii/authclient/BaseOAuth::refreshAccessToken|
+ |yii/authclient/OAuth2::refreshAccessToken|
  |yii/authclient/OAuth2::buildAuthUrl|
  |yii/authclient/OAuth2::fetchAccessToken|
  |yii/authclient/OAuth2::applyClientCredentialsToRequest|
@@ -141,49 +131,65 @@ Inherited methods:
  |yii/authclient/OAuth2::authenticateUserJwt|
 
 
-*yii/authclient/clients/LinkedIn::init*			public
->
- init()
-<
-return (void)
-
- {@inheritdoc}
-
-
 *yii/authclient/clients/LinkedIn::defaultName*		protected
 >
  defaultName()
 <
-return (void)
+return (string) Service name.
 
- {@inheritdoc}
+ Generates service name.
+
+
+
+
+
+
 
 
 *yii/authclient/clients/LinkedIn::defaultTitle*		protected
 >
  defaultTitle()
 <
-return (void)
+return (string) Service title.
 
- {@inheritdoc}
+ Generates service title.
+
+
+
+
+
+
 
 
 *yii/authclient/clients/LinkedIn::initUserAttributes*	protected
 >
  initUserAttributes()
 <
-return (void)
+return (array) Auth user attributes.
 
- {@inheritdoc}
+ Initializes authenticated user attributes.
+
+
+
+
+
+
 
 
 *yii/authclient/clients/LinkedIn::defaultNormalizeUserAttributeMap*protected
 >
  defaultNormalizeUserAttributeMap()
 <
-return (void)
+return (array) Normalize attribute map.
 
- {@inheritdoc}
+ Returns the default 'normalizeUserAttributeMap' value.
+
+
+
+ Particular client may override this method in order to provide specific
+ default map.
+
+
 
 
 *yii/authclient/clients/LinkedIn::applyAccessTokenToRequest*public
@@ -192,10 +198,24 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Applies access token to the HTTP request instance.
 
-    [$request] () 
-    [$accessToken] () 
+
+
+
+
+
+
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
+
+
+*yii/authclient/clients/LinkedIn::init*			public
+>
+ init()
+<
+return (void)
+
 
 
 

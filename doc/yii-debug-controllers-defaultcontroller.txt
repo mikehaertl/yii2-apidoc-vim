@@ -6,29 +6,14 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-Inherited properties:
-
- |yii/base/Controller::$id|
- |yii/base/Controller::$defaultAction|
- |yii/base/Controller::$action|
- |yii/web/Controller::$enableCsrfValidation|
- |yii/web/Controller::$actionParams|
-
-
-$module					*yii/debug/controllers/DefaultController::$module*
-
- (\yii\debug\Module)
 
 $layout					*yii/debug/controllers/DefaultController::$layout*
 
- (null|string|false) 
+ ()
 
- The name of the layout to be applied to this controller's views. This
- property mainly affects the behavior of 'render()'. Defaults to null, meaning
- the actual layout value should inherit that from 'module''s layout value. If
- false, no layout will be applied.
+$module					*yii/debug/controllers/DefaultController::$module*
 
-
+ (\yii\debug\Module) Owner module.
 
 $summary				*yii/debug/controllers/DefaultController::$summary*
 
@@ -39,86 +24,12 @@ $summary				*yii/debug/controllers/DefaultController::$summary*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/Controller::__construct|
- |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
- |yii/base/Controller::runAction|
- |yii/base/Controller::run|
- |yii/web/Controller::bindActionParams|
- |yii/base/Controller::createAction|
- |yii/base/Controller::afterAction|
- |yii/base/Controller::getModules|
- |yii/base/Controller::getUniqueId|
- |yii/base/Controller::getRoute|
- |yii/base/Controller::render|
- |yii/base/Controller::renderContent|
- |yii/base/Controller::renderPartial|
- |yii/base/Controller::renderFile|
- |yii/base/Controller::getView|
- |yii/base/Controller::setView|
- |yii/base/Controller::getViewPath|
- |yii/base/Controller::setViewPath|
- |yii/base/Controller::findLayoutFile|
- |yii/web/Controller::renderAjax|
- |yii/web/Controller::asJson|
- |yii/web/Controller::asXml|
- |yii/web/Controller::redirect|
- |yii/web/Controller::goHome|
- |yii/web/Controller::goBack|
- |yii/web/Controller::refresh|
-
 
 *yii/debug/controllers/DefaultController::actions*	public
 >
  actions()
 <
 return (void)
-
- Declares external actions for the controller.
-
-
-
- This method is meant to be overwritten to declare external actions for the
- controller. It should return an array, with array keys being action IDs, and
- array values the corresponding action class names or action configuration
- arrays. For example,
-
-   return [
-       'action1' => 'app\components\Action1',
-       'action2' => [
-           'class' => 'app\components\Action2',
-           'property1' => 'value1',
-           'property2' => 'value2',
-       ],
-   ];
-
- '\Yii::createObject()' will be used later to create the requested action
- using the configuration provided here.
-
 
 
 
@@ -143,10 +54,10 @@ return (void)
 >
  actionView($tag='null', $panel='null')
 <
-return (void)
+return (mixed) Response.
 
-    [$tag] () 
-    [$panel] () 
+    [$tag] (string|null) Debug data tag.
+    [$panel] (string|null) Debug panel ID.
 
 
 *yii/debug/controllers/DefaultController::actionToolbar*	public
@@ -171,19 +82,19 @@ return (void)
 >
  getManifest($forceReload='false')
 <
-return (void)
+return (array) 
 
-    [$forceReload] () 
+    [$forceReload] (bool) 
 
 
 *yii/debug/controllers/DefaultController::loadData*	public
 >
- loadData($tag, $maxRetry='0')
+ loadData($tag, $maxRetry=0)
 <
 return (void)
 
-    [$tag] () 
-    [$maxRetry] () 
+    [$tag] (string) Debug data tag.
+    [$maxRetry] (int) Maximum numbers of tag retrieval attempts.
 
 
 

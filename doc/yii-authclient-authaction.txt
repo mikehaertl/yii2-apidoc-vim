@@ -36,11 +36,6 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-Inherited properties:
-
- |yii/base/Action::$id|
- |yii/base/Action::$controller|
-
 
 $clientCollection			*yii/authclient/AuthAction::$clientCollection*
 
@@ -88,42 +83,23 @@ $redirectView				*yii/authclient/AuthAction::$redirectView*
  perform redirection. If not set 
    - default one will be used.
 
+$user					*yii/authclient/AuthAction::$user*
+
+ (\yii\web\User|array|string) The User object or the application component ID
+ of the user component.
+
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/Action::__construct|
- |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
- |yii/base/Action::getUniqueId|
- |yii/base/Action::runWithParams|
- |yii/base/Action::beforeRun|
- |yii/base/Action::afterRun|
+*yii/authclient/AuthAction::init*				public
+>
+ init()
+<
+return (void)
+
 
 
 *yii/authclient/AuthAction::setSuccessUrl*		public
@@ -189,13 +165,14 @@ return (void)
 
 *yii/authclient/AuthAction::auth*				protected
 >
- auth($client)
+ auth($client, $authUrlParams='[]')
 <
 return (\yii\web\Response) Response instance.
 
  Perform authentication for the given client.
 
     [$client] (mixed) Auth client instance.
+    [$authUrlParams] (array) Additional auth GET params.
 
 
 *yii/authclient/AuthAction::authSuccess*			protected
@@ -269,24 +246,26 @@ return (\yii\web\Response) Action response.
 
 *yii/authclient/AuthAction::authOAuth1*			protected
 >
- authOAuth1($client)
+ authOAuth1($client, $authUrlParams='[]')
 <
 return (\yii\web\Response) Action response.
 
  Performs OAuth1 auth flow.
 
     [$client] (\yii\authclient\OAuth1) Auth client instance.
+    [$authUrlParams] (array) Additional auth GET params.
 
 
 *yii/authclient/AuthAction::authOAuth2*			protected
 >
- authOAuth2($client)
+ authOAuth2($client, $authUrlParams='[]')
 <
 return (\yii\web\Response) Action response.
 
  Performs OAuth2 auth flow.
 
     [$client] (\yii\authclient\OAuth2) Auth client instance.
+    [$authUrlParams] (array) Additional auth GET params.
 
 
 

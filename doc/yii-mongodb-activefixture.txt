@@ -21,14 +21,6 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-Inherited properties:
-
- |yii/test/Fixture::$depends|
- |yii/test/FileFixtureTrait::$dataDirectory|
- |yii/test/FileFixtureTrait::$dataFile|
- |yii/test/BaseActiveFixture::$modelClass|
- |yii/test/BaseActiveFixture::$data|
-
 
 $db					*yii/mongodb/ActiveFixture::$db*
 
@@ -45,46 +37,6 @@ $collectionName				*yii/mongodb/ActiveFixture::$collectionName*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
- |yii/test/Fixture::beforeLoad|
- |yii/test/Fixture::afterLoad|
- |yii/test/BaseActiveFixture::unload|
- |yii/test/Fixture::beforeUnload|
- |yii/test/Fixture::afterUnload|
- |yii/test/FileFixtureTrait::loadData|
- |yii/base/ArrayAccessTrait::getIterator|
- |yii/base/ArrayAccessTrait::count|
- |yii/base/ArrayAccessTrait::offsetExists|
- |yii/base/ArrayAccessTrait::offsetGet|
- |yii/base/ArrayAccessTrait::offsetSet|
- |yii/base/ArrayAccessTrait::offsetUnset|
- |yii/test/BaseActiveFixture::getModel|
-
 
 *yii/mongodb/ActiveFixture::init*				public
 >
@@ -92,7 +44,6 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
 
 
 *yii/mongodb/ActiveFixture::load*				public
@@ -105,24 +56,6 @@ return (void)
 
  The default implementation will first reset the MongoDB collection and then
  populate it with the data returned by 'getData()'.
-
-
-*yii/mongodb/ActiveFixture::getData*			protected
->
- getData()
-<
-return (array) The data rows to be inserted into the collection.
-
- Returns the fixture data.
-
- This method is called by 'loadData()' to get the needed fixture data.
-
- The default implementation will try to return the fixture data by including
- the external file specified by 'dataFile'. The file should return an array of
- data rows (column name => column value), each corresponding to a row in the
- collection.
-
- If the data file does not exist, an empty array will be returned.
 
 
 *yii/mongodb/ActiveFixture::getCollection*		protected
@@ -141,6 +74,24 @@ return (\yii\mongodb\Collection) Related collection.
 return (array|string) Related collection name
 
  Returns collection name used by this fixture.
+
+
+*yii/mongodb/ActiveFixture::getData*			protected
+>
+ getData()
+<
+return (array) The data rows to be inserted into the collection.
+
+ Returns the fixture data.
+
+ This method is called by 'loadData()' to get the needed fixture data.
+
+ The default implementation will try to return the fixture data by including
+ the external file specified by 'dataFile'. The file should return an array of
+ data rows (column name => column value), each corresponding to a row in the
+ collection.
+
+ If the data file does not exist, an empty array will be returned.
 
 
 *yii/mongodb/ActiveFixture::resetCollection*		protected

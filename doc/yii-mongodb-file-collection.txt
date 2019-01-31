@@ -31,18 +31,6 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
  |yii/mongodb/Collection::getFullName|
  |yii/mongodb/Collection::listIndexes|
  |yii/mongodb/Collection::createIndexes|
@@ -67,9 +55,15 @@ Inherited methods:
 >
  drop()
 <
-return (void)
+return (bool) Whether the operation successful.
 
- {@inheritdoc}
+ Drops this collection.
+
+
+
+
+
+
 
 
 *yii/mongodb/file/Collection::find*			public
@@ -78,23 +72,35 @@ return (void)
 <
 return (\yii\mongodb\file\Cursor) Cursor for the search results
 
- {@inheritdoc}
+ Returns a cursor for the search results.
 
-    [$condition] () 
-    [$fields] () 
-    [$options] () 
+
+
+ In order to perform "find" queries use 'Query' class.
+
+
+
+    [$condition] (array) Query condition
+    [$fields] (array) Fields to be selected
+    [$options] (array) Query options (available since 2.1).
 
 
 *yii/mongodb/file/Collection::remove*			public
 >
  remove($condition='[]', $options='[]')
 <
-return (void)
+return (int|bool) Number of updated documents or whether operation was successful.
 
- {@inheritdoc}
+ Removes data from the collection.
 
-    [$condition] () 
-    [$options] () 
+
+
+
+
+
+
+    [$condition] (array) Description of records to remove.
+    [$options] (array) List of options in format: optionName => optionValue.
 
 
 *yii/mongodb/file/Collection::getPrefix*			public

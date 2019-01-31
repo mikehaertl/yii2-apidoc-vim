@@ -1,18 +1,18 @@
 
-*yii/apidoc/models/BaseDoc*   >> |yii/base/Object|
+*yii/apidoc/models/BaseDoc*   >> |yii/base/BaseObject|
 ===========================
 
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/apidoc/models/PropertyDoc|
-|yii/apidoc/models/MethodDoc|
 |yii/apidoc/models/TypeDoc|
-|yii/apidoc/models/InterfaceDoc|
 |yii/apidoc/models/TraitDoc|
 |yii/apidoc/models/EventDoc|
-|yii/apidoc/models/ConstDoc|
+|yii/apidoc/models/PropertyDoc|
+|yii/apidoc/models/MethodDoc|
+|yii/apidoc/models/InterfaceDoc|
 |yii/apidoc/models/FunctionDoc|
+|yii/apidoc/models/ConstDoc|
 |yii/apidoc/models/ClassDoc|
 
 
@@ -69,31 +69,6 @@ $tags					*yii/apidoc/models/BaseDoc::$tags*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
-
-
-*yii/apidoc/models/BaseDoc::__construct*			public
->
- __construct($reflector='null', $context='null', $config='[]')
-<
-return (void)
-
-    [$reflector] (\phpDocumentor\Reflection\BaseReflector) 
-    [$context] (\yii\apidoc\models\Context) 
-    [$config] (array) 
-
 
 *yii/apidoc/models/BaseDoc::hasTag*			public
 >
@@ -121,11 +96,23 @@ return (void)
 >
  getFirstTag($name)
 <
-return (\phpDocumentor\Reflection\DocBlock\Tag) 
+return (\phpDocumentor\Reflection\DocBlock\Tag|null) Tag instance, 'null' if not
+found.
 
  Get the first tag of a given name
 
-    [$name] (string) 
+    [$name] (string) Tag name.
+
+
+*yii/apidoc/models/BaseDoc::__construct*			public
+>
+ __construct($reflector='null', $context='null', $config='[]')
+<
+return (void)
+
+    [$reflector] (\phpDocumentor\Reflection\BaseReflector) 
+    [$context] (\yii\apidoc\models\Context) 
+    [$config] (array) 
 
 
 *yii/apidoc/models/BaseDoc::extractFirstSentence*		public

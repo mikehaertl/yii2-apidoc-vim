@@ -1,0 +1,87 @@
+
+*yii/queue/sqs/Command*   >> |yii/queue/cli/Command|
+=======================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/queue/cli/Command::$verbose|
+ |yii/queue/cli/Command::$verboseConfig|
+ |yii/queue/cli/Command::$isolate|
+ |yii/queue/cli/Command::$phpBinary|
+
+
+$queue					*yii/queue/sqs/Command::$queue*
+
+ (\yii\queue\sqs\Queue)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/queue/cli/Command::options|
+ |yii/queue/cli/Command::optionAliases|
+ |yii/queue/cli/Command::canVerbose|
+ |yii/queue/cli/Command::canIsolate|
+ |yii/queue/cli/Command::beforeAction|
+ |yii/queue/cli/Command::actionExec|
+ |yii/queue/cli/Command::handleMessage|
+
+
+*yii/queue/sqs/Command::isWorkerAction*			protected
+>
+ isWorkerAction($actionID)
+<
+return (bool) 
+
+
+
+
+
+
+
+    [$actionID] (string) 
+
+
+*yii/queue/sqs/Command::actionRun*			public
+>
+ actionRun()
+<
+return (null|int) Exit code.
+
+ Runs all jobs from sqs.
+
+ It can be used as cron job.
+
+
+*yii/queue/sqs/Command::actionListen*			public
+>
+ actionListen($timeout=3)
+<
+return (null|int) Exit code.
+
+ Listens sqs and runs new jobs.
+
+ It can be used as demon process.
+
+    [$timeout] (int) Number of seconds to sleep before next reading of the
+    queue.
+
+
+*yii/queue/sqs/Command::actionClear*			public
+>
+ actionClear()
+<
+return (void)
+
+ Clears the queue.
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

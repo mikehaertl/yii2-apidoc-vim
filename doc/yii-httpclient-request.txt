@@ -9,31 +9,6 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
  |yii/httpclient/Message::setHeaders|
  |yii/httpclient/Message::getHeaders|
  |yii/httpclient/Message::addHeaders|
@@ -55,40 +30,64 @@ Inherited methods:
 >
  setData($data)
 <
-return (void)
+return ($this) Self reference.
 
- {@inheritdoc}
+ Sets the data fields, which composes message content.
 
-    [$data] () 
+
+
+
+
+
+
+    [$data] (mixed) Content data fields.
 
 
 *yii/httpclient/Request::addData*				public
 >
  addData($data)
 <
-return (void)
+return ($this) Self reference.
 
- {@inheritdoc}
+ Adds data fields to the existing ones.
 
-    [$data] () 
+
+
+
+
+
+
+    [$data] (array) Additional content data fields.
 
 
 *yii/httpclient/Request::composeHeaderLines*		public
 >
  composeHeaderLines()
 <
-return (void)
+return (array) Raw header lines.
 
- {@inheritdoc}
+ Composes raw header lines from 'headers'.
+
+
+
+ Each line will be a string in format: 'header-name: value'.
+
+
 
 
 *yii/httpclient/Request::toString*			public
 >
  toString()
 <
-return (void)
+return (string) The string representation of this HTTP message.
 
- {@inheritdoc}
+ Returns string representation of this HTTP message.
+
+
+
+
+
+
 
 
 *yii/httpclient/Request::setUrl*				public
@@ -117,11 +116,11 @@ return (string|array) Target URL or URL parameters
 >
  setFullUrl($fullUrl)
 <
-return (void)
+return ($this) Self reference.
 
  Sets full target URL.
 
- This method can be use during request formatting and preparation. Do not use
+ This method can be used during request formatting and preparation. Do not use
  it for the target URL specification, use 'setUrl()' instead.
 
     [$fullUrl] (string) Full target URL.

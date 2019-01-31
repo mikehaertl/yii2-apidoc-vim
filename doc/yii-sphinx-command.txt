@@ -34,14 +34,6 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-Inherited properties:
-
- |yii/db/Command::$pdoStatement|
- |yii/db/Command::$fetchMode|
- |yii/db/Command::$params|
- |yii/db/Command::$queryCacheDuration|
- |yii/db/Command::$queryCacheDependency|
-
 
 $db					*yii/sphinx/Command::$db*
 
@@ -52,114 +44,6 @@ $db					*yii/sphinx/Command::$db*
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
-
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
- |yii/db/Command::cache|
- |yii/db/Command::noCache|
- |yii/db/Command::getSql|
- |yii/db/Command::setSql|
- |yii/db/Command::setRawSql|
- |yii/db/Command::cancel|
- |yii/db/Command::bindParam|
- |yii/db/Command::bindPendingParams|
- |yii/db/Command::query|
- |yii/db/Command::queryAll|
- |yii/db/Command::queryOne|
- |yii/db/Command::queryScalar|
- |yii/db/Command::queryColumn|
- |yii/db/Command::insert|
- |yii/db/Command::upsert|
- |yii/db/Command::delete|
- |yii/db/Command::addUnique|
- |yii/db/Command::dropUnique|
- |yii/db/Command::addCheck|
- |yii/db/Command::dropCheck|
- |yii/db/Command::addDefaultValue|
- |yii/db/Command::dropDefaultValue|
- |yii/db/Command::addCommentOnColumn|
- |yii/db/Command::addCommentOnTable|
- |yii/db/Command::dropCommentFromColumn|
- |yii/db/Command::dropCommentFromTable|
- |yii/db/Command::createView|
- |yii/db/Command::dropView|
- |yii/db/Command::execute|
- |yii/db/Command::queryInternal|
- |yii/db/Command::requireTableSchemaRefresh|
- |yii/db/Command::refreshTableSchema|
- |yii/db/Command::requireTransaction|
- |yii/db/Command::setRetryHandler|
- |yii/db/Command::internalExecute|
- |yii/db/Command::reset|
-
-
-*yii/sphinx/Command::getRawSql*				public
->
- getRawSql()
-<
-return (void)
-
- {@inheritdoc}
-
-
-*yii/sphinx/Command::prepare*				public
->
- prepare($forRead='null')
-<
-return (void)
-
- {@inheritdoc}
-
-    [$forRead] () 
-
-
-*yii/sphinx/Command::bindValue*				public
->
- bindValue($name, $value, $dataType='null')
-<
-return (void)
-
- {@inheritdoc}
-
-    [$name] () 
-    [$value] () 
-    [$dataType] () 
-
-
-*yii/sphinx/Command::bindValues*				public
->
- bindValues($values)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$values] () 
 
 
 *yii/sphinx/Command::batchInsert*				public
@@ -183,235 +67,6 @@ return ($this) The command object itself
     [$index] (string) The index that new rows will be inserted into.
     [$columns] (array) The column names
     [$rows] (array) The rows to be batch inserted into the index
-
-
-*yii/sphinx/Command::update*				public
->
- update($index, $columns, $condition='\'\'', $params='[]', $options='[]')
-<
-return ($this) The command object itself
-
- Creates an UPDATE command.
-
- For example,
-
-   $connection->createCommand()->update('user', ['status' => 1], 'age >
- 30')->execute();
-
- The method will properly escape the column names and bind the values to be
- updated.
-
- Note that the created command is not executed until 'execute()' is called.
-
-    [$index] (string) The index to be updated.
-    [$columns] (array) The column data (name => value) to be updated.
-    [$condition] (string|array) The condition that will be put in the WHERE
-    part. Please refer to 'Query::where()' on how to specify condition.
-    [$params] (array) The parameters to be bound to the command
-    [$options] (array) List of options in format: optionName => optionValue
-
-
-*yii/sphinx/Command::createTable*				public
->
- createTable($table, $columns, $options='null')
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-    [$columns] () 
-    [$options] () 
-
-
-*yii/sphinx/Command::renameTable*				public
->
- renameTable($table, $newName)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-    [$newName] () 
-
-
-*yii/sphinx/Command::dropTable*				public
->
- dropTable($table)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-
-
-*yii/sphinx/Command::truncateTable*			public
->
- truncateTable($table)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-
-
-*yii/sphinx/Command::addColumn*				public
->
- addColumn($table, $column, $type)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-    [$column] () 
-    [$type] () 
-
-
-*yii/sphinx/Command::dropColumn*				public
->
- dropColumn($table, $column)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-    [$column] () 
-
-
-*yii/sphinx/Command::renameColumn*			public
->
- renameColumn($table, $oldName, $newName)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-    [$oldName] () 
-    [$newName] () 
-
-
-*yii/sphinx/Command::alterColumn*				public
->
- alterColumn($table, $column, $type)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-    [$column] () 
-    [$type] () 
-
-
-*yii/sphinx/Command::addPrimaryKey*			public
->
- addPrimaryKey($name, $table, $columns)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$name] () 
-    [$table] () 
-    [$columns] () 
-
-
-*yii/sphinx/Command::dropPrimaryKey*			public
->
- dropPrimaryKey($name, $table)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$name] () 
-    [$table] () 
-
-
-*yii/sphinx/Command::addForeignKey*			public
->
- addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
-<
-return (void)
-
- {@inheritdoc}
-
-    [$name] () 
-    [$table] () 
-    [$columns] () 
-    [$refTable] () 
-    [$refColumns] () 
-    [$delete] () 
-    [$update] () 
-
-
-*yii/sphinx/Command::dropForeignKey*			public
->
- dropForeignKey($name, $table)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$name] () 
-    [$table] () 
-
-
-*yii/sphinx/Command::createIndex*				public
->
- createIndex($name, $table, $columns, $unique='false')
-<
-return (void)
-
- {@inheritdoc}
-
-    [$name] () 
-    [$table] () 
-    [$columns] () 
-    [$unique] () 
-
-
-*yii/sphinx/Command::dropIndex*				public
->
- dropIndex($name, $table)
-<
-return (void)
-
- {@inheritdoc}
-
-    [$name] () 
-    [$table] () 
-
-
-*yii/sphinx/Command::resetSequence*			public
->
- resetSequence($table, $value='null')
-<
-return (void)
-
- {@inheritdoc}
-
-    [$table] () 
-    [$value] () 
-
-
-*yii/sphinx/Command::checkIntegrity*			public
->
- checkIntegrity($check='true', $schema='\'\'', $table='\'\'')
-<
-return (void)
-
- {@inheritdoc}
-
-    [$check] () 
-    [$schema] () 
-    [$table] () 
 
 
 *yii/sphinx/Command::replace*				public
@@ -462,6 +117,32 @@ return ($this) The command object itself
     [$rows] (array) The rows to be batch replaced in the index
 
 
+*yii/sphinx/Command::update*				public
+>
+ update($index, $columns, $condition='\'\'', $params='[]', $options='[]')
+<
+return ($this) The command object itself
+
+ Creates an UPDATE command.
+
+ For example,
+
+   $connection->createCommand()->update('user', ['status' => 1], 'age >
+ 30')->execute();
+
+ The method will properly escape the column names and bind the values to be
+ updated.
+
+ Note that the created command is not executed until 'execute()' is called.
+
+    [$index] (string) The index to be updated.
+    [$columns] (array) The column data (name => value) to be updated.
+    [$condition] (string|array) The condition that will be put in the WHERE
+    part. Please refer to 'Query::where()' on how to specify condition.
+    [$params] (array) The parameters to be bound to the command
+    [$options] (array) List of options in format: optionName => optionValue
+
+
 *yii/sphinx/Command::truncateIndex*			public
 >
  truncateIndex($index)
@@ -505,6 +186,214 @@ return ($this) The command object itself
     [$text] (string) The text to break down to keywords.
     [$fetchStatistic] (bool) Whether to return document and hit occurrence
     statistics
+
+
+*yii/sphinx/Command::bindValue*				public
+>
+ bindValue($name, $value, $dataType='null')
+<
+return (void)
+
+    [$name] () 
+    [$value] () 
+    [$dataType] () 
+
+
+*yii/sphinx/Command::bindValues*				public
+>
+ bindValues($values)
+<
+return (void)
+
+    [$values] () 
+
+
+*yii/sphinx/Command::prepare*				public
+>
+ prepare($forRead='null')
+<
+return (void)
+
+    [$forRead] () 
+
+
+*yii/sphinx/Command::getRawSql*				public
+>
+ getRawSql()
+<
+return (void)
+
+
+
+*yii/sphinx/Command::createTable*				public
+>
+ createTable($table, $columns, $options='null')
+<
+return (void)
+
+    [$table] () 
+    [$columns] () 
+    [$options] () 
+
+
+*yii/sphinx/Command::renameTable*				public
+>
+ renameTable($table, $newName)
+<
+return (void)
+
+    [$table] () 
+    [$newName] () 
+
+
+*yii/sphinx/Command::dropTable*				public
+>
+ dropTable($table)
+<
+return (void)
+
+    [$table] () 
+
+
+*yii/sphinx/Command::truncateTable*			public
+>
+ truncateTable($table)
+<
+return (void)
+
+    [$table] () 
+
+
+*yii/sphinx/Command::addColumn*				public
+>
+ addColumn($table, $column, $type)
+<
+return (void)
+
+    [$table] () 
+    [$column] () 
+    [$type] () 
+
+
+*yii/sphinx/Command::dropColumn*				public
+>
+ dropColumn($table, $column)
+<
+return (void)
+
+    [$table] () 
+    [$column] () 
+
+
+*yii/sphinx/Command::renameColumn*			public
+>
+ renameColumn($table, $oldName, $newName)
+<
+return (void)
+
+    [$table] () 
+    [$oldName] () 
+    [$newName] () 
+
+
+*yii/sphinx/Command::alterColumn*				public
+>
+ alterColumn($table, $column, $type)
+<
+return (void)
+
+    [$table] () 
+    [$column] () 
+    [$type] () 
+
+
+*yii/sphinx/Command::addPrimaryKey*			public
+>
+ addPrimaryKey($name, $table, $columns)
+<
+return (void)
+
+    [$name] () 
+    [$table] () 
+    [$columns] () 
+
+
+*yii/sphinx/Command::dropPrimaryKey*			public
+>
+ dropPrimaryKey($name, $table)
+<
+return (void)
+
+    [$name] () 
+    [$table] () 
+
+
+*yii/sphinx/Command::addForeignKey*			public
+>
+ addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete='null', $update='null')
+<
+return (void)
+
+    [$name] () 
+    [$table] () 
+    [$columns] () 
+    [$refTable] () 
+    [$refColumns] () 
+    [$delete] () 
+    [$update] () 
+
+
+*yii/sphinx/Command::dropForeignKey*			public
+>
+ dropForeignKey($name, $table)
+<
+return (void)
+
+    [$name] () 
+    [$table] () 
+
+
+*yii/sphinx/Command::createIndex*				public
+>
+ createIndex($name, $table, $columns, $unique='false')
+<
+return (void)
+
+    [$name] () 
+    [$table] () 
+    [$columns] () 
+    [$unique] () 
+
+
+*yii/sphinx/Command::dropIndex*				public
+>
+ dropIndex($name, $table)
+<
+return (void)
+
+    [$name] () 
+    [$table] () 
+
+
+*yii/sphinx/Command::resetSequence*			public
+>
+ resetSequence($table, $value='null')
+<
+return (void)
+
+    [$table] () 
+    [$value] () 
+
+
+*yii/sphinx/Command::checkIntegrity*			public
+>
+ checkIntegrity($check='true', $schema='\'\'', $table='\'\'')
+<
+return (void)
+
+    [$check] () 
+    [$schema] () 
+    [$table] () 
 
 
 

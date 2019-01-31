@@ -5,12 +5,13 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/queue/file/Queue|
-|yii/queue/db/Queue|
-|yii/queue/amqp_interop/Queue|
-|yii/queue/redis/Queue|
-|yii/queue/amqp/Queue|
 |yii/queue/gearman/Queue|
+|yii/queue/db/Queue|
+|yii/queue/redis/Queue|
+|yii/queue/file/Queue|
+|yii/queue/sqs/Queue|
+|yii/queue/amqp_interop/Queue|
+|yii/queue/amqp/Queue|
 |yii/queue/beanstalk/Queue|
 
 
@@ -48,31 +49,7 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
+ |yii/queue/Queue::init|
  |yii/queue/Queue::ttr|
  |yii/queue/Queue::delay|
  |yii/queue/Queue::priority|
@@ -132,15 +109,7 @@ return (string) Command id
 <
 return (void)
 
- Bootstrap method to be called during application bootstrap stage.
-
-
-
-
-
-
-
-    [$app] (\yii\base\Application) The application currently running
+    [$app] () 
 
 
 *yii/queue/cli/Queue::runWorker*				protected

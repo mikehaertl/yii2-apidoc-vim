@@ -14,16 +14,6 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
-Inherited properties:
-
- |yii/base/Controller::$id|
- |yii/base/Controller::$defaultAction|
- |yii/base/Controller::$layout|
- |yii/base/Controller::$action|
- |yii/console/Controller::$interactive|
- |yii/console/Controller::$color|
- |yii/console/Controller::$help|
-
 
 $module					*yii/gii/console/GenerateController::$module*
 
@@ -44,104 +34,14 @@ $generators				*yii/gii/console/GenerateController::$generators*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/Controller::__construct|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
- |yii/console/Controller::runAction|
- |yii/base/Controller::run|
- |yii/console/Controller::bindActionParams|
- |yii/base/Controller::beforeAction|
- |yii/base/Controller::afterAction|
- |yii/base/Controller::getModules|
- |yii/base/Controller::getUniqueId|
- |yii/base/Controller::getRoute|
- |yii/base/Controller::render|
- |yii/base/Controller::renderContent|
- |yii/base/Controller::renderPartial|
- |yii/base/Controller::renderFile|
- |yii/base/Controller::getView|
- |yii/base/Controller::setView|
- |yii/base/Controller::getViewPath|
- |yii/base/Controller::setViewPath|
- |yii/base/Controller::findLayoutFile|
- |yii/console/Controller::isColorEnabled|
- |yii/console/Controller::ansiFormat|
- |yii/console/Controller::stdout|
- |yii/console/Controller::stderr|
- |yii/console/Controller::prompt|
- |yii/console/Controller::confirm|
- |yii/console/Controller::select|
- |yii/console/Controller::optionAliases|
- |yii/console/Controller::getOptionValues|
- |yii/console/Controller::getPassedOptions|
- |yii/console/Controller::getPassedOptionValues|
- |yii/console/Controller::getHelpSummary|
- |yii/console/Controller::getHelp|
- |yii/console/Controller::getActionMethodReflection|
- |yii/console/Controller::parseDocCommentTags|
- |yii/console/Controller::parseDocCommentSummary|
- |yii/console/Controller::parseDocCommentDetail|
-
-
-*yii/gii/console/GenerateController::init*		public
->
- init()
-<
-return (void)
-
- Initializes the object.
-
-
-
- This method is invoked at the end of the constructor after the object is
- initialized with the given configuration.
-
-
-
 
 *yii/gii/console/GenerateController::__get*		public
 >
  __get($name)
 <
-return (mixed) The property value or the value of a behavior's property
+return (void)
 
- Returns the value of a component property.
-
-
-
- This method will check in the following order and act accordingly:
-
-  
-   - a property defined by a getter: return the getter result  
-   - a property of a behavior: return the behavior property value
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing '$value = $component->property;'.
-
-
-
-    [$name] (string) The property name
+    [$name] () 
 
 
 *yii/gii/console/GenerateController::__set*		public
@@ -150,27 +50,25 @@ return (mixed) The property value or the value of a behavior's property
 <
 return (void)
 
- Sets the value of a component property.
+    [$name] () 
+    [$value] () 
+
+
+*yii/gii/console/GenerateController::init*		public
+>
+ init()
+<
+return (void)
 
 
 
- This method will check in the following order and act accordingly:
+*yii/gii/console/GenerateController::createAction*	public
+>
+ createAction($id)
+<
+return (void)
 
-  
-   - a property defined by a setter: set the property value  
-   - an event in the format of "on xyz": attach the handler to the
-   event "xyz"  
-   - a behavior in the format of "as xyz": attach the behavior named as
-   "xyz"  
-   - a property of a behavior: set the behavior property value
-
- Do not call this method directly as it is a PHP magic method that will be
- implicitly called when executing '$component->property = $value;'.
-
-
-
-    [$name] (string) The property name or the event name
-    [$value] (mixed) The property value
+    [$id] () 
 
 
 *yii/gii/console/GenerateController::actions*		public
@@ -179,160 +77,6 @@ return (void)
 <
 return (void)
 
- Declares external actions for the controller.
-
-
-
- This method is meant to be overwritten to declare external actions for the
- controller. It should return an array, with array keys being action IDs, and
- array values the corresponding action class names or action configuration
- arrays. For example,
-
-   return [
-       'action1' => 'app\components\Action1',
-       'action2' => [
-           'class' => 'app\components\Action2',
-           'property1' => 'value1',
-           'property2' => 'value2',
-       ],
-   ];
-
- '\Yii::createObject()' will be used later to create the requested action
- using the configuration provided here.
-
-
-
-
-*yii/gii/console/GenerateController::createAction*	public
->
- createAction($id)
-<
-return (\yii\base\Action|null) The newly created action instance. Null if the ID
-doesn't resolve into any action.
-
- Creates an action based on the given action ID.
-
-
-
- The method first checks if the action ID has been declared in 'actions()'. If
- so, it will use the configuration declared there to create the action object.
- If not, it will look for a controller method whose name is in the format of
- 'actionXyz' where 'Xyz' stands for the action ID. If found, an 'InlineAction'
- representing that method will be created and returned.
-
-
-
-    [$id] (string) The action ID.
-
-
-*yii/gii/console/GenerateController::options*		public
->
- options($id)
-<
-return (string[]) The names of the options valid for the action
-
- Returns the names of valid options for the action (id) An option requires the
- existence of a public member variable whose name is the option name.
-
-
-
- Child classes may override this method to specify possible options.
-
- Note that the values setting via options are not available until
- 'beforeAction()' is being called.
-
-
-
-    [$id] () 
-
-
-*yii/gii/console/GenerateController::getActionHelpSummary*public
->
- getActionHelpSummary($action)
-<
-return (string) A one-line short summary describing the specified action.
-
- Returns a one-line short summary describing the specified action.
-
-
-
-
-
-
-
-    [$action] (\yii\base\Action) Action to get summary for
-
-
-*yii/gii/console/GenerateController::getActionHelp*	public
->
- getActionHelp($action)
-<
-return (string) The detailed help information for the specified action.
-
- Returns the detailed help information for the specified action.
-
-
-
-
-
-
-
-    [$action] (\yii\base\Action) Action to get help for
-
-
-*yii/gii/console/GenerateController::getActionArgsHelp*	public
->
- getActionArgsHelp($action)
-<
-return (array) The help information of the action arguments
-
- Returns the help information for the anonymous arguments for the action.
-
-
-
- The returned value should be an array. The keys are the argument names, and
- the values are the corresponding help information. Each value must be an
- array of the following structure:
-
-
-   - required: boolean, whether this argument is required. 
-   - type: string, the PHP type of this argument. 
-   - default: string, the default value of this argument 
-   - comment: string, the comment of this argument
-
- The default implementation will return the help information extracted from
- the doc-comment of the parameters corresponding to the action method.
-
-
-
-    [$action] (\yii\base\Action) 
-
-
-*yii/gii/console/GenerateController::getActionOptionsHelp*public
->
- getActionOptionsHelp($action)
-<
-return (array) The help information of the action options
-
- Returns the help information for the options for the action.
-
-
-
- The returned value should be an array. The keys are the option names, and the
- values are the corresponding help information. Each value must be an array of
- the following structure:
-
-
-   - type: string, the PHP type of this argument. 
-   - default: string, the default value of this argument 
-   - comment: string, the comment of this argument
-
- The default implementation will return the help information extracted from
- the doc-comment of the properties corresponding to the action options.
-
-
-
-    [$action] (\yii\base\Action) 
 
 
 *yii/gii/console/GenerateController::actionIndex*		public
@@ -349,6 +93,51 @@ return (void)
 <
 return (void)
 
+
+
+*yii/gii/console/GenerateController::options*		public
+>
+ options($id)
+<
+return (void)
+
+    [$id] () 
+
+
+*yii/gii/console/GenerateController::getActionHelpSummary*public
+>
+ getActionHelpSummary($action)
+<
+return (void)
+
+    [$action] () 
+
+
+*yii/gii/console/GenerateController::getActionHelp*	public
+>
+ getActionHelp($action)
+<
+return (void)
+
+    [$action] () 
+
+
+*yii/gii/console/GenerateController::getActionArgsHelp*	public
+>
+ getActionArgsHelp($action)
+<
+return (void)
+
+    [$action] () 
+
+
+*yii/gii/console/GenerateController::getActionOptionsHelp*public
+>
+ getActionOptionsHelp($action)
+<
+return (void)
+
+    [$action] () 
 
 
 *yii/gii/console/GenerateController::formatHint*		protected

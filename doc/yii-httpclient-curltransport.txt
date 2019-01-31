@@ -15,55 +15,42 @@ DESCRIPTION
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
-Inherited methods:
-
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
-
 
 *yii/httpclient/CurlTransport::send*			public
 >
  send($request)
 <
-return (void)
+return (\yii\httpclient\Response) Response instance.
 
- {@inheritdoc}
+ Performs given request.
 
-    [$request] () 
+
+
+
+
+
+
+    [$request] (\yii\httpclient\Request) Request to be sent.
 
 
 *yii/httpclient/CurlTransport::batchSend*			public
 >
  batchSend($requests)
 <
-return (void)
+return (\yii\httpclient\Response[]) Responses list.
 
- {@inheritdoc}
+ Performs multiple HTTP requests.
 
-    [$requests] () 
+
+
+ Particular transport may benefit from this method, allowing sending requests
+ in parallel. This method accepts an array of the 'Request' objects and
+ returns an array of the  'Response' objects. Keys of the response array
+ correspond the ones from request array.
+
+
+
+    [$requests] (\yii\httpclient\Request[]) Requests to perform.
 
 
 

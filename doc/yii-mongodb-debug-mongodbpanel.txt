@@ -21,7 +21,11 @@ Inherited properties:
 
 $db					*yii/mongodb/debug/MongoDbPanel::$db*
 
- ()
+ (string) 
+
+ The name of the database component to use for executing (explain) queries
+
+
 
 
 
@@ -30,30 +34,6 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
  |yii/debug/panels/DbPanel::getSummary|
  |yii/debug/panels/DbPanel::save|
  |yii/debug/Panel::load|
@@ -73,40 +53,56 @@ Inherited methods:
  |yii/debug/panels/DbPanel::getDb|
 
 
-*yii/mongodb/debug/MongoDbPanel::init*			public
->
- init()
-<
-return (void)
-
- {@inheritdoc}
-
-
 *yii/mongodb/debug/MongoDbPanel::getName*			public
 >
  getName()
 <
-return (void)
+return (string) Name of the panel
 
- {@inheritdoc}
+
+
+
+
+
 
 
 *yii/mongodb/debug/MongoDbPanel::getDetail*		public
 >
  getDetail()
 <
+return (string) Content that is displayed in debugger detail view
+
+
+
+
+
+
+
+
+*yii/mongodb/debug/MongoDbPanel::init*			public
+>
+ init()
+<
 return (void)
 
- {@inheritdoc}
+
+
+
+
+
 
 
 *yii/mongodb/debug/MongoDbPanel::getSummaryName*		public
 >
  getSummaryName()
 <
-return (void)
+return (string) Short name of the panel, which will be use in summary.
 
- {@inheritdoc}
+
+
+
+
+
 
 
 *yii/mongodb/debug/MongoDbPanel::getProfileLogs*		public
@@ -122,31 +118,47 @@ return (array)
 >
  getQueryType($timing)
 <
-return (void)
+return (string) Query type such as select, insert, delete, etc.
 
- {@inheritdoc}
+ Returns database query type.
 
-    [$timing] () 
+
+
+
+
+
+
+    [$timing] (string) Timing procedure string
 
 
 *yii/mongodb/debug/MongoDbPanel::hasExplain*		protected
 >
  hasExplain()
 <
-return (void)
+return (bool) Whether the DB component has support for EXPLAIN queries
 
- {@inheritdoc}
+
+
+
+
+
 
 
 *yii/mongodb/debug/MongoDbPanel::canBeExplained*		public
 >
  canBeExplained($type)
 <
-return (void)
+return (bool) 
 
- {@inheritdoc}
+ Check if given query type can be explained.
 
-    [$type] () 
+
+
+
+
+
+
+    [$type] (string) Query type
 
 
 

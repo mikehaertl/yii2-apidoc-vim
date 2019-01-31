@@ -39,7 +39,7 @@ PROPERTY DETAILS
 
 Inherited properties:
 
- |yii/authclient/BaseOAuth::$version|
+ |yii/authclient/OAuth2::$version|
  |yii/authclient/BaseOAuth::$apiBaseUrl|
  |yii/authclient/BaseOAuth::$authUrl|
  |yii/authclient/BaseOAuth::$autoRefreshAccessToken|
@@ -51,7 +51,11 @@ Inherited properties:
 
 $scope					*yii/authclient/OpenIdConnect::$scope*
 
- ()
+ (string) 
+
+ Auth request scope.
+
+
 
 $issuerUrl				*yii/authclient/OpenIdConnect::$issuerUrl*
 
@@ -83,31 +87,6 @@ METHOD DETAILS
 
 Inherited methods:
 
- |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
- |yii/base/Component::__get|
- |yii/base/Component::__set|
- |yii/base/Component::__isset|
- |yii/base/Component::__unset|
- |yii/base/Component::__call|
- |yii/base/Component::hasProperty|
- |yii/base/Component::canGetProperty|
- |yii/base/Component::canSetProperty|
- |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
- |yii/base/Component::behaviors|
- |yii/base/Component::hasEventHandlers|
- |yii/base/Component::on|
- |yii/base/Component::off|
- |yii/base/Component::trigger|
- |yii/base/Component::getBehavior|
- |yii/base/Component::getBehaviors|
- |yii/base/Component::attachBehavior|
- |yii/base/Component::attachBehaviors|
- |yii/base/Component::detachBehavior|
- |yii/base/Component::detachBehaviors|
- |yii/base/Component::ensureBehaviors|
  |yii/authclient/ClientInterface::setId|
  |yii/authclient/ClientInterface::getId|
  |yii/authclient/ClientInterface::setName|
@@ -152,7 +131,6 @@ Inherited methods:
  |yii/authclient/BaseOAuth::createApiRequest|
  |yii/authclient/BaseOAuth::beforeApiRequestSend|
  |yii/authclient/BaseOAuth::api|
- |yii/authclient/BaseOAuth::applyAccessTokenToRequest|
  |yii/authclient/OAuth2::generateAuthState|
  |yii/authclient/OAuth2::authenticateClient|
  |yii/authclient/OAuth2::authenticateUser|
@@ -163,63 +141,118 @@ Inherited methods:
 >
  initUserAttributes()
 <
-return (void)
+return (array) Auth user attributes.
 
- {@inheritdoc}
+ Initializes authenticated user attributes.
+
+
+
+
+
+
 
 
 *yii/authclient/OpenIdConnect::defaultReturnUrl*		protected
 >
  defaultReturnUrl()
 <
-return (void)
+return (string) Return URL.
 
- {@inheritdoc}
+ Composes default 'returnUrl' value.
+
+
+
+
+
+
 
 
 *yii/authclient/OpenIdConnect::createToken*		protected
 >
  createToken($tokenConfig='[]')
 <
-return (void)
+return (\yii\authclient\OAuthToken) Token instance.
 
- {@inheritdoc}
+ Creates token from its configuration.
 
-    [$tokenConfig] () 
+
+
+
+
+
+
+    [$tokenConfig] (array) Token configuration.
 
 
 *yii/authclient/OpenIdConnect::refreshAccessToken*	public
 >
  refreshAccessToken($token)
 <
+return (\yii\authclient\OAuthToken) New auth token.
+
+ Gets new auth token to replace expired one.
+
+
+
+
+
+
+
+    [$token] (\yii\authclient\OAuthToken) Expired auth token.
+
+
+*yii/authclient/OpenIdConnect::applyAccessTokenToRequest*	public
+>
+ applyAccessTokenToRequest($request, $accessToken)
+<
 return (void)
 
- {@inheritdoc}
+ Applies access token to the HTTP request instance.
 
-    [$token] () 
+
+
+
+
+
+
+    [$request] (\yii\httpclient\Request) HTTP request instance.
+    [$accessToken] (\yii\authclient\OAuthToken) Access token instance.
 
 
 *yii/authclient/OpenIdConnect::buildAuthUrl*		public
 >
  buildAuthUrl($params='[]')
 <
-return (void)
+return (string) Authorization URL.
 
- {@inheritdoc}
+ Composes user authorization URL.
 
-    [$params] () 
+
+
+
+
+
+
+    [$params] (array) Additional auth GET params.
 
 
 *yii/authclient/OpenIdConnect::fetchAccessToken*		public
 >
  fetchAccessToken($authCode, $params='[]')
 <
-return (void)
+return (\yii\authclient\OAuthToken) Access token.
 
- {@inheritdoc}
+ Fetches access token from authorization code.
 
-    [$authCode] () 
-    [$params] () 
+
+
+
+
+
+
+    [$authCode] (string) Authorization code, usually comes at GET parameter
+    'code'.
+    [$params] (array) Additional request params.
 
 
 *yii/authclient/OpenIdConnect::applyClientCredentialsToRequest*protected
@@ -228,9 +261,17 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Applies client credentials (e.g. 'clientId' and 'clientSecret') to the HTTP
+ request instance.
 
-    [$request] () 
+
+
+ This method should be invoked before sending any HTTP request, which requires
+ client credentials.
+
+
+
+    [$request] (\yii\httpclient\Request) HTTP request instance.
 
 
 *yii/authclient/OpenIdConnect::getValidateAuthNonce*	public

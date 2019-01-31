@@ -1,0 +1,178 @@
+
+*yii/queue/sqs/Queue*   >> |yii/queue/cli/Queue|
+=====================
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/queue/Queue::$strictJobType|
+ |yii/queue/Queue::$ttr|
+ |yii/queue/Queue::$attempts|
+ |yii/queue/cli/Queue::$loopConfig|
+ |yii/queue/cli/Queue::$commandOptions|
+ |yii/queue/cli/Queue::$messageHandler|
+
+
+$serializer				*yii/queue/sqs/Queue::$serializer*
+
+ (\yii\queue\serializers\SerializerInterface|array) 
+
+
+
+
+
+$commandClass				*yii/queue/sqs/Queue::$commandClass*
+
+ (string) Command class name
+
+ Command class name
+
+
+
+$url					*yii/queue/sqs/Queue::$url*
+
+ (string)
+
+$key					*yii/queue/sqs/Queue::$key*
+
+ (string|null)
+
+$secret					*yii/queue/sqs/Queue::$secret*
+
+ (string|null)
+
+$region					*yii/queue/sqs/Queue::$region*
+
+ (string)
+
+$version				*yii/queue/sqs/Queue::$version*
+
+ (string)
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/queue/Queue::ttr|
+ |yii/queue/Queue::delay|
+ |yii/queue/Queue::priority|
+ |yii/queue/Queue::push|
+ |yii/queue/Queue::getWorkerPid|
+ |yii/queue/Queue::handleMessage|
+ |yii/queue/Queue::handleError|
+ |yii/queue/Queue::isWaiting|
+ |yii/queue/Queue::isReserved|
+ |yii/queue/Queue::isDone|
+ |yii/queue/cli/Queue::getCommandId|
+ |yii/queue/cli/Queue::bootstrap|
+ |yii/queue/cli/Queue::runWorker|
+ |yii/queue/cli/Queue::execute|
+
+
+*yii/queue/sqs/Queue::init*				public
+>
+ init()
+<
+return (void)
+
+
+
+
+
+
+
+
+*yii/queue/sqs/Queue::pushMessage*			protected
+>
+ pushMessage($message, $ttr, $delay, $priority)
+<
+return (string) Id of a job message
+
+
+
+
+
+
+
+    [$message] (string) 
+    [$ttr] (int) Time to reserve in seconds
+    [$delay] (int) 
+    [$priority] (mixed) 
+
+
+*yii/queue/sqs/Queue::status*				public
+>
+ status($id)
+<
+return (int) Status code
+
+
+
+
+
+
+
+    [$id] (string) Of a job message
+
+
+*yii/queue/sqs/Queue::run*				public
+>
+ run($repeat, $timeout=0)
+<
+return (null|int) Exit code.
+
+ Listens queue and runs each job.
+
+    [$repeat] (bool) Whether to continue listening when queue is empty.
+    [$timeout] (int) Number of seconds to sleep before next iteration.
+
+
+*yii/queue/sqs/Queue::reserve*				protected
+>
+ reserve($timeout)
+<
+return (null|array) Payload.
+
+ Gets a single message from SQS queue and sets the visibility to reserve
+ message.
+
+    [$timeout] (int) Number of seconds for long polling. Must be between 0 and
+    20.
+
+
+*yii/queue/sqs/Queue::delete*				protected
+>
+ delete($payload)
+<
+return (void)
+
+ Deletes the message after successfully handling.
+
+    [$payload] (array) 
+
+
+*yii/queue/sqs/Queue::clear*				public
+>
+ clear()
+<
+return (void)
+
+ Clears the queue.
+
+
+*yii/queue/sqs/Queue::getClient*				protected
+>
+ getClient()
+<
+return (\Aws\Sqs\SqsClient) 
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:
