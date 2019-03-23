@@ -129,17 +129,24 @@ return (bool)
     [$attempt] (int) Number
 
 
+*yii/queue/Queue::unserializeMessage*			public
+>
+ unserializeMessage($serialized)
+<
+return (array) Pair of a job and error that
+
+ Unserializes.
+
+    [$serialized] (string) Message
+
+
 *yii/queue/Queue::handleError*				public
 >
- handleError($id, $job, $ttr, $attempt, $error)
+ handleError($event)
 <
 return (bool) 
 
-    [$id] (string|null) 
-    [$job] (\yii\queue\JobInterface) 
-    [$ttr] (int) 
-    [$attempt] (int) 
-    [$error] (\Exception|\Throwable) 
+    [$event] (\yii\queue\ExecEvent) 
 
 
 *yii/queue/Queue::isWaiting*				public
