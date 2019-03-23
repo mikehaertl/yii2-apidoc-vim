@@ -28,6 +28,19 @@ $queue					*yii/queue/cli/SignalLoop::$queue*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__get|
+ |yii/base/BaseObject::__set|
+ |yii/base/BaseObject::__isset|
+ |yii/base/BaseObject::__unset|
+ |yii/base/BaseObject::__call|
+ |yii/base/BaseObject::hasProperty|
+ |yii/base/BaseObject::canGetProperty|
+ |yii/base/BaseObject::canSetProperty|
+ |yii/base/BaseObject::hasMethod|
+
 
 *yii/queue/cli/SignalLoop::__construct*			public
 >
@@ -35,8 +48,28 @@ METHOD DETAILS
 <
 return (void)
 
+ Constructor.
+
+
+
+ The default implementation does two things:
+
+
+   - Initializes the object with the given configuration '$config'. 
+   - Call 'init()'.
+
+ If this method is overridden in a child class, it is recommended that
+
+
+   - the last parameter of the constructor is a configuration array,
+   like '$config' here. 
+   - call the parent implementation at the end of the constructor.
+
+
+
     [$queue] (\yii\queue\cli\Queue) 
-    [$config] () 
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
 
 
 *yii/queue/cli/SignalLoop::init*				public
@@ -46,6 +79,13 @@ return (void)
 return (void)
 
  Sets signal handlers.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/queue/cli/SignalLoop::canContinue*			public

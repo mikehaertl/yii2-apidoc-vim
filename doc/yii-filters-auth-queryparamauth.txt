@@ -41,8 +41,8 @@ Inherited methods:
  |yii/base/BaseObject::canSetProperty|
  |yii/base/BaseObject::hasMethod|
  |yii/base/Behavior::events|
- |yii/base/ActionFilter::attach|
- |yii/base/ActionFilter::detach|
+ |yii/base/Behavior::attach|
+ |yii/base/Behavior::detach|
  |yii/base/ActionFilter::beforeFilter|
  |yii/base/ActionFilter::afterFilter|
  |yii/filters/auth/AuthMethod::beforeAction|
@@ -58,13 +58,20 @@ Inherited methods:
 >
  authenticate($user, $request, $response)
 <
-return (void)
+return (\yii\web\IdentityInterface) The authenticated user identity. If
+authentication information is not provided, null will be returned.
 
- {@inheritdoc}
+ Authenticates the current user.
 
-    [$user] () 
-    [$request] () 
-    [$response] () 
+
+
+
+
+
+
+    [$user] (\yii\web\User) 
+    [$request] (\yii\web\Request) 
+    [$response] (\yii\web\Response) 
 
 
 

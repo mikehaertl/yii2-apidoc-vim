@@ -27,6 +27,7 @@ Inherited properties:
 
  |yii/test/Fixture::$depends|
  |yii/test/DbFixture::$db|
+ |yii/base/Component::$behaviors|
 
 
 $initScript				*yii/test/InitDbFixture::$initScript*
@@ -85,7 +86,15 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Loads the fixture.
+
+
+
+ This method is called before performing every test method. You should
+ override this method with concrete implementation about how to set up the
+ fixture.
+
+
 
 
 *yii/test/InitDbFixture::beforeLoad*			public
@@ -94,7 +103,13 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ This method is called BEFORE any fixture data is loaded for the current test.
+
+
+
+
+
+
 
 
 *yii/test/InitDbFixture::afterLoad*			public
@@ -103,7 +118,14 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ This method is called AFTER all fixture data have been loaded for the current
+ test.
+
+
+
+
+
+
 
 
 *yii/test/InitDbFixture::beforeUnload*			public
@@ -112,7 +134,14 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ This method is called BEFORE any fixture data is unloaded for the current
+ test.
+
+
+
+
+
+
 
 
 *yii/test/InitDbFixture::afterUnload*			public
@@ -121,7 +150,14 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ This method is called AFTER all fixture data have been unloaded for the
+ current test.
+
+
+
+
+
+
 
 
 *yii/test/InitDbFixture::checkIntegrity*			public

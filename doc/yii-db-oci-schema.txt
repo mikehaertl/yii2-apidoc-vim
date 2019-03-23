@@ -12,6 +12,18 @@ Inherited properties:
  |yii/db/Schema::$defaultSchema|
  |yii/db/Schema::$columnSchemaClass|
  |yii/db/Schema::$columnQuoteCharacter|
+ |yii/db/Schema::$tableSchemas|
+ |yii/db/Schema::$schemaNames|
+ |yii/db/Schema::$tableNames|
+ |yii/db/Schema::$queryBuilder|
+ |yii/db/Schema::$transactionIsolationLevel|
+ |yii/db/Schema::$serverVersion|
+ |yii/db/ConstraintFinderTrait::$schemaPrimaryKeys|
+ |yii/db/ConstraintFinderTrait::$schemaForeignKeys|
+ |yii/db/ConstraintFinderTrait::$schemaIndexes|
+ |yii/db/ConstraintFinderTrait::$schemaUniques|
+ |yii/db/ConstraintFinderTrait::$schemaChecks|
+ |yii/db/ConstraintFinderTrait::$schemaDefaultValues|
 
 
 $exceptionMap				*yii/db/oci/Schema::$exceptionMap*
@@ -21,7 +33,17 @@ $exceptionMap				*yii/db/oci/Schema::$exceptionMap*
 
 $tableQuoteCharacter			*yii/db/oci/Schema::$tableQuoteCharacter*
 
- ()
+ (string|string[]) 
+
+ Character used to quote schema, table, etc. names. An array of 2 characters
+ can be used in case starting and ending characters are different.
+
+
+
+$lastInsertID				*yii/db/oci/Schema::$lastInsertID*
+
+ (string) The row ID of the last row inserted, or the last value retrieved
+ from the sequence object
 
 
 
@@ -91,70 +113,121 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/db/oci/Schema::resolveTableName*			protected
 >
  resolveTableName($name)
 <
-return (void)
+return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
 
- {@inheritdoc}
+ Resolves the table name and schema name (if any).
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The table name
 
 
 *yii/db/oci/Schema::findSchemaNames*			protected
 >
  findSchemaNames()
 <
-return (void)
+return (array) All schema names in the database, except system schemas.
 
- {@inheritdoc}
+ Returns all schema names in the database, including the default one but not
+ system schemas.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
 
 
 *yii/db/oci/Schema::findTableNames*			protected
 >
- findTableNames($schema='\'\'')
+ findTableNames($schema='''')
 <
-return (void)
+return (array) All table names in the database. The names have NO schema name prefix.
 
- {@inheritdoc}
+ Returns all table names in the database.
 
-    [$schema] () 
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
 
 
 *yii/db/oci/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (void)
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
 
- {@inheritdoc}
+ Loads the metadata for the specified table.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/oci/Schema::createQueryBuilder*			public
 >
  createQueryBuilder()
 <
-return (void)
+return (\yii\db\QueryBuilder) Query builder instance
 
- {@inheritdoc}
+ Creates a query builder for the database.
+
+
+
+ This method may be overridden by child classes to create a DBMS-specific
+ query builder.
+
+
 
 
 *yii/db/oci/Schema::createColumnSchemaBuilder*		public
 >
  createColumnSchemaBuilder($type, $length='null')
 <
-return (void)
+return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
 
- {@inheritdoc}
+ Create a column schema builder instance giving the type and value precision.
 
-    [$type] () 
-    [$length] () 
+
+
+ This method may be overridden by child classes to create a DBMS-specific
+ column schema builder.
+
+
+
+    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
+    [$length] (int|string|array) Length or precision of the column. See
+    'ColumnSchemaBuilder::$length'.
 
 
 *yii/db/oci/Schema::findUniqueIndexes*			public
@@ -194,32 +267,52 @@ the sequence object
 <
 return (void)
 
- {@inheritdoc}
+ Releases an existing savepoint.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The savepoint name
 
 
 *yii/db/oci/Schema::insert*				public
 >
  insert($table, $columns)
 <
-return (void)
+return (array|false) Primary key values or false if the command fails
 
- {@inheritdoc}
+ Executes the INSERT command, returning primary key values.
 
-    [$table] () 
-    [$columns] () 
+
+
+
+
+
+
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column data (name => value) to be inserted into the
+    table.
 
 
 *yii/db/oci/Schema::quoteSimpleTableName*			public
 >
  quoteSimpleTableName($name)
 <
-return (void)
+return (string) The properly quoted table name
 
- {@inheritdoc}
+ Quotes a simple table name for use in a query.
 
-    [$name] () 
+
+
+ A simple table name should contain the table name only without any schema
+ prefix. If the table name is already quoted, this method will do nothing.
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/oci/Schema::loadTablePrimaryKey*			protected
@@ -227,8 +320,6 @@ return (void)
  loadTablePrimaryKey($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -239,8 +330,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -249,8 +338,6 @@ return (void)
  loadTableIndexes($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -261,8 +348,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -272,8 +357,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -282,8 +365,6 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 

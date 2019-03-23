@@ -59,6 +59,18 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/mail/BaseMailer::$htmlLayout|
+ |yii/mail/BaseMailer::$textLayout|
+ |yii/mail/BaseMailer::$messageConfig|
+ |yii/mail/BaseMailer::$useFileTransport|
+ |yii/mail/BaseMailer::$fileTransportPath|
+ |yii/mail/BaseMailer::$fileTransportCallback|
+ |yii/base/Component::$behaviors|
+ |yii/mail/BaseMailer::$view|
+ |yii/mail/BaseMailer::$viewPath|
+
 
 $messageClass				*yii/swiftmailer/Mailer::$messageClass*
 
@@ -70,10 +82,78 @@ $enableSwiftMailerLogging		*yii/swiftmailer/Mailer::$enableSwiftMailerLogging*
  log mechanism. If enabled 'Logger' plugin will be attached to the 'transport'
  for this purpose.
 
+$swiftMailer				*yii/swiftmailer/Mailer::$swiftMailer*
+
+ (array|\Swift_Mailer) Swift mailer instance or array configuration.
+
+$transport				*yii/swiftmailer/Mailer::$transport*
+
+ (array|\Swift_Transport)
+
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/mail/BaseMailer::setView|
+ |yii/mail/BaseMailer::getView|
+ |yii/mail/BaseMailer::createView|
+ |yii/mail/BaseMailer::compose|
+ |yii/mail/BaseMailer::createMessage|
+ |yii/mail/BaseMailer::send|
+ |yii/mail/BaseMailer::sendMultiple|
+ |yii/mail/BaseMailer::render|
+ |yii/mail/BaseMailer::saveMessage|
+ |yii/mail/BaseMailer::generateMessageFileName|
+ |yii/mail/BaseMailer::getViewPath|
+ |yii/mail/BaseMailer::setViewPath|
+ |yii/mail/BaseMailer::beforeSend|
+ |yii/mail/BaseMailer::afterSend|
+
+
+*yii/swiftmailer/Mailer::sendMessage*			protected
+>
+ sendMessage($message)
+<
+return (bool) Whether the message is sent successfully
+
+ Sends the specified message.
+
+
+
+ This method should be implemented by child classes with the actual email
+ sending logic.
+
+
+
+    [$message] (\yii\mail\MessageInterface) The message to be sent
 
 
 *yii/swiftmailer/Mailer::getSwiftMailer*			public
@@ -99,15 +179,6 @@ return (void)
 <
 return (array|\Swift_Transport) 
 
-
-
-*yii/swiftmailer/Mailer::sendMessage*			protected
->
- sendMessage($message)
-<
-return (void)
-
-    [$message] () 
 
 
 *yii/swiftmailer/Mailer::createSwiftMailer*		protected

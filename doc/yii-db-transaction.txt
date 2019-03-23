@@ -26,9 +26,9 @@ DESCRIPTION
 
  > Note: in the above code we have two catch-blocks for compatibility > with
  PHP 5.x and PHP 7.x. '\Exception' implements the ['\Throwable'
- interface](http://php.net/manual/en/class.throwable.php) > since PHP 7.0, so
- you can skip the part with '\Exception' if your app uses only PHP 7.0 and
- higher.
+ interface](https://secure.php.net/manual/en/class.throwable.php) > since PHP
+ 7.0, so you can skip the part with '\Exception' if your app uses only PHP 7.0
+ and higher.
 
 
 PROPERTY DETAILS
@@ -39,6 +39,22 @@ $db					*yii/db/Transaction::$db*
 
  (\yii\db\Connection) The database connection that this transaction is
  associated with.
+
+$isActive				*yii/db/Transaction::$isActive*
+
+ (bool) Whether this transaction is active. Only an active transaction can
+ 'commit()' or 'rollBack()'.
+
+$isolationLevel				*yii/db/Transaction::$isolationLevel*
+
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'READ_UNCOMMITTED', 'READ_COMMITTED', 'REPEATABLE_READ' and
+ 'SERIALIZABLE' but also a string containing DBMS specific syntax to be used
+ after 'SET TRANSACTION ISOLATION LEVEL'.
+
+$level					*yii/db/Transaction::$level*
+
+ (int) The current nesting level of the transaction.
 
 
 
@@ -99,6 +115,9 @@ return (void)
 
     [isolation level]:
     http://en.wikipedia.org/wiki/Isolation_%28database_systems%29#Isolation_levels
+
+    Starting from version 2.0.16, this method throws exception when beginning
+    nested transaction and underlying DBMS does not support savepoints.
 
 
 *yii/db/Transaction::commit*				public

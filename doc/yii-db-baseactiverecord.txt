@@ -5,17 +5,62 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/db/ActiveRecord|
 |yii/elasticsearch/ActiveRecord|
-|yii/mongodb/file/ActiveRecord|
 |yii/mongodb/ActiveRecord|
+|yii/mongodb/file/ActiveRecord|
 |yii/redis/ActiveRecord|
 |yii/sphinx/ActiveRecord|
+|yii/db/ActiveRecord|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
 
  See '\yii\db\ActiveRecord' for a concrete implementation.
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+ |yii/base/Model::$validators|
+ |yii/base/Model::$activeValidators|
+ |yii/base/Model::$errors|
+ |yii/base/Model::$firstErrors|
+ |yii/base/Model::$attributes|
+ |yii/base/Model::$scenario|
+ |yii/base/Model::$iterator|
+
+
+$relatedRecords				*yii/db/BaseActiveRecord::$relatedRecords*
+
+ (array) An array of related records indexed by relation names.
+
+$oldAttributes				*yii/db/BaseActiveRecord::$oldAttributes*
+
+ (array) The old attribute values (name-value pairs)
+
+$dirtyAttributes			*yii/db/BaseActiveRecord::$dirtyAttributes*
+
+ (array) The changed attribute values (name-value pairs)
+
+$isNewRecord				*yii/db/BaseActiveRecord::$isNewRecord*
+
+ (bool) Whether the record is new and should be inserted when calling
+ 'save()'.
+
+$primaryKey				*yii/db/BaseActiveRecord::$primaryKey*
+
+ (mixed) The primary key value. An array (column name => column value) is
+ returned if the primary key is composite or '$asArray' is 'true'. A string is
+ returned otherwise (null will be returned if the key value is null).
+
+$oldPrimaryKey				*yii/db/BaseActiveRecord::$oldPrimaryKey*
+
+ (mixed) The old primary key value. An array (column name => column value) is
+ returned if the primary key is composite or '$asArray' is 'true'. A string is
+ returned otherwise (null will be returned if the key value is null).
 
 
 
@@ -26,9 +71,9 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -163,50 +208,138 @@ return (void)
 >
  canGetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (void)
+return (bool) Whether the property can be read
 
- {@inheritdoc}
+ Returns a value indicating whether a property can be read.
 
-    [$name] () 
-    [$checkVars] () 
-    [$checkBehaviors] () 
+
+
+ A property can be read if:
+
+
+   - the class has a getter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a readable property of the given name
+   (when '$checkBehaviors' is true).
+
+
+
+    [$name] (string) The property name
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
+    properties of this component
 
 
 *yii/db/BaseActiveRecord::canSetProperty*			public
 >
  canSetProperty($name, $checkVars='true', $checkBehaviors='true')
 <
-return (void)
+return (bool) Whether the property can be written
 
- {@inheritdoc}
+ Returns a value indicating whether a property can be set.
 
-    [$name] () 
-    [$checkVars] () 
-    [$checkBehaviors] () 
+
+
+ A property can be written if:
+
+
+   - the class has a setter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a writable property of the given name
+   (when '$checkBehaviors' is true).
+
+
+
+    [$name] (string) The property name
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
+    properties of this component
 
 
 *yii/db/BaseActiveRecord::fields*				public
 >
  fields()
 <
-return (void)
+return (array) The list of field names or field definitions.
 
- {@inheritdoc}
+ Returns the list of fields that should be returned by default by 'toArray()'
+ when no specific fields are specified.
 
  The default implementation returns the names of the columns whose values have
  been populated into this record.
+
+ A field is a named element in the returned array by 'toArray()'.
+
+ This method should return an array of field names or field definitions. If
+ the former, the field name will be treated as an object property name whose
+ value will be used as the field value. If the latter, the array key should be
+ the field name while the array value should be the corresponding field
+ definition which can be either an object property name or a PHP callable
+ returning the corresponding field value. The signature of the callable should
+ be:
+
+   function ($model, $field) {
+       // return field value
+   }
+
+ For example, the following code declares four fields:
+
+
+   - 'email': the field name is the same as the property name 'email'; 
+   - 'firstName' and 'lastName': the field names are 'firstName' and
+   'lastName', and their   values are obtained from the 'first_name' and
+ 'last_name' properties; 
+   - 'fullName': the field name is 'fullName'. Its value is obtained by
+   concatenating 'first_name'   and 'last_name'.
+
+   return [
+       'email',
+       'firstName' => 'first_name',
+       'lastName' => 'last_name',
+       'fullName' => function ($model) {
+           return $model->first_name . ' ' . $model->last_name;
+       },
+   ];
+
+ In this method, you may also want to return different lists of fields based
+ on some context information. For example, depending on 'scenario' or the
+ privilege of the current application user, you may return different sets of
+ visible fields or filter out some fields.
+
+ The default implementation of this method returns 'attributes()' indexed by
+ the same attribute names.
+
+
 
 
 *yii/db/BaseActiveRecord::extraFields*			public
 >
  extraFields()
 <
-return (void)
+return (array) The list of expandable field names or field definitions. Please refer
+to 'fields()' on the format of the return value.
 
- {@inheritdoc}
+ Returns the list of fields that can be expanded further and returned by
+ 'toArray()'.
 
  The default implementation returns the names of the relations that have been
  populated into this record.
+
+ This method is similar to 'fields()' except that the list of fields returned
+ by this method are not returned by default by 'toArray()'. Only when field
+ names to be expanded are explicitly specified when calling 'toArray()', will
+ their values be exported.
+
+ The default implementation returns an empty array.
+
+ You may override this method to return a list of expandable fields based on
+ some context information (e.g. the current application user).
+
+
 
 
 *yii/db/BaseActiveRecord::getAttributeLabel*		public
@@ -271,9 +404,75 @@ return (void)
 return (static|null) ActiveRecord instance matching the condition, or 'null' if
 nothing matches.
 
- {@inheritdoc}
+ Returns a single active record model instance by a primary key or an array of
+ column values.
 
-    [$condition] () 
+
+
+ The method accepts:
+
+  
+   - a scalar value (integer or string): query by a single primary key
+   value and return the    corresponding record (or 'null' if not found).  
+   - a non-associative array: query by a list of primary key values and
+   return the    first record (or 'null' if not found).  
+   - an associative array of name-value pairs: query by a set of
+   attribute values and return a single record    matching all of them (or
+ 'null' if not found). Note that '['id' => 1, 2]' is treated as a
+ non-associative array.    Column names are limited to current records table
+ columns for SQL DBMS, or filtered otherwise to be limited to simple filter
+ conditions.
+
+ That this method will automatically call the 'one()' method and return an
+ 'ActiveRecordInterface|ActiveRecord' instance.
+
+ > Note: As this is a short-hand method only, using more complex conditions,
+ like ['!=', 'id', 1] will not work. > If you need to specify more complex
+ conditions, use 'find()' in combination with 'ActiveQuery::where()|where()'
+ instead.
+
+ See the following code for usage examples:
+
+   // find a single customer whose primary key value is 10
+   $customer = Customer::findOne(10);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['id' => 10])->one();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findOne([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->one();
+
+   // find the first customer whose age is 30 and whose status is 1
+   $customer = Customer::findOne(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customer = Customer::find()->where(['age' => 30, 'status' => 1])->one();
+
+ If you need to pass user input to this method, make sure the input value is
+ scalar or in case of array condition, make sure the array structure can not
+ be changed from the outside:
+
+   // yii\web\Controller ensures that $id is scalar
+   public function actionView($id)
+   {
+       $model = Post::findOne($id);
+       // ...
+   }
+
+   // explicitly specifying the colum to search, passing a scalar or array
+ here will always result in finding a single record
+   $model = Post::findOne(['id' => Yii::$app->request->get('id')]);
+
+   // do NOT use the following code! it is possible to inject an array
+ condition to filter by arbitrary column values!
+   $model = Post::findOne(Yii::$app->request->get('id'));
+
+
+
+    [$condition] (mixed) Primary key value or a set of column values
 
 
 *yii/db/BaseActiveRecord::findAll*			public
@@ -283,9 +482,79 @@ nothing matches.
 return (static[]) An array of ActiveRecord instances, or an empty array if nothing
 matches.
 
- {@inheritdoc}
+ Returns a list of active record models that match the specified primary key
+ value(s) or a set of column values.
 
-    [$condition] () 
+
+
+ The method accepts:
+
+  
+   - a scalar value (integer or string): query by a single primary key
+   value and return an array containing the    corresponding record (or an
+ empty array if not found).  
+   - a non-associative array: query by a list of primary key values and
+   return the    corresponding records (or an empty array if none was found). 
+   Note that an empty condition will result in an empty result as it will be
+ interpreted as a search for    primary keys and not an empty 'WHERE'
+ condition.  
+   - an associative array of name-value pairs: query by a set of
+   attribute values and return an array of records    matching all of them (or
+ an empty array if none was found). Note that '['id' => 1, 2]' is treated as  
+  a non-associative array.    Column names are limited to current records
+ table columns for SQL DBMS, or filtered otherwise to be limted to simple
+ filter conditions.
+
+ This method will automatically call the 'all()' method and return an array of
+ 'ActiveRecordInterface|ActiveRecord' instances.
+
+ > Note: As this is a short-hand method only, using more complex conditions,
+ like ['!=', 'id', 1] will not work. > If you need to specify more complex
+ conditions, use 'find()' in combination with 'ActiveQuery::where()|where()'
+ instead.
+
+ See the following code for usage examples:
+
+   // find the customers whose primary key value is 10
+   $customers = Customer::findAll(10);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => 10])->all();
+
+   // find the customers whose primary key value is 10, 11 or 12.
+   $customers = Customer::findAll([10, 11, 12]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+   // find customers whose age is 30 and whose status is 1
+   $customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+   // the above code is equivalent to:
+   $customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
+
+ If you need to pass user input to this method, make sure the input value is
+ scalar or in case of array condition, make sure the array structure can not
+ be changed from the outside:
+
+   // yii\web\Controller ensures that $id is scalar
+   public function actionView($id)
+   {
+       $model = Post::findOne($id);
+       // ...
+   }
+
+   // explicitly specifying the colum to search, passing a scalar or array
+ here will always result in finding a single record
+   $model = Post::findOne(['id' => Yii::$app->request->get('id')]);
+
+   // do NOT use the following code! it is possible to inject an array
+ condition to filter by arbitrary column values!
+   $model = Post::findOne(Yii::$app->request->get('id'));
+
+
+
+    [$condition] (mixed) Primary key value or a set of column values
 
 
 *yii/db/BaseActiveRecord::findByCondition*		protected
@@ -392,9 +661,11 @@ supported.
 
  1. Create a column to store the version number of each row. The column type
  should be 'BIGINT DEFAULT 0'.    Override this method to return the name of
- this column. 2. Add a 'required' validation rule for the version column to
- ensure the version value is submitted. 3. In the Web form that collects the
- user input, add a hidden field that stores    the lock version of the
+ this column. 2. Ensure the version value is submitted and loaded to your
+ model before any update or delete.    Or add
+ '\yii\behaviors\OptimisticLockBehavior|OptimisticLockBehavior' to your model 
+   class in order to automate the process. 3. In the Web form that collects
+ the user input, add a hidden field that stores    the lock version of the
  recording being updated. 4. In the controller action that does the data
  updating, try to catch the 'StaleObjectException'    and implement necessary
  business logic (e.g. merging the changes, prompting stated data)    to

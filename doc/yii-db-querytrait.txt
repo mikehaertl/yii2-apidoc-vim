@@ -14,8 +14,9 @@ PROPERTY DETAILS
 
 $where					*yii/db/QueryTrait::$where*
 
- (string|array) Query condition. This refers to the WHERE clause in a SQL
- statement. For example, '['age' => 31, 'team' => 1]'.
+ (string|array|\yii\db\ExpressionInterface) Query condition. This refers to
+ the WHERE clause in a SQL statement. For example, '['age' => 31, 'team' =>
+ 1]'.
 
 $limit					*yii/db/QueryTrait::$limit*
 
@@ -35,8 +36,9 @@ $orderBy				*yii/db/QueryTrait::$orderBy*
  clause in a SQL statement. The array keys are the columns to be sorted by,
  and the array values are the corresponding sort directions which can be
  either
- [SORT_ASC](http://php.net/manual/en/array.constants.php#constant.sort-asc) or
- [SORT_DESC](http://php.net/manual/en/array.constants.php#constant.sort-desc).
+ [SORT_ASC](https://secure.php.net/manual/en/array.constants.php#constant.sort-asc)
+ or
+ [SORT_DESC](https://secure.php.net/manual/en/array.constants.php#constant.sort-desc).
  The array may also contain 'ExpressionInterface' objects. If that is the
  case, the expressions will be converted into strings without any change.
 
@@ -89,7 +91,8 @@ return ($this) The query object itself
 
  See 'QueryInterface::where()' for detailed documentation.
 
-    [$condition] (array) The conditions that should be put in the WHERE part.
+    [$condition] (string|array|\yii\db\ExpressionInterface) The conditions
+    that should be put in the WHERE part.
 
 
 *yii/db/QueryTrait::andWhere*				public
@@ -103,8 +106,8 @@ return ($this) The query object itself
  The new condition and the existing one will be joined using the 'AND'
  operator.
 
-    [$condition] (array) The new WHERE condition. Please refer to 'where()' on
-    how to specify this parameter.
+    [$condition] (string|array|\yii\db\ExpressionInterface) The new WHERE
+    condition. Please refer to 'where()' on how to specify this parameter.
 
 
 *yii/db/QueryTrait::orWhere*				public
@@ -118,8 +121,8 @@ return ($this) The query object itself
  The new condition and the existing one will be joined using the 'OR'
  operator.
 
-    [$condition] (array) The new WHERE condition. Please refer to 'where()' on
-    how to specify this parameter.
+    [$condition] (string|array|\yii\db\ExpressionInterface) The new WHERE
+    condition. Please refer to 'where()' on how to specify this parameter.
 
 
 *yii/db/QueryTrait::filterWhere*				public

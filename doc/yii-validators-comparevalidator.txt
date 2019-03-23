@@ -34,6 +34,9 @@ Inherited properties:
  |yii/validators/Validator::$isEmpty|
  |yii/validators/Validator::$when|
  |yii/validators/Validator::$whenClient|
+ |yii/base/Component::$behaviors|
+ |yii/validators/Validator::$validationAttributes|
+ |yii/validators/Validator::$attributeNames|
 
 
 $message				*yii/validators/CompareValidator::$message*
@@ -133,6 +136,7 @@ Inherited methods:
  |yii/base/Component::ensureBehaviors|
  |yii/validators/Validator::createValidator|
  |yii/validators/Validator::validateAttributes|
+ |yii/validators/Validator::getValidationAttributes|
  |yii/validators/Validator::validate|
  |yii/validators/Validator::isActive|
  |yii/validators/Validator::addError|
@@ -147,7 +151,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/validators/CompareValidator::validateAttribute*	public
@@ -156,46 +167,125 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Validates a single attribute.
 
-    [$model] () 
-    [$attribute] () 
+
+
+ Child classes must implement this method to provide the actual validation
+ logic.
+
+
+
+    [$model] (\yii\base\Model) The data model to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/CompareValidator::validateValue*		protected
 >
  validateValue($value)
 <
-return (void)
+return (array|null) The error message and the array of parameters to be inserted into
+the error message.
 
- {@inheritdoc}
+  if (!$valid) {
+      return [$this->message, [
+          'param1' => $this->param1,
+          'formattedLimit' =>
+Yii::$app->formatter->asShortSize($this->getSizeLimit()),
+          'mimeTypes' => implode(', ', $this->mimeTypes),
+          'param4' => 'etc...',
+      ]];
+  }
 
-    [$value] () 
+  return null;
+
+for this example 'message' template can contain '{param1}',
+'{formattedLimit}', '{mimeTypes}', '{param4}'
+
+Null should be returned if the data is valid.
+
+ Validates a value.
+
+
+
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
+
+
+
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/CompareValidator::clientValidateAttribute*public
 >
  clientValidateAttribute($model, $attribute, $view)
 <
-return (void)
+return (string|null) The client-side validation script. Null if the validator does
+not support client-side validation.
 
- {@inheritdoc}
+ Returns the JavaScript needed for performing client-side validation.
 
-    [$model] () 
-    [$attribute] () 
-    [$view] () 
+
+
+ Calls 'getClientOptions()' to generate options array for client-side
+ validation.
+
+ You may override this method to return the JavaScript validation code if the
+ validator can support client-side validation.
+
+ The following JavaScript variables are predefined and can be used in the
+ validation code:
+
+
+   - 'attribute': an object describing the the attribute being
+   validated. 
+   - 'value': the value being validated. 
+   - 'messages': an array used to hold the validation error messages
+   for the attribute. 
+   - 'deferred': an array used to hold deferred objects for
+   asynchronous validation 
+   - '$form': a jQuery object containing the form element
+
+ The 'attribute' object contains the following properties: 
+   - 'id': a unique ID identifying the attribute (e.g.
+   "loginform-username") in the form 
+   - 'name': attribute name or expression (e.g. "[0]content" for
+   tabular input) 
+   - 'container': the jQuery selector of the container of the input
+   field 
+   - 'input': the jQuery selector of the input field under the context
+   of the form 
+   - 'error': the jQuery selector of the error tag under the context of
+   the container 
+   - 'status': status of the input field, 0: empty, not entered before,
+   1: validated, 2: pending validation, 3: validating
+
+
+
+    [$model] (\yii\base\Model) The data model being validated
+    [$attribute] (string) The name of the attribute to be validated.
+    [$view] (\yii\web\View) The view object that is going to be used to render
+    views or view files containing a model form with this validator applied.
 
 
 *yii/validators/CompareValidator::getClientOptions*	public
 >
  getClientOptions($model, $attribute)
 <
-return (void)
+return (array) The client-side validation options
 
- {@inheritdoc}
+ Returns the client-side validation options.
 
-    [$model] () 
-    [$attribute] () 
+
+
+ This method is usually called from 'clientValidateAttribute()'. You may
+ override this method to modify options that will be passed to the client-side
+ validation.
+
+
+
+    [$model] (\yii\base\Model) The model being validated
+    [$attribute] (string) The attribute name being validated
 
 
 *yii/validators/CompareValidator::compareValues*		protected

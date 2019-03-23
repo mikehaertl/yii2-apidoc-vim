@@ -5,37 +5,38 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/base/DynamicModel|
-|yii/db/BaseActiveRecord|
-|yii/db/ActiveRecord|
-|yii/data/ActiveDataFilter|
-|yii/data/DataFilter|
-|yii/debug/models/search/Mail|
-|yii/debug/models/search/User|
-|yii/debug/models/search/Db|
-|yii/debug/models/search/Profile|
-|yii/debug/models/search/Log|
-|yii/debug/models/search/Debug|
-|yii/debug/models/search/Base|
 |yii/debug/models/Router|
-|yii/debug/models/UserSwitch|
 |yii/debug/models/timeline/Search|
+|yii/debug/models/search/Mail|
+|yii/debug/models/search/Base|
+|yii/debug/models/search/Db|
+|yii/debug/models/search/Log|
+|yii/debug/models/search/User|
+|yii/debug/models/search/Profile|
+|yii/debug/models/search/Debug|
+|yii/debug/models/search/Event|
+|yii/debug/models/UserSwitch|
 |yii/elasticsearch/ActiveRecord|
 |yii/gii/Generator|
-|yii/gii/generators/module/Generator|
-|yii/gii/generators/controller/Generator|
-|yii/gii/generators/extension/Generator|
 |yii/gii/generators/form/Generator|
-|yii/gii/generators/model/Generator|
+|yii/gii/generators/module/Generator|
+|yii/gii/generators/extension/Generator|
 |yii/gii/generators/crud/Generator|
+|yii/gii/generators/model/Generator|
+|yii/gii/generators/controller/Generator|
 |yii/httpclient/debug/SearchModel|
-|yii/mongodb/file/ActiveRecord|
 |yii/mongodb/ActiveRecord|
+|yii/mongodb/file/ActiveRecord|
 |yii/mongodb/gii/model/Generator|
 |yii/queue/gii/Generator|
 |yii/redis/ActiveRecord|
 |yii/sphinx/ActiveRecord|
 |yii/sphinx/gii/model/Generator|
+|yii/data/ActiveDataFilter|
+|yii/data/DataFilter|
+|yii/db/ActiveRecord|
+|yii/db/BaseActiveRecord|
+|yii/base/DynamicModel|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -64,6 +65,61 @@ DESCRIPTION
  models](guide:structure-models).
 
 
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
+
+$validators				*yii/base/Model::$validators*
+
+ (\ArrayObject|\yii\validators\Validator[]) All the validators declared in the
+ model.
+
+$activeValidators			*yii/base/Model::$activeValidators*
+
+ (\yii\validators\Validator[]) The validators applicable to the current
+ 'scenario'.
+
+$errors					*yii/base/Model::$errors*
+
+ (array) Errors for all attributes or the specified attribute. Empty array is
+ returned if no error. Note that when returning errors for all attributes, the
+ result is a two-dimensional array, like the following:
+
+   [
+       'username' => [
+           'Username is required.',
+           'Username must contain only word characters.',
+       ],
+       'email' => [
+           'Email address is invalid.',
+       ]
+   ]
+
+
+
+$firstErrors				*yii/base/Model::$firstErrors*
+
+ (array) The first errors. The array keys are the attribute names, and the
+ array values are the corresponding error messages. An empty array will be
+ returned if there is no error.
+
+$attributes				*yii/base/Model::$attributes*
+
+ (array) Attribute values (name => value).
+
+$scenario				*yii/base/Model::$scenario*
+
+ (string) The scenario that this model is in. Defaults to 'SCENARIO_DEFAULT'.
+
+$iterator				*yii/base/Model::$iterator*
+
+ (\ArrayIterator) An iterator for traversing the items in the list.
+
+
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
@@ -73,15 +129,15 @@ Inherited methods:
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|

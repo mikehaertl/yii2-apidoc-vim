@@ -5,8 +5,8 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/db/sqlite/Command|
 |yii/sphinx/Command|
+|yii/db/sqlite/Command|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -47,6 +47,10 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $db					*yii/db/Command::$db*
 
@@ -77,6 +81,14 @@ $queryCacheDependency			*yii/db/Command::$queryCacheDependency*
 
  (\yii\caching\Dependency) The dependency to be associated with the cached
  query result for this command
+
+$sql					*yii/db/Command::$sql*
+
+ (string) The SQL statement to be executed
+
+$rawSql					*yii/db/Command::$rawSql*
+
+ (string) The SQL statement to be set.
 
 
 
@@ -312,7 +324,7 @@ nothing.
  Executes the SQL statement and returns ALL rows at once.
 
     [$fetchMode] (int) The result fetch mode. Please refer to [PHP
-    manual](http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php)
+    manual](https://secure.php.net/manual/en/function.PDOStatement-setFetchMode.php)
     for valid fetch modes. If this parameter is null, the value set in
     'fetchMode' will be used.
 
@@ -330,9 +342,9 @@ is returned if the query results in nothing.
  query.
 
     [$fetchMode] (int) The result fetch mode. Please refer to [PHP
-    manual](http://php.net/manual/en/pdostatement.setfetchmode.php) for valid
-    fetch modes. If this parameter is null, the value set in 'fetchMode' will
-    be used.
+    manual](https://secure.php.net/manual/en/pdostatement.setfetchmode.php)
+    for valid fetch modes. If this parameter is null, the value set in
+    'fetchMode' will be used.
 
 
 *yii/db/Command::queryScalar*				public
@@ -845,13 +857,32 @@ return ($this) The command object itself
  key.
 
  The sequence will be reset such that the primary key of the next new row
- inserted will have the specified value or 1.
+ inserted will have the specified value or the maximum existing value +1.
 
     [$table] (string) The name of the table whose primary key sequence will be
     reset
     [$value] (mixed) The value for the primary key of the next new row
-    inserted. If this is not set, the next new row's primary key will have a
-    value 1.
+    inserted. If this is not set, the next new row's primary key will have the
+    maximum existing value +1.
+
+
+*yii/db/Command::executeResetSequence*			public
+>
+ executeResetSequence($table, $value='null')
+<
+return (void)
+
+ Executes a db command resetting the sequence value of a table's primary key.
+
+ Reason for execute is that some databases (Oracle) need several queries to do
+ so. The sequence is reset such that the primary key of the next new row
+ inserted will have the specified value or the maximum existing value +1.
+
+    [$table] (string) The name of the table whose primary key sequence is
+    reset
+    [$value] (mixed) The value for the primary key of the next new row
+    inserted. If this is not set, the next new row's primary key will have the
+    maximum existing value +1.
 
 
 *yii/db/Command::checkIntegrity*				public
@@ -960,6 +991,19 @@ return (int) Number of rows affected by the execution.
  as 'INSERT', 'DELETE', 'UPDATE' SQLs. No result set will be returned.
 
 
+*yii/db/Command::logQuery*				protected
+>
+ logQuery($category)
+<
+return (array) Array of two elements, the first is boolean of whether profiling is
+enabled or not. The second is the rawSql if it has been created.
+
+ Logs the current database query if query logging is enabled and returns the
+ profiling token if profiling is enabled.
+
+    [$category] (string) The log category.
+
+
 *yii/db/Command::queryInternal*				protected
 >
  queryInternal($method, $fetchMode=null)
@@ -970,9 +1014,25 @@ return (mixed) The method execution result
 
     [$method] (string) Method of PDOStatement to be called
     [$fetchMode] (int) The result fetch mode. Please refer to [PHP
-    manual](http://www.php.net/manual/en/function.PDOStatement-setFetchMode.php)
+    manual](https://secure.php.net/manual/en/function.PDOStatement-setFetchMode.php)
     for valid fetch modes. If this parameter is null, the value set in
     'fetchMode' will be used.
+
+
+*yii/db/Command::getCacheKey*				protected
+>
+ getCacheKey($method, $fetchMode, $rawSql)
+<
+return (array) The cache key
+
+ Returns the cache key for the query.
+
+    [$method] (string) Method of PDOStatement to be called
+    [$fetchMode] (int) The result fetch mode. Please refer to [PHP
+    manual](https://secure.php.net/manual/en/function.PDOStatement-setFetchMode.php)
+    for valid fetch modes.
+    [$rawSql] (string) The raw SQL with parameter values inserted into the
+    corresponding placeholders
 
 
 *yii/db/Command::requireTableSchemaRefresh*		protected

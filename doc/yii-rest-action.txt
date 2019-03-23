@@ -5,11 +5,11 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/rest/CreateAction|
-|yii/rest/IndexAction|
 |yii/rest/ViewAction|
+|yii/rest/IndexAction|
 |yii/rest/DeleteAction|
 |yii/rest/UpdateAction|
+|yii/rest/CreateAction|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -25,6 +25,8 @@ Inherited properties:
 
  |yii/base/Action::$id|
  |yii/base/Action::$controller|
+ |yii/base/Component::$behaviors|
+ |yii/base/Action::$uniqueId|
 
 
 $modelClass				*yii/rest/Action::$modelClass*
@@ -72,15 +74,15 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/Action::__construct|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -106,7 +108,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/rest/Action::findModel*				public

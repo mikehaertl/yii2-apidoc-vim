@@ -59,6 +59,13 @@ PROPERTY DETAILS
 Inherited properties:
 
  |yii/data/BaseDataProvider::$id|
+ |yii/base/Component::$behaviors|
+ |yii/data/BaseDataProvider::$models|
+ |yii/data/BaseDataProvider::$keys|
+ |yii/data/BaseDataProvider::$count|
+ |yii/data/BaseDataProvider::$totalCount|
+ |yii/data/BaseDataProvider::$pagination|
+ |yii/data/BaseDataProvider::$sort|
 
 
 $db					*yii/data/SqlDataProvider::$db*
@@ -145,29 +152,48 @@ return (void)
 >
  prepareModels()
 <
-return (void)
+return (array) The available data models
 
- {@inheritdoc}
+ Prepares the data models that will be made available in the current page.
+
+
+
+
+
+
 
 
 *yii/data/SqlDataProvider::prepareKeys*			protected
 >
  prepareKeys($models)
 <
-return (void)
+return (array) The keys
 
- {@inheritdoc}
+ Prepares the keys associated with the currently available data models.
 
-    [$models] () 
+
+
+
+
+
+
+    [$models] (array) The available data models
 
 
 *yii/data/SqlDataProvider::prepareTotalCount*		protected
 >
  prepareTotalCount()
 <
-return (void)
+return (int) Total number of data models in this data provider.
 
- {@inheritdoc}
+ Returns a value indicating the total number of data models in this data
+ provider.
+
+
+
+
+
+
 
 
 

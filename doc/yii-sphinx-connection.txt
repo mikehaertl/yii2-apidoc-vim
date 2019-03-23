@@ -46,10 +46,65 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/db/Connection::$dsn|
+ |yii/db/Connection::$username|
+ |yii/db/Connection::$password|
+ |yii/db/Connection::$attributes|
+ |yii/db/Connection::$pdo|
+ |yii/db/Connection::$enableSchemaCache|
+ |yii/db/Connection::$schemaCacheDuration|
+ |yii/db/Connection::$schemaCacheExclude|
+ |yii/db/Connection::$schemaCache|
+ |yii/db/Connection::$enableQueryCache|
+ |yii/db/Connection::$queryCacheDuration|
+ |yii/db/Connection::$queryCache|
+ |yii/db/Connection::$charset|
+ |yii/db/Connection::$emulatePrepare|
+ |yii/db/Connection::$tablePrefix|
+ |yii/db/Connection::$pdoClass|
+ |yii/db/Connection::$commandClass|
+ |yii/db/Connection::$commandMap|
+ |yii/db/Connection::$enableSavepoint|
+ |yii/db/Connection::$serverStatusCache|
+ |yii/db/Connection::$serverRetryInterval|
+ |yii/db/Connection::$enableSlaves|
+ |yii/db/Connection::$slaves|
+ |yii/db/Connection::$slaveConfig|
+ |yii/db/Connection::$masters|
+ |yii/db/Connection::$masterConfig|
+ |yii/db/Connection::$shuffleMasters|
+ |yii/db/Connection::$enableLogging|
+ |yii/db/Connection::$enableProfiling|
+ |yii/base/Component::$behaviors|
+ |yii/db/Connection::$isActive|
+ |yii/db/Connection::$transaction|
+ |yii/db/Connection::$schema|
+ |yii/db/Connection::$queryBuilder|
+ |yii/db/Connection::$driverName|
+ |yii/db/Connection::$serverVersion|
+ |yii/db/Connection::$slavePdo|
+ |yii/db/Connection::$masterPdo|
+ |yii/db/Connection::$slave|
+ |yii/db/Connection::$master|
+
 
 $schemaMap				*yii/sphinx/Connection::$schemaMap*
 
- ()
+ (array) 
+
+ Mapping between PDO driver names and 'Schema' classes. The keys of the array
+ are PDO driver names while the values are either the corresponding schema
+ class names or configurations. Please refer to 'Yii::createObject()' for
+ details on how to specify a configuration.
+
+ This property is mainly used by 'getSchema()' when fetching the database
+ schema information. You normally do not need to set this property unless you
+ want to use your own 'Schema' class to support DBMS that is not supported by
+ Yii.
+
+
 
 $enableFloatConversion			*yii/sphinx/Connection::$enableFloatConversion*
 
@@ -58,10 +113,107 @@ $enableFloatConversion			*yii/sphinx/Connection::$enableFloatConversion*
  does not provide specific param type for float binding, while Sphinx is
  unable to process float values passed as quoted strings.
 
+$lastInsertID				*yii/sphinx/Connection::$lastInsertID*
+
+ (string) The row ID of the last row inserted, or the last value retrieved
+ from the sequence object
+
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/db/Connection::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/db/Connection::getIsActive|
+ |yii/db/Connection::cache|
+ |yii/db/Connection::noCache|
+ |yii/db/Connection::getQueryCacheInfo|
+ |yii/db/Connection::open|
+ |yii/db/Connection::close|
+ |yii/db/Connection::createPdoInstance|
+ |yii/db/Connection::initConnection|
+ |yii/db/Connection::getTransaction|
+ |yii/db/Connection::beginTransaction|
+ |yii/db/Connection::transaction|
+ |yii/db/Connection::getSchema|
+ |yii/db/Connection::getQueryBuilder|
+ |yii/db/Connection::setQueryBuilder|
+ |yii/db/Connection::getTableSchema|
+ |yii/db/Connection::quoteValue|
+ |yii/db/Connection::quoteColumnName|
+ |yii/db/Connection::quoteSql|
+ |yii/db/Connection::getDriverName|
+ |yii/db/Connection::setDriverName|
+ |yii/db/Connection::getServerVersion|
+ |yii/db/Connection::getSlavePdo|
+ |yii/db/Connection::getMasterPdo|
+ |yii/db/Connection::getSlave|
+ |yii/db/Connection::getMaster|
+ |yii/db/Connection::useMaster|
+ |yii/db/Connection::openFromPool|
+ |yii/db/Connection::openFromPoolSequentially|
+ |yii/db/Connection::__sleep|
+
+
+*yii/sphinx/Connection::createCommand*			public
+>
+ createCommand($sql='null', $params='[]')
+<
+return (\yii\sphinx\Command) The Sphinx command
+
+ Creates a command for execution.
+
+    [$sql] (string) The SQL statement to be executed
+    [$params] (array) The parameters to be bound to the SQL statement
+
+
+*yii/sphinx/Connection::getLastInsertID*			public
+>
+ getLastInsertID($sequenceName='''')
+<
+return (string) The row ID of the last row inserted, or the last value retrieved from
+the sequence object
+
+ This method is not supported by Sphinx.
+
+    [$sequenceName] (string) Name of the sequence object
+
+
+*yii/sphinx/Connection::quoteTableName*			public
+>
+ quoteTableName($name)
+<
+return (string) The properly quoted table name
+
+ Alias of 'quoteIndexName()'.
+
+    [$name] (string) Table name
 
 
 *yii/sphinx/Connection::getIndexSchema*			public
@@ -91,41 +243,6 @@ return (string) The properly quoted index name
  including '(', ''' and '{{', then this method will do nothing.
 
     [$name] (string) Index name
-
-
-*yii/sphinx/Connection::quoteTableName*			public
->
- quoteTableName($name)
-<
-return (string) The properly quoted table name
-
- Alias of 'quoteIndexName()'.
-
-    [$name] (string) Table name
-
-
-*yii/sphinx/Connection::createCommand*			public
->
- createCommand($sql='null', $params='[]')
-<
-return (\yii\sphinx\Command) The Sphinx command
-
- Creates a command for execution.
-
-    [$sql] (string) The SQL statement to be executed
-    [$params] (array) The parameters to be bound to the SQL statement
-
-
-*yii/sphinx/Connection::getLastInsertID*			public
->
- getLastInsertID($sequenceName='''')
-<
-return (string) The row ID of the last row inserted, or the last value retrieved from
-the sequence object
-
- This method is not supported by Sphinx.
-
-    [$sequenceName] (string) Name of the sequence object
 
 
 *yii/sphinx/Connection::escapeMatchValue*			public

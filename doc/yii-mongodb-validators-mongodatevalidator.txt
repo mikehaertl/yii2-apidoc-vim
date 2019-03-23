@@ -25,6 +25,36 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/validators/Validator::$builtInValidators|
+ |yii/validators/Validator::$attributes|
+ |yii/validators/Validator::$message|
+ |yii/validators/Validator::$on|
+ |yii/validators/Validator::$except|
+ |yii/validators/Validator::$skipOnError|
+ |yii/validators/Validator::$skipOnEmpty|
+ |yii/validators/Validator::$enableClientValidation|
+ |yii/validators/Validator::$isEmpty|
+ |yii/validators/Validator::$when|
+ |yii/validators/Validator::$whenClient|
+ |yii/validators/DateValidator::$type|
+ |yii/validators/DateValidator::$format|
+ |yii/validators/DateValidator::$locale|
+ |yii/validators/DateValidator::$timeZone|
+ |yii/validators/DateValidator::$timestampAttribute|
+ |yii/validators/DateValidator::$timestampAttributeFormat|
+ |yii/validators/DateValidator::$timestampAttributeTimeZone|
+ |yii/validators/DateValidator::$max|
+ |yii/validators/DateValidator::$min|
+ |yii/validators/DateValidator::$tooBig|
+ |yii/validators/DateValidator::$tooSmall|
+ |yii/validators/DateValidator::$maxString|
+ |yii/validators/DateValidator::$minString|
+ |yii/base/Component::$behaviors|
+ |yii/validators/Validator::$validationAttributes|
+ |yii/validators/Validator::$attributeNames|
+
 
 $mongoDateAttribute			*yii/mongodb/validators/MongoDateValidator::$mongoDateAttribute*
 
@@ -42,6 +72,46 @@ $mongoDateAttribute			*yii/mongodb/validators/MongoDateValidator::$mongoDateAttr
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/validators/Validator::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/validators/Validator::createValidator|
+ |yii/validators/Validator::validateAttributes|
+ |yii/validators/Validator::getValidationAttributes|
+ |yii/validators/Validator::validate|
+ |yii/validators/Validator::validateValue|
+ |yii/validators/Validator::clientValidateAttribute|
+ |yii/validators/Validator::getClientOptions|
+ |yii/validators/Validator::isActive|
+ |yii/validators/Validator::addError|
+ |yii/validators/Validator::isEmpty|
+ |yii/validators/Validator::formatMessage|
+ |yii/validators/Validator::getAttributeNames|
+
 
 *yii/mongodb/validators/MongoDateValidator::validateAttribute*public
 >
@@ -49,17 +119,34 @@ METHOD DETAILS
 <
 return (void)
 
-    [$model] () 
-    [$attribute] () 
+ Validates a single attribute.
+
+
+
+ Child classes must implement this method to provide the actual validation
+ logic.
+
+
+
+    [$model] (\yii\base\Model) The data model to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/mongodb/validators/MongoDateValidator::parseDateValue*protected
 >
  parseDateValue($value)
 <
-return (void)
+return (int|false) A UNIX timestamp or 'false' on failure.
 
-    [$value] () 
+ Parses date string into UNIX timestamp.
+
+
+
+
+
+
+
+    [$value] (string) String representing date
 
 
 

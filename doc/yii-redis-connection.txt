@@ -22,6 +22,10 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $hostname				*yii/redis/Connection::$hostname*
 
@@ -96,10 +100,67 @@ $redisCommands				*yii/redis/Connection::$redisCommands*
 
  (array) List of available redis commands.
 
+$isActive				*yii/redis/Connection::$isActive*
+
+ (bool) Whether the DB connection is established
+
+$driverName				*yii/redis/Connection::$driverName*
+
+ (string) Name of the DB driver
+
+$luaScriptBuilder			*yii/redis/Connection::$luaScriptBuilder*
+
+ (\yii\redis\LuaScriptBuilder)
+
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+
+
+*yii/redis/Connection::__call*				public
+>
+ __call($name, $params)
+<
+return (mixed) 
+
+ Allows issuing all supported commands via magic methods.
+
+
+
+   $redis->hmset('test_collection', 'key1', 'val1', 'key2', 'val2')
+
+
+
+    [$name] (string) Name of the missing method to execute
+    [$params] (array) Method call arguments
 
 
 *yii/redis/Connection::__sleep*				public
@@ -169,24 +230,6 @@ return (string) Name of the DB driver
 <
 return (\yii\redis\LuaScriptBuilder) 
 
-
-
-*yii/redis/Connection::__call*				public
->
- __call($name, $params)
-<
-return (mixed) 
-
- Allows issuing all supported commands via magic methods.
-
-
-
-   $redis->hmset('test_collection', 'key1', 'val1', 'key2', 'val2')
-
-
-
-    [$name] (string) Name of the missing method to execute
-    [$params] (array) Method call arguments
 
 
 *yii/redis/Connection::executeCommand*			public

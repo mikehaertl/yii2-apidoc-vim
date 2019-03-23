@@ -45,6 +45,10 @@ Inherited properties:
  |yii/widgets/BaseListView::$summaryOptions|
  |yii/widgets/BaseListView::$emptyText|
  |yii/widgets/BaseListView::$emptyTextOptions|
+ |yii/base/Component::$behaviors|
+ |yii/base/Widget::$id|
+ |yii/base/Widget::$view|
+ |yii/base/Widget::$viewPath|
 
 
 $options				*yii/grid/GridView::$options*
@@ -253,6 +257,11 @@ $filterErrorOptions			*yii/grid/GridView::$filterErrorOptions*
  used by 'Html::error()' when rendering an error message next to every filter
  input field.
 
+$filterOnFocusOut			*yii/grid/GridView::$filterOnFocusOut*
+
+ (bool) Whatever to apply filters on losing focus. Leaves an ability to manage
+ filters via yiiGridView JS
+
 
 
 METHOD DETAILS
@@ -262,15 +271,15 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -336,11 +345,18 @@ return (string) The HTML code of table
 >
  renderSection($name)
 <
-return (void)
+return (string|bool) The rendering result of the section, or false if the named
+section is not supported.
 
- {@inheritdoc}
+ Renders a section of the specified name.
 
-    [$name] () 
+
+
+ If the named section is not supported, false will be returned.
+
+
+
+    [$name] (string) The section name, e.g., '{summary}', '{items}'.
 
 
 *yii/grid/GridView::renderErrors*				public

@@ -3,9 +3,472 @@
 =========================
 
 
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/mail/BaseMessage::$mailer|
+
+
+$charset				*yii/swiftmailer/Message::$charset*
+
+ (string) The character set of this message.
+
+$from					*yii/swiftmailer/Message::$from*
+
+ (string|array) The sender
+
+$to					*yii/swiftmailer/Message::$to*
+
+ (string|array) The message recipients
+
+$replyTo				*yii/swiftmailer/Message::$replyTo*
+
+ (string|array) The reply-to address of this message.
+
+$cc					*yii/swiftmailer/Message::$cc*
+
+ (string|array) The Cc (additional copy receiver) addresses of this message.
+
+$bcc					*yii/swiftmailer/Message::$bcc*
+
+ (string|array) The Bcc (hidden copy receiver) addresses of this message.
+
+$subject				*yii/swiftmailer/Message::$subject*
+
+ (string) The message subject
+
+$textBody				*yii/swiftmailer/Message::$textBody*
+
+ (string) Message plain text content.
+
+$htmlBody				*yii/swiftmailer/Message::$htmlBody*
+
+ (string) Message HTML content.
+
+$swiftMessage				*yii/swiftmailer/Message::$swiftMessage*
+
+ (\Swift_Message) Swift message instance.
+
+$signature				*yii/swiftmailer/Message::$signature*
+
+ (array|callable|\Swift_Signer) Signature specification. See 'addSignature()'
+ for details on how it should be specified.
+
+$headers				*yii/swiftmailer/Message::$headers*
+
+ (array) Headers in format: '[name => value]'.
+
+$returnPath				*yii/swiftmailer/Message::$returnPath*
+
+ (string) The bounce email address.
+
+$priority				*yii/swiftmailer/Message::$priority*
+
+ (int) Priority value, should be an integer in range: '1..5', where 1 is the
+ highest priority and 5 is the lowest.
+
+$readReceiptTo				*yii/swiftmailer/Message::$readReceiptTo*
+
+ (string|array) Receipt receive email address(es).
+
+
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/BaseObject::__get|
+ |yii/base/BaseObject::__set|
+ |yii/base/BaseObject::__isset|
+ |yii/base/BaseObject::__unset|
+ |yii/base/BaseObject::__call|
+ |yii/base/BaseObject::hasProperty|
+ |yii/base/BaseObject::canGetProperty|
+ |yii/base/BaseObject::canSetProperty|
+ |yii/base/BaseObject::hasMethod|
+ |yii/mail/BaseMessage::send|
+ |yii/mail/BaseMessage::__toString|
+
+
+*yii/swiftmailer/Message::getCharset*			public
+>
+ getCharset()
+<
+return (string) The character set of this message.
+
+ Returns the character set of this message.
+
+
+
+
+
+
+
+
+*yii/swiftmailer/Message::setCharset*			public
+>
+ setCharset($charset)
+<
+return ($this) Self reference.
+
+ Sets the character set of this message.
+
+
+
+
+
+
+
+    [$charset] (string) Character set name.
+
+
+*yii/swiftmailer/Message::getFrom*			public
+>
+ getFrom()
+<
+return (string|array) The sender
+
+ Returns the message sender.
+
+
+
+
+
+
+
+
+*yii/swiftmailer/Message::setFrom*			public
+>
+ setFrom($from)
+<
+return ($this) Self reference.
+
+ Sets the message sender.
+
+
+
+
+
+
+
+    [$from] (string|array) Sender email address. You may pass an array of
+    addresses if this message is from multiple people. You may also specify
+    sender name in addition to email address using format: '[email => name]'.
+
+
+*yii/swiftmailer/Message::getTo*				public
+>
+ getTo()
+<
+return (string|array) The message recipients
+
+ Returns the message recipient(s).
+
+
+
+
+
+
+
+
+*yii/swiftmailer/Message::setTo*				public
+>
+ setTo($to)
+<
+return ($this) Self reference.
+
+ Sets the message recipient(s).
+
+
+
+
+
+
+
+    [$to] (string|array) Receiver email address. You may pass an array of
+    addresses if multiple recipients should receive this message. You may also
+    specify receiver name in addition to email address using format: '[email
+    => name]'.
+
+
+*yii/swiftmailer/Message::getReplyTo*			public
+>
+ getReplyTo()
+<
+return (string|array) The reply-to address of this message.
+
+ Returns the reply-to address of this message.
+
+
+
+
+
+
+
+
+*yii/swiftmailer/Message::setReplyTo*			public
+>
+ setReplyTo($replyTo)
+<
+return ($this) Self reference.
+
+ Sets the reply-to address of this message.
+
+
+
+
+
+
+
+    [$replyTo] (string|array) The reply-to address. You may pass an array of
+    addresses if this message should be replied to multiple people. You may
+    also specify reply-to name in addition to email address using format:
+    '[email => name]'.
+
+
+*yii/swiftmailer/Message::getCc*				public
+>
+ getCc()
+<
+return (string|array) The Cc (additional copy receiver) addresses of this message.
+
+ Returns the Cc (additional copy receiver) addresses of this message.
+
+
+
+
+
+
+
+
+*yii/swiftmailer/Message::setCc*				public
+>
+ setCc($cc)
+<
+return ($this) Self reference.
+
+ Sets the Cc (additional copy receiver) addresses of this message.
+
+
+
+
+
+
+
+    [$cc] (string|array) Copy receiver email address. You may pass an array of
+    addresses if multiple recipients should receive this message. You may also
+    specify receiver name in addition to email address using format: '[email
+    => name]'.
+
+
+*yii/swiftmailer/Message::getBcc*				public
+>
+ getBcc()
+<
+return (string|array) The Bcc (hidden copy receiver) addresses of this message.
+
+ Returns the Bcc (hidden copy receiver) addresses of this message.
+
+
+
+
+
+
+
+
+*yii/swiftmailer/Message::setBcc*				public
+>
+ setBcc($bcc)
+<
+return ($this) Self reference.
+
+ Sets the Bcc (hidden copy receiver) addresses of this message.
+
+
+
+
+
+
+
+    [$bcc] (string|array) Hidden copy receiver email address. You may pass an
+    array of addresses if multiple recipients should receive this message. You
+    may also specify receiver name in addition to email address using format:
+    '[email => name]'.
+
+
+*yii/swiftmailer/Message::getSubject*			public
+>
+ getSubject()
+<
+return (string) The message subject
+
+ Returns the message subject.
+
+
+
+
+
+
+
+
+*yii/swiftmailer/Message::setSubject*			public
+>
+ setSubject($subject)
+<
+return ($this) Self reference.
+
+ Sets the message subject.
+
+
+
+
+
+
+
+    [$subject] (string) Message subject
+
+
+*yii/swiftmailer/Message::setTextBody*			public
+>
+ setTextBody($text)
+<
+return ($this) Self reference.
+
+ Sets message plain text content.
+
+
+
+
+
+
+
+    [$text] (string) Message plain text content.
+
+
+*yii/swiftmailer/Message::setHtmlBody*			public
+>
+ setHtmlBody($html)
+<
+return ($this) Self reference.
+
+ Sets message HTML content.
+
+
+
+
+
+
+
+    [$html] (string) Message HTML content.
+
+
+*yii/swiftmailer/Message::attach*				public
+>
+ attach($fileName, $options='[]')
+<
+return ($this) Self reference.
+
+ Attaches existing file to the email message.
+
+
+
+
+
+
+
+    [$fileName] (string) Full file name
+    [$options] (array) Options for embed file. Valid options are:
+
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
+
+
+*yii/swiftmailer/Message::attachContent*			public
+>
+ attachContent($content, $options='[]')
+<
+return ($this) Self reference.
+
+ Attach specified content as file for the email message.
+
+
+
+
+
+
+
+    [$content] (string) Attachment file content.
+    [$options] (array) Options for embed file. Valid options are:
+
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
+
+
+*yii/swiftmailer/Message::embed*				public
+>
+ embed($fileName, $options='[]')
+<
+return (string) Attachment CID.
+
+ Attach a file and return it's CID source.
+
+
+
+ This method should be used when embedding images or other data in a message.
+
+
+
+    [$fileName] (string) File name.
+    [$options] (array) Options for embed file. Valid options are:
+
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
+
+
+*yii/swiftmailer/Message::embedContent*			public
+>
+ embedContent($content, $options='[]')
+<
+return (string) Attachment CID.
+
+ Attach a content as file and return it's CID source.
+
+
+
+ This method should be used when embedding images or other data in a message.
+
+
+
+    [$content] (string) Attachment file content.
+    [$options] (array) Options for embed file. Valid options are:
+
+
+      - fileName: name, which should be used to attach file. 
+      - contentType: attached file MIME type.
+
+
+*yii/swiftmailer/Message::toString*			public
+>
+ toString()
+<
+return (string) The string representation of this message.
+
+ Returns string representation of this message.
+
+
+
+
+
+
 
 
 *yii/swiftmailer/Message::__clone*			public
@@ -27,143 +490,6 @@ return (\Swift_Message) Swift message instance.
 
 
 
-*yii/swiftmailer/Message::getCharset*			public
->
- getCharset()
-<
-return (void)
-
-
-
-*yii/swiftmailer/Message::setCharset*			public
->
- setCharset($charset)
-<
-return (void)
-
-    [$charset] () 
-
-
-*yii/swiftmailer/Message::getFrom*			public
->
- getFrom()
-<
-return (void)
-
-
-
-*yii/swiftmailer/Message::setFrom*			public
->
- setFrom($from)
-<
-return (void)
-
-    [$from] () 
-
-
-*yii/swiftmailer/Message::getReplyTo*			public
->
- getReplyTo()
-<
-return (void)
-
-
-
-*yii/swiftmailer/Message::setReplyTo*			public
->
- setReplyTo($replyTo)
-<
-return (void)
-
-    [$replyTo] () 
-
-
-*yii/swiftmailer/Message::getTo*				public
->
- getTo()
-<
-return (void)
-
-
-
-*yii/swiftmailer/Message::setTo*				public
->
- setTo($to)
-<
-return (void)
-
-    [$to] () 
-
-
-*yii/swiftmailer/Message::getCc*				public
->
- getCc()
-<
-return (void)
-
-
-
-*yii/swiftmailer/Message::setCc*				public
->
- setCc($cc)
-<
-return (void)
-
-    [$cc] () 
-
-
-*yii/swiftmailer/Message::getBcc*				public
->
- getBcc()
-<
-return (void)
-
-
-
-*yii/swiftmailer/Message::setBcc*				public
->
- setBcc($bcc)
-<
-return (void)
-
-    [$bcc] () 
-
-
-*yii/swiftmailer/Message::getSubject*			public
->
- getSubject()
-<
-return (void)
-
-
-
-*yii/swiftmailer/Message::setSubject*			public
->
- setSubject($subject)
-<
-return (void)
-
-    [$subject] () 
-
-
-*yii/swiftmailer/Message::setTextBody*			public
->
- setTextBody($text)
-<
-return (void)
-
-    [$text] () 
-
-
-*yii/swiftmailer/Message::setHtmlBody*			public
->
- setHtmlBody($html)
-<
-return (void)
-
-    [$html] () 
-
-
 *yii/swiftmailer/Message::setBody*			protected
 >
  setBody($body, $contentType)
@@ -178,46 +504,6 @@ return (void)
 
     [$body] (string) Body content.
     [$contentType] (string) Body content type.
-
-
-*yii/swiftmailer/Message::attach*				public
->
- attach($fileName, $options='[]')
-<
-return (void)
-
-    [$fileName] () 
-    [$options] () 
-
-
-*yii/swiftmailer/Message::attachContent*			public
->
- attachContent($content, $options='[]')
-<
-return (void)
-
-    [$content] () 
-    [$options] () 
-
-
-*yii/swiftmailer/Message::embed*				public
->
- embed($fileName, $options='[]')
-<
-return (void)
-
-    [$fileName] () 
-    [$options] () 
-
-
-*yii/swiftmailer/Message::embedContent*			public
->
- embedContent($content, $options='[]')
-<
-return (void)
-
-    [$content] () 
-    [$options] () 
 
 
 *yii/swiftmailer/Message::setSignature*			public
@@ -258,14 +544,6 @@ return (\Swift_Signer) Signer instance
  Creates signer from its configuration
 
     [$signature] (array) Signature configuration
-
-
-*yii/swiftmailer/Message::toString*			public
->
- toString()
-<
-return (void)
-
 
 
 *yii/swiftmailer/Message::createSwiftMessage*		protected

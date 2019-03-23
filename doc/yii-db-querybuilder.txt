@@ -5,12 +5,12 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/db/mysql/QueryBuilder|
-|yii/db/mssql/QueryBuilder|
-|yii/db/oci/QueryBuilder|
 |yii/db/sqlite/QueryBuilder|
+|yii/db/oci/QueryBuilder|
 |yii/db/pgsql/QueryBuilder|
+|yii/db/mssql/QueryBuilder|
 |yii/db/cubrid/QueryBuilder|
+|yii/db/mysql/QueryBuilder|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -123,7 +123,14 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/db/QueryBuilder::defaultConditionClasses*		protected
@@ -422,7 +429,7 @@ return (string) The SQL statement for creating a new DB table.
 
  Builds a SQL statement for creating a new DB table.
 
- The columns in the new  table should be specified as name-definition pairs
+ The columns in the new table should be specified as name-definition pairs
  (e.g. 'name' => 'string'), where name stands for a column name which will be
  properly quoted by the method, and definition stands for the column type
  which can contain an abstract DB type. The 'getColumnType()' method will be
@@ -765,13 +772,33 @@ return (string) The SQL statement for resetting sequence
  key.
 
  The sequence will be reset such that the primary key of the next new row
- inserted will have the specified value or 1.
+ inserted will have the specified value or the maximum existing value +1.
 
     [$table] (string) The name of the table whose primary key sequence will be
     reset
     [$value] (array|string) The value for the primary key of the next new row
-    inserted. If this is not set, the next new row's primary key will have a
-    value 1.
+    inserted. If this is not set, the next new row's primary key will have the
+    maximum existing value +1.
+
+
+*yii/db/QueryBuilder::executeResetSequence*		public
+>
+ executeResetSequence($table, $value='null')
+<
+return (void)
+
+ Execute a SQL statement for resetting the sequence value of a table's primary
+ key.
+
+ Reason for execute is that some databases (Oracle) need several queries to do
+ so. The sequence is reset such that the primary key of the next new row
+ inserted will have the specified value or the maximum existing value +1.
+
+    [$table] (string) The name of the table whose primary key sequence is
+    reset
+    [$value] (array|string) The value for the primary key of the next new row
+    inserted. If this is not set, the next new row's primary key will have the
+    maximum existing value +1.
 
 
 *yii/db/QueryBuilder::checkIntegrity*			public

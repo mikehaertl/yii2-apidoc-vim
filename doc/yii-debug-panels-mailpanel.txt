@@ -14,11 +14,29 @@ Inherited properties:
  |yii/debug/Panel::$data|
  |yii/debug/Panel::$actions|
  |yii/debug/Panel::$error|
+ |yii/base/Component::$behaviors|
+ |yii/debug/Panel::$url|
 
 
 $mailPath				*yii/debug/panels/MailPanel::$mailPath*
 
  (string) Path where all emails will be saved. should be an alias.
+
+$name					*yii/debug/panels/MailPanel::$name*
+
+ (string) Name of the panel
+
+$summary				*yii/debug/panels/MailPanel::$summary*
+
+ (string) Content that is displayed at debug toolbar
+
+$detail					*yii/debug/panels/MailPanel::$detail*
+
+ (string) Content that is displayed in debugger detail view
+
+$messagesFileName			*yii/debug/panels/MailPanel::$messagesFileName*
+
+ (array)
 
 
 
@@ -27,6 +45,30 @@ METHOD DETAILS
 
 Inherited methods:
 
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
  |yii/debug/Panel::load|
  |yii/debug/Panel::getUrl|
  |yii/debug/Panel::getTraceLine|
@@ -34,6 +76,22 @@ Inherited methods:
  |yii/debug/Panel::getError|
  |yii/debug/Panel::hasError|
  |yii/debug/Panel::isEnabled|
+
+
+*yii/debug/panels/MailPanel::init*			public
+>
+ init()
+<
+return (void)
+
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/debug/panels/MailPanel::getName*			public
@@ -83,14 +141,6 @@ return (array) Messages
 
  Save info about messages of current request. Each element is array holding
  message info, such as: time, reply, bc, cc, from, to and other.
-
-
-*yii/debug/panels/MailPanel::init*			public
->
- init()
-<
-return (void)
-
 
 
 *yii/debug/panels/MailPanel::getMessagesFileName*		public

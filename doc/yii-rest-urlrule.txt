@@ -58,6 +58,7 @@ Inherited properties:
 
  |yii/web/CompositeUrlRule::$rules|
  |yii/web/CompositeUrlRule::$createStatus|
+ |yii/web/CompositeUrlRule::$createUrlStatus|
 
 
 $prefix					*yii/rest/UrlRule::$prefix*
@@ -155,41 +156,69 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/rest/UrlRule::createRules*				protected
 >
  createRules()
 <
-return (void)
+return (\yii\web\UrlRuleInterface[]) The URL rules
 
- {@inheritdoc}
+ Creates the URL rules that should be contained within this composite rule.
+
+
+
+
+
+
 
 
 *yii/rest/UrlRule::parseRequest*				public
 >
  parseRequest($manager, $request)
 <
-return (void)
+return (array|bool) The parsing result. The route and the parameters are returned as
+an array. If false, it means this rule cannot be used to parse this path info.
 
- {@inheritdoc}
+ Parses the given request and returns the corresponding route and parameters.
 
-    [$manager] () 
-    [$request] () 
+
+
+
+
+
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$request] (\yii\web\Request) The request component
 
 
 *yii/rest/UrlRule::createUrl*				public
 >
  createUrl($manager, $route, $params)
 <
-return (void)
+return (string|bool) The created URL, or false if this rule cannot be used for
+creating this URL.
 
- {@inheritdoc}
+ Creates a URL according to the given route and parameters.
 
-    [$manager] () 
-    [$route] () 
-    [$params] () 
+
+
+
+
+
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$route] (string) The route. It should not have slashes at the beginning
+    or the end.
+    [$params] (array) The parameters
 
 
 *yii/rest/UrlRule::createRule*				protected

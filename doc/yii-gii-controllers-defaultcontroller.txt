@@ -6,14 +6,28 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
 
-$layout					*yii/gii/controllers/DefaultController::$layout*
+ |yii/base/Controller::$id|
+ |yii/base/Controller::$defaultAction|
+ |yii/base/Controller::$action|
+ |yii/web/Controller::$enableCsrfValidation|
+ |yii/web/Controller::$actionParams|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/Controller::$viewPath|
 
- ()
 
 $module					*yii/gii/controllers/DefaultController::$module*
 
  (\yii\gii\Module)
+
+$layout					*yii/gii/controllers/DefaultController::$layout*
+
+ ()
 
 $generator				*yii/gii/controllers/DefaultController::$generator*
 
@@ -24,14 +38,98 @@ $generator				*yii/gii/controllers/DefaultController::$generator*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/Controller::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/base/Controller::actions|
+ |yii/base/Controller::runAction|
+ |yii/base/Controller::run|
+ |yii/web/Controller::bindActionParams|
+ |yii/base/Controller::createAction|
+ |yii/base/Controller::afterAction|
+ |yii/base/Controller::getModules|
+ |yii/base/Controller::getUniqueId|
+ |yii/base/Controller::getRoute|
+ |yii/base/Controller::render|
+ |yii/base/Controller::renderContent|
+ |yii/base/Controller::renderPartial|
+ |yii/base/Controller::renderFile|
+ |yii/base/Controller::getView|
+ |yii/base/Controller::setView|
+ |yii/base/Controller::getViewPath|
+ |yii/base/Controller::setViewPath|
+ |yii/base/Controller::findLayoutFile|
+ |yii/web/Controller::renderAjax|
+ |yii/web/Controller::asJson|
+ |yii/web/Controller::asXml|
+ |yii/web/Controller::redirect|
+ |yii/web/Controller::goHome|
+ |yii/web/Controller::goBack|
+ |yii/web/Controller::refresh|
+
 
 *yii/gii/controllers/DefaultController::beforeAction*	public
 >
  beforeAction($action)
 <
-return (void)
+return (bool) Whether the action should continue to run.
 
-    [$action] () 
+ This method is invoked right before an action is executed.
+
+
+
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
+
+ In case the action should not run, the request should be handled inside of
+ the 'beforeAction' code by either providing the necessary output or
+ redirecting the request. Otherwise the response will be empty.
+
+ If you override this method, your code should look like the following:
+
+   public function beforeAction($action)
+   {
+       // your custom code here, if you want the code to run before action
+ filters,
+       // which are triggered on the [[EVENT_BEFORE_ACTION]] event, e.g.
+ PageCache or AccessControl
+
+       if (!parent::beforeAction($action)) {
+           return false;
+       }
+
+       // other custom code here
+
+       return true; // or false to not run the action
+   }
+
+
+
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/gii/controllers/DefaultController::actionIndex*	public

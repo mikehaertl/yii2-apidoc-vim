@@ -50,6 +50,13 @@ PROPERTY DETAILS
 Inherited properties:
 
  |yii/data/BaseDataProvider::$id|
+ |yii/base/Component::$behaviors|
+ |yii/data/BaseDataProvider::$models|
+ |yii/data/BaseDataProvider::$keys|
+ |yii/data/BaseDataProvider::$count|
+ |yii/data/BaseDataProvider::$totalCount|
+ |yii/data/BaseDataProvider::$pagination|
+ |yii/data/BaseDataProvider::$sort|
 
 
 $query					*yii/data/ActiveDataProvider::$query*
@@ -96,7 +103,6 @@ Inherited methods:
  |yii/base/Component::canGetProperty|
  |yii/base/Component::canSetProperty|
  |yii/base/Component::hasMethod|
- |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
  |yii/base/Component::on|
@@ -135,33 +141,60 @@ return (void)
  valid DB connection.
 
 
+*yii/data/ActiveDataProvider::__clone*			public
+>
+ __clone()
+<
+return (void)
+
+
+
 *yii/data/ActiveDataProvider::prepareModels*		protected
 >
  prepareModels()
 <
-return (void)
+return (array) The available data models
 
- {@inheritdoc}
+ Prepares the data models that will be made available in the current page.
+
+
+
+
+
+
 
 
 *yii/data/ActiveDataProvider::prepareKeys*		protected
 >
  prepareKeys($models)
 <
-return (void)
+return (array) The keys
 
- {@inheritdoc}
+ Prepares the keys associated with the currently available data models.
 
-    [$models] () 
+
+
+
+
+
+
+    [$models] (array) The available data models
 
 
 *yii/data/ActiveDataProvider::prepareTotalCount*		protected
 >
  prepareTotalCount()
 <
-return (void)
+return (int) Total number of data models in this data provider.
 
- {@inheritdoc}
+ Returns a value indicating the total number of data models in this data
+ provider.
+
+
+
+
+
+
 
 
 *yii/data/ActiveDataProvider::setSort*			public
@@ -170,9 +203,22 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Sets the sort definition for this data provider.
 
-    [$value] () 
+
+
+
+
+
+
+    [$value] (array|\yii\data\Sort|bool) The sort definition to be used by
+    this data provider. This can be one of the following:
+
+
+      - a configuration array for creating the sort definition object. The
+      "class" element defaults   to 'yii\data\Sort' 
+      - an instance of 'Sort' or its subclass 
+      - false, if sorting needs to be disabled.
 
 
 

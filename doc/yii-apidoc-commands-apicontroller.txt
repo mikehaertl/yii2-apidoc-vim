@@ -8,9 +8,26 @@ PROPERTY DETAILS
 
 Inherited properties:
 
+ |yii/base/Controller::$id|
+ |yii/base/Controller::$module|
+ |yii/base/Controller::$defaultAction|
+ |yii/base/Controller::$layout|
+ |yii/base/Controller::$action|
+ |yii/console/Controller::$interactive|
+ |yii/console/Controller::$color|
+ |yii/console/Controller::$help|
  |yii/apidoc/components/BaseController::$template|
  |yii/apidoc/components/BaseController::$exclude|
  |yii/apidoc/components/BaseController::$pageTitle|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/ViewContextInterface::$viewPath|
+ |yii/console/Controller::$passedOptions|
+ |yii/console/Controller::$passedOptionValues|
+ |yii/console/Controller::$helpSummary|
 
 
 $guide					*yii/apidoc/commands/ApiController::$guide*
@@ -28,11 +45,97 @@ METHOD DETAILS
 
 Inherited methods:
 
+ |yii/base/BaseObject::className|
+ |yii/base/Controller::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/base/Controller::actions|
+ |yii/base/Controller::runAction|
+ |yii/base/Controller::run|
+ |yii/base/Controller::bindActionParams|
+ |yii/base/Controller::createAction|
+ |yii/base/Controller::beforeAction|
+ |yii/base/Controller::afterAction|
+ |yii/base/Controller::getModules|
+ |yii/base/Controller::getUniqueId|
+ |yii/base/Controller::getRoute|
+ |yii/base/Controller::render|
+ |yii/base/Controller::renderContent|
+ |yii/base/Controller::renderPartial|
+ |yii/base/Controller::renderFile|
+ |yii/base/Controller::getView|
+ |yii/base/Controller::setView|
+ |yii/base/ViewContextInterface::getViewPath|
+ |yii/base/Controller::setViewPath|
+ |yii/base/Controller::findLayoutFile|
+ |yii/console/Controller::isColorEnabled|
+ |yii/console/Controller::ansiFormat|
+ |yii/console/Controller::stdout|
+ |yii/console/Controller::stderr|
+ |yii/console/Controller::prompt|
+ |yii/console/Controller::confirm|
+ |yii/console/Controller::select|
+ |yii/console/Controller::optionAliases|
+ |yii/console/Controller::getOptionValues|
+ |yii/console/Controller::getPassedOptions|
+ |yii/console/Controller::getPassedOptionValues|
+ |yii/console/Controller::getHelpSummary|
+ |yii/console/Controller::getHelp|
+ |yii/console/Controller::getActionHelpSummary|
+ |yii/console/Controller::getActionHelp|
+ |yii/console/Controller::getActionArgsHelp|
+ |yii/console/Controller::getActionOptionsHelp|
+ |yii/console/Controller::getActionMethodReflection|
+ |yii/console/Controller::parseDocCommentTags|
+ |yii/console/Controller::parseDocCommentSummary|
+ |yii/console/Controller::parseDocCommentDetail|
  |yii/apidoc/components/BaseController::normalizeTargetDir|
  |yii/apidoc/components/BaseController::searchFiles|
  |yii/apidoc/components/BaseController::loadContext|
  |yii/apidoc/components/BaseController::storeContext|
  |yii/apidoc/components/BaseController::updateContext|
+
+
+*yii/apidoc/commands/ApiController::options*		public
+>
+ options($actionID)
+<
+return (string[]) The names of the options valid for the action
+
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
+
+
+
+ Child classes may override this method to specify possible options.
+
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+
+
+
+    [$actionID] (string) The action id of the current request
 
 
 *yii/apidoc/commands/ApiController::findFiles*		protected
@@ -66,21 +169,6 @@ return (\yii\apidoc\renderers\ApiRenderer)
 
 
     [$template] (string) 
-
-
-*yii/apidoc/commands/ApiController::options*		public
->
- options($actionID)
-<
-return (void)
-
-
-
-
-
-
-
-    [$actionID] () 
 
 
 *yii/apidoc/commands/ApiController::actionIndex*		public

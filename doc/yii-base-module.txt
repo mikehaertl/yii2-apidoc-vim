@@ -5,11 +5,11 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/base/Application|
-|yii/web/Application|
-|yii/console/Application|
 |yii/debug/Module|
 |yii/gii/Module|
+|yii/web/Application|
+|yii/base/Application|
+|yii/console/Application|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -28,6 +28,11 @@ DESCRIPTION
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+ |yii/di/ServiceLocator::$components|
 
 
 $params					*yii/base/Module::$params*
@@ -92,6 +97,48 @@ $defaultRoute				*yii/base/Module::$defaultRoute*
  'help', 'post/create', 'admin/post/create'. If action ID is not given, it
  will take the default value as specified in 'Controller::defaultAction'.
 
+$uniqueId				*yii/base/Module::$uniqueId*
+
+ (string) The unique ID of the module.
+
+$basePath				*yii/base/Module::$basePath*
+
+ (string) The root directory of the module.
+
+$controllerPath				*yii/base/Module::$controllerPath*
+
+ (string) The directory that contains the controller classes.
+
+$viewPath				*yii/base/Module::$viewPath*
+
+ (string) The root directory of view files. Defaults to "'basePath'/views".
+
+$layoutPath				*yii/base/Module::$layoutPath*
+
+ (string) The root directory of layout files. Defaults to
+ "'viewPath'/layouts".
+
+$version				*yii/base/Module::$version*
+
+ (string) The version of this module.
+
+$aliases				*yii/base/Module::$aliases*
+
+ (array) List of path aliases to be defined. The array keys are alias names
+ (must start with '@') and the array values are the corresponding paths or
+ aliases. For example,
+
+   [
+       '@models' => '@app/models', // an existing alias
+       '@backend' => __DIR__ . '/../backend',  // a directory
+   ]
+
+
+
+$modules				*yii/base/Module::$modules*
+
+ (array) The modules (indexed by their IDs).
+
 
 
 METHOD DETAILS
@@ -100,15 +147,15 @@ METHOD DETAILS
 Inherited methods:
 
  |yii/base/BaseObject::className|
- |yii/di/ServiceLocator::__get|
- |yii/base/BaseObject::__set|
- |yii/di/ServiceLocator::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -162,30 +209,51 @@ return (void)
 >
  has($id, $checkInstance='false')
 <
-return (void)
+return (bool) Whether the locator has the specified component definition or has
+instantiated the component.
 
- {@inheritdoc}
+ Returns a value indicating whether the locator has the specified component
+ definition or has instantiated the component.
 
  Since version 2.0.13, if a component isn't defined in the module, it will be
  looked up in the parent module. The parent module may be the application.
 
-    [$id] () 
-    [$checkInstance] () 
+ This method may return different results depending on the value of
+ '$checkInstance'.
+
+
+   - If '$checkInstance' is false (default), the method will return a
+   value indicating whether the locator has the specified   component
+ definition. 
+   - If '$checkInstance' is true, the method will return a value
+   indicating whether the locator has   instantiated the specified component.
+
+
+
+    [$id] (string) Component ID (e.g. 'db').
+    [$checkInstance] (bool) Whether the method should check if the component
+    is shared and instantiated.
 
 
 *yii/base/Module::get*					public
 >
  get($id, $throwException='true')
 <
-return (void)
+return (object|null) The component of the specified ID. If '$throwException' is false
+and '$id' is not registered before, null will be returned.
 
- {@inheritdoc}
+ Returns the component instance with the specified ID.
 
  Since version 2.0.13, if a component isn't defined in the module, it will be
  looked up in the parent module. The parent module may be the application.
 
-    [$id] () 
-    [$throwException] () 
+
+
+
+
+    [$id] (string) Component ID (e.g. 'db').
+    [$throwException] (bool) Whether to throw an exception if '$id' is not
+    registered with the locator before.
 
 
 *yii/base/Module::getInstance*				public

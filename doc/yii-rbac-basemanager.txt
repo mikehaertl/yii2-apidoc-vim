@@ -5,9 +5,9 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/rbac/PhpManager|
-|yii/rbac/DbManager|
 |yii/mongodb/rbac/MongoDbManager|
+|yii/rbac/DbManager|
+|yii/rbac/PhpManager|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -19,12 +19,31 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+ |yii/rbac/ManagerInterface::$rules|
+
 
 $defaultRoles				*yii/rbac/BaseManager::$defaultRoles*
 
  (array) A list of role names that are assigned to every user automatically
  without calling 'assign()'. Note that these roles are applied to users,
  regardless of their state of authentication.
+
+$roles					*yii/rbac/BaseManager::$roles*
+
+ (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+ names.
+
+$defaultRoleInstances			*yii/rbac/BaseManager::$defaultRoleInstances*
+
+ (\yii\rbac\Role[]) Default roles. The array is indexed by the role names
+
+$permissions				*yii/rbac/BaseManager::$permissions*
+
+ (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+ by the permission names.
 
 
 
@@ -179,87 +198,141 @@ return (bool) Whether the rule is successfully updated
 >
  createRole($name)
 <
-return (void)
+return (\yii\rbac\Role) The new Role object
 
- {@inheritdoc}
+ Creates a new Role object.
 
-    [$name] () 
+
+
+ Note that the newly created role is not added to the RBAC system yet. You
+ must fill in the needed data and call 'add()' to add it to the system.
+
+
+
+    [$name] (string) The role name
 
 
 *yii/rbac/BaseManager::createPermission*			public
 >
  createPermission($name)
 <
-return (void)
+return (\yii\rbac\Permission) The new Permission object
 
- {@inheritdoc}
+ Creates a new Permission object.
 
-    [$name] () 
+
+
+ Note that the newly created permission is not added to the RBAC system yet.
+ You must fill in the needed data and call 'add()' to add it to the system.
+
+
+
+    [$name] (string) The permission name
 
 
 *yii/rbac/BaseManager::add*				public
 >
  add($object)
 <
-return (void)
+return (bool) Whether the role, permission or rule is successfully added to the
+system
 
- {@inheritdoc}
+ Adds a role, permission or rule to the RBAC system.
 
-    [$object] () 
+
+
+
+
+
+
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
 *yii/rbac/BaseManager::remove*				public
 >
  remove($object)
 <
-return (void)
+return (bool) Whether the role, permission or rule is successfully removed
 
- {@inheritdoc}
+ Removes a role, permission or rule from the RBAC system.
 
-    [$object] () 
+
+
+
+
+
+
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
 *yii/rbac/BaseManager::update*				public
 >
  update($name, $object)
 <
-return (void)
+return (bool) Whether the update is successful
 
- {@inheritdoc}
+ Updates the specified role, permission or rule in the system.
 
-    [$name] () 
-    [$object] () 
+
+
+
+
+
+
+    [$name] (string) The old name of the role, permission or rule
+    [$object] (\yii\rbac\Role|\yii\rbac\Permission|\yii\rbac\Rule) 
 
 
 *yii/rbac/BaseManager::getRole*				public
 >
  getRole($name)
 <
-return (void)
+return (null|\yii\rbac\Role) The role corresponding to the specified name. Null is
+returned if no such role.
 
- {@inheritdoc}
+ Returns the named role.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The role name.
 
 
 *yii/rbac/BaseManager::getPermission*			public
 >
  getPermission($name)
 <
-return (void)
+return (null|\yii\rbac\Permission) The permission corresponding to the specified
+name. Null is returned if no such permission.
 
- {@inheritdoc}
+ Returns the named permission.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The permission name.
 
 
 *yii/rbac/BaseManager::getRoles*				public
 >
  getRoles()
 <
-return (void)
+return (\yii\rbac\Role[]) All roles in the system. The array is indexed by the role
+names.
 
- {@inheritdoc}
+ Returns all roles in the system.
+
+
+
+
+
+
 
 
 *yii/rbac/BaseManager::setDefaultRoles*			public
@@ -296,9 +369,16 @@ return (\yii\rbac\Role[]) Default roles. The array is indexed by the role names
 >
  getPermissions()
 <
-return (void)
+return (\yii\rbac\Permission[]) All permissions in the system. The array is indexed
+by the permission names.
 
- {@inheritdoc}
+ Returns all permissions in the system.
+
+
+
+
+
+
 
 
 *yii/rbac/BaseManager::executeRule*			protected

@@ -161,9 +161,16 @@ Inherited methods:
 >
  renderHeaderCellContent()
 <
-return (void)
+return (string) The rendering result
 
- {@inheritdoc}
+ Renders the header cell content.
+
+
+
+ The default implementation simply renders 'header'. This method may be
+ overridden to customize the rendering of the header cell.
+
+
 
 
 *yii/grid/DataColumn::getHeaderCellLabel*			protected
@@ -179,22 +186,36 @@ return (void)
 >
  renderDataCellContent($model, $key, $index)
 <
-return (void)
+return (string) The rendering result
 
- {@inheritdoc}
+ Renders the data cell content.
 
-    [$model] () 
-    [$key] () 
-    [$index] () 
+
+
+
+
+
+
+    [$model] (mixed) The data model
+    [$key] (mixed) The key associated with the data model
+    [$index] (int) The zero-based index of the data model among the models
+    array returned by 'GridView::dataProvider'.
 
 
 *yii/grid/DataColumn::renderFilterCellContent*		protected
 >
  renderFilterCellContent()
 <
-return (void)
+return (string) The rendering result
 
- {@inheritdoc}
+ Renders the filter cell content.
+
+
+
+ The default implementation simply renders a space. This method may be
+ overridden to customize the rendering of the filter cell (if any).
+
+
 
 
 *yii/grid/DataColumn::getDataCellValue*			public

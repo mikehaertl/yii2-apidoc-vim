@@ -12,20 +12,47 @@ Inherited properties:
  |yii/db/Schema::$defaultSchema|
  |yii/db/Schema::$exceptionMap|
  |yii/db/Schema::$columnSchemaClass|
+ |yii/db/Schema::$tableSchemas|
+ |yii/db/Schema::$schemaNames|
+ |yii/db/Schema::$tableNames|
+ |yii/db/Schema::$queryBuilder|
+ |yii/db/Schema::$lastInsertID|
+ |yii/db/Schema::$serverVersion|
+ |yii/db/ConstraintFinderTrait::$schemaPrimaryKeys|
+ |yii/db/ConstraintFinderTrait::$schemaForeignKeys|
+ |yii/db/ConstraintFinderTrait::$schemaIndexes|
+ |yii/db/ConstraintFinderTrait::$schemaUniques|
+ |yii/db/ConstraintFinderTrait::$schemaChecks|
+ |yii/db/ConstraintFinderTrait::$schemaDefaultValues|
 
 
 $tableQuoteCharacter			*yii/db/sqlite/Schema::$tableQuoteCharacter*
 
- ()
+ (string|string[]) 
+
+ Character used to quote schema, table, etc. names. An array of 2 characters
+ can be used in case starting and ending characters are different.
+
+
 
 $columnQuoteCharacter			*yii/db/sqlite/Schema::$columnQuoteCharacter*
 
- ()
+ (string|string[]) 
+
+ Character used to quote column names. An array of 2 characters can be used in
+ case starting and ending characters are different.
+
+
 
 $typeMap				*yii/db/sqlite/Schema::$typeMap*
 
  (array) Mapping from physical column types (keys) to abstract column types
  (values)
+
+$transactionIsolationLevel		*yii/db/sqlite/Schema::$transactionIsolationLevel*
+
+ (string) The transaction isolation level to use for this transaction. This
+ can be either 'Transaction::READ_UNCOMMITTED' or 'Transaction::SERIALIZABLE'.
 
 
 
@@ -97,24 +124,39 @@ Inherited methods:
 
 *yii/db/sqlite/Schema::findTableNames*			protected
 >
- findTableNames($schema='\'\'')
+ findTableNames($schema='''')
 <
-return (void)
+return (array) All table names in the database. The names have NO schema name prefix.
 
- {@inheritdoc}
+ Returns all table names in the database.
 
-    [$schema] () 
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
 
 
 *yii/db/sqlite/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (void)
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
 
- {@inheritdoc}
+ Loads the metadata for the specified table.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/sqlite/Schema::createQueryBuilder*		public
@@ -135,10 +177,18 @@ return (\yii\db\sqlite\QueryBuilder) Query builder instance
 <
 return (\yii\db\sqlite\ColumnSchemaBuilder) Column schema builder instance
 
- {@inheritdoc}
+ Create a column schema builder instance giving the type and value precision.
 
-    [$type] () 
-    [$length] () 
+
+
+ This method may be overridden by child classes to create a DBMS-specific
+ column schema builder.
+
+
+
+    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
+    [$length] (int|string|array) Length or precision of the column. See
+    'ColumnSchemaBuilder::$length'.
 
 
 *yii/db/sqlite/Schema::findUniqueIndexes*			public
@@ -180,8 +230,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -190,8 +238,6 @@ return (void)
  loadTableForeignKeys($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -202,8 +248,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -212,8 +256,6 @@ return (void)
  loadTableUniques($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -224,8 +266,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -234,8 +274,6 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 

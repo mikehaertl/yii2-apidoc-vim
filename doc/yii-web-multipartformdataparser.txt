@@ -61,6 +61,14 @@ $force					*yii/web/MultipartFormDataParser::$force*
  'POST' requests, which are already processed by PHP automatically. > Note: if
  this option is enabled, value of '$_FILES' will be reset on each parse.
 
+$uploadFileMaxSize			*yii/web/MultipartFormDataParser::$uploadFileMaxSize*
+
+ (int) Upload file max size in bytes.
+
+$uploadFileMaxCount			*yii/web/MultipartFormDataParser::$uploadFileMaxCount*
+
+ (int) Maximum upload files count.
+
 
 
 METHOD DETAILS
@@ -120,12 +128,18 @@ return (void)
 >
  parse($rawBody, $contentType)
 <
-return (void)
+return (array) Parameters parsed from the request body
 
- {@inheritdoc}
+ Parses a HTTP request body.
 
-    [$rawBody] () 
-    [$contentType] () 
+
+
+
+
+
+
+    [$rawBody] (string) The raw HTTP request body.
+    [$contentType] (string) The content type specified for the request body.
 
 
 

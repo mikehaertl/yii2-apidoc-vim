@@ -55,6 +55,7 @@ Inherited methods:
  |yii/base/Component::detachBehaviors|
  |yii/base/Component::ensureBehaviors|
  |yii/validators/Validator::createValidator|
+ |yii/validators/Validator::getValidationAttributes|
  |yii/validators/Validator::validate|
  |yii/validators/Validator::validateValue|
  |yii/validators/Validator::clientValidateAttribute|
@@ -72,10 +73,19 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Validates the specified object.
 
-    [$model] () 
-    [$attributes] () 
+
+
+
+
+
+
+    [$model] (\yii\base\Model) The data model being validated
+    [$attributes] (array|string|null) The list of attributes to be validated.
+    Note that if an attribute is not associated with the validator 
+      - it will be ignored. If this parameter is null, every attribute listed
+    in 'attributes' will be validated.
 
 
 *yii/validators/SafeValidator::validateAttribute*		public
@@ -84,10 +94,17 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Validates a single attribute.
 
-    [$model] () 
-    [$attribute] () 
+
+
+ Child classes must implement this method to provide the actual validation
+ logic.
+
+
+
+    [$model] (\yii\base\Model) The data model to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 

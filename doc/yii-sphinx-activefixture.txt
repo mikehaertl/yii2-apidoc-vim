@@ -23,17 +23,21 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/test/Fixture::$depends|
+ |yii/test/FileFixtureTrait::$dataDirectory|
+ |yii/test/BaseActiveFixture::$modelClass|
+ |yii/test/BaseActiveFixture::$data|
+ |yii/base/Component::$behaviors|
+ |yii/base/ArrayAccessTrait::$iterator|
+
 
 $db					*yii/sphinx/ActiveFixture::$db*
 
  (\yii\sphinx\Connection|array|string) The Sphinx connection object or the
  application component ID of the Sphinx connection or a configuration array
  for creating the object.
-
-$indexName				*yii/sphinx/ActiveFixture::$indexName*
-
- (string) The name of the Sphinx index that this fixture is about. If this
- property is not set, the index name will be determined via 'modelClass'.
 
 $dataFile				*yii/sphinx/ActiveFixture::$dataFile*
 
@@ -44,10 +48,60 @@ $dataFile				*yii/sphinx/ActiveFixture::$dataFile*
  name of the index associated with this fixture. You can set this property to
  be false to prevent loading any data.
 
+$indexName				*yii/sphinx/ActiveFixture::$indexName*
+
+ (string) The name of the Sphinx index that this fixture is about. If this
+ property is not set, the index name will be determined via 'modelClass'.
+
+$indexSchema				*yii/sphinx/ActiveFixture::$indexSchema*
+
+ (\yii\sphinx\IndexSchema) The schema information of the database table
+ associated with this fixture.
+
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/test/Fixture::beforeLoad|
+ |yii/test/Fixture::afterLoad|
+ |yii/test/Fixture::unload|
+ |yii/test/Fixture::beforeUnload|
+ |yii/test/Fixture::afterUnload|
+ |yii/test/FileFixtureTrait::loadData|
+ |yii/base/ArrayAccessTrait::getIterator|
+ |yii/base/ArrayAccessTrait::count|
+ |yii/base/ArrayAccessTrait::offsetExists|
+ |yii/base/ArrayAccessTrait::offsetGet|
+ |yii/base/ArrayAccessTrait::offsetSet|
+ |yii/base/ArrayAccessTrait::offsetUnset|
+ |yii/test/BaseActiveFixture::getModel|
 
 
 *yii/sphinx/ActiveFixture::init*				public
@@ -55,6 +109,14 @@ METHOD DETAILS
  init()
 <
 return (void)
+
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
 
 
 

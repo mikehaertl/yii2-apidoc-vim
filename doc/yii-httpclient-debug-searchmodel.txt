@@ -6,6 +6,17 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+ |yii/base/Model::$validators|
+ |yii/base/Model::$activeValidators|
+ |yii/base/Model::$errors|
+ |yii/base/Model::$firstErrors|
+ |yii/base/Model::$attributes|
+ |yii/base/Model::$scenario|
+ |yii/base/Model::$iterator|
+
 
 $type					*yii/httpclient/debug/SearchModel::$type*
 
@@ -26,6 +37,77 @@ METHOD DETAILS
 
 Inherited methods:
 
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/base/StaticInstanceTrait::instance|
+ |yii/base/ArrayableTrait::fields|
+ |yii/base/ArrayableTrait::extraFields|
+ |yii/base/ArrayableTrait::toArray|
+ |yii/base/ArrayableTrait::extractRootFields|
+ |yii/base/ArrayableTrait::extractFieldsFor|
+ |yii/base/ArrayableTrait::resolveFields|
+ |yii/base/Model::scenarios|
+ |yii/base/Model::formName|
+ |yii/base/Model::attributes|
+ |yii/base/Model::attributeHints|
+ |yii/base/Model::validate|
+ |yii/base/Model::beforeValidate|
+ |yii/base/Model::afterValidate|
+ |yii/base/Model::getValidators|
+ |yii/base/Model::getActiveValidators|
+ |yii/base/Model::createValidators|
+ |yii/base/Model::isAttributeRequired|
+ |yii/base/Model::isAttributeSafe|
+ |yii/base/Model::isAttributeActive|
+ |yii/base/Model::getAttributeLabel|
+ |yii/base/Model::getAttributeHint|
+ |yii/base/Model::hasErrors|
+ |yii/base/Model::getErrors|
+ |yii/base/Model::getFirstErrors|
+ |yii/base/Model::getFirstError|
+ |yii/base/Model::getErrorSummary|
+ |yii/base/Model::addError|
+ |yii/base/Model::addErrors|
+ |yii/base/Model::clearErrors|
+ |yii/base/Model::generateAttributeLabel|
+ |yii/base/Model::getAttributes|
+ |yii/base/Model::setAttributes|
+ |yii/base/Model::onUnsafeAttribute|
+ |yii/base/Model::getScenario|
+ |yii/base/Model::setScenario|
+ |yii/base/Model::safeAttributes|
+ |yii/base/Model::activeAttributes|
+ |yii/base/Model::load|
+ |yii/base/Model::loadMultiple|
+ |yii/base/Model::validateMultiple|
+ |yii/base/Model::getIterator|
+ |yii/base/Model::offsetExists|
+ |yii/base/Model::offsetGet|
+ |yii/base/Model::offsetSet|
+ |yii/base/Model::offsetUnset|
  |yii/debug/models/search/Base::addCondition|
 
 
@@ -33,7 +115,81 @@ Inherited methods:
 >
  rules()
 <
-return (void)
+return (array) Validation rules
+
+ Returns the validation rules for attributes.
+
+
+
+ Validation rules are used by 'validate()' to check if attribute values are
+ valid. Child classes may override this method to declare different validation
+ rules.
+
+ Each rule is an array with the following structure:
+
+   [
+       ['attribute1', 'attribute2'],
+       'validator type',
+       'on' => ['scenario1', 'scenario2'],
+       //...other parameters...
+   ]
+
+ where
+
+  
+   - attribute list: required, specifies the attributes array to be
+   validated, for single attribute you can pass a string;  
+   - validator type: required, specifies the validator to be used. It
+   can be a built-in validator name,    a method name of the model class, an
+ anonymous function, or a validator class name.  
+   - on: optional, specifies the 'scenario|scenarios' array in which
+   the validation    rule can be applied. If this option is not set, the rule
+ will apply to all scenarios.  
+   - additional name-value pairs can be specified to initialize the
+   corresponding validator properties.    Please refer to individual validator
+ class API for possible properties.
+
+ A validator can be either an object of a class extending 'Validator', or a
+ model class method (called *inline validator*) that has the following
+ signature:
+
+   // $params refers to validation parameters given in the rule
+   function validatorName($attribute, $params)
+
+ In the above '$attribute' refers to the attribute currently being validated
+ while '$params' contains an array of validator configuration options such as
+ 'max' in case of 'string' validator. The value of the attribute currently
+ being validated can be accessed as '$this->$attribute'. Note the '$' before
+ 'attribute'; this is taking the value of the variable '$attribute' and using
+ it as the name of the property to access.
+
+ Yii also provides a set of 'Validator::builtInValidators|built-in
+ validators'. Each one has an alias name which can be used when specifying a
+ validation rule.
+
+ Below are some examples:
+
+   [
+       // built-in "required" validator
+       [['username', 'password'], 'required'],
+       // built-in "string" validator customized with "min" and "max"
+ properties
+       ['username', 'string', 'min' => 3, 'max' => 12],
+       // built-in "compare" validator that is used in "register" scenario
+ only
+       ['password', 'compare', 'compareAttribute' => 'password2', 'on' =>
+ 'register'],
+       // an inline validator defined via the "authenticate()" method in the
+ model class
+       ['password', 'authenticate', 'on' => 'login'],
+       // a validator of class "DateRangeValidator"
+       ['dateRange', 'DateRangeValidator'],
+   ];
+
+ Note, in order to inherit rules defined in the parent class, a child class
+ needs to merge the parent rules with child rules using functions such as
+ 'array_merge()'.
+
 
 
 
@@ -41,7 +197,23 @@ return (void)
 >
  attributeLabels()
 <
-return (void)
+return (array) Attribute labels (name => label)
+
+ Returns the attribute labels.
+
+
+
+ Attribute labels are mainly used for display purpose. For example, given an
+ attribute 'firstName', we can declare a label 'First Name' which is more
+ user-friendly and can be displayed to end users.
+
+ By default an attribute label is generated using 'generateAttributeLabel()'.
+ This method allows you to explicitly specify attribute labels.
+
+ Note, in order to inherit labels defined in the parent class, a child class
+ needs to merge the parent labels with child labels using functions such as
+ 'array_merge()'.
+
 
 
 

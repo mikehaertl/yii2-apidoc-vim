@@ -15,6 +15,18 @@ Inherited properties:
  |yii/data/DataFilter::$operatorTypes|
  |yii/data/DataFilter::$multiValueOperators|
  |yii/data/DataFilter::$attributeMap|
+ |yii/base/Component::$behaviors|
+ |yii/base/Model::$validators|
+ |yii/base/Model::$activeValidators|
+ |yii/base/Model::$errors|
+ |yii/base/Model::$firstErrors|
+ |yii/base/Model::$attributes|
+ |yii/base/Model::$scenario|
+ |yii/base/Model::$iterator|
+ |yii/data/DataFilter::$filter|
+ |yii/data/DataFilter::$searchModel|
+ |yii/data/DataFilter::$searchAttributeTypes|
+ |yii/data/DataFilter::$errorMessages|
 
 
 $conditionBuilders			*yii/data/ActiveDataFilter::$conditionBuilders*
@@ -68,11 +80,11 @@ Inherited methods:
  |yii/data/DataFilter::__set|
  |yii/data/DataFilter::__isset|
  |yii/data/DataFilter::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
  |yii/data/DataFilter::canGetProperty|
  |yii/data/DataFilter::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -93,11 +105,11 @@ Inherited methods:
  |yii/base/ArrayableTrait::extractRootFields|
  |yii/base/ArrayableTrait::extractFieldsFor|
  |yii/base/ArrayableTrait::resolveFields|
- |yii/base/Model::rules|
+ |yii/data/DataFilter::rules|
  |yii/base/Model::scenarios|
- |yii/base/Model::formName|
- |yii/base/Model::attributes|
- |yii/base/Model::attributeLabels|
+ |yii/data/DataFilter::formName|
+ |yii/data/DataFilter::attributes|
+ |yii/data/DataFilter::attributeLabels|
  |yii/base/Model::attributeHints|
  |yii/base/Model::validate|
  |yii/base/Model::beforeValidate|
@@ -162,9 +174,16 @@ Inherited methods:
 >
  buildInternal()
 <
-return (void)
+return (mixed) Built actual filter value.
 
- {@inheritdoc}
+ Performs actual filter build.
+
+
+
+ By default this method returns result of 'normalize()'. The child class may
+ override this method providing more specific implementation.
+
+
 
 
 *yii/data/ActiveDataFilter::buildCondition*		protected

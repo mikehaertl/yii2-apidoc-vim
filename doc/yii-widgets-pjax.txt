@@ -40,15 +40,27 @@ PROPERTY DETAILS
 Inherited properties:
 
  |yii/base/Widget::$stack|
+ |yii/base/Component::$behaviors|
+ |yii/base/Widget::$id|
+ |yii/base/Widget::$view|
+ |yii/base/Widget::$viewPath|
 
 
 $counter				*yii/widgets/Pjax::$counter*
 
- ()
+ (int) 
+
+ A counter used to generate 'id' for widgets.
+
+
 
 $autoIdPrefix				*yii/widgets/Pjax::$autoIdPrefix*
 
- ()
+ (string) 
+
+ The prefix to the automatically generated widget IDs.
+
+
 
 $options				*yii/widgets/Pjax::$options*
 
@@ -159,16 +171,29 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is called at the end of the constructor. The default
+ implementation will trigger an 'EVENT_INIT' event.
+
+
 
 
 *yii/widgets/Pjax::run*					public
 >
  run()
 <
-return (void)
+return (string) The result of widget execution to be outputted.
 
- {@inheritdoc}
+ Executes the widget.
+
+
+
+
+
+
 
 
 *yii/widgets/Pjax::requiresPjax*				protected

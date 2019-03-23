@@ -5,11 +5,11 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/web/MultiFieldSession|
-|yii/web/DbSession|
-|yii/web/CacheSession|
 |yii/mongodb/Session|
 |yii/redis/Session|
+|yii/web/CacheSession|
+|yii/web/MultiFieldSession|
+|yii/web/DbSession|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -48,6 +48,10 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $flashParam				*yii/web/Session::$flashParam*
 
@@ -58,6 +62,77 @@ $handler				*yii/web/Session::$handler*
  (\SessionHandlerInterface|array) An object implementing the
  SessionHandlerInterface or a configuration array. If set, will be used to
  provide persistency instead of build-in methods.
+
+$useCustomStorage			*yii/web/Session::$useCustomStorage*
+
+ (bool) Whether to use custom storage.
+
+$isActive				*yii/web/Session::$isActive*
+
+ (bool) Whether the session has started
+
+$hasSessionId				*yii/web/Session::$hasSessionId*
+
+ (bool) Whether the current request has sent the session ID.
+
+$id					*yii/web/Session::$id*
+
+ (string) The current session ID
+
+$name					*yii/web/Session::$name*
+
+ (string) The current session name
+
+$savePath				*yii/web/Session::$savePath*
+
+ (string) The current session save path, defaults to '/tmp'.
+
+$cookieParams				*yii/web/Session::$cookieParams*
+
+ (array) The session cookie parameters.
+
+$useCookies				*yii/web/Session::$useCookies*
+
+ (bool|null) The value indicating whether cookies should be used to store
+ session IDs.
+
+$gCProbability				*yii/web/Session::$gCProbability*
+
+ (float) The probability (percentage) that the GC (garbage collection) process
+ is started on every session initialization, defaults to 1 meaning 1% chance.
+
+$useTransparentSessionID		*yii/web/Session::$useTransparentSessionID*
+
+ (bool) Whether transparent sid support is enabled or not, defaults to false.
+
+$timeout				*yii/web/Session::$timeout*
+
+ (int) The number of seconds after which data will be seen as 'garbage' and
+ cleaned up. The default value is 1440 seconds (or the value of
+ "session.gc_maxlifetime" set in php.ini).
+
+$iterator				*yii/web/Session::$iterator*
+
+ (\yii\web\SessionIterator) An iterator for traversing the session variables.
+
+$count					*yii/web/Session::$count*
+
+ (int) The number of session variables
+
+$allFlashes				*yii/web/Session::$allFlashes*
+
+ (array) Flash messages (key => message or key => [message1, message2]).
+
+$flash					*yii/web/Session::$flash*
+
+ (string) The key identifying the flash message. Note that flash messages and
+ normal session variables share the same name space. If you have a normal
+ session variable using the same name, its value will be overwritten by this
+ method.
+
+$cacheLimiter				*yii/web/Session::$cacheLimiter*
+
+ (string)
 
 
 
@@ -204,7 +279,7 @@ return (string) The current session ID
  Gets the session ID.
 
  This is a wrapper for [PHP
- session_id()](http://php.net/manual/en/function.session-id.php).
+ session_id()](https://secure.php.net/manual/en/function.session-id.php).
 
 
 *yii/web/Session::setId*					public
@@ -216,7 +291,7 @@ return (void)
  Sets the session ID.
 
  This is a wrapper for [PHP
- session_id()](http://php.net/manual/en/function.session-id.php).
+ session_id()](https://secure.php.net/manual/en/function.session-id.php).
 
     [$value] (string) The session ID for the current session
 
@@ -229,7 +304,8 @@ return (void)
 
  Updates the current session ID with a newly generated one.
 
- Please refer to <http://php.net/session_regenerate_id> for more details.
+ Please refer to <https://secure.php.net/session_regenerate_id> for more
+ details.
 
  This method has no effect when session is not 'getIsActive()|active'. Make
  sure to call 'open()' before calling it.
@@ -247,7 +323,7 @@ return (string) The current session name
  Gets the name of the current session.
 
  This is a wrapper for [PHP
- session_name()](http://php.net/manual/en/function.session-name.php).
+ session_name()](https://secure.php.net/manual/en/function.session-name.php).
 
 
 *yii/web/Session::setName*				public
@@ -259,7 +335,7 @@ return (void)
  Sets the name for the current session.
 
  This is a wrapper for [PHP
- session_name()](http://php.net/manual/en/function.session-name.php).
+ session_name()](https://secure.php.net/manual/en/function.session-name.php).
 
     [$value] (string) The session name for the current session, must be an
     alphanumeric string. It defaults to "PHPSESSID".
@@ -274,7 +350,7 @@ return (string) The current session save path, defaults to '/tmp'.
  Gets the current session save path.
 
  This is a wrapper for [PHP
- session_save_path()](http://php.net/manual/en/function.session-save-path.php).
+ session_save_path()](https://secure.php.net/manual/en/function.session-save-path.php).
 
 
 *yii/web/Session::setSavePath*				public
@@ -286,7 +362,7 @@ return (void)
  Sets the current session save path.
 
  This is a wrapper for [PHP
- session_save_path()](http://php.net/manual/en/function.session-save-path.php).
+ session_save_path()](https://secure.php.net/manual/en/function.session-save-path.php).
 
     [$value] (string) The current session save path. This can be either a
     directory name or a [path alias](guide:concept-aliases).

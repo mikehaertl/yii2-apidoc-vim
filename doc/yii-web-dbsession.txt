@@ -31,6 +31,23 @@ Inherited properties:
  |yii/web/Session::$handler|
  |yii/web/MultiFieldSession::$readCallback|
  |yii/web/MultiFieldSession::$writeCallback|
+ |yii/base/Component::$behaviors|
+ |yii/web/MultiFieldSession::$useCustomStorage|
+ |yii/web/Session::$isActive|
+ |yii/web/Session::$hasSessionId|
+ |yii/web/Session::$id|
+ |yii/web/Session::$name|
+ |yii/web/Session::$savePath|
+ |yii/web/Session::$cookieParams|
+ |yii/web/Session::$useCookies|
+ |yii/web/Session::$gCProbability|
+ |yii/web/Session::$useTransparentSessionID|
+ |yii/web/Session::$timeout|
+ |yii/web/Session::$iterator|
+ |yii/web/Session::$count|
+ |yii/web/Session::$allFlashes|
+ |yii/web/Session::$flash|
+ |yii/web/Session::$cacheLimiter|
 
 
 $db					*yii/web/DbSession::$db*
@@ -64,6 +81,10 @@ $sessionTable				*yii/web/DbSession::$sessionTable*
  Note that according to the php.ini setting of 'session.hash_function', you
  may need to adjust the length of the 'id' column. For example, if
  'session.hash_function=sha256', you should use length 64 instead of 40.
+
+$fields					*yii/web/DbSession::$fields*
+
+ (array) Session fields to be written into session table columns
 
 
 
@@ -99,7 +120,6 @@ Inherited methods:
  |yii/web/MultiFieldSession::getUseCustomStorage|
  |yii/web/Session::open|
  |yii/web/Session::registerSessionHandler|
- |yii/web/Session::close|
  |yii/web/Session::destroy|
  |yii/web/Session::getIsActive|
  |yii/web/Session::getHasSessionId|
@@ -162,6 +182,15 @@ return (void)
  valid DB connection.
 
 
+*yii/web/DbSession::close*				public
+>
+ close()
+<
+return (void)
+
+ Ends the current session and store session data.
+
+
 *yii/web/DbSession::regenerateID*				public
 >
  regenerateID($deleteOldSession='false')
@@ -170,7 +199,8 @@ return (void)
 
  Updates the current session ID with a newly generated one .
 
- Please refer to <http://php.net/session_regenerate_id> for more details.
+ Please refer to <https://secure.php.net/session_regenerate_id> for more
+ details.
 
     [$deleteOldSession] (bool) Whether to delete the old associated session
     file or not.

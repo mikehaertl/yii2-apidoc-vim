@@ -5,10 +5,10 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/test/ActiveFixture|
 |yii/elasticsearch/ActiveFixture|
 |yii/mongodb/ActiveFixture|
 |yii/sphinx/ActiveFixture|
+|yii/test/ActiveFixture|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -26,6 +26,8 @@ Inherited properties:
  |yii/test/DbFixture::$db|
  |yii/test/FileFixtureTrait::$dataDirectory|
  |yii/test/FileFixtureTrait::$dataFile|
+ |yii/base/Component::$behaviors|
+ |yii/base/ArrayAccessTrait::$iterator|
 
 
 $modelClass				*yii/test/BaseActiveFixture::$modelClass*
@@ -101,7 +103,14 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Unloads the fixture.
+
+
+
+ This method is called after every test method finishes. You may override this
+ method to perform necessary cleanup work for the fixture.
+
+
 
 
 *yii/test/BaseActiveFixture::getModel*			public

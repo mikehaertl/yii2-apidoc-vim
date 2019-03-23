@@ -62,6 +62,31 @@ Inherited properties:
  |yii/base/Application::$bootstrap|
  |yii/base/Application::$state|
  |yii/base/Application::$loadedModules|
+ |yii/base/Component::$behaviors|
+ |yii/di/ServiceLocator::$components|
+ |yii/base/Application::$uniqueId|
+ |yii/base/Module::$basePath|
+ |yii/base/Module::$controllerPath|
+ |yii/base/Module::$viewPath|
+ |yii/base/Module::$layoutPath|
+ |yii/base/Module::$version|
+ |yii/base/Module::$aliases|
+ |yii/base/Module::$modules|
+ |yii/base/Application::$runtimePath|
+ |yii/base/Application::$vendorPath|
+ |yii/base/Application::$timeZone|
+ |yii/base/Application::$db|
+ |yii/base/Application::$log|
+ |yii/base/Application::$cache|
+ |yii/base/Application::$formatter|
+ |yii/base/Application::$view|
+ |yii/base/Application::$urlManager|
+ |yii/base/Application::$i18n|
+ |yii/base/Application::$mailer|
+ |yii/base/Application::$authManager|
+ |yii/base/Application::$assetManager|
+ |yii/base/Application::$security|
+ |yii/base/Application::$container|
 
 
 $defaultRoute				*yii/console/Application::$defaultRoute*
@@ -78,6 +103,18 @@ $enableCoreCommands			*yii/console/Application::$enableCoreCommands*
  (bool) Whether to enable the commands provided by the core framework.
  Defaults to true.
 
+$errorHandler				*yii/console/Application::$errorHandler*
+
+ (\yii\console\ErrorHandler) The error handler application component.
+
+$request				*yii/console/Application::$request*
+
+ (\yii\console\Request) The request component.
+
+$response				*yii/console/Application::$response*
+
+ (\yii\console\Response) The response component.
+
 
 
 METHOD DETAILS
@@ -86,15 +123,15 @@ METHOD DETAILS
 Inherited methods:
 
  |yii/base/BaseObject::className|
- |yii/di/ServiceLocator::__get|
- |yii/base/BaseObject::__set|
- |yii/di/ServiceLocator::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -108,8 +145,8 @@ Inherited methods:
  |yii/base/Component::detachBehavior|
  |yii/base/Component::detachBehaviors|
  |yii/base/Component::ensureBehaviors|
- |yii/di/ServiceLocator::has|
- |yii/di/ServiceLocator::get|
+ |yii/base/Module::has|
+ |yii/base/Module::get|
  |yii/di/ServiceLocator::set|
  |yii/di/ServiceLocator::clear|
  |yii/di/ServiceLocator::getComponents|
@@ -168,9 +205,17 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Constructor.
 
-    [$config] () 
+
+
+
+
+
+
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties. Note that the configuration must contain both 'id' and
+    'basePath'.
 
 
 *yii/console/Application::init*				public
@@ -252,7 +297,13 @@ return (\yii\console\Response) The response component.
 <
 return (void)
 
- {@inheritdoc}
+ Returns the configuration of core application components.
+
+
+
+
+
+
 
 
 *yii/console/Application::loadConfig*			protected

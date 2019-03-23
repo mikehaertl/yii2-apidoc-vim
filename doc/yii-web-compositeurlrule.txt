@@ -5,8 +5,8 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/rest/UrlRule|
 |yii/web/GroupUrlRule|
+|yii/rest/UrlRule|
 
 
 PROPERTY DETAILS
@@ -21,6 +21,11 @@ $rules					*yii/web/CompositeUrlRule::$rules*
 $createStatus				*yii/web/CompositeUrlRule::$createStatus*
 
  (int|null) Status of the URL creation after the last 'createUrl()' call.
+
+$createUrlStatus			*yii/web/CompositeUrlRule::$createUrlStatus*
+
+ (null|int) Status of the URL creation after the last 'createUrl()' call.
+ 'null' if rule does not provide info about create status.
 
 
 
@@ -48,7 +53,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/web/CompositeUrlRule::createRules*			protected
@@ -64,25 +76,40 @@ return (\yii\web\UrlRuleInterface[]) The URL rules
 >
  parseRequest($manager, $request)
 <
-return (void)
+return (array|bool) The parsing result. The route and the parameters are returned as
+an array. If false, it means this rule cannot be used to parse this path info.
 
- {@inheritdoc}
+ Parses the given request and returns the corresponding route and parameters.
 
-    [$manager] () 
-    [$request] () 
+
+
+
+
+
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$request] (\yii\web\Request) The request component
 
 
 *yii/web/CompositeUrlRule::createUrl*			public
 >
  createUrl($manager, $route, $params)
 <
-return (void)
+return (string|bool) The created URL, or false if this rule cannot be used for
+creating this URL.
 
- {@inheritdoc}
+ Creates a URL according to the given route and parameters.
 
-    [$manager] () 
-    [$route] () 
-    [$params] () 
+
+
+
+
+
+
+    [$manager] (\yii\web\UrlManager) The URL manager
+    [$route] (string) The route. It should not have slashes at the beginning
+    or the end.
+    [$params] (array) The parameters
 
 
 *yii/web/CompositeUrlRule::iterateRules*			protected

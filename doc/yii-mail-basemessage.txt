@@ -10,13 +10,25 @@ SUBCLASSES
 DESCRIPTION
 ------------------------------------------------------------------------------
 
- By default, 'send()' will use the "mail" application component to send the
- current message. The "mail" application component should be a mailer instance
- implementing 'MailerInterface'.
+ By default, 'send()' will use the "mailer" application component to send the
+ current message. The "mailer" application component should be a mailer
+ instance implementing 'MailerInterface'.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/mail/MessageInterface::$charset|
+ |yii/mail/MessageInterface::$from|
+ |yii/mail/MessageInterface::$to|
+ |yii/mail/MessageInterface::$replyTo|
+ |yii/mail/MessageInterface::$cc|
+ |yii/mail/MessageInterface::$bcc|
+ |yii/mail/MessageInterface::$subject|
+ |yii/mail/MessageInterface::$textBody|
+ |yii/mail/MessageInterface::$htmlBody|
 
 
 $mailer					*yii/mail/BaseMessage::$mailer*
@@ -76,7 +88,8 @@ return (bool) Whether this message is sent successfully.
 
     [$mailer] (\yii\mail\MailerInterface) The mailer that should be used to
     send this message. If no mailer is given it will first check if 'mailer'
-    is set and if not, the "mail" application component will be used instead.
+    is set and if not, the "mailer" application component will be used
+    instead.
 
 
 *yii/mail/BaseMessage::__toString*			public

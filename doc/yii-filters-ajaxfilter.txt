@@ -58,8 +58,8 @@ Inherited methods:
  |yii/base/BaseObject::canSetProperty|
  |yii/base/BaseObject::hasMethod|
  |yii/base/Behavior::events|
- |yii/base/ActionFilter::attach|
- |yii/base/ActionFilter::detach|
+ |yii/base/Behavior::attach|
+ |yii/base/Behavior::detach|
  |yii/base/ActionFilter::beforeFilter|
  |yii/base/ActionFilter::afterFilter|
  |yii/base/ActionFilter::afterAction|
@@ -73,18 +73,33 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/filters/AjaxFilter::beforeAction*			public
 >
  beforeAction($action)
 <
-return (void)
+return (bool) Whether the action should continue to be executed.
 
- {@inheritdoc}
+ This method is invoked right before an action is to be executed (after all
+ possible filters.) You may override this method to do last-minute preparation
+ for the action.
 
-    [$action] () 
+
+
+
+
+
+
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 

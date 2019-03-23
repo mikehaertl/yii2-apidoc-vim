@@ -14,6 +14,8 @@ Inherited properties:
  |yii/debug/Panel::$data|
  |yii/debug/Panel::$actions|
  |yii/debug/Panel::$error|
+ |yii/base/Component::$behaviors|
+ |yii/debug/Panel::$url|
 
 
 $ruleUserSwitch				*yii/debug/panels/UserPanel::$ruleUserSwitch*
@@ -41,6 +43,30 @@ $userComponent				*yii/debug/panels/UserPanel::$userComponent*
 
  (string|\yii\web\User) ID of the user component or a user object
 
+$name					*yii/debug/panels/UserPanel::$name*
+
+ (string) Name of the panel
+
+$summary				*yii/debug/panels/UserPanel::$summary*
+
+ (string) Content that is displayed at debug toolbar
+
+$detail					*yii/debug/panels/UserPanel::$detail*
+
+ (string) Content that is displayed in debugger detail view
+
+$user					*yii/debug/panels/UserPanel::$user*
+
+ (\yii\web\User|null)
+
+$usersFilterModel			*yii/debug/panels/UserPanel::$usersFilterModel*
+
+ (\yii\base\Model|\yii\debug\models\search\UserSearchInterface)
+
+$userDataProvider			*yii/debug/panels/UserPanel::$userDataProvider*
+
+ (\yii\data\DataProviderInterface)
+
 
 
 METHOD DETAILS
@@ -48,12 +74,52 @@ METHOD DETAILS
 
 Inherited methods:
 
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
  |yii/debug/Panel::load|
  |yii/debug/Panel::getUrl|
  |yii/debug/Panel::getTraceLine|
  |yii/debug/Panel::setError|
  |yii/debug/Panel::getError|
  |yii/debug/Panel::hasError|
+
+
+*yii/debug/panels/UserPanel::init*			public
+>
+ init()
+<
+return (void)
+
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/debug/panels/UserPanel::getName*			public
@@ -122,14 +188,6 @@ return (bool) Whether this panel is enabled.
 
 
 
-
-
-
-*yii/debug/panels/UserPanel::init*			public
->
- init()
-<
-return (void)
 
 
 

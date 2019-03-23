@@ -16,18 +16,28 @@ DESCRIPTION
 
  The Formatter class is designed to format values according to a 'locale'. For
  this feature to work the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) has to be installed. Most
- of the methods however work also if the PHP intl extension is not installed
- by providing a fallback implementation. Without intl month and day names are
- in English only. Note that even if the intl extension is installed,
- formatting date and time values for years >=2038 or <=1901 on 32bit systems
- will fall back to the PHP implementation because intl uses a 32bit UNIX
- timestamp internally. On a 64bit system the intl formatter is used in all
- cases if installed.
+ extension](https://secure.php.net/manual/en/book.intl.php) has to be
+ installed. Most of the methods however work also if the PHP intl extension is
+ not installed by providing a fallback implementation. Without intl month and
+ day names are in English only. Note that even if the intl extension is
+ installed, formatting date and time values for years >=2038 or <=1901 on
+ 32bit systems will fall back to the PHP implementation because intl uses a
+ 32bit UNIX timestamp internally. On a 64bit system the intl formatter is used
+ in all cases if installed.
+
+ > Note: The Formatter class is meant to be used for formatting values for
+ display to users in different > languages and time zones. If you need to
+ format a date or time in machine readable format, use the > PHP
+ [date()](https://secure.php.net/manual/en/function.date.php) function
+ instead.
 
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
 
 
 $nullDisplay				*yii/i18n/Formatter::$nullDisplay*
@@ -47,18 +57,19 @@ $locale					*yii/i18n/Formatter::$locale*
 
  (string) The locale ID that is used to localize the date and number
  formatting. For number and date formatting this is only effective when the
- [PHP intl extension](http://php.net/manual/en/book.intl.php) is installed. If
- not set, '\yii\base\Application::language' will be used.
+ [PHP intl extension](https://secure.php.net/manual/en/book.intl.php) is
+ installed. If not set, '\yii\base\Application::language' will be used.
 
 $timeZone				*yii/i18n/Formatter::$timeZone*
 
  (string) The time zone to use for formatting time and date values.
 
  This can be any value that may be passed to
- [date_default_timezone_set()](http://www.php.net/manual/en/function.date-default-timezone-set.php)
+ [date_default_timezone_set()](https://secure.php.net/manual/en/function.date-default-timezone-set.php)
  e.g. 'UTC', 'Europe/Berlin' or 'America/Chicago'. Refer to the [php
- manual](http://www.php.net/manual/en/timezones.php) for available time zones.
- If this property is not set, '\yii\base\Application::timeZone' will be used.
+ manual](https://secure.php.net/manual/en/timezones.php) for available time
+ zones. If this property is not set, '\yii\base\Application::timeZone' will be
+ used.
 
  Note that the default time zone for input data is assumed to be UTC by
  default if no time zone is included in the input date value. If you store
@@ -72,7 +83,8 @@ $defaultTimeZone			*yii/i18n/Formatter::$defaultTimeZone*
 
  The value must be a valid time zone identifier, e.g. 'UTC', 'Europe/Berlin'
  or 'America/Chicago'. Please refer to the [php
- manual](http://www.php.net/manual/en/timezones.php) for available time zones.
+ manual](https://secure.php.net/manual/en/timezones.php) for available time
+ zones.
 
  It defaults to 'UTC' so you only have to adjust this value if you store
  datetime values in another time zone in your database.
@@ -91,7 +103,7 @@ $dateFormat				*yii/i18n/Formatter::$dateFormat*
  manual](http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax).
  Alternatively this can be a string prefixed with 'php:' representing a format
  that can be recognized by the PHP
- [date()](http://php.net/manual/en/function.date.php)-function.
+ [date()](https://secure.php.net/manual/en/function.date.php)-function.
 
  For example:
 
@@ -110,7 +122,7 @@ $timeFormat				*yii/i18n/Formatter::$timeFormat*
  manual](http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax).
  Alternatively this can be a string prefixed with 'php:' representing a format
  that can be recognized by the PHP
- [date()](http://php.net/manual/en/function.date.php)-function.
+ [date()](https://secure.php.net/manual/en/function.date.php)-function.
 
  For example:
 
@@ -130,7 +142,7 @@ $datetimeFormat				*yii/i18n/Formatter::$datetimeFormat*
 
  Alternatively this can be a string prefixed with 'php:' representing a format
  that can be recognized by the PHP
- [date()](http://php.net/manual/en/function.date.php)-function.
+ [date()](https://secure.php.net/manual/en/function.date.php)-function.
 
  For example:
 
@@ -144,7 +156,7 @@ $calendar				*yii/i18n/Formatter::$calendar*
  (\IntlCalendar|int|null) The calendar to be used for date formatting. The
  value of this property will be directly passed to the [constructor of the
  'IntlDateFormatter'
- class](http://php.net/manual/en/intldateformatter.create.php).
+ class](https://secure.php.net/manual/en/intldateformatter.create.php).
 
  Defaults to 'null', which means the Gregorian calendar will be used. You may
  also explicitly pass the constant '\IntlDateFormatter::GREGORIAN' for
@@ -165,37 +177,38 @@ $calendar				*yii/i18n/Formatter::$calendar*
  manual](http://userguide.icu-project.org/datetime/calendar).
 
  Since PHP 5.5 you may also use an instance of the '\IntlCalendar' class.
- Check the [PHP manual](http://php.net/manual/en/intldateformatter.create.php)
- for more details.
+ Check the [PHP
+ manual](https://secure.php.net/manual/en/intldateformatter.create.php) for
+ more details.
 
- If the [PHP intl extension](http://php.net/manual/en/book.intl.php) is not
- available, setting this property will have no effect.
+ If the [PHP intl extension](https://secure.php.net/manual/en/book.intl.php)
+ is not available, setting this property will have no effect.
 
 $decimalSeparator			*yii/i18n/Formatter::$decimalSeparator*
 
  (string) The character displayed as the decimal point when formatting a
  number. If not set, the decimal separator corresponding to 'locale' will be
- used. If [PHP intl extension](http://php.net/manual/en/book.intl.php) is not
- available, the default value is '.'.
+ used. If [PHP intl extension](https://secure.php.net/manual/en/book.intl.php)
+ is not available, the default value is '.'.
 
 $thousandSeparator			*yii/i18n/Formatter::$thousandSeparator*
 
  (string) The character displayed as the thousands separator (also called
  grouping separator) character when formatting a number. If not set, the
  thousand separator corresponding to 'locale' will be used. If [PHP intl
- extension](http://php.net/manual/en/book.intl.php) is not available, the
- default value is ','.
+ extension](https://secure.php.net/manual/en/book.intl.php) is not available,
+ the default value is ','.
 
 $numberFormatterOptions			*yii/i18n/Formatter::$numberFormatterOptions*
 
  (array) A list of name value pairs that are passed to the intl
- [NumberFormatter::setAttribute()](http://php.net/manual/en/numberformatter.setattribute.php)
+ [NumberFormatter::setAttribute()](https://secure.php.net/manual/en/numberformatter.setattribute.php)
  method of all the number formatter objects created by
  'createNumberFormatter()'. This property takes only effect if the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) is installed.
+ extension](https://secure.php.net/manual/en/book.intl.php) is installed.
 
  Please refer to the [PHP
- manual](http://php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute)
+ manual](https://secure.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute)
  for the possible options.
 
  For example to adjust the maximum and minimum value of fraction digits you
@@ -211,13 +224,13 @@ $numberFormatterOptions			*yii/i18n/Formatter::$numberFormatterOptions*
 $numberFormatterTextOptions		*yii/i18n/Formatter::$numberFormatterTextOptions*
 
  (array) A list of name value pairs that are passed to the intl
- [NumberFormatter::setTextAttribute()](http://php.net/manual/en/numberformatter.settextattribute.php)
+ [NumberFormatter::setTextAttribute()](https://secure.php.net/manual/en/numberformatter.settextattribute.php)
  method of all the number formatter objects created by
  'createNumberFormatter()'. This property takes only effect if the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) is installed.
+ extension](https://secure.php.net/manual/en/book.intl.php) is installed.
 
  Please refer to the [PHP
- manual](http://php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute)
+ manual](https://secure.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute)
  for the possible options.
 
  For example to change the minus sign for negative numbers you can configure
@@ -232,13 +245,13 @@ $numberFormatterTextOptions		*yii/i18n/Formatter::$numberFormatterTextOptions*
 $numberFormatterSymbols			*yii/i18n/Formatter::$numberFormatterSymbols*
 
  (array) A list of name value pairs that are passed to the intl
- [NumberFormatter::setSymbol()](http://php.net/manual/en/numberformatter.setsymbol.php)
+ [NumberFormatter::setSymbol()](https://secure.php.net/manual/en/numberformatter.setsymbol.php)
  method of all the number formatter objects created by
  'createNumberFormatter()'. This property takes only effect if the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) is installed.
+ extension](https://secure.php.net/manual/en/book.intl.php) is installed.
 
  Please refer to the [PHP
- manual](http://php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatsymbol)
+ manual](https://secure.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatsymbol)
  for the possible options.
 
  For example to choose a custom currency symbol, e.g.
@@ -329,7 +342,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/i18n/Formatter::format*				public
@@ -493,10 +513,11 @@ return (string) The formatted result.
       - an integer representing a UNIX timestamp. A UNIX timestamp is
       always in UTC by its definition. 
       - a string that can be [parsed to create a DateTime
-      object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
-    given. 
-      - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
+      object](https://secure.php.net/manual/en/datetime.formats.php).   The
+    timestamp is assumed to be in 'defaultTimeZone' unless a time zone is
+    explicitly given. 
+      - a PHP
+      [DateTime](https://secure.php.net/manual/en/class.datetime.php)
       object. You may set the time zone   for the DateTime object to specify
     the source time zone.
 
@@ -515,7 +536,7 @@ return (string) The formatted result.
 
     Alternatively this can be a string prefixed with 'php:' representing a
     format that can be recognized by the PHP
-    [date()](http://php.net/manual/en/function.date.php)-function.
+    [date()](https://secure.php.net/manual/en/function.date.php)-function.
 
 
 *yii/i18n/Formatter::asTime*				public
@@ -533,10 +554,11 @@ return (string) The formatted result.
       - an integer representing a UNIX timestamp. A UNIX timestamp is
       always in UTC by its definition. 
       - a string that can be [parsed to create a DateTime
-      object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
-    given. 
-      - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
+      object](https://secure.php.net/manual/en/datetime.formats.php).   The
+    timestamp is assumed to be in 'defaultTimeZone' unless a time zone is
+    explicitly given. 
+      - a PHP
+      [DateTime](https://secure.php.net/manual/en/class.datetime.php)
       object. You may set the time zone   for the DateTime object to specify
     the source time zone.
 
@@ -553,7 +575,7 @@ return (string) The formatted result.
 
     Alternatively this can be a string prefixed with 'php:' representing a
     format that can be recognized by the PHP
-    [date()](http://php.net/manual/en/function.date.php)-function.
+    [date()](https://secure.php.net/manual/en/function.date.php)-function.
 
 
 *yii/i18n/Formatter::asDatetime*				public
@@ -571,10 +593,11 @@ return (string) The formatted result.
       - an integer representing a UNIX timestamp. A UNIX timestamp is
       always in UTC by its definition. 
       - a string that can be [parsed to create a DateTime
-      object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
-    given. 
-      - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
+      object](https://secure.php.net/manual/en/datetime.formats.php).   The
+    timestamp is assumed to be in 'defaultTimeZone' unless a time zone is
+    explicitly given. 
+      - a PHP
+      [DateTime](https://secure.php.net/manual/en/class.datetime.php)
       object. You may set the time zone   for the DateTime object to specify
     the source time zone.
 
@@ -591,7 +614,7 @@ return (string) The formatted result.
 
     Alternatively this can be a string prefixed with 'php:' representing a
     format that can be recognized by the PHP
-    [date()](http://php.net/manual/en/function.date.php)-function.
+    [date()](https://secure.php.net/manual/en/function.date.php)-function.
 
 
 *yii/i18n/Formatter::normalizeDatetimeValue*		protected
@@ -614,10 +637,11 @@ timestamp has date information or it is just a time value.
 
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
-      object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
-    given. 
-      - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
+      object](https://secure.php.net/manual/en/datetime.formats.php).   The
+    timestamp is assumed to be in 'defaultTimeZone' unless a time zone is
+    explicitly given. 
+      - a PHP
+      [DateTime](https://secure.php.net/manual/en/class.datetime.php)
       object
     [$checkDateTimeInfo] (bool) Whether to also check if the date/time value
     has some time and date information attached. Defaults to 'false'. If
@@ -643,10 +667,11 @@ return (string) The formatted result.
 
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
-      object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
-    given. 
-      - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
+      object](https://secure.php.net/manual/en/datetime.formats.php).   The
+    timestamp is assumed to be in 'defaultTimeZone' unless a time zone is
+    explicitly given. 
+      - a PHP
+      [DateTime](https://secure.php.net/manual/en/class.datetime.php)
       object
 
 
@@ -670,10 +695,11 @@ return (string) The formatted result.
 
       - an integer representing a UNIX timestamp 
       - a string that can be [parsed to create a DateTime
-      object](http://php.net/manual/en/datetime.formats.php).   The timestamp
-    is assumed to be in 'defaultTimeZone' unless a time zone is explicitly
-    given. 
-      - a PHP [DateTime](http://php.net/manual/en/class.datetime.php)
+      object](https://secure.php.net/manual/en/datetime.formats.php).   The
+    timestamp is assumed to be in 'defaultTimeZone' unless a time zone is
+    explicitly given. 
+      - a PHP
+      [DateTime](https://secure.php.net/manual/en/class.datetime.php)
       object 
       - a PHP DateInterval object (a positive time interval will refer to
       the past, a negative one to the future)
@@ -693,7 +719,7 @@ return (string) The formatted duration.
     [$value] (\DateInterval|string|int) The value to be formatted. Acceptable
     formats:  
       - [DateInterval
-      object](http://php.net/manual/ru/class.dateinterval.php)  
+      object](https://secure.php.net/manual/ru/class.dateinterval.php)  
       - integer - number of seconds. For example: value '131' represents
       '2 minutes, 11 seconds'  
       - ISO8601 duration format. For example, all of these values
@@ -719,6 +745,12 @@ return (string) The formatted result.
  Formats the value as an integer number by removing any decimal digits without
  rounding.
 
+ Since 2.0.16 numbers that are mispresented after normalization are formatted
+ as strings using fallback function without [PHP intl
+ extension](https://secure.php.net/manual/en/book.intl.php) support. For very
+ big numbers it's recommended to pass them as strings and not use scientific
+ notation otherwise the output might be wrong.
+
     [$value] (mixed) The value to be formatted.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
@@ -737,13 +769,18 @@ return (string) The formatted result.
  Property 'decimalSeparator' will be used to represent the decimal point. The
  value is rounded automatically to the defined decimal digits.
 
+ Since 2.0.16 numbers that are mispresented after normalization are formatted
+ as strings using fallback function without [PHP intl
+ extension](https://secure.php.net/manual/en/book.intl.php) support. For very
+ big numbers it's recommended to pass them as strings and not use scientific
+ notation otherwise the output might be wrong.
+
     [$value] (mixed) The value to be formatted.
     [$decimals] (int) The number of digits after the decimal point. If not
     given, the number of digits depends in the input value and is determined
     based on 'NumberFormatter::MIN_FRACTION_DIGITS' and
     'NumberFormatter::MAX_FRACTION_DIGITS', which can be configured using
-    '$numberFormatterOptions'. If the [PHP intl
-    extension](http://php.net/manual/en/book.intl.php) is not available, the
+    '$numberFormatterOptions'. If the PHP intl extension is not available, the
     default value is '2'. If you want consistent behavior between environments
     where intl is available and not, you should explicitly specify a value
     here.
@@ -761,14 +798,19 @@ return (string) The formatted result.
 
  Formats the value as a percent number with "%" sign.
 
+ Since 2.0.16 numbers that are mispresented after normalization are formatted
+ as strings using fallback function without [PHP intl
+ extension](https://secure.php.net/manual/en/book.intl.php) support. For very
+ big numbers it's recommended to pass them as strings and not use scientific
+ notation otherwise the output might be wrong.
+
     [$value] (mixed) The value to be formatted. It must be a factor e.g.
     '0.75' will result in '75%'.
     [$decimals] (int) The number of digits after the decimal point. If not
     given, the number of digits depends in the input value and is determined
     based on 'NumberFormatter::MIN_FRACTION_DIGITS' and
     'NumberFormatter::MAX_FRACTION_DIGITS', which can be configured using
-    '$numberFormatterOptions'. If the [PHP intl
-    extension](http://php.net/manual/en/book.intl.php) is not available, the
+    '$numberFormatterOptions'. If the PHP intl extension is not available, the
     default value is '0'. If you want consistent behavior between environments
     where intl is available and not, you should explicitly specify a value
     here.
@@ -792,10 +834,10 @@ return (string) The formatted result.
     based on 'NumberFormatter::MIN_FRACTION_DIGITS' and
     'NumberFormatter::MAX_FRACTION_DIGITS', which can be configured using
     '$numberFormatterOptions'. If the [PHP intl
-    extension](http://php.net/manual/en/book.intl.php) is not available, the
-    default value depends on your PHP configuration. If you want consistent
-    behavior between environments where intl is available and not, you should
-    explicitly specify a value here.
+    extension](https://secure.php.net/manual/en/book.intl.php) is not
+    available, the default value depends on your PHP configuration. If you
+    want consistent behavior between environments where intl is available and
+    not, you should explicitly specify a value here.
     [$options] (array) Optional configuration for the number formatter. This
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.
@@ -811,8 +853,14 @@ return (string) The formatted result.
  Formats the value as a currency number.
 
  This function does not require the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) to be installed to work,
- but it is highly recommended to install it to get good formatting results.
+ extension](https://secure.php.net/manual/en/book.intl.php) to be installed to
+ work, but it is highly recommended to install it to get good formatting
+ results.
+
+ Since 2.0.16 numbers that are mispresented after normalization are formatted
+ as strings using fallback function without PHP intl extension support. For
+ very big numbers it's recommended to pass them as strings and not use
+ scientific notation otherwise the output might be wrong.
 
     [$value] (mixed) The value to be formatted.
     [$currency] (string) The 3-letter ISO 4217 currency code indicating the
@@ -832,7 +880,9 @@ return (string) The formatted result.
  Formats the value as a number spellout.
 
  This function requires the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) to be installed.
+ extension](https://secure.php.net/manual/en/book.intl.php) to be installed.
+
+ This formatter does not work well with very big numbers.
 
     [$value] (mixed) The value to be formatted
 
@@ -846,7 +896,9 @@ return (string) The formatted result.
  Formats the value as a ordinal value of a number.
 
  This function requires the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) to be installed.
+ extension](https://secure.php.net/manual/en/book.intl.php) to be installed.
+
+ This formatter does not work well with very big numbers.
 
     [$value] (mixed) The value to be formatted
 
@@ -858,7 +910,7 @@ return (string) The formatted result.
 return (string) The formatted result.
 
  Formats the value in bytes as a size in human readable form for example '12
- KB'.
+ kB'.
 
  This is the short form of 'asSize'.
 
@@ -989,13 +1041,15 @@ return (float|int) The normalized number value
  Normalizes a numeric input value.
 
 
-   - everything [empty](http://php.net/manual/en/function.empty.php)
-   will result in '0' 
-   - a [numeric](http://php.net/manual/en/function.is-numeric.php)
+   - everything
+   [empty](https://secure.php.net/manual/en/function.empty.php) will
+   result in '0' 
+   - a
+   [numeric](https://secure.php.net/manual/en/function.is-numeric.php)
    string will be casted to float 
    - everything else will be returned if it is
-   [numeric](http://php.net/manual/en/function.is-numeric.php),   otherwise an
- exception is thrown.
+   [numeric](https://secure.php.net/manual/en/function.is-numeric.php),  
+ otherwise an exception is thrown.
 
     [$value] (mixed) The input value
 
@@ -1018,6 +1072,87 @@ return (\NumberFormatter) The created formatter instance
     parameter will be merged with 'numberFormatterOptions'.
     [$textOptions] (array) Optional configuration for the number formatter.
     This parameter will be merged with 'numberFormatterTextOptions'.
+
+
+*yii/i18n/Formatter::isNormalizedValueMispresented*	protected
+>
+ isNormalizedValueMispresented($value, $normalizedValue)
+<
+return (bool) 
+
+ Checks if string representations of given value and its normalized version
+ are different.
+
+    [$value] (string|float|int) 
+    [$normalizedValue] (float|int) 
+
+
+*yii/i18n/Formatter::normalizeNumericStringValue*		protected
+>
+ normalizeNumericStringValue($value)
+<
+return (string) The normalized number value as a string
+
+ Normalizes a numeric string value.
+
+    [$value] (string) 
+
+
+*yii/i18n/Formatter::asDecimalStringFallback*		protected
+>
+ asDecimalStringFallback($value, $decimals=2)
+<
+return (string) The formatted result.
+
+ Fallback for formatting value as a decimal number.
+
+ Property 'decimalSeparator' will be used to represent the decimal point. The
+ value is rounded automatically to the defined decimal digits.
+
+    [$value] (string|int|float) The value to be formatted.
+    [$decimals] (int) The number of digits after the decimal point. The
+    default value is '2'.
+
+
+*yii/i18n/Formatter::asIntegerStringFallback*		protected
+>
+ asIntegerStringFallback($value)
+<
+return (string) The formatted result.
+
+ Fallback for formatting value as an integer number by removing any decimal
+ digits without rounding.
+
+    [$value] (string|int|float) The value to be formatted.
+
+
+*yii/i18n/Formatter::asPercentStringFallback*		protected
+>
+ asPercentStringFallback($value, $decimals=null)
+<
+return (string) The formatted result.
+
+ Fallback for formatting value as a percent number with "%" sign.
+
+ Property 'decimalSeparator' will be used to represent the decimal point. The
+ value is rounded automatically to the defined decimal digits.
+
+    [$value] (string|int|float) The value to be formatted.
+    [$decimals] (int) The number of digits after the decimal point. The
+    default value is '0'.
+
+
+*yii/i18n/Formatter::asCurrencyStringFallback*		protected
+>
+ asCurrencyStringFallback($value, $currency='null')
+<
+return (string) The formatted result.
+
+ Fallback for formatting value as a currency number.
+
+    [$value] (string|int|float) The value to be formatted.
+    [$currency] (string) The 3-letter ISO 4217 currency code indicating the
+    currency to use. If null, 'currencyCode' will be used.
 
 
 

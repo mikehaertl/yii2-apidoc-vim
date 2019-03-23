@@ -5,20 +5,20 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/filters/HttpCache|
-|yii/filters/AccessControl|
-|yii/filters/Cors|
-|yii/filters/PageCache|
-|yii/filters/ContentNegotiator|
-|yii/filters/AjaxFilter|
 |yii/filters/HostControl|
-|yii/filters/auth/HttpBasicAuth|
-|yii/filters/auth/AuthMethod|
-|yii/filters/auth/HttpHeaderAuth|
-|yii/filters/auth/CompositeAuth|
+|yii/filters/HttpCache|
+|yii/filters/RateLimiter|
 |yii/filters/auth/QueryParamAuth|
 |yii/filters/auth/HttpBearerAuth|
-|yii/filters/RateLimiter|
+|yii/filters/auth/CompositeAuth|
+|yii/filters/auth/HttpBasicAuth|
+|yii/filters/auth/HttpHeaderAuth|
+|yii/filters/auth/AuthMethod|
+|yii/filters/ContentNegotiator|
+|yii/filters/Cors|
+|yii/filters/AccessControl|
+|yii/filters/PageCache|
+|yii/filters/AjaxFilter|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -87,9 +87,18 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Attaches the behavior object to the component.
 
-    [$owner] () 
+
+
+ The default implementation will set the 'owner' property and attach event
+ handlers as declared in 'events'. Make sure you call the parent
+ implementation if you override this method.
+
+
+
+    [$owner] (\yii\base\Component) The component that this behavior is to be
+    attached to.
 
 
 *yii/base/ActionFilter::detach*				public
@@ -98,7 +107,15 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Detaches the behavior object from the component.
+
+
+
+ The default implementation will unset the 'owner' property and detach event
+ handlers declared in 'events'. Make sure you call the parent implementation
+ if you override this method.
+
+
 
 
 *yii/base/ActionFilter::beforeFilter*			public

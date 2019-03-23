@@ -7,7 +7,8 @@ DESCRIPTION
 
  ExistValidator checks if the value being validated can be found in the table
  column specified by the ActiveRecord class 'targetClass' and the attribute
- 'targetAttribute'.
+ 'targetAttribute'. Since version 2.0.14 you can use more convenient attribute
+ 'targetRelation'
 
  This validator is often used to verify that a foreign key contains a value
  that can be found in the foreign table.
@@ -26,6 +27,12 @@ DESCRIPTION
    // a1 needs to exist by checking the existence of both a2 and a3 (using a1
  value)
    ['a1', 'exist', 'targetAttribute' => ['a2', 'a1' => 'a3']]
+   // type_id needs to exist in the column "id" in the table defined in
+ ProductType class
+   ['type_id', 'exist', 'targetClass' => ProductType::class, 'targetAttribute'
+ => ['type_id' => 'id']],
+   // the same as the previous, but using already defined relation "type"
+   ['type_id', 'exist', 'targetRelation' => 'type'],
 
 
 
@@ -46,6 +53,9 @@ Inherited properties:
  |yii/validators/Validator::$isEmpty|
  |yii/validators/Validator::$when|
  |yii/validators/Validator::$whenClient|
+ |yii/base/Component::$behaviors|
+ |yii/validators/Validator::$validationAttributes|
+ |yii/validators/Validator::$attributeNames|
 
 
 $targetClass				*yii/validators/ExistValidator::$targetClass*
@@ -123,6 +133,7 @@ Inherited methods:
  |yii/base/Component::ensureBehaviors|
  |yii/validators/Validator::createValidator|
  |yii/validators/Validator::validateAttributes|
+ |yii/validators/Validator::getValidationAttributes|
  |yii/validators/Validator::validate|
  |yii/validators/Validator::clientValidateAttribute|
  |yii/validators/Validator::getClientOptions|
@@ -139,7 +150,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/validators/ExistValidator::validateAttribute*	public
@@ -148,21 +166,53 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Validates a single attribute.
 
-    [$model] () 
-    [$attribute] () 
+
+
+ Child classes must implement this method to provide the actual validation
+ logic.
+
+
+
+    [$model] (\yii\base\Model) The data model to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/ExistValidator::validateValue*		protected
 >
  validateValue($value)
 <
-return (void)
+return (array|null) The error message and the array of parameters to be inserted into
+the error message.
 
- {@inheritdoc}
+  if (!$valid) {
+      return [$this->message, [
+          'param1' => $this->param1,
+          'formattedLimit' =>
+Yii::$app->formatter->asShortSize($this->getSizeLimit()),
+          'mimeTypes' => implode(', ', $this->mimeTypes),
+          'param4' => 'etc...',
+      ]];
+  }
 
-    [$value] () 
+  return null;
+
+for this example 'message' template can contain '{param1}',
+'{formattedLimit}', '{mimeTypes}', '{param4}'
+
+Null should be returned if the data is valid.
+
+ Validates a value.
+
+
+
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
+
+
+
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/ExistValidator::createQuery*		protected

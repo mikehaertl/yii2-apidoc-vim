@@ -43,6 +43,9 @@ Inherited properties:
  |yii/validators/Validator::$isEmpty|
  |yii/validators/Validator::$when|
  |yii/validators/Validator::$whenClient|
+ |yii/base/Component::$behaviors|
+ |yii/validators/Validator::$validationAttributes|
+ |yii/validators/Validator::$attributeNames|
 
 
 $message				*yii/validators/UniqueValidator::$message*
@@ -133,6 +136,7 @@ Inherited methods:
  |yii/base/Component::ensureBehaviors|
  |yii/validators/Validator::createValidator|
  |yii/validators/Validator::validateAttributes|
+ |yii/validators/Validator::getValidationAttributes|
  |yii/validators/Validator::validate|
  |yii/validators/Validator::validateValue|
  |yii/validators/Validator::clientValidateAttribute|
@@ -150,7 +154,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/validators/UniqueValidator::validateAttribute*	public
@@ -159,10 +170,17 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Validates a single attribute.
 
-    [$model] () 
-    [$attribute] () 
+
+
+ Child classes must implement this method to provide the actual validation
+ logic.
+
+
+
+    [$model] (\yii\base\Model) The data model to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 

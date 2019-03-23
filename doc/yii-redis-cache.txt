@@ -77,6 +77,13 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/caching/Cache::$keyPrefix|
+ |yii/caching/Cache::$serializer|
+ |yii/caching/Cache::$defaultDuration|
+ |yii/base/Component::$behaviors|
+
 
 $redis					*yii/redis/Cache::$redis*
 
@@ -112,6 +119,51 @@ $replicas				*yii/redis/Cache::$replicas*
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/caching/Cache::buildKey|
+ |yii/caching/Cache::get|
+ |yii/caching/Cache::mget|
+ |yii/caching/Cache::multiGet|
+ |yii/caching/Cache::set|
+ |yii/caching/Cache::mset|
+ |yii/caching/Cache::multiSet|
+ |yii/caching/Cache::madd|
+ |yii/caching/Cache::multiAdd|
+ |yii/caching/Cache::add|
+ |yii/caching/Cache::delete|
+ |yii/caching/Cache::flush|
+ |yii/caching/Cache::addValues|
+ |yii/caching/Cache::offsetExists|
+ |yii/caching/Cache::offsetGet|
+ |yii/caching/Cache::offsetSet|
+ |yii/caching/Cache::offsetUnset|
+ |yii/caching/Cache::getOrSet|
 
 
 *yii/redis/Cache::init*					public
@@ -149,38 +201,40 @@ or expired.
 >
  getValue($key)
 <
-return (void)
+return (mixed|false) The value stored in cache, false if the value is not in the
+cache or expired. Most often value is a string. If you have disabled
+'serializer', it could be something else.
 
-    [$key] () 
+ Retrieves a value from cache with a specified key.
 
 
-*yii/redis/Cache::getValues*				protected
->
- getValues($keys)
-<
-return (void)
 
-    [$keys] () 
+ This method should be implemented by child classes to retrieve the data from
+ specific cache storage.
+
+
+
+    [$key] (string) A unique key identifying the cached value
 
 
 *yii/redis/Cache::setValue*				protected
 >
  setValue($key, $value, $expire)
 <
-return (void)
+return (bool) True if the value is successfully stored into cache, false otherwise
 
-    [$key] () 
-    [$value] () 
-    [$expire] () 
+ Stores a value identified by a key in cache.
 
 
-*yii/redis/Cache::setValues*				protected
->
- setValues($data, $expire)
-<
-return (void)
 
-    [$data] () 
+ This method should be implemented by child classes to store the data in
+ specific cache storage.
+
+
+
+    [$key] (string) The key identifying the value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
     [$expire] () 
 
 
@@ -188,10 +242,21 @@ return (void)
 >
  addValue($key, $value, $expire)
 <
-return (void)
+return (bool) True if the value is successfully stored into cache, false otherwise
 
-    [$key] () 
-    [$value] () 
+ Stores a value identified by a key into cache if the cache does not contain
+ this key.
+
+
+
+ This method should be implemented by child classes to store the data in
+ specific cache storage.
+
+
+
+    [$key] (string) The key identifying the value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
     [$expire] () 
 
 
@@ -199,17 +264,73 @@ return (void)
 >
  deleteValue($key)
 <
-return (void)
+return (bool) If no error happens during deletion
 
-    [$key] () 
+ Deletes a value with the specified key from cache This method should be
+ implemented by child classes to delete the data from actual cache storage.
+
+
+
+
+
+
+
+    [$key] (string) The key of the value to be deleted
 
 
 *yii/redis/Cache::flushValues*				protected
 >
  flushValues()
 <
-return (void)
+return (bool) Whether the flush operation was successful.
 
+ Deletes all values from cache.
+
+
+
+ Child classes may implement this method to realize the flush operation.
+
+
+
+
+*yii/redis/Cache::getValues*				protected
+>
+ getValues($keys)
+<
+return (array) A list of cached values indexed by the keys
+
+ Retrieves multiple values from cache with the specified keys.
+
+
+
+ The default implementation calls 'getValue()' multiple times to retrieve the
+ cached values one by one. If the underlying cache storage supports multiget,
+ this method should be overridden to exploit that feature.
+
+
+
+    [$keys] (array) A list of keys identifying the cached values
+
+
+*yii/redis/Cache::setValues*				protected
+>
+ setValues($data, $expire)
+<
+return (array) Array of failed keys
+
+ Stores multiple key-value pairs in cache.
+
+
+
+ The default implementation calls 'setValue()' multiple times store values one
+ by one. If the underlying cache storage supports multi-set, this method
+ should be overridden to exploit that feature.
+
+
+
+    [$data] (array) Array where key corresponds to cache key while value is
+    the value stored
+    [$expire] () 
 
 
 *yii/redis/Cache::getReplica*				protected

@@ -5,17 +5,17 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/caching/WinCache|
-|yii/caching/ZendDataCache|
-|yii/caching/MemCache|
-|yii/caching/FileCache|
-|yii/caching/ApcCache|
-|yii/caching/DummyCache|
-|yii/caching/XCache|
-|yii/caching/ArrayCache|
-|yii/caching/DbCache|
 |yii/mongodb/Cache|
 |yii/redis/Cache|
+|yii/caching/MemCache|
+|yii/caching/ZendDataCache|
+|yii/caching/WinCache|
+|yii/caching/ArrayCache|
+|yii/caching/ApcCache|
+|yii/caching/DummyCache|
+|yii/caching/FileCache|
+|yii/caching/XCache|
+|yii/caching/DbCache|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -61,6 +61,10 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $keyPrefix				*yii/caching/Cache::$keyPrefix*
 
@@ -76,7 +80,7 @@ $serializer				*yii/caching/Cache::$serializer*
  (null|array|false) The functions used to serialize and unserialize cached
  data. Defaults to null, meaning using the default PHP 'serialize()' and
  'unserialize()' functions. If you want to use some more efficient serializer
- (e.g. [igbinary](http://pecl.php.net/package/igbinary)), you may configure
+ (e.g. [igbinary](https://pecl.php.net/package/igbinary)), you may configure
  this property with a two-element array. The first element specifies the
  serialization function, and the second the deserialization function. If this
  property is set false, data will be directly sent to and retrieved from the
@@ -101,7 +105,6 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
  |yii/base/Component::__get|
  |yii/base/Component::__set|
  |yii/base/Component::__isset|
@@ -124,6 +127,22 @@ Inherited methods:
  |yii/base/Component::detachBehavior|
  |yii/base/Component::detachBehaviors|
  |yii/base/Component::ensureBehaviors|
+
+
+*yii/caching/Cache::init*					public
+>
+ init()
+<
+return (void)
+
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/caching/Cache::buildKey*				public
@@ -574,8 +593,11 @@ return (mixed) Result of $callable execution
     simple string or a complex data structure consisting of factors
     representing the key.
     [$callable] (callable|\Closure) The callable or closure that will be used
-    to generate a value to be cached. In case $callable returns 'false', the
-    value will not be cached.
+    to generate a value to be cached. If you use $callable that can return
+    'false', then keep in mind that 'getOrSet()' may work inefficiently
+    because the 'yii\caching\Cache::get()' method uses 'false' return value to
+    indicate the data item is not found in the cache. Thus, caching of 'false'
+    value will lead to unnecessary internal calls.
     [$duration] (int) Default duration in seconds before the cache will
     expire. If not set, 'defaultDuration' value will be used.
     [$dependency] (\yii\caching\Dependency) Dependency of the cached item. If

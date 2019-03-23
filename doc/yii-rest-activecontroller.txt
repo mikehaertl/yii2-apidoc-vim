@@ -45,6 +45,12 @@ Inherited properties:
  |yii/rest/Controller::$enableCsrfValidation|
  |yii/web/Controller::$actionParams|
  |yii/rest/Controller::$serializer|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/Controller::$viewPath|
 
 
 $modelClass				*yii/rest/ActiveController::$modelClass*
@@ -68,15 +74,15 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/Controller::__construct|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/rest/Controller::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -92,9 +98,9 @@ Inherited methods:
  |yii/base/Component::ensureBehaviors|
  |yii/base/Controller::runAction|
  |yii/base/Controller::run|
- |yii/base/Controller::bindActionParams|
+ |yii/web/Controller::bindActionParams|
  |yii/base/Controller::createAction|
- |yii/base/Controller::beforeAction|
+ |yii/web/Controller::beforeAction|
  |yii/rest/Controller::afterAction|
  |yii/base/Controller::getModules|
  |yii/base/Controller::getUniqueId|
@@ -124,7 +130,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/rest/ActiveController::actions*			public
@@ -133,16 +146,43 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Declares external actions for the controller.
+
+
+
+ This method is meant to be overwritten to declare external actions for the
+ controller. It should return an array, with array keys being action IDs, and
+ array values the corresponding action class names or action configuration
+ arrays. For example,
+
+   return [
+       'action1' => 'app\components\Action1',
+       'action2' => [
+           'class' => 'app\components\Action2',
+           'property1' => 'value1',
+           'property2' => 'value2',
+       ],
+   ];
+
+ '\Yii::createObject()' will be used later to create the requested action
+ using the configuration provided here.
+
+
 
 
 *yii/rest/ActiveController::verbs*			protected
 >
  verbs()
 <
-return (void)
+return (array) The allowed HTTP verbs.
 
- {@inheritdoc}
+ Declares the allowed HTTP verbs.
+
+
+
+ Please refer to 'VerbFilter::actions' on how to declare the allowed verbs.
+
+
 
 
 *yii/rest/ActiveController::checkAccess*			public

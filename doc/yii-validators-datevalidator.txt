@@ -44,6 +44,9 @@ Inherited properties:
  |yii/validators/Validator::$isEmpty|
  |yii/validators/Validator::$when|
  |yii/validators/Validator::$whenClient|
+ |yii/base/Component::$behaviors|
+ |yii/validators/Validator::$validationAttributes|
+ |yii/validators/Validator::$attributeNames|
 
 
 $type					*yii/validators/DateValidator::$type*
@@ -54,7 +57,7 @@ $type					*yii/validators/DateValidator::$type*
  the intl short formats, 'short', 'medium', 'long', or 'full'.
 
  This is only effective when the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) is installed.
+ extension](https://secure.php.net/manual/en/book.intl.php) is installed.
 
  This property can be set to the following values:
 
@@ -74,7 +77,7 @@ $format					*yii/validators/DateValidator::$format*
 
  Alternatively this can be a string prefixed with 'php:' representing a format
  that can be recognized by the PHP Datetime class. Please refer to
- <http://php.net/manual/en/datetime.createfromformat.php> on supported
+ <https://secure.php.net/manual/en/datetime.createfromformat.php> on supported
  formats.
 
  If this property is not set, the default value will be obtained from
@@ -98,34 +101,35 @@ $format					*yii/validators/DateValidator::$format*
 
  **Note:** the underlying date parsers being used vary dependent on the
  format. If you use the ICU format and the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) is installed, the
- [IntlDateFormatter](http://php.net/manual/en/intldateformatter.parse.php) is
- used to parse the input value. In all other cases the PHP
- [DateTime](http://php.net/manual/en/datetime.createfromformat.php) class is
- used. The IntlDateFormatter has the advantage that it can parse international
- dates like '12. Mai 2015' or '12 мая 2014', while the PHP parser is
- limited to English only. The PHP parser however is more strict about the
- input format as it will not accept '12.05.05' for the format 'php:d.m.Y', but
- the IntlDateFormatter will accept it for the format 'dd.MM.yyyy'. If you need
- to use the IntlDateFormatter you can avoid this problem by specifying a
- 'min|minimum date'.
+ extension](https://secure.php.net/manual/en/book.intl.php) is installed, the
+ [IntlDateFormatter](https://secure.php.net/manual/en/intldateformatter.parse.php)
+ is used to parse the input value. In all other cases the PHP
+ [DateTime](https://secure.php.net/manual/en/datetime.createfromformat.php)
+ class is used. The IntlDateFormatter has the advantage that it can parse
+ international dates like '12. Mai 2015' or '12 мая 2014', while the PHP
+ parser is limited to English only. The PHP parser however is more strict
+ about the input format as it will not accept '12.05.05' for the format
+ 'php:d.m.Y', but the IntlDateFormatter will accept it for the format
+ 'dd.MM.yyyy'. If you need to use the IntlDateFormatter you can avoid this
+ problem by specifying a 'min|minimum date'.
 
 $locale					*yii/validators/DateValidator::$locale*
 
  (string) The locale ID that is used to localize the date parsing. This is
  only effective when the [PHP intl
- extension](http://php.net/manual/en/book.intl.php) is installed. If not set,
- the locale of the '\yii\base\Application::formatter|formatter' will be used.
- See also '\yii\i18n\Formatter::locale'.
+ extension](https://secure.php.net/manual/en/book.intl.php) is installed. If
+ not set, the locale of the '\yii\base\Application::formatter|formatter' will
+ be used. See also '\yii\i18n\Formatter::locale'.
 
 $timeZone				*yii/validators/DateValidator::$timeZone*
 
  (string) The timezone to use for parsing date and time values. This can be
  any value that may be passed to
- [date_default_timezone_set()](http://www.php.net/manual/en/function.date-default-timezone-set.php)
+ [date_default_timezone_set()](https://secure.php.net/manual/en/function.date-default-timezone-set.php)
  e.g. 'UTC', 'Europe/Berlin' or 'America/Chicago'. Refer to the [php
- manual](http://www.php.net/manual/en/timezones.php) for available timezones.
- If this property is not set, '\yii\base\Application::timeZone' will be used.
+ manual](https://secure.php.net/manual/en/timezones.php) for available
+ timezones. If this property is not set, '\yii\base\Application::timeZone'
+ will be used.
 
 $timestampAttribute			*yii/validators/DateValidator::$timestampAttribute*
 
@@ -157,9 +161,10 @@ $timestampAttributeTimeZone		*yii/validators/DateValidator::$timestampAttributeT
  Defaults to 'UTC'.
 
  This can be any value that may be passed to
- [date_default_timezone_set()](http://www.php.net/manual/en/function.date-default-timezone-set.php)
+ [date_default_timezone_set()](https://secure.php.net/manual/en/function.date-default-timezone-set.php)
  e.g. 'UTC', 'Europe/Berlin' or 'America/Chicago'. Refer to the [php
- manual](http://www.php.net/manual/en/timezones.php) for available timezones.
+ manual](https://secure.php.net/manual/en/timezones.php) for available
+ timezones.
 
  If 'timestampAttributeFormat' is not set, this property will be ignored.
 
@@ -227,6 +232,7 @@ Inherited methods:
  |yii/base/Component::ensureBehaviors|
  |yii/validators/Validator::createValidator|
  |yii/validators/Validator::validateAttributes|
+ |yii/validators/Validator::getValidationAttributes|
  |yii/validators/Validator::validate|
  |yii/validators/Validator::clientValidateAttribute|
  |yii/validators/Validator::getClientOptions|
@@ -243,7 +249,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/validators/DateValidator::validateAttribute*		public
@@ -252,21 +265,53 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Validates a single attribute.
 
-    [$model] () 
-    [$attribute] () 
+
+
+ Child classes must implement this method to provide the actual validation
+ logic.
+
+
+
+    [$model] (\yii\base\Model) The data model to be validated
+    [$attribute] (string) The name of the attribute to be validated.
 
 
 *yii/validators/DateValidator::validateValue*		protected
 >
  validateValue($value)
 <
-return (void)
+return (array|null) The error message and the array of parameters to be inserted into
+the error message.
 
- {@inheritdoc}
+  if (!$valid) {
+      return [$this->message, [
+          'param1' => $this->param1,
+          'formattedLimit' =>
+Yii::$app->formatter->asShortSize($this->getSizeLimit()),
+          'mimeTypes' => implode(', ', $this->mimeTypes),
+          'param4' => 'etc...',
+      ]];
+  }
 
-    [$value] () 
+  return null;
+
+for this example 'message' template can contain '{param1}',
+'{formattedLimit}', '{mimeTypes}', '{param4}'
+
+Null should be returned if the data is valid.
+
+ Validates a value.
+
+
+
+ A validator class can implement this method to support data validation out of
+ the context of a data model.
+
+
+
+    [$value] (mixed) The data value to be validated.
 
 
 *yii/validators/DateValidator::parseDateValue*		protected

@@ -26,6 +26,10 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $cipher					*yii/base/Security::$cipher*
 
@@ -90,15 +94,15 @@ Inherited methods:
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -333,7 +337,7 @@ return (string) The generated random key
 return (string) The password hash string. When 'passwordHashStrategy' is set to
 'crypt', the output is always 60 ASCII characters, when set to 'password_hash'
 the output length might increase in future versions of PHP
-(http://php.net/manual/en/function.password-hash.php)
+(https://secure.php.net/manual/en/function.password-hash.php)
 
  Generates a secure hash from a password and a random salt.
 
@@ -385,9 +389,9 @@ return (string) The random salt value.
 
  Generates a salt that can be used to generate a password hash.
 
- The PHP [crypt()](http://php.net/manual/en/function.crypt.php) built-in
- function requires, for the Blowfish hash algorithm, a salt string in a
- specific format: "$2a$", "$2x$" or "$2y$", a two digit cost parameter, "$",
+ The PHP [crypt()](https://secure.php.net/manual/en/function.crypt.php)
+ built-in function requires, for the Blowfish hash algorithm, a salt string in
+ a specific format: "$2a$", "$2x$" or "$2y$", a two digit cost parameter, "$",
  and 22 characters from the alphabet "./0-9A-Za-z".
 
     [$cost] (int) The cost parameter

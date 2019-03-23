@@ -15,9 +15,141 @@ DESCRIPTION
  automatically because of this.
 
 
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/data/BaseDataProvider::$id|
+ |yii/data/ActiveDataProvider::$query|
+ |yii/data/ActiveDataProvider::$key|
+ |yii/data/ActiveDataProvider::$db|
+ |yii/base/Component::$behaviors|
+ |yii/data/BaseDataProvider::$models|
+ |yii/data/BaseDataProvider::$keys|
+ |yii/data/BaseDataProvider::$count|
+ |yii/data/BaseDataProvider::$totalCount|
+ |yii/data/BaseDataProvider::$pagination|
+ |yii/data/BaseDataProvider::$sort|
+
+
+$queryResults				*yii/elasticsearch/ActiveDataProvider::$queryResults*
+
+ (array) Full query results
+
+$aggregations				*yii/elasticsearch/ActiveDataProvider::$aggregations*
+
+ (array) All aggregations results
+
+
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/data/ActiveDataProvider::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/data/ActiveDataProvider::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/data/BaseDataProvider::prepare|
+ |yii/data/BaseDataProvider::getModels|
+ |yii/data/BaseDataProvider::setModels|
+ |yii/data/BaseDataProvider::getKeys|
+ |yii/data/BaseDataProvider::setKeys|
+ |yii/data/BaseDataProvider::getCount|
+ |yii/data/BaseDataProvider::getTotalCount|
+ |yii/data/BaseDataProvider::setTotalCount|
+ |yii/data/BaseDataProvider::getPagination|
+ |yii/data/BaseDataProvider::setPagination|
+ |yii/data/BaseDataProvider::getSort|
+ |yii/data/ActiveDataProvider::setSort|
+
+
+*yii/elasticsearch/ActiveDataProvider::prepareModels*	protected
+>
+ prepareModels()
+<
+return (array) The available data models
+
+ Prepares the data models that will be made available in the current page.
+
+
+
+
+
+
+
+
+*yii/elasticsearch/ActiveDataProvider::prepareKeys*	protected
+>
+ prepareKeys($models)
+<
+return (array) The keys
+
+ Prepares the keys associated with the currently available data models.
+
+
+
+
+
+
+
+    [$models] (array) The available data models
+
+
+*yii/elasticsearch/ActiveDataProvider::prepareTotalCount*	protected
+>
+ prepareTotalCount()
+<
+return (int) Total number of data models in this data provider.
+
+ Returns a value indicating the total number of data models in this data
+ provider.
+
+
+
+
+
+
+
+
+*yii/elasticsearch/ActiveDataProvider::refresh*		public
+>
+ refresh()
+<
+return (void)
+
+ Refreshes the data provider.
+
+
+
+ After calling this method, if 'getModels()', 'getKeys()' or 'getTotalCount()'
+ is called again, they will re-execute the query and return the latest data
+ available.
+
+
 
 
 *yii/elasticsearch/ActiveDataProvider::setQueryResults*	public
@@ -54,39 +186,6 @@ return (array) Aggregation results.
  Returns results of the specified aggregation.
 
     [$name] (string) Aggregation name.
-
-
-*yii/elasticsearch/ActiveDataProvider::prepareModels*	protected
->
- prepareModels()
-<
-return (void)
-
-
-
-*yii/elasticsearch/ActiveDataProvider::prepareTotalCount*	protected
->
- prepareTotalCount()
-<
-return (void)
-
-
-
-*yii/elasticsearch/ActiveDataProvider::prepareKeys*	protected
->
- prepareKeys($models)
-<
-return (void)
-
-    [$models] () 
-
-
-*yii/elasticsearch/ActiveDataProvider::refresh*		public
->
- refresh()
-<
-return (void)
-
 
 
 

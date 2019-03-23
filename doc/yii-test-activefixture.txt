@@ -31,6 +31,8 @@ Inherited properties:
  |yii/test/FileFixtureTrait::$dataDirectory|
  |yii/test/BaseActiveFixture::$modelClass|
  |yii/test/BaseActiveFixture::$data|
+ |yii/base/Component::$behaviors|
+ |yii/base/ArrayAccessTrait::$iterator|
 
 
 $dataFile				*yii/test/ActiveFixture::$dataFile*
@@ -46,6 +48,11 @@ $tableName				*yii/test/ActiveFixture::$tableName*
 
  (string) The name of the database table that this fixture is about. If this
  property is not set, the table name will be determined via 'modelClass'.
+
+$tableSchema				*yii/test/ActiveFixture::$tableSchema*
+
+ (\yii\db\TableSchema) The schema information of the database table associated
+ with this fixture.
 
 
 
@@ -98,7 +105,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/test/ActiveFixture::load*				public
@@ -122,7 +136,14 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Unloads the fixture.
+
+
+
+ This method is called after every test method finishes. You may override this
+ method to perform necessary cleanup work for the fixture.
+
+
 
 
 *yii/test/ActiveFixture::getData*				protected

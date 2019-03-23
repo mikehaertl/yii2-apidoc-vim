@@ -6,19 +6,97 @@
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
 
-$template				*yii/gii/components/ActiveField::$template*
+ |yii/widgets/ActiveField::$form|
+ |yii/widgets/ActiveField::$attribute|
+ |yii/widgets/ActiveField::$options|
+ |yii/widgets/ActiveField::$inputOptions|
+ |yii/widgets/ActiveField::$errorOptions|
+ |yii/widgets/ActiveField::$labelOptions|
+ |yii/widgets/ActiveField::$hintOptions|
+ |yii/widgets/ActiveField::$enableClientValidation|
+ |yii/widgets/ActiveField::$enableAjaxValidation|
+ |yii/widgets/ActiveField::$validateOnChange|
+ |yii/widgets/ActiveField::$validateOnBlur|
+ |yii/widgets/ActiveField::$validateOnType|
+ |yii/widgets/ActiveField::$validationDelay|
+ |yii/widgets/ActiveField::$selectors|
+ |yii/widgets/ActiveField::$parts|
+ |yii/widgets/ActiveField::$addAriaAttributes|
+ |yii/base/Component::$behaviors|
 
- ()
 
 $model					*yii/gii/components/ActiveField::$model*
 
  (\yii\gii\Generator)
 
+$template				*yii/gii/components/ActiveField::$template*
+
+ (string) 
+
+ The template that is used to arrange the label, the input field, the error
+ message and the hint text. The following tokens will be replaced when
+ 'render()' is called: '{label}', '{input}', '{error}' and '{hint}'.
+
+
+
 
 
 METHOD DETAILS
 ------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
+ |yii/base/Component::__clone|
+ |yii/base/Component::behaviors|
+ |yii/base/Component::hasEventHandlers|
+ |yii/base/Component::on|
+ |yii/base/Component::off|
+ |yii/base/Component::trigger|
+ |yii/base/Component::getBehavior|
+ |yii/base/Component::getBehaviors|
+ |yii/base/Component::attachBehavior|
+ |yii/base/Component::attachBehaviors|
+ |yii/base/Component::detachBehavior|
+ |yii/base/Component::detachBehaviors|
+ |yii/base/Component::ensureBehaviors|
+ |yii/widgets/ActiveField::__toString|
+ |yii/widgets/ActiveField::render|
+ |yii/widgets/ActiveField::begin|
+ |yii/widgets/ActiveField::end|
+ |yii/widgets/ActiveField::label|
+ |yii/widgets/ActiveField::error|
+ |yii/widgets/ActiveField::input|
+ |yii/widgets/ActiveField::textInput|
+ |yii/widgets/ActiveField::hiddenInput|
+ |yii/widgets/ActiveField::passwordInput|
+ |yii/widgets/ActiveField::fileInput|
+ |yii/widgets/ActiveField::textarea|
+ |yii/widgets/ActiveField::dropDownList|
+ |yii/widgets/ActiveField::listBox|
+ |yii/widgets/ActiveField::checkboxList|
+ |yii/widgets/ActiveField::radioList|
+ |yii/widgets/ActiveField::widget|
+ |yii/widgets/ActiveField::adjustLabelFor|
+ |yii/widgets/ActiveField::getClientOptions|
+ |yii/widgets/ActiveField::isClientValidationEnabled|
+ |yii/widgets/ActiveField::isAjaxValidationEnabled|
+ |yii/widgets/ActiveField::getInputId|
+ |yii/widgets/ActiveField::addAriaAttributes|
+ |yii/widgets/ActiveField::addRoleAttributes|
+ |yii/widgets/ActiveField::addErrorClassIfNeeded|
 
 
 *yii/gii/components/ActiveField::init*			public
@@ -27,6 +105,134 @@ METHOD DETAILS
 <
 return (void)
 
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
+
+
+*yii/gii/components/ActiveField::hint*			public
+>
+ hint($content, $options='[]')
+<
+return ($this) The field object itself.
+
+ Renders the hint tag.
+
+
+
+
+
+
+
+    [$content] (string|bool) The hint content. If 'null', the hint will be
+    generated via 'Model::getAttributeHint()'. If 'false', the generated field
+    will not contain the hint part. Note that this will NOT be
+    'Html::encode()|encoded'.
+    [$options] (array) The tag options in terms of name-value pairs. These
+    will be rendered as the attributes of the hint tag. The values will be
+    HTML-encoded using 'Html::encode()'.
+
+    The following options are specially handled:
+
+
+      - 'tag': this specifies the tag name. If not set, 'div' will be
+      used.   See also '\yii\helpers\Html::tag()'.
+
+
+*yii/gii/components/ActiveField::radio*			public
+>
+ radio($options='[]', $enclosedByLabel='false')
+<
+return ($this) The field object itself.
+
+ Renders a radio button.
+
+
+
+ This method will generate the 'checked' tag attribute according to the model
+ attribute value.
+
+
+
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+
+      - 'uncheck': string, the value associated with the uncheck state of
+      the radio button. If not set,   it will take the default value '0'. This
+    method will render a hidden input so that if the radio button   is not
+    checked and is submitted, the value of this attribute will still be
+    submitted to the server   via the hidden input. If you do not want any
+    hidden input, you should explicitly set this option as 'null'. 
+      - 'label': string, a label displayed next to the radio button. It
+      will NOT be HTML-encoded. Therefore you can pass   in HTML code such as
+    an image tag. If this is coming from end users, you should
+    'Html::encode()|encode' it to prevent XSS attacks.   When this option is
+    specified, the radio button will be enclosed by a label tag. If you do not
+    want any label, you should   explicitly set this option as 'null'. 
+      - 'labelOptions': array, the HTML attributes for the label tag. This
+      is only used when the 'label' option is specified.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is 'null', the corresponding attribute will not be rendered.
+
+    If you set a custom 'id' for the input element, you may need to adjust the
+    '$selectors' accordingly.
+    [$enclosedByLabel] (bool) Whether to enclose the radio within the label.
+    If 'true', the method will still use 'template' to layout the radio button
+    and the error message except that the radio is enclosed by the label tag.
+
+
+*yii/gii/components/ActiveField::checkbox*		public
+>
+ checkbox($options='[]', $enclosedByLabel='false')
+<
+return ($this) The field object itself.
+
+ Renders a checkbox.
+
+
+
+ This method will generate the 'checked' tag attribute according to the model
+ attribute value.
+
+
+
+    [$options] (array) The tag options in terms of name-value pairs. The
+    following options are specially handled:
+
+
+      - 'uncheck': string, the value associated with the uncheck state of
+      the radio button. If not set,   it will take the default value '0'. This
+    method will render a hidden input so that if the radio button   is not
+    checked and is submitted, the value of this attribute will still be
+    submitted to the server   via the hidden input. If you do not want any
+    hidden input, you should explicitly set this option as 'null'. 
+      - 'label': string, a label displayed next to the checkbox. It will
+      NOT be HTML-encoded. Therefore you can pass   in HTML code such as an
+    image tag. If this is coming from end users, you should
+    'Html::encode()|encode' it to prevent XSS attacks.   When this option is
+    specified, the checkbox will be enclosed by a label tag. If you do not
+    want any label, you should   explicitly set this option as 'null'. 
+      - 'labelOptions': array, the HTML attributes for the label tag. This
+      is only used when the 'label' option is specified.
+
+    The rest of the options will be rendered as the attributes of the
+    resulting tag. The values will be HTML-encoded using 'Html::encode()'. If
+    a value is 'null', the corresponding attribute will not be rendered.
+
+    If you set a custom 'id' for the input element, you may need to adjust the
+    '$selectors' accordingly.
+    [$enclosedByLabel] (bool) Whether to enclose the checkbox within the
+    label. If 'true', the method will still use 'template' to layout the
+    checkbox and the error message except that the checkbox is enclosed by the
+    label tag.
 
 
 *yii/gii/components/ActiveField::sticky*			public
@@ -47,36 +253,6 @@ return ($this) The field object itself
  Makes field auto completable
 
     [$data] (array) Auto complete data (array of callables or scalars)
-
-
-*yii/gii/components/ActiveField::hint*			public
->
- hint($content, $options='[]')
-<
-return (void)
-
-    [$content] () 
-    [$options] () 
-
-
-*yii/gii/components/ActiveField::checkbox*		public
->
- checkbox($options='[]', $enclosedByLabel='false')
-<
-return (void)
-
-    [$options] () 
-    [$enclosedByLabel] () 
-
-
-*yii/gii/components/ActiveField::radio*			public
->
- radio($options='[]', $enclosedByLabel='false')
-<
-return (void)
-
-    [$options] () 
-    [$enclosedByLabel] () 
 
 
 

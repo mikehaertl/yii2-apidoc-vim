@@ -101,6 +101,7 @@ Inherited properties:
  |yii/db/ActiveQueryTrait::$modelClass|
  |yii/db/ActiveQueryTrait::$with|
  |yii/db/ActiveQueryTrait::$asArray|
+ |yii/base/Component::$behaviors|
 
 
 $sql					*yii/db/ActiveQuery::$sql*
@@ -119,6 +120,10 @@ $on					*yii/db/ActiveQuery::$on*
 $joinWith				*yii/db/ActiveQuery::$joinWith*
 
  (array) A list of relations that this query should be joined with
+
+$tablesUsedInFrom			*yii/db/ActiveQuery::$tablesUsedInFrom*
+
+ (string[]) Table names indexed by aliases
 
 
 
@@ -257,11 +262,20 @@ return (\yii\db\Command) The created DB command instance.
 >
  prepare($builder)
 <
-return (void)
+return ($this) A prepared query instance which will be used by 'QueryBuilder' to
+build the SQL
 
- {@inheritdoc}
+ Prepares for building SQL.
 
-    [$builder] () 
+
+
+ This method is called by 'QueryBuilder' when it starts to build SQL from a
+ query object. You may override this method to do some final preparation work
+ when converting a query into a SQL statement.
+
+
+
+    [$builder] (\yii\db\QueryBuilder) 
 
 
 *yii/db/ActiveQuery::all*					public
@@ -281,11 +295,18 @@ nothing, an empty array will be returned.
 >
  populate($rows)
 <
-return (void)
+return (array) The converted query result
 
- {@inheritdoc}
+ Converts the raw query results into the format as specified by this query.
 
-    [$rows] () 
+
+
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
+
+
+
+    [$rows] (array) The raw query result from database
 
 
 *yii/db/ActiveQuery::one*					public
@@ -307,21 +328,33 @@ ActiveRecord object. 'null' will be returned if the query results in nothing.
 >
  queryScalar($selectExpression, $db)
 <
-return (void)
+return (bool|string) 
 
- {@inheritdoc}
+ Queries a scalar value by setting 'select' first.
 
-    [$selectExpression] () 
-    [$db] () 
+
+
+ Restores the value of select to make this query reusable.
+
+
+
+    [$selectExpression] (string|\yii\db\ExpressionInterface) 
+    [$db] (\yii\db\Connection|null) 
 
 
 *yii/db/ActiveQuery::getTablesUsedInFrom*			public
 >
  getTablesUsedInFrom()
 <
-return (void)
+return (string[]) Table names indexed by aliases
 
- {@inheritdoc}
+ Returns table names used in 'from' indexed by aliases.
+
+
+
+ Both aliases and names are enclosed into {{ and }}.
+
+
 
 
 *yii/db/ActiveQuery::joinWith*				public
@@ -409,6 +442,15 @@ return ($this) The query object itself
     that this does not mean, that the relations are populated from the query
     result. An extra query will still be performed to bring in the related
     data.
+
+
+*yii/db/ActiveQuery::getTableNameAndAlias*		protected
+>
+ getTableNameAndAlias()
+<
+return (array) The table name and the table alias.
+
+ Returns the table name and the table alias for 'modelClass'.
 
 
 *yii/db/ActiveQuery::onCondition*				public

@@ -74,11 +74,11 @@ Inherited methods:
  |yii/db/BaseActiveRecord::__set|
  |yii/db/BaseActiveRecord::__isset|
  |yii/db/BaseActiveRecord::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
  |yii/db/BaseActiveRecord::canGetProperty|
  |yii/db/BaseActiveRecord::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -384,9 +384,18 @@ deleted is 0, even though the deletion execution is successful.
 >
  refresh()
 <
-return (void)
+return (bool) Whether the row still exists in the database. If 'true', the latest
+data will be populated to this active record. Otherwise, this record will
+remain unchanged.
 
- {@inheritdoc}
+ Repopulates this active record with the latest data.
+
+
+
+ If the refresh is successful, an 'EVENT_AFTER_REFRESH' event will be
+ triggered. This event is available since version 2.0.8.
+
+
 
 
 *yii/db/ActiveRecord::equals*				public
@@ -412,10 +421,23 @@ database table.
 <
 return (void)
 
- {@inheritdoc}
+ Populates an active record object using a row of data from the
+ database/storage.
 
-    [$record] () 
-    [$row] () 
+
+
+ This is an internal method meant to be called to create active record objects
+ after fetching data from the database. It is mainly used by 'ActiveQuery' to
+ populate the query results into active records.
+
+ When calling this method manually you should call 'afterFind()' on the
+ created record to trigger the 'EVENT_AFTER_FIND|afterFind Event'.
+
+
+
+    [$record] (\yii\db\BaseActiveRecord) The record to be populated. In most
+    cases this will be an instance created by 'instantiate()' beforehand.
+    [$row] (array) Attribute values (name => value)
 
 
 *yii/db/ActiveRecord::primaryKey*				public
@@ -443,7 +465,51 @@ return (string[]) The primary keys of the associated database table.
 <
 return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance.
 
- {@inheritdoc}
+ Creates an 'ActiveQueryInterface' instance for query purpose.
+
+
+
+ The returned 'ActiveQueryInterface' instance can be further customized by
+ calling methods defined in 'ActiveQueryInterface' before 'one()' or 'all()'
+ is called to return populated ActiveRecord instances. For example,
+
+   // find the customer whose ID is 1
+   $customer = Customer::find()->where(['id' => 1])->one();
+
+   // find all active customers and order them by their age:
+   $customers = Customer::find()
+       ->where(['status' => 1])
+       ->orderBy('age')
+       ->all();
+
+ This method is also called by 'BaseActiveRecord::hasOne()' and
+ 'BaseActiveRecord::hasMany()' to create a relational query.
+
+ You may override this method to return a customized query. For example,
+
+   class Customer extends ActiveRecord
+   {
+       public static function find()
+       {
+           // use CustomerQuery instead of the default ActiveQuery
+           return new CustomerQuery(get_called_class());
+       }
+   }
+
+ The following code shows how to apply a default condition for all queries:
+
+ '''php class Customer extends ActiveRecord {     public static function
+ find()     {         return parent::find()->where(['deleted' => false]);    
+ } }
+
+ // Use andWhere()/orWhere() to apply the default condition // SELECT FROM
+ customer WHERE 'deleted'=:deleted AND age>30 $customers =
+ Customer::find()->andWhere('age>30')->all();
+
+ // Use where() to ignore the default condition // SELECT FROM customer WHERE
+ age>30 $customers = Customer::find()->where('age>30')->all();
+
+
 
 
 *yii/db/ActiveRecord::insert*				public
@@ -551,9 +617,20 @@ return (\yii\db\ActiveQuery) The newly created 'ActiveQuery' instance
     execution.
 
 
+*yii/db/ActiveRecord::filterValidAliases*			protected
+>
+ filterValidAliases($query)
+<
+return (array) 
+
+ Returns table aliases which are not the same as the name of the tables.
+
+    [$query] (\yii\db\Query) 
+
+
 *yii/db/ActiveRecord::filterCondition*			protected
 >
- filterCondition($condition)
+ filterCondition($condition, $aliases='[]')
 <
 return (array) Filtered condition.
 
@@ -563,6 +640,20 @@ return (array) Filtered condition.
  table columns.
 
     [$condition] (array) Condition to filter.
+    [$aliases] (array) 
+
+
+*yii/db/ActiveRecord::filterValidColumnNames*		protected
+>
+ filterValidColumnNames($db, $aliases)
+<
+return (array) 
+
+ Valid column names are table column names or column names prefixed with table
+ name or table alias
+
+    [$db] (\yii\db\Connection) 
+    [$aliases] (array) 
 
 
 *yii/db/ActiveRecord::tableName*				public

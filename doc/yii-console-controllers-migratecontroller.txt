@@ -58,7 +58,7 @@ Inherited properties:
 
  |yii/base/Controller::$id|
  |yii/base/Controller::$module|
- |yii/base/Controller::$defaultAction|
+ |yii/console/controllers/BaseMigrateController::$defaultAction|
  |yii/base/Controller::$layout|
  |yii/base/Controller::$action|
  |yii/console/Controller::$interactive|
@@ -67,11 +67,26 @@ Inherited properties:
  |yii/console/controllers/BaseMigrateController::$migrationPath|
  |yii/console/controllers/BaseMigrateController::$migrationNamespaces|
  |yii/console/controllers/BaseMigrateController::$compact|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/ViewContextInterface::$viewPath|
+ |yii/console/Controller::$passedOptions|
+ |yii/console/Controller::$passedOptionValues|
+ |yii/console/Controller::$helpSummary|
 
 
 $templateFile				*yii/console/controllers/MigrateController::$templateFile*
 
- ()
+ (string) 
+
+ The template file for generating new migrations. This can be either a [path
+ alias](guide:concept-aliases) (e.g. "@app/migrations/template.php") or a file
+ path.
+
+
 
 $migrationTable				*yii/console/controllers/MigrateController::$migrationTable*
 
@@ -128,15 +143,15 @@ Inherited methods:
  |yii/base/BaseObject::className|
  |yii/base/Controller::__construct|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -165,7 +180,7 @@ Inherited methods:
  |yii/base/Controller::renderFile|
  |yii/base/Controller::getView|
  |yii/base/Controller::setView|
- |yii/base/Controller::getViewPath|
+ |yii/base/ViewContextInterface::getViewPath|
  |yii/base/Controller::setViewPath|
  |yii/base/Controller::findLayoutFile|
  |yii/console/Controller::isColorEnabled|
@@ -221,20 +236,37 @@ return (bool) Whether the action should continue to be executed.
 >
  options($actionID)
 <
-return (void)
+return (string[]) The names of the options valid for the action
 
- {@inheritdoc}
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
 
-    [$actionID] () 
+
+
+ Child classes may override this method to specify possible options.
+
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+
+
+
+    [$actionID] (string) The action id of the current request
 
 
 *yii/console/controllers/MigrateController::optionAliases*public
 >
  optionAliases()
 <
-return (void)
+return (array) The options alias names valid for the action where the keys is alias
+name for option and value is option name.
 
- {@inheritdoc}
+ Returns option alias names.
+
+
+
+ Child classes may override this method to specify alias options.
+
+
 
 
 *yii/console/controllers/MigrateController::createMigration*protected
@@ -252,11 +284,23 @@ return (\yii\db\Migration) The migration instance
 >
  generateMigrationSourceCode($params)
 <
-return (void)
+return (string) Generated PHP code.
 
- {@inheritdoc}
+ Generates new migration source PHP code.
 
-    [$params] () 
+
+
+ Child class may override this method, adding extra logic or variation to the
+ process.
+
+
+
+    [$params] (array) Generation parameters, usually following parameters are
+    present:
+
+     
+      - name: string migration base name  
+      - className: string migration class name
 
 
 *yii/console/controllers/MigrateController::truncateDatabase*protected
@@ -265,27 +309,48 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Truncates the database.
+
+
+
+ This method should be overwritten in subclasses to implement the task of
+ clearing the database.
+
+
 
 
 *yii/console/controllers/MigrateController::getMigrationNameLimit*protected
 >
  getMigrationNameLimit()
 <
-return (void)
+return (int|null) The maximum name length for a migration or 'null' if no limit
+applies.
 
- {@inheritdoc}
+ Return the maximum name length for a migration.
+
+
+
+ Subclasses may override this method to define a limit.
+
+
 
 
 *yii/console/controllers/MigrateController::getMigrationHistory*protected
 >
  getMigrationHistory($limit)
 <
-return (void)
+return (array) The migration history
 
- {@inheritdoc}
+ Returns the migration history.
 
-    [$limit] () 
+
+
+
+
+
+
+    [$limit] (int) The maximum number of records in the history to be
+    returned. 'null' for "no limit".
 
 
 *yii/console/controllers/MigrateController::addMigrationHistory*protected
@@ -294,9 +359,15 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Adds new migration entry to the history.
 
-    [$version] () 
+
+
+
+
+
+
+    [$version] (string) Migration version name.
 
 
 *yii/console/controllers/MigrateController::removeMigrationHistory*protected
@@ -305,9 +376,15 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Removes existing migration from the history.
 
-    [$version] () 
+
+
+
+
+
+
+    [$version] (string) Migration version name.
 
 
 *yii/console/controllers/MigrateController::createMigrationHistoryTable*protected

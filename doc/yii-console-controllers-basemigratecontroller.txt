@@ -5,8 +5,8 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/console/controllers/MigrateController|
 |yii/mongodb/console/controllers/MigrateController|
+|yii/console/controllers/MigrateController|
 
 
 PROPERTY DETAILS
@@ -21,6 +21,15 @@ Inherited properties:
  |yii/console/Controller::$interactive|
  |yii/console/Controller::$color|
  |yii/console/Controller::$help|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/ViewContextInterface::$viewPath|
+ |yii/console/Controller::$passedOptions|
+ |yii/console/Controller::$passedOptionValues|
+ |yii/console/Controller::$helpSummary|
 
 
 $defaultAction				*yii/console/controllers/BaseMigrateController::$defaultAction*
@@ -92,15 +101,15 @@ Inherited methods:
  |yii/base/BaseObject::className|
  |yii/base/Controller::__construct|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -171,11 +180,21 @@ return (bool) Whether the action should continue to be executed.
 >
  options($actionID)
 <
-return (void)
+return (string[]) The names of the options valid for the action
 
- {@inheritdoc}
+ Returns the names of valid options for the action (id) An option requires the
+ existence of a public member variable whose name is the option name.
 
-    [$actionID] () 
+
+
+ Child classes may override this method to specify possible options.
+
+ Note that the values setting via options are not available until
+ 'beforeAction()' is being called.
+
+
+
+    [$actionID] (string) The action id of the current request
 
 
 *yii/console/controllers/BaseMigrateController::actionUp*	public

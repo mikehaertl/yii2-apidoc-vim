@@ -17,7 +17,12 @@ $escapingReplacements			*yii/db/oci/conditions/LikeConditionBuilder::$escapingRe
 
 $escapeCharacter			*yii/db/oci/conditions/LikeConditionBuilder::$escapeCharacter*
 
- ()
+ (string|null) 
+
+ Character used to escape special characters in LIKE conditions. By default
+ it's assumed to be '\'.
+
+
 
 
 
@@ -34,12 +39,21 @@ Inherited methods:
 >
  build($expression, $params='[]')
 <
-return (void)
+return (string) The raw SQL that will not be additionally escaped or quoted.
 
- {@inheritdoc}
+ Method builds the raw SQL from the $expression that will not be additionally
+ escaped or quoted.
 
-    [$expression] () 
-    [$params] () 
+
+
+
+
+
+
+    [$expression]
+    (\yii\db\ExpressionInterface|\yii\db\conditions\LikeCondition) The
+    expression to be built.
+    [$params] (array) The binding parameters.
 
 
 

@@ -1,0 +1,220 @@
+
+*yii/behaviors/OptimisticLockBehavior*   >> |yii/behaviors/AttributeBehavior|
+======================================
+
+DESCRIPTION
+------------------------------------------------------------------------------
+
+ Optimistic locking allows multiple users to access the same record for edits
+ and avoids potential conflicts. In case when a user attempts to save the
+ record upon some staled data (because another user has modified the data), a
+ 'StaleObjectException' exception will be thrown, and the update or deletion
+ is skipped.
+
+ To use this behavior, first enable optimistic lock by following the steps
+ listed in '\yii\db\BaseActiveRecord::optimisticLock()|optimisticLock()',
+ remove the column name holding the lock version from the
+ '\yii\base\Model::rules()|rules()' method of your ActiveRecord class, then
+ add the following code to it:
+
+   use yii\behaviors\OptimisticLockBehavior;
+
+   public function behaviors()
+   {
+       return [
+           OptimisticLockBehavior::className(),
+       ];
+   }
+
+ By default, OptimisticLockBehavior will use
+ '\yii\web\Request::getBodyParam()|getBodyParam()' to parse the submitted
+ value or set it to 0 on any fail. That means a request not holding the
+ version attribute may achieve a first successful update to entity, but
+ starting from there any further try should fail unless the request is holding
+ the expected version number.
+
+ Once attached, internal use of the model class should also fail to save the
+ record if the version number isn't held by
+ '\yii\web\Request::getBodyParam()|getBodyParam()'. It may be useful to extend
+ your model class, enable optimistic lock in parent class by overriding
+ '\yii\db\BaseActiveRecord::optimisticLock()|optimisticLock()', then attach
+ the behavior to the child class so you can tie the parent model to internal
+ use while linking the child model holding this behavior to the controllers
+ responsible of receiving end user inputs. Alternatively, you can also
+ configure the 'value' property with a PHP callable to implement a different
+ logic.
+
+ OptimisticLockBehavior also provides a method named 'upgrade()' that
+ increases a model's version by one, that may be useful when you need to mark
+ an entity as stale among connected clients and avoid any change to it until
+ they load it again:
+
+   $model->upgrade();
+
+
+
+
+PROPERTY DETAILS
+------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/base/Behavior::$owner|
+ |yii/behaviors/AttributeBehavior::$attributes|
+ |yii/behaviors/AttributeBehavior::$preserveNonEmptyValues|
+
+
+$value					*yii/behaviors/OptimisticLockBehavior::$value*
+
+ (mixed) In case of 'null' value it will be directly parsed from
+ '\yii\web\Request::getBodyParam()|getBodyParam()' or set to 0.
+
+ The value that will be assigned to the current attributes. This can be an
+ anonymous function, callable in array format (e.g. '[$this, 'methodName']'),
+ an '\yii\db\Expression|Expression' object representing a DB expression (e.g.
+ 'new Expression('NOW()')'), scalar, string or an arbitrary value. If the
+ former, the return value of the function will be assigned to the attributes.
+ The signature of the function should be as follows,
+
+   function ($event)
+   {
+       // return value will be assigned to the attribute
+   }
+
+
+
+$skipUpdateOnClean			*yii/behaviors/OptimisticLockBehavior::$skipUpdateOnClean*
+
+ (bool) 
+
+ Whether to skip this behavior when the '$owner' has not been modified
+
+
+
+
+
+METHOD DETAILS
+------------------------------------------------------------------------------
+
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/BaseObject::__get|
+ |yii/base/BaseObject::__set|
+ |yii/base/BaseObject::__isset|
+ |yii/base/BaseObject::__unset|
+ |yii/base/BaseObject::__call|
+ |yii/base/BaseObject::hasProperty|
+ |yii/base/BaseObject::canGetProperty|
+ |yii/base/BaseObject::canSetProperty|
+ |yii/base/BaseObject::hasMethod|
+ |yii/base/Behavior::detach|
+ |yii/behaviors/AttributeBehavior::evaluateAttributes|
+
+
+*yii/behaviors/OptimisticLockBehavior::events*		public
+>
+ events()
+<
+return (array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+ Declares event handlers for the 'owner''s events.
+
+
+
+ Child classes may override this method to declare what PHP callbacks should
+ be attached to the events of the 'owner' component.
+
+ The callbacks will be attached to the 'owner''s events when the behavior is
+ attached to the owner; and they will be detached from the events when the
+ behavior is detached from the component.
+
+ The callbacks can be any of the following:
+
+
+   - method in this behavior: ''handleClick'', equivalent to '[$this,
+   'handleClick']' 
+   - object method: '[$object, 'handleClick']' 
+   - static method: '['Page', 'handleClick']' 
+   - anonymous function: 'function ($event) { ... }'
+
+ The following is an example:
+
+   [
+       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+   ]
+
+
+
+
+*yii/behaviors/OptimisticLockBehavior::attach*		public
+>
+ attach($owner)
+<
+return (void)
+
+ Attaches the behavior object to the component.
+
+
+
+ The default implementation will set the 'owner' property and attach event
+ handlers as declared in 'events'. Make sure you call the parent
+ implementation if you override this method.
+
+
+
+    [$owner] (\yii\base\Component) The component that this behavior is to be
+    attached to.
+
+
+*yii/behaviors/OptimisticLockBehavior::getValue*		protected
+>
+ getValue($event)
+<
+return (mixed) The attribute value
+
+ Returns the value for the current attributes.
+
+ In case of 'null', value will be parsed from
+ '\yii\web\Request::getBodyParam()|getBodyParam()' or set to 0.
+
+ This method is called by 'evaluateAttributes()'. Its return value will be
+ assigned to the attributes corresponding to the triggering event.
+
+
+
+    [$event] (\yii\base\Event) The event that triggers the current attribute
+    updating.
+
+
+*yii/behaviors/OptimisticLockBehavior::getLockAttribute*	protected
+>
+ getLockAttribute()
+<
+return (string) The property name.
+
+ Returns the column name to hold the version value as defined in
+ '\yii\db\BaseActiveRecord::optimisticLock()|optimisticLock()'.
+
+
+*yii/behaviors/OptimisticLockBehavior::upgrade*		public
+>
+ upgrade()
+<
+return (void)
+
+ Upgrades the version value by one and stores it to database.
+
+
+
+   $model->upgrade();
+
+
+
+
+
+ vim:tw=78:ts=8:ft=help:norl:

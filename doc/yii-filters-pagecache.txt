@@ -43,6 +43,7 @@ Inherited properties:
  |yii/base/Behavior::$owner|
  |yii/base/ActionFilter::$only|
  |yii/base/ActionFilter::$except|
+ |yii/base/DynamicContentAwareTrait::$dynamicPlaceholders|
 
 
 $varyByRoute				*yii/filters/PageCache::$varyByRoute*
@@ -143,8 +144,8 @@ Inherited methods:
  |yii/base/BaseObject::canSetProperty|
  |yii/base/BaseObject::hasMethod|
  |yii/base/Behavior::events|
- |yii/base/ActionFilter::attach|
- |yii/base/ActionFilter::detach|
+ |yii/base/Behavior::attach|
+ |yii/base/Behavior::detach|
  |yii/base/ActionFilter::beforeFilter|
  |yii/base/ActionFilter::afterFilter|
  |yii/base/ActionFilter::afterAction|
@@ -162,7 +163,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/filters/PageCache::beforeAction*			public
@@ -184,7 +192,6 @@ return (bool) Whether the action should continue to be executed.
 <
 return (void)
 
- {@inheritdoc}
 
 
 *yii/filters/PageCache::beforeCacheResponse*		public

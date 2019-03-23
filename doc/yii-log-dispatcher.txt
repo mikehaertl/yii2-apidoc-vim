@@ -46,12 +46,31 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $targets				*yii/log/Dispatcher::$targets*
 
  (array|\yii\log\Target[]) The log targets. Each array element represents a
  single 'Target|log target' instance or the configuration for creating the log
  target instance.
+
+$logger					*yii/log/Dispatcher::$logger*
+
+ (\yii\log\Logger) The logger.
+
+$traceLevel				*yii/log/Dispatcher::$traceLevel*
+
+ (int) How many application call stacks should be logged together with each
+ message. This method returns the value of 'Logger::traceLevel'. Defaults to
+ 0.
+
+$flushInterval				*yii/log/Dispatcher::$flushInterval*
+
+ (int) How many messages should be logged before they are sent to targets.
+ This method returns the value of 'Logger::flushInterval'.
 
 
 
@@ -91,9 +110,27 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Constructor.
 
-    [$config] () 
+
+
+ The default implementation does two things:
+
+
+   - Initializes the object with the given configuration '$config'. 
+   - Call 'init()'.
+
+ If this method is overridden in a child class, it is recommended that
+
+
+   - the last parameter of the constructor is a configuration array,
+   like '$config' here. 
+   - call the parent implementation at the end of the constructor.
+
+
+
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
 
 
 *yii/log/Dispatcher::init*				public
@@ -102,7 +139,14 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/log/Dispatcher::getLogger*				public

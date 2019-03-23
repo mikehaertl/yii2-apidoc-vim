@@ -5,11 +5,11 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/rest/Controller|
-|yii/rest/ActiveController|
 |yii/debug/controllers/DefaultController|
 |yii/debug/controllers/UserController|
 |yii/gii/controllers/DefaultController|
+|yii/rest/Controller|
+|yii/rest/ActiveController|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -28,6 +28,12 @@ Inherited properties:
  |yii/base/Controller::$defaultAction|
  |yii/base/Controller::$layout|
  |yii/base/Controller::$action|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/Controller::$viewPath|
 
 
 $enableCsrfValidation			*yii/web/Controller::$enableCsrfValidation*
@@ -50,15 +56,15 @@ Inherited methods:
  |yii/base/BaseObject::className|
  |yii/base/Controller::__construct|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -112,11 +118,40 @@ return (array) The valid parameters that the action can run with.
 >
  beforeAction($action)
 <
-return (void)
+return (bool) Whether the action should continue to run.
 
- {@inheritdoc}
+ This method is invoked right before an action is executed.
 
-    [$action] () 
+
+
+ The method will trigger the 'EVENT_BEFORE_ACTION' event. The return value of
+ the method will determine whether the action should continue to run.
+
+ In case the action should not run, the request should be handled inside of
+ the 'beforeAction' code by either providing the necessary output or
+ redirecting the request. Otherwise the response will be empty.
+
+ If you override this method, your code should look like the following:
+
+   public function beforeAction($action)
+   {
+       // your custom code here, if you want the code to run before action
+ filters,
+       // which are triggered on the [[EVENT_BEFORE_ACTION]] event, e.g.
+ PageCache or AccessControl
+
+       if (!parent::beforeAction($action)) {
+           return false;
+       }
+
+       // other custom code here
+
+       return true; // or false to not run the action
+   }
+
+
+
+    [$action] (\yii\base\Action) The action to be executed.
 
 
 *yii/web/Controller::renderAjax*				public

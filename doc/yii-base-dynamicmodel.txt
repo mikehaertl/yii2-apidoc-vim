@@ -51,11 +51,9 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -135,11 +133,24 @@ return (void)
 >
  __get($name)
 <
-return (void)
+return (mixed) The property value or the value of a behavior's property
 
- {@inheritdoc}
+ Returns the value of a component property.
 
-    [$name] () 
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a getter: return the getter result  
+   - a property of a behavior: return the behavior property value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$value = $component->property;'.
+
+
+
+    [$name] (string) The property name
 
 
 *yii/base/DynamicModel::__set*				public
@@ -148,21 +159,52 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Sets the value of a component property.
 
-    [$name] () 
-    [$value] () 
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a setter: set the property value  
+   - an event in the format of "on xyz": attach the handler to the
+   event "xyz"  
+   - a behavior in the format of "as xyz": attach the behavior named as
+   "xyz"  
+   - a property of a behavior: set the behavior property value
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing '$component->property = $value;'.
+
+
+
+    [$name] (string) The property name or the event name
+    [$value] (mixed) The property value
 
 
 *yii/base/DynamicModel::__isset*				public
 >
  __isset($name)
 <
-return (void)
+return (bool) Whether the named property is set
 
- {@inheritdoc}
+ Checks if a property is set, i.e. defined and not null.
 
-    [$name] () 
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a setter: return whether the property is set  
+   - a property of a behavior: return whether the property is set  
+   - return 'false' for non existing properties
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'isset($component->property)'.
+
+
+
+    [$name] (string) The property name or the event name
 
 
 *yii/base/DynamicModel::__unset*				public
@@ -171,18 +213,106 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Sets a component property to be null.
 
-    [$name] () 
+
+
+ This method will check in the following order and act accordingly:
+
+  
+   - a property defined by a setter: set the property value to be null  
+   - a property of a behavior: set the property value to be null
+
+ Do not call this method directly as it is a PHP magic method that will be
+ implicitly called when executing 'unset($component->property)'.
+
+
+
+    [$name] (string) The property name
+
+
+*yii/base/DynamicModel::canGetProperty*			public
+>
+ canGetProperty($name, $checkVars='true', $checkBehaviors='true')
+<
+return (bool) Whether the property can be read
+
+ Returns a value indicating whether a property can be read.
+
+
+
+ A property can be read if:
+
+
+   - the class has a getter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a readable property of the given name
+   (when '$checkBehaviors' is true).
+
+
+
+    [$name] (string) The property name
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
+    properties of this component
+
+
+*yii/base/DynamicModel::canSetProperty*			public
+>
+ canSetProperty($name, $checkVars='true', $checkBehaviors='true')
+<
+return (bool) Whether the property can be written
+
+ Returns a value indicating whether a property can be set.
+
+
+
+ A property can be written if:
+
+
+   - the class has a setter method associated with the specified name   (in
+ this case, property name is case-insensitive); 
+   - the class has a member variable with the specified name (when
+   '$checkVars' is true); 
+   - an attached behavior has a writable property of the given name
+   (when '$checkBehaviors' is true).
+
+
+
+    [$name] (string) The property name
+    [$checkVars] (bool) Whether to treat member variables as properties
+    [$checkBehaviors] (bool) Whether to treat behaviors' properties as
+    properties of this component
 
 
 *yii/base/DynamicModel::attributes*			public
 >
  attributes()
 <
-return (void)
+return (array) List of attribute names.
 
- {@inheritdoc}
+ Returns the list of attribute names.
+
+
+
+ By default, this method returns all public non-static properties of the
+ class. You may override this method to change the default behavior.
+
+
+
+
+*yii/base/DynamicModel::hasAttribute*			public
+>
+ hasAttribute($name)
+<
+return (bool) Whether the model has an attribute with the specified name.
+
+ Returns a value indicating whether the model has an attribute with the
+ specified name.
+
+    [$name] (string) The name of the attribute
 
 
 *yii/base/DynamicModel::defineAttribute*			public

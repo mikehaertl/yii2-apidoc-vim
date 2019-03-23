@@ -5,12 +5,12 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/data/ArrayDataProvider|
-|yii/data/SqlDataProvider|
-|yii/data/ActiveDataProvider|
 |yii/debug/models/timeline/DataProvider|
 |yii/elasticsearch/ActiveDataProvider|
 |yii/sphinx/ActiveDataProvider|
+|yii/data/ActiveDataProvider|
+|yii/data/SqlDataProvider|
+|yii/data/ArrayDataProvider|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -22,6 +22,10 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $id					*yii/data/BaseDataProvider::$id*
 
@@ -32,6 +36,33 @@ $id					*yii/data/BaseDataProvider::$id*
    - First data provider ID is empty. 
    - Second and all subsequent data provider IDs are: "dp-1", "dp-2",
    etc.
+
+$models					*yii/data/BaseDataProvider::$models*
+
+ (array) The list of data models in the current page.
+
+$keys					*yii/data/BaseDataProvider::$keys*
+
+ (array) The list of key values corresponding to 'models'. Each data model in
+ 'models' is uniquely identified by the corresponding key value in this array.
+
+$count					*yii/data/BaseDataProvider::$count*
+
+ (int) The number of data models in the current page.
+
+$totalCount				*yii/data/BaseDataProvider::$totalCount*
+
+ (int) Total number of possible data models.
+
+$pagination				*yii/data/BaseDataProvider::$pagination*
+
+ (\yii\data\Pagination|false) The pagination object. If this is false, it
+ means the pagination is disabled.
+
+$sort					*yii/data/BaseDataProvider::$sort*
+
+ (\yii\data\Sort|bool) The sorting object. If this is false, it means the
+ sorting is disabled.
 
 
 
@@ -72,7 +103,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/data/BaseDataProvider::prepareModels*		protected

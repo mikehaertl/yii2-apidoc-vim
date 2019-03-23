@@ -5,6 +5,10 @@
 DESCRIPTION
 ------------------------------------------------------------------------------
 
+ Note: This behavior relies on php-intl extension for transliteration. If it
+ is not installed it falls back to replacements defined in
+ '\yii\helpers\Inflector::$transliteration'.
+
  To use SluggableBehavior, insert the following code to your ActiveRecord
  class:
 
@@ -151,18 +155,33 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/behaviors/SluggableBehavior::getValue*		protected
 >
  getValue($event)
 <
-return (void)
+return (mixed) The attribute value
 
- {@inheritdoc}
+ Returns the value for the current attributes.
 
-    [$event] () 
+
+
+ This method is called by 'evaluateAttributes()'. Its return value will be
+ assigned to the attributes corresponding to the triggering event.
+
+
+
+    [$event] (\yii\base\Event) The event that triggers the current attribute
+    updating.
 
 
 *yii/behaviors/SluggableBehavior::isNewSlugNeeded*	protected

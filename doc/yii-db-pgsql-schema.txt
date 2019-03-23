@@ -11,6 +11,20 @@ Inherited properties:
  |yii/db/Schema::$db|
  |yii/db/Schema::$exceptionMap|
  |yii/db/Schema::$columnQuoteCharacter|
+ |yii/db/Schema::$tableSchemas|
+ |yii/db/Schema::$schemaNames|
+ |yii/db/Schema::$tableNames|
+ |yii/db/Schema::$queryBuilder|
+ |yii/db/Schema::$lastInsertID|
+ |yii/db/Schema::$transactionIsolationLevel|
+ |yii/db/Schema::$serverVersion|
+ |yii/db/ConstraintFinderTrait::$schemaPrimaryKeys|
+ |yii/db/ConstraintFinderTrait::$schemaForeignKeys|
+ |yii/db/ConstraintFinderTrait::$schemaIndexes|
+ |yii/db/ConstraintFinderTrait::$schemaUniques|
+ |yii/db/ConstraintFinderTrait::$schemaChecks|
+ |yii/db/ConstraintFinderTrait::$schemaDefaultValues|
+ |yii/db/ViewFinderTrait::$viewNames|
 
 
 $defaultSchema				*yii/db/pgsql/Schema::$defaultSchema*
@@ -19,11 +33,20 @@ $defaultSchema				*yii/db/pgsql/Schema::$defaultSchema*
 
 $columnSchemaClass			*yii/db/pgsql/Schema::$columnSchemaClass*
 
- ()
+ (string|array) 
+
+ Column schema class or class config
+
+
 
 $tableQuoteCharacter			*yii/db/pgsql/Schema::$tableQuoteCharacter*
 
- ()
+ (string|string[]) 
+
+ Character used to quote schema, table, etc. names. An array of 2 characters
+ can be used in case starting and ending characters are different.
+
+
 
 $typeMap				*yii/db/pgsql/Schema::$typeMap*
 
@@ -102,42 +125,71 @@ Inherited methods:
 >
  resolveTableName($name)
 <
-return (void)
+return (\yii\db\TableSchema) 'TableSchema' with resolved table, schema, etc. names.
 
- {@inheritdoc}
+ Resolves the table name and schema name (if any).
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The table name
 
 
 *yii/db/pgsql/Schema::findSchemaNames*			protected
 >
  findSchemaNames()
 <
-return (void)
+return (array) All schema names in the database, except system schemas.
 
- {@inheritdoc}
+ Returns all schema names in the database, including the default one but not
+ system schemas.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
 
 
 *yii/db/pgsql/Schema::findTableNames*			protected
 >
- findTableNames($schema='\'\'')
+ findTableNames($schema='''')
 <
-return (void)
+return (array) All table names in the database. The names have NO schema name prefix.
 
- {@inheritdoc}
+ Returns all table names in the database.
 
-    [$schema] () 
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
 
 
 *yii/db/pgsql/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (void)
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
 
- {@inheritdoc}
+ Loads the metadata for the specified table.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/pgsql/Schema::createQueryBuilder*			public
@@ -173,12 +225,19 @@ return (array) All unique indexes for the given table.
 >
  insert($table, $columns)
 <
-return (void)
+return (array|false) Primary key values or false if the command fails
 
- {@inheritdoc}
+ Executes the INSERT command, returning primary key values.
 
-    [$table] () 
-    [$columns] () 
+
+
+
+
+
+
+    [$table] (string) The table that new rows will be inserted into.
+    [$columns] (array) The column data (name => value) to be inserted into the
+    table.
 
 
 *yii/db/pgsql/Schema::loadTablePrimaryKey*		protected
@@ -186,8 +245,6 @@ return (void)
  loadTablePrimaryKey($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -198,8 +255,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -208,8 +263,6 @@ return (void)
  loadTableIndexes($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -220,8 +273,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -231,8 +282,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -241,8 +290,6 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 

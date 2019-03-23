@@ -26,7 +26,7 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
+ |yii/caching/Cache::init|
  |yii/base/Component::__get|
  |yii/base/Component::__set|
  |yii/base/Component::__isset|
@@ -75,68 +75,123 @@ Inherited methods:
 >
  exists($key)
 <
-return (void)
+return (bool) True if a value exists in cache, false if the value is not in the cache
+or expired.
 
- {@inheritdoc}
+ Checks whether a specified key exists in the cache.
 
-    [$key] () 
+
+
+ This can be faster than getting the value from the cache if the data is big.
+ In case a cache does not support this feature natively, this method will try
+ to simulate it but has no performance improvement over getting it. Note that
+ this method does not check whether the dependency associated with the cached
+ data, if there is any, has changed. So a call to 'get' may return false while
+ exists returns true.
+
+
+
+    [$key] (mixed) A key identifying the cached value. This can be a simple
+    string or a complex data structure consisting of factors representing the
+    key.
 
 
 *yii/caching/ArrayCache::getValue*			protected
 >
  getValue($key)
 <
-return (void)
+return (mixed|false) The value stored in cache, false if the value is not in the
+cache or expired. Most often value is a string. If you have disabled
+'serializer', it could be something else.
 
- {@inheritdoc}
+ Retrieves a value from cache with a specified key.
 
-    [$key] () 
+
+
+ This method should be implemented by child classes to retrieve the data from
+ specific cache storage.
+
+
+
+    [$key] (string) A unique key identifying the cached value
 
 
 *yii/caching/ArrayCache::setValue*			protected
 >
  setValue($key, $value, $duration)
 <
-return (void)
+return (bool) True if the value is successfully stored into cache, false otherwise
 
- {@inheritdoc}
+ Stores a value identified by a key in cache.
 
-    [$key] () 
-    [$value] () 
-    [$duration] () 
+
+
+ This method should be implemented by child classes to store the data in
+ specific cache storage.
+
+
+
+    [$key] (string) The key identifying the value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
+    [$duration] (int) The number of seconds in which the cached value will
+    expire. 0 means never expire.
 
 
 *yii/caching/ArrayCache::addValue*			protected
 >
  addValue($key, $value, $duration)
 <
-return (void)
+return (bool) True if the value is successfully stored into cache, false otherwise
 
- {@inheritdoc}
+ Stores a value identified by a key into cache if the cache does not contain
+ this key.
 
-    [$key] () 
-    [$value] () 
-    [$duration] () 
+
+
+ This method should be implemented by child classes to store the data in
+ specific cache storage.
+
+
+
+    [$key] (string) The key identifying the value to be cached
+    [$value] (mixed) The value to be cached. Most often it's a string. If you
+    have disabled 'serializer', it could be something else.
+    [$duration] (int) The number of seconds in which the cached value will
+    expire. 0 means never expire.
 
 
 *yii/caching/ArrayCache::deleteValue*			protected
 >
  deleteValue($key)
 <
-return (void)
+return (bool) If no error happens during deletion
 
- {@inheritdoc}
+ Deletes a value with the specified key from cache This method should be
+ implemented by child classes to delete the data from actual cache storage.
 
-    [$key] () 
+
+
+
+
+
+
+    [$key] (string) The key of the value to be deleted
 
 
 *yii/caching/ArrayCache::flushValues*			protected
 >
  flushValues()
 <
-return (void)
+return (bool) Whether the flush operation was successful.
 
- {@inheritdoc}
+ Deletes all values from cache.
+
+
+
+ Child classes may implement this method to realize the flush operation.
+
+
 
 
 

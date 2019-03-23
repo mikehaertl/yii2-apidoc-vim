@@ -11,6 +11,20 @@ Inherited properties:
  |yii/db/Schema::$db|
  |yii/db/Schema::$exceptionMap|
  |yii/db/Schema::$columnSchemaClass|
+ |yii/db/Schema::$tableSchemas|
+ |yii/db/Schema::$schemaNames|
+ |yii/db/Schema::$tableNames|
+ |yii/db/Schema::$queryBuilder|
+ |yii/db/Schema::$lastInsertID|
+ |yii/db/Schema::$transactionIsolationLevel|
+ |yii/db/Schema::$serverVersion|
+ |yii/db/ConstraintFinderTrait::$schemaPrimaryKeys|
+ |yii/db/ConstraintFinderTrait::$schemaForeignKeys|
+ |yii/db/ConstraintFinderTrait::$schemaIndexes|
+ |yii/db/ConstraintFinderTrait::$schemaUniques|
+ |yii/db/ConstraintFinderTrait::$schemaChecks|
+ |yii/db/ConstraintFinderTrait::$schemaDefaultValues|
+ |yii/db/ViewFinderTrait::$viewNames|
 
 
 $defaultSchema				*yii/db/mssql/Schema::$defaultSchema*
@@ -19,11 +33,21 @@ $defaultSchema				*yii/db/mssql/Schema::$defaultSchema*
 
 $tableQuoteCharacter			*yii/db/mssql/Schema::$tableQuoteCharacter*
 
- ()
+ (string|string[]) 
+
+ Character used to quote schema, table, etc. names. An array of 2 characters
+ can be used in case starting and ending characters are different.
+
+
 
 $columnQuoteCharacter			*yii/db/mssql/Schema::$columnQuoteCharacter*
 
- ()
+ (string|string[]) 
+
+ Character used to quote column names. An array of 2 characters can be used in
+ case starting and ending characters are different.
+
+
 
 $typeMap				*yii/db/mssql/Schema::$typeMap*
 
@@ -111,31 +135,54 @@ return (\yii\db\mssql\TableSchema) Resolved table, schema, etc. names.
 >
  findSchemaNames()
 <
-return (void)
+return (array) All schema names in the database, except system schemas.
 
- {@inheritdoc}
+ Returns all schema names in the database, including the default one but not
+ system schemas.
+
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
 
 
 *yii/db/mssql/Schema::findTableNames*			protected
 >
- findTableNames($schema='\'\'')
+ findTableNames($schema='''')
 <
-return (void)
+return (array) All table names in the database. The names have NO schema name prefix.
 
- {@inheritdoc}
+ Returns all table names in the database.
 
-    [$schema] () 
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
 
 
 *yii/db/mssql/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (void)
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
 
- {@inheritdoc}
+ Loads the metadata for the specified table.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/mssql/Schema::createQueryBuilder*			public
@@ -173,9 +220,15 @@ return (array) All unique indexes for the given table.
 <
 return (void)
 
- {@inheritdoc}
+ Creates a new savepoint.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The savepoint name
 
 
 *yii/db/mssql/Schema::releaseSavepoint*			public
@@ -184,9 +237,15 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Releases an existing savepoint.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The savepoint name
 
 
 *yii/db/mssql/Schema::rollBackSavepoint*			public
@@ -195,9 +254,15 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Rolls back to a previously created savepoint.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The savepoint name
 
 
 *yii/db/mssql/Schema::loadTablePrimaryKey*		protected
@@ -205,8 +270,6 @@ return (void)
  loadTablePrimaryKey($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -217,8 +280,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -227,8 +288,6 @@ return (void)
  loadTableIndexes($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -239,8 +298,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -249,8 +306,6 @@ return (void)
  loadTableChecks($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -261,8 +316,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -271,8 +324,6 @@ return (void)
  findViewNames($schema='\'\'')
 <
 return (void)
-
- {@inheritdoc}
 
     [$schema] () 
 

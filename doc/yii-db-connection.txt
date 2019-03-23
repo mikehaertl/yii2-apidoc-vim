@@ -12,7 +12,8 @@ DESCRIPTION
 
  Connection works together with 'Command', 'DataReader' and 'Transaction' to
  provide data access to various DBMS in a common set of APIs. They are a thin
- wrapper of the [PDO PHP extension](http://php.net/manual/en/book.pdo.php).
+ wrapper of the [PDO PHP
+ extension](https://secure.php.net/manual/en/book.pdo.php).
 
  Connection supports database replication and read-write splitting. In
  particular, a Connection component can be configured with multiple 'masters'
@@ -99,17 +100,21 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $dsn					*yii/db/Connection::$dsn*
 
  (string) The Data Source Name, or DSN, contains the information required to
  connect to the database. Please refer to the [PHP
- manual](http://php.net/manual/en/pdo.construct.php) on the format of the DSN
- string.
+ manual](https://secure.php.net/manual/en/pdo.construct.php) on the format of
+ the DSN string.
 
- For [SQLite](http://php.net/manual/en/ref.pdo-sqlite.connection.php) you may
- use a [path alias](guide:concept-aliases) for specifying the database path,
- e.g. 'sqlite:@app/data/db.sql'.
+ For [SQLite](https://secure.php.net/manual/en/ref.pdo-sqlite.connection.php)
+ you may use a [path alias](guide:concept-aliases) for specifying the database
+ path, e.g. 'sqlite:@app/data/db.sql'.
 
 $username				*yii/db/Connection::$username*
 
@@ -125,8 +130,8 @@ $attributes				*yii/db/Connection::$attributes*
 
  (array) PDO attributes (name => value) that should be set when calling
  'open()' to establish a DB connection. Please refer to the [PHP
- manual](http://php.net/manual/en/pdo.setattribute.php) for details about
- available attributes.
+ manual](https://secure.php.net/manual/en/pdo.setattribute.php) for details
+ about available attributes.
 
 $pdo					*yii/db/Connection::$pdo*
 
@@ -327,6 +332,57 @@ $enableProfiling			*yii/db/Connection::$enableProfiling*
  database queries. Defaults to true. You may want to disable this option in a
  production environment to gain performance if you do not need the information
  being logged.
+
+$isActive				*yii/db/Connection::$isActive*
+
+ (bool) Whether the DB connection is established
+
+$transaction				*yii/db/Connection::$transaction*
+
+ (\yii\db\Transaction|null) The currently active transaction. Null if no
+ active transaction.
+
+$schema					*yii/db/Connection::$schema*
+
+ (\yii\db\Schema) The schema information for the database opened by this
+ connection.
+
+$queryBuilder				*yii/db/Connection::$queryBuilder*
+
+ (\yii\db\QueryBuilder) The query builder for the current DB connection.
+
+$lastInsertID				*yii/db/Connection::$lastInsertID*
+
+ (string) The row ID of the last row inserted, or the last value retrieved
+ from the sequence object
+
+$driverName				*yii/db/Connection::$driverName*
+
+ (string) Name of the DB driver
+
+$serverVersion				*yii/db/Connection::$serverVersion*
+
+ (string) Server version as a string.
+
+$slavePdo				*yii/db/Connection::$slavePdo*
+
+ (\PDO) The PDO instance for the currently active slave connection. 'null' is
+ returned if no slave connection is available and '$fallbackToMaster' is
+ false.
+
+$masterPdo				*yii/db/Connection::$masterPdo*
+
+ (\PDO) The PDO instance for the currently active master connection.
+
+$slave					*yii/db/Connection::$slave*
+
+ (\yii\db\Connection) The currently active slave connection. 'null' is
+ returned if there is no slave available and '$fallbackToMaster' is false.
+
+$master					*yii/db/Connection::$master*
+
+ (\yii\db\Connection) The currently active master connection. 'null' is
+ returned if there is no master available.
 
 
 

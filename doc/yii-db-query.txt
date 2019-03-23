@@ -5,9 +5,9 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/db/ActiveQuery|
 |yii/sphinx/ActiveQuery|
 |yii/sphinx/Query|
+|yii/db/ActiveQuery|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -49,6 +49,7 @@ Inherited properties:
  |yii/db/QueryTrait::$orderBy|
  |yii/db/QueryTrait::$indexBy|
  |yii/db/QueryTrait::$emulateExecution|
+ |yii/base/Component::$behaviors|
 
 
 $select					*yii/db/Query::$select*
@@ -125,6 +126,10 @@ $queryCacheDependency			*yii/db/Query::$queryCacheDependency*
 
  (\yii\caching\Dependency) The dependency to be associated with the cached
  query result for this query
+
+$tablesUsedInFrom			*yii/db/Query::$tablesUsedInFrom*
+
+ (string[]) Table names indexed by aliases
 
 
 
@@ -825,11 +830,11 @@ return ($this) The query object itself
 
  Adds additional group-by columns to the existing ones.
 
-    [$columns] (string|array) Additional columns to be grouped by. Columns can
-    be specified in either a string (e.g. "id, name") or an array (e.g. ['id',
-    'name']). The method will automatically quote the column names unless a
-    column contains some parenthesis (which means the column contains a DB
-    expression).
+    [$columns] (string|array|\yii\db\ExpressionInterface) Additional columns
+    to be grouped by. Columns can be specified in either a string (e.g. "id,
+    name") or an array (e.g. ['id', 'name']). The method will automatically
+    quote the column names unless a column contains some parenthesis (which
+    means the column contains a DB expression).
 
     Note that if your group-by is an expression containing commas, you should
     always use an array to represent the group-by information. Otherwise, the

@@ -19,6 +19,10 @@ DESCRIPTION
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
 
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
+
 
 $context				*yii/base/View::$context*
 
@@ -73,6 +77,16 @@ $dynamicPlaceholders			*yii/base/View::$dynamicPlaceholders*
  is used internally to implement the content caching feature. Do not modify it
  directly.
 
+$viewFile				*yii/base/View::$viewFile*
+
+ (string|bool) The view file currently being rendered. False if no view file
+ is being rendered.
+
+$dynamicContents			*yii/base/View::$dynamicContents*
+
+ (\yii\base\DynamicContentAwareInterface[]) Class instances supporting dynamic
+ contents.
+
 
 
 METHOD DETAILS
@@ -82,15 +96,15 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -202,6 +216,15 @@ being rendered.
 
 
 
+*yii/base/View::getRequestedViewFile*			protected
+>
+ getRequestedViewFile()
+<
+return (string|bool) The requested view currently being rendered. False if no view
+file is being rendered.
+
+
+
 *yii/base/View::beforeRender*				public
 >
  beforeRender($viewFile, $params)
@@ -276,9 +299,16 @@ there is no active content cache currently.
 >
  getDynamicPlaceholders()
 <
-return (void)
+return (array) A list of placeholders.
 
- {@inheritdoc}
+ Returns a list of placeholders for dynamic content. This method is used
+ internally to implement the content caching feature.
+
+
+
+
+
+
 
 
 *yii/base/View::setDynamicPlaceholders*			public
@@ -287,9 +317,16 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Sets a list of placeholders for dynamic content. This method is used
+ internally to implement the content caching feature.
 
-    [$placeholders] () 
+
+
+
+
+
+
+    [$placeholders] (array) A list of placeholders.
 
 
 *yii/base/View::addDynamicPlaceholder*			public
@@ -298,10 +335,17 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Adds a placeholder for dynamic content.
+
+
+
+ This method is used internally to implement the content caching feature.
+
+
 
     [$placeholder] () 
-    [$statements] () 
+    [$statements] (string) The PHP statements for generating the dynamic
+    content.
 
 
 *yii/base/View::evaluateDynamicContent*			public

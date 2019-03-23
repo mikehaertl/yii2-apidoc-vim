@@ -5,8 +5,8 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/web/DbSession|
 |yii/mongodb/Session|
+|yii/web/DbSession|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -35,6 +35,22 @@ Inherited properties:
 
  |yii/web/Session::$flashParam|
  |yii/web/Session::$handler|
+ |yii/base/Component::$behaviors|
+ |yii/web/Session::$isActive|
+ |yii/web/Session::$hasSessionId|
+ |yii/web/Session::$id|
+ |yii/web/Session::$name|
+ |yii/web/Session::$savePath|
+ |yii/web/Session::$cookieParams|
+ |yii/web/Session::$useCookies|
+ |yii/web/Session::$gCProbability|
+ |yii/web/Session::$useTransparentSessionID|
+ |yii/web/Session::$timeout|
+ |yii/web/Session::$iterator|
+ |yii/web/Session::$count|
+ |yii/web/Session::$allFlashes|
+ |yii/web/Session::$flash|
+ |yii/web/Session::$cacheLimiter|
 
 
 $readCallback				*yii/web/MultiFieldSession::$readCallback*
@@ -81,6 +97,10 @@ $writeCallback				*yii/web/MultiFieldSession::$writeCallback*
 
 
 
+$useCustomStorage			*yii/web/MultiFieldSession::$useCustomStorage*
+
+ (bool) Whether to use custom storage.
+
 
 
 METHOD DETAILS
@@ -90,7 +110,7 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::init|
+ |yii/web/Session::init|
  |yii/base/Component::__get|
  |yii/base/Component::__set|
  |yii/base/Component::__isset|
@@ -182,14 +202,14 @@ return (bool) Whether to use custom storage.
 
 *yii/web/MultiFieldSession::composeFields*		protected
 >
- composeFields($id, $data)
+ composeFields($id='null', $data='null')
 <
 return (array) Storage fields
 
  Composes storage field set for session writing.
 
-    [$id] (string) Session id
-    [$data] (string) Session data
+    [$id] (string) Optional session id
+    [$data] (string) Optional session data
 
 
 *yii/web/MultiFieldSession::extractData*			protected

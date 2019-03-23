@@ -25,6 +25,15 @@ Inherited properties:
  |yii/base/Module::$module|
  |yii/base/Module::$controllerMap|
  |yii/base/Module::$defaultRoute|
+ |yii/base/Component::$behaviors|
+ |yii/di/ServiceLocator::$components|
+ |yii/base/Module::$basePath|
+ |yii/base/Module::$controllerPath|
+ |yii/base/Module::$viewPath|
+ |yii/base/Module::$layoutPath|
+ |yii/base/Module::$version|
+ |yii/base/Module::$aliases|
+ |yii/base/Module::$modules|
 
 
 $layout					*yii/base/Application::$layout*
@@ -129,6 +138,88 @@ $loadedModules				*yii/base/Application::$loadedModules*
 
  (array) List of loaded modules indexed by their class names.
 
+$uniqueId				*yii/base/Application::$uniqueId*
+
+ (string) The unique ID of the module.
+
+$runtimePath				*yii/base/Application::$runtimePath*
+
+ (string) The directory that stores runtime files. Defaults to the "runtime"
+ subdirectory under 'basePath'.
+
+$vendorPath				*yii/base/Application::$vendorPath*
+
+ (string) The directory that stores vendor files. Defaults to "vendor"
+ directory under 'basePath'.
+
+$timeZone				*yii/base/Application::$timeZone*
+
+ (string) The time zone used by this application.
+
+$db					*yii/base/Application::$db*
+
+ (\yii\db\Connection) The database connection.
+
+$log					*yii/base/Application::$log*
+
+ (\yii\log\Dispatcher) The log dispatcher application component.
+
+$errorHandler				*yii/base/Application::$errorHandler*
+
+ (\yii\web\ErrorHandler|\yii\console\ErrorHandler) The error handler
+ application component.
+
+$cache					*yii/base/Application::$cache*
+
+ (\yii\caching\CacheInterface) The cache application component. Null if the
+ component is not enabled.
+
+$formatter				*yii/base/Application::$formatter*
+
+ (\yii\i18n\Formatter) The formatter application component.
+
+$request				*yii/base/Application::$request*
+
+ (\yii\web\Request|\yii\console\Request) The request component.
+
+$response				*yii/base/Application::$response*
+
+ (\yii\web\Response|\yii\console\Response) The response component.
+
+$view					*yii/base/Application::$view*
+
+ (\yii\base\View|\yii\web\View) The view application component that is used to
+ render various view files.
+
+$urlManager				*yii/base/Application::$urlManager*
+
+ (\yii\web\UrlManager) The URL manager for this application.
+
+$i18n					*yii/base/Application::$i18n*
+
+ (\yii\i18n\I18N) The internationalization application component.
+
+$mailer					*yii/base/Application::$mailer*
+
+ (\yii\mail\MailerInterface) The mailer application component.
+
+$authManager				*yii/base/Application::$authManager*
+
+ (\yii\rbac\ManagerInterface) The auth manager application component. Null is
+ returned if auth manager is not configured.
+
+$assetManager				*yii/base/Application::$assetManager*
+
+ (\yii\web\AssetManager) The asset manager application component.
+
+$security				*yii/base/Application::$security*
+
+ (\yii\base\Security) The security application component.
+
+$container				*yii/base/Application::$container*
+
+ (array) Values given in terms of name-value pairs
+
 
 
 METHOD DETAILS
@@ -137,15 +228,15 @@ METHOD DETAILS
 Inherited methods:
 
  |yii/base/BaseObject::className|
- |yii/di/ServiceLocator::__get|
- |yii/base/BaseObject::__set|
- |yii/di/ServiceLocator::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -159,8 +250,8 @@ Inherited methods:
  |yii/base/Component::detachBehavior|
  |yii/base/Component::detachBehaviors|
  |yii/base/Component::ensureBehaviors|
- |yii/di/ServiceLocator::has|
- |yii/di/ServiceLocator::get|
+ |yii/base/Module::has|
+ |yii/base/Module::get|
  |yii/di/ServiceLocator::set|
  |yii/di/ServiceLocator::clear|
  |yii/di/ServiceLocator::getComponents|
@@ -208,7 +299,18 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the module.
+
+
+
+ This method is called after the module is created and initialized with
+ property values given in configuration. The default implementation will
+ initialize 'controllerNamespace' if it is not set.
+
+ If you override this method, please make sure you call the parent
+ implementation.
+
+
 
 
 *yii/base/Application::getUniqueId*			public
@@ -364,8 +466,8 @@ return (void)
  Sets the time zone used by this application.
 
  This is a simple wrapper of PHP function date_default_timezone_set(). Refer
- to the [php manual](http://www.php.net/manual/en/timezones.php) for available
- timezones.
+ to the [php manual](https://secure.php.net/manual/en/timezones.php) for
+ available timezones.
 
     [$value] (string) The time zone used by this application.
 

@@ -82,6 +82,7 @@ Inherited methods:
  |yii/db/Command::addDefaultValue|
  |yii/db/Command::dropDefaultValue|
  |yii/db/Command::resetSequence|
+ |yii/db/Command::executeResetSequence|
  |yii/db/Command::checkIntegrity|
  |yii/db/Command::addCommentOnColumn|
  |yii/db/Command::addCommentOnTable|
@@ -89,6 +90,8 @@ Inherited methods:
  |yii/db/Command::dropCommentFromTable|
  |yii/db/Command::createView|
  |yii/db/Command::dropView|
+ |yii/db/Command::logQuery|
+ |yii/db/Command::getCacheKey|
  |yii/db/Command::requireTableSchemaRefresh|
  |yii/db/Command::refreshTableSchema|
  |yii/db/Command::requireTransaction|
@@ -101,21 +104,37 @@ Inherited methods:
 >
  execute()
 <
-return (void)
+return (int) Number of rows affected by the execution.
 
- {@inheritdoc}
+ Executes the SQL statement.
+
+
+
+ This method should only be used for executing non-query SQL statement, such
+ as 'INSERT', 'DELETE', 'UPDATE' SQLs. No result set will be returned.
+
+
 
 
 *yii/db/sqlite/Command::queryInternal*			protected
 >
- queryInternal($method, $fetchMode='null')
+ queryInternal($method, $fetchMode=null)
 <
-return (void)
+return (mixed) The method execution result
 
- {@inheritdoc}
+ Performs the actual DB query of a SQL statement.
 
-    [$method] () 
-    [$fetchMode] () 
+
+
+
+
+
+
+    [$method] (string) Method of PDOStatement to be called
+    [$fetchMode] (int) The result fetch mode. Please refer to [PHP
+    manual](https://secure.php.net/manual/en/function.PDOStatement-setFetchMode.php)
+    for valid fetch modes. If this parameter is null, the value set in
+    'fetchMode' will be used.
 
 
 

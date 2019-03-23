@@ -5,28 +5,29 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/console/controllers/HelpController|
-|yii/console/controllers/FixtureController|
-|yii/console/controllers/AssetController|
-|yii/console/controllers/ServeController|
-|yii/console/controllers/MessageController|
-|yii/console/controllers/MigrateController|
-|yii/console/controllers/BaseMigrateController|
-|yii/console/controllers/CacheController|
 |yii/apidoc/commands/ApiController|
 |yii/apidoc/commands/GuideController|
 |yii/apidoc/components/BaseController|
 |yii/faker/FixtureController|
 |yii/gii/console/GenerateController|
 |yii/mongodb/console/controllers/MigrateController|
-|yii/queue/cli/Command|
-|yii/queue/file/Command|
-|yii/queue/db/Command|
-|yii/queue/amqp_interop/Command|
-|yii/queue/redis/Command|
-|yii/queue/amqp/Command|
 |yii/queue/gearman/Command|
+|yii/queue/db/Command|
+|yii/queue/redis/Command|
+|yii/queue/file/Command|
+|yii/queue/sqs/Command|
+|yii/queue/amqp_interop/Command|
+|yii/queue/amqp/Command|
 |yii/queue/beanstalk/Command|
+|yii/queue/cli/Command|
+|yii/console/controllers/ServeController|
+|yii/console/controllers/AssetController|
+|yii/console/controllers/MessageController|
+|yii/console/controllers/HelpController|
+|yii/console/controllers/CacheController|
+|yii/console/controllers/BaseMigrateController|
+|yii/console/controllers/FixtureController|
+|yii/console/controllers/MigrateController|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -52,6 +53,12 @@ Inherited properties:
  |yii/base/Controller::$defaultAction|
  |yii/base/Controller::$layout|
  |yii/base/Controller::$action|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/Controller::$viewPath|
 
 
 $interactive				*yii/console/Controller::$interactive*
@@ -67,6 +74,18 @@ $help					*yii/console/Controller::$help*
 
  (bool) Whether to display help information about current command.
 
+$passedOptions				*yii/console/Controller::$passedOptions*
+
+ (array) The names of the options passed during execution
+
+$passedOptionValues			*yii/console/Controller::$passedOptionValues*
+
+ (array) The properties corresponding to the passed options
+
+$helpSummary				*yii/console/Controller::$helpSummary*
+
+ (string)
+
 
 
 METHOD DETAILS
@@ -77,15 +96,15 @@ Inherited methods:
  |yii/base/BaseObject::className|
  |yii/base/Controller::__construct|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|

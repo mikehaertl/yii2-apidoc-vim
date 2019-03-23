@@ -5,12 +5,12 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/db/mysql/Schema|
-|yii/db/mssql/Schema|
-|yii/db/oci/Schema|
 |yii/db/sqlite/Schema|
+|yii/db/oci/Schema|
 |yii/db/pgsql/Schema|
+|yii/db/mssql/Schema|
 |yii/db/cubrid/Schema|
+|yii/db/mysql/Schema|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -49,6 +49,40 @@ $columnQuoteCharacter			*yii/db/Schema::$columnQuoteCharacter*
 
  (string|string[]) Character used to quote column names. An array of 2
  characters can be used in case starting and ending characters are different.
+
+$tableSchemas				*yii/db/Schema::$tableSchemas*
+
+ (\yii\db\TableSchema[]) The metadata for all tables in the database. Each
+ array element is an instance of 'TableSchema' or its child class.
+
+$schemaNames				*yii/db/Schema::$schemaNames*
+
+ (string[]) All schema names in the database, except system schemas.
+
+$tableNames				*yii/db/Schema::$tableNames*
+
+ (string[]) All table names in the database.
+
+$queryBuilder				*yii/db/Schema::$queryBuilder*
+
+ (\yii\db\QueryBuilder) The query builder for this connection.
+
+$lastInsertID				*yii/db/Schema::$lastInsertID*
+
+ (string) The row ID of the last row inserted, or the last value retrieved
+ from the sequence object
+
+$transactionIsolationLevel		*yii/db/Schema::$transactionIsolationLevel*
+
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
+
+$serverVersion				*yii/db/Schema::$serverVersion*
+
+ (string) Server version as a string.
 
 
 

@@ -57,8 +57,22 @@ Inherited properties:
 
 $value					*yii/behaviors/BlameableBehavior::$value*
 
- () In case, when the property is 'null', the value of 'Yii::$app->user->id'
- will be used as the value.
+ (mixed) In case, when the property is 'null', the value of
+ 'Yii::$app->user->id' will be used as the value.
+
+ The value that will be assigned to the current attributes. This can be an
+ anonymous function, callable in array format (e.g. '[$this, 'methodName']'),
+ an '\yii\db\Expression|Expression' object representing a DB expression (e.g.
+ 'new Expression('NOW()')'), scalar, string or an arbitrary value. If the
+ former, the return value of the function will be assigned to the attributes.
+ The signature of the function should be as follows,
+
+   function ($event)
+   {
+       // return value will be assigned to the attribute
+   }
+
+
 
 $createdByAttribute			*yii/behaviors/BlameableBehavior::$createdByAttribute*
 
@@ -92,7 +106,7 @@ Inherited methods:
  |yii/base/BaseObject::canGetProperty|
  |yii/base/BaseObject::canSetProperty|
  |yii/base/BaseObject::hasMethod|
- |yii/behaviors/AttributeBehavior::events|
+ |yii/base/Behavior::events|
  |yii/base/Behavior::attach|
  |yii/base/Behavior::detach|
  |yii/behaviors/AttributeBehavior::evaluateAttributes|
@@ -104,21 +118,34 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/behaviors/BlameableBehavior::getValue*		protected
 >
  getValue($event)
 <
-return (void)
+return (mixed) The attribute value
 
- {@inheritdoc}
+ Returns the value for the current attributes.
 
  In case, when the 'value' property is 'null', the value of 'defaultValue'
  will be used as the value.
 
-    [$event] () 
+ This method is called by 'evaluateAttributes()'. Its return value will be
+ assigned to the attributes corresponding to the triggering event.
+
+
+
+    [$event] (\yii\base\Event) The event that triggers the current attribute
+    updating.
 
 
 *yii/behaviors/BlameableBehavior::getDefaultValue*	protected

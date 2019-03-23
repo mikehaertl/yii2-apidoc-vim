@@ -25,12 +25,58 @@ $command				*yii/queue/cli/VerboseBehavior::$command*
 METHOD DETAILS
 ------------------------------------------------------------------------------
 
+Inherited methods:
+
+ |yii/base/BaseObject::className|
+ |yii/base/BaseObject::__construct|
+ |yii/base/BaseObject::init|
+ |yii/base/BaseObject::__get|
+ |yii/base/BaseObject::__set|
+ |yii/base/BaseObject::__isset|
+ |yii/base/BaseObject::__unset|
+ |yii/base/BaseObject::__call|
+ |yii/base/BaseObject::hasProperty|
+ |yii/base/BaseObject::canGetProperty|
+ |yii/base/BaseObject::canSetProperty|
+ |yii/base/BaseObject::hasMethod|
+ |yii/base/Behavior::attach|
+ |yii/base/Behavior::detach|
+
 
 *yii/queue/cli/VerboseBehavior::events*			public
 >
  events()
 <
-return (void)
+return (array) Events (array keys) and the corresponding event handler methods (array
+values).
+
+ Declares event handlers for the 'owner''s events.
+
+
+
+ Child classes may override this method to declare what PHP callbacks should
+ be attached to the events of the 'owner' component.
+
+ The callbacks will be attached to the 'owner''s events when the behavior is
+ attached to the owner; and they will be detached from the events when the
+ behavior is detached from the component.
+
+ The callbacks can be any of the following:
+
+
+   - method in this behavior: ''handleClick'', equivalent to '[$this,
+   'handleClick']' 
+   - object method: '[$object, 'handleClick']' 
+   - static method: '['Page', 'handleClick']' 
+   - anonymous function: 'function ($event) { ... }'
+
+ The following is an example:
+
+   [
+       Model::EVENT_BEFORE_VALIDATE => 'myBeforeValidate',
+       Model::EVENT_AFTER_VALIDATE => 'myAfterValidate',
+   ]
+
 
 
 

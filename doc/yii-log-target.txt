@@ -5,13 +5,13 @@
 SUBCLASSES
 ------------------------------------------------------------------------------
 
-|yii/log/FileTarget|
-|yii/log/DbTarget|
-|yii/log/SyslogTarget|
-|yii/log/EmailTarget|
 |yii/debug/LogTarget|
 |yii/elasticsearch/ElasticsearchTarget|
 |yii/mongodb/log/MongoDbTarget|
+|yii/log/FileTarget|
+|yii/log/DbTarget|
+|yii/log/EmailTarget|
+|yii/log/SyslogTarget|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -28,6 +28,10 @@ DESCRIPTION
 
 PROPERTY DETAILS
 ------------------------------------------------------------------------------
+
+Inherited properties:
+
+ |yii/base/Component::$behaviors|
 
 
 $categories				*yii/log/Target::$categories*
@@ -67,6 +71,21 @@ $logVars				*yii/log/Target::$logVars*
  Note that if you need $_SESSION to logged regardless if session was used you
  have to open it right at the start of your request.
 
+$maskVars				*yii/log/Target::$maskVars*
+
+ (array) List of the PHP predefined variables that should NOT be logged "as
+ is" and should always be replaced with a mask '***' before logging, when
+ exist.
+
+ Defaults to '[ '_SERVER.HTTP_AUTHORIZATION', '_SERVER.PHP_AUTH_USER',
+ '_SERVER.PHP_AUTH_PW']'
+
+ Each element could be specified as one of the following:
+
+
+   - 'var' - 'var' will be logged as '***' 
+   - 'var.key' - only 'var[key]' will be logged as '***'
+
 $prefix					*yii/log/Target::$prefix*
 
  (callable) A PHP callable that returns a string to be prefixed to every
@@ -93,6 +112,26 @@ $messages				*yii/log/Target::$messages*
 $microtime				*yii/log/Target::$microtime*
 
  (bool) Whether to log time with microseconds. Defaults to false.
+
+$levels					*yii/log/Target::$levels*
+
+ (int) The message levels that this target is interested in. This is a bitmap
+ of level values. Defaults to 0, meaning all available levels.
+
+$enabled				*yii/log/Target::$enabled*
+
+ (bool|callable) A boolean value or a callable to obtain the value from. The
+ callable value is available since version 2.0.13.
+
+ A callable may be used to determine whether the log target should be enabled
+ in a dynamic way. For example, to only enable a log if the current user is
+ logged in you can configure the target as follows:
+
+   'enabled' => function() {
+       return !Yii::$app->user->isGuest;
+   }
+
+
 
 
 
@@ -174,7 +213,7 @@ information.
  getLevels()
 <
 return (int) The message levels that this target is interested in. This is a bitmap
-of level values. Defaults to 0, meaning  all available levels.
+of level values. Defaults to 0, meaning all available levels.
 
 
 

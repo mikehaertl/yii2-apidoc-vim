@@ -12,6 +12,18 @@ Inherited properties:
  |yii/db/Schema::$defaultSchema|
  |yii/db/Schema::$columnSchemaClass|
  |yii/db/Schema::$columnQuoteCharacter|
+ |yii/db/Schema::$tableSchemas|
+ |yii/db/Schema::$schemaNames|
+ |yii/db/Schema::$tableNames|
+ |yii/db/Schema::$queryBuilder|
+ |yii/db/Schema::$lastInsertID|
+ |yii/db/Schema::$serverVersion|
+ |yii/db/ConstraintFinderTrait::$schemaPrimaryKeys|
+ |yii/db/ConstraintFinderTrait::$schemaForeignKeys|
+ |yii/db/ConstraintFinderTrait::$schemaIndexes|
+ |yii/db/ConstraintFinderTrait::$schemaUniques|
+ |yii/db/ConstraintFinderTrait::$schemaChecks|
+ |yii/db/ConstraintFinderTrait::$schemaDefaultValues|
 
 
 $exceptionMap				*yii/db/cubrid/Schema::$exceptionMap*
@@ -21,7 +33,12 @@ $exceptionMap				*yii/db/cubrid/Schema::$exceptionMap*
 
 $tableQuoteCharacter			*yii/db/cubrid/Schema::$tableQuoteCharacter*
 
- ()
+ (string|string[]) 
+
+ Character used to quote schema, table, etc. names. An array of 2 characters
+ can be used in case starting and ending characters are different.
+
+
 
 $typeMap				*yii/db/cubrid/Schema::$typeMap*
 
@@ -29,6 +46,14 @@ $typeMap				*yii/db/cubrid/Schema::$typeMap*
  (values) Please refer to [CUBRID
  manual](http://www.cubrid.org/manual/91/en/sql/datatype.html) for details on
  data types.
+
+$transactionIsolationLevel		*yii/db/cubrid/Schema::$transactionIsolationLevel*
+
+ (string) The transaction isolation level to use for this transaction. This
+ can be one of 'Transaction::READ_UNCOMMITTED', 'Transaction::READ_COMMITTED',
+ 'Transaction::REPEATABLE_READ' and 'Transaction::SERIALIZABLE' but also a
+ string containing DBMS specific syntax to be used after 'SET TRANSACTION
+ ISOLATION LEVEL'.
 
 
 
@@ -99,24 +124,39 @@ Inherited methods:
 
 *yii/db/cubrid/Schema::findTableNames*			protected
 >
- findTableNames($schema='\'\'')
+ findTableNames($schema='''')
 <
-return (void)
+return (array) All table names in the database. The names have NO schema name prefix.
 
- {@inheritdoc}
+ Returns all table names in the database.
 
-    [$schema] () 
+
+
+ This method should be overridden by child classes in order to support this
+ feature because the default implementation simply throws an exception.
+
+
+
+    [$schema] (string) The schema of the tables. Defaults to empty string,
+    meaning the current or default schema.
 
 
 *yii/db/cubrid/Schema::loadTableSchema*			protected
 >
  loadTableSchema($name)
 <
-return (void)
+return (\yii\db\TableSchema|null) DBMS-dependent table metadata, 'null' if the table
+does not exist.
 
- {@inheritdoc}
+ Loads the metadata for the specified table.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) Table name
 
 
 *yii/db/cubrid/Schema::getPdoType*			public
@@ -143,12 +183,20 @@ return (\yii\db\cubrid\QueryBuilder) Query builder instance
 >
  createColumnSchemaBuilder($type, $length='null')
 <
-return (void)
+return (\yii\db\ColumnSchemaBuilder) Column schema builder instance
 
- {@inheritdoc}
+ Create a column schema builder instance giving the type and value precision.
 
-    [$type] () 
-    [$length] () 
+
+
+ This method may be overridden by child classes to create a DBMS-specific
+ column schema builder.
+
+
+
+    [$type] (string) Type of the column. See 'ColumnSchemaBuilder::$type'.
+    [$length] (int|string|array) Length or precision of the column. See
+    'ColumnSchemaBuilder::$length'.
 
 
 *yii/db/cubrid/Schema::releaseSavepoint*			public
@@ -157,9 +205,15 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Releases an existing savepoint.
 
-    [$name] () 
+
+
+
+
+
+
+    [$name] (string) The savepoint name
 
 
 *yii/db/cubrid/Schema::setTransactionIsolationLevel*	public
@@ -168,9 +222,19 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
+ Sets the isolation level of the current transaction.
 
-    [$level] () 
+
+
+
+
+
+
+    [$level] (string) The transaction isolation level to use for this
+    transaction. This can be one of 'Transaction::READ_UNCOMMITTED',
+    'Transaction::READ_COMMITTED', 'Transaction::REPEATABLE_READ' and
+    'Transaction::SERIALIZABLE' but also a string containing DBMS specific
+    syntax to be used after 'SET TRANSACTION ISOLATION LEVEL'.
 
 
 *yii/db/cubrid/Schema::loadTablePrimaryKey*		protected
@@ -178,8 +242,6 @@ return (void)
  loadTablePrimaryKey($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -190,8 +252,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -200,8 +260,6 @@ return (void)
  loadTableIndexes($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 
@@ -212,8 +270,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -223,8 +279,6 @@ return (void)
 <
 return (void)
 
- {@inheritdoc}
-
     [$tableName] () 
 
 
@@ -233,8 +287,6 @@ return (void)
  loadTableDefaultValues($tableName)
 <
 return (void)
-
- {@inheritdoc}
 
     [$tableName] () 
 

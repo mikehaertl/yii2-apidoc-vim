@@ -11,10 +11,14 @@ Inherited properties:
  |yii/log/Target::$categories|
  |yii/log/Target::$except|
  |yii/log/Target::$logVars|
+ |yii/log/Target::$maskVars|
  |yii/log/Target::$prefix|
  |yii/log/Target::$exportInterval|
  |yii/log/Target::$messages|
  |yii/log/Target::$microtime|
+ |yii/base/Component::$behaviors|
+ |yii/log/Target::$levels|
+ |yii/log/Target::$enabled|
 
 
 $identity				*yii/log/SyslogTarget::$identity*
@@ -28,8 +32,8 @@ $facility				*yii/log/SyslogTarget::$facility*
 $options				*yii/log/SyslogTarget::$options*
 
  (int) Openlog options. This is a bitfield passed as the '$option' parameter
- to [openlog()](http://php.net/openlog). Defaults to 'null' which means to use
- the default options 'LOG_ODELAY | LOG_PID'.
+ to [openlog()](https://secure.php.net/openlog). Defaults to 'null' which
+ means to use the default options 'LOG_ODELAY | LOG_PID'.
 
 
 
@@ -79,7 +83,14 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes the object.
+
+
+
+ This method is invoked at the end of the constructor after the object is
+ initialized with the given configuration.
+
+
 
 
 *yii/log/SyslogTarget::export*				public
@@ -98,11 +109,18 @@ return (void)
 >
  formatMessage($message)
 <
-return (void)
+return (string) The formatted message
 
- {@inheritdoc}
+ Formats a log message for display as a string.
 
-    [$message] () 
+
+
+
+
+
+
+    [$message] (array) The log message to be formatted. The message structure
+    follows that in 'Logger::messages'.
 
 
 

@@ -33,11 +33,23 @@ Inherited properties:
  |yii/base/Controller::$layout|
  |yii/base/Controller::$action|
  |yii/web/Controller::$actionParams|
+ |yii/base/Component::$behaviors|
+ |yii/base/Controller::$modules|
+ |yii/base/Controller::$uniqueId|
+ |yii/base/Controller::$route|
+ |yii/base/Controller::$view|
+ |yii/base/Controller::$viewPath|
 
 
 $enableCsrfValidation			*yii/rest/Controller::$enableCsrfValidation*
 
- ()
+ (bool) 
+
+ Whether to enable CSRF validation for the actions in this controller. CSRF
+ validation is enabled only when both this property and
+ '\yii\web\Request::enableCsrfValidation' are true.
+
+
 
 $serializer				*yii/rest/Controller::$serializer*
 
@@ -54,15 +66,15 @@ Inherited methods:
  |yii/base/BaseObject::className|
  |yii/base/Controller::__construct|
  |yii/base/BaseObject::init|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::hasEventHandlers|
  |yii/base/Component::on|
@@ -78,9 +90,9 @@ Inherited methods:
  |yii/base/Controller::actions|
  |yii/base/Controller::runAction|
  |yii/base/Controller::run|
- |yii/base/Controller::bindActionParams|
+ |yii/web/Controller::bindActionParams|
  |yii/base/Controller::createAction|
- |yii/base/Controller::beforeAction|
+ |yii/web/Controller::beforeAction|
  |yii/base/Controller::getModules|
  |yii/base/Controller::getUniqueId|
  |yii/base/Controller::getRoute|
@@ -106,21 +118,64 @@ Inherited methods:
 >
  behaviors()
 <
-return (void)
+return (array) The behavior configurations.
 
- {@inheritdoc}
+ Returns a list of behaviors that this component should behave as.
+
+
+
+ Child classes may override this method to specify the behaviors they want to
+ behave as.
+
+ The return value of this method should be an array of behavior objects or
+ configurations indexed by behavior names. A behavior configuration can be
+ either a string specifying the behavior class or an array of the following
+ structure:
+
+   'behaviorName' => [
+       'class' => 'BehaviorClass',
+       'property1' => 'value1',
+       'property2' => 'value2',
+   ]
+
+ Note that a behavior class must extend from 'Behavior'. Behaviors can be
+ attached using a name or anonymously. When a name is used as the array key,
+ using this name, the behavior can later be retrieved using 'getBehavior()' or
+ be detached using 'detachBehavior()'. Anonymous behaviors can not be
+ retrieved or detached.
+
+ Behaviors declared in this method will be attached to the component
+ automatically (on demand).
+
+
 
 
 *yii/rest/Controller::afterAction*			public
 >
  afterAction($action, $result)
 <
-return (void)
+return (mixed) The processed action result.
 
- {@inheritdoc}
+ This method is invoked right after an action is executed.
 
-    [$action] () 
-    [$result] () 
+
+
+ The method will trigger the 'EVENT_AFTER_ACTION' event. The return value of
+ the method will be used as the action return value.
+
+ If you override this method, your code should look like the following:
+
+   public function afterAction($action, $result)
+   {
+       $result = parent::afterAction($action, $result);
+       // your custom code here
+       return $result;
+   }
+
+
+
+    [$action] (\yii\base\Action) The action just executed.
+    [$result] (mixed) The action return result.
 
 
 *yii/rest/Controller::verbs*				protected

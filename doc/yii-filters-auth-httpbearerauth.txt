@@ -36,11 +36,19 @@ Inherited properties:
 
 $header					*yii/filters/auth/HttpBearerAuth::$header*
 
- ()
+ (string) 
+
+ The HTTP header name
+
+
 
 $pattern				*yii/filters/auth/HttpBearerAuth::$pattern*
 
- ()
+ (string) 
+
+ A pattern to use to extract the HTTP authentication value
+
+
 
 $realm					*yii/filters/auth/HttpBearerAuth::$realm*
 
@@ -66,8 +74,8 @@ Inherited methods:
  |yii/base/BaseObject::canSetProperty|
  |yii/base/BaseObject::hasMethod|
  |yii/base/Behavior::events|
- |yii/base/ActionFilter::attach|
- |yii/base/ActionFilter::detach|
+ |yii/base/Behavior::attach|
+ |yii/base/Behavior::detach|
  |yii/base/ActionFilter::beforeFilter|
  |yii/base/ActionFilter::afterFilter|
  |yii/filters/auth/AuthMethod::beforeAction|
@@ -85,9 +93,15 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Generates challenges upon authentication failure.
 
-    [$response] () 
+
+
+ For example, some appropriate HTTP headers may be generated.
+
+
+
+    [$response] (\yii\web\Response) 
 
 
 

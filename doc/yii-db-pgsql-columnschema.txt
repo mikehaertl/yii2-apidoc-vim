@@ -74,22 +74,37 @@ Inherited methods:
 >
  phpTypecast($value)
 <
-return (void)
+return (mixed) Converted value
 
- {@inheritdoc}
+ Converts the input value according to 'phpType' after retrieval from the
+ database.
 
-    [$value] () 
+
+
+ If the value is null or an 'Expression', it will not be converted.
+
+
+
+    [$value] (mixed) Input value
 
 
 *yii/db/pgsql/ColumnSchema::dbTypecast*			public
 >
  dbTypecast($value)
 <
-return (void)
+return (mixed) Converted value. This may also be an array containing the value as the
+first element and the PDO type as the second element.
 
- {@inheritdoc}
+ Converts the input value according to 'type' and 'dbType' for use in a db
+ query.
 
-    [$value] () 
+
+
+ If the value is null or an 'Expression', it will not be converted.
+
+
+
+    [$value] (mixed) Input value
 
 
 *yii/db/pgsql/ColumnSchema::phpTypecastValue*		protected

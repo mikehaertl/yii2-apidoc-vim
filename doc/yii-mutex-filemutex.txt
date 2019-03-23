@@ -30,6 +30,8 @@ PROPERTY DETAILS
 Inherited properties:
 
  |yii/mutex/Mutex::$autoRelease|
+ |yii/mutex/RetryAcquireTrait::$retryDelay|
+ |yii/base/Component::$behaviors|
 
 
 $mutexPath				*yii/mutex/FileMutex::$mutexPath*
@@ -51,6 +53,12 @@ $dirMode				*yii/mutex/FileMutex::$dirMode*
  meaning the directory is read-writable by owner and group, but read-only for
  other users.
 
+$isWindows				*yii/mutex/FileMutex::$isWindows*
+
+ (bool) Whether file handling should assume a Windows file system. This value
+ will determine how 'releaseLock()' goes about deleting the lock file. If not
+ set, it will be determined by checking the DIRECTORY_SEPARATOR constant.
+
 
 
 METHOD DETAILS
@@ -60,15 +68,15 @@ Inherited methods:
 
  |yii/base/BaseObject::className|
  |yii/base/BaseObject::__construct|
- |yii/base/BaseObject::__get|
- |yii/base/BaseObject::__set|
- |yii/base/BaseObject::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|

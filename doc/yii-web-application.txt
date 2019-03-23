@@ -17,9 +17,9 @@ Inherited properties:
  |yii/base/Module::$params|
  |yii/base/Module::$id|
  |yii/base/Module::$module|
- |yii/base/Application::$layout|
+ |yii/base/Module::$layout|
  |yii/base/Module::$controllerMap|
- |yii/base/Application::$controllerNamespace|
+ |yii/base/Module::$controllerNamespace|
  |yii/base/Application::$name|
  |yii/base/Application::$charset|
  |yii/base/Application::$language|
@@ -31,6 +31,31 @@ Inherited properties:
  |yii/base/Application::$bootstrap|
  |yii/base/Application::$state|
  |yii/base/Application::$loadedModules|
+ |yii/base/Component::$behaviors|
+ |yii/di/ServiceLocator::$components|
+ |yii/base/Module::$uniqueId|
+ |yii/base/Module::$basePath|
+ |yii/base/Module::$controllerPath|
+ |yii/base/Module::$viewPath|
+ |yii/base/Module::$layoutPath|
+ |yii/base/Module::$version|
+ |yii/base/Module::$aliases|
+ |yii/base/Module::$modules|
+ |yii/base/Application::$runtimePath|
+ |yii/base/Application::$vendorPath|
+ |yii/base/Application::$timeZone|
+ |yii/base/Application::$db|
+ |yii/base/Application::$log|
+ |yii/base/Application::$cache|
+ |yii/base/Application::$formatter|
+ |yii/base/Application::$view|
+ |yii/base/Application::$urlManager|
+ |yii/base/Application::$i18n|
+ |yii/base/Application::$mailer|
+ |yii/base/Application::$authManager|
+ |yii/base/Application::$assetManager|
+ |yii/base/Application::$security|
+ |yii/base/Application::$container|
 
 
 $defaultRoute				*yii/web/Application::$defaultRoute*
@@ -58,6 +83,30 @@ $catchAll				*yii/web/Application::$catchAll*
 
  Defaults to null, meaning catch-all is not used.
 
+$errorHandler				*yii/web/Application::$errorHandler*
+
+ (\yii\web\ErrorHandler) The error handler application component.
+
+$request				*yii/web/Application::$request*
+
+ (\yii\web\Request) The request component.
+
+$response				*yii/web/Application::$response*
+
+ (\yii\web\Response) The response component.
+
+$homeUrl				*yii/web/Application::$homeUrl*
+
+ (string) The homepage URL
+
+$session				*yii/web/Application::$session*
+
+ (\yii\web\Session) The session component.
+
+$user					*yii/web/Application::$user*
+
+ (\yii\web\User) The user component.
+
 
 
 METHOD DETAILS
@@ -66,17 +115,17 @@ METHOD DETAILS
 Inherited methods:
 
  |yii/base/BaseObject::className|
- |yii/base/Application::__construct|
- |yii/base/Application::init|
- |yii/di/ServiceLocator::__get|
- |yii/base/BaseObject::__set|
- |yii/di/ServiceLocator::__isset|
- |yii/base/BaseObject::__unset|
- |yii/base/BaseObject::__call|
- |yii/base/BaseObject::hasProperty|
- |yii/base/BaseObject::canGetProperty|
- |yii/base/BaseObject::canSetProperty|
- |yii/base/BaseObject::hasMethod|
+ |yii/base/Module::__construct|
+ |yii/base/Module::init|
+ |yii/base/Component::__get|
+ |yii/base/Component::__set|
+ |yii/base/Component::__isset|
+ |yii/base/Component::__unset|
+ |yii/base/Component::__call|
+ |yii/base/Component::hasProperty|
+ |yii/base/Component::canGetProperty|
+ |yii/base/Component::canSetProperty|
+ |yii/base/Component::hasMethod|
  |yii/base/Component::__clone|
  |yii/base/Component::behaviors|
  |yii/base/Component::hasEventHandlers|
@@ -90,17 +139,17 @@ Inherited methods:
  |yii/base/Component::detachBehavior|
  |yii/base/Component::detachBehaviors|
  |yii/base/Component::ensureBehaviors|
- |yii/di/ServiceLocator::has|
- |yii/di/ServiceLocator::get|
+ |yii/base/Module::has|
+ |yii/base/Module::get|
  |yii/di/ServiceLocator::set|
  |yii/di/ServiceLocator::clear|
  |yii/di/ServiceLocator::getComponents|
  |yii/di/ServiceLocator::setComponents|
  |yii/base/Module::getInstance|
  |yii/base/Module::setInstance|
- |yii/base/Application::getUniqueId|
+ |yii/base/Module::getUniqueId|
  |yii/base/Module::getBasePath|
- |yii/base/Application::setBasePath|
+ |yii/base/Module::setBasePath|
  |yii/base/Module::getControllerPath|
  |yii/base/Module::getViewPath|
  |yii/base/Module::setViewPath|
@@ -150,7 +199,15 @@ Inherited methods:
 <
 return (void)
 
- {@inheritdoc}
+ Initializes extensions and executes bootstrap components.
+
+
+
+ This method is called by 'init()' after the application has been fully
+ configured. If you override this method, make sure you also call the parent
+ implementation.
+
+
 
 
 *yii/web/Application::handleRequest*			public
@@ -197,7 +254,13 @@ return (\yii\web\Response) The response component.
 <
 return (void)
 
- {@inheritdoc}
+ Returns the configuration of core application components.
+
+
+
+
+
+
 
 
 *yii/web/Application::getHomeUrl*				public
