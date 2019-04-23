@@ -1,13 +1,6 @@
 
-*yii/httpclient/Transport*   >> |yii/base/Component|
-==========================
-
-SUBCLASSES
-------------------------------------------------------------------------------
-
-|yii/httpclient/CurlTransport|
-|yii/httpclient/StreamTransport|
-|yii/httpclient/MockTransport|
+*yii/httpclient/MockTransport*   >> |yii/httpclient/Transport|
+==============================
 
 
 
@@ -41,9 +34,10 @@ Inherited methods:
  |yii/base/Component::detachBehavior|
  |yii/base/Component::detachBehaviors|
  |yii/base/Component::ensureBehaviors|
+ |yii/httpclient/Transport::batchSend|
 
 
-*yii/httpclient/Transport::send*				public
+*yii/httpclient/MockTransport::send*			public
 >
  send($request)
 <
@@ -51,23 +45,30 @@ return (\yii\httpclient\Response) Response instance.
 
  Performs given request.
 
+
+
+
+
+
+
     [$request] (\yii\httpclient\Request) Request to be sent.
 
 
-*yii/httpclient/Transport::batchSend*			public
+*yii/httpclient/MockTransport::appendResponse*		public
 >
- batchSend($requests)
+ appendResponse($response)
 <
-return (\yii\httpclient\Response[]) Responses list.
+return (void)
 
- Performs multiple HTTP requests.
+    [$response] (\yii\httpclient\Response) 
 
- Particular transport may benefit from this method, allowing sending requests
- in parallel. This method accepts an array of the 'Request' objects and
- returns an array of the  'Response' objects. Keys of the response array
- correspond the ones from request array.
 
-    [$requests] (\yii\httpclient\Request[]) Requests to perform.
+*yii/httpclient/MockTransport::flushRequests*		public
+>
+ flushRequests()
+<
+return (\yii\httpclient\Request[]) 
+
 
 
 
