@@ -31,6 +31,11 @@ $depth					*yii/debug/panels/DumpPanel::$depth*
 
  (int) Maximum depth that the dumper should go into the variable
 
+$varDumpCallback			*yii/debug/panels/DumpPanel::$varDumpCallback*
+
+ (callable) Callback that replaces the built-in var dumper. The signature of
+ this function should be: 'function (mixed $data, DumpPanel $panel)'
+
 $name					*yii/debug/panels/DumpPanel::$name*
 
  (string) Name of the panel
@@ -82,6 +87,7 @@ Inherited methods:
  |yii/debug/Panel::getError|
  |yii/debug/Panel::hasError|
  |yii/debug/Panel::isEnabled|
+ |yii/debug/Panel::getLogMessages|
 
 
 *yii/debug/panels/DumpPanel::getName*			public
@@ -136,6 +142,17 @@ return (mixed) Data to be saved
  This method is called on every page where debugger is enabled.
 
 
+
+
+*yii/debug/panels/DumpPanel::varDump*			public
+>
+ varDump($var)
+<
+return (void)
+
+ Called by view to format the dumped variable.
+
+    [$var] () 
 
 
 *yii/debug/panels/DumpPanel::getModels*			protected
