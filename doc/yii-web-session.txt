@@ -388,7 +388,19 @@ return (void)
  'session_get_cookie_params()'.
 
     [$value] (array) Cookie parameters, valid keys include: 'lifetime',
-    'path', 'domain', 'secure' and 'httponly'.
+    'path', 'domain', 'secure' and 'httponly'. Starting with Yii 2.0.21
+    'sameSite' is also supported. It requires PHP version 7.3.0 or higher. For
+    securtiy, an exception will be thrown if 'sameSite' is set while using an
+    unsupported version of PHP. To use this feature across different PHP
+    versions check the version first. E.g.
+
+      [
+          'sameSite' => PHP_VERSION_ID >= 70300 ?
+    yii\web\Cookie::SAME_SITE_LAX : null,
+      ]
+
+    See https://www.owasp.org/index.php/SameSite for more information about
+    'sameSite'.
 
 
 *yii/web/Session::getUseCookies*				public
