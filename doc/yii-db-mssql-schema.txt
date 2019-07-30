@@ -96,7 +96,6 @@ Inherited methods:
  |yii/db/Schema::insert|
  |yii/db/Schema::quoteValue|
  |yii/db/Schema::quoteTableName|
- |yii/db/Schema::quoteColumnName|
  |yii/db/Schema::quoteSimpleTableName|
  |yii/db/Schema::quoteSimpleColumnName|
  |yii/db/Schema::unquoteSimpleTableName|
@@ -281,6 +280,25 @@ return (array)
  {@inheritDoc}
 
     [$name] (string) 
+
+
+*yii/db/mssql/Schema::quoteColumnName*			public
+>
+ quoteColumnName($name)
+<
+return (string) The properly quoted column name
+
+ Quotes a column name for use in a query.
+
+
+
+ If the column name contains prefix, the prefix will also be properly quoted.
+ If the column name is already quoted or contains '(', ''' or '{{', then this
+ method will do nothing.
+
+
+
+    [$name] (string) Column name
 
 
 *yii/db/mssql/Schema::loadTablePrimaryKey*		protected
