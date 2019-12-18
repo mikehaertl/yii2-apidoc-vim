@@ -431,6 +431,15 @@ return (void)
     [$headerCollection] (\yii\web\HeaderCollection) 
 
 
+*yii/web/Request::getTrustedHeaders*			protected
+>
+ getTrustedHeaders()
+<
+return (array) 
+
+ Trusted headers according to the 'trustedHosts'.
+
+
 *yii/web/Request::getIpValidator*				protected
 >
  getIpValidator()
@@ -967,6 +976,15 @@ return (string|null) User agent, null if not available
  Returns the user agent.
 
 
+*yii/web/Request::getUserIpFromIpHeaders*			protected
+>
+ getUserIpFromIpHeaders()
+<
+return (string|null) User IP address, null if not available
+
+ Returns the user IP address from 'ipHeaders'.
+
+
 *yii/web/Request::getUserIP*				public
 >
  getUserIP()
@@ -976,6 +994,18 @@ return (string|null) User IP address, null if not available
  Returns the user IP address.
 
  The IP is determined using headers and / or '$_SERVER' variables.
+
+
+*yii/web/Request::getUserIpFromIpHeader*			protected
+>
+ getUserIpFromIpHeader($ips)
+<
+return (string|null) IP as string. Null is returned if IP can not be determined from
+header.
+
+ Return user IP's from IP header.
+
+    [$ips] (string) Comma separated IP list
 
 
 *yii/web/Request::getUserHost*				public

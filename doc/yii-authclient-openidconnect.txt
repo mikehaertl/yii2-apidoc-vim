@@ -24,14 +24,21 @@ DESCRIPTION
        // ...
    ]
 
- This class requires 'spomky-labs/jose' library to be installed for JWS
+ This class requires 'web-token/jwt-checker','web-token/jwt-key-mgmt',
+ 'web-token/jwt-signature', 'web-token/jwt-signature-algorithm-hmac',
+ 'web-token/jwt-signature-algorithm-ecdsa' and
+ 'web-token/jwt-signature-algorithm-rsa' libraries to be installed for JWS
  verification. This can be done via composer:
 
- ''' composer require --prefer-dist "spomky-labs/jose:~5.0.6" '''
+ ''' composer require --prefer-dist "web-token/jwt-checker:>=1.0 <3.0"
+ "web-token/jwt-signature:>=1.0 <3.0" "web-token/jwt-signature:>=1.0 <3.0"
+ "web-token/jwt-signature-algorithm-hmac:>=1.0 <3.0"
+ "web-token/jwt-signature-algorithm-ecdsa:>=1.0 <3.0"
+ "web-token/jwt-signature-algorithm-rsa:>=1.0 <3.0" '''
 
  Note: if you are using well-trusted OpenIdConnect provider, you may disable
- 'validateJws', making installation of 'spomky-labs/jose' library redundant,
- however it is not recommended as it violates the protocol specification.
+ 'validateJws', making installation of 'web-token' library redundant, however
+ it is not recommended as it violates the protocol specification.
 
 
 PROPERTY DETAILS
@@ -78,16 +85,19 @@ $issuerUrl				*yii/authclient/OpenIdConnect::$issuerUrl*
 $validateJws				*yii/authclient/OpenIdConnect::$validateJws*
 
  (bool) Whether to validate/decrypt JWS received with Auth token. Note: this
- functionality requires 'spomky-labs/jose' composer package to be installed.
- You can disable this option in case of usage of trusted OpenIDConnect
- provider, however this violates the protocol rules, so you are doing it on
- your own risk.
+ functionality requires 'web-token/jwt-checker', 'web-token/jwt-key-mgmt',
+ 'web-token/jwt-signature' composer package to be installed. You can disable
+ this option in case of usage of trusted OpenIDConnect provider, however this
+ violates the protocol rules, so you are doing it on your own risk.
 
 $allowedJwsAlgorithms			*yii/authclient/OpenIdConnect::$allowedJwsAlgorithms*
 
  (array) JWS algorithms, which are allowed to be used. These are used by
- 'spomky-labs/jose' library for JWS validation/decryption. Make sure
- 'spomky-labs/jose' supports the particular algorithm before adding it here.
+ 'web-token' library for JWS validation/decryption. Make sure to install
+ 'web-token/jwt-signature-algorithm-hmac',
+ 'web-token/jwt-signature-algorithm-ecdsa' and
+ 'web-token/jwt-signature-algorithm-rsa' packages that support the particular
+ algorithm before adding it here.
 
 $configParamsCacheKeyPrefix		*yii/authclient/OpenIdConnect::$configParamsCacheKeyPrefix*
 
@@ -388,6 +398,24 @@ return (mixed) Configuration parameter value.
 return (array) OpenID Provider configuration parameters.
 
  Discovers OpenID Provider configuration parameters.
+
+
+*yii/authclient/OpenIdConnect::getJwkSet*			protected
+>
+ getJwkSet()
+<
+return (\yii\authclient\JWKSet) Object represents a key set.
+
+ Return JwkSet, returning related data.
+
+
+*yii/authclient/OpenIdConnect::getJwsLoader*		protected
+>
+ getJwsLoader()
+<
+return (\Jose\Component\Signature\JWSLoader) To do token validation.
+
+ Return JWSLoader that validate the JWS token.
 
 
 *yii/authclient/OpenIdConnect::loadJws*			protected

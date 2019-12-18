@@ -33,6 +33,10 @@ $hostname				*yii/redis/Connection::$hostname*
  server. Defaults to 'localhost'. If 'unixSocket' is specified, hostname and
  'port' will be ignored.
 
+$redirectConnectionString		*yii/redis/Connection::$redirectConnectionString*
+
+ (string) If the query gets redirected, use this as the temporary new hostname
+
 $port					*yii/redis/Connection::$port*
 
  (integer) The port to use for connecting to the redis server. Default port is
@@ -96,9 +100,23 @@ $retries				*yii/redis/Connection::$retries*
  connection failure occurs. This is used in 'executeCommand()' when a
  'SocketException' is thrown. Defaults to 0 meaning no retries on failure.
 
+$retryInterval				*yii/redis/Connection::$retryInterval*
+
+ (integer) The retry interval in microseconds to wait between retry. This is
+ used in 'executeCommand()' when a 'SocketException' is thrown. Defaults to 0
+ meaning no wait.
+
 $redisCommands				*yii/redis/Connection::$redisCommands*
 
  (array) List of available redis commands.
+
+$connectionString			*yii/redis/Connection::$connectionString*
+
+ (string) Socket connection string
+
+$socket					*yii/redis/Connection::$socket*
+
+ (resource|false)
 
 $isActive				*yii/redis/Connection::$isActive*
 
@@ -170,6 +188,26 @@ return (mixed)
 return (array) 
 
  Closes the connection when this component is being serialized.
+
+
+*yii/redis/Connection::getConnectionString*		public
+>
+ getConnectionString()
+<
+return (string) Socket connection string
+
+ Return the connection string used to open a socket connection. During a
+ redirect (cluster mode) this will be the target of the redirect.
+
+
+*yii/redis/Connection::getSocket*				public
+>
+ getSocket()
+<
+return (resource|false) 
+
+ Return the connection resource if a connection to the target has been
+ established before, 'false' otherwise.
 
 
 *yii/redis/Connection::getIsActive*			public
