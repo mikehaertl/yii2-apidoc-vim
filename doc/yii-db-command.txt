@@ -7,6 +7,7 @@ SUBCLASSES
 
 |yii/db/sqlite/Command|
 |yii/sphinx/Command|
+|yii/db/oci/Command|
 
 DESCRIPTION
 ------------------------------------------------------------------------------
@@ -81,6 +82,10 @@ $queryCacheDependency			*yii/db/Command::$queryCacheDependency*
 
  (\yii\caching\Dependency) The dependency to be associated with the cached
  query result for this command
+
+$pendingParams				*yii/db/Command::$pendingParams*
+
+ (array) Pending parameters to be bound to the current PDO statement.
 
 $sql					*yii/db/Command::$sql*
 
@@ -1032,8 +1037,7 @@ return (array) The cache key
     [$fetchMode] (int) The result fetch mode. Please refer to [PHP
     manual](https://secure.php.net/manual/en/function.PDOStatement-setFetchMode.php)
     for valid fetch modes.
-    [$rawSql] (string) The raw SQL with parameter values inserted into the
-    corresponding placeholders
+    [$rawSql] () 
 
 
 *yii/db/Command::requireTableSchemaRefresh*		protected
