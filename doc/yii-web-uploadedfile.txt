@@ -64,7 +64,6 @@ METHOD DETAILS
 Inherited methods:
 
  |yii/base/BaseObject::className|
- |yii/base/BaseObject::__construct|
  |yii/base/BaseObject::init|
  |yii/base/BaseObject::__get|
  |yii/base/BaseObject::__set|
@@ -75,6 +74,18 @@ Inherited methods:
  |yii/base/BaseObject::canGetProperty|
  |yii/base/BaseObject::canSetProperty|
  |yii/base/BaseObject::hasMethod|
+
+
+*yii/web/UploadedFile::__construct*			public
+>
+ __construct($config='[]')
+<
+return (void)
+
+ UploadedFile constructor.
+
+    [$config] (array) Name-value pairs that will be used to initialize the
+    object properties
 
 
 *yii/web/UploadedFile::__toString*			public
@@ -172,13 +183,44 @@ return (bool) True whether the file is saved successfully
 
  Saves the uploaded file.
 
- Note that this method uses php's move_uploaded_file() method. If the target
- file '$file' already exists, it will be overwritten.
+ If the target file '$file' already exists, it will be overwritten.
 
-    [$file] (string) The file path used to save the uploaded file
+    [$file] (string) The file path or a path alias used to save the uploaded
+    file.
     [$deleteTempFile] (bool) Whether to delete the temporary file after
     saving. If true, you will not be able to save the uploaded file again in
     the current request.
+
+
+*yii/web/UploadedFile::copyTempFile*			protected
+>
+ copyTempFile($targetFile)
+<
+return (bool|int) The total count of bytes copied, or false on failure
+
+ Copy temporary file into file specified
+
+    [$targetFile] (string) Path of the file to copy to
+
+
+*yii/web/UploadedFile::deleteTempFile*			protected
+>
+ deleteTempFile()
+<
+return (bool) If file was deleted
+
+ Delete temporary file
+
+
+*yii/web/UploadedFile::isUploadedFile*			protected
+>
+ isUploadedFile($file)
+<
+return (bool) 
+
+ Check if file is uploaded file
+
+    [$file] (string) Path to the file to check
 
 
 *yii/web/UploadedFile::getBaseName*			public

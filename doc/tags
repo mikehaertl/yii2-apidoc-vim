@@ -102,6 +102,11 @@ yii/apidoc/helpers/ApiMarkdownTrait::parseApiLinks	yii-apidoc-helpers-apimarkdow
 yii/apidoc/helpers/ApiMarkdownTrait::renderApiLink	yii-apidoc-helpers-apimarkdowntrait.txt	/*yii\/apidoc\/helpers\/ApiMarkdownTrait::renderApiLink*
 yii/apidoc/helpers/ApiMarkdownTrait::renderQuote	yii-apidoc-helpers-apimarkdowntrait.txt	/*yii\/apidoc\/helpers\/ApiMarkdownTrait::renderQuote*
 yii/apidoc/helpers/ApiMarkdownTrait::translateBlockType	yii-apidoc-helpers-apimarkdowntrait.txt	/*yii\/apidoc\/helpers\/ApiMarkdownTrait::translateBlockType*
+yii/apidoc/helpers/BrokenLinkException	yii-apidoc-helpers-brokenlinkexception.txt	/*yii\/apidoc\/helpers\/BrokenLinkException*
+yii/apidoc/helpers/BrokenLinkException::$context	yii-apidoc-helpers-brokenlinkexception.txt	/*yii\/apidoc\/helpers\/BrokenLinkException::$context*
+yii/apidoc/helpers/BrokenLinkException::$object	yii-apidoc-helpers-brokenlinkexception.txt	/*yii\/apidoc\/helpers\/BrokenLinkException::$object*
+yii/apidoc/helpers/BrokenLinkException::__construct	yii-apidoc-helpers-brokenlinkexception.txt	/*yii\/apidoc\/helpers\/BrokenLinkException::__construct*
+yii/apidoc/helpers/BrokenLinkException::getName	yii-apidoc-helpers-brokenlinkexception.txt	/*yii\/apidoc\/helpers\/BrokenLinkException::getName*
 yii/apidoc/helpers/IndexFileAnalyzer	yii-apidoc-helpers-indexfileanalyzer.txt	/*yii\/apidoc\/helpers\/IndexFileAnalyzer*
 yii/apidoc/helpers/IndexFileAnalyzer::$introduction	yii-apidoc-helpers-indexfileanalyzer.txt	/*yii\/apidoc\/helpers\/IndexFileAnalyzer::$introduction*
 yii/apidoc/helpers/IndexFileAnalyzer::$title	yii-apidoc-helpers-indexfileanalyzer.txt	/*yii\/apidoc\/helpers\/IndexFileAnalyzer::$title*
@@ -120,6 +125,7 @@ yii/apidoc/models/BaseDoc::$deprecatedSince	yii-apidoc-models-basedoc.txt	/*yii\
 yii/apidoc/models/BaseDoc::$description	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::$description*
 yii/apidoc/models/BaseDoc::$endLine	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::$endLine*
 yii/apidoc/models/BaseDoc::$name	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::$name*
+yii/apidoc/models/BaseDoc::$packageName	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::$packageName*
 yii/apidoc/models/BaseDoc::$phpDocContext	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::$phpDocContext*
 yii/apidoc/models/BaseDoc::$shortDescription	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::$shortDescription*
 yii/apidoc/models/BaseDoc::$since	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::$since*
@@ -129,6 +135,7 @@ yii/apidoc/models/BaseDoc::$tags	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/mo
 yii/apidoc/models/BaseDoc::__construct	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::__construct*
 yii/apidoc/models/BaseDoc::extractFirstSentence	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::extractFirstSentence*
 yii/apidoc/models/BaseDoc::getFirstTag	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::getFirstTag*
+yii/apidoc/models/BaseDoc::getPackageName	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::getPackageName*
 yii/apidoc/models/BaseDoc::hasTag	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::hasTag*
 yii/apidoc/models/BaseDoc::mbUcFirst	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::mbUcFirst*
 yii/apidoc/models/BaseDoc::removeTag	yii-apidoc-models-basedoc.txt	/*yii\/apidoc\/models\/BaseDoc::removeTag*
@@ -2080,6 +2087,7 @@ yii/caching/MemCache::getServers	yii-caching-memcache.txt	/*yii\/caching\/MemCac
 yii/caching/MemCache::getValue	yii-caching-memcache.txt	/*yii\/caching\/MemCache::getValue*
 yii/caching/MemCache::getValues	yii-caching-memcache.txt	/*yii\/caching\/MemCache::getValues*
 yii/caching/MemCache::init	yii-caching-memcache.txt	/*yii\/caching\/MemCache::init*
+yii/caching/MemCache::normalizeDuration	yii-caching-memcache.txt	/*yii\/caching\/MemCache::normalizeDuration*
 yii/caching/MemCache::setServers	yii-caching-memcache.txt	/*yii\/caching\/MemCache::setServers*
 yii/caching/MemCache::setValue	yii-caching-memcache.txt	/*yii\/caching\/MemCache::setValue*
 yii/caching/MemCache::setValues	yii-caching-memcache.txt	/*yii\/caching\/MemCache::setValues*
@@ -3474,6 +3482,7 @@ yii/db/conditions/InCondition::getValues	yii-db-conditions-incondition.txt	/*yii
 yii/db/conditions/InConditionBuilder	yii-db-conditions-inconditionbuilder.txt	/*yii\/db\/conditions\/InConditionBuilder*
 yii/db/conditions/InConditionBuilder::build	yii-db-conditions-inconditionbuilder.txt	/*yii\/db\/conditions\/InConditionBuilder::build*
 yii/db/conditions/InConditionBuilder::buildValues	yii-db-conditions-inconditionbuilder.txt	/*yii\/db\/conditions\/InConditionBuilder::buildValues*
+yii/db/conditions/InConditionBuilder::getNullCondition	yii-db-conditions-inconditionbuilder.txt	/*yii\/db\/conditions\/InConditionBuilder::getNullCondition*
 yii/db/conditions/LikeCondition	yii-db-conditions-likecondition.txt	/*yii\/db\/conditions\/LikeCondition*
 yii/db/conditions/LikeCondition::$escapingReplacements	yii-db-conditions-likecondition.txt	/*yii\/db\/conditions\/LikeCondition::$escapingReplacements*
 yii/db/conditions/LikeCondition::__construct	yii-db-conditions-likecondition.txt	/*yii\/db\/conditions\/LikeCondition::__construct*
@@ -5037,6 +5046,7 @@ yii/gii/generators/model/Generator::$baseClass	yii-gii-generators-model-generato
 yii/gii/generators/model/Generator::$classNames	yii-gii-generators-model-generator.txt	/*yii\/gii\/generators\/model\/Generator::$classNames*
 yii/gii/generators/model/Generator::$db	yii-gii-generators-model-generator.txt	/*yii\/gii\/generators\/model\/Generator::$db*
 yii/gii/generators/model/Generator::$description	yii-gii-generators-model-generator.txt	/*yii\/gii\/generators\/model\/Generator::$description*
+yii/gii/generators/model/Generator::$generateJunctionRelationMode	yii-gii-generators-model-generator.txt	/*yii\/gii\/generators\/model\/Generator::$generateJunctionRelationMode*
 yii/gii/generators/model/Generator::$generateLabelsFromComments	yii-gii-generators-model-generator.txt	/*yii\/gii\/generators\/model\/Generator::$generateLabelsFromComments*
 yii/gii/generators/model/Generator::$generateQuery	yii-gii-generators-model-generator.txt	/*yii\/gii\/generators\/model\/Generator::$generateQuery*
 yii/gii/generators/model/Generator::$generateRelations	yii-gii-generators-model-generator.txt	/*yii\/gii\/generators\/model\/Generator::$generateRelations*
@@ -5571,7 +5581,6 @@ yii/httpclient/MockTransport::send	yii-httpclient-mocktransport.txt	/*yii\/httpc
 yii/httpclient/ParserInterface	yii-httpclient-parserinterface.txt	/*yii\/httpclient\/ParserInterface*
 yii/httpclient/ParserInterface::parse	yii-httpclient-parserinterface.txt	/*yii\/httpclient\/ParserInterface::parse*
 yii/httpclient/Request	yii-httpclient-request.txt	/*yii\/httpclient\/Request*
-yii/httpclient/Request::$data	yii-httpclient-request.txt	/*yii\/httpclient\/Request::$data*
 yii/httpclient/Request::$fullUrl	yii-httpclient-request.txt	/*yii\/httpclient\/Request::$fullUrl*
 yii/httpclient/Request::$method	yii-httpclient-request.txt	/*yii\/httpclient\/Request::$method*
 yii/httpclient/Request::$options	yii-httpclient-request.txt	/*yii\/httpclient\/Request::$options*
@@ -5604,6 +5613,8 @@ yii/httpclient/RequestEvent	yii-httpclient-requestevent.txt	/*yii\/httpclient\/R
 yii/httpclient/RequestEvent::$request	yii-httpclient-requestevent.txt	/*yii\/httpclient\/RequestEvent::$request*
 yii/httpclient/RequestEvent::$response	yii-httpclient-requestevent.txt	/*yii\/httpclient\/RequestEvent::$response*
 yii/httpclient/Response	yii-httpclient-response.txt	/*yii\/httpclient\/Response*
+yii/httpclient/Response::$cookies	yii-httpclient-response.txt	/*yii\/httpclient\/Response::$cookies*
+yii/httpclient/Response::$data	yii-httpclient-response.txt	/*yii\/httpclient\/Response::$data*
 yii/httpclient/Response::$isOk	yii-httpclient-response.txt	/*yii\/httpclient\/Response::$isOk*
 yii/httpclient/Response::$statusCode	yii-httpclient-response.txt	/*yii\/httpclient\/Response::$statusCode*
 yii/httpclient/Response::defaultFormat	yii-httpclient-response.txt	/*yii\/httpclient\/Response::defaultFormat*
@@ -5732,6 +5743,7 @@ yii/i18n/Formatter::asUrl	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::asUrl*
 yii/i18n/Formatter::asWeight	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::asWeight*
 yii/i18n/Formatter::createNumberFormatter	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::createNumberFormatter*
 yii/i18n/Formatter::format	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::format*
+yii/i18n/Formatter::formatNumber	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::formatNumber*
 yii/i18n/Formatter::init	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::init*
 yii/i18n/Formatter::isNormalizedValueMispresented	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::isNormalizedValueMispresented*
 yii/i18n/Formatter::normalizeDatetimeValue	yii-i18n-formatter.txt	/*yii\/i18n\/Formatter::normalizeDatetimeValue*
@@ -6143,6 +6155,7 @@ yii/log/Dispatcher::$targets	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::$tar
 yii/log/Dispatcher::$traceLevel	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::$traceLevel*
 yii/log/Dispatcher::__construct	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::__construct*
 yii/log/Dispatcher::dispatch	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::dispatch*
+yii/log/Dispatcher::generateTargetFailErrorMessage	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::generateTargetFailErrorMessage*
 yii/log/Dispatcher::getFlushInterval	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::getFlushInterval*
 yii/log/Dispatcher::getLogger	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::getLogger*
 yii/log/Dispatcher::getTraceLevel	yii-log-dispatcher.txt	/*yii\/log\/Dispatcher::getTraceLevel*
@@ -7534,6 +7547,7 @@ yii/redis/Cache::$forceClusterMode	yii-redis-cache.txt	/*yii\/redis\/Cache::$for
 yii/redis/Cache::$isCluster	yii-redis-cache.txt	/*yii\/redis\/Cache::$isCluster*
 yii/redis/Cache::$redis	yii-redis-cache.txt	/*yii\/redis\/Cache::$redis*
 yii/redis/Cache::$replicas	yii-redis-cache.txt	/*yii\/redis\/Cache::$replicas*
+yii/redis/Cache::$shareDatabase	yii-redis-cache.txt	/*yii\/redis\/Cache::$shareDatabase*
 yii/redis/Cache::addValue	yii-redis-cache.txt	/*yii\/redis\/Cache::addValue*
 yii/redis/Cache::buildKey	yii-redis-cache.txt	/*yii\/redis\/Cache::buildKey*
 yii/redis/Cache::deleteValue	yii-redis-cache.txt	/*yii\/redis\/Cache::deleteValue*
@@ -7564,6 +7578,7 @@ yii/redis/Connection::$retryInterval	yii-redis-connection.txt	/*yii\/redis\/Conn
 yii/redis/Connection::$socket	yii-redis-connection.txt	/*yii\/redis\/Connection::$socket*
 yii/redis/Connection::$socketClientFlags	yii-redis-connection.txt	/*yii\/redis\/Connection::$socketClientFlags*
 yii/redis/Connection::$unixSocket	yii-redis-connection.txt	/*yii\/redis\/Connection::$unixSocket*
+yii/redis/Connection::$useSSL	yii-redis-connection.txt	/*yii\/redis\/Connection::$useSSL*
 yii/redis/Connection::__call	yii-redis-connection.txt	/*yii\/redis\/Connection::__call*
 yii/redis/Connection::__sleep	yii-redis-connection.txt	/*yii\/redis\/Connection::__sleep*
 yii/redis/Connection::close	yii-redis-connection.txt	/*yii\/redis\/Connection::close*
@@ -7912,6 +7927,7 @@ yii/sphinx/ColumnSchema::phpTypecast	yii-sphinx-columnschema.txt	/*yii\/sphinx\/
 yii/sphinx/ColumnSchema::typecast	yii-sphinx-columnschema.txt	/*yii\/sphinx\/ColumnSchema::typecast*
 yii/sphinx/Command	yii-sphinx-command.txt	/*yii\/sphinx\/Command*
 yii/sphinx/Command::$db	yii-sphinx-command.txt	/*yii\/sphinx\/Command::$db*
+yii/sphinx/Command::$rawSql	yii-sphinx-command.txt	/*yii\/sphinx\/Command::$rawSql*
 yii/sphinx/Command::addColumn	yii-sphinx-command.txt	/*yii\/sphinx\/Command::addColumn*
 yii/sphinx/Command::addForeignKey	yii-sphinx-command.txt	/*yii\/sphinx\/Command::addForeignKey*
 yii/sphinx/Command::addPrimaryKey	yii-sphinx-command.txt	/*yii\/sphinx\/Command::addPrimaryKey*
@@ -8006,7 +8022,6 @@ yii/sphinx/Query::$within	yii-sphinx-query.txt	/*yii\/sphinx\/Query::$within*
 yii/sphinx/Query::addFacets	yii-sphinx-query.txt	/*yii\/sphinx\/Query::addFacets*
 yii/sphinx/Query::addOptions	yii-sphinx-query.txt	/*yii\/sphinx\/Query::addOptions*
 yii/sphinx/Query::addWithin	yii-sphinx-query.txt	/*yii\/sphinx\/Query::addWithin*
-yii/sphinx/Query::all	yii-sphinx-query.txt	/*yii\/sphinx\/Query::all*
 yii/sphinx/Query::callSnippets	yii-sphinx-query.txt	/*yii\/sphinx\/Query::callSnippets*
 yii/sphinx/Query::callSnippetsInternal	yii-sphinx-query.txt	/*yii\/sphinx\/Query::callSnippetsInternal*
 yii/sphinx/Query::create	yii-sphinx-query.txt	/*yii\/sphinx\/Query::create*
@@ -8023,6 +8038,7 @@ yii/sphinx/Query::leftJoin	yii-sphinx-query.txt	/*yii\/sphinx\/Query::leftJoin*
 yii/sphinx/Query::match	yii-sphinx-query.txt	/*yii\/sphinx\/Query::match*
 yii/sphinx/Query::one	yii-sphinx-query.txt	/*yii\/sphinx\/Query::one*
 yii/sphinx/Query::options	yii-sphinx-query.txt	/*yii\/sphinx\/Query::options*
+yii/sphinx/Query::populate	yii-sphinx-query.txt	/*yii\/sphinx\/Query::populate*
 yii/sphinx/Query::queryScalar	yii-sphinx-query.txt	/*yii\/sphinx\/Query::queryScalar*
 yii/sphinx/Query::rightJoin	yii-sphinx-query.txt	/*yii\/sphinx\/Query::rightJoin*
 yii/sphinx/Query::search	yii-sphinx-query.txt	/*yii\/sphinx\/Query::search*
@@ -8300,7 +8316,11 @@ yii/twig/Profile::$view	yii-twig-profile.txt	/*yii\/twig\/Profile::$view*
 yii/twig/Profile::__construct	yii-twig-profile.txt	/*yii\/twig\/Profile::__construct*
 yii/twig/Template	yii-twig-template.txt	/*yii\/twig\/Template*
 yii/twig/Template::attribute	yii-twig-template.txt	/*yii\/twig\/Template::attribute*
-yii/twig/Template::displayWithErrorHandling	yii-twig-template.txt	/*yii\/twig\/Template::displayWithErrorHandling*
+yii/twig/TwigEmptyLoader	yii-twig-twigemptyloader.txt	/*yii\/twig\/TwigEmptyLoader*
+yii/twig/TwigEmptyLoader::exists	yii-twig-twigemptyloader.txt	/*yii\/twig\/TwigEmptyLoader::exists*
+yii/twig/TwigEmptyLoader::getCacheKey	yii-twig-twigemptyloader.txt	/*yii\/twig\/TwigEmptyLoader::getCacheKey*
+yii/twig/TwigEmptyLoader::getSourceContext	yii-twig-twigemptyloader.txt	/*yii\/twig\/TwigEmptyLoader::getSourceContext*
+yii/twig/TwigEmptyLoader::isFresh	yii-twig-twigemptyloader.txt	/*yii\/twig\/TwigEmptyLoader::isFresh*
 yii/twig/TwigSimpleFileLoader	yii-twig-twigsimplefileloader.txt	/*yii\/twig\/TwigSimpleFileLoader*
 yii/twig/TwigSimpleFileLoader::__construct	yii-twig-twigsimplefileloader.txt	/*yii\/twig\/TwigSimpleFileLoader::__construct*
 yii/twig/TwigSimpleFileLoader::getCacheKey	yii-twig-twigsimplefileloader.txt	/*yii\/twig\/TwigSimpleFileLoader::getCacheKey*
@@ -9176,6 +9196,9 @@ yii/web/Request::getRemoteHost	yii-web-request.txt	/*yii\/web\/Request::getRemot
 yii/web/Request::getRemoteIP	yii-web-request.txt	/*yii\/web\/Request::getRemoteIP*
 yii/web/Request::getScriptFile	yii-web-request.txt	/*yii\/web\/Request::getScriptFile*
 yii/web/Request::getScriptUrl	yii-web-request.txt	/*yii\/web\/Request::getScriptUrl*
+yii/web/Request::getSecureForwardedHeaderParts	yii-web-request.txt	/*yii\/web\/Request::getSecureForwardedHeaderParts*
+yii/web/Request::getSecureForwardedHeaderTrustedPart	yii-web-request.txt	/*yii\/web\/Request::getSecureForwardedHeaderTrustedPart*
+yii/web/Request::getSecureForwardedHeaderTrustedParts	yii-web-request.txt	/*yii\/web\/Request::getSecureForwardedHeaderTrustedParts*
 yii/web/Request::getSecurePort	yii-web-request.txt	/*yii\/web\/Request::getSecurePort*
 yii/web/Request::getServerName	yii-web-request.txt	/*yii\/web\/Request::getServerName*
 yii/web/Request::getServerPort	yii-web-request.txt	/*yii\/web\/Request::getServerPort*
@@ -9372,7 +9395,10 @@ yii/web/UploadedFile::$name	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::$
 yii/web/UploadedFile::$size	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::$size*
 yii/web/UploadedFile::$tempName	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::$tempName*
 yii/web/UploadedFile::$type	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::$type*
+yii/web/UploadedFile::__construct	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::__construct*
 yii/web/UploadedFile::__toString	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::__toString*
+yii/web/UploadedFile::copyTempFile	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::copyTempFile*
+yii/web/UploadedFile::deleteTempFile	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::deleteTempFile*
 yii/web/UploadedFile::getBaseName	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::getBaseName*
 yii/web/UploadedFile::getExtension	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::getExtension*
 yii/web/UploadedFile::getHasError	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::getHasError*
@@ -9380,6 +9406,7 @@ yii/web/UploadedFile::getInstance	yii-web-uploadedfile.txt	/*yii\/web\/UploadedF
 yii/web/UploadedFile::getInstanceByName	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::getInstanceByName*
 yii/web/UploadedFile::getInstances	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::getInstances*
 yii/web/UploadedFile::getInstancesByName	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::getInstancesByName*
+yii/web/UploadedFile::isUploadedFile	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::isUploadedFile*
 yii/web/UploadedFile::reset	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::reset*
 yii/web/UploadedFile::saveAs	yii-web-uploadedfile.txt	/*yii\/web\/UploadedFile::saveAs*
 yii/web/UrlManager	yii-web-urlmanager.txt	/*yii\/web\/UrlManager*

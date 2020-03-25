@@ -200,7 +200,7 @@ Inherited methods:
  |yii/db/Query::prepare|
  |yii/db/Query::batch|
  |yii/db/Query::each|
- |yii/db/Query::populate|
+ |yii/db/Query::all|
  |yii/db/Query::scalar|
  |yii/db/Query::column|
  |yii/db/Query::count|
@@ -248,24 +248,22 @@ return (\yii\sphinx\Command) The created Sphinx command instance.
     component will be used.
 
 
-*yii/sphinx/Query::all*					public
+*yii/sphinx/Query::populate*				public
 >
- all($db='null')
+ populate($rows)
 <
-return (array) The query results. If the query results in nothing, an empty array
-will be returned.
+return (array) The converted query result
 
- Executes the query and returns all results as an array.
-
+ Converts the raw query results into the format as specified by this query.
 
 
 
+ This method is internally used to convert the data fetched from database into
+ the format as required by this query.
 
 
 
-    [$db] (\yii\db\Connection) The database connection used to generate the
-    SQL statement. If this parameter is not given, the 'db' application
-    component will be used.
+    [$rows] (array) The raw query result from database
 
 
 *yii/sphinx/Query::one*					public

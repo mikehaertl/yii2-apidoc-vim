@@ -127,13 +127,15 @@ $secureHeaders				*yii/web/Request::$secureHeaders*
 
  (array) Lists of headers that are, by default, subject to the trusted host
  configuration. These headers will be filtered unless explicitly allowed in
- 'trustedHosts'. The match of header names is case-insensitive.
+ 'trustedHosts'. If the list contains the 'Forwarded' header, processing will
+ be done according to RFC 7239. The match of header names is case-insensitive.
 
 $ipHeaders				*yii/web/Request::$ipHeaders*
 
  (string[]) List of headers where proxies store the real client IP. It's not
- advisable to put insecure headers here. The match of header names is
- case-insensitive.
+ advisable to put insecure headers here. To use the 'Forwarded' header
+ according to RFC 7239, the header must be added to 'secureHeaders' list. The
+ match of header names is case-insensitive.
 
 $secureProtocolHeaders			*yii/web/Request::$secureProtocolHeaders*
 
@@ -1369,6 +1371,35 @@ method will return true.
     [$clientSuppliedToken] (string) The user-provided CSRF token to be
     validated. If null, the token will be retrieved from the 'csrfParam' POST
     field or HTTP header. This parameter is available since version 2.0.4.
+
+
+*yii/web/Request::getSecureForwardedHeaderTrustedPart*	protected
+>
+ getSecureForwardedHeaderTrustedPart($token)
+<
+return (string|null) 
+
+ Gets first 'Forwarded' header value for token
+
+    [$token] (string) Header token
+
+
+*yii/web/Request::getSecureForwardedHeaderTrustedParts*	protected
+>
+ getSecureForwardedHeaderTrustedParts()
+<
+return (array) 
+
+ Gets only trusted 'Forwarded' header parts
+
+
+*yii/web/Request::getSecureForwardedHeaderParts*		protected
+>
+ getSecureForwardedHeaderParts()
+<
+return (array) 
+
+ Returns decoded forwarded header
 
 
 

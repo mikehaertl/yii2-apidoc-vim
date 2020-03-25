@@ -11,11 +11,11 @@ DESCRIPTION
  It is possible to connect to a redis server using 'hostname' and 'port' or
  using a 'unixSocket'.
 
- It also supports [the AUTH command](http://redis.io/commands/auth) of redis.
+ It also supports [the AUTH command](https://redis.io/commands/auth) of redis.
  When the server needs authentication, you can set the 'password' property to
  authenticate with the server after connect.
 
- The execution of [redis commands](http://redis.io/commands) is possible with
+ The execution of [redis commands](https://redis.io/commands) is possible with
  via 'executeCommand()'.
 
 
@@ -52,7 +52,7 @@ $unixSocket				*yii/redis/Connection::$unixSocket*
 $password				*yii/redis/Connection::$password*
 
  (string) The password for establishing DB connection. Defaults to null
- meaning no AUTH command is sent. See http://redis.io/commands/auth
+ meaning no AUTH command is sent. See https://redis.io/commands/auth
 
 $database				*yii/redis/Connection::$database*
 
@@ -70,11 +70,15 @@ $dataTimeout				*yii/redis/Connection::$dataTimeout*
  (float) Timeout to use for redis socket when reading and writing data. If not
  set the php default value will be used.
 
+$useSSL					*yii/redis/Connection::$useSSL*
+
+ (boolean) Send sockets over SSL protocol. Default state is false.
+
 $socketClientFlags			*yii/redis/Connection::$socketClientFlags*
 
  (integer) Bitmask field which may be set to any combination of connection
  flags passed to
- [stream_socket_client()](http://php.net/manual/en/function.stream-socket-client.php).
+ [stream_socket_client()](https://www.php.net/manual/en/function.stream-socket-client.php).
  Currently the select of connection flags is limited to
  'STREAM_CLIENT_CONNECT' (default), 'STREAM_CLIENT_ASYNC_CONNECT' and
  'STREAM_CLIENT_PERSISTENT'.
@@ -86,8 +90,8 @@ $socketClientFlags			*yii/redis/Connection::$socketClientFlags*
  to use if you use only one database. > > You may still use persistent
  connections in this case when disambiguating ports as described > in [a
  comment on the PHP
- manual](http://php.net/manual/en/function.stream-socket-client.php#105393) >
- e.g. on the connection used for session storage, specify the port as: > >
+ manual](https://www.php.net/manual/en/function.stream-socket-client.php#105393)
+ > e.g. on the connection used for session storage, specify the port as: > >
 
    > 'port' => '6379/session'
    > 
@@ -287,13 +291,13 @@ range of a signed 64 bit integer.
   - 'string' or 'null' for commands that return "bulk reply". 
   - 'array' for commands that return "Multi-bulk replies".
 
-See [redis protocol description](http://redis.io/topics/protocol) for details
+See [redis protocol description](https://redis.io/topics/protocol) for details
 on the mentioned reply types.
 
  Executes a redis command.
 
  For a list of available commands and their parameters see
- http://redis.io/commands.
+ https://redis.io/commands.
 
  The params array should contain the params separated by white space, e.g. to
  execute 'SET mykey somevalue NX' call the following:
